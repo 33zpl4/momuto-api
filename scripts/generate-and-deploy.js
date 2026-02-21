@@ -68,8 +68,9 @@ Return ONLY the JSON object, no other text.`;
     messages: [{ role: 'user', content: prompt }]
   });
 
-  const text = response.content[0].text.trim();
-  return JSON.parse(text);
+const text = response.content[0].text.trim();
+const clean = text.replace(/^```json\n?/, '').replace(/\n?```$/, '');
+return JSON.parse(clean);
 }
 
 function buildPageHTML(config, content, lang) {
