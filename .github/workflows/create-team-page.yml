@@ -1,0 +1,40 @@
+name: Create Team Proposal Pages
+
+on:
+  push:
+    paths:
+      - 'teams/*/config.json'
+
+jobs:
+  create-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install @anthropic-ai/sdk
+
+      - name: Find changed team configs
+        id: changed
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep 'teams/.*/config.json' | head -1)
+          echo "config=$CHANGED" >> $GITHUB_OUTPUT
+          TEAM=$(echo $CHANGED | cut -d'/' -f2)
+          echo "team=$TEAM" >> $GITHUB_OUTPUT
+
+      - name: Generate and deploy pages
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          TEAM_SLUG: ${{ steps.changed.outputs.team }}
+        run: node scripts/generate-and-deploy.js
