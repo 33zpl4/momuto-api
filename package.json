@@ -1,0 +1,11 @@
+{
+  "name": "momuto-automation",
+  "version": "1.0.0",
+  "description": "Automated team page creation for MOMUTO across three domains",
+  "scripts": {
+    "deploy": "node scripts/generate-and-deploy.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0"
+  }
+}
