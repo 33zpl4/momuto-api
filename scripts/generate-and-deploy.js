@@ -255,11 +255,6 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
     </div>
   </div>
 </div>
-
-<div class="disclaimer">
-  <p><strong>Confidential Preview:</strong> ${safe(content.disclaimer_text)}</p>
-</div>
-
 <div class="trust-section">
   <h3 style="color:white;text-transform:uppercase;font-weight:900;margin-bottom:10px;">MOMUTO</h3>
   <p style="color:#888;font-size:0.9rem;">${safe(content.gallery_tagline)}</p>
