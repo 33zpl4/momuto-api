@@ -4,6 +4,9 @@ const path = require('path');
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
+// Sanitize strings used inside template literals
+const safe = str => String(str).replace(/`/g, "'").replace(/\$/g, '&#36;');
+
 const DOMAINS = {
   en: {
     host: 'https://openapi.oemapps.com',
@@ -60,7 +63,7 @@ Generate a JSON object with these exact fields:
   "whatsapp_share_message": "message to share on WhatsApp mentioning team name and kit"
 }
 
-Return ONLY the JSON object, no other text.`;
+Return ONLY the JSON object, no markdown, no code fences, no other text.`;
 
   const response = await client.messages.create({
     model: 'claude-sonnet-4-6',
@@ -68,28 +71,28 @@ Return ONLY the JSON object, no other text.`;
     messages: [{ role: 'user', content: prompt }]
   });
 
-const text = response.content[0].text.trim();
-const clean = text.replace(/^```json\n?/, '').replace(/\n?```$/, '');
-return JSON.parse(clean);
+  const text = response.content[0].text.trim();
+  // Strip markdown code fences if present
+  const clean = text.replace(/^```json\n?/, '').replace(/^```\n?/, '').replace(/\n?```$/, '');
+  return JSON.parse(clean);
 }
 
 function buildPageHTML(config, content, lang) {
-  const teamSlug = config.team_name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
   const accentColor = config.accent_color || config.primary_color || '#e63946';
 
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "${config.team_name} Custom Kit Design — MOMUTO",
+  "name": "${safe(config.team_name)} Custom Kit Design — MOMUTO",
   "serviceType": "Custom Football Kit Design",
   "provider": {
     "@type": "Organization",
     "name": "MOMUTO",
     "url": "https://www.momuto.com"
   },
-  "description": "${content.design_story_short.replace(/"/g, '\\"')}",
-  "image": "${config.image_url}",
+  "description": "${safe(content.design_story_short)}",
+  "image": "${safe(config.image_url)}",
   "inLanguage": "${lang}",
   "areaServed": "Worldwide",
   "offers": {
@@ -157,11 +160,11 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 </style>
 
 <section class="hero">
-  <div class="status-badge">${content.status_badge}</div>
-  <h1 class="team-name">${config.team_name}</h1>
-  <p class="subtitle">${content.subtitle}</p>
+  <div class="status-badge">${safe(content.status_badge)}</div>
+  <h1 class="team-name">${safe(config.team_name)}</h1>
+  <p class="subtitle">${safe(content.subtitle)}</p>
   <div class="jersey-stage" onclick="openLightbox()">
-    <img src="${config.image_url}" class="jersey-img" alt="${config.team_name} custom kit design by MOMUTO" />
+    <img src="${safe(config.image_url)}" class="jersey-img" alt="${safe(config.team_name)} custom kit design by MOMUTO" />
     <div class="expand-hint">
       <svg class="expand-icon" viewBox="0 0 24 24"><path d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42L17.3 18.7 15 21h6v-6z"/></svg>
     </div>
@@ -180,10 +183,10 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 
 <div class="story-container">
   <div class="story-content">
-    <h2 class="story-heading">${content.design_story_heading}</h2>
-    <p class="story-p">${content.design_story_short}</p>
+    <h2 class="story-heading">${safe(content.design_story_heading)}</h2>
+    <p class="story-p">${safe(content.design_story_short)}</p>
     <br/>
-    <p class="story-p" style="opacity:0.7;font-size:0.85rem;">${content.design_story_full}</p>
+    <p class="story-p" style="opacity:0.7;font-size:0.85rem;">${safe(content.design_story_full)}</p>
   </div>
 </div>
 
@@ -210,12 +213,12 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 </div>
 
 <div class="disclaimer">
-  <p><strong>Confidential Preview:</strong> ${content.disclaimer_text}</p>
+  <p><strong>Confidential Preview:</strong> ${safe(content.disclaimer_text)}</p>
 </div>
 
 <div class="trust-section">
   <h3 style="color:white;text-transform:uppercase;font-weight:900;margin-bottom:10px;">MOMUTO</h3>
-  <p style="color:#888;font-size:0.9rem;">${content.gallery_tagline}</p>
+  <p style="color:#888;font-size:0.9rem;">${safe(content.gallery_tagline)}</p>
   <div class="trust-links">
     <a href="https://www.momuto.com/pages/custom-kit-gallery" class="trust-link">View Gallery</a>
     <a href="https://www.momuto.com/pages/momuto-vs-jersix-owayo-spized-comparison" class="trust-link">Why MOMUTO?</a>
@@ -223,12 +226,12 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 </div>
 
 <div class="sticky-share">
-  <button class="btn-whatsapp" onclick="shareToWhatsApp()">📲 ${content.share_button_text}</button>
+  <button class="btn-whatsapp" onclick="shareToWhatsApp()">📲 ${safe(content.share_button_text)}</button>
 </div>
 
 <div id="lightbox" class="lightbox-overlay">
   <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
-  <img id="zoomImg" src="${config.image_url}" class="lightbox-img" />
+  <img id="zoomImg" src="${safe(config.image_url)}" class="lightbox-img" />
 </div>
 
 <script>
@@ -237,7 +240,7 @@ function selectReaction(btn, type) {
   btn.classList.add('selected');
 }
 function openLightbox() {
-  document.getElementById('zoomImg').src = '${config.image_url}';
+  document.getElementById('zoomImg').src = '${safe(config.image_url)}';
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -246,7 +249,7 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 function shareToWhatsApp() {
-  const text = encodeURIComponent('${content.whatsapp_share_message}');
+  const text = encodeURIComponent('${safe(content.whatsapp_share_message)}');
   const url = encodeURIComponent(window.location.href);
   window.open('https://wa.me/?text=' + text + '%20' + url, '_blank');
 }
@@ -265,9 +268,12 @@ async function createPage(domain, pageData) {
   });
 
   const result = await response.json();
-  if (!response.ok) {
+
+  // OEMSaaS returns code 0 for success regardless of HTTP status
+  if (!response.ok || result.code !== 0) {
     throw new Error(`Failed to create page on ${domain.label}: ${JSON.stringify(result)}`);
   }
+
   return result;
 }
 
@@ -300,7 +306,7 @@ async function main() {
 
     console.log(`Deploying to ${domain.label}...`);
     const result = await createPage(domain, pageData);
-    console.log(`✓ Created on ${domain.label}:`, result);
+    console.log(`✓ Created on ${domain.label}:`, JSON.stringify(result));
   }
 
   console.log('\n✅ All three domains updated successfully.');
