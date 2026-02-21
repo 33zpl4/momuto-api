@@ -12,19 +12,64 @@ const DOMAINS = {
     host: 'https://openapi.oemapps.com',
     token: process.env.OEMSAAS_TOKEN_EN,
     lang: 'en',
-    label: 'momuto.com'
+    label: 'momuto.com',
+    baseUrl: 'https://www.momuto.com',
+    galleryUrl: 'https://www.momuto.com/pages/custom-kit-gallery',
+    comparisonUrl: 'https://www.momuto.com/pages/momuto-vs-jersix-owayo-spized-comparison',
+    galleryLabel: 'View Gallery',
+    comparisonLabel: 'Why MOMUTO?',
+    orderUrl: 'https://www.momuto.com/pages/request-custom-kit-design',
+    features: [
+      { name: 'Moisture Control', desc: 'Wicks sweat. Stays dry.' },
+      { name: 'Stretch Fabric', desc: 'Moves with you. Never restricts.' },
+      { name: 'Built to Last', desc: 'Pro-grade durability.' }
+    ],
+    performanceTitle: 'Performance Fabric. Precision Fit.',
+    performanceSubtitle: 'Built for the game',
+    specsLabels: { quality: 'Quality', custom: 'Custom', delivery: 'Delivery' },
+    deliveryText: '20-25 DAYS'
   },
   es: {
     host: 'https://openapi.oemapps.com',
     token: process.env.OEMSAAS_TOKEN_ES,
     lang: 'es',
-    label: 'es.momuto.com'
+    label: 'es.momuto.com',
+    baseUrl: 'https://es.momuto.com',
+    galleryUrl: 'https://es.momuto.com/pages/equipos-momuto',
+    comparisonUrl: 'https://es.momuto.com/pages/zentral-opiniones-alternativa',
+    galleryLabel: 'Ver Galería',
+    comparisonLabel: '¿Por qué Momuto?',
+    orderUrl: 'https://es.momuto.com/pages/request-custom-kit-design',
+    features: [
+      { name: 'Control de Humedad', desc: 'Absorbe el sudor. Siempre seco.' },
+      { name: 'Tejido Elástico', desc: 'Se mueve contigo. Sin restricciones.' },
+      { name: 'Duración Profesional', desc: 'Resistencia de alto rendimiento.' }
+    ],
+    performanceTitle: 'Tejido de Alto Rendimiento. Corte Preciso.',
+    performanceSubtitle: 'Diseñado para el juego',
+    specsLabels: { quality: 'Calidad', custom: 'Personalizado', delivery: 'Entrega' },
+    deliveryText: '20-25 DÍAS'
   },
   fr: {
     host: 'https://openapi.oemapps.com',
     token: process.env.OEMSAAS_TOKEN_FR,
     lang: 'fr',
-    label: 'fr.momuto.com'
+    label: 'fr.momuto.com',
+    baseUrl: 'https://fr.momuto.com',
+    galleryUrl: 'https://fr.momuto.com/pages/equipes-clubs-momuto',
+    comparisonUrl: 'https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026',
+    galleryLabel: 'Voir la Galerie',
+    comparisonLabel: 'Pourquoi Momuto ?',
+    orderUrl: 'https://fr.momuto.com/pages/request-custom-kit-design',
+    features: [
+      { name: "Gestion de l'Humidité", desc: 'Évacue la sueur. Reste au sec.' },
+      { name: 'Tissu Extensible', desc: 'Suit vos mouvements. Sans contrainte.' },
+      { name: 'Durabilité Pro', desc: 'Résistance de niveau professionnel.' }
+    ],
+    performanceTitle: 'Tissu Haute Performance. Coupe Précise.',
+    performanceSubtitle: 'Conçu pour le jeu',
+    specsLabels: { quality: 'Qualité', custom: 'Personnalisé', delivery: 'Livraison' },
+    deliveryText: '20-25 J'
   }
 };
 
@@ -72,12 +117,11 @@ Return ONLY the JSON object, no markdown, no code fences, no other text.`;
   });
 
   const text = response.content[0].text.trim();
-  // Strip markdown code fences if present
   const clean = text.replace(/^```json\n?/, '').replace(/^```\n?/, '').replace(/\n?```$/, '');
   return JSON.parse(clean);
 }
 
-function buildPageHTML(config, content, lang) {
+function buildPageHTML(config, content, domain) {
   const accentColor = config.accent_color || config.primary_color || '#e63946';
 
   return `<script type="application/ld+json">
@@ -89,17 +133,17 @@ function buildPageHTML(config, content, lang) {
   "provider": {
     "@type": "Organization",
     "name": "MOMUTO",
-    "url": "https://www.momuto.com"
+    "url": "${domain.baseUrl}"
   },
   "description": "${safe(content.design_story_short)}",
   "image": "${safe(config.image_url)}",
-  "inLanguage": "${lang}",
+  "inLanguage": "${domain.lang}",
   "areaServed": "Worldwide",
   "offers": {
     "@type": "Offer",
     "price": "20.90",
     "priceCurrency": "EUR",
-    "url": "https://www.momuto.com/pages/request-custom-kit-design"
+    "url": "${domain.orderUrl}"
   }
 }
 <\/script>
@@ -176,9 +220,9 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 </section>
 
 <div class="specs-container">
-  <div class="spec-item"><span class="spec-val">PRO</span><span class="spec-label">Quality</span></div>
-  <div class="spec-item"><span class="spec-val">100%</span><span class="spec-label">Custom</span></div>
-  <div class="spec-item"><span class="spec-val">20-25 DAYS</span><span class="spec-label">Delivery</span></div>
+  <div class="spec-item"><span class="spec-val">PRO</span><span class="spec-label">${domain.specsLabels.quality}</span></div>
+  <div class="spec-item"><span class="spec-val">100%</span><span class="spec-label">${domain.specsLabels.custom}</span></div>
+  <div class="spec-item"><span class="spec-val">${domain.deliveryText}</span><span class="spec-label">${domain.specsLabels.delivery}</span></div>
 </div>
 
 <div class="story-container">
@@ -191,23 +235,23 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 </div>
 
 <div class="performance-section">
-  <h2 class="performance-title">Performance Fabric. Precision Fit.</h2>
-  <p class="performance-subtitle">Built for the game</p>
+  <h2 class="performance-title">${domain.performanceTitle}</h2>
+  <p class="performance-subtitle">${domain.performanceSubtitle}</p>
   <div class="features-grid">
     <div class="feature-item">
       <div class="feature-icon"><svg class="feature-icon-svg" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-      <div class="feature-name">Moisture Control</div>
-      <div class="feature-desc">Wicks sweat. Stays dry.</div>
+      <div class="feature-name">${domain.features[0].name}</div>
+      <div class="feature-desc">${domain.features[0].desc}</div>
     </div>
     <div class="feature-item">
       <div class="feature-icon"><svg class="feature-icon-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-      <div class="feature-name">Stretch Fabric</div>
-      <div class="feature-desc">Moves with you. Never restricts.</div>
+      <div class="feature-name">${domain.features[1].name}</div>
+      <div class="feature-desc">${domain.features[1].desc}</div>
     </div>
     <div class="feature-item">
       <div class="feature-icon"><svg class="feature-icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-      <div class="feature-name">Built to Last</div>
-      <div class="feature-desc">Pro-grade durability.</div>
+      <div class="feature-name">${domain.features[2].name}</div>
+      <div class="feature-desc">${domain.features[2].desc}</div>
     </div>
   </div>
 </div>
@@ -220,8 +264,8 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
   <h3 style="color:white;text-transform:uppercase;font-weight:900;margin-bottom:10px;">MOMUTO</h3>
   <p style="color:#888;font-size:0.9rem;">${safe(content.gallery_tagline)}</p>
   <div class="trust-links">
-    <a href="https://www.momuto.com/pages/custom-kit-gallery" class="trust-link">View Gallery</a>
-    <a href="https://www.momuto.com/pages/momuto-vs-jersix-owayo-spized-comparison" class="trust-link">Why MOMUTO?</a>
+    <a href="${domain.galleryUrl}" class="trust-link">${domain.galleryLabel}</a>
+    <a href="${domain.comparisonUrl}" class="trust-link">${domain.comparisonLabel}</a>
   </div>
 </div>
 
@@ -269,7 +313,6 @@ async function createPage(domain, pageData) {
 
   const result = await response.json();
 
-  // OEMSaaS returns code 0 for success regardless of HTTP status
   if (!response.ok || result.code !== 0) {
     throw new Error(`Failed to create page on ${domain.label}: ${JSON.stringify(result)}`);
   }
@@ -291,7 +334,7 @@ async function main() {
     console.log(`\nGenerating ${lang.toUpperCase()} content...`);
     const content = await generatePageContent(config, lang);
 
-    const html = buildPageHTML(config, content, lang);
+    const html = buildPageHTML(config, content, domain);
     const handle = `${teamSlug}-custom-kit-design`;
 
     const pageData = {
