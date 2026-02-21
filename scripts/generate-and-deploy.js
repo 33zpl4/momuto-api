@@ -103,7 +103,6 @@ Generate a JSON object with these exact fields:
   "design_story_short": "1 sentence teaser for the design",
   "design_story_full": "2-3 sentences detailed description of the design concept and visual elements",
   "share_button_text": "WhatsApp share button text",
-  "disclaimer_text": "short confidential preview disclaimer mentioning team name and MOMUTO",
   "gallery_tagline": "short tagline like 'Join 50+ teams who trust us with their identity'",
   "whatsapp_share_message": "message to share on WhatsApp mentioning team name and kit"
 }
