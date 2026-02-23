@@ -14,7 +14,7 @@ const DOMAINS = {
     lang: 'en',
     label: 'momuto.com',
     baseUrl: 'https://www.momuto.com',
-    handleSuffix: 'custom-kit-design',          // slug: [team]-custom-kit-design
+    handleSuffix: 'custom-kit-design',
     galleryUrl: 'https://www.momuto.com/pages/custom-kit-gallery',
     galleryHandle: 'custom-kit-gallery',
     comparisonUrl: 'https://www.momuto.com/pages/momuto-vs-jersix-owayo-spized-comparison',
@@ -37,7 +37,7 @@ const DOMAINS = {
     lang: 'es',
     label: 'es.momuto.com',
     baseUrl: 'https://es.momuto.com',
-    handleSuffix: 'diseno-equipacion',           // slug: [team]-diseno-equipacion
+    handleSuffix: 'diseno-equipacion',
     galleryUrl: 'https://es.momuto.com/pages/equipos-momuto',
     galleryHandle: 'equipos-momuto',
     comparisonUrl: 'https://es.momuto.com/pages/zentral-opiniones-alternativa',
@@ -60,7 +60,7 @@ const DOMAINS = {
     lang: 'fr',
     label: 'fr.momuto.com',
     baseUrl: 'https://fr.momuto.com',
-    handleSuffix: 'design-maillot',              // slug: [team]-design-maillot
+    handleSuffix: 'design-maillot',
     galleryUrl: 'https://fr.momuto.com/pages/equipes-clubs-momuto',
     galleryHandle: 'equipes-clubs-momuto',
     comparisonUrl: 'https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026',
@@ -309,7 +309,6 @@ async function getGalleryPage(domain) {
   if (!response.ok || result.code !== 0) {
     throw new Error(`Failed to fetch gallery on ${domain.label}: ${JSON.stringify(result)}`);
   }
-  // Find the gallery page in the list
   const pages = result.data?.list || result.data || [];
   const gallery = Array.isArray(pages)
     ? pages.find(p => p.handle === domain.galleryHandle)
@@ -322,22 +321,17 @@ async function updateGallery(domain, teamSlug, config) {
   const gallery = await getGalleryPage(domain);
   const teamPageUrl = `${domain.baseUrl}/pages/${teamSlug}-${domain.handleSuffix}`;
 
-  // New gallery entry — appended before closing </div> or at end of content
-  const newEntry = `
-<div class="gallery-item">
-  <a href="${teamPageUrl}">
-    <img src="${config.image_url}" alt="${config.team_name} custom kit by MOMUTO" loading="lazy" />
-    <p class="gallery-item-name">${config.team_name}</p>
-  </a>
-</div>`;
+  // New entry injected at the START of the designs array so newest appears first
+  const newEntry = `    {\n        team: "${config.team_name}",\n        desc: "${config.design_description}",\n        image: "${config.image_url}",\n        url: "${teamPageUrl}"\n    },`;
 
-  // Append new entry inside existing gallery grid if marker exists, otherwise append to end
+  const marker = 'const designs = [';
   let updatedContent = gallery.content || '';
-const marker = '<!-- gallery-grid -->';
+
   if (updatedContent.includes(marker)) {
     updatedContent = updatedContent.replace(marker, `${marker}\n${newEntry}`);
   } else {
-    updatedContent = newEntry + updatedContent;
+    console.warn(`⚠️ Could not find designs array in gallery on ${domain.label} — skipping gallery update`);
+    return;
   }
 
   const response = await fetch(`${domain.host}/pages/${gallery.id}`, {
@@ -360,7 +354,7 @@ const marker = '<!-- gallery-grid -->';
   if (!response.ok || result.code !== 0) {
     throw new Error(`Failed to update gallery on ${domain.label}: ${JSON.stringify(result)}`);
   }
-  console.log(`✓ Gallery updated on ${domain.label} with link to ${teamPageUrl}`);
+  console.log(`✓ Gallery updated on ${domain.label} — ${config.team_name} added first`);
   return result;
 }
 
