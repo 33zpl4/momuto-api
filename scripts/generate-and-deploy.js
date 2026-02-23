@@ -189,7 +189,10 @@ function switchView(view, btnElement) {
     });
     document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
     if(btnElement) btnElement.classList.add('active');
-    document.getElementById('zoomImg').src = document.querySelector('.jersey-view.active img').src;
+    var zoomImg = document.getElementById('zoomImg');
+    if(zoomImg) {
+        zoomImg.src = document.querySelector('.jersey-view.active img').src;
+    }
 }
 function selectReaction(btn, type) {
     document.querySelectorAll('.reaction-btn').forEach(b => b.classList.remove('selected'));
