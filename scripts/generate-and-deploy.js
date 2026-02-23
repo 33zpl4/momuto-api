@@ -29,7 +29,8 @@ const DOMAINS = {
     performanceTitle: 'Performance Fabric. Precision Fit.',
     performanceSubtitle: 'Built for the game',
     specsLabels: { quality: 'Quality', custom: 'Custom', delivery: 'Delivery' },
-    deliveryText: '20-25 DAYS'
+    deliveryText: '20-25 DAYS',
+    titleTemplate: (team) => `${team} Custom Kit Design Preview | MOMUTO`
   },
   es: {
     host: 'https://openapi.oemapps.com',
@@ -52,7 +53,8 @@ const DOMAINS = {
     performanceTitle: 'Tejido de Alto Rendimiento. Corte Preciso.',
     performanceSubtitle: 'Diseñado para el juego',
     specsLabels: { quality: 'Calidad', custom: 'Personalizado', delivery: 'Entrega' },
-    deliveryText: '20-25 DÍAS'
+    deliveryText: '20-25 DÍAS',
+    titleTemplate: (team) => `Diseño Equipación ${team} | MOMUTO`
   },
   fr: {
     host: 'https://openapi.oemapps.com',
@@ -75,7 +77,8 @@ const DOMAINS = {
     performanceTitle: 'Tissu Haute Performance. Coupe Précise.',
     performanceSubtitle: 'Conçu pour le jeu',
     specsLabels: { quality: 'Qualité', custom: 'Personnalisé', delivery: 'Livraison' },
-    deliveryText: '20-25 J'
+    deliveryText: '20-25 J',
+    titleTemplate: (team) => `Design Maillot ${team} | MOMUTO`
   }
 };
 
@@ -514,11 +517,13 @@ async function main() {
 
           const html = buildPageHTML(config, content, domain);
 
+          const pageTitle = domain.titleTemplate(config.team_name);
+
           const pageData = {
             is_default: 0,
-            title: content.meta_title,
+            title: pageTitle,
             content: html,
-            meta_title: content.meta_title,
+            meta_title: pageTitle,
             meta_keywords: ['custom football kit', 'custom jersey', config.team_name, 'MOMUTO'],
             meta_descript: content.meta_description,
             handle: handle
