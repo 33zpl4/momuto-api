@@ -333,11 +333,11 @@ async function updateGallery(domain, teamSlug, config) {
 
   // Append new entry inside existing gallery grid if marker exists, otherwise append to end
   let updatedContent = gallery.content || '';
-  const marker = '<!-- /gallery-grid -->';
+const marker = '<!-- gallery-grid -->';
   if (updatedContent.includes(marker)) {
-    updatedContent = updatedContent.replace(marker, `${newEntry}\n${marker}`);
+    updatedContent = updatedContent.replace(marker, `${marker}\n${newEntry}`);
   } else {
-    updatedContent += newEntry;
+    updatedContent = newEntry + updatedContent;
   }
 
   const response = await fetch(`${domain.host}/pages/${gallery.id}`, {
