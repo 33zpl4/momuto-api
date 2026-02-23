@@ -148,27 +148,116 @@ Return ONLY the caption text, nothing else. No quotes, no punctuation at the end
 
 function buildPageHTML(config, content, domain) {
   const accentColor = config.accent_color || config.primary_color || '#e63946';
+  const hasBack = !!config.back_image_url;
+
+  // Conditional CSS for view toggle (only when back image exists)
+  const toggleCSS = hasBack ? `
+.view-toggle { display: flex; gap: 10px; margin-bottom: 1.5rem; }
+.view-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 10px 20px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s ease; }
+.view-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+.jersey-carousel { position: relative; width: 100%; height: auto; overflow: hidden; }
+.jersey-view { display: none; width: 100%; }
+.jersey-view.active { display: block; }` : '';
+
+  // Conditional hero image section
+  const imageSection = hasBack ? `
+  <div class="view-toggle"><button class="view-btn active" onclick="switchView('front', this)">FRONT</button> <button class="view-btn" onclick="switchView('back', this)">BACK</button></div>
+  <div class="jersey-stage" onclick="openLightbox()">
+    <div class="jersey-carousel">
+      <div class="jersey-view active" data-view="front"><img src="${safe(config.image_url)}" class="jersey-img" alt="${safe(config.team_name)} Kit Design - Front" /></div>
+      <div class="jersey-view" data-view="back"><img src="${safe(config.back_image_url)}" class="jersey-img" alt="${safe(config.team_name)} Kit Design - Back" /></div>
+    </div>
+    <div class="expand-hint">
+      <svg class="expand-icon" viewBox="0 0 24 24"><path d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42L17.3 18.7 15 21h6v-6z"/></svg>
+    </div>
+  </div>` : `
+  <div class="jersey-stage" onclick="openLightbox()">
+    <img src="${safe(config.image_url)}" class="jersey-img" alt="${safe(config.team_name)} custom kit design by MOMUTO" />
+    <div class="expand-hint">
+      <svg class="expand-icon" viewBox="0 0 24 24"><path d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42L17.3 18.7 15 21h6v-6z"/></svg>
+    </div>
+  </div>`;
+
+  // Conditional JS for view switching and lightbox
+  const scriptSection = hasBack ? `
+<script>
+let currentView = 'front';
+function switchView(view, btnElement) {
+    currentView = view;
+    document.querySelectorAll('.jersey-view').forEach(v => {
+        v.classList.toggle('active', v.dataset.view === view);
+    });
+    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+    if(btnElement) btnElement.classList.add('active');
+    document.getElementById('zoomImg').src = document.querySelector('.jersey-view.active img').src;
+}
+function selectReaction(btn, type) {
+    document.querySelectorAll('.reaction-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+}
+function openLightbox() {
+    var activeImg = document.querySelector('.jersey-view.active img');
+    document.getElementById('zoomImg').src = activeImg.src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+}
+function shareToWhatsApp() {
+    var text = encodeURIComponent('${safe(content.whatsapp_share_message)}');
+    var url = encodeURIComponent(window.location.href);
+    window.open('https://wa.me/?text=' + text + '%20' + url, '_blank');
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+var lastTap = 0;
+var zoomImg = document.getElementById('zoomImg');
+zoomImg.addEventListener('touchend', function(e) {
+    var now = new Date().getTime();
+    if (now - lastTap < 300 && now - lastTap > 0) {
+        e.preventDefault();
+        var s = parseFloat(zoomImg.style.transform.replace('scale(','').replace(')','')) || 1;
+        zoomImg.style.transform = s === 1 ? 'scale(2.5)' : 'scale(1)';
+    }
+    lastTap = now;
+});
+<\/script>` : `
+<script>
+function selectReaction(btn, type) {
+  document.querySelectorAll('.reaction-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function openLightbox() {
+  document.getElementById('zoomImg').src = '${safe(config.image_url)}';
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function shareToWhatsApp() {
+  var text = encodeURIComponent('${safe(content.whatsapp_share_message)}');
+  var url = encodeURIComponent(window.location.href);
+  window.open('https://wa.me/?text=' + text + '%20' + url, '_blank');
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+<\/script>`;
 
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "${safe(config.team_name)} Custom Kit Design — MOMUTO",
-  "serviceType": "Custom Football Kit Design",
-  "provider": {
-    "@type": "Organization",
-    "name": "MOMUTO",
-    "url": "${domain.baseUrl}"
-  },
-  "description": "${safe(content.design_story_short)}",
+  "@type": "CreativeWork",
+  "name": "${safe(config.team_name)} Kit Design",
+  "description": "Exclusive custom kit design for ${safe(config.team_name)} by MOMUTO",
+  "author": { "@type": "Organization", "name": "MOMUTO" },
   "image": "${safe(config.image_url)}",
   "inLanguage": "${domain.lang}",
-  "areaServed": "Worldwide",
-  "offers": {
-    "@type": "Offer",
-    "price": "20.90",
-    "priceCurrency": "EUR",
-    "url": "${domain.orderUrl}"
+  "workExample": {
+    "@type": "VisualArtwork",
+    "name": "${safe(config.design_name)}",
+    "artform": "Sports Jersey Design"
   }
 }
 <\/script>
@@ -186,10 +275,10 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 .title { display: none; }
 .hero { position: relative; padding: 2rem 1rem 0; display: flex; flex-direction: column; align-items: center; background: radial-gradient(circle at 50% 30%, #1a1a1a 0%, var(--bg-dark) 70%); }
 .status-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--text-white); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 6px 16px; margin-bottom: 1.5rem; display: inline-block; }
-.team-name { font-size: clamp(2rem, 7vw, 3.5rem); font-weight: 900; text-transform: uppercase; line-height: 0.9; text-align: center; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.team-name { font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; text-transform: uppercase; line-height: 0.9; text-align: center; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
 .subtitle { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem; }
 .jersey-stage { width: 100%; max-width: 600px; position: relative; margin-bottom: 2rem; cursor: zoom-in; }
-.jersey-img { width: 100%; height: auto; display: block; filter: drop-shadow(0 25px 50px rgba(0,0,0,0.5)); }
+.jersey-img { width: 100%; height: auto; display: block; filter: drop-shadow(0 25px 50px rgba(0,0,0,0.5)); transition: opacity 0.3s ease; }
 .expand-hint { position: absolute; bottom: 20px; right: 20px; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); padding: 8px; border-radius: 8px; opacity: 0.7; pointer-events: none; }
 .expand-icon { width: 20px; height: 20px; fill: white; display: block; }
 .reaction-container { width: 100%; max-width: 450px; margin: 0 auto 3rem; display: flex; gap: 10px; padding: 0 1rem; }
@@ -220,23 +309,17 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 .trust-link { color: white; text-decoration: none; border: 1px solid #333; padding: 12px 25px; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; transition: 0.3s; }
 .trust-link:hover { border-color: var(--accent); background: var(--accent); }
 .sticky-share { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); padding: 15px; z-index: 100; border-top: 1px solid #222; display: flex; justify-content: center; }
-.btn-whatsapp { background: #25D366; color: white; width: 100%; max-width: 400px; padding: 14px; border: none; font-family: 'Jost', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; cursor: pointer; }
-.lightbox-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 9999; }
+.btn-whatsapp { background: #25D366; color: white; width: 100%; max-width: 400px; padding: 14px; border: none; font-family: 'Jost', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; cursor: pointer; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); }
+.lightbox-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 9999; touch-action: none; }
 .lightbox-overlay.active { display: flex; justify-content: center; align-items: center; }
-.lightbox-img { max-width: 100%; max-height: 100%; }
-.lightbox-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; cursor: pointer; z-index: 10001; }
+.lightbox-img { max-width: 100%; max-height: 100%; transition: transform 0.2s; }
+.lightbox-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; cursor: pointer; z-index: 10001; }${toggleCSS}
 </style>
 
 <section class="hero">
   <div class="status-badge">${safe(content.status_badge)}</div>
   <h1 class="team-name">${safe(config.team_name)}</h1>
-  <p class="subtitle">${safe(content.subtitle)}</p>
-  <div class="jersey-stage" onclick="openLightbox()">
-    <img src="${safe(config.image_url)}" class="jersey-img" alt="${safe(config.team_name)} custom kit design by MOMUTO" />
-    <div class="expand-hint">
-      <svg class="expand-icon" viewBox="0 0 24 24"><path d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42L17.3 18.7 15 21h6v-6z"/></svg>
-    </div>
-  </div>
+  <p class="subtitle">${safe(content.subtitle)}</p>${imageSection}
   <div class="reaction-container">
     <button class="reaction-btn" onclick="selectReaction(this,'fire')"><span class="emoji-icon">🔥</span> Fire</button>
     <button class="reaction-btn" onclick="selectReaction(this,'love')"><span class="emoji-icon">⚡</span> Love It</button>
@@ -297,28 +380,7 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
   <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
   <img id="zoomImg" src="${safe(config.image_url)}" class="lightbox-img" />
 </div>
-
-<script>
-function selectReaction(btn, type) {
-  document.querySelectorAll('.reaction-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-}
-function openLightbox() {
-  document.getElementById('zoomImg').src = '${safe(config.image_url)}';
-  document.getElementById('lightbox').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
-  document.body.style.overflow = '';
-}
-function shareToWhatsApp() {
-  const text = encodeURIComponent('${safe(content.whatsapp_share_message)}');
-  const url = encodeURIComponent(window.location.href);
-  window.open('https://wa.me/?text=' + text + '%20' + url, '_blank');
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-<\/script>`;
+${scriptSection}`;
 }
 
 async function getGalleryPage(domain) {
