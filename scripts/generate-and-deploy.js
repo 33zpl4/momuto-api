@@ -162,17 +162,17 @@ function buildPageHTML(config, content, domain) {
   // Conditional hero image section
   const imageSection = hasBack ? `
   <div class="view-toggle"><button class="view-btn active" onclick="switchView('front', this)">FRONT</button> <button class="view-btn" onclick="switchView('back', this)">BACK</button></div>
-  <div class="jersey-stage" onclick="openLightbox()">
+  <div class="jersey-stage">
     <div class="jersey-carousel">
-      <div class="jersey-view active" data-view="front"><img src="${safe(config.image_url)}" class="jersey-img" alt="${safe(config.team_name)} Kit Design - Front" /></div>
-      <div class="jersey-view" data-view="back"><img src="${safe(config.back_image_url)}" class="jersey-img" alt="${safe(config.team_name)} Kit Design - Back" /></div>
+      <div class="jersey-view active" data-view="front"><img src="${safe(config.image_url)}" class="jersey-img" onclick="openLightbox()" alt="${safe(config.team_name)} Kit Design - Front" /></div>
+      <div class="jersey-view" data-view="back"><img src="${safe(config.back_image_url)}" class="jersey-img" onclick="openLightbox()" alt="${safe(config.team_name)} Kit Design - Back" /></div>
     </div>
     <div class="expand-hint">
       <svg class="expand-icon" viewBox="0 0 24 24"><path d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42L17.3 18.7 15 21h6v-6z"/></svg>
     </div>
   </div>` : `
-  <div class="jersey-stage" onclick="openLightbox()">
-    <img src="${safe(config.image_url)}" class="jersey-img" alt="${safe(config.team_name)} custom kit design by MOMUTO" />
+  <div class="jersey-stage">
+    <img src="${safe(config.image_url)}" class="jersey-img" onclick="openLightbox()" alt="${safe(config.team_name)} custom kit design by MOMUTO" />
     <div class="expand-hint">
       <svg class="expand-icon" viewBox="0 0 24 24"><path d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42L17.3 18.7 15 21h6v-6z"/></svg>
     </div>
@@ -190,9 +190,7 @@ function switchView(view, btnElement) {
     document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
     if(btnElement) btnElement.classList.add('active');
     var zoomImg = document.getElementById('zoomImg');
-    if(zoomImg) {
-        zoomImg.src = document.querySelector('.jersey-view.active img').src;
-    }
+    if(zoomImg) zoomImg.src = document.querySelector('.jersey-view.active img').src;
 }
 function selectReaction(btn, type) {
     document.querySelectorAll('.reaction-btn').forEach(b => b.classList.remove('selected'));
@@ -280,8 +278,8 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 .status-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--text-white); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 6px 16px; margin-bottom: 1.5rem; display: inline-block; }
 .team-name { font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; text-transform: uppercase; line-height: 0.9; text-align: center; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
 .subtitle { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem; }
-.jersey-stage { width: 100%; max-width: 600px; position: relative; margin-bottom: 2rem; cursor: zoom-in; }
-.jersey-img { width: 100%; height: auto; display: block; filter: drop-shadow(0 25px 50px rgba(0,0,0,0.5)); transition: opacity 0.3s ease; }
+.jersey-stage { width: 100%; max-width: 600px; position: relative; margin-bottom: 2rem; }
+.jersey-img { width: 100%; height: auto; display: block; filter: drop-shadow(0 25px 50px rgba(0,0,0,0.5)); transition: opacity 0.3s ease; cursor: zoom-in; }
 .expand-hint { position: absolute; bottom: 20px; right: 20px; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); padding: 8px; border-radius: 8px; opacity: 0.7; pointer-events: none; }
 .expand-icon { width: 20px; height: 20px; fill: white; display: block; }
 .reaction-container { width: 100%; max-width: 450px; margin: 0 auto 3rem; display: flex; gap: 10px; padding: 0 1rem; }
