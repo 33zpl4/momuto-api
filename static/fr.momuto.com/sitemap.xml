@@ -63,28 +63,21 @@
   <!-- ==================== POLICY PAGES ==================== -->
 
   <url>
-    <loc>https://fr.momuto.com/pages/shipping-policy_2cf047d2</loc>
+    <loc>https://fr.momuto.com/pages/retours-echanges</loc>
     <lastmod>2026-02-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://fr.momuto.com/pages/return-policy_b801b8e1</loc>
-    <lastmod>2026-02-23</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-
-  <url>
-    <loc>https://fr.momuto.com/pages/terms-of-service_736dfc8a</loc>
+    <loc>https://fr.momuto.com/pages/conditions-generales</loc>
     <lastmod>2026-02-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://fr.momuto.com/pages/privacy-policy_0d030312</loc>
+    <loc>https://fr.momuto.com/pages/politique-de-confidentialite</loc>
     <lastmod>2026-02-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -93,7 +86,7 @@
   <!-- ==================== COLLECTIONS ==================== -->
 
   <url>
-    <loc>https://fr.momuto.com/collections</loc>
+    <loc>https://fr.momuto.com/pages/collection-ready-to-play</loc>
     <lastmod>2026-02-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
