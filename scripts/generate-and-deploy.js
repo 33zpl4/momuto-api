@@ -14,7 +14,9 @@ const DOMAINS = {
     lang: 'en',
     label: 'momuto.com',
     baseUrl: 'https://www.momuto.com',
+    handleSuffix: 'custom-kit-design',          // slug: [team]-custom-kit-design
     galleryUrl: 'https://www.momuto.com/pages/custom-kit-gallery',
+    galleryHandle: 'custom-kit-gallery',
     comparisonUrl: 'https://www.momuto.com/pages/momuto-vs-jersix-owayo-spized-comparison',
     galleryLabel: 'View Gallery',
     comparisonLabel: 'Why MOMUTO?',
@@ -35,7 +37,9 @@ const DOMAINS = {
     lang: 'es',
     label: 'es.momuto.com',
     baseUrl: 'https://es.momuto.com',
+    handleSuffix: 'diseno-equipacion',           // slug: [team]-diseno-equipacion
     galleryUrl: 'https://es.momuto.com/pages/equipos-momuto',
+    galleryHandle: 'equipos-momuto',
     comparisonUrl: 'https://es.momuto.com/pages/zentral-opiniones-alternativa',
     galleryLabel: 'Ver Galería',
     comparisonLabel: '¿Por qué Momuto?',
@@ -56,7 +60,9 @@ const DOMAINS = {
     lang: 'fr',
     label: 'fr.momuto.com',
     baseUrl: 'https://fr.momuto.com',
+    handleSuffix: 'design-maillot',              // slug: [team]-design-maillot
     galleryUrl: 'https://fr.momuto.com/pages/equipes-clubs-momuto',
+    galleryHandle: 'equipes-clubs-momuto',
     comparisonUrl: 'https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026',
     galleryLabel: 'Voir la Galerie',
     comparisonLabel: 'Pourquoi Momuto ?',
@@ -199,7 +205,6 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 .lightbox-overlay.active { display: flex; justify-content: center; align-items: center; }
 .lightbox-img { max-width: 100%; max-height: 100%; }
 .lightbox-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; cursor: pointer; z-index: 10001; }
-.disclaimer { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 1rem; margin: 2rem auto; max-width: 600px; font-size: 0.8rem; color: var(--text-muted); text-align: center; border-radius: 4px; }
 </style>
 
 <section class="hero">
@@ -254,6 +259,7 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
     </div>
   </div>
 </div>
+
 <div class="trust-section">
   <h3 style="color:white;text-transform:uppercase;font-weight:900;margin-bottom:10px;">MOMUTO</h3>
   <p style="color:#888;font-size:0.9rem;">${safe(content.gallery_tagline)}</p>
@@ -295,6 +301,69 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
 <\/script>`;
 }
 
+async function getGalleryPage(domain) {
+  const response = await fetch(`${domain.host}/pages?handle=${domain.galleryHandle}`, {
+    headers: { 'token': domain.token }
+  });
+  const result = await response.json();
+  if (!response.ok || result.code !== 0) {
+    throw new Error(`Failed to fetch gallery on ${domain.label}: ${JSON.stringify(result)}`);
+  }
+  // Find the gallery page in the list
+  const pages = result.data?.list || result.data || [];
+  const gallery = Array.isArray(pages)
+    ? pages.find(p => p.handle === domain.galleryHandle)
+    : null;
+  if (!gallery) throw new Error(`Gallery page not found on ${domain.label}`);
+  return gallery;
+}
+
+async function updateGallery(domain, teamSlug, config) {
+  const gallery = await getGalleryPage(domain);
+  const teamPageUrl = `${domain.baseUrl}/pages/${teamSlug}-${domain.handleSuffix}`;
+
+  // New gallery entry — appended before closing </div> or at end of content
+  const newEntry = `
+<div class="gallery-item">
+  <a href="${teamPageUrl}">
+    <img src="${config.image_url}" alt="${config.team_name} custom kit by MOMUTO" loading="lazy" />
+    <p class="gallery-item-name">${config.team_name}</p>
+  </a>
+</div>`;
+
+  // Append new entry inside existing gallery grid if marker exists, otherwise append to end
+  let updatedContent = gallery.content || '';
+  const marker = '<!-- /gallery-grid -->';
+  if (updatedContent.includes(marker)) {
+    updatedContent = updatedContent.replace(marker, `${newEntry}\n${marker}`);
+  } else {
+    updatedContent += newEntry;
+  }
+
+  const response = await fetch(`${domain.host}/pages/${gallery.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'token': domain.token
+    },
+    body: JSON.stringify({
+      content: updatedContent,
+      title: gallery.title,
+      meta_title: gallery.meta_title,
+      meta_keywords: gallery.meta_keywords,
+      meta_descript: gallery.meta_descript,
+      handle: gallery.handle
+    })
+  });
+
+  const result = await response.json();
+  if (!response.ok || result.code !== 0) {
+    throw new Error(`Failed to update gallery on ${domain.label}: ${JSON.stringify(result)}`);
+  }
+  console.log(`✓ Gallery updated on ${domain.label} with link to ${teamPageUrl}`);
+  return result;
+}
+
 async function createPage(domain, pageData) {
   const response = await fetch(`${domain.host}/pages`, {
     method: 'POST',
@@ -306,11 +375,9 @@ async function createPage(domain, pageData) {
   });
 
   const result = await response.json();
-
   if (!response.ok || result.code !== 0) {
     throw new Error(`Failed to create page on ${domain.label}: ${JSON.stringify(result)}`);
   }
-
   return result;
 }
 
@@ -322,14 +389,17 @@ async function main() {
   if (!fs.existsSync(configPath)) throw new Error(`Config not found: ${configPath}`);
 
   const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  const updateGalleryFlag = process.env.UPDATE_GALLERY === 'true';
+
   console.log(`Processing team: ${config.team_name}`);
+  console.log(`Gallery update: ${updateGalleryFlag ? 'YES' : 'NO'}`);
 
   for (const [lang, domain] of Object.entries(DOMAINS)) {
     console.log(`\nGenerating ${lang.toUpperCase()} content...`);
     const content = await generatePageContent(config, lang);
 
     const html = buildPageHTML(config, content, domain);
-    const handle = `${teamSlug}-custom-kit-design`;
+    const handle = `${teamSlug}-${domain.handleSuffix}`;
 
     const pageData = {
       is_default: 0,
@@ -341,9 +411,14 @@ async function main() {
       handle: handle
     };
 
-    console.log(`Deploying to ${domain.label}...`);
+    console.log(`Deploying to ${domain.label} with handle: ${handle}`);
     const result = await createPage(domain, pageData);
     console.log(`✓ Created on ${domain.label}:`, JSON.stringify(result));
+
+    if (updateGalleryFlag) {
+      console.log(`Updating gallery on ${domain.label}...`);
+      await updateGallery(domain, teamSlug, config);
+    }
   }
 
   console.log('\n✅ All three domains updated successfully.');
