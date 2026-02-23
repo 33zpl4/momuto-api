@@ -126,6 +126,23 @@ Return ONLY the JSON object, no markdown, no code fences, no other text.`;
   return JSON.parse(clean);
 }
 
+async function generateGalleryDesc(config) {
+  const prompt = `Given this football kit design description: "${config.design_description}"
+
+Write a SHORT gallery caption of exactly 4 to 6 words that captures the essence of the design.
+Examples of good captions: "Bold gradient with black sleeves", "Classic red and white stripes", "Navy fade with gold trim"
+
+Return ONLY the caption text, nothing else. No quotes, no punctuation at the end.`;
+
+  const response = await client.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 50,
+    messages: [{ role: 'user', content: prompt }]
+  });
+
+  return response.content[0].text.trim().replace(/^["']|["']$/g, '').replace(/\.$/, '');
+}
+
 function buildPageHTML(config, content, domain) {
   const accentColor = config.accent_color || config.primary_color || '#e63946';
 
@@ -317,15 +334,26 @@ async function getGalleryPage(domain) {
   return gallery;
 }
 
-async function updateGallery(domain, teamSlug, config) {
+async function updateGallery(domain, teamSlug, config, galleryDesc) {
   const gallery = await getGalleryPage(domain);
   const teamPageUrl = `${domain.baseUrl}/pages/${teamSlug}-${domain.handleSuffix}`;
 
+  const currentContent = gallery.content || '';
+
+  // Check if this team already exists in the gallery
+  if (currentContent.includes(`url: "${teamPageUrl}"`) || currentContent.includes(`team: "${config.team_name}"`)) {
+    console.log(`✓ Gallery on ${domain.label} already contains ${config.team_name} — skipping`);
+    return;
+  }
+
+  // Use short gallery description (4-6 words) instead of full design_description
+  const shortDesc = galleryDesc || config.design_description;
+
   // New entry injected at the START of the designs array so newest appears first
-  const newEntry = `    {\n        team: "${config.team_name}",\n        desc: "${config.design_description}",\n        image: "${config.image_url}",\n        url: "${teamPageUrl}"\n    },`;
+  const newEntry = `    {\n        team: "${config.team_name}",\n        desc: "${shortDesc}",\n        image: "${config.image_url}",\n        url: "${teamPageUrl}"\n    },`;
 
   const marker = 'const designs = [';
-  let updatedContent = gallery.content || '';
+  let updatedContent = currentContent;
 
   if (updatedContent.includes(marker)) {
     updatedContent = updatedContent.replace(marker, `${marker}\n${newEntry}`);
@@ -415,6 +443,20 @@ async function updateSitemap(domain, teamSlug) {
   console.log(`✓ Sitemap updated on ${domain.label} — added ${handle}`);
 }
 
+async function pageExists(domain, handle) {
+  try {
+    const response = await fetch(`${domain.host}/pages?handle=${handle}`, {
+      headers: { 'token': domain.token }
+    });
+    const result = await response.json();
+    if (!response.ok || result.code !== 0) return false;
+    const pages = result.data?.list || result.data || [];
+    return Array.isArray(pages) && pages.some(p => p.handle === handle);
+  } catch {
+    return false;
+  }
+}
+
 async function createPage(domain, pageData) {
   const response = await fetch(`${domain.host}/pages`, {
     method: 'POST',
@@ -447,36 +489,64 @@ async function main() {
   console.log(`Mode: ${galleryOnly ? 'GALLERY ONLY' : 'FULL DEPLOY'}`);
   console.log(`Gallery update: ${updateGalleryFlag || galleryOnly ? 'YES' : 'NO'}`);
 
+  // Generate a short gallery description (4-6 words) once, reuse for all domains
+  let galleryDesc = null;
+  if (updateGalleryFlag || galleryOnly) {
+    console.log('Generating short gallery description...');
+    galleryDesc = await generateGalleryDesc(config);
+    console.log(`Gallery description: "${galleryDesc}"`);
+  }
+
+  const errors = [];
+
   for (const [lang, domain] of Object.entries(DOMAINS)) {
-    if (!galleryOnly) {
-      console.log(`\nGenerating ${lang.toUpperCase()} content...`);
-      const content = await generatePageContent(config, lang);
+    try {
+      if (!galleryOnly) {
+        const handle = `${teamSlug}-${domain.handleSuffix}`;
 
-      const html = buildPageHTML(config, content, domain);
-      const handle = `${teamSlug}-${domain.handleSuffix}`;
+        // Check if page already exists to prevent duplicates
+        const exists = await pageExists(domain, handle);
+        if (exists) {
+          console.log(`\n⏭️ Page already exists on ${domain.label} with handle: ${handle} — skipping creation`);
+        } else {
+          console.log(`\nGenerating ${lang.toUpperCase()} content...`);
+          const content = await generatePageContent(config, lang);
 
-      const pageData = {
-        is_default: 0,
-        title: content.meta_title,
-        content: html,
-        meta_title: content.meta_title,
-        meta_keywords: ['custom football kit', 'custom jersey', config.team_name, 'MOMUTO'],
-        meta_descript: content.meta_description,
-        handle: handle
-      };
+          const html = buildPageHTML(config, content, domain);
 
-      console.log(`Deploying to ${domain.label} with handle: ${handle}`);
-      const result = await createPage(domain, pageData);
-      console.log(`✓ Created on ${domain.label}:`, JSON.stringify(result));
+          const pageData = {
+            is_default: 0,
+            title: content.meta_title,
+            content: html,
+            meta_title: content.meta_title,
+            meta_keywords: ['custom football kit', 'custom jersey', config.team_name, 'MOMUTO'],
+            meta_descript: content.meta_description,
+            handle: handle
+          };
 
-      console.log(`Updating sitemap on ${domain.label}...`);
-      await updateSitemap(domain, teamSlug);
+          console.log(`Deploying to ${domain.label} with handle: ${handle}`);
+          const result = await createPage(domain, pageData);
+          console.log(`✓ Created on ${domain.label}:`, JSON.stringify(result));
+        }
+
+        console.log(`Updating sitemap on ${domain.label}...`);
+        await updateSitemap(domain, teamSlug);
+      }
+
+      if (updateGalleryFlag || galleryOnly) {
+        console.log(`Updating gallery on ${domain.label}...`);
+        await updateGallery(domain, teamSlug, config, galleryDesc);
+      }
+    } catch (err) {
+      console.error(`❌ Error processing ${domain.label}: ${err.message}`);
+      errors.push({ domain: domain.label, error: err.message });
     }
+  }
 
-    if (updateGalleryFlag || galleryOnly) {
-      console.log(`Updating gallery on ${domain.label}...`);
-      await updateGallery(domain, teamSlug, config);
-    }
+  if (errors.length > 0) {
+    console.error(`\n⚠️ Completed with ${errors.length} error(s):`);
+    errors.forEach(e => console.error(`  - ${e.domain}: ${e.error}`));
+    process.exit(1);
   }
 
   console.log('\n✅ All three domains updated successfully.');
