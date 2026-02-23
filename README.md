@@ -54,10 +54,19 @@ Create a file at `teams/[team-slug]/config.json`:
 Push to GitHub. The Action will:
 - Generate EN, ES, FR content using Claude AI
 - Deploy all three pages via OEMSaaS API
+- Update sitemaps on all three domains automatically via DiyFile API
 - Pages will be live at:
   - `momuto.com/pages/[team-slug]-custom-kit-design`
-  - `es.momuto.com/pages/[team-slug]-custom-kit-design`
-  - `fr.momuto.com/pages/[team-slug]-custom-kit-design`
+  - `es.momuto.com/pages/[team-slug]-diseno-equipacion`
+  - `fr.momuto.com/pages/[team-slug]-design-maillot`
+
+### Gallery update (opt-in)
+
+To also add the team to the gallery pages on all three domains, include `add-to-gallery` in the commit message:
+
+```
+git commit -m "Add new-team config add-to-gallery"
+```
 
 ## Repo structure
 
@@ -72,12 +81,24 @@ teams/
     config.json             ← Example team
   [new-team]/
     config.json
+static/                     ← Static files for all domains
+  shared/
+    llms.txt
+  momuto.com/
+    robots.txt
+    sitemap.xml
+  es.momuto.com/
+    robots.txt
+    sitemap.xml
+    llms.txt
+  fr.momuto.com/
+    robots.txt
+    sitemap.xml
+    llms.txt
 package.json
 ```
 
 ## After deployment
 
 Remember to:
-1. Add the new pages to all three sitemaps (batch update monthly)
-2. Link the new page from the gallery on each domain
-3. Validate schema at search.google.com/test/rich-results
+1. Validate schema at search.google.com/test/rich-results

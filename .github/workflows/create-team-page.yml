@@ -30,6 +30,16 @@ jobs:
           TEAM=$(echo $CHANGED | cut -d'/' -f2)
           echo "team=$TEAM" >> $GITHUB_OUTPUT
 
+      - name: Check if gallery update requested
+        id: gallery
+        run: |
+          MSG=$(git log -1 --pretty=%B)
+          if echo "$MSG" | grep -qi 'add-to-gallery'; then
+            echo "update=true" >> $GITHUB_OUTPUT
+          else
+            echo "update=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Generate and deploy pages
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -37,4 +47,5 @@ jobs:
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           TEAM_SLUG: ${{ steps.changed.outputs.team }}
+          UPDATE_GALLERY: ${{ steps.gallery.outputs.update }}
         run: node scripts/generate-and-deploy.js
