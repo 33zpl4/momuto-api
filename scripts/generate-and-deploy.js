@@ -358,6 +358,63 @@ async function updateGallery(domain, teamSlug, config) {
   return result;
 }
 
+async function updateSitemap(domain, teamSlug) {
+  const handle = `${teamSlug}-${domain.handleSuffix}`;
+  const newPageUrl = `${domain.baseUrl}/pages/${handle}`;
+
+  // Fetch current sitemap via DiyFile API
+  const listResponse = await fetch(`${domain.host}/diy-files?name=sitemap.xml`, {
+    headers: { 'token': domain.token }
+  });
+  const listResult = await listResponse.json();
+  if (!listResponse.ok || listResult.code !== 0) {
+    console.warn(`⚠️ Could not fetch sitemap on ${domain.label}: ${JSON.stringify(listResult)} — skipping sitemap update`);
+    return;
+  }
+
+  const files = listResult.data?.list || listResult.data || [];
+  const sitemap = Array.isArray(files)
+    ? files.find(f => f.name === 'sitemap.xml')
+    : null;
+
+  if (!sitemap) {
+    console.warn(`⚠️ sitemap.xml not found on ${domain.label} — skipping sitemap update`);
+    return;
+  }
+
+  // Check if this URL already exists in the sitemap
+  const content = sitemap.content || '';
+  if (content.includes(newPageUrl)) {
+    console.log(`✓ Sitemap on ${domain.label} already contains ${handle} — skipping`);
+    return;
+  }
+
+  // Inject new <url> entry before </urlset>
+  const today = new Date().toISOString().split('T')[0];
+  const newEntry = `<url>\n  <loc>${newPageUrl}</loc>\n  <lastmod>${today}</lastmod>\n  <changefreq>monthly</changefreq>\n  <priority>0.6</priority>\n</url>\n`;
+
+  const updatedContent = content.replace('</urlset>', `${newEntry}</urlset>`);
+
+  const putResponse = await fetch(`${domain.host}/diy-files/${sitemap.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'token': domain.token
+    },
+    body: JSON.stringify({
+      name: sitemap.name,
+      content: updatedContent
+    })
+  });
+
+  const putResult = await putResponse.json();
+  if (!putResponse.ok || putResult.code !== 0) {
+    console.warn(`⚠️ Failed to update sitemap on ${domain.label}: ${JSON.stringify(putResult)}`);
+    return;
+  }
+  console.log(`✓ Sitemap updated on ${domain.label} — added ${handle}`);
+}
+
 async function createPage(domain, pageData) {
   const response = await fetch(`${domain.host}/pages`, {
     method: 'POST',
@@ -408,6 +465,9 @@ async function main() {
     console.log(`Deploying to ${domain.label} with handle: ${handle}`);
     const result = await createPage(domain, pageData);
     console.log(`✓ Created on ${domain.label}:`, JSON.stringify(result));
+
+    console.log(`Updating sitemap on ${domain.label}...`);
+    await updateSitemap(domain, teamSlug);
 
     if (updateGalleryFlag) {
       console.log(`Updating gallery on ${domain.label}...`);
