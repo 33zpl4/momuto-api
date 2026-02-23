@@ -441,35 +441,39 @@ async function main() {
 
   const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
   const updateGalleryFlag = process.env.UPDATE_GALLERY === 'true';
+  const galleryOnly = process.env.GALLERY_ONLY === 'true';
 
   console.log(`Processing team: ${config.team_name}`);
-  console.log(`Gallery update: ${updateGalleryFlag ? 'YES' : 'NO'}`);
+  console.log(`Mode: ${galleryOnly ? 'GALLERY ONLY' : 'FULL DEPLOY'}`);
+  console.log(`Gallery update: ${updateGalleryFlag || galleryOnly ? 'YES' : 'NO'}`);
 
   for (const [lang, domain] of Object.entries(DOMAINS)) {
-    console.log(`\nGenerating ${lang.toUpperCase()} content...`);
-    const content = await generatePageContent(config, lang);
+    if (!galleryOnly) {
+      console.log(`\nGenerating ${lang.toUpperCase()} content...`);
+      const content = await generatePageContent(config, lang);
 
-    const html = buildPageHTML(config, content, domain);
-    const handle = `${teamSlug}-${domain.handleSuffix}`;
+      const html = buildPageHTML(config, content, domain);
+      const handle = `${teamSlug}-${domain.handleSuffix}`;
 
-    const pageData = {
-      is_default: 0,
-      title: content.meta_title,
-      content: html,
-      meta_title: content.meta_title,
-      meta_keywords: ['custom football kit', 'custom jersey', config.team_name, 'MOMUTO'],
-      meta_descript: content.meta_description,
-      handle: handle
-    };
+      const pageData = {
+        is_default: 0,
+        title: content.meta_title,
+        content: html,
+        meta_title: content.meta_title,
+        meta_keywords: ['custom football kit', 'custom jersey', config.team_name, 'MOMUTO'],
+        meta_descript: content.meta_description,
+        handle: handle
+      };
 
-    console.log(`Deploying to ${domain.label} with handle: ${handle}`);
-    const result = await createPage(domain, pageData);
-    console.log(`✓ Created on ${domain.label}:`, JSON.stringify(result));
+      console.log(`Deploying to ${domain.label} with handle: ${handle}`);
+      const result = await createPage(domain, pageData);
+      console.log(`✓ Created on ${domain.label}:`, JSON.stringify(result));
 
-    console.log(`Updating sitemap on ${domain.label}...`);
-    await updateSitemap(domain, teamSlug);
+      console.log(`Updating sitemap on ${domain.label}...`);
+      await updateSitemap(domain, teamSlug);
+    }
 
-    if (updateGalleryFlag) {
+    if (updateGalleryFlag || galleryOnly) {
       console.log(`Updating gallery on ${domain.label}...`);
       await updateGallery(domain, teamSlug, config);
     }
