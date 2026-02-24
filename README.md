@@ -80,8 +80,16 @@ When `back_image_url` is present in `config.json`, the generated page automatica
 
 - **Detection:** `const hasBack = !!config.back_image_url` — if truthy, the toggle UI is rendered
 - **Structure:** Two `.jersey-view` divs (one per side) live inside a `.jersey-carousel`. Only the `.active` one is visible (`display: block`)
-- **Switching:** `switchView(view, btn)` toggles the `active` class on the views and updates the lightbox image src to match
-- **Lightbox:** `openLightbox()` reads the currently active view's image src, so zooming always shows the correct side
+- **Switching:** `switchView(view, btn)` uses explicit `classList.add()` and `classList.remove()` to toggle the `active` class on views
+- **⚠️ Important:** Never use `classList.toggle(token, force)` in switchView — it's unreliable. Always use:
+  ```javascript
+  if (v.dataset.view === view) {
+    v.classList.add('active');
+  } else {
+    v.classList.remove('active');
+  }
+  ```
+- **Lightbox:** `openLightbox()` reads the currently active view's image src (not hardcoded), so zooming shows the correct side after toggle
 - **Click handler:** Each `<img class="jersey-img">` carries its own `onclick="openLightbox()"` — the onclick is on the image, not the container, to prevent event propagation conflicts with the toggle buttons on mobile
 
 If `back_image_url` is omitted, a single static image is shown with no toggle.
