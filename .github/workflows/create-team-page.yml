@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'teams/*/config.json'
+      - 'scripts/generate-and-deploy.js'
 
 jobs:
   create-pages:
