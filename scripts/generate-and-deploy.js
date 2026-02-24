@@ -416,19 +416,24 @@ async function updateGallery(domain, teamSlug, config, galleryDesc) {
     return;
   }
 
+  console.log(`  Searching for 'const designs = [' in ${domain.label} gallery...`);
+
   // Use short gallery description (4-6 words) instead of full design_description
   const shortDesc = galleryDesc || config.design_description;
 
   // New entry injected at the START of the designs array so newest appears first
   const newEntry = `    {\n        team: "${config.team_name}",\n        desc: "${shortDesc}",\n        image: "${config.image_url}",\n        url: "${teamPageUrl}"\n    },`;
 
-  const marker = 'const designs = [';
+  // Use regex to match "const designs = [" with flexible whitespace
+  const markerRegex = /const\s+designs\s*=\s*\[/;
   let updatedContent = currentContent;
 
-  if (updatedContent.includes(marker)) {
-    updatedContent = updatedContent.replace(marker, `${marker}\n${newEntry}`);
+  if (markerRegex.test(updatedContent)) {
+    updatedContent = updatedContent.replace(markerRegex, (match) => `${match}\n${newEntry}`);
+    console.log(`  ✓ Found designs array, injecting entry...`);
   } else {
     console.warn(`⚠️ Could not find designs array in gallery on ${domain.label} — skipping gallery update`);
+    console.warn(`  (Gallery content length: ${currentContent.length} chars)`);
     return;
   }
 
