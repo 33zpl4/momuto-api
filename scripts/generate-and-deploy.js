@@ -185,7 +185,11 @@ let currentView = 'front';
 function switchView(view, btnElement) {
     currentView = view;
     document.querySelectorAll('.jersey-view').forEach(v => {
-        v.classList.toggle('active', v.dataset.view === view);
+        if (v.dataset.view === view) {
+            v.classList.add('active');
+        } else {
+            v.classList.remove('active');
+        }
     });
     document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
     if(btnElement) btnElement.classList.add('active');
