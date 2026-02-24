@@ -47,9 +47,22 @@ Create a file at `teams/[team-slug]/config.json`:
   "primary_color": "#hexcolor",
   "secondary_color": "#hexcolor",
   "accent_color": "#hexcolor",
-  "image_url": "https://cdn.staticsoe.com/pics/..."
+  "image_url": "https://cdn.staticsoe.com/pics/...",
+  "back_image_url": "https://cdn.staticsoe.com/pics/..."  ← optional, enables front/back toggle
 }
 ```
+
+### Front/Back toggle
+
+When `back_image_url` is present in `config.json`, the generated page automatically includes a **FRONT / BACK** toggle above the jersey image. How it works:
+
+- **Detection:** `const hasBack = !!config.back_image_url` — if truthy, the toggle UI is rendered
+- **Structure:** Two `.jersey-view` divs (one per side) live inside a `.jersey-carousel`. Only the `.active` one is visible (`display: block`)
+- **Switching:** `switchView(view, btn)` toggles the `active` class on the views and updates the lightbox image src to match
+- **Lightbox:** `openLightbox()` reads the currently active view's image src, so zooming always shows the correct side
+- **Click handler:** Each `<img class="jersey-img">` carries its own `onclick="openLightbox()"` — the onclick is on the image, not the container, to prevent event propagation conflicts with the toggle buttons on mobile
+
+If `back_image_url` is omitted, a single static image is shown with no toggle.
 
 Push to GitHub. The Action will:
 - Generate EN, ES, FR content using Claude AI
