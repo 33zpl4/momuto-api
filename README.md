@@ -37,6 +37,28 @@ You can confirm this in OEMSaaS Admin → Settings → System → Developer
 
 ## Creating a new team page
 
+### ⚠️ Pre-deployment checklist
+
+**CRITICAL:** Before committing a team config, verify these match the actual jersey image:
+
+1. **`primary_color`** — Must be the dominant base color of the jersey
+2. **`secondary_color`** — Must match the secondary/accent color on the jersey
+3. **`accent_color`** — Must match the button highlight color on the page. **This MUST be `secondary_color`** (used for FRONT/BACK toggle buttons, reaction buttons, etc.)
+4. **`design_description`** — Must accurately describe the actual colors and design of the jersey image
+
+**Why this matters:**
+- The `accent_color` becomes the `.active` button color when users toggle between FRONT/BACK views
+- If `accent_color` is yellow but the jersey is black and red, the UI looks broken
+- The `design_description` is used in page copy and gallery text — color mismatch confuses customers
+
+**How to validate:**
+1. Open the jersey image file (`image_url` and `back_image_url`)
+2. Extract the dominant colors using a color picker
+3. Update all four config values to match
+4. Do NOT reuse accent colors from previous team configs
+
+---
+
 Create a file at `teams/[team-slug]/config.json`:
 
 ```json

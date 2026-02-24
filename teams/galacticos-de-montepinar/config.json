@@ -1,10 +1,10 @@
 {
   "team_name": "GALÁCTICOS DE MONTEPINAR",
-  "design_name": "Los Galácticos",
-  "design_description": "Bold and dynamic design befitting the Galácticos name. Premium custom kit crafted for champions of Montepinar.",
-  "primary_color": "#ffffff",
-  "secondary_color": "#000000",
-  "accent_color": "#FFD700",
+  "design_name": "Fuego y Poder",
+  "design_description": "Base negra con detalles en rojo carmesí que crean un diseño agresivo y dinámico. Hombros y mangas rojo intenso transmiten pasión y determinación en el campo.",
+  "primary_color": "#000000",
+  "secondary_color": "#c41e3a",
+  "accent_color": "#c41e3a",
   "image_url": "https://cdn.staticsoe.com/pics/c991f3a1701de4b1bfe5f76f7d2a00c08ab77b520b06d118cc1f06537b1b80fb.png",
   "back_image_url": "https://cdn.staticsoe.com/pics/f20b297fcc38b339dd8b8e8631406884cc8a818149387fe56a8fbd381cd12bc9.png"
 }
