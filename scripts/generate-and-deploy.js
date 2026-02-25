@@ -4,8 +4,13 @@ const path = require('path');
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-// Sanitize strings used inside template literals
-const safe = str => String(str).replace(/`/g, "'").replace(/\$/g, '&#36;');
+// Sanitize strings for HTML contexts — normalizes smart/curly quotes to straight ASCII
+// equivalents to prevent JS syntax errors when content is embedded in script blocks.
+const safe = str => String(str)
+  .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'")  // curly single quotes → straight '
+  .replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"')  // curly double quotes → straight "
+  .replace(/`/g, "'")
+  .replace(/\$/g, '&#36;');
 
 const DOMAINS = {
   en: {
@@ -211,7 +216,7 @@ function closeLightbox() {
     document.body.style.overflow = '';
 }
 function shareToWhatsApp() {
-    var text = encodeURIComponent('${safe(content.whatsapp_share_message)}');
+    var text = encodeURIComponent(${JSON.stringify(safe(content.whatsapp_share_message))});
     var url = encodeURIComponent(window.location.href);
     window.open('https://wa.me/?text=' + text + '%20' + url, '_blank');
 }
@@ -234,7 +239,7 @@ function selectReaction(btn, type) {
   btn.classList.add('selected');
 }
 function openLightbox() {
-  document.getElementById('zoomImg').src = '${safe(config.image_url)}';
+  document.getElementById('zoomImg').src = ${JSON.stringify(safe(config.image_url))};
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -243,7 +248,7 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 function shareToWhatsApp() {
-  var text = encodeURIComponent('${safe(content.whatsapp_share_message)}');
+  var text = encodeURIComponent(${JSON.stringify(safe(content.whatsapp_share_message))});
   var url = encodeURIComponent(window.location.href);
   window.open('https://wa.me/?text=' + text + '%20' + url, '_blank');
 }
@@ -422,7 +427,7 @@ async function updateGallery(domain, teamSlug, config, galleryDesc) {
   const shortDesc = galleryDesc || config.design_description;
 
   // New entry injected at the START of the designs array so newest appears first
-  const newEntry = `    {\n        team: "${config.team_name}",\n        desc: "${shortDesc}",\n        image: "${config.image_url}",\n        url: "${teamPageUrl}"\n    },`;
+  const newEntry = `    {\n        team: ${JSON.stringify(config.team_name)},\n        desc: ${JSON.stringify(shortDesc)},\n        image: ${JSON.stringify(config.image_url)},\n        url: ${JSON.stringify(teamPageUrl)}\n    },`;
 
   // Use regex to match "const designs = [" with flexible whitespace
   const markerRegex = /const\s+designs\s*=\s*\[/;
