@@ -30,6 +30,9 @@ jobs:
           echo "config=$CHANGED" >> $GITHUB_OUTPUT
           TEAM=$(echo $CHANGED | cut -d'/' -f2)
           echo "team=$TEAM" >> $GITHUB_OUTPUT
+          if [ -z "$TEAM" ]; then
+            echo "No team config changed — skipping deploy"
+          fi
 
       - name: Check if gallery update requested
         id: gallery
@@ -42,6 +45,7 @@ jobs:
           fi
 
       - name: Generate and deploy pages
+        if: steps.changed.outputs.team != ''
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
