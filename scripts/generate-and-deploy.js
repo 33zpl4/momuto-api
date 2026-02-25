@@ -523,17 +523,17 @@ async function updateSitemap(domain, teamSlug) {
   console.log(`✓ Sitemap updated on ${domain.label} — added ${handle}`);
 }
 
-async function pageExists(domain, handle) {
+async function getExistingPage(domain, handle) {
   try {
     const response = await fetch(`${domain.host}/pages?handle=${handle}`, {
       headers: { 'token': domain.token }
     });
     const result = await response.json();
-    if (!response.ok || result.code !== 0) return false;
+    if (!response.ok || result.code !== 0) return null;
     const pages = result.data?.list || result.data || [];
-    return Array.isArray(pages) && pages.some(p => p.handle === handle);
+    return Array.isArray(pages) ? (pages.find(p => p.handle === handle) || null) : null;
   } catch {
-    return false;
+    return null;
   }
 }
 
@@ -550,6 +550,23 @@ async function createPage(domain, pageData) {
   const result = await response.json();
   if (!response.ok || result.code !== 0) {
     throw new Error(`Failed to create page on ${domain.label}: ${JSON.stringify(result)}`);
+  }
+  return result;
+}
+
+async function updatePage(domain, pageId, pageData) {
+  const response = await fetch(`${domain.host}/pages/${pageId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'token': domain.token
+    },
+    body: JSON.stringify(pageData)
+  });
+
+  const result = await response.json();
+  if (!response.ok || result.code !== 0) {
+    throw new Error(`Failed to update page on ${domain.label}: ${JSON.stringify(result)}`);
   }
   return result;
 }
@@ -584,28 +601,29 @@ async function main() {
       if (!galleryOnly) {
         const handle = `${teamSlug}-${domain.handleSuffix}`;
 
-        // Check if page already exists to prevent duplicates
-        const exists = await pageExists(domain, handle);
-        if (exists) {
-          console.log(`\n⏭️ Page already exists on ${domain.label} with handle: ${handle} — skipping creation`);
+        console.log(`\nGenerating ${lang.toUpperCase()} content...`);
+        const content = await generatePageContent(config, lang);
+
+        const html = buildPageHTML(config, content, domain);
+
+        const pageTitle = domain.titleTemplate(config.team_name);
+
+        const pageData = {
+          is_default: 0,
+          title: pageTitle,
+          content: html,
+          meta_title: pageTitle,
+          meta_keywords: ['custom football kit', 'custom jersey', config.team_name, 'MOMUTO'],
+          meta_descript: content.meta_description,
+          handle: handle
+        };
+
+        const existingPage = await getExistingPage(domain, handle);
+        if (existingPage) {
+          console.log(`Updating existing page on ${domain.label} with handle: ${handle}`);
+          const result = await updatePage(domain, existingPage.id, pageData);
+          console.log(`✓ Updated on ${domain.label}:`, JSON.stringify(result));
         } else {
-          console.log(`\nGenerating ${lang.toUpperCase()} content...`);
-          const content = await generatePageContent(config, lang);
-
-          const html = buildPageHTML(config, content, domain);
-
-          const pageTitle = domain.titleTemplate(config.team_name);
-
-          const pageData = {
-            is_default: 0,
-            title: pageTitle,
-            content: html,
-            meta_title: pageTitle,
-            meta_keywords: ['custom football kit', 'custom jersey', config.team_name, 'MOMUTO'],
-            meta_descript: content.meta_description,
-            handle: handle
-          };
-
           console.log(`Deploying to ${domain.label} with handle: ${handle}`);
           const result = await createPage(domain, pageData);
           console.log(`✓ Created on ${domain.label}:`, JSON.stringify(result));
