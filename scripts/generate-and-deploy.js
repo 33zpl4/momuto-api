@@ -134,12 +134,19 @@ Return ONLY the JSON object, no markdown, no code fences, no other text.`;
   return JSON.parse(clean);
 }
 
-async function generateGalleryDesc(config) {
+async function generateGalleryDesc(config, lang) {
+  const langInstructions = {
+    en: 'Write the caption in English.',
+    es: 'Write the caption in Spanish.',
+    fr: 'Write the caption in French.'
+  };
+
   const prompt = `Given this football kit design description: "${config.design_description}"
 
 Write a SHORT gallery caption of exactly 4 to 6 words that captures the essence of the design.
 Examples of good captions: "Bold gradient with black sleeves", "Classic red and white stripes", "Navy fade with gold trim"
 
+${langInstructions[lang] || langInstructions.en}
 Return ONLY the caption text, nothing else. No quotes, no punctuation at the end.`;
 
   const response = await client.messages.create({
@@ -586,14 +593,6 @@ async function main() {
   console.log(`Mode: ${galleryOnly ? 'GALLERY ONLY' : 'FULL DEPLOY'}`);
   console.log(`Gallery update: ${updateGalleryFlag || galleryOnly ? 'YES' : 'NO'}`);
 
-  // Generate a short gallery description (4-6 words) once, reuse for all domains
-  let galleryDesc = null;
-  if (updateGalleryFlag || galleryOnly) {
-    console.log('Generating short gallery description...');
-    galleryDesc = await generateGalleryDesc(config);
-    console.log(`Gallery description: "${galleryDesc}"`);
-  }
-
   const errors = [];
 
   for (const [lang, domain] of Object.entries(DOMAINS)) {
@@ -634,6 +633,9 @@ async function main() {
       }
 
       if (updateGalleryFlag || galleryOnly) {
+        console.log(`Generating ${lang.toUpperCase()} gallery description...`);
+        const galleryDesc = await generateGalleryDesc(config, lang);
+        console.log(`Gallery description (${lang}): "${galleryDesc}"`);
         console.log(`Updating gallery on ${domain.label}...`);
         await updateGallery(domain, teamSlug, config, galleryDesc);
       }
