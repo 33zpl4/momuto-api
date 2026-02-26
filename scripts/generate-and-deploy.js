@@ -422,31 +422,40 @@ async function updateGallery(domain, teamSlug, config, galleryDesc) {
 
   const currentContent = gallery.content || '';
 
-  // Check if this team already exists in the gallery
-  if (currentContent.includes(`url: "${teamPageUrl}"`) || currentContent.includes(`team: "${config.team_name}"`)) {
-    console.log(`✓ Gallery on ${domain.label} already contains ${config.team_name} — skipping`);
-    return;
-  }
-
-  console.log(`  Searching for 'const designs = [' in ${domain.label} gallery...`);
-
   // Use short gallery description (4-6 words) instead of full design_description
   const shortDesc = galleryDesc || config.design_description;
 
-  // New entry injected at the START of the designs array so newest appears first
-  const newEntry = `    {\n        team: ${JSON.stringify(config.team_name)},\n        desc: ${JSON.stringify(shortDesc)},\n        image: ${JSON.stringify(config.image_url)},\n        url: ${JSON.stringify(teamPageUrl)}\n    },`;
-
-  // Use regex to match "const designs = [" with flexible whitespace
-  const markerRegex = /const\s+designs\s*=\s*\[/;
+  const urlMarker = `url: "${teamPageUrl}"`;
   let updatedContent = currentContent;
 
-  if (markerRegex.test(updatedContent)) {
-    updatedContent = updatedContent.replace(markerRegex, (match) => `${match}\n${newEntry}`);
-    console.log(`  ✓ Found designs array, injecting entry...`);
+  if (currentContent.includes(urlMarker)) {
+    // Team already in gallery — update desc in-place with the new (possibly localized) caption
+    console.log(`  Team already in ${domain.label} gallery — updating desc...`);
+    const urlIdx = currentContent.indexOf(urlMarker);
+    const entryStart = currentContent.lastIndexOf('{', urlIdx);
+    const entryEnd = currentContent.indexOf('}', urlIdx) + 1;
+    const existingEntry = currentContent.slice(entryStart, entryEnd);
+    const updatedEntry = existingEntry.replace(/desc:\s*"(?:[^"\\]|\\.)*"/, `desc: ${JSON.stringify(shortDesc)}`);
+    updatedContent = currentContent.slice(0, entryStart) + updatedEntry + currentContent.slice(entryEnd);
+    console.log(`  ✓ Updated desc for ${config.team_name} on ${domain.label}`);
   } else {
-    console.warn(`⚠️ Could not find designs array in gallery on ${domain.label} — skipping gallery update`);
-    console.warn(`  (Gallery content length: ${currentContent.length} chars)`);
-    return;
+    // New team — inject at the start of the designs array
+    console.log(`  Searching for 'const designs = [' in ${domain.label} gallery...`);
+
+    // New entry injected at the START of the designs array so newest appears first
+    const newEntry = `    {\n        team: ${JSON.stringify(config.team_name)},\n        desc: ${JSON.stringify(shortDesc)},\n        image: ${JSON.stringify(config.image_url)},\n        url: ${JSON.stringify(teamPageUrl)}\n    },`;
+
+    // Use regex to match "const designs = [" with flexible whitespace
+    const markerRegex = /const\s+designs\s*=\s*\[/;
+
+    if (markerRegex.test(updatedContent)) {
+      updatedContent = updatedContent.replace(markerRegex, (match) => `${match}\n${newEntry}`);
+      console.log(`  ✓ Found designs array, injecting entry...`);
+    } else {
+      console.warn(`⚠️ Could not find designs array in gallery on ${domain.label} — skipping gallery update`);
+      console.warn(`  (Gallery content length: ${currentContent.length} chars)`);
+      return;
+    }
   }
 
   const response = await fetch(`${domain.host}/pages/${gallery.id}`, {
@@ -469,7 +478,7 @@ async function updateGallery(domain, teamSlug, config, galleryDesc) {
   if (!response.ok || result.code !== 0) {
     throw new Error(`Failed to update gallery on ${domain.label}: ${JSON.stringify(result)}`);
   }
-  console.log(`✓ Gallery updated on ${domain.label} — ${config.team_name} added first`);
+  console.log(`✓ Gallery updated on ${domain.label} for ${config.team_name}`);
   return result;
 }
 
