@@ -1,10 +1,11 @@
 {
   "team_name": "REAL ISLETA",
-  "design_name": "Golden Stripes",
-  "design_description": "Black and gold. Raw stripes. Built to reign.",
+  "design_name": "Brush Stroke Gold",
+  "design_description": "A classic black and gold vertical stripe layout is energized with sharp brush-stroke textures that cut across the fabric, giving the kit a sense of raw movement and intensity. The contrast between the structured stripes and the aggressive graphic elements creates a bold, modern look while maintaining a strong traditional identity.",
   "primary_color": "#B8860B",
   "secondary_color": "#000000",
   "accent_color": "#B8860B",
-  "image_url": "https://cdn.staticsoe.com/pics/b348af9ff19da21501d70ec67a6e9aeef53e8a0d8eb7e199aa92090cb6deef10.png",
-  "updated_at": "2026-03-03"
+  "image_url": "https://cdn.staticsoe.com/pics/fa2a58fdd95fde338322e6816381c9551e119698b1362ccf6e1589ba1e07ee8f.png",
+  "back_image_url": "https://cdn.staticsoe.com/pics/fa2a58fdd95fde338322e6816381c9551e119698b1362ccf6e1589ba1e07ee8f.png",
+  "updated_at": "2026-03-04"
 }
