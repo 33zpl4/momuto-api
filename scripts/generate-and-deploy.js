@@ -166,7 +166,7 @@ function buildPageHTML(config, content, domain) {
   const toggleCSS = hasBack ? `
 .view-toggle { display: flex; gap: 10px; margin-bottom: 1.5rem; }
 .view-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 10px 20px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s ease; }
-.view-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+.view-btn.active { background: var(--accent); color: var(--bg-dark); border-color: var(--accent); }
 .jersey-carousel { position: relative; width: 100%; height: auto; overflow: hidden; }
 .jersey-view { display: none; width: 100%; }
 .jersey-view.active { display: block; }` : '';
@@ -318,7 +318,7 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
 .feature-item { text-align: center; }
 .feature-icon { width: 50px; height: 50px; margin: 0 auto 1rem; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.feature-icon-svg { width: 24px; height: 24px; stroke: white; fill: none; stroke-width: 2; }
+.feature-icon-svg { width: 24px; height: 24px; stroke: var(--bg-dark); fill: none; stroke-width: 2; }
 .feature-name { font-weight: 700; margin-bottom: 0.5rem; font-size: 0.9rem; }
 .feature-desc { font-size: 0.85rem; color: var(--text-muted); }
 .trust-section { background: #111; padding: 4rem 1.5rem; text-align: center; }
