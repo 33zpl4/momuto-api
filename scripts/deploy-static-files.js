@@ -36,26 +36,15 @@ function getFilePath(domain, filename) {
 }
 
 async function getDiyFile(domain, filename) {
-  const response = await fetch(`${domain.host}/diy-files?name=${encodeURIComponent(filename)}`, {
+  const url = `${domain.host}/diy-files?name=${encodeURIComponent(filename)}`;
+  const response = await fetch(url, {
     headers: { token: domain.token }
   });
   const result = await response.json();
+  console.log(`  [debug] GET ${url} → HTTP ${response.status} | ${JSON.stringify(result)}`);
   if (!response.ok || result.code !== 0) return null;
   const files = result.data?.list || result.data || [];
   return Array.isArray(files) ? (files.find(f => f.name === filename) || null) : null;
-}
-
-async function createDiyFile(domain, filename, content) {
-  const response = await fetch(`${domain.host}/diy-files`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', token: domain.token },
-    body: JSON.stringify({ name: filename, content })
-  });
-  const result = await response.json();
-  if (!response.ok || result.code !== 0) {
-    throw new Error(`Create failed: ${JSON.stringify(result)}`);
-  }
-  return result;
 }
 
 async function updateDiyFile(domain, fileId, filename, content) {
@@ -86,8 +75,12 @@ async function deployFile(domain, filename) {
     await updateDiyFile(domain, existing.id, filename, content);
     console.log(`  ✓ Updated ${filename} on ${domain.label}`);
   } else {
-    await createDiyFile(domain, filename, content);
-    console.log(`  ✓ Created ${filename} on ${domain.label}`);
+    // OEMSaaS DiyFile API does not support POST (create). The file must be
+    // created manually in the OEMSaaS admin panel first (Settings → DIY Files),
+    // then this script can update it.
+    throw new Error(
+      `${filename} does not exist on ${domain.label} — create it manually in the OEMSaaS admin panel (Settings → DIY Files) with an empty body, then re-run this workflow`
+    );
   }
 }
 
