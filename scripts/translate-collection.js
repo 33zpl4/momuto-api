@@ -236,8 +236,17 @@ function unpackXlsx(srcFile, tmpDir) {
 }
 
 function repackXlsx(tmpDir, destFile) {
-  // zip must be run from inside the directory so paths are relative
-  execSync(`cd "${tmpDir}" && zip -r "${destFile}" .`, { stdio: 'pipe' });
+  // xlsx spec requires:
+  //   1. [Content_Types].xml must be the first entry
+  //   2. No directory entries (only files)
+  const dest = path.resolve(destFile);
+  // Delete existing file — zip appends to existing zips, we want a fresh one
+  if (fs.existsSync(dest)) fs.unlinkSync(dest);
+  const cmd = [
+    `cd "${tmpDir}"`,
+    `(printf '%s\\n' '[Content_Types].xml'; find . -type f | sed 's|^\\./||' | grep -vF '[Content_Types].xml' | sort) | zip "${dest}" -@`
+  ].join(' && ');
+  execSync(cmd, { stdio: 'pipe' });
 }
 
 // ─── COLLECTIONS TRANSLATION ──────────────────────────────────────────────────
