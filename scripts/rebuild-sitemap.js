@@ -136,14 +136,14 @@ async function pushSitemap(domain, xml) {
 async function rebuildDomain(domain) {
   console.log(`\n[${domain.label}] Fetching content from CMS...`);
 
-  const [pages, articles, products, collections] = await Promise.all([
+  const [pages, posts, products, collections] = await Promise.all([
     fetchAll(domain, 'pages'),
-    fetchAll(domain, 'articles'),
+    fetchAll(domain, 'posts'),
     fetchAll(domain, 'products'),
     fetchAll(domain, 'collections'),
   ]);
 
-  console.log(`  pages: ${pages.length}, articles: ${articles.length}, products: ${products.length}, collections: ${collections.length}`);
+  console.log(`  pages: ${pages.length}, posts: ${posts.length}, products: ${products.length}, collections: ${collections.length}`);
 
   const today = new Date().toISOString().split('T')[0];
   const entries = [];
@@ -174,9 +174,9 @@ async function rebuildDomain(domain) {
     entries.push({ loc: `${domain.baseUrl}/products/${slug}`, lastmod: getLastmod(p, today), changefreq: 'monthly', priority: '0.8' });
   }
 
-  // Blog index + articles → /blogs/[handle]
+  // Blog index + posts → /blogs/[handle]
   entries.push({ loc: `${domain.baseUrl}/blogs`, lastmod: today, changefreq: 'weekly', priority: '0.7' });
-  for (const a of articles) {
+  for (const a of posts) {
     const slug = getSlug(a);
     if (!slug) continue;
     entries.push({ loc: `${domain.baseUrl}/blogs/${slug}`, lastmod: getLastmod(a, today), changefreq: 'monthly', priority: '0.6' });
