@@ -36,7 +36,7 @@ function getFilePath(domain, filename) {
 }
 
 async function getDiyFile(domain, filename) {
-  const url = `${domain.host}/diy-files`;
+  const url = `${domain.host}/diyfiles`;
   const response = await fetch(url, {
     headers: { token: domain.token }
   });
@@ -49,10 +49,10 @@ async function getDiyFile(domain, filename) {
 }
 
 async function updateDiyFile(domain, fileId, filename, content) {
-  const response = await fetch(`${domain.host}/diy-files/${fileId}`, {
+  const response = await fetch(`${domain.host}/diyfiles/${fileId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', token: domain.token },
-    body: JSON.stringify({ name: filename, content })
+    body: JSON.stringify({ file_name: filename, content })
   });
   const result = await response.json();
   if (!response.ok || result.code !== 0) {
