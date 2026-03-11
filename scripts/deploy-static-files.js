@@ -36,12 +36,11 @@ function getFilePath(domain, filename) {
 }
 
 async function getDiyFile(domain, filename) {
-  const url = `${domain.host}/diy-files?name=${encodeURIComponent(filename)}`;
+  const url = `${domain.host}/diy-files`;
   const response = await fetch(url, {
     headers: { token: domain.token }
   });
   const result = await response.json();
-  console.log(`  [debug] GET ${url} → HTTP ${response.status} | ${JSON.stringify(result)}`);
   if (!response.ok || result.code !== 0) return null;
   const files = result.data?.list || result.data || [];
   return Array.isArray(files) ? (files.find(f => f.name === filename) || null) : null;

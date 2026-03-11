@@ -487,7 +487,7 @@ async function updateSitemap(domain, teamSlug) {
   const newPageUrl = `${domain.baseUrl}/pages/${handle}`;
 
   // Fetch current sitemap via DiyFile API
-  const listResponse = await fetch(`${domain.host}/diy-files?name=sitemap.xml`, {
+  const listResponse = await fetch(`${domain.host}/diy-files`, {
     headers: { 'token': domain.token }
   });
   const listResult = await listResponse.json();
