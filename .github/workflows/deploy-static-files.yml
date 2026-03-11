@@ -1,0 +1,49 @@
+name: Deploy Static Files (robots.txt / llms.txt / sitemap.xml)
+
+on:
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Domain to deploy to (leave blank for all)'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - en
+          - es
+          - fr
+      file:
+        description: 'File to deploy (leave blank for all)'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - robots.txt
+          - llms.txt
+          - sitemap.xml
+  push:
+    paths:
+      - 'static/**'
+
+jobs:
+  deploy-static:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Deploy static files
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          TARGET_DOMAIN: ${{ github.event.inputs.domain }}
+          TARGET_FILE: ${{ github.event.inputs.file }}
+        run: node scripts/deploy-static-files.js
