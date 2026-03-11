@@ -53,10 +53,12 @@ async function getDiyFile(domain, filename) {
 }
 
 async function updateDiyFile(domain, fileId, filename, type, content) {
+  const body = { file_name: filename, type: String(type), url: '', content };
+  console.log(`  [debug] PUT /diyfiles/${fileId} body=${JSON.stringify(body)}`);
   const response = await fetch(`${domain.host}/diyfiles/${fileId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', token: domain.token },
-    body: JSON.stringify({ file_name: filename, type: String(type), url: '', content })
+    body: JSON.stringify(body)
   });
   const result = await response.json();
   if (!response.ok || result.code !== 0) {
@@ -77,6 +79,7 @@ async function deployFile(domain, filename) {
   const existing = await getDiyFile(domain, filename);
 
   if (existing) {
+    console.log(`  [debug] found existing: ${JSON.stringify(existing)}`);
     await updateDiyFile(domain, existing.id, filename, existing.type, content);
     console.log(`  ✓ Updated ${filename} on ${domain.label}`);
   } else {
