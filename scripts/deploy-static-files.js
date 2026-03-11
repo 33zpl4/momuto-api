@@ -41,8 +41,10 @@ async function getDiyFile(domain, filename) {
     headers: { token: domain.token }
   });
   const result = await response.json();
+  console.log(`  [debug] GET /diy-files on ${domain.label} → ${JSON.stringify(result).slice(0, 500)}`);
   if (!response.ok || result.code !== 0) return null;
   const files = result.data?.list || result.data || [];
+  console.log(`  [debug] files array length: ${Array.isArray(files) ? files.length : 'not array'}, sample: ${JSON.stringify(files).slice(0, 300)}`);
   return Array.isArray(files) ? (files.find(f => f.name === filename) || null) : null;
 }
 
