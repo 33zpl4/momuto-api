@@ -36,16 +36,20 @@ function getFilePath(domain, filename) {
 }
 
 async function getDiyFile(domain, filename) {
-  const url = `${domain.host}/diyfiles`;
-  const response = await fetch(url, {
-    headers: { token: domain.token }
-  });
-  const result = await response.json();
-  console.log(`  [debug] GET /diy-files on ${domain.label} → ${JSON.stringify(result).slice(0, 500)}`);
-  if (!response.ok || result.code !== 0) return null;
-  const files = result.data?.list || result.data || [];
-  console.log(`  [debug] files array length: ${Array.isArray(files) ? files.length : 'not array'}, sample: ${JSON.stringify(files).slice(0, 300)}`);
-  return Array.isArray(files) ? (files.find(f => f.name === filename) || null) : null;
+  let page = 1;
+  const pagesize = 50;
+  while (true) {
+    const url = `${domain.host}/diyfiles?page=${page}&pagesize=${pagesize}`;
+    const response = await fetch(url, { headers: { token: domain.token } });
+    const result = await response.json();
+    if (!response.ok || result.code !== 0) return null;
+    const files = result.data?.list || result.data || [];
+    if (!Array.isArray(files) || files.length === 0) return null;
+    const found = files.find(f => f.file_name === filename);
+    if (found) return found;
+    if (files.length < pagesize) return null;
+    page++;
+  }
 }
 
 async function updateDiyFile(domain, fileId, filename, content) {
