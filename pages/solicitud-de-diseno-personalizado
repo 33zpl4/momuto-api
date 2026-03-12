@@ -1,3 +1,84 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Equipación de Fútbol Personalizada MOMUTO",
+  "description": "Equipación de fútbol totalmente personalizable con impresión por sublimación completa. Tejido de poliéster-elastano de alto rendimiento como estándar. Diseño profesional gratuito en 1-2 días. Sin pedido mínimo. Emblemas 3D de silicona opcionales para pedidos grandes. Entrega en 20-25 días en todo el mundo.",
+  "brand": { "@type": "Brand", "name": "MOMUTO" },
+  "category": "Equipaciones de Fútbol Personalizadas",
+  "material": "Tejido de poliéster-elastano (estándar en todas las equipaciones)",
+  "color": "Totalmente personalizable",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "20.90",
+    "highPrice": "38.90",
+    "offerCount": "1",
+    "availability": "https://schema.org/InStock",
+    "priceValidUntil": "2026-12-31",
+    "seller": { "@type": "Organization", "name": "MOMUTO" },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": { "@type": "QuantitativeValue", "minValue": 7, "maxValue": 12, "unitCode": "DAY" },
+        "transitTime": { "@type": "QuantitativeValue", "minValue": 10, "maxValue": 15, "unitCode": "DAY" }
+      },
+      "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "EUR" }
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.4",
+    "reviewCount": "17",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Pedido Mínimo", "value": "Sin mínimo — pide 1 o 100+ equipaciones" },
+    { "@type": "PropertyValue", "name": "Método de Impresión", "value": "Sublimación completa — garantía de por vida contra descascarillado, grietas o decoloración" },
+    { "@type": "PropertyValue", "name": "Servicio de Diseño", "value": "Maqueta de diseño profesional gratuita en 1-2 días, revisiones gratuitas incluidas" },
+    { "@type": "PropertyValue", "name": "Configurador 3D", "value": "Configurador de equipaciones 3D en tiempo real con más de 30 plantillas profesionales" },
+    { "@type": "PropertyValue", "name": "Tejido", "value": "Mezcla de poliéster-elastano como estándar — los competidores incluyen elastano solo en niveles premium" },
+    { "@type": "PropertyValue", "name": "Emblemas 3D de Silicona", "value": "Emblemas 3D de silicona premium disponibles para pedidos grandes" },
+    { "@type": "PropertyValue", "name": "Entrega", "value": "7-12 días de producción + 10-15 días de envío = 20-25 días total en todo el mundo" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Cómo Pedir Equipaciones de Fútbol Personalizadas en MOMUTO",
+  "description": "Obtén equipaciones de fútbol totalmente personalizadas y de calidad profesional en 3 pasos: diseña con el configurador 3D o solicita una maqueta profesional gratuita, aprueba tu diseño y recibe tu equipación en 20-25 días en todo el mundo.",
+  "totalTime": "P25D",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "EUR",
+    "value": "Desde 20,90€ por camiseta (10+ unidades) o 38,90€ por una camiseta individual"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Diseña Tu Equipación",
+      "text": "Usa el configurador 3D de MOMUTO con más de 30 plantillas profesionales para diseñar al instante, o envía tu brief (escudo, colores, referencias) a través del sitio web, WhatsApp o email para recibir una maqueta personalizada gratuita en 1-2 días."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Revisa y Aprueba",
+      "text": "Revisa la maqueta de tu diseño y solicita revisiones — todas gratuitas. Confirma tu pedido con el desglose de tallas. Sin pedido mínimo. Opción de emblemas 3D de silicona disponible para pedidos más grandes."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Recibe Tu Equipación",
+      "text": "Tu equipación se fabrica en 7-12 días mediante impresión por sublimación completa sobre tejido de poliéster-elastano, y se envía a todo el mundo con un plazo de tránsito de 10-15 días. Total: 20-25 días. Envío gratuito en pedidos superiores a 50€."
+    }
+  ]
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <style>
     /* ===== BASE STYLES (MOMUTO PREMIUM) ===== */
@@ -22,7 +103,7 @@
         line-height: 1.6;
     }
 
-    /* ===== HERO SECTION (Grassroots Positioning) ===== */
+    /* ===== HERO SECTION ===== */
     header.hero.full-bleed {
         left: auto !important;
         transform: none !important;
@@ -34,9 +115,9 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        background: transparent; 
+        background: transparent;
         border: none;
-        overflow: visible !important; 
+        overflow: visible !important;
     }
 
     header.hero.full-bleed::before {
@@ -45,11 +126,11 @@
         top: 0;
         bottom: 0;
         left: 50%;
-        transform: translateX(-50%); 
-        width: 100vw; 
+        transform: translateX(-50%);
+        width: 100vw;
         background: var(--bg-light);
         border-bottom: 1px solid var(--border-color);
-        z-index: -1; 
+        z-index: -1;
     }
 
     .hero-content {
@@ -85,6 +166,14 @@
         margin: 0 auto;
         max-width: 700px;
         line-height: 1.5;
+    }
+
+    .hero-intro {
+        font-size: 1rem;
+        color: var(--text-grey);
+        max-width: 700px;
+        margin: 1.5rem auto 0;
+        line-height: 1.7;
     }
 
     /* ===== SOCIAL PROOF STRIP ===== */
@@ -147,7 +236,7 @@
         letter-spacing: 0.05em;
     }
 
-    /* ===== CHOOSE YOUR PATH SECTION ===== */
+    /* ===== PATH SECTION ===== */
     .path-section {
         padding: 6rem 20px;
         background: var(--bg-white);
@@ -251,6 +340,66 @@
         transform: translateY(-2px);
     }
 
+    /* ===== COMPARISON SECTION ===== */
+    .comparison-section {
+        margin-top: 3rem;
+        padding-top: 3rem;
+        border-top: 1px solid var(--border-color);
+        text-align: center;
+    }
+
+    .comparison-section h3 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        margin-bottom: 2rem;
+        color: var(--text-black);
+    }
+
+    .comparison-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .comparison-card {
+        background: var(--bg-light);
+        border: 1px solid var(--border-color);
+        padding: 2rem 1.5rem;
+        text-align: left;
+    }
+
+    .comparison-card .comparison-icon {
+        font-size: 1.5rem;
+        color: var(--accent-red);
+        margin-bottom: 1rem;
+    }
+
+    .comparison-option {
+        font-weight: 800;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        margin-bottom: 0.5rem;
+        color: var(--text-black);
+    }
+
+    .comparison-best-for {
+        font-size: 0.8rem;
+        color: var(--accent-red);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.75rem;
+    }
+
+    .comparison-benefit {
+        font-size: 0.9rem;
+        color: var(--text-grey);
+        line-height: 1.5;
+    }
+
     /* ===== ACTION GALLERY TEASER ===== */
     .action-teaser {
         background: #fafafa;
@@ -348,6 +497,180 @@
         color: white;
     }
 
+    /* ===== WHY SECTION ===== */
+    .why-section {
+        padding: 6rem 20px;
+        background: var(--bg-white);
+        border-top: 1px solid var(--border-color);
+    }
+
+    .why-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .why-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .why-header h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+        color: var(--text-black);
+    }
+
+    .why-header p {
+        font-size: 1.05rem;
+        color: var(--text-grey);
+        max-width: 680px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .why-header p a {
+        color: var(--text-black);
+        font-weight: 600;
+        text-decoration: underline;
+        text-decoration-color: var(--accent-red);
+        text-underline-offset: 3px;
+    }
+
+    .why-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 3.5rem;
+    }
+
+    .why-card {
+        background: var(--bg-light);
+        border: 1px solid var(--border-color);
+        padding: 2rem 1.75rem;
+    }
+
+    .why-card-icon {
+        font-size: 1.5rem;
+        color: var(--accent-red);
+        margin-bottom: 1rem;
+    }
+
+    .why-card h3 {
+        font-size: 1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--text-black);
+        margin-bottom: 0.5rem;
+    }
+
+    .why-card p {
+        font-size: 0.95rem;
+        color: var(--text-grey);
+        line-height: 1.55;
+    }
+
+    .why-card p a {
+        color: var(--text-grey);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .why-card p a:hover {
+        color: var(--accent-red);
+    }
+
+    /* ===== HOW IT WORKS SECTION ===== */
+    .how-it-works-section {
+        padding: 5rem 20px;
+        background: var(--bg-white);
+    }
+
+    .hiw-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hiw-container h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+        margin-bottom: 3rem;
+        color: var(--text-black);
+        text-align: center;
+    }
+
+    .hiw-steps {
+        list-style: none;
+    }
+
+    .hiw-steps li {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .hiw-steps li:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .hiw-num {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        background: var(--text-black);
+        color: white;
+        font-weight: 800;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hiw-steps li > div strong {
+        font-weight: 800;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        display: block;
+        margin-bottom: 0.35rem;
+        color: var(--text-black);
+    }
+
+    .hiw-steps li > div p {
+        font-size: 0.9rem;
+        color: var(--text-grey);
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .hiw-internal-links {
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border-color);
+        font-size: 0.9rem;
+        color: var(--text-grey);
+        text-align: center;
+        line-height: 2;
+    }
+
+    .hiw-internal-links a {
+        color: var(--text-black);
+        font-weight: 700;
+        text-decoration: underline;
+        text-decoration-color: var(--accent-red);
+    }
+
     /* ===== CUSTOM DESIGN FORM SECTION ===== */
     .form-section {
         padding: 6rem 20px;
@@ -437,7 +760,7 @@
     @keyframes fadeIn { from {opacity:0; transform: translateY(10px);} to {opacity:1; transform:translateY(0);} }
 
     .form-section-inner { margin-bottom: 40px; }
-    
+
     .form-section-inner h3, .form-section-inner h4 {
         font-size: 1.2rem;
         font-weight: 700;
@@ -454,7 +777,7 @@
         padding: 18px 20px;
         background: transparent;
         border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 0px; 
+        border-radius: 0px;
         color: white;
         font-size: 1rem;
         font-family: 'Jost', sans-serif;
@@ -492,7 +815,7 @@
     .colors-row { display: flex; gap: 40px; margin-top: 20px; }
     .color-col { display: flex; flex-direction: column; gap: 10px; }
     .color-col label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); }
-    
+
     .color-circle {
         width: 60px;
         height: 60px;
@@ -504,20 +827,20 @@
     .color-circle:hover { transform: scale(1.1); border-color: white; }
 
     /* Style Slider */
-    .style-scale { 
-        display: flex; 
-        align-items: center; 
-        gap: 20px; 
-        margin: 30px 0; 
+    .style-scale {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin: 30px 0;
     }
 
-    .style-scale span { 
-        font-weight: 700; 
-        font-size: 1.2rem; 
-        flex-shrink: 0; 
-        white-space: nowrap; 
+    .style-scale span {
+        font-weight: 700;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        white-space: nowrap;
     }
-    
+
     input[type="range"] {
         -webkit-appearance: none; width: 100%; height: 4px; background: rgba(255,255,255,0.2); border: none;
     }
@@ -571,7 +894,7 @@
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        background-color: #111111; 
+        background-color: #111111;
         border: 2px solid rgba(255, 255, 255, 0.3);
         margin: 0 auto 8px;
         cursor: pointer;
@@ -589,7 +912,7 @@
     }
 
     .size-radio:checked + .size-label .size-button {
-        background-color: #e2214b; 
+        background-color: #e2214b;
         border-color: #e2214b;
         transform: scale(1.4);
         box-shadow: 0 0 15px rgba(226, 33, 75, 0.4);
@@ -640,11 +963,11 @@
         border: 1px solid rgba(255,255,255,0.1);
         margin: 20px 0;
     }
-    
+
     .terms-checkbox input[type="checkbox"] {
-        appearance: auto !important; 
+        appearance: auto !important;
         -webkit-appearance: checkbox !important;
-        width: 20px !important; 
+        width: 20px !important;
         height: 20px !important;
         margin-right: 15px !important;
         cursor: pointer;
@@ -653,71 +976,71 @@
         position: static !important;
         display: block !important;
     }
-    
+
     .terms-checkbox label {
         cursor: pointer;
         margin: 0;
         font-size: 0.95rem;
         color: white;
     }
-    
-    .terms-checkbox a { 
-        color: white; 
-        text-decoration: underline; 
-        font-weight: bold; 
+
+    .terms-checkbox a {
+        color: white;
+        text-decoration: underline;
+        font-weight: bold;
     }
 
     /* Modal Styles */
     .color-modal {
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        width: 100vw; 
-        height: 100vh; 
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
         z-index: 2000;
-        background: transparent; 
+        background: transparent;
         transform: none;
-        padding: 0; 
+        padding: 0;
         max-width: none;
         box-shadow: none;
     }
-    
-    .modal-overlay { 
-        position: absolute; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%; 
-        background: rgba(0,0,0,0.8); 
-        z-index: 1; 
+
+    .modal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 1;
     }
-    
+
     .color-modal-content {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: white; 
-        padding: 30px; 
-        width: 90%; 
+        background: white;
+        padding: 30px;
+        width: 90%;
         max-width: 400px;
         box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         z-index: 2;
     }
-    
+
     .color-modal-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
     .color-modal-header h3 { color: black; font-weight: 800; text-transform: uppercase; }
     .close-modal { background: none; border: none; font-size: 2rem; cursor: pointer; }
-    
+
     #colorSwatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
-    
-    .color-swatch { 
-        width: 40px; 
-        height: 40px; 
-        border-radius: 50%; 
-        cursor: pointer; 
-        border: 1px solid #eee; 
-        position: relative; 
+
+    .color-swatch {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 1px solid #eee;
+        position: relative;
         z-index: 10;
     }
     .color-swatch:hover { transform: scale(1.2); border: 2px solid black; }
@@ -725,6 +1048,65 @@
     /* Confirmation */
     #confirmationMessage { text-align: center; padding: 40px; color: white; }
     .success-icon { color: #4ade80; font-size: 3rem; margin-bottom: 20px; }
+
+    /* ===== FAQ SECTION ===== */
+    .faq-section {
+        padding: 5rem 20px;
+        background: var(--bg-light);
+    }
+
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .faq-container h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+        margin-bottom: 3rem;
+        color: var(--text-black);
+        text-align: center;
+    }
+
+    .faq-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .faq-item {
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.75rem 0;
+    }
+
+    .faq-item:first-child {
+        border-top: 1px solid var(--border-color);
+    }
+
+    .faq-item h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-black);
+        margin-bottom: 0.75rem;
+        line-height: 1.4;
+        text-transform: none;
+        letter-spacing: 0;
+    }
+
+    .faq-item p {
+        font-size: 0.95rem;
+        color: var(--text-grey);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    .faq-item a {
+        color: var(--text-black);
+        font-weight: 700;
+        text-decoration: underline;
+        text-decoration-color: var(--accent-red);
+    }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -738,21 +1120,24 @@
         .style-extremes { flex-direction: row; }
         .form-navigation { flex-direction: row; }
         .next-step, .submit-form { padding: 15px 20px; font-size: 0.9rem; }
+        .why-grid { grid-template-columns: 1fr; }
+        .comparison-grid { grid-template-columns: 1fr; }
     }
 </style>
 <header class="hero full-bleed">
 <div class="hero-content">
 <h1>Camisetas de F&uacute;tbol Personalizadas para <span class="highlight">Equipos Amateur</span></h1>
 <h3>Ya sea que lo dise&ntilde;emos nosotros, o que lo crees t&uacute;&mdash;obt&eacute;n calidad profesional desde 20,90&euro;.</h3>
+<p class="hero-intro">MOMUTO ayuda a equipos de f&uacute;tbol amateur a crear equipaciones personalizadas a trav&eacute;s de tres v&iacute;as: un servicio de dise&ntilde;o gratuito, un configurador 3D en tiempo real, o dise&ntilde;os listos para jugar. Sin pedido m&iacute;nimo. Impresi&oacute;n profesional por sublimaci&oacute;n. Entrega mundial.</p>
 </div>
 </header>
 <section class="social-proof-strip">
 <div class="proof-container">
 <div class="proof-stats">
-<div class="proof-stat"><span class="stat-number">50+</span>
+<div class="proof-stat"><span class="stat-number">100+</span>
 <div class="stat-label">Equipos Satisfechos</div>
 </div>
-<div class="proof-stat"><span class="stat-number">6</span>
+<div class="proof-stat"><span class="stat-number">10+</span>
 <div class="stat-label">Pa&iacute;ses</div>
 </div>
 <div class="proof-stat"><span class="stat-number">98%</span>
@@ -765,28 +1150,51 @@
 <section class="path-section">
 <div class="path-container">
 <div class="path-header">
-<h2>Crea Tu Identidad. A Tu Manera.</h2>
-<p>Camisetas de calidad profesional para clubes amateur. Elige c&oacute;mo quieres crear el look de tu equipo.</p>
+<h2>Dise&ntilde;o de Equipaci&oacute;n de F&uacute;tbol Personalizada para Equipos, Clubes y Torneos</h2>
+<p>Tanto si necesitas una identidad de equipo totalmente original, quieres dise&ntilde;ar tu camiseta online, o prefieres empezar desde plantillas probadas, MOMUTO te ofrece tres formas de crear una equipaci&oacute;n de f&uacute;tbol profesional.</p>
 </div>
 <div class="path-options">
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-pencil-alt"></i></div>
 <h3>Servicio de Dise&ntilde;o Personalizado</h3>
 <div class="path-for">Equipos que quieren una identidad &uacute;nica y profesional</div>
-<p class="path-description">Deja que nuestros dise&ntilde;adores profesionales creen una camiseta 100% personalizada para tu equipo. Revisiones ilimitadas. Sin plantillas. Perfecto para equipos nuevos o renovaciones.</p>
+<p class="path-description">Trabaja con nuestro equipo para crear una equipaci&oacute;n de f&uacute;tbol totalmente personalizada para tu club. Sin plantillas, revisiones gratuitas y una identidad profesional construida alrededor de tus colores, escudo y referencias.</p>
 <a href="#cta-form" class="path-cta">Solicitar Dise&ntilde;o Gratuito</a></div>
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-cube"></i></div>
 <h3>Configurador 3D</h3>
 <div class="path-for">Creativos que quieren control total</div>
-<p class="path-description">Toma las riendas. Usa nuestro configurador 3D avanzado para construir tu camiseta desde cero, visualizar colores y colocar logos al instante.</p>
+<p class="path-description">Usa nuestro configurador 3D de camisetas de f&uacute;tbol para dise&ntilde;ar tu equipaci&oacute;n online, probar colores, colocar logos y visualizar el resultado antes de pedir.</p>
 <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="path-cta">Abrir Configurador 3D</a></div>
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-tshirt"></i></div>
 <h3>Colecci&oacute;n Lista para Jugar</h3>
 <div class="path-for">Equipos con prisa o que les gustan los modelos probados</div>
-<p class="path-description">Explora dise&ntilde;os predise&ntilde;ados seleccionados. Elige tu patr&oacute;n, selecciona los colores, s&aacute;ltate la fase de dise&ntilde;o. Maquetas garantizadas en 24h.</p>
-<a href="https://www.momuto.es/pages/coleccion-ready-to-play" class="path-cta">Explorar el Cat&aacute;logo</a></div>
+<p class="path-description">Empieza con dise&ntilde;os de equipaci&oacute;n predise&ntilde;ados, elige tus colores y obt&eacute;n una v&iacute;a m&aacute;s r&aacute;pida hacia un look de equipo profesional. Maquetas garantizadas en 24h.</p>
+<a href="https://es.momuto.com/pages/coleccion-ready-to-play" class="path-cta">Explorar el Cat&aacute;logo</a></div>
+</div>
+<div class="comparison-section">
+<h3>&iquest;Qu&eacute; opci&oacute;n es la correcta para tu equipo?</h3>
+<div class="comparison-grid">
+<div class="comparison-card">
+<div class="comparison-icon"><i class="fas fa-pencil-alt"></i></div>
+<div class="comparison-option">Dise&ntilde;o Personalizado</div>
+<div class="comparison-best-for">Para equipos que quieren una identidad &uacute;nica</div>
+<div class="comparison-benefit">Equipaci&oacute;n totalmente original construida alrededor de tu escudo y colores. Revisiones gratuitas hasta quedar satisfecho.</div>
+</div>
+<div class="comparison-card">
+<div class="comparison-icon"><i class="fas fa-cube"></i></div>
+<div class="comparison-option">Configurador 3D</div>
+<div class="comparison-best-for">Para equipos que quieren control total</div>
+<div class="comparison-benefit">Dise&ntilde;a online al instante. Ve tu camiseta en 3D antes de pedir nada.</div>
+</div>
+<div class="comparison-card">
+<div class="comparison-icon"><i class="fas fa-tshirt"></i></div>
+<div class="comparison-option">Lista para Jugar</div>
+<div class="comparison-best-for">Para equipos que quieren rapidez</div>
+<div class="comparison-benefit">Patrones probados, tus colores. La v&iacute;a m&aacute;s r&aacute;pida de la decisi&oacute;n al campo.</div>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -823,6 +1231,59 @@
 </div>
 </div>
 <div style="text-align: center;"><a href="https://www.momuto.es/pages/equipos-momuto" class="view-gallery-btn">Ver Galer&iacute;a Completa</a></div>
+</div>
+</section>
+<section class="why-section">
+<div class="why-container">
+<div class="why-header">
+<h2>Por Qu&eacute; los Equipos Eligen MOMUTO</h2>
+<p>Desde el precio hasta la entrega, pasando por la calidad del tejido, los equipos suelen elegir MOMUTO por los mismos motivos: menor coste por equipaci&oacute;n, entrega m&aacute;s r&aacute;pida, servicio de dise&ntilde;o gratuito y sin pedido m&iacute;nimo. &iquest;Comparas con proveedores como Owayo, Spized o Jersix? Hemos analizado las diferencias en nuestra <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">comparativa completa de equipaciones</a>.</p>
+</div>
+<div class="why-grid">
+<div class="why-card">
+<div class="why-card-icon"><i class="fas fa-truck"></i></div>
+<h3>Entrega M&aacute;s R&aacute;pida</h3>
+<p>20&ndash;25 d&iacute;as en todo el mundo desde la confirmaci&oacute;n del pedido: 7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Env&iacute;o gratuito en pedidos superiores a 50&euro;. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Ver comparativa de entrega.</a></p>
+</div>
+<div class="why-card">
+<div class="why-card-icon"><i class="fas fa-tag"></i></div>
+<h3>Mejor Precio por Equipo</h3>
+<p>Camisetas desde 20,90&euro; por unidad en pedidos grandes, 38,90&euro; para una camiseta individual. Sin pedido m&iacute;nimo &mdash; sin obligaci&oacute;n de compra a granel. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Comparar precios con competidores.</a></p>
+</div>
+<div class="why-card">
+<div class="why-card-icon"><i class="fas fa-layer-group"></i></div>
+<h3>Tejido de Alto Rendimiento como Est&aacute;ndar</h3>
+<p>Mezcla de poli&eacute;ster-elastano en todas las equipaciones &mdash; no solo en niveles premium. Absorbe el sudor, se mueve contigo, resistente toda la temporada.</p>
+</div>
+<div class="why-card">
+<div class="why-card-icon"><i class="fas fa-pencil-ruler"></i></div>
+<h3>Dise&ntilde;o Profesional Gratuito</h3>
+<p>Maqueta personalizada en 24&ndash;48h, revisiones gratuitas incluidas. Sin compromiso hasta confirmar el pedido &mdash; sin honorarios de dise&ntilde;o, nunca.</p>
+</div>
+<div class="why-card">
+<div class="why-card-icon"><i class="fas fa-box-open"></i></div>
+<h3>Sin Pedido M&iacute;nimo</h3>
+<p>Pide 1 camiseta o 100+. Sin recargos por muestra, sin obligaci&oacute;n de compra a granel. Cada pedido &mdash; por peque&ntilde;o que sea &mdash; recibe la misma calidad de producci&oacute;n.</p>
+</div>
+<div class="why-card">
+<div class="why-card-icon"><i class="fas fa-award"></i></div>
+<h3>Acabados Premium</h3>
+<p>Impresi&oacute;n por sublimaci&oacute;n completa con garant&iacute;a de por vida contra descascarillado o decoloraci&oacute;n. Emblemas 3D de silicona opcionales para pedidos grandes &mdash; un acabado profesional poco habitual a este precio.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="how-it-works-section">
+<div class="hiw-container">
+<h2>C&oacute;mo funciona el servicio de dise&ntilde;o de equipaciones MOMUTO</h2>
+<ol class="hiw-steps">
+<li><span class="hiw-num">1</span><div><strong>Comparte tu brief</strong><p>Cu&eacute;ntanos el nombre de tu equipo, escudo, colores y cualquier referencia. Env&iacute;alo a trav&eacute;s del formulario, WhatsApp o email. Solo tarda 2 minutos.</p></div></li>
+<li><span class="hiw-num">2</span><div><strong>Recibe tu maqueta en 24&ndash;48h</strong><p>Nuestros dise&ntilde;adores crean una maqueta de equipaci&oacute;n de f&uacute;tbol totalmente personalizada, de forma gratuita.</p></div></li>
+<li><span class="hiw-num">3</span><div><strong>Solicita revisiones si es necesario</strong><p>Todas las revisiones son gratuitas. Ajustamos hasta que est&eacute;s satisfecho.</p></div></li>
+<li><span class="hiw-num">4</span><div><strong>Confirma tallas y detalles del pedido</strong><p>Env&iacute;a el desglose de tallas y preparamos la producci&oacute;n.</p></div></li>
+<li><span class="hiw-num">5</span><div><strong>Producimos y enviamos tu equipaci&oacute;n</strong><p>7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Tu equipaci&oacute;n llega en 20&ndash;25 d&iacute;as en todo el mundo.</p></div></li>
+</ol>
+<p class="hiw-internal-links">&iquest;Prefieres dise&ntilde;arlo t&uacute; mismo? <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">Usa nuestro configurador 3D de camisetas.</a><br />&iquest;Quieres ver lo que han pedido otros clubes? <a href="https://www.momuto.es/pages/equipos-momuto">Explora la galer&iacute;a completa de equipos.</a></p>
 </div>
 </section>
 <section class="form-section">
@@ -914,6 +1375,37 @@
 </div>
 </div>
 </section>
+<section class="faq-section">
+<div class="faq-container">
+<h2>Preguntas frecuentes sobre equipaciones de f&uacute;tbol personalizadas</h2>
+<div class="faq-list">
+<div class="faq-item">
+<h3>&iquest;C&oacute;mo funciona el servicio de dise&ntilde;o gratuito de equipaciones de MOMUTO?</h3>
+<p>Env&iacute;a tu brief a trav&eacute;s del formulario de arriba &mdash; nombre del equipo, escudo, colores y cualquier referencia. Nuestros dise&ntilde;adores crean una maqueta totalmente personalizada en 24&ndash;48 horas, de forma gratuita. Todas las revisiones tambi&eacute;n son gratuitas hasta quedar satisfecho.</p>
+</div>
+<div class="faq-item">
+<h3>&iquest;Hay un pedido m&iacute;nimo para equipaciones de f&uacute;tbol personalizadas?</h3>
+<p>No. MOMUTO no tiene pedido m&iacute;nimo. Puedes pedir una sola camiseta o un equipo completo de 50+. El precio empieza desde 20,90&euro; por camiseta en pedidos grandes y 38,90&euro; para una camiseta individual.</p>
+</div>
+<div class="faq-item">
+<h3>&iquest;Cu&aacute;nto tiempo tarda en llegar la equipaci&oacute;n de f&uacute;tbol personalizada?</h3>
+<p>La producci&oacute;n tarda 7&ndash;12 d&iacute;as. El env&iacute;o tarda 10&ndash;15 d&iacute;as en todo el mundo. El tiempo total de entrega es normalmente de 20&ndash;25 d&iacute;as desde la confirmaci&oacute;n del pedido.</p>
+</div>
+<div class="faq-item">
+<h3>&iquest;Puedo subir el escudo de mi club y elegir mis propios colores?</h3>
+<p>S&iacute;. El formulario de solicitud de dise&ntilde;o te permite subir tu escudo directamente y seleccionar colores primarios y secundarios. Tambi&eacute;n puedes compartir referencias por WhatsApp o email si lo prefieres.</p>
+</div>
+<div class="faq-item">
+<h3>&iquest;Qu&eacute; m&eacute;todo de impresi&oacute;n usa MOMUTO?</h3>
+<p>MOMUTO utiliza impresi&oacute;n por sublimaci&oacute;n completa sobre tejido de poli&eacute;ster-elastano de alto rendimiento. La sublimaci&oacute;n significa que los colores se incrustan en el tejido &mdash; no impresos encima &mdash; por lo que nunca se descascarillan, agrietan ni decoloran.</p>
+</div>
+<div class="faq-item">
+<h3>&iquest;Puedo dise&ntilde;ar la equipaci&oacute;n yo mismo en lugar de solicitar una maqueta?</h3>
+<p>S&iacute;. Usa nuestro <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">configurador 3D de camisetas</a> para dise&ntilde;ar tu equipaci&oacute;n online en tiempo real. Tambi&eacute;n puedes explorar nuestra <a href="https://es.momuto.com/pages/coleccion-ready-to-play">colecci&oacute;n lista para jugar</a> si prefieres empezar desde plantillas probadas.</p>
+</div>
+</div>
+</div>
+</section>
 <div id="colorModal" class="color-modal" style="display: none;">
 <div id="colorModalOverlay" class="modal-overlay" onclick="closeColorModal()"></div>
 <div class="color-modal-content">
@@ -929,12 +1421,11 @@
     // === FORM LOGIC ===
     let currentStep = 1;
     const totalSteps = 3;
-    
+
     function showStep(step) {
         document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
         document.getElementById(`step${step}`).classList.add('active');
-        
-        // Update progress indicator
+
         document.querySelectorAll('.progress-step').forEach((s, i) => {
             if(i + 1 <= step) {
                 s.classList.add('active');
@@ -943,7 +1434,7 @@
             }
         });
     }
-    
+
     function nextStep() {
         if (validateCurrentStep()) {
             if (currentStep < totalSteps) {
@@ -953,18 +1444,18 @@
             }
         }
     }
-    
+
     function prevStep() {
         if (currentStep > 1) {
             currentStep--;
             showStep(currentStep);
         }
     }
-    
+
     function validateCurrentStep() {
         const currentStepElement = document.getElementById(`step${currentStep}`);
         const requiredFields = currentStepElement.querySelectorAll('input[required], select[required]');
-        
+
         for (let field of requiredFields) {
             if (!field.value.trim() && field.type !== 'checkbox') {
                 field.focus();
@@ -978,16 +1469,16 @@
         }
         return true;
     }
-    
+
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.next-step').forEach(btn => {
             btn.addEventListener('click', nextStep);
         });
-        
+
         document.querySelectorAll('.prev-step').forEach(btn => {
             btn.addEventListener('click', prevStep);
         });
-        
+
         document.getElementById('proposalForm').addEventListener('submit', function(e) {
             if (!validateCurrentStep()) {
                 e.preventDefault();
@@ -1001,28 +1492,27 @@
             });
         });
 
-        // Smooth scroll for anchor links
         document.querySelector('a[href="#cta-form"]').addEventListener('click', function(e) {
             e.preventDefault();
             document.getElementById('cta-form').scrollIntoView({behavior: 'smooth'});
         });
     });
-    
+
     function previewLogo(input) {
         const preview = document.getElementById('logoPreview');
         const nameDisplay = document.getElementById('fileNameDisplay');
-        
+
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             nameDisplay.textContent = input.files[0].name;
-            
+
             reader.onload = function(e) {
                 preview.innerHTML = `<img src="${e.target.result}" style="width:100%; border-radius:4px;">`;
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
+
     // Color Picker Logic
     const colors = [
         '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF',
@@ -1030,14 +1520,14 @@
         '#FFA500', '#FFC0CB', '#A52A2A', '#808080', '#000000', '#FFFFFF',
         '#E2214B', '#0055FF', '#FF29CC', '#32CD32', '#FF6347', '#4169E1'
     ];
-    
+
     let currentColorTarget = '';
-    
+
     function openColorModal(target) {
         currentColorTarget = target;
         const modal = document.getElementById('colorModal');
         const swatches = document.getElementById('colorSwatches');
-        
+
         swatches.innerHTML = '';
         colors.forEach(color => {
             const swatch = document.createElement('div');
@@ -1047,18 +1537,18 @@
             swatch.onclick = () => selectColor(color);
             swatches.appendChild(swatch);
         });
-        
+
         modal.style.display = 'block';
     }
-    
+
     function closeColorModal() {
         document.getElementById('colorModal').style.display = 'none';
     }
-    
+
     function selectColor(color) {
         const circle = document.getElementById(`${currentColorTarget}ColorCircle`);
         const hiddenInput = document.getElementById(`${currentColorTarget}ColorValue`);
-        
+
         circle.style.backgroundColor = color;
         hiddenInput.value = color;
         closeColorModal();
