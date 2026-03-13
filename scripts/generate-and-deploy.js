@@ -623,6 +623,7 @@ async function main() {
           meta_title: pageTitle,
           meta_keywords: ['custom football kit', 'custom jersey', config.team_name, 'MOMUTO'],
           meta_descript: content.meta_description,
+          og_image: config.image_url,
           handle: handle
         };
 
