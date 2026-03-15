@@ -71,22 +71,6 @@ jobs:
           LOCATION_LABEL_FR: ${{ inputs.location_label_fr }}
         run: node scripts/add-team-photo.js
 
-      - name: Commit and push changes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Commit files via GitHub API (avoids git push permission issues)
-          for FILE in pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto; do
-            CONTENT=$(base64 -w 0 "$FILE")
-            SHA=$(gh api "repos/${{ github.repository }}/contents/${FILE}" --jq '.sha')
-            gh api --method PUT "repos/${{ github.repository }}/contents/${FILE}" \
-              -f message="Add ${{ inputs.team_name }} photo to ${FILE}" \
-              -f content="$CONTENT" \
-              -f sha="$SHA" \
-              -f branch="main"
-            echo "Committed ${FILE}"
-          done
-
       - name: Deploy updated pages to CMS
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
@@ -138,3 +122,18 @@ jobs:
           deploy_page "$OEMSAAS_TOKEN_FR" "equipes-clubs-momuto" "pages/equipes-clubs-momuto"
 
           echo "All gallery pages deployed to CMS."
+
+      - name: Commit updated pages to repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for FILE in pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto; do
+            CONTENT=$(base64 -w 0 "$FILE")
+            SHA=$(gh api "repos/${{ github.repository }}/contents/${FILE}" --jq '.sha')
+            gh api --method PUT "repos/${{ github.repository }}/contents/${FILE}" \
+              -f message="Add ${{ inputs.team_name }} photo to ${FILE}" \
+              -f content="$CONTENT" \
+              -f sha="$SHA" \
+              -f branch="main"
+            echo "Committed ${FILE}"
+          done
