@@ -48,6 +48,9 @@ const PAGES = {
       `${team} team wearing their custom MOMUTO football jerseys in ${loc}, ${league}`,
     metaTemplate: (team, loc, league) =>
       `${team} - Custom MOMUTO jerseys - ${loc}, ${league}`,
+    jsonLdName: (team) => `${team} wearing custom MOMUTO jerseys`,
+    jsonLdDesc: (team, loc, league) =>
+      `${team} football team from ${loc} wearing their custom-designed MOMUTO jerseys during a ${league} match`,
   },
   es: {
     file: 'pages/equipos-momuto',
@@ -55,6 +58,9 @@ const PAGES = {
       `Equipo ${team} luciendo camisetas personalizadas MOMUTO en ${loc}, ${league}`,
     metaTemplate: (team, loc, league) =>
       `${team} - Camisetas MOMUTO - ${loc}, ${league}`,
+    jsonLdName: (team) => `${team} con camisetas MOMUTO`,
+    jsonLdDesc: (team, loc, league) =>
+      `Equipo ${team} de ${loc} luciendo sus camisetas personalizadas MOMUTO en partido de ${league}`,
   },
   fr: {
     file: 'pages/equipes-clubs-momuto',
@@ -62,6 +68,9 @@ const PAGES = {
       `&Eacute;quipe ${team} portant leurs maillots personnalis&eacute;s MOMUTO &agrave; ${loc}, ${league}`,
     metaTemplate: (team, loc, league) =>
       `${team} - Maillots MOMUTO - ${loc}, ${league}`,
+    jsonLdName: (team) => `${team} en maillots MOMUTO`,
+    jsonLdDesc: (team, loc, league) =>
+      `&Eacute;quipe ${team} de ${loc} portant leurs maillots personnalis&eacute;s MOMUTO en match de ${league}`,
   },
 };
 
@@ -104,6 +113,13 @@ function addPhotoToPage(lang) {
   }
 
   let content = fs.readFileSync(filePath, 'utf8');
+
+  // Check for duplicate — skip if this team's photo URL is already in the page
+  if (content.includes(IMAGE_URL)) {
+    console.log(`⏭ ${TEAM_NAME} photo already exists in ${page.file} — skipping`);
+    return;
+  }
+
   const entry = buildPhotoEntry(lang);
 
   // Insert right after the opening masonry-gallery div (before first action-photo)
@@ -122,11 +138,11 @@ function addPhotoToPage(lang) {
     const newCount = oldCount + 1;
     content = content.replace(/"numberOfItems":\s*\d+/, `"numberOfItems": ${newCount}`);
 
-    // Build JSON-LD entry - plain text for JSON (no HTML entities)
-    const plainTeam = TEAM_NAME;
-    const plainLoc = locationLabels[lang];
-    const plainLeague = LEAGUE;
-    const jsonEntry = `{"@type": "ListItem", "position": ${newCount}, "item": {"@type": "ImageObject", "name": "${plainTeam} wearing custom MOMUTO jerseys", "description": "${plainTeam} football team from ${plainLoc} wearing their custom-designed MOMUTO jerseys during a ${plainLeague} match", "contentUrl": "${IMAGE_URL}"}}`;
+    // Build JSON-LD entry with localized text
+    const page = PAGES[lang];
+    const jsonName = page.jsonLdName(htmlEncode(TEAM_NAME));
+    const jsonDesc = page.jsonLdDesc(htmlEncode(TEAM_NAME), htmlEncode(locationLabels[lang]), htmlEncode(LEAGUE));
+    const jsonEntry = `{"@type": "ListItem", "position": ${newCount}, "item": {"@type": "ImageObject", "name": "${jsonName}", "description": "${jsonDesc}", "contentUrl": "${IMAGE_URL}"}}`;
 
     // Insert before the closing ] of itemListElement
     const listEnd = content.lastIndexOf(']\n');
