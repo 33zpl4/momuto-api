@@ -42,6 +42,9 @@ on:
         required: false
         type: string
 
+permissions:
+  contents: write
+
 jobs:
   add-photo:
     runs-on: ubuntu-latest
