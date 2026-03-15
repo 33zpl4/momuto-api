@@ -83,9 +83,9 @@ jobs:
           deploy_page() {
             local TOKEN="$1"
             local HANDLE="$2"
+            local FILE="$3"
             local HOST="https://openapi.oemapps.com"
 
-            # Fetch existing page
             RESPONSE=$(curl -s -H "token: ${TOKEN}" "${HOST}/pages?handle=${HANDLE}")
             PAGE_ID=$(echo "$RESPONSE" | node -e "
               const data = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));
@@ -95,29 +95,28 @@ jobs:
             ")
 
             if [ -z "$PAGE_ID" ]; then
-              echo "⚠️ Page ${HANDLE} not found — skipping"
+              echo "Warning: Page ${HANDLE} not found — skipping"
               return
             fi
 
-            # Read local file content
-            local FILE="$3"
-            local CONTENT=$(cat "$FILE")
+            # Build JSON payload via node to avoid heredoc issues
+            node -e "
+              const fs = require('fs');
+              const content = fs.readFileSync('${FILE}', 'utf8');
+              fs.writeFileSync('/tmp/payload.json', JSON.stringify({ content }));
+            "
 
-            # Update page via API
             HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
               -X PUT \
               -H "Content-Type: application/json" \
               -H "token: ${TOKEN}" \
               "${HOST}/pages/${PAGE_ID}" \
-              --data-binary @- <<JSONEOF
-            {"content": $(node -e "console.log(JSON.stringify(require('fs').readFileSync('${FILE}','utf8')))")}
-JSONEOF
-            )
+              -d @/tmp/payload.json)
 
             if [ "$HTTP_CODE" = "200" ]; then
-              echo "✓ Updated ${HANDLE} on CMS"
+              echo "Updated ${HANDLE} on CMS"
             else
-              echo "⚠️ Failed to update ${HANDLE} — HTTP ${HTTP_CODE}"
+              echo "Warning: Failed to update ${HANDLE} — HTTP ${HTTP_CODE}"
             fi
           }
 
@@ -125,4 +124,4 @@ JSONEOF
           deploy_page "$OEMSAAS_TOKEN_ES" "equipos-momuto" "pages/equipos-momuto"
           deploy_page "$OEMSAAS_TOKEN_FR" "equipes-clubs-momuto" "pages/equipes-clubs-momuto"
 
-          echo "✅ All gallery pages deployed to CMS."
+          echo "All gallery pages deployed to CMS."
