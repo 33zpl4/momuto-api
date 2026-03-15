@@ -385,6 +385,23 @@
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+    /* SR-ONLY: visible to crawlers & screen readers, hidden visually */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    .action-photo figure { margin: 0; }
+    .action-photo figcaption { position: absolute; bottom: 0; left: 0; right: 0; pointer-events: none; }
+    .action-photo figcaption .photo-meta { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
         .main-title { font-size: 2.5rem; }
@@ -397,6 +414,43 @@
         .container { padding: 0 20px; }
     }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "name": "Galerie de maillots personnalis&eacute;s MOMUTO - &Eacute;quipes portant leurs maillots",
+  "description": "Photos r&eacute;elles d'&eacute;quipes de football portant des maillots personnalis&eacute;s con&ccedil;us et fabriqu&eacute;s par MOMUTO. Plus de 100 &eacute;quipes dans 10 pays font confiance &agrave; MOMUTO pour leurs maillots de qualit&eacute; PRO, impression par sublimation et livraison en 3 semaines.",
+  "author": {
+    "@type": "Organization",
+    "name": "MOMUTO",
+    "url": "https://fr.momuto.com"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Maillots de football personnalis&eacute;s",
+    "description": "Maillots et tenues de football professionnels con&ccedil;us et produits par MOMUTO"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "&Eacute;quipes portant les maillots personnalis&eacute;s MOMUTO",
+    "numberOfItems": 12,
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "item": {"@type": "ImageObject", "name": "Atl&eacute;tico Guanche en maillots MOMUTO", "description": "&Eacute;quipe Atl&eacute;tico Guanche de Las Palmas, &Icirc;les Canaries, portant leurs maillots personnalis&eacute;s MOMUTO en match de Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg"}},
+      {"@type": "ListItem", "position": 2, "item": {"@type": "ImageObject", "name": "Ronperla FC en maillots MOMUTO", "description": "&Eacute;quipe Ronperla FC de Tenerife, &Icirc;les Canaries, portant leurs maillots personnalis&eacute;s MOMUTO en match de Liga La Amistad", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg"}},
+      {"@type": "ListItem", "position": 3, "item": {"@type": "ImageObject", "name": "Olympique Mehunois en maillots MOMUTO", "description": "&Eacute;quipe Olympique Mehunois de France portant leurs maillots personnalis&eacute;s MOMUTO en match de D&eacute;partemental 2", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg"}},
+      {"@type": "ListItem", "position": 4, "item": {"@type": "ImageObject", "name": "Astra Rhei en maillots MOMUTO", "description": "&Eacute;quipe Astra Rhei de Biscaye, Espagne, portant leurs maillots personnalis&eacute;s MOMUTO en match de FutbolSiete", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/d9088919fcf1cfa3c9ce49a5e6fd45ed.jpg"}},
+      {"@type": "ListItem", "position": 5, "item": {"@type": "ImageObject", "name": "Mango CF en maillots MOMUTO", "description": "&Eacute;quipe Mango CF de Madrid portant leurs maillots personnalis&eacute;s MOMUTO en match de MadridFutbol7", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg"}},
+      {"@type": "ListItem", "position": 6, "item": {"@type": "ImageObject", "name": "Elche Koslovaco en maillots MOMUTO", "description": "&Eacute;quipe Elche Koslovaco de Las Palmas portant leurs maillots personnalis&eacute;s MOMUTO en match de Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg"}},
+      {"@type": "ListItem", "position": 7, "item": {"@type": "ImageObject", "name": "Celtanquetas FC en maillots MOMUTO", "description": "&Eacute;quipe Celtanquetas FC de Madrid portant leurs maillots personnalis&eacute;s MOMUTO en ligue ETSII", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/b4aee24cc1fca4085bfb118f7b9fbfdc.jpg"}},
+      {"@type": "ListItem", "position": 8, "item": {"@type": "ImageObject", "name": "Los Bloques en maillots MOMUTO", "description": "&Eacute;quipe Los Bloques de Las Palmas portant leurs maillots personnalis&eacute;s MOMUTO en Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/6ae16bbf2bc37fffbe519aff5b4e1dad.jpg"}},
+      {"@type": "ListItem", "position": 9, "item": {"@type": "ImageObject", "name": "Aston Birra en maillots MOMUTO", "description": "&Eacute;quipe Aston Birra de Las Palmas portant leurs maillots personnalis&eacute;s MOMUTO en Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp"}},
+      {"@type": "ListItem", "position": 10, "item": {"@type": "ImageObject", "name": "Naranja Mec&aacute;nica FC en maillots MOMUTO", "description": "&Eacute;quipe Naranja Mec&aacute;nica FC de Saragosse portant leurs maillots personnalis&eacute;s MOMUTO en MLA Sport", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp"}},
+      {"@type": "ListItem", "position": 11, "item": {"@type": "ImageObject", "name": "Ca Pedro FC en maillots MOMUTO", "description": "&Eacute;quipe Ca Pedro FC de Las Palmas portant leurs maillots personnalis&eacute;s MOMUTO en Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg"}},
+      {"@type": "ListItem", "position": 12, "item": {"@type": "ImageObject", "name": "Atl&eacute;tico Agon&iacute;as en maillots MOMUTO", "description": "&Eacute;quipe Atl&eacute;tico Agon&iacute;as de Madrid portant leurs maillots personnalis&eacute;s MOMUTO en F&uacute;tbol7", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg"}}
+    ]
+  }
+}
+</script>
 <section class="equipos-page">
 <div class="container">
 <div class="section-header">
@@ -423,70 +477,70 @@
 </div>
 <div class="teams-carousel">
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251008/19F8F2D8-8974-DA51-7C7F-42EDB901714D.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251008/19F8F2D8-8974-DA51-7C7F-42EDB901714D.jpg" alt="Maillot Al-Carajo FC" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251008/19F8F2D8-8974-DA51-7C7F-42EDB901714D.jpg" alt="Maillot de football personnalis&eacute; con&ccedil;u par MOMUTO pour Al-Carajo FC, Madrid" /></div>
 <div class="team-info">
 <div class="team-name">Al-Carajo FC</div>
 <div class="team-location">Madrid, Espagne</div>
 <span class="team-league">ETSII</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251023/EFA287E4-EB36-E749-3B93-B5114C5F908A.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251023/EFA287E4-EB36-E749-3B93-B5114C5F908A.jpg" alt="Maillot Ultimate Pupas" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251023/EFA287E4-EB36-E749-3B93-B5114C5F908A.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Ultimate Pupas, Las Palmas" /></div>
 <div class="team-info">
 <div class="team-name">Ultimate Pupas</div>
 <div class="team-location">Las Palmas, Espagne</div>
 <span class="team-league">Superliga</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20250925/768D82FA-36D9-55C8-79E6-7C1A5667EF66.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250925/768D82FA-36D9-55C8-79E6-7C1A5667EF66.jpg" alt="Maillot Olympo C" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250925/768D82FA-36D9-55C8-79E6-7C1A5667EF66.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Olympo C, Saragosse" /></div>
 <div class="team-info">
 <div class="team-name">Olympo C</div>
 <div class="team-location">Saragosse, Espagne</div>
 <span class="team-league">MLA Sport</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/47711/cart/resources/20251110/9DFC2A78-9F3E-CB0B-30CA-1EE27240B6DB.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251110/9DFC2A78-9F3E-CB0B-30CA-1EE27240B6DB.jpg" alt="Maillot Bodega Ballers" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251110/9DFC2A78-9F3E-CB0B-30CA-1EE27240B6DB.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Bodega Ballers, Danemark" /></div>
 <div class="team-info">
 <div class="team-name">Bodega Ballers</div>
 <div class="team-location">Danemark</div>
 <span class="team-league">Superleague</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20250818/BA41CB9F-DA85-BA21-E3A7-B2E1620B4B6B.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250818/BA41CB9F-DA85-BA21-E3A7-B2E1620B4B6B.jpg" alt="Maillot FC Aguacatero" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250818/BA41CB9F-DA85-BA21-E3A7-B2E1620B4B6B.jpg" alt="Maillot personnalis&eacute; MOMUTO pour FC Aguacatero, Las Palmas" /></div>
 <div class="team-info">
 <div class="team-name">FC Aguacatero</div>
 <div class="team-location">Las Palmas, Espagne</div>
 <span class="team-league">Liga Tinamar</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251024/979ED288-B88A-B255-4C9B-A8EC24A47261.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251024/979ED288-B88A-B255-4C9B-A8EC24A47261.jpg" alt="Maillot Mallorga FC" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251024/979ED288-B88A-B255-4C9B-A8EC24A47261.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Mallorga FC, Madrid" /></div>
 <div class="team-info">
 <div class="team-name">Mallorga FC</div>
 <div class="team-location">Madrid, Espagne</div>
 <span class="team-league">ETSII</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/4BAFC1A4-6BDD-F238-79DE-E35FD2D3C5F4.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/4BAFC1A4-6BDD-F238-79DE-E35FD2D3C5F4.jpg" alt="Maillot Astra Rhei" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/4BAFC1A4-6BDD-F238-79DE-E35FD2D3C5F4.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Astra Rhei, Biscaye" /></div>
 <div class="team-info">
 <div class="team-name">Astra Rhei</div>
 <div class="team-location">Biscaye, Espagne</div>
 <span class="team-league">FutbolSiete</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251022/CD84A8D2-E926-177B-2BAB-C85E5A071BEF.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251022/CD84A8D2-E926-177B-2BAB-C85E5A071BEF.jpg" alt="Maillot Naranja Mecanica" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251022/CD84A8D2-E926-177B-2BAB-C85E5A071BEF.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Naranja Mecanica, Saragosse" /></div>
 <div class="team-info">
 <div class="team-name">Naranja Mec&aacute;nica</div>
 <div class="team-location">Saragosse, Espagne</div>
 <span class="team-league">MLA Sport</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/31B3AFEC-BE49-5C85-C869-F4E0D00B4C61.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/31B3AFEC-BE49-5C85-C869-F4E0D00B4C61.jpg" alt="Maillot Elche Koslovaco" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/31B3AFEC-BE49-5C85-C869-F4E0D00B4C61.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Elche Koslovaco, Las Palmas" /></div>
 <div class="team-info">
 <div class="team-name">Elche Koslovaco</div>
 <div class="team-location">Las Palmas, Espagne</div>
 <span class="team-league">Superliga</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20250811/7BF417F2-884B-1AC7-AE92-6B7B7B02CD91.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250811/7BF417F2-884B-1AC7-AE92-6B7B7B02CD91.jpg" alt="Maillot Olympique Mehunois" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250811/7BF417F2-884B-1AC7-AE92-6B7B7B02CD91.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Olympique Mehunois, France" /></div>
 <div class="team-info">
 <div class="team-name">Olympique Mehunois</div>
 <div class="team-location">France</div>
@@ -509,72 +563,84 @@
 <h2 class="gallery-title">Nos Maillots en Action</h2>
 <p class="gallery-subtitle">&Eacute;quipes r&eacute;elles, matchs r&eacute;els, passion authentique</p>
 <div class="gallery-filters"><button class="filter-btn active" data-filter="all">Tous</button> <button class="filter-btn" data-filter="espa&ntilde;a">Espagne</button> <button class="filter-btn" data-filter="canarias">&Icirc;les Canaries</button> <button class="filter-btn" data-filter="madrid">Madrid</button> <button class="filter-btn" data-filter="internacional">International</button></div>
-<div class="masonry-gallery">
-<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg" alt="Atl&eacute;tico Guanche" loading="lazy" />
+<div class="masonry-gallery" role="list" aria-label="Photos d'&eacute;quipes portant les maillots personnalis&eacute;s MOMUTO">
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg" alt="&Eacute;quipe Atl&eacute;tico Guanche portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Atl&eacute;tico Guanche - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Atl&eacute;tico Guanche</div>
 <div class="team-details">Las Palmas &bull; Superliga LPGC</div>
 </div>
 </div>
-<div class="action-photo" data-location="canarias" data-city="tenerife"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg" alt="Ronperla FC" loading="lazy" />
+<div class="action-photo" data-location="canarias" data-city="tenerife" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg" alt="&Eacute;quipe Ronperla FC portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Tenerife, Liga La Amistad" loading="lazy" />
+<figcaption><span class="photo-meta">Ronperla FC - Maillots MOMUTO - Tenerife, Liga La Amistad</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Ronperla FC</div>
 <div class="team-details">Tenerife &bull; Liga La Amistad</div>
 </div>
 </div>
-<div class="action-photo" data-location="internacional" data-city="francia"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg" alt="Olympique Mehunois" loading="lazy" />
+<div class="action-photo" data-location="internacional" data-city="francia" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg" alt="&Eacute;quipe Olympique Mehunois portant leurs maillots personnalis&eacute;s MOMUTO en France, D&eacute;partemental 2" loading="lazy" />
+<figcaption><span class="photo-meta">Olympique Mehunois - Maillots MOMUTO - France, D&eacute;partemental 2</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Olympique Mehunois</div>
 <div class="team-details">France &bull; D&eacute;partemental 2</div>
 </div>
 </div>
-<div class="action-photo" data-location="espa&ntilde;a" data-city="vizcaya"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/d9088919fcf1cfa3c9ce49a5e6fd45ed.jpg" alt="Astra Rhei" loading="lazy" />
+<div class="action-photo" data-location="espa&ntilde;a" data-city="vizcaya" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/d9088919fcf1cfa3c9ce49a5e6fd45ed.jpg" alt="&Eacute;quipe Astra Rhei portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Biscaye, FutbolSiete" loading="lazy" />
+<figcaption><span class="photo-meta">Astra Rhei - Maillots MOMUTO - Biscaye, FutbolSiete</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Astra Rhei</div>
 <div class="team-details">Biscaye &bull; FutbolSiete</div>
 </div>
 </div>
-<div class="action-photo" data-location="madrid" data-city="madrid"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg" alt="Mango CF" loading="lazy" />
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg" alt="&Eacute;quipe Mango CF portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Madrid, MadridFutbol7" loading="lazy" />
+<figcaption><span class="photo-meta">Mango CF - Maillots MOMUTO - Madrid, MadridFutbol7</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Mango CF</div>
 <div class="team-details">Madrid &bull; MadridFutbol7</div>
 </div>
 </div>
-<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg" alt="Elche Koslovaco" loading="lazy" />
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg" alt="&Eacute;quipe Elche Koslovaco portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Elche Koslovaco - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Elche Koslovaco</div>
 <div class="team-details">Las Palmas &bull; Superliga LPGC</div>
 </div>
 </div>
-<div class="action-photo" data-location="madrid" data-city="madrid"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/b4aee24cc1fca4085bfb118f7b9fbfdc.jpg" alt="Celtanquetas FC" loading="lazy" />
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/b4aee24cc1fca4085bfb118f7b9fbfdc.jpg" alt="&Eacute;quipe Celtanquetas FC portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Madrid, ETSII" loading="lazy" />
+<figcaption><span class="photo-meta">Celtanquetas FC - Maillots MOMUTO - Madrid, ETSII</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Celtanquetas FC</div>
 <div class="team-details">Madrid &bull; ETSII</div>
 </div>
 </div>
-<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg" alt="Ca&rsquo;Pedro FC" loading="lazy" />
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg" alt="&Eacute;quipe Ca&rsquo;Pedro FC portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Ca&rsquo;Pedro FC - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Ca&rsquo;Pedro FC</div>
-<div class="team-details">Las Palmas; Superliga LPGC</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
 </div>
 </div>
-<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/6ae16bbf2bc37fffbe519aff5b4e1dad.jpg" alt="Los Bloques" loading="lazy" />
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/6ae16bbf2bc37fffbe519aff5b4e1dad.jpg" alt="&Eacute;quipe Los Bloques portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Los Bloques - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Los Bloques</div>
 </div>
 </div>
-<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp" alt="Aston Birra" loading="lazy" />
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp" alt="&Eacute;quipe Aston Birra portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Aston Birra - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Aston Birra</div>
 <div class="team-details">Las Palmas &bull; Superliga LPGC</div>
 </div>
 </div>
-<div class="action-photo" data-location="aragon" data-city="zaragoza"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp" alt="Naranja Mec&aacute;nica FC" loading="lazy" />
+<div class="action-photo" data-location="aragon" data-city="zaragoza" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp" alt="&Eacute;quipe Naranja Mec&aacute;nica FC portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Saragosse, MLA Sport" loading="lazy" />
+<figcaption><span class="photo-meta">Naranja Mec&aacute;nica FC - Maillots MOMUTO - Saragosse, MLA Sport</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Naranja Mec&aacute;nica FC</div>
 </div>
 </div>
-<div class="action-photo" data-location="madrid" data-city="madrid"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg" alt="Atl&eacute;tico Agon&iacute;as" loading="lazy" />
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg" alt="&Eacute;quipe Atl&eacute;tico Agon&iacute;as portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Madrid, F&uacute;tbol7" loading="lazy" />
+<figcaption><span class="photo-meta">Atl&eacute;tico Agon&iacute;as - Maillots MOMUTO - Madrid, F&uacute;tbol7</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Atl&eacute;tico Agon&iacute;as</div>
 <div class="team-details">Madrid &bull; F&uacute;tbol7</div>
@@ -589,6 +655,10 @@
 <p class="ugc-subtitle">Contactez-nous et envoyez-nous votre photo ! Nous adorons montrer tous les clubs qui font confiance &agrave; MOMUTO.</p>
 <div class="ugc-actions"><a href="mailto:info@momuto.com?subject=Photo de notre &eacute;quipe" class="btn-secondary">Envoyer une Photo</a></div>
 </div>
+</div>
+<div class="sr-only" aria-hidden="false">
+<h2>Portfolio de maillots personnalis&eacute;s MOMUTO</h2>
+<p>MOMUTO con&ccedil;oit et fabrique des maillots de football personnalis&eacute;s pour des &eacute;quipes du monde entier. Plus de 100 &eacute;quipes dans 10 pays font confiance &agrave; MOMUTO pour leurs tenues de qualit&eacute; professionnelle avec impression par sublimation compl&egrave;te, livr&eacute;es en 3 semaines sans minimum de commande. &Eacute;quipes vedettes : Atl&eacute;tico Guanche (Las Palmas, Superliga LPGC), Ronperla FC (Tenerife, Liga La Amistad), Olympique Mehunois (France, D&eacute;partemental 2), Astra Rhei (Biscaye, FutbolSiete), Mango CF (Madrid, MadridFutbol7), Elche Koslovaco (Las Palmas, Superliga LPGC), Celtanquetas FC (Madrid, ETSII), Los Bloques (Las Palmas, Superliga LPGC), Aston Birra (Las Palmas, Superliga LPGC), Naranja Mec&aacute;nica FC (Saragosse, MLA Sport), Ca'Pedro FC (Las Palmas, Superliga LPGC) et Atl&eacute;tico Agon&iacute;as (Madrid, F&uacute;tbol7). Tous les maillots sont fabriqu&eacute;s en tissu polyester/&eacute;lasthanne avec impression par sublimation garantie &agrave; vie. Prix de 20,90 EUR &agrave; 38,90 EUR par maillot.</p>
 </div>
 <section class="footer-cta-wrapper">
 <div class="final-cta-section">
