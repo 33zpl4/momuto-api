@@ -433,7 +433,7 @@
   "mainEntity": {
     "@type": "ItemList",
     "name": "Equipos con camisetas personalizadas MOMUTO",
-    "numberOfItems": 12,
+    "numberOfItems": 13,
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "item": {"@type": "ImageObject", "name": "Atl&eacute;tico Guanche con camisetas MOMUTO", "description": "Equipo Atl&eacute;tico Guanche de Las Palmas, Canarias, luciendo sus camisetas personalizadas MOMUTO en partido de Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg"}},
       {"@type": "ListItem", "position": 2, "item": {"@type": "ImageObject", "name": "Ronperla FC con camisetas MOMUTO", "description": "Equipo Ronperla FC de Tenerife, Canarias, luciendo sus camisetas personalizadas MOMUTO en partido de Liga La Amistad", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg"}},
@@ -446,7 +446,8 @@
       {"@type": "ListItem", "position": 9, "item": {"@type": "ImageObject", "name": "Aston Birra con camisetas MOMUTO", "description": "Equipo Aston Birra de Las Palmas luciendo sus camisetas personalizadas MOMUTO en Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp"}},
       {"@type": "ListItem", "position": 10, "item": {"@type": "ImageObject", "name": "Naranja Mec&aacute;nica FC con camisetas MOMUTO", "description": "Equipo Naranja Mec&aacute;nica FC de Zaragoza luciendo sus camisetas personalizadas MOMUTO en MLA Sport", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp"}},
       {"@type": "ListItem", "position": 11, "item": {"@type": "ImageObject", "name": "Ca Pedro FC con camisetas MOMUTO", "description": "Equipo Ca Pedro FC de Las Palmas luciendo sus camisetas personalizadas MOMUTO en Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg"}},
-      {"@type": "ListItem", "position": 12, "item": {"@type": "ImageObject", "name": "Atl&eacute;tico Agon&iacute;as con camisetas MOMUTO", "description": "Equipo Atl&eacute;tico Agon&iacute;as de Madrid luciendo sus camisetas personalizadas MOMUTO en F&uacute;tbol7", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg"}}
+      {"@type": "ListItem", "position": 12, "item": {"@type": "ImageObject", "name": "Atl&eacute;tico Agon&iacute;as con camisetas MOMUTO", "description": "Equipo Atl&eacute;tico Agon&iacute;as de Madrid luciendo sus camisetas personalizadas MOMUTO en F&uacute;tbol7", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg"}},
+      {"@type": "ListItem", "position": 13, "item": {"@type": "ImageObject", "name": "Batán Scorpion wearing custom MOMUTO jerseys", "description": "Batán Scorpion football team from Las Palmas wearing their custom-designed MOMUTO jerseys during a Superliga LPGC match", "contentUrl": "https://cdn.staticsoe.com/pics/2d4dbad060830cb72dd1dfa01bbadfa5f7f8e5fac20590b04e667d2ea96300f4.jpg"}}
     ]
   }
 }
@@ -562,6 +563,13 @@
 <p class="gallery-subtitle">Equipos reales, partidos reales, pasi&oacute;n aut&eacute;ntica</p>
 <div class="gallery-filters"><button class="filter-btn active" data-filter="all">Todos</button> <button class="filter-btn" data-filter="espa&ntilde;a">Espa&ntilde;a</button> <button class="filter-btn" data-filter="canarias">Canarias</button> <button class="filter-btn" data-filter="madrid">Madrid</button> <button class="filter-btn" data-filter="internacional">Internacional</button></div>
 <div class="masonry-gallery" role="list" aria-label="Fotos de equipos con camisetas personalizadas MOMUTO">
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/pics/2d4dbad060830cb72dd1dfa01bbadfa5f7f8e5fac20590b04e667d2ea96300f4.jpg" alt="Equipo Batán Scorpion luciendo camisetas personalizadas MOMUTO en Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Batán Scorpion - Camisetas MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Batán Scorpion</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
+</div>
+</div>
 <div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg" alt="Equipo Atl&eacute;tico Guanche luciendo camisetas personalizadas MOMUTO en Las Palmas, Superliga LPGC" loading="lazy" />
 <figcaption><span class="photo-meta">Atl&eacute;tico Guanche - Camisetas MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
@@ -649,7 +657,7 @@
 </section>
 <div class="sr-only" aria-hidden="false">
 <h2>Portfolio de equipaciones personalizadas MOMUTO</h2>
-<p>MOMUTO dise&ntilde;a y fabrica camisetas de f&uacute;tbol personalizadas para equipos de todo el mundo. M&aacute;s de 100 equipos en 10 pa&iacute;ses conf&iacute;an en MOMUTO para sus equipaciones de calidad profesional con impresi&oacute;n por sublimaci&oacute;n completa, entregadas en 3 semanas sin pedido m&iacute;nimo. Equipos destacados: Atl&eacute;tico Guanche (Las Palmas, Superliga LPGC), Ronperla FC (Tenerife, Liga La Amistad), Olympique Mehunois (Francia, D&eacute;partemental 2), Astra Rhei (Vizcaya, FutbolSiete), Mango CF (Madrid, MadridFutbol7), Elche Koslovaco (Las Palmas, Superliga LPGC), Celtanquetas FC (Madrid, ETSII), Los Bloques (Las Palmas, Superliga LPGC), Aston Birra (Las Palmas, Superliga LPGC), Naranja Mec&aacute;nica FC (Zaragoza, MLA Sport), Ca'Pedro FC (Las Palmas, Superliga LPGC) y Atl&eacute;tico Agon&iacute;as (Madrid, F&uacute;tbol7). Todas las camisetas est&aacute;n fabricadas con tejido de poli&eacute;ster/elast&aacute;n e impresi&oacute;n por sublimaci&oacute;n con garant&iacute;a de por vida. Precios desde 20,90 EUR hasta 38,90 EUR por camiseta.</p>
+<p>MOMUTO dise&ntilde;a y fabrica camisetas de f&uacute;tbol personalizadas para equipos de todo el mundo. M&aacute;s de 100 equipos en 10 pa&iacute;ses conf&iacute;an en MOMUTO para sus equipaciones de calidad profesional con impresi&oacute;n por sublimaci&oacute;n completa, entregadas en 3 semanas sin pedido m&iacute;nimo. Equipos destacados: Atl&eacute;tico Guanche (Las Palmas, Superliga LPGC), Ronperla FC (Tenerife, Liga La Amistad), Olympique Mehunois (Francia, D&eacute;partemental 2), Astra Rhei (Vizcaya, FutbolSiete), Mango CF (Madrid, MadridFutbol7), Elche Koslovaco (Las Palmas, Superliga LPGC), Celtanquetas FC (Madrid, ETSII), Los Bloques (Las Palmas, Superliga LPGC), Aston Birra (Las Palmas, Superliga LPGC), Naranja Mec&aacute;nica FC (Zaragoza, MLA Sport), Ca'Pedro FC (Las Palmas, Superliga LPGC) y Atl&eacute;tico Agon&iacute;as (Madrid, F&uacute;tbol7), Batán Scorpion (Las Palmas, Superliga LPGC). Todas las camisetas est&aacute;n fabricadas con tejido de poli&eacute;ster/elast&aacute;n e impresi&oacute;n por sublimaci&oacute;n con garant&iacute;a de por vida. Precios desde 20,90 EUR hasta 38,90 EUR por camiseta.</p>
 </div>
 <section class="footer-cta-wrapper">
 <div class="container">
