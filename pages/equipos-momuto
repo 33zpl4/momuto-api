@@ -1,0 +1,646 @@
+<style>
+    /* LOAD GOOGLE FONTS */
+    @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        color: #111;
+        background: #ffffff;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+    }
+
+    /* HIDE CMS GENERATED TITLES */
+    .title { display: none !important; }
+
+    /* CMS OVERRIDE FOR SUBTITLE ALIGNMENT */
+    .mo-editor-reset p, .mo-editor-reset .main-subtitle, p.main-subtitle {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* --- 1. HERO SECTION: COMPACT & COHESIVE --- */
+    .equipos-page {
+        background: #f4f4f5; /* Light Cool Grey */
+        padding: 5rem 0 0 0; /* Remove bottom padding to merge with carousel */
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .main-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: #111;
+        line-height: 0.95;
+        text-transform: uppercase;
+        letter-spacing: -0.04em;
+    }
+
+    .main-subtitle {
+        font-size: 1.15rem;
+        color: #52525b;
+        font-weight: 400;
+        line-height: 1.5;
+    }
+
+    /* --- STATS: INTEGRATED INTO HERO --- */
+    .portfolio-stats {
+        display: flex;
+        justify-content: center;
+        gap: 6rem;
+        padding: 3rem 0;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        margin-top: 3rem;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #111;
+        display: block;
+        line-height: 1;
+        letter-spacing: -0.04em;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+    }
+
+    /* --- 2. CAROUSEL SECTION --- */
+    .teams-carousel-section {
+        background: #f4f4f5; /* Continue the grey bg from hero so it blends */
+        padding: 0 0 6rem 0;
+    }
+
+    .carousel-header {
+        text-align: left;
+        margin-bottom: 2rem;
+        padding-left: 40px; /* Match container padding */
+        max-width: 1400px;
+        margin: 0 auto 2rem auto;
+    }
+
+    .carousel-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #111;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    /* Arrow to indicate scrolling */
+    .carousel-title::after {
+        content: "→";
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+
+    .teams-carousel {
+        display: flex;
+        overflow-x: auto;
+        gap: 1.5rem;
+        padding: 1rem 40px 3rem 40px; /* Padding matches container */
+        scroll-behavior: smooth;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    .teams-carousel::-webkit-scrollbar { display: none; }
+
+    .team-card {
+        flex: 0 0 28vw; /* Shows 3 full + part of next on desktop */
+        min-width: 320px;
+        max-width: 450px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .team-image {
+        width: 100%;
+        height: 420px;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        transition: transform 0.4s ease;
+    }
+
+    .team-image img {
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        mix-blend-mode: multiply;
+    }
+
+    /* Hover Effects */
+    .team-card:hover .team-image { transform: translateY(-5px); }
+    .team-card:hover .team-image img { transform: scale(1.1); }
+
+    .team-info { padding: 0; text-align: left; }
+
+    .team-name {
+        font-weight: 800;
+        color: #111;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.25rem;
+    }
+
+    .team-location {
+        font-size: 0.85rem;
+        color: #71717a;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    /* FIX 1: LEAGUE TAG STYLING */
+    .team-league {
+        background: #111; /* Black tag */
+        color: #fff;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        display: inline-block;
+        line-height: 1;
+    }
+
+    /* --- 3. GALLERY --- */
+    .action-gallery-section {
+        background: #fafafa; /* Very subtle off-white/bone */
+        color: #111;
+        padding: 6rem 0;
+        border-top: 1px solid #eaeaea;
+    }
+
+    .gallery-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #111;
+        margin-bottom: 0.5rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+    }
+
+    .gallery-subtitle {
+        color: #71717a;
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .filter-btn {
+        background: transparent;
+        color: #71717a;
+        border: 1px solid #d4d4d8;
+        border-radius: 0;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+        padding: 0.8rem 1.5rem;
+        font-weight: 600;
+        margin: 0 5px;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+        background: #111;
+        color: #fff;
+        border-color: #111;
+    }
+
+    .masonry-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+    }
+
+    .action-photo {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    .action-photo img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    /* FIX 2: STRONGER GRADIENT FOR READABILITY ON DARK PHOTOS */
+    .action-overlay {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        /* Stronger gradient that goes to near-black at the bottom */
+        background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.95) 100%);
+        color: white;
+        padding: 2rem 1.5rem 1.5rem 1.5rem; /* More top padding for gradient breath */
+        opacity: 0;
+        transition: all 0.3s ease;
+        transform: translateY(10px); /* Subtle slide up effect */
+    }
+
+    .action-overlay .team-name {
+        font-weight: 800;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        color: #fff;
+        /* Subtle text shadow for absolute worst-case scenarios */
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .action-photo:hover img { transform: scale(1.05); }
+    .action-photo:hover .action-overlay { opacity: 1; transform: translateY(0); }
+
+
+    /* --- 4. UGC & FOOTER --- */
+    .ugc-cta-section {
+        background: white;
+        border: 1px solid #eaeaea;
+        padding: 4rem;
+        margin-top: 4rem;
+        text-align: center;
+    }
+
+    .ugc-title { color: #111; font-weight: 800; text-transform: uppercase; }
+    .ugc-subtitle { color: #52525b; margin-bottom: 1.5rem; }
+
+    .btn-secondary {
+        background: transparent;
+        color: #111;
+        padding: 15px 30px;
+        border: 2px solid #111;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.8rem;
+        font-weight: 700;
+        display: inline-block;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    .btn-secondary:hover { background: #111; color: white; }
+
+    .footer-cta-wrapper {
+        background: #111;
+        padding: 8rem 0;
+        margin-top: 0;
+    }
+    .final-cta-section { text-align: center; }
+    .cta-title { color: #fff; font-size: 2.5rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem; }
+    .cta-description { color: #a1a1aa; font-size: 1.1rem; margin-bottom: 3rem; }
+    
+    .btn-primary {
+        background: #fff;
+        color: #111;
+        padding: 20px 50px;
+        border: none;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 1rem;
+        font-weight: 800;
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+        transition: transform 0.2s;
+    }
+    .btn-primary:hover { transform: scale(1.05); }
+
+    /* --- 5. LIGHTBOX --- */
+    .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(255,255,255,0.98); /* cleaner white */
+        animation: fadeIn 0.3s ease;
+        justify-content: center;
+        align-items: center;
+    }
+    .lightbox.active { display: flex; }
+    
+    .lightbox-content {
+        max-width: 900px;
+        max-height: 90vh;
+        position: relative;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        background: transparent;
+    }
+    
+    .lightbox-image {
+        max-width: 100%;
+        max-height: 85vh;
+        display: block;
+        /* Ensure blended images look right in lightbox too */
+        mix-blend-mode: multiply; 
+    }
+    
+    .lightbox-close {
+        position: absolute;
+        top: -40px; right: 0;
+        font-size: 30px;
+        color: #111;
+        cursor: pointer;
+        z-index: 100;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .main-title { font-size: 2.5rem; }
+        .portfolio-stats { gap: 2rem; flex-wrap: wrap; }
+        .team-card { flex: 0 0 75vw; } /* Mobile: show 1 card + peek of next */
+        .team-image { height: 350px; }
+        .masonry-gallery { grid-template-columns: 1fr; }
+        .carousel-header { padding-left: 20px; }
+        .teams-carousel { padding: 1rem 20px 3rem 20px; }
+        .container { padding: 0 20px; }
+    }
+</style>
+<section class="equipos-page">
+<div class="container">
+<div class="section-header">
+<h1 class="main-title">Equipos que ya conf&iacute;an en Momuto</h1>
+<p class="main-subtitle">Desde Madrid hasta Dinamarca: descubre los clubes que han elegido nuestros dise&ntilde;os &uacute;nicos. Calidad PRO, entrega en 3 semanas, sin pedido m&iacute;nimo.</p>
+<div class="portfolio-stats">
+<div class="stat-item"><span class="stat-number">100+</span>
+<div class="stat-label">Equipos Satisfechos</div>
+</div>
+<div class="stat-item"><span class="stat-number">10</span>
+<div class="stat-label">Pa&iacute;ses</div>
+</div>
+<div class="stat-item"><span class="stat-number">98%</span>
+<div class="stat-label">Satisfacci&oacute;n</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="teams-carousel-section">
+<div class="carousel-header">
+<h2 class="carousel-title">Nuestros Dise&ntilde;os</h2>
+</div>
+<div class="teams-carousel">
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251008/19F8F2D8-8974-DA51-7C7F-42EDB901714D.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251008/19F8F2D8-8974-DA51-7C7F-42EDB901714D.jpg" alt="Al-Carajo FC" /></div>
+<div class="team-info">
+<div class="team-name">Al-Carajo FC</div>
+<div class="team-location">Madrid, Espa&ntilde;a</div>
+<span class="team-league">ETSII</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251023/EFA287E4-EB36-E749-3B93-B5114C5F908A.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251023/EFA287E4-EB36-E749-3B93-B5114C5F908A.jpg" alt="Ultimate Pupas" /></div>
+<div class="team-info">
+<div class="team-name">Ultimate Pupas</div>
+<div class="team-location">Las Palmas, Espa&ntilde;a</div>
+<span class="team-league">Superliga</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20250925/768D82FA-36D9-55C8-79E6-7C1A5667EF66.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250925/768D82FA-36D9-55C8-79E6-7C1A5667EF66.jpg" alt="Olympo C" /></div>
+<div class="team-info">
+<div class="team-name">Olympo C</div>
+<div class="team-location">Zaragoza, Espa&ntilde;a</div>
+<span class="team-league">MLA Sport</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/47711/cart/resources/20251110/9DFC2A78-9F3E-CB0B-30CA-1EE27240B6DB.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251110/9DFC2A78-9F3E-CB0B-30CA-1EE27240B6DB.jpg" alt="Bodega Ballers" /></div>
+<div class="team-info">
+<div class="team-name">Bodega Ballers</div>
+<div class="team-location">Denmark</div>
+<span class="team-league">Superleague</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20250818/BA41CB9F-DA85-BA21-E3A7-B2E1620B4B6B.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250818/BA41CB9F-DA85-BA21-E3A7-B2E1620B4B6B.jpg" alt="FC Aguacatero" /></div>
+<div class="team-info">
+<div class="team-name">FC Aguacatero</div>
+<div class="team-location">Las Palmas, Espa&ntilde;a</div>
+<span class="team-league">Liga Tinamar</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251024/979ED288-B88A-B255-4C9B-A8EC24A47261.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251024/979ED288-B88A-B255-4C9B-A8EC24A47261.jpg" alt="Mallorga FC" /></div>
+<div class="team-info">
+<div class="team-name">Mallorga FC</div>
+<div class="team-location">Madrid, Espa&ntilde;a</div>
+<span class="team-league">ETSII</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/4BAFC1A4-6BDD-F238-79DE-E35FD2D3C5F4.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/4BAFC1A4-6BDD-F238-79DE-E35FD2D3C5F4.jpg" alt="Astra Rhei" /></div>
+<div class="team-info">
+<div class="team-name">Astra Rhei</div>
+<div class="team-location">Vizcaya, Espa&ntilde;a</div>
+<span class="team-league">FutbolSiete</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251022/CD84A8D2-E926-177B-2BAB-C85E5A071BEF.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251022/CD84A8D2-E926-177B-2BAB-C85E5A071BEF.jpg" alt="Naranja Mecanica" /></div>
+<div class="team-info">
+<div class="team-name">Naranja Mec&aacute;nica</div>
+<div class="team-location">Zaragoza, Espa&ntilde;a</div>
+<span class="team-league">MLA Sport</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/31B3AFEC-BE49-5C85-C869-F4E0D00B4C61.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/31B3AFEC-BE49-5C85-C869-F4E0D00B4C61.jpg" alt="Elche Koslovaco" /></div>
+<div class="team-info">
+<div class="team-name">Elche Koslovaco</div>
+<div class="team-location">Las Palmas, Espa&ntilde;a</div>
+<span class="team-league">Superliga</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20250811/7BF417F2-884B-1AC7-AE92-6B7B7B02CD91.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250811/7BF417F2-884B-1AC7-AE92-6B7B7B02CD91.jpg" alt="Olympique Mehunois" /></div>
+<div class="team-info">
+<div class="team-name">Olympique Mehunois</div>
+<div class="team-location">Francia</div>
+<span class="team-league">D&eacute;partemental 2</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://via.placeholder.com/1000x1000/111/fff?text=MOMUTO')">
+<div class="team-image" style="background: #eee;">
+<div style="color: #ccc; font-weight: bold;">+ M&Aacute;S DISE&Ntilde;OS</div>
+</div>
+<div class="team-info">
+<div class="team-name">Tu Equipo</div>
+<div class="team-location">Aqu&iacute;</div>
+</div>
+</div>
+</div>
+</section>
+<section class="action-gallery-section">
+<div class="container">
+<h2 class="gallery-title">Nuestros Dise&ntilde;os en Acci&oacute;n</h2>
+<p class="gallery-subtitle">Equipos reales, partidos reales, pasi&oacute;n aut&eacute;ntica</p>
+<div class="gallery-filters"><button class="filter-btn active" data-filter="all">Todos</button> <button class="filter-btn" data-filter="espa&ntilde;a">Espa&ntilde;a</button> <button class="filter-btn" data-filter="canarias">Canarias</button> <button class="filter-btn" data-filter="madrid">Madrid</button> <button class="filter-btn" data-filter="internacional">Internacional</button></div>
+<div class="masonry-gallery">
+<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg" alt="Atl&eacute;tico Guanche" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Atl&eacute;tico Guanche</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="tenerife"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg" alt="Ronperla FC" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Ronperla FC</div>
+</div>
+</div>
+<div class="action-photo" data-location="internacional" data-city="francia"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg" alt="Olympique Mehunois" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Olympique Mehunois</div>
+</div>
+</div>
+<div class="action-photo" data-location="espa&ntilde;a" data-city="vizcaya"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/d9088919fcf1cfa3c9ce49a5e6fd45ed.jpg" alt="Astra Rhei" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Astra Rhei</div>
+</div>
+</div>
+<div class="action-photo" data-location="madrid" data-city="madrid"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg" alt="Mango CF" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Mango CF</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg" alt="Elche Koslovaco" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Elche Koslovaco</div>
+</div>
+</div>
+<div class="action-photo" data-location="madrid" data-city="madrid"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/b4aee24cc1fca4085bfb118f7b9fbfdc.jpg" alt="Celtanquetas FC" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Celtanquetas FC</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/6ae16bbf2bc37fffbe519aff5b4e1dad.jpg" alt="Los Bloques" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Los Bloques</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp" alt="Aston Birra" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Aston Birra</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
+</div>
+</div>
+<div class="action-photo" data-location="aragon" data-city="zaragoza"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp" alt="Naranja Mec&aacute;nica FC" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Naranja Mec&aacute;nica FC</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg" alt="Ca&rsquo;Pedro FC" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Ca&rsquo;Pedro FC</div>
+<div class="team-details">Las Palmas; Superliga LPGC</div>
+</div>
+</div>
+<div class="action-photo" data-location="madrid" data-city="madrid"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg" alt="Atl&eacute;tico Agon&iacute;as" loading="lazy" />
+<div class="action-overlay">
+<div class="team-name">Atl&eacute;tico Agon&iacute;as</div>
+<div class="team-details">Madrid &bull; F&uacute;tbol7</div>
+</div>
+</div>
+</div>
+<div class="ugc-cta-section">
+<div class="ugc-content">
+<h3 class="ugc-title">&iquest;No ves a tu equipo?</h3>
+<p class="ugc-subtitle">&iexcl;Cont&aacute;ctanos y m&aacute;ndanos tu foto! Nos encanta mostrar a todos los equipos que conf&iacute;an en MOMUTO.</p>
+<div class="ugc-actions"><a href="mailto:info@momuto.es?subject=Foto de nuestro equipo" class="btn-secondary">Enviar Foto</a></div>
+</div>
+</div>
+</div>
+</section>
+<section class="footer-cta-wrapper">
+<div class="container">
+<div class="final-cta-section">
+<h2 class="cta-title">&iquest;Listo para crear la equipaci&oacute;n de tu equipo?</h2>
+<p class="cta-description">&Uacute;nete a estos clubes y dale a tu equipo la identidad visual que se merece</p>
+<a href="https://www.momuto.es/pages/solicitud-de-diseno-personalizado" class="btn-primary">CONSIGUE TU EQUIPACI&Oacute;N</a></div>
+</div>
+</section>
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+<div class="lightbox-content" onclick="event.stopPropagation()"><span class="lightbox-close" onclick="closeLightbox()">&times;</span> <img id="lightbox-image" class="lightbox-image" alt="Full size team kit design" /></div>
+</div>
+<script>
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            
+            lightboxImage.src = imageSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const actionPhotos = document.querySelectorAll('.action-photo');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const filter = this.getAttribute('data-filter');
+
+                    actionPhotos.forEach(photo => {
+                        if (filter === 'all') {
+                            photo.style.display = 'block';
+                        } else {
+                            const photoLocation = photo.getAttribute('data-location');
+                            const photoCity = photo.getAttribute('data-city');
+                            
+                            if (filter === 'españa' && (photoLocation === 'españa' || photoLocation === 'madrid' || photoLocation === 'canarias')) {
+                                photo.style.display = 'block';
+                            } else if (filter === photoLocation || filter === photoCity) {
+                                photo.style.display = 'block';
+                            } else {
+                                photo.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        });
+</script>
