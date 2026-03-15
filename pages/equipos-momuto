@@ -433,7 +433,7 @@
   "mainEntity": {
     "@type": "ItemList",
     "name": "Equipos con camisetas personalizadas MOMUTO",
-    "numberOfItems": 13,
+    "numberOfItems": 14,
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "item": {"@type": "ImageObject", "name": "Atl&eacute;tico Guanche con camisetas MOMUTO", "description": "Equipo Atl&eacute;tico Guanche de Las Palmas, Canarias, luciendo sus camisetas personalizadas MOMUTO en partido de Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg"}},
       {"@type": "ListItem", "position": 2, "item": {"@type": "ImageObject", "name": "Ronperla FC con camisetas MOMUTO", "description": "Equipo Ronperla FC de Tenerife, Canarias, luciendo sus camisetas personalizadas MOMUTO en partido de Liga La Amistad", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg"}},
@@ -563,6 +563,13 @@
 <p class="gallery-subtitle">Equipos reales, partidos reales, pasi&oacute;n aut&eacute;ntica</p>
 <div class="gallery-filters"><button class="filter-btn active" data-filter="all">Todos</button> <button class="filter-btn" data-filter="espa&ntilde;a">Espa&ntilde;a</button> <button class="filter-btn" data-filter="canarias">Canarias</button> <button class="filter-btn" data-filter="madrid">Madrid</button> <button class="filter-btn" data-filter="internacional">Internacional</button></div>
 <div class="masonry-gallery" role="list" aria-label="Fotos de equipos con camisetas personalizadas MOMUTO">
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/pics/2d4dbad060830cb72dd1dfa01bbadfa5f7f8e5fac20590b04e667d2ea96300f4.jpg" alt="Equipo Batán Scorpion luciendo camisetas personalizadas MOMUTO en Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Batán Scorpion - Camisetas MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Batán Scorpion</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
+</div>
+</div>
 <div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/pics/2d4dbad060830cb72dd1dfa01bbadfa5f7f8e5fac20590b04e667d2ea96300f4.jpg" alt="Equipo Batán Scorpion luciendo camisetas personalizadas MOMUTO en Las Palmas, Superliga LPGC" loading="lazy" />
 <figcaption><span class="photo-meta">Batán Scorpion - Camisetas MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
