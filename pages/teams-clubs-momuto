@@ -433,7 +433,7 @@
   "mainEntity": {
     "@type": "ItemList",
     "name": "Teams wearing MOMUTO custom jerseys",
-    "numberOfItems": 12,
+    "numberOfItems": 13,
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "item": {"@type": "ImageObject", "name": "Atletico Guanche wearing custom MOMUTO jerseys", "description": "Atletico Guanche football team from Las Palmas, Canary Islands, wearing their custom-designed MOMUTO jerseys during a Superliga LPGC match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg"}},
       {"@type": "ListItem", "position": 2, "item": {"@type": "ImageObject", "name": "Ronperla FC wearing custom MOMUTO jerseys", "description": "Ronperla FC football team from Tenerife, Canary Islands, wearing their custom-designed MOMUTO jerseys during a Liga La Amistad match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg"}},
@@ -446,7 +446,8 @@
       {"@type": "ListItem", "position": 9, "item": {"@type": "ImageObject", "name": "Aston Birra wearing custom MOMUTO jerseys", "description": "Aston Birra football team from Las Palmas, wearing their custom-designed MOMUTO jerseys during a Superliga LPGC match", "contentUrl": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp"}},
       {"@type": "ListItem", "position": 10, "item": {"@type": "ImageObject", "name": "Naranja Mecanica FC wearing custom MOMUTO jerseys", "description": "Naranja Mecanica FC football team from Zaragoza, wearing their custom-designed MOMUTO jerseys during an MLA Sport match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp"}},
       {"@type": "ListItem", "position": 11, "item": {"@type": "ImageObject", "name": "Ca Pedro FC wearing custom MOMUTO jerseys", "description": "Ca Pedro FC football team from Las Palmas, wearing their custom-designed MOMUTO jerseys during a Superliga LPGC match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg"}},
-      {"@type": "ListItem", "position": 12, "item": {"@type": "ImageObject", "name": "Atletico Agonias wearing custom MOMUTO jerseys", "description": "Atletico Agonias football team from Madrid, wearing their custom-designed MOMUTO jerseys during a Futbol7 match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg"}}
+      {"@type": "ListItem", "position": 12, "item": {"@type": "ImageObject", "name": "Atletico Agonias wearing custom MOMUTO jerseys", "description": "Atletico Agonias football team from Madrid, wearing their custom-designed MOMUTO jerseys during a Futbol7 match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg"}},
+      {"@type": "ListItem", "position": 13, "item": {"@type": "ImageObject", "name": "Batán Scorpion wearing custom MOMUTO jerseys", "description": "Batán Scorpion football team from Las Palmas wearing their custom-designed MOMUTO jerseys during a Superliga LPGC match", "contentUrl": "https://cdn.staticsoe.com/pics/2d4dbad060830cb72dd1dfa01bbadfa5f7f8e5fac20590b04e667d2ea96300f4.jpg"}}
     ]
   }
 }
@@ -564,6 +565,13 @@
 <p class="gallery-subtitle">Real teams, real matches, authentic passion</p>
 <div class="gallery-filters"><button class="filter-btn active" data-filter="all">All</button> <button class="filter-btn" data-filter="espa&ntilde;a">Spain</button> <button class="filter-btn" data-filter="canarias">Canary Islands</button> <button class="filter-btn" data-filter="madrid">Madrid</button> <button class="filter-btn" data-filter="internacional">International</button></div>
 <div class="masonry-gallery" role="list" aria-label="Photos of teams wearing custom MOMUTO jerseys">
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/pics/2d4dbad060830cb72dd1dfa01bbadfa5f7f8e5fac20590b04e667d2ea96300f4.jpg" alt="Batán Scorpion team wearing their custom MOMUTO football jerseys in Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Batán Scorpion - Custom MOMUTO jerseys - Las Palmas, Superliga LPGC</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Batán Scorpion</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
+</div>
+</div>
 <div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg" alt="Atl&eacute;tico Guanche team wearing their custom MOMUTO football jerseys in Las Palmas, Superliga LPGC" loading="lazy" />
 <figcaption><span class="photo-meta">Atl&eacute;tico Guanche - Custom MOMUTO jerseys - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
@@ -660,7 +668,7 @@
 </div>
 <div class="sr-only" aria-hidden="false">
 <h2>MOMUTO Custom Football Kit Portfolio</h2>
-<p>MOMUTO designs and manufactures custom football jerseys for teams worldwide. Over 100 teams across 10 countries trust MOMUTO for professional-quality custom kits with full dye-sublimation printing, delivered in 3 weeks with no minimum order. Featured teams include: Atletico Guanche (Las Palmas, Superliga LPGC), Ronperla FC (Tenerife, Liga La Amistad), Olympique Mehunois (France, Departemental 2), Astra Rhei (Vizcaya, FutbolSiete), Mango CF (Madrid, MadridFutbol7), Elche Koslovaco (Las Palmas, Superliga LPGC), Celtanquetas FC (Madrid, ETSII), Los Bloques (Las Palmas, Superliga LPGC), Aston Birra (Las Palmas, Superliga LPGC), Naranja Mecanica FC (Zaragoza, MLA Sport), Ca'Pedro FC (Las Palmas, Superliga LPGC), and Atletico Agonias (Madrid, Futbol7). All jerseys are made with polyester/elastane fabric and lifetime-guaranteed dye-sublimation printing. Prices range from 20.90 EUR to 38.90 EUR per jersey.</p>
+<p>MOMUTO designs and manufactures custom football jerseys for teams worldwide. Over 100 teams across 10 countries trust MOMUTO for professional-quality custom kits with full dye-sublimation printing, delivered in 3 weeks with no minimum order. Featured teams include: Atletico Guanche (Las Palmas, Superliga LPGC), Ronperla FC (Tenerife, Liga La Amistad), Olympique Mehunois (France, Departemental 2), Astra Rhei (Vizcaya, FutbolSiete), Mango CF (Madrid, MadridFutbol7), Elche Koslovaco (Las Palmas, Superliga LPGC), Celtanquetas FC (Madrid, ETSII), Los Bloques (Las Palmas, Superliga LPGC), Aston Birra (Las Palmas, Superliga LPGC), Naranja Mecanica FC (Zaragoza, MLA Sport), Ca'Pedro FC (Las Palmas, Superliga LPGC), and Atletico Agonias (Madrid, Futbol7), Batán Scorpion (Las Palmas, Superliga LPGC). All jerseys are made with polyester/elastane fabric and lifetime-guaranteed dye-sublimation printing. Prices range from 20.90 EUR to 38.90 EUR per jersey.</p>
 </div>
 <section class="footer-cta-wrapper">
 <div class="final-cta-section">
