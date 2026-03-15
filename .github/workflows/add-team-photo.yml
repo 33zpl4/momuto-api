@@ -1,0 +1,128 @@
+name: Add Team Photo to Gallery
+
+on:
+  workflow_dispatch:
+    inputs:
+      team_name:
+        description: 'Team name (e.g. "Atletico Guanche")'
+        required: true
+        type: string
+      image_url:
+        description: 'Full CDN URL to the team photo'
+        required: true
+        type: string
+      location:
+        description: 'Region filter (canarias, madrid, españa, aragon, internacional)'
+        required: true
+        type: choice
+        options:
+          - canarias
+          - madrid
+          - españa
+          - aragon
+          - internacional
+      city:
+        description: 'City filter key (e.g. las-palmas, tenerife, madrid, zaragoza, francia)'
+        required: true
+        type: string
+      league:
+        description: 'League name (e.g. "Superliga LPGC")'
+        required: true
+        type: string
+      location_label_en:
+        description: 'Location display name in English (e.g. "Las Palmas"). Leave empty to auto-derive from city.'
+        required: false
+        type: string
+      location_label_es:
+        description: 'Location display name in Spanish (e.g. "Las Palmas"). Leave empty to auto-derive from city.'
+        required: false
+        type: string
+      location_label_fr:
+        description: 'Location display name in French (e.g. "Las Palmas"). Leave empty to auto-derive from city.'
+        required: false
+        type: string
+
+jobs:
+  add-photo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Add team photo to all gallery pages
+        env:
+          TEAM_NAME: ${{ inputs.team_name }}
+          IMAGE_URL: ${{ inputs.image_url }}
+          LOCATION: ${{ inputs.location }}
+          CITY: ${{ inputs.city }}
+          LEAGUE: ${{ inputs.league }}
+          LOCATION_LABEL_EN: ${{ inputs.location_label_en }}
+          LOCATION_LABEL_ES: ${{ inputs.location_label_es }}
+          LOCATION_LABEL_FR: ${{ inputs.location_label_fr }}
+        run: node scripts/add-team-photo.js
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto
+          git commit -m "Add ${{ inputs.team_name }} photo to team galleries"
+          git push
+
+      - name: Deploy updated pages to CMS
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+        run: |
+          deploy_page() {
+            local TOKEN="$1"
+            local HANDLE="$2"
+            local HOST="https://openapi.oemapps.com"
+
+            # Fetch existing page
+            RESPONSE=$(curl -s -H "token: ${TOKEN}" "${HOST}/pages?handle=${HANDLE}")
+            PAGE_ID=$(echo "$RESPONSE" | node -e "
+              const data = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));
+              const pages = data.data?.list || data.data || [];
+              const page = Array.isArray(pages) ? pages.find(p => p.handle === '${HANDLE}') : null;
+              if (page) console.log(page.id);
+            ")
+
+            if [ -z "$PAGE_ID" ]; then
+              echo "⚠️ Page ${HANDLE} not found — skipping"
+              return
+            fi
+
+            # Read local file content
+            local FILE="$3"
+            local CONTENT=$(cat "$FILE")
+
+            # Update page via API
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+              -X PUT \
+              -H "Content-Type: application/json" \
+              -H "token: ${TOKEN}" \
+              "${HOST}/pages/${PAGE_ID}" \
+              --data-binary @- <<JSONEOF
+            {"content": $(node -e "console.log(JSON.stringify(require('fs').readFileSync('${FILE}','utf8')))")}
+JSONEOF
+            )
+
+            if [ "$HTTP_CODE" = "200" ]; then
+              echo "✓ Updated ${HANDLE} on CMS"
+            else
+              echo "⚠️ Failed to update ${HANDLE} — HTTP ${HTTP_CODE}"
+            fi
+          }
+
+          deploy_page "$OEMSAAS_TOKEN_EN" "teams-clubs-momuto" "pages/teams-clubs-momuto"
+          deploy_page "$OEMSAAS_TOKEN_ES" "equipos-momuto" "pages/equipos-momuto"
+          deploy_page "$OEMSAAS_TOKEN_FR" "equipes-clubs-momuto" "pages/equipes-clubs-momuto"
+
+          echo "✅ All gallery pages deployed to CMS."

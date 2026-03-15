@@ -385,6 +385,23 @@
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+    /* SR-ONLY: visible to crawlers & screen readers, hidden visually */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    .action-photo figure { margin: 0; }
+    .action-photo figcaption { position: absolute; bottom: 0; left: 0; right: 0; pointer-events: none; }
+    .action-photo figcaption .photo-meta { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
         .main-title { font-size: 2.5rem; }
@@ -397,6 +414,43 @@
         .container { padding: 0 20px; }
     }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "name": "MOMUTO Custom Football Kit Gallery - Teams Wearing Their Jerseys",
+  "description": "Real photos of football teams wearing custom jerseys designed and manufactured by MOMUTO. Over 100 teams across 10 countries trust MOMUTO for their custom kit designs with PRO quality, full dye-sublimation printing, and 3-week delivery.",
+  "author": {
+    "@type": "Organization",
+    "name": "MOMUTO",
+    "url": "https://www.momuto.com"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Custom Football Kits",
+    "description": "Professional custom football jerseys and kits designed and produced by MOMUTO"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "Teams wearing MOMUTO custom jerseys",
+    "numberOfItems": 12,
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "item": {"@type": "ImageObject", "name": "Atletico Guanche wearing custom MOMUTO jerseys", "description": "Atletico Guanche football team from Las Palmas, Canary Islands, wearing their custom-designed MOMUTO jerseys during a Superliga LPGC match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg"}},
+      {"@type": "ListItem", "position": 2, "item": {"@type": "ImageObject", "name": "Ronperla FC wearing custom MOMUTO jerseys", "description": "Ronperla FC football team from Tenerife, Canary Islands, wearing their custom-designed MOMUTO jerseys during a Liga La Amistad match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg"}},
+      {"@type": "ListItem", "position": 3, "item": {"@type": "ImageObject", "name": "Olympique Mehunois wearing custom MOMUTO jerseys", "description": "Olympique Mehunois football team from France wearing their custom-designed MOMUTO jerseys during a Departemental 2 match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg"}},
+      {"@type": "ListItem", "position": 4, "item": {"@type": "ImageObject", "name": "Astra Rhei wearing custom MOMUTO jerseys", "description": "Astra Rhei football team from Vizcaya, Spain, wearing their custom-designed MOMUTO jerseys during a FutbolSiete match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/d9088919fcf1cfa3c9ce49a5e6fd45ed.jpg"}},
+      {"@type": "ListItem", "position": 5, "item": {"@type": "ImageObject", "name": "Mango CF wearing custom MOMUTO jerseys", "description": "Mango CF football team from Madrid, Spain, wearing their custom-designed MOMUTO jerseys during a MadridFutbol7 match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg"}},
+      {"@type": "ListItem", "position": 6, "item": {"@type": "ImageObject", "name": "Elche Koslovaco wearing custom MOMUTO jerseys", "description": "Elche Koslovaco football team from Las Palmas, wearing their custom-designed MOMUTO jerseys during a Superliga LPGC match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg"}},
+      {"@type": "ListItem", "position": 7, "item": {"@type": "ImageObject", "name": "Celtanquetas FC wearing custom MOMUTO jerseys", "description": "Celtanquetas FC football team from Madrid, wearing their custom-designed MOMUTO jerseys during an ETSII league match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/b4aee24cc1fca4085bfb118f7b9fbfdc.jpg"}},
+      {"@type": "ListItem", "position": 8, "item": {"@type": "ImageObject", "name": "Los Bloques wearing custom MOMUTO jerseys", "description": "Los Bloques football team from Las Palmas, wearing their custom-designed MOMUTO jerseys during a Superliga LPGC match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/6ae16bbf2bc37fffbe519aff5b4e1dad.jpg"}},
+      {"@type": "ListItem", "position": 9, "item": {"@type": "ImageObject", "name": "Aston Birra wearing custom MOMUTO jerseys", "description": "Aston Birra football team from Las Palmas, wearing their custom-designed MOMUTO jerseys during a Superliga LPGC match", "contentUrl": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp"}},
+      {"@type": "ListItem", "position": 10, "item": {"@type": "ImageObject", "name": "Naranja Mecanica FC wearing custom MOMUTO jerseys", "description": "Naranja Mecanica FC football team from Zaragoza, wearing their custom-designed MOMUTO jerseys during an MLA Sport match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp"}},
+      {"@type": "ListItem", "position": 11, "item": {"@type": "ImageObject", "name": "Ca Pedro FC wearing custom MOMUTO jerseys", "description": "Ca Pedro FC football team from Las Palmas, wearing their custom-designed MOMUTO jerseys during a Superliga LPGC match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg"}},
+      {"@type": "ListItem", "position": 12, "item": {"@type": "ImageObject", "name": "Atletico Agonias wearing custom MOMUTO jerseys", "description": "Atletico Agonias football team from Madrid, wearing their custom-designed MOMUTO jerseys during a Futbol7 match", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg"}}
+    ]
+  }
+}
+</script>
 <section class="equipos-page">
 <div class="container">
 <div class="section-header">
@@ -423,70 +477,70 @@
 </div>
 <div class="teams-carousel">
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251008/19F8F2D8-8974-DA51-7C7F-42EDB901714D.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251008/19F8F2D8-8974-DA51-7C7F-42EDB901714D.jpg" alt="Al-Carajo FC Jersey" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251008/19F8F2D8-8974-DA51-7C7F-42EDB901714D.jpg" alt="Custom football jersey designed by MOMUTO for Al-Carajo FC, Madrid" /></div>
 <div class="team-info">
 <div class="team-name">Al-Carajo FC</div>
 <div class="team-location">Madrid, Spain</div>
 <span class="team-league">ETSII</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251023/EFA287E4-EB36-E749-3B93-B5114C5F908A.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251023/EFA287E4-EB36-E749-3B93-B5114C5F908A.jpg" alt="Ultimate Pupas Jersey" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251023/EFA287E4-EB36-E749-3B93-B5114C5F908A.jpg" alt="Custom football jersey designed by MOMUTO for Ultimate Pupas, Las Palmas" /></div>
 <div class="team-info">
 <div class="team-name">Ultimate Pupas</div>
 <div class="team-location">Las Palmas, Spain</div>
 <span class="team-league">Superliga</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20250925/768D82FA-36D9-55C8-79E6-7C1A5667EF66.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250925/768D82FA-36D9-55C8-79E6-7C1A5667EF66.jpg" alt="Olympo C Jersey" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250925/768D82FA-36D9-55C8-79E6-7C1A5667EF66.jpg" alt="Custom football jersey designed by MOMUTO for Olympo C, Zaragoza" /></div>
 <div class="team-info">
 <div class="team-name">Olympo C</div>
 <div class="team-location">Zaragoza, Spain</div>
 <span class="team-league">MLA Sport</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/47711/cart/resources/20251110/9DFC2A78-9F3E-CB0B-30CA-1EE27240B6DB.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251110/9DFC2A78-9F3E-CB0B-30CA-1EE27240B6DB.jpg" alt="Bodega Ballers Jersey" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251110/9DFC2A78-9F3E-CB0B-30CA-1EE27240B6DB.jpg" alt="Custom football jersey designed by MOMUTO for Bodega Ballers, Denmark" /></div>
 <div class="team-info">
 <div class="team-name">Bodega Ballers</div>
 <div class="team-location">Denmark</div>
 <span class="team-league">Superleague</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20250818/BA41CB9F-DA85-BA21-E3A7-B2E1620B4B6B.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250818/BA41CB9F-DA85-BA21-E3A7-B2E1620B4B6B.jpg" alt="FC Aguacatero Jersey" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250818/BA41CB9F-DA85-BA21-E3A7-B2E1620B4B6B.jpg" alt="Custom football jersey designed by MOMUTO for FC Aguacatero, Las Palmas" /></div>
 <div class="team-info">
 <div class="team-name">FC Aguacatero</div>
 <div class="team-location">Las Palmas, Spain</div>
 <span class="team-league">Liga Tinamar</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251024/979ED288-B88A-B255-4C9B-A8EC24A47261.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251024/979ED288-B88A-B255-4C9B-A8EC24A47261.jpg" alt="Mallorga FC Jersey" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251024/979ED288-B88A-B255-4C9B-A8EC24A47261.jpg" alt="Custom football jersey designed by MOMUTO for Mallorga FC, Madrid" /></div>
 <div class="team-info">
 <div class="team-name">Mallorga FC</div>
 <div class="team-location">Madrid, Spain</div>
 <span class="team-league">ETSII</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/4BAFC1A4-6BDD-F238-79DE-E35FD2D3C5F4.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/4BAFC1A4-6BDD-F238-79DE-E35FD2D3C5F4.jpg" alt="Astra Rhei Jersey" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/4BAFC1A4-6BDD-F238-79DE-E35FD2D3C5F4.jpg" alt="Custom football jersey designed by MOMUTO for Astra Rhei, Vizcaya" /></div>
 <div class="team-info">
 <div class="team-name">Astra Rhei</div>
 <div class="team-location">Vizcaya, Spain</div>
 <span class="team-league">FutbolSiete</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251022/CD84A8D2-E926-177B-2BAB-C85E5A071BEF.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251022/CD84A8D2-E926-177B-2BAB-C85E5A071BEF.jpg" alt="Naranja Mecanica Jersey" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251022/CD84A8D2-E926-177B-2BAB-C85E5A071BEF.jpg" alt="Custom football jersey designed by MOMUTO for Naranja Mecanica, Zaragoza" /></div>
 <div class="team-info">
 <div class="team-name">Naranja Mec&aacute;nica</div>
 <div class="team-location">Zaragoza, Spain</div>
 <span class="team-league">MLA Sport</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/31B3AFEC-BE49-5C85-C869-F4E0D00B4C61.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/31B3AFEC-BE49-5C85-C869-F4E0D00B4C61.jpg" alt="Elche Koslovaco Jersey" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/31B3AFEC-BE49-5C85-C869-F4E0D00B4C61.jpg" alt="Custom football jersey designed by MOMUTO for Elche Koslovaco, Las Palmas" /></div>
 <div class="team-info">
 <div class="team-name">Elche Koslovaco</div>
 <div class="team-location">Las Palmas, Spain</div>
 <span class="team-league">Superliga</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20250811/7BF417F2-884B-1AC7-AE92-6B7B7B02CD91.jpg')">
-<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250811/7BF417F2-884B-1AC7-AE92-6B7B7B02CD91.jpg" alt="Olympique Mehunois Jersey" /></div>
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250811/7BF417F2-884B-1AC7-AE92-6B7B7B02CD91.jpg" alt="Custom football jersey designed by MOMUTO for Olympique Mehunois, France" /></div>
 <div class="team-info">
 <div class="team-name">Olympique Mehunois</div>
 <div class="team-location">France</div>
@@ -509,74 +563,86 @@
 <h2 class="gallery-title">Our Kits in Action</h2>
 <p class="gallery-subtitle">Real teams, real matches, authentic passion</p>
 <div class="gallery-filters"><button class="filter-btn active" data-filter="all">All</button> <button class="filter-btn" data-filter="espa&ntilde;a">Spain</button> <button class="filter-btn" data-filter="canarias">Canary Islands</button> <button class="filter-btn" data-filter="madrid">Madrid</button> <button class="filter-btn" data-filter="internacional">International</button></div>
-<div class="masonry-gallery">
-<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg" alt="Atl&eacute;tico Guanche" loading="lazy" />
+<div class="masonry-gallery" role="list" aria-label="Photos of teams wearing custom MOMUTO jerseys">
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg" alt="Atl&eacute;tico Guanche team wearing their custom MOMUTO football jerseys in Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Atl&eacute;tico Guanche - Custom MOMUTO jerseys - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Atl&eacute;tico Guanche</div>
 <div class="team-details">Las Palmas &bull; Superliga LPGC</div>
 </div>
 </div>
-<div class="action-photo" data-location="canarias" data-city="tenerife"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg" alt="Ronperla FC" loading="lazy" />
+<div class="action-photo" data-location="canarias" data-city="tenerife" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg" alt="Ronperla FC team wearing their custom MOMUTO football jerseys in Tenerife, Liga La Amistad" loading="lazy" />
+<figcaption><span class="photo-meta">Ronperla FC - Custom MOMUTO jerseys - Tenerife, Liga La Amistad</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Ronperla FC</div>
 <div class="team-details">Tenerife &bull; Liga La Amistad</div>
 </div>
 </div>
-<div class="action-photo" data-location="internacional" data-city="francia"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg" alt="Olympique Mehunois" loading="lazy" />
+<div class="action-photo" data-location="internacional" data-city="francia" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg" alt="Olympique Mehunois team wearing their custom MOMUTO football jerseys in France, D&eacute;partemental 2" loading="lazy" />
+<figcaption><span class="photo-meta">Olympique Mehunois - Custom MOMUTO jerseys - France, D&eacute;partemental 2</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Olympique Mehunois</div>
 <div class="team-details">France &bull; D&eacute;partemental 2</div>
 </div>
 </div>
-<div class="action-photo" data-location="espa&ntilde;a" data-city="vizcaya"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/d9088919fcf1cfa3c9ce49a5e6fd45ed.jpg" alt="Astra Rhei" loading="lazy" />
+<div class="action-photo" data-location="espa&ntilde;a" data-city="vizcaya" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/d9088919fcf1cfa3c9ce49a5e6fd45ed.jpg" alt="Astra Rhei team wearing their custom MOMUTO football jerseys in Vizcaya, FutbolSiete" loading="lazy" />
+<figcaption><span class="photo-meta">Astra Rhei - Custom MOMUTO jerseys - Vizcaya, FutbolSiete</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Astra Rhei</div>
 <div class="team-details">Vizcaya &bull; FutbolSiete</div>
 </div>
 </div>
-<div class="action-photo" data-location="madrid" data-city="madrid"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg" alt="Mango CF" loading="lazy" />
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg" alt="Mango CF team wearing their custom MOMUTO football jerseys in Madrid, MadridFutbol7" loading="lazy" />
+<figcaption><span class="photo-meta">Mango CF - Custom MOMUTO jerseys - Madrid, MadridFutbol7</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Mango CF</div>
 <div class="team-details">Madrid &bull; MadridFutbol7</div>
 </div>
 </div>
-<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg" alt="Elche Koslovaco" loading="lazy" />
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg" alt="Elche Koslovaco team wearing their custom MOMUTO football jerseys in Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Elche Koslovaco - Custom MOMUTO jerseys - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Elche Koslovaco</div>
 <div class="team-details">Las Palmas &bull; Superliga LPGC</div>
 </div>
 </div>
-<div class="action-photo" data-location="madrid" data-city="madrid"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/b4aee24cc1fca4085bfb118f7b9fbfdc.jpg" alt="Celtanquetas FC" loading="lazy" />
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/b4aee24cc1fca4085bfb118f7b9fbfdc.jpg" alt="Celtanquetas FC team wearing their custom MOMUTO football jerseys in Madrid, ETSII league" loading="lazy" />
+<figcaption><span class="photo-meta">Celtanquetas FC - Custom MOMUTO jerseys - Madrid, ETSII</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Celtanquetas FC</div>
 <div class="team-details">Madrid &bull; ETSII</div>
 </div>
 </div>
-<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/6ae16bbf2bc37fffbe519aff5b4e1dad.jpg" alt="Los Bloques" loading="lazy" />
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/6ae16bbf2bc37fffbe519aff5b4e1dad.jpg" alt="Los Bloques team wearing their custom MOMUTO football jerseys in Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Los Bloques - Custom MOMUTO jerseys - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Los Bloques</div>
 <div class="team-details">Las Palmas &bull; Superliga LPGC</div>
 </div>
 </div>
-<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp" alt="Aston Birra" loading="lazy" />
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp" alt="Aston Birra team wearing their custom MOMUTO football jerseys in Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Aston Birra - Custom MOMUTO jerseys - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Aston Birra</div>
 <div class="team-details">Las Palmas &bull; Superliga LPGC</div>
 </div>
 </div>
-<div class="action-photo" data-location="aragon" data-city="zaragoza"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp" alt="Naranja Mec&aacute;nica FC" loading="lazy" />
+<div class="action-photo" data-location="aragon" data-city="zaragoza" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp" alt="Naranja Mec&aacute;nica FC team wearing their custom MOMUTO football jerseys in Zaragoza, MLA Sport" loading="lazy" />
+<figcaption><span class="photo-meta">Naranja Mec&aacute;nica FC - Custom MOMUTO jerseys - Zaragoza, MLA Sport</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Naranja Mec&aacute;nica FC</div>
 <div class="team-details">Zaragoza &bull; MLA Sport</div>
 </div>
 </div>
-<div class="action-photo" data-location="canarias" data-city="las-palmas"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg" alt="Ca&rsquo;Pedro FC" loading="lazy" />
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg" alt="Ca&rsquo;Pedro FC team wearing their custom MOMUTO football jerseys in Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Ca&rsquo;Pedro FC - Custom MOMUTO jerseys - Las Palmas, Superliga LPGC</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Ca&rsquo;Pedro FC</div>
 <div class="team-details">Las Palmas &bull; Superliga LPGC</div>
 </div>
 </div>
-<div class="action-photo" data-location="madrid" data-city="madrid"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg" alt="Atl&eacute;tico Agon&iacute;as" loading="lazy" />
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg" alt="Atl&eacute;tico Agon&iacute;as team wearing their custom MOMUTO football jerseys in Madrid, F&uacute;tbol7" loading="lazy" />
+<figcaption><span class="photo-meta">Atl&eacute;tico Agon&iacute;as - Custom MOMUTO jerseys - Madrid, F&uacute;tbol7</span></figcaption></figure>
 <div class="action-overlay">
 <div class="team-name">Atl&eacute;tico Agon&iacute;as</div>
 <div class="team-details">Madrid &bull; F&uacute;tbol7</div>
@@ -591,6 +657,10 @@
 <p class="ugc-subtitle">Contact us and send your photo! We love showcasing all the clubs that trust MOMUTO.</p>
 <div class="ugc-actions"><a href="mailto:info@momuto.com?subject=Photo of our team" class="btn-secondary">Send a Photo</a></div>
 </div>
+</div>
+<div class="sr-only" aria-hidden="false">
+<h2>MOMUTO Custom Football Kit Portfolio</h2>
+<p>MOMUTO designs and manufactures custom football jerseys for teams worldwide. Over 100 teams across 10 countries trust MOMUTO for professional-quality custom kits with full dye-sublimation printing, delivered in 3 weeks with no minimum order. Featured teams include: Atletico Guanche (Las Palmas, Superliga LPGC), Ronperla FC (Tenerife, Liga La Amistad), Olympique Mehunois (France, Departemental 2), Astra Rhei (Vizcaya, FutbolSiete), Mango CF (Madrid, MadridFutbol7), Elche Koslovaco (Las Palmas, Superliga LPGC), Celtanquetas FC (Madrid, ETSII), Los Bloques (Las Palmas, Superliga LPGC), Aston Birra (Las Palmas, Superliga LPGC), Naranja Mecanica FC (Zaragoza, MLA Sport), Ca'Pedro FC (Las Palmas, Superliga LPGC), and Atletico Agonias (Madrid, Futbol7). All jerseys are made with polyester/elastane fabric and lifetime-guaranteed dye-sublimation printing. Prices range from 20.90 EUR to 38.90 EUR per jersey.</p>
 </div>
 <section class="footer-cta-wrapper">
 <div class="final-cta-section">
