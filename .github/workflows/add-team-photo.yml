@@ -84,23 +84,37 @@ jobs:
             local HOST="https://openapi.oemapps.com"
 
             RESPONSE=$(curl -s -H "token: ${TOKEN}" "${HOST}/pages?handle=${HANDLE}")
-            PAGE_ID=$(echo "$RESPONSE" | node -e "
+            PAGE_DATA=$(echo "$RESPONSE" | node -e "
               const data = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));
               const pages = data.data?.list || data.data || [];
               const page = Array.isArray(pages) ? pages.find(p => p.handle === '${HANDLE}') : null;
-              if (page) console.log(page.id);
+              if (page) console.log(JSON.stringify({ id: page.id, title: page.title || '', meta_title: page.meta_title || '', meta_keywords: page.meta_keywords || '', meta_descript: page.meta_descript || '', handle: page.handle || '' }));
             ")
 
-            if [ -z "$PAGE_ID" ]; then
+            if [ -z "$PAGE_DATA" ]; then
               echo "Warning: Page ${HANDLE} not found — skipping"
               return
             fi
 
-            # Build JSON payload via node to avoid heredoc issues
+            PAGE_ID=$(echo "$PAGE_DATA" | node -e "console.log(JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).id)")
+
+            # Save page metadata to temp file for safe JSON handling
+            echo "$PAGE_DATA" > /tmp/page_meta.json
+
+            # Build JSON payload preserving existing page metadata
             node -e "
               const fs = require('fs');
               const content = fs.readFileSync('${FILE}', 'utf8');
-              fs.writeFileSync('/tmp/payload.json', JSON.stringify({ content }));
+              const existing = JSON.parse(fs.readFileSync('/tmp/page_meta.json', 'utf8'));
+              const payload = {
+                content,
+                title: existing.title,
+                meta_title: existing.meta_title,
+                meta_keywords: existing.meta_keywords,
+                meta_descript: existing.meta_descript,
+                handle: existing.handle
+              };
+              fs.writeFileSync('/tmp/payload.json', JSON.stringify(payload));
             "
 
             HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
