@@ -117,7 +117,7 @@ function addPhotoToPage(lang) {
   // Check for duplicate — skip if this team's photo URL is already in the page
   if (content.includes(IMAGE_URL)) {
     console.log(`⏭ ${TEAM_NAME} photo already exists in ${page.file} — skipping`);
-    return;
+    return false;
   }
 
   const entry = buildPhotoEntry(lang);
@@ -172,11 +172,25 @@ function addPhotoToPage(lang) {
 
   fs.writeFileSync(filePath, content, 'utf8');
   console.log(`✓ Added ${TEAM_NAME} photo to ${page.file}`);
+  return true;
 }
 
-// Process all three languages
+// Process all three languages, track which were modified
+const modified = [];
 for (const lang of ['en', 'es', 'fr']) {
-  addPhotoToPage(lang);
+  if (addPhotoToPage(lang)) {
+    modified.push(PAGES[lang].file);
+  }
 }
 
-console.log('\n✅ Team photo added to all gallery pages.');
+// Write modified files list for the workflow to consume
+const outputFile = process.env.GITHUB_OUTPUT;
+if (outputFile) {
+  fs.appendFileSync(outputFile, `modified=${modified.join(',')}\n`);
+}
+
+if (modified.length > 0) {
+  console.log(`\n✅ Team photo added to: ${modified.join(', ')}`);
+} else {
+  console.log('\n⏭ Team photo already exists in all pages — nothing to do.');
+}
