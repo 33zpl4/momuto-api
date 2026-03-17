@@ -60,6 +60,7 @@ jobs:
           node-version: '20'
 
       - name: Add team photo to all gallery pages
+        id: add-photo
         env:
           TEAM_NAME: ${{ inputs.team_name }}
           IMAGE_URL: ${{ inputs.image_url }}
@@ -72,16 +73,24 @@ jobs:
         run: node scripts/add-team-photo.js
 
       - name: Deploy updated pages to CMS
+        if: steps.add-photo.outputs.modified != ''
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          MODIFIED: ${{ steps.add-photo.outputs.modified }}
         run: |
           deploy_page() {
             local TOKEN="$1"
             local HANDLE="$2"
             local FILE="$3"
             local HOST="https://openapi.oemapps.com"
+
+            # Only deploy if this file was actually modified
+            if [[ ",$MODIFIED," != *",$FILE,"* ]]; then
+              echo "⏭ ${FILE} not modified — skipping deploy"
+              return
+            fi
 
             RESPONSE=$(curl -s -H "token: ${TOKEN}" "${HOST}/pages?handle=${HANDLE}")
             PAGE_DATA=$(echo "$RESPONSE" | node -e "
@@ -125,7 +134,7 @@ jobs:
               -d @/tmp/payload.json)
 
             if [ "$HTTP_CODE" = "200" ]; then
-              echo "Updated ${HANDLE} on CMS"
+              echo "✓ Deployed ${HANDLE} to CMS"
             else
               echo "Warning: Failed to update ${HANDLE} — HTTP ${HTTP_CODE}"
             fi
@@ -135,13 +144,18 @@ jobs:
           deploy_page "$OEMSAAS_TOKEN_ES" "equipos-momuto" "pages/equipos-momuto"
           deploy_page "$OEMSAAS_TOKEN_FR" "equipes-clubs-momuto" "pages/equipes-clubs-momuto"
 
-          echo "All gallery pages deployed to CMS."
-
       - name: Commit updated pages to repo
+        if: steps.add-photo.outputs.modified != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODIFIED: ${{ steps.add-photo.outputs.modified }}
         run: |
           for FILE in pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto; do
+            # Only commit files that were actually modified
+            if [[ ",$MODIFIED," != *",$FILE,"* ]]; then
+              echo "⏭ ${FILE} not modified — skipping commit"
+              continue
+            fi
             CONTENT=$(base64 -w 0 "$FILE")
             SHA=$(gh api "repos/${{ github.repository }}/contents/${FILE}" --jq '.sha')
             gh api --method PUT "repos/${{ github.repository }}/contents/${FILE}" \
@@ -149,5 +163,5 @@ jobs:
               -f content="$CONTENT" \
               -f sha="$SHA" \
               -f branch="main"
-            echo "Committed ${FILE}"
+            echo "✓ Committed ${FILE}"
           done
