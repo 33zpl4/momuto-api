@@ -1,9 +1,9 @@
 {
   "team_name": "DE FACTOS FC",
-  "design_name": "Midnight Gold",
-  "design_description": "A deep black base is refined by subtle dark charcoal side panels that add depth and structure without distraction. Gold accents on the collar and sleeve cuffs bring a sharp, premium contrast, while the clean white inner collar adds a classic finishing touch. The overall aesthetic is bold yet understated, projecting authority and style in equal measure.",
-  "primary_color": "#000000",
-  "secondary_color": "#C9A84C",
-  "accent_color": "#C9A84C",
+  "design_name": "Baroque Navy",
+  "design_description": "A deep navy base is enriched with flowing baroque-inspired blue patterns that sweep diagonally across the torso, creating a sense of elegance and movement. The tonal layering adds depth while maintaining a cohesive monochrome palette, giving the kit a refined and artistic identity.",
+  "primary_color": "#0A1F44",
+  "secondary_color": "#1A3A6B",
+  "accent_color": "#1E4D8C",
   "image_url": "https://cdn.staticsoe.com/pics/1138eb946dd1ea4a3c550f9ab3d37c477ee8e7bd5699dbac52d086e6fb4255d1.png"
 }
