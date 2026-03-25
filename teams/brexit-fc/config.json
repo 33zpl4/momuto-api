@@ -1,5 +1,10 @@
 {
   "team_name": "BREXIT FC",
+  "design_name": "Midnight Gold",
+  "design_description": "A minimalist black base is elevated by refined gold trim on the collar and sleeves, creating a clean and premium monochrome look. Subtle tonal side panels add structure and depth, while the restrained branding keeps the design sharp and understated.",
+  "primary_color": "#000000",
+  "secondary_color": "#C9A84C",
+  "accent_color": "#C9A84C",
   "image_url": "https://cdn.staticsoe.com/pics/509549ad50196b5f6ea9e4aff85957d88882d6a43661e490d5814408a112641e.png",
   "back_image_url": "https://cdn.staticsoe.com/pics/3244077b3f0641156aa99d484e929f494240dd773cd9e8a193a8b2ff7a835776.png"
 }
