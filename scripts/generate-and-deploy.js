@@ -166,14 +166,17 @@ function buildPageHTML(config, content, domain) {
   const hasHomeAway = !!(config.away_image_url);
   const hasBack = !!config.back_image_url;
 
-  // Home/away kit toggle CSS + front/back toggle CSS
+  // Home/away kit toggle CSS + front/back toggle CSS — unified toolbar row
   const homeAwayCSS = hasHomeAway ? `
-.kit-toggle { display: flex; gap: 10px; margin-bottom: 0.75rem; }
-.kit-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 10px 20px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s ease; }
-.kit-btn.active { background: var(--accent); color: var(--bg-dark); border-color: var(--accent); }
-.view-toggle { display: flex; gap: 10px; margin-bottom: 1.5rem; }
-.view-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 10px 20px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s ease; }
-.view-btn.active { background: rgba(255,255,255,0.15); color: var(--text-white); border-color: rgba(255,255,255,0.3); }` : '';
+.kit-toolbar { display: flex; align-items: center; gap: 0; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.12); overflow: hidden; }
+.kit-group { display: flex; }
+.toolbar-divider { width: 1px; background: rgba(255,255,255,0.12); align-self: stretch; flex-shrink: 0; }
+.kit-btn { background: transparent; border: none; color: var(--text-muted); padding: 11px 20px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.18s ease; border-right: 1px solid rgba(255,255,255,0.08); white-space: nowrap; }
+.kit-btn:last-child { border-right: none; }
+.kit-btn.active { background: var(--accent); color: var(--bg-dark); }
+.view-btn { background: transparent; border: none; color: var(--text-muted); padding: 11px 18px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.18s ease; border-right: 1px solid rgba(255,255,255,0.08); white-space: nowrap; }
+.view-btn:last-child { border-right: none; }
+.view-btn.active { background: rgba(255,255,255,0.12); color: var(--text-white); }` : '';
 
   // Conditional CSS for view toggle (only when back image exists, no home/away)
   const toggleCSS = (!hasHomeAway && hasBack) ? `
@@ -191,13 +194,16 @@ function buildPageHTML(config, content, domain) {
   if (hasHomeAway) {
     const kitLabels = domain.kitLabels || { home: 'HOME', away: 'AWAY' };
     imageSection = `
-  <div class="kit-toggle">
-    <button class="kit-btn active" onclick="switchKit('home', this)">${kitLabels.home}</button>
-    <button class="kit-btn" onclick="switchKit('away', this)">${kitLabels.away}</button>
-  </div>
-  <div class="view-toggle">
-    <button class="view-btn active" onclick="switchView('front', this)">FRONT</button>
-    <button class="view-btn" onclick="switchView('back', this)">BACK</button>
+  <div class="kit-toolbar">
+    <div class="kit-group">
+      <button class="kit-btn active" onclick="switchKit('home', this)">${kitLabels.home}</button>
+      <button class="kit-btn" onclick="switchKit('away', this)">${kitLabels.away}</button>
+    </div>
+    <div class="toolbar-divider"></div>
+    <div class="kit-group">
+      <button class="view-btn active" onclick="switchView('front', this)">FRONT</button>
+      <button class="view-btn" onclick="switchView('back', this)">BACK</button>
+    </div>
   </div>
   <div class="jersey-stage">
     <img id="jerseyImg" src="${safe(config.image_url)}" class="jersey-img" onclick="openLightbox()" alt="${safe(config.team_name)} Kit Design" />
