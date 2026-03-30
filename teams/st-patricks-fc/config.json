@@ -1,0 +1,12 @@
+{
+  "team_name": "ST PATRICK'S FC",
+  "design_name": "Blue & Yellow Dual Kit",
+  "design_description": "The away kit features a vibrant yellow base paired with deep blue sleeves and accents, creating a bold and high-contrast look. The home version flips this into a deep blue base with yellow detailing, maintaining the same clean structure and strong, recognizable identity across both kits.",
+  "primary_color": "#003087",
+  "secondary_color": "#FFD700",
+  "accent_color": "#FFD700",
+  "image_url": "https://cdn.staticsoe.com/pics/1575bd83929301633d133e1bb86d8b92761085fe9387daf4ba8c9a164dd4ad7d.png",
+  "back_image_url": "https://cdn.staticsoe.com/pics/fe6575cdc8c6414d1d1a8775251d8fa3f641cfd67e0eab8939b3d4b43866c9cf.png",
+  "away_image_url": "https://cdn.staticsoe.com/pics/1fd633955516be0e7f7f36bc3ffb6f43f4ccaaaa44edf4eaae07f3397df11593.png",
+  "away_back_image_url": "https://cdn.staticsoe.com/pics/b590a188873e997b20e4e499aa666b42cd90b729e3ef68d5d35639468dfee4cb.png"
+}

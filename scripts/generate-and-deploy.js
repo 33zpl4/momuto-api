@@ -26,6 +26,7 @@ const DOMAINS = {
     galleryLabel: 'View Gallery',
     comparisonLabel: 'Why MOMUTO?',
     orderUrl: 'https://www.momuto.com/pages/request-custom-kit-design',
+    kitLabels: { home: 'HOME', away: 'AWAY' },
     features: [
       { name: 'Moisture Control', desc: 'Wicks sweat. Stays dry.' },
       { name: 'Stretch Fabric', desc: 'Moves with you. Never restricts.' },
@@ -50,6 +51,7 @@ const DOMAINS = {
     galleryLabel: 'Ver Galería',
     comparisonLabel: '¿Por qué Momuto?',
     orderUrl: 'https://es.momuto.com/pages/request-custom-kit-design',
+    kitLabels: { home: 'PRIMERA', away: 'SEGUNDA' },
     features: [
       { name: 'Control de Humedad', desc: 'Absorbe el sudor. Siempre seco.' },
       { name: 'Tejido Elástico', desc: 'Se mueve contigo. Sin restricciones.' },
@@ -74,6 +76,7 @@ const DOMAINS = {
     galleryLabel: 'Voir la Galerie',
     comparisonLabel: 'Pourquoi Momuto ?',
     orderUrl: 'https://fr.momuto.com/pages/request-custom-kit-design',
+    kitLabels: { home: 'DOMICILE', away: 'EXTÉRIEUR' },
     features: [
       { name: "Gestion de l'Humidité", desc: 'Évacue la sueur. Reste au sec.' },
       { name: 'Tissu Extensible', desc: 'Suit vos mouvements. Sans contrainte.' },
@@ -160,10 +163,23 @@ Return ONLY the caption text, nothing else. No quotes, no punctuation at the end
 
 function buildPageHTML(config, content, domain) {
   const accentColor = config.accent_color || config.primary_color || '#e63946';
+  const hasHomeAway = !!(config.away_image_url);
   const hasBack = !!config.back_image_url;
 
-  // Conditional CSS for view toggle (only when back image exists)
-  const toggleCSS = hasBack ? `
+  // Home/away kit toggle CSS + front/back toggle CSS — unified toolbar row
+  const homeAwayCSS = hasHomeAway ? `
+.kit-toolbar { display: flex; align-items: center; gap: 0; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.12); overflow: hidden; }
+.kit-group { display: flex; }
+.toolbar-divider { width: 1px; background: rgba(255,255,255,0.12); align-self: stretch; flex-shrink: 0; }
+.kit-btn { background: transparent; border: none; color: var(--text-muted); padding: 11px 20px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.18s ease; border-right: 1px solid rgba(255,255,255,0.08); white-space: nowrap; }
+.kit-btn:last-child { border-right: none; }
+.kit-btn.active { background: var(--accent); color: var(--bg-dark); }
+.view-btn { background: transparent; border: none; color: var(--text-muted); padding: 11px 18px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.18s ease; border-right: 1px solid rgba(255,255,255,0.08); white-space: nowrap; }
+.view-btn:last-child { border-right: none; }
+.view-btn.active { background: rgba(255,255,255,0.12); color: var(--text-white); }` : '';
+
+  // Conditional CSS for view toggle (only when back image exists, no home/away)
+  const toggleCSS = (!hasHomeAway && hasBack) ? `
 .view-toggle { display: flex; gap: 10px; margin-bottom: 1.5rem; }
 .view-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 10px 20px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s ease; }
 .view-btn.active { background: var(--accent); color: var(--bg-dark); border-color: var(--accent); }
@@ -171,8 +187,30 @@ function buildPageHTML(config, content, domain) {
 .jersey-view { display: none; width: 100%; }
 .jersey-view.active { display: block; }` : '';
 
+  const expandHintSVG = `<svg class="expand-icon" viewBox="0 0 24 24"><path d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42L17.3 18.7 15 21h6v-6z"/></svg>`;
+
   // Conditional hero image section
-  const imageSection = hasBack ? `
+  let imageSection;
+  if (hasHomeAway) {
+    const kitLabels = domain.kitLabels || { home: 'HOME', away: 'AWAY' };
+    imageSection = `
+  <div class="kit-toolbar">
+    <div class="kit-group">
+      <button class="kit-btn active" onclick="switchKit('home', this)">${kitLabels.home}</button>
+      <button class="kit-btn" onclick="switchKit('away', this)">${kitLabels.away}</button>
+    </div>
+    <div class="toolbar-divider"></div>
+    <div class="kit-group">
+      <button class="view-btn active" onclick="switchView('front', this)">FRONT</button>
+      <button class="view-btn" onclick="switchView('back', this)">BACK</button>
+    </div>
+  </div>
+  <div class="jersey-stage">
+    <img id="jerseyImg" src="${safe(config.image_url)}" class="jersey-img" onclick="openLightbox()" alt="${safe(config.team_name)} Kit Design" />
+    <div class="expand-hint">${expandHintSVG}</div>
+  </div>`;
+  } else if (hasBack) {
+    imageSection = `
   <div class="view-toggle"><button class="view-btn active" onclick="switchView('front', this)">FRONT</button> <button class="view-btn" onclick="switchView('back', this)">BACK</button></div>
   <div class="jersey-stage">
     <div class="jersey-carousel">
@@ -180,18 +218,86 @@ function buildPageHTML(config, content, domain) {
       <div class="jersey-view" data-view="back"><img src="${safe(config.back_image_url)}" class="jersey-img" onclick="openLightbox()" alt="${safe(config.team_name)} Kit Design - Back" /></div>
     </div>
     <div class="expand-hint">
-      <svg class="expand-icon" viewBox="0 0 24 24"><path d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42L17.3 18.7 15 21h6v-6z"/></svg>
+      ${expandHintSVG}
     </div>
-  </div>` : `
+  </div>`;
+  } else {
+    imageSection = `
   <div class="jersey-stage">
     <img src="${safe(config.image_url)}" class="jersey-img" onclick="openLightbox()" alt="${safe(config.team_name)} custom kit design by MOMUTO" />
     <div class="expand-hint">
-      <svg class="expand-icon" viewBox="0 0 24 24"><path d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42L17.3 18.7 15 21h6v-6z"/></svg>
+      ${expandHintSVG}
     </div>
   </div>`;
+  }
 
   // Conditional JS for view switching and lightbox
-  const scriptSection = hasBack ? `
+  let scriptSection;
+  if (hasHomeAway) {
+    const homeFront = safe(config.image_url);
+    const homeBack = safe(config.back_image_url || config.image_url);
+    const awayFront = safe(config.away_image_url);
+    const awayBack = safe(config.away_back_image_url || config.away_image_url);
+    scriptSection = `
+<script>
+var kitImages = {
+  home: { front: ${JSON.stringify(homeFront)}, back: ${JSON.stringify(homeBack)} },
+  away: { front: ${JSON.stringify(awayFront)}, back: ${JSON.stringify(awayBack)} }
+};
+var currentKit = 'home';
+var currentView = 'front';
+function switchKit(kit, btnElement) {
+  currentKit = kit;
+  document.querySelectorAll('.kit-btn').forEach(function(b) { b.classList.remove('active'); });
+  if(btnElement) btnElement.classList.add('active');
+  updateJerseyImage();
+}
+function switchView(view, btnElement) {
+  currentView = view;
+  document.querySelectorAll('.view-btn').forEach(function(b) { b.classList.remove('active'); });
+  if(btnElement) btnElement.classList.add('active');
+  updateJerseyImage();
+}
+function updateJerseyImage() {
+  var src = (kitImages[currentKit] && kitImages[currentKit][currentView]) || kitImages[currentKit]['front'];
+  document.getElementById('jerseyImg').src = src;
+  var zoomImg = document.getElementById('zoomImg');
+  if(zoomImg) zoomImg.src = src;
+}
+function selectReaction(btn, type) {
+  document.querySelectorAll('.reaction-btn').forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+}
+function openLightbox() {
+  var img = document.getElementById('jerseyImg');
+  document.getElementById('zoomImg').src = img ? img.src : ${JSON.stringify(homeFront)};
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function shareToWhatsApp() {
+  var text = encodeURIComponent(${JSON.stringify(safe(content.whatsapp_share_message))});
+  var url = encodeURIComponent(window.location.href);
+  window.open('https://wa.me/?text=' + text + '%20' + url, '_blank');
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+var lastTap = 0;
+var zoomImg = document.getElementById('zoomImg');
+zoomImg.addEventListener('touchend', function(e) {
+  var now = new Date().getTime();
+  if (now - lastTap < 300 && now - lastTap > 0) {
+    e.preventDefault();
+    var s = parseFloat(zoomImg.style.transform.replace('scale(','').replace(')','')) || 1;
+    zoomImg.style.transform = s === 1 ? 'scale(2.5)' : 'scale(1)';
+  }
+  lastTap = now;
+});
+<\/script>`;
+  } else if (hasBack) {
+    scriptSection = `
 <script>
 let currentView = 'front';
 function switchView(view, btnElement) {
@@ -239,7 +345,9 @@ zoomImg.addEventListener('touchend', function(e) {
     }
     lastTap = now;
 });
-<\/script>` : `
+<\/script>`;
+  } else {
+    scriptSection = `
 <script>
 function selectReaction(btn, type) {
   document.querySelectorAll('.reaction-btn').forEach(b => b.classList.remove('selected'));
@@ -261,6 +369,7 @@ function shareToWhatsApp() {
 }
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
 <\/script>`;
+  }
 
   return `<script type="application/ld+json">
 {
@@ -330,7 +439,7 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 .lightbox-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 9999; touch-action: none; }
 .lightbox-overlay.active { display: flex; justify-content: center; align-items: center; }
 .lightbox-img { max-width: 100%; max-height: 100%; transition: transform 0.2s; }
-.lightbox-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; cursor: pointer; z-index: 10001; }${toggleCSS}
+.lightbox-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; cursor: pointer; z-index: 10001; }${toggleCSS}${homeAwayCSS}
 </style>
 
 <section class="hero">
