@@ -90,6 +90,24 @@ const DOMAINS = {
   }
 };
 
+async function withRetry(fn, maxAttempts = 4) {
+  const delays = [5000, 15000, 30000];
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      const isOverloaded = err?.status === 529 || err?.message?.includes('529') || err?.message?.includes('overloaded');
+      if (isOverloaded && attempt < maxAttempts) {
+        const delay = delays[attempt - 1] || 30000;
+        console.log(`  ⏳ API overloaded, retrying in ${delay / 1000}s (attempt ${attempt}/${maxAttempts})...`);
+        await new Promise(r => setTimeout(r, delay));
+      } else {
+        throw err;
+      }
+    }
+  }
+}
+
 async function generatePageContent(config, lang) {
   const langInstructions = {
     en: 'Write all text content in English.',
@@ -126,11 +144,11 @@ Generate a JSON object with these exact fields:
 
 Return ONLY the JSON object, no markdown, no code fences, no other text.`;
 
-  const response = await client.messages.create({
+  const response = await withRetry(() => client.messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 1000,
     messages: [{ role: 'user', content: prompt }]
-  });
+  }));
 
   const text = response.content[0].text.trim();
   const clean = text.replace(/^```json\n?/, '').replace(/^```\n?/, '').replace(/\n?```$/, '');
@@ -152,11 +170,11 @@ Examples of good captions: "Bold gradient with black sleeves", "Classic red and 
 ${langInstructions[lang] || langInstructions.en}
 Return ONLY the caption text, nothing else. No quotes, no punctuation at the end.`;
 
-  const response = await client.messages.create({
+  const response = await withRetry(() => client.messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 50,
     messages: [{ role: 'user', content: prompt }]
-  });
+  }));
 
   return response.content[0].text.trim().replace(/^["']|["']$/g, '').replace(/\.$/, '');
 }
