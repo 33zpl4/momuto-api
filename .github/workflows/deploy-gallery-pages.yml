@@ -1,0 +1,136 @@
+name: Deploy Gallery Pages
+
+on:
+  push:
+    paths:
+      - 'pages/teams-clubs-momuto'
+      - 'pages/equipos-momuto'
+      - 'pages/equipes-clubs-momuto'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Which page(s) to deploy'
+        required: true
+        type: choice
+        default: all
+        options:
+          - all
+          - en
+          - es
+          - fr
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Determine changed pages
+        id: changes
+        run: |
+          TARGET="${{ inputs.target }}"
+          if [ -n "$TARGET" ] && [ "$TARGET" != "all" ]; then
+            # Manual dispatch targeting a specific locale
+            case "$TARGET" in
+              en) CHANGED="pages/teams-clubs-momuto" ;;
+              es) CHANGED="pages/equipos-momuto" ;;
+              fr) CHANGED="pages/equipes-clubs-momuto" ;;
+            esac
+          elif [ "$TARGET" = "all" ]; then
+            # Manual dispatch: deploy all three
+            CHANGED="pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto"
+          else
+            # Push trigger: only deploy files actually changed in this push
+            CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E '^pages/(teams-clubs-momuto|equipos-momuto|equipes-clubs-momuto)$' | tr '\n' ' ' || true)
+          fi
+          echo "files=$CHANGED" >> $GITHUB_OUTPUT
+          echo "Changed: $CHANGED"
+
+      - name: Deploy to CMS
+        if: steps.changes.outputs.files != ''
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          CHANGED_FILES: ${{ steps.changes.outputs.files }}
+        run: |
+          deploy_page() {
+            local TOKEN="$1"
+            local HANDLE="$2"
+            local FILE="$3"
+            local HOST="https://openapi.oemapps.com"
+
+            if [[ " $CHANGED_FILES " != *" $FILE "* ]]; then
+              echo "⏭ ${FILE} not in changed set — skipping"
+              return
+            fi
+
+            if [ ! -f "$FILE" ]; then
+              echo "❌ ${FILE} not found on disk — skipping"
+              return
+            fi
+
+            if [ -z "$TOKEN" ]; then
+              echo "⚠️  No token for ${HANDLE} — skipping"
+              return
+            fi
+
+            RESPONSE=$(curl -s -H "token: ${TOKEN}" "${HOST}/pages?handle=${HANDLE}")
+            PAGE_DATA=$(echo "$RESPONSE" | node -e "
+              const data = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));
+              const pages = data.data?.list || data.data || [];
+              const page = Array.isArray(pages) ? pages.find(p => p.handle === '${HANDLE}') : null;
+              if (page) console.log(JSON.stringify({ id: page.id, title: page.title || '', meta_title: page.meta_title || '', meta_keywords: page.meta_keywords || '', meta_descript: page.meta_descript || '', handle: page.handle || '' }));
+            ")
+
+            if [ -z "$PAGE_DATA" ]; then
+              echo "❌ Page ${HANDLE} not found in CMS — skipping"
+              return
+            fi
+
+            PAGE_ID=$(echo "$PAGE_DATA" | node -e "console.log(JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).id)")
+
+            echo "$PAGE_DATA" > /tmp/page_meta.json
+
+            node -e "
+              const fs = require('fs');
+              const content = fs.readFileSync('${FILE}', 'utf8');
+              const existing = JSON.parse(fs.readFileSync('/tmp/page_meta.json', 'utf8'));
+              const payload = {
+                content,
+                title: existing.title,
+                meta_title: existing.meta_title,
+                meta_keywords: existing.meta_keywords,
+                meta_descript: existing.meta_descript,
+                handle: existing.handle
+              };
+              fs.writeFileSync('/tmp/payload.json', JSON.stringify(payload));
+            "
+
+            HTTP_CODE=$(curl -s -o /tmp/response.txt -w "%{http_code}" \
+              -X PUT \
+              -H "Content-Type: application/json" \
+              -H "token: ${TOKEN}" \
+              "${HOST}/pages/${PAGE_ID}" \
+              -d @/tmp/payload.json)
+
+            if [ "$HTTP_CODE" = "200" ]; then
+              echo "✓ Deployed ${HANDLE} to CMS"
+            else
+              echo "❌ Failed to update ${HANDLE} — HTTP ${HTTP_CODE}"
+              cat /tmp/response.txt
+              exit 1
+            fi
+          }
+
+          deploy_page "$OEMSAAS_TOKEN_EN" "teams-clubs-momuto" "pages/teams-clubs-momuto"
+          deploy_page "$OEMSAAS_TOKEN_ES" "equipos-momuto" "pages/equipos-momuto"
+          deploy_page "$OEMSAAS_TOKEN_FR" "equipes-clubs-momuto" "pages/equipes-clubs-momuto"

@@ -1,6 +1,21 @@
 <style>
-    /* LOAD GOOGLE FONTS */
-    @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&display=swap');
+    /* LOAD GOOGLE FONTS — MOMUTO BRAND: Bebas Neue (display) + Outfit (body) */
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+    /* ===== BRAND VARIABLES ===== */
+    :root {
+        --rtp-bg: #0a0a0a;
+        --rtp-panel: #111;
+        --rtp-border: rgba(255,255,255,0.06);
+        --rtp-border-hover: rgba(255,255,255,0.12);
+        --rtp-white: #f5f5f5;
+        --rtp-muted: #a1a1aa;
+        --rtp-dim: #71717a;
+        --rtp-red: #c8352e;
+        --rtp-red-hover: #e04038;
+        --font-display: 'Bebas Neue', sans-serif;
+        --font-body: 'Outfit', sans-serif;
+    }
 
     * {
         margin: 0;
@@ -9,10 +24,10 @@
     }
 
     body {
-        font-family: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: var(--font-body);
         line-height: 1.6;
-        color: #111;
-        background: #ffffff;
+        color: var(--rtp-white);
+        background: var(--rtp-bg);
     }
 
     .container {
@@ -31,10 +46,10 @@
         margin-right: auto !important;
     }
 
-    /* --- 1. HERO SECTION: COMPACT & COHESIVE --- */
+    /* --- 1. HERO SECTION --- */
     .equipos-page {
-        background: #f4f4f5; /* Light Cool Grey */
-        padding: 5rem 0 0 0; /* Remove bottom padding to merge with carousel */
+        background: var(--rtp-bg);
+        padding: 5rem 0 0 0;
     }
 
     .section-header {
@@ -46,81 +61,85 @@
     }
 
     .main-title {
-        font-size: 3.5rem;
-        font-weight: 800;
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 400;
         margin-bottom: 1rem;
-        color: #111;
-        line-height: 0.95;
+        color: var(--rtp-white);
+        line-height: 1;
         text-transform: uppercase;
-        letter-spacing: -0.04em;
+        letter-spacing: 0.03em;
     }
 
     .main-subtitle {
-        font-size: 1.15rem;
-        color: #52525b;
-        font-weight: 400;
-        line-height: 1.5;
+        font-size: 1rem;
+        color: var(--rtp-muted);
+        font-weight: 300;
+        line-height: 1.7;
+        max-width: 640px;
+        margin: 0 auto;
     }
 
-    /* --- STATS: INTEGRATED INTO HERO --- */
+    /* --- STATS --- */
     .portfolio-stats {
         display: flex;
         justify-content: center;
         gap: 6rem;
         padding: 3rem 0;
-        border-top: 1px solid rgba(0,0,0,0.1);
+        border-top: 1px solid var(--rtp-border);
         margin-top: 3rem;
     }
 
     .stat-item { text-align: center; }
 
     .stat-number {
+        font-family: var(--font-display);
         font-size: 3.5rem;
-        font-weight: 800;
-        color: #111;
+        font-weight: 400;
+        color: var(--rtp-white);
         display: block;
         line-height: 1;
-        letter-spacing: -0.04em;
+        letter-spacing: 0.02em;
     }
 
     .stat-label {
-        font-size: 0.8rem;
-        color: #666;
+        font-size: 0.7rem;
+        color: var(--rtp-dim);
         margin-top: 0.5rem;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.15em;
         font-weight: 700;
     }
 
     /* --- 2. CAROUSEL SECTION --- */
     .teams-carousel-section {
-        background: #f4f4f5; /* Continue the grey bg from hero so it blends */
+        background: var(--rtp-bg);
         padding: 0 0 6rem 0;
     }
 
     .carousel-header {
         text-align: left;
         margin-bottom: 2rem;
-        padding-left: 40px; /* Match container padding */
+        padding-left: 40px;
         max-width: 1400px;
         margin: 0 auto 2rem auto;
     }
 
     .carousel-title {
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: #111;
+        font-family: var(--font-body);
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--rtp-red);
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.2em;
         display: flex;
         align-items: center;
         gap: 1rem;
     }
-    
-    /* Arrow to indicate scrolling */
+
     .carousel-title::after {
         content: "→";
-        font-size: 1.5rem;
+        font-size: 1rem;
         font-weight: 400;
     }
 
@@ -128,16 +147,16 @@
         display: flex;
         overflow-x: auto;
         gap: 1.5rem;
-        padding: 1rem 40px 3rem 40px; /* Padding matches container */
+        padding: 1rem 40px 3rem 40px;
         scroll-behavior: smooth;
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
-    
+
     .teams-carousel::-webkit-scrollbar { display: none; }
 
     .team-card {
-        flex: 0 0 28vw; /* Shows 3 full + part of next on desktop */
+        flex: 0 0 28vw;
         min-width: 320px;
         max-width: 450px;
         background: transparent;
@@ -149,15 +168,15 @@
     .team-image {
         width: 100%;
         height: 420px;
-        background: #ffffff;
+        background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+        border: 1px solid var(--rtp-border);
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
         overflow: hidden;
         margin-bottom: 1rem;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        transition: transform 0.4s ease;
+        transition: transform 0.4s ease, border-color 0.25s ease;
     }
 
     .team-image img {
@@ -165,39 +184,44 @@
         height: 90%;
         object-fit: contain;
         transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-        mix-blend-mode: multiply;
+        filter: drop-shadow(0 12px 24px rgba(0,0,0,0.5));
     }
 
     /* Hover Effects */
-    .team-card:hover .team-image { transform: translateY(-5px); }
+    .team-card:hover .team-image {
+        transform: translateY(-5px);
+        border-color: var(--rtp-border-hover);
+    }
     .team-card:hover .team-image img { transform: scale(1.1); }
 
     .team-info { padding: 0; text-align: left; }
 
     .team-name {
-        font-weight: 800;
-        color: #111;
-        font-size: 1.1rem;
+        font-family: var(--font-display);
+        font-weight: 400;
+        color: var(--rtp-white);
+        font-size: 1.4rem;
         text-transform: uppercase;
-        letter-spacing: -0.02em;
+        letter-spacing: 0.02em;
         margin-bottom: 0.25rem;
+        line-height: 1.1;
     }
 
     .team-location {
-        font-size: 0.85rem;
-        color: #71717a;
-        font-weight: 500;
+        font-size: 0.82rem;
+        color: var(--rtp-muted);
+        font-weight: 300;
         margin-bottom: 0.5rem;
     }
 
-    /* FIX 1: LEAGUE TAG STYLING */
     .team-league {
-        background: #111; /* Black tag */
-        color: #fff;
-        padding: 0.25rem 0.5rem;
-        font-size: 0.65rem;
+        background: rgba(200,53,46,0.1);
+        color: var(--rtp-red);
+        border: 1px solid rgba(200,53,46,0.3);
+        padding: 0.3rem 0.6rem;
+        font-size: 0.6rem;
         font-weight: 700;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         display: inline-block;
         line-height: 1;
@@ -205,46 +229,58 @@
 
     /* --- 3. GALLERY --- */
     .action-gallery-section {
-        background: #fafafa; /* Very subtle off-white/bone */
-        color: #111;
+        background: var(--rtp-panel);
+        color: var(--rtp-white);
         padding: 6rem 0;
-        border-top: 1px solid #eaeaea;
+        border-top: 1px solid var(--rtp-border);
+        border-bottom: 1px solid var(--rtp-border);
     }
 
     .gallery-title {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #111;
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        color: var(--rtp-white);
         margin-bottom: 0.5rem;
         text-align: center;
         text-transform: uppercase;
-        letter-spacing: -0.03em;
+        letter-spacing: 0.03em;
+        line-height: 1;
     }
 
     .gallery-subtitle {
-        color: #71717a;
-        font-size: 1.1rem;
+        color: var(--rtp-muted);
+        font-size: 1rem;
+        font-weight: 300;
         text-align: center;
         margin-bottom: 3rem;
     }
 
+    .gallery-filters {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
     .filter-btn {
         background: transparent;
-        color: #71717a;
-        border: 1px solid #d4d4d8;
+        color: var(--rtp-muted);
+        border: 1px solid var(--rtp-border);
         border-radius: 0;
         text-transform: uppercase;
-        font-size: 0.8rem;
-        letter-spacing: 0.1em;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
         padding: 0.8rem 1.5rem;
-        font-weight: 600;
-        margin: 0 5px;
+        font-weight: 700;
+        margin: 0 4px 8px 4px;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: all 0.2s ease;
     }
 
     .filter-btn.active, .filter-btn:hover {
-        background: #111;
+        background: var(--rtp-red);
         color: #fff;
-        border-color: #111;
+        border-color: var(--rtp-red);
     }
 
     .masonry-gallery {
@@ -265,27 +301,33 @@
         transition: transform 0.5s ease;
     }
 
-    /* FIX 2: STRONGER GRADIENT FOR READABILITY ON DARK PHOTOS */
     .action-overlay {
         position: absolute;
         bottom: 0; left: 0; right: 0;
-        /* Stronger gradient that goes to near-black at the bottom */
         background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.95) 100%);
         color: white;
-        padding: 2rem 1.5rem 1.5rem 1.5rem; /* More top padding for gradient breath */
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
         opacity: 0;
         transition: all 0.3s ease;
-        transform: translateY(10px); /* Subtle slide up effect */
+        transform: translateY(10px);
     }
 
     .action-overlay .team-name {
-        font-weight: 800;
-        font-size: 1rem;
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: 1.2rem;
         text-transform: uppercase;
-        letter-spacing: -0.02em;
+        letter-spacing: 0.02em;
         color: #fff;
-        /* Subtle text shadow for absolute worst-case scenarios */
         text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        line-height: 1.1;
+    }
+
+    .action-overlay .team-details {
+        font-size: 0.78rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.85);
+        margin-top: 4px;
     }
 
     .action-photo:hover img { transform: scale(1.05); }
@@ -294,53 +336,90 @@
 
     /* --- 4. UGC & FOOTER --- */
     .ugc-cta-section {
-        background: white;
-        border: 1px solid #eaeaea;
+        background: var(--rtp-panel);
+        border: 1px solid var(--rtp-border);
         padding: 4rem;
-        margin-top: 4rem;
+        margin: 4rem auto 0 auto;
+        max-width: 1320px;
         text-align: center;
     }
 
-    .ugc-title { color: #111; font-weight: 800; text-transform: uppercase; }
-    .ugc-subtitle { color: #52525b; margin-bottom: 1.5rem; }
+    .ugc-title {
+        font-family: var(--font-display);
+        color: var(--rtp-white);
+        font-weight: 400;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        margin-bottom: 0.75rem;
+    }
+    .ugc-subtitle {
+        color: var(--rtp-muted);
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+    }
 
     .btn-secondary {
         background: transparent;
-        color: #111;
+        color: var(--rtp-white);
         padding: 15px 30px;
-        border: 2px solid #111;
+        border: 2px solid var(--rtp-white);
         text-transform: uppercase;
-        letter-spacing: 0.1em;
-        font-size: 0.8rem;
+        letter-spacing: 0.15em;
+        font-size: 0.75rem;
         font-weight: 700;
         display: inline-block;
         text-decoration: none;
         transition: all 0.3s ease;
+        font-family: var(--font-body);
     }
-    .btn-secondary:hover { background: #111; color: white; }
+    .btn-secondary:hover {
+        background: var(--rtp-red);
+        color: #fff;
+        border-color: var(--rtp-red);
+    }
 
     .footer-cta-wrapper {
-        background: #111;
+        background: var(--rtp-red);
         padding: 8rem 0;
-        margin-top: 0;
+        margin-top: 4rem;
     }
     .final-cta-section { text-align: center; }
-    .cta-title { color: #fff; font-size: 2.5rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem; }
-    .cta-description { color: #a1a1aa; font-size: 1.1rem; margin-bottom: 3rem; }
-    
+    .cta-title {
+        font-family: var(--font-display);
+        color: #fff;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+    .cta-description {
+        color: rgba(255,255,255,0.9);
+        font-size: 1rem;
+        font-weight: 300;
+        margin-bottom: 3rem;
+        max-width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .btn-primary {
         background: #fff;
-        color: #111;
+        color: var(--rtp-bg);
         padding: 20px 50px;
         border: none;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        font-size: 1rem;
-        font-weight: 800;
+        font-size: 0.9rem;
+        font-weight: 700;
         cursor: pointer;
         display: inline-block;
         text-decoration: none;
         transition: transform 0.2s;
+        font-family: var(--font-body);
     }
     .btn-primary:hover { transform: scale(1.05); }
 
@@ -351,41 +430,39 @@
         z-index: 9999;
         left: 0; top: 0;
         width: 100%; height: 100%;
-        background-color: rgba(255,255,255,0.98); /* cleaner white */
+        background-color: rgba(10,10,10,0.95);
         animation: fadeIn 0.3s ease;
         justify-content: center;
         align-items: center;
     }
     .lightbox.active { display: flex; }
-    
+
     .lightbox-content {
         max-width: 900px;
         max-height: 90vh;
         position: relative;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         background: transparent;
     }
-    
+
     .lightbox-image {
         max-width: 100%;
         max-height: 85vh;
         display: block;
-        /* Ensure blended images look right in lightbox too */
-        mix-blend-mode: multiply; 
     }
-    
+
     .lightbox-close {
         position: absolute;
         top: -40px; right: 0;
         font-size: 30px;
-        color: #111;
+        color: var(--rtp-white);
         cursor: pointer;
         z-index: 100;
     }
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* SR-ONLY: visible to crawlers & screen readers, hidden visually */
+    /* SR-ONLY */
     .sr-only {
         position: absolute;
         width: 1px;
@@ -402,16 +479,30 @@
     .action-photo figcaption { position: absolute; bottom: 0; left: 0; right: 0; pointer-events: none; }
     .action-photo figcaption .photo-meta { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
+    /* "+ MORE DESIGNS" placeholder card on dark theme */
+    .team-card-placeholder {
+        background: var(--rtp-panel) !important;
+        border: 1px dashed var(--rtp-border) !important;
+    }
+    .team-card-placeholder-text {
+        font-family: var(--font-display);
+        color: var(--rtp-dim) !important;
+        font-weight: 400 !important;
+        font-size: 1.2rem;
+        letter-spacing: 0.05em;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
         .main-title { font-size: 2.5rem; }
         .portfolio-stats { gap: 2rem; flex-wrap: wrap; }
-        .team-card { flex: 0 0 75vw; } /* Mobile: show 1 card + peek of next */
+        .team-card { flex: 0 0 75vw; }
         .team-image { height: 350px; }
         .masonry-gallery { grid-template-columns: 1fr; }
         .carousel-header { padding-left: 20px; }
         .teams-carousel { padding: 1rem 20px 3rem 20px; }
         .container { padding: 0 20px; }
+        .ugc-cta-section { padding: 2.5rem 1.5rem; }
     }
 </style>
 <script type="application/ld+json">
@@ -552,8 +643,8 @@
 <span class="team-league">D&eacute;partemental 2</span></div>
 </div>
 <div class="team-card" onclick="openLightbox('https://via.placeholder.com/1000x1000/111/fff?text=MOMUTO')">
-<div class="team-image" style="background: #eee;">
-<div style="color: #ccc; font-weight: bold;">+ MORE DESIGNS</div>
+<div class="team-image team-card-placeholder">
+<div class="team-card-placeholder-text">+ MORE DESIGNS</div>
 </div>
 <div class="team-info">
 <div class="team-name">Your Team</div>
