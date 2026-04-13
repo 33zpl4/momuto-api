@@ -1,13 +1,18 @@
-<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" /><link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" /><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
 <style>
         :root {
-            --momuto-red: #e63946;
-            --momuto-red-dark: #b91c1c;
-            --bg-dark: #050505;
-            --bg-card: #121212;
-            --text-white: #ffffff;
-            --text-muted: #a1a1aa;
-            --border-subtle: rgba(255,255,255,0.1);
+            --mg-bg: #0a0a0a;
+            --mg-panel: #111;
+            --mg-card: #111;
+            --mg-border: rgba(255,255,255,0.06);
+            --mg-border-hover: rgba(255,255,255,0.12);
+            --mg-white: #f5f5f5;
+            --mg-muted: #a1a1aa;
+            --mg-dim: #71717a;
+            --mg-red: #c8352e;
+            --mg-red-hover: #e04038;
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'Outfit', sans-serif;
         }
         * {
             margin: 0;
@@ -19,62 +24,72 @@
             display: none;
         }
         body {
-            font-family: 'Jost', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-white);
+            font-family: var(--font-body);
+            font-weight: 300;
+            background-color: var(--mg-bg);
+            color: var(--mg-white);
             line-height: 1.6;
             overflow-x: hidden;
         }
         /* ============ TYPOGRAPHY ============ */
         h1, h2, h3 {
-            font-weight: 800;
+            font-family: var(--font-display);
+            font-weight: 400;
             text-transform: uppercase;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
+            letter-spacing: 0.03em;
+            line-height: 1;
         }
         .highlight-red {
-            color: var(--momuto-red);
+            color: var(--mg-red);
         }
         /* ============ HERO SECTION ============ */
         .hero {
             padding: 6rem 1.5rem 4rem;
             text-align: center;
-            background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, var(--bg-dark) 70%);
-            border-bottom: 1px solid var(--border-subtle);
+            background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, var(--mg-bg) 70%);
+            border-bottom: 1px solid var(--mg-border);
         }
         .hero-badge {
-            background: rgba(230, 57, 70, 0.1);
-            border: 1px solid rgba(230, 57, 70, 0.3);
-            color: var(--momuto-red);
-            font-size: 0.75rem;
+            background: rgba(200, 53, 46, 0.1);
+            border: 1px solid rgba(200, 53, 46, 0.15);
+            color: var(--mg-red);
+            font-family: var(--font-body);
+            font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            padding: 8px 16px;
+            letter-spacing: 0.14em;
+            padding: 6px 14px;
             margin-bottom: 1.5rem;
             display: inline-block;
         }
         .hero-title {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-family: var(--font-display);
+            font-size: clamp(2.75rem, 6vw, 4.5rem);
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            line-height: 1;
             margin-bottom: 1.5rem;
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
         }
         .hero-subtitle {
-            color: var(--text-muted);
-            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-family: var(--font-body);
+            color: var(--mg-muted);
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.7;
             margin-bottom: 2.5rem;
-            max-width: 600px;
-            
+            max-width: 640px;
+
             /* FORCE Centering */
             margin-left: auto !important;
             margin-right: auto !important;
-            text-align: center !important; 
-            
+            text-align: center !important;
+
             /* Ensure it behaves as a block for margins to work */
             display: block !important;
-            width: 100%; 
+            width: 100%;
         }
         /* Stats Grid */
         .stats-grid {
@@ -84,22 +99,28 @@
             max-width: 800px;
             margin: 0 auto;
             padding-top: 2rem;
-            border-top: 1px solid var(--border-subtle);
+            border-top: 1px solid var(--mg-border);
         }
         .stat-item {
             padding: 1rem;
         }
         .stat-number {
             display: block;
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--text-white);
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            line-height: 1;
+            color: var(--mg-white);
+            margin-bottom: 0.4rem;
         }
         .stat-label {
-            font-size: 0.8rem;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
+            letter-spacing: 0.14em;
+            color: var(--mg-muted);
         }
         /* ============ GALLERY GRID ============ */
         .gallery-container {
@@ -113,14 +134,22 @@
             align-items: flex-end;
             margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--mg-border);
+            gap: 1rem;
         }
         .gallery-title {
-            font-size: 1.5rem;
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            letter-spacing: 0.04em;
+            line-height: 1;
         }
         .gallery-count {
-            color: var(--text-muted);
-            font-family: monospace;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--mg-muted);
         }
         .gallery-grid {
             display: grid;
@@ -129,17 +158,18 @@
         }
         /* Design Card */
         .design-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
+            background: var(--mg-card);
+            border: 1px solid var(--mg-border);
             color: inherit;
             display: block;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.25s ease, transform 0.25s ease;
             position: relative;
             overflow: hidden;
             text-decoration: none;
         }
         .design-card:hover {
-            border-color: rgba(230, 57, 70, 0.5);
+            border-color: var(--mg-border-hover);
+            transform: translateY(-4px);
         }
         .card-image-wrapper {
             position: relative;
@@ -170,61 +200,93 @@
             padding: 1.5rem;
         }
         .card-team {
-            font-size: 1.25rem;
-            margin-bottom: 0.25rem;
-            color: var(--text-white);
+            font-family: var(--font-display);
+            font-size: 1.65rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            color: var(--mg-white);
         }
         .card-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            opacity: 0.8;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--mg-muted);
+            opacity: 0.9;
         }
         .card-tag {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.75);
             backdrop-filter: blur(4px);
-            padding: 4px 10px;
-            font-size: 0.7rem;
+            padding: 5px 10px;
+            font-family: var(--font-body);
+            font-size: 0.6rem;
             font-weight: 700;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            border: 1px solid var(--border-subtle);
+            color: var(--mg-white);
+            border: 1px solid rgba(255,255,255,0.08);
         }
         /* ============ CTA SECTION ============ */
         .cta-section {
             padding: 6rem 1.5rem;
             text-align: center;
-            background: var(--bg-card);
+            background: var(--mg-panel);
             margin-top: 4rem;
-            border-top: 1px solid var(--border-subtle);
+            border-top: 1px solid var(--mg-border);
+        }
+        .cta-section h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            letter-spacing: 0.04em;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .cta-section p {
+            font-family: var(--font-body);
+            color: var(--mg-muted);
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.7;
+            margin: 0 auto 2rem;
+            max-width: 560px;
         }
         .btn-primary {
             display: inline-block;
-            background: var(--momuto-red);
-            color: white;
-            padding: 16px 48px;
-            font-weight: 800;
+            background: var(--mg-red);
+            color: #fff;
+            padding: 16px 40px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
             text-decoration: none;
-            font-size: 1rem;
-            letter-spacing: 0.05em;
-            border: none;
+            border: 1px solid var(--mg-red);
             cursor: pointer;
             transition: all 0.2s ease;
         }
         .btn-primary:hover {
-            background: var(--momuto-red-dark);
+            background: var(--mg-red-hover);
+            border-color: var(--mg-red-hover);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.25);
+            box-shadow: 0 10px 30px rgba(200, 53, 46, 0.25);
         }
         .btn-outline {
             display: inline-block;
             background: transparent;
-            color: var(--text-white);
-            border: 1px solid var(--border-subtle);
-            padding: 14px 40px;
-            font-weight: 700;
+            color: var(--mg-white);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 14px 36px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.78rem;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
             cursor: pointer;
             margin-top: 2rem;
@@ -232,54 +294,54 @@
             text-decoration: none;
         }
         .btn-outline:hover {
-            border-color: var(--text-white);
-            background: rgba(255,255,255,0.05);
+            border-color: var(--mg-red);
+            background: var(--mg-red);
+            color: #fff;
         }
         /* ============ RESPONSIVE ============ */
         @media (max-width: 768px) {
             .hero {
                 padding: 4rem 1.5rem 3rem;
             }
-            .hero-title { 
-                font-size: 2.5rem; 
+            .hero-title {
+                font-size: 2.75rem;
             }
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1.5rem;
             }
-            .gallery-grid { 
+            .gallery-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem; 
+                gap: 1.5rem;
             }
-            
+
             .card-image-wrapper {
                 aspect-ratio: 3/4;
                 min-height: 400px;
             }
-            
+
             .card-overlay {
                 height: 30%;
                 background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.7) 50%, transparent);
                 padding: 1.5rem 1.25rem;
             }
-            
-            .card-team { 
-                font-size: 1.4rem;
-                font-weight: 900;
+
+            .card-team {
+                font-size: 1.8rem;
                 margin-bottom: 0.5rem;
             }
-            
+
             .card-desc {
                 font-size: 0.9rem;
                 line-height: 1.4;
                 opacity: 0.9;
             }
-            
+
             .card-tag {
                 top: 1rem;
                 right: 1rem;
-                font-size: 0.65rem;
-                padding: 6px 12px;
+                font-size: 0.6rem;
+                padding: 5px 10px;
             }
         }
     </style>
@@ -301,8 +363,8 @@
 <div style="text-align: center;"><button id="loadMoreBtn" class="btn-outline">Ver M&aacute;s Dise&ntilde;os</button></div>
 </section>
 <section class="cta-section">
-<h2 style="font-size: 2.5rem; margin-bottom: 1rem;">&iquest;Listo para destacar?</h2>
-<p style="color: var(--text-muted); margin-bottom: 2rem;">&Uacute;nete al club. Recibe tu propuesta de dise&ntilde;o gratuita en 48 horas.</p>
+<h2>&iquest;Listo para destacar?</h2>
+<p>&Uacute;nete al club. Recibe tu propuesta de dise&ntilde;o gratuita en 48 horas.</p>
 <a href="https://es.momuto.com/pages/solicitud-de-diseno-personalizado" class="btn-primary">Solicitar Dise&ntilde;o Personalizado</a></section>
 <script>
         const designs = [
