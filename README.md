@@ -111,33 +111,90 @@ To also add the team to the gallery pages on all three domains, include `add-to-
 git commit -m "Add new-team config add-to-gallery"
 ```
 
+## Ready-to-Play collection
+
+Pre-designed kit templates (The Kinetic, The Legacy, The Apex, …) live in `ready-to-play/`. The collection page (at `/collections/ready-to-play` on each domain) shows one card per template.
+
+### Add a new Ready-to-Play template
+
+1. Create a folder `ready-to-play/templates/[template-slug]/` (slug is used in the URL — e.g. `the-apex`, `electric-red`)
+2. Add `config.json` with the template metadata:
+
+```json
+{
+  "slug": "electric-red",
+  "name": "ELECTRIC RED",
+  "category":         { "en": "Modern / Lightning", "es": "...", "fr": "..." },
+  "tags":             { "en": ["Popular", "Preview 24h"], "es": [...], "fr": [...] },
+  "description":      { "en": "...", "es": "...", "fr": "..." },
+  "card_description": { "en": "...", "es": "...", "fr": "..." },
+  "hero_image": "https://cdn.staticsoe.com/.../main.webp",
+  "variants": [
+    { "name": "Classic", "image": "https://cdn.staticsoe.com/.../variant1.webp" },
+    { "name": "Inverse", "image": "https://cdn.staticsoe.com/.../variant2.webp" }
+  ],
+  "default_colors": {
+    "primary":   { "hex": "#000000", "name": "black" },
+    "secondary": { "hex": "#C8102E", "name": "sport red" },
+    "trim":      { "hex": "#FFFFFF", "name": "white" }
+  },
+  "status": "published"
+}
+```
+
+3. Add the 3 localized HTML page bodies (copy from an existing template and adapt):
+
+```
+ready-to-play/templates/electric-red/
+  config.json
+  en.html
+  es.html
+  fr.html
+```
+
+4. Push to GitHub. The `Add Ready-to-Play Template` workflow will:
+   - Auto-generate SEO `meta_title` + `meta_description` in each language via Claude
+   - Deploy the 3 template pages (one per domain)
+   - Inject/update the card on each localized collection page
+   - Commit the updated collection HTML back to the repo
+
+Pages will be live at:
+- `momuto.com/pages/ready-to-play-[slug]`
+- `es.momuto.com/pages/ready-to-play-[slug]`
+- `fr.momuto.com/pages/maillot-[slug]`
+
+Shared pricing, URL patterns, and delivery terms are in `ready-to-play/config.json`.
+
 ## Repo structure
 
 ```
 .github/
   workflows/
-    create-team-page.yml    ← GitHub Action
+    create-team-page.yml              ← Team page workflow
+    add-ready-to-play-template.yml    ← Ready-to-Play workflow
 scripts/
-  generate-and-deploy.js    ← Main script
+  generate-and-deploy.js              ← Team page script
+  add-ready-to-play-template.js       ← Ready-to-Play script
 teams/
-  gosling-fc/
-    config.json             ← Example team
-  [new-team]/
+  [team-slug]/
     config.json
-static/                     ← Static files for all domains
+ready-to-play/
+  config.json                         ← Shared RTP config (pricing, URL patterns)
+  collection/
+    en.html  es.html  fr.html         ← Collection page per language
+  templates/
+    [template-slug]/
+      config.json                     ← Template metadata
+      en.html  es.html  fr.html       ← Template page body per language
+static/                               ← Static files for all domains
   shared/
     llms.txt
   momuto.com/
-    robots.txt
-    sitemap.xml
+    robots.txt  sitemap.xml
   es.momuto.com/
-    robots.txt
-    sitemap.xml
-    llms.txt
+    robots.txt  sitemap.xml  llms.txt
   fr.momuto.com/
-    robots.txt
-    sitemap.xml
-    llms.txt
+    robots.txt  sitemap.xml  llms.txt
 package.json
 ```
 

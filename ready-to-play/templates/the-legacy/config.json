@@ -1,17 +1,25 @@
 {
   "slug": "the-legacy",
   "name": "THE LEGACY",
-  "category": "Retro / Structure",
-  "tags": ["Classic", "Preview 24h"],
+  "category": {
+    "en": "Retro / Structure",
+    "es": "Retro / Estructura",
+    "fr": "Rétro / Structure"
+  },
+  "tags": {
+    "en": ["Classic", "Preview 24h"],
+    "es": ["Clásico", "Preview 24h"],
+    "fr": ["Classique", "Preview 24h"]
+  },
   "description": {
     "en": "Timeless authority. Double vertical pillar architecture with a precise central stripe. A modern reconstruction of classic match-day aesthetics.",
-    "es": "",
-    "fr": ""
+    "es": "Autoridad atemporal. Arquitectura de doble pilar vertical y franja central precisa. Una reconstrucción moderna de la estética clásica de día de partido.",
+    "fr": "Autorité intemporelle. Architecture de double pilier vertical et rayure centrale précise. Une reconstruction moderne de l'esthétique classique du jour de match."
   },
   "card_description": {
     "en": "Timeless authority. Wide vertical pillars and a precise central stripe. A modern reconstruction of classic match-day aesthetics.",
-    "es": "",
-    "fr": ""
+    "es": "Autoridad atemporal. Pilares verticales anchos y franja central precisa. Una reconstrucción moderna de la estética clásica de día de partido.",
+    "fr": "Autorité intemporelle. Piliers verticaux larges et rayure centrale précise. Une reconstruction moderne de l'esthétique classique de match."
   },
   "hero_image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp",
   "variants": [

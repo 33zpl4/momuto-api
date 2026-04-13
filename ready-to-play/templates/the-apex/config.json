@@ -1,17 +1,25 @@
 {
   "slug": "the-apex",
   "name": "THE APEX",
-  "category": "Aerodynamic / Tech",
-  "tags": ["Aerodynamic", "Preview 24h"],
+  "category": {
+    "en": "Aerodynamic / Tech",
+    "es": "Aerodinámico / Tech",
+    "fr": "Aérodynamique / Tech"
+  },
+  "tags": {
+    "en": ["Aerodynamic", "Preview 24h"],
+    "es": ["Aerodinámico", "Preview 24h"],
+    "fr": ["Aérodynamique", "Preview 24h"]
+  },
   "description": {
     "en": "Engineered for speed. Aerodynamic curved side panels inspired by 2000s performance wear. Clean chest optimised for sponsor visibility.",
-    "es": "",
-    "fr": ""
+    "es": "Ingeniería para la velocidad. Paneles laterales curvos aerodinámicos inspirados en el sportswear de los años 2000. Pecho limpio, optimizado para la visibilidad del sponsor.",
+    "fr": "Ingénierie pour la vitesse. Panneaux latéraux courbés aérodynamiques inspirés du sportswear des années 2000. Poitrine épurée, optimisée pour la visibilité du sponsor."
   },
   "card_description": {
     "en": "Engineered for speed. Aerodynamic curved side panels inspired by 2000s performance wear. Clean chest optimised for sponsor visibility.",
-    "es": "",
-    "fr": ""
+    "es": "Ingeniería para la velocidad. Paneles laterales curvos aerodinámicos inspirados en el sportswear de los años 2000. Pecho limpio optimizado para la visibilidad del sponsor.",
+    "fr": "Ingénierie pour la vitesse. Panneaux latéraux courbés aérodynamiques inspirés du sportswear des années 2000. Poitrine épurée optimisée pour la visibilité du sponsor."
   },
   "hero_image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp",
   "variants": [
