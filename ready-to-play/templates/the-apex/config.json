@@ -1,0 +1,28 @@
+{
+  "slug": "the-apex",
+  "name": "THE APEX",
+  "category": "Aerodynamic / Tech",
+  "tags": ["Aerodynamic", "Preview 24h"],
+  "description": {
+    "en": "Engineered for speed. Aerodynamic curved side panels inspired by 2000s performance wear. Clean chest optimised for sponsor visibility.",
+    "es": "",
+    "fr": ""
+  },
+  "card_description": {
+    "en": "Engineered for speed. Aerodynamic curved side panels inspired by 2000s performance wear. Clean chest optimised for sponsor visibility.",
+    "es": "",
+    "fr": ""
+  },
+  "hero_image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp",
+  "variants": [
+    { "name": "White",       "image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp" },
+    { "name": "Joga Bonito", "image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/1f1021f3b7949a43631730854183acb0.webp" },
+    { "name": "Tech-Ops",    "image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/92b8c420d06911b03e847d1c2c78fe05.webp" }
+  ],
+  "default_colors": {
+    "primary":   { "hex": "#001F5B", "name": "navy" },
+    "secondary": { "hex": "#C4A46B", "name": "gold" },
+    "trim":      { "hex": "#FFFFFF", "name": "white" }
+  },
+  "status": "published"
+}

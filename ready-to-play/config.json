@@ -1,0 +1,29 @@
+{
+  "collection_handle": "ready-to-play",
+  "collection_path": "/collections/ready-to-play",
+  "template_handle_pattern": {
+    "en": "ready-to-play-the-{slug}",
+    "es": "ready-to-play-the-{slug}",
+    "fr": "maillot-the-{slug}"
+  },
+  "template_path_pattern": {
+    "en": "/pages/ready-to-play-the-{slug}",
+    "es": "/pages/ready-to-play-the-{slug}",
+    "fr": "/pages/maillot-the-{slug}"
+  },
+  "pricing": {
+    "jersey_current": 19.70,
+    "jersey_original": 21.90,
+    "kit_current": 24.20,
+    "kit_original": 26.90,
+    "currency": "EUR",
+    "discount_pct": 10,
+    "min_quantity": 10
+  },
+  "delivery": {
+    "preview_hours": 24,
+    "revisions_included": 1,
+    "production_days_min": 20,
+    "production_days_max": 25
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "slug": "the-kinetic",
+  "name": "THE KINETIC",
+  "category": "Modern / Geometric",
+  "tags": ["Popular", "Preview 24h"],
+  "description": {
+    "en": "Aggression by design. Fractured graphics simulating high-velocity motion. Built for teams that play on the front foot.",
+    "es": "",
+    "fr": ""
+  },
+  "card_description": {
+    "en": "Aggression by design. Fractured graphics simulating high-velocity motion. Built for teams that play on the front foot.",
+    "es": "",
+    "fr": ""
+  },
+  "hero_image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp",
+  "variants": [
+    { "name": "Black/Red", "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp" },
+    { "name": "White/Blue", "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/1f306b3459e4854d7e2abd4be3067acf.webp" },
+    { "name": "Grey/Neon",  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/00fbe7583a3449945fc6f0d9254fe1eb.webp" }
+  ],
+  "default_colors": {
+    "primary":   { "hex": "#000000", "name": "black" },
+    "secondary": { "hex": "#C8102E", "name": "sport red" },
+    "trim":      { "hex": "#FFFFFF", "name": "white" }
+  },
+  "status": "published"
+}
