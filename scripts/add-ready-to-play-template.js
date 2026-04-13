@@ -222,15 +222,36 @@ ${tagsHtml}
 }
 
 function upsertCardInCollection(collectionHTML, cardHTML, templateName) {
-  // Find existing card by title match
-  const nameEscaped = escapeHtml(templateName).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const existingRegex = new RegExp(
-    `(\\s*<!--[^-]*${nameEscaped}[^-]*-->\\s*)?<article class="rtp-col-card"[^]*?>[^]*?<h2 class="rtp-col-card-title"[^>]*>${nameEscaped}</h2>[^]*?</article>`,
+  // Find existing card by iterating article blocks and matching the h2 title
+  // inside each one. A naive single-regex approach with `[^]*?` can span
+  // multiple sibling cards, which would wipe them all on replace.
+  const nameEscaped = escapeHtml(templateName);
+  const nameRegexEscaped = nameEscaped.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  const articleRe = /<article\b[^>]*\bclass="rtp-col-card"[^>]*>[\s\S]*?<\/article>/gi;
+  const titleRe = new RegExp(
+    `<h2\\s[^>]*\\bclass="rtp-col-card-title"[^>]*>\\s*${nameRegexEscaped}\\s*</h2>`,
     'i'
   );
 
-  if (existingRegex.test(collectionHTML)) {
-    return collectionHTML.replace(existingRegex, '\n' + cardHTML);
+  let match;
+  while ((match = articleRe.exec(collectionHTML)) !== null) {
+    if (!titleRe.test(match[0])) continue;
+
+    let start = match.index;
+    const end = match.index + match[0].length;
+
+    // If immediately preceded by a "<!-- TEMPLATE NAME -->" comment, consume it
+    // too so we don't leave a stale comment behind after the replace.
+    const precedingSlice = collectionHTML.slice(Math.max(0, start - 200), start);
+    const leadingCommentRe = new RegExp(
+      `\\s*<!--[^-]*?${nameRegexEscaped}[^-]*?-->\\s*$`,
+      'i'
+    );
+    const leadMatch = precedingSlice.match(leadingCommentRe);
+    if (leadMatch) start -= leadMatch[0].length;
+
+    return collectionHTML.slice(0, start) + '\n' + cardHTML + collectionHTML.slice(end);
   }
 
   // Insert at end of <main class="rtp-col-grid"> (before closing </main>)
