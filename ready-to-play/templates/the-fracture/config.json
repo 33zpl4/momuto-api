@@ -1,0 +1,43 @@
+{
+  "slug": "the-fracture",
+  "name": "THE FRACTURE",
+  "category": {
+    "en": "Modern / Texture",
+    "es": "Moderno / Textura",
+    "fr": "Moderne / Texture"
+  },
+  "tags": {
+    "en": ["Textured", "Preview 24h"],
+    "es": ["Texturizado", "Preview 24h"],
+    "fr": ["Texturé", "Preview 24h"]
+  },
+  "description": {
+    "en": "Torn terrain. A raw, diagonal pattern that looks like stone splitting under pressure — layered, unpredictable, and unapologetically aggressive. Three-tone depth built from your two team colours creates a textured, almost geological aesthetic that no flat design can replicate. For teams that don't do subtle.",
+    "es": "Terreno desgarrado. Un patrón crudo y diagonal que parece piedra partiéndose bajo presión — en capas, impredecible y agresivo sin complejos. Una profundidad de tres tonos construida a partir de los dos colores de tu equipo crea una estética texturizada, casi geológica, que ningún diseño plano puede replicar. Para equipos que no hacen lo sutil.",
+    "fr": "Terrain déchiré. Un motif brut et diagonal qui évoque la pierre qui se fend sous la pression — en couches, imprévisible et agressif sans concession. Une profondeur en trois tons construite à partir de vos deux couleurs d'équipe crée une esthétique texturée, presque géologique, qu'aucun design plat ne peut reproduire. Pour les équipes qui ne font pas dans le subtil."
+  },
+  "card_description": {
+    "en": "Torn terrain. A raw, diagonal fracture pattern with three-tone depth built from your team colours. For teams that don't do subtle.",
+    "es": "Terreno desgarrado. Un patrón diagonal de fractura con profundidad en tres tonos construida desde los colores de tu equipo. Para equipos que no hacen lo sutil.",
+    "fr": "Terrain déchiré. Un motif de fracture diagonal avec une profondeur en trois tons construite à partir de vos couleurs d'équipe. Pour les équipes qui ne font pas dans le subtil."
+  },
+  "hero_image": "https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png",
+  "variants": [
+    { "name": "Marble", "image": "https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png" },
+    { "name": "Red",    "image": "https://cdn.staticsoe.com/pics/8d9d6f5fe8577deba7784a1c4584ff5dfa821a287cebac5a48c7681094ea99e6.png" },
+    { "name": "Blue",   "image": "https://cdn.staticsoe.com/pics/4295c15439a7dc80e2d278960cf3d45fc1dd84e0b22f0470a4b32556d2fb9f71.png" }
+  ],
+  "gallery": [
+    "https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png",
+    "https://cdn.staticsoe.com/pics/8fea3ebff939ad1356a7e9c265b6b5f1b394d7be5b0a3c303771dfb3d63a3788.png",
+    "https://cdn.staticsoe.com/pics/4c6b464425d2bd014426784d23d63eb3eef0029fb8618d9126c485599bbcac43.png",
+    "https://cdn.staticsoe.com/pics/8d9d6f5fe8577deba7784a1c4584ff5dfa821a287cebac5a48c7681094ea99e6.png",
+    "https://cdn.staticsoe.com/pics/4295c15439a7dc80e2d278960cf3d45fc1dd84e0b22f0470a4b32556d2fb9f71.png"
+  ],
+  "default_colors": {
+    "primary":   { "hex": "#000000", "name": "black" },
+    "secondary": { "hex": "#F5F1E8", "name": "off-white" },
+    "trim":      { "hex": "#808080", "name": "grey" }
+  },
+  "status": "published"
+}
