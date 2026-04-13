@@ -1,0 +1,36 @@
+{
+  "slug": "the-legacy",
+  "name": "THE LEGACY",
+  "category": {
+    "en": "Retro / Structure",
+    "es": "Retro / Estructura",
+    "fr": "Rétro / Structure"
+  },
+  "tags": {
+    "en": ["Classic", "Preview 24h"],
+    "es": ["Clásico", "Preview 24h"],
+    "fr": ["Classique", "Preview 24h"]
+  },
+  "description": {
+    "en": "Timeless authority. Double vertical pillar architecture with a precise central stripe. A modern reconstruction of classic match-day aesthetics.",
+    "es": "Autoridad atemporal. Arquitectura de doble pilar vertical y franja central precisa. Una reconstrucción moderna de la estética clásica de día de partido.",
+    "fr": "Autorité intemporelle. Architecture de double pilier vertical et rayure centrale précise. Une reconstruction moderne de l'esthétique classique du jour de match."
+  },
+  "card_description": {
+    "en": "Timeless authority. Wide vertical pillars and a precise central stripe. A modern reconstruction of classic match-day aesthetics.",
+    "es": "Autoridad atemporal. Pilares verticales anchos y franja central precisa. Una reconstrucción moderna de la estética clásica de día de partido.",
+    "fr": "Autorité intemporelle. Piliers verticaux larges et rayure centrale précise. Une reconstruction moderne de l'esthétique classique de match."
+  },
+  "hero_image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp",
+  "variants": [
+    { "name": "Shadow", "image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp" },
+    { "name": "Icon",   "image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/956d6f684978db5406f32af543da9ea6.webp" },
+    { "name": "Club",   "image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/03241b1c3269fac360eae36e29e11815.webp" }
+  ],
+  "default_colors": {
+    "primary":   { "hex": "#000000", "name": "black" },
+    "secondary": { "hex": "#D9D9D9", "name": "light grey" },
+    "trim":      { "hex": "#FFFFFF", "name": "white" }
+  },
+  "status": "published"
+}
