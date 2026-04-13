@@ -1,0 +1,43 @@
+{
+  "slug": "the-mosaic",
+  "name": "THE MOSAIC",
+  "category": {
+    "en": "Retro / Pattern",
+    "es": "Retro / Patrón",
+    "fr": "Rétro / Motif"
+  },
+  "tags": {
+    "en": ["90s Pattern", "Preview 24h"],
+    "es": ["Patrón 90s", "Preview 24h"],
+    "fr": ["Motif 90s", "Preview 24h"]
+  },
+  "description": {
+    "en": "Disrupted checkerboard. A dense, irregular grid that fractures tradition into something raw and unapologetic. Inspired by the iconic kits of the early 90s — when patterns meant identity, not decoration. The solid badge zone and sponsor bar cut through the noise, giving your crest the stage it deserves. Built to be recognised from across the pitch.",
+    "es": "Tablero de ajedrez disruptivo. Una cuadrícula densa e irregular que fractura la tradición en algo crudo y sin complejos. Inspirada en las míticas equipaciones de principios de los 90 — cuando los estampados eran identidad, no decoración. La zona sólida del escudo y la banda de patrocinador cortan el ruido, dando a tu crest el protagonismo que merece. Diseñada para reconocerse desde cualquier parte del campo.",
+    "fr": "Damier disloqué. Une grille dense et irrégulière qui fracture la tradition en quelque chose de brut et sans concession. Inspiré des maillots iconiques du début des années 90 — quand les motifs signifiaient l'identité, pas la décoration. La zone solide du blason et la bande sponsor percent le bruit, donnant à ton écusson la scène qu'il mérite. Conçu pour être reconnu depuis l'autre bout du terrain."
+  },
+  "card_description": {
+    "en": "Disrupted checkerboard from the early 90s. A dense, irregular grid with a solid badge zone and sponsor bar that give your crest the stage it deserves.",
+    "es": "Tablero de ajedrez disruptivo inspirado en los 90. Una cuadrícula densa con zona sólida para el escudo y banda de patrocinador para dar protagonismo al crest.",
+    "fr": "Damier disloqué inspiré des années 90. Une grille dense avec zone solide pour le blason et bande sponsor pour mettre en scène ton écusson."
+  },
+  "hero_image": "https://cdn.staticsoe.com/pics/ae9deb9e17f800bd3140e6d66fb130a31813b202b8bf60485eea441fe361ebc5.png",
+  "variants": [
+    { "name": "Blue",  "image": "https://cdn.staticsoe.com/pics/ae9deb9e17f800bd3140e6d66fb130a31813b202b8bf60485eea441fe361ebc5.png" },
+    { "name": "Gold",  "image": "https://cdn.staticsoe.com/pics/c6a2e6dc82e74caf58b1833546524eea468772464b629c08c14ebcb1b17f4081.png" },
+    { "name": "Green", "image": "https://cdn.staticsoe.com/pics/75a51edf2ba99e973a1bd9a9275f986046511f958545ef175854752b67af746c.png" }
+  ],
+  "gallery": [
+    "https://cdn.staticsoe.com/pics/ae9deb9e17f800bd3140e6d66fb130a31813b202b8bf60485eea441fe361ebc5.png",
+    "https://cdn.staticsoe.com/pics/b60b5ecdeccd765f9e6be0501b566d18c3ee6c33f64a8e17aa9c71634b1daecb.png",
+    "https://cdn.staticsoe.com/pics/90400254fd478f9bae0ec0fb2bac255de68844956f5687a8060403810988a759.png",
+    "https://cdn.staticsoe.com/pics/c6a2e6dc82e74caf58b1833546524eea468772464b629c08c14ebcb1b17f4081.png",
+    "https://cdn.staticsoe.com/pics/75a51edf2ba99e973a1bd9a9275f986046511f958545ef175854752b67af746c.png"
+  ],
+  "default_colors": {
+    "primary":   { "hex": "#001F5B", "name": "navy" },
+    "secondary": { "hex": "#FFFFFF", "name": "white" },
+    "trim":      { "hex": "#C4A46B", "name": "gold" }
+  },
+  "status": "published"
+}
