@@ -250,7 +250,6 @@ async function main() {
 
   const shared = loadSharedConfig();
   const template = loadTemplateConfig(slug);
-  const collectionHandle = shared.collection_handle;
 
   console.log(`Deploying Ready-to-Play template: ${template.name} (slug: ${slug})`);
   console.log(`Status: ${template.status || 'published'}`);
@@ -267,10 +266,12 @@ async function main() {
 
       const handle = shared.template_handle_pattern[lang].replace('{slug}', slug);
       const templatePageUrl = `${domain.baseUrl}${shared.template_path_pattern[lang].replace('{slug}', slug)}`;
+      const collectionHandle = shared.collection_handle[lang];
 
       console.log(`\n── ${domain.label} ──`);
-      console.log(`  template handle: ${handle}`);
-      console.log(`  template url:    ${templatePageUrl}`);
+      console.log(`  template handle:   ${handle}`);
+      console.log(`  template url:      ${templatePageUrl}`);
+      console.log(`  collection handle: ${collectionHandle}`);
 
       // 1. Generate SEO metadata
       console.log(`  Generating meta...`);

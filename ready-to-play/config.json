@@ -1,6 +1,14 @@
 {
-  "collection_handle": "ready-to-play",
-  "collection_path": "/collections/ready-to-play",
+  "collection_handle": {
+    "en": "ready-to-play",
+    "es": "coleccion-ready-to-play",
+    "fr": "collection-ready-to-play"
+  },
+  "collection_path": {
+    "en": "/pages/ready-to-play",
+    "es": "/pages/coleccion-ready-to-play",
+    "fr": "/pages/collection-ready-to-play"
+  },
   "template_handle_pattern": {
     "en": "ready-to-play-{slug}",
     "es": "ready-to-play-{slug}",

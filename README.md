@@ -113,7 +113,11 @@ git commit -m "Add new-team config add-to-gallery"
 
 ## Ready-to-Play collection
 
-Pre-designed kit templates (The Kinetic, The Legacy, The Apex, …) live in `ready-to-play/`. The collection page (at `/collections/ready-to-play` on each domain) shows one card per template.
+Pre-designed kit templates (The Kinetic, The Legacy, The Apex, …) live in `ready-to-play/`. The collection page shows one card per template:
+
+- EN: `momuto.com/pages/ready-to-play`
+- ES: `es.momuto.com/pages/coleccion-ready-to-play`
+- FR: `fr.momuto.com/pages/collection-ready-to-play`
 
 ### Add a new Ready-to-Play template
 
