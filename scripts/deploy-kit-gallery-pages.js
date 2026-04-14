@@ -7,12 +7,14 @@
  *
  * Surgical deploy strategy:
  *   1. Fetch the live CMS content for each gallery page.
- *   2. Replace ONLY the region from the start of the page through the first
- *      `</style>` tag with the matching region from the repo source file.
- *      That region holds the font <link> and the <style> block.
- *   3. Clean up two legacy inline CTA styles that reference the old
+ *   2. Split both repo and CMS content at `<section class="gallery-container">`.
+ *      The head covers the font <link>, <style> block, and the hero section
+ *      (including the stats strip). The tail covers the gallery grid, CTA,
+ *      the `const designs = [...]` script, and the JSON-LD schemas.
+ *   3. Replace head with the repo version, keep tail from the live CMS.
+ *   4. Clean up two legacy inline CTA styles that reference the old
  *      `--text-muted` variable (removed from the new styles).
- *   4. PUT the merged content back to the CMS.
+ *   5. PUT the merged content back to the CMS.
  *
  * The `const designs = [ ... ]` array that appears inside the gallery
  * JS block is NEVER touched. This matters because `update-gallery`
@@ -61,14 +63,14 @@ const LOCALES = (process.env.LOCALES || 'en,es,fr')
   .map(s => s.trim())
   .filter(Boolean);
 
-const STYLE_CLOSE = '</style>';
+const SPLIT_MARKER = '<section class="gallery-container">';
 
 function splitHead(content) {
-  const idx = content.indexOf(STYLE_CLOSE);
+  const idx = content.indexOf(SPLIT_MARKER);
   if (idx < 0) return null;
   return {
-    head: content.slice(0, idx + STYLE_CLOSE.length),
-    tail: content.slice(idx + STYLE_CLOSE.length)
+    head: content.slice(0, idx),
+    tail: content.slice(idx)
   };
 }
 
@@ -135,7 +137,7 @@ async function deployLocale(locale) {
 
   const repoContent = fs.readFileSync(domain.file, 'utf8');
   const repoSplit = splitHead(repoContent);
-  if (!repoSplit) throw new Error(`No </style> in source ${domain.file}`);
+  if (!repoSplit) throw new Error(`Split marker '${SPLIT_MARKER}' not found in source ${domain.file}`);
 
   // Sanity: make sure we're about to deploy the NEW styling, not the old one.
   if (!repoSplit.head.includes('Bebas Neue') || !repoSplit.head.includes('Outfit')) {
@@ -145,7 +147,7 @@ async function deployLocale(locale) {
   const page = await getPageByHandle(domain);
   const liveContent = page.content || '';
   const liveSplit = splitHead(liveContent);
-  if (!liveSplit) throw new Error(`No </style> in live CMS content for ${domain.label}`);
+  if (!liveSplit) throw new Error(`Split marker '${SPLIT_MARKER}' not found in live CMS content for ${domain.label}`);
 
   // Sanity: the preserved tail MUST still contain the designs array.
   // If the CMS page doesn't look like a gallery, abort rather than overwrite.
