@@ -1,201 +1,157 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "inLanguage": "fr",
+  "name": "&Agrave; propos de MOMUTO — Maillots de football personnalis&eacute;s pour &eacute;quipes amateurs",
+  "description": "MOMUTO est une marque europ&eacute;enne de maillots de football personnalis&eacute;s, fond&eacute;e en 2023, qui apporte des maillots de qualit&eacute; professionnelle en sublimation totale aux &eacute;quipes amateurs du monde entier. Sans interm&eacute;diaires, sans &eacute;cussons qui se d&eacute;collent, sans commande minimum. Livr&eacute; en 25-30 jours dans le monde entier.",
+  "url": "https://fr.momuto.com/pages/a-propos-de-nous",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "MOMUTO",
+    "url": "https://www.momuto.com",
+    "foundingDate": "2023",
+    "description": "Fabricant de maillots de football personnalis&eacute;s sp&eacute;cialis&eacute; dans l'impression par sublimation totale pour les &eacute;quipes amateurs. Design europ&eacute;en, production mondiale, z&eacute;ro interm&eacute;diaire.",
+    "brand": { "@type": "Brand", "name": "MOMUTO" },
+    "areaServed": "Worldwide",
+    "knowsAbout": [
+      "Maillots de football personnalis&eacute;s",
+      "Sublimation textile",
+      "Tissus techniques polyester-&eacute;lasthanne",
+      "Design de maillots de football",
+      "Maillots concept"
+    ],
+    "makesOffer": {
+      "@type": "Offer",
+      "name": "Maillot de football personnalis&eacute; MOMUTO",
+      "priceCurrency": "EUR",
+      "price": "21.90",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "21.90",
+        "priceCurrency": "EUR",
+        "referenceQuantity": { "@type": "QuantitativeValue", "value": "10", "unitCode": "C62" },
+        "description": "&Agrave; partir de 21,90 € par maillot pour les commandes de 10+ unit&eacute;s. 38,90 € pour un maillot unique. Livraison en 25-30 jours dans le monde entier."
+      }
+    }
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
 <style>
-     .title {
-       display: none;
-    }
-body {
-        font-family: 'Jost', sans-serif;
-        color: black;
-        text-align: justify;
-        word-wrap: break-word;
-    }
-
-    .section-title, .subtitle, .h1, .h2, .p, .bold {
-        text-align: left;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .section-title {
-        font-weight: 700;
-        font-size: 35px;
-        line-height: 39px;
-        margin-top: 2em;
-        margin-bottom: 0.5em;
-        text-transform: uppercase;
+    :root {
+        --mg-bg: #ffffff;
+        --mg-surface: #fafafa;
+        --mg-text: #0a0a0a;
+        --mg-muted: #52525b;
+        --mg-dim: #71717a;
+        --mg-border: #e4e4e7;
+        --mg-red: #c8352e;
+        --mg-red-hover: #a82a24;
+        --font-display: 'Bebas Neue', sans-serif;
+        --font-body: 'Outfit', sans-serif;
     }
 
-    .subtitle {
-        font-weight: 500;
-        font-size: 22px;
-        line-height: 30px;
-        margin-bottom: 1em;
-    }
+    .about-page { font-family: var(--font-body); color: var(--mg-text); background: var(--mg-bg); line-height: 1.6; }
+    .about-page * { box-sizing: border-box; }
+    .about-page .title { display: none; }
 
-    .h2 {
-        font-weight: 500;
-        font-size: 20px; 
-        line-height: 30px;
-        margin-bottom: 1em;
-    }
+    .about-container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 2.5rem 0 4rem; }
 
-    .p {
-        font-weight: 400;
-        font-size: 20px; 
-        line-height: 28px;
-        margin-bottom: 0.5em;
-    }
+    /* Hero */
+    .about-hero { display: flex; align-items: center; gap: 3rem; padding: 2rem 0 4rem; margin-bottom: 3rem; border-bottom: 1px solid var(--mg-border); }
+    .about-hero > * { flex: 1; min-width: 0; }
+    .hero-kicker { display: inline-block; font-family: var(--font-display); font-size: 1rem; letter-spacing: 0.25em; color: var(--mg-red); margin: 0 0 1.25rem; text-transform: uppercase; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(2.75rem, 7vw, 5.25rem); line-height: 0.95; letter-spacing: 0.01em; margin: 0 0 1.5rem; text-transform: uppercase; color: var(--mg-text); font-weight: 400; }
+    .hero-lead { font-size: 1.1875rem; line-height: 1.55; margin: 0 0 1rem; font-weight: 500; color: var(--mg-text); max-width: 52ch; }
+    .hero-body { font-size: 1rem; line-height: 1.65; color: var(--mg-muted); margin: 0; max-width: 52ch; }
+    .hero-image img { width: 100%; height: auto; display: block; border-radius: 6px; }
 
-    .bold {
-        font-weight: 600;
-    }
+    /* Feature sections */
+    .about-feature { display: flex; align-items: center; gap: 3rem; margin-bottom: 4rem; }
+    .about-feature > * { flex: 1; min-width: 0; }
+    .feature-title { font-family: var(--font-display); font-size: clamp(1.875rem, 4.25vw, 2.75rem); line-height: 1; letter-spacing: 0.01em; text-transform: uppercase; margin: 0 0 1.25rem; color: var(--mg-text); font-weight: 400; }
+    .feature-lead { font-size: 1.125rem; line-height: 1.5; margin: 0 0 1rem; font-weight: 500; color: var(--mg-text); }
+    .feature-body { font-size: 1rem; line-height: 1.65; margin: 0 0 0.75rem; color: var(--mg-muted); }
+    .feature-body strong, .feature-lead strong { color: var(--mg-text); font-weight: 600; }
+    .feature-list { list-style: none; padding: 0; margin: 1.25rem 0 0; }
+    .feature-list li { font-size: 1rem; line-height: 1.6; padding: 0 0 0 1.5rem; margin: 0 0 0.75rem; color: var(--mg-muted); position: relative; }
+    .feature-list li::before { content: ""; position: absolute; left: 0; top: 0.7rem; width: 0.875rem; height: 2px; background: var(--mg-red); }
+    .feature-list strong { color: var(--mg-text); font-weight: 600; }
+    .feature-image img { width: 100%; height: auto; display: block; border-radius: 6px; }
 
-    .container {
-        width: 80%;
-        margin: auto;
-    }
+    /* CTA */
+    .about-cta { text-align: center; padding: 4rem 0 2rem; border-top: 1px solid var(--mg-border); margin-top: 2rem; }
+    .cta-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1; letter-spacing: 0.01em; text-transform: uppercase; margin: 0 auto 1rem; max-width: 22ch; color: var(--mg-text); font-weight: 400; }
+    .cta-sub { font-size: 1.0625rem; color: var(--mg-muted); margin: 0 0 2rem; }
+    .cta-sub strong { color: var(--mg-text); font-weight: 600; }
+    .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
-    .content-section {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2em;
-        gap: 2em; /* Added gap for better spacing */
-    }
+    /* Buttons */
+    .btn { display: inline-block; padding: 1rem 2rem; font-family: var(--font-body); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 4px; border: 2px solid var(--mg-text); transition: background-color 0.2s, color 0.2s, border-color 0.2s; cursor: pointer; }
+    .btn-primary { background: var(--mg-text); color: #ffffff; }
+    .btn-primary:hover { background: var(--mg-red); border-color: var(--mg-red); color: #ffffff; }
+    .btn-secondary { background: transparent; color: var(--mg-text); }
+    .btn-secondary:hover { background: var(--mg-text); color: #ffffff; }
 
-    .text-content, .image-content {
-        flex: 1;
-        padding: 0 1em;
-    }
-
-    .image-content img {
-        width: 100%; /* Changed max-width to width to fill container */
-        height: auto;
-        display: block;
-    }
-
-    .call-to-action {
-        text-align: center;
-        font-size: 20px;
-        line-height: 32px;
-        margin-top: 4em;
-        margin-bottom: 4em;
-    }
-
-    .button-container {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        margin-top: 20px;
-    }
-
-    .button {
-        background-color: black; 
-        color: white; 
-        border: 2px solid black; 
-        padding: 15px 30px;
-        font-size: 16px;
-        font-weight: 600; 
-        cursor: pointer; 
-        text-transform: uppercase;
-        border-radius: 3px; 
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    .button:hover {
-        background-color: #333;
-        border-color: #333;
-    }
-
-    /* Secondary button style for the "Request Design" option */
-    .button-secondary {
-        background-color: white;
-        color: black;
-        border: 2px solid black;
-    }
-
-    .button-secondary:hover {
-        background-color: black;
-        color: white;
-    }
-
-    @media screen and (max-width: 768px) {
-        .content-section {
-            flex-direction: column;
-        }
-
-        .text-content, .image-content {
-            width: 100%;
-            padding: 0;
-        }
-
-        /* Order adjustment: Image top, Text bottom on mobile */
-        .text-content {
-            order: 2;
-        }
-
-        .image-content {
-            order: 1;
-            margin-bottom: 20px;
-        }
-
-        .button-container {
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .button {
-            width: 100%;
-            max-width: 300px;
-            text-align: center;
-        }
+    @media (max-width: 820px) {
+        .about-container { padding: 1.5rem 0 3rem; }
+        .about-hero, .about-feature { flex-direction: column; gap: 1.5rem; }
+        .about-hero { padding: 1.5rem 0 2.5rem; margin-bottom: 2rem; }
+        .about-feature { margin-bottom: 2.5rem; }
+        .about-hero .hero-image, .about-feature .feature-image { order: -1; }
+        .about-cta { padding: 3rem 0 1rem; }
+        .cta-buttons { flex-direction: column; align-items: center; }
+        .btn { width: 100%; max-width: 320px; text-align: center; }
     }
 </style>
-<div class="container">
-<div class="content-section">
-<div class="text-content">
-<h1 class="section-title">VOTRE IDENTIT&Eacute;, SANS LIMITES.</h1>
-<p class="subtitle">Dans un football satur&eacute; de mod&egrave;les g&eacute;n&eacute;riques, <strong>MOMUTO</strong> vous redonne le contr&ocirc;le. N&eacute;s en 2023 avec une mission claire : <strong>Rapprocher la qualit&eacute; professionnelle des &eacute;quipes amateurs.</strong></p>
-<p class="p">Sans interm&eacute;diaires. Sans flocages qui se d&eacute;collent. Seulement du design exclusif et des performances d'&eacute;lite.</p>
+<div class="about-page">
+<div class="about-container">
+<section class="about-hero">
+<div class="hero-copy">
+<span class="hero-kicker">&Agrave; propos de MOMUTO</span>
+<h1 class="hero-title">Votre identit&eacute;, sans limites.</h1>
+<p class="hero-lead">Dans un football satur&eacute; de mod&egrave;les g&eacute;n&eacute;riques, <strong>MOMUTO</strong> vous redonne le contr&ocirc;le. N&eacute;s fin 2023 avec une mission claire : <strong>rapprocher la qualit&eacute; professionnelle des &eacute;quipes amateurs.</strong></p>
+<p class="hero-body">Sans interm&eacute;diaires. Sans flocages qui se d&eacute;collent. Seulement du design exclusif et des performances d'&eacute;lite.</p>
 </div>
-<div class="image-content"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20240503/26dee47be03339e58b60705a3bcbcc89.jpg" class="responsive-img" alt="&Eacute;quipe MOMUTO C&eacute;l&eacute;bration" /></div>
-</div>
-<div class="content-section">
-<div class="image-content"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20240503/2403e399289c69b71fc4fcf32cf916b3.jpg" class="responsive-img" alt="D&eacute;tail Textile MOMUTO" /></div>
-<div class="text-content">
-<h2 class="section-title">VOTRE &Eacute;CUSSON, &Eacute;TERNEL</h2>
-<p class="subtitle"><b>Nous savons &agrave; quel point c'est douloureux de voir votre &eacute;cusson se d&eacute;coller apr&egrave;s trois lavages.</b></p>
-<p class="p">C'est pourquoi, chez <strong>MOMUTO</strong>, nous avons banni le flocage traditionnel. Nous utilisons <strong>l'impression num&eacute;rique &agrave; fusion totale (sublimation textile)</strong>.</p>
-<ul>
-<li class="p"><strong>Fusion, pas adh&eacute;sif :</strong> Votre design ne se trouve pas <em>sur</em> le tissu, mais <em>fait partie</em> du tissu.</li>
-<li class="p"><strong>R&eacute;sistance Totale :</strong> Tirez, lavez, jouez dans la boue : votre identit&eacute; restera intacte du premier coup de sifflet &agrave; la troisi&egrave;me mi-temps.</li>
-<li class="p"><strong>R&eacute;assort Garanti :</strong> Nous gardons votre design pour toujours. Un nouveau joueur l'ann&eacute;e prochaine ? Commandez une seule unit&eacute; sans probl&egrave;me.</li>
+<div class="hero-image"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20240503/26dee47be03339e58b60705a3bcbcc89.jpg" alt="&Eacute;quipe MOMUTO c&eacute;l&eacute;brant avec ses maillots personnalis&eacute;s" /></div>
+</section>
+<section class="about-feature">
+<div class="feature-image"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20240503/2403e399289c69b71fc4fcf32cf916b3.jpg" alt="D&eacute;tail du tissu avec sublimation MOMUTO" /></div>
+<div class="feature-copy">
+<h2 class="feature-title">Votre &eacute;cusson, &eacute;ternel</h2>
+<p class="feature-lead"><strong>Nous savons &agrave; quel point c'est douloureux de voir votre &eacute;cusson se d&eacute;coller apr&egrave;s trois lavages.</strong></p>
+<p class="feature-body">C'est pourquoi, chez <strong>MOMUTO</strong>, nous avons banni le flocage traditionnel. Nous utilisons <strong>l'impression num&eacute;rique &agrave; fusion totale (sublimation textile)</strong>.</p>
+<ul class="feature-list">
+<li><strong>Fusion, pas adh&eacute;sif :</strong> votre design n'est pas <em>sur</em> le tissu, il <em>fait partie</em> du tissu.</li>
+<li><strong>R&eacute;sistance totale :</strong> tirez, lavez, jouez dans la boue — votre identit&eacute; restera intacte du premier coup de sifflet &agrave; la troisi&egrave;me mi-temps.</li>
+<li><strong>R&eacute;assort garanti :</strong> nous conservons votre design pour toujours. Un nouveau joueur l'ann&eacute;e prochaine ? Commandez une seule unit&eacute; sans probl&egrave;me.</li>
 </ul>
 </div>
+</section>
+<section class="about-feature">
+<div class="feature-copy">
+<h2 class="feature-title">Design europ&eacute;en, puissance mondiale</h2>
+<p class="feature-lead">Chez <strong>MOMUTO</strong>, nous n'avons pas de fronti&egrave;res. Notre si&egrave;ge cr&eacute;atif respire le football en Europe, tandis que notre production voyage vers l'&eacute;picentre de la technologie textile : <strong>l'Asie</strong>.</p>
+<p class="feature-body">Nous avons choisi de fabriquer l&agrave; o&ugrave; le font les g&eacute;ants de l'industrie, garantissant l'acc&egrave;s aux m&ecirc;mes tissus techniques et &agrave; la m&ecirc;me pr&eacute;cision de confection — tout en <strong>&eacute;liminant les interm&eacute;diaires</strong> qui gonflent le prix.</p>
+<p class="feature-body">Le r&eacute;sultat : <strong>qualit&eacute; Ligue des Champions &agrave; prix de tournoi local.</strong></p>
 </div>
-<div class="content-section">
-<div class="text-content">
-<h2 class="section-title">DESIGN EUROP&Eacute;EN, PUISSANCE MONDIALE</h2>
-<p class="subtitle">Chez <strong>MOMUTO</strong>, nous n'avons pas de fronti&egrave;res. Notre si&egrave;ge cr&eacute;atif respire le football en Europe, mais notre production voyage vers l'&eacute;picentre de la technologie textile : <strong>l'Asie</strong>.</p>
-<p class="p">Nous avons choisi de fabriquer l&agrave; o&ugrave; le font les g&eacute;ants de l'industrie, garantissant l'acc&egrave;s aux m&ecirc;mes tissus techniques et &agrave; la m&ecirc;me pr&eacute;cision de confection, mais <strong>en &eacute;liminant les interm&eacute;diaires</strong> qui gonflent le prix.</p>
-<p class="p">Le r&eacute;sultat : <strong>qualit&eacute; Ligue des Champions &agrave; prix de tournoi local.</strong></p>
+<div class="feature-image"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20240503/7107b9785aee3764865b3866b5d49d24.jpg" alt="Production mondiale MOMUTO" /></div>
+</section>
+<section class="about-feature">
+<div class="feature-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251212/b9aa3125986f34f15a71fd6ae9a28f1e.jpg" alt="Maillot concept MOMUTO Homme de Vitruve" /></div>
+<div class="feature-copy">
+<h2 class="feature-title">Culture et football</h2>
+<p class="feature-lead">Nous n'habillons pas seulement des joueurs. Nous habillons des passionn&eacute;s.</p>
+<p class="feature-body">Nos <strong>maillots Concept</strong> r&eacute;inventent l'histoire du football en fusionnant mode urbaine et h&eacute;ritage sportif. Des designs qui racontent des histoires, &agrave; porter dans et hors du stade.</p>
 </div>
-<div class="image-content"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20240503/7107b9785aee3764865b3866b5d49d24.jpg" class="responsive-img" alt="Production Mondiale MOMUTO" /></div>
-</div>
-<div class="content-section">
-<div class="image-content"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251212/b9aa3125986f34f15a71fd6ae9a28f1e.jpg" class="responsive-img" alt="Concept Jersey MOMUTO Homme de Vitruve" /></div>
-<div class="text-content">
-<h2 class="section-title">CULTURE ET FOOTBALL</h2>
-<p class="subtitle">Nous n'habillons pas seulement des joueurs, nous habillons des passionn&eacute;s.</p>
-<p class="p">Nos <strong>Maillots Concept</strong> r&eacute;inventent l'histoire du football en fusionnant mode urbaine et h&eacute;ritage sportif. Des designs qui racontent des histoires, &agrave; porter dans et hors du stade.</p>
-</div>
-</div>
-<!-- SEO-Optimized French Football Keywords -->
-<div style="display: none;" class="seo-keywords"><span>maillot de football personnalis&eacute; france</span> <span>maillot foot sur mesure &eacute;quipe amateur</span> <span>sublimation textile maillot sport</span> <span>&eacute;quipementier football fran&ccedil;ais</span> <span>maillot club amateur personnalisation</span> <span>flocage maillot r&eacute;sistant sublimation</span> <span>&eacute;cusson club football brod&eacute;</span> <span>maillot football qualit&eacute; professionnelle</span> <span>&eacute;quipement football technique polyester</span> <span>cr&eacute;ation maillot football original</span> <span>textile sport haute performance</span> <span>maillot foot design exclusif</span> <span>fabrication maillot football europe</span> <span>impression maillot sport durable</span> <span>&eacute;quipe football amateur &eacute;quipement</span></div>
-<div class="call-to-action">
-<h1 class="section-title">NE JOUEZ PAS AVEC LE MAILLOT D'UN AUTRE. CR&Eacute;EZ LE V&Ocirc;TRE.</h1>
-<h2 class="subtitle">Vous avez deux moyens de commencer votre h&eacute;ritage avec <strong>MOMUTO</strong> :</h2>
-<div class="button-container"><a href="https://design.momuto.com/3d-configurator/configurator.html?userId=446703ab1ed3128104&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr" class="button">OUVRIR CONFIGURATEUR 3D</a> <a href="https://www.momuto.fr/pages/demande-de-design-professionnel-de-maillots" class="button button-secondary">DEMANDER DESIGN GRATUIT</a></div>
+</section>
+<section class="about-cta">
+<h2 class="cta-title">Ne jouez pas avec le maillot d'un autre. Cr&eacute;ez le v&ocirc;tre.</h2>
+<p class="cta-sub">Vous avez deux fa&ccedil;ons de commencer votre h&eacute;ritage avec <strong>MOMUTO</strong>.</p>
+<div class="cta-buttons"><a class="btn btn-primary" href="https://design.momuto.com/3d-configurator/configurator.html?userId=446703ab1ed3128104&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr">Ouvrir le configurateur 3D</a> <a class="btn btn-secondary" href="https://fr.momuto.com/pages/demande-de-design-professionnel-de-maillots">Demander un design gratuit</a></div>
+</section>
 </div>
 </div>
