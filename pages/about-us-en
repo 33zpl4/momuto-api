@@ -1,0 +1,233 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Order Custom Football Kits from MOMUTO",
+  "description": "Get fully custom, professional-grade football kits in 3 steps: design using the 3D configurator or request a free professional mockup, approve your design, and receive your kits in 20-25 days worldwide.",
+  "totalTime": "P25D",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "EUR",
+    "value": "From €20.90 per jersey (10+ units) or €38.90 for a single jersey"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Design Your Kit",
+      "text": "Use MOMUTO's real-time 3D configurator with 30+ professional templates to design instantly, or submit your brief (crest, colours, references) via the website, WhatsApp, or email to receive a free fully custom mockup in 1-2 days."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Review and Approve",
+      "text": "Review your design mockup and request any revisions — all free. Confirm your order with your size breakdown. No minimum order. Optional 3D silicon badge upgrade available for larger orders."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Receive Your Kits",
+      "text": "Your kits are manufactured in 7-12 days using full dye-sublimation printing on a polyester-elastane performance blend, then shipped worldwide with a 10-15 day transit time. Total: 20-25 days. Free shipping on orders over €50."
+    }
+  ]
+}
+</script>
+<style>
+    body {
+        font-family: 'Jost', sans-serif;
+        color: black;
+        text-align: justify;
+        word-wrap: break-word;
+    }
+    .title {
+        display: none;
+    }
+
+    .section-title, .subtitle, .h1, .h2, .p, .bold {
+        text-align: left;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .section-title {
+        font-weight: 700;
+        font-size: 35px;
+        line-height: 39px;
+        margin-top: 2em;
+        margin-bottom: 0.5em;
+        text-transform: uppercase;
+    }
+
+    .subtitle {
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 30px;
+        margin-bottom: 1em;
+    }
+
+    .h2 {
+        font-weight: 500;
+        font-size: 20px; 
+        line-height: 30px;
+        margin-bottom: 1em;
+    }
+
+    .p {
+        font-weight: 400;
+        font-size: 20px; 
+        line-height: 28px;
+        margin-bottom: 0.5em;
+    }
+
+    .bold {
+        font-weight: 600;
+    }
+
+    .container {
+        width: 80%;
+        margin: auto;
+    }
+
+    .content-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2em;
+        gap: 2em; /* Added gap for better spacing */
+    }
+
+    .text-content, .image-content {
+        flex: 1;
+        padding: 0 1em;
+    }
+
+    .image-content img {
+        width: 100%; /* Changed max-width to width to fill container */
+        height: auto;
+        display: block;
+    }
+
+    .call-to-action {
+        text-align: center;
+        font-size: 20px;
+        line-height: 32px;
+        margin-top: 4em;
+        margin-bottom: 4em;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    .button {
+        background-color: black; 
+        color: white; 
+        border: 2px solid black; 
+        padding: 15px 30px;
+        font-size: 16px;
+        font-weight: 600; 
+        cursor: pointer; 
+        text-transform: uppercase;
+        border-radius: 3px; 
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .button:hover {
+        background-color: #333;
+        border-color: #333;
+    }
+
+    /* Secondary button style for the "Request Design" option */
+    .button-secondary {
+        background-color: white;
+        color: black;
+        border: 2px solid black;
+    }
+
+    .button-secondary:hover {
+        background-color: black;
+        color: white;
+    }
+
+    @media screen and (max-width: 768px) {
+        .content-section {
+            flex-direction: column;
+        }
+
+        .text-content, .image-content {
+            width: 100%;
+            padding: 0;
+        }
+
+        /* Order adjustment: Image top, Text bottom on mobile */
+        .text-content {
+            order: 2;
+        }
+
+        .image-content {
+            order: 1;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .button {
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+        }
+    }
+</style>
+<div class="container">
+<div class="content-section">
+<div class="text-content">
+<h1 class="section-title">YOUR IDENTITY, UNLIMITED.</h1>
+<p class="subtitle">In a football world saturated with generic templates, <strong>MOMUTO</strong> gives you back control. Born in late 2023 with a clear mission: <strong>Bringing professional quality to amateur teams.</strong></p>
+<p class="p">No middlemen. No peeling vinyl. Only exclusive design and elite performance.</p>
+</div>
+<div class="image-content"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20240503/26dee47be03339e58b60705a3bcbcc89.jpg" class="responsive-img" alt="MOMUTO Custom Football Team Celebration" /></div>
+</div>
+<div class="content-section">
+<div class="image-content"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20240503/2403e399289c69b71fc4fcf32cf916b3.jpg" class="responsive-img" alt="MOMUTO Sublimation Fabric Detail" /></div>
+<div class="text-content">
+<h2 class="section-title">YOUR BADGE, FOREVER</h2>
+<p class="subtitle"><b>We know the pain of seeing your club badge peel off after three washes.</b></p>
+<p class="p">That's why at <strong>MOMUTO</strong> we have eliminated traditional iron-on vinyl. We use <strong>full-fusion digital printing (dye sublimation)</strong>.</p>
+<ul>
+<li class="p"><strong>Fusion, not adhesive:</strong> Your design isn't <em>on</em> the fabric, it <em>becomes</em> the fabric.</li>
+<li class="p"><strong>Total Durability:</strong> Pull, wash, play in mud: your identity remains intact from the first whistle to the post-match pint.</li>
+<li class="p"><strong>Future-Proof Squads:</strong> We store your design forever. New player next season? Order a single jersey with no hassle.</li>
+</ul>
+</div>
+</div>
+<div class="content-section">
+<div class="text-content">
+<h2 class="section-title">EUROPEAN DESIGN, GLOBAL POWER</h2>
+<p class="subtitle">At <strong>MOMUTO</strong> we have no borders. Our creative headquarters breathes football in Europe, but our production travels to the epicenter of textile technology: <strong>Asia</strong>.</p>
+<p class="p">We choose to manufacture where the industry giants do, ensuring access to the same technical fabrics and manufacturing precision, while <strong>eliminating the middlemen</strong> that inflate prices.</p>
+<p class="p">The result: <strong>Champions League quality at grassroots pricing.</strong></p>
+</div>
+<div class="image-content"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20240503/7107b9785aee3764865b3866b5d49d24.jpg" class="responsive-img" alt="MOMUTO Global Manufacturing Factory" /></div>
+</div>
+<div class="content-section">
+<div class="image-content"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251212/b9aa3125986f34f15a71fd6ae9a28f1e.jpg" class="responsive-img" alt="MOMUTO Vitruvian Man Concept Soccer Jersey" /></div>
+<div class="text-content">
+<h2 class="section-title">FOOTBALL &amp; CULTURE</h2>
+<p class="subtitle">We don't just dress players, we dress fans.</p>
+<p class="p">Our <strong>Concept Kits</strong> reimagine soccer and football history by fusing streetwear with sporting heritage. Designs that tell stories, built to be worn on the pitch and in the streets.</p>
+</div>
+</div>
+<div class="call-to-action">
+<h1 class="section-title">DON'T PLAY IN SOMEONE ELSE'S KIT. CREATE YOUR OWN.</h1>
+<h2 class="subtitle">You have two ways to start your legacy with <strong>MOMUTO</strong>:</h2>
+<div class="button-container"><a href="https://design.momuto.com/3d-configurator/configurator.html?userId=446703ab1ed3128104&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="button">OPEN 3D CONFIGURATOR</a> <a href="https://www.momuto.com/pages/request-custom-design" class="button button-secondary">REQUEST FREE DESIGN</a></div>
+</div>
+</div>
