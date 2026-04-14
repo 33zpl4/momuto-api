@@ -54,9 +54,13 @@
         --font-body: 'Outfit', sans-serif;
     }
 
+    /* Hide the CMS-rendered page title (the site layout injects it as
+       .title above our custom hero — this selector is intentionally
+       unscoped because .title is a sibling of .about-page, not a child). */
+    .title { display: none; }
+
     .about-page { font-family: var(--font-body); color: var(--mg-text); background: var(--mg-bg); line-height: 1.6; }
     .about-page * { box-sizing: border-box; }
-    .about-page .title { display: none; }
 
     .about-container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 2.5rem 0 4rem; }
 
