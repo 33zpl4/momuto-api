@@ -1,10 +1,12 @@
 {
-  "team_name": "LOS CHULOS",
+  "team_name": "ELS CHULOS",
   "design_name": "Fire Strike",
   "design_description": "A sleek black base is disrupted by sharp orange and red streaks that cut across the jersey, creating a sense of speed and aggression. The bold central sponsor and red trim anchor the design, giving it a fiery, high-energy identity.",
   "primary_color": "#0D0D0D",
   "secondary_color": "#FF6600",
   "accent_color": "#CC0000",
-  "image_url": "https://cdn.staticsoe.com/pics/a135e74f7f0023926a65f12174f5d851267800b43474747d65793c81b541e56f.png",
-  "back_image_url": "https://cdn.staticsoe.com/pics/13176c3a7e7accf88dde021bf490f85fdaa819d97df86a33b36df27a7dcce1e3.png"
+  "image_url": "https://cdn.staticsoe.com/pics/5300fe237d07255fbe61ca655d2a7f097f4c74ac69b8bdedde919e5dcbd330a6.png",
+  "back_image_url": "https://cdn.staticsoe.com/pics/68094aa94dea445f1573e4360d7be215b19c2d43b6de0a2bc3a30cccf20952b0.png",
+  "away_image_url": "https://cdn.staticsoe.com/pics/00dbfdd118cc2c5a0c2f4708479721b669df6de4db87b528fcf325d284d274ae.png",
+  "away_back_image_url": "https://cdn.staticsoe.com/pics/44858e8b155ac8198123b269664113b411f8e8fbddc6f3e12d5421615012091b.png"
 }
