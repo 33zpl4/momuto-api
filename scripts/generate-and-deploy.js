@@ -562,9 +562,10 @@ async function updateGallery(domain, teamSlug, config, galleryDesc) {
     const entryStart = currentContent.lastIndexOf('{', urlIdx);
     const entryEnd = currentContent.indexOf('}', urlIdx) + 1;
     const existingEntry = currentContent.slice(entryStart, entryEnd);
-    const updatedEntry = existingEntry.replace(/desc:\s*"(?:[^"\\]|\\.)*"/, `desc: ${JSON.stringify(shortDesc)}`);
+    let updatedEntry = existingEntry.replace(/desc:\s*"(?:[^"\\]|\\.)*"/, `desc: ${JSON.stringify(shortDesc)}`);
+    updatedEntry = updatedEntry.replace(/image:\s*"(?:[^"\\]|\\.)*"/, `image: ${JSON.stringify(config.image_url)}`);
     updatedContent = currentContent.slice(0, entryStart) + updatedEntry + currentContent.slice(entryEnd);
-    console.log(`  ✓ Updated desc for ${config.team_name} on ${domain.label}`);
+    console.log(`  ✓ Updated desc + image for ${config.team_name} on ${domain.label}`);
   } else {
     // New team — inject at the start of the designs array
     console.log(`  Searching for 'const designs = [' in ${domain.label} gallery...`);
