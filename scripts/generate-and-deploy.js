@@ -137,7 +137,8 @@ async function generatePageContent(config, lang) {
   const langInstructions = {
     en: 'Write all text content in English.',
     es: 'Write all text content in Spanish (Spain). Use "equipación" for kit, "camiseta" for jersey.',
-    fr: 'Write all text content in French. Use "maillot" for jersey, "tenue" for kit.'
+    fr: 'Write all text content in French. Use "maillot" for jersey, "tenue" for kit.',
+    it: 'Write all text content in Italian. Use "maglia" for jersey, "divisa" for kit.'
   };
 
   const prompt = `You are creating a custom football kit design proposal page for MOMUTO (momuto.com), a custom football kit brand.
@@ -184,7 +185,8 @@ async function generateGalleryDesc(config, lang) {
   const langInstructions = {
     en: 'Write the caption in English.',
     es: 'Write the caption in Spanish.',
-    fr: 'Write the caption in French.'
+    fr: 'Write the caption in French.',
+    it: 'Write the caption in Italian.'
   };
 
   const prompt = `Given this football kit design description: "${config.design_description}"
