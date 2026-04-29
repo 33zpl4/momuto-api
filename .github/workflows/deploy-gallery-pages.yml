@@ -6,6 +6,7 @@ on:
       - 'pages/teams-clubs-momuto'
       - 'pages/equipos-momuto'
       - 'pages/equipes-clubs-momuto'
+      - 'pages/squadre-club-momuto'
   workflow_dispatch:
     inputs:
       target:
@@ -18,6 +19,7 @@ on:
           - en
           - es
           - fr
+          - it
 
 jobs:
   deploy:
@@ -43,13 +45,14 @@ jobs:
               en) CHANGED="pages/teams-clubs-momuto" ;;
               es) CHANGED="pages/equipos-momuto" ;;
               fr) CHANGED="pages/equipes-clubs-momuto" ;;
+              it) CHANGED="pages/squadre-club-momuto" ;;
             esac
           elif [ "$TARGET" = "all" ]; then
-            # Manual dispatch: deploy all three
-            CHANGED="pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto"
+            # Manual dispatch: deploy all four
+            CHANGED="pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto pages/squadre-club-momuto"
           else
             # Push trigger: only deploy files actually changed in this push
-            CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E '^pages/(teams-clubs-momuto|equipos-momuto|equipes-clubs-momuto)$' | tr '\n' ' ' || true)
+            CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E '^pages/(teams-clubs-momuto|equipos-momuto|equipes-clubs-momuto|squadre-club-momuto)$' | tr '\n' ' ' || true)
           fi
           echo "files=$CHANGED" >> $GITHUB_OUTPUT
           echo "Changed: $CHANGED"
@@ -60,6 +63,7 @@ jobs:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           CHANGED_FILES: ${{ steps.changes.outputs.files }}
         run: |
           deploy_page() {
@@ -134,3 +138,4 @@ jobs:
           deploy_page "$OEMSAAS_TOKEN_EN" "teams-clubs-momuto" "pages/teams-clubs-momuto"
           deploy_page "$OEMSAAS_TOKEN_ES" "equipos-momuto" "pages/equipos-momuto"
           deploy_page "$OEMSAAS_TOKEN_FR" "equipes-clubs-momuto" "pages/equipes-clubs-momuto"
+          deploy_page "$OEMSAAS_TOKEN_IT" "squadre-club-momuto" "pages/squadre-club-momuto"

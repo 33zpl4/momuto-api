@@ -54,11 +54,18 @@ const DOMAINS = {
     label: 'fr.momuto.com',
     handle: 'galerie-maillots-foot-sur-mesure',
     file: path.join(ROOT, 'pages', 'galerie-maillots-foot-sur-mesure')
+  },
+  it: {
+    host: 'https://openapi.oemapps.com',
+    token: process.env.OEMSAAS_TOKEN_IT,
+    label: 'it.momuto.com',
+    handle: 'galleria-maglie-personalizzate',
+    file: path.join(ROOT, 'pages', 'galleria-maglie-personalizzate')
   }
 };
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
-const LOCALES = (process.env.LOCALES || 'en,es,fr')
+const LOCALES = (process.env.LOCALES || 'en,es,fr,it')
   .split(',')
   .map(s => s.trim())
   .filter(Boolean);

@@ -41,6 +41,10 @@ on:
         description: 'Location display name in French (e.g. "Las Palmas"). Leave empty to auto-derive from city.'
         required: false
         type: string
+      location_label_it:
+        description: 'Location display name in Italian (e.g. "Las Palmas"). Leave empty to auto-derive from city.'
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -70,6 +74,7 @@ jobs:
           LOCATION_LABEL_EN: ${{ inputs.location_label_en }}
           LOCATION_LABEL_ES: ${{ inputs.location_label_es }}
           LOCATION_LABEL_FR: ${{ inputs.location_label_fr }}
+          LOCATION_LABEL_IT: ${{ inputs.location_label_it }}
         run: node scripts/add-team-photo.js
 
       - name: Deploy updated pages to CMS
@@ -78,6 +83,7 @@ jobs:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           MODIFIED: ${{ steps.add-photo.outputs.modified }}
         run: |
           deploy_page() {
@@ -143,6 +149,7 @@ jobs:
           deploy_page "$OEMSAAS_TOKEN_EN" "teams-clubs-momuto" "pages/teams-clubs-momuto"
           deploy_page "$OEMSAAS_TOKEN_ES" "equipos-momuto" "pages/equipos-momuto"
           deploy_page "$OEMSAAS_TOKEN_FR" "equipes-clubs-momuto" "pages/equipes-clubs-momuto"
+          deploy_page "$OEMSAAS_TOKEN_IT" "squadre-club-momuto" "pages/squadre-club-momuto"
 
       - name: Commit updated pages to repo
         if: steps.add-photo.outputs.modified != ''
@@ -150,7 +157,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MODIFIED: ${{ steps.add-photo.outputs.modified }}
         run: |
-          for FILE in pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto; do
+          for FILE in pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto pages/squadre-club-momuto; do
             # Only commit files that were actually modified
             if [[ ",$MODIFIED," != *",$FILE,"* ]]; then
               echo "⏭ ${FILE} not modified — skipping commit"

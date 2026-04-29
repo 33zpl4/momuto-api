@@ -7,14 +7,15 @@ on:
       - 'pages/custom-kit-gallery.html'
       - 'pages/galeria-equipaciones-personalizadas'
       - 'pages/galerie-maillots-foot-sur-mesure'
+      - 'pages/galleria-maglie-personalizzate'
       - 'scripts/deploy-kit-gallery-pages.js'
       - '.github/workflows/deploy-kit-gallery-pages.yml'
   workflow_dispatch:
     inputs:
       locales:
-        description: 'Comma-separated locales to deploy (en,es,fr)'
+        description: 'Comma-separated locales to deploy (en,es,fr,it)'
         required: false
-        default: 'en,es,fr'
+        default: 'en,es,fr,it'
       dry_run:
         description: 'Dry run (do not write to CMS)'
         required: false
@@ -38,6 +39,7 @@ jobs:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
-          LOCALES: ${{ inputs.locales || 'en,es,fr' }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          LOCALES: ${{ inputs.locales || 'en,es,fr,it' }}
           DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
         run: node scripts/deploy-kit-gallery-pages.js

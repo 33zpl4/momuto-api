@@ -51,6 +51,7 @@ jobs:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           TEAM_SLUG: ${{ steps.changed.outputs.team }}
           UPDATE_GALLERY: ${{ steps.gallery.outputs.update }}
         run: node scripts/generate-and-deploy.js

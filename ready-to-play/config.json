@@ -2,22 +2,26 @@
   "collection_handle": {
     "en": "ready-to-play",
     "es": "coleccion-ready-to-play",
-    "fr": "collection-ready-to-play"
+    "fr": "collection-ready-to-play",
+    "it": "collezione-ready-to-play"
   },
   "collection_path": {
     "en": "/pages/ready-to-play",
     "es": "/pages/coleccion-ready-to-play",
-    "fr": "/pages/collection-ready-to-play"
+    "fr": "/pages/collection-ready-to-play",
+    "it": "/pages/collezione-ready-to-play"
   },
   "template_handle_pattern": {
     "en": "ready-to-play-{slug}",
     "es": "ready-to-play-{slug}",
-    "fr": "maillot-{slug}"
+    "fr": "maillot-{slug}",
+    "it": "ready-to-play-{slug}"
   },
   "template_path_pattern": {
     "en": "/pages/ready-to-play-{slug}",
     "es": "/pages/ready-to-play-{slug}",
-    "fr": "/pages/maillot-{slug}"
+    "fr": "/pages/maillot-{slug}",
+    "it": "/pages/ready-to-play-{slug}"
   },
   "pricing": {
     "jersey_current": 19.70,

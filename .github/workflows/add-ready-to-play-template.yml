@@ -59,6 +59,7 @@ jobs:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           TEMPLATE_SLUG: ${{ steps.slug.outputs.value }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: node scripts/add-ready-to-play-template.js

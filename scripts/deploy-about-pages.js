@@ -51,11 +51,18 @@ const DOMAINS = {
     label: 'fr.momuto.com',
     handle: 'a-propos-de-nous',
     file: path.join(ROOT, 'pages', 'about-us-fr')
+  },
+  it: {
+    host: 'https://openapi.oemapps.com',
+    token: process.env.OEMSAAS_TOKEN_IT,
+    label: 'it.momuto.com',
+    handle: 'chi-siamo',
+    file: path.join(ROOT, 'pages', 'about-us-it')
   }
 };
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
-const LOCALES = (process.env.LOCALES || 'en,es,fr')
+const LOCALES = (process.env.LOCALES || 'en,es,fr,it')
   .split(',')
   .map(s => s.trim())
   .filter(Boolean);
