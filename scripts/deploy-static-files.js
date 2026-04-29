@@ -63,7 +63,7 @@ async function updateDiyFile(domain, fileId, filename, type, content) {
   const response = await fetch(`${domain.host}/diyfiles/${fileId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', token: domain.token },
-    body: JSON.stringify(body)
+    body: JSON.stringify({ file_name: filename, type: type, content: content })
   });
   const result = await response.json();
   if (!response.ok || result.code !== 0) {
