@@ -1,15 +1,20 @@
-name: Add Team to Gallery
+name: Deploy Ready-to-Play Collection
 
 on:
+  push:
+    paths:
+      - 'ready-to-play/collection/**'
+      - 'ready-to-play/config.json'
   workflow_dispatch:
     inputs:
-      team_slug:
-        description: 'Team slug (folder name under teams/)'
-        required: true
-        type: string
+      dry_run:
+        description: 'Dry run (no CMS writes)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
-  update-gallery:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -20,16 +25,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install @anthropic-ai/sdk
-
-      - name: Update gallery on all domains
+      - name: Deploy collection pages
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
-          TEAM_SLUG: ${{ inputs.team_slug }}
-          GALLERY_ONLY: 'true'
-        run: node scripts/generate-and-deploy.js
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: node scripts/deploy-ready-to-play-collection.js

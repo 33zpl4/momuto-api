@@ -1,0 +1,847 @@
+<style>
+    /* LOAD GOOGLE FONTS — MOMUTO BRAND: Bebas Neue (display) + Outfit (body) */
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+    /* ===== BRAND VARIABLES ===== */
+    :root {
+        --rtp-bg: #0a0a0a;
+        --rtp-panel: #111;
+        --rtp-border: rgba(255,255,255,0.06);
+        --rtp-border-hover: rgba(255,255,255,0.12);
+        --rtp-white: #f5f5f5;
+        --rtp-muted: #a1a1aa;
+        --rtp-dim: #71717a;
+        --rtp-red: #c8352e;
+        --rtp-red-hover: #e04038;
+        --font-display: 'Bebas Neue', sans-serif;
+        --font-body: 'Outfit', sans-serif;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: var(--font-body);
+        line-height: 1.6;
+        color: var(--rtp-white);
+        background: var(--rtp-bg);
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+    }
+
+    /* HIDE CMS GENERATED TITLES */
+    .title { display: none !important; }
+
+    /* CMS OVERRIDE FOR SUBTITLE ALIGNMENT */
+    .mo-editor-reset p, .mo-editor-reset .main-subtitle, p.main-subtitle {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* --- 1. HERO SECTION --- */
+    .equipos-page {
+        background: var(--rtp-bg);
+        padding: 5rem 0 0 0;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .main-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 400;
+        margin-bottom: 1rem;
+        color: var(--rtp-white);
+        line-height: 1;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    .main-subtitle {
+        font-size: 1rem;
+        color: var(--rtp-muted);
+        font-weight: 300;
+        line-height: 1.7;
+        max-width: 640px;
+        margin: 0 auto;
+    }
+
+    /* --- STATS --- */
+    .portfolio-stats {
+        display: flex;
+        justify-content: center;
+        gap: 6rem;
+        padding: 3rem 0;
+        border-top: 1px solid var(--rtp-border);
+        margin-top: 3rem;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+        font-family: var(--font-display);
+        font-size: 3.5rem;
+        font-weight: 400;
+        color: var(--rtp-white);
+        display: block;
+        line-height: 1;
+        letter-spacing: 0.02em;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+        color: var(--rtp-dim);
+        margin-top: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-weight: 700;
+    }
+
+    /* --- 2. CAROUSEL SECTION --- */
+    .teams-carousel-section {
+        background: var(--rtp-bg);
+        padding: 0 0 6rem 0;
+    }
+
+    .carousel-header {
+        text-align: left;
+        margin-bottom: 2rem;
+        padding-left: 40px;
+        max-width: 1400px;
+        margin: 0 auto 2rem auto;
+    }
+
+    .carousel-title {
+        font-family: var(--font-body);
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--rtp-red);
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .carousel-title::after {
+        content: "→";
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    .teams-carousel {
+        display: flex;
+        overflow-x: auto;
+        gap: 1.5rem;
+        padding: 1rem 40px 3rem 40px;
+        scroll-behavior: smooth;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .teams-carousel::-webkit-scrollbar { display: none; }
+
+    .team-card {
+        flex: 0 0 28vw;
+        min-width: 320px;
+        max-width: 450px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .team-image {
+        width: 100%;
+        height: 420px;
+        background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+        border: 1px solid var(--rtp-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        transition: transform 0.4s ease, border-color 0.25s ease;
+    }
+
+    .team-image img {
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        filter: drop-shadow(0 12px 24px rgba(0,0,0,0.5));
+    }
+
+    /* Hover Effects */
+    .team-card:hover .team-image {
+        transform: translateY(-5px);
+        border-color: var(--rtp-border-hover);
+    }
+    .team-card:hover .team-image img { transform: scale(1.1); }
+
+    .team-info { padding: 0; text-align: left; }
+
+    .team-name {
+        font-family: var(--font-display);
+        font-weight: 400;
+        color: var(--rtp-white);
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        margin-bottom: 0.25rem;
+        line-height: 1.1;
+    }
+
+    .team-location {
+        font-size: 0.82rem;
+        color: var(--rtp-muted);
+        font-weight: 300;
+        margin-bottom: 0.5rem;
+    }
+
+    .team-league {
+        background: rgba(200,53,46,0.1);
+        color: var(--rtp-red);
+        border: 1px solid rgba(200,53,46,0.3);
+        padding: 0.3rem 0.6rem;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        display: inline-block;
+        line-height: 1;
+    }
+
+    /* --- 3. GALLERY --- */
+    .action-gallery-section {
+        background: var(--rtp-panel);
+        color: var(--rtp-white);
+        padding: 6rem 0;
+        border-top: 1px solid var(--rtp-border);
+        border-bottom: 1px solid var(--rtp-border);
+    }
+
+    .gallery-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        color: var(--rtp-white);
+        margin-bottom: 0.5rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        line-height: 1;
+    }
+
+    .gallery-subtitle {
+        color: var(--rtp-muted);
+        font-size: 1rem;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .gallery-filters {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+        background: transparent;
+        color: var(--rtp-muted);
+        border: 1px solid var(--rtp-border);
+        border-radius: 0;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        padding: 0.8rem 1.5rem;
+        font-weight: 700;
+        margin: 0 4px 8px 4px;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: all 0.2s ease;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+        background: var(--rtp-red);
+        color: #fff;
+        border-color: var(--rtp-red);
+    }
+
+    .masonry-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+    }
+
+    .action-photo {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    .action-photo img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    .action-overlay {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.95) 100%);
+        color: white;
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
+        opacity: 0;
+        transition: all 0.3s ease;
+        transform: translateY(10px);
+    }
+
+    .action-overlay .team-name {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        line-height: 1.1;
+    }
+
+    .action-overlay .team-details {
+        font-size: 0.78rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.85);
+        margin-top: 4px;
+    }
+
+    .action-photo:hover img { transform: scale(1.05); }
+    .action-photo:hover .action-overlay { opacity: 1; transform: translateY(0); }
+
+
+    /* --- 4. UGC & FOOTER --- */
+    .ugc-cta-section {
+        background: var(--rtp-panel);
+        border: 1px solid var(--rtp-border);
+        padding: 4rem;
+        margin: 4rem auto 0 auto;
+        max-width: 1320px;
+        text-align: center;
+    }
+
+    .ugc-title {
+        font-family: var(--font-display);
+        color: var(--rtp-white);
+        font-weight: 400;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        margin-bottom: 0.75rem;
+    }
+    .ugc-subtitle {
+        color: var(--rtp-muted);
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: var(--rtp-white);
+        padding: 15px 30px;
+        border: 2px solid var(--rtp-white);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 0.75rem;
+        font-weight: 700;
+        display: inline-block;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-family: var(--font-body);
+    }
+    .btn-secondary:hover {
+        background: var(--rtp-red);
+        color: #fff;
+        border-color: var(--rtp-red);
+    }
+
+    .footer-cta-wrapper {
+        background: var(--rtp-red);
+        padding: 8rem 0;
+        margin-top: 4rem;
+    }
+    .final-cta-section { text-align: center; }
+    .cta-title {
+        font-family: var(--font-display);
+        color: #fff;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+    .cta-description {
+        color: rgba(255,255,255,0.9);
+        font-size: 1rem;
+        font-weight: 300;
+        margin-bottom: 3rem;
+        max-width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-primary {
+        background: #fff;
+        color: var(--rtp-bg);
+        padding: 20px 50px;
+        border: none;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+        transition: transform 0.2s;
+        font-family: var(--font-body);
+    }
+    .btn-primary:hover { transform: scale(1.05); }
+
+    /* --- 5. LIGHTBOX --- */
+    .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(10,10,10,0.95);
+        animation: fadeIn 0.3s ease;
+        justify-content: center;
+        align-items: center;
+    }
+    .lightbox.active { display: flex; }
+
+    .lightbox-content {
+        max-width: 900px;
+        max-height: 90vh;
+        position: relative;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        background: transparent;
+    }
+
+    .lightbox-image {
+        max-width: 100%;
+        max-height: 85vh;
+        display: block;
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: -40px; right: 0;
+        font-size: 30px;
+        color: var(--rtp-white);
+        cursor: pointer;
+        z-index: 100;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* SR-ONLY */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    .action-photo figure { margin: 0; }
+    .action-photo figcaption { position: absolute; bottom: 0; left: 0; right: 0; pointer-events: none; }
+    .action-photo figcaption .photo-meta { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    /* "+ MORE DESIGNS" placeholder card on dark theme */
+    .team-card-placeholder {
+        background: var(--rtp-panel) !important;
+        border: 1px dashed var(--rtp-border) !important;
+    }
+    .team-card-placeholder-text {
+        font-family: var(--font-display);
+        color: var(--rtp-dim) !important;
+        font-weight: 400 !important;
+        font-size: 1.2rem;
+        letter-spacing: 0.05em;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .main-title { font-size: 2.5rem; }
+        .portfolio-stats { gap: 2rem; flex-wrap: wrap; }
+        .team-card { flex: 0 0 75vw; }
+        .team-image { height: 350px; }
+        .masonry-gallery { grid-template-columns: 1fr; }
+        .carousel-header { padding-left: 20px; }
+        .teams-carousel { padding: 1rem 20px 3rem 20px; }
+        .container { padding: 0 20px; }
+        .ugc-cta-section { padding: 2.5rem 1.5rem; }
+    }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "name": "Galerie de maillots personnalis&eacute;s MOMUTO - &Eacute;quipes portant leurs maillots",
+  "description": "Photos r&eacute;elles d'&eacute;quipes de football portant des maillots personnalis&eacute;s con&ccedil;us et fabriqu&eacute;s par MOMUTO. Plus de 100 &eacute;quipes dans 10 pays font confiance &agrave; MOMUTO pour leurs maillots de qualit&eacute; PRO, impression par sublimation et livraison en 3 semaines.",
+  "author": {
+    "@type": "Organization",
+    "name": "MOMUTO",
+    "url": "https://fr.momuto.com"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Maillots de football personnalis&eacute;s",
+    "description": "Maillots et tenues de football professionnels con&ccedil;us et produits par MOMUTO"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "&Eacute;quipes portant les maillots personnalis&eacute;s MOMUTO",
+    "numberOfItems": 18,
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "item": {"@type": "ImageObject", "name": "Atl&eacute;tico Guanche en maillots MOMUTO", "description": "&Eacute;quipe Atl&eacute;tico Guanche de Las Palmas, &Icirc;les Canaries, portant leurs maillots personnalis&eacute;s MOMUTO en match de Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg"}},
+      {"@type": "ListItem", "position": 2, "item": {"@type": "ImageObject", "name": "Ronperla FC en maillots MOMUTO", "description": "&Eacute;quipe Ronperla FC de Tenerife, &Icirc;les Canaries, portant leurs maillots personnalis&eacute;s MOMUTO en match de Liga La Amistad", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg"}},
+      {"@type": "ListItem", "position": 3, "item": {"@type": "ImageObject", "name": "Olympique Mehunois en maillots MOMUTO", "description": "&Eacute;quipe Olympique Mehunois de France portant leurs maillots personnalis&eacute;s MOMUTO en match de D&eacute;partemental 2", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg"}},
+      {"@type": "ListItem", "position": 4, "item": {"@type": "ImageObject", "name": "Astra Rhei en maillots MOMUTO", "description": "&Eacute;quipe Astra Rhei de Biscaye, Espagne, portant leurs maillots personnalis&eacute;s MOMUTO en match de FutbolSiete", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/d9088919fcf1cfa3c9ce49a5e6fd45ed.jpg"}},
+      {"@type": "ListItem", "position": 5, "item": {"@type": "ImageObject", "name": "Mango CF en maillots MOMUTO", "description": "&Eacute;quipe Mango CF de Madrid portant leurs maillots personnalis&eacute;s MOMUTO en match de MadridFutbol7", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg"}},
+      {"@type": "ListItem", "position": 6, "item": {"@type": "ImageObject", "name": "Elche Koslovaco en maillots MOMUTO", "description": "&Eacute;quipe Elche Koslovaco de Las Palmas portant leurs maillots personnalis&eacute;s MOMUTO en match de Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg"}},
+      {"@type": "ListItem", "position": 7, "item": {"@type": "ImageObject", "name": "Celtanquetas FC en maillots MOMUTO", "description": "&Eacute;quipe Celtanquetas FC de Madrid portant leurs maillots personnalis&eacute;s MOMUTO en ligue ETSII", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/b4aee24cc1fca4085bfb118f7b9fbfdc.jpg"}},
+      {"@type": "ListItem", "position": 8, "item": {"@type": "ImageObject", "name": "Los Bloques en maillots MOMUTO", "description": "&Eacute;quipe Los Bloques de Las Palmas portant leurs maillots personnalis&eacute;s MOMUTO en Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/6ae16bbf2bc37fffbe519aff5b4e1dad.jpg"}},
+      {"@type": "ListItem", "position": 9, "item": {"@type": "ImageObject", "name": "Aston Birra en maillots MOMUTO", "description": "&Eacute;quipe Aston Birra de Las Palmas portant leurs maillots personnalis&eacute;s MOMUTO en Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp"}},
+      {"@type": "ListItem", "position": 10, "item": {"@type": "ImageObject", "name": "Naranja Mec&aacute;nica FC en maillots MOMUTO", "description": "&Eacute;quipe Naranja Mec&aacute;nica FC de Saragosse portant leurs maillots personnalis&eacute;s MOMUTO en MLA Sport", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp"}},
+      {"@type": "ListItem", "position": 11, "item": {"@type": "ImageObject", "name": "Ca Pedro FC en maillots MOMUTO", "description": "&Eacute;quipe Ca Pedro FC de Las Palmas portant leurs maillots personnalis&eacute;s MOMUTO en Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg"}},
+      {"@type": "ListItem", "position": 12, "item": {"@type": "ImageObject", "name": "Atl&eacute;tico Agon&iacute;as en maillots MOMUTO", "description": "&Eacute;quipe Atl&eacute;tico Agon&iacute;as de Madrid portant leurs maillots personnalis&eacute;s MOMUTO en F&uacute;tbol7", "contentUrl": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg"}},
+      {"@type": "ListItem", "position": 13, "item": {"@type": "ImageObject", "name": "Bat&aacute;n Scorpion en maillots MOMUTO", "description": "&Eacute;quipe Bat&aacute;n Scorpion de Las Palmas portant leurs maillots personnalis&eacute;s MOMUTO en match de Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/pics/2d4dbad060830cb72dd1dfa01bbadfa5f7f8e5fac20590b04e667d2ea96300f4.jpg"}},
+      {"@type": "ListItem", "position": 15, "item": {"@type": "ImageObject", "name": "Mallorga FC en maillots MOMUTO", "description": "&Eacute;quipe Mallorga FC de Madrid portant leurs maillots personnalis&eacute;s MOMUTO en match de ETSII", "contentUrl": "https://cdn.staticsoe.com/pics/497d0188ede93f2a61fd5a2cbc1f336007a71b03f8fde2d83b8ba71d6709f435.webp"}},
+      {"@type": "ListItem", "position": 16, "item": {"@type": "ImageObject", "name": "Drinkteam FC en maillots MOMUTO", "description": "&Eacute;quipe Drinkteam FC de Las Palmas portant leurs maillots personnalis&eacute;s MOMUTO en match de Superliga LPGC", "contentUrl": "https://cdn.staticsoe.com/pics/e097d61ca5fe85f0031a2a7aa3e5b8b88f982031cdbe827c911c2a813b59bd44.jpg"}},
+      {"@type": "ListItem", "position": 17, "item": {"@type": "ImageObject", "name": "Al-Carajo en maillots MOMUTO", "description": "&Eacute;quipe Al-Carajo de Madrid portant leurs maillots personnalis&eacute;s MOMUTO en match de ETSII", "contentUrl": "https://cdn.staticsoe.com/pics/1ab6bb594575da8b31fed6b65fe8bf3837bc24e8498b1ef31fe3a0de4d00fdcd.jpg"}},
+      {"@type": "ListItem", "position": 18, "item": {"@type": "ImageObject", "name": "STAPS de Metz en maillots MOMUTO", "description": "&Eacute;quipe STAPS de Metz de Francia portant leurs maillots personnalis&eacute;s MOMUTO en match de FFSU", "contentUrl": "https://cdn.staticsoe.com/pics/728feeea4a4df6468d54225a54169686ea889acfd5ca56686c73787d9954f456.webp"}}
+    ]
+  }
+}
+</script>
+<section class="equipos-page">
+<div class="container">
+<div class="section-header">
+<h1 class="main-title">DES &Eacute;QUIPES QUI FONT CONFIANCE &Agrave; MOMUTO</h1>
+<p class="main-subtitle">De Madrid au Danemark : d&eacute;couvrez les clubs qui ont choisi nos designs uniques. Qualit&eacute; PRO, livraison en 3 semaines, sans minimum de commande.</p>
+</div>
+<div class="portfolio-stats">
+<div class="stat-item"><span class="stat-number">100+</span>
+<div class="stat-label">&Eacute;quipes Satisfaites</div>
+</div>
+<div class="stat-item"><span class="stat-number">10</span>
+<div class="stat-label">Pays</div>
+</div>
+<div class="stat-item"><span class="stat-number">98%</span>
+<div class="stat-label">Satisfaction</div>
+</div>
+</div>
+</div>
+</section>
+<section class="teams-carousel-section">
+<div class="container">
+<div class="carousel-header">
+<h2 class="carousel-title">Nos R&eacute;alisations</h2>
+</div>
+<div class="teams-carousel">
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251008/19F8F2D8-8974-DA51-7C7F-42EDB901714D.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251008/19F8F2D8-8974-DA51-7C7F-42EDB901714D.jpg" alt="Maillot de football personnalis&eacute; con&ccedil;u par MOMUTO pour Al-Carajo FC, Madrid" /></div>
+<div class="team-info">
+<div class="team-name">Al-Carajo FC</div>
+<div class="team-location">Madrid, Espagne</div>
+<span class="team-league">ETSII</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251023/EFA287E4-EB36-E749-3B93-B5114C5F908A.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251023/EFA287E4-EB36-E749-3B93-B5114C5F908A.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Ultimate Pupas, Las Palmas" /></div>
+<div class="team-info">
+<div class="team-name">Ultimate Pupas</div>
+<div class="team-location">Las Palmas, Espagne</div>
+<span class="team-league">Superliga</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20250925/768D82FA-36D9-55C8-79E6-7C1A5667EF66.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250925/768D82FA-36D9-55C8-79E6-7C1A5667EF66.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Olympo C, Saragosse" /></div>
+<div class="team-info">
+<div class="team-name">Olympo C</div>
+<div class="team-location">Saragosse, Espagne</div>
+<span class="team-league">MLA Sport</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/47711/cart/resources/20251110/9DFC2A78-9F3E-CB0B-30CA-1EE27240B6DB.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251110/9DFC2A78-9F3E-CB0B-30CA-1EE27240B6DB.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Bodega Ballers, Danemark" /></div>
+<div class="team-info">
+<div class="team-name">Bodega Ballers</div>
+<div class="team-location">Danemark</div>
+<span class="team-league">Superleague</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20250818/BA41CB9F-DA85-BA21-E3A7-B2E1620B4B6B.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20250818/BA41CB9F-DA85-BA21-E3A7-B2E1620B4B6B.jpg" alt="Maillot personnalis&eacute; MOMUTO pour FC Aguacatero, Las Palmas" /></div>
+<div class="team-info">
+<div class="team-name">FC Aguacatero</div>
+<div class="team-location">Las Palmas, Espagne</div>
+<span class="team-league">Liga Tinamar</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251024/979ED288-B88A-B255-4C9B-A8EC24A47261.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251024/979ED288-B88A-B255-4C9B-A8EC24A47261.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Mallorga FC, Madrid" /></div>
+<div class="team-info">
+<div class="team-name">Mallorga FC</div>
+<div class="team-location">Madrid, Espagne</div>
+<span class="team-league">ETSII</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/4BAFC1A4-6BDD-F238-79DE-E35FD2D3C5F4.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/4BAFC1A4-6BDD-F238-79DE-E35FD2D3C5F4.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Astra Rhei, Biscaye" /></div>
+<div class="team-info">
+<div class="team-name">Astra Rhei</div>
+<div class="team-location">Biscaye, Espagne</div>
+<span class="team-league">FutbolSiete</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/52561/cart/resources/20251022/CD84A8D2-E926-177B-2BAB-C85E5A071BEF.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251022/CD84A8D2-E926-177B-2BAB-C85E5A071BEF.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Naranja Mecanica, Saragosse" /></div>
+<div class="team-info">
+<div class="team-name">Naranja Mec&aacute;nica</div>
+<div class="team-location">Saragosse, Espagne</div>
+<span class="team-league">MLA Sport</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/31B3AFEC-BE49-5C85-C869-F4E0D00B4C61.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20251119/31B3AFEC-BE49-5C85-C869-F4E0D00B4C61.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Elche Koslovaco, Las Palmas" /></div>
+<div class="team-info">
+<div class="team-name">Elche Koslovaco</div>
+<div class="team-location">Las Palmas, Espagne</div>
+<span class="team-league">Superliga</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://cdn.staticsoe.com/uploads/49703/cart/resources/20250811/7BF417F2-884B-1AC7-AE92-6B7B7B02CD91.jpg')">
+<div class="team-image"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250811/7BF417F2-884B-1AC7-AE92-6B7B7B02CD91.jpg" alt="Maillot personnalis&eacute; MOMUTO pour Olympique Mehunois, France" /></div>
+<div class="team-info">
+<div class="team-name">Olympique Mehunois</div>
+<div class="team-location">France</div>
+<span class="team-league">D&eacute;partemental 2</span></div>
+</div>
+<div class="team-card" onclick="openLightbox('https://via.placeholder.com/1000x1000/111/fff?text=MOMUTO')">
+<div class="team-image team-card-placeholder">
+<div class="team-card-placeholder-text">+ PLUS DE DESIGNS</div>
+</div>
+<div class="team-info">
+<div class="team-name">Votre &Eacute;quipe</div>
+<div class="team-location">Ici</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="action-gallery-section">
+<div class="container">
+<h2 class="gallery-title">Nos Maillots en Action</h2>
+<p class="gallery-subtitle">&Eacute;quipes r&eacute;elles, matchs r&eacute;els, passion authentique</p>
+<div class="gallery-filters"><button class="filter-btn active" data-filter="all">Tous</button> <button class="filter-btn" data-filter="espa&ntilde;a">Espagne</button> <button class="filter-btn" data-filter="canarias">&Icirc;les Canaries</button> <button class="filter-btn" data-filter="madrid">Madrid</button> <button class="filter-btn" data-filter="internacional">International</button></div>
+<div class="masonry-gallery" role="list" aria-label="Photos d'&eacute;quipes portant les maillots personnalis&eacute;s MOMUTO">
+<div class="action-photo" data-location="internacional" data-city="francia" role="listitem"><figure><img src="https://cdn.staticsoe.com/pics/728feeea4a4df6468d54225a54169686ea889acfd5ca56686c73787d9954f456.webp" alt="&Eacute;quipe STAPS de Metz portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Francia, FFSU" loading="lazy" />
+<figcaption><span class="photo-meta">STAPS de Metz - Maillots MOMUTO - Francia, FFSU</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">STAPS de Metz</div>
+<div class="team-details">Francia &bull; FFSU</div>
+</div>
+</div>
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/pics/1ab6bb594575da8b31fed6b65fe8bf3837bc24e8498b1ef31fe3a0de4d00fdcd.jpg" alt="&Eacute;quipe Al-Carajo portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Madrid, ETSII" loading="lazy" />
+<figcaption><span class="photo-meta">Al-Carajo - Maillots MOMUTO - Madrid, ETSII</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Al-Carajo</div>
+<div class="team-details">Madrid &bull; ETSII</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/pics/e097d61ca5fe85f0031a2a7aa3e5b8b88f982031cdbe827c911c2a813b59bd44.jpg" alt="&Eacute;quipe Drinkteam FC portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Drinkteam FC - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Drinkteam FC</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
+</div>
+</div>
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/pics/497d0188ede93f2a61fd5a2cbc1f336007a71b03f8fde2d83b8ba71d6709f435.webp" alt="&Eacute;quipe Mallorga FC portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Madrid, ETSII" loading="lazy" />
+<figcaption><span class="photo-meta">Mallorga FC - Maillots MOMUTO - Madrid, ETSII</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Mallorga FC</div>
+<div class="team-details">Madrid &bull; ETSII</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/pics/2d4dbad060830cb72dd1dfa01bbadfa5f7f8e5fac20590b04e667d2ea96300f4.jpg" alt="&Eacute;quipe Batán Scorpion portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Batán Scorpion - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Batán Scorpion</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg" alt="&Eacute;quipe Atl&eacute;tico Guanche portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Atl&eacute;tico Guanche - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Atl&eacute;tico Guanche</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="tenerife" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg" alt="&Eacute;quipe Ronperla FC portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Tenerife, Liga La Amistad" loading="lazy" />
+<figcaption><span class="photo-meta">Ronperla FC - Maillots MOMUTO - Tenerife, Liga La Amistad</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Ronperla FC</div>
+<div class="team-details">Tenerife &bull; Liga La Amistad</div>
+</div>
+</div>
+<div class="action-photo" data-location="internacional" data-city="francia" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg" alt="&Eacute;quipe Olympique Mehunois portant leurs maillots personnalis&eacute;s MOMUTO en France, D&eacute;partemental 2" loading="lazy" />
+<figcaption><span class="photo-meta">Olympique Mehunois - Maillots MOMUTO - France, D&eacute;partemental 2</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Olympique Mehunois</div>
+<div class="team-details">France &bull; D&eacute;partemental 2</div>
+</div>
+</div>
+<div class="action-photo" data-location="espa&ntilde;a" data-city="vizcaya" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/d9088919fcf1cfa3c9ce49a5e6fd45ed.jpg" alt="&Eacute;quipe Astra Rhei portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Biscaye, FutbolSiete" loading="lazy" />
+<figcaption><span class="photo-meta">Astra Rhei - Maillots MOMUTO - Biscaye, FutbolSiete</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Astra Rhei</div>
+<div class="team-details">Biscaye &bull; FutbolSiete</div>
+</div>
+</div>
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg" alt="&Eacute;quipe Mango CF portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Madrid, MadridFutbol7" loading="lazy" />
+<figcaption><span class="photo-meta">Mango CF - Maillots MOMUTO - Madrid, MadridFutbol7</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Mango CF</div>
+<div class="team-details">Madrid &bull; MadridFutbol7</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg" alt="&Eacute;quipe Elche Koslovaco portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Elche Koslovaco - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Elche Koslovaco</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
+</div>
+</div>
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/b4aee24cc1fca4085bfb118f7b9fbfdc.jpg" alt="&Eacute;quipe Celtanquetas FC portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Madrid, ETSII" loading="lazy" />
+<figcaption><span class="photo-meta">Celtanquetas FC - Maillots MOMUTO - Madrid, ETSII</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Celtanquetas FC</div>
+<div class="team-details">Madrid &bull; ETSII</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg" alt="&Eacute;quipe Ca&rsquo;Pedro FC portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Ca&rsquo;Pedro FC - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Ca&rsquo;Pedro FC</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/6ae16bbf2bc37fffbe519aff5b4e1dad.jpg" alt="&Eacute;quipe Los Bloques portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Los Bloques - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Los Bloques</div>
+</div>
+</div>
+<div class="action-photo" data-location="canarias" data-city="las-palmas" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp" alt="&Eacute;quipe Aston Birra portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Las Palmas, Superliga LPGC" loading="lazy" />
+<figcaption><span class="photo-meta">Aston Birra - Maillots MOMUTO - Las Palmas, Superliga LPGC</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Aston Birra</div>
+<div class="team-details">Las Palmas &bull; Superliga LPGC</div>
+</div>
+</div>
+<div class="action-photo" data-location="aragon" data-city="zaragoza" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp" alt="&Eacute;quipe Naranja Mec&aacute;nica FC portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Saragosse, MLA Sport" loading="lazy" />
+<figcaption><span class="photo-meta">Naranja Mec&aacute;nica FC - Maillots MOMUTO - Saragosse, MLA Sport</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Naranja Mec&aacute;nica FC</div>
+</div>
+</div>
+<div class="action-photo" data-location="madrid" data-city="madrid" role="listitem"><figure><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg" alt="&Eacute;quipe Atl&eacute;tico Agon&iacute;as portant leurs maillots personnalis&eacute;s MOMUTO &agrave; Madrid, F&uacute;tbol7" loading="lazy" />
+<figcaption><span class="photo-meta">Atl&eacute;tico Agon&iacute;as - Maillots MOMUTO - Madrid, F&uacute;tbol7</span></figcaption></figure>
+<div class="action-overlay">
+<div class="team-name">Atl&eacute;tico Agon&iacute;as</div>
+<div class="team-details">Madrid &bull; F&uacute;tbol7</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="ugc-cta-section">
+<div class="ugc-content">
+<h3 class="ugc-title">Vous ne voyez pas votre &eacute;quipe ?</h3>
+<p class="ugc-subtitle">Contactez-nous et envoyez-nous votre photo ! Nous adorons montrer tous les clubs qui font confiance &agrave; MOMUTO.</p>
+<div class="ugc-actions"><a href="mailto:info@momuto.com?subject=Photo de notre &eacute;quipe" class="btn-secondary">Envoyer une Photo</a></div>
+</div>
+</div>
+<div class="sr-only" aria-hidden="false">
+<h2>Portfolio de maillots personnalis&eacute;s MOMUTO</h2>
+<p>MOMUTO con&ccedil;oit et fabrique des maillots de football personnalis&eacute;s pour des &eacute;quipes du monde entier. Plus de 100 &eacute;quipes dans 10 pays font confiance &agrave; MOMUTO pour leurs tenues de qualit&eacute; professionnelle avec impression par sublimation compl&egrave;te, livr&eacute;es en 3 semaines sans minimum de commande. &Eacute;quipes vedettes : Atl&eacute;tico Guanche (Las Palmas, Superliga LPGC), Ronperla FC (Tenerife, Liga La Amistad), Olympique Mehunois (France, D&eacute;partemental 2), Astra Rhei (Biscaye, FutbolSiete), Mango CF (Madrid, MadridFutbol7), Elche Koslovaco (Las Palmas, Superliga LPGC), Celtanquetas FC (Madrid, ETSII), Los Bloques (Las Palmas, Superliga LPGC), Aston Birra (Las Palmas, Superliga LPGC), Naranja Mec&aacute;nica FC (Saragosse, MLA Sport), Ca'Pedro FC (Las Palmas, Superliga LPGC) et Atl&eacute;tico Agon&iacute;as (Madrid, F&uacute;tbol7), Batán Scorpion (Las Palmas, Superliga LPGC), Mallorga FC (Madrid, ETSII), Drinkteam FC (Las Palmas, Superliga LPGC), Al-Carajo (Madrid, ETSII), STAPS de Metz (Francia, FFSU). Tous les maillots sont fabriqu&eacute;s en tissu polyester/&eacute;lasthanne avec impression par sublimation garantie &agrave; vie. Prix de 20,90 EUR &agrave; 38,90 EUR par maillot.</p>
+</div>
+<section class="footer-cta-wrapper">
+<div class="final-cta-section">
+<h2 class="cta-title">Pr&ecirc;t &agrave; cr&eacute;er l'&eacute;quipement de votre &eacute;quipe ?</h2>
+<p class="cta-description">Rejoignez ces clubs et donnez &agrave; votre &eacute;quipe l'identit&eacute; visuelle qu'elle m&eacute;rite</p>
+<a href="/pages/demande-de-design-professionnel-de-maillots" class="btn-primary">CR&Eacute;EZ VOTRE MAILLOT</a></div>
+</section>
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+<div class="lightbox-content" onclick="event.stopPropagation()"><span class="lightbox-close" onclick="closeLightbox()">&times;</span> <img id="lightbox-image" class="lightbox-image" alt="Design maillot personnalis&eacute;" /></div>
+</div>
+<script>
+    /* Same Lightbox Script as before */
+    function openLightbox(imageSrc) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        lightboxImage.src = imageSrc;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { closeLightbox(); }
+    });
+    /* Filter Logic - Same as before */
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const actionPhotos = document.querySelectorAll('.action-photo');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                const filter = this.getAttribute('data-filter');
+                actionPhotos.forEach(photo => {
+                    if (filter === 'all') {
+                        photo.style.display = 'block';
+                    } else {
+                        const photoLocation = photo.getAttribute('data-location');
+                        const photoCity = photo.getAttribute('data-city');
+                        if (filter === 'españa' && (photoLocation === 'españa' || photoLocation === 'madrid' || photoLocation === 'canarias')) {
+                            photo.style.display = 'block';
+                        } else if (filter === photoLocation || filter === photoCity) {
+                            photo.style.display = 'block';
+                        } else {
+                            photo.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script>

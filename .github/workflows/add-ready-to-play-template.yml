@@ -1,0 +1,78 @@
+name: Add Ready-to-Play Template
+
+on:
+  push:
+    paths:
+      - 'ready-to-play/templates/**/config.json'
+      - 'ready-to-play/templates/**/*.html'
+  workflow_dispatch:
+    inputs:
+      template_slug:
+        description: 'Template slug (folder name under ready-to-play/templates/)'
+        required: true
+        type: string
+      dry_run:
+        description: 'Dry run (no CMS writes)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install @anthropic-ai/sdk
+
+      - name: Determine template slug
+        id: slug
+        run: |
+          if [ -n "${{ inputs.template_slug }}" ]; then
+            echo "value=${{ inputs.template_slug }}" >> $GITHUB_OUTPUT
+          else
+            # Extract slug from changed paths (first folder under ready-to-play/templates/)
+            CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E '^ready-to-play/templates/[^/]+/' | head -n1 || true)
+            if [ -z "$CHANGED" ]; then
+              echo "No ready-to-play template changes detected — exiting" >&2
+              exit 0
+            fi
+            SLUG=$(echo "$CHANGED" | cut -d/ -f3)
+            echo "value=$SLUG" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Deploy template
+        if: steps.slug.outputs.value != ''
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          TEMPLATE_SLUG: ${{ steps.slug.outputs.value }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: node scripts/add-ready-to-play-template.js
+
+      - name: Commit updated collection pages
+        if: steps.slug.outputs.value != '' && inputs.dry_run != true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet ready-to-play/collection/; then
+            git add ready-to-play/collection/
+            git commit -m "Update Ready-to-Play collection cards for ${{ steps.slug.outputs.value }}"
+            git push
+          else
+            echo "No collection changes to commit"
+          fi

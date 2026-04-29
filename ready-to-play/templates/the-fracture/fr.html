@@ -1,0 +1,997 @@
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+/* ===== GLOBAL RESETS ===== */
+html, body {
+  background-color: #0a0a0a !important;
+  color: #f5f5f5;
+}
+h1.title, .title, .page-title, .section-header h1, h1.section-header__title {
+  display: none !important;
+}
+.container_wrapper, .page-width, .container, .main-content {
+  max-width: 100% !important; width: 100% !important;
+  padding: 0 !important; margin: 0 !important;
+  overflow: visible !important;
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ===== VARIABLES ===== */
+:root {
+  --rtp-bg: #0a0a0a;
+  --rtp-panel: #111;
+  --rtp-border: rgba(255,255,255,0.06);
+  --rtp-border-hover: rgba(255,255,255,0.15);
+  --rtp-white: #f5f5f5;
+  --rtp-muted: #a1a1aa;
+  --rtp-dim: #71717a;
+  --rtp-red: #c8352e;
+  --rtp-red-hover: #e04038;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+/* ===== PAGE WRAPPER ===== */
+.rtp-page {
+  font-family: var(--font-body);
+  background: var(--rtp-bg);
+  color: var(--rtp-white);
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: clip;
+  padding-bottom: 80px;
+}
+
+.rtp-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 60px;
+}
+
+/* ===== CONTEXT BANNER ===== */
+.rtp-banner-wrap { grid-column: 1 / -1; margin-bottom: 10px; }
+.rtp-banner {
+  border-left: 3px solid var(--rtp-red);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(90deg, var(--rtp-panel) 0%, rgba(17,17,17,0) 100%);
+}
+.rtp-banner-badge {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rtp-red);
+  background: rgba(200,53,46,0.1);
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+.rtp-banner-text {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--rtp-muted);
+  line-height: 1.5;
+}
+.rtp-banner-text strong { color: var(--rtp-white); font-weight: 600; }
+
+/* ===== LEFT COLUMN: VISUALS ===== */
+.rtp-visual {
+  position: sticky;
+  top: 40px;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+  align-self: start;
+  height: fit-content;
+}
+
+.rtp-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rtp-thumb {
+  aspect-ratio: 1;
+  width: 100%;
+  background: var(--rtp-panel);
+  border: 1px solid var(--rtp-border);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: all 0.2s ease;
+}
+.rtp-thumb:hover,
+.rtp-thumb.active {
+  border-color: var(--rtp-white);
+  opacity: 1;
+}
+.rtp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.rtp-main-img-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--rtp-panel);
+  border: 1px solid var(--rtp-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: zoom-in;
+}
+.rtp-main-img {
+  width: 92%;
+  height: 92%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+  transition: opacity 0.2s ease;
+}
+
+/* ===== RIGHT COLUMN: FORM ===== */
+.rtp-form-col { padding-top: 0; }
+
+/* Header */
+.rtp-header {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rtp-border);
+}
+.rtp-collection-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rtp-red);
+  margin-bottom: 6px;
+  display: block;
+}
+.rtp-design-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 0.95;
+  color: var(--rtp-white);
+  letter-spacing: 0.03em;
+}
+.rtp-design-desc {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--rtp-muted);
+  margin-top: 14px;
+  line-height: 1.7;
+}
+
+/* ── VALUE STRIP ── */
+.rtp-value-strip {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--rtp-border);
+  padding: 20px 22px;
+  margin-bottom: 28px;
+}
+.rtp-value-headline {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--rtp-white);
+  margin: 0 0 14px 0;
+  line-height: 1.4;
+}
+.rtp-value-headline span { color: var(--rtp-red); }
+.rtp-value-features { display: flex; gap: 0; }
+.rtp-value-feature {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--rtp-muted);
+  padding: 0 14px;
+  border-left: 1px solid var(--rtp-border);
+}
+.rtp-value-feature:first-child { padding-left: 0; border-left: none; }
+.rtp-value-icon {
+  width: 28px; height: 28px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.rtp-value-icon svg {
+  width: 12px; height: 12px;
+  stroke: var(--rtp-red); fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ── FORM SECTIONS ── */
+.rtp-section-title {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--rtp-white);
+  margin: 32px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rtp-border);
+}
+.rtp-section-num {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--rtp-red);
+  line-height: 1;
+}
+
+/* ── COLOR PICKER (INLINE SWATCHES) ── */
+.rtp-color-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rtp-border);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.rtp-color-row:hover { opacity: 0.8; }
+.rtp-color-row-last { border-bottom: none; }
+.rtp-color-info { display: flex; flex-direction: column; gap: 2px; }
+.rtp-color-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--rtp-white);
+}
+.rtp-color-hint {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: var(--rtp-dim);
+}
+.rtp-color-selected {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.rtp-color-preview {
+  width: 28px; height: 28px;
+  border: 2px solid rgba(255,255,255,0.12);
+  transition: border-color 0.2s;
+}
+.rtp-color-row:hover .rtp-color-preview { border-color: rgba(255,255,255,0.3); }
+.rtp-color-selected-label {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--rtp-dim);
+  min-width: 50px;
+}
+.rtp-color-chevron { transition: transform 0.25s ease; }
+.rtp-color-row.rtp-row-open .rtp-color-chevron { transform: rotate(180deg); }
+
+/* Swatch panel */
+.rtp-swatch-panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+  padding: 0;
+}
+.rtp-swatch-panel.rtp-panel-open {
+  max-height: 200px;
+  opacity: 1;
+  padding: 12px 0 16px;
+}
+.rtp-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 30px);
+  gap: 7px;
+  justify-content: start;
+}
+.rtp-swatch {
+  width: 30px; height: 30px;
+  border: 2px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+  position: relative;
+}
+.rtp-swatch:hover {
+  transform: scale(1.15);
+  border-color: rgba(255,255,255,0.3);
+  z-index: 2;
+}
+.rtp-swatch.rtp-swatch-active {
+  border-color: var(--rtp-red);
+  transform: scale(1.1);
+}
+.rtp-swatch[data-color="#FFFFFF"],
+.rtp-swatch[data-color="#F5F1E8"],
+.rtp-swatch[data-color="#D9D9D9"] {
+  border-color: rgba(255,255,255,0.15);
+}
+.rtp-swatch.rtp-swatch-active::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--rtp-red);
+  box-shadow: 0 0 0 2px var(--rtp-bg);
+}
+.rtp-swatch.rtp-swatch-active.rtp-swatch-light::after {
+  background: #0a0a0a;
+  box-shadow: 0 0 0 2px #fff;
+}
+.rtp-custom-color-note {
+  font-size: 0.65rem;
+  font-weight: 300;
+  color: var(--rtp-dim);
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* ── FORM INPUTS ── */
+.rtp-input-group { margin-bottom: 18px; }
+.rtp-input-group label {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--rtp-dim);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.rtp-input, .rtp-select {
+  width: 100%;
+  background: var(--rtp-panel);
+  border: 1px solid var(--rtp-border);
+  color: var(--rtp-white);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 400;
+  height: 48px;
+  padding: 0 14px;
+}
+.rtp-input:focus, .rtp-select:focus {
+  outline: none;
+  border-color: var(--rtp-white);
+}
+.rtp-input::placeholder { color: var(--rtp-dim); font-weight: 300; }
+
+/* File upload */
+.rtp-file-btn {
+  width: 100%;
+  background: var(--rtp-panel);
+  border: 1px dashed rgba(255,255,255,0.1);
+  color: var(--rtp-muted);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+.rtp-file-btn:hover { border-color: rgba(255,255,255,0.25); }
+.rtp-file-status {
+  font-size: 0.72rem;
+  margin-top: 5px;
+  color: var(--rtp-red);
+  font-weight: 500;
+}
+
+/* ── PRICE BLOCK ── */
+.rtp-price-block {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rtp-border);
+}
+.rtp-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.rtp-price-main {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.rtp-price-current {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--rtp-white);
+  line-height: 1;
+}
+.rtp-price-original {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--rtp-dim);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+.rtp-price-per {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--rtp-muted);
+  font-weight: 400;
+}
+.rtp-price-badge {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--rtp-red);
+  background: rgba(200,53,46,0.1);
+  padding: 4px 10px;
+}
+.rtp-price-detail {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: var(--rtp-dim);
+  margin-top: 6px;
+}
+
+/* ── KIT TYPE SELECTOR ── */
+.rtp-kit-selector {
+  display: flex;
+  gap: 10px;
+}
+.rtp-kit-option {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px solid var(--rtp-border);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.rtp-kit-option:hover {
+  border-color: var(--rtp-border-hover);
+}
+.rtp-kit-option.rtp-kit-active {
+  border-color: var(--rtp-red);
+  background: rgba(200,53,46,0.04);
+}
+.rtp-kit-option-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--rtp-white);
+  margin-bottom: 4px;
+}
+.rtp-kit-option-price {
+  font-size: 0.72rem;
+  color: var(--rtp-muted);
+  font-weight: 400;
+}
+.rtp-kit-option-price s {
+  color: var(--rtp-dim);
+  margin-right: 4px;
+}
+.rtp-kit-label-short {
+  font-size: 0.62rem;
+  color: var(--rtp-dim);
+  display: block;
+  margin-top: 2px;
+}
+
+/* ── KIT PERKS ── */
+.rtp-kit-perks {
+  background: rgba(200,53,46,0.04);
+  border: 1px solid rgba(200,53,46,0.12);
+  padding: 14px 18px;
+  margin-bottom: 18px;
+}
+.rtp-kit-perk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: var(--rtp-muted);
+  padding: 4px 0;
+}
+.rtp-kit-perk i {
+  color: var(--rtp-red);
+  font-size: 0.7rem;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.rtp-kit-perk strong {
+  color: var(--rtp-white);
+  font-weight: 600;
+}
+
+/* ── TRUST BOX ── */
+.rtp-trust {
+  background: var(--rtp-panel);
+  border: 1px solid var(--rtp-border);
+  border-left: 3px solid var(--rtp-red);
+  padding: 22px 24px;
+  margin: 28px 0;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.rtp-trust-icon {
+  color: var(--rtp-red);
+  font-size: 1rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.rtp-trust-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rtp-white);
+  margin: 0 0 4px 0;
+}
+.rtp-trust-text {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--rtp-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+.rtp-trust-text strong { color: var(--rtp-white); font-weight: 600; }
+
+/* ── SUBMIT BUTTON ── */
+.rtp-submit {
+  width: 100%;
+  background: var(--rtp-red);
+  color: #fff;
+  border: none;
+  padding: 20px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+.rtp-submit:hover {
+  background: var(--rtp-red-hover);
+  transform: translateY(-2px);
+}
+
+/* ── CTA SUBTEXT ── */
+.rtp-submit-note {
+  text-align: center;
+  font-size: 0.65rem;
+  color: var(--rtp-dim);
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+/* ── REASSURANCE LINK ── */
+.rtp-alt-path {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rtp-border);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--rtp-dim);
+}
+.rtp-alt-path a {
+  color: var(--rtp-red);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.rtp-alt-path a:hover { opacity: 0.7; }
+
+/* ===== LIGHTBOX ===== */
+.rtp-lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.95);
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+.rtp-lightbox.active { display: flex; }
+.rtp-lightbox-img {
+  max-width: 85vw;
+  max-height: 85vh;
+  object-fit: contain;
+  filter: drop-shadow(0 0 40px rgba(0,0,0,0.5));
+}
+.rtp-lb-close {
+  position: absolute;
+  top: 20px; right: 20px;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.rtp-lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.3);
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 20px;
+  transition: color 0.2s;
+}
+.rtp-lb-nav:hover { color: var(--rtp-red); }
+.rtp-lb-prev { left: 20px; }
+.rtp-lb-next { right: 20px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .rtp-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 24px 20px;
+  }
+  .rtp-visual {
+    position: static;
+    grid-template-columns: 1fr;
+  }
+  .rtp-thumbs {
+    flex-direction: row;
+    order: 2;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    gap: 8px;
+  }
+  .rtp-thumb { width: 72px; flex-shrink: 0; }
+  .rtp-main-img-wrap { order: 1; }
+  .rtp-value-features { flex-direction: column; gap: 10px; }
+  .rtp-value-feature { padding: 0; border-left: none; }
+}
+</style>
+<!-- ═══════════════════════════════════════
+     PAGE STRUCTURE
+     ═══════════════════════════════════════ -->
+<div class="rtp-page">
+<div class="rtp-container"><!-- BANNER -->
+<div class="rtp-banner-wrap">
+<div class="rtp-banner">
+<div class="rtp-banner-badge">Ready-to-Play</div>
+<div class="rtp-banner-text">Designs cr&eacute;&eacute;s par nos designers, port&eacute;s par de vrais clubs. Pas de phase de design. <strong>Gagnez du temps et &eacute;conomisez 10%.</strong></div>
+</div>
+</div>
+<!-- LEFT: VISUALS -->
+<div class="rtp-visual">
+<div class="rtp-thumbs">
+<div class="rtp-thumb active" onclick="rtpSelectVariant(0)"><img src="https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png" alt="Fracture Marbre &mdash; face" /></div>
+<div class="rtp-thumb" onclick="rtpSelectVariant(1)"><img src="https://cdn.staticsoe.com/pics/8fea3ebff939ad1356a7e9c265b6b5f1b394d7be5b0a3c303771dfb3d63a3788.png" alt="Fracture Marbre &mdash; dos" /></div>
+<div class="rtp-thumb" onclick="rtpSelectVariant(2)"><img src="https://cdn.staticsoe.com/pics/4c6b464425d2bd014426784d23d63eb3eef0029fb8618d9126c485599bbcac43.png" alt="Fracture Marbre &mdash; &eacute;quipement complet" /></div>
+<div class="rtp-thumb" onclick="rtpSelectVariant(3)"><img src="https://cdn.staticsoe.com/pics/8d9d6f5fe8577deba7784a1c4584ff5dfa821a287cebac5a48c7681094ea99e6.png" alt="Fracture Rouge &mdash; face" /></div>
+<div class="rtp-thumb" onclick="rtpSelectVariant(4)"><img src="https://cdn.staticsoe.com/pics/4295c15439a7dc80e2d278960cf3d45fc1dd84e0b22f0470a4b32556d2fb9f71.png" alt="Fracture Bleu &mdash; face" /></div>
+</div>
+<div class="rtp-main-img-wrap" onclick="rtpOpenLightbox()"><img src="https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png" class="rtp-main-img" id="rtpMainDisplay" alt="The Fracture" /></div>
+</div>
+<!-- RIGHT: FORM -->
+<div class="rtp-form-col"><!-- Header -->
+<div class="rtp-header"><span class="rtp-collection-label">Ready-to-Play Collection</span>
+<h1 class="rtp-design-title">THE FRACTURE</h1>
+<p class="rtp-design-desc">Terrain d&eacute;chir&eacute;. Un motif brut et diagonal qui &eacute;voque la pierre qui se fend sous la pression &mdash; en couches, impr&eacute;visible et agressif sans concession. Une profondeur en trois tons construite &agrave; partir de vos deux couleurs d'&eacute;quipe cr&eacute;e une esth&eacute;tique textur&eacute;e, presque g&eacute;ologique, qu'aucun design plat ne peut reproduire. Pour les &eacute;quipes qui ne font pas dans le subtil.</p>
+</div>
+<!-- Price Display -->
+<div class="rtp-price-block">
+<div class="rtp-price-row" id="rtpPriceJersey">
+<div class="rtp-price-main"><span class="rtp-price-current">&euro;19.70</span> <span class="rtp-price-original">&euro;21.90</span> <span class="rtp-price-per">/ maillot</span></div>
+<div class="rtp-price-badge">READY-TO-PLAY &middot; -10%</div>
+</div>
+<div class="rtp-price-row rtp-price-row-kit" id="rtpPriceKit" style="display: none;">
+<div class="rtp-price-main"><span class="rtp-price-current">&euro;24.20</span> <span class="rtp-price-original">&euro;26.90</span> <span class="rtp-price-per">/ &eacute;quipement complet</span></div>
+<div class="rtp-price-badge">READY-TO-PLAY &middot; -10%</div>
+</div>
+<div class="rtp-price-detail">maillot + short &middot; &agrave; partir de 10 pi&egrave;ces</div>
+</div>
+<!-- Value Strip -->
+<div class="rtp-value-strip">
+<div class="rtp-value-headline">M&ecirc;me qualit&eacute; premium. Sans l'attente. <span>-10%.</span></div>
+<div class="rtp-value-features">
+<div class="rtp-value-feature">
+<div class="rtp-value-icon"><svg viewbox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"></circle><circle cx="6" cy="13.5" r="2.5"></circle><circle cx="18" cy="18" r="2.5"></circle><path d="M11.5 8.5 8 12m7-1.5-3.5 5"></path></svg></div>
+Vos couleurs &amp; blason</div>
+<div class="rtp-value-feature">
+<div class="rtp-value-icon"><svg viewbox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="0"></rect><path d="M3 9h18M9 3v18"></path></svg></div>
+Aper&ccedil;u en 24h</div>
+<div class="rtp-value-feature">
+<div class="rtp-value-icon"><svg viewbox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></div>
+1 r&eacute;vision incluse</div>
+</div>
+</div>
+<!-- FORM --><form id="rtpForm" enctype="multipart/form-data" method="POST" action="https://formsubmit.co/29e668c40e91767614196fc0ac4e0576"><!-- Hidden fields for colors --> <input type="hidden" id="rtpPrimaryValue" name="Couleur Primaire" value="#000000" /> <input type="hidden" id="rtpSecondaryValue" name="Couleur Secondaire" value="#F5F1E8" /> <input type="hidden" id="rtpTrimValue" name="Couleur Bordures" value="#808080" /> <input type="hidden" name="Design" value="The Fracture" /> <input type="hidden" name="_subject" value="Ready-to-Play: The Fracture" /> <input type="hidden" name="_next" value="https://fr.momuto.com/pages/ready-to-play-merci" /> <input type="hidden" name="_captcha" value="false" /> <input type="hidden" id="rtpKitTypeValue" name="Type de kit" value="Maillot seul" /> <!-- SECTION 1: COLORS -->
+<h3 class="rtp-section-title"><span class="rtp-section-num">01</span> Configurer vos couleurs</h3>
+<div class="rtp-color-row" data-rtp-property="primary" data-hidden="rtpPrimaryValue">
+<div class="rtp-color-info"><span class="rtp-color-name">Primaire</span> <span class="rtp-color-hint">corps du maillot</span></div>
+<div class="rtp-color-selected" data-default="#000000" data-default-name="noir">
+<div class="rtp-color-preview" style="background: #000000;"></div>
+<span class="rtp-color-selected-label">noir</span> <svg class="rtp-color-chevron" viewbox="0 0 24 24" width="14" height="14" fill="none" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></div>
+</div>
+<div class="rtp-swatch-panel" data-for="primary"></div>
+<div class="rtp-color-row" data-rtp-property="secondary" data-hidden="rtpSecondaryValue">
+<div class="rtp-color-info"><span class="rtp-color-name">Secondaire</span> <span class="rtp-color-hint">motif de fracture</span></div>
+<div class="rtp-color-selected" data-default="#F5F1E8" data-default-name="off-white">
+<div class="rtp-color-preview" style="background: #F5F1E8;"></div>
+<span class="rtp-color-selected-label">off-white</span> <svg class="rtp-color-chevron" viewbox="0 0 24 24" width="14" height="14" fill="none" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></div>
+</div>
+<div class="rtp-swatch-panel" data-for="secondary"></div>
+<div class="rtp-color-row rtp-color-row-last" data-rtp-property="trim" data-hidden="rtpTrimValue">
+<div class="rtp-color-info"><span class="rtp-color-name">Bordures</span> <span class="rtp-color-hint">col &amp; poignets</span></div>
+<div class="rtp-color-selected" data-default="#808080" data-default-name="gris">
+<div class="rtp-color-preview" style="background: #808080;"></div>
+<span class="rtp-color-selected-label">gris</span> <svg class="rtp-color-chevron" viewbox="0 0 24 24" width="14" height="14" fill="none" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></div>
+</div>
+<div class="rtp-swatch-panel" data-for="trim"></div>
+<div class="rtp-custom-color-note">Votre couleur exacte n'est pas ici ? Pr&eacute;cisez-la dans les commentaires ci-dessous.</div>
+<!-- SECTION 2: IDENTITY -->
+<h3 class="rtp-section-title"><span class="rtp-section-num">02</span> Votre &eacute;quipe</h3>
+<!-- Kit type selector -->
+<div class="rtp-input-group"><label>Type de kit</label>
+<div class="rtp-kit-selector">
+<div class="rtp-kit-option rtp-kit-active" onclick="rtpSelectKit('jersey', this)">
+<div class="rtp-kit-option-title">Maillot seul</div>
+<div class="rtp-kit-option-price"><s>&euro;21.90</s> &euro;19.70</div>
+</div>
+<div class="rtp-kit-option" onclick="rtpSelectKit('fullkit', this)">
+<div class="rtp-kit-option-title">&Eacute;quipement complet</div>
+<div class="rtp-kit-option-price"><s>&euro;26.90</s> &euro;24.20 <span class="rtp-kit-label-short">maillot + short</span></div>
+</div>
+</div>
+</div>
+<!-- Full kit perks (hidden by default) -->
+<div class="rtp-kit-perks" id="rtpKitPerks" style="display: none;">
+<div class="rtp-kit-perk"><i class="fas fa-flag"></i> <span><strong>Drapeau d'&eacute;quipe offert</strong> avec &eacute;cusson &middot; pour les commandes de 10+ pi&egrave;ces</span></div>
+<div class="rtp-kit-perk"><i class="fas fa-star"></i> <span><strong>Brassard capitaine offert</strong> &middot; pour les commandes de 10+ pi&egrave;ces</span></div>
+</div>
+<!-- Team name -->
+<div class="rtp-input-group"><label>Nom de l'&eacute;quipe</label> <input type="text" name="teamName" class="rtp-input" placeholder="ex. FC Wolf Pack" required="" /></div>
+<!-- File uploads -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+<div class="rtp-input-group"><label>&Eacute;cusson d'&eacute;quipe</label> <label for="rtpCrest" class="rtp-file-btn"> <i class="fas fa-upload"></i> T&eacute;l&eacute;charger </label> <input type="file" id="rtpCrest" name="teamCrest" style="display: none;" onchange="rtpShowFile(this,'rtpCrestStatus')" />
+<div id="rtpCrestStatus" class="rtp-file-status"></div>
+</div>
+<div class="rtp-input-group"><label>Logo sponsor (optionnel)</label> <label for="rtpSponsor" class="rtp-file-btn"> <i class="fas fa-upload"></i> T&eacute;l&eacute;charger </label> <input type="file" id="rtpSponsor" name="sponsorLogo" style="display: none;" onchange="rtpShowFile(this,'rtpSponsorStatus')" />
+<div id="rtpSponsorStatus" class="rtp-file-status"></div>
+</div>
+</div>
+<!-- SECTION 3: CONTACT -->
+<h3 class="rtp-section-title"><span class="rtp-section-num">03</span> Contact &amp; d&eacute;tails</h3>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+<div class="rtp-input-group"><label>Nom</label> <input type="text" name="contactName" class="rtp-input" placeholder="Votre nom" required="" /></div>
+<div class="rtp-input-group"><label>Email</label> <input type="email" name="contactEmail" class="rtp-input" placeholder="votre@email.com" required="" /></div>
+</div>
+<div class="rtp-input-group"><label>Quantit&eacute; estim&eacute;e</label><select name="estimatedQty" class="rtp-select" required="">
+<option value="" disabled="disabled" selected="selected">S&eacute;lectionner...</option>
+<option value="1-10">1&ndash;10 maillots</option>
+<option value="11-20">11&ndash;20 maillots</option>
+<option value="21-50">21&ndash;50 maillots</option>
+<option value="50+">50+ (club)</option>
+</select></div>
+<div class="rtp-input-group"><label>Commentaires (optionnel)</label> <input type="text" name="comments" class="rtp-input" placeholder="Couleur exacte, d&eacute;tails suppl&eacute;mentaires..." /></div>
+<!-- TRUST BOX -->
+<div class="rtp-trust">
+<div class="rtp-trust-icon"><i class="fas fa-check-circle"></i></div>
+<div>
+<h4 class="rtp-trust-title">Aper&ccedil;u pro en 24h</h4>
+<p class="rtp-trust-text">Un <strong>designer senior</strong> adaptera ce design avec vos couleurs et positionnera vos logos. Vous recevrez un aper&ccedil;u haute qualit&eacute; avant tout engagement.</p>
+</div>
+</div>
+<!-- SUBMIT --> <button type="submit" class="rtp-submit">RECEVOIR MON APER&Ccedil;U &middot; 24H</button>
+<div class="rtp-submit-note">Gratuit &middot; Sans engagement &middot; 1 r&eacute;vision incluse</div>
+</form><!-- ALT PATH -->
+<div class="rtp-alt-path">Vous pr&eacute;f&eacute;rez un design 100% unique ? <a href="/pages/request-design">Demander un design sur mesure &rarr;</a></div>
+</div>
+</div>
+</div>
+<!-- LIGHTBOX -->
+<div id="rtpLightbox" class="rtp-lightbox"><button class="rtp-lb-close" onclick="rtpCloseLightbox()">&times;</button> <button class="rtp-lb-nav rtp-lb-prev" onclick="rtpNavLightbox(-1)"><i class="fas fa-chevron-left"></i></button> <button class="rtp-lb-nav rtp-lb-next" onclick="rtpNavLightbox(1)"><i class="fas fa-chevron-right"></i></button> <img id="rtpLightboxImg" class="rtp-lightbox-img" /></div>
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════ -->
+<script>
+(function() {
+  /* ── IMAGES ── */
+  var rtpImages = [
+    "https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png",
+    "https://cdn.staticsoe.com/pics/8fea3ebff939ad1356a7e9c265b6b5f1b394d7be5b0a3c303771dfb3d63a3788.png",
+    "https://cdn.staticsoe.com/pics/4c6b464425d2bd014426784d23d63eb3eef0029fb8618d9126c485599bbcac43.png",
+    "https://cdn.staticsoe.com/pics/8d9d6f5fe8577deba7784a1c4584ff5dfa821a287cebac5a48c7681094ea99e6.png",
+    "https://cdn.staticsoe.com/pics/4295c15439a7dc80e2d278960cf3d45fc1dd84e0b22f0470a4b32556d2fb9f71.png"
+  ];
+  var rtpCurrentIdx = 0;
+
+  /* Fix CMS overflow */
+  document.addEventListener('DOMContentLoaded', function() {
+    var el = document.querySelector('.rtp-page');
+    if (el) {
+      while ((el = el.parentElement) && el.tagName !== 'HTML') {
+        el.style.overflow = 'visible';
+        el.style.overflowX = 'visible';
+      }
+    }
+  });
+
+  /* Gallery */
+  window.rtpSelectVariant = function(idx) {
+    rtpCurrentIdx = idx;
+    var main = document.getElementById('rtpMainDisplay');
+    var thumbs = document.querySelectorAll('.rtp-thumb');
+    main.style.opacity = 0.5;
+    setTimeout(function() { main.src = rtpImages[idx]; main.style.opacity = 1; }, 150);
+    thumbs.forEach(function(t) { t.classList.remove('active'); });
+    thumbs[idx].classList.add('active');
+  };
+
+  /* Lightbox */
+  window.rtpOpenLightbox = function() {
+    var lb = document.getElementById('rtpLightbox');
+    document.getElementById('rtpLightboxImg').src = rtpImages[rtpCurrentIdx];
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+  window.rtpCloseLightbox = function() {
+    document.getElementById('rtpLightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  };
+  window.rtpNavLightbox = function(dir) {
+    rtpCurrentIdx += dir;
+    if (rtpCurrentIdx >= rtpImages.length) rtpCurrentIdx = 0;
+    if (rtpCurrentIdx < 0) rtpCurrentIdx = rtpImages.length - 1;
+    var img = document.getElementById('rtpLightboxImg');
+    img.style.opacity = 0.5;
+    setTimeout(function() { img.src = rtpImages[rtpCurrentIdx]; img.style.opacity = 1; }, 150);
+    rtpSelectVariant(rtpCurrentIdx);
+  };
+
+  /* Keyboard */
+  document.addEventListener('keydown', function(e) {
+    var lb = document.getElementById('rtpLightbox');
+    if (lb.classList.contains('active')) {
+      if (e.key === 'Escape') rtpCloseLightbox();
+      if (e.key === 'ArrowRight') rtpNavLightbox(1);
+      if (e.key === 'ArrowLeft') rtpNavLightbox(-1);
+    }
+  });
+
+  /* ── COLOR PALETTE ── */
+  var colors = [
+    { hex: '#FFFFFF', name: 'white' },
+    { hex: '#F5F1E8', name: 'off-white' },
+    { hex: '#D9D9D9', name: 'gris clair' },
+    { hex: '#808080', name: 'gris' },
+    { hex: '#000000', name: 'noir' },
+    { hex: '#FF2D2D', name: 'rouge vif' },
+    { hex: '#C8102E', name: 'rouge sport' },
+    { hex: '#800020', name: 'bordeaux' },
+    { hex: '#5C1A1B', name: 'marron' },
+    { hex: '#0057FF', name: 'bleu royal' },
+    { hex: '#001F5B', name: 'navy' },
+    { hex: '#6EC6FF', name: 'bleu ciel' },
+    { hex: '#A7D8FF', name: 'bleu glacier' },
+    { hex: '#00A651', name: 'vert émeraude' },
+    { hex: '#1F5F3B', name: 'vert forêt' },
+    { hex: '#C7FF00', name: 'volt' },
+    { hex: '#FFD200', name: 'jaune sport' },
+    { hex: '#FF8C00', name: 'orange' },
+    { hex: '#FF4FA3', name: 'rose vif' },
+    { hex: '#7A3DB8', name: 'violet' },
+    { hex: '#4B1F6F', name: 'violet foncé' },
+    { hex: '#00AFAF', name: 'teal' },
+    { hex: '#C4A46B', name: 'gold' },
+    { hex: '#C0C0C0', name: 'argent' },
+    { hex: '#D8C3A5', name: 'sable' }
+  ];
+  var lightColors = ['#FFFFFF','#F5F1E8','#D9D9D9','#C7FF00','#FFD200','#A7D8FF','#6EC6FF','#C0C0C0','#D8C3A5'];
+
+  /* Build swatch grids */
+  document.querySelectorAll('.rtp-swatch-panel').forEach(function(panel) {
+    var propName = panel.getAttribute('data-for');
+    var row = document.querySelector('.rtp-color-row[data-rtp-property="' + propName + '"]');
+    var selectedEl = row.querySelector('.rtp-color-selected');
+    var defaultColor = selectedEl.getAttribute('data-default');
+    var hiddenId = row.getAttribute('data-hidden');
+
+    var grid = document.createElement('div');
+    grid.className = 'rtp-swatch-grid';
+
+    colors.forEach(function(c) {
+      var swatch = document.createElement('div');
+      swatch.className = 'rtp-swatch';
+      swatch.setAttribute('data-color', c.hex);
+      swatch.setAttribute('data-name', c.name);
+      swatch.style.background = c.hex;
+      if (lightColors.indexOf(c.hex) !== -1) swatch.classList.add('rtp-swatch-light');
+      if (c.hex === defaultColor) swatch.classList.add('rtp-swatch-active');
+
+      swatch.addEventListener('click', function(e) {
+        e.stopPropagation();
+        grid.querySelectorAll('.rtp-swatch').forEach(function(s) { s.classList.remove('rtp-swatch-active'); });
+        swatch.classList.add('rtp-swatch-active');
+        selectedEl.querySelector('.rtp-color-preview').style.background = c.hex;
+        selectedEl.querySelector('.rtp-color-selected-label').textContent = c.name;
+        document.getElementById(hiddenId).value = c.hex;
+        setTimeout(function() {
+          panel.classList.remove('rtp-panel-open');
+          row.classList.remove('rtp-row-open');
+        }, 200);
+      });
+
+      grid.appendChild(swatch);
+    });
+
+    panel.appendChild(grid);
+
+    row.addEventListener('click', function() {
+      var isOpen = panel.classList.contains('rtp-panel-open');
+      document.querySelectorAll('.rtp-swatch-panel').forEach(function(p) { p.classList.remove('rtp-panel-open'); });
+      document.querySelectorAll('.rtp-color-row').forEach(function(r) { r.classList.remove('rtp-row-open'); });
+      if (!isOpen) {
+        panel.classList.add('rtp-panel-open');
+        row.classList.add('rtp-row-open');
+      }
+    });
+  });
+
+  /* ── KIT SELECTOR ── */
+  window.rtpSelectKit = function(type, el) {
+    document.querySelectorAll('.rtp-kit-option').forEach(function(o) { o.classList.remove('rtp-kit-active'); });
+    el.classList.add('rtp-kit-active');
+
+    var priceJersey = document.getElementById('rtpPriceJersey');
+    var priceKit = document.getElementById('rtpPriceKit');
+    var perks = document.getElementById('rtpKitPerks');
+    var hidden = document.getElementById('rtpKitTypeValue');
+
+    if (type === 'fullkit') {
+      priceJersey.style.display = 'none';
+      priceKit.style.display = 'flex';
+      perks.style.display = 'block';
+      hidden.value = 'Équipement complet (maillot + short)';
+    } else {
+      priceJersey.style.display = 'flex';
+      priceKit.style.display = 'none';
+      perks.style.display = 'none';
+      hidden.value = 'Maillot seul';
+    }
+  };
+
+  /* ── FILE UPLOAD ── */
+  window.rtpShowFile = function(input, statusId) {
+    if (input.files[0]) {
+      document.getElementById(statusId).innerHTML = '<i class="fas fa-check"></i> ' + input.files[0].name;
+    }
+  };
+})();
+</script>

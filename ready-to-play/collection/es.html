@@ -1,0 +1,552 @@
+<!-- SEO Meta Tags -->
+<link rel="canonical" href="https://es.momuto.com/pages/coleccion-ready-to-play" />
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Maillots de Foot Ready-to-Play",
+    "description": "Diseños probados, usados por clubes reales. Sin fase de diseño. -10% vs. a medida. MOMUTO Ready-to-Play.",
+    "url": "https://es.momuto.com/pages/coleccion-ready-to-play",
+    "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": 3,
+        "itemListElement": [
+            {
+                "@type": "Product",
+                "position": 1,
+                "name": "Maillot The Kinetic",
+                "description": "Maillot de football moderne avec graphismes géométriques fractionnés",
+                "category": "Maillots de football personnalisés",
+                "brand": { "@type": "Brand", "name": "MOMUTO" },
+                "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp",
+                "url": "https://es.momuto.com/pages/ready-to-play-the-kinetic",
+                "offers": { "@type": "Offer", "price": "19.70", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
+            },
+            {
+                "@type": "Product",
+                "position": 2,
+                "name": "Maillot The Legacy",
+                "description": "Maillot de football rétro avec piliers verticaux et rayure centrale",
+                "category": "Maillots de football personnalisés",
+                "brand": { "@type": "Brand", "name": "MOMUTO" },
+                "image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp",
+                "url": "https://es.momuto.com/pages/ready-to-play-the-legacy",
+                "offers": { "@type": "Offer", "price": "19.70", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
+            },
+            {
+                "@type": "Product",
+                "position": 3,
+                "name": "Maillot The Apex",
+                "description": "Maillot de football aérodynamique avec panneaux latéraux courbés",
+                "category": "Maillots de football personnalisés",
+                "brand": { "@type": "Brand", "name": "MOMUTO" },
+                "image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp",
+                "url": "https://es.momuto.com/pages/ready-to-play-the-apex",
+                "offers": { "@type": "Offer", "price": "19.70", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
+            }
+        ]
+    }
+}
+</script>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<!-- Preload key images -->
+<link rel="preload" as="image" href="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp" />
+
+<style>
+/* ===== GLOBAL RESETS ===== */
+html, body {
+  background-color: #0a0a0a !important;
+  color: #f5f5f5;
+}
+h1.title, .title, .page-title { display: none !important; }
+.container_wrapper, .page-width, .container, .main-content {
+  max-width: 100% !important; width: 100% !important;
+  padding: 0 !important; margin: 0 !important;
+  overflow: visible !important;
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ===== VARIABLES ===== */
+:root {
+  --rtp-bg: #0a0a0a;
+  --rtp-panel: #111;
+  --rtp-card: #111;
+  --rtp-border: rgba(255,255,255,0.06);
+  --rtp-border-hover: rgba(255,255,255,0.12);
+  --rtp-white: #f5f5f5;
+  --rtp-muted: #a1a1aa;
+  --rtp-dim: #71717a;
+  --rtp-red: #c8352e;
+  --rtp-red-hover: #e04038;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+/* ===== PAGE LAYOUT ===== */
+.rtp-col-page {
+  font-family: var(--font-body);
+  background: var(--rtp-bg);
+  color: var(--rtp-white);
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+.rtp-col-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 40px;
+}
+
+/* ===== HEADER ===== */
+.rtp-col-header {
+  margin-bottom: 50px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--rtp-border);
+  text-align: center;
+}
+.rtp-col-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rtp-red);
+  background: rgba(200,53,46,0.1);
+  border: 1px solid rgba(200,53,46,0.15);
+  padding: 6px 14px;
+  margin-bottom: 18px;
+}
+.rtp-col-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 16px 0;
+  line-height: 1;
+  color: var(--rtp-white);
+}
+.rtp-col-header p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--rtp-muted);
+  margin: 0 auto;
+  max-width: 640px;
+  line-height: 1.7;
+}
+.rtp-col-header p strong {
+  color: var(--rtp-white);
+  font-weight: 600;
+}
+
+/* ── PRICING STRIP ── */
+.rtp-col-pricing {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.rtp-col-price-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--rtp-muted);
+}
+.rtp-col-price-amount {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--rtp-white);
+  line-height: 1;
+}
+.rtp-col-price-old {
+  font-size: 0.78rem;
+  color: var(--rtp-dim);
+  text-decoration: line-through;
+}
+.rtp-col-price-tag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--rtp-red);
+  background: rgba(200,53,46,0.1);
+  padding: 3px 8px;
+  margin-left: 8px;
+}
+
+/* ===== GRID ===== */
+.rtp-col-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+/* ===== CARD ===== */
+.rtp-col-card {
+  background: var(--rtp-card);
+  border: 1px solid var(--rtp-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.rtp-col-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--rtp-border-hover);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Image */
+.rtp-col-card-img {
+  width: 100%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #0e0e0e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  position: relative;
+}
+.rtp-col-card-img img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.5));
+  transition: transform 0.3s ease;
+}
+.rtp-col-card:hover .rtp-col-card-img img { transform: scale(1.03); }
+
+/* Tags */
+.rtp-col-tags {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+}
+.rtp-col-tag {
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  background: rgba(0,0,0,0.75);
+  color: var(--rtp-white);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(4px);
+}
+.rtp-col-tag.rtp-col-tag-red {
+  background: var(--rtp-red);
+  color: #fff;
+  border-color: var(--rtp-red);
+}
+
+/* Details */
+.rtp-col-card-details {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border-top: 1px solid var(--rtp-border);
+}
+.rtp-col-card-series {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rtp-red);
+  margin-bottom: 6px;
+}
+.rtp-col-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0 0 10px 0;
+  line-height: 1;
+  color: var(--rtp-white);
+}
+.rtp-col-card-desc {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--rtp-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Card price row */
+.rtp-col-card-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rtp-border);
+}
+.rtp-col-card-price-current {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--rtp-white);
+  line-height: 1;
+}
+.rtp-col-card-price-old {
+  font-size: 0.75rem;
+  color: var(--rtp-dim);
+  text-decoration: line-through;
+}
+.rtp-col-card-price-per {
+  font-size: 0.7rem;
+  color: var(--rtp-dim);
+}
+.rtp-col-card-price-badge {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--rtp-red);
+  margin-left: auto;
+}
+
+/* Specs */
+.rtp-col-card-specs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.rtp-col-spec {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--rtp-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(255,255,255,0.03);
+  padding: 5px 10px;
+  border: 1px solid var(--rtp-border);
+}
+.rtp-col-spec i {
+  color: var(--rtp-red);
+  font-size: 0.6rem;
+}
+
+/* CTA Button */
+.rtp-col-card-btn {
+  margin-top: auto;
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--rtp-white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.rtp-col-card:hover .rtp-col-card-btn {
+  background: var(--rtp-red);
+  border-color: var(--rtp-red);
+  color: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .rtp-col-grid { grid-template-columns: 1fr; gap: 40px; }
+  .rtp-col-container { padding: 30px 20px; }
+  .rtp-col-pricing { gap: 20px; }
+}
+</style>
+
+<!-- ═══════════════════════════════════════
+     PAGE STRUCTURE
+     ═══════════════════════════════════════ -->
+<div class="rtp-col-page">
+<div class="rtp-col-container">
+
+  <!-- Header -->
+  <header class="rtp-col-header">
+    <div class="rtp-col-badge">-10% vs. a medida</div>
+    <h1>READY-TO-PLAY</h1>
+    <p>Diseños creados por nuestros diseñadores, <strong>usados por clubes reales.</strong> Sin fase de diseño. Elige el que se adapte a tu identidad, ahorra tiempo y ahorra un 10%.</p>
+    <div class="rtp-col-pricing">
+      <div class="rtp-col-price-item">
+        <span class="rtp-col-price-amount">€19.70</span>
+        <span class="rtp-col-price-old">€21.90</span>
+        / camiseta
+        <span class="rtp-col-price-tag">-10%</span>
+      </div>
+      <div class="rtp-col-price-item">
+        <span class="rtp-col-price-amount">€24.20</span>
+        <span class="rtp-col-price-old">€26.90</span>
+        / equipación completa
+        <span class="rtp-col-price-tag">-10%</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Grid -->
+  <main class="rtp-col-grid">
+
+    <!-- THE KINETIC -->
+    <article class="rtp-col-card" itemscope itemtype="https://schema.org/Product" onclick="window.location.href='https://es.momuto.com/pages/ready-to-play-the-kinetic'">
+      <div class="rtp-col-card-img">
+        <div class="rtp-col-tags">
+          <span class="rtp-col-tag rtp-col-tag-red">Popular</span>
+          <span class="rtp-col-tag">Vista previa 24h</span>
+        </div>
+        <img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp" alt="The Kinetic — Camiseta de fútbol moderna geométrica MOMUTO" itemprop="image" loading="eager" width="400" height="400">
+      </div>
+      <div class="rtp-col-card-details">
+        <span class="rtp-col-card-series" itemprop="category">Moderno / Geométrico</span>
+        <h2 class="rtp-col-card-title" itemprop="name">THE KINETIC</h2>
+        <p class="rtp-col-card-desc" itemprop="description">Agresividad visual. Gráficos fracturados que simulan movimiento de alta velocidad. Diseñado para equipos que juegan al ataque.</p>
+        <div class="rtp-col-card-price">
+          <span class="rtp-col-card-price-current">€19.70</span>
+          <span class="rtp-col-card-price-old">€21.90</span>
+          <span class="rtp-col-card-price-per">/ camiseta</span>
+          <span class="rtp-col-card-price-badge">-10% READY-TO-PLAY</span>
+        </div>
+        <div class="rtp-col-card-specs">
+          <div class="rtp-col-spec"><i class="fas fa-clock"></i> Vista previa 24h</div>
+          <div class="rtp-col-spec"><i class="fas fa-check"></i> 1 revisión</div>
+          <div class="rtp-col-spec"><i class="fas fa-truck"></i> 20-25 días</div>
+        </div>
+        <div class="rtp-col-card-btn">Ver este diseño <i class="fas fa-arrow-right"></i></div>
+      </div>
+    </article>
+
+    <!-- THE LEGACY -->
+    <article class="rtp-col-card" itemscope itemtype="https://schema.org/Product" onclick="window.location.href='https://es.momuto.com/pages/ready-to-play-the-legacy'">
+      <div class="rtp-col-card-img">
+        <div class="rtp-col-tags">
+          <span class="rtp-col-tag">Clásico</span>
+          <span class="rtp-col-tag">Vista previa 24h</span>
+        </div>
+        <img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp" alt="The Legacy — Camiseta de fútbol retro clásica MOMUTO" itemprop="image" loading="lazy" width="400" height="400">
+      </div>
+      <div class="rtp-col-card-details">
+        <span class="rtp-col-card-series" itemprop="category">Retro / Estructura</span>
+        <h2 class="rtp-col-card-title" itemprop="name">THE LEGACY</h2>
+        <p class="rtp-col-card-desc" itemprop="description">Autoridad atemporal. Pilares verticales anchos y franja central precisa. Una reconstrucción moderna de la estética clásica de día de partido.</p>
+        <div class="rtp-col-card-price">
+          <span class="rtp-col-card-price-current">€19.70</span>
+          <span class="rtp-col-card-price-old">€21.90</span>
+          <span class="rtp-col-card-price-per">/ camiseta</span>
+          <span class="rtp-col-card-price-badge">-10% READY-TO-PLAY</span>
+        </div>
+        <div class="rtp-col-card-specs">
+          <div class="rtp-col-spec"><i class="fas fa-clock"></i> Vista previa 24h</div>
+          <div class="rtp-col-spec"><i class="fas fa-check"></i> 1 revisión</div>
+          <div class="rtp-col-spec"><i class="fas fa-truck"></i> 20-25 días</div>
+        </div>
+        <div class="rtp-col-card-btn">Ver este diseño <i class="fas fa-arrow-right"></i></div>
+      </div>
+    </article>
+    <!-- THE APEX -->
+    <article class="rtp-col-card" itemscope itemtype="https://schema.org/Product" onclick="window.location.href='https://es.momuto.com/pages/ready-to-play-the-apex'">
+      <div class="rtp-col-card-img">
+        <div class="rtp-col-tags">
+          <span class="rtp-col-tag">Aerodinámico</span>
+          <span class="rtp-col-tag">Preview 24h</span>
+        </div>
+        <img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp" alt="THE APEX — Aerodynamic / Tech football kit by MOMUTO" itemprop="image" loading="lazy" width="400" height="400">
+      </div>
+      <div class="rtp-col-card-details">
+        <span class="rtp-col-card-series" itemprop="category">Aerodinámico / Tech</span>
+        <h2 class="rtp-col-card-title" itemprop="name">THE APEX</h2>
+        <p class="rtp-col-card-desc" itemprop="description">Ingeniería para la velocidad. Paneles laterales curvos aerodinámicos inspirados en el sportswear de los años 2000. Pecho limpio optimizado para la visibilidad del sponsor.</p>
+        <div class="rtp-col-card-price">
+          <span class="rtp-col-card-price-current">€19.70</span>
+          <span class="rtp-col-card-price-old">€21.90</span>
+          <span class="rtp-col-card-price-per">/ camiseta</span>
+          <span class="rtp-col-card-price-badge">-10% READY-TO-PLAY</span>
+        </div>
+        <div class="rtp-col-card-specs">
+          <div class="rtp-col-spec"><i class="fas fa-clock"></i> Preview 24h</div>
+          <div class="rtp-col-spec"><i class="fas fa-check"></i> 1 revisión</div>
+          <div class="rtp-col-spec"><i class="fas fa-truck"></i> 20-25 días</div>
+        </div>
+        <div class="rtp-col-card-btn">Ver este diseño <i class="fas fa-arrow-right"></i></div>
+      </div>
+    </article>
+    <!-- THE MOSAIC -->
+    <article class="rtp-col-card" itemscope itemtype="https://schema.org/Product" onclick="window.location.href='https://es.momuto.com/pages/ready-to-play-the-mosaic'">
+      <div class="rtp-col-card-img">
+        <div class="rtp-col-tags">
+          <span class="rtp-col-tag">Patrón 90s</span>
+          <span class="rtp-col-tag">Preview 24h</span>
+        </div>
+        <img src="https://cdn.staticsoe.com/pics/ae9deb9e17f800bd3140e6d66fb130a31813b202b8bf60485eea441fe361ebc5.png" alt="THE MOSAIC — Retro / Pattern football kit by MOMUTO" itemprop="image" loading="lazy" width="400" height="400">
+      </div>
+      <div class="rtp-col-card-details">
+        <span class="rtp-col-card-series" itemprop="category">Retro / Patrón</span>
+        <h2 class="rtp-col-card-title" itemprop="name">THE MOSAIC</h2>
+        <p class="rtp-col-card-desc" itemprop="description">Tablero de ajedrez disruptivo inspirado en los 90. Una cuadrícula densa con zona sólida para el escudo y banda de patrocinador para dar protagonismo al crest.</p>
+        <div class="rtp-col-card-price">
+          <span class="rtp-col-card-price-current">€19.70</span>
+          <span class="rtp-col-card-price-old">€21.90</span>
+          <span class="rtp-col-card-price-per">/ camiseta</span>
+          <span class="rtp-col-card-price-badge">-10% READY-TO-PLAY</span>
+        </div>
+        <div class="rtp-col-card-specs">
+          <div class="rtp-col-spec"><i class="fas fa-clock"></i> Preview 24h</div>
+          <div class="rtp-col-spec"><i class="fas fa-check"></i> 1 revisión</div>
+          <div class="rtp-col-spec"><i class="fas fa-truck"></i> 20-25 días</div>
+        </div>
+        <div class="rtp-col-card-btn">Ver este diseño <i class="fas fa-arrow-right"></i></div>
+      </div>
+    </article>
+    <!-- THE FRACTURE -->
+    <article class="rtp-col-card" itemscope itemtype="https://schema.org/Product" onclick="window.location.href='https://es.momuto.com/pages/ready-to-play-the-fracture'">
+      <div class="rtp-col-card-img">
+        <div class="rtp-col-tags">
+          <span class="rtp-col-tag">Texturizado</span>
+          <span class="rtp-col-tag">Preview 24h</span>
+        </div>
+        <img src="https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png" alt="THE FRACTURE — Modern / Texture football kit by MOMUTO" itemprop="image" loading="lazy" width="400" height="400">
+      </div>
+      <div class="rtp-col-card-details">
+        <span class="rtp-col-card-series" itemprop="category">Moderno / Textura</span>
+        <h2 class="rtp-col-card-title" itemprop="name">THE FRACTURE</h2>
+        <p class="rtp-col-card-desc" itemprop="description">Terreno desgarrado. Un patrón diagonal de fractura con profundidad en tres tonos construida desde los colores de tu equipo. Para equipos que no hacen lo sutil.</p>
+        <div class="rtp-col-card-price">
+          <span class="rtp-col-card-price-current">€19.70</span>
+          <span class="rtp-col-card-price-old">€21.90</span>
+          <span class="rtp-col-card-price-per">/ camiseta</span>
+          <span class="rtp-col-card-price-badge">-10% READY-TO-PLAY</span>
+        </div>
+        <div class="rtp-col-card-specs">
+          <div class="rtp-col-spec"><i class="fas fa-clock"></i> Preview 24h</div>
+          <div class="rtp-col-spec"><i class="fas fa-check"></i> 1 revisión</div>
+          <div class="rtp-col-spec"><i class="fas fa-truck"></i> 20-25 días</div>
+        </div>
+        <div class="rtp-col-card-btn">Ver este diseño <i class="fas fa-arrow-right"></i></div>
+      </div>
+    </article>
+
+
+  </main>
+</div>
+</div>
