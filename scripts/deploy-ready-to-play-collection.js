@@ -31,6 +31,11 @@ const DOMAINS = {
     host: 'https://openapi.oemapps.com',
     token: process.env.OEMSAAS_TOKEN_FR,
     label: 'fr.momuto.com'
+  },
+  it: {
+    host: 'https://openapi.oemapps.com',
+    token: process.env.OEMSAAS_TOKEN_IT,
+    label: 'it.momuto.com'
   }
 };
 

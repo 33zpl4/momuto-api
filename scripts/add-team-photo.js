@@ -72,6 +72,16 @@ const PAGES = {
     jsonLdDesc: (team, loc, league) =>
       `&Eacute;quipe ${team} de ${loc} portant leurs maillots personnalis&eacute;s MOMUTO en match de ${league}`,
   },
+  it: {
+    file: 'pages/squadre-club-momuto',
+    altTemplate: (team, loc, league) =>
+      `Squadra ${team} con le maglie personalizzate MOMUTO a ${loc}, ${league}`,
+    metaTemplate: (team, loc, league) =>
+      `${team} - Maglie MOMUTO - ${loc}, ${league}`,
+    jsonLdName: (team) => `${team} con maglie MOMUTO`,
+    jsonLdDesc: (team, loc, league) =>
+      `La squadra ${team} di ${loc} con le maglie personalizzate MOMUTO durante una partita di ${league}`,
+  },
 };
 
 // Derive location display labels from city if not provided
@@ -79,6 +89,7 @@ const locationLabels = {
   en: process.env.LOCATION_LABEL_EN || CITY.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
   es: process.env.LOCATION_LABEL_ES || CITY.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
   fr: process.env.LOCATION_LABEL_FR || CITY.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+  it: process.env.LOCATION_LABEL_IT || CITY.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
 };
 
 function buildPhotoEntry(lang) {

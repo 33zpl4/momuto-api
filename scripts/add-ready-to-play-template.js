@@ -51,6 +51,16 @@ const DOMAINS = {
     titleTemplate: (name) => `${name} — Maillot Ready-to-Play | MOMUTO`,
     metaKeywords: ['ready-to-play', 'maillot de foot', 'maillot pré-conçu', 'MOMUTO'],
     langInstruction: 'Write all text content in French. Use "maillot" for jersey and "tenue" for kit.'
+  },
+  it: {
+    host: 'https://openapi.oemapps.com',
+    token: process.env.OEMSAAS_TOKEN_IT,
+    label: 'it.momuto.com',
+    baseUrl: 'https://it.momuto.com',
+    collectionPath: '/collections/ready-to-play',
+    titleTemplate: (name) => `${name} — Maglia Ready-to-Play | MOMUTO`,
+    metaKeywords: ['ready-to-play', 'maglia calcio', 'maglia pre-disegnata', 'MOMUTO'],
+    langInstruction: 'Write all text content in Italian. Use "maglia" for jersey and "kit" for kit.'
   }
 };
 

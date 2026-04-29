@@ -22,6 +22,13 @@ const DOMAINS = {
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'fr.momuto.com'),
     files: ['robots.txt', 'sitemap.xml', 'llms.txt']
+  },
+  it: {
+    token: process.env.OEMSAAS_TOKEN_IT,
+    label: 'it.momuto.com',
+    host: 'https://openapi.oemapps.com',
+    staticDir: path.join('static', 'it.momuto.com'),
+    files: ['robots.txt', 'sitemap.xml', 'llms.txt']
   }
 };
 

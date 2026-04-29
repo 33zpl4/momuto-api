@@ -87,6 +87,31 @@ const DOMAINS = {
     specsLabels: { quality: 'Qualité', custom: 'Personnalisé', delivery: 'Livraison' },
     deliveryText: '20-25 J',
     titleTemplate: (team) => `Design Maillot ${team} | MOMUTO`
+  },
+  it: {
+    host: 'https://openapi.oemapps.com',
+    token: process.env.OEMSAAS_TOKEN_IT,
+    lang: 'it',
+    label: 'it.momuto.com',
+    baseUrl: 'https://it.momuto.com',
+    handleSuffix: 'design-maglia',
+    galleryUrl: 'https://it.momuto.com/pages/galleria-maglie-personalizzate',
+    galleryHandle: 'galleria-maglie-personalizzate',
+    comparisonUrl: 'https://it.momuto.com/pages/perche-momuto',
+    galleryLabel: 'Vedi la Galleria',
+    comparisonLabel: 'Perché MOMUTO?',
+    orderUrl: 'https://it.momuto.com/pages/richiesta-design-personalizzato',
+    kitLabels: { home: 'CASA', away: 'TRASFERTA' },
+    features: [
+      { name: "Gestione dell'Umidità", desc: 'Assorbe il sudore. Sempre asciutto.' },
+      { name: 'Tessuto Elastico', desc: 'Si muove con te. Nessun vincolo.' },
+      { name: 'Durabilità Pro', desc: 'Resistenza di livello professionale.' }
+    ],
+    performanceTitle: 'Tessuto ad Alte Prestazioni. Taglio Preciso.',
+    performanceSubtitle: 'Progettato per il gioco',
+    specsLabels: { quality: 'Qualità', custom: 'Personalizzato', delivery: 'Consegna' },
+    deliveryText: '20-25 GG',
+    titleTemplate: (team) => `Design Maglia ${team} | MOMUTO`
   }
 };
 

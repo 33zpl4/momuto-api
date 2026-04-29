@@ -13,6 +13,7 @@ on:
           - en
           - es
           - fr
+          - it
       file:
         description: 'File to deploy (leave blank for all)'
         required: false
@@ -44,6 +45,7 @@ jobs:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           TARGET_DOMAIN: ${{ github.event.inputs.domain }}
           TARGET_FILE: ${{ github.event.inputs.file }}
         run: node scripts/deploy-static-files.js
