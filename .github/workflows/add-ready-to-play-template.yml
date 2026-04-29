@@ -72,7 +72,7 @@ jobs:
           if ! git diff --quiet ready-to-play/collection/; then
             git add ready-to-play/collection/
             git commit -m "Update Ready-to-Play collection cards for ${{ steps.slug.outputs.value }}"
-            git push
+            git pull --rebase origin ${{ github.ref_name }} && git push || (git pull --rebase origin ${{ github.ref_name }} && git push)
           else
             echo "No collection changes to commit"
           fi
