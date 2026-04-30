@@ -141,6 +141,12 @@
 </div>
 <div class="path-options">
 <div class="path-card" style="border-color: var(--accent-red);">
+<div class="path-icon"><i class="fas fa-tshirt"></i></div>
+<h3>Collection Pr&ecirc;t-&agrave;-Jouer</h3>
+<div class="path-for">&Eacute;quipes press&eacute;es ou qui aiment les mod&egrave;les &eacute;prouv&eacute;s</div>
+<p class="path-description">Partez de designs &eacute;prouv&eacute;s port&eacute;s par de vraies &eacute;quipes. Choisissez vos couleurs, uploadez votre blason, obtenez une maquette sous 24h. <strong>10&nbsp;% moins cher que le design sur mesure.</strong></p>
+<a href="https://fr.momuto.com/pages/collection-ready-to-play" class="path-cta path-cta-primary">Parcourir le Catalogue</a></div>
+<div class="path-card">
 <div class="path-icon"><i class="fas fa-pencil-alt"></i></div>
 <h3>Service de Design Sur Mesure</h3>
 <div class="path-for">&Eacute;quipes voulant une identit&eacute; unique et professionnelle</div>
@@ -152,16 +158,16 @@
 <div class="path-for">Cr&eacute;atifs qui veulent le contr&ocirc;le total</div>
 <p class="path-description">Utilisez notre configurateur 3D de maillots de football pour concevoir votre tenue en ligne, tester les couleurs, placer les logos et visualiser le r&eacute;sultat avant de commander.</p>
 <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr" class="path-cta">Ouvrir le Configurateur 3D</a></div>
-<div class="path-card">
-<div class="path-icon"><i class="fas fa-tshirt"></i></div>
-<h3>Collection Pr&ecirc;t-&agrave;-Jouer</h3>
-<div class="path-for">&Eacute;quipes press&eacute;es ou qui aiment les mod&egrave;les &eacute;prouv&eacute;s</div>
-<p class="path-description">Partez de designs de maillots pr&eacute;faits, choisissez vos couleurs et obtenez une voie plus rapide vers un look d&rsquo;&eacute;quipe professionnel. Maquettes garanties sous 24h.</p>
-<a href="https://fr.momuto.com/pages/collection-ready-to-play" class="path-cta">Parcourir le Catalogue</a></div>
 </div>
 <div class="comparison-section">
 <h3>Quelle option convient &agrave; votre &eacute;quipe&nbsp;?</h3>
 <div class="comparison-grid">
+<div class="comparison-card">
+<div class="comparison-icon"><i class="fas fa-tshirt"></i></div>
+<div class="comparison-option">Pr&ecirc;t-&agrave;-Jouer</div>
+<div class="comparison-best-for">Pour les &eacute;quipes qui veulent aller vite &mdash; 10&nbsp;% de r&eacute;duction</div>
+<div class="comparison-benefit">Mod&egrave;les &eacute;prouv&eacute;s, vos couleurs. La voie la plus rapide de la d&eacute;cision au terrain. 10&nbsp;% moins cher que le design sur mesure.</div>
+</div>
 <div class="comparison-card">
 <div class="comparison-icon"><i class="fas fa-pencil-alt"></i></div>
 <div class="comparison-option">Design Sur Mesure</div>
@@ -173,12 +179,6 @@
 <div class="comparison-option">Configurateur 3D</div>
 <div class="comparison-best-for">Pour les &eacute;quipes voulant le contr&ocirc;le</div>
 <div class="comparison-benefit">Concevez en ligne instantan&eacute;ment. Visualisez votre maillot en 3D avant de commander quoi que ce soit.</div>
-</div>
-<div class="comparison-card">
-<div class="comparison-icon"><i class="fas fa-tshirt"></i></div>
-<div class="comparison-option">Pr&ecirc;t-&agrave;-Jouer</div>
-<div class="comparison-best-for">Pour les &eacute;quipes qui veulent aller vite</div>
-<div class="comparison-benefit">Mod&egrave;les &eacute;prouv&eacute;s, vos couleurs. La voie la plus rapide de la d&eacute;cision au terrain.</div>
 </div>
 </div>
 </div>
