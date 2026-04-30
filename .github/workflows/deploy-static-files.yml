@@ -1,4 +1,4 @@
-name: Deploy Static Files (robots.txt / llms.txt / sitemap.xml)
+name: Deploy Static Files (robots.txt / llms.txt / sitemap.xml / blog.css)
 
 on:
   workflow_dispatch:
@@ -24,6 +24,7 @@ on:
           - robots.txt
           - llms.txt
           - sitemap.xml
+          - blog.css
   push:
     paths:
       - 'static/**'
