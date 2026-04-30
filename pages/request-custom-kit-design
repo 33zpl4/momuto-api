@@ -405,13 +405,13 @@
 <section class="how-it-works-section">
 <div class="hiw-container">
 <h2>How to get your MOMUTO kit</h2>
-<ol class="hiw-steps">
+<ul class="hiw-steps">
 <li><span class="hiw-num">1</span><div><strong>Choose your route</strong><p>Browse the <a href="https://www.momuto.com/pages/ready-to-play" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">Ready-to-Play collection</a> for proven designs at 10% off. Or submit a brief below for a fully custom design. Or <a href="https://www.momuto.com/pages/custom-soccer-jersey-designer" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">build it yourself in 3D</a>.</p></div></li>
 <li><span class="hiw-num">2</span><div><strong>Configure and submit</strong><p>Pick your colours, upload your badge and sponsor logo. For Ready-to-Play, choose from curated colour swatches. For custom, share references and let our designers interpret.</p></div></li>
 <li><span class="hiw-num">3</span><div><strong>Receive your preview</strong><p>Ready-to-Play previews arrive in 24h. Custom mockups in 24-48h. Both free. Both with at least 1 revision included.</p></div></li>
 <li><span class="hiw-num">4</span><div><strong>Approve and order</strong><p>Happy with the result? Confirm your sizes and place your order. No commitment until this step &mdash; your preview is free regardless.</p></div></li>
 <li><span class="hiw-num">5</span><div><strong>We produce and ship</strong><p>7-12 days production with full dye-sublimation printing + 10-15 days worldwide shipping. Your kits arrive in 20-25 days. Free shipping on orders over &euro;50.</p></div></li>
-</ol>
+</ul>
 <p class="hiw-internal-links">Looking for the fastest route? <a href="https://www.momuto.com/pages/ready-to-play">Ready-to-Play kits start at &euro;19.70 with 24h previews.</a><br>Want to see what other clubs ordered? <a href="https://www.momuto.com/pages/teams-clubs-momuto">Browse the full team gallery.</a></p>
 </div>
 </section>
