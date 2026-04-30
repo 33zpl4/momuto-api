@@ -7,28 +7,28 @@ const DOMAINS = {
     label: 'momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt']
+    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
   },
   es: {
     token: process.env.OEMSAAS_TOKEN_ES,
     label: 'es.momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'es.momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt']
+    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
   },
   fr: {
     token: process.env.OEMSAAS_TOKEN_FR,
     label: 'fr.momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'fr.momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt']
+    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
   },
   it: {
     token: process.env.OEMSAAS_TOKEN_IT,
     label: 'it.momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'it.momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt']
+    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
   }
 };
 
@@ -36,9 +36,9 @@ const DOMAINS = {
 const SHARED_DIR = path.join('static', 'shared');
 
 function getFilePath(domain, filename) {
-  if (filename === 'llms.txt' && domain.label === 'momuto.com') {
-    return path.join(SHARED_DIR, 'llms.txt');
-  }
+  // Shared files served identically across all stores
+  if (filename === 'blog.css') return path.join(SHARED_DIR, 'blog.css');
+  if (filename === 'llms.txt' && domain.label === 'momuto.com') return path.join(SHARED_DIR, 'llms.txt');
   return path.join(domain.staticDir, filename);
 }
 
