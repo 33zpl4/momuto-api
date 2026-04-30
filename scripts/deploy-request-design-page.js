@@ -3,6 +3,17 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 
+const SHARED_CSS = path.join(ROOT, 'shared', 'design-request.css');
+const SHARED_JS  = path.join(ROOT, 'shared', 'design-request.js');
+
+function injectShared(template) {
+  const css = fs.readFileSync(SHARED_CSS, 'utf8');
+  const js  = fs.readFileSync(SHARED_JS,  'utf8');
+  return template
+    .replace('<!-- inject:design-request.css -->', `<style>\n${css}\n</style>`)
+    .replace('<!-- inject:design-request.js -->',  `<script>\n${js}\n</script>`);
+}
+
 const DOMAINS = {
   en: {
     host: 'https://openapi.oemapps.com',
@@ -89,7 +100,8 @@ async function deployLocale(locale) {
     throw new Error(`Source file not found: ${domain.file}`);
   }
 
-  const repoContent = fs.readFileSync(domain.file, 'utf8');
+  const template = fs.readFileSync(domain.file, 'utf8');
+  const repoContent = injectShared(template);
   sanityCheck(repoContent, domain.file);
 
   const page = await getPageByHandle(domain);

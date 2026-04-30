@@ -7,6 +7,8 @@ on:
       - 'pages/request-custom-kit-design'
       - 'pages/solicitud-de-diseno-personalizado'
       - 'pages/demande-de-design-professionnel-de-maillots'
+      - 'shared/design-request.css'
+      - 'shared/design-request.js'
       - 'scripts/deploy-request-design-page.js'
       - '.github/workflows/deploy-request-design-page.yml'
   workflow_dispatch:
