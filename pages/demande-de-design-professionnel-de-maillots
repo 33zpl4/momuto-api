@@ -79,6 +79,34 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Comment fonctionne le service de design gratuit de maillots de football de MOMUTO ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Soumettez votre brief via le formulaire — nom d'équipe, blason, couleurs et références. Nos designers créent une maquette entièrement personnalisée en 24–48 heures, gratuitement. Toutes les révisions sont également gratuites jusqu'à votre satisfaction. Sans engagement jusqu'à la confirmation de commande." }
+    },
+    {
+      "@type": "Question",
+      "name": "Y a-t-il un minimum de commande pour les maillots de football personnalisés MOMUTO ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Non. MOMUTO n'a aucun minimum de commande. Vous pouvez commander un seul maillot ou une équipe complète de 50+. Les prix commencent à 20,90€ par maillot pour les commandes importantes et 38,90€ pour un maillot individuel." }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien de temps faut-il pour recevoir des maillots de football personnalisés MOMUTO ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La production prend 7–12 jours. L'expédition prend 10–15 jours dans le monde entier. Le délai de livraison total est généralement de 20–25 jours à compter de la confirmation de commande. Livraison gratuite pour les commandes supérieures à 50€." }
+    },
+    {
+      "@type": "Question",
+      "name": "Puis-je soumettre mon propre design ou un concept de maillot généré par IA à MOMUTO ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Oui. Si vous avez créé un concept de maillot avec des outils comme ChatGPT, Midjourney, Gemini ou tout autre logiciel de design, vous pouvez le télécharger via le formulaire de design personnalisé. Pour les commandes de 10+ maillots, MOMUTO adapte votre design pour la production sans frais supplémentaires. Pour les commandes plus petites ou les designs complexes, un acompte de 30€ s'applique — intégralement déduit de votre commande finale. Même qualité de production, même délai de livraison." }
+    }
+  ]
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <style>
     /* ===== BASE STYLES (MOMUTO PREMIUM) ===== */
@@ -174,7 +202,10 @@
         max-width: 700px;
         margin: 1.5rem auto 0;
         line-height: 1.7;
+        text-align: center;
+        padding: 0;
     }
+    .mo-editor-reset .hero-intro { display: block; margin-inline-start: auto; margin-inline-end: auto; margin-top: 1.5rem; }
 
     /* ===== SOCIAL PROOF STRIP ===== */
     .social-proof-strip {
@@ -1158,7 +1189,7 @@
 <div class="path-icon"><i class="fas fa-pencil-alt"></i></div>
 <h3>Service de Design Sur Mesure</h3>
 <div class="path-for">&Eacute;quipes voulant une identit&eacute; unique et professionnelle</div>
-<p class="path-description">Travaillez avec notre &eacute;quipe pour cr&eacute;er un maillot de football enti&egrave;rement personnalis&eacute; pour votre club. Sans templates, r&eacute;visions gratuites et une identit&eacute; professionnelle construite autour de vos couleurs, blason et r&eacute;f&eacute;rences.</p>
+<p class="path-description">Travaillez avec notre &eacute;quipe pour cr&eacute;er un maillot enti&egrave;rement original &mdash; ou adaptez un design que vous avez d&eacute;j&agrave; cr&eacute;&eacute; (g&eacute;n&eacute;r&eacute; par IA, dessin&eacute; &agrave; la main, ou cr&eacute;&eacute; avec n&rsquo;importe quel outil). Maquette gratuite sous 24-48h, r&eacute;visions gratuites, sans engagement.</p>
 <a href="#cta-form" class="path-cta">Demander un Design Gratuit</a></div>
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-cube"></i></div>
@@ -1276,13 +1307,13 @@
 <section class="how-it-works-section">
 <div class="hiw-container">
 <h2>Comment fonctionne le service de design de maillots MOMUTO</h2>
-<ol class="hiw-steps">
+<ul class="hiw-steps">
 <li><span class="hiw-num">1</span><div><strong>Partagez votre brief</strong><p>Indiquez-nous le nom de votre &eacute;quipe, votre blason, vos couleurs et toute r&eacute;f&eacute;rence. Soumettez via le formulaire ci-dessous, WhatsApp ou email. Cela prend 2 minutes.</p></div></li>
 <li><span class="hiw-num">2</span><div><strong>Recevez votre maquette sous 24&ndash;48h</strong><p>Nos designers cr&eacute;ent une maquette de maillot de football enti&egrave;rement personnalis&eacute;e, gratuitement.</p></div></li>
 <li><span class="hiw-num">3</span><div><strong>Demandez des r&eacute;visions si n&eacute;cessaire</strong><p>Toutes les r&eacute;visions sont gratuites. Nous affinons jusqu&rsquo;&agrave; votre satisfaction.</p></div></li>
 <li><span class="hiw-num">4</span><div><strong>Confirmez les tailles et les d&eacute;tails de commande</strong><p>Soumettez votre r&eacute;partition de tailles et nous pr&eacute;parons la production.</p></div></li>
 <li><span class="hiw-num">5</span><div><strong>Nous produisons et exp&eacute;dions vos maillots</strong><p>7&ndash;12 jours de production + 10&ndash;15 jours d&rsquo;exp&eacute;dition. Vos maillots arrivent en 20&ndash;25 jours dans le monde entier.</p></div></li>
-</ol>
+</ul>
 <p class="hiw-internal-links">Vous pr&eacute;f&eacute;rez concevoir vous-m&ecirc;me&nbsp;? <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr">Utilisez notre configurateur 3D de maillots.</a><br />Vous voulez voir ce que d&rsquo;autres clubs ont command&eacute;&nbsp;? <a href="https://fr.momuto.com/pages/equipes-clubs-momuto">Parcourez la galerie compl&egrave;te des &eacute;quipes.</a></p>
 </div>
 </section>
@@ -1291,7 +1322,7 @@
 <div class="form-content" id="cta-form">
 <div class="form-intro">
 <h2>Option 1&nbsp;: Demandez Votre Design Sur Mesure</h2>
-<p>Vous avez choisi le parcours design sur mesure&nbsp;? Compl&eacute;tez votre brief ci-dessous et recevez votre design unique sous 24-48h.</p>
+<p>Vous voulez quelque chose d&rsquo;unique&nbsp;? Compl&eacute;tez votre brief ci-dessous et recevez une maquette professionnelle gratuite sous 24-48h. Vous avez d&eacute;j&agrave; un design&nbsp;? T&eacute;l&eacute;chargez-le ci-dessous &mdash; nous l&rsquo;adapterons pour la production.</p>
 </div>
 <div class="progress-indicator">
 <div class="progress-step active"><span class="step-label">1</span> <span class="step-text">D&eacute;tails</span></div>
@@ -1315,6 +1346,11 @@
 <div id="fileNameDisplay"></div>
 <div id="logoPreview" style="margin-top: 10px; max-width: 100px;"></div>
 </div>
+</div>
+<div class="form-section-inner">
+<h4>1b. Vous avez d&eacute;j&agrave; un concept de design&nbsp;?</h4>
+<p style="font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-bottom: 15px; font-weight: 300;">Vous avez cr&eacute;&eacute; quelque chose avec ChatGPT, Midjourney, Gemini ou un autre outil&nbsp;? T&eacute;l&eacute;chargez-le ici et nous l&rsquo;adapterons pour la production. Ignorez cette &eacute;tape si vous voulez que nous concevions depuis z&eacute;ro.</p>
+<div class="custom-file-upload"><label for="designConcept"><i class="fas fa-upload"></i> T&eacute;l&eacute;charger le Concept</label> <input type="file" id="designConcept" name="design_concept" accept="image/*,.pdf" onchange="previewDesign(this)" /><div id="designNameDisplay"></div><div id="designPreview" style="margin-top: 10px; max-width: 200px;"></div></div>
 </div>
 <div class="form-section-inner">
 <h4>2. Couleurs Principales</h4>
@@ -1402,6 +1438,10 @@
 <div class="faq-item">
 <h3>Puis-je concevoir le maillot moi-m&ecirc;me plut&ocirc;t que de demander une maquette&nbsp;?</h3>
 <p>Oui. Utilisez notre <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr">configurateur 3D de maillots</a> pour concevoir votre tenue en ligne en temps r&eacute;el. Vous pouvez &eacute;galement parcourir notre <a href="https://fr.momuto.com/pages/collection-ready-to-play">collection pr&ecirc;t-&agrave;-jouer</a> si vous pr&eacute;f&eacute;rez partir de templates &eacute;prouv&eacute;s.</p>
+</div>
+<div class="faq-item">
+<h3>Puis-je soumettre mon propre design ou un concept g&eacute;n&eacute;r&eacute; par IA&nbsp;?</h3>
+<p>Oui. Si vous avez cr&eacute;&eacute; un concept de maillot avec des outils comme ChatGPT, Midjourney, Gemini ou tout autre logiciel de design, vous pouvez le t&eacute;l&eacute;charger via le formulaire de design personnalis&eacute;. Pour les commandes de 10+ maillots, nous adaptons votre design pour la production sans frais suppl&eacute;mentaires. Pour les commandes plus petites ou les designs complexes, un acompte de &euro;30 s&rsquo;applique &mdash; int&eacute;gralement d&eacute;duit de votre commande finale. M&ecirc;me qualit&eacute; de production, m&ecirc;me d&eacute;lai de livraison.</p>
 </div>
 </div>
 </div>
@@ -1497,6 +1537,17 @@
             document.getElementById('cta-form').scrollIntoView({behavior: 'smooth'});
         });
     });
+
+    function previewDesign(input) {
+        const preview = document.getElementById('designPreview');
+        const nameDisplay = document.getElementById('designNameDisplay');
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            nameDisplay.textContent = input.files[0].name;
+            reader.onload = function(e) { preview.innerHTML = '<img src="' + e.target.result + '" style="width:100%; border: 1px solid rgba(255,255,255,0.1);">'; };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
     function previewLogo(input) {
         const preview = document.getElementById('logoPreview');
