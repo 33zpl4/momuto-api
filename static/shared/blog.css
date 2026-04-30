@@ -1,0 +1,246 @@
+/* ═══════════════════════════════════════════════════════════════
+   MOMUTO — Shared Blog Styles
+   Deployed via scripts/deploy-blog-css.js to all four stores.
+   Targets: Post Detail (news/detail) + Post List (news/list)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Fonts ─────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Design tokens ─────────────────────────────────────────────── */
+:root {
+  --mg-red:     #c8352e;
+  --mg-text:    #3a3a3a;
+  --mg-muted:   #71717a;
+  --mg-surface: #f5f5f3;
+  --mg-border:  #e4e4e7;
+  --mg-dark:    #0a0a0a;
+}
+
+/* ── CMS-injected post title (.title) ──────────────────────────── */
+/* Restyled — not hidden. The CMS renders this; we don't add our own H1. */
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  color: var(--mg-dark);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  margin-bottom: 1rem;
+}
+
+/* ── Prose container ───────────────────────────────────────────── */
+.post-content,
+.news-detail-content {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--mg-text);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ── Headings ──────────────────────────────────────────────────── */
+.post-content h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  color: var(--mg-dark);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.post-content h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--mg-dark);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Links ─────────────────────────────────────────────────────── */
+.post-content a {
+  color: var(--mg-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── Images ────────────────────────────────────────────────────── */
+.post-content img {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin: 2rem auto;
+  display: block;
+  border-radius: 2px;
+}
+
+/* ── Tables ────────────────────────────────────────────────────── */
+.post-content table,
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+}
+
+.post-content table th,
+.data-table th {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mg-muted);
+  border-bottom: 2px solid var(--mg-border);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+}
+
+.post-content table td,
+.data-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--mg-border);
+}
+
+/* ── TL;DR / Key Takeaways box ─────────────────────────────────── */
+.tldr-box {
+  background: var(--mg-surface);
+  border: 1px solid var(--mg-border);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0 2rem;
+  font-size: 0.95rem;
+}
+
+.tldr-box strong,
+.tldr-box b {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mg-muted);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.tldr-box ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.tldr-box li {
+  margin-bottom: 0.35rem;
+}
+
+/* ── Pull quotes ───────────────────────────────────────────────── */
+.post-content blockquote,
+.pull-quote {
+  border-left: 3px solid var(--mg-red);
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  margin: 2rem 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--mg-dark);
+}
+
+/* ── Callout / Pro-tip box ─────────────────────────────────────── */
+.callout-box {
+  background: var(--mg-surface);
+  border: 1px solid var(--mg-border);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* ── Post meta line (category · date · reading time) ───────────── */
+.post-meta {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mg-muted);
+  margin-bottom: 1.25rem;
+}
+
+.post-meta .category-tag {
+  color: var(--mg-red);
+  margin-right: 0.75rem;
+}
+
+/* ── Author entity ─────────────────────────────────────────────── */
+.author-bio {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 3rem 0 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--mg-border);
+  font-size: 0.9rem;
+}
+
+.author-bio img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.author-bio .author-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--mg-dark);
+}
+
+.author-bio .author-role {
+  font-size: 0.72rem;
+  color: var(--mg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── End CTA card ──────────────────────────────────────────────── */
+.cta-card {
+  border: 2px solid var(--mg-red);
+  border-radius: 4px;
+  padding: 1.75rem 2rem;
+  margin: 3rem 0 1rem;
+  text-align: center;
+}
+
+.cta-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  color: var(--mg-dark);
+  margin: 0 0 0.5rem;
+}
+
+.cta-card p {
+  color: var(--mg-muted);
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+}
+
+.cta-card a {
+  display: inline-block;
+  background: var(--mg-red);
+  color: #fff !important;
+  text-decoration: none !important;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;
+  transition: opacity 0.15s;
+}
+
+.cta-card a:hover {
+  opacity: 0.88;
+}

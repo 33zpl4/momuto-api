@@ -1,0 +1,41 @@
+name: Translate Blog Posts to Italian
+
+on:
+  workflow_dispatch:
+    inputs:
+      post_handle:
+        description: 'EN post handle to translate (blank = all posts)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run — preview translations without writing to CMS'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Translate blog posts
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          POST_HANDLE: ${{ github.event.inputs.post_handle }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/translate-blog-posts.js
