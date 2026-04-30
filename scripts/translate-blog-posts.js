@@ -102,19 +102,22 @@ Rules:
 
 Translate the following blog post metadata from English to Italian.
 - The handle (URL slug) must be Italian: lowercase, hyphens only, SEO-friendly (not word-for-word)
-- meta_title under 60 chars, meta_descript under 155 chars
-- Return ONLY valid JSON, no markdown fences
+- META_TITLE must be under 60 characters
+- META_DESC must be under 155 characters
 
-${JSON.stringify(metaSource, null, 2)}
+Source:
+TITLE: ${metaSource.title}
+HANDLE: ${metaSource.handle}
+SUMMARY: ${metaSource.summary}
+META_TITLE: ${metaSource.meta_title}
+META_DESC: ${metaSource.meta_descript}
 
-Return this exact JSON structure:
-{
-  "title": "...",
-  "handle": "...",
-  "summary": "...",
-  "meta_title": "...",
-  "meta_descript": "..."
-}`;
+Reply with EXACTLY these 5 lines and nothing else — no JSON, no HTML, no extra text:
+TITLE: <translated>
+HANDLE: <slug>
+SUMMARY: <translated>
+META_TITLE: <translated>
+META_DESC: <translated>`;
 
   const metaResponse = await withRetry(() => client.messages.create({
     model: 'claude-sonnet-4-6',
@@ -122,12 +125,24 @@ Return this exact JSON structure:
     messages: [{ role: 'user', content: metaPrompt }],
   }));
 
-  const metaRaw = metaResponse.content[0].text.trim().replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
-  let meta;
-  try {
-    meta = JSON.parse(metaRaw);
-  } catch (err) {
-    throw new Error(`Claude returned invalid JSON for metadata: ${err.message}\n---\n${metaRaw.slice(0, 500)}`);
+  const metaRaw = metaResponse.content[0].text.trim();
+  const metaLines = {};
+  for (const line of metaRaw.split('\n')) {
+    const colon = line.indexOf(':');
+    if (colon === -1) continue;
+    const key = line.slice(0, colon).trim().toUpperCase();
+    const val = line.slice(colon + 1).trim();
+    metaLines[key] = val;
+  }
+  const meta = {
+    title: metaLines['TITLE'] || metaSource.title,
+    handle: metaLines['HANDLE'] || metaSource.handle,
+    summary: metaLines['SUMMARY'] || metaSource.summary,
+    meta_title: metaLines['META_TITLE'] || metaSource.meta_title,
+    meta_descript: metaLines['META_DESC'] || metaSource.meta_descript,
+  };
+  if (!meta.title || !meta.handle) {
+    throw new Error(`Metadata translation incomplete. Raw response:\n${metaRaw.slice(0, 500)}`);
   }
 
   // Call 2: HTML content only — returned as raw HTML, no JSON wrapper
