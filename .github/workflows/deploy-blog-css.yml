@@ -1,0 +1,49 @@
+name: Deploy Blog CSS
+
+on:
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Store to deploy to (blank = all)'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - en
+          - es
+          - fr
+          - it
+      dry_run:
+        description: 'Dry run — preview without writing to CMS'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+  push:
+    paths:
+      - 'static/shared/blog.css'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Deploy blog CSS
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          TARGET_DOMAIN: ${{ github.event.inputs.domain }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/deploy-blog-css.js
