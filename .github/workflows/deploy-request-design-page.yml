@@ -1,0 +1,43 @@
+name: Deploy Request Design Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pages/request-custom-kit-design'
+      - 'pages/solicitud-de-diseno-personalizado'
+      - 'pages/demande-de-design-professionnel-de-maillots'
+      - 'scripts/deploy-request-design-page.js'
+      - '.github/workflows/deploy-request-design-page.yml'
+  workflow_dispatch:
+    inputs:
+      locales:
+        description: 'Comma-separated locales to deploy (en,es,fr)'
+        required: false
+        default: 'en,es,fr'
+      dry_run:
+        description: 'Dry run (do not write to CMS)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Deploy request design pages
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          LOCALES: ${{ inputs.locales || 'en,es,fr' }}
+          DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+        run: node scripts/deploy-request-design-page.js
