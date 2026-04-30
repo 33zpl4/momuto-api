@@ -1,0 +1,40 @@
+name: Audit & Fix English Blog Posts
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — audit only, no writes to CMS'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      post_handle:
+        description: 'Restrict to one post handle (blank = all posts)'
+        required: false
+        default: ''
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Audit and fix English blog posts
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          POST_HANDLE: ${{ github.event.inputs.post_handle }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/audit-and-fix-english-posts.js
