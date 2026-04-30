@@ -94,6 +94,10 @@
       "@type": "Question",
       "name": "What printing method does MOMUTO use?",
       "acceptedAnswer": { "@type": "Answer", "text": "MOMUTO uses full dye-sublimation printing on a polyester-elastane performance blend. Sublimation means colors are embedded into the fabric — not printed on top — so they never peel, crack, or fade." }
+    },{
+      "@type": "Question",
+      "name": "Can I submit my own design or an AI-generated football kit concept to MOMUTO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. If you've created a kit concept using tools like ChatGPT, Midjourney, Gemini, or any design software, you can upload it through the custom design form. For orders of 10+ kits, MOMUTO adapts your design for production at no extra cost. For smaller orders or complex designs, a €30 design adaptation deposit applies — fully deducted from your final order. Same production quality, same delivery timeline." }
     }
   ]
 }
@@ -322,7 +326,7 @@
 <div class="path-icon"><i class="fas fa-pencil-alt"></i></div>
 <h3>Custom Design Service</h3>
 <div class="path-for">100% unique &middot; Free mockup &middot; Free revisions included</div>
-<p class="path-description">Want something nobody else has? Our designers create a fully original kit from your brief &mdash; crest, colours, references. Free mockup in 24-48h, free revisions, no commitment. From &euro;21.90/jersey.</p>
+<p class="path-description">Want something nobody else has? Our designers create a fully original kit from your brief &mdash; or adapt a design you've already created (AI-generated, hand-drawn, or from any tool). Free mockup in 24-48h, free revisions, no commitment. From &euro;21.90/jersey.</p>
 <a href="#cta-form" class="path-cta">Request Free Design</a>
 </div>
 
@@ -418,7 +422,7 @@
 <div class="form-content" id="cta-form">
 <div class="form-intro">
 <h2>Request Your Custom Design</h2>
-<p>Want something fully unique? Complete your brief below and receive a free professional mockup in 24-48h. Prefer a faster route? <a href="https://www.momuto.com/pages/ready-to-play" style="color:var(--accent-red);text-decoration:underline;font-weight:700;">Browse Ready-to-Play designs at 10% off &rarr;</a></p>
+<p>Want something fully unique? Complete your brief below and receive a free professional mockup in 24-48h. Already have a design? Upload it below &mdash; we'll adapt it for production. Prefer a faster route? <a href="https://www.momuto.com/pages/ready-to-play" style="color:var(--accent-red);text-decoration:underline;font-weight:700;">Browse Ready-to-Play designs at 10% off &rarr;</a></p>
 </div>
 <div class="progress-indicator">
 <div class="progress-step active"><span class="step-label">1</span> <span class="step-text">Details</span></div>
@@ -446,6 +450,11 @@
 <div class="form-section-inner">
 <h4>1. Team Badge</h4>
 <div class="custom-file-upload"><label for="clubCrest"><i class="fas fa-upload"></i> Upload File</label> <input type="file" id="clubCrest" name="upload_file" accept="image/*" onchange="previewLogo(this)" /><div id="fileNameDisplay"></div><div id="logoPreview" style="margin-top: 10px; max-width: 100px;"></div></div>
+</div>
+<div class="form-section-inner">
+<h4>1b. Already have a design concept?</h4>
+<p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 15px; font-weight: 300;">Created something with ChatGPT, Midjourney, Gemini, or any other tool? Upload it here and we'll adapt it for production. Skip this if you want us to design from scratch.</p>
+<div class="custom-file-upload"><label for="designConcept"><i class="fas fa-upload"></i> Upload Design Concept</label> <input type="file" id="designConcept" name="design_concept" accept="image/*,.pdf" onchange="previewDesign(this)" /><div id="designNameDisplay"></div><div id="designPreview" style="margin-top: 10px; max-width: 200px;"></div></div>
 </div>
 <div class="form-section-inner">
 <h4>2. Main Colors</h4>
@@ -511,6 +520,10 @@
 <div class="faq-item"><h3>What printing method does MOMUTO use?</h3><p>MOMUTO uses full dye-sublimation printing on a polyester-elastane performance blend. Sublimation means colors are embedded into the fabric &mdash; not printed on top &mdash; so they never peel, crack, or fade. This applies to both Ready-to-Play and custom design kits.</p></div>
 <div class="faq-item"><h3>Can I design the kit myself instead of requesting a mockup?</h3><p>Yes. Use our <a href="https://www.momuto.com/pages/custom-soccer-jersey-designer">3D soccer jersey designer</a> to build your kit online in real time. You can also browse the <a href="https://www.momuto.com/pages/ready-to-play">Ready-to-Play collection</a> if you prefer to start from proven designs &mdash; with a 10% discount and 24h previews.</p></div>
 <div class="faq-item"><h3>Do Ready-to-Play kits include shorts?</h3><p>Yes. Each Ready-to-Play design is available as jersey only (from &euro;19.70) or as a full kit with matching shorts (from &euro;24.20). Orders of 10+ full kits also include a free team flag with your crest and a captain armband.</p></div>
+<div class="faq-item">
+<h3>Can I submit my own design or an AI-generated concept?</h3>
+<p>Yes. If you've created a kit concept using tools like ChatGPT, Midjourney, Gemini, or any design software, you can upload it through the custom design form. For orders of 10+ kits, we adapt your design for production at no extra cost. For smaller orders or complex designs, a &euro;30 design adaptation deposit applies &mdash; fully deducted from your final order. Same production quality, same delivery timeline.</p>
+</div>
 </div>
 </div>
 </section>
@@ -558,6 +571,16 @@
             const reader = new FileReader();
             nameDisplay.textContent = input.files[0].name;
             reader.onload = function(e) { preview.innerHTML = `<img src="${e.target.result}" style="width:100%; border-radius:4px;">`; };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function previewDesign(input) {
+        const preview = document.getElementById('designPreview');
+        const nameDisplay = document.getElementById('designNameDisplay');
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            nameDisplay.textContent = input.files[0].name;
+            reader.onload = function(e) { preview.innerHTML = '<img src="' + e.target.result + '" style="width:100%; border: 1px solid rgba(255,255,255,0.1);">'; };
             reader.readAsDataURL(input.files[0]);
         }
     }
