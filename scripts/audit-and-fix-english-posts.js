@@ -91,20 +91,25 @@ function codeAudit(post) {
 
   if (!post.summary && !post.excerpt) issues.push('missing post summary/excerpt');
 
+  // CMS injects the title as .title — post content must NOT include its own H1.
   const h1Count = (content.match(/<h1[\s>]/gi) || []).length;
-  if (h1Count === 0) issues.push('no <h1> tag');
-  else if (h1Count > 1) issues.push(`multiple <h1> tags (${h1Count}) — only one allowed`);
+  if (h1Count > 0) issues.push(`has ${h1Count} <h1> in content — remove it, CMS injects the title via .title`);
 
   if (!/<h2[\s>]/i.test(content)) issues.push('no <h2> headings');
   if (!/<h3[\s>]/i.test(content)) issues.push('no <h3> headings');
 
   const hasTable = /<table[\s>]/i.test(content);
-  const hasChecklist = /checklist|<ul[\s>]/i.test(content);
+  const hasChecklist = /<ul[\s>]/i.test(content);
   if (!hasTable && !hasChecklist) issues.push('no data interstitial (table or checklist)');
 
-  if (!content.includes('Bebas Neue') && !content.includes('bebas')) {
-    issues.push('missing Bebas Neue font (brand typography not loaded)');
-  }
+  // Inline <style> blocks belong in blog.css, not in post content.
+  if (/<style[\s>]/i.test(content)) issues.push('has inline <style> block — move styles to blog.css and remove');
+
+  // Check for shared component classes from blog.css
+  const hasTldrClass = /class="[^"]*tldr-box/.test(content);
+  const hasCtaClass  = /class="[^"]*cta-card/.test(content);
+  if (!hasTldrClass) issues.push('not using .tldr-box class (add a Key Takeaways box near the top)');
+  if (!hasCtaClass)  issues.push('not using .cta-card class (add a CTA block at the end)');
 
   // Rough word count from stripped HTML
   const wordCount = content.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
@@ -137,6 +142,11 @@ Post metadata:
 
 Post content (HTML):
 ${truncated}
+
+Architecture notes (reflect these in your audit):
+- The CMS auto-injects the post title as an h1.title element — post content must NOT contain its own <h1>
+- Shared CSS (blog.css) is loaded globally — post content should NOT contain <style> blocks
+- Component classes to look for: .tldr-box, .cta-card, .author-bio, .pull-quote, .callout-box
 
 Return ONLY this JSON (no markdown, no explanation):
 {
