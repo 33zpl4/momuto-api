@@ -125,6 +125,7 @@
     .hero h3 { font-family: var(--font-body); font-size: 1.15rem; font-weight: 300; color: var(--text-muted); margin: 0 auto; max-width: 700px; line-height: 1.5; }
     .hero-intro { font-family: var(--font-body); font-size: 0.95rem; font-weight: 300; color: var(--text-dim); max-width: 700px; margin: 1.5rem auto 0; line-height: 1.7; text-align: center; padding: 0; }
     .hero-intro strong { color: var(--text-muted); font-weight: 600; }
+    .mo-editor-reset .hero-intro { display: block; margin-inline-start: auto; margin-inline-end: auto; margin-top: 1.5rem; }
     .social-proof-strip { background: var(--bg-panel); padding: 3rem 20px; border-bottom: 1px solid var(--border-color); }
     .proof-container { max-width: 1200px; margin: 0 auto; text-align: center; }
     .proof-stats { display: flex; justify-content: center; gap: 4rem; margin-bottom: 2rem; flex-wrap: wrap; }
