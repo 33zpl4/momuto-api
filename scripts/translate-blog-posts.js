@@ -37,6 +37,8 @@ const IT = {
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
 const HANDLE_FILTER = process.env.POST_HANDLE || '';
+// PATCH_META=true: skip content translation, only update src/status/metadata on existing IT posts
+const PATCH_META = process.env.PATCH_META === 'true';
 
 async function withRetry(fn, maxAttempts = 4) {
   const delays = [5000, 15000, 30000];
@@ -81,6 +83,25 @@ async function fetchAll(domain, endpoint) {
 
 function getHandle(item) {
   return item.handle || item.alias || item.slug || item.url_key || null;
+}
+
+async function translateMetaOnly(post) {
+  const handle = getHandle(post);
+  const prompt = `You are translating a blog post handle/slug for MOMUTO (it.momuto.com), an Italian-language custom football kit website.
+
+Translate this English URL slug to Italian: "${handle}"
+- Lowercase, hyphens only, SEO-friendly natural Italian (not word-for-word)
+- Context: post title is "${post.title || ''}"
+
+Reply with EXACTLY one line — the Italian slug only, nothing else.`;
+
+  const response = await withRetry(() => client.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 64,
+    messages: [{ role: 'user', content: prompt }],
+  }));
+
+  return { handle: response.content[0].text.trim().toLowerCase().replace(/\s+/g, '-') };
 }
 
 async function translatePost(post) {
@@ -233,10 +254,56 @@ async function main() {
 
   for (const post of toProcess) {
     const enHandle = getHandle(post);
-    console.log(`\n[${enHandle}] Translating...`);
+    console.log(`\n[${enHandle}]${PATCH_META ? ' Patching metadata...' : ' Translating...'}`);
 
-    console.log(`  → src: ${post.src || 'none'}`);
+    // PATCH_META mode: translate only metadata to find the Italian handle, then
+    // update just src/status on the existing IT post — content is left untouched.
+    if (PATCH_META) {
+      let itHandle;
+      try {
+        const meta = await translateMetaOnly(post);
+        itHandle = meta.handle;
+        console.log(`  → it handle: ${itHandle}`);
+      } catch (err) {
+        console.error(`  ❌ Handle translation failed: ${err.message}`);
+        errors.push({ handle: enHandle, error: `handle translation: ${err.message}` });
+        continue;
+      }
 
+      const existing = itPosts.find(p => getHandle(p) === itHandle);
+      if (!existing) {
+        console.warn(`  ⚠️  No IT post found with handle "${itHandle}" — skipping`);
+        continue;
+      }
+
+      if (DRY_RUN) {
+        console.log(`  DRY_RUN — would patch src/status on post ${existing.id}`);
+        console.log(`  → src: ${post.src || 'none'}`);
+        continue;
+      }
+
+      try {
+        await updatePost(existing.id, {
+          title: existing.title,
+          handle: existing.handle,
+          summary: existing.summary || '',
+          content: existing.content || '',
+          meta_title: existing.meta_title || '',
+          meta_descript: existing.meta_descript || '',
+          status: post.status ?? 1,
+          ...(post.src ? { src: post.src } : {}),
+          ...(post.image_alt ? { image_alt: post.image_alt } : {}),
+          ...(post.author_name ? { author_name: post.author_name } : {}),
+        });
+        console.log(`  ✓ Patched  → ${IT.baseUrl}/blogs/${itHandle}`);
+      } catch (err) {
+        console.error(`  ❌ Patch failed: ${err.message}`);
+        errors.push({ handle: enHandle, error: `patch: ${err.message}` });
+      }
+      continue;
+    }
+
+    // Full translation mode
     let translated;
     try {
       translated = await translatePost(post);
@@ -280,7 +347,6 @@ async function main() {
       }
     } catch (err) {
       console.error(`  ❌ Upsert failed: ${err.message}`);
-      // If POST is unsupported, give a clear action
       if (err.message.includes('POST /posts failed')) {
         console.error(`     The OEMSaaS /posts API may not support creation via API.`);
         console.error(`     Create the post manually on ${IT.label}, then re-run to update it.`);

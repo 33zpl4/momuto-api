@@ -15,6 +15,14 @@ on:
         options:
           - 'false'
           - 'true'
+      patch_meta:
+        description: 'Patch metadata only (image/status) — skip content re-translation'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
 
 jobs:
   translate:
@@ -38,4 +46,5 @@ jobs:
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           POST_HANDLE: ${{ github.event.inputs.post_handle }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
+          PATCH_META: ${{ github.event.inputs.patch_meta }}
         run: node scripts/translate-blog-posts.js
