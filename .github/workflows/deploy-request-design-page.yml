@@ -7,6 +7,7 @@ on:
       - 'pages/request-custom-kit-design'
       - 'pages/solicitud-de-diseno-personalizado'
       - 'pages/demande-de-design-professionnel-de-maillots'
+      - 'pages/richiesta-design-personalizzato'
       - 'shared/design-request.css'
       - 'shared/design-request.js'
       - 'scripts/deploy-request-design-page.js'
@@ -14,9 +15,9 @@ on:
   workflow_dispatch:
     inputs:
       locales:
-        description: 'Comma-separated locales to deploy (en,es,fr)'
+        description: 'Comma-separated locales to deploy (en,es,fr,it)'
         required: false
-        default: 'en,es,fr'
+        default: 'en,es,fr,it'
       dry_run:
         description: 'Dry run (do not write to CMS)'
         required: false
@@ -40,6 +41,7 @@ jobs:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
-          LOCALES: ${{ inputs.locales || 'en,es,fr' }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          LOCALES: ${{ inputs.locales || 'en,es,fr,it' }}
           DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
         run: node scripts/deploy-request-design-page.js
