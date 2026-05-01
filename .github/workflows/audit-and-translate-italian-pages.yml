@@ -1,0 +1,40 @@
+name: Audit & Translate Italian Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — detect language only, no writes to CMS'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      page_handle:
+        description: 'Restrict to one page handle (blank = all pages)'
+        required: false
+        default: ''
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Audit and translate Italian pages
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          PAGE_HANDLE: ${{ github.event.inputs.page_handle }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/audit-and-translate-italian-pages.js
