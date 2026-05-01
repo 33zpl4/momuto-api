@@ -235,7 +235,7 @@ async function main() {
     const enHandle = getHandle(post);
     console.log(`\n[${enHandle}] Translating...`);
 
-    console.log(`  → post fields: ${JSON.stringify(Object.fromEntries(Object.entries(post).filter(([k]) => k !== 'content')))}`);
+    console.log(`  → src: ${post.src || 'none'}`);
 
     let translated;
     try {
@@ -262,13 +262,10 @@ async function main() {
       content: translated.content,
       meta_title: translated.meta_title,
       meta_descript: translated.meta_descript,
-      // Mirror the EN post's published status so IT posts go live immediately
-      ...(post.status !== undefined ? { status: post.status } : {}),
-      ...(post.is_published !== undefined ? { is_published: post.is_published } : {}),
-      ...(post.published !== undefined ? { published: post.published } : {}),
-      ...(post.image ? { image: post.image } : {}),
-      ...(post.cover ? { cover: post.cover } : {}),
-      ...(post.author ? { author: post.author } : {}),
+      status: post.status ?? 1,
+      ...(post.src ? { src: post.src } : {}),
+      ...(post.image_alt ? { image_alt: post.image_alt } : {}),
+      ...(post.author_name ? { author_name: post.author_name } : {}),
     };
 
     const existing = itPosts.find(p => getHandle(p) === translated.handle);
