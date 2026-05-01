@@ -85,23 +85,36 @@ function getHandle(item) {
   return item.handle || item.alias || item.slug || item.url_key || null;
 }
 
-async function translateMetaOnly(post) {
-  const handle = getHandle(post);
-  const prompt = `You are translating a blog post handle/slug for MOMUTO (it.momuto.com), an Italian-language custom football kit website.
+async function matchPostsByTitle(enPosts, itPosts) {
+  // Build prompt listing EN titles and IT titles, ask Claude to match them
+  const enList = enPosts.map((p, i) => `EN${i}: ${p.title}`).join('\n');
+  const itList = itPosts.map((p, i) => `IT${i}: ${p.title}`).join('\n');
 
-Translate this English URL slug to Italian: "${handle}"
-- Lowercase, hyphens only, SEO-friendly natural Italian (not word-for-word)
-- Context: post title is "${post.title || ''}"
+  const prompt = `Match each English blog post title to its Italian translation counterpart.
 
-Reply with EXACTLY one line — the Italian slug only, nothing else.`;
+English posts:
+${enList}
+
+Italian posts:
+${itList}
+
+Reply with ONLY lines in this format (one per matched pair, skip unmatched):
+EN0 = IT5
+EN1 = IT12
+...`;
 
   const response = await withRetry(() => client.messages.create({
     model: 'claude-sonnet-4-6',
-    max_tokens: 64,
+    max_tokens: 1024,
     messages: [{ role: 'user', content: prompt }],
   }));
 
-  return { handle: response.content[0].text.trim().toLowerCase().replace(/\s+/g, '-') };
+  const mapping = new Map(); // enIndex → itIndex
+  for (const line of response.content[0].text.trim().split('\n')) {
+    const m = line.match(/EN(\d+)\s*=\s*IT(\d+)/);
+    if (m) mapping.set(parseInt(m[1]), parseInt(m[2]));
+  }
+  return mapping;
 }
 
 async function translatePost(post) {
@@ -252,56 +265,70 @@ async function main() {
 
   const errors = [];
 
-  for (const post of toProcess) {
-    const enHandle = getHandle(post);
-    console.log(`\n[${enHandle}]${PATCH_META ? ' Patching metadata...' : ' Translating...'}`);
+  // PATCH_META mode: use one Claude call to match EN→IT posts by title,
+  // then update only src/status — no content re-translation.
+  if (PATCH_META) {
+    console.log('\nMatching EN posts to IT posts by title...');
+    let mapping;
+    try {
+      mapping = await matchPostsByTitle(toProcess, itPosts);
+      console.log(`Matched ${mapping.size}/${toProcess.length} posts`);
+    } catch (err) {
+      console.error(`❌ Title matching failed: ${err.message}`);
+      process.exit(1);
+    }
 
-    // PATCH_META mode: translate only metadata to find the Italian handle, then
-    // update just src/status on the existing IT post — content is left untouched.
-    if (PATCH_META) {
-      let itHandle;
-      try {
-        const meta = await translateMetaOnly(post);
-        itHandle = meta.handle;
-        console.log(`  → it handle: ${itHandle}`);
-      } catch (err) {
-        console.error(`  ❌ Handle translation failed: ${err.message}`);
-        errors.push({ handle: enHandle, error: `handle translation: ${err.message}` });
+    for (let i = 0; i < toProcess.length; i++) {
+      const enPost = toProcess[i];
+      const enHandle = getHandle(enPost);
+      const itIndex = mapping.get(i);
+
+      if (itIndex === undefined) {
+        console.warn(`\n[${enHandle}] ⚠️  No IT match found — skipping`);
         continue;
       }
 
-      const existing = itPosts.find(p => getHandle(p) === itHandle);
-      if (!existing) {
-        console.warn(`  ⚠️  No IT post found with handle "${itHandle}" — skipping`);
-        continue;
-      }
+      const itPost = itPosts[itIndex];
+      console.log(`\n[${enHandle}] → "${itPost.title}" (${getHandle(itPost)})`);
+      console.log(`  src: ${enPost.src || 'none'}`);
 
       if (DRY_RUN) {
-        console.log(`  DRY_RUN — would patch src/status on post ${existing.id}`);
-        console.log(`  → src: ${post.src || 'none'}`);
+        console.log(`  DRY_RUN — would patch post ${itPost.id}`);
         continue;
       }
 
       try {
-        await updatePost(existing.id, {
-          title: existing.title,
-          handle: existing.handle,
-          summary: existing.summary || '',
-          content: existing.content || '',
-          meta_title: existing.meta_title || '',
-          meta_descript: existing.meta_descript || '',
-          status: post.status ?? 1,
-          ...(post.src ? { src: post.src } : {}),
-          ...(post.image_alt ? { image_alt: post.image_alt } : {}),
-          ...(post.author_name ? { author_name: post.author_name } : {}),
+        await updatePost(itPost.id, {
+          title: itPost.title,
+          handle: itPost.handle,
+          summary: itPost.summary || '',
+          content: itPost.content || '',
+          meta_title: itPost.meta_title || '',
+          meta_descript: itPost.meta_descript || '',
+          status: enPost.status ?? 1,
+          ...(enPost.src ? { src: enPost.src } : {}),
+          ...(enPost.image_alt ? { image_alt: enPost.image_alt } : {}),
+          ...(enPost.author_name ? { author_name: enPost.author_name } : {}),
         });
-        console.log(`  ✓ Patched  → ${IT.baseUrl}/blogs/${itHandle}`);
+        console.log(`  ✓ Patched → ${IT.baseUrl}/blogs/${itPost.handle}`);
       } catch (err) {
         console.error(`  ❌ Patch failed: ${err.message}`);
         errors.push({ handle: enHandle, error: `patch: ${err.message}` });
       }
-      continue;
     }
+
+    if (errors.length > 0) {
+      console.error(`\n⚠️  Completed with ${errors.length} error(s):`);
+      errors.forEach(e => console.error(`  - [${e.handle}] ${e.error}`));
+      process.exit(1);
+    }
+    console.log('\n✅ Patch complete.');
+    return;
+  }
+
+  for (const post of toProcess) {
+    const enHandle = getHandle(post);
+    console.log(`\n[${enHandle}] Translating...`);
 
     // Full translation mode
     let translated;
