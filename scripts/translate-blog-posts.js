@@ -260,6 +260,10 @@ async function main() {
       content: translated.content,
       meta_title: translated.meta_title,
       meta_descript: translated.meta_descript,
+      // Mirror the EN post's published status so IT posts go live immediately
+      ...(post.status !== undefined ? { status: post.status } : {}),
+      ...(post.is_published !== undefined ? { is_published: post.is_published } : {}),
+      ...(post.published !== undefined ? { published: post.published } : {}),
       ...(post.image ? { image: post.image } : {}),
       ...(post.cover ? { cover: post.cover } : {}),
       ...(post.author ? { author: post.author } : {}),
