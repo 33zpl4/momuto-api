@@ -235,6 +235,8 @@ async function main() {
     const enHandle = getHandle(post);
     console.log(`\n[${enHandle}] Translating...`);
 
+    console.log(`  → image:      ${JSON.stringify(post.image ?? post.cover ?? null)}`);
+
     let translated;
     try {
       translated = await translatePost(post);
