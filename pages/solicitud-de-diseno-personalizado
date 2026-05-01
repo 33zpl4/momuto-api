@@ -188,7 +188,7 @@
 </div>
 </div>
 </div>
-<div style="text-align: center;"><a href="https://www.momuto.es/pages/equipos-momuto" class="view-gallery-btn">Ver Galer&iacute;a Completa</a></div>
+<div style="text-align: center;"><a href="https://es.momuto.com/pages/equipos-momuto" class="view-gallery-btn">Ver Galer&iacute;a Completa</a></div>
 </div>
 </section>
 <section class="why-section">
@@ -241,7 +241,7 @@
 <li><span class="hiw-num">4</span><div><strong>Confirma tallas y detalles del pedido</strong><p>Env&iacute;a el desglose de tallas y preparamos la producci&oacute;n.</p></div></li>
 <li><span class="hiw-num">5</span><div><strong>Producimos y enviamos tu equipaci&oacute;n</strong><p>7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Tu equipaci&oacute;n llega en 20&ndash;25 d&iacute;as en todo el mundo.</p></div></li>
 </ul>
-<p class="hiw-internal-links">&iquest;Buscas la v&iacute;a m&aacute;s r&aacute;pida? <a href="https://es.momuto.com/pages/coleccion-ready-to-play">La colecci&oacute;n Lista para Jugar empieza desde 19,70&euro; con maquetas en 24h.</a><br />&iquest;Quieres ver lo que han pedido otros clubes? <a href="https://www.momuto.es/pages/equipos-momuto">Explora la galer&iacute;a completa de equipos.</a></p>
+<p class="hiw-internal-links">&iquest;Buscas la v&iacute;a m&aacute;s r&aacute;pida? <a href="https://es.momuto.com/pages/coleccion-ready-to-play">La colecci&oacute;n Lista para Jugar empieza desde 19,70&euro; con maquetas en 24h.</a><br />&iquest;Quieres ver lo que han pedido otros clubes? <a href="https://es.momuto.com/pages/equipos-momuto">Explora la galer&iacute;a completa de equipos.</a></p>
 </div>
 </section>
 <section class="form-section">
@@ -323,7 +323,7 @@
 <h3>&iexcl;Todo Listo!</h3>
 <p style="color: rgba(255,255,255,0.7);">Revisa tus detalles y env&iacute;a. Recibir&aacute;s tu dise&ntilde;o en 24-48h.</p>
 </div>
-<div class="terms-checkbox"><input type="checkbox" id="termsAccept" name="termsAccept" required="" /> <label for="termsAccept"> Acepto la <a href="https://www.momuto.es/pages/politica-de-privacidad" target="_blank" rel="noopener">pol&iacute;tica de privacidad</a>. </label></div>
+<div class="terms-checkbox"><input type="checkbox" id="termsAccept" name="termsAccept" required="" /> <label for="termsAccept"> Acepto la <a href="https://es.momuto.com/pages/politica-privacidad" target="_blank" rel="noopener">pol&iacute;tica de privacidad</a>. </label></div>
 <div class="form-navigation"><button type="button" class="prev-step">ATR&Aacute;S</button> <button type="submit" class="submit-form">ENVIAR SOLICITUD</button></div>
 </div>
 <input type="hidden" id="primaryColorValue" name="primaryColorValue" value="#e2214b" /> <input type="hidden" id="secondaryColorValue" name="secondaryColorValue" value="#ffffff" /></form></div>
