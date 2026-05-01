@@ -160,7 +160,9 @@ ${post.content || ''}`;
     messages: [{ role: 'user', content: contentPrompt }],
   }));
 
-  const translatedContent = contentResponse.content[0].text.trim();
+  // Strip inline <style> blocks — covered by the shared blog.css DIY file
+  const translatedContent = contentResponse.content[0].text.trim()
+    .replace(/<style[\s\S]*?<\/style>/gi, '').trim();
 
   return {
     title: meta.title,

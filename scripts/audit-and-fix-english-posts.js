@@ -181,6 +181,13 @@ Return ONLY this JSON (no markdown, no explanation):
   }
 }
 
+// ─── Inline style stripping ───────────────────────────────────────────────────
+
+function stripInlineStyles(content) {
+  // Remove all <style>...</style> blocks — covered by shared blog.css DIY file
+  return content.replace(/<style[\s\S]*?<\/style>/gi, '').trim();
+}
+
 // ─── French → English translation ─────────────────────────────────────────────
 
 async function translateToEnglish(post) {
@@ -261,12 +268,14 @@ function renderReport(results) {
 
   const geoIssueCounts = {};
   let frenchCount = 0;
+  let strippedCount = 0;
   let postsWithIssues = 0;
 
   for (const r of results) {
     const allIssues = [...r.codeIssues, ...(r.claudeAudit?.geo_issues || [])];
     if (allIssues.length > 0) postsWithIssues++;
     if (r.claudeAudit?.language !== 'en') frenchCount++;
+    if (r.stylesStripped) strippedCount++;
 
     console.log(`\n┌─ [${r.index}/${results.length}] ${r.handle}`);
     console.log(`│  Title: ${r.title || '(none)'}`);
@@ -278,6 +287,11 @@ function renderReport(results) {
     console.log(`│  ${langIcon} Language: ${lang.toUpperCase()}${r.claudeAudit?.language_note ? ` — ${r.claudeAudit.language_note}` : ''}`);
     if (r.translated) {
       console.log(`│  🔄 Translated FR→EN: new handle "${r.translated.handle}"`);
+    }
+    if (r.stylesStripped) {
+      console.log(`│  🧹 Inline <style> block stripped`);
+    }
+    if (r.translated || r.stylesStripped) {
       if (r.updateError) console.log(`│  ❌ Update failed: ${r.updateError}`);
       else if (!DRY_RUN) console.log(`│  ✅ Updated on momuto.com`);
       else console.log(`│  ⚠️  DRY_RUN — update skipped`);
@@ -318,9 +332,10 @@ function renderReport(results) {
   console.log(`\n${'═'.repeat(66)}`);
   console.log('SUMMARY');
   console.log(`${'─'.repeat(66)}`);
-  console.log(`  Total posts:           ${results.length}`);
-  console.log(`  Non-English posts:     ${frenchCount}${frenchCount > 0 && !DRY_RUN ? ' → translated and updated' : frenchCount > 0 ? ' → DRY_RUN (not updated)' : ''}`);
-  console.log(`  Posts with any issue:  ${postsWithIssues}/${results.length}`);
+  console.log(`  Total posts:              ${results.length}`);
+  console.log(`  Non-English posts:        ${frenchCount}${frenchCount > 0 && !DRY_RUN ? ' → translated and updated' : frenchCount > 0 ? ' → DRY_RUN (not updated)' : ''}`);
+  console.log(`  Inline styles stripped:   ${strippedCount}${strippedCount > 0 && !DRY_RUN ? ' → cleaned and updated' : strippedCount > 0 ? ' → DRY_RUN (not updated)' : ''}`);
+  console.log(`  Posts with any issue:     ${postsWithIssues}/${results.length}`);
 
   if (Object.keys(geoIssueCounts).length > 0) {
     console.log(`\n  Most common issues (sorted by frequency):`);
@@ -340,7 +355,7 @@ async function main() {
   if (!EN.token) throw new Error('OEMSAAS_TOKEN_EN not set');
   if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY not set');
 
-  console.log(`Mode: ${DRY_RUN ? 'DRY RUN (no writes)' : 'LIVE (will update French posts)'}`);
+  console.log(`Mode: ${DRY_RUN ? 'DRY RUN (no writes)' : 'LIVE (will update French posts + strip inline styles)'}`);
   if (HANDLE_FILTER) console.log(`Filter: ${HANDLE_FILTER}`);
 
   console.log(`\nFetching posts from ${EN.label}...`);
@@ -374,6 +389,7 @@ async function main() {
     let claudeAuditResult = null;
     let auditError = null;
     let translated = null;
+    let stylesStripped = false;
     let updateError = null;
 
     try {
@@ -384,24 +400,55 @@ async function main() {
       console.log(' ⚠️  audit error');
     }
 
-    // Translate if French (and token present)
+    // Build the final content and fields for the PUT (one write covers both fixes)
+    let finalContent = post.content || '';
+    let finalFields = null; // non-null means we need a PUT
+
+    // Step 1: translate if French
     if (claudeAuditResult?.language === 'fr') {
       process.stdout.write(' [translating FR→EN]');
       try {
         translated = await translateToEnglish(post);
-        if (!DRY_RUN) {
-          const postData = {
-            title: translated.title,
-            handle: translated.handle,
-            summary: translated.summary,
-            content: translated.content,
-            meta_title: translated.meta_title,
-            meta_descript: translated.meta_descript,
-            ...(post.image ? { image: post.image } : {}),
-            ...(post.cover ? { cover: post.cover } : {}),
-          };
-          await updatePost(post.id, postData);
-        }
+        finalContent = translated.content || finalContent;
+        finalFields = {
+          title: translated.title,
+          handle: translated.handle,
+          summary: translated.summary,
+          meta_title: translated.meta_title,
+          meta_descript: translated.meta_descript,
+          ...(post.image ? { image: post.image } : {}),
+          ...(post.cover ? { cover: post.cover } : {}),
+        };
+      } catch (err) {
+        updateError = err.message;
+        hasErrors = true;
+      }
+    }
+
+    // Step 2: strip inline <style> blocks (applies to all posts, including just-translated ones)
+    const cleanedContent = stripInlineStyles(finalContent);
+    if (cleanedContent !== finalContent) {
+      stylesStripped = true;
+      finalContent = cleanedContent;
+      process.stdout.write(' [stripping inline styles]');
+      // Ensure we have a finalFields object to trigger the PUT
+      if (!finalFields) {
+        finalFields = {
+          title: post.title,
+          handle: handle,
+          summary: post.summary || post.excerpt || '',
+          meta_title: post.meta_title || '',
+          meta_descript: post.meta_descript || '',
+          ...(post.image ? { image: post.image } : {}),
+          ...(post.cover ? { cover: post.cover } : {}),
+        };
+      }
+    }
+
+    // Single PUT covering translation + style strip
+    if (finalFields && !DRY_RUN && !updateError) {
+      try {
+        await updatePost(post.id, { ...finalFields, content: finalContent });
       } catch (err) {
         updateError = err.message;
         hasErrors = true;
@@ -419,6 +466,7 @@ async function main() {
       claudeAudit: claudeAuditResult,
       auditError,
       translated,
+      stylesStripped,
       updateError,
     });
   }
