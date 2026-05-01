@@ -1,0 +1,317 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Kit da Calcio Personalizzato MOMUTO",
+  "description": "Kit da calcio completamente personalizzabile con stampa a sublimazione totale. Tessuto poliestere-elastan ad alte prestazioni come standard. Tre modi per ordinare: kit Ready-to-Play pre-disegnati al 10% di sconto (da 19,70€/maglia), servizio di design personalizzato gratuito (mockup in 24-48h), o costruttore 3D in tempo reale. Senza ordine minimo. Consegna in 20-25 giorni in tutto il mondo.",
+  "brand": { "@type": "Brand", "name": "MOMUTO" },
+  "category": "Kit da Calcio Personalizzati",
+  "material": "Tessuto poliestere-elastan ad alte prestazioni (standard su tutti i kit)",
+  "color": "Completamente personalizzabile",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "19.70",
+    "highPrice": "38.90",
+    "offerCount": "3",
+    "availability": "https://schema.org/InStock",
+    "priceValidUntil": "2026-12-31",
+    "seller": { "@type": "Organization", "name": "MOMUTO" },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": { "@type": "QuantitativeValue", "minValue": 7, "maxValue": 12, "unitCode": "DAY" },
+        "transitTime": { "@type": "QuantitativeValue", "minValue": 10, "maxValue": 15, "unitCode": "DAY" }
+      },
+      "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "EUR" }
+    }
+  },
+  "hasVariant": [
+    {
+      "@type": "Product",
+      "name": "Kit da Calcio Ready-to-Play",
+      "description": "Template di kit da calcio pre-disegnati creati dai designer MOMUTO e indossati da veri club. Scegli i tuoi colori, carica il tuo stemma, ricevi un'anteprima professionale in 24h. Il 10% più economico del design personalizzato.",
+      "url": "https://it.momuto.com/pages/collezione-ready-to-play",
+      "offers": { "@type": "Offer", "price": "19.70", "priceCurrency": "EUR", "description": "Prezzo maglia Ready-to-Play (10% di sconto vs personalizzato). Kit completo da 24,20€." }
+    },
+    {
+      "@type": "Product",
+      "name": "Kit da Calcio Design Personalizzato",
+      "description": "Kit da calcio completamente su misura progettato da zero dal team di design MOMUTO. Mockup professionale gratuito in 24-48h, revisioni gratuite incluse, nessun impegno fino all'ordine.",
+      "offers": { "@type": "Offer", "price": "21.90", "priceCurrency": "EUR", "description": "Prezzo maglia personalizzata da 10+ unità. Kit completo da 26,90€." }
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.4",
+    "reviewCount": "17",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Ordine Minimo", "value": "Senza minimo — ordina 1 kit o 100+" },
+    { "@type": "PropertyValue", "name": "Metodo di Stampa", "value": "Sublimazione totale — garanzia a vita contro scrostatura, crepe o scolorimento" },
+    { "@type": "PropertyValue", "name": "Collezione Ready-to-Play", "value": "6 template pre-disegnati al 10% di sconto vs personalizzato. Anteprima in 24h." },
+    { "@type": "PropertyValue", "name": "Servizio di Design", "value": "Mockup di design professionale gratuito in 24-48h, revisioni gratuite incluse" },
+    { "@type": "PropertyValue", "name": "Configuratore 3D", "value": "Configuratore di kit 3D in tempo reale con 30+ template professionali" },
+    { "@type": "PropertyValue", "name": "Tessuto", "value": "Misto poliestere-elastan come standard — i competitor includono l'elastan solo nei livelli premium" },
+    { "@type": "PropertyValue", "name": "Consegna", "value": "7-12 giorni di produzione + 10-15 giorni di spedizione = 20-25 giorni totali in tutto il mondo" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Cos'è la collezione Ready-to-Play di MOMUTO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ready-to-Play è la collezione di template di kit da calcio pre-disegnati da designer professionisti e già indossati da veri club. Scegli un design, i colori della tua squadra, carica il tuo stemma e ricevi un'anteprima personalizzata entro 24 ore. I kit Ready-to-Play costano il 10% in meno rispetto al design personalizzato — da 19,70€ a maglia — perché salti la fase di design mantenendo la stessa qualità." }
+    },
+    {
+      "@type": "Question",
+      "name": "Come funziona il servizio di design gratuito di MOMUTO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Invia il tuo brief tramite il modulo — nome della squadra, stemma, colori e qualsiasi riferimento. I designer MOMUTO creano un mockup completamente personalizzato in 24-48 ore, gratuitamente. Tutte le revisioni sono incluse fino alla tua soddisfazione. Nessun impegno fino alla conferma dell'ordine." }
+    },
+    {
+      "@type": "Question",
+      "name": "C'è un ordine minimo per le maglie da calcio personalizzate?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. MOMUTO non ha ordine minimo. Puoi ordinare una sola maglia o una squadra completa di 50+. I prezzi partono da 19,70€ a maglia per il Ready-to-Play o 21,90€ per il design personalizzato su ordini più grandi." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto tempo ci vuole per ricevere le maglie da calcio personalizzate?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La produzione richiede 7-12 giorni. La spedizione richiede 10-15 giorni in tutto il mondo. Il tempo totale di consegna è tipicamente 20-25 giorni dalla conferma dell'ordine. Spedizione gratuita su ordini superiori a 50€." }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso inviare il mio design o un concept generato dall'IA?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sì. Se hai creato un concept di kit con strumenti come ChatGPT, Midjourney, Gemini o qualsiasi software di design, puoi caricarlo tramite il modulo. Per ordini di 10+ kit, MOMUTO adatta il tuo design per la produzione senza costi aggiuntivi. Per ordini più piccoli o design complessi, si applica un deposito di adattamento di 30€ — interamente detratto dall'ordine finale." }
+    },
+    {
+      "@type": "Question",
+      "name": "Che metodo di stampa usa MOMUTO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "MOMUTO utilizza la stampa a sublimazione totale su tessuto misto poliestere-elastan. La sublimazione significa che i colori vengono incorporati nel tessuto — non stampati sopra — quindi non si scrostano, creano né scoloriscono mai." }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<!-- inject:design-request.css -->
+<header class="hero full-bleed">
+<div class="hero-content">
+<h1>Maglie da Calcio Personalizzate per <span class="highlight">Squadre Amateur</span></h1>
+<h3>Qualit&agrave; professionale da 19,70&euro; a maglia &mdash; le disegniamo noi o scegli dalla nostra collezione</h3>
+<p class="hero-intro">MOMUTO aiuta le squadre di calcio amateur a creare kit personalizzati attraverso tre vie: una <strong>collezione Ready-to-Play</strong> con design collaudati al 10% di sconto, un <strong>servizio di design personalizzato gratuito</strong> con mockup in 24-48h, o un <strong>configuratore 3D in tempo reale</strong>. Senza ordine minimo. Stampa professionale a sublimazione. Consegna mondiale in 20-25 giorni.</p>
+</div>
+</header>
+<section class="social-proof-strip">
+<div class="proof-container">
+<div class="proof-stats">
+<div class="proof-stat"><span class="stat-number">100+</span><div class="stat-label">Squadre Soddisfatte</div></div>
+<div class="proof-stat"><span class="stat-number">10+</span><div class="stat-label">Paesi</div></div>
+<div class="proof-stat"><span class="stat-number">98%</span><div class="stat-label">Soddisfazione</div></div>
+</div>
+<div class="proof-teams"><span class="proof-team">Madrid &bull; ETSII</span> <span class="proof-team">Danimarca &bull; Superliga</span> <span class="proof-team">Francia &bull; D&eacute;partemental</span> <span class="proof-team">Canarias &bull; Superliga</span></div>
+</div>
+</section>
+<section class="path-section">
+<div class="path-container">
+<div class="path-header">
+<h2>Design Kit da Calcio Personalizzato per Squadre, Club e Tornei</h2>
+<p>Che tu voglia design collaudati con sconto, un&rsquo;identit&agrave; totalmente originale, o controllo totale &mdash; MOMUTO ti offre tre modi per creare un kit da calcio professionale.</p>
+</div>
+<div class="path-options">
+<div class="path-card" style="border-color: var(--accent-red);">
+<div class="path-icon"><i class="fas fa-tshirt"></i></div>
+<h3>Collezione Ready-to-Play</h3>
+<div class="path-for">Design collaudati &middot; 10% di sconto &middot; Anteprima in 24h</div>
+<p class="path-description">Design creati dal nostro team, indossati da veri club. Scegline uno, scegli i tuoi colori, carica il tuo stemma &mdash; fatto. Stessa qualit&agrave; del design personalizzato, 10% in meno, e pi&ugrave; veloce. Da 19,70&euro; a maglia.</p>
+<a href="https://it.momuto.com/pages/collezione-ready-to-play" class="path-cta path-cta-primary">Sfoglia il Catalogo</a></div>
+<div class="path-card">
+<div class="path-icon"><i class="fas fa-pencil-alt"></i></div>
+<h3>Servizio di Design Personalizzato</h3>
+<div class="path-for">100% unico &middot; Mockup gratuito &middot; Revisioni gratuite incluse</div>
+<p class="path-description">Vuoi qualcosa che nessun altro ha? I nostri designer creano un kit completamente originale dal tuo brief &mdash; o adattano un design che hai gi&agrave; creato (generato da IA, disegnato a mano, o creato con qualsiasi strumento). Mockup gratuito in 24-48h, revisioni gratuite, senza impegno. Da 21,90&euro; a maglia.</p>
+<a href="#cta-form" class="path-cta">Richiedi Design Gratuito</a></div>
+<div class="path-card">
+<div class="path-icon"><i class="fas fa-cube"></i></div>
+<h3>Configuratore 3D</h3>
+<div class="path-for">Progettalo tu stesso &middot; Anteprima istantanea</div>
+<p class="path-description">Preferisci il controllo totale? Usa il nostro configuratore 3D per progettare il tuo kit online &mdash; scegli template, prova i colori, posiziona i loghi e visualizza il risultato in tempo reale prima di ordinare.</p>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it" class="path-cta">Apri il Configuratore 3D</a></div>
+</div>
+<div class="comparison-section">
+<h3>Quale opzione &egrave; giusta per la tua squadra?</h3>
+<div class="comparison-grid">
+<div class="comparison-card" style="border-left: 3px solid var(--accent-red);">
+<div class="comparison-icon"><i class="fas fa-tshirt"></i></div>
+<div class="comparison-option">Ready-to-Play</div>
+<div class="comparison-best-for">Per le squadre che vogliono velocit&agrave; &mdash; 10% di sconto</div>
+<div class="comparison-benefit">Design collaudati indossati da veri club. Scegli i colori, anteprima in 24h, 10% in meno del design personalizzato. Da 19,70&euro; a maglia. Kit completi disponibili.</div>
+</div>
+<div class="comparison-card">
+<div class="comparison-icon"><i class="fas fa-pencil-alt"></i></div>
+<div class="comparison-option">Design Personalizzato</div>
+<div class="comparison-best-for">Per le squadre che vogliono un&rsquo;identit&agrave; unica</div>
+<div class="comparison-benefit">Kit completamente originale creato da zero. Mockup gratuito in 24-48h, revisioni gratuite incluse, senza impegno. Da 21,90&euro; a maglia.</div>
+</div>
+<div class="comparison-card">
+<div class="comparison-icon"><i class="fas fa-cube"></i></div>
+<div class="comparison-option">Configuratore 3D</div>
+<div class="comparison-best-for">Per le squadre che vogliono controllo totale</div>
+<div class="comparison-benefit">Progetta online in tempo reale. 30+ template, anteprima 3D istantanea. Costruisci esattamente quello che vuoi, poi ordina.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="action-teaser">
+<div class="teaser-container">
+<div class="teaser-header">
+<h2>Guarda i Nostri Kit in Azione</h2>
+<p>Squadre reali, partite reali, passione autentica</p>
+</div>
+<div class="action-grid">
+<div class="action-preview"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg" alt="Atl&eacute;tico Guanche in azione" /><div class="action-overlay"><div class="team-name">Atl&eacute;tico Guanche</div><div class="team-location">Las Palmas &bull; Superliga</div></div></div>
+<div class="action-preview"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg" alt="Olympique Mehunois in azione" /><div class="action-overlay"><div class="team-name">Olympique Mehunois</div><div class="team-location">Francia &bull; D&eacute;partemental</div></div></div>
+<div class="action-preview"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg" alt="Mango CF in azione" /><div class="action-overlay"><div class="team-name">Mango CF</div><div class="team-location">Madrid &bull; ETSII</div></div></div>
+<div class="action-preview"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg" alt="Elche Koslovaco in azione" /><div class="action-overlay"><div class="team-name">Elche Koslovaco</div><div class="team-location">Las Palmas &bull; Superliga</div></div></div>
+</div>
+<div style="text-align: center;"><a href="https://it.momuto.com/pages/squadre-club-momuto" class="view-gallery-btn">Guarda la Galleria Completa</a></div>
+</div>
+</section>
+<section class="why-section">
+<div class="why-container">
+<div class="why-header">
+<h2>Perch&eacute; le Squadre Scelgono MOMUTO</h2>
+<p>Dal prezzo alla consegna alla qualit&agrave; del tessuto, le squadre scelgono MOMUTO per gli stessi motivi: costo per giocatore pi&ugrave; basso, consegna pi&ugrave; rapida, supporto al design gratuito e nessun ordine minimo. Stai confrontando con fornitori come Owayo, Spized o Jersix? Abbiamo analizzato le differenze nella nostra <a href="https://it.momuto.com/pages/confronto-fornitori-maglie-calcio">comparativa completa dei kit</a>.</p>
+</div>
+<div class="why-grid">
+<div class="why-card"><div class="why-card-icon"><i class="fas fa-truck"></i></div><h3>Consegna Pi&ugrave; Rapida</h3><p>20&ndash;25 giorni in tutto il mondo dalla conferma dell&rsquo;ordine: 7&ndash;12 giorni di produzione + 10&ndash;15 giorni di spedizione. Spedizione gratuita su ordini superiori a 50&euro;.</p></div>
+<div class="why-card"><div class="why-card-icon"><i class="fas fa-tag"></i></div><h3>Prezzo Migliore per Squadra</h3><p>Ready-to-Play da 19,70&euro; a maglia. Personalizzato da 21,90&euro;. Kit singoli 38,90&euro;. Senza ordine minimo &mdash; nessun acquisto in blocco forzato.</p></div>
+<div class="why-card"><div class="why-card-icon"><i class="fas fa-layer-group"></i></div><h3>Tessuto ad Alte Prestazioni come Standard</h3><p>Misto poliestere-elastan su ogni kit &mdash; non riservato ai livelli premium. Assorbe il sudore, si muove con te, costruito per durare tutta la stagione.</p></div>
+<div class="why-card"><div class="why-card-icon"><i class="fas fa-pencil-ruler"></i></div><h3>Design Professionale Gratuito</h3><p>Mockup personalizzato consegnato in 24&ndash;48h, revisioni gratuite incluse. O scegli il Ready-to-Play per un design collaudato con anteprima in 24h e 10% di sconto.</p></div>
+<div class="why-card"><div class="why-card-icon"><i class="fas fa-box-open"></i></div><h3>Senza Ordine Minimo</h3><p>Ordina 1 kit o 100+. Nessun supplemento campione, nessun acquisto in blocco forzato. Ogni ordine &mdash; per quanto piccolo &mdash; riceve la stessa qualit&agrave; di produzione.</p></div>
+<div class="why-card"><div class="why-card-icon"><i class="fas fa-award"></i></div><h3>Finiture Premium</h3><p>Stampa a sublimazione totale con garanzia a vita contro scrostatura o scolorimento. Stemmi 3D in silicone opzionali disponibili per ordini pi&ugrave; grandi.</p></div>
+</div>
+</div>
+</section>
+<section class="how-it-works-section">
+<div class="hiw-container">
+<h2>Come ottenere il tuo kit MOMUTO</h2>
+<ul class="hiw-steps">
+<li><span class="hiw-num">1</span><div><strong>Scegli la tua via</strong><p>Sfoglia la <a href="https://it.momuto.com/pages/collezione-ready-to-play" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">collezione Ready-to-Play</a> per design collaudati al 10% di sconto. O invia un brief per un design completamente personalizzato. O <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">costruiscilo tu stesso in 3D</a>.</p></div></li>
+<li><span class="hiw-num">2</span><div><strong>Configura e invia</strong><p>Scegli i tuoi colori, carica il tuo stemma e logo sponsor. Per il Ready-to-Play, scegli dalla palette di colori. Per il personalizzato, condividi i riferimenti e lascia che i nostri designer interpretino.</p></div></li>
+<li><span class="hiw-num">3</span><div><strong>Ricevi la tua anteprima</strong><p>Le anteprime Ready-to-Play arrivano in 24h. I mockup personalizzati in 24-48h. Entrambi gratuiti. Entrambi con almeno 1 revisione inclusa.</p></div></li>
+<li><span class="hiw-num">4</span><div><strong>Approva e ordina</strong><p>Soddisfatto del risultato? Conferma le taglie e fai l&rsquo;ordine. Nessun impegno fino a questo momento &mdash; l&rsquo;anteprima &egrave; gratuita indipendentemente.</p></div></li>
+<li><span class="hiw-num">5</span><div><strong>Produciamo e spediamo</strong><p>7-12 giorni di produzione con stampa a sublimazione totale + 10-15 giorni di spedizione mondiale. I tuoi kit arrivano in 20-25 giorni. Spedizione gratuita su ordini superiori a 50&euro;.</p></div></li>
+</ul>
+<p class="hiw-internal-links">Cerchi la via pi&ugrave; rapida? <a href="https://it.momuto.com/pages/collezione-ready-to-play">I kit Ready-to-Play partono da 19,70&euro; con anteprime in 24h.</a><br />Vuoi vedere cosa hanno ordinato altri club? <a href="https://it.momuto.com/pages/squadre-club-momuto">Sfoglia la galleria completa delle squadre.</a></p>
+</div>
+</section>
+<section class="form-section">
+<div class="form-container">
+<div class="form-content" id="cta-form">
+<div class="form-intro">
+<h2>Richiedi il Tuo Design Personalizzato</h2>
+<p>Vuoi qualcosa di completamente unico? Compila il brief e ricevi un mockup professionale gratuito in 24-48h. Hai gi&agrave; un design? Caricalo qui sotto &mdash; lo adattiamo per la produzione. Preferisci una via pi&ugrave; rapida? <a href="https://it.momuto.com/pages/collezione-ready-to-play" style="color:var(--accent-red);text-decoration:underline;font-weight:700;">Sfoglia i design Ready-to-Play con il 10% di sconto &rarr;</a></p>
+</div>
+<div class="progress-indicator">
+<div class="progress-step active"><span class="step-label">1</span> <span class="step-text">Dettagli</span></div>
+<div class="progress-step" id="progress2"><span class="step-label">2</span> <span class="step-text">Stile</span></div>
+<div class="progress-step" id="progress3"><span class="step-label">3</span> <span class="step-text">Invia</span></div>
+</div>
+<div id="formContentWrapper"><form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://formsubmit.co/info@momuto.com"><input type="hidden" name="_subject" value="Nuova Richiesta Design Personalizzato (Italiano)" /> <input type="hidden" name="_captcha" value="false" /> <input type="hidden" name="_enctype" value="multipart/form-data" /> <input type="hidden" name="_next" value="https://it.momuto.com/pages/design-personalizzato-confermato" />
+<div class="form-step active" id="step1">
+<div class="form-section-inner">
+<div class="input-group"><input type="text" id="customerName" name="firstname" placeholder="Il Tuo Nome / Manager" required="" /></div>
+<div class="input-group"><input type="email" id="customerEmail" name="email" placeholder="Email di Contatto" required="" /></div>
+<div class="input-group"><input type="text" id="teamName" name="company" placeholder="Nome della Squadra" required="" /></div>
+<div class="input-group"><input type="text" id="leagueName" name="industry" placeholder="Campionato o Torneo" required="" /></div>
+</div>
+<div class="form-navigation" style="justify-content: flex-end;"><button type="button" class="next-step">PASSO SUCCESSIVO</button></div>
+</div>
+<div class="form-step" id="step2">
+<div class="form-section-inner">
+<h4>1. Stemma della Squadra</h4>
+<div class="custom-file-upload"><label for="clubCrest"><i class="fas fa-upload"></i> Carica File</label> <input type="file" id="clubCrest" name="upload_file" accept="image/*" onchange="previewLogo(this)" /><div id="fileNameDisplay"></div><div id="logoPreview" style="margin-top: 10px; max-width: 100px;"></div></div>
+</div>
+<div class="form-section-inner">
+<h4>1b. Hai gi&agrave; un concept di design?</h4>
+<p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 15px; font-weight: 300;">Hai creato qualcosa con ChatGPT, Midjourney, Gemini o qualsiasi altro strumento? Caricalo qui e lo adattiamo per la produzione. Salta questo se vuoi che progettiamo da zero.</p>
+<div class="custom-file-upload"><label for="designConcept"><i class="fas fa-upload"></i> Carica Concept di Design</label> <input type="file" id="designConcept" name="design_concept" accept="image/*,.pdf" onchange="previewDesign(this)" /><div id="designNameDisplay"></div><div id="designPreview" style="margin-top: 10px; max-width: 200px;"></div></div>
+</div>
+<div class="form-section-inner">
+<h4>2. Colori Principali</h4>
+<div class="colors-row">
+<div class="color-col"><label>Primario</label><div class="color-circle" id="primaryColorCircle" style="background-color: #e2214b;" onclick="openColorModal('primary')"></div></div>
+<div class="color-col"><label>Secondario</label><div class="color-circle" id="secondaryColorCircle" style="background-color: #ffffff;" onclick="openColorModal('secondary')"></div></div>
+</div>
+</div>
+<div class="form-section-inner">
+<h4>3. Stile Visivo</h4>
+<p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 15px;">Da 1 (Classico) a 10 (Moderno/Audace)</p>
+<div class="style-scale"><span>1</span> <input type="range" id="stylePreference" name="stylePreference" min="1" max="10" value="5" /> <span>10</span></div>
+<div class="style-extremes">
+<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/7717020eb4f7350ff2eaf310f87346f7.jpg" alt="Stile Classico" /><p>Classico</p></div>
+<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/aa44aa9cce491bdfc97c04586417a837.jpg" alt="Stile Audace" /><p>Audace</p></div>
+</div>
+</div>
+<div class="form-section-inner">
+<h4>4. Quantit&agrave; Stimata</h4>
+<div class="size-slider"><div class="size-track"></div>
+<div class="size-options">
+<div class="size-option"><input type="radio" id="size-1-4" name="orderSize" value="1-4" class="size-radio" checked="" /> <label for="size-1-4" class="size-label"><span class="size-button"></span> 1-4</label></div>
+<div class="size-option"><input type="radio" id="size-5-10" name="orderSize" value="5-10" class="size-radio" /> <label for="size-5-10" class="size-label"><span class="size-button"></span> 5-10</label></div>
+<div class="size-option"><input type="radio" id="size-11-20" name="orderSize" value="11-20" class="size-radio" /> <label for="size-11-20" class="size-label"><span class="size-button"></span> 11-20</label></div>
+<div class="size-option"><input type="radio" id="size-21-50" name="orderSize" value="21-50" class="size-radio" /> <label for="size-21-50" class="size-label"><span class="size-button"></span> 21-50</label></div>
+<div class="size-option"><input type="radio" id="size-51-plus" name="orderSize" value="51+" class="size-radio" /> <label for="size-51-plus" class="size-label"><span class="size-button"></span> 51+</label></div>
+</div>
+</div>
+</div>
+<div class="form-navigation"><button type="button" class="prev-step">INDIETRO</button> <button type="button" class="next-step">CONTINUA</button></div>
+</div>
+<div class="form-step" id="step3">
+<div style="text-align: center; margin-bottom: 30px;"><h3>Tutto Pronto!</h3><p style="color: rgba(255,255,255,0.7);">Controlla i tuoi dati e invia. Riceverai il tuo design in 24-48h.</p></div>
+<div class="terms-checkbox"><input type="checkbox" id="termsAccept" name="termsAccept" required="" /> <label for="termsAccept"> Accetto la <a href="https://it.momuto.com/pages/politica-privacy" target="_blank" rel="noopener">politica sulla privacy</a>.</label></div>
+<div class="form-navigation"><button type="button" class="prev-step">INDIETRO</button> <button type="submit" class="submit-form">INVIA RICHIESTA</button></div>
+</div>
+<input type="hidden" id="primaryColorValue" name="primaryColorValue" value="#e2214b" />
+<input type="hidden" id="secondaryColorValue" name="secondaryColorValue" value="#ffffff" />
+</form></div>
+<div id="confirmationMessage" style="display: none;">
+<div class="success-icon"><i class="fas fa-check-circle"></i></div>
+<h3>Richiesta Ricevuta!</h3>
+<p>Il team di design di Momuto si mette al lavoro.</p>
+<div class="social-follow"><p>Nel frattempo, scopri il nostro lavoro:</p><a href="https://www.instagram.com/momutofc" target="_blank" class="instagram-link" rel="noopener"><i class="fab fa-instagram"></i> @momutofc</a></div>
+</div>
+</div>
+</div>
+</section>
+<section class="faq-section">
+<div class="faq-container">
+<h2>Domande frequenti sulle maglie da calcio personalizzate</h2>
+<div class="faq-list">
+<div class="faq-item"><h3>Cos&rsquo;&egrave; la collezione Ready-to-Play di MOMUTO?</h3><p>Ready-to-Play &egrave; una collezione di template di kit pre-disegnati da designer professionisti e gi&agrave; indossati da veri club. Scegli un design, i colori della tua squadra, carica il tuo stemma e ricevi un&rsquo;anteprima personalizzata entro 24 ore. I kit Ready-to-Play costano il 10% in meno rispetto al design personalizzato &mdash; da 19,70&euro; a maglia &mdash; perch&eacute; salti la fase di design mantenendo la stessa qualit&agrave;.</p></div>
+<div class="faq-item"><h3>Come funziona il servizio di design gratuito di MOMUTO?</h3><p>Invia il tuo brief tramite il modulo qui sopra &mdash; nome della squadra, stemma, colori e qualsiasi riferimento. I nostri designer creano un mockup completamente personalizzato in 24&ndash;48 ore, gratuitamente. Tutte le revisioni sono anch&rsquo;esse gratuite fino alla tua soddisfazione. Nessun impegno fino alla conferma dell&rsquo;ordine.</p></div>
+<div class="faq-item"><h3>C&rsquo;&egrave; un ordine minimo per le maglie da calcio personalizzate?</h3><p>No. MOMUTO non ha ordine minimo. Puoi ordinare una sola maglia o una squadra completa di 50+. I prezzi partono da 19,70&euro; a maglia per il Ready-to-Play o 21,90&euro; per il design personalizzato su ordini pi&ugrave; grandi, e 38,90&euro; per una maglia singola.</p></div>
+<div class="faq-item"><h3>Quanto tempo ci vuole per ricevere le maglie da calcio personalizzate?</h3><p>La produzione richiede 7&ndash;12 giorni. La spedizione richiede 10&ndash;15 giorni in tutto il mondo. Il tempo totale di consegna &egrave; tipicamente 20&ndash;25 giorni dalla conferma dell&rsquo;ordine. Spedizione gratuita su ordini superiori a 50&euro;.</p></div>
+<div class="faq-item"><h3>Che metodo di stampa usa MOMUTO?</h3><p>MOMUTO utilizza la stampa a sublimazione totale su tessuto misto poliestere-elastan ad alte prestazioni. La sublimazione significa che i colori vengono incorporati nel tessuto &mdash; non stampati sopra &mdash; quindi non si scrostano, creano ni scoloriscono mai. Vale sia per i kit Ready-to-Play che per il design personalizzato.</p></div>
+<div class="faq-item"><h3>Posso progettare il kit io stesso invece di richiedere un mockup?</h3><p>S&igrave;. Usa il nostro <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">configuratore 3D di maglie</a> per progettare il tuo kit online in tempo reale. Puoi anche esplorare la <a href="https://it.momuto.com/pages/collezione-ready-to-play">collezione Ready-to-Play</a> se preferisci partire da design collaudati &mdash; con il 10% di sconto e anteprime in 24h.</p></div>
+<div class="faq-item"><h3>I kit Ready-to-Play includono i pantaloncini?</h3><p>S&igrave;. Ogni design Ready-to-Play &egrave; disponibile solo come maglia (da 19,70&euro;) o come kit completo con pantaloncini abbinati (da 24,20&euro;). Gli ordini di 10+ kit completi includono anche una bandiera della squadra con il tuo stemma e una fascia da capitano gratuite.</p></div>
+<div class="faq-item"><h3>Posso inviare il mio design o un concept generato dall&rsquo;IA?</h3><p>S&igrave;. Se hai creato un concept di kit con strumenti come ChatGPT, Midjourney, Gemini o qualsiasi software di design, puoi caricarlo tramite il modulo di design personalizzato. Per ordini di 10+ kit, MOMUTO adatta il tuo design per la produzione senza costi aggiuntivi. Per ordini pi&ugrave; piccoli o design complessi, si applica un deposito di adattamento di 30&euro; &mdash; interamente detratto dall&rsquo;ordine finale. Stessa qualit&agrave; di produzione, stessa tempistica di consegna.</p></div>
+</div>
+</div>
+</section>
+<div id="colorModal" class="color-modal" style="display: none;">
+<div id="colorModalOverlay" class="modal-overlay" onclick="closeColorModal()"></div>
+<div class="color-modal-content">
+<div class="color-modal-header"><h3>Seleziona Colore</h3><button class="close-modal" onclick="closeColorModal()">&times;</button></div>
+<div class="color-modal-body"><div id="colorSwatches"></div></div>
+</div>
+</div>
+<!-- inject:design-request.js -->

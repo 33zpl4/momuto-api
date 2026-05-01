@@ -35,11 +35,18 @@ const DOMAINS = {
     label: 'fr.momuto.com',
     handle: 'demande-de-design-professionnel-de-maillots',
     file: path.join(ROOT, 'pages', 'demande-de-design-professionnel-de-maillots')
+  },
+  it: {
+    host: 'https://openapi.oemapps.com',
+    token: process.env.OEMSAAS_TOKEN_IT,
+    label: 'it.momuto.com',
+    handle: 'richiesta-design-personalizzato',
+    file: path.join(ROOT, 'pages', 'richiesta-design-personalizzato')
   }
 };
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
-const LOCALES = (process.env.LOCALES || 'en,es,fr')
+const LOCALES = (process.env.LOCALES || 'en,es,fr,it')
   .split(',')
   .map(s => s.trim())
   .filter(Boolean);
