@@ -85,50 +85,91 @@ function getHandle(item) {
 
 async function translatePost(post) {
   const handle = getHandle(post);
-  const source = {
+  const preamble = `You are translating content for MOMUTO (it.momuto.com), an Italian-language custom football kit website.
+Rules:
+- Do NOT translate: MOMUTO, brand names, product names, URLs, CSS class names, HTML attributes, JSON-LD keys
+- Use natural Italian — not word-for-word`;
+
+  // Call 1: metadata only (safe small JSON)
+  const metaSource = {
     title: post.title || '',
     handle: handle || '',
     summary: post.summary || post.excerpt || '',
-    content: post.content || '',
     meta_title: post.meta_title || post.title || '',
     meta_descript: post.meta_descript || post.summary || '',
   };
+  const metaPrompt = `${preamble}
 
-  const prompt = `You are translating a blog post for MOMUTO (it.momuto.com), an Italian-language custom football kit website.
+Translate the following blog post metadata from English to Italian.
+- The handle (URL slug) must be Italian: lowercase, hyphens only, SEO-friendly (not word-for-word)
+- META_TITLE must be under 60 characters
+- META_DESC must be under 155 characters
 
-Translate the following blog post from English to Italian. Rules:
-- Preserve ALL HTML tags and structure exactly — only translate visible text content
-- Do NOT translate: MOMUTO, brand names, product names, URLs, CSS class names, HTML attributes, JSON-LD keys
-- The handle (URL slug) must be Italian: lowercase, hyphens only, SEO-friendly natural Italian (not word-for-word)
-- meta_title and meta_descript must be natural Italian SEO copy, under 60 and 155 characters respectively
-- Return ONLY valid JSON — no markdown fences, no explanation
+Source:
+TITLE: ${metaSource.title}
+HANDLE: ${metaSource.handle}
+SUMMARY: ${metaSource.summary}
+META_TITLE: ${metaSource.meta_title}
+META_DESC: ${metaSource.meta_descript}
 
-Source post:
-${JSON.stringify(source, null, 2)}
+Reply with EXACTLY these 5 lines and nothing else — no JSON, no HTML, no extra text:
+TITLE: <translated>
+HANDLE: <slug>
+SUMMARY: <translated>
+META_TITLE: <translated>
+META_DESC: <translated>`;
 
-Return this exact JSON structure:
-{
-  "title": "...",
-  "handle": "...",
-  "summary": "...",
-  "content": "...",
-  "meta_title": "...",
-  "meta_descript": "..."
-}`;
-
-  const response = await withRetry(() => client.messages.create({
+  const metaResponse = await withRetry(() => client.messages.create({
     model: 'claude-sonnet-4-6',
-    max_tokens: 8000,
-    messages: [{ role: 'user', content: prompt }],
+    max_tokens: 1024,
+    messages: [{ role: 'user', content: metaPrompt }],
   }));
 
-  const raw = response.content[0].text.trim();
-  const jsonStr = raw.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
-  try {
-    return JSON.parse(jsonStr);
-  } catch (err) {
-    throw new Error(`Claude returned invalid JSON: ${err.message}\n---\n${raw.slice(0, 500)}`);
+  const metaRaw = metaResponse.content[0].text.trim();
+  const metaLines = {};
+  for (const line of metaRaw.split('\n')) {
+    const colon = line.indexOf(':');
+    if (colon === -1) continue;
+    const key = line.slice(0, colon).trim().toUpperCase();
+    const val = line.slice(colon + 1).trim();
+    metaLines[key] = val;
   }
+  const meta = {
+    title: metaLines['TITLE'] || metaSource.title,
+    handle: metaLines['HANDLE'] || metaSource.handle,
+    summary: metaLines['SUMMARY'] || metaSource.summary,
+    meta_title: metaLines['META_TITLE'] || metaSource.meta_title,
+    meta_descript: metaLines['META_DESC'] || metaSource.meta_descript,
+  };
+  if (!meta.title || !meta.handle) {
+    throw new Error(`Metadata translation incomplete. Raw response:\n${metaRaw.slice(0, 500)}`);
+  }
+
+  // Call 2: HTML content only — returned as raw HTML, no JSON wrapper
+  const contentPrompt = `${preamble}
+
+Translate the following HTML blog post content from English to Italian.
+- Preserve ALL HTML tags and structure exactly — only translate visible text content
+- Return ONLY the translated HTML — no JSON, no markdown fences, no explanation
+
+${post.content || ''}`;
+
+  const contentResponse = await withRetry(() => client.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 8000,
+    messages: [{ role: 'user', content: contentPrompt }],
+  }));
+
+  const translatedContent = contentResponse.content[0].text.trim();
+
+  return {
+    title: meta.title,
+    handle: meta.handle,
+    summary: meta.summary,
+    content: translatedContent,
+    meta_title: meta.meta_title,
+    meta_descript: meta.meta_descript,
+  };
 }
 
 async function createPost(postData) {
