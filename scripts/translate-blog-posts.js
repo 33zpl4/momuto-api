@@ -37,6 +37,8 @@ const IT = {
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
 const HANDLE_FILTER = process.env.POST_HANDLE || '';
+// PATCH_META=true: skip content translation, only update src/status/metadata on existing IT posts
+const PATCH_META = process.env.PATCH_META === 'true';
 
 async function withRetry(fn, maxAttempts = 4) {
   const delays = [5000, 15000, 30000];
@@ -81,6 +83,38 @@ async function fetchAll(domain, endpoint) {
 
 function getHandle(item) {
   return item.handle || item.alias || item.slug || item.url_key || null;
+}
+
+async function matchPostsByTitle(enPosts, itPosts) {
+  // Build prompt listing EN titles and IT titles, ask Claude to match them
+  const enList = enPosts.map((p, i) => `EN${i}: ${p.title}`).join('\n');
+  const itList = itPosts.map((p, i) => `IT${i}: ${p.title}`).join('\n');
+
+  const prompt = `Match each English blog post title to its Italian translation counterpart.
+
+English posts:
+${enList}
+
+Italian posts:
+${itList}
+
+Reply with ONLY lines in this format (one per matched pair, skip unmatched):
+EN0 = IT5
+EN1 = IT12
+...`;
+
+  const response = await withRetry(() => client.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 1024,
+    messages: [{ role: 'user', content: prompt }],
+  }));
+
+  const mapping = new Map(); // enIndex → itIndex
+  for (const line of response.content[0].text.trim().split('\n')) {
+    const m = line.match(/EN(\d+)\s*=\s*IT(\d+)/);
+    if (m) mapping.set(parseInt(m[1]), parseInt(m[2]));
+  }
+  return mapping;
 }
 
 async function translatePost(post) {
@@ -231,10 +265,72 @@ async function main() {
 
   const errors = [];
 
+  // PATCH_META mode: use one Claude call to match EN→IT posts by title,
+  // then update only src/status — no content re-translation.
+  if (PATCH_META) {
+    console.log('\nMatching EN posts to IT posts by title...');
+    let mapping;
+    try {
+      mapping = await matchPostsByTitle(toProcess, itPosts);
+      console.log(`Matched ${mapping.size}/${toProcess.length} posts`);
+    } catch (err) {
+      console.error(`❌ Title matching failed: ${err.message}`);
+      process.exit(1);
+    }
+
+    for (let i = 0; i < toProcess.length; i++) {
+      const enPost = toProcess[i];
+      const enHandle = getHandle(enPost);
+      const itIndex = mapping.get(i);
+
+      if (itIndex === undefined) {
+        console.warn(`\n[${enHandle}] ⚠️  No IT match found — skipping`);
+        continue;
+      }
+
+      const itPost = itPosts[itIndex];
+      console.log(`\n[${enHandle}] → "${itPost.title}" (${getHandle(itPost)})`);
+      console.log(`  src: ${enPost.src || 'none'}`);
+
+      if (DRY_RUN) {
+        console.log(`  DRY_RUN — would patch post ${itPost.id}`);
+        continue;
+      }
+
+      try {
+        await updatePost(itPost.id, {
+          title: itPost.title,
+          handle: itPost.handle,
+          summary: itPost.summary || '',
+          content: itPost.content || '',
+          meta_title: itPost.meta_title || '',
+          meta_descript: itPost.meta_descript || '',
+          status: enPost.status ?? 1,
+          ...(enPost.src ? { src: enPost.src } : {}),
+          ...(enPost.image_alt ? { image_alt: enPost.image_alt } : {}),
+          ...(enPost.author_name ? { author_name: enPost.author_name } : {}),
+        });
+        console.log(`  ✓ Patched → ${IT.baseUrl}/blogs/${itPost.handle}`);
+      } catch (err) {
+        console.error(`  ❌ Patch failed: ${err.message}`);
+        errors.push({ handle: enHandle, error: `patch: ${err.message}` });
+      }
+    }
+
+    if (errors.length > 0) {
+      console.error(`\n⚠️  Completed with ${errors.length} error(s):`);
+      errors.forEach(e => console.error(`  - [${e.handle}] ${e.error}`));
+      process.exit(1);
+    }
+    console.log('\n✅ Patch complete.');
+    return;
+  }
+
   for (const post of toProcess) {
     const enHandle = getHandle(post);
     console.log(`\n[${enHandle}] Translating...`);
 
+    // Full translation mode
     let translated;
     try {
       translated = await translatePost(post);
@@ -260,9 +356,10 @@ async function main() {
       content: translated.content,
       meta_title: translated.meta_title,
       meta_descript: translated.meta_descript,
-      ...(post.image ? { image: post.image } : {}),
-      ...(post.cover ? { cover: post.cover } : {}),
-      ...(post.author ? { author: post.author } : {}),
+      status: post.status ?? 1,
+      ...(post.src ? { src: post.src } : {}),
+      ...(post.image_alt ? { image_alt: post.image_alt } : {}),
+      ...(post.author_name ? { author_name: post.author_name } : {}),
     };
 
     const existing = itPosts.find(p => getHandle(p) === translated.handle);
@@ -277,7 +374,6 @@ async function main() {
       }
     } catch (err) {
       console.error(`  ❌ Upsert failed: ${err.message}`);
-      // If POST is unsupported, give a clear action
       if (err.message.includes('POST /posts failed')) {
         console.error(`     The OEMSaaS /posts API may not support creation via API.`);
         console.error(`     Create the post manually on ${IT.label}, then re-run to update it.`);
