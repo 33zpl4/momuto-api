@@ -1,0 +1,452 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuál es el pedido mínimo en MOMUTO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MOMUTO no tiene pedido mínimo. Una camiseta individual empieza desde 38,90 €. Para pedidos de equipo de 10 unidades o más, el kit completo (camiseta + pantalón) baja a 26,90 € por jugador, con diseño profesional gratuito incluido. Gestionamos equipos de fútbol 7, clubes completos, orgs de e-sport y pedidos individuales."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuál es el plazo de entrega en España?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MOMUTO entrega en España en 25–30 días — 7–15 días de producción más 10–15 días de envío directo desde fábrica. El diseño gratuito está listo en 1–2 días tras recibir tu brief, revisiones incluidas. Realizamos envíos a Península, Baleares y Canarias con seguimiento en tiempo real."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿El servicio de diseño es realmente gratuito?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, completamente gratuito. Elige entre un configurador 3D en tiempo real con más de 30 plantillas, o envíanos tu idea y un diseñador profesional creará tu maqueta personalizada en 1–2 días con revisiones ilimitadas. Solo pagas cuando apruebas el diseño y realizas tu pedido."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puede MOMUTO fabricar camisetas a partir de un diseño generado por IA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí — y somos uno de los únicos proveedores que puede hacerlo. Envíanos una imagen creada con ChatGPT, Midjourney, Gemini o cualquier otra herramienta. Nuestros diseñadores gestionan la traducción técnica completa: escalado a vectores 8K, gestión de costuras, gradación de tallas de S a XXL y conversión de colores para sublimación. Gratuito para pedidos de 10 camisetas o más. Puede aplicarse un depósito de 30 € para diseños muy complejos, descontado íntegramente de tu pedido."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "No tengo logo ni diseño — ¿podéis ayudarme?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Por supuesto. Danos tus colores, el nombre de tu equipo, una referencia de ambiente — incluso un boceto o una descripción — y un diseñador profesional construirá tu identidad visual completa en 1–2 días, gratis, con revisiones incluidas. No necesitas ningún conocimiento de diseño."
+      }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  /* ===== VARIABLES ===== */
+  :root {
+    --mg-dark:    #0a0a0a;
+    --mg-panel:   #111;
+    --mg-light:   #f4f4f5;
+    --mg-white:   #ffffff;
+    --mg-border:  #e4e4e7;
+    --mg-muted:   #71717a;
+    --mg-mid:     #52525b;
+    --mg-red:     #c8352e;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body:    'Outfit', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  .title { display: none; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--mg-dark);
+    background: var(--mg-dark);
+  }
+
+  .cnt-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ===== HERO — DARK ===== */
+  .cnt-hero {
+    background: var(--mg-dark);
+    padding: 7rem 0 6rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .cnt-hero-eyebrow {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mg-red);
+    background: rgba(200,53,46,0.1);
+    border: 1px solid rgba(200,53,46,0.2);
+    padding: 5px 14px;
+    margin-bottom: 24px;
+  }
+
+  .cnt-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 5rem);
+    font-weight: 400;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .cnt-hero-sub {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #71717a;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 16px;
+  }
+
+  .cnt-hero .cnt-hero-promise {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 300;
+    color: #a1a1aa;
+    max-width: 480px;
+    margin: 0 auto;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  .cnt-hero-promise strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ===== CONTACT METHODS — LIGHT ===== */
+  .cnt-methods {
+    background: var(--mg-light);
+    padding: 6rem 0;
+  }
+
+  .cnt-methods-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 960px;
+    margin: 0 auto;
+    background: var(--mg-border);
+  }
+
+  .cnt-method {
+    background: var(--mg-white);
+    padding: 3rem 2.5rem;
+    text-align: center;
+    transition: background 0.2s;
+  }
+
+  .cnt-method:hover {
+    background: #fafafa;
+  }
+
+  .cnt-method-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border: 1.5px solid var(--mg-dark);
+    margin-bottom: 1.5rem;
+    color: var(--mg-dark);
+  }
+
+  .cnt-method-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--mg-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .cnt-method-sub {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--mg-muted);
+    line-height: 1.5;
+    margin-bottom: 1.75rem;
+    min-height: 2.5em;
+  }
+
+  .cnt-method-btn {
+    display: inline-block;
+    background: var(--mg-dark);
+    color: #fff;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .cnt-method-btn:hover {
+    background: var(--mg-red);
+  }
+
+  .cnt-method-response {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--mg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--mg-border);
+  }
+
+  /* ===== FAQ — WHITE ===== */
+  .cnt-faq {
+    background: var(--mg-white);
+    padding: 6rem 0;
+    border-top: 1px solid var(--mg-border);
+  }
+
+  .cnt-faq-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .cnt-faq-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    color: var(--mg-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .cnt-faq-intro {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--mg-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .cnt-faq-grid {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  details.cnt-faq-item {
+    border-bottom: 1px solid var(--mg-border);
+  }
+
+  details.cnt-faq-item:first-of-type {
+    border-top: 1px solid var(--mg-border);
+  }
+
+  summary.cnt-faq-q {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--mg-dark);
+    padding: 1.4rem 0;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s;
+  }
+
+  summary.cnt-faq-q:hover { color: var(--mg-red); }
+
+  summary.cnt-faq-q::after {
+    content: '+';
+    font-family: var(--font-body);
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--mg-muted);
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: color 0.2s;
+  }
+
+  details[open] summary.cnt-faq-q::after { content: '−'; color: var(--mg-red); }
+  details[open] summary.cnt-faq-q { color: var(--mg-red); }
+
+  summary.cnt-faq-q::-webkit-details-marker { display: none; }
+
+  .cnt-faq-a {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--mg-mid);
+    line-height: 1.75;
+    padding: 0 2rem 1.75rem 0;
+  }
+
+  .cnt-faq-a strong {
+    color: var(--mg-dark);
+    font-weight: 600;
+  }
+
+  /* ===== FOOTER CTA — DARK ===== */
+  .cnt-footer-cta {
+    background: var(--mg-dark);
+    padding: 7rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .cnt-cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 400;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .cnt-cta-sub {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: #a1a1aa;
+    max-width: 420px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  .cnt-cta-sub strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .cnt-cta-btn {
+    display: inline-block;
+    background: #fff;
+    color: var(--mg-dark);
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 20px 52px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .cnt-cta-btn:hover {
+    background: var(--mg-red);
+    color: #fff;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .cnt-container { padding: 0 20px; }
+    .cnt-hero { padding: 5rem 0 4rem; }
+    .cnt-methods-grid { grid-template-columns: 1fr; }
+    .cnt-method { padding: 2.5rem 2rem; }
+    .cnt-footer-cta { padding: 5rem 0; }
+  }
+</style>
+<!-- ===== HERO ===== -->
+<section class="cnt-hero">
+<div class="cnt-container">
+<div class="cnt-hero-eyebrow">Soporte &amp; Solicitudes de Dise&ntilde;o</div>
+<h1 class="cnt-hero-title">Cont&aacute;ctanos</h1>
+<p class="cnt-hero-sub">Dise&ntilde;o de Equipaciones &middot; Pedidos &middot; Colaboraciones</p>
+<p class="cnt-hero-promise">Env&iacute;anos tu idea &mdash; boceto, concepto IA o simplemente un brief. <strong>Maqueta de dise&ntilde;o en 1&ndash;2 d&iacute;as, gratis.</strong></p>
+</div>
+</section>
+<!-- ===== CONTACT METHODS ===== -->
+<section class="cnt-methods">
+<div class="cnt-container">
+<div class="cnt-methods-grid">
+<div class="cnt-method"><span class="cnt-method-icon"> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path> </svg> </span>
+<h3 class="cnt-method-title">WhatsApp</h3>
+<p class="cnt-method-sub">Respuestas r&aacute;pidas. Env&iacute;a tus bocetos, conceptos IA o dudas urgentes.</p>
+<a href="https://wa.me/34614625408?text=Hola%20MOMUTO%2C%20quiero%20info%20sobre..." class="cnt-method-btn">Iniciar Chat</a>
+<div class="cnt-method-response">Tiempo medio: 3&ndash;4 horas</div>
+</div>
+<div class="cnt-method"><span class="cnt-method-icon"> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect> <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path> <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line> </svg> </span>
+<h3 class="cnt-method-title">Instagram</h3>
+<p class="cnt-method-sub">DM para colaboraciones y proyectos creativos. Sigue nuestros &uacute;ltimos drops.</p>
+<a href="https://instagram.com/momutofc" class="cnt-method-btn">@momutofc</a>
+<div class="cnt-method-response">Tiempo medio: mismo d&iacute;a</div>
+</div>
+<div class="cnt-method"><span class="cnt-method-icon"> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path> <polyline points="22,6 12,13 2,6"></polyline> </svg> </span>
+<h3 class="cnt-method-title">Email</h3>
+<p class="cnt-method-sub">Pedidos de equipos grandes, facturaci&oacute;n y preguntas t&eacute;cnicas.</p>
+<a href="mailto:info@momuto.com" class="cnt-method-btn">Enviar Email</a>
+<div class="cnt-method-response">Tiempo medio: 24 horas</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== FAQ ===== -->
+<section class="cnt-faq">
+<div class="cnt-container">
+<div class="cnt-faq-header">
+<h2 class="cnt-faq-title">Preguntas Frecuentes</h2>
+<p class="cnt-faq-intro">Todo lo que necesitas saber antes de contactarnos.</p>
+</div>
+<div class="cnt-faq-grid">
+<details class="cnt-faq-item">
+<summary class="cnt-faq-q">&iquest;Cu&aacute;l es el pedido m&iacute;nimo?</summary>
+<div class="cnt-faq-a">Sin m&iacute;nimo. Una camiseta individual empieza desde <strong>38,90 &euro;</strong>. Para pedidos de equipo de 10 unidades o m&aacute;s, el kit completo (camiseta + pantal&oacute;n) baja a <strong>26,90 &euro; por jugador</strong> &mdash; con dise&ntilde;o profesional gratuito incluido. Gestionamos equipos de f&uacute;tbol 7, clubes completos, orgs de e-sport y pedidos individuales.</div>
+</details>
+<details class="cnt-faq-item">
+<summary class="cnt-faq-q">&iquest;Cu&aacute;les son los plazos de entrega?</summary>
+<div class="cnt-faq-a">Las equipaciones personalizadas se entregan en <strong>25&ndash;30 d&iacute;as</strong> &mdash; 7&ndash;15 d&iacute;as de producci&oacute;n m&aacute;s 10&ndash;15 d&iacute;as de env&iacute;o directo desde f&aacute;brica. Tu maqueta de dise&ntilde;o gratuita est&aacute; lista en <strong>1&ndash;2 d&iacute;as</strong> tras tu brief, revisiones incluidas. Enviamos a Pen&iacute;nsula, Baleares y Canarias con seguimiento en tiempo real.</div>
+</details>
+<details class="cnt-faq-item">
+<summary class="cnt-faq-q">&iquest;El servicio de dise&ntilde;o es realmente gratuito?</summary>
+<div class="cnt-faq-a">S&iacute;, completamente gratuito. Elige entre un <strong>configurador 3D en tiempo real</strong> con m&aacute;s de 30 plantillas, o env&iacute;anos tu idea y un <strong>dise&ntilde;ador humano profesional</strong> crear&aacute; tu maqueta personalizada en 1&ndash;2 d&iacute;as con revisiones ilimitadas. Solo pagas cuando apruebas el dise&ntilde;o y realizas tu pedido.</div>
+</details>
+<details class="cnt-faq-item">
+<summary class="cnt-faq-q">&iquest;Pod&eacute;is trabajar con un dise&ntilde;o generado por IA?</summary>
+<div class="cnt-faq-a">S&iacute; &mdash; y somos uno de los &uacute;nicos proveedores que puede hacerlo. Env&iacute;anos una imagen creada con <strong>ChatGPT, Midjourney, Gemini</strong> o cualquier herramienta. Nuestros dise&ntilde;adores gestionan la traducci&oacute;n t&eacute;cnica completa: escalado a vectores 8K, gesti&oacute;n de costuras, gradaci&oacute;n de tallas de S a XXL y conversi&oacute;n de colores para sublimaci&oacute;n. <strong>Gratuito para pedidos de 10 camisetas o m&aacute;s.</strong> Puede aplicarse un dep&oacute;sito de 30&nbsp;&euro; para dise&ntilde;os muy complejos, descontado &iacute;ntegramente de tu pedido.</div>
+</details>
+<details class="cnt-faq-item">
+<summary class="cnt-faq-q">No tengo logo ni dise&ntilde;o &mdash; &iquest;pod&eacute;is ayudarme?</summary>
+<div class="cnt-faq-a">Por supuesto. Danos tus colores, el nombre de tu equipo, una referencia de ambiente &mdash; incluso un boceto o una descripci&oacute;n &mdash; y un <strong>dise&ntilde;ador profesional construir&aacute; tu identidad visual completa en 1&ndash;2 d&iacute;as, gratis</strong>, revisiones incluidas. No necesitas ning&uacute;n conocimiento de dise&ntilde;o.</div>
+</details>
+</div>
+</div>
+</section>
+<!-- ===== FOOTER CTA ===== -->
+<section class="cnt-footer-cta">
+<div class="cnt-container">
+<h2 class="cnt-cta-title">Empieza tu Equipaci&oacute;n</h2>
+<p class="cnt-cta-sub">Env&iacute;anos tu idea hoy. <strong>Maqueta en 1&ndash;2 d&iacute;as, gratis.</strong> Sin compromiso hasta que apruebes el dise&ntilde;o.</p>
+<a href="https://es.momuto.com/pages/solicitud-de-diseno-personalizado" class="cnt-cta-btn">Empezar mi Dise&ntilde;o</a></div>
+</section>

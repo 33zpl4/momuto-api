@@ -6,6 +6,7 @@
     "deploy": "node scripts/generate-and-deploy.js"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.39.0"
+    "@anthropic-ai/sdk": "^0.39.0",
+    "busboy": "^1.6.0"
   }
 }

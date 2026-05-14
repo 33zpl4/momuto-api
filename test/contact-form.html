@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!--
+  MOMUTO — API submit endpoint test form
+  ───────────────────────────────────────
+  This mirrors the production kit request form exactly.
+  Change API_URL below to your deployed Vercel endpoint before testing.
+
+  To run locally:
+    npx vercel dev          (in repo root)
+    Then open this file in a browser — form action is already set to localhost.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOMUTO — Test Form (not live)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a; --panel: #111; --red: #c8352e;
+    --white: #f5f5f5; --muted: #a1a1aa; --dim: #71717a;
+    --border: rgba(255,255,255,0.08);
+    --font-d: 'Bebas Neue', sans-serif;
+    --font-b: 'Outfit', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-b); background: var(--bg); color: var(--white); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 40px 20px; }
+
+  .test-banner {
+    width: 100%; max-width: 700px;
+    background: rgba(200,53,46,0.12); border: 1px solid rgba(200,53,46,0.3);
+    padding: 10px 16px; margin-bottom: 32px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--red);
+  }
+
+  h1 { font-family: var(--font-d); font-size: 2.5rem; letter-spacing: 0.03em; text-transform: uppercase; margin-bottom: 8px; }
+  .sub { font-size: 0.9rem; color: var(--muted); font-weight: 300; margin-bottom: 40px; }
+
+  .card {
+    width: 100%; max-width: 700px;
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 40px;
+  }
+
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--dim); margin: 28px 0 14px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  .field { margin-bottom: 18px; }
+  label { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); margin-bottom: 6px; }
+
+  input[type=text], input[type=email], select, textarea {
+    width: 100%; padding: 13px 16px;
+    background: transparent; border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white); font-family: var(--font-b); font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: rgba(255,255,255,0.4); }
+  input::placeholder { color: var(--dim); font-size: 0.8rem; }
+  select option { background: #1a1a1a; }
+
+  textarea { min-height: 80px; resize: vertical; }
+
+  .file-row { display: flex; align-items: center; gap: 12px; }
+  .file-btn {
+    display: inline-block; padding: 10px 20px;
+    background: transparent; border: 1px solid rgba(255,255,255,0.15);
+    color: var(--white); font-family: var(--font-b); font-size: 0.75rem;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+    cursor: pointer; white-space: nowrap; transition: border-color 0.2s;
+  }
+  .file-btn:hover { border-color: rgba(255,255,255,0.4); }
+  input[type=file] { display: none; }
+  .file-name { font-size: 0.8rem; color: var(--red); font-weight: 500; }
+
+  .colors-row { display: flex; gap: 32px; margin-top: 8px; }
+  .color-col label { margin-bottom: 8px; }
+  .color-preview {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15); cursor: pointer;
+  }
+  input[type=color] { opacity: 0; position: absolute; width: 48px; height: 48px; cursor: pointer; }
+  .color-wrap { position: relative; width: 48px; height: 48px; }
+
+  .qty-options { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  .qty-option input { display: none; }
+  .qty-option label {
+    display: inline-block; padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.12); font-size: 0.82rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; color: var(--dim); text-transform: none; letter-spacing: 0;
+  }
+  .qty-option input:checked + label { background: var(--red); border-color: var(--red); color: #fff; }
+
+  .style-row { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+  .style-row span { font-family: var(--font-d); font-size: 1.1rem; color: var(--white); }
+  input[type=range] { flex: 1; -webkit-appearance: none; height: 2px; background: rgba(255,255,255,0.12); }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; background: var(--red); border-radius: 50%; cursor: pointer; }
+
+  .terms { display: flex; align-items: flex-start; gap: 12px; margin: 24px 0; font-size: 0.85rem; color: var(--muted); font-weight: 300; }
+  .terms input[type=checkbox] { margin-top: 3px; accent-color: var(--red); width: 16px; height: 16px; flex-shrink: 0; }
+  .terms a { color: var(--white); text-decoration: underline; }
+
+  .submit-btn {
+    width: 100%; padding: 16px; background: var(--red); color: #fff;
+    border: none; font-family: var(--font-b); font-size: 0.82rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: #e04038; }
+
+  .env-note {
+    width: 100%; max-width: 700px; margin-top: 28px;
+    font-size: 0.78rem; color: var(--dim); line-height: 1.8;
+  }
+  .env-note code { background: rgba(255,255,255,0.06); padding: 2px 6px; font-size: 0.75rem; }
+</style>
+</head>
+<body>
+
+<div class="test-banner">⚠ Test form — not linked from any live page — submissions go to API endpoint only</div>
+
+<h1>Kit Design Request</h1>
+<p class="sub">Test form — mirrors production form exactly</p>
+
+<!--
+  ACTION: change this URL to your Vercel deployment.
+  For local testing with `vercel dev`: action="/api/submit"
+-->
+<form class="card" method="POST" action="/api/submit" enctype="multipart/form-data">
+
+  <p class="section-label">Contact</p>
+
+  <div class="field">
+    <label for="firstname">Name / Manager</label>
+    <input type="text" id="firstname" name="firstname" placeholder="Your name" required>
+  </div>
+  <div class="field">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+  </div>
+  <div class="field">
+    <label for="company">Team Name</label>
+    <input type="text" id="company" name="company" placeholder="FC Example" required>
+  </div>
+  <div class="field">
+    <label for="industry">League / Tournament</label>
+    <input type="text" id="industry" name="industry" placeholder="Regional league, cup, 5-a-side…">
+  </div>
+
+  <p class="section-label">Design Assets</p>
+
+  <div class="field">
+    <label>Team Badge</label>
+    <div class="file-row">
+      <label class="file-btn" for="upload_file">↑ Upload Badge</label>
+      <input type="file" id="upload_file" name="upload_file" accept="image/*" onchange="showName(this,'badge-name')">
+      <span class="file-name" id="badge-name"></span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Design Concept <span style="font-weight:300;text-transform:none;letter-spacing:0">(optional — AI concept, sketch, PDF)</span></label>
+    <div class="file-row">
+      <label class="file-btn" for="design_concept">↑ Upload Concept</label>
+      <input type="file" id="design_concept" name="design_concept" accept="image/*,.pdf" onchange="showName(this,'concept-name')">
+      <span class="file-name" id="concept-name"></span>
+    </div>
+  </div>
+
+  <p class="section-label">Style</p>
+
+  <div class="field">
+    <label>Main Colors</label>
+    <div class="colors-row">
+      <div class="color-col">
+        <label>Primary</label>
+        <div class="color-wrap">
+          <div class="color-preview" id="primaryPreview" style="background:#c8352e"></div>
+          <input type="color" id="primaryPicker" value="#c8352e" oninput="syncColor('primary',this.value)">
+        </div>
+      </div>
+      <div class="color-col">
+        <label>Secondary</label>
+        <div class="color-wrap">
+          <div class="color-preview" id="secondaryPreview" style="background:#ffffff"></div>
+          <input type="color" id="secondaryPicker" value="#ffffff" oninput="syncColor('secondary',this.value)">
+        </div>
+      </div>
+    </div>
+    <input type="hidden" id="primaryColorValue"   name="primaryColorValue"   value="#c8352e">
+    <input type="hidden" id="secondaryColorValue" name="secondaryColorValue" value="#ffffff">
+  </div>
+
+  <div class="field">
+    <label>Visual Style</label>
+    <div class="style-row">
+      <span>Classic</span>
+      <input type="range" name="stylePreference" id="stylePreference" min="1" max="10" value="5">
+      <span>Bold</span>
+    </div>
+  </div>
+
+  <p class="section-label">Quantity</p>
+
+  <div class="qty-options">
+    <div class="qty-option"><input type="radio" id="q1" name="orderSize" value="1-4" checked><label for="q1">1–4</label></div>
+    <div class="qty-option"><input type="radio" id="q2" name="orderSize" value="5-10"><label for="q2">5–10</label></div>
+    <div class="qty-option"><input type="radio" id="q3" name="orderSize" value="11-20"><label for="q3">11–20</label></div>
+    <div class="qty-option"><input type="radio" id="q4" name="orderSize" value="21-50"><label for="q4">21–50</label></div>
+    <div class="qty-option"><input type="radio" id="q5" name="orderSize" value="51+"><label for="q5">51+</label></div>
+  </div>
+
+  <div class="terms">
+    <input type="checkbox" id="termsAccept" name="termsAccept" required>
+    <label for="termsAccept">I accept the <a href="https://www.momuto.com/pages/privacy-policy" target="_blank" rel="noopener">privacy policy</a>.</label>
+  </div>
+
+  <button type="submit" class="submit-btn">Submit Request</button>
+</form>
+
+<div class="env-note">
+  <strong>Env vars needed before testing:</strong><br>
+  <code>ANTHROPIC_API_KEY</code> — already in repo<br>
+  <code>RESEND_API_KEY</code> — resend.com free tier<br>
+  <code>HUBSPOT_TOKEN</code> — Private App token (contacts write scope)<br>
+  <code>TEAM_EMAIL</code> — where notifications go<br>
+  <code>THANK_YOU_URL</code> — redirect after submit<br><br>
+  Run locally: <code>npx vercel dev</code> in repo root, then open this file.
+</div>
+
+<script>
+  function showName(input, spanId) {
+    document.getElementById(spanId).textContent = input.files[0]?.name || '';
+  }
+  function syncColor(which, hex) {
+    document.getElementById(which + 'Preview').style.background = hex;
+    document.getElementById(which + 'ColorValue').value = hex;
+  }
+  // Click on color preview → open native picker
+  document.getElementById('primaryPreview').onclick   = () => document.getElementById('primaryPicker').click();
+  document.getElementById('secondaryPreview').onclick = () => document.getElementById('secondaryPicker').click();
+</script>
+</body>
+</html>
