@@ -130,6 +130,8 @@
   For local testing with `vercel dev`: action="/api/submit"
 -->
 <form class="card" method="POST" action="/api/submit" enctype="multipart/form-data">
+  <!-- Per-language redirect: set _next to the correct thank-you page for each store -->
+  <input type="hidden" name="_next" value="https://www.momuto.com/pages/customized-design-confirmed">
 
   <p class="section-label">Contact</p>
 

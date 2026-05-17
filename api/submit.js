@@ -20,7 +20,7 @@ const { put } = require('@vercel/blob');
 const RESEND_KEY  = process.env.RESEND_API_KEY;
 const TEAM_EMAIL  = process.env.TEAM_EMAIL  || 'info@momuto.com';
 const FROM_EMAIL  = process.env.FROM_EMAIL  || 'leads@momuto.com';
-const THANK_YOU   = process.env.THANK_YOU_URL
+const THANK_YOU_FALLBACK = process.env.THANK_YOU_URL
   || 'https://www.momuto.com/pages/customized-design-confirmed';
 
 // ── Parse multipart form ─────────────────────────────────────────────────────
@@ -180,5 +180,6 @@ module.exports = async function handler(req, res) {
     // Always redirect — never expose errors to the user
   }
 
-  res.redirect(302, THANK_YOU);
+  const thankYouUrl = fields._next || THANK_YOU_FALLBACK;
+  res.redirect(302, thankYouUrl);
 };
