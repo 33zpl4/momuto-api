@@ -171,8 +171,11 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  let thankYouUrl = THANK_YOU_FALLBACK;
+
   try {
     const { fields, files } = await parseForm(req);
+    if (fields._next) thankYouUrl = fields._next;
     const { subject, html } = buildEmail(fields, files);
     await sendEmail(fields, subject, html);
   } catch (err) {
@@ -180,6 +183,5 @@ module.exports = async function handler(req, res) {
     // Always redirect — never expose errors to the user
   }
 
-  const thankYouUrl = fields._next || THANK_YOU_FALLBACK;
   res.redirect(302, thankYouUrl);
 };
