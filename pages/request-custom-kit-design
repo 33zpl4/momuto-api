@@ -252,10 +252,7 @@
 <div class="progress-step" id="progress3"><span class="step-label">3</span> <span class="step-text">Submit</span></div>
 </div>
 <div id="formContentWrapper">
-<form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://formsubmit.co/info@momuto.com">
-<input type="hidden" name="_subject" value="New Custom Design Request (English)" />
-<input type="hidden" name="_captcha" value="false" />
-<input type="hidden" name="_enctype" value="multipart/form-data" />
+<form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://momuto-api.vercel.app/api/submit">
 <input type="hidden" name="_next" value="https://www.momuto.com/pages/customized-design-confirmed" />
 
 <div class="form-step active" id="step1">
