@@ -284,7 +284,7 @@
 <div class="progress-step" id="progress2"><span class="step-label">2</span> <span class="step-text">Style</span></div>
 <div class="progress-step" id="progress3"><span class="step-label">3</span> <span class="step-text">Envoyer</span></div>
 </div>
-<div id="formContentWrapper"><form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://formsubmit.co/info@momuto.com"><input type="hidden" name="_subject" value="Nouvelle Demande de Design Sur Mesure (Fran&ccedil;ais)" /> <input type="hidden" name="_captcha" value="false" /> <input type="hidden" name="_enctype" value="multipart/form-data" /> <input type="hidden" name="_next" value="https://fr.momuto.com/pages/design-personnalise-confirme" />
+<div id="formContentWrapper"><form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://momuto-api.vercel.app/api/submit"><input type="hidden" name="_next" value="https://fr.momuto.com/pages/design-personnalise-confirme" />
 <div class="form-step active" id="step1">
 <div class="form-section-inner">
 <div class="input-group"><input type="text" id="customerName" name="firstname" placeholder="Votre Nom / Manager" required="" /></div>
