@@ -729,7 +729,8 @@ Aper&ccedil;u en 24h</div>
 1 r&eacute;vision incluse</div>
 </div>
 </div>
-<!-- FORM --><form id="rtpForm" enctype="multipart/form-data" method="POST" action="https://formsubmit.co/29e668c40e91767614196fc0ac4e0576"><!-- Hidden fields for colors --> <input type="hidden" id="rtpPrimaryValue" name="Couleur Primaire" value="#001F5B" /> <input type="hidden" id="rtpSecondaryValue" name="Couleur Secondaire" value="#C4A46B" /> <input type="hidden" id="rtpTrimValue" name="Couleur Bordures" value="#FFFFFF" /> <input type="hidden" name="Design" value="The Apex" /> <input type="hidden" name="_subject" value="Ready-to-Play: The Apex" /> <input type="hidden" name="_next" value="https://fr.momuto.com/pages/ready-to-play-merci" /> <input type="hidden" name="_captcha" value="false" /> <input type="hidden" id="rtpKitTypeValue" name="Type de kit" value="Maillot seul" /> <!-- SECTION 1: COLORS -->
+<!-- FORM --><form id="rtpForm" enctype="multipart/form-data" method="POST" action="https://momuto-api.vercel.app/api/submit"><!-- Hidden fields for colors --> <input type="hidden" id="rtpPrimaryValue" name="Couleur Primaire" value="#001F5B" /> <input type="hidden" id="rtpSecondaryValue" name="Couleur Secondaire" value="#C4A46B" /> <input type="hidden" id="rtpTrimValue" name="Couleur Bordures" value="#FFFFFF" /> <input type="hidden" name="Design" value="The Apex" /> <input type="hidden" name="_next" value="https://fr.momuto.com/pages/ready-to-play-merci" />
+      <input type="hidden" name="_source_url" id="_sourceUrl" value=""> <input type="hidden" id="rtpKitTypeValue" name="Type de kit" value="Maillot seul" /> <!-- SECTION 1: COLORS -->
 <h3 class="rtp-section-title"><span class="rtp-section-num">01</span> Configurer vos couleurs</h3>
 <div class="rtp-color-row" data-rtp-property="primary" data-hidden="rtpPrimaryValue">
 <div class="rtp-color-info"><span class="rtp-color-name">Primaire</span> <span class="rtp-color-hint">corps du maillot</span></div>
@@ -830,6 +831,7 @@ Aper&ccedil;u en 24h</div>
 
   /* Fix CMS overflow */
   document.addEventListener('DOMContentLoaded', function() {
+    var su = document.getElementById('_sourceUrl'); if (su) su.value = window.location.href;
     var el = document.querySelector('.rtp-page');
     if (el) {
       while ((el = el.parentElement) && el.tagName !== 'HTML') {

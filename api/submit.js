@@ -70,8 +70,14 @@ function buildEmail(fields, files) {
   const badge   = files.find(f => f.fieldName === 'upload_file');
   const concept = files.find(f => f.fieldName === 'design_concept');
 
-  const qty = fields.orderSize || '—';
-  const subject = `New Kit Request — ${fields.company || 'Unknown'} (${qty} kits)`;
+  const qty    = fields.orderSize || '—';
+  const design = fields.Design || fields.design || null;
+  const source = fields._source_url || null;
+
+  const subjectBase = design
+    ? `Ready-to-Play: ${design} — ${fields.company || 'Unknown'} (${qty} kits)`
+    : `New Kit Request — ${fields.company || 'Unknown'} (${qty} kits)`;
+  const subject = subjectBase;
 
   const fileRow = (label, file) => {
     if (!file) return row(label, '<span style="color:#a1a1aa">Not uploaded</span>');
@@ -112,6 +118,8 @@ function buildEmail(fields, files) {
     <p style="margin:0 0 20px;font-size:0.85rem;color:#71717a">${qty} kits</p>
 
     <table style="width:100%;border-collapse:collapse;margin-bottom:24px">
+      ${source ? row('Source', `<a href="${source}" style="color:#c8352e;font-size:0.8rem">${source}</a>`) : ''}
+      ${design ? row('Template', design) : ''}
       ${row('Name',    fields.firstname || '—')}
       ${row('Email',   fields.email
         ? `<a href="mailto:${fields.email}" style="color:#c8352e">${fields.email}</a>`
@@ -119,9 +127,9 @@ function buildEmail(fields, files) {
       ${row('Team',    fields.company   || '—')}
       ${row('League',  fields.industry  || '—')}
       ${row('Qty',     qty)}
-      ${row('Primary', swatch(fields.primaryColorValue))}
-      ${row('Secondary', swatch(fields.secondaryColorValue))}
-      ${row('Style',   fields.stylePreference ? `${fields.stylePreference} / 10` : '—')}
+      ${row('Primary', swatch(fields.primaryColorValue || fields['Primary Colour'] || fields['Couleur Primaire'] || fields['Color Primario'] || ''))}
+      ${row('Secondary', swatch(fields.secondaryColorValue || fields['Secondary Colour'] || fields['Couleur Secondaire'] || fields['Color Secundario'] || ''))}
+      ${fields.stylePreference ? row('Style', `${fields.stylePreference} / 10`) : ''}
       ${fileRow('Badge',          badge)}
       ${fileRow('Design concept', concept)}
     </table>
