@@ -35,7 +35,7 @@ const DOMAINS = {
     performanceTitle: 'Performance Fabric. Precision Fit.',
     performanceSubtitle: 'Built for the game',
     specsLabels: { quality: 'Quality', custom: 'Custom', delivery: 'Delivery' },
-    deliveryText: '20-25 DAYS',
+    deliveryText: '25-30 DAYS',
     titleTemplate: (team) => `${team} Custom Kit Design Preview | MOMUTO`
   },
   es: {
@@ -60,7 +60,7 @@ const DOMAINS = {
     performanceTitle: 'Tejido de Alto Rendimiento. Corte Preciso.',
     performanceSubtitle: 'Diseñado para el juego',
     specsLabels: { quality: 'Calidad', custom: 'Personalizado', delivery: 'Entrega' },
-    deliveryText: '20-25 DÍAS',
+    deliveryText: '25-30 DÍAS',
     titleTemplate: (team) => `Diseño Equipación ${team} | MOMUTO`
   },
   fr: {
@@ -85,7 +85,7 @@ const DOMAINS = {
     performanceTitle: 'Tissu Haute Performance. Coupe Précise.',
     performanceSubtitle: 'Conçu pour le jeu',
     specsLabels: { quality: 'Qualité', custom: 'Personnalisé', delivery: 'Livraison' },
-    deliveryText: '20-25 J',
+    deliveryText: '25-30 J',
     titleTemplate: (team) => `Design Maillot ${team} | MOMUTO`
   },
   it: {
@@ -110,7 +110,7 @@ const DOMAINS = {
     performanceTitle: 'Tessuto ad Alte Prestazioni. Taglio Preciso.',
     performanceSubtitle: 'Progettato per il gioco',
     specsLabels: { quality: 'Qualità', custom: 'Personalizzato', delivery: 'Consegna' },
-    deliveryText: '20-25 GG',
+    deliveryText: '25-30 GG',
     titleTemplate: (team) => `Design Maglia ${team} | MOMUTO`
   }
 };
@@ -237,7 +237,10 @@ function buildPageHTML(config, content, domain) {
   // Conditional hero image section
   let imageSection;
   if (hasHomeAway) {
-    const kitLabels = domain.kitLabels || { home: 'HOME', away: 'AWAY' };
+    const kitLabels = {
+      home: config.kit_label_home || domain.kitLabels?.home || 'HOME',
+      away: config.kit_label_away || domain.kitLabels?.away || 'AWAY'
+    };
     imageSection = `
   <div class="kit-toolbar">
     <div class="kit-group">
