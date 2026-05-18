@@ -762,16 +762,15 @@ h1.title, .title, .page-title, .section-header h1, h1.section-header__title {
     </div>
 
     <!-- FORM -->
-    <form id="rtpForm" enctype="multipart/form-data" method="POST" action="https://formsubmit.co/29e668c40e91767614196fc0ac4e0576">
+    <form id="rtpForm" enctype="multipart/form-data" method="POST" action="https://momuto-api.vercel.app/api/submit">
 
       <!-- Hidden fields for colors -->
       <input type="hidden" id="rtpPrimaryValue" name="Primary Colour" value="#000000">
       <input type="hidden" id="rtpSecondaryValue" name="Secondary Colour" value="#C8102E">
       <input type="hidden" id="rtpTrimValue" name="Trim Colour" value="#FFFFFF">
       <input type="hidden" name="Design" value="The Kinetic">
-      <input type="hidden" name="_subject" value="Ready-to-Play: The Kinetic">
       <input type="hidden" name="_next" value="https://it.momuto.com/pages/ready-to-play-thank-you">
-      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_source_url" id="_sourceUrl" value="">
       <input type="hidden" id="rtpKitTypeValue" name="Kit Type" value="Solo maglia">
 
       <!-- SECTION 1: COLORS -->
@@ -963,6 +962,7 @@ h1.title, .title, .page-title, .section-header h1, h1.section-header__title {
 
   /* Fix CMS overflow */
   document.addEventListener('DOMContentLoaded', function() {
+    var su = document.getElementById('_sourceUrl'); if (su) su.value = window.location.href;
     var el = document.querySelector('.rtp-page');
     if (el) {
       while ((el = el.parentElement) && el.tagName !== 'HTML') {
