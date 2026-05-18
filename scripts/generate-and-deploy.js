@@ -237,7 +237,10 @@ function buildPageHTML(config, content, domain) {
   // Conditional hero image section
   let imageSection;
   if (hasHomeAway) {
-    const kitLabels = domain.kitLabels || { home: 'HOME', away: 'AWAY' };
+    const kitLabels = {
+      home: config.kit_label_home || domain.kitLabels?.home || 'HOME',
+      away: config.kit_label_away || domain.kitLabels?.away || 'AWAY'
+    };
     imageSection = `
   <div class="kit-toolbar">
     <div class="kit-group">
