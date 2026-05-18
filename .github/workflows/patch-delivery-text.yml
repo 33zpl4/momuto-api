@@ -1,0 +1,37 @@
+name: Patch Delivery Text on All Team Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Domain to patch (leave blank for all)'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - en
+          - es
+          - fr
+          - it
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run patch script
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          TARGET_DOMAIN: ${{ github.event.inputs.domain }}
+        run: node scripts/patch-delivery-text.js
