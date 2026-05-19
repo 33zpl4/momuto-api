@@ -34,29 +34,39 @@ module.exports = async function handler(req, res) {
 
   const message = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
-    max_tokens: 256,
-    messages: [{
-      role: 'user',
-      content: `Extract order details from this invoice or order text and return ONLY a JSON object with these fields (use null if not found):
-{
-  "name":      string — customer full name,
-  "email":     string — customer email,
-  "team":      string — team or club name,
-  "qty":       string — quantity (e.g. "11-20" or "15"),
-  "ref":       string — invoice or order reference number,
-  "orderDate": string — date in YYYY-MM-DD format
-}
+    max_tokens: 300,
+    messages: [
+      {
+        role: 'user',
+        content: `Extract order details from this invoice or order text. Return ONLY a raw JSON object, no markdown, no explanation.
+
+Fields (use null if not found):
+- name: customer full name
+- email: customer email address
+- team: team or club name
+- qty: quantity as a string (e.g. "15" or "11-20")
+- ref: invoice or order reference number
+- orderDate: date in YYYY-MM-DD format
 
 Invoice text:
 ${text}`,
-    }],
+      },
+      {
+        role: 'assistant',
+        content: '{',
+      },
+    ],
   });
 
   try {
-    const raw = message.content[0].text.trim();
-    const json = JSON.parse(raw.replace(/^```json\n?|\n?```$/g, ''));
+    // Prepend the '{' we used as prefill, then extract the JSON object
+    const raw = '{' + message.content[0].text.trim();
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error('No JSON object found in response');
+    const json = JSON.parse(match[0]);
     return res.status(200).json(json);
-  } catch {
-    return res.status(422).json({ error: 'Could not parse response', raw: message.content[0].text });
+  } catch (err) {
+    console.error('[parse-invoice] parse error:', err.message, message.content[0].text);
+    return res.status(422).json({ error: 'Could not parse response' });
   }
 };

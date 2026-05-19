@@ -1,10 +1,9 @@
 'use strict';
 
 /**
- * GET  /api/orders          — list all orders (admin)
- * POST /api/orders          — create order, send confirmation email
- *
- * Auth: x-admin-token header must match ADMIN_TOKEN env var
+ * GET   /api/orders  — list all orders
+ * POST  /api/orders  — create order (no email — awaiting payment)
+ * PATCH /api/orders  — mark order as paid → sends confirmation, starts lifecycle
  */
 
 const { kv } = require('@vercel/kv');
@@ -13,13 +12,9 @@ const RESEND_KEY  = process.env.RESEND_API_KEY;
 const FROM_EMAIL  = process.env.FROM_EMAIL_ORDERS || process.env.FROM_EMAIL || 'orders@momuto.com';
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 
-// ── Auth ─────────────────────────────────────────────────────────────────────
-
 function isAuthorised(req) {
   return req.headers['x-admin-token'] === ADMIN_TOKEN;
 }
-
-// ── Body parser ───────────────────────────────────────────────────────────────
 
 function readJSON(req) {
   return new Promise((resolve, reject) => {
@@ -51,10 +46,10 @@ function emailConfirmation(order) {
   </div>
   <div style="padding:32px 24px">
     <p style="margin:0 0 8px;font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#c8352e">Order Confirmed</p>
-    <h2 style="margin:0 0 24px;font-size:1.3rem;color:#0a0a0a;font-weight:700">Hi ${order.name},<br>your kits are in the works.</h2>
+    <h2 style="margin:0 0 24px;font-size:1.3rem;color:#0a0a0a;font-weight:700">Hi ${order.name},<br>payment received — your kits are in the works.</h2>
     <p style="margin:0 0 24px;font-size:0.95rem;color:#3a3a3a;line-height:1.7">
-      We've received your order for <strong>${order.team}</strong> (${order.qty} kits).<br>
-      Our design team is finalising everything and production will kick off shortly.
+      We've received your payment for <strong>${order.team}</strong> (${order.qty} kits).<br>
+      Our team is getting everything ready and production will kick off shortly.
     </p>
     <table style="width:100%;border-collapse:collapse;margin-bottom:28px">
       <tr>
@@ -85,11 +80,11 @@ function emailConfirmation(order) {
 
 async function saveOrder(order) {
   await kv.set(`order:${order.id}`, order);
-  await kv.sadd('orders:active', order.id);
+  await kv.sadd('orders:all', order.id);
 }
 
 async function listOrders() {
-  const ids = (await kv.smembers('orders:active')) || [];
+  const ids = (await kv.smembers('orders:all')) || [];
   if (!ids.length) return [];
   const orders = await Promise.all(ids.map(id => kv.get(`order:${id}`)));
   return orders
@@ -106,16 +101,16 @@ module.exports = async function handler(req, res) {
 
   if (!isAuthorised(req)) return res.status(401).json({ error: 'Unauthorised' });
 
-  // ── GET: list orders ──────────────────────────────────────────────────────
+  // ── GET: list all orders ──────────────────────────────────────────────────
   if (req.method === 'GET') {
     const orders = await listOrders();
     return res.status(200).json({ orders });
   }
 
-  // ── POST: create order ────────────────────────────────────────────────────
+  // ── POST: create order (pending payment, no email) ────────────────────────
   if (req.method === 'POST') {
     const body = await readJSON(req);
-    const { name, email, team, qty, ref, orderDate, notes, backdated } = body;
+    const { name, email, team, qty, ref, orderDate, notes } = body;
 
     if (!name || !email || !team) {
       return res.status(400).json({ error: 'name, email and team are required' });
@@ -129,22 +124,45 @@ module.exports = async function handler(req, res) {
       team,
       qty:       qty || '—',
       ref:       ref || id,
-      orderDate: orderDate || new Date().toISOString().slice(0, 10),
+      invoiceDate: orderDate || new Date().toISOString().slice(0, 10),
       notes:     notes || null,
-      emailsSent:     backdated ? ['confirmation', 'day4', 'day10'] : ['confirmation'],
+      paidAt:    null,
+      emailsSent:     [],
       trackingNumber: null,
       trackingUrl:    null,
-      status:    'active',
+      status:    'pending_payment',
       createdAt: new Date().toISOString(),
     };
 
     await saveOrder(order);
-
-    const { subject, html } = emailConfirmation(order);
-    await sendEmail(order.email, subject, html);
-
-    console.log(`[orders] created ${id} for ${team} (${email})`);
+    console.log(`[orders] created ${id} for ${team} — awaiting payment`);
     return res.status(201).json({ ok: true, id });
+  }
+
+  // ── PATCH: mark as paid → send confirmation, start lifecycle ──────────────
+  if (req.method === 'PATCH') {
+    const { id } = await readJSON(req);
+    if (!id) return res.status(400).json({ error: 'id is required' });
+
+    const order = await kv.get(`order:${id}`);
+    if (!order) return res.status(404).json({ error: 'Order not found' });
+    if (order.paidAt) return res.status(409).json({ error: 'Already marked as paid' });
+
+    const updated = {
+      ...order,
+      paidAt:     new Date().toISOString(),
+      status:     'active',
+      emailsSent: ['confirmation'],
+    };
+
+    await kv.set(`order:${id}`, updated);
+    await kv.sadd('orders:active', id);
+
+    const { subject, html } = emailConfirmation(updated);
+    await sendEmail(updated.email, subject, html);
+
+    console.log(`[orders] ${id} marked as paid — confirmation sent`);
+    return res.status(200).json({ ok: true });
   }
 
   return res.status(405).json({ error: 'Method not allowed' });

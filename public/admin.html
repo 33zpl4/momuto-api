@@ -164,44 +164,43 @@
         <input type="text" id="f-ref" placeholder="INV-2026-001">
       </div>
       <div class="field">
-        <label>Order Date</label>
+        <label>Invoice Date</label>
         <input type="date" id="f-date">
       </div>
       <div class="field full">
         <label>Notes (internal)</label>
         <textarea id="f-notes" placeholder="Custom colours, special requests…"></textarea>
       </div>
-      <div class="field full" style="flex-direction:row;align-items:center;gap:10px;margin-top:4px">
-        <input type="checkbox" id="f-backdated" style="width:16px;height:16px;accent-color:var(--red);border:none;padding:0;flex-shrink:0">
-        <label for="f-backdated" style="text-transform:none;letter-spacing:0;font-size:0.82rem;color:var(--muted);cursor:pointer">
-          Backdated order — skip confirmation, day-4 &amp; day-10 emails. Only send tracking when added.
-        </label>
-      </div>
     </div>
     <br>
-    <button class="btn btn-primary" id="createBtn" onclick="createOrder()">Create Order &amp; Send Confirmation</button>
+    <button class="btn btn-primary" id="createBtn" onclick="createOrder()">Save Order — No Email Until Paid</button>
     <div class="form-msg" id="createMsg"></div>
   </div>
 
-  <!-- ── Active Orders ──────────────────────────── -->
+  <!-- ── Awaiting Payment ───────────────────────── -->
   <p class="section-title">
-    Active Orders
+    Awaiting Payment
     <button class="refresh-btn" onclick="loadOrders()">↻ Refresh</button>
   </p>
-  <div class="orders-wrap">
-    <table class="orders" id="ordersTable">
+  <div class="orders-wrap" style="margin-bottom:48px">
+    <table class="orders">
       <thead>
-        <tr>
-          <th>Ref</th>
-          <th>Team</th>
-          <th>Customer</th>
-          <th>Qty</th>
-          <th>Day</th>
-          <th>Status</th>
-          <th>Tracking</th>
-        </tr>
+        <tr><th>Ref</th><th>Team</th><th>Customer</th><th>Qty</th><th>Invoice Date</th><th>Action</th></tr>
       </thead>
-      <tbody id="ordersBody">
+      <tbody id="pendingBody">
+        <tr><td colspan="6" class="empty">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Active Orders ──────────────────────────── -->
+  <p class="section-title">Active Orders</p>
+  <div class="orders-wrap">
+    <table class="orders">
+      <thead>
+        <tr><th>Ref</th><th>Team</th><th>Customer</th><th>Qty</th><th>Day (since payment)</th><th>Progress</th><th>Tracking</th></tr>
+      </thead>
+      <tbody id="activeBody">
         <tr><td colspan="7" class="empty">Loading…</td></tr>
       </tbody>
     </table>
@@ -281,7 +280,7 @@
     if (!name || !email || !team) { showMsg('createMsg', 'Name, email and team are required.', false); return; }
 
     const btn = document.getElementById('createBtn');
-    btn.disabled = true; btn.textContent = 'Sending…';
+    btn.disabled = true; btn.textContent = 'Saving…';
 
     const today = new Date().toISOString().slice(0, 10);
     const body = {
@@ -290,7 +289,6 @@
       ref:       document.getElementById('f-ref').value.trim() || null,
       orderDate: document.getElementById('f-date').value || today,
       notes:     document.getElementById('f-notes').value.trim() || null,
-      backdated: document.getElementById('f-backdated').checked,
     };
 
     try {
@@ -299,52 +297,80 @@
         headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
         body: JSON.stringify(body),
       });
-
       if (r.status === 401) { showMsg('createMsg', 'Invalid token.', false); logout(); return; }
       if (!r.ok) { const e = await r.json(); showMsg('createMsg', e.error || 'Error', false); return; }
 
-      const wasBackdated = document.getElementById('f-backdated').checked;
-      showMsg('createMsg', wasBackdated
-        ? '✓ Order added — awaiting tracking number to notify customer.'
-        : '✓ Order created — confirmation email sent.', true);
+      showMsg('createMsg', '✓ Order saved — mark as paid when payment arrives.', true);
       ['f-name','f-email','f-team','f-ref','f-notes'].forEach(id => document.getElementById(id).value = '');
       document.getElementById('f-qty').value = '';
-      document.getElementById('f-date').value = '';
-      document.getElementById('f-backdated').checked = false;
+      document.getElementById('f-date').value = today;
       loadOrders();
-    } catch(err) {
+    } catch {
       showMsg('createMsg', 'Network error — try again.', false);
     } finally {
-      btn.disabled = false; btn.textContent = 'Create Order & Send Confirmation';
+      btn.disabled = false; btn.textContent = 'Save Order — No Email Until Paid';
+    }
+  }
+
+  // ── Mark as paid ──────────────────────────────────────────────────────────
+  async function markPaid(id) {
+    const btn = document.getElementById(`pay-${id}`);
+    btn.disabled = true; btn.textContent = 'Processing…';
+    try {
+      const r = await fetch(`${API}/api/orders`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+        body: JSON.stringify({ id }),
+      });
+      if (!r.ok) { const e = await r.json(); alert(e.error || 'Error'); btn.disabled = false; btn.textContent = 'Mark as Paid'; return; }
+      setTimeout(loadOrders, 500);
+    } catch {
+      alert('Network error'); btn.disabled = false; btn.textContent = 'Mark as Paid';
     }
   }
 
   // ── Load orders ───────────────────────────────────────────────────────────
   async function loadOrders() {
-    const tbody = document.getElementById('ordersBody');
-    tbody.innerHTML = '<tr><td colspan="7" class="empty">Loading…</td></tr>';
+    document.getElementById('pendingBody').innerHTML = '<tr><td colspan="6" class="empty">Loading…</td></tr>';
+    document.getElementById('activeBody').innerHTML  = '<tr><td colspan="7" class="empty">Loading…</td></tr>';
     try {
       const r = await fetch(`${API}/api/orders`, { headers: { 'x-admin-token': token } });
       if (r.status === 401) { logout(); return; }
       const { orders } = await r.json();
-      renderOrders(orders || []);
+      const pending = (orders || []).filter(o => o.status === 'pending_payment');
+      const active  = (orders || []).filter(o => o.status !== 'pending_payment');
+      renderPending(pending);
+      renderActive(active);
     } catch {
-      tbody.innerHTML = '<tr><td colspan="7" class="empty">Failed to load orders.</td></tr>';
+      document.getElementById('pendingBody').innerHTML = '<tr><td colspan="6" class="empty">Failed to load.</td></tr>';
+      document.getElementById('activeBody').innerHTML  = '<tr><td colspan="7" class="empty">Failed to load.</td></tr>';
     }
   }
 
-  function renderOrders(orders) {
-    const tbody = document.getElementById('ordersBody');
-    if (!orders.length) { tbody.innerHTML = '<tr><td colspan="7" class="empty">No active orders.</td></tr>'; return; }
+  function renderPending(orders) {
+    const tbody = document.getElementById('pendingBody');
+    if (!orders.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty">No orders awaiting payment.</td></tr>'; return; }
+    tbody.innerHTML = orders.map(o => `<tr>
+      <td style="font-size:0.8rem;color:var(--muted)">${o.ref}</td>
+      <td><strong>${o.team}</strong>${o.notes ? `<br><span style="font-size:0.75rem;color:var(--dim)">${o.notes}</span>` : ''}</td>
+      <td style="font-size:0.82rem">${o.name}<br><a href="mailto:${o.email}" style="color:var(--red);font-size:0.75rem">${o.email}</a></td>
+      <td style="font-size:0.82rem">${o.qty}</td>
+      <td style="font-size:0.8rem;color:var(--muted)">${o.invoiceDate || '—'}</td>
+      <td><button class="btn-sm" id="pay-${o.id}" onclick="markPaid('${o.id}')">Mark as Paid ✓</button>
+          <div class="form-msg" id="pm-${o.id}"></div></td>
+    </tr>`).join('');
+  }
 
+  function renderActive(orders) {
+    const tbody = document.getElementById('activeBody');
+    if (!orders.length) { tbody.innerHTML = '<tr><td colspan="7" class="empty">No active orders.</td></tr>'; return; }
     tbody.innerHTML = orders.map(o => {
-      const days     = daysSince(o.orderDate);
-      const sent     = o.emailsSent || [];
-      const shipped  = o.status === 'shipped';
-      const daysLabel = `<span class="days-badge ${days > 14 && !shipped ? 'days-late' : ''}">Day ${days}</span>`;
-      const statusPill = shipped
-        ? '<span class="status-pill pill-shipped">Shipped</span>'
-        : '<span class="status-pill pill-active">Active</span>';
+      const days    = o.paidAt ? daysSince(o.paidAt) : '—';
+      const sent    = o.emailsSent || [];
+      const shipped = o.status === 'shipped';
+      const daysLabel = typeof days === 'number'
+        ? `<span class="days-badge ${days > 14 && !shipped ? 'days-late' : ''}">Day ${days}</span>`
+        : '—';
 
       const steps = [
         { key: 'confirmation', label: 'Confirmed' },
@@ -356,8 +382,8 @@
       const trackingCell = shipped
         ? `<span class="track-sent">✓ ${o.trackingNumber}</span>`
         : `<div class="tracking-row">
-            <input type="text"  id="tn-${o.id}" placeholder="Tracking #">
-            <input type="url"   id="tu-${o.id}" placeholder="Tracking URL">
+            <input type="text" id="tn-${o.id}" placeholder="Tracking #">
+            <input type="url"  id="tu-${o.id}" placeholder="Tracking URL">
             <button class="btn-sm" onclick="sendTracking('${o.id}')">Send</button>
            </div>
            <div class="form-msg" id="tm-${o.id}"></div>`;
@@ -368,7 +394,7 @@
         <td style="font-size:0.82rem">${o.name}<br><a href="mailto:${o.email}" style="color:var(--red);font-size:0.75rem">${o.email}</a></td>
         <td style="font-size:0.82rem">${o.qty}</td>
         <td>${daysLabel}</td>
-        <td>${statusPill}<br><div class="progress">${steps}</div></td>
+        <td><div class="progress">${steps}</div></td>
         <td>${trackingCell}</td>
       </tr>`;
     }).join('');
