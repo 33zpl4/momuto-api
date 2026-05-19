@@ -115,7 +115,7 @@ module.exports = async function handler(req, res) {
   // ── POST: create order ────────────────────────────────────────────────────
   if (req.method === 'POST') {
     const body = await readJSON(req);
-    const { name, email, team, qty, ref, orderDate, notes } = body;
+    const { name, email, team, qty, ref, orderDate, notes, backdated } = body;
 
     if (!name || !email || !team) {
       return res.status(400).json({ error: 'name, email and team are required' });
@@ -131,7 +131,7 @@ module.exports = async function handler(req, res) {
       ref:       ref || id,
       orderDate: orderDate || new Date().toISOString().slice(0, 10),
       notes:     notes || null,
-      emailsSent:     ['confirmation'],
+      emailsSent:     backdated ? ['confirmation', 'day4', 'day10'] : ['confirmation'],
       trackingNumber: null,
       trackingUrl:    null,
       status:    'active',

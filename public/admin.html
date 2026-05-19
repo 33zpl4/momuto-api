@@ -159,6 +159,12 @@
         <label>Notes (internal)</label>
         <textarea id="f-notes" placeholder="Custom colours, special requests…"></textarea>
       </div>
+      <div class="field full" style="flex-direction:row;align-items:center;gap:10px;margin-top:4px">
+        <input type="checkbox" id="f-backdated" style="width:16px;height:16px;accent-color:var(--red);border:none;padding:0;flex-shrink:0">
+        <label for="f-backdated" style="text-transform:none;letter-spacing:0;font-size:0.82rem;color:var(--muted);cursor:pointer">
+          Backdated order — skip confirmation, day-4 &amp; day-10 emails. Only send tracking when added.
+        </label>
+      </div>
     </div>
     <br>
     <button class="btn btn-primary" id="createBtn" onclick="createOrder()">Create Order &amp; Send Confirmation</button>
@@ -234,6 +240,7 @@
       ref:       document.getElementById('f-ref').value.trim() || null,
       orderDate: document.getElementById('f-date').value || today,
       notes:     document.getElementById('f-notes').value.trim() || null,
+      backdated: document.getElementById('f-backdated').checked,
     };
 
     try {
@@ -246,10 +253,14 @@
       if (r.status === 401) { showMsg('createMsg', 'Invalid token.', false); logout(); return; }
       if (!r.ok) { const e = await r.json(); showMsg('createMsg', e.error || 'Error', false); return; }
 
-      showMsg('createMsg', '✓ Order created — confirmation email sent.', true);
+      const wasBackdated = document.getElementById('f-backdated').checked;
+      showMsg('createMsg', wasBackdated
+        ? '✓ Order added — awaiting tracking number to notify customer.'
+        : '✓ Order created — confirmation email sent.', true);
       ['f-name','f-email','f-team','f-ref','f-notes'].forEach(id => document.getElementById(id).value = '');
       document.getElementById('f-qty').value = '';
       document.getElementById('f-date').value = '';
+      document.getElementById('f-backdated').checked = false;
       loadOrders();
     } catch(err) {
       showMsg('createMsg', 'Network error — try again.', false);
