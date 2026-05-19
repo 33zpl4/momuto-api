@@ -123,9 +123,9 @@ module.exports = async function handler(req, res) {
 
   for (const id of ids) {
     const order = await kv.get(`order:${id}`);
-    if (!order) continue;
+    if (!order || !order.paidAt) continue;  // only process paid orders
 
-    const days = daysSince(order.orderDate);
+    const days = daysSince(order.paidAt);   // clock starts from payment date
     const sent = order.emailsSent || [];
 
     try {
