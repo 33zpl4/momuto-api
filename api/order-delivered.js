@@ -1,13 +1,14 @@
 'use strict';
 
 /**
- * POST /api/order-tracking
- * Body: { id, trackingNumber, trackingUrl }
- * Marks order as shipped and sends tracking email immediately.
+ * POST /api/order-delivered
+ * Body: { id }
+ * Manually triggered once delivery is confirmed.
+ * Sends Email 5 (post-delivery / review request).
  */
 
 const { kv } = require('@vercel/kv');
-const { emailTracking } = require('../lib/emails');
+const { emailDelivered } = require('../lib/emails');
 
 const RESEND_KEY  = process.env.RESEND_API_KEY;
 const FROM_EMAIL  = process.env.FROM_EMAIL_ORDERS || process.env.FROM_EMAIL || 'orders@momuto.com';
@@ -27,13 +28,13 @@ function readJSON(req) {
 }
 
 async function sendEmail(to, subject, html) {
-  if (!RESEND_KEY) { console.warn('[order-tracking] RESEND_API_KEY not set'); return; }
+  if (!RESEND_KEY) { console.warn('[order-delivered] RESEND_API_KEY not set'); return; }
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ from: `MOMUTO <${FROM_EMAIL}>`, to: [to], subject, html }),
   });
-  if (!r.ok) console.error('[order-tracking] Resend error:', r.status, await r.text());
+  if (!r.ok) console.error('[order-delivered] Resend error:', r.status, await r.text());
 }
 
 module.exports = async function handler(req, res) {
@@ -44,30 +45,29 @@ module.exports = async function handler(req, res) {
   if (!isAuthorised(req)) return res.status(401).json({ error: 'Unauthorised' });
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { id, trackingNumber, trackingUrl } = await readJSON(req);
-  if (!id || !trackingNumber || !trackingUrl) {
-    return res.status(400).json({ error: 'id, trackingNumber and trackingUrl are required' });
-  }
+  const { id } = await readJSON(req);
+  if (!id) return res.status(400).json({ error: 'id is required' });
 
   const order = await kv.get(`order:${id}`);
   if (!order) return res.status(404).json({ error: 'Order not found' });
+  if ((order.emailsSent || []).includes('delivered')) {
+    return res.status(409).json({ error: 'Delivery email already sent' });
+  }
 
   const updated = {
     ...order,
-    trackingNumber,
-    trackingUrl,
-    status:     'shipped',
-    emailsSent: [...(order.emailsSent || []), 'tracking'],
-    shippedAt:  new Date().toISOString(),
+    status:     'delivered',
+    emailsSent: [...(order.emailsSent || []), 'delivered'],
+    deliveredAt: new Date().toISOString(),
   };
 
   await kv.set(`order:${id}`, updated);
-  await kv.srem('orders:active', id);
-  await kv.sadd('orders:shipped', id);
+  await kv.srem('orders:shipped', id);
+  await kv.sadd('orders:delivered', id);
 
-  const { subject, html } = emailTracking(updated);
+  const { subject, html } = emailDelivered(updated);
   await sendEmail(updated.email, subject, html);
 
-  console.log(`[order-tracking] tracking sent for ${id}`);
+  console.log(`[order-delivered] post-delivery email sent for ${id}`);
   return res.status(200).json({ ok: true });
 };

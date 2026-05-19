@@ -167,6 +167,15 @@
         <label>Invoice Date</label>
         <input type="date" id="f-date">
       </div>
+      <div class="field">
+        <label>Language</label>
+        <select id="f-lang">
+          <option value="en">EN — English</option>
+          <option value="es">ES — Español</option>
+          <option value="fr">FR — Français</option>
+          <option value="it">IT — Italiano</option>
+        </select>
+      </div>
       <div class="field full">
         <label>Notes (internal)</label>
         <textarea id="f-notes" placeholder="Custom colours, special requests…"></textarea>
@@ -289,6 +298,7 @@
       ref:       document.getElementById('f-ref').value.trim() || null,
       orderDate: document.getElementById('f-date').value || today,
       notes:     document.getElementById('f-notes').value.trim() || null,
+      lang:      document.getElementById('f-lang').value,
     };
 
     try {
@@ -338,7 +348,8 @@
       if (r.status === 401) { logout(); return; }
       const { orders } = await r.json();
       const pending = (orders || []).filter(o => o.status === 'pending_payment');
-      const active  = (orders || []).filter(o => o.status !== 'pending_payment');
+      const active  = (orders || []).filter(o => o.status !== 'pending_payment' && o.status !== 'delivered');
+      const delivered = (orders || []).filter(o => o.status === 'delivered');
       renderPending(pending);
       renderActive(active);
     } catch {
@@ -377,10 +388,15 @@
         { key: 'day4',         label: 'Day 4' },
         { key: 'day10',        label: 'Day 10' },
         { key: 'tracking',     label: 'Shipped' },
+        { key: 'delivered',    label: 'Delivered' },
       ].map(s => `<span class="step ${sent.includes(s.key) ? 'step-done' : 'step-pending'}">${s.label}</span>`).join('');
 
-      const trackingCell = shipped
-        ? `<span class="track-sent">✓ ${o.trackingNumber}</span>`
+      const delivered = o.status === 'delivered';
+      const trackingCell = delivered
+        ? `<span class="track-sent">✓ Delivered</span>`
+        : shipped
+        ? `<button class="btn-sm" id="del-${o.id}" onclick="markDelivered('${o.id}')">Mark Delivered</button>
+           <div class="form-msg" id="dm-${o.id}"></div>`
         : `<div class="tracking-row">
             <input type="text" id="tn-${o.id}" placeholder="Tracking #">
             <input type="url"  id="tu-${o.id}" placeholder="Tracking URL">
@@ -398,6 +414,23 @@
         <td>${trackingCell}</td>
       </tr>`;
     }).join('');
+  }
+
+  // ── Mark as delivered ─────────────────────────────────────────────────────
+  async function markDelivered(id) {
+    const btn = document.getElementById(`del-${id}`);
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try {
+      const r = await fetch(`${API}/api/order-delivered`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+        body: JSON.stringify({ id }),
+      });
+      if (!r.ok) { const e = await r.json(); alert(e.error || 'Error'); btn.disabled = false; btn.textContent = 'Mark Delivered'; return; }
+      setTimeout(loadOrders, 500);
+    } catch {
+      alert('Network error'); btn.disabled = false; btn.textContent = 'Mark Delivered';
+    }
   }
 
   // ── Send tracking ─────────────────────────────────────────────────────────
