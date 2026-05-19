@@ -1,7 +1,14 @@
 {
   "functions": {
-    "api/submit.js": {
-      "maxDuration": 30
+    "api/submit.js":         { "maxDuration": 30 },
+    "api/orders.js":         { "maxDuration": 15 },
+    "api/order-tracking.js": { "maxDuration": 15 },
+    "api/cron-orders.js":    { "maxDuration": 30 }
+  },
+  "crons": [
+    {
+      "path": "/api/cron-orders",
+      "schedule": "0 8 * * *"
     }
-  }
+  ]
 }

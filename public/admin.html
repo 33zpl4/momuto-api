@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOMUTO — Order Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a; --panel: #111; --panel2: #161616;
+    --red: #c8352e; --white: #f5f5f5; --muted: #a1a1aa;
+    --dim: #71717a; --border: rgba(255,255,255,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--white); min-height: 100vh; }
+
+  /* ── Auth overlay ─────────────────────────────── */
+  #authOverlay {
+    position: fixed; inset: 0; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; z-index: 100;
+  }
+  #authOverlay.hidden { display: none; }
+  .auth-box { width: 340px; background: var(--panel); border: 1px solid var(--border); padding: 40px; }
+  .auth-box h2 { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
+  .auth-error { color: var(--red); font-size: 0.8rem; margin-top: 8px; display: none; }
+
+  /* ── Layout ───────────────────────────────────── */
+  header { background: #000; border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+  header span { font-size: 1.2rem; font-weight: 800; letter-spacing: 0.1em; }
+  header button { background: none; border: 1px solid var(--border); color: var(--muted); font-family: inherit; font-size: 0.75rem; padding: 6px 14px; cursor: pointer; letter-spacing: 0.06em; text-transform: uppercase; }
+  main { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+
+  /* ── Section titles ───────────────────────────── */
+  .section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--dim); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+
+  /* ── Form ─────────────────────────────────────── */
+  .form-card { background: var(--panel); border: 1px solid var(--border); padding: 28px; margin-bottom: 48px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-grid .full { grid-column: 1 / -1; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); }
+  input, select, textarea {
+    background: transparent; border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white); font-family: inherit; font-size: 0.88rem;
+    padding: 10px 13px; transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: rgba(255,255,255,0.35); }
+  input::placeholder, textarea::placeholder { color: var(--dim); font-size: 0.8rem; }
+  select option { background: #1a1a1a; }
+  textarea { resize: vertical; min-height: 70px; }
+  .btn { padding: 11px 24px; font-family: inherit; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; border: none; transition: background 0.2s; }
+  .btn-primary { background: var(--red); color: #fff; }
+  .btn-primary:hover { background: #e04038; }
+  .btn-primary:disabled { background: #555; cursor: not-allowed; }
+  .form-msg { margin-top: 12px; font-size: 0.82rem; display: none; }
+  .form-msg.ok { color: #4ade80; }
+  .form-msg.err { color: var(--red); }
+
+  /* ── Orders table ─────────────────────────────── */
+  .orders-wrap { overflow-x: auto; }
+  table.orders { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  table.orders th {
+    text-align: left; padding: 10px 14px; font-size: 0.68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim);
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+  table.orders td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table.orders tr:last-child td { border-bottom: none; }
+  table.orders tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .status-pill {
+    display: inline-block; padding: 2px 8px; border-radius: 2px;
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .pill-active   { background: rgba(200,53,46,0.15); color: #f87171; }
+  .pill-shipped  { background: rgba(74,222,128,0.12); color: #4ade80; }
+
+  .progress { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+  .step {
+    font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 7px; border: 1px solid;
+  }
+  .step-done  { border-color: #4ade80; color: #4ade80; }
+  .step-pending { border-color: rgba(255,255,255,0.12); color: var(--dim); }
+
+  .days-badge { font-size: 0.75rem; color: var(--muted); }
+  .days-late  { color: #fb923c; }
+
+  /* ── Tracking form (inline) ───────────────────── */
+  .tracking-row { display: flex; gap: 8px; margin-top: 10px; align-items: flex-start; flex-wrap: wrap; }
+  .tracking-row input { flex: 1; min-width: 120px; font-size: 0.78rem; padding: 7px 10px; }
+  .btn-sm { padding: 7px 14px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; border: none; background: var(--red); color: #fff; font-family: inherit; }
+  .btn-sm:disabled { background: #555; cursor: not-allowed; }
+  .track-sent { font-size: 0.75rem; color: #4ade80; }
+
+  .empty { padding: 32px; text-align: center; color: var(--dim); font-size: 0.85rem; }
+  .refresh-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: inherit; font-size: 0.72rem; padding: 5px 12px; cursor: pointer; letter-spacing: 0.06em; text-transform: uppercase; margin-left: 12px; }
+</style>
+</head>
+<body>
+
+<!-- Auth overlay -->
+<div id="authOverlay">
+  <div class="auth-box">
+    <h2>MOMUTO Admin</h2>
+    <div class="field">
+      <label>Admin Token</label>
+      <input type="password" id="tokenInput" placeholder="Enter admin token" autocomplete="current-password">
+    </div>
+    <div class="auth-error" id="authError">Invalid token — try again</div>
+    <br>
+    <button class="btn btn-primary" onclick="login()" style="width:100%;margin-top:8px">Sign In</button>
+  </div>
+</div>
+
+<header>
+  <span>MOMUTO</span>
+  <button onclick="logout()">Sign Out</button>
+</header>
+
+<main>
+
+  <!-- ── New Order ─────────────────────────────── -->
+  <p class="section-title">New Order</p>
+  <div class="form-card">
+    <div class="form-grid">
+      <div class="field">
+        <label>Customer Name *</label>
+        <input type="text" id="f-name" placeholder="First Last" required>
+      </div>
+      <div class="field">
+        <label>Customer Email *</label>
+        <input type="email" id="f-email" placeholder="customer@email.com" required>
+      </div>
+      <div class="field">
+        <label>Team Name *</label>
+        <input type="text" id="f-team" placeholder="FC Example" required>
+      </div>
+      <div class="field">
+        <label>Quantity</label>
+        <select id="f-qty">
+          <option value="">— select —</option>
+          <option>1–4</option>
+          <option>5–10</option>
+          <option>11–20</option>
+          <option>21–50</option>
+          <option>51+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Invoice / Order Ref</label>
+        <input type="text" id="f-ref" placeholder="INV-2026-001">
+      </div>
+      <div class="field">
+        <label>Order Date</label>
+        <input type="date" id="f-date">
+      </div>
+      <div class="field full">
+        <label>Notes (internal)</label>
+        <textarea id="f-notes" placeholder="Custom colours, special requests…"></textarea>
+      </div>
+    </div>
+    <br>
+    <button class="btn btn-primary" id="createBtn" onclick="createOrder()">Create Order &amp; Send Confirmation</button>
+    <div class="form-msg" id="createMsg"></div>
+  </div>
+
+  <!-- ── Active Orders ──────────────────────────── -->
+  <p class="section-title">
+    Active Orders
+    <button class="refresh-btn" onclick="loadOrders()">↻ Refresh</button>
+  </p>
+  <div class="orders-wrap">
+    <table class="orders" id="ordersTable">
+      <thead>
+        <tr>
+          <th>Ref</th>
+          <th>Team</th>
+          <th>Customer</th>
+          <th>Qty</th>
+          <th>Day</th>
+          <th>Status</th>
+          <th>Tracking</th>
+        </tr>
+      </thead>
+      <tbody id="ordersBody">
+        <tr><td colspan="7" class="empty">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<script>
+  const API = '';  // same origin
+
+  // ── Auth ──────────────────────────────────────────────────────────────────
+  let token = sessionStorage.getItem('adminToken') || '';
+
+  function login() {
+    token = document.getElementById('tokenInput').value.trim();
+    sessionStorage.setItem('adminToken', token);
+    document.getElementById('authOverlay').classList.add('hidden');
+    loadOrders();
+  }
+
+  function logout() {
+    sessionStorage.removeItem('adminToken');
+    token = '';
+    document.getElementById('authOverlay').classList.remove('hidden');
+    document.getElementById('tokenInput').value = '';
+  }
+
+  document.getElementById('tokenInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+  if (token) {
+    document.getElementById('authOverlay').classList.add('hidden');
+  }
+
+  // ── Create order ──────────────────────────────────────────────────────────
+  async function createOrder() {
+    const name  = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const team  = document.getElementById('f-team').value.trim();
+    if (!name || !email || !team) { showMsg('createMsg', 'Name, email and team are required.', false); return; }
+
+    const btn = document.getElementById('createBtn');
+    btn.disabled = true; btn.textContent = 'Sending…';
+
+    const today = new Date().toISOString().slice(0, 10);
+    const body = {
+      name, email, team,
+      qty:       document.getElementById('f-qty').value || '—',
+      ref:       document.getElementById('f-ref').value.trim() || null,
+      orderDate: document.getElementById('f-date').value || today,
+      notes:     document.getElementById('f-notes').value.trim() || null,
+    };
+
+    try {
+      const r = await fetch(`${API}/api/orders`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+        body: JSON.stringify(body),
+      });
+
+      if (r.status === 401) { showMsg('createMsg', 'Invalid token.', false); logout(); return; }
+      if (!r.ok) { const e = await r.json(); showMsg('createMsg', e.error || 'Error', false); return; }
+
+      showMsg('createMsg', '✓ Order created — confirmation email sent.', true);
+      ['f-name','f-email','f-team','f-ref','f-notes'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('f-qty').value = '';
+      document.getElementById('f-date').value = '';
+      loadOrders();
+    } catch(err) {
+      showMsg('createMsg', 'Network error — try again.', false);
+    } finally {
+      btn.disabled = false; btn.textContent = 'Create Order & Send Confirmation';
+    }
+  }
+
+  // ── Load orders ───────────────────────────────────────────────────────────
+  async function loadOrders() {
+    const tbody = document.getElementById('ordersBody');
+    tbody.innerHTML = '<tr><td colspan="7" class="empty">Loading…</td></tr>';
+    try {
+      const r = await fetch(`${API}/api/orders`, { headers: { 'x-admin-token': token } });
+      if (r.status === 401) { logout(); return; }
+      const { orders } = await r.json();
+      renderOrders(orders || []);
+    } catch {
+      tbody.innerHTML = '<tr><td colspan="7" class="empty">Failed to load orders.</td></tr>';
+    }
+  }
+
+  function renderOrders(orders) {
+    const tbody = document.getElementById('ordersBody');
+    if (!orders.length) { tbody.innerHTML = '<tr><td colspan="7" class="empty">No active orders.</td></tr>'; return; }
+
+    tbody.innerHTML = orders.map(o => {
+      const days     = daysSince(o.orderDate);
+      const sent     = o.emailsSent || [];
+      const shipped  = o.status === 'shipped';
+      const daysLabel = `<span class="days-badge ${days > 14 && !shipped ? 'days-late' : ''}">Day ${days}</span>`;
+      const statusPill = shipped
+        ? '<span class="status-pill pill-shipped">Shipped</span>'
+        : '<span class="status-pill pill-active">Active</span>';
+
+      const steps = [
+        { key: 'confirmation', label: 'Confirmed' },
+        { key: 'day4',         label: 'Day 4' },
+        { key: 'day10',        label: 'Day 10' },
+        { key: 'tracking',     label: 'Shipped' },
+      ].map(s => `<span class="step ${sent.includes(s.key) ? 'step-done' : 'step-pending'}">${s.label}</span>`).join('');
+
+      const trackingCell = shipped
+        ? `<span class="track-sent">✓ ${o.trackingNumber}</span>`
+        : `<div class="tracking-row">
+            <input type="text"  id="tn-${o.id}" placeholder="Tracking #">
+            <input type="url"   id="tu-${o.id}" placeholder="Tracking URL">
+            <button class="btn-sm" onclick="sendTracking('${o.id}')">Send</button>
+           </div>
+           <div class="form-msg" id="tm-${o.id}"></div>`;
+
+      return `<tr>
+        <td style="white-space:nowrap;font-size:0.8rem;color:var(--muted)">${o.ref}</td>
+        <td><strong>${o.team}</strong>${o.notes ? `<br><span style="font-size:0.75rem;color:var(--dim)">${o.notes}</span>` : ''}</td>
+        <td style="font-size:0.82rem">${o.name}<br><a href="mailto:${o.email}" style="color:var(--red);font-size:0.75rem">${o.email}</a></td>
+        <td style="font-size:0.82rem">${o.qty}</td>
+        <td>${daysLabel}</td>
+        <td>${statusPill}<br><div class="progress">${steps}</div></td>
+        <td>${trackingCell}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  // ── Send tracking ─────────────────────────────────────────────────────────
+  async function sendTracking(id) {
+    const trackingNumber = document.getElementById(`tn-${id}`).value.trim();
+    const trackingUrl    = document.getElementById(`tu-${id}`).value.trim();
+    const msgEl = document.getElementById(`tm-${id}`);
+
+    if (!trackingNumber || !trackingUrl) {
+      showMsgEl(msgEl, 'Both tracking number and URL are required.', false);
+      return;
+    }
+
+    try {
+      const r = await fetch(`${API}/api/order-tracking`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+        body: JSON.stringify({ id, trackingNumber, trackingUrl }),
+      });
+      if (!r.ok) { const e = await r.json(); showMsgEl(msgEl, e.error || 'Error', false); return; }
+      showMsgEl(msgEl, '✓ Tracking email sent.', true);
+      setTimeout(loadOrders, 1000);
+    } catch {
+      showMsgEl(msgEl, 'Network error.', false);
+    }
+  }
+
+  // ── Helpers ───────────────────────────────────────────────────────────────
+  function daysSince(dateStr) {
+    const start = new Date(dateStr); start.setHours(0,0,0,0);
+    const now   = new Date();        now.setHours(0,0,0,0);
+    return Math.floor((now - start) / 86400000);
+  }
+
+  function showMsg(id, msg, ok) {
+    const el = document.getElementById(id);
+    el.textContent = msg; el.className = `form-msg ${ok ? 'ok' : 'err'}`; el.style.display = 'block';
+  }
+  function showMsgEl(el, msg, ok) {
+    el.textContent = msg; el.className = `form-msg ${ok ? 'ok' : 'err'}`; el.style.display = 'block';
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
+  if (token) loadOrders();
+</script>
+</body>
+</html>
