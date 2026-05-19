@@ -120,6 +120,18 @@
 
 <main>
 
+  <!-- ── Parse Invoice ─────────────────────────── -->
+  <p class="section-title">Extract from Invoice</p>
+  <div class="form-card" style="margin-bottom:24px">
+    <div class="field">
+      <label>Paste invoice or order text</label>
+      <textarea id="invoiceText" placeholder="Paste any invoice text, email body, or order summary here…" style="min-height:110px"></textarea>
+    </div>
+    <br>
+    <button class="btn btn-primary" id="extractBtn" onclick="extractInvoice()">Extract &amp; Fill Form</button>
+    <div class="form-msg" id="extractMsg"></div>
+  </div>
+
   <!-- ── New Order ─────────────────────────────── -->
   <p class="section-title">New Order</p>
   <div class="form-card">
@@ -221,6 +233,44 @@
 
   if (token) {
     document.getElementById('authOverlay').classList.add('hidden');
+  }
+
+  // ── Extract invoice ───────────────────────────────────────────────────────
+  async function extractInvoice() {
+    const text = document.getElementById('invoiceText').value.trim();
+    if (!text) { showMsg('extractMsg', 'Paste some invoice text first.', false); return; }
+
+    const btn = document.getElementById('extractBtn');
+    btn.disabled = true; btn.textContent = 'Extracting…';
+
+    try {
+      const r = await fetch(`${API}/api/parse-invoice`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+        body: JSON.stringify({ text }),
+      });
+      if (r.status === 401) { logout(); return; }
+      if (!r.ok) { showMsg('extractMsg', 'Extraction failed — fill in manually.', false); return; }
+
+      const d = await r.json();
+      if (d.name)      document.getElementById('f-name').value  = d.name;
+      if (d.email)     document.getElementById('f-email').value = d.email;
+      if (d.team)      document.getElementById('f-team').value  = d.team;
+      if (d.ref)       document.getElementById('f-ref').value   = d.ref;
+      if (d.orderDate) document.getElementById('f-date').value  = d.orderDate;
+      if (d.qty) {
+        const sel = document.getElementById('f-qty');
+        const opt = [...sel.options].find(o => o.value.replace('–','-') === d.qty.replace('–','-'));
+        if (opt) sel.value = opt.value; else sel.value = '';
+      }
+
+      document.getElementById('invoiceText').value = '';
+      showMsg('extractMsg', '✓ Fields filled — review and adjust before submitting.', true);
+    } catch {
+      showMsg('extractMsg', 'Network error.', false);
+    } finally {
+      btn.disabled = false; btn.textContent = 'Extract & Fill Form';
+    }
   }
 
   // ── Create order ──────────────────────────────────────────────────────────
