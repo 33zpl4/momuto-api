@@ -5,8 +5,6 @@
   "primary_color": "#FFFFFF",
   "secondary_color": "#7B1C3A",
   "accent_color": "#C9A84C",
-  "image_url": "https://cdn.staticsoe.com/pics/e6e9e86323980c54d64eef30b261f8decc9e39b59b3ccf7755e30d43575ad0a8.png",
-  "away_image_url": "https://cdn.staticsoe.com/pics/ceb0787fcddb33d051f6e1528ce935a09067636f49c96ac6e893611d361661d8.png",
-  "kit_label_home": "OPTION A",
-  "kit_label_away": "OPTION B"
+  "image_url": "https://cdn.staticsoe.com/pics/ec4d3787eacef3c768dc1432dd2ccdafc3ec333f5e76006c04036140bc4b7260.png",
+  "back_image_url": "https://cdn.staticsoe.com/pics/40a8d37e092c779f09bf1ef42c7264e054e229ecd24c627829eda8b0b18824b4.png"
 }
