@@ -78,6 +78,7 @@ function buildEmail(fields, files) {
   const qty     = fields.orderSize   || fields.estimatedQty || '—';
   const design  = fields.Design      || fields.design       || null;
   const kitType = fields['Kit Type'] || fields['Type de kit'] || fields['Tipo de kit'] || fields['Tipo di kit'] || null;
+  const trim    = fields['Trim Colour'] || fields['Couleur Bordures'] || fields['Color Bordes'] || null;
   const source  = fields._source_url || null;
 
   const subjectBase = design
@@ -134,6 +135,7 @@ function buildEmail(fields, files) {
       ${kitType ? row('Kit type', kitType) : ''}
       ${row('Primary',   swatch(fields.primaryColorValue || fields['Primary Colour'] || fields['Couleur Primaire'] || fields['Color Primario'] || ''))}
       ${row('Secondary', swatch(fields.secondaryColorValue || fields['Secondary Colour'] || fields['Couleur Secondaire'] || fields['Color Secundario'] || ''))}
+      ${trim ? row('Trim / Cuffs', swatch(trim)) : ''}
       ${fields.stylePreference ? row('Style', `${fields.stylePreference} / 10`) : ''}
       ${fields.comments ? row('Comments', fields.comments) : ''}
       ${fileRow('Badge / Crest',  badge)}
