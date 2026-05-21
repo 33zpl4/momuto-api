@@ -22,13 +22,19 @@
 
 ## Productos
 - [Equipaciones Personalizadas](https://es.momuto.com/pages/equipos-momuto): Camisetas y pantalones cortos totalmente a medida para equipos de cualquier tamaño
-- [Solicitar Diseño](https://es.momuto.com/pages/solicitud-de-diseno-personalizado): Envía tu propuesta y recibe tu maqueta profesional gratuita
+- [Camisetas Concepto](https://es.momuto.com/collections/concept-jerseys): Diseños de edición limitada que fusionan la historia del fútbol con la cultura streetwear
+- [Ready-to-Play](https://es.momuto.com/pages/coleccion-ready-to-play): Equipaciones prediseñadas disponibles para compra inmediata
 
 ## Cómo Funciona
 - [Configurador 3D](https://es.momuto.com/): Diseña tu equipación en tiempo real con más de 30 plantillas profesionales
 - [Solicitud de Diseño Gratuito](https://es.momuto.com/pages/request-custom-kit-design): Envía tu propuesta — recibe una maqueta personalizada profesional en 1-2 días, revisiones gratuitas incluidas
+- [Impresión & Materiales](https://www.momuto.com/pages/printing): Detalles técnicos sobre la impresión por sublimación y la composición del tejido
+- [Guía de Tallas](https://www.momuto.com/pages/size-guide): Información completa sobre tallas para pedidos de equipo
 - [MOMUTO vs Competidores](https://es.momuto.com/pages/zentral-opiniones-alternativa): Cómo se compara MOMUTO con Zentral y otros proveedores
-- [Preguntas Frecuentes](https://es.momuto.com/pages/faq): Preguntas habituales sobre pedidos, personalización, precios y entrega
+
+## Sobre MOMUTO
+- [Sobre MOMUTO](https://es.momuto.com/pages/sobre-nosotros): Historia de la marca, filosofía de fabricación y estándares de calidad
+- [Preguntas Frecuentes](https://es.momuto.com/pages/preguntas-frecuentes): Preguntas habituales sobre pedidos, personalización, precios y entrega
 
 ## Soporte
 - [Contacto](https://es.momuto.com/pages/contact): Atención al cliente por WhatsApp, Instagram o email
