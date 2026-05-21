@@ -1,10 +1,13 @@
-name: Rewrite high-quality-soccer-kits Post
+name: Deploy Blog Post
 
 on:
   workflow_dispatch:
     inputs:
+      post_handle:
+        description: 'URL handle of the post (must match a file in blogs/)'
+        required: true
       dry_run:
-        description: 'Dry run — audit only, no writes to CMS'
+        description: 'Dry run — preview only, no writes to CMS'
         required: false
         default: 'true'
         type: choice
@@ -13,7 +16,7 @@ on:
           - 'false'
 
 jobs:
-  rewrite:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -27,8 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Rewrite post
+      - name: Deploy blog post
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          POST_HANDLE: ${{ github.event.inputs.post_handle }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
-        run: node scripts/rewrite-soccer-kits-post.js
+        run: node scripts/deploy-blog-post.js
