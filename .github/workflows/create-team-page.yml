@@ -5,6 +5,17 @@ on:
     paths:
       - 'teams/*/config.json'
       - 'scripts/generate-and-deploy.js'
+  workflow_dispatch:
+    inputs:
+      team_slug:
+        description: 'Team slug (folder name under teams/)'
+        required: true
+        type: string
+      update_gallery:
+        description: 'Also update gallery?'
+        required: false
+        default: 'false'
+        type: string
 
 jobs:
   create-pages:
@@ -21,27 +32,35 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install @anthropic-ai/sdk
+        run: npm install @anthropic-ai/sdk@0.39.0
 
       - name: Find changed team configs
         id: changed
         run: |
-          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep 'teams/.*/config.json' | head -1)
-          echo "config=$CHANGED" >> $GITHUB_OUTPUT
-          TEAM=$(echo $CHANGED | cut -d'/' -f2)
-          echo "team=$TEAM" >> $GITHUB_OUTPUT
-          if [ -z "$TEAM" ]; then
-            echo "No team config changed — skipping deploy"
+          if [ -n "${{ inputs.team_slug }}" ]; then
+            echo "team=${{ inputs.team_slug }}" >> $GITHUB_OUTPUT
+          else
+            CHANGED=$(git diff --name-only HEAD~1 HEAD | grep 'teams/.*/config.json' | head -1)
+            echo "config=$CHANGED" >> $GITHUB_OUTPUT
+            TEAM=$(echo $CHANGED | cut -d'/' -f2)
+            echo "team=$TEAM" >> $GITHUB_OUTPUT
+            if [ -z "$TEAM" ]; then
+              echo "No team config changed — skipping deploy"
+            fi
           fi
 
       - name: Check if gallery update requested
         id: gallery
         run: |
-          MSG=$(git log -1 --pretty=%B)
-          if echo "$MSG" | grep -qi 'add-to-gallery'; then
+          if [ -n "${{ inputs.update_gallery }}" ] && [ "${{ inputs.update_gallery }}" = "true" ]; then
             echo "update=true" >> $GITHUB_OUTPUT
           else
-            echo "update=false" >> $GITHUB_OUTPUT
+            MSG=$(git log -1 --pretty=%B)
+            if echo "$MSG" | grep -qi 'add-to-gallery'; then
+              echo "update=true" >> $GITHUB_OUTPUT
+            else
+              echo "update=false" >> $GITHUB_OUTPUT
+            fi
           fi
 
       - name: Generate and deploy pages
