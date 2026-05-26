@@ -14,6 +14,17 @@ function injectShared(template) {
     .replace('<!-- inject:design-request.js -->',  `<script>\n${js}\n</script>`);
 }
 
+// Additional EN-only pages deployed alongside the main locale pages
+const EXTRA_EN_PAGES = [
+  {
+    host: 'https://openapi.oemapps.com',
+    token: () => process.env.OEMSAAS_TOKEN_EN,
+    label: 'momuto.com',
+    handle: 'custom-kit-design-studio',
+    file: path.join(ROOT, 'pages', 'custom-kit-design-studio')
+  }
+];
+
 const DOMAINS = {
   en: {
     host: 'https://openapi.oemapps.com',
@@ -147,6 +158,35 @@ async function main() {
     } catch (e) {
       errors.push(`${locale}: ${e.message}`);
       console.error(`❌ ${locale}: ${e.message}`);
+    }
+  }
+
+  // Deploy extra EN-only pages
+  for (const extra of EXTRA_EN_PAGES) {
+    const domain = { ...extra, token: extra.token() };
+    if (!domain.token) {
+      console.warn(`⚠️  No EN token — skipping ${domain.handle}`);
+      continue;
+    }
+    try {
+      if (!fs.existsSync(domain.file)) {
+        throw new Error(`Source file not found: ${domain.file}`);
+      }
+      const template = fs.readFileSync(domain.file, 'utf8');
+      const repoContent = injectShared(template);
+      const page = await getPageByHandle(domain);
+      const liveContent = page.content || '';
+      if (repoContent === liveContent) {
+        console.log(`✓ ${domain.label}/${domain.handle}: already up to date`);
+        continue;
+      }
+      console.log(`${domain.label}/${domain.handle}: ${liveContent.length} → ${repoContent.length} chars`);
+      if (DRY_RUN) { console.log(`  DRY_RUN — skipping PUT`); continue; }
+      await updatePage(domain, page, repoContent);
+      console.log(`✓ Deployed ${domain.handle} to ${domain.label}`);
+    } catch (e) {
+      errors.push(`${domain.handle}: ${e.message}`);
+      console.error(`❌ ${domain.handle}: ${e.message}`);
     }
   }
 

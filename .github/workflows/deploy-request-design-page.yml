@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'pages/request-custom-kit-design'
+      - 'pages/custom-kit-design-studio'
       - 'pages/solicitud-de-diseno-personalizado'
       - 'pages/demande-de-design-professionnel-de-maillots'
       - 'pages/richiesta-design-personalizzato'
