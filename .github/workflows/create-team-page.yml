@@ -5,17 +5,6 @@ on:
     paths:
       - 'teams/*/config.json'
       - 'scripts/generate-and-deploy.js'
-  workflow_dispatch:
-    inputs:
-      team_slug:
-        description: 'Team slug (folder name under teams/)'
-        required: true
-        type: string
-      update_gallery:
-        description: 'Also update gallery?'
-        required: false
-        default: 'false'
-        type: string
 
 jobs:
   create-pages:
@@ -36,35 +25,23 @@ jobs:
 
       - name: Find changed team configs
         id: changed
-        env:
-          INPUT_TEAM: ${{ inputs.team_slug }}
         run: |
-          if [ -n "$INPUT_TEAM" ]; then
-            echo "team=$INPUT_TEAM" >> $GITHUB_OUTPUT
-          else
-            CHANGED=$(git diff --name-only HEAD~1 HEAD | grep 'teams/.*/config.json' | head -1)
-            echo "config=$CHANGED" >> $GITHUB_OUTPUT
-            TEAM=$(echo $CHANGED | cut -d'/' -f2)
-            echo "team=$TEAM" >> $GITHUB_OUTPUT
-            if [ -z "$TEAM" ]; then
-              echo "No team config changed — skipping deploy"
-            fi
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep 'teams/.*/config.json' | head -1)
+          echo "config=$CHANGED" >> $GITHUB_OUTPUT
+          TEAM=$(echo $CHANGED | cut -d'/' -f2)
+          echo "team=$TEAM" >> $GITHUB_OUTPUT
+          if [ -z "$TEAM" ]; then
+            echo "No team config changed — skipping deploy"
           fi
 
       - name: Check if gallery update requested
         id: gallery
-        env:
-          INPUT_GALLERY: ${{ inputs.update_gallery }}
         run: |
-          if [ "$INPUT_GALLERY" = "true" ]; then
+          MSG=$(git log -1 --pretty=%B)
+          if echo "$MSG" | grep -qi 'add-to-gallery'; then
             echo "update=true" >> $GITHUB_OUTPUT
           else
-            MSG=$(git log -1 --pretty=%B)
-            if echo "$MSG" | grep -qi 'add-to-gallery'; then
-              echo "update=true" >> $GITHUB_OUTPUT
-            else
-              echo "update=false" >> $GITHUB_OUTPUT
-            fi
+            echo "update=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Generate and deploy pages
