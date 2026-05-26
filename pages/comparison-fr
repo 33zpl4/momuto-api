@@ -1,6 +1,27 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "MOMUTO vs Gladiasport vs Owayo vs Spized — Comparatif Maillots de Foot 2026",
+  "description": "Comparatif indépendant des fournisseurs de maillots de foot personnalisés en 2026 : MOMUTO, Gladiasport, Owayo et Spized. Prix, délais, tissu, service design et livraison comparés.",
+  "url": "https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026",
+  "datePublished": "2024-01-01",
+  "dateModified": "2026-05-01",
+  "inLanguage": "fr",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".verdict-section", ".analysis-section"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MOMUTO",
+    "url": "https://fr.momuto.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
@@ -8,7 +29,15 @@
       "name": "Quel est le délai de livraison pour des maillots personnalisés en 2026 ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MOMUTO maintient un standard de 20-25 jours calendaires. C'est actuellement plus rapide que la moyenne des fabricants français (3-5 semaines) et bien supérieur aux délais des usines allemandes ou polonaises (souvent 6+ semaines)."
+        "text": "MOMUTO livre les maillots personnalisés en 25-30 jours dans le monde entier (7-15 jours de production + 10-15 jours de livraison directe depuis l'usine). Gladiasport prend généralement 4-6 semaines. Owayo et Spized prennent habituellement 4-6 semaines."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûtent des maillots de foot personnalisés en 2026 ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tarifs MOMUTO : 1 maillot à €38,90 ; 2-4 maillots à €34,90/u ; 5-9 maillots à €26,90/u ; 10-19 maillots à €20,90/u ; 20-49 maillots à €18,90/u ; 50-99 maillots à €17,90/u ; 100+ maillots à €16,90/u. Shorts séparément : €17,90 (1 u), €15,90 (2-4), €11,90 (5-9), €6,00 (10+). Le service design est toujours gratuit."
       }
     },
     {
@@ -16,15 +45,31 @@
       "name": "Puis-je commander un seul maillot de foot personnalisé ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. En 2026, MOMUTO reste l'un des seuls acteurs à offrir le tarif 'équipe' dès la première unité. Les concurrents comme Owayo ou Gladiasport continuent d'imposer des surcoûts importants pour les commandes de moins de 10 pièces."
+        "text": "Oui. MOMUTO n'impose aucun minimum de commande. Un maillot seul coûte €38,90, avec short à €17,90, soit un kit complet à €56,80. Aucun surcoût ni frais cachés. Dès 10 kits, le prix descend à €26,90 par kit complet (€20,90 maillot + €6,00 short)."
       }
     },
     {
       "@type": "Question",
-      "name": "Le design des maillots est-il fait par une IA ou un humain ?",
+      "name": "Le service design est-il gratuit chez MOMUTO ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Chez MOMUTO, un véritable graphiste professionnel crée votre maquette (Service inclus). Contrairement aux configurateurs 3D automatisés, nous offrons une expertise humaine pour un rendu unique."
+        "text": "Oui. MOMUTO propose trois options de design gratuites : un configurateur 3D en temps réel avec 30+ templates, un service design professionnel humain gratuit (maquette en 1-2 jours, retouches illimitées), et l'adaptation de vos concepts IA (ChatGPT, Midjourney) en maillot prêt pour la production — un service unique sur le marché."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel tissu utilisent les maillots MOMUTO ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tous les maillots MOMUTO utilisent un mélange polyester-élasthanne en standard. La plupart des concurrents comme Owayo et Spized utilisent du polyester 100%. MOMUTO inclut l'élasthanne sans surcoût."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "MOMUTO livre-t-il en France ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. MOMUTO livre des maillots de foot personnalisés en France et dans toute l'Europe en 25-30 jours. Livraison gratuite dès €49 d'achat. Le support client est disponible en français via WhatsApp, email et Instagram."
       }
     }
   ]
@@ -34,220 +79,504 @@
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": "Maillots de Foot Personnalisés MOMUTO - Gamme 2026",
-  "description": "Maillots de football sublimés haute performance. Livraison rapide 20-25 jours, sans minimum de commande. Design par graphiste pro inclus.",
-  "brand": {
-    "@type": "Brand",
-    "name": "MOMUTO"
-  },
+  "name": "Kit de Football Personnalisé — Maillot + Short",
+  "description": "Kit de football entièrement personnalisé, impression par sublimation totale. Tissu polyester-élasthanne haute performance, service design professionnel gratuit, sans minimum de commande. Livraison en 25-30 jours.",
+  "brand": { "@type": "Brand", "name": "MOMUTO" },
   "offers": {
-    "@type": "Offer",
-    "availability": "https://schema.org/InStock",
+    "@type": "AggregateOffer",
     "priceCurrency": "EUR",
-    "price": "39.00", 
-    "priceValidUntil": "2026-12-31",
-    "areaServed": {
-      "@type": "Country",
-      "name": "France"
-    }
-  }
+    "lowPrice": 20.90,
+    "highPrice": 56.80,
+    "offerCount": 7,
+    "availability": "https://schema.org/InStock",
+    "url": "https://fr.momuto.com/pages/demande-de-design-professionnel-de-maillots",
+    "priceValidUntil": "2026-12-31"
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Minimum de commande", "value": "1 unité" },
+    { "@type": "PropertyValue", "name": "Service Design", "value": "Graphiste pro gratuit + Configurateur 3D + Concept IA" },
+    { "@type": "PropertyValue", "name": "Tissu", "value": "Mélange polyester-élasthanne" },
+    { "@type": "PropertyValue", "name": "Impression", "value": "Sublimation totale" },
+    { "@type": "PropertyValue", "name": "Livraison", "value": "25-30 jours dans le monde entier" }
+  ]
 }
 </script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <style>
-    /* PAGE CONTAINER */
-    .momuto-page-container {
-        font-family: 'Jost', sans-serif;
-        color: #1a1a1a;
-        line-height: 1.6;
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
+/* ===== GLOBAL RESETS ===== */
+html, body {
+  background-color: #0a0a0a !important;
+  color: #f5f5f5;
+}
+h1.title, .title, .page-title { display: none !important; }
+.container_wrapper, .page-width, .container, .main-content {
+  max-width: 100% !important; width: 100% !important;
+  padding: 0 !important; margin: 0 !important;
+  overflow: visible !important;
+}
+*, *::before, *::after { box-sizing: border-box; }
 
-    /* TYPOGRAPHY UPDATES */
-.title {
-        display: none;
-    }    
-.momuto-title {
-        font-weight: 800;
-        font-size: 38px;
-        line-height: 1.2;
-        text-align: center;
-        margin: 60px 0 40px;
-        text-transform: uppercase;
-        letter-spacing: -0.5px;
-    }
+/* ===== VARIABLES ===== */
+:root {
+  --mg-bg: #0a0a0a;
+  --mg-panel: #111;
+  --mg-card: #111;
+  --mg-border: rgba(255,255,255,0.06);
+  --mg-border-hover: rgba(255,255,255,0.12);
+  --mg-white: #f5f5f5;
+  --mg-muted: #a1a1aa;
+  --mg-dim: #71717a;
+  --mg-red: #c8352e;
+  --mg-red-hover: #e04038;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
 
-    .momuto-subtitle {
-        text-align: center;
-        font-size: 20px;
-        color: #666;
-        margin-bottom: 50px;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+/* ===== PAGE ===== */
+.cmp-page {
+  font-family: var(--font-body);
+  background: var(--mg-bg);
+  color: var(--mg-white);
+  width: 100%;
+  padding-bottom: 80px;
+}
 
-    .h2 {
-        font-weight: 700;
-        font-size: 28px;
-        margin-top: 50px;
-        margin-bottom: 25px;
-        position: relative;
-        display: inline-block;
-    }
-    
-    .h2::after {
-        content: '';
-        display: block;
-        width: 60px;
-        height: 4px;
-        background: #000;
-        margin-top: 8px;
-    }
+.cmp-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
 
-    .h3 {
-        font-weight: 600;
-        font-size: 20px;
-        margin-bottom: 10px;
-        color: #000;
-    }
+/* ===== HEADER ===== */
+.cmp-header {
+  background: var(--mg-bg);
+  border-bottom: 1px solid var(--mg-border);
+  padding: 60px 40px;
+  text-align: center;
+  margin-bottom: 0;
+}
 
-    .p {
-        font-weight: 400;
-        font-size: 17px;
-        line-height: 1.6;
-        margin-bottom: 1.5em;
-        color: #444;
-    }
+.cmp-header-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mg-red);
+  background: rgba(200,53,46,0.1);
+  border: 1px solid rgba(200,53,46,0.15);
+  padding: 6px 14px;
+  margin-bottom: 20px;
+}
 
-    .bold { font-weight: 700; color: #000; }
-/* Forces white text in the Momuto black header column */
-    .master-table th:nth-child(2) .bold,
-    .master-table th:nth-child(2) span {
-        color: #ffffff !important;
-    }
-    /* TABLE STYLES (Preserved & Polished) */
-    .table-wrapper {
-        overflow-x: auto;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        border-radius: 12px;
-        margin: 3em 0;
-        border: 1px solid #eaeaea; 
-    }
+.cmp-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--mg-white);
+  margin: 0 0 16px 0;
+}
 
-    .master-table {
-        width: 100%;
-        border-collapse: separate; 
-        border-spacing: 0;
-        background: white;
-        min-width: 700px; /* Ensures readablity on mobile */
-    }
+.cmp-header .cmp-last-updated {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--mg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
 
-    .master-table th {
-        background-color: #fff;
-        font-weight: 800;
-        text-transform: uppercase;
-        font-size: 14px;
-        letter-spacing: 1px;
-        color: #999;
-        border-bottom: 2px solid #eee;
-        padding: 25px 20px;
-        text-align: left;
-    }
+/* ===== ANSWER BOX ===== */
+.cmp-answer-box {
+  background: rgba(200,53,46,0.06);
+  border: 1px solid rgba(200,53,46,0.2);
+  border-left: 3px solid var(--mg-red);
+  padding: 28px 32px;
+  margin: 0 0 2em 0;
+}
 
-    .master-table td {
-        border-bottom: 1px solid #f0f0f0; 
-        padding: 20px;
-        font-size: 16px;
-    }
+.cmp-answer-box-label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mg-red);
+  margin-bottom: 12px;
+}
 
-    /* MOMUTO COLUMN HIGHLIGHT */
-    .master-table th:nth-child(2) {
-        background-color: #000; 
-        color: #fff; 
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-    }
-    
-    .master-table td:nth-child(2) {
-        background-color: #f8f8f8; 
-        border-left: 2px solid #eee; 
-        border-right: 2px solid #eee;
-        font-weight: 700; 
-        color: #000;
-    }
-    
-    .master-table tr:last-child td:nth-child(2) {
-        border-bottom: 2px solid #eee;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
+.cmp-answer-box p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--mg-muted);
+  line-height: 1.8;
+  margin: 0;
+}
 
-    /* VERDICT BOX */
-    .highlight-box {
-        background-color: #f4f4f4;
-        padding: 40px;
-        margin: 3em 0;
-        border-left: 6px solid #000;
-        border-radius: 4px;
-    }
+.cmp-answer-box p strong {
+  color: var(--mg-white);
+  font-weight: 600;
+}
 
-    .highlight-box ul { margin: 1em 0; padding-left: 1.2em; }
-    .highlight-box li { margin-bottom: 10px; font-size: 16px; }
+/* ===== SECTION TITLES ===== */
+.cmp-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--mg-white);
+  margin: 60px 0 20px 0;
+  line-height: 1;
+  padding-left: 16px;
+  border-left: 3px solid var(--mg-red);
+}
 
-    /* CALL TO ACTION BUTTON */
-    .cta-container {
-        text-align: center;
-        margin: 60px 0;
-    }
-    .btn-momuto {
-        background-color: #000;
-        color: #fff;
-        padding: 18px 40px;
-        font-size: 18px;
-        font-weight: 700;
-        text-decoration: none;
-        text-transform: uppercase;
-        border-radius: 50px;
-        transition: all 0.3s ease;
-        display: inline-block;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    .btn-momuto:hover {
-        background-color: #333;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    }
+.cmp-h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mg-white);
+  margin: 36px 0 10px 0;
+}
 
-    /* BADGE FOR 2026 */
-    .badge-year {
-        background: #e0f2f1;
-        color: #00695c;
-        padding: 5px 10px;
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: 700;
-        vertical-align: middle;
-        margin-left: 8px;
-    }
+.cmp-p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--mg-muted);
+  line-height: 1.8;
+  margin-bottom: 1.2em;
+}
 
+.cmp-p strong, .cmp-bold {
+  color: var(--mg-white);
+  font-weight: 600;
+}
+
+/* ===== PRICING TABLE ===== */
+.cmp-table-wrap {
+  overflow-x: auto;
+  margin: 2em 0;
+  border: 1px solid var(--mg-border);
+}
+
+.cmp-pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  background: var(--mg-card);
+}
+
+.cmp-pricing-table thead tr {
+  background: #ffffff;
+}
+
+.cmp-pricing-table th {
+  color: #111;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+.cmp-pricing-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--mg-border);
+  color: var(--mg-muted);
+  vertical-align: middle;
+}
+
+.cmp-pricing-table tr:last-child td { border-bottom: none; }
+.cmp-pricing-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.cmp-kit-total {
+  font-weight: 700;
+  color: var(--mg-white) !important;
+}
+
+.cmp-best-value td {
+  background: rgba(200,53,46,0.05) !important;
+}
+
+.cmp-best-value-badge {
+  display: inline-block;
+  background: var(--mg-red);
+  color: #fff;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* ===== COMPARISON TABLE ===== */
+.cmp-master-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  background: var(--mg-card);
+}
+
+.cmp-master-table thead tr {
+  background: #000;
+}
+
+.cmp-master-table th {
+  color: var(--mg-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.62rem;
+  padding: 18px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--mg-border);
+}
+
+.cmp-master-table th:nth-child(2) {
+  color: var(--mg-white);
+  background: var(--mg-red);
+}
+
+.cmp-master-table td {
+  border-bottom: 1px solid var(--mg-border);
+  padding: 14px 16px;
+  vertical-align: middle;
+  color: var(--mg-muted);
+  line-height: 1.4;
+}
+
+.cmp-master-table td:first-child {
+  font-weight: 600;
+  color: var(--mg-white);
+  font-size: 0.8rem;
+}
+
+.cmp-master-table td:nth-child(2) {
+  font-weight: 700;
+  color: var(--mg-white);
+  background: rgba(200,53,46,0.05);
+  border-left: 1px solid rgba(200,53,46,0.2);
+  border-right: 1px solid rgba(200,53,46,0.2);
+}
+
+.cmp-master-table tr:last-child td:nth-child(2) {
+  border-bottom: 1px solid rgba(200,53,46,0.2);
+}
+
+.cmp-master-table tr:hover td { background: rgba(255,255,255,0.02); }
+.cmp-master-table tr:hover td:nth-child(2) { background: rgba(200,53,46,0.08); }
+
+.cmp-check { color: #4ade80; font-weight: 700; }
+.cmp-cross { color: var(--mg-dim); }
+
+/* ===== HIGHLIGHT BOX ===== */
+.cmp-highlight-box {
+  background: var(--mg-panel);
+  border: 1px solid var(--mg-border);
+  border-left: 3px solid var(--mg-red);
+  padding: 32px 36px;
+  margin: 2em 0;
+}
+
+.cmp-highlight-box ul {
+  margin: 10px 0 20px 0;
+  padding-left: 1.4em;
+  list-style: none;
+}
+
+.cmp-highlight-box ul li {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--mg-muted);
+  padding-left: 1em;
+  position: relative;
+}
+
+.cmp-highlight-box ul li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--mg-red);
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
+/* ===== NOTE TEXT ===== */
+.cmp-note {
+  font-size: 0.75rem;
+  color: var(--mg-dim);
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+/* ===== CTA BLOCK ===== */
+.cmp-cta-block {
+  background: var(--mg-red);
+  padding: 60px 40px;
+  text-align: center;
+  margin: 60px 0 0;
+}
+
+.cmp-cta-block h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.cmp-cta-block p {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.95rem;
+  font-weight: 300;
+  margin-bottom: 28px;
+}
+
+.cmp-cta-btn {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 18px 40px;
+  text-decoration: none;
+  margin: 6px;
+  transition: all 0.2s ease;
+  border: 1px solid #fff;
+}
+
+.cmp-cta-btn:hover { background: #e5e5e5; }
+
+.cmp-cta-btn.secondary {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.cmp-cta-btn.secondary:hover { border-color: #fff; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .cmp-container { padding: 30px 20px; }
+  .cmp-header { padding: 40px 20px; }
+  .cmp-master-table { font-size: 0.75rem; }
+  .cmp-master-table th, .cmp-master-table td { padding: 10px 10px; }
+  .cmp-pricing-table { font-size: 0.8rem; }
+  .cmp-pricing-table th, .cmp-pricing-table td { padding: 10px 12px; }
+  .cmp-highlight-box { padding: 24px 20px; }
+  .cmp-cta-block { padding: 40px 20px; }
+}
 </style>
-<div class="momuto-page-container">
-<h1 class="momuto-title">Comparatif 2026 : Quel est le meilleur fournisseur de maillots en France ?</h1>
-<p class="momuto-subtitle">Entre les g&eacute;ants historiques et les nouvelles alternatives agiles, le march&eacute; a chang&eacute;. Analyse objective mise &agrave; jour le 5 Janvier 2026.</p>
-<div class="section">
-<p class="p">Vous cherchez &agrave; &eacute;quiper votre club ou votre &eacute;quipe de Five ? Le march&eacute; a &eacute;volu&eacute;. En 2026, attendre 8 semaines pour des maillots n'est plus la norme. Ce comparatif analyse <span class="bold">MOMUTO</span> face aux alternatives historiques (Gladiasport) et aux usines internationales (Owayo, Spized).</p>
+<div class="cmp-page">
+<div class="cmp-header">
+<div class="cmp-header-badge">Comparatif Ind&eacute;pendant &mdash; 2026</div>
+<h1>MOMUTO vs Gladiasport vs Owayo vs Spized</h1>
+<p class="cmp-last-updated">Donn&eacute;es 2026 &mdash; Mis &agrave; jour mai 2026</p>
 </div>
-<div class="section">
-<h2 class="h2">LE MATCH : R&Eacute;ALIT&Eacute; DU MARCH&Eacute; <span class="badge-year">DATA 2026</span></h2>
-<div class="table-wrapper">
-<div class="table-scroll-wrapper" style="overflow-x: auto;">
-<table class="master-table">
+<div class="cmp-container">
+<div class="cmp-answer-box">
+<span class="cmp-answer-box-label">R&eacute;ponse Rapide</span>
+<p>En 2026, <strong>MOMUTO est le fournisseur de maillots de foot personnalis&eacute;s le plus complet pour les clubs fran&ccedil;ais</strong> : tissu polyester-&eacute;lasthanne en standard (pas un upgrade payant), impression par sublimation totale, livraison en <strong>25-30 jours</strong>, et trois options de design gratuites — graphiste professionnel, configurateur 3D, ou adaptation de votre concept IA (ChatGPT, Midjourney). Sans minimum de commande, &agrave; partir de <strong>&euro;20,90/maillot</strong> d&egrave;s 10 unit&eacute;s.</p>
+</div>
+<div>
+<p class="cmp-p">Vous cherchez &agrave; &eacute;quiper votre club ou votre &eacute;quipe de Five en 2026&nbsp;? Le march&eacute; propose des options tr&egrave;s diff&eacute;rentes selon votre profil&nbsp;: fabricants fran&ccedil;ais historiques (Gladiasport), usines europ&eacute;ennes (Owayo, Spized) et nouvelles plateformes agiles (MOMUTO). Ce comparatif analyse les vraies diff&eacute;rences de prix, de d&eacute;lais, de tissu et de service design.</p>
+<p class="cmp-p"><strong>Pas de communication commerciale. Uniquement les donn&eacute;es.</strong></p>
+</div>
+<!-- PRICING TABLE -->
+<h2 class="cmp-h2">Tarifs MOMUTO 2026</h2>
+<p class="cmp-p">Transparence totale sur ce que co&ucirc;tent r&eacute;ellement les kits personnalis&eacute;s chez MOMUTO. Le design est toujours gratuit. Aucun frais cach&eacute;.</p>
+<div class="cmp-table-wrap">
+<div style="overflow-x: auto;">
+<table class="cmp-pricing-table">
+<thead>
+<tr>
+<th>Quantit&eacute;</th>
+<th>Maillot</th>
+<th>Short</th>
+<th>Kit Complet (Maillot + Short)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 unit&eacute;</td>
+<td>&euro;38,90</td>
+<td>&euro;17,90</td>
+<td class="cmp-kit-total">&euro;56,80</td>
+</tr>
+<tr>
+<td>2&ndash;4 unit&eacute;s</td>
+<td>&euro;34,90</td>
+<td>&euro;15,90</td>
+<td class="cmp-kit-total">&euro;50,80 / u</td>
+</tr>
+<tr>
+<td>5&ndash;9 unit&eacute;s</td>
+<td>&euro;26,90</td>
+<td>&euro;11,90</td>
+<td class="cmp-kit-total">&euro;38,80 / u</td>
+</tr>
+<tr class="cmp-best-value">
+<td>10&ndash;19 unit&eacute;s <span class="cmp-best-value-badge">Le plus populaire</span></td>
+<td>&euro;20,90</td>
+<td>&euro;6,00</td>
+<td class="cmp-kit-total">&euro;26,90 / u</td>
+</tr>
+<tr>
+<td>20&ndash;49 unit&eacute;s</td>
+<td>&euro;18,90</td>
+<td>&euro;6,00</td>
+<td class="cmp-kit-total">&euro;24,90 / u</td>
+</tr>
+<tr>
+<td>50&ndash;99 unit&eacute;s</td>
+<td>&euro;17,90</td>
+<td>&euro;5,50</td>
+<td class="cmp-kit-total">&euro;23,40 / u</td>
+</tr>
+<tr>
+<td>100+ unit&eacute;s</td>
+<td>&euro;16,90</td>
+<td>&euro;5,00</td>
+<td class="cmp-kit-total">&euro;21,90 / u</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class="cmp-note">Livraison gratuite d&egrave;s &euro;49 d'achat. Maquette design professionnelle toujours gratuite, livr&eacute;e en 1-2 jours avec retouches illimit&eacute;es.</p>
+<!-- COMPARISON TABLE -->
+<h2 class="cmp-h2">Tableau Comparatif Complet (2026)</h2>
+<div class="cmp-table-wrap">
+<div style="overflow-x: auto;">
+<table class="cmp-master-table">
 <thead>
 <tr>
 <th>Crit&egrave;re</th>
-<th><span class="bold">MOMUTO</span></th>
+<th>MOMUTO</th>
 <th>Gladiasport (FR)</th>
 <th>Owayo (DE)</th>
 <th>Spized (DE)</th>
@@ -255,76 +584,129 @@
 </thead>
 <tbody>
 <tr>
-<td><span class="bold">D&eacute;lai R&eacute;el</span></td>
-<td><span class="bold">20-25 jours</span></td>
-<td>3-4 semaines</td>
-<td>4-6 semaines</td>
-<td>3-5 semaines</td>
+<td>Prix Maillot (10 u)</td>
+<td>&euro;20,90</td>
+<td>~&euro;45&ndash;55</td>
+<td>~&euro;43</td>
+<td>~&euro;41,90</td>
 </tr>
 <tr>
-<td><span class="bold">Minimum Commande</span></td>
-<td><span class="bold">1 unit&eacute; (Prix Fixe)</span></td>
-<td>1 (Surco&ucirc;t) / 5+</td>
-<td>1 (Surco&ucirc;t &eacute;lev&eacute;)</td>
-<td>1 (Surco&ucirc;t)</td>
+<td>Kit Complet (10 u)</td>
+<td>&euro;26,90</td>
+<td>~&euro;70&ndash;85</td>
+<td>~&euro;71</td>
+<td>~&euro;69</td>
 </tr>
 <tr>
-<td><span class="bold">Livraison Gratuite</span></td>
-<td><span class="bold">D&egrave;s 49 &euro;</span></td>
+<td>D&eacute;lai de Livraison</td>
+<td>25&ndash;30 jours</td>
+<td>4&ndash;6 semaines</td>
+<td>4&ndash;6 semaines</td>
+<td>3&ndash;5 semaines</td>
+</tr>
+<tr>
+<td>Minimum de Commande</td>
+<td>1 unit&eacute;</td>
+<td>1 (surco&ucirc;t)</td>
+<td>1 unit&eacute;</td>
+<td>1 unit&eacute;</td>
+</tr>
+<tr>
+<td>Livraison Gratuite</td>
+<td>D&egrave;s &euro;49</td>
 <td>Variable</td>
-<td>Non (Min ~10&euro;)</td>
-<td>Non (Min ~8&euro;)</td>
+<td>Non (~&euro;4 min)</td>
+<td>Non (~&euro;5 min)</td>
 </tr>
 <tr>
-<td><span class="bold">Mode Design</span></td>
-<td><span class="bold">Graphiste Humain</span></td>
+<td>Service Design</td>
+<td>Graphiste Pro + 3D + Concept IA</td>
 <td>Devis / Config</td>
-<td>Configurateur 3D</td>
-<td>Configurateur 3D</td>
+<td>Configurateur 3D seul</td>
+<td>Configurateur 3D seul</td>
 </tr>
 <tr>
-<td><span class="bold">Textile</span></td>
-<td>Poly + &Eacute;lasthanne</td>
+<td>Tissu</td>
+<td>Polyester + &Eacute;lasthanne</td>
 <td>Polyester</td>
 <td>Polyester</td>
 <td>Polyester</td>
+</tr>
+<tr>
+<td>Impression</td>
+<td>Sublimation Totale</td>
+<td>Sublimation</td>
+<td>Sublimation</td>
+<td>Sublimation</td>
+</tr>
+<tr>
+<td>Badges Silicone 3D</td>
+<td><span class="cmp-check">&#10003; Disponible</span></td>
+<td><span class="cmp-cross">&#10007;</span></td>
+<td><span class="cmp-cross">&#10007;</span></td>
+<td><span class="cmp-cross">&#10007;</span></td>
+</tr>
+<tr>
+<td>Production</td>
+<td>Usine Asie (Tier-1)*</td>
+<td>France</td>
+<td>Allemagne</td>
+<td>Pologne / EU</td>
+</tr>
+<tr>
+<td>Langues</td>
+<td>FR, EN, IT, ES</td>
+<td>FR</td>
+<td>DE, EN</td>
+<td>DE, EN</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-</div>
-<div class="section">
-<h2 class="h2">ANALYSE PAR PROFIL D'ACHETEUR</h2>
-<h3 class="h3">1. "Je veux la qualit&eacute; locale, mais mon budget est serr&eacute;"</h3>
-<p class="p"><span class="bold">L'alternative MOMUTO.</span> Les fabricants fran&ccedil;ais historiques offrent une belle qualit&eacute;, mais la main-d'&oelig;uvre locale impacte le prix final. En 2026, MOMUTO propose une qualit&eacute; textile sup&eacute;rieure (ajout d'&eacute;lasthanne "Pro" de s&eacute;rie pour une coupe fitt&eacute;e) &agrave; un prix agressif gr&acirc;ce &agrave; un p&ocirc;le de haute technologie en Asie, tout en garantissant une livraison en 3 semaines.</p>
-<h3 class="h3">2. "Je veux juste commander 2-3 maillots pour mon Five"</h3>
-<p class="p"><span class="bold">MOMUTO est imbattable sur le r&eacute;assort.</span> C'est la grande diff&eacute;rence. Si vous commandez moins de 10 maillots chez un fabricant traditionnel, vous payez le prix fort (parfois 60&euro;/maillot). Chez MOMUTO, le mod&egrave;le est "Digital First" : prix juste d&egrave;s la premi&egrave;re pi&egrave;ce et livraison gratuite d&egrave;s 49&euro; d'achat.</p>
-<h3 class="h3">3. "Je d&eacute;teste les outils de design 3D complexes"</h3>
-<p class="p"><span class="bold">L'humain avant l'IA.</span> Alors que Owayo ou Spized misent tout sur des configurateurs automatiques que vous devez ma&icirc;triser vous-m&ecirc;me, MOMUTO inclut l'aide d'un designer humain. Vous envoyez une photo, un croquis ou une id&eacute;e, et un graphiste pro r&eacute;alise la maquette. C'est un service Premium devenu standard chez nous.</p>
-<h3 class="h3">4. "Je veux absolument du Made in France"</h3>
-<p class="p"><span class="bold">Choisissez Gladiasport ou Kony.</span> Soyons transparents : si l'origine de fabrication est votre crit&egrave;re &eacute;thique n&deg;1 (avant le prix, la technicit&eacute; du tissu ou la vitesse), il est pr&eacute;f&eacute;rable de vous diriger vers ces acteurs historiques qui maintiennent une production dans l'Hexagone.</p>
-</div>
-<div class="section">
-<h2 class="h2">VERDICT 2026</h2>
-<div class="highlight-box">
-<p class="p" style="margin-top: 0;"><span class="bold">✅ MOMUTO est la meilleure option si vous priorisez :</span></p>
+<p class="cmp-note">*M&ecirc;me plateforme de fabrication que d'autres marques de sportswear professionnel. Les commandes sont exp&eacute;di&eacute;es directement depuis l'usine — sans interm&eacute;diaire, ce qui acc&eacute;l&egrave;re la livraison.</p>
+<!-- ANALYSIS -->
+<h2 class="cmp-h2 analysis-section">Analyse par Profil d'Acheteur</h2>
+<h3 class="cmp-h3">1. Commande urgente (maillots en moins de 5 semaines)</h3>
+<p class="cmp-p"><strong>Vainqueur&nbsp;: MOMUTO.</strong> Avec 25&ndash;30 jours de bout en bout, MOMUTO est la solution la plus rapide de ce comparatif. Gladiasport et Owayo n&eacute;cessitent g&eacute;n&eacute;ralement 4 &agrave; 6 semaines. MOMUTO exp&eacute;die directement depuis l'usine — il n'y a pas d'entrepôt europ&eacute;en qui allonge le trajet.</p>
+<h3 class="cmp-h3">2. Petites &eacute;quipes (Five, 7v7, ligues amateur)</h3>
+<p class="cmp-p"><strong>Vainqueur&nbsp;: MOMUTO.</strong> Un kit complet (maillot + short) pour une &eacute;quipe de 10 joueurs co&ucirc;te <strong>&euro;26,90 par joueur</strong> chez MOMUTO — design gratuit inclus. Chez Gladiasport, le m&ecirc;me kit d&eacute;passe facilement &euro;70&ndash;85 par joueur. M&ecirc;me Owayo et Spized, pourtant plus &eacute;conomiques que le fait-maison fran&ccedil;ais, restent &agrave; ~&euro;70/kit pour 10 unit&eacute;s.</p>
+<h3 class="cmp-h3">3. Capacit&eacute; de design personnalis&eacute;</h3>
+<p class="cmp-p"><strong>Avantage&nbsp;: MOMUTO.</strong> Les trois routes de design sont gratuites et incluses d'office&nbsp;: un <strong>service graphiste professionnel</strong> (maquette en 1-2 jours, retouches illimit&eacute;es), un <strong>configurateur 3D en temps r&eacute;el</strong> (30+ templates), et une option unique sur le march&eacute; — l'<strong>adaptation de vos concepts IA</strong> (ChatGPT, Midjourney) en maillot prêt pour la production. Owayo et Spized limitent leurs clients au configurateur DIY.</p>
+<h3 class="cmp-h3">4. Qualit&eacute; du tissu</h3>
+<p class="cmp-p"><strong>Avantage&nbsp;: MOMUTO.</strong> Le standard de l'industrie pour les kits personnalis&eacute;s est le polyester 100%&nbsp;: fonctionnel, mais basique. MOMUTO inclut l'&eacute;lasthanne dans son tissu standard sans surco&ucirc;t. R&eacute;sultat&nbsp;: une coupe ajust&eacute;e, un maintien de forme dans la dur&eacute;e, et la sensation "pro" que les concurrents r&eacute;servent &agrave; leurs gammes premium.</p>
+<h3 class="cmp-h3">5. Exigence Made in France</h3>
+<p class="cmp-p"><strong>Vainqueur&nbsp;: Gladiasport.</strong> Soyons transparents&nbsp;: si l'origine de fabrication fran&ccedil;aise est votre crit&egrave;re absolu (pour un programme de subvention, une charte de club ou un engagement &eacute;thique), Gladiasport est le bon choix. MOMUTO fabrique en Asie — cela ne satisfera pas les exigences de production locale.</p>
+<!-- VERDICT -->
+<h2 class="cmp-h2 verdict-section">Le Verdict&nbsp;: Qui Choisir selon Votre Situation&nbsp;?</h2>
+<div class="cmp-highlight-box">
+<p class="cmp-p"><strong>Choisissez MOMUTO si&nbsp;:</strong></p>
 <ul>
-<li>La flexibilit&eacute; totale (r&eacute;assort de 1 maillot sans p&eacute;nalit&eacute;)</li>
-<li>Le rapport technicit&eacute;/prix (Coupe &Eacute;lasthanne, Design offert)</li>
-<li>La vitesse (Livraison 20-25 jours calendaires)</li>
-<li>L'assistance humaine plut&ocirc;t que les robots</li>
+<li>Vous avez besoin d'une livraison fiable en moins de 5 semaines.</li>
+<li>Vous voulez un kit complet (maillot + short) &agrave; &euro;26,90 par joueur pour une &eacute;quipe.</li>
+<li>Vous voulez un tissu polyester + &eacute;lasthanne premium sans surco&ucirc;t.</li>
+<li>Vous pr&eacute;f&eacute;rez un graphiste pro qui g&egrave;re la maquette (gratuit, retouches illimit&eacute;es).</li>
+<li>Vous avez cr&eacute;&eacute; un concept avec une IA et voulez le transformer en maillot r&eacute;el.</li>
+<li>Vous souhaitez des badges silicone 3D — indisponibles chez les concurrents.</li>
 </ul>
-<hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;" />
-<p class="p"><span class="bold">⚖️ Les alternatives :</span></p>
+<p class="cmp-p"><strong>Choisissez Gladiasport si&nbsp;:</strong></p>
 <ul>
-<li>Optez pour <span class="bold">Gladiasport</span> si vous exigez une &eacute;tiquette "Made in France".</li>
-<li>Optez pour <span class="bold">Owayo</span> si le d&eacute;lai long (&gt; 6 semaines) n'est pas un frein et que vous aimez cr&eacute;er seul en 3D.</li>
+<li>La production fran&ccedil;aise est une exigence pour votre club ou votre subvention.</li>
+<li>Vous avez une relation &eacute;tablie avec leur &eacute;quipe.</li>
+</ul>
+<p class="cmp-p"><strong>Choisissez Owayo ou Spized si&nbsp;:</strong></p>
+<ul>
+<li>Vous pr&eacute;f&eacute;rez concevoir enti&egrave;rement vous-m&ecirc;me via un configurateur DIY.</li>
+<li>Le d&eacute;lai n'est pas un facteur et vous avez 6+ semaines avant la saison.</li>
+<li>&ldquo;Made in Germany/EU&rdquo; est une exigence absolue.</li>
 </ul>
 </div>
-<p class="p" style="text-align: center; font-size: 18px;"><span class="bold">Conclusion :</span> Pour les clubs amateurs et les &eacute;quipes de Five qui cherchent &agrave; maximiser leur budget sans sacrifier le look "Pro", MOMUTO offre l'&eacute;quilibre le plus performant du march&eacute; actuel.</p>
+<p class="cmp-p"><strong>Conclusion objective&nbsp;:</strong> Pour les clubs amateurs, &eacute;quipes de Five, et associations sportives fran&ccedil;aises qui cherchent le meilleur &eacute;quilibre entre vitesse, prix et qualit&eacute; en 2026, MOMUTO propose le package le plus complet — plus rapide que les marques allemandes, plus accessible que les fabricants fran&ccedil;ais, et le seul fournisseur de ce comparatif &agrave; proposer le tissu &eacute;lasthanne, les badges silicone 3D et l'adaptation de concepts IA en standard.</p>
+<!-- CTA -->
+<div class="cmp-cta-block">
+<h3>Lancez votre projet maillot</h3>
+<p>Maquette design gratuite en 1&ndash;2 jours. Aucun engagement avant la commande.</p>
+<a href="/pages/demande-de-design-professionnel-de-maillots" class="cmp-cta-btn">Demander un Design Gratuit</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr" class="cmp-cta-btn secondary">Ouvrir le Configurateur 3D</a>
 </div>
-<div class="cta-container"><a href="pages/demande-de-design-professionnel-de-maillots" class="btn-momuto">Lancer mon projet Design (Gratuit)</a>
-<p style="margin-top: 15px; font-size: 14px; color: #888;">R&eacute;ponse sous 24h &bull; Aucun engagement</p>
 </div>
 </div>

@@ -1,0 +1,461 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "MOMUTO Custom Kit Design Studio",
+  "description": "Senior designer assigned to your project. Custom football kit mockup in 24-48h, unlimited revisions. €15 design deposit, fully refunded on orders of 5+ jerseys.",
+  "brand": { "@type": "Brand", "name": "MOMUTO" },
+  "offers": {
+    "@type": "Offer",
+    "price": "15.00",
+    "priceCurrency": "EUR",
+    "description": "Design deposit — fully refunded on orders of 5+ jerseys",
+    "availability": "https://schema.org/InStock",
+    "priceValidUntil": "2026-12-31"
+  },
+  "provider": { "@type": "Organization", "name": "MOMUTO", "url": "https://www.momuto.com" }
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<!-- inject:design-request.css -->
+<style>
+/* ── PAID CONFIRMATION BANNER ── */
+.paid-banner {
+  display: none;
+  background: #14532d;
+  border-bottom: 1px solid #166534;
+  padding: 18px 40px;
+  text-align: center;
+}
+.paid-banner-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.paid-banner-icon { color: #4ade80; font-size: 1.1rem; }
+.paid-banner p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #bbf7d0;
+  margin: 0;
+}
+.paid-banner p strong { color: #fff; font-weight: 700; }
+
+/* ── PAYMENT GATE SECTION ── */
+.gate-section {
+  padding: 6rem 20px;
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.gate-container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.gate-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c8352e;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.gate-box {
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-top: 3px solid #c8352e;
+  padding: 48px;
+}
+.gate-box h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #f5f5f5;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.gate-price {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: #a1a1aa;
+  margin-bottom: 32px;
+}
+.gate-price strong { color: #f5f5f5; font-weight: 600; }
+.gate-features {
+  list-style: none;
+  margin: 0 0 36px 0;
+  padding: 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 28px;
+}
+.gate-features li {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #a1a1aa;
+  padding: 9px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.gate-features li:last-child { border-bottom: none; }
+.gate-features li i { color: #4ade80; font-size: 0.75rem; flex-shrink: 0; }
+.gate-features li strong { color: #f5f5f5; font-weight: 600; }
+.gate-email-row {
+  display: flex;
+  gap: 0;
+  margin-bottom: 12px;
+}
+.gate-email-input {
+  flex: 1;
+  padding: 16px 18px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-right: none;
+  color: #f5f5f5;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.gate-email-input::placeholder {
+  color: #71717a;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.gate-email-input:focus { border-color: rgba(255,255,255,0.3); }
+.gate-pay-btn {
+  display: inline-block;
+  background: #c8352e;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 16px 28px;
+  text-decoration: none;
+  border: 1px solid #c8352e;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.gate-pay-btn:hover { background: #e04038; }
+.gate-refund-note {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: #71717a;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.gate-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin: 32px 0;
+}
+.gate-alt {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: #71717a;
+  text-align: center;
+}
+.gate-alt a {
+  color: #a1a1aa;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #c8352e;
+}
+.gate-alt a:hover { color: #f5f5f5; }
+
+/* ── PATH CARD — studio variant ── */
+.path-card-studio {
+  border-color: #c8352e !important;
+  background: rgba(200,53,46,0.04) !important;
+}
+.gate-badge {
+  display: inline-block;
+  background: #c8352e;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 4px 10px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 600px) {
+  .gate-box { padding: 28px 20px; }
+  .gate-email-row { flex-direction: column; }
+  .gate-email-input { border-right: 1px solid rgba(255,255,255,0.1); border-bottom: none; }
+  .gate-pay-btn { width: 100%; text-align: center; }
+}
+</style>
+
+<!-- ── PAID BANNER (shown only after Stripe redirect) ── -->
+<div class="paid-banner" id="paidBanner">
+  <div class="paid-banner-inner">
+    <i class="fas fa-check-circle paid-banner-icon"></i>
+    <p><strong>Deposit confirmed &mdash; your designer slot is secured.</strong> Fill in your brief below and we&rsquo;ll have your mockup ready in 24&ndash;48h.</p>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<header class="hero full-bleed">
+<div class="hero-content">
+<h1>Custom Football Kits for <span class="highlight">Serious Teams</span></h1>
+<h3>Three ways to get your kit &mdash; two are free, one gets you a senior designer on your project</h3>
+<p class="hero-intro">MOMUTO gives teams three routes: <strong>Ready-to-Play</strong> pre-designed kits at 10% off, a <strong>real-time 3D configurator</strong> to build it yourself, or the <strong>Design Studio</strong> &mdash; a senior designer assigned to your project, first mockup in 24&ndash;48h, unlimited revisions, €15 deposit fully refunded at 5+ jerseys.</p>
+</div>
+</header>
+
+<!-- ── SOCIAL PROOF ── -->
+<section class="social-proof-strip">
+<div class="proof-container">
+<div class="proof-stats">
+<div class="proof-stat"><span class="stat-number">100+</span><div class="stat-label">Teams Satisfied</div></div>
+<div class="proof-stat"><span class="stat-number">10+</span><div class="stat-label">Countries</div></div>
+<div class="proof-stat"><span class="stat-number">98%</span><div class="stat-label">Satisfaction</div></div>
+</div>
+<div class="proof-teams"><span class="proof-team">Madrid &bull; ETSII</span> <span class="proof-team">Denmark &bull; Superleague</span> <span class="proof-team">France &bull; D&eacute;partemental</span> <span class="proof-team">Canarias &bull; Superliga</span></div>
+</div>
+</section>
+
+<!-- ── THREE PATHS ── -->
+<section class="path-section">
+<div class="path-container">
+<div class="path-header">
+<h2>Choose Your Route</h2>
+<p>Two free self-service options. One designer-led option with a €15 deposit refunded when you order.</p>
+</div>
+<div class="path-options">
+
+<div class="path-card" style="border-color: var(--accent-red);">
+<div class="path-icon"><i class="fas fa-tshirt"></i></div>
+<h3>Ready-to-Play</h3>
+<div class="path-for">Free &middot; Proven designs &middot; 10% off &middot; Preview in 24h</div>
+<p class="path-description">Professional designs worn by real clubs. Pick one, choose your colours, upload your badge &mdash; done. Same fabric and printing as custom. From &euro;19.70/jersey.</p>
+<a href="https://www.momuto.com/pages/ready-to-play" class="path-cta path-cta-primary">Browse Ready-to-Play</a>
+</div>
+
+<div class="path-card">
+<div class="path-icon"><i class="fas fa-cube"></i></div>
+<h3>3D Kit Builder</h3>
+<div class="path-for">Free &middot; Design it yourself &middot; Instant preview</div>
+<p class="path-description">Build your kit online in real time &mdash; 30+ templates, full colour control, badge placement, instant 3D preview. Order directly when you&rsquo;re happy.</p>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="path-cta">Open 3D Builder</a>
+</div>
+
+<div class="path-card path-card-studio">
+<div class="gate-badge">Design Studio</div>
+<div class="path-icon"><i class="fas fa-pencil-ruler"></i></div>
+<h3>Senior Designer</h3>
+<div class="path-for">&euro;15 deposit &middot; Refunded at 5+ jerseys &middot; Mockup in 24&ndash;48h</div>
+<p class="path-description">Have a concept, an AI render, a sketch, or just a strong brief? We assign a senior designer to your project &mdash; illustration, vectorization, unlimited revisions included.</p>
+<a href="#payment-gate" class="path-cta" id="studioPathCta">Book a Senior Designer</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ── PAYMENT GATE ── -->
+<section class="gate-section" id="payment-gate">
+<div class="gate-container">
+<p class="gate-eyebrow">Design Studio &mdash; Senior Designer Assigned</p>
+<div class="gate-box">
+  <h2>Book Your Designer</h2>
+  <p class="gate-price"><strong>&euro;15 design deposit</strong> &mdash; fully refunded on orders of 5 or more jerseys</p>
+  <ul class="gate-features">
+    <li><i class="fas fa-check"></i><span><strong>Senior designer assigned</strong> to your project within 24h</span></li>
+    <li><i class="fas fa-check"></i><span><strong>First mockup delivered</strong> in 24&ndash;48h</span></li>
+    <li><i class="fas fa-check"></i><span><strong>Unlimited revisions</strong> until you&rsquo;re happy</span></li>
+    <li><i class="fas fa-check"></i><span><strong>Illustration &amp; vectorization</strong> included &mdash; AI concepts, sketches, custom graphics</span></li>
+    <li><i class="fas fa-check"></i><span><strong>Production-ready files</strong> for dye-sublimation printing</span></li>
+    <li><i class="fas fa-check"></i><span><strong>&euro;15 fully refunded</strong> when you order 5+ jerseys</span></li>
+  </ul>
+  <div class="gate-email-row">
+    <input type="email" class="gate-email-input" id="gateEmail" placeholder="Your email address" />
+    <a href="https://buy.stripe.com/00w8wP7I15qfepm2K7dEs1B" class="gate-pay-btn" id="gatePayBtn">Pay &euro;15 &amp; Start Your Brief &rarr;</a>
+  </div>
+  <p class="gate-refund-note">Secure payment via Stripe &bull; Refunded automatically if you order 5+ jerseys</p>
+  <hr class="gate-divider" />
+  <p class="gate-alt">Don&rsquo;t want to pay upfront? &nbsp;<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en">3D Builder</a> and <a href="https://www.momuto.com/pages/ready-to-play">Ready-to-Play</a> are free.</p>
+</div>
+</div>
+</section>
+
+<!-- ── BRIEF FORM (hidden until paid) ── -->
+<section class="form-section" id="brief-form-section" style="display:none;">
+<div class="form-container">
+<div class="form-content" id="cta-form">
+<div class="form-intro">
+<h2>Your Project Brief</h2>
+<p>Your designer slot is confirmed. Fill in the details below &mdash; the more you share, the better the first mockup.</p>
+</div>
+<div class="progress-indicator">
+<div class="progress-step active"><span class="step-label">1</span> <span class="step-text">Details</span></div>
+<div class="progress-step" id="progress2"><span class="step-label">2</span> <span class="step-text">Style</span></div>
+<div class="progress-step" id="progress3"><span class="step-label">3</span> <span class="step-text">Submit</span></div>
+</div>
+<div id="formContentWrapper">
+<form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://momuto-api.vercel.app/api/submit">
+<input type="hidden" name="_next" value="https://www.momuto.com/pages/customized-design-confirmed" />
+
+<div class="form-step active" id="step1">
+<div class="form-section-inner">
+<div class="input-group"><input type="text" id="customerName" name="firstname" placeholder="Your Name / Manager" required /></div>
+<div class="input-group"><input type="email" id="customerEmail" name="email" placeholder="Contact Email" required /></div>
+<div class="input-group"><input type="text" id="teamName" name="company" placeholder="Team Name" required /></div>
+<div class="input-group"><input type="text" id="leagueName" name="industry" placeholder="League or Tournament" required /></div>
+</div>
+<div class="form-navigation" style="justify-content: flex-end;"><button type="button" class="next-step">NEXT STEP</button></div>
+</div>
+
+<div class="form-step" id="step2">
+<div class="form-section-inner">
+<h4>1. Team Badge</h4>
+<div class="custom-file-upload"><label for="clubCrest"><i class="fas fa-upload"></i> Upload Badge</label> <input type="file" id="clubCrest" name="upload_file" accept="image/*" onchange="previewLogo(this)" /><div id="fileNameDisplay"></div><div id="logoPreview" style="margin-top: 10px; max-width: 100px;"></div></div>
+</div>
+<div class="form-section-inner">
+<h4>1b. Design Concept (optional)</h4>
+<p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 15px; font-weight: 300;">AI render, sketch, reference kit, or any visual concept. Skip if you&rsquo;d rather brief us in words.</p>
+<div class="custom-file-upload"><label for="designConcept"><i class="fas fa-upload"></i> Upload Concept</label> <input type="file" id="designConcept" name="design_concept" accept="image/*,.pdf" onchange="previewDesign(this)" /><div id="designNameDisplay"></div><div id="designPreview" style="margin-top: 10px; max-width: 200px;"></div></div>
+</div>
+<div class="form-section-inner">
+<h4>2. Main Colors</h4>
+<div class="colors-row">
+<div class="color-col"><label>Primary</label><div class="color-circle" id="primaryColorCircle" style="background-color: #e2214b;" onclick="openColorModal('primary')"></div></div>
+<div class="color-col"><label>Secondary</label><div class="color-circle" id="secondaryColorCircle" style="background-color: #ffffff;" onclick="openColorModal('secondary')"></div></div>
+</div>
+</div>
+<div class="form-section-inner">
+<h4>3. Visual Style</h4>
+<p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 15px;">From 1 (Classic) to 10 (Modern/Bold)</p>
+<div class="style-scale"><span>1</span> <input type="range" id="stylePreference" name="stylePreference" min="1" max="10" value="5" /> <span>10</span></div>
+<div class="style-extremes">
+<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/7717020eb4f7350ff2eaf310f87346f7.jpg" alt="Classic Style" /><p>Classic</p></div>
+<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/aa44aa9cce491bdfc97c04586417a837.jpg" alt="Bold Style" /><p>Bold</p></div>
+</div>
+</div>
+<div class="form-section-inner">
+<h4>4. Estimated Quantity</h4>
+<div class="size-slider"><div class="size-track"></div>
+<div class="size-options">
+<div class="size-option"><input type="radio" id="size-1-4" name="orderSize" value="1-4" class="size-radio" checked /> <label for="size-1-4" class="size-label"><span class="size-button"></span> 1-4</label></div>
+<div class="size-option"><input type="radio" id="size-5-10" name="orderSize" value="5-10" class="size-radio" /> <label for="size-5-10" class="size-label"><span class="size-button"></span> 5-10</label></div>
+<div class="size-option"><input type="radio" id="size-11-20" name="orderSize" value="11-20" class="size-radio" /> <label for="size-11-20" class="size-label"><span class="size-button"></span> 11-20</label></div>
+<div class="size-option"><input type="radio" id="size-21-50" name="orderSize" value="21-50" class="size-radio" /> <label for="size-21-50" class="size-label"><span class="size-button"></span> 21-50</label></div>
+<div class="size-option"><input type="radio" id="size-51-plus" name="orderSize" value="51+" class="size-radio" /> <label for="size-51-plus" class="size-label"><span class="size-button"></span> 51+</label></div>
+</div>
+</div>
+</div>
+<div class="form-navigation"><button type="button" class="prev-step">BACK</button> <button type="button" class="next-step">CONTINUE</button></div>
+</div>
+
+<div class="form-step" id="step3">
+<div style="text-align: center; margin-bottom: 30px;"><h3>All Set!</h3><p style="color: rgba(255,255,255,0.7);">Review your details and submit. Your designer will be in touch within 24h.</p></div>
+<div class="terms-checkbox"><input type="checkbox" id="termsAccept" name="termsAccept" required /> <label for="termsAccept"> I accept the <a href="https://www.momuto.com/pages/privacy-policy" target="_blank" rel="noopener">privacy policy</a>.</label></div>
+<div class="form-navigation"><button type="button" class="prev-step">BACK</button> <button type="submit" class="submit-form">SUBMIT BRIEF</button></div>
+</div>
+
+<input type="hidden" id="primaryColorValue" name="primaryColorValue" value="#e2214b" />
+<input type="hidden" id="secondaryColorValue" name="secondaryColorValue" value="#ffffff" />
+</form>
+</div>
+<div id="confirmationMessage" style="display: none;">
+<div class="success-icon"><i class="fas fa-check-circle"></i></div>
+<h3>Brief Received!</h3>
+<p>Your senior designer will be in touch within 24h.</p>
+<div class="social-follow" style="margin-top:20px;"><p style="color:var(--text-muted); font-size:0.85rem;">In the meantime, check out our work:</p><a href="https://www.instagram.com/momuto_es" target="_blank" rel="noopener" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">@momuto_es</a></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq-section">
+<div class="faq-container">
+<h2>Frequently Asked Questions</h2>
+<div class="faq-list">
+<div class="faq-item"><h3>Why is there a €15 deposit for the Design Studio?</h3><p>A senior designer invests real time in your project &mdash; research, illustration, vectorization, and revisions. The €15 deposit ensures we can focus on teams that are ready to order and give each project the attention it deserves. It&rsquo;s fully refunded when you order 5 or more jerseys, so for any real team order it costs nothing.</p></div>
+<div class="faq-item"><h3>When does the €15 get refunded?</h3><p>Automatically when your order reaches 5 or more jerseys. You&rsquo;ll see it deducted from your order total at checkout. No need to ask &mdash; it&rsquo;s applied automatically.</p></div>
+<div class="faq-item"><h3>What's included in the Design Studio service?</h3><p>A senior designer assigned to your project, first mockup in 24&ndash;48h, unlimited revisions, illustration and vectorization work (AI concepts, sketches, reference kits, custom graphics), and production-ready files for dye-sublimation printing.</p></div>
+<div class="faq-item"><h3>Can I submit an AI-generated concept (ChatGPT, Midjourney)?</h3><p>Yes &mdash; that&rsquo;s exactly what the Design Studio is built for. Upload your AI render and our designer will adapt it into a production-ready kit while preserving your vision. This includes vectorizing custom shapes, replicating gradients and textures, and adjusting for real fabric constraints.</p></div>
+<div class="faq-item"><h3>What if I just have a brief and no concept?</h3><p>That&rsquo;s fine. Describe your colours, style direction, and any references (existing kits, palettes, mood). The more detail the better, but our designers work from briefs every day. You&rsquo;ll get a mockup in 24&ndash;48h regardless.</p></div>
+<div class="faq-item"><h3>Don't want to pay upfront? What are the free options?</h3><p>Two free routes: the <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en">3D Kit Builder</a> lets you design in real time with 30+ templates and instant preview. The <a href="https://www.momuto.com/pages/ready-to-play">Ready-to-Play collection</a> has professional pre-designed kits at 10% off custom pricing, with a personalised 24h preview.</p></div>
+<div class="faq-item"><h3>Is there a minimum order?</h3><p>No. You can order from a single jersey upward. Pricing starts at &euro;38.90 for one jersey, down to &euro;20.90 per jersey at 10+ units. The €15 deposit is refunded at 5+ jerseys.</p></div>
+<div class="faq-item"><h3>How long until I receive the kits?</h3><p>25&ndash;30 days from order confirmation: 7&ndash;15 days production + 10&ndash;15 days worldwide shipping. Free shipping on orders over &euro;50.</p></div>
+</div>
+</div>
+</section>
+
+<!-- ── COLOR MODAL ── -->
+<div id="colorModal" class="color-modal" style="display: none;">
+<div id="colorModalOverlay" class="modal-overlay" onclick="closeColorModal()"></div>
+<div class="color-modal-content">
+<div class="color-modal-header"><h3>Select Color</h3><button class="close-modal" onclick="closeColorModal()">&times;</button></div>
+<div class="color-modal-body"><div id="colorSwatches"></div></div>
+</div>
+</div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var isPaid = params.get('paid') === 'true';
+
+  if (isPaid) {
+    // Show confirmation banner
+    document.getElementById('paidBanner').style.display = 'block';
+    // Hide payment gate, show form
+    document.getElementById('payment-gate').style.display = 'none';
+    document.getElementById('brief-form-section').style.display = 'block';
+    // Scroll to form smoothly after a short delay
+    setTimeout(function() {
+      document.getElementById('cta-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+
+  // Prefill Stripe email from gate input
+  var gateEmail = document.getElementById('gateEmail');
+  var gatePayBtn = document.getElementById('gatePayBtn');
+  var baseStripeUrl = 'https://buy.stripe.com/00w8wP7I15qfepm2K7dEs1B';
+
+  if (gateEmail && gatePayBtn) {
+    gateEmail.addEventListener('input', function() {
+      var email = this.value.trim();
+      if (email) {
+        gatePayBtn.href = baseStripeUrl + '?prefilled_email=' + encodeURIComponent(email);
+      } else {
+        gatePayBtn.href = baseStripeUrl;
+      }
+    });
+  }
+
+  // Smooth scroll for Studio path card CTA
+  var studioCta = document.getElementById('studioPathCta');
+  if (studioCta) {
+    studioCta.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('payment-gate').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+})();
+</script>
+<!-- inject:design-request.js -->

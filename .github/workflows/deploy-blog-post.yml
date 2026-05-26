@@ -4,8 +4,18 @@ on:
   workflow_dispatch:
     inputs:
       post_handle:
-        description: 'URL handle of the post (must match a file in blogs/)'
+        description: 'URL handle of the post (must match a file in blogs/<locale>/)'
         required: true
+      locale:
+        description: 'Site locale'
+        required: false
+        default: 'en'
+        type: choice
+        options:
+          - en
+          - fr
+          - es
+          - it
       dry_run:
         description: 'Dry run — preview only, no writes to CMS'
         required: false
@@ -33,6 +43,10 @@ jobs:
       - name: Deploy blog post
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          LOCALE: ${{ github.event.inputs.locale }}
           POST_HANDLE: ${{ github.event.inputs.post_handle }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: node scripts/deploy-blog-post.js

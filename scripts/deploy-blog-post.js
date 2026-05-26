@@ -1,21 +1,33 @@
 'use strict';
 
 /**
- * Deploys a single blog post to momuto.com from blogs/<handle>.json.
+ * Deploys a single blog post from blogs/<locale>/<handle>.json (or blogs/<handle>.json for EN).
  *
  * Env:
- *   OEMSAAS_TOKEN_EN  - required
- *   POST_HANDLE       - required: matches filename in blogs/
- *   DRY_RUN=true|false - default true
+ *   LOCALE=en|fr|es|it  - default en
+ *   OEMSAAS_TOKEN_EN/FR/ES/IT  - token for the selected locale
+ *   POST_HANDLE         - required: matches filename in blogs/<locale>/
+ *   DRY_RUN=true|false  - default true
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const HOST = 'https://openapi.oemapps.com';
-const TOKEN = process.env.OEMSAAS_TOKEN_EN;
+const LOCALE = (process.env.LOCALE || 'en').toLowerCase();
 const HANDLE = process.env.POST_HANDLE;
 const DRY_RUN = process.env.DRY_RUN !== 'false';
+
+const DOMAIN_MAP = {
+  en: { token: process.env.OEMSAAS_TOKEN_EN, url: 'https://www.momuto.com' },
+  fr: { token: process.env.OEMSAAS_TOKEN_FR, url: 'https://fr.momuto.com' },
+  es: { token: process.env.OEMSAAS_TOKEN_ES, url: 'https://es.momuto.com' },
+  it: { token: process.env.OEMSAAS_TOKEN_IT, url: 'https://it.momuto.com' },
+};
+
+const domain = DOMAIN_MAP[LOCALE];
+if (!domain) { console.error(`Unknown locale: ${LOCALE}`); process.exit(1); }
+const TOKEN = domain.token;
 
 // ─── API helpers ──────────────────────────────────────────────────────────────
 
@@ -55,12 +67,17 @@ async function updatePost(id, data) {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  if (!TOKEN) { console.error('OEMSAAS_TOKEN_EN is required'); process.exit(1); }
+  if (!TOKEN) { console.error(`OEMSAAS_TOKEN_${LOCALE.toUpperCase()} is required`); process.exit(1); }
   if (!HANDLE) { console.error('POST_HANDLE is required'); process.exit(1); }
 
-  const dataFile = path.join(__dirname, '..', 'blogs', `${HANDLE}.json`);
+  // EN posts live in blogs/, other locales in blogs/<locale>/
+  const blogDir = LOCALE === 'en'
+    ? path.join(__dirname, '..', 'blogs')
+    : path.join(__dirname, '..', 'blogs', LOCALE);
+
+  const dataFile = path.join(blogDir, `${HANDLE}.json`);
   if (!fs.existsSync(dataFile)) {
-    console.error(`No content file found: blogs/${HANDLE}.json`);
+    console.error(`No content file found: blogs/${LOCALE === 'en' ? '' : LOCALE + '/'}${HANDLE}.json`);
     process.exit(1);
   }
 
@@ -72,6 +89,7 @@ async function main() {
   }
 
   console.log(`Mode: ${DRY_RUN ? 'DRY RUN (no writes)' : 'LIVE'}`);
+  console.log(`Locale: ${LOCALE} → ${domain.url}`);
   console.log(`Handle: ${HANDLE}`);
   console.log(`Title: ${data.title}`);
   console.log(`Meta title length: ${data.meta_title?.length ?? 0} (max 65)`);
@@ -106,7 +124,7 @@ async function main() {
     handle: HANDLE,
   });
 
-  console.log(`✅ Done: https://www.momuto.com/blogs/${HANDLE}`);
+  console.log(`✅ Done: ${domain.url}/blogs/${HANDLE}`);
 }
 
 main().catch(err => { console.error(err); process.exit(1); });
