@@ -36,9 +36,11 @@ jobs:
 
       - name: Find changed team configs
         id: changed
+        env:
+          INPUT_TEAM: ${{ inputs.team_slug }}
         run: |
-          if [ -n "${{ inputs.team_slug }}" ]; then
-            echo "team=${{ inputs.team_slug }}" >> $GITHUB_OUTPUT
+          if [ -n "$INPUT_TEAM" ]; then
+            echo "team=$INPUT_TEAM" >> $GITHUB_OUTPUT
           else
             CHANGED=$(git diff --name-only HEAD~1 HEAD | grep 'teams/.*/config.json' | head -1)
             echo "config=$CHANGED" >> $GITHUB_OUTPUT
@@ -51,8 +53,10 @@ jobs:
 
       - name: Check if gallery update requested
         id: gallery
+        env:
+          INPUT_GALLERY: ${{ inputs.update_gallery }}
         run: |
-          if [ -n "${{ inputs.update_gallery }}" ] && [ "${{ inputs.update_gallery }}" = "true" ]; then
+          if [ "$INPUT_GALLERY" = "true" ]; then
             echo "update=true" >> $GITHUB_OUTPUT
           else
             MSG=$(git log -1 --pretty=%B)
