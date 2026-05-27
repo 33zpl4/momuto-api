@@ -23,6 +23,23 @@ const FROM_EMAIL  = process.env.FROM_EMAIL  || 'leads@momuto.com';
 const THANK_YOU_FALLBACK = process.env.THANK_YOU_URL
   || 'https://www.momuto.com/pages/customized-design-confirmed';
 
+const ALLOWED_ORIGINS = [
+  'https://momuto.com',
+  'https://www.momuto.com',
+  'https://es.momuto.com',
+  'https://fr.momuto.com',
+  'https://it.momuto.com',
+];
+
+function isAllowedOrigin(req) {
+  const origin  = req.headers['origin']  || '';
+  const referer = req.headers['referer'] || '';
+  return (
+    ALLOWED_ORIGINS.some(o => origin === o) ||
+    ALLOWED_ORIGINS.some(o => referer.startsWith(o))
+  );
+}
+
 // ── Parse multipart form ─────────────────────────────────────────────────────
 
 function parseForm(req) {
@@ -187,16 +204,27 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  if (!isAllowedOrigin(req)) {
+    console.warn('[submit] blocked: origin=%s referer=%s', req.headers['origin'], req.headers['referer']);
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+
   let thankYouUrl = THANK_YOU_FALLBACK;
 
   try {
     const { fields, files } = await parseForm(req);
     if (fields._next) thankYouUrl = fields._next;
+
+    // Honeypot: real users never fill this field
+    if (fields._honey) {
+      console.warn('[submit] honeypot triggered — dropping silently');
+      return res.redirect(302, thankYouUrl);
+    }
+
     const { subject, html, replyTo } = buildEmail(fields, files);
     await sendEmail(fields, subject, html, replyTo);
   } catch (err) {
     console.error('[submit] fatal:', err.message);
-    // Always redirect — never expose errors to the user
   }
 
   res.redirect(302, thankYouUrl);
