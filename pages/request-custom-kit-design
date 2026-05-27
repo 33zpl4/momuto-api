@@ -267,8 +267,9 @@
 
 <div class="form-step" id="step2">
 <div class="form-section-inner">
-<h4>1. Team Badge</h4>
+<h4>1. Team Badge <span style="color:#e2214b">*</span></h4>
 <div class="custom-file-upload"><label for="clubCrest"><i class="fas fa-upload"></i> Upload File</label> <input type="file" id="clubCrest" name="upload_file" accept="image/*" onchange="previewLogo(this)" /><div id="fileNameDisplay"></div><div id="logoPreview" style="margin-top: 10px; max-width: 100px;"></div></div>
+<div id="crestError" style="display:none;color:#e2214b;font-size:0.8rem;margin-top:6px">Please upload your team badge to continue.</div>
 </div>
 <div class="form-section-inner">
 <h4>1b. Already have a design concept?</h4>

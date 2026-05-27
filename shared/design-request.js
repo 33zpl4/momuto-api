@@ -14,6 +14,17 @@
             if (!field.value.trim() && field.type !== 'checkbox') { field.focus(); field.style.borderColor = '#e2214b'; return false; }
             if (field.type === 'checkbox' && !field.checked) { field.parentElement.style.borderColor = '#e2214b'; return false; }
         }
+        if (currentStep === 2) {
+            const crest = document.getElementById('clubCrest');
+            if (!crest || !crest.files || crest.files.length === 0) {
+                const label = document.querySelector('label[for="clubCrest"]');
+                if (label) label.style.outline = '2px solid #e2214b';
+                const err = document.getElementById('crestError');
+                if (err) err.style.display = 'block';
+                crest && crest.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return false;
+            }
+        }
         return true;
     }
     document.addEventListener('DOMContentLoaded', function() {
@@ -31,6 +42,10 @@
             nameDisplay.textContent = input.files[0].name;
             reader.onload = function(e) { preview.innerHTML = `<img src="${e.target.result}" style="width:100%; border-radius:4px;">`; };
             reader.readAsDataURL(input.files[0]);
+            const label = document.querySelector('label[for="clubCrest"]');
+            if (label) label.style.outline = '';
+            const err = document.getElementById('crestError');
+            if (err) err.style.display = 'none';
         }
     }
     function previewDesign(input) {
