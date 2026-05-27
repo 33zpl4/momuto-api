@@ -21,20 +21,20 @@
     "es": "Arraigado en algo más profundo. Un intrincado patrón de geometría tribal con detalles en capas y profundidad en tres tonos construida desde los colores de tu equipo. Para equipos que sacan su fuerza de sus raíces.",
     "fr": "Ancré dans quelque chose de plus profond. Un motif de géométrie tribale complexe avec des détails en couches et une profondeur en trois tons construite à partir de vos couleurs d'équipe. Pour les équipes qui puisent leur force dans leurs racines."
   },
-  "hero_image": "https://cdn.staticsoe.com/pics/fa2afd50cbdfd2468501146a918a9010ff0772e5cd7626cb7b704e580ac2fd02.png",
+  "hero_image": "https://cdn.staticsoe.com/pics/368482b72b5c435b66cfbbabce8943e8ca57434ee5715699faf727aa36709d72.png",
   "variants": [
-    { "name": "Black Cyan",   "image": "https://cdn.staticsoe.com/pics/fa2afd50cbdfd2468501146a918a9010ff0772e5cd7626cb7b704e580ac2fd02.png" },
     { "name": "Neon Green",   "image": "https://cdn.staticsoe.com/pics/368482b72b5c435b66cfbbabce8943e8ca57434ee5715699faf727aa36709d72.png" },
+    { "name": "Black Cyan",   "image": "https://cdn.staticsoe.com/pics/fa2afd50cbdfd2468501146a918a9010ff0772e5cd7626cb7b704e580ac2fd02.png" },
     { "name": "Metal Gold",   "image": "https://cdn.staticsoe.com/pics/936489723f7b959217d22b1e34c3d61b9237ab1d45009c74d41552da25d5fc3a.png" }
   ],
   "gallery": [
-    "https://cdn.staticsoe.com/pics/fa2afd50cbdfd2468501146a918a9010ff0772e5cd7626cb7b704e580ac2fd02.png",
     "https://cdn.staticsoe.com/pics/368482b72b5c435b66cfbbabce8943e8ca57434ee5715699faf727aa36709d72.png",
+    "https://cdn.staticsoe.com/pics/fa2afd50cbdfd2468501146a918a9010ff0772e5cd7626cb7b704e580ac2fd02.png",
     "https://cdn.staticsoe.com/pics/936489723f7b959217d22b1e34c3d61b9237ab1d45009c74d41552da25d5fc3a.png"
   ],
   "default_colors": {
     "primary":   { "hex": "#000000", "name": "black" },
-    "secondary": { "hex": "#6EC6FF", "name": "sky blue" },
+    "secondary": { "hex": "#39FF14", "name": "neon green" },
     "trim":      { "hex": "#FFFFFF", "name": "white" }
   },
   "status": "published"
