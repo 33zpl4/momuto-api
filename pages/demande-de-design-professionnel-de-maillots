@@ -354,7 +354,7 @@
 <div class="terms-checkbox"><input type="checkbox" id="termsAccept" name="termsAccept" required="" /> <label for="termsAccept"> J&rsquo;accepte la <a href="https://fr.momuto.com/pages/politique-de-confidentialite" target="_blank" rel="noopener">politique de confidentialit&eacute;</a>. </label></div>
 <div class="form-navigation"><button type="button" class="prev-step">RETOUR</button> <button type="submit" class="submit-form">ENVOYER LA DEMANDE</button></div>
 </div>
-<input type="hidden" id="primaryColorValue" name="primaryColorValue" value="#e2214b" /> <input type="hidden" id="secondaryColorValue" name="secondaryColorValue" value="#ffffff" /></form></div>
+<input type="hidden" id="primaryColorValue" name="primaryColorValue" value="#e2214b" /> <input type="hidden" id="secondaryColorValue" name="secondaryColorValue" value="#ffffff" /><input type="text" name="_honey" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" tabindex="-1" autocomplete="off" aria-hidden="true" /></form></div>
 <div id="confirmationMessage" style="display: none;">
 <div class="success-icon"><i class="fas fa-check-circle"></i></div>
 <h3>Demande Re&ccedil;ue&nbsp;!</h3>

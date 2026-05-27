@@ -282,6 +282,7 @@
 </div>
 <input type="hidden" id="primaryColorValue" name="primaryColorValue" value="#e2214b" />
 <input type="hidden" id="secondaryColorValue" name="secondaryColorValue" value="#ffffff" />
+<input type="text" name="_honey" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" tabindex="-1" autocomplete="off" aria-hidden="true" />
 </form></div>
 <div id="confirmationMessage" style="display: none;">
 <div class="success-icon"><i class="fas fa-check-circle"></i></div>
