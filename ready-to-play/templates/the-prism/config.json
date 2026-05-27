@@ -1,0 +1,41 @@
+{
+  "slug": "the-prism",
+  "name": "THE PRISM",
+  "category": {
+    "en": "Modern / Geometric",
+    "es": "Moderno / Geométrico",
+    "fr": "Moderne / Géométrique"
+  },
+  "tags": {
+    "en": ["Geometric", "Preview 24h"],
+    "es": ["Geométrico", "Preview 24h"],
+    "fr": ["Géométrique", "Aperçu 24h"]
+  },
+  "description": {
+    "en": "Light refracted into form. A bold, geometric prism pattern built on sharp opposing diagonals — dynamic, structured, and impossible to ignore. Three-tone depth emerges naturally as your two team colours split across the interlocking angles. The result is a kit that looks engineered, not just designed. For teams that mean business.",
+    "es": "Luz refractada en forma. Un patrón de prisma geométrico y atrevido construido sobre diagonales opuestas y pronunciadas — dinámico, estructurado e imposible de ignorar. La profundidad en tres tonos emerge naturalmente cuando los dos colores de tu equipo se dividen sobre los ángulos entrelazados. Para equipos que van en serio.",
+    "fr": "Lumière réfractée en forme. Un motif de prisme géométrique audacieux construit sur des diagonales opposées et marquées — dynamique, structuré et impossible à ignorer. Une profondeur en trois tons émerge naturellement lorsque vos deux couleurs d'équipe se divisent sur les angles entrelacés. Pour les équipes qui jouent avec intention."
+  },
+  "card_description": {
+    "en": "Light refracted into form. A bold geometric prism pattern with three-tone depth built from your team colours. For teams that mean business.",
+    "es": "Luz refractada en forma. Un patrón de prisma geométrico con profundidad en tres tonos construida desde los colores de tu equipo. Para equipos que van en serio.",
+    "fr": "Lumière réfractée en forme. Un motif de prisme géométrique avec une profondeur en trois tons construite à partir de vos couleurs d'équipe. Pour les équipes qui jouent avec intention."
+  },
+  "hero_image": "https://cdn.staticsoe.com/pics/8861a904ded03b3141c5878a5b9d6fc864330eee737204b3d186d724d6c82c51.png",
+  "variants": [
+    { "name": "Burgundy", "image": "https://cdn.staticsoe.com/pics/8861a904ded03b3141c5878a5b9d6fc864330eee737204b3d186d724d6c82c51.png" },
+    { "name": "Pine Green", "image": "https://cdn.staticsoe.com/pics/196554a7508c93aa01e3a7234e08347031a225533010f132bbb17876f567389f.png" },
+    { "name": "Neon", "image": "https://cdn.staticsoe.com/pics/bf0469fc4c242bd82f28404fb35d9f4af2e19932557714cd6fcf3cbd9d19070a.png" }
+  ],
+  "gallery": [
+    "https://cdn.staticsoe.com/pics/8861a904ded03b3141c5878a5b9d6fc864330eee737204b3d186d724d6c82c51.png",
+    "https://cdn.staticsoe.com/pics/196554a7508c93aa01e3a7234e08347031a225533010f132bbb17876f567389f.png",
+    "https://cdn.staticsoe.com/pics/bf0469fc4c242bd82f28404fb35d9f4af2e19932557714cd6fcf3cbd9d19070a.png"
+  ],
+  "default_colors": {
+    "primary":   { "hex": "#800020", "name": "burgundy" },
+    "secondary": { "hex": "#808080", "name": "grey" },
+    "trim":      { "hex": "#000000", "name": "black" }
+  },
+  "status": "published"
+}
