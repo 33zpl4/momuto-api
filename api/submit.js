@@ -221,6 +221,13 @@ module.exports = async function handler(req, res) {
       return res.redirect(302, thankYouUrl);
     }
 
+    // Badge is required — no file means it's a bot posting directly to the API
+    const hasBadge = files.some(f => (f.fieldName === 'upload_file' || f.fieldName === 'teamCrest') && f.size > 0);
+    if (!hasBadge) {
+      console.warn('[submit] blocked: no badge uploaded (bot direct-post) email=%s', fields.email);
+      return res.redirect(302, thankYouUrl);
+    }
+
     const { subject, html, replyTo } = buildEmail(fields, files);
     await sendEmail(fields, subject, html, replyTo);
   } catch (err) {
