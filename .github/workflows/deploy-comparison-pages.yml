@@ -1,0 +1,41 @@
+name: Deploy Comparison Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pages/comparison-en'
+      - 'pages/comparison-fr'
+      - 'scripts/deploy-comparison-pages.js'
+      - '.github/workflows/deploy-comparison-pages.yml'
+  workflow_dispatch:
+    inputs:
+      locales:
+        description: 'Comma-separated locales to deploy (en,fr)'
+        required: false
+        default: 'en,fr'
+      dry_run:
+        description: 'Dry run (do not write to CMS)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Deploy comparison pages
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          LOCALES: ${{ inputs.locales || 'en,fr' }}
+          DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+        run: node scripts/deploy-comparison-pages.js
