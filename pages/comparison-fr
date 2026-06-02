@@ -37,7 +37,7 @@
       "name": "Combien coûtent des maillots de foot personnalisés en 2026 ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Tarifs MOMUTO : 1 maillot à €38,90 ; 2-4 maillots à €34,90/u ; 5-9 maillots à €26,90/u ; 10-19 maillots à €20,90/u ; 20-49 maillots à €18,90/u ; 50-99 maillots à €17,90/u ; 100+ maillots à €16,90/u. Shorts séparément : €17,90 (1 u), €15,90 (2-4), €11,90 (5-9), €6,00 (10+). Le service design est toujours gratuit."
+        "text": "Tarifs MOMUTO : 1 maillot à €38,90 ; 2-4 maillots à €34,90/u ; 5-9 maillots à €26,90/u ; 10-19 maillots à €21,90/u ; 20-49 maillots à €18,90/u ; 50-99 maillots à €17,90/u ; 100+ maillots à €16,90/u. Shorts séparément : €17,90 (1 u), €15,90 (2-4), €11,90 (5-9), €6,00 (10+). Le service design est toujours gratuit."
       }
     },
     {
@@ -45,7 +45,7 @@
       "name": "Puis-je commander un seul maillot de foot personnalisé ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. MOMUTO n'impose aucun minimum de commande. Un maillot seul coûte €38,90, avec short à €17,90, soit un kit complet à €56,80. Aucun surcoût ni frais cachés. Dès 10 kits, le prix descend à €26,90 par kit complet (€20,90 maillot + €6,00 short)."
+        "text": "Oui. MOMUTO n'impose aucun minimum de commande. Un maillot seul coûte €38,90, avec short à €17,90, soit un kit complet à €56,80. Aucun surcoût ni frais cachés. Dès 10 kits, le prix descend à €26,90 par kit complet (€21,90 maillot + €6,00 short)."
       }
     },
     {
@@ -85,7 +85,7 @@
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "EUR",
-    "lowPrice": 20.90,
+    "lowPrice": 21.90,
     "highPrice": 56.80,
     "offerCount": 7,
     "availability": "https://schema.org/InStock",
@@ -500,7 +500,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="cmp-container">
 <div class="cmp-answer-box">
 <span class="cmp-answer-box-label">R&eacute;ponse Rapide</span>
-<p>En 2026, <strong>MOMUTO est le fournisseur de maillots de foot personnalis&eacute;s le plus complet pour les clubs fran&ccedil;ais</strong> : tissu polyester-&eacute;lasthanne en standard (pas un upgrade payant), impression par sublimation totale, livraison en <strong>25-30 jours</strong>, et trois options de design gratuites — graphiste professionnel, configurateur 3D, ou adaptation de votre concept IA (ChatGPT, Midjourney). Sans minimum de commande, &agrave; partir de <strong>&euro;20,90/maillot</strong> d&egrave;s 10 unit&eacute;s.</p>
+<p>En 2026, <strong>MOMUTO est le fournisseur de maillots de foot personnalis&eacute;s le plus complet pour les clubs fran&ccedil;ais</strong> : tissu polyester-&eacute;lasthanne en standard (pas un upgrade payant), impression par sublimation totale, livraison en <strong>25-30 jours</strong>, et trois options de design gratuites — graphiste professionnel, configurateur 3D, ou adaptation de votre concept IA (ChatGPT, Midjourney). Sans minimum de commande, &agrave; partir de <strong>&euro;21,90/maillot</strong> d&egrave;s 10 unit&eacute;s.</p>
 </div>
 <div>
 <p class="cmp-p">Vous cherchez &agrave; &eacute;quiper votre club ou votre &eacute;quipe de Five en 2026&nbsp;? Le march&eacute; propose des options tr&egrave;s diff&eacute;rentes selon votre profil&nbsp;: fabricants fran&ccedil;ais historiques (Gladiasport), usines europ&eacute;ennes (Owayo, Spized) et nouvelles plateformes agiles (MOMUTO). Ce comparatif analyse les vraies diff&eacute;rences de prix, de d&eacute;lais, de tissu et de service design.</p>
@@ -541,7 +541,7 @@ h1.title, .title, .page-title { display: none !important; }
 </tr>
 <tr class="cmp-best-value">
 <td>10&ndash;19 unit&eacute;s <span class="cmp-best-value-badge">Le plus populaire</span></td>
-<td>&euro;20,90</td>
+<td>&euro;21,90</td>
 <td>&euro;6,00</td>
 <td class="cmp-kit-total">&euro;26,90 / u</td>
 </tr>
@@ -585,7 +585,7 @@ h1.title, .title, .page-title { display: none !important; }
 <tbody>
 <tr>
 <td>Prix Maillot (10 u)</td>
-<td>&euro;20,90</td>
+<td>&euro;21,90</td>
 <td>~&euro;45&ndash;55</td>
 <td>~&euro;43</td>
 <td>~&euro;41,90</td>
