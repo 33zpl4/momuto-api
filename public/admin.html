@@ -120,6 +120,22 @@
 
 <main>
 
+  <!-- ── Design Requests ──────────────────────── -->
+  <p class="section-title">
+    Design Requests
+    <button class="refresh-btn" onclick="loadLeads()">↻ Refresh</button>
+  </p>
+  <div class="orders-wrap" style="margin-bottom:48px">
+    <table class="orders">
+      <thead>
+        <tr><th>Received</th><th>Team</th><th>Contact</th><th>Qty</th><th>Colors</th><th>Files</th><th>Email</th></tr>
+      </thead>
+      <tbody id="leadsBody">
+        <tr><td colspan="7" class="empty">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
   <!-- ── Parse Invoice ─────────────────────────── -->
   <p class="section-title">Extract from Invoice</p>
   <div class="form-card" style="margin-bottom:24px">
@@ -473,9 +489,48 @@
     el.textContent = msg; el.className = `form-msg ${ok ? 'ok' : 'err'}`; el.style.display = 'block';
   }
 
+  // ── Design Requests ───────────────────────────────────────────────────────
+  async function loadLeads() {
+    try {
+      const r = await fetch(`${API}/api/submit`, { headers: { 'x-admin-token': token } });
+      if (r.status === 401) { logout(); return; }
+      const leads = await r.json();
+      renderLeads(leads);
+    } catch {
+      document.getElementById('leadsBody').innerHTML = '<tr><td colspan="7" class="empty">Failed to load</td></tr>';
+    }
+  }
+
+  function renderLeads(leads) {
+    const body = document.getElementById('leadsBody');
+    if (!leads.length) { body.innerHTML = '<tr><td colspan="7" class="empty">No requests yet</td></tr>'; return; }
+    body.innerHTML = leads.map(l => {
+      const date = new Date(l.receivedAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+      const colors = [l.primary, l.secondary].filter(Boolean).map(c =>
+        `<span style="display:inline-block;width:12px;height:12px;background:${c};border:1px solid rgba(255,255,255,0.2);border-radius:2px;vertical-align:middle;margin-right:3px"></span>`
+      ).join('') || '—';
+      const badge   = l.badgeUrl   ? `<a href="${l.badgeUrl}"   target="_blank" style="color:var(--red);font-size:0.75rem">Badge</a>` : '<span style="color:var(--dim);font-size:0.75rem">—</span>';
+      const concept = l.conceptUrl ? `<a href="${l.conceptUrl}" target="_blank" style="color:var(--red);font-size:0.75rem">Concept</a>` : '';
+      const emailStatus = l.emailSent
+        ? '<span style="color:#4ade80;font-size:0.72rem">✓ Sent</span>'
+        : l.emailError
+        ? `<span style="color:#fb923c;font-size:0.72rem" title="${l.emailError}">⚠ Failed</span>`
+        : '<span style="color:var(--dim);font-size:0.72rem">Pending</span>';
+      return `<tr>
+        <td style="font-size:0.78rem;color:var(--muted);white-space:nowrap">${date}</td>
+        <td><strong>${l.team || '—'}</strong>${l.league ? `<br><span style="font-size:0.72rem;color:var(--dim)">${l.league}</span>` : ''}${l.design ? `<br><span style="font-size:0.72rem;color:var(--red)">${l.design}</span>` : ''}</td>
+        <td style="font-size:0.82rem">${l.name || '—'}<br><a href="mailto:${l.email}" style="color:var(--red);font-size:0.75rem">${l.email || '—'}</a></td>
+        <td style="font-size:0.82rem">${l.qty || '—'}</td>
+        <td>${colors}</td>
+        <td style="white-space:nowrap">${badge}${concept ? ' · ' + concept : ''}</td>
+        <td>${emailStatus}</td>
+      </tr>`;
+    }).join('');
+  }
+
   // ── Init ──────────────────────────────────────────────────────────────────
   document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
-  if (token) loadOrders();
+  if (token) { loadLeads(); loadOrders(); }
 </script>
 </body>
 </html>

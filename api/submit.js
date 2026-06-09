@@ -1,25 +1,30 @@
 'use strict';
 
 /**
- * POST /api/submit — MOMUTO kit design request handler (MVP)
+ * POST /api/submit — MOMUTO kit design request handler
+ * GET  /api/submit — list all design request leads (admin)
  *
- * Receives multipart/form-data, uploads files to Vercel Blob,
- * emails the team via Resend, redirects user to thank-you page.
+ * Receives multipart/form-data, saves lead to Vercel KV,
+ * uploads files to Vercel Blob, emails the team via Resend,
+ * then redirects user to thank-you page.
  *
  * Env vars:
- *   RESEND_API_KEY     — resend.com (free tier: 3 000 emails/mo)
- *   BLOB_READ_WRITE_TOKEN — Vercel Blob (free tier: 1 GB)
- *   TEAM_EMAIL         — where notifications go, e.g. info@momuto.com
- *   FROM_EMAIL         — verified sender, e.g. leads@momuto.com
+ *   RESEND_API_KEY     — resend.com
+ *   BLOB_READ_WRITE_TOKEN — Vercel Blob
+ *   TEAM_EMAIL         — where notifications go
+ *   FROM_EMAIL         — verified sender
  *   THANK_YOU_URL      — redirect after submit
+ *   ADMIN_TOKEN        — for GET /api/submit
  */
 
 const Busboy = require('busboy');
 const { put } = require('@vercel/blob');
+const { kv }  = require('@vercel/kv');
 
 const RESEND_KEY  = process.env.RESEND_API_KEY;
 const TEAM_EMAIL  = process.env.TEAM_EMAIL  || 'info@momuto.com';
 const FROM_EMAIL  = process.env.FROM_EMAIL  || 'leads@momuto.com';
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 const THANK_YOU_FALLBACK = process.env.THANK_YOU_URL
   || 'https://www.momuto.com/pages/customized-design-confirmed';
 
@@ -197,9 +202,35 @@ async function sendEmail(fields, subject, html, replyTo) {
   }
 }
 
+// ── KV helpers ───────────────────────────────────────────────────────────────
+
+async function saveLead(lead) {
+  await kv.set(`lead:${lead.id}`, lead);
+  await kv.sadd('leads:all', lead.id);
+}
+
+async function listLeads() {
+  const ids = (await kv.smembers('leads:all')) || [];
+  if (!ids.length) return [];
+  const leads = await Promise.all(ids.map(id => kv.get(`lead:${id}`)));
+  return leads
+    .filter(Boolean)
+    .sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt));
+}
+
 // ── Handler ──────────────────────────────────────────────────────────────────
 
 module.exports = async function handler(req, res) {
+
+  // ── GET: list leads (admin only) ──────────────────
+  if (req.method === 'GET') {
+    if (!ADMIN_TOKEN || req.headers['x-admin-token'] !== ADMIN_TOKEN) {
+      return res.status(401).json({ error: 'Unauthorised' });
+    }
+    const leads = await listLeads();
+    return res.status(200).json(leads);
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -228,8 +259,39 @@ module.exports = async function handler(req, res) {
       return res.redirect(302, thankYouUrl);
     }
 
+    // ── Persist lead to KV before attempting email ────
+    const badge   = files.find(f => f.fieldName === 'upload_file'   || f.fieldName === 'teamCrest');
+    const concept = files.find(f => f.fieldName === 'design_concept' || f.fieldName === 'sponsorLogo');
+    const lead = {
+      id:         `lead_${Date.now()}`,
+      receivedAt: new Date().toISOString(),
+      name:       fields.firstname  || fields.contactName  || null,
+      email:      fields.email      || fields.contactEmail || null,
+      team:       fields.company    || fields.teamName     || null,
+      league:     fields.industry   || null,
+      qty:        fields.orderSize  || fields.estimatedQty || null,
+      primary:    fields.primaryColorValue   || null,
+      secondary:  fields.secondaryColorValue || null,
+      style:      fields.stylePreference     || null,
+      design:     fields.Design || fields.design || null,
+      badgeUrl:   badge?.url   || null,
+      conceptUrl: concept?.url || null,
+      source:     fields._source_url || null,
+      emailSent:  false,
+      emailError: null,
+    };
+    await saveLead(lead);
+
+    // ── Send email, record outcome ────────────────────
     const { subject, html, replyTo } = buildEmail(fields, files);
-    await sendEmail(fields, subject, html, replyTo);
+    try {
+      await sendEmail(fields, subject, html, replyTo);
+      await kv.set(`lead:${lead.id}`, { ...lead, emailSent: true });
+    } catch (emailErr) {
+      console.error('[submit] email failed for lead', lead.id, emailErr.message);
+      await kv.set(`lead:${lead.id}`, { ...lead, emailError: emailErr.message });
+    }
+
   } catch (err) {
     console.error('[submit] fatal:', err.message);
   }
