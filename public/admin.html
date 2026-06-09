@@ -493,7 +493,10 @@
   async function loadLeads() {
     try {
       const r = await fetch(`${API}/api/submit`, { headers: { 'x-admin-token': token } });
-      if (r.status === 401) { logout(); return; }
+      if (!r.ok) {
+        document.getElementById('leadsBody').innerHTML = `<tr><td colspan="7" class="empty">Could not load leads (${r.status})</td></tr>`;
+        return;
+      }
       const leads = await r.json();
       renderLeads(leads);
     } catch {
