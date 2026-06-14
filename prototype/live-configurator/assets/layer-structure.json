@@ -1,0 +1,343 @@
+{
+  "doc": "admiral-psd.tif",
+  "w": 6200,
+  "h": 6200,
+  "layers": [
+    {
+      "name": "JERSEY",
+      "type": "LayerSet",
+      "visible": true,
+      "blendMode": "BlendMode.PASSTHROUGH",
+      "opacity": 100,
+      "fillOpacity": NaN,
+      "layers": [
+        {
+          "name": "highlights",
+          "type": "ArtLayer",
+          "visible": true,
+          "blendMode": "BlendMode.SCREEN",
+          "opacity": 25,
+          "fillOpacity": 100,
+          "kind": "LayerKind.NORMAL"
+        },
+        {
+          "name": "shadows",
+          "type": "ArtLayer",
+          "visible": true,
+          "blendMode": "BlendMode.LINEARBURN",
+          "opacity": 80,
+          "fillOpacity": 100,
+          "kind": "LayerKind.NORMAL"
+        },
+        {
+          "name": "Brillo/contraste 1",
+          "type": "ArtLayer",
+          "visible": true,
+          "blendMode": "BlendMode.NORMAL",
+          "opacity": 100,
+          "fillOpacity": 100,
+          "kind": "LayerKind.BRIGHTNESSCONTRAST"
+        },
+        {
+          "name": "Tono/saturación 1",
+          "type": "ArtLayer",
+          "visible": true,
+          "blendMode": "BlendMode.NORMAL",
+          "opacity": 100,
+          "fillOpacity": 100,
+          "kind": "LayerKind.HUESATURATION"
+        },
+        {
+          "name": "SMARTS",
+          "type": "LayerSet",
+          "visible": true,
+          "blendMode": "BlendMode.PASSTHROUGH",
+          "opacity": 100,
+          "fillOpacity": NaN,
+          "layers": [
+            {
+              "name": "JERSEY DESIGN",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SMARTOBJECT"
+            },
+            {
+              "name": "SLEEVE DESIGN",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SMARTOBJECT"
+            },
+            {
+              "name": "SLEEVE DESIGN",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SMARTOBJECT"
+            },
+            {
+              "name": "TAPE DESIGN",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SMARTOBJECT"
+            },
+            {
+              "name": "INNER DESIGN",
+              "type": "ArtLayer",
+              "visible": false,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SMARTOBJECT"
+            },
+            {
+              "name": "JERSEY DESIGN",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SMARTOBJECT"
+            },
+            {
+              "name": "JERSEY DESIGN",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SMARTOBJECT"
+            },
+            {
+              "name": "COLLAR TOP",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SMARTOBJECT"
+            },
+            {
+              "name": "COLLAR BOTTOM",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SMARTOBJECT"
+            }
+          ]
+        },
+        {
+          "name": "PARTS MERGED",
+          "type": "ArtLayer",
+          "visible": false,
+          "blendMode": "BlendMode.NORMAL",
+          "opacity": 100,
+          "fillOpacity": 100,
+          "kind": "LayerKind.NORMAL"
+        },
+        {
+          "name": "PARTS",
+          "type": "LayerSet",
+          "visible": true,
+          "blendMode": "BlendMode.PASSTHROUGH",
+          "opacity": 100,
+          "fillOpacity": NaN,
+          "layers": [
+            {
+              "name": "SLEEVES STITCHES",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "TAPE STITCHES",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "JERSEY STITCHES",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "INNER SIDE",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "CUFFS",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "CUFFS",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "CUFFS",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "TAPE",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "COLLAR",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "SLEEVE",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "SLEEVE",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "SHOULDERS",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "FRONT",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "BACK",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "ADD.MASK",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            },
+            {
+              "name": "ADD.MASK",
+              "type": "ArtLayer",
+              "visible": true,
+              "blendMode": "BlendMode.NORMAL",
+              "opacity": 100,
+              "fillOpacity": 100,
+              "kind": "LayerKind.SOLIDFILL"
+            }
+          ]
+        },
+        {
+          "name": "FULL COLOR",
+          "type": "ArtLayer",
+          "visible": true,
+          "blendMode": "BlendMode.NORMAL",
+          "opacity": 100,
+          "fillOpacity": 100,
+          "kind": "LayerKind.SOLIDFILL"
+        }
+      ]
+    },
+    {
+      "name": "BLANK IMAGE",
+      "type": "ArtLayer",
+      "visible": false,
+      "blendMode": "BlendMode.NORMAL",
+      "opacity": 100,
+      "fillOpacity": 100,
+      "kind": "LayerKind.NORMAL"
+    },
+    {
+      "name": "front",
+      "type": "ArtLayer",
+      "visible": false,
+      "blendMode": "BlendMode.NORMAL",
+      "opacity": 100,
+      "fillOpacity": 100,
+      "kind": "LayerKind.TEXT"
+    },
+    {
+      "name": "BACKGROUND",
+      "type": "ArtLayer",
+      "visible": false,
+      "blendMode": "BlendMode.NORMAL",
+      "opacity": 100,
+      "fillOpacity": 100,
+      "kind": "LayerKind.SOLIDFILL"
+    }
+  ]
+}
