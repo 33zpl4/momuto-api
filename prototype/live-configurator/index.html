@@ -84,11 +84,12 @@ const load=src=>new Promise(r=>{const i=new Image();i.crossOrigin="anonymous";i.
 function offscreen(w,h){const c=document.createElement("canvas");c.width=w;c.height=h;return c;}
 
 // cover-fit drawImage of a raster into a zone bbox, optionally mirrored, return ImageData over full mockup
-function placeDesign(img, bbox, {mirror=false, anchorTop=false, pad=1.02}={}){
+function placeDesign(img, bbox, {mirror=false, anchorTop=false, anchorBottom=false, pad=1.02}={}){
   const c=offscreen(W,H), x=c.getContext("2d");
   const s=Math.max(bbox.w/img.width, bbox.h/img.height)*pad;
   const dw=img.width*s, dh=img.height*s;
-  const cx=bbox.x+bbox.w/2, cy=anchorTop? bbox.y+dh/2 : bbox.y+bbox.h/2;
+  const cx=bbox.x+bbox.w/2;
+  const cy=anchorTop? bbox.y+dh/2 : anchorBottom? bbox.y+bbox.h-dh/2 : bbox.y+bbox.h/2;
   x.save(); x.translate(cx,cy); if(mirror) x.scale(-1,1);
   x.drawImage(img, -dw/2, -dh/2, dw, dh); x.restore();
   return x.getImageData(0,0,W,H);
@@ -103,33 +104,56 @@ async function init(){
   const bc=offscreen(W,H), bx=bc.getContext("2d"); bx.drawImage(blank,0,0,W,H);
   const bd=bx.getImageData(0,0,W,H).data; const n=W*H;
   zoneIdx=new Int8Array(n); ratio=new Float32Array(n*3); srcA=new Uint8ClampedArray(n);
+  const chromaD=new Float32Array(n);
   const Bs=BASES.map(b=>{const s=b[0]+b[1]+b[2]||1;return [b[0]/s,b[1]/s,b[2]/s];});
-  const zbb={}; // zone bbox
+  // 1) classify by chromaticity; track shirt extent + body extent
+  let minx=1e9,maxx=0,bsumx=0,bcnt=0,bminy=1e9,bmaxy=0;
   for(let i=0;i<n;i++){
     const r=bd[i*4],g=bd[i*4+1],b=bd[i*4+2],a=bd[i*4+3]; srcA[i]=a;
     if(a<8){zoneIdx[i]=-1;continue;}
+    const x=i%W,y=(i/W)|0; if(x<minx)minx=x; if(x>maxx)maxx=x;
     const s=(r+g+b)||1,cr=r/s,cg=g/s,cb=b/s; let best=0,bd2=1e9;
     for(let z=0;z<Bs.length;z++){const dr=cr-Bs[z][0],dg=cg-Bs[z][1],db=cb-Bs[z][2],d=dr*dr+dg*dg+db*db;if(d<bd2){bd2=d;best=z;}}
-    zoneIdx[i]=best; const base=BASES[best];
+    zoneIdx[i]=best; chromaD[i]=bd2;
+    if(best===0){bsumx+=x;bcnt++; if(y<bminy)bminy=y; if(y>bmaxy)bmaxy=y;}
+  }
+  // 2) reassign: collar = neck ring only; cuff stripes / side bleed -> sleeves (design covers) or body
+  const neckBottom=bminy+(bmaxy-bminy)*0.16;
+  const leftT=minx+(maxx-minx)*0.30, rightT=minx+(maxx-minx)*0.70;
+  for(let i=0;i<n;i++){
+    const z=zoneIdx[i]; if(z<0)continue;
+    const x=i%W,y=(i/W)|0;
+    const lowCuff = y > bminy+(bmaxy-bminy)*0.42;      // sleeves/cuffs live in the lower part
+    if(z===1 && lowCuff){ zoneIdx[i]= x<leftT?3:4; continue; } // low 'shoulder' = misclassified cuff stripe
+    if(z===2 && y<neckBottom) continue;               // genuine collar (neck ring) stays trim
+    if(z===2 || chromaD[i]>0.0022){                    // side piping + cuff stripes (poorly matched)
+      zoneIdx[i] = x<leftT?3 : x>rightT?4 : 0;          // outer -> sleeves, central -> body
+    }
+  }
+  // 3) shading ratio + zone bboxes from final zones
+  const zbb={};
+  for(let i=0;i<n;i++){
+    const z=zoneIdx[i]; if(z<0)continue;
+    const r=bd[i*4],g=bd[i*4+1],b=bd[i*4+2],base=BASES[z];
     ratio[i*3]=r/(base[0]||1); ratio[i*3+1]=g/(base[1]||1); ratio[i*3+2]=b/(base[2]||1);
-    const x=i%W,y=(i/W)|0,bb=zbb[best]||(zbb[best]={x0:1e9,y0:1e9,x1:0,y1:0});
+    const x=i%W,y=(i/W)|0,bb=zbb[z]||(zbb[z]={x0:1e9,y0:1e9,x1:0,y1:0});
     if(x<bb.x0)bb.x0=x; if(x>bb.x1)bb.x1=x; if(y<bb.y0)bb.y0=y; if(y>bb.y1)bb.y1=y;
   }
   const bbox=z=>({x:zbb[z].x0,y:zbb[z].y0,w:zbb[z].x1-zbb[z].x0+1,h:zbb[z].y1-zbb[z].y0+1});
-  // 2) build design composite: each design zone sampled from its mapped raster
+  // 4) design composite: body=front svg; shoulders=sleeve svg (cuff above frame); sleeves=sleeve svg (cuff at hem)
   designRGB=new Uint8ClampedArray(n*3); isDesign=new Uint8Array(n);
   const place={
     0: placeDesign(front,  bbox(0)),
-    1: placeDesign(sleeve, bbox(1), {anchorTop:true}),            // shoulders: anchor top so cuff falls below
-    3: placeDesign(sleeve, bbox(3)),                              // left sleeve
-    4: placeDesign(sleeve, bbox(4), {mirror:true}),               // right sleeve mirrored
+    1: placeDesign(sleeve, bbox(1), {anchorTop:true}),                 // shoulders: cuff band falls below frame
+    3: placeDesign(sleeve, bbox(3), {anchorBottom:true, pad:1.12}),    // left sleeve: cuff band at hem
+    4: placeDesign(sleeve, bbox(4), {mirror:true, anchorBottom:true, pad:1.12}), // right sleeve mirrored
   };
   for(let i=0;i<n;i++){
     const z=zoneIdx[i]; if(z<0) continue;
     if(DESIGN_ZONES[z]!==undefined){
       const pd=place[z].data; const a=pd[i*4+3];
       if(a>10){ designRGB[i*3]=pd[i*4]; designRGB[i*3+1]=pd[i*4+1]; designRGB[i*3+2]=pd[i*4+2]; isDesign[i]=1; }
-      else { isDesign[i]=2; } // design zone but raster doesn't cover -> fill with secondary
+      else { isDesign[i]=2; }
     }
   }
   // 3) logo slot rect in mockup space (map front 'logos' bbox through body fit)
@@ -159,7 +183,8 @@ function render(){
       const dist=Math.sqrt((dr-px)**2+(dg-py)**2+(db-pz)**2);
       if(dist<AXTOL){ r=P[0]+t*(S[0]-P[0]); g=P[1]+t*(S[1]-P[1]); b=P[2]+t*(S[2]-P[2]); }
       else { r=dr;g=dg;b=db; } // preserve maker mark / off-axis pixels
-    } else { r=S[0];g=S[1];b=S[2]; } // uncovered design zone -> secondary
+    } else if(isDesign[i]===2 && (z===3||z===4)){ r=T[0];g=T[1];b=T[2]; } // sleeve hem not covered -> trim (clean cuff)
+    else { r=S[0];g=S[1];b=S[2]; } // uncovered design zone -> secondary
     o[i*4]  =Math.min(255,r*ratio[i*3]);
     o[i*4+1]=Math.min(255,g*ratio[i*3+1]);
     o[i*4+2]=Math.min(255,b*ratio[i*3+2]);
