@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOMUTO — Live Kit Configurator (POC)</title>
+<style>
+  :root { --brand:#E2214B; --bg:#0e0f13; --panel:#1a1c22; --line:rgba(255,255,255,.12); --txt:#f2f3f5; --mut:#9aa0aa; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--txt); }
+  header { padding:16px 24px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px; }
+  header b { letter-spacing:.18em; font-weight:800; }
+  header span { color:var(--mut); font-size:13px; }
+  .wrap { display:flex; gap:24px; padding:24px; flex-wrap:wrap; }
+  .stage { flex:1 1 420px; min-width:320px; display:flex; align-items:center; justify-content:center;
+           background:radial-gradient(circle at 50% 35%, #23262e, #0e0f13 70%); border-radius:16px; padding:12px; position:relative; }
+  canvas#cv { max-width:100%; height:auto; }
+  .panel { flex:0 0 340px; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:18px; }
+  .panel h2 { margin:18px 0 4px; font-size:13px; text-transform:uppercase; letter-spacing:.1em; color:var(--mut); }
+  .panel h2:first-child { margin-top:0; }
+  .zone { display:flex; align-items:center; justify-content:space-between; padding:9px 0; border-top:1px solid var(--line); }
+  .zone label { font-size:14px; }
+  .zone input[type=color] { width:46px; height:32px; border:1px solid var(--line); border-radius:8px; background:none; cursor:pointer; padding:2px; }
+  .uploads label.up { display:flex; align-items:center; justify-content:space-between; padding:9px 0; border-top:1px solid var(--line); font-size:14px; cursor:pointer; }
+  .uploads .pill { font-size:12px; color:var(--brand); }
+  .presets { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 4px; }
+  .presets button { flex:1; min-width:78px; padding:9px; border:1px solid var(--line); background:#22252c; color:var(--txt); border-radius:8px; cursor:pointer; font-size:12px; }
+  .presets button:hover { border-color:var(--brand); }
+  .row { display:flex; gap:8px; margin-top:16px; }
+  .row button { flex:1; padding:11px; border-radius:8px; border:none; cursor:pointer; font-weight:600; font-size:13px; }
+  .reset { background:#22252c; color:var(--txt); border:1px solid var(--line)!important; }
+  .cta { background:var(--brand); color:#fff; }
+  .note { margin-top:16px; font-size:11px; color:var(--mut); line-height:1.5; }
+  #busy { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:var(--mut); font-size:14px; }
+</style>
+</head>
+<body>
+<header><b>MOMUTO</b><span>Live Kit Configurator — POC · The Fracture</span></header>
+<div class="wrap">
+  <div class="stage"><canvas id="cv" width="1500" height="1500"></canvas><div id="busy">Loading…</div></div>
+  <div class="panel">
+    <h2>Colours</h2>
+    <div class="zone"><label>Primary</label><input type="color" id="primary" value="#13294b"></div>
+    <div class="zone"><label>Secondary</label><input type="color" id="secondary" value="#f4f5f6"></div>
+    <div class="zone"><label>Trim (collar &amp; cuffs)</label><input type="color" id="trim" value="#b9123a"></div>
+    <h2>Your badges</h2>
+    <div class="uploads">
+      <label class="up">Team crest <span class="pill" id="crestName">Upload ▸</span><input type="file" id="crest" accept="image/*" hidden></label>
+      <label class="up">Sponsor <span class="pill" id="sponsorName">Upload ▸</span><input type="file" id="sponsor" accept="image/*" hidden></label>
+    </div>
+    <div class="presets" id="presets"></div>
+    <div class="row">
+      <button class="reset" id="reset">Reset</button>
+      <button class="cta" id="order">Add to cart ▸</button>
+    </div>
+    <p class="note">POC: body/sleeves/shoulders use your real SVG design, recoloured along a primary↔secondary
+    axis; collar = trim. Real fabric shading from the mockup. Cuff/collar-split and exact sleeve mapping sharpen
+    once a template is exported with one flat colour per part.</p>
+  </div>
+</div>
+<script>
+const A = "assets/";
+const cv = document.getElementById("cv"), ctx = cv.getContext("2d",{willReadFrequently:true});
+const W=1500, H=1500;
+// zone bases from the blank-shirt export: body, shoulder, collar, sleeveL, sleeveR
+const BASES=[[96,168,144],[72,168,240],[192,96,168],[96,144,48],[216,168,72]];
+const DESIGN_ZONES={0:"front",1:"sleeve",3:"sleeve",4:"sleeve"}; // body=front svg; shoulders+sleeves=sleeve svg
+const TRIM_ZONES=new Set([2]);                                   // collar/piping = trim
+// design recolor axis (original pink -> white)
+const ORIGP=[255,110,185], ORIGS=[255,240,250], AXTOL=70;
+
+let zoneIdx, ratio, srcA, designRGB, isDesign, slots={};
+let state={ primary:"#13294b", secondary:"#f4f5f6", trim:"#b9123a", crest:null, sponsor:null };
+
+const PRESETS={
+ "Classic":{primary:"#13294b",secondary:"#f4f5f6",trim:"#b9123a"},
+ "Blood":{primary:"#b11226",secondary:"#1a1a1a",trim:"#f4f5f6"},
+ "Emerald":{primary:"#0b6e4f",secondary:"#f4d03f",trim:"#111111"},
+ "Mono":{primary:"#222831",secondary:"#cfd3da",trim:"#e23b5a"},
+};
+const hx=h=>{h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
+const load=src=>new Promise(r=>{const i=new Image();i.crossOrigin="anonymous";i.onload=()=>r(i);i.src=src;});
+
+function offscreen(w,h){const c=document.createElement("canvas");c.width=w;c.height=h;return c;}
+
+// cover-fit drawImage of a raster into a zone bbox, optionally mirrored, return ImageData over full mockup
+function placeDesign(img, bbox, {mirror=false, anchorTop=false, anchorBottom=false, pad=1.02}={}){
+  const c=offscreen(W,H), x=c.getContext("2d");
+  const s=Math.max(bbox.w/img.width, bbox.h/img.height)*pad;
+  const dw=img.width*s, dh=img.height*s;
+  const cx=bbox.x+bbox.w/2;
+  const cy=anchorTop? bbox.y+dh/2 : anchorBottom? bbox.y+bbox.h-dh/2 : bbox.y+bbox.h/2;
+  x.save(); x.translate(cx,cy); if(mirror) x.scale(-1,1);
+  x.drawImage(img, -dw/2, -dh/2, dw, dh); x.restore();
+  return x.getImageData(0,0,W,H);
+}
+
+async function init(){
+  const [blank, front, sleeve, slotJson] = await Promise.all([
+    load(A+"blank-shirt-front.png"), load(A+"front-design.png"),
+    load(A+"sleeve-design.png"), fetch(A+"template-slots.json").then(r=>r.json())
+  ]);
+  // 1) zones + shading from blank shirt
+  const bc=offscreen(W,H), bx=bc.getContext("2d"); bx.drawImage(blank,0,0,W,H);
+  const bd=bx.getImageData(0,0,W,H).data; const n=W*H;
+  zoneIdx=new Int8Array(n); ratio=new Float32Array(n*3); srcA=new Uint8ClampedArray(n);
+  const chromaD=new Float32Array(n);
+  const Bs=BASES.map(b=>{const s=b[0]+b[1]+b[2]||1;return [b[0]/s,b[1]/s,b[2]/s];});
+  // 1) classify by chromaticity; track shirt extent + body extent
+  let minx=1e9,maxx=0,bsumx=0,bcnt=0,bminy=1e9,bmaxy=0;
+  for(let i=0;i<n;i++){
+    const r=bd[i*4],g=bd[i*4+1],b=bd[i*4+2],a=bd[i*4+3]; srcA[i]=a;
+    if(a<8){zoneIdx[i]=-1;continue;}
+    const x=i%W,y=(i/W)|0; if(x<minx)minx=x; if(x>maxx)maxx=x;
+    const s=(r+g+b)||1,cr=r/s,cg=g/s,cb=b/s; let best=0,bd2=1e9;
+    for(let z=0;z<Bs.length;z++){const dr=cr-Bs[z][0],dg=cg-Bs[z][1],db=cb-Bs[z][2],d=dr*dr+dg*dg+db*db;if(d<bd2){bd2=d;best=z;}}
+    zoneIdx[i]=best; chromaD[i]=bd2;
+    if(best===0){bsumx+=x;bcnt++; if(y<bminy)bminy=y; if(y>bmaxy)bmaxy=y;}
+  }
+  // 2) reassign: collar = neck ring only; cuff stripes / side bleed -> sleeves (design covers) or body
+  const neckBottom=bminy+(bmaxy-bminy)*0.16;
+  const leftT=minx+(maxx-minx)*0.30, rightT=minx+(maxx-minx)*0.70;
+  for(let i=0;i<n;i++){
+    const z=zoneIdx[i]; if(z<0)continue;
+    const x=i%W,y=(i/W)|0;
+    const lowCuff = y > bminy+(bmaxy-bminy)*0.42;      // sleeves/cuffs live in the lower part
+    if(z===1 && lowCuff){ zoneIdx[i]= x<leftT?3:4; continue; } // low 'shoulder' = misclassified cuff stripe
+    if(z===2 && y<neckBottom) continue;               // genuine collar (neck ring) stays trim
+    if(z===2 || chromaD[i]>0.0022){                    // side piping + cuff stripes (poorly matched)
+      zoneIdx[i] = x<leftT?3 : x>rightT?4 : 0;          // outer -> sleeves, central -> body
+    }
+  }
+  // 3) shading ratio + zone bboxes from final zones
+  const zbb={};
+  for(let i=0;i<n;i++){
+    const z=zoneIdx[i]; if(z<0)continue;
+    const r=bd[i*4],g=bd[i*4+1],b=bd[i*4+2],base=BASES[z];
+    ratio[i*3]=r/(base[0]||1); ratio[i*3+1]=g/(base[1]||1); ratio[i*3+2]=b/(base[2]||1);
+    const x=i%W,y=(i/W)|0,bb=zbb[z]||(zbb[z]={x0:1e9,y0:1e9,x1:0,y1:0});
+    if(x<bb.x0)bb.x0=x; if(x>bb.x1)bb.x1=x; if(y<bb.y0)bb.y0=y; if(y>bb.y1)bb.y1=y;
+  }
+  const bbox=z=>({x:zbb[z].x0,y:zbb[z].y0,w:zbb[z].x1-zbb[z].x0+1,h:zbb[z].y1-zbb[z].y0+1});
+  // 4) design composite: body=front svg; shoulders=sleeve svg (cuff above frame); sleeves=sleeve svg (cuff at hem)
+  designRGB=new Uint8ClampedArray(n*3); isDesign=new Uint8Array(n);
+  const place={
+    0: placeDesign(front,  bbox(0)),
+    1: placeDesign(sleeve, bbox(1), {anchorTop:true}),                 // shoulders: cuff band falls below frame
+    3: placeDesign(sleeve, bbox(3), {anchorBottom:true, pad:1.12}),    // left sleeve: cuff band at hem
+    4: placeDesign(sleeve, bbox(4), {mirror:true, anchorBottom:true, pad:1.12}), // right sleeve mirrored
+  };
+  for(let i=0;i<n;i++){
+    const z=zoneIdx[i]; if(z<0) continue;
+    if(DESIGN_ZONES[z]!==undefined){
+      const pd=place[z].data; const a=pd[i*4+3];
+      if(a>10){ designRGB[i*3]=pd[i*4]; designRGB[i*3+1]=pd[i*4+1]; designRGB[i*3+2]=pd[i*4+2]; isDesign[i]=1; }
+      else { isDesign[i]=2; }
+    }
+  }
+  // 3) logo slot rect in mockup space (map front 'logos' bbox through body fit)
+  const fb=bbox(0), DW=slotJson.front.root.w, DH=slotJson.front.root.h;
+  const s=Math.max(fb.w/DW, fb.h/DH)*1.02, cx=fb.x+fb.w/2, cy=fb.y+fb.h/2;
+  const map=(dx,dy)=>[cx+(dx-DW/2)*s, cy+(dy-DH/2)*s];
+  const mkSlot=r=>{const[ax,ay]=map(r.x,r.y),[bx,by]=map(r.x+r.w,r.y+r.h);return{x:ax,y:ay,w:bx-ax,h:by-ay};};
+  slots.sponsor=mkSlot(slotJson.front.slots.sponsor);
+  slots.crest  =mkSlot(slotJson.front.slots.crest);
+  document.getElementById("busy").style.display="none";
+  buildUI(); render();
+}
+
+function render(){
+  const out=ctx.createImageData(W,H), o=out.data, n=W*H;
+  const P=hx(state.primary), S=hx(state.secondary), T=hx(state.trim);
+  const PS=[ORIGS[0]-ORIGP[0],ORIGS[1]-ORIGP[1],ORIGS[2]-ORIGP[2]];
+  const L2=PS[0]*PS[0]+PS[1]*PS[1]+PS[2]*PS[2];
+  for(let i=0;i<n;i++){
+    const z=zoneIdx[i]; if(z<0){o[i*4+3]=0;continue;}
+    let r,g,b;
+    if(TRIM_ZONES.has(z)){ r=T[0];g=T[1];b=T[2]; }
+    else if(isDesign[i]===1){
+      const dr=designRGB[i*3],dg=designRGB[i*3+1],db=designRGB[i*3+2];
+      let t=((dr-ORIGP[0])*PS[0]+(dg-ORIGP[1])*PS[1]+(db-ORIGP[2])*PS[2])/L2; t=t<0?0:t>1?1:t;
+      const px=ORIGP[0]+t*PS[0],py=ORIGP[1]+t*PS[1],pz=ORIGP[2]+t*PS[2];
+      const dist=Math.sqrt((dr-px)**2+(dg-py)**2+(db-pz)**2);
+      if(dist<AXTOL){ r=P[0]+t*(S[0]-P[0]); g=P[1]+t*(S[1]-P[1]); b=P[2]+t*(S[2]-P[2]); }
+      else { r=dr;g=dg;b=db; } // preserve maker mark / off-axis pixels
+    } else if(isDesign[i]===2 && (z===3||z===4)){ r=T[0];g=T[1];b=T[2]; } // sleeve hem not covered -> trim (clean cuff)
+    else { r=S[0];g=S[1];b=S[2]; } // uncovered design zone -> secondary
+    o[i*4]  =Math.min(255,r*ratio[i*3]);
+    o[i*4+1]=Math.min(255,g*ratio[i*3+1]);
+    o[i*4+2]=Math.min(255,b*ratio[i*3+2]);
+    o[i*4+3]=srcA[i];
+  }
+  ctx.putImageData(out,0,0);
+  drawLogo(state.crest, slots.crest); drawLogo(state.sponsor, slots.sponsor);
+}
+
+function drawLogo(img, slot){
+  if(!img||!slot) return;
+  const s=Math.min(slot.w/img.width, slot.h/img.height);
+  const dw=img.width*s, dh=img.height*s;
+  ctx.drawImage(img, slot.x+(slot.w-dw)/2, slot.y+(slot.h-dh)/2, dw, dh);
+}
+
+function buildUI(){
+  ["primary","secondary","trim"].forEach(id=>{
+    const el=document.getElementById(id); el.value=state[id];
+    el.addEventListener("input",e=>{state[id]=e.target.value;render();});
+  });
+  const handleUp=(inputId,nameId,key)=>{
+    document.getElementById(inputId).addEventListener("change",e=>{
+      const f=e.target.files[0]; if(!f)return;
+      document.getElementById(nameId).textContent=f.name.slice(0,14);
+      const im=new Image(); im.onload=()=>{state[key]=im;render();}; im.src=URL.createObjectURL(f);
+    });
+  };
+  handleUp("crest","crestName","crest"); handleUp("sponsor","sponsorName","sponsor");
+  const pc=document.getElementById("presets");
+  Object.entries(PRESETS).forEach(([name,m])=>{const b=document.createElement("button");b.textContent=name;
+    b.onclick=()=>{Object.assign(state,m);["primary","secondary","trim"].forEach(id=>document.getElementById(id).value=state[id]);render();};pc.appendChild(b);});
+  document.getElementById("reset").onclick=()=>{Object.assign(state,{primary:"#13294b",secondary:"#f4f5f6",trim:"#b9123a"});
+    ["primary","secondary","trim"].forEach(id=>document.getElementById(id).value=state[id]);render();};
+  document.getElementById("order").onclick=()=>alert("Hands off to the existing order/checkout flow:\n\n"+
+    JSON.stringify({template:"the-fracture",primary:state.primary,secondary:state.secondary,trim:state.trim,
+      crest:!!state.crest,sponsor:!!state.sponsor},null,2));
+}
+init();
+</script>
+</body>
+</html>
