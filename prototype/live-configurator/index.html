@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOMUTO — Live Configurator (POC)</title>
+<style>
+  :root { --brand:#E2214B; --bg:#0e0f13; --panel:#1a1c22; --line:rgba(255,255,255,.12); --txt:#f2f3f5; --mut:#9aa0aa; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--txt); }
+  header { padding:16px 24px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px; }
+  header b { letter-spacing:.18em; font-weight:800; }
+  header span { color:var(--mut); font-size:13px; }
+  .wrap { display:flex; gap:24px; padding:24px; flex-wrap:wrap; }
+  .stage { flex:1 1 420px; min-width:320px; display:flex; align-items:center; justify-content:center;
+           background:radial-gradient(circle at 50% 35%, #23262e, #0e0f13 70%); border-radius:16px; padding:12px; }
+  canvas { max-width:100%; height:auto; image-rendering:auto; }
+  .panel { flex:0 0 320px; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:18px; }
+  .panel h2 { margin:0 0 4px; font-size:14px; text-transform:uppercase; letter-spacing:.1em; }
+  .panel p.hint { margin:0 0 16px; color:var(--mut); font-size:12px; }
+  .zone { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-top:1px solid var(--line); }
+  .zone:first-of-type { border-top:none; }
+  .zone label { font-size:14px; }
+  .zone .sub { color:var(--mut); font-size:11px; display:block; }
+  .zone input[type=color] { width:46px; height:32px; border:1px solid var(--line); border-radius:8px; background:none; cursor:pointer; padding:2px; }
+  .presets { display:flex; gap:8px; flex-wrap:wrap; margin:16px 0 4px; }
+  .presets button { flex:1; min-width:80px; padding:9px; border:1px solid var(--line); background:#22252c; color:var(--txt);
+                    border-radius:8px; cursor:pointer; font-size:12px; }
+  .presets button:hover { border-color:var(--brand); }
+  .row { display:flex; gap:8px; margin-top:14px; }
+  .row button { flex:1; padding:10px; border-radius:8px; border:none; cursor:pointer; font-weight:600; font-size:13px; }
+  .reset { background:#22252c; color:var(--txt); border:1px solid var(--line)!important; }
+  .cta { background:var(--brand); color:#fff; }
+  .note { margin-top:16px; font-size:11px; color:var(--mut); line-height:1.5; }
+</style>
+</head>
+<body>
+<header>
+  <b>MOMUTO</b><span>Live Configurator — proof of concept · The Fracture (front)</span>
+</header>
+<div class="wrap">
+  <div class="stage"><canvas id="cv" width="1500" height="1500"></canvas></div>
+  <div class="panel">
+    <h2>Customise</h2>
+    <p class="hint">Pick a colour per zone — the jersey recolours live, keeping real fabric shading.</p>
+    <div id="zones"></div>
+    <div class="presets" id="presets"></div>
+    <div class="row">
+      <button class="reset" id="reset">Reset</button>
+      <button class="cta" id="order">Request this design</button>
+    </div>
+    <p class="note">POC note: zones are auto-extracted from one Photoshop export. Sleeves/cuffs will be
+    driven by the SVG design in production; collar-top/bottom split once the template defines them as separate colours.</p>
+  </div>
+</div>
+
+<script>
+// ---- TEMPLATE DEFINITION (done once per template) -----------------------------
+// Each zone = a part identified by its flat colour in the exported zone-map PNG.
+// In production this is loaded from a per-template zones.json.
+const TEMPLATE = {
+  source: "assets/blank-shirt-front.png",
+  zones: [
+    { id:"body",     name:"Body",         base:[96,168,144], def:"#f4f5f6" },
+    { id:"shoulder", name:"Shoulders",    base:[72,168,240], def:"#13294b" },
+    { id:"collar",   name:"Collar & trim",base:[192,96,168], def:"#13294b" },
+    { id:"sleeveL",  name:"Left sleeve",  base:[96,144,48],  def:"#b11226", sub:"(SVG in production)" },
+    { id:"sleeveR",  name:"Right sleeve", base:[216,168,72], def:"#b11226", sub:"(SVG in production)" },
+  ],
+  presets: {
+    "Classic":  { body:"#f4f5f6", shoulder:"#13294b", collar:"#13294b", sleeveL:"#13294b", sleeveR:"#13294b" },
+    "Blood":    { body:"#b11226", shoulder:"#1a1a1a", collar:"#1a1a1a", sleeveL:"#1a1a1a", sleeveR:"#1a1a1a" },
+    "Emerald":  { body:"#0b6e4f", shoulder:"#f4f5f6", collar:"#f4f5f6", sleeveL:"#0b6e4f", sleeveR:"#0b6e4f" },
+    "Mono":     { body:"#222831", shoulder:"#393e46", collar:"#eeeeee", sleeveL:"#393e46", sleeveR:"#393e46" },
+  }
+};
+// --------------------------------------------------------------------------------
+
+const cv = document.getElementById("cv"), ctx = cv.getContext("2d", { willReadFrequently:true });
+let src, zoneIdx, ratio, baseImg, current = {};
+
+function hexToRgb(h){ h=h.replace("#",""); return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
+
+const img = new Image();
+img.crossOrigin = "anonymous";
+img.onload = () => {
+  cv.width = img.width; cv.height = img.height;
+  ctx.drawImage(img,0,0);
+  src = ctx.getImageData(0,0,cv.width,cv.height);
+  precompute();
+  buildUI();
+  TEMPLATE.zones.forEach(z => current[z.id]=z.def);
+  render();
+};
+img.src = TEMPLATE.source;
+
+// Classify every opaque pixel to nearest zone base (by chromaticity = brightness-invariant),
+// and store the per-channel shading ratio = pixel/base, which encodes folds/shadows/highlights.
+function precompute(){
+  const d = src.data, n = cv.width*cv.height;
+  zoneIdx = new Int8Array(n); ratio = new Float32Array(n*3);
+  const Z = TEMPLATE.zones.map(z=>{ const s=z.base[0]+z.base[1]+z.base[2]||1; return [z.base[0]/s,z.base[1]/s,z.base[2]/s]; });
+  for(let i=0;i<n;i++){
+    const r=d[i*4],g=d[i*4+1],b=d[i*4+2],a=d[i*4+3];
+    if(a<8){ zoneIdx[i]=-1; continue; }
+    const s=(r+g+b)||1, cr=r/s,cg=g/s,cb=b/s;
+    let best=0,bd=1e9;
+    for(let z=0;z<Z.length;z++){ const dr=cr-Z[z][0],dg=cg-Z[z][1],db=cb-Z[z][2],dd=dr*dr+dg*dg+db*db; if(dd<bd){bd=dd;best=z;} }
+    zoneIdx[i]=best;
+    const base=TEMPLATE.zones[best].base;
+    ratio[i*3]  = r/(base[0]||1);
+    ratio[i*3+1]= g/(base[1]||1);
+    ratio[i*3+2]= b/(base[2]||1);
+  }
+}
+
+function render(){
+  const out = ctx.createImageData(cv.width,cv.height), o=out.data, s=src.data, n=cv.width*cv.height;
+  const newCol = TEMPLATE.zones.map(z=>hexToRgb(current[z.id]));
+  for(let i=0;i<n;i++){
+    const z=zoneIdx[i];
+    if(z<0){ o[i*4+3]=0; continue; }
+    const c=newCol[z];
+    o[i*4]  = Math.min(255, c[0]*ratio[i*3]);
+    o[i*4+1]= Math.min(255, c[1]*ratio[i*3+1]);
+    o[i*4+2]= Math.min(255, c[2]*ratio[i*3+2]);
+    o[i*4+3]= s[i*4+3];
+  }
+  ctx.putImageData(out,0,0);
+}
+
+function buildUI(){
+  const zc=document.getElementById("zones");
+  TEMPLATE.zones.forEach(z=>{
+    const row=document.createElement("div"); row.className="zone";
+    row.innerHTML=`<label>${z.name}${z.sub?`<span class="sub">${z.sub}</span>`:""}</label>`;
+    const inp=document.createElement("input"); inp.type="color"; inp.value=z.def;
+    inp.addEventListener("input", e=>{ current[z.id]=e.target.value; render(); });
+    inp.dataset.zone=z.id; row.appendChild(inp); zc.appendChild(row);
+  });
+  const pc=document.getElementById("presets");
+  Object.entries(TEMPLATE.presets).forEach(([name,map])=>{
+    const b=document.createElement("button"); b.textContent=name;
+    b.onclick=()=>applyMap(map); pc.appendChild(b);
+  });
+  document.getElementById("reset").onclick=()=>{ const m={}; TEMPLATE.zones.forEach(z=>m[z.id]=z.def); applyMap(m); };
+  document.getElementById("order").onclick=()=>{
+    alert("In production this hands the chosen colours to the existing order form:\n\n"+JSON.stringify(current,null,2));
+  };
+}
+function applyMap(map){
+  TEMPLATE.zones.forEach(z=>{ if(map[z.id]){ current[z.id]=map[z.id];
+    const inp=document.querySelector(`input[data-zone="${z.id}"]`); if(inp) inp.value=map[z.id]; } });
+  render();
+}
+</script>
+</body>
+</html>
