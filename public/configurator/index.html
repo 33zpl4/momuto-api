@@ -102,9 +102,9 @@ const load=src=>new Promise(r=>{const i=new Image();i.crossOrigin="anonymous";i.
 function offscreen(w,h){const c=document.createElement("canvas");c.width=w;c.height=h;return c;}
 
 // cover-fit drawImage of a raster into a zone bbox, optionally mirrored, return ImageData over full mockup
-function placeDesign(img, bbox, {mirror=false, anchorTop=false, anchorBottom=false, pad=1.02}={}){
+function placeDesign(img, bbox, {mirror=false, anchorTop=false, anchorBottom=false, pad=1.02, contain=false}={}){
   const c=offscreen(W,H), x=c.getContext("2d");
-  const s=Math.max(bbox.w/img.width, bbox.h/img.height)*pad;
+  const s=(contain?Math.min:Math.max)(bbox.w/img.width, bbox.h/img.height)*pad;
   const dw=img.width*s, dh=img.height*s;
   const cx=bbox.x+bbox.w/2;
   const cy=anchorTop? bbox.y+dh/2 : anchorBottom? bbox.y+bbox.h-dh/2 : bbox.y+bbox.h/2;
@@ -116,7 +116,7 @@ function placeDesign(img, bbox, {mirror=false, anchorTop=false, anchorBottom=fal
 async function init(){
   const [blank, front, sleeve, logo, slotJson] = await Promise.all([
     load(A+"blank-shirt-front.png"), load(A+"front-design.png"),
-    load(A+"sleeve-design.png"), load(A+"logo-overlay.png"),
+    load(A+"sleeve-design.png"), load(A+"logo-momuto.png"),
     fetch(A+"template-slots.json").then(r=>r.json())
   ]);
   // 1) zones + shading from blank shirt
@@ -163,8 +163,12 @@ async function init(){
   for(let i=0;i<n;i++){
     const z=zoneIdx[i]; if(z<0)continue;
     const r=bd[i*4],g=bd[i*4+1],b=bd[i*4+2],base=BASES[z];
-    if(neutral[i]){ let k=(0.299*r+0.587*g+0.114*b)/175; k=k<0.5?0.5:k>1.08?1.08:k; ratio[i*3]=ratio[i*3+1]=ratio[i*3+2]=k; }
-    else { ratio[i*3]=r/(base[0]||1); ratio[i*3+1]=g/(base[1]||1); ratio[i*3+2]=b/(base[2]||1); }
+    // neutral (luminance) shading for every zone: keeps the mockup's fabric shadows but
+    // never injects the flat zone-colour's hue (which caused green/yellow leakage on misclassified pixels)
+    const lum=0.299*r+0.587*g+0.114*b;
+    let k = neutral[i] ? lum/175 : lum/((0.299*base[0]+0.587*base[1]+0.114*base[2])||1);
+    k = k<0.45?0.45 : k>1.15?1.15 : k;
+    ratio[i*3]=ratio[i*3+1]=ratio[i*3+2]=k;
     const x=i%W,y=(i/W)|0,bb=zbb[z]||(zbb[z]={x0:1e9,y0:1e9,x1:0,y1:0});
     if(x<bb.x0)bb.x0=x; if(x>bb.x1)bb.x1=x; if(y<bb.y0)bb.y0=y; if(y>bb.y1)bb.y1=y;
   }
@@ -185,10 +189,6 @@ async function init(){
       else { isDesign[i]=2; }
     }
   }
-  // always-on maker mark (momuto + swoosh): same body-fit transform as the front design
-  const lp = placeDesign(logo, bbox(0));
-  logoA = new Uint8Array(n);
-  for(let i=0;i<n;i++) logoA[i]=lp.data[i*4+3];
   // 3) logo slot rect in mockup space (map front 'logos' bbox through body fit)
   const fb=bbox(0), DW=slotJson.front.root.w, DH=slotJson.front.root.h;
   const s=Math.max(fb.w/DW, fb.h/DH)*1.02, cx=fb.x+fb.w/2, cy=fb.y+fb.h/2;
@@ -196,6 +196,10 @@ async function init(){
   const mkSlot=r=>{const[ax,ay]=map(r.x,r.y),[bx,by]=map(r.x+r.w,r.y+r.h);return{x:ax,y:ay,w:bx-ax,h:by-ay};};
   slots.sponsor=mkSlot(slotJson.front.slots.sponsor);
   slots.crest  =mkSlot(slotJson.front.slots.crest);
+  // always-on maker mark (momuto + swoosh): contain-fit into its slot (aligned with the crest)
+  const lp = placeDesign(logo, mkSlot(slotJson.front.slots["logo-momuto"]), {contain:true, pad:0.92});
+  logoA = new Uint8Array(n);
+  for(let i=0;i<n;i++) logoA[i]=lp.data[i*4+3];
   document.getElementById("busy").style.display="none";
   buildUI(); render();
 }
