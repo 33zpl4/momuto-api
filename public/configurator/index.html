@@ -117,25 +117,31 @@ async function init(){
     zoneIdx[i]=best; chromaD[i]=bd2;
     if(best===0){bsumx+=x;bcnt++; if(y<bminy)bminy=y; if(y>bmaxy)bmaxy=y;}
   }
-  // 2) reassign: collar = neck ring only; cuff stripes / side bleed -> sleeves (design covers) or body
+  // 2) reassign: cuff bands (pure cyan/red) -> nearest sleeve (painted by sleeve SVG's black band);
+  //    collar = neck ring only; magenta side piping below neck -> sleeve/body
   const neckBottom=bminy+(bmaxy-bminy)*0.16;
+  const cxc=bcnt? bsumx/bcnt : (minx+maxx)/2;
   const leftT=minx+(maxx-minx)*0.30, rightT=minx+(maxx-minx)*0.70;
+  const neutral=new Uint8Array(n);   // pixels reassigned across hues -> shade neutrally (avoid chroma distortion)
   for(let i=0;i<n;i++){
     const z=zoneIdx[i]; if(z<0)continue;
     const x=i%W,y=(i/W)|0;
-    const lowCuff = y > bminy+(bmaxy-bminy)*0.42;      // sleeves/cuffs live in the lower part
-    if(z===1 && lowCuff){ zoneIdx[i]= x<leftT?3:4; continue; } // low 'shoulder' = misclassified cuff stripe
-    if(z===2 && y<neckBottom) continue;               // genuine collar (neck ring) stays trim
-    if(z===2 || chromaD[i]>0.0022){                    // side piping + cuff stripes (poorly matched)
-      zoneIdx[i] = x<leftT?3 : x>rightT?4 : 0;          // outer -> sleeves, central -> body
-    }
+    const r=bd[i*4],g=bd[i*4+1],b=bd[i*4+2];
+    const mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn,sat=mx?d/mx:0;
+    let hue=0; if(d){ hue = mx===r? 60*(((g-b)/d)%6) : mx===g? 60*((b-r)/d+2) : 60*((r-g)/d+4); if(hue<0)hue+=360; }
+    const isCuff = sat>0.55 && (hue<=14 || hue>=346 || (hue>=160 && hue<=195)); // pure cyan/red cuff bands
+    if(isCuff){ zoneIdx[i] = x<cxc?3:4; neutral[i]=1; continue; }      // cuff -> nearest sleeve; sleeve art covers it
+    if(z===1 && y > bminy+(bmaxy-bminy)*0.45){ zoneIdx[i]= x<cxc?3:4; neutral[i]=1; continue; } // stray low 'shoulder'
+    if(z===2 && y<neckBottom) continue;                  // collar neck ring stays trim
+    if(z===2){ zoneIdx[i] = x<leftT?3 : x>rightT?4 : 0; neutral[i]=1; } // side piping below neck -> sleeve/body
   }
   // 3) shading ratio + zone bboxes from final zones
   const zbb={};
   for(let i=0;i<n;i++){
     const z=zoneIdx[i]; if(z<0)continue;
     const r=bd[i*4],g=bd[i*4+1],b=bd[i*4+2],base=BASES[z];
-    ratio[i*3]=r/(base[0]||1); ratio[i*3+1]=g/(base[1]||1); ratio[i*3+2]=b/(base[2]||1);
+    if(neutral[i]){ let k=(0.299*r+0.587*g+0.114*b)/175; k=k<0.5?0.5:k>1.08?1.08:k; ratio[i*3]=ratio[i*3+1]=ratio[i*3+2]=k; }
+    else { ratio[i*3]=r/(base[0]||1); ratio[i*3+1]=g/(base[1]||1); ratio[i*3+2]=b/(base[2]||1); }
     const x=i%W,y=(i/W)|0,bb=zbb[z]||(zbb[z]={x0:1e9,y0:1e9,x1:0,y1:0});
     if(x<bb.x0)bb.x0=x; if(x>bb.x1)bb.x1=x; if(y<bb.y0)bb.y0=y; if(y>bb.y1)bb.y1=y;
   }
