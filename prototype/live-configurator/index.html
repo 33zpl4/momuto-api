@@ -152,17 +152,11 @@ async function init(){
     const inNeck = y < collarBot && Math.abs(x-cxc) < (maxx-minx)*0.16;
     // inner collar lining -> white: ONLY neutral grey INSIDE the neck opening (not the blue shoulders around it)
     if(inNeck && sat<0.22 && mx>70){ zoneIdx[i]=5; neutral[i]=1; continue; }
-    // cuff bands (pure cyan/red), only in the sleeves below the neck -> dedicated cuff zone (flat trim)
-    if(y>collarBot && sat>0.55 && (hue<=14 || hue>=346 || (hue>=160 && hue<=195))){ zoneIdx[i]=6; neutral[i]=1; continue; }
+    // cuff-coloured pixels (cyan/red) belong to the sleeve; the cuff band itself is built geometrically below
+    if(y>collarBot && sat>0.55 && (hue<=14 || hue>=346 || (hue>=160 && hue<=195))){ zoneIdx[i]= x<cxc?3:4; neutral[i]=1; continue; }
     if(z===1 && y > bminy+(bmaxy-bminy)*0.45){ zoneIdx[i]= x<cxc?3:4; neutral[i]=1; continue; } // stray low 'shoulder'
     if(z===2 && y<neckBottom) continue;                  // collar neck ring stays trim
     if(z===2){ zoneIdx[i] = x<leftT?3 : x>rightT?4 : 0; neutral[i]=1; } // side piping below neck -> sleeve/body
-  }
-  // extend the cuff down to the exact hem edge: any sleeve pixel directly below a cuff pixel becomes cuff
-  // (top-down pass cascades to the hem, killing the thin pattern sliver under the cuff band)
-  for(let y=1;y<H;y++) for(let x=0;x<W;x++){
-    const i=y*W+x, z=zoneIdx[i];
-    if((z===3||z===4) && zoneIdx[i-W]===6){ zoneIdx[i]=6; neutral[i]=1; }
   }
   // 3) shading ratio + zone bboxes from final zones
   const zbb={};
@@ -180,6 +174,14 @@ async function init(){
     ratio[i*3]=ratio[i*3+1]=ratio[i*3+2]=k;
     const x=i%W,y=(i/W)|0,bb=zbb[z]||(zbb[z]={x0:1e9,y0:1e9,x1:0,y1:0});
     if(x<bb.x0)bb.x0=x; if(x>bb.x1)bb.x1=x; if(y<bb.y0)bb.y0=y; if(y>bb.y1)bb.y1=y;
+  }
+  // cuff = uniform trim band along the bottom edge of each sleeve (geometric -> follows the angled hem, no colour streaks)
+  { const colBot=new Int32Array(W).fill(-1);
+    for(let i=0;i<n;i++){ const z=zoneIdx[i]; if(z===3||z===4){ const x=i%W,y=(i/W)|0; if(y>colBot[x])colBot[x]=y; } }
+    const sh=Math.max(zbb[3]?zbb[3].y1-zbb[3].y0:0, zbb[4]?zbb[4].y1-zbb[4].y0:0);
+    const T=Math.min(48, Math.max(20, Math.round(sh*0.085)));
+    for(let i=0;i<n;i++){ const z=zoneIdx[i]; if(z===3||z===4){ const x=i%W,y=(i/W)|0;
+      if(colBot[x]>=0 && y>=colBot[x]-T){ zoneIdx[i]=6; ratio[i*3]=ratio[i*3+1]=ratio[i*3+2]=0.96; } } }
   }
   const bbox=z=>({x:zbb[z].x0,y:zbb[z].y0,w:zbb[z].x1-zbb[z].x0+1,h:zbb[z].y1-zbb[z].y0+1});
   // 4) design composite: body=front svg; shoulders=sleeve svg (cuff above frame); sleeves=sleeve svg (cuff at hem)
