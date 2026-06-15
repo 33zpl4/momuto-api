@@ -31,6 +31,8 @@
   .reset { background:#22252c; color:var(--txt); border:1px solid var(--line)!important; }
   .cta { background:var(--brand); color:#fff; }
   .note { margin-top:16px; font-size:11px; color:var(--mut); line-height:1.5; }
+  .svc { margin:11px 0 2px; font-size:11px; color:var(--mut); line-height:1.55; }
+  .svc b { color:var(--txt); font-weight:600; }
   #busy { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:var(--mut); font-size:14px; }
   .sw { width:34px; height:34px; border:2px solid rgba(255,255,255,.25); border-radius:50%; cursor:pointer; padding:0; }
   .sw-modal { position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; z-index:50; }
@@ -58,6 +60,7 @@
       <label class="up">Team crest <span class="pill" id="crestName">Upload ▸</span><input type="file" id="crest" accept="image/*" hidden></label>
       <label class="up">Sponsor <span class="pill" id="sponsorName">Upload ▸</span><input type="file" id="sponsor" accept="image/*" hidden></label>
     </div>
+    <p class="svc">JPG or PNG both work — plain backgrounds are auto-trimmed here in the preview. Every crest &amp; sponsor is then <b>vectorised &amp; cleaned by our design team</b>, placement refined, and you receive a <b>free proof to approve before printing</b>.</p>
     <div class="presets" id="presets"></div>
     <div class="row">
       <button class="reset" id="reset">Reset</button>
@@ -109,6 +112,28 @@ const hx=h=>{h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.sl
 const load=src=>new Promise(r=>{const i=new Image();i.crossOrigin="anonymous";i.onload=()=>r(i);i.src=src;});
 
 function offscreen(w,h){const c=document.createElement("canvas");c.width=w;c.height=h;return c;}
+
+// best-effort background knockout for uploaded logos: flood-fill from the edges, only when the
+// background is plainly uniform (white/solid). Interior colours are preserved (not edge-connected).
+function knockoutBg(img){
+  const w=img.width,h=img.height,c=offscreen(w,h),x=c.getContext("2d",{willReadFrequently:true});
+  x.drawImage(img,0,0);
+  const id=x.getImageData(0,0,w,h),d=id.data;
+  const corner=(px,py)=>{const i=(py*w+px)*4;return [d[i],d[i+1],d[i+2]];};
+  const cs=[corner(0,0),corner(w-1,0),corner(0,h-1),corner(w-1,h-1)];
+  const avg=[0,1,2].map(k=>Math.round(cs.reduce((s,v)=>s+v[k],0)/4));
+  const uniform=cs.every(v=>Math.abs(v[0]-avg[0])+Math.abs(v[1]-avg[1])+Math.abs(v[2]-avg[2])<48);
+  if(!uniform) return img;                       // not a plain background -> leave it for the design team
+  const seen=new Uint8Array(w*h),st=[];
+  const push=(px,py)=>{ if(px<0||py<0||px>=w||py>=h)return; const k=py*w+px; if(!seen[k]){seen[k]=1;st.push(k);} };
+  for(let px=0;px<w;px++){push(px,0);push(px,h-1);} for(let py=0;py<h;py++){push(0,py);push(w-1,py);}
+  const tol=100;
+  while(st.length){ const k=st.pop(),i=k*4;
+    if(Math.abs(d[i]-avg[0])+Math.abs(d[i+1]-avg[1])+Math.abs(d[i+2]-avg[2])>=tol) continue;
+    d[i+3]=0; const px=k%w,py=(k/w)|0; push(px+1,py);push(px-1,py);push(px,py+1);push(px,py-1);
+  }
+  x.putImageData(id,0,0); return c;
+}
 
 // cover-fit drawImage of a raster into a zone bbox, optionally mirrored, return ImageData over full mockup
 function placeDesign(img, bbox, {mirror=false, anchorTop=false, anchorBottom=false, pad=1.02, contain=false}={}){
@@ -271,7 +296,7 @@ function buildUI(){
     document.getElementById(inputId).addEventListener("change",e=>{
       const f=e.target.files[0]; if(!f)return;
       document.getElementById(nameId).textContent=f.name.slice(0,14);
-      const im=new Image(); im.onload=()=>{state[key]=im;render();}; im.src=URL.createObjectURL(f);
+      const im=new Image(); im.onload=()=>{state[key]=knockoutBg(im);render();}; im.src=URL.createObjectURL(f);
     });
   };
   handleUp("crest","crestName","crest"); handleUp("sponsor","sponsorName","sponsor");
@@ -280,7 +305,10 @@ function buildUI(){
     b.onclick=()=>{Object.assign(state,m);repaintAll();render();};pc.appendChild(b);});
   document.getElementById("reset").onclick=()=>{Object.assign(state,{primary:"#13294b",secondary:"#f4f5f6",trim:"#b9123a"});
     repaintAll();render();};
-  document.getElementById("order").onclick=()=>alert("Hands off to the existing order/checkout flow:\n\n"+
+  document.getElementById("order").onclick=()=>alert("Added to cart (POC).\n\n"+
+    "Next: our design team reviews your kit — your crest & sponsor are vectorised and cleaned, "+
+    "placement is refined, and you'll get a free proof to approve before production.\n\n"+
+    "Payload handed to checkout:\n"+
     JSON.stringify({template:"the-fracture",primary:state.primary,secondary:state.secondary,trim:state.trim,
       crest:!!state.crest,sponsor:!!state.sponsor},null,2));
 }
