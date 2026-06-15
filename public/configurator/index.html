@@ -32,6 +32,16 @@
   .cta { background:var(--brand); color:#fff; }
   .note { margin-top:16px; font-size:11px; color:var(--mut); line-height:1.5; }
   #busy { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:var(--mut); font-size:14px; }
+  .sw { width:34px; height:34px; border:2px solid rgba(255,255,255,.25); border-radius:50%; cursor:pointer; padding:0; }
+  .sw-modal { position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; z-index:50; }
+  .sw-modal.open { display:flex; }
+  .sw-card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; width:300px; }
+  .sw-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--mut); }
+  .sw-head button { background:none; border:none; color:var(--mut); font-size:16px; cursor:pointer; }
+  .sw-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; }
+  .sw-grid div { aspect-ratio:1; border-radius:8px; cursor:pointer; border:1px solid rgba(255,255,255,.14); transition:transform .08s; }
+  .sw-grid div:hover { transform:scale(1.1); }
+  .sw-grid div.sel { outline:2px solid #fff; outline-offset:1px; }
 </style>
 </head>
 <body>
@@ -40,9 +50,9 @@
   <div class="stage"><canvas id="cv" width="1500" height="1500"></canvas><div id="busy">Loading…</div></div>
   <div class="panel">
     <h2>Colours</h2>
-    <div class="zone"><label>Primary</label><input type="color" id="primary" value="#13294b"></div>
-    <div class="zone"><label>Secondary</label><input type="color" id="secondary" value="#f4f5f6"></div>
-    <div class="zone"><label>Trim (collar &amp; cuffs)</label><input type="color" id="trim" value="#b9123a"></div>
+    <div class="zone"><label>Primary</label><button class="sw" id="primarySw" data-k="primary"></button></div>
+    <div class="zone"><label>Secondary</label><button class="sw" id="secondarySw" data-k="secondary"></button></div>
+    <div class="zone"><label>Trim (collar &amp; cuffs)</label><button class="sw" id="trimSw" data-k="trim"></button></div>
     <h2>Your badges</h2>
     <div class="uploads">
       <label class="up">Team crest <span class="pill" id="crestName">Upload ▸</span><input type="file" id="crest" accept="image/*" hidden></label>
@@ -58,6 +68,10 @@
     once a template is exported with one flat colour per part.</p>
   </div>
 </div>
+<div class="sw-modal" id="swModal"><div class="sw-card">
+  <div class="sw-head"><span id="swTitle">Pick a colour</span><button id="swClose">✕</button></div>
+  <div class="sw-grid" id="swGrid"></div>
+</div></div>
 <script>
 const A = "assets/";
 const cv = document.getElementById("cv"), ctx = cv.getContext("2d",{willReadFrequently:true});
@@ -78,6 +92,8 @@ const PRESETS={
  "Emerald":{primary:"#0b6e4f",secondary:"#f4d03f",trim:"#111111"},
  "Mono":{primary:"#222831",secondary:"#cfd3da",trim:"#e23b5a"},
 };
+// curated palette (from the request-design page)
+const PALETTE=['#FF0000','#00FF00','#0000FF','#FFFF00','#FF00FF','#00FFFF','#800000','#008000','#000080','#808000','#800080','#008080','#FFA500','#FFC0CB','#A52A2A','#808080','#000000','#FFFFFF','#E2214B','#0055FF','#FF29CC','#32CD32','#FF6347','#4169E1'];
 const hx=h=>{h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
 const load=src=>new Promise(r=>{const i=new Image();i.crossOrigin="anonymous";i.onload=()=>r(i);i.src=src;});
 
@@ -130,7 +146,7 @@ async function init(){
     const mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn,sat=mx?d/mx:0;
     let hue=0; if(d){ hue = mx===r? 60*(((g-b)/d)%6) : mx===g? 60*((b-r)/d+2) : 60*((r-g)/d+4); if(hue<0)hue+=360; }
     const isCuff = sat>0.55 && (hue<=14 || hue>=346 || (hue>=160 && hue<=195)); // pure cyan/red cuff bands
-    if(isCuff){ zoneIdx[i] = x<cxc?3:4; neutral[i]=1; continue; }      // cuff -> nearest sleeve; sleeve art covers it
+    if(isCuff){ zoneIdx[i] = 2; neutral[i]=1; continue; }            // cuff band -> trim colour (matches collar), follows real hem shape
     if(z===1 && y > bminy+(bmaxy-bminy)*0.45){ zoneIdx[i]= x<cxc?3:4; neutral[i]=1; continue; } // stray low 'shoulder'
     if(z===2 && y<neckBottom) continue;                  // collar neck ring stays trim
     if(z===2){ zoneIdx[i] = x<leftT?3 : x>rightT?4 : 0; neutral[i]=1; } // side piping below neck -> sleeve/body
@@ -208,10 +224,21 @@ function drawLogo(img, slot){
 }
 
 function buildUI(){
-  ["primary","secondary","trim"].forEach(id=>{
-    const el=document.getElementById(id); el.value=state[id];
-    el.addEventListener("input",e=>{state[id]=e.target.value;render();});
-  });
+  const swModal=document.getElementById("swModal"), swGrid=document.getElementById("swGrid"), swTitle=document.getElementById("swTitle");
+  const paintSw=k=>{ document.getElementById(k+"Sw").style.background=state[k]; };
+  const openSw=(k,label)=>{
+    swTitle.textContent=label; swGrid.innerHTML="";
+    PALETTE.forEach(c=>{ const d=document.createElement("div"); d.style.background=c;
+      if(c.toLowerCase()===String(state[k]).toLowerCase()) d.classList.add("sel");
+      d.onclick=()=>{ state[k]=c; paintSw(k); render(); swModal.classList.remove("open"); };
+      swGrid.appendChild(d); });
+    swModal.classList.add("open");
+  };
+  document.querySelectorAll(".sw").forEach(b=>{ const k=b.dataset.k; paintSw(k);
+    b.onclick=()=>openSw(k, b.previousElementSibling.textContent); });
+  document.getElementById("swClose").onclick=()=>swModal.classList.remove("open");
+  swModal.onclick=e=>{ if(e.target===swModal) swModal.classList.remove("open"); };
+  const repaintAll=()=>["primary","secondary","trim"].forEach(paintSw);
   const handleUp=(inputId,nameId,key)=>{
     document.getElementById(inputId).addEventListener("change",e=>{
       const f=e.target.files[0]; if(!f)return;
@@ -222,9 +249,9 @@ function buildUI(){
   handleUp("crest","crestName","crest"); handleUp("sponsor","sponsorName","sponsor");
   const pc=document.getElementById("presets");
   Object.entries(PRESETS).forEach(([name,m])=>{const b=document.createElement("button");b.textContent=name;
-    b.onclick=()=>{Object.assign(state,m);["primary","secondary","trim"].forEach(id=>document.getElementById(id).value=state[id]);render();};pc.appendChild(b);});
+    b.onclick=()=>{Object.assign(state,m);repaintAll();render();};pc.appendChild(b);});
   document.getElementById("reset").onclick=()=>{Object.assign(state,{primary:"#13294b",secondary:"#f4f5f6",trim:"#b9123a"});
-    ["primary","secondary","trim"].forEach(id=>document.getElementById(id).value=state[id]);render();};
+    repaintAll();render();};
   document.getElementById("order").onclick=()=>alert("Hands off to the existing order/checkout flow:\n\n"+
     JSON.stringify({template:"the-fracture",primary:state.primary,secondary:state.secondary,trim:state.trim,
       crest:!!state.crest,sponsor:!!state.sponsor},null,2));
