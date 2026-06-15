@@ -170,6 +170,7 @@ async function init(){
     const lum=0.299*r+0.587*g+0.114*b;
     let k;
     if(z===6){ k=0.96; }                                   // cuff: single flat trim shade (no two-tone)
+    else if(z===5){ k=lum/215; }                           // inner collar: keep its real shaded gradient (not blown-out white)
     else if(neutral[i]){ k=lum/175; }
     else { k=lum/((0.299*base[0]+0.587*base[1]+0.114*base[2])||1); }
     k = k<0.45?0.45 : k>1.15?1.15 : k;
