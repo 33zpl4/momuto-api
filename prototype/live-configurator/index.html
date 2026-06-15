@@ -96,8 +96,15 @@ const PRESETS={
  "Emerald":{primary:"#0b6e4f",secondary:"#f4d03f",trim:"#111111"},
  "Mono":{primary:"#222831",secondary:"#cfd3da",trim:"#e23b5a"},
 };
-// curated palette (from the request-design page)
-const PALETTE=['#FF0000','#00FF00','#0000FF','#FFFF00','#FF00FF','#00FFFF','#800000','#008000','#000080','#808000','#800080','#008080','#FFA500','#FFC0CB','#A52A2A','#808080','#000000','#FFFFFF','#E2214B','#0055FF','#FF29CC','#32CD32','#FF6347','#4169E1'];
+// curated teamwear-grade palette (refined tones grouped by family), [hex, name]
+const PALETTE=[
+ ['#FFFFFF','White'],['#D9DCE1','Silver'],['#9AA0A6','Grey'],['#5A6068','Slate'],['#2E3238','Charcoal'],['#121212','Black'],
+ ['#E63027','Red'],['#C8102E','Team Red'],['#A11731','Crimson'],['#6E1F2E','Maroon'],['#FF6F61','Coral'],['#F25C9A','Pink'],
+ ['#F2622A','Orange'],['#FB8C00','Amber'],['#F4A800','Gold'],['#FFCC00','Yellow'],['#CDE000','Volt'],['#7AC143','Lime'],
+ ['#2FA84F','Green'],['#009A4E','Kelly Green'],['#0B7A4B','Emerald'],['#14543A','Pine'],['#009CA6','Teal'],['#34B5C0','Aqua'],
+ ['#7FD0F0','Sky'],['#3FA9F5','Light Blue'],['#1E63E9','Royal'],['#0B4FC4','Blue'],['#1B3A6B','Cobalt'],['#16223F','Navy'],
+ ['#6A2DA8','Purple'],['#8E44AD','Violet'],['#B5179E','Magenta'],['#5E2750','Plum'],['#6B4226','Brown'],['#F3EAD3','Cream'],
+];
 const hx=h=>{h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
 const load=src=>new Promise(r=>{const i=new Image();i.crossOrigin="anonymous";i.onload=()=>r(i);i.src=src;});
 
@@ -249,9 +256,9 @@ function buildUI(){
   const paintSw=k=>{ document.getElementById(k+"Sw").style.background=state[k]; };
   const openSw=(k,label)=>{
     swTitle.textContent=label; swGrid.innerHTML="";
-    PALETTE.forEach(c=>{ const d=document.createElement("div"); d.style.background=c;
-      if(c.toLowerCase()===String(state[k]).toLowerCase()) d.classList.add("sel");
-      d.onclick=()=>{ state[k]=c; paintSw(k); render(); swModal.classList.remove("open"); };
+    PALETTE.forEach(([hex,name])=>{ const d=document.createElement("div"); d.style.background=hex; d.title=name;
+      if(hex.toLowerCase()===String(state[k]).toLowerCase()) d.classList.add("sel");
+      d.onclick=()=>{ state[k]=hex; paintSw(k); render(); swModal.classList.remove("open"); };
       swGrid.appendChild(d); });
     swModal.classList.add("open");
   };
