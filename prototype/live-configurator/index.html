@@ -82,8 +82,10 @@ const DESIGN_ZONES={0:"front",1:"sleeve",3:"sleeve",4:"sleeve"}; // body=front s
 const TRIM_ZONES=new Set([2,6]);                                 // collar ring (2) + cuffs (6) = trim
 const WHITE_ZONES=new Set([5]);                                  // inner collar + inside strip = always white
 const WHITE=[245,245,245];
-// design recolor axis (original pink -> white)
-const ORIGP=[255,110,185], ORIGS=[255,240,250], AXTOL=70;
+// the 4 flat tones in the source pattern (dark -> light) and where each maps on the primary->secondary scale
+const SRC4=[[255,125,189],[255,152,202],[252,208,243],[254,234,252]]; // #ff7dbd #ff98ca #fcd0f3 #feeafc
+const TONE_T=[0.0, 0.34, 0.66, 1.0];                                   // primary, primary-shade, secondary-shade, secondary
+const OFFTOL=8500;                                                     // RGB dist^2 beyond which a pixel is off-palette (preserve, e.g. black)
 
 let zoneIdx, ratio, srcA, designRGB, isDesign, slots={}, logoA;
 let state={ primary:"#13294b", secondary:"#f4f5f6", trim:"#b9123a", crest:null, sponsor:null };
@@ -210,8 +212,6 @@ async function init(){
 function render(){
   const out=ctx.createImageData(W,H), o=out.data, n=W*H;
   const P=hx(state.primary), S=hx(state.secondary), T=hx(state.trim);
-  const PS=[ORIGS[0]-ORIGP[0],ORIGS[1]-ORIGP[1],ORIGS[2]-ORIGP[2]];
-  const L2=PS[0]*PS[0]+PS[1]*PS[1]+PS[2]*PS[2];
   for(let i=0;i<n;i++){
     const z=zoneIdx[i]; if(z<0){o[i*4+3]=0;continue;}
     let r,g,b;
@@ -219,11 +219,11 @@ function render(){
     else if(TRIM_ZONES.has(z)){ r=T[0];g=T[1];b=T[2]; }
     else if(isDesign[i]===1){
       const dr=designRGB[i*3],dg=designRGB[i*3+1],db=designRGB[i*3+2];
-      let t=((dr-ORIGP[0])*PS[0]+(dg-ORIGP[1])*PS[1]+(db-ORIGP[2])*PS[2])/L2; t=t<0?0:t>1?1:t;
-      const px=ORIGP[0]+t*PS[0],py=ORIGP[1]+t*PS[1],pz=ORIGP[2]+t*PS[2];
-      const dist=Math.sqrt((dr-px)**2+(dg-py)**2+(db-pz)**2);
-      if(dist<AXTOL){ r=P[0]+t*(S[0]-P[0]); g=P[1]+t*(S[1]-P[1]); b=P[2]+t*(S[2]-P[2]); }
-      else { r=dr;g=dg;b=db; } // preserve maker mark / off-axis pixels
+      // snap to nearest of the 4 source tones, then map that tone to primary..secondary (keeps 4-tone depth)
+      let bi=0,bdist=1e9;
+      for(let s=0;s<4;s++){ const ds=(dr-SRC4[s][0])**2+(dg-SRC4[s][1])**2+(db-SRC4[s][2])**2; if(ds<bdist){bdist=ds;bi=s;} }
+      if(bdist>OFFTOL){ r=dr;g=dg;b=db; }          // off-palette (e.g. black maker mark) -> preserve
+      else { const t=TONE_T[bi]; r=P[0]+t*(S[0]-P[0]); g=P[1]+t*(S[1]-P[1]); b=P[2]+t*(S[2]-P[2]); }
     } else if(isDesign[i]===2 && (z===3||z===4)){ r=T[0];g=T[1];b=T[2]; } // sleeve hem not covered -> trim (clean cuff)
     else { r=S[0];g=S[1];b=S[2]; } // uncovered design zone -> secondary
     if(logoA[i]>110){ r=T[0]; g=T[1]; b=T[2]; } // maker mark (momuto + swoosh) -> trim accent, fabric-shaded
