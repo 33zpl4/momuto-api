@@ -424,12 +424,7 @@ function buildUI(){
     b.onclick=()=>{Object.assign(state,m);repaintAll();render();};pc.appendChild(b);});
   document.getElementById("reset").onclick=()=>{Object.assign(state,{primary:"#2e3238",secondary:"#ffffff",trim:"#121212",nameColor:"#121212"});
     repaintAll();render();};
-  document.getElementById("order").onclick=()=>{
-    const o=buildDesignPayload();
-    console.log("[add-to-cart] design payload ->", o);
-    alert("Added to cart (POC)\n\nThis DESIGN is passed to design.momuto.com/cart, where you set size + name/number for each player.\n\n"+
-      JSON.stringify({...o, preview:{front:"(png "+o.preview.front.length+" b)", back:"(png "+o.preview.back.length+" b)"}}, null, 2));
-  };
+  document.getElementById("order").onclick=()=>handoffToCart();
 }
 
 // ---- order handoff: render front+back previews and assemble the design passed to design.momuto.com/cart ----
@@ -444,6 +439,29 @@ function buildDesignPayload(){
     logos: { crest:!!state.crest, sponsor:!!state.sponsor }, // become uploaded URLs once the upload endpoint is wired
     preview: { front: captureView("front"), back: captureView("back") } // rendered PNG data-URLs
   };
+}
+
+// ---- cart hand-off (design.momuto.com): mirror the goto3d/jump3d flow ----
+const CART = { base:"https://design.momuto.com", productId:"16534", oemId:"10294534", lang:"en" };
+function genUserId(){ // 2 rand hex + hex(unix ts) + 8 rand hex  (matches the goto3d script)
+  const h=n=>{let s="";while(s.length<n)s+=Math.floor(Math.random()*16).toString(16);return s;};
+  return h(2) + Math.floor(Date.now()/1000).toString(16) + h(8);
+}
+async function handoffToCart(){
+  const design=buildDesignPayload();          // colours/font/logos + front/back preview — captured for the proof workflow
+  console.log("[rtp] design ->", {...design, preview:{front:design.preview.front.length+"b", back:design.preview.back.length+"b"}});
+  // 1) Embedded on the product page → reuse the page's exact goto3d/jump3d procedure (no duplication)
+  const goto3d=document.getElementById("goto3d") || (typeof window.jump3d==="function" && window.jump3d);
+  if(goto3d){ if(typeof goto3d==="function") goto3d(); else goto3d.click(); return; }
+  // 2) Standalone (preview/testing) → replicate the same flow
+  const userId=genUserId();
+  const body=new URLSearchParams({ productId:CART.productId, quantity:"1", userId, oemId:CART.oemId,
+    lanType:CART.lang, timestamp:String(Math.floor(Date.now()/1000)), ranstr:String(Math.floor(Math.random()*1e10)) });
+  try{ const r=await fetch(CART.base+"/v1/addToEcart",{ method:"POST",
+        headers:{"Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"}, body });
+       console.log("[rtp] addToEcart ->", r.status); }
+  catch(e){ console.warn("[rtp] addToEcart failed (will still redirect):", e); }
+  window.location.href = CART.base+"/cart?uuid="+userId+"&langguage="+CART.lang;
 }
 init();
 </script>
