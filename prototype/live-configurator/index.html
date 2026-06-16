@@ -356,7 +356,13 @@ function drawNameNumber(V){
   const f=fontImg[state.font], sl=V.nameSlot; if(!f||!sl) return;
   const s=Math.min(sl.w/f.width, sl.h/f.height), dw=f.width*s, dh=f.height*s;
   const dx=sl.cx-dw/2, dy=sl.cy-dh/2;
-  const fill=tintFont(f,dw,dh,state.nameColor), stroke=tintFont(f,dw,dh,state.trim);
+  // stroke must contrast with the fill: prefer trim, else secondary, else primary, else black/white
+  const near=(a,b)=>{const A=hx(a),B=hx(b);return Math.abs(A[0]-B[0])+Math.abs(A[1]-B[1])+Math.abs(A[2]-B[2])<70;};
+  let strokeCol=state.trim;
+  if(near(strokeCol,state.nameColor)) strokeCol=state.secondary;
+  if(near(strokeCol,state.nameColor)) strokeCol=state.primary;
+  if(near(strokeCol,state.nameColor)){ const c=hx(state.nameColor); strokeCol=lum3(c[0],c[1],c[2])>140?"#111111":"#ffffff"; }
+  const fill=tintFont(f,dw,dh,state.nameColor), stroke=tintFont(f,dw,dh,strokeCol);
   const rad=Math.max(1.25, dh*0.007);                    // trim-coloured outline so the name/number pops
   for(let a=0;a<20;a++){ const t=a/20*Math.PI*2; ctx.drawImage(stroke, dx+Math.cos(t)*rad, dy+Math.sin(t)*rad); }
   ctx.drawImage(fill, dx, dy);
