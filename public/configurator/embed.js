@@ -126,22 +126,10 @@ var CSS = ":host{display:block;--brand:#E2214B;--bg:#0e0f13;--panel:#1a1c22;--li
 +".qstep input::-webkit-outer-spin-button,.qstep input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}"
 +".est{margin:9px 0 0;font-size:12px;color:var(--mut);line-height:1.5;}"
 +".est b{color:var(--txt);font-size:20px;font-weight:800;}"
-+".promo{margin:9px 0 2px;padding:8px 10px;border-radius:8px;background:rgba(226,33,75,.12);border:1px solid rgba(226,33,75,.45);color:#ffd2dc;font-size:12px;}"
-+".rtp-shell{background:var(--bg);border-radius:18px;padding:22px 22px 26px;}"
-+".rtp-hd{text-align:center;max-width:680px;margin:0 auto 22px;}"
-+".rtp-badge{display:inline-block;background:var(--brand);color:#fff;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:999px;}"
-+".rtp-title{font-family:'Bebas Neue',Oswald,'Arial Narrow',sans-serif;font-weight:600;font-size:46px;line-height:1.02;letter-spacing:.01em;color:#fff;margin:12px 0 8px;text-transform:uppercase;}"
-+".rtp-sub{color:var(--mut);font-size:15px;line-height:1.5;margin:0;}"
-+"@media(max-width:560px){.rtp-title{font-size:34px;}.rtp-shell{padding:16px 14px 20px;}}";
++".promo{margin:9px 0 2px;padding:8px 10px;border-radius:8px;background:rgba(226,33,75,.12);border:1px solid rgba(226,33,75,.45);color:#ffd2dc;font-size:12px;}";
 
 var HTML =
- '<div class="rtp-shell">'
-+'  <div class="rtp-hd">'
-+'    <span class="rtp-badge">Ready-to-Play · −10%</span>'
-+'    <h1 class="rtp-title">Their design. Your colours.</h1>'
-+'    <p class="rtp-sub">A pro design our team built, ready for your club. Pick your colours, drop in your crest, choose the back — see it come together live. Reviewed by our designers, worn by real clubs.</p>'
-+'  </div>'
-+'  <div class="wrap">'
+ '<div class="wrap">'
 +'  <div class="stage"><canvas id="cv" width="1500" height="1500"></canvas><div id="busy">Loading…</div>'
 +'    <div class="vtog" id="vtog"><button data-v="front" class="on">Front</button><button data-v="back">Back</button></div>'
 +'  </div>'
@@ -168,7 +156,6 @@ var HTML =
 +'    <div class="est" id="est"></div>'
 +'    <div class="promo" id="promo" style="display:none">✓ Includes a free team flag + captain&#39;s armband</div>'
 +'    <div class="row"><button class="reset" id="reset">Reset</button><button class="cta" id="order">Add to cart ▸</button></div>'
-+'  </div>'
 +'  </div>'
 +'</div>'
 +'<div class="sw-modal" id="swModal"><div class="sw-card">'
