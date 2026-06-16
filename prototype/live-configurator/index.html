@@ -8,12 +8,12 @@
   :root { --brand:#E2214B; --bg:#0e0f13; --panel:#1a1c22; --line:rgba(255,255,255,.12); --txt:#f2f3f5; --mut:#9aa0aa; }
   * { box-sizing:border-box; }
   body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--txt); }
-  header { padding:16px 24px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px; }
+  header { padding:11px 24px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px; }
   header b { letter-spacing:.18em; font-weight:800; }
   header span { color:var(--mut); font-size:13px; }
-  .wrap { display:flex; gap:24px; padding:24px; flex-wrap:wrap; }
+  .wrap { display:flex; gap:24px; padding:14px 24px 24px; flex-wrap:wrap; }
   .stage { flex:1 1 420px; min-width:320px; display:flex; align-items:center; justify-content:center;
-           background:radial-gradient(circle at 50% 35%, #23262e, #0e0f13 70%); border-radius:16px; padding:12px; position:relative; }
+           background:radial-gradient(circle at 50% 35%, #23262e, #0e0f13 70%); border-radius:16px; padding:6px 12px; position:relative; }
   canvas#cv { max-width:100%; max-height:82vh; width:auto; height:auto; }
   .panel { flex:0 0 340px; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:18px; }
   .panel h2 { margin:18px 0 4px; font-size:13px; text-transform:uppercase; letter-spacing:.1em; color:var(--mut); }
@@ -44,13 +44,16 @@
   .sw-grid div { aspect-ratio:1; border-radius:8px; cursor:pointer; border:1px solid rgba(255,255,255,.14); transition:transform .08s; }
   .sw-grid div:hover { transform:scale(1.1); }
   .sw-grid div.sel { outline:2px solid #fff; outline-offset:1px; }
-  .vtog { position:absolute; bottom:12px; left:50%; transform:translateX(-50%); display:flex; gap:2px;
-          background:#1a1c22; border:1px solid var(--line); border-radius:999px; padding:3px; }
+  .vtog { position:absolute; top:12px; left:50%; transform:translateX(-50%); display:flex; gap:2px; z-index:5;
+          background:rgba(26,28,34,.9); border:1px solid var(--line); border-radius:999px; padding:3px; }
   .vtog button { border:none; background:none; color:var(--mut); padding:7px 22px; cursor:pointer; font-size:13px; font-weight:600; border-radius:999px; }
   .vtog button.on { background:var(--brand); color:#fff; }
   .fonts { display:flex; gap:8px; margin:10px 0 2px; }
-  .fontchip { flex:1; padding:10px 0; border:1px solid var(--line); background:#22252c; color:var(--txt); border-radius:8px; cursor:pointer; line-height:1; }
-  .fontchip.on { border-color:var(--brand); color:#fff; }
+  .fontchip { flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; padding:8px 4px; border:1px solid var(--line); background:#22252c; border-radius:8px; cursor:pointer; }
+  .fontchip img { height:42px; max-width:100%; object-fit:contain; }
+  .fontchip span { font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--mut); }
+  .fontchip.on { border-color:var(--brand); }
+  .fontchip.on span { color:#fff; }
 </style>
 </head>
 <body>
@@ -73,6 +76,7 @@
     <div id="perso" style="display:none">
       <h2>Personalisation · Back</h2>
       <div class="fonts" id="fonts"></div>
+      <div class="zone"><label>Name &amp; number</label><button class="sw" id="nameColorSw" data-k="nameColor"></button></div>
     </div>
     <div class="presets" id="presets"></div>
     <div class="row">
@@ -104,7 +108,7 @@ const TONE_T=[0.0, 0.34, 0.66, 1.0];                                   // primar
 const OFFTOL=8500;                                                     // RGB dist^2 beyond which a pixel is off-palette (preserve, e.g. black)
 
 let views={}, active="front";
-let state={ primary:"#13294b", secondary:"#f4f5f6", trim:"#b9123a", crest:null, sponsor:null, font:"vanguard" };
+let state={ primary:"#13294b", secondary:"#f4f5f6", trim:"#b9123a", crest:null, sponsor:null, font:"vanguard", nameColor:"#f4f5f6" };
 
 const PRESETS={
  "Classic":{primary:"#13294b",secondary:"#f4f5f6",trim:"#b9123a"},
@@ -343,13 +347,19 @@ function render(){
   if(V.kind==="front"){ drawLogo(state.crest, V.slots.crest); drawLogo(state.sponsor, V.slots.sponsor); }
   else drawNameNumber(V);
 }
+function tintFont(f, dw, dh, color){
+  const c=offscreen(Math.max(1,Math.ceil(dw)),Math.max(1,Math.ceil(dh))), x=c.getContext("2d");
+  x.drawImage(f,0,0,dw,dh); x.globalCompositeOperation="source-in"; x.fillStyle=color; x.fillRect(0,0,c.width,c.height);
+  return c;
+}
 function drawNameNumber(V){
   const f=fontImg[state.font], sl=V.nameSlot; if(!f||!sl) return;
   const s=Math.min(sl.w/f.width, sl.h/f.height), dw=f.width*s, dh=f.height*s;
-  const tc=offscreen(Math.max(1,Math.ceil(dw)),Math.max(1,Math.ceil(dh))), tx=tc.getContext("2d");
-  tx.drawImage(f,0,0,dw,dh);                              // outlined glyphs
-  tx.globalCompositeOperation="source-in"; tx.fillStyle=state.secondary; tx.fillRect(0,0,dw,dh); // recolour to kit
-  ctx.drawImage(tc, sl.cx-dw/2, sl.cy-dh/2);
+  const dx=sl.cx-dw/2, dy=sl.cy-dh/2;
+  const fill=tintFont(f,dw,dh,state.nameColor), stroke=tintFont(f,dw,dh,state.trim);
+  const rad=Math.max(2.5, dh*0.014);                     // trim-coloured outline so the name/number pops
+  for(let a=0;a<20;a++){ const t=a/20*Math.PI*2; ctx.drawImage(stroke, dx+Math.cos(t)*rad, dy+Math.sin(t)*rad); }
+  ctx.drawImage(fill, dx, dy);
 }
 
 function drawLogo(img, slot){
@@ -393,13 +403,14 @@ function buildUI(){
   // font picker (back name/number)
   const fb=document.getElementById("fonts");
   FONTS.forEach(([key,label])=>{ const f=fontImg[key]; const c=document.createElement("button");
-    c.className="fontchip"+(state.font===key?" on":""); c.title=label;
-    const ph=44, srcY=f.height*0.42, srcH=f.height*0.58, s=ph/srcH, pw=Math.round(f.width*s); // preview the "10"
+    c.className="fontchip"+(state.font===key?" on":"");
+    const ph=120, srcY=f.height*0.34, srcH=f.height*0.66, s=ph/srcH, pw=Math.round(f.width*s); // preview the "10"
     const pc=offscreen(pw,ph), px=pc.getContext("2d");
     px.drawImage(f, 0,srcY,f.width,srcH, 0,0,pw,ph);
     px.globalCompositeOperation="source-in"; px.fillStyle="#e9ecf1"; px.fillRect(0,0,pw,ph);
-    const im=document.createElement("img"); im.src=pc.toDataURL(); im.style.height="38px"; im.style.display="block"; im.style.margin="0 auto";
-    c.appendChild(im);
+    const im=document.createElement("img"); im.src=pc.toDataURL();
+    const sp=document.createElement("span"); sp.textContent=label;
+    c.appendChild(im); c.appendChild(sp);
     c.onclick=()=>{ state.font=key; document.querySelectorAll(".fontchip").forEach(x=>x.classList.remove("on")); c.classList.add("on"); render(); };
     fb.appendChild(c); });
   const pc=document.getElementById("presets");
