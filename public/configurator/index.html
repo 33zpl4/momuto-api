@@ -363,10 +363,8 @@ function drawNameNumber(V){
   if(near(strokeCol,state.nameColor)) strokeCol=state.primary;
   if(near(strokeCol,state.nameColor)){ const c=hx(state.nameColor); strokeCol=lum3(c[0],c[1],c[2])>140?"#111111":"#ffffff"; }
   const fill=tintFont(f,dw,dh,state.nameColor), stroke=tintFont(f,dw,dh,strokeCol);
-  const rad=Math.max(1.25, dh*0.007);                    // trim-coloured outer outline so the name/number pops
-  for(let a=0;a<28;a++){ const t=a/28*Math.PI*2; ctx.drawImage(stroke, dx+Math.cos(t)*rad, dy+Math.sin(t)*rad); }
-  const fr=Math.max(0.8, dh*0.0032);                     // hairline-dilate the fill to close the font's inline gaps (stops stroke bleeding through)
-  for(let a=0;a<10;a++){ const t=a/10*Math.PI*2; ctx.drawImage(fill, dx+Math.cos(t)*fr, dy+Math.sin(t)*fr); }
+  const rad=Math.max(1.25, dh*0.007);                    // trim-coloured outline so the name/number pops
+  for(let a=0;a<20;a++){ const t=a/20*Math.PI*2; ctx.drawImage(stroke, dx+Math.cos(t)*rad, dy+Math.sin(t)*rad); }
   ctx.drawImage(fill, dx, dy);
 }
 
