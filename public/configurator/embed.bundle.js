@@ -31,6 +31,7 @@ var PALETTE=[
  ['#7FD0F0','Sky'],['#3FA9F5','Light Blue'],['#1E63E9','Royal'],['#0B4FC4','Blue'],['#1B3A6B','Cobalt'],['#16223F','Navy'],
  ['#6A2DA8','Purple'],['#8E44AD','Violet'],['#B5179E','Magenta'],['#5E2750','Plum'],['#6B4226','Brown'],['#F3EAD3','Cream'] ];
 var FONTS=[["vanguard","Vanguard","fonts/font-1.svg"],["contour","Contour","fonts/font-2.svg"],["industry","Industry","fonts/font-3.svg"]];
+var VIEW_DY={front:15, back:-20};   // per-view vertical nudge (display px) so front/back line up
 var lum3=function(r,g,b){return 0.299*r+0.587*g+0.114*b;};
 var hx=function(h){h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
 var load=function(src){return new Promise(function(r){var i=new Image();i.crossOrigin="anonymous";i.onload=function(){r(i);};i.src=src;});};
@@ -270,6 +271,7 @@ function run(root, opts){
 
   function render(){
     var V=views[active]; if(!V) return;
+    cv.style.transform="translateY("+(VIEW_DY[active]||0)+"px)";   // line up front/back vertically
     var zoneIdx=V.zoneIdx,ratio=V.ratio,srcA=V.srcA,designRGB=V.designRGB,isDesign=V.isDesign,logoA=V.logoA;
     var out=ctx.createImageData(W,H), o=out.data, n=W*H;
     var P=hx(state.primary), S=hx(state.secondary), T=hx(state.trim);
