@@ -50,7 +50,7 @@
   .vtog button.on { background:var(--brand); color:#fff; }
   .fonts { display:flex; gap:8px; margin:10px 0 2px; }
   .fontchip { flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; padding:8px 4px; border:1px solid var(--line); background:#22252c; border-radius:8px; cursor:pointer; }
-  .fontchip img { height:22px; max-width:100%; object-fit:contain; }
+  .fontchip img { height:18px; max-width:100%; object-fit:contain; }
   .fontchip span { font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--mut); }
   .fontchip.on { border-color:var(--brand); }
   .fontchip.on span { color:#fff; }
@@ -410,7 +410,7 @@ function buildUI(){
   const fb=document.getElementById("fonts");
   FONTS.forEach(([key,label])=>{ const f=fontImg[key]; const c=document.createElement("button");
     c.className="fontchip"+(state.font===key?" on":"");
-    const ph=120, srcY=f.height*0.29, srcH=f.height*0.71, s=ph/srcH, pw=Math.round(f.width*s); // preview the "10"
+    const ph=120, srcY=f.height*0.25, srcH=f.height*0.73, s=ph/srcH, pw=Math.round(f.width*s); // preview the "10" with headroom
     const pc=offscreen(pw,ph), px=pc.getContext("2d");
     px.drawImage(f, 0,srcY,f.width,srcH, 0,0,pw,ph);
     px.globalCompositeOperation="source-in"; px.fillStyle="#e9ecf1"; px.fillRect(0,0,pw,ph);
