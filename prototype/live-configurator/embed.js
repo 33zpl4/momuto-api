@@ -6,7 +6,8 @@
 (function(){
 "use strict";
 var SELF = document.currentScript || (function(){var s=document.getElementsByTagName("script");return s[s.length-1];})();
-var ASSETS = new URL("assets/", SELF.src).href;   // resolves on whatever host serves embed.js
+var DEFAULT_ASSETS = new URL("assets/", SELF.src).href;   // default: assets/ next to embed.js
+// override per-mount with data-assets="https://your-cms-cdn/path/" if files live elsewhere
 
 // ---- shared constants / pure helpers (root-independent) ----
 var W=1500, H=1500;
@@ -139,7 +140,7 @@ var HTML =
 
 // ---- per-instance engine ----
 function run(root, opts){
-  var A=ASSETS;
+  var A=opts.assets;
   var cv=root.getElementById("cv"), ctx=cv.getContext("2d",{willReadFrequently:true});
   var views={}, active="front", fontImg={};
   var state={ primary:"#2e3238", secondary:"#ffffff", trim:"#121212", crest:null, sponsor:null, font:"vanguard", nameColor:"#121212" };
@@ -388,7 +389,8 @@ function run(root, opts){
 function mount(host){
   if(host.__rtpMounted) return; host.__rtpMounted=true;
   var opts={ template:host.dataset.template||"the-fracture", productId:host.dataset.product||"16534",
-    oemId:host.dataset.oem||"10294534", lang:host.dataset.lang||"en" };
+    oemId:host.dataset.oem||"10294534", lang:host.dataset.lang||"en",
+    assets: host.dataset.assets ? host.dataset.assets.replace(/\/?$/,"/") : DEFAULT_ASSETS };
   var root=host.attachShadow({mode:"open"});
   root.innerHTML="<style>"+CSS+"</style>"+HTML;
   host.__rtp=run(root,opts);
