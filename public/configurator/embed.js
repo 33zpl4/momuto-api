@@ -33,8 +33,9 @@ var FONTS=[["vanguard","Vanguard","fonts/font-1.svg"],["contour","Contour","font
 var PRICING={ jersey:[[1,38.90],[2,34.90],[5,26.90],[10,21.90],[20,18.90],[50,17.90],[100,16.90]],
               kit:   [[1,56.80],[2,50.80],[5,38.80],[10,26.90],[20,24.90],[50,23.40],[100,21.90]] };
 var RTP_OFF=0.10;
-function unitPrice(kind,qty){ var t=PRICING[kind]||PRICING.jersey, p=t[0][1];
-  for(var i=0;i<t.length;i++){ if(qty>=t[i][0]) p=t[i][1]; } return Math.round(p*(1-RTP_OFF)*10)/10; }  // round to .10 to match published prices
+function tierBase(kind,qty){ var t=PRICING[kind]||PRICING.jersey, p=t[0][1];
+  for(var i=0;i<t.length;i++){ if(qty>=t[i][0]) p=t[i][1]; } return p; }  // standard (pre-RTP) price for this quantity tier
+function unitPrice(kind,qty){ return Math.round(tierBase(kind,qty)*(1-RTP_OFF)*10)/10; }  // round to .10 to match published RTP prices
 var lum3=function(r,g,b){return 0.299*r+0.587*g+0.114*b;};
 var hx=function(h){h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
 var load=function(src){return new Promise(function(r){var i=new Image();i.crossOrigin="anonymous";i.onload=function(){r(i);};i.src=src;});};
@@ -118,17 +119,31 @@ var CSS = ":host{display:block;--brand:#E2214B;--bg:#0e0f13;--panel:#1a1c22;--li
 +".fontchip span{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);}"
 +".fontchip.on{border-color:var(--brand);}.fontchip.on span{color:#fff;}"
 +".kit{display:flex;gap:8px;margin:10px 0 4px;}"
-+".kit button{flex:1;padding:9px;border:1px solid var(--line);background:#22252c;color:var(--txt);border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;}"
-+".kit button.on{background:var(--brand);color:#fff;border-color:var(--brand);}"
++".kit button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:11px 8px;border:1px solid var(--line);background:#22252c;color:var(--txt);border-radius:8px;cursor:pointer;text-align:center;}"
++".kit button.on{border-color:var(--brand);background:rgba(226,33,75,.06);}"
++".kit .kt{font-size:13px;font-weight:600;}"
++".kit .kp{font-size:12px;color:var(--txt);}"
++".kit .kp s{color:var(--mut);margin-right:4px;font-weight:400;}"
++".kit .ks{font-size:10px;color:var(--mut);letter-spacing:.02em;}"
 +".qtyrow{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-top:1px solid var(--line);}"
 +".qtyrow label{font-size:14px;}"
 +".qstep{display:flex;align-items:center;}"
 +".qstep button{width:30px;height:30px;border:1px solid var(--line);background:#22252c;color:var(--txt);cursor:pointer;font-size:16px;line-height:1;}"
 +".qstep input{width:54px;height:30px;text-align:center;border:1px solid var(--line);border-left:0;border-right:0;background:#15171c;color:var(--txt);font-size:14px;-moz-appearance:textfield;}"
 +".qstep input::-webkit-outer-spin-button,.qstep input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}"
-+".est{margin:9px 0 0;font-size:12px;color:var(--mut);line-height:1.5;}"
-+".est b{color:var(--txt);font-size:20px;font-weight:800;}"
-+".promo{margin:9px 0 2px;padding:8px 10px;border-radius:8px;background:rgba(226,33,75,.12);border:1px solid rgba(226,33,75,.45);color:#ffd2dc;font-size:12px;}";
++".priceblk{margin:12px 0 2px;padding:12px 0 0;border-top:1px solid var(--line);}"
++".pr-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}"
++".pr-main{display:flex;align-items:baseline;gap:7px;}"
++".pr-cur{font-size:26px;font-weight:800;color:var(--txt);line-height:1;}"
++".pr-orig{font-size:13px;color:var(--mut);text-decoration:line-through;}"
++".pr-per{font-size:12px;color:var(--mut);}"
++".pr-badge{font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--brand);background:rgba(226,33,75,.12);padding:4px 9px;border-radius:5px;}"
++".pr-detail{font-size:11px;color:var(--mut);margin-top:6px;}"
++".pr-detail b{color:var(--txt);font-weight:700;}"
++".perks{margin:11px 0 2px;padding:11px 13px;border-radius:8px;background:rgba(226,33,75,.06);border:1px solid rgba(226,33,75,.22);}"
++".perk{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--mut);padding:3px 0;}"
++".perk .pi{color:var(--brand);width:15px;text-align:center;flex-shrink:0;}"
++".perk b{color:var(--txt);font-weight:600;}";
 
 var HTML =
  '<div class="wrap">'
@@ -153,10 +168,16 @@ var HTML =
 +'    </div>'
 +'    <div class="presets" id="presets"></div>'
 +'    <h2>Order estimate</h2>'
-+'    <div class="kit" id="kit"><button data-kit="jersey" class="on">Jersey</button><button data-kit="kit">Full kit</button></div>'
++'    <div class="kit" id="kit">'
++'      <button data-kit="jersey" class="on"><span class="kt">Jersey only</span><span class="kp" id="kpJersey"></span></button>'
++'      <button data-kit="kit"><span class="kt">Full kit</span><span class="kp" id="kpKit"></span><span class="ks">jersey + shorts</span></button>'
++'    </div>'
 +'    <div class="qtyrow"><label>Quantity</label><div class="qstep"><button id="qminus" type="button">−</button><input id="qty" type="number" min="1" value="10"><button id="qplus" type="button">+</button></div></div>'
-+'    <div class="est" id="est"></div>'
-+'    <div class="promo" id="promo" style="display:none">✓ Includes a free team flag + captain&#39;s armband</div>'
++'    <div class="priceblk" id="est"></div>'
++'    <div class="perks" id="promo" style="display:none">'
++'      <div class="perk"><span class="pi">&#9873;</span><span><b>Free team flag</b> with crest · orders of 10+ pieces</span></div>'
++'      <div class="perk"><span class="pi">&#9733;</span><span><b>Free captain armband</b> · orders of 10+ pieces</span></div>'
++'    </div>'
 +'    <div class="row"><button class="reset" id="reset">Reset</button><button class="cta" id="order">Add to cart ▸</button></div>'
 +'  </div>'
 +'</div>'
@@ -385,9 +406,16 @@ function run(root, opts){
     // order estimate: kit type + quantity -> RTP price + free flag/armband promo
     function updateEstimate(){
       var q=Math.max(1, parseInt(state.qty,10)||1);
-      var unit=unitPrice(state.kit,q), total=unit*q, label=state.kit==="kit"?"full kit":"jersey";
-      root.getElementById("est").innerHTML="Estimated <b>€"+total.toFixed(2)+"</b><br>€"+unit.toFixed(2)+"/unit · "+label+" · "+q+" units · RTP price (10% off) — final at checkout";
-      root.getElementById("promo").style.display=(state.kit==="kit" && q>=10)?"block":"none";
+      var euro=function(n){return "€"+n.toFixed(2);};
+      // per-option prices on the kit cards
+      root.getElementById("kpJersey").innerHTML="<s>"+euro(tierBase("jersey",q))+"</s>"+euro(unitPrice("jersey",q));
+      root.getElementById("kpKit").innerHTML="<s>"+euro(tierBase("kit",q))+"</s>"+euro(unitPrice("kit",q));
+      // live price block for the selected kit
+      var unit=unitPrice(state.kit,q), orig=tierBase(state.kit,q), total=unit*q, label=state.kit==="kit"?"full kit":"jersey";
+      root.getElementById("est").innerHTML=
+        '<div class="pr-row"><div class="pr-main"><span class="pr-cur">'+euro(unit)+'</span><span class="pr-orig">'+euro(orig)+'</span><span class="pr-per">/ '+label+'</span></div><span class="pr-badge">READY-TO-PLAY · −10%</span></div>'
+        +'<div class="pr-detail">'+q+' units · estimated <b>'+euro(total)+'</b> · final price at checkout</div>';
+      root.getElementById("promo").style.display=(state.kit==="kit")?"block":"none";
     }
     root.querySelectorAll("#kit button").forEach(function(btn){
       btn.onclick=function(){ state.kit=btn.dataset.kit;
