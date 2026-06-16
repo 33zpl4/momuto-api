@@ -39,7 +39,14 @@ var lum3=function(r,g,b){return 0.299*r+0.587*g+0.114*b;};
 var hx=function(h){h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
 var load=function(src){return new Promise(function(r){var i=new Image();i.crossOrigin="anonymous";i.onload=function(){r(i);};i.src=src;});};
 function offscreen(w,h){var c=document.createElement("canvas");c.width=w;c.height=h;return c;}
-function centerDY(srcA,n){ var y0=1e9,y1=0; for(var i=0;i<n;i++){ if(srcA[i]>8){ var y=(i/W)|0; if(y<y0)y0=y; if(y>y1)y1=y; } } return (y1<y0)?0:Math.round(H/2-(y0+y1)/2); }
+function centerDY(srcA,n){ /* ALIGN_V2 shoulder-pin: align the shoulder line (first row reaching 80% of max width) to a fixed target so front/back never jump on toggle */
+  var rows=new Int32Array(H), maxw=0, i, y;
+  for(i=0;i<n;i++){ if(srcA[i]>8){ rows[(i/W)|0]++; } }
+  for(y=0;y<H;y++){ if(rows[y]>maxw) maxw=rows[y]; }
+  if(!maxw) return 0;
+  var thr=maxw*0.8, sh=-1; for(y=0;y<H;y++){ if(rows[y]>=thr){ sh=y; break; } }
+  if(sh<0) return 0;
+  return Math.round(H*0.24 - sh); }
 function genUserId(){var hh=function(n){var s="";while(s.length<n)s+=Math.floor(Math.random()*16).toString(16);return s;};
   return hh(2)+Math.floor(Date.now()/1000).toString(16)+hh(8);}
 
