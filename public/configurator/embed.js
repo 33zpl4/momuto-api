@@ -79,7 +79,7 @@ function placeDesign(img,bbox,o){
 var CSS = ":host{display:block;--brand:#E2214B;--bg:#0e0f13;--panel:#1a1c22;--line:rgba(255,255,255,.12);--txt:#f2f3f5;--mut:#9aa0aa;"
 +"font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--txt);font-size:14px;line-height:1.4;text-align:left;}"
 +"*{box-sizing:border-box;}"
-+".wrap{display:flex;gap:24px;flex-wrap:wrap;}"
++".wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;}"
 +".stage{flex:1 1 420px;min-width:300px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,#23262e,#0e0f13 70%);border-radius:16px;padding:6px 12px;position:relative;}"
 +"canvas#cv{max-width:100%;max-height:78vh;width:auto;height:auto;}"
 +".panel{flex:0 0 340px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;}"
