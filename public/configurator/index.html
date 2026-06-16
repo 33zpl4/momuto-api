@@ -108,7 +108,7 @@ const TONE_T=[0.0, 0.34, 0.66, 1.0];                                   // primar
 const OFFTOL=8500;                                                     // RGB dist^2 beyond which a pixel is off-palette (preserve, e.g. black)
 
 let views={}, active="front";
-let state={ primary:"#13294b", secondary:"#f4f5f6", trim:"#b9123a", crest:null, sponsor:null, font:"vanguard", nameColor:"#f4f5f6" };
+let state={ primary:"#2e3238", secondary:"#ffffff", trim:"#121212", crest:null, sponsor:null, font:"vanguard", nameColor:"#121212" };
 
 const PRESETS={
  "Classic":{primary:"#13294b",secondary:"#f4f5f6",trim:"#b9123a"},
@@ -422,7 +422,7 @@ function buildUI(){
   const pc=document.getElementById("presets");
   Object.entries(PRESETS).forEach(([name,m])=>{const b=document.createElement("button");b.textContent=name;
     b.onclick=()=>{Object.assign(state,m);repaintAll();render();};pc.appendChild(b);});
-  document.getElementById("reset").onclick=()=>{Object.assign(state,{primary:"#13294b",secondary:"#f4f5f6",trim:"#b9123a"});
+  document.getElementById("reset").onclick=()=>{Object.assign(state,{primary:"#2e3238",secondary:"#ffffff",trim:"#121212",nameColor:"#121212"});
     repaintAll();render();};
   document.getElementById("order").onclick=()=>{
     const o=buildDesignPayload();
