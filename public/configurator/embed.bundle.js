@@ -31,7 +31,6 @@ var PALETTE=[
  ['#7FD0F0','Sky'],['#3FA9F5','Light Blue'],['#1E63E9','Royal'],['#0B4FC4','Blue'],['#1B3A6B','Cobalt'],['#16223F','Navy'],
  ['#6A2DA8','Purple'],['#8E44AD','Violet'],['#B5179E','Magenta'],['#5E2750','Plum'],['#6B4226','Brown'],['#F3EAD3','Cream'] ];
 var FONTS=[["vanguard","Vanguard","fonts/font-1.svg"],["contour","Contour","fonts/font-2.svg"],["industry","Industry","fonts/font-3.svg"]];
-var VIEW_DY={front:15, back:-20};   // per-view vertical nudge (display px) so front/back line up
 // Ready-to-Play pricing: base table (€/unit) by min order size; RTP applies a 10% discount
 var PRICING={ jersey:[[1,38.90],[2,34.90],[5,26.90],[10,21.90],[20,18.90],[50,17.90],[100,16.90]],
               kit:   [[1,56.80],[2,50.80],[5,38.80],[10,26.90],[20,24.90],[50,23.40],[100,21.90]] };
@@ -42,6 +41,7 @@ var lum3=function(r,g,b){return 0.299*r+0.587*g+0.114*b;};
 var hx=function(h){h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
 var load=function(src){return new Promise(function(r){var i=new Image();i.crossOrigin="anonymous";i.onload=function(){r(i);};i.src=src;});};
 function offscreen(w,h){var c=document.createElement("canvas");c.width=w;c.height=h;return c;}
+function centerDY(srcA,n){ var y0=1e9,y1=0; for(var i=0;i<n;i++){ if(srcA[i]>8){ var y=(i/W)|0; if(y<y0)y0=y; if(y>y1)y1=y; } } return (y1<y0)?0:Math.round(H/2-(y0+y1)/2); }
 function genUserId(){var hh=function(n){var s="";while(s.length<n)s+=Math.floor(Math.random()*16).toString(16);return s;};
   return hh(2)+Math.floor(Date.now()/1000).toString(16)+hh(8);}
 
@@ -245,7 +245,7 @@ function run(root, opts){
     var slots={ sponsor:mkSlot(slotJson.front.slots.sponsor), crest:mkSlot(slotJson.front.slots.crest) };
     var lp=placeDesign(logo, mkSlot(slotJson.front.slots["logo-momuto"]), {contain:true,pad:1.06});
     var logoA=new Uint8Array(n); for(i=0;i<n;i++) logoA[i]=lp.data[i*4+3];
-    return {kind:"front",zoneIdx:zoneIdx,ratio:ratio,srcA:srcA,designRGB:designRGB,isDesign:isDesign,logoA:logoA,slots:slots};
+    return {kind:"front",zoneIdx:zoneIdx,ratio:ratio,srcA:srcA,designRGB:designRGB,isDesign:isDesign,logoA:logoA,slots:slots,dy:centerDY(srcA,n)};
   }
 
   function buildBack(blank,bodyDesign,sleeve){
@@ -289,17 +289,17 @@ function run(root, opts){
         if(a2>10){designRGB[i*3]=pd[i*4];designRGB[i*3+1]=pd[i*4+1];designRGB[i*3+2]=pd[i*4+2];isDesign[i]=1;} else isDesign[i]=2; } }
     var b0=bbox(0);
     var nameSlot={ cx:b0.x+b0.w/2, cy:b0.y+b0.h*0.34, w:b0.w*0.64, h:b0.h*0.54 };
-    return {kind:"back",zoneIdx:zoneIdx,ratio:ratio,srcA:srcA,designRGB:designRGB,isDesign:isDesign,logoA:null,slots:{},nameSlot:nameSlot};
+    return {kind:"back",zoneIdx:zoneIdx,ratio:ratio,srcA:srcA,designRGB:designRGB,isDesign:isDesign,logoA:null,slots:{},nameSlot:nameSlot,dy:centerDY(srcA,n)};
   }
 
   function render(){
     var V=views[active]; if(!V) return;
-    cv.style.transform="translateY("+(VIEW_DY[active]||0)+"px)";   // line up front/back vertically
+    cv.style.transform="";
     var zoneIdx=V.zoneIdx,ratio=V.ratio,srcA=V.srcA,designRGB=V.designRGB,isDesign=V.isDesign,logoA=V.logoA;
-    var out=ctx.createImageData(W,H), o=out.data, n=W*H;
+    var out=ctx.createImageData(W,H), o=out.data, n=W*H, dyW=(V.dy||0)*W;
     var P=hx(state.primary), S=hx(state.secondary), T=hx(state.trim);
     for(var i=0;i<n;i++){
-      var z=zoneIdx[i]; if(z<0){o[i*4+3]=0;continue;}
+      var z=zoneIdx[i]; if(z<0) continue;
       var r,g,b;
       if(WHITE_ZONES.has(z)){ r=WHITE[0];g=WHITE[1];b=WHITE[2]; }
       else if(TRIM_ZONES.has(z)){ r=T[0];g=T[1];b=T[2]; }
@@ -310,11 +310,14 @@ function run(root, opts){
       } else if(isDesign[i]===2 && (z===3||z===4)){ r=T[0];g=T[1];b=T[2]; }
       else { r=S[0];g=S[1];b=S[2]; }
       if(logoA && logoA[i]>110){ r=T[0];g=T[1];b=T[2]; }
-      o[i*4]=Math.min(255,r*ratio[i*3]); o[i*4+1]=Math.min(255,g*ratio[i*3+1]); o[i*4+2]=Math.min(255,b*ratio[i*3+2]); o[i*4+3]=srcA[i];
+      var oi=i+dyW; if(oi<0||oi>=n) continue;
+      o[oi*4]=Math.min(255,r*ratio[i*3]); o[oi*4+1]=Math.min(255,g*ratio[i*3+1]); o[oi*4+2]=Math.min(255,b*ratio[i*3+2]); o[oi*4+3]=srcA[i];
     }
     ctx.putImageData(out,0,0);
+    ctx.save(); ctx.translate(0, V.dy||0);
     if(V.kind==="front"){ drawLogo(state.crest,V.slots.crest); drawLogo(state.sponsor,V.slots.sponsor); }
     else drawNameNumber(V);
+    ctx.restore();
   }
   function tintFont(f,dw,dh,color){
     var c=offscreen(Math.max(1,Math.ceil(dw)),Math.max(1,Math.ceil(dh))), x=c.getContext("2d");
