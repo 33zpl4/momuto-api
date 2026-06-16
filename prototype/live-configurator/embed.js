@@ -8,6 +8,7 @@
 var SELF = document.currentScript || (function(){var s=document.getElementsByTagName("script");return s[s.length-1];})();
 var DEFAULT_ASSETS = new URL("assets/", SELF.src).href;   // default: assets/ next to embed.js
 // override per-mount with data-assets="https://your-cms-cdn/path/" if files live elsewhere
+var ASSET_DATA = (typeof window!=="undefined" && window.__RTP_ASSETS) || null;  // bundled (inlined) assets, if present
 
 // ---- shared constants / pure helpers (root-independent) ----
 var W=1500, H=1500;
@@ -141,19 +142,21 @@ var HTML =
 // ---- per-instance engine ----
 function run(root, opts){
   var A=opts.assets;
+  var assetSrc=function(name){ return (ASSET_DATA && ASSET_DATA[name]) ? ASSET_DATA[name] : (A+name); };
   var cv=root.getElementById("cv"), ctx=cv.getContext("2d",{willReadFrequently:true});
   var views={}, active="front", fontImg={};
   var state={ primary:"#2e3238", secondary:"#ffffff", trim:"#121212", crest:null, sponsor:null, font:"vanguard", nameColor:"#121212" };
   var CART={ base:"https://design.momuto.com", productId:opts.productId, oemId:opts.oemId, lang:opts.lang };
 
   async function init(){
+    var slot = (ASSET_DATA && ASSET_DATA.slots) ? Promise.resolve(ASSET_DATA.slots) : fetch(A+"template-slots.json").then(function(x){return x.json();});
     var r=await Promise.all([
-      load(A+"blank-shirt-front.png"), load(A+"front-design.png"), load(A+"sleeve-design.png"),
-      load(A+"logo-momuto.png"), load(A+"blank-shirt-back.png"), load(A+"back-design.png"),
-      fetch(A+"template-slots.json").then(function(x){return x.json();}) ]);
+      load(assetSrc("blank-shirt-front.png")), load(assetSrc("front-design.png")), load(assetSrc("sleeve-design.png")),
+      load(assetSrc("logo-momuto.png")), load(assetSrc("blank-shirt-back.png")), load(assetSrc("back-design.png")),
+      slot ]);
     views.front=buildFront(r[0],r[1],r[2],r[3],r[6]);
     views.back =buildBack(r[4],r[5],r[2]);
-    var fl=await Promise.all(FONTS.map(function(f){return load(A+f[2]);}));
+    var fl=await Promise.all(FONTS.map(function(f){return load(assetSrc(f[2]));}));
     FONTS.forEach(function(f,i){fontImg[f[0]]=fl[i];});
     root.getElementById("busy").style.display="none";
     buildUI(); render();
