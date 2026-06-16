@@ -104,7 +104,7 @@ const TONE_T=[0.0, 0.34, 0.66, 1.0];                                   // primar
 const OFFTOL=8500;                                                     // RGB dist^2 beyond which a pixel is off-palette (preserve, e.g. black)
 
 let views={}, active="front";
-let state={ primary:"#13294b", secondary:"#f4f5f6", trim:"#b9123a", crest:null, sponsor:null, font:"block" };
+let state={ primary:"#13294b", secondary:"#f4f5f6", trim:"#b9123a", crest:null, sponsor:null, font:"vanguard" };
 
 const PRESETS={
  "Classic":{primary:"#13294b",secondary:"#f4f5f6",trim:"#b9123a"},
@@ -121,11 +121,9 @@ const PALETTE=[
  ['#7FD0F0','Sky'],['#3FA9F5','Light Blue'],['#1E63E9','Royal'],['#0B4FC4','Blue'],['#1B3A6B','Cobalt'],['#16223F','Navy'],
  ['#6A2DA8','Purple'],['#8E44AD','Violet'],['#B5179E','Magenta'],['#5E2750','Plum'],['#6B4226','Brown'],['#F3EAD3','Cream'],
 ];
-// back name/number fonts (temporary CSS fallbacks until the outlined SVGs land), {s}=px size
-const FONTS=[["block","Block"],["condensed","Condensed"],["classic","Classic"]];
-const FONT_CSS={ block:'900 {s}px "Arial Black",Impact,system-ui,sans-serif',
-  condensed:'800 {s}px Oswald,"Arial Narrow","Liberation Sans Narrow",sans-serif',
-  classic:'700 {s}px Georgia,"Times New Roman",serif' };
+// back name/number — outlined-SVG fonts (PLAYER + 10), recoloured to match the kit
+const FONTS=[["vanguard","Vanguard","fonts/font-1.svg"],["contour","Contour","fonts/font-2.svg"],["industry","Industry","fonts/font-3.svg"]];
+let fontImg={};   // key -> loaded outlined SVG image
 const lum3=(r,g,b)=>0.299*r+0.587*g+0.114*b;
 const hx=h=>{h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
 const load=src=>new Promise(r=>{const i=new Image();i.crossOrigin="anonymous";i.onload=()=>r(i);i.src=src;});
@@ -174,6 +172,8 @@ async function init(){
   ]);
   views.front = buildFront(blankF, frontD, sleeve, logo, slotJson);
   views.back  = buildBack(blankB, backD, sleeve);
+  const loaded = await Promise.all(FONTS.map(([,,file])=>load(A+file)));
+  FONTS.forEach(([key],i)=>fontImg[key]=loaded[i]);
   document.getElementById("busy").style.display="none";
   buildUI(); render();
 }
@@ -310,9 +310,8 @@ function buildBack(blank, bodyDesign, sleeve){
     if(DESIGN_ZONES[z]!==undefined && place[z]){ const pd=place[z].data,a=pd[i*4+3];
       if(a>10){designRGB[i*3]=pd[i*4];designRGB[i*3+1]=pd[i*4+1];designRGB[i*3+2]=pd[i*4+2];isDesign[i]=1;} else isDesign[i]=2; } }
   const b0=bbox(0);
-  const nameNum={ number:{cx:b0.x+b0.w/2, cy:b0.y+b0.h*0.42, size:b0.h*0.34},
-                  name:  {cx:b0.x+b0.w/2, cy:b0.y+b0.h*0.17, size:b0.h*0.075} };
-  return {kind:"back", zoneIdx, ratio, srcA, designRGB, isDesign, logoA:null, slots:{}, nameNum};
+  const nameSlot={ cx:b0.x+b0.w/2, cy:b0.y+b0.h*0.34, w:b0.w*0.64, h:b0.h*0.54 };
+  return {kind:"back", zoneIdx, ratio, srcA, designRGB, isDesign, logoA:null, slots:{}, nameSlot};
 }
 
 function render(){
@@ -345,15 +344,12 @@ function render(){
   else drawNameNumber(V);
 }
 function drawNameNumber(V){
-  const nn=V.nameNum; ctx.save(); ctx.textAlign="center"; ctx.textBaseline="middle";
-  ctx.fillStyle=state.secondary; ctx.strokeStyle=state.trim; ctx.lineJoin="round";
-  ctx.font=FONT_CSS[state.font].replace("{s}", Math.round(nn.number.size));
-  ctx.lineWidth=Math.max(2, nn.number.size*0.04);
-  ctx.strokeText("10", nn.number.cx, nn.number.cy); ctx.fillText("10", nn.number.cx, nn.number.cy);
-  ctx.font=FONT_CSS[state.font].replace("{s}", Math.round(nn.name.size));
-  ctx.lineWidth=Math.max(1.5, nn.name.size*0.06);
-  ctx.strokeText("PLAYER", nn.name.cx, nn.name.cy); ctx.fillText("PLAYER", nn.name.cx, nn.name.cy);
-  ctx.restore();
+  const f=fontImg[state.font], sl=V.nameSlot; if(!f||!sl) return;
+  const s=Math.min(sl.w/f.width, sl.h/f.height), dw=f.width*s, dh=f.height*s;
+  const tc=offscreen(Math.max(1,Math.ceil(dw)),Math.max(1,Math.ceil(dh))), tx=tc.getContext("2d");
+  tx.drawImage(f,0,0,dw,dh);                              // outlined glyphs
+  tx.globalCompositeOperation="source-in"; tx.fillStyle=state.secondary; tx.fillRect(0,0,dw,dh); // recolour to kit
+  ctx.drawImage(tc, sl.cx-dw/2, sl.cy-dh/2);
 }
 
 function drawLogo(img, slot){
@@ -396,9 +392,14 @@ function buildUI(){
   });
   // font picker (back name/number)
   const fb=document.getElementById("fonts");
-  FONTS.forEach(([key,label])=>{ const c=document.createElement("button");
-    c.className="fontchip"+(state.font===key?" on":""); c.textContent="10"; c.title=label;
-    c.style.font=FONT_CSS[key].replace("{s}","24");
+  FONTS.forEach(([key,label])=>{ const f=fontImg[key]; const c=document.createElement("button");
+    c.className="fontchip"+(state.font===key?" on":""); c.title=label;
+    const ph=44, srcY=f.height*0.42, srcH=f.height*0.58, s=ph/srcH, pw=Math.round(f.width*s); // preview the "10"
+    const pc=offscreen(pw,ph), px=pc.getContext("2d");
+    px.drawImage(f, 0,srcY,f.width,srcH, 0,0,pw,ph);
+    px.globalCompositeOperation="source-in"; px.fillStyle="#e9ecf1"; px.fillRect(0,0,pw,ph);
+    const im=document.createElement("img"); im.src=pc.toDataURL(); im.style.height="38px"; im.style.display="block"; im.style.margin="0 auto";
+    c.appendChild(im);
     c.onclick=()=>{ state.font=key; document.querySelectorAll(".fontchip").forEach(x=>x.classList.remove("on")); c.classList.add("on"); render(); };
     fb.appendChild(c); });
   const pc=document.getElementById("presets");
