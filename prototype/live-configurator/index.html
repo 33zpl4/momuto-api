@@ -424,12 +424,26 @@ function buildUI(){
     b.onclick=()=>{Object.assign(state,m);repaintAll();render();};pc.appendChild(b);});
   document.getElementById("reset").onclick=()=>{Object.assign(state,{primary:"#13294b",secondary:"#f4f5f6",trim:"#b9123a"});
     repaintAll();render();};
-  document.getElementById("order").onclick=()=>alert("Added to cart (POC).\n\n"+
-    "Next: our design team reviews your kit — your crest & sponsor are vectorised and cleaned, "+
-    "placement is refined, and you'll get a free proof to approve before production.\n\n"+
-    "Payload handed to checkout:\n"+
-    JSON.stringify({template:"the-fracture",primary:state.primary,secondary:state.secondary,trim:state.trim,
-      crest:!!state.crest,sponsor:!!state.sponsor},null,2));
+  document.getElementById("order").onclick=()=>{
+    const o=buildDesignPayload();
+    console.log("[add-to-cart] design payload ->", o);
+    alert("Added to cart (POC)\n\nThis DESIGN is passed to design.momuto.com/cart, where you set size + name/number for each player.\n\n"+
+      JSON.stringify({...o, preview:{front:"(png "+o.preview.front.length+" b)", back:"(png "+o.preview.back.length+" b)"}}, null, 2));
+  };
+}
+
+// ---- order handoff: render front+back previews and assemble the design passed to design.momuto.com/cart ----
+function captureView(v){ const prev=active; active=v; render(); const url=cv.toDataURL("image/png"); active=prev; render(); return url; }
+function buildDesignPayload(){
+  return {
+    tool: "rtp-2d-configurator",
+    template: "the-fracture",
+    suit: "mamuto3",                                   // CollectName / suitName (product anchor)
+    colours: { primary:state.primary, secondary:state.secondary, trim:state.trim },
+    nameNumber: { font:state.font, fill:state.nameColor },  // style only — per-player name/number entered in the cart
+    logos: { crest:!!state.crest, sponsor:!!state.sponsor }, // become uploaded URLs once the upload endpoint is wired
+    preview: { front: captureView("front"), back: captureView("back") } // rendered PNG data-URLs
+  };
 }
 init();
 </script>
