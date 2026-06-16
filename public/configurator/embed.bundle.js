@@ -32,6 +32,12 @@ var PALETTE=[
  ['#6A2DA8','Purple'],['#8E44AD','Violet'],['#B5179E','Magenta'],['#5E2750','Plum'],['#6B4226','Brown'],['#F3EAD3','Cream'] ];
 var FONTS=[["vanguard","Vanguard","fonts/font-1.svg"],["contour","Contour","fonts/font-2.svg"],["industry","Industry","fonts/font-3.svg"]];
 var VIEW_DY={front:15, back:-20};   // per-view vertical nudge (display px) so front/back line up
+// Ready-to-Play pricing: base table (€/unit) by min order size; RTP applies a 10% discount
+var PRICING={ jersey:[[1,38.90],[2,34.90],[5,26.90],[10,21.90],[20,18.90],[50,17.90],[100,16.90]],
+              kit:   [[1,56.80],[2,50.80],[5,38.80],[10,26.90],[20,24.90],[50,23.40],[100,21.90]] };
+var RTP_OFF=0.10;
+function unitPrice(kind,qty){ var t=PRICING[kind]||PRICING.jersey, p=t[0][1];
+  for(var i=0;i<t.length;i++){ if(qty>=t[i][0]) p=t[i][1]; } return p*(1-RTP_OFF); }
 var lum3=function(r,g,b){return 0.299*r+0.587*g+0.114*b;};
 var hx=function(h){h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
 var load=function(src){return new Promise(function(r){var i=new Image();i.crossOrigin="anonymous";i.onload=function(){r(i);};i.src=src;});};
@@ -110,7 +116,19 @@ var CSS = ":host{display:block;--brand:#E2214B;--bg:#0e0f13;--panel:#1a1c22;--li
 +".fontchip{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 4px;border:1px solid var(--line);background:#22252c;border-radius:8px;cursor:pointer;}"
 +".fontchip img{height:18px;max-width:100%;object-fit:contain;}"
 +".fontchip span{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);}"
-+".fontchip.on{border-color:var(--brand);}.fontchip.on span{color:#fff;}";
++".fontchip.on{border-color:var(--brand);}.fontchip.on span{color:#fff;}"
++".kit{display:flex;gap:8px;margin:10px 0 4px;}"
++".kit button{flex:1;padding:9px;border:1px solid var(--line);background:#22252c;color:var(--txt);border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;}"
++".kit button.on{background:var(--brand);color:#fff;border-color:var(--brand);}"
++".qtyrow{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-top:1px solid var(--line);}"
++".qtyrow label{font-size:14px;}"
++".qstep{display:flex;align-items:center;}"
++".qstep button{width:30px;height:30px;border:1px solid var(--line);background:#22252c;color:var(--txt);cursor:pointer;font-size:16px;line-height:1;}"
++".qstep input{width:54px;height:30px;text-align:center;border:1px solid var(--line);border-left:0;border-right:0;background:#15171c;color:var(--txt);font-size:14px;-moz-appearance:textfield;}"
++".qstep input::-webkit-outer-spin-button,.qstep input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}"
++".est{margin:9px 0 0;font-size:12px;color:var(--mut);line-height:1.5;}"
++".est b{color:var(--txt);font-size:20px;font-weight:800;}"
++".promo{margin:9px 0 2px;padding:8px 10px;border-radius:8px;background:rgba(226,33,75,.12);border:1px solid rgba(226,33,75,.45);color:#ffd2dc;font-size:12px;}";
 
 var HTML =
  '<div class="wrap">'
@@ -134,6 +152,11 @@ var HTML =
 +'      <div class="zone"><label>Name &amp; number</label><button class="sw" id="nameColorSw" data-k="nameColor"></button></div>'
 +'    </div>'
 +'    <div class="presets" id="presets"></div>'
++'    <h2>Order estimate</h2>'
++'    <div class="kit" id="kit"><button data-kit="jersey" class="on">Jersey</button><button data-kit="kit">Full kit</button></div>'
++'    <div class="qtyrow"><label>Quantity</label><div class="qstep"><button id="qminus" type="button">−</button><input id="qty" type="number" min="1" value="10"><button id="qplus" type="button">+</button></div></div>'
++'    <div class="est" id="est"></div>'
++'    <div class="promo" id="promo" style="display:none">✓ Includes a free team flag + captain&#39;s armband</div>'
 +'    <div class="row"><button class="reset" id="reset">Reset</button><button class="cta" id="order">Add to cart ▸</button></div>'
 +'  </div>'
 +'</div>'
@@ -148,7 +171,7 @@ function run(root, opts){
   var assetSrc=function(name){ return (ASSET_DATA && ASSET_DATA[name]) ? ASSET_DATA[name] : (A+name); };
   var cv=root.getElementById("cv"), ctx=cv.getContext("2d",{willReadFrequently:true});
   var views={}, active="front", fontImg={};
-  var state={ primary:"#2e3238", secondary:"#ffffff", trim:"#121212", crest:null, sponsor:null, font:"vanguard", nameColor:"#121212" };
+  var state={ primary:"#2e3238", secondary:"#ffffff", trim:"#121212", crest:null, sponsor:null, font:"vanguard", nameColor:"#121212", kit:"jersey", qty:10 };
   var CART={ base:"https://design.momuto.com", productId:opts.productId, oemId:opts.oemId, lang:opts.lang };
 
   async function init(){
@@ -356,6 +379,24 @@ function run(root, opts){
     Object.keys(PRESETS).forEach(function(name){ var m=PRESETS[name], b=document.createElement("button"); b.textContent=name;
       b.onclick=function(){ Object.assign(state,m); repaintAll(); render(); }; pc.appendChild(b); });
     root.getElementById("reset").onclick=function(){ Object.assign(state,{primary:"#2e3238",secondary:"#ffffff",trim:"#121212",nameColor:"#121212"}); repaintAll(); render(); };
+    // order estimate: kit type + quantity -> RTP price + free flag/armband promo
+    function updateEstimate(){
+      var q=Math.max(1, parseInt(state.qty,10)||1);
+      var unit=unitPrice(state.kit,q), total=unit*q, label=state.kit==="kit"?"full kit":"jersey";
+      root.getElementById("est").innerHTML="Estimated <b>€"+total.toFixed(2)+"</b><br>€"+unit.toFixed(2)+"/unit · "+label+" · "+q+" units · RTP price (10% off) — final at checkout";
+      root.getElementById("promo").style.display=(state.kit==="kit" && q>=10)?"block":"none";
+    }
+    root.querySelectorAll("#kit button").forEach(function(btn){
+      btn.onclick=function(){ state.kit=btn.dataset.kit;
+        root.querySelectorAll("#kit button").forEach(function(x){x.classList.toggle("on",x===btn);}); updateEstimate(); };
+    });
+    var qtyEl=root.getElementById("qty");
+    var setQty=function(v){ v=Math.max(1, v|0); state.qty=v; qtyEl.value=v; updateEstimate(); };
+    root.getElementById("qminus").onclick=function(){ setQty((parseInt(qtyEl.value,10)||1)-1); };
+    root.getElementById("qplus").onclick=function(){ setQty((parseInt(qtyEl.value,10)||1)+1); };
+    qtyEl.addEventListener("change",function(){ setQty(parseInt(qtyEl.value,10)||1); });
+    qtyEl.addEventListener("input",function(){ if(qtyEl.value){ state.qty=parseInt(qtyEl.value,10)||1; updateEstimate(); } });
+    updateEstimate();
     root.getElementById("order").onclick=function(){ handoffToCart(); };
   }
 
