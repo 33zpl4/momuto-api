@@ -1,0 +1,537 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Custom Soccer Jerseys & Uniforms — Design Your Team's Kit | MOMUTO",
+  "description": "Design custom soccer jerseys and uniforms online with MOMUTO's free 3D tool. No minimum order, full dye-sublimation, youth-to-adult sizing, free professional design in 1-2 days.",
+  "url": "https://www.momuto.com/pages/custom-soccer-jerseys",
+  "datePublished": "2026-06-17",
+  "dateModified": "2026-06-17",
+  "inLanguage": "en-US",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".sj-bluf", ".sj-faq"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MOMUTO",
+    "url": "https://www.momuto.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.momuto.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Custom Soccer Jerseys & Uniforms", "item": "https://www.momuto.com/pages/custom-soccer-jerseys" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a minimum order for custom soccer jerseys?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. MOMUTO has no minimum order. You can order a single custom soccer jersey or a full club kit of 100+. Pricing per jersey drops as the order grows, but there are no minimum-quantity surcharges or sample fees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does delivery take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Custom soccer jerseys and uniforms are delivered in 25-30 days worldwide (production plus shipping direct from the factory). Your free design mockup is ready in 1-2 days, and production does not start until you approve it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I upload my own logo or team crest?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can upload your own club logo, crest, or sponsor artwork, and our design team will place it on the jersey. Because every kit is full dye-sublimation printed, logos and crests are printed into the fabric rather than sewn on, so there are no size or color limits."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What sizes are available — do you make youth soccer jerseys?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. MOMUTO makes both youth and adult sizes, so a club, academy, or family can order the same design across every age group. A full size guide with measurements is available before you order."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are the jerseys sublimated or sewn?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All MOMUTO soccer jerseys use full dye-sublimation printing, where the design is fused into the fabric. It never peels, cracks, or fades, and it allows unlimited colors, gradients, patterns, names, numbers, and crests at no extra cost — unlike sewn-on twill or heat-pressed numbers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can each player have a different name and number?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The whole team can order one design with a different name and number per player, at no extra charge. Sublimation printing means personalization is part of the print, not an add-on."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the design service really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. MOMUTO offers two free ways to design: a real-time 3D configurator with 30+ templates, and a free professional design service where our team creates a fully custom mockup in 1-2 days with free revisions. You only pay when you place an order."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Custom Soccer Jersey & Uniform",
+  "description": "Fully custom, full-sublimation soccer jersey and uniform. Polyester-elastane performance fabric, free professional design, no minimum order, youth-to-adult sizing. Delivered worldwide in 25-30 days.",
+  "brand": { "@type": "Brand", "name": "MOMUTO" },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": 4.4,
+    "reviewCount": 17,
+    "bestRating": 5
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": 21.90,
+    "highPrice": 56.80,
+    "offerCount": 7,
+    "availability": "https://schema.org/InStock",
+    "url": "https://www.momuto.com/pages/request-custom-kit-design",
+    "priceValidUntil": "2026-12-31"
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Minimum Order", "value": "1 unit" },
+    { "@type": "PropertyValue", "name": "Design Service", "value": "Free professional design + free 3D configurator" },
+    { "@type": "PropertyValue", "name": "Fabric", "value": "Polyester-elastane performance blend" },
+    { "@type": "PropertyValue", "name": "Printing", "value": "Full dye-sublimation" },
+    { "@type": "PropertyValue", "name": "Sizing", "value": "Youth to adult" },
+    { "@type": "PropertyValue", "name": "Delivery", "value": "25-30 days worldwide" }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+/* ===== GLOBAL RESETS ===== */
+html, body {
+  background-color: #0a0a0a !important;
+  color: #f5f5f5;
+}
+h1.title, .title, .page-title { display: none !important; }
+.container_wrapper, .page-width, .container, .main-content {
+  max-width: 100% !important; width: 100% !important;
+  padding: 0 !important; margin: 0 !important;
+  overflow: visible !important;
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ===== VARIABLES ===== */
+:root {
+  --mg-bg: #0a0a0a;
+  --mg-panel: #111;
+  --mg-card: #111;
+  --mg-border: rgba(255,255,255,0.06);
+  --mg-border-hover: rgba(255,255,255,0.12);
+  --mg-white: #f5f5f5;
+  --mg-muted: #a1a1aa;
+  --mg-dim: #71717a;
+  --mg-red: #c8352e;
+  --mg-red-hover: #e04038;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+/* ===== PAGE ===== */
+.sj-page {
+  font-family: var(--font-body);
+  background: var(--mg-bg);
+  color: var(--mg-white);
+  width: 100%;
+  padding-bottom: 80px;
+}
+.sj-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ===== HERO ===== */
+.sj-hero {
+  background: var(--mg-bg);
+  border-bottom: 1px solid var(--mg-border);
+  padding: 64px 40px 56px;
+  text-align: center;
+}
+.sj-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mg-red);
+  background: rgba(200,53,46,0.1);
+  border: 1px solid rgba(200,53,46,0.15);
+  padding: 6px 14px;
+  margin-bottom: 20px;
+}
+.sj-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 0.98;
+  color: var(--mg-white);
+  margin: 0 auto 18px;
+  max-width: 14ch;
+}
+.sj-hero h1 .hl { color: var(--mg-red); }
+.sj-lede {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--mg-muted);
+  line-height: 1.7;
+  max-width: 62ch;
+  margin: 0 auto 28px;
+}
+.sj-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.sj-btn {
+  display: inline-block;
+  background: var(--mg-red);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 16px 34px;
+  text-decoration: none;
+  border: 1px solid var(--mg-red);
+  transition: background 0.2s ease;
+}
+.sj-btn:hover { background: var(--mg-red-hover); border-color: var(--mg-red-hover); }
+.sj-btn.secondary {
+  background: transparent;
+  color: var(--mg-white);
+  border: 1px solid var(--mg-border-hover);
+}
+.sj-btn.secondary:hover { border-color: var(--mg-white); background: transparent; }
+
+/* ===== BLUF / QUICK FACTS ===== */
+.sj-bluf { padding: 40px 0 0; }
+.sj-bluf p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--mg-muted);
+  line-height: 1.8;
+  margin-bottom: 1.1em;
+}
+.sj-bluf p strong { color: var(--mg-white); font-weight: 600; }
+.sj-equiv {
+  background: var(--mg-panel);
+  border: 1px solid var(--mg-border);
+  border-left: 3px solid var(--mg-red);
+  padding: 18px 22px;
+  font-size: 0.92rem;
+  color: var(--mg-muted);
+  line-height: 1.7;
+  margin: 6px 0 0;
+}
+.sj-equiv strong { color: var(--mg-white); }
+
+.sj-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  margin: 36px 0 0;
+}
+.sj-fact {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--mg-border);
+  padding: 20px;
+}
+.sj-fact .k {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--mg-white);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.sj-fact .l {
+  font-size: 0.78rem;
+  color: var(--mg-muted);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ===== SECTION TITLES ===== */
+.sj-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--mg-white);
+  margin: 60px 0 18px 0;
+  line-height: 1;
+  padding-left: 16px;
+  border-left: 3px solid var(--mg-red);
+}
+.sj-p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--mg-muted);
+  line-height: 1.8;
+  margin-bottom: 1.2em;
+}
+.sj-p strong { color: var(--mg-white); font-weight: 600; }
+
+/* ===== COMPARISON TABLE ===== */
+.sj-table-wrap { overflow-x: auto; margin: 2em 0; border: 1px solid var(--mg-border); }
+.sj-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  background: var(--mg-card);
+}
+.sj-table thead tr { background: #000; }
+.sj-table th {
+  color: var(--mg-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.62rem;
+  padding: 18px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--mg-border);
+}
+.sj-table th:nth-child(2) { color: var(--mg-white); background: var(--mg-red); }
+.sj-table td {
+  border-bottom: 1px solid var(--mg-border);
+  padding: 14px 16px;
+  vertical-align: middle;
+  color: var(--mg-muted);
+  line-height: 1.4;
+}
+.sj-table td:first-child { font-weight: 600; color: var(--mg-white); font-size: 0.8rem; }
+.sj-table td:nth-child(2) {
+  font-weight: 700;
+  color: var(--mg-white);
+  background: rgba(200,53,46,0.05);
+  border-left: 1px solid rgba(200,53,46,0.2);
+  border-right: 1px solid rgba(200,53,46,0.2);
+}
+.sj-table tr:last-child td:nth-child(2) { border-bottom: 1px solid rgba(200,53,46,0.2); }
+.sj-table tr:hover td { background: rgba(255,255,255,0.02); }
+.sj-table tr:hover td:nth-child(2) { background: rgba(200,53,46,0.08); }
+.sj-check { color: #4ade80; font-weight: 700; }
+
+/* ===== USE CASES ===== */
+.sj-uc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 1.5em 0;
+}
+.sj-uc {
+  background: var(--mg-panel);
+  border: 1px solid var(--mg-border);
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+.sj-uc:hover { border-color: var(--mg-border-hover); }
+.sj-uc i { color: var(--mg-red); font-size: 1.2rem; margin-bottom: 12px; display: block; }
+.sj-uc h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--mg-white);
+  margin: 0 0 8px;
+}
+.sj-uc p { font-size: 0.84rem; color: var(--mg-muted); line-height: 1.6; margin: 0; }
+
+/* ===== FAQ ===== */
+.sj-faq { margin: 1.5em 0; }
+.sj-faq details {
+  border: 1px solid var(--mg-border);
+  border-left: 3px solid var(--mg-red);
+  background: var(--mg-panel);
+  margin-bottom: 10px;
+  padding: 0 22px;
+}
+.sj-faq summary {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--mg-white);
+  padding: 18px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.sj-faq summary::-webkit-details-marker { display: none; }
+.sj-faq summary::after { content: "+"; float: right; color: var(--mg-red); font-weight: 700; }
+.sj-faq details[open] summary::after { content: "−"; }
+.sj-faq details p {
+  font-size: 0.9rem;
+  color: var(--mg-muted);
+  line-height: 1.75;
+  margin: 0 0 18px;
+  font-weight: 300;
+}
+
+/* ===== TRUST ===== */
+.sj-trust {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--mg-dim);
+  margin-top: 18px;
+  letter-spacing: 0.04em;
+}
+.sj-trust a { color: var(--mg-muted); text-decoration: underline; }
+
+/* ===== CTA BLOCK ===== */
+.sj-cta-block {
+  background: var(--mg-red);
+  padding: 60px 40px;
+  text-align: center;
+  margin: 64px 0 0;
+}
+.sj-cta-block h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  line-height: 1;
+  margin: 0 0 12px;
+}
+.sj-cta-block p { color: rgba(255,255,255,0.85); font-size: 0.95rem; font-weight: 300; margin-bottom: 26px; }
+.sj-cta-block .sj-btn { background: #fff; color: #000; border-color: #fff; }
+.sj-cta-block .sj-btn:hover { background: #e5e5e5; }
+.sj-cta-block .sj-btn.secondary { background: transparent; color: #fff; border-color: rgba(255,255,255,0.5); }
+
+.sj-note { font-size: 0.75rem; color: var(--mg-dim); margin-top: 10px; font-weight: 300; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .sj-container { padding: 0 20px; }
+  .sj-hero { padding: 44px 20px 40px; }
+  .sj-table { font-size: 0.75rem; }
+  .sj-table th, .sj-table td { padding: 10px 10px; }
+  .sj-cta-block { padding: 40px 20px; }
+}
+</style>
+<div class="sj-page">
+<div class="sj-hero">
+<div class="sj-badge">Custom Soccer Jerseys &amp; Uniforms</div>
+<h1>Design Your Team's <span class="hl">Soccer Kit</span></h1>
+<p class="sj-lede">Build a fully custom soccer jersey in our free 3D designer, or send us your idea and get a professional mockup back in 1&ndash;2 days. No minimum order, full-sublimation printing, and every size from youth to adult.</p>
+<div class="sj-cta-row">
+<a href="/" class="sj-btn">Design in 3D — Free</a>
+<a href="/pages/request-custom-kit-design" class="sj-btn secondary">Request a Free Design</a>
+</div>
+<p class="sj-trust">Rated 4.4/5 on <a href="https://www.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> &mdash; trusted by clubs, academies and leagues worldwide.</p>
+</div>
+<div class="sj-container">
+<!-- BLUF -->
+<div class="sj-bluf">
+<p>MOMUTO makes <strong>custom soccer jerseys and full uniforms</strong> for clubs, youth academies, rec leagues, college intramural teams, and corporate sides. Pick a template in the <strong>free 3D designer</strong> and order in minutes, or submit your brief and our team designs a custom kit for you &mdash; <strong>the design is always free</strong>. Every jersey is <strong>full dye-sublimation</strong> printed on a polyester-elastane performance fabric, with <strong>no minimum order</strong> (order 5 or 50), <strong>youth-to-adult sizing</strong>, and worldwide delivery in <strong>25&ndash;30 days</strong>.</p>
+<p class="sj-equiv"><strong>Soccer or football &mdash; it's the same sport, and the same kit.</strong> MOMUTO works as both a soccer jersey maker and a football kit designer. Whatever you call it, you get the same fully custom jersey, shorts, and uniform built to your team's identity.</p>
+<div class="sj-facts">
+<div class="sj-fact"><div class="k">No min.</div><div class="l">Order a single jersey or a full club &mdash; no minimum-quantity surcharges</div></div>
+<div class="sj-fact"><div class="k">1&ndash;2 days</div><div class="l">Free professional design mockup, with free revisions</div></div>
+<div class="sj-fact"><div class="k">25&ndash;30 days</div><div class="l">Worldwide delivery, direct from the factory</div></div>
+<div class="sj-fact"><div class="k">Youth&ndash;adult</div><div class="l">One design across every age group for clubs and academies</div></div>
+</div>
+</div>
+
+<!-- 3D TOOL -->
+<h2 class="sj-h2">Design Your Own Soccer Jersey in 3D</h2>
+<p class="sj-p">The fastest way to start is the free 3D soccer jersey designer. Choose from 30+ professional templates, set your colors, drop in your crest, sponsor logo, and player names and numbers, and rotate the kit in real time to see exactly how it will look. When you're happy, order straight from the tool &mdash; or hand it to our designers to refine. There's no charge to design and no commitment until you place an order.</p>
+<div class="sj-cta-row" style="justify-content:flex-start;">
+<a href="/" class="sj-btn">Open the 3D Designer</a>
+<a href="/pages/custom-kit-gallery" class="sj-btn secondary">See Real Team Kits</a>
+</div>
+
+<!-- COMPARISON -->
+<h2 class="sj-h2">How MOMUTO Compares</h2>
+<p class="sj-p">A side-by-side look at MOMUTO versus the way most teams get custom soccer uniforms today &mdash; a local print shop or a traditional bulk supplier.</p>
+<div class="sj-table-wrap">
+<table class="sj-table">
+<thead>
+<tr>
+<th>Factor</th>
+<th>MOMUTO</th>
+<th>Local Print Shop</th>
+<th>Traditional Bulk Supplier</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Minimum Order</td><td>1 unit</td><td>Often 1&ndash;6</td><td>Usually 10&ndash;hundreds</td></tr>
+<tr><td>Decoration</td><td>Full dye-sublimation (printed into the fabric)</td><td>Heat-press / vinyl numbers</td><td>Sewn-on twill / embroidery</td></tr>
+<tr><td>Design Freedom</td><td>Unlimited colors, gradients, patterns, crests</td><td>Limited by transfer area</td><td>Limited by stitching</td></tr>
+<tr><td>Crest &amp; Patches</td><td><span class="sj-check">✓</span> Sublimated, full color, no extra cost</td><td>Add-on cost</td><td>Embroidery surcharge</td></tr>
+<tr><td>Per-player Names &amp; Numbers</td><td><span class="sj-check">✓</span> Included</td><td>Per-name charge</td><td>Per-name charge</td></tr>
+<tr><td>Youth &amp; Adult Sizes</td><td><span class="sj-check">✓</span> Both, same design</td><td>Varies</td><td>Varies</td></tr>
+<tr><td>Design Help</td><td>Free 3D tool + free pro designer</td><td>You supply artwork</td><td>You supply artwork</td></tr>
+<tr><td>Fabric</td><td>Polyester-elastane performance blend</td><td>Blank stock tees</td><td>100% polyester (typical)</td></tr>
+<tr><td>Turnaround</td><td>25&ndash;30 days</td><td>Days&ndash;weeks (simple jobs)</td><td>4&ndash;6+ weeks</td></tr>
+</tbody>
+</table>
+</div>
+<p class="sj-note">General comparison of common options for US teams. Local print shops can be faster for very simple, low-color jobs; MOMUTO's advantage is full-color custom design with no minimum and per-player personalization built in.</p>
+
+<!-- USE CASES -->
+<h2 class="sj-h2">Built for Every Kind of Team</h2>
+<div class="sj-uc-grid">
+<div class="sj-uc"><i class="fas fa-shield-halved"></i><h3>Club Teams</h3><p>Match and away kits with your crest, sponsors, and full squad of names and numbers.</p></div>
+<div class="sj-uc"><i class="fas fa-children"></i><h3>Youth &amp; Academy</h3><p>One design across every age group, in youth and adult sizing, with no minimum order.</p></div>
+<div class="sj-uc"><i class="fas fa-futbol"></i><h3>Rec &amp; Adult Leagues</h3><p>Outfit a 5-a-side, 7-a-side, or weekend league side &mdash; order just what you need.</p></div>
+<div class="sj-uc"><i class="fas fa-graduation-cap"></i><h3>College &amp; Intramural</h3><p>Club and intramural teams get a pro look without a federation-sized budget or order.</p></div>
+<div class="sj-uc"><i class="fas fa-briefcase"></i><h3>Corporate &amp; Events</h3><p>Company sides, tournaments, and charity matches with branded jerseys for everyone.</p></div>
+<div class="sj-uc"><i class="fas fa-shirt"></i><h3>Goalkeeper &amp; Training</h3><p>Matching goalkeeper jerseys and training tops designed in the same kit system.</p></div>
+</div>
+
+<!-- FAQ -->
+<h2 class="sj-h2">Soccer Jersey FAQ</h2>
+<div class="sj-faq">
+<details><summary>Is there a minimum order for custom soccer jerseys?</summary><p>No. MOMUTO has no minimum order &mdash; order a single custom jersey or a full club kit of 100+. Pricing per jersey drops as the order grows, but there are no minimum-quantity surcharges or sample fees.</p></details>
+<details><summary>How long does delivery take?</summary><p>Custom soccer jerseys and uniforms are delivered in 25&ndash;30 days worldwide (production plus shipping direct from the factory). Your free design mockup is ready in 1&ndash;2 days, and production doesn't start until you approve it.</p></details>
+<details><summary>Can I upload my own logo or team crest?</summary><p>Yes. Upload your club logo, crest, or sponsor artwork and our design team places it on the jersey. Because every kit is full dye-sublimation printed, logos and crests are printed into the fabric &mdash; no size or color limits, and no peeling.</p></details>
+<details><summary>What sizes are available — do you make youth soccer jerseys?</summary><p>Yes. MOMUTO makes both youth and adult sizes, so a club, academy, or family can order the same design across every age group. A full size guide with measurements is available before you order.</p></details>
+<details><summary>Are the jerseys sublimated or sewn?</summary><p>All MOMUTO soccer jerseys use full dye-sublimation printing, where the design is fused into the fabric. It never peels, cracks, or fades, and it allows unlimited colors, gradients, patterns, names, numbers, and crests at no extra cost &mdash; unlike sewn-on twill or heat-pressed numbers.</p></details>
+<details><summary>Can each player have a different name and number?</summary><p>Yes. The whole team can order one design with a different name and number per player at no extra charge. Personalization is part of the print, not an add-on.</p></details>
+</div>
+
+<!-- CTA -->
+</div>
+<div class="sj-cta-block">
+<h2>Start Your Soccer Kit</h2>
+<p>Design it yourself in 3D, or let our team design it for you &mdash; free, with no commitment until you order.</p>
+<a href="/" class="sj-btn">Design in 3D</a>
+<a href="/pages/request-custom-kit-design" class="sj-btn secondary">Request a Free Design</a>
+<p class="sj-note">No minimum order &middot; Full sublimation &middot; Youth to adult sizes &middot; Worldwide delivery in 25&ndash;30 days</p>
+</div>
+</div>
