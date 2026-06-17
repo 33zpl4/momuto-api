@@ -97,7 +97,7 @@ const DOMAINS = {
     handleSuffix: 'design-maglia',
     galleryUrl: 'https://it.momuto.com/pages/galleria-maglie-personalizzate',
     galleryHandle: 'galleria-maglie-personalizzate',
-    comparisonUrl: 'https://it.momuto.com/pages/perche-momuto',
+    comparisonUrl: 'https://it.momuto.com/pages/confronto-fornitori-maglie-calcio-2026',
     galleryLabel: 'Vedi la Galleria',
     comparisonLabel: 'Perché MOMUTO?',
     orderUrl: 'https://it.momuto.com/pages/richiesta-design-personalizzato',
