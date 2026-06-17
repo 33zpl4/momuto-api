@@ -151,13 +151,17 @@ async function deployLocale(locale) {
     m.meta_descript !== page.meta_descript
   );
 
-  if (repoContent === liveContent && !needsRename && !needsMeta) {
+  // Compare ignoring trailing whitespace — the CMS strips the trailing newline,
+  // which would otherwise show as a permanent 1-char diff and re-push every run.
+  const contentChanged = repoContent.trim() !== liveContent.trim();
+
+  if (!contentChanged && !needsRename && !needsMeta) {
     console.log(`✓ ${domain.label}: already up to date (${liveContent.length} chars)`);
     return { locale, unchanged: true };
   }
 
   const reasons = [
-    repoContent !== liveContent ? `content ${liveContent.length}→${repoContent.length}` : null,
+    contentChanged ? `content ${liveContent.length}→${repoContent.length}` : null,
     needsRename ? `rename ${page.handle}→${domain.handle}` : null,
     needsMeta ? 'meta' : null,
   ].filter(Boolean).join(', ');
