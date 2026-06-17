@@ -15,15 +15,21 @@ def webp(p, lossless=False, q=82):
     return "data:image/webp;base64,"+base64.b64encode(buf.getvalue()).decode()
 def svg(p): return "data:image/svg+xml;base64,"+base64.b64encode(open(A+p,'rb').read()).decode()
 if composite:
+    front_png = "the-"+slug+"-front.png"
+    back_png  = "the-"+slug+"-back.png"
     data={
-     "composite-front.png": webp("the-apex-front.png", lossless=True),
-     "composite-back.png":  webp("the-apex-back.png", lossless=True),
+     "composite-front.png": webp(front_png, lossless=True),
+     "composite-back.png":  webp(back_png, lossless=True),
      "logo-momuto.png": webp("logo-momuto.png", q=90),
      "fonts/font-1.svg": svg("fonts/font-1.svg"),
      "fonts/font-2.svg": svg("fonts/font-2.svg"),
      "fonts/font-3.svg": svg("fonts/font-3.svg"),
      "slots": json.load(open(A+"template-slots.json")),
     }
+    # optional per-template native source palette (drives the generic segmenter).
+    # Without it the engine falls back to the built-in lime rule (Apex).
+    if os.path.exists(A+"palette.json"):
+        data["palette"]=json.load(open(A+"palette.json"))
 else:
     data={
      "blank-shirt-front.png": webp("blank-shirt-front.png", lossless=True),

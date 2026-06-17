@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOMUTO — Live Kit Configurator (POC) · The Kinetic</title>
+<style>
+  body { margin:0; background:#0e0f13; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  .hd { padding:11px 24px; border-bottom:1px solid rgba(255,255,255,.12); color:#f2f3f5; }
+  .hd b { letter-spacing:.18em; font-weight:800; }
+  .hd span { color:#9aa0aa; font-size:13px; margin-left:10px; }
+  #momuto-rtp { padding:14px 24px 24px; }
+</style>
+</head>
+<body>
+<div class="hd"><b>MOMUTO</b><span>Live Kit Configurator — POC · The Kinetic (composite)</span></div>
+<!-- Composite pipeline with a native source palette (purple / black / cyan) bundled
+     into assets-kinetic.js, so the generic segmenter recolours by region. -->
+<div id="momuto-rtp" data-template="the-kinetic" data-mode="composite"
+     data-primary="#3c00a8" data-secondary="#000000" data-trim="#00f0f0"
+     data-product="16534" data-oem="10294534" data-lang="en"></div>
+<script src="assets-kinetic.js" defer></script>
+<script src="embed.js" defer></script>
+</body>
+</html>

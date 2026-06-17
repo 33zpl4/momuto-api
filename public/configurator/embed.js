@@ -232,31 +232,66 @@ function run(root, opts){
     buildUI(); render();
   }
 
+  // hsv helper for the palette matcher (h in [0,360), s,v in [0,1])
+  function rgb2hsv(r,g,b){
+    var mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn,h=0;
+    if(d){ if(mx===r)h=((g-b)/d)%6; else if(mx===g)h=(b-r)/d+2; else h=(r-g)/d+4; h*=60; if(h<0)h+=360; }
+    return [h, mx?d/mx:0, mx/255];
+  }
+  function hueDist(a,b){ var d=Math.abs(a-b)%360; return d>180?360-d:d; }
+
   function buildComposite(img,kind,slotJson,logo){
     var c=offscreen(W,H), x=c.getContext("2d"); x.drawImage(img,0,0,W,H);
     var d=x.getImageData(0,0,W,H).data, n=W*H;
     var region=new Uint8Array(n), ratio=new Float32Array(n), srcA=new Uint8ClampedArray(n), lumArr=new Float32Array(n);
     var minx=1e9,maxx=0,miny=1e9,maxy=0,i;
-    // pass 1: classify by colour. 1=secondary(lime panels), 2=trim(white/neutral), 0=primary(body), 255=empty
+    // Palette (bundled per template) gives the design's NATIVE source colours so the
+    // segmenter is generic. If absent, fall back to the original lime rule (Apex).
+    var palette=(ASSET_DATA && ASSET_DATA.palette) || opts.palette || null;
+    var SRC=null, trimNearSecondary=false;
+    if(palette){
+      SRC=["primary","secondary","trim"].map(function(role){ var c2=hx(palette[role]); var h=rgb2hsv(c2[0],c2[1],c2[2]); return [h[0],h[1],h[2]]; });
+      var ts=hx(palette.trim), ss=hx(palette.secondary);
+      trimNearSecondary=(Math.abs(ts[0]-ss[0])+Math.abs(ts[1]-ss[1])+Math.abs(ts[2]-ss[2])<60);
+    }
+    // shading-robust nearest-source classify -> region 0/1/2
+    var classify=function(r,g,b){
+      var hsv=rgb2hsv(r,g,b),hue=hsv[0],sat=hsv[1],val=hsv[2];
+      if(sat<0.18 && val>0.47) return 2;            // bright neutral = inner collar facing
+      var best=0,bs=1e9;
+      for(var ri=0;ri<3;ri++){ var S=SRC[ri],hs=S[0],ss2=S[1],vs=S[2],sc;
+        if(vs<0.24) sc=val+sat;                     // dark source (e.g. black)
+        else if(ss2>0.25) sc=(sat<0.15?2.0:hueDist(hue,hs)/180);  // chromatic source
+        else sc=sat+Math.abs(val-vs);               // neutral source
+        if(sc<bs){bs=sc;best=ri;}
+      }
+      return best;
+    };
+    // pass 1: classify. region 0=primary 1=secondary 2=trim 255=empty
     for(i=0;i<n;i++){
       var r=d[i*4],g=d[i*4+1],b=d[i*4+2],a=d[i*4+3]; srcA[i]=a;
       if(a<20){region[i]=255;continue;}
       var X=i%W,Y=(i/W)|0; if(X<minx)minx=X;if(X>maxx)maxx=X;if(Y<miny)miny=Y;if(Y>maxy)maxy=Y;
-      var mx=Math.max(r,g,b),mn=Math.min(r,g,b),sat=mx?(mx-mn)/mx:0,lum=0.299*r+0.587*g+0.114*b;
-      lumArr[i]=lum;
-      var lime=(g>110)&&(r>60)&&(b<110)&&(g>=b+40)&&(g>=r-12);
-      if(lime) region[i]=1;
-      else if(sat<0.18 && lum>150) region[i]=2;   // bright neutral = inner collar facing
-      else region[i]=0;
+      var lum=0.299*r+0.587*g+0.114*b; lumArr[i]=lum;
+      if(palette){ region[i]=classify(r,g,b); }
+      else {
+        var mx=Math.max(r,g,b),sat=mx?(mx-Math.min(r,g,b))/mx:0;
+        var lime=(g>110)&&(r>60)&&(b<110)&&(g>=b+40)&&(g>=r-12);
+        region[i]= lime?1 : (sat<0.18&&lum>150?2 : 0);
+      }
     }
     var gw=maxx-minx+1, gh=maxy-miny+1, cx=(minx+maxx)/2;
-    // pass 2: split secondary(1) -> trim(2) where it is collar (top centre) or cuff (upper outer)
-    for(i=0;i<n;i++){
-      if(region[i]!==1) continue;
-      var X=i%W,Y=(i/W)|0;
-      var collar=(Y<miny+0.22*gh)&&(Math.abs(X-cx)<0.20*gw);
-      var cuff=(Y<miny+0.46*gh)&&(X<minx+0.17*gw||X>maxx-0.17*gw);
-      if(collar||cuff) region[i]=2;
+    // pass 2: spatial collar/cuff split — only when trim shares the secondary colour
+    // (Apex: lime trim == lime panels). When trim is its own colour (Kinetic: cyan) it
+    // is already separated by the matcher, so skip.
+    if(!palette || trimNearSecondary){
+      for(i=0;i<n;i++){
+        if(region[i]!==1) continue;
+        var X2=i%W,Y2=(i/W)|0;
+        var collar=(Y2<miny+0.22*gh)&&(Math.abs(X2-cx)<0.20*gw);
+        var cuff=(Y2<miny+0.46*gh)&&(X2<minx+0.17*gw||X2>maxx-0.17*gw);
+        if(collar||cuff) region[i]=2;
+      }
     }
     // pass 3: per-region shading ratio = lum / (region mean * 1.04)
     var sum=[0,0,0],cnt=[0,0,0];
