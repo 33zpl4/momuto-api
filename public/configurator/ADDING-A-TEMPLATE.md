@@ -208,6 +208,19 @@ Use the canonical editorial block (banner + collection label + title + descripti
 2. `<p>` description (from `ready-to-play/templates/<slug>/config.json` → `description.en`)
 3. widget `data-template` / `data-product` / `data-oem`, and `assets-<slug>.js` src.
 
+**Signature opening colours.** Set the model's default colourway on the mount so the
+widget opens on-brand (matching the collection page and the design SVG). Pull values
+from `config.json` → `default_colors`:
+
+```html
+<div id="momuto-rtp" data-template="<slug>" data-product="…" data-oem="…" data-lang="en"
+     data-primary="#001F5B" data-secondary="#C4A46B" data-trim="#FFFFFF"></div>
+```
+
+Optional `data-namecolor` overrides the back name/number colour (defaults to trim).
+If omitted, the widget falls back to the marble default. "Reset" returns to these
+values, not a hard-coded colourway.
+
 See `ready-to-play/templates/the-fracture/` for reference copy and the chat-delivered
 block for the exact markup.
 

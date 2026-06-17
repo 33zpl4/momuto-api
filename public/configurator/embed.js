@@ -192,7 +192,10 @@ function run(root, opts){
   var assetSrc=function(name){ return (ASSET_DATA && ASSET_DATA[name]) ? ASSET_DATA[name] : (A+name); };
   var cv=root.getElementById("cv"), ctx=cv.getContext("2d",{willReadFrequently:true});
   var views={}, active="front", fontImg={};
-  var state={ primary:"#2e3238", secondary:"#ffffff", trim:"#121212", crest:null, sponsor:null, font:"vanguard", nameColor:"#121212", kit:"jersey", qty:10 };
+  // per-template signature colours via data-primary/secondary/trim/namecolor; falls back to marble
+  var DEFAULTS={ primary:opts.primary||"#2e3238", secondary:opts.secondary||"#ffffff",
+    trim:opts.trim||"#121212", nameColor:opts.nameColor||opts.trim||"#121212" };
+  var state={ primary:DEFAULTS.primary, secondary:DEFAULTS.secondary, trim:DEFAULTS.trim, crest:null, sponsor:null, font:"vanguard", nameColor:DEFAULTS.nameColor, kit:"jersey", qty:10 };
   var CART={ base:"https://design.momuto.com", productId:opts.productId, oemId:opts.oemId, lang:opts.lang };
 
   async function init(){
@@ -402,7 +405,7 @@ function run(root, opts){
     var pc=root.getElementById("presets");
     Object.keys(PRESETS).forEach(function(name){ var m=PRESETS[name], b=document.createElement("button"); b.textContent=name;
       b.onclick=function(){ Object.assign(state,m); repaintAll(); render(); }; pc.appendChild(b); });
-    root.getElementById("reset").onclick=function(){ Object.assign(state,{primary:"#2e3238",secondary:"#ffffff",trim:"#121212",nameColor:"#121212"}); repaintAll(); render(); };
+    root.getElementById("reset").onclick=function(){ Object.assign(state,{primary:DEFAULTS.primary,secondary:DEFAULTS.secondary,trim:DEFAULTS.trim,nameColor:DEFAULTS.nameColor}); repaintAll(); render(); };
     // order estimate: kit type + quantity -> RTP price + free flag/armband promo
     function updateEstimate(){
       var q=Math.max(1, parseInt(state.qty,10)||1);
@@ -469,6 +472,8 @@ function mount(host){
   if(host.__rtpMounted) return; host.__rtpMounted=true;
   var opts={ template:host.dataset.template||"the-fracture", productId:host.dataset.product||"16534",
     oemId:host.dataset.oem||"10294534", lang:host.dataset.lang||"en",
+    primary:host.dataset.primary||null, secondary:host.dataset.secondary||null,
+    trim:host.dataset.trim||null, nameColor:host.dataset.namecolor||null,
     assets: host.dataset.assets ? host.dataset.assets.replace(/\/?$/,"/") : DEFAULT_ASSETS };
   var root=host.attachShadow({mode:"open"});
   root.innerHTML="<style>"+CSS+"</style>"+HTML;
