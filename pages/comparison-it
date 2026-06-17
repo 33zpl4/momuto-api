@@ -37,7 +37,7 @@
       "name": "Quanto costano i kit da calcio personalizzati nel 2026?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Prezzi maglie personalizzate MOMUTO: 1 maglia €38.90, 2-4 maglie €34.90 cad., 5-9 maglie €26.90 cad., 10-19 maglie €20.90 cad., 20-49 maglie €18.90 cad., 50-99 maglie €17.90 cad., 100+ maglie €16.90 cad. I pantaloncini sono a prezzo separato: €17.90 (1 unità), €15.90 (2-4), €11.90 (5-9), €6.00 (10-19), €6.00 (20-49), €5.50 (50-99), €5.00 (100+). Il design professionale è sempre gratuito."
+        "text": "Prezzi maglie personalizzate MOMUTO: 1 maglia €38.90, 2-4 maglie €34.90 cad., 5-9 maglie €26.90 cad., 10-19 maglie €21.90 cad., 20-49 maglie €18.90 cad., 50-99 maglie €17.90 cad., 100+ maglie €16.90 cad. I pantaloncini sono a prezzo separato: €17.90 (1 unità), €15.90 (2-4), €11.90 (5-9), €6.00 (10-19), €6.00 (20-49), €5.50 (50-99), €5.00 (100+). Il design professionale è sempre gratuito."
       }
     },
     {
@@ -45,7 +45,7 @@
       "name": "Posso ordinare una sola maglia personalizzata?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sì. MOMUTO non ha ordine minimo. Una singola maglia personalizzata costa €38.90, con pantaloncini a €17.90, per un kit completo a €56.80. Nessun costo per campioni o commissioni nascoste. Ordini da 10+ kit scendono a €26.90 per kit completo (€20.90 maglia + €6.00 pantaloncini)."
+        "text": "Sì. MOMUTO non ha ordine minimo. Una singola maglia personalizzata costa €38.90, con pantaloncini a €17.90, per un kit completo a €56.80. Nessun costo per campioni o commissioni nascoste. Ordini da 10+ kit scendono a €26.90 per kit completo (€21.90 maglia + €6.00 pantaloncini)."
       }
     },
     {
@@ -564,7 +564,7 @@ h1.title, .title, .page-title { display: none !important; }
 </tr>
 <tr class="cmp-best-value">
 <td>10&ndash;19 unit&agrave; <span class="cmp-best-value-badge">Pi&ugrave; Popolare</span></td>
-<td>&euro;20.90</td>
+<td>&euro;21.90</td>
 <td>&euro;6.00</td>
 <td class="cmp-kit-total">&euro;26.90 cad.</td>
 </tr>
@@ -608,7 +608,7 @@ h1.title, .title, .page-title { display: none !important; }
 <tbody>
 <tr>
 <td>Prezzo Maglia (10 unit&agrave;)</td>
-<td>&euro;20.90</td>
+<td>&euro;21.90</td>
 <td>~&euro;29</td>
 <td>~&euro;43</td>
 <td>~&euro;41.90</td>
