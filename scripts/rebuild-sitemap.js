@@ -80,7 +80,7 @@ const STATIC_CLUSTERS = [
   { en: 'teams-clubs-momuto',                  es: 'equipos-momuto',                      fr: 'equipes-clubs-momuto',                       it: 'squadre-club-momuto' },
   { en: 'about-us',                            es: 'sobre-nosotros',                      fr: 'a-propos-de-nous',                           it: 'chi-siamo' },
   { en: 'request-custom-kit-design',           es: 'solicitud-de-diseno-personalizado',   fr: 'demande-de-design-professionnel-de-maillots', it: 'richiesta-design-personalizzato' },
-  { en: 'momuto-vs-jersix-owayo-spized-comparison', es: 'zentral-opiniones-alternativa',  fr: 'comparatif-fournisseur-maillot-foot-2026',   it: 'perche-momuto' },
+  { en: 'momuto-vs-jersix-owayo-spized-comparison', es: 'zentral-opiniones-alternativa',  fr: 'comparatif-fournisseur-maillot-foot-2026',   it: 'confronto-fornitori-maglie-calcio-2026' },
   { en: 'ready-to-play',                       es: 'coleccion-ready-to-play',             fr: 'collection-ready-to-play',                   it: 'collezione-ready-to-play' },
 ];
 
