@@ -29,8 +29,8 @@
   ],
   "default_colors": {
     "primary":   { "hex": "#001F5B", "name": "navy" },
-    "secondary": { "hex": "#C4A46B", "name": "gold" },
-    "trim":      { "hex": "#FFFFFF", "name": "white" }
+    "secondary": { "hex": "#CCFF00", "name": "volt" },
+    "trim":      { "hex": "#CCFF00", "name": "volt" }
   },
   "status": "published"
 }
