@@ -1,34 +1,40 @@
 const fs = require('fs');
 const path = require('path');
 
+// NOTE: sitemap.xml is intentionally NOT deployed here. It is owned by
+// scripts/rebuild-sitemap.js, which generates the sitemap dynamically from the
+// live CMS (including cross-locale hreflang annotations) and pushes it to the
+// DIY file. The static/*/sitemap.xml files are legacy snapshots; deploying them
+// would overwrite the richer dynamic sitemap with stale, hreflang-less content.
+
 const DOMAINS = {
   en: {
     token: process.env.OEMSAAS_TOKEN_EN,
     label: 'momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
+    files: ['robots.txt', 'llms.txt', 'blog.css']
   },
   es: {
     token: process.env.OEMSAAS_TOKEN_ES,
     label: 'es.momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'es.momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
+    files: ['robots.txt', 'llms.txt', 'blog.css']
   },
   fr: {
     token: process.env.OEMSAAS_TOKEN_FR,
     label: 'fr.momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'fr.momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
+    files: ['robots.txt', 'llms.txt', 'blog.css']
   },
   it: {
     token: process.env.OEMSAAS_TOKEN_IT,
     label: 'it.momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'it.momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
+    files: ['robots.txt', 'llms.txt', 'blog.css']
   }
 };
 
@@ -118,6 +124,10 @@ async function main() {
 
     console.log(`\nDeploying static files to ${domain.label}...`);
 
+    if (targetFile === 'sitemap.xml') {
+      console.error('❌ sitemap.xml is managed by scripts/rebuild-sitemap.js — run that instead.');
+      process.exit(1);
+    }
     const filesToDeploy = targetFile ? [targetFile] : domain.files;
 
     for (const filename of filesToDeploy) {
