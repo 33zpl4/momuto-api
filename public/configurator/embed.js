@@ -257,7 +257,7 @@ function run(root, opts){
     // shading-robust nearest-source classify -> region 0/1/2
     var classify=function(r,g,b){
       var hsv=rgb2hsv(r,g,b),hue=hsv[0],sat=hsv[1],val=hsv[2];
-      if(sat<0.18 && val>0.47) return 2;            // bright neutral = inner collar facing
+      if(sat<0.18 && val>0.47) return 3;            // bright neutral = inner collar facing (kept WHITE, not recoloured)
       var best=0,bs=1e9;
       for(var ri=0;ri<3;ri++){ var S=SRC[ri],hs=S[0],ss2=S[1],vs=S[2],sc;
         if(vs<0.24) sc=val+sat;                     // dark source (e.g. black)
@@ -277,7 +277,7 @@ function run(root, opts){
       else {
         var mx=Math.max(r,g,b),sat=mx?(mx-Math.min(r,g,b))/mx:0;
         var lime=(g>110)&&(r>60)&&(b<110)&&(g>=b+40)&&(g>=r-12);
-        region[i]= lime?1 : (sat<0.18&&lum>150?2 : 0);
+        region[i]= lime?1 : (sat<0.18&&lum>150?3 : 0);  // 3 = neutral inner collar (white)
       }
     }
     var gw=maxx-minx+1, gh=maxy-miny+1, cx=(minx+maxx)/2;
@@ -293,11 +293,11 @@ function run(root, opts){
         if(collar||cuff) region[i]=2;
       }
     }
-    // pass 3: per-region shading ratio = lum / (region mean * 1.04)
-    var sum=[0,0,0],cnt=[0,0,0];
-    for(i=0;i<n;i++){var z=region[i]; if(z>2)continue; sum[z]+=lumArr[i]; cnt[z]++;}
-    var ref=[0,1,2].map(function(z){return cnt[z]?(sum[z]/cnt[z])*1.04:1;});
-    for(i=0;i<n;i++){var z2=region[i]; if(z2>2)continue; var k=lumArr[i]/(ref[z2]||1); ratio[i]=k<0.4?0.4:k>1.18?1.18:k;}
+    // pass 3: per-region shading ratio = lum / (region mean * 1.04). regions 0..3
+    var sum=[0,0,0,0],cnt=[0,0,0,0];
+    for(i=0;i<n;i++){var z=region[i]; if(z>3)continue; sum[z]+=lumArr[i]; cnt[z]++;}
+    var ref=[0,1,2,3].map(function(z){return cnt[z]?(sum[z]/cnt[z])*1.04:1;});
+    for(i=0;i<n;i++){var z2=region[i]; if(z2>3)continue; var k=lumArr[i]/(ref[z2]||1); ratio[i]=k<0.4?0.4:k>1.18?1.18:k;}
     var view={mode:"composite",kind:kind,region:region,ratio:ratio,srcA:srcA,logoA:null,slots:{},dy:0};
     if(kind==="front" && slotJson && slotJson.front){
       var DW=slotJson.front.root.w, DH=slotJson.front.root.h;
@@ -315,8 +315,8 @@ function run(root, opts){
     var out=ctx.createImageData(W,H), o=out.data;
     var P=hx(state.primary), S=hx(state.secondary), T=hx(state.trim);
     for(var i=0;i<n;i++){
-      var z=region[i]; if(z>2) continue;
-      var col = z===0?P : z===1?S : T;
+      var z=region[i]; if(z>3) continue;
+      var col = z===0?P : z===1?S : z===2?T : WHITE;   // 3 = neutral inner collar, not recoloured
       if(logoA && logoA[i]>110) col=T;
       var k=ratio[i];
       o[i*4]=Math.min(255,col[0]*k); o[i*4+1]=Math.min(255,col[1]*k); o[i*4+2]=Math.min(255,col[2]*k); o[i*4+3]=srcA[i];
