@@ -199,6 +199,7 @@ function run(root, opts){
   var CART={ base:"https://design.momuto.com", productId:opts.productId, oemId:opts.oemId, lang:opts.lang };
 
   async function init(){
+    if(opts.mode==="composite") return initComposite();
     var slot = (ASSET_DATA && ASSET_DATA.slots) ? Promise.resolve(ASSET_DATA.slots) : fetch(A+"template-slots.json").then(function(x){return x.json();});
     var r=await Promise.all([
       load(assetSrc("blank-shirt-front.png")), load(assetSrc("front-design.png")), load(assetSrc("sleeve-design.png")),
@@ -210,6 +211,84 @@ function run(root, opts){
     FONTS.forEach(function(f,i){fontImg[f[0]]=fl[i];});
     root.getElementById("busy").style.display="none";
     buildUI(); render();
+  }
+
+  // ---- COMPOSITE MODE ----------------------------------------------------
+  // For panel-based designs supplied as a finished on-body PNG (garment + design
+  // already in place, with real shading). We segment the composite into colour
+  // regions (primary body / secondary panels / trim) and recolour each region by
+  // its own luminance shading — so registration is exact (it IS the artwork) and
+  // there is no blank+overlay cover-fit to misalign.
+  async function initComposite(){
+    var slot = (ASSET_DATA && ASSET_DATA.slots) ? Promise.resolve(ASSET_DATA.slots) : fetch(A+"template-slots.json").then(function(x){return x.json();});
+    var r=await Promise.all([
+      load(assetSrc("composite-front.png")), load(assetSrc("composite-back.png")),
+      load(assetSrc("logo-momuto.png")), slot ]);
+    views.front=buildComposite(r[0],"front",r[3],r[2]);
+    views.back =buildComposite(r[1],"back",r[3],null);
+    var fl=await Promise.all(FONTS.map(function(f){return load(assetSrc(f[2]));}));
+    FONTS.forEach(function(f,i){fontImg[f[0]]=fl[i];});
+    root.getElementById("busy").style.display="none";
+    buildUI(); render();
+  }
+
+  function buildComposite(img,kind,slotJson,logo){
+    var c=offscreen(W,H), x=c.getContext("2d"); x.drawImage(img,0,0,W,H);
+    var d=x.getImageData(0,0,W,H).data, n=W*H;
+    var region=new Uint8Array(n), ratio=new Float32Array(n), srcA=new Uint8ClampedArray(n), lumArr=new Float32Array(n);
+    var minx=1e9,maxx=0,miny=1e9,maxy=0,i;
+    // pass 1: classify by colour. 1=secondary(lime panels), 2=trim(white/neutral), 0=primary(body), 255=empty
+    for(i=0;i<n;i++){
+      var r=d[i*4],g=d[i*4+1],b=d[i*4+2],a=d[i*4+3]; srcA[i]=a;
+      if(a<20){region[i]=255;continue;}
+      var X=i%W,Y=(i/W)|0; if(X<minx)minx=X;if(X>maxx)maxx=X;if(Y<miny)miny=Y;if(Y>maxy)maxy=Y;
+      var mx=Math.max(r,g,b),mn=Math.min(r,g,b),sat=mx?(mx-mn)/mx:0,lum=0.299*r+0.587*g+0.114*b;
+      lumArr[i]=lum;
+      var lime=(g>110)&&(r>60)&&(b<110)&&(g>=b+40)&&(g>=r-12);
+      if(lime) region[i]=1;
+      else if(sat<0.18 && lum>150) region[i]=2;   // bright neutral = inner collar facing
+      else region[i]=0;
+    }
+    var gw=maxx-minx+1, gh=maxy-miny+1, cx=(minx+maxx)/2;
+    // pass 2: split secondary(1) -> trim(2) where it is collar (top centre) or cuff (upper outer)
+    for(i=0;i<n;i++){
+      if(region[i]!==1) continue;
+      var X=i%W,Y=(i/W)|0;
+      var collar=(Y<miny+0.22*gh)&&(Math.abs(X-cx)<0.20*gw);
+      var cuff=(Y<miny+0.46*gh)&&(X<minx+0.17*gw||X>maxx-0.17*gw);
+      if(collar||cuff) region[i]=2;
+    }
+    // pass 3: per-region shading ratio = lum / (region mean * 1.04)
+    var sum=[0,0,0],cnt=[0,0,0];
+    for(i=0;i<n;i++){var z=region[i]; if(z>2)continue; sum[z]+=lumArr[i]; cnt[z]++;}
+    var ref=[0,1,2].map(function(z){return cnt[z]?(sum[z]/cnt[z])*1.04:1;});
+    for(i=0;i<n;i++){var z2=region[i]; if(z2>2)continue; var k=lumArr[i]/(ref[z2]||1); ratio[i]=k<0.4?0.4:k>1.18?1.18:k;}
+    var view={mode:"composite",kind:kind,region:region,ratio:ratio,srcA:srcA,logoA:null,slots:{},dy:0};
+    if(kind==="front" && slotJson && slotJson.front){
+      var DW=slotJson.front.root.w, DH=slotJson.front.root.h;
+      var mkSlot=function(rc){return {x:minx+rc.x/DW*gw, y:miny+rc.y/DH*gh, w:rc.w/DW*gw, h:rc.h/DH*gh};};
+      view.slots={ sponsor:mkSlot(slotJson.front.slots.sponsor), crest:mkSlot(slotJson.front.slots.crest) };
+      if(logo){ var lp=placeDesign(logo, mkSlot(slotJson.front.slots["logo-momuto"]), {contain:true,pad:1.06});
+        var logoA=new Uint8Array(n); for(i=0;i<n;i++) logoA[i]=lp.data[i*4+3]; view.logoA=logoA; }
+    }
+    if(kind==="back"){ view.nameSlot={ cx:cx, cy:miny+gh*0.34, w:gw*0.50, h:gh*0.50 }; }
+    return view;
+  }
+  function renderComposite(V){
+    cv.style.transform="";
+    var region=V.region, ratio=V.ratio, srcA=V.srcA, logoA=V.logoA, n=W*H;
+    var out=ctx.createImageData(W,H), o=out.data;
+    var P=hx(state.primary), S=hx(state.secondary), T=hx(state.trim);
+    for(var i=0;i<n;i++){
+      var z=region[i]; if(z>2) continue;
+      var col = z===0?P : z===1?S : T;
+      if(logoA && logoA[i]>110) col=T;
+      var k=ratio[i];
+      o[i*4]=Math.min(255,col[0]*k); o[i*4+1]=Math.min(255,col[1]*k); o[i*4+2]=Math.min(255,col[2]*k); o[i*4+3]=srcA[i];
+    }
+    ctx.putImageData(out,0,0);
+    if(V.kind==="front"){ drawLogo(state.crest,V.slots.crest); drawLogo(state.sponsor,V.slots.sponsor); }
+    else drawNameNumber(V);
   }
 
   function buildFront(blank,front,sleeve,logo,slotJson){
@@ -318,6 +397,7 @@ function run(root, opts){
 
   function render(){
     var V=views[active]; if(!V) return;
+    if(V.mode==="composite") return renderComposite(V);
     cv.style.transform="";
     var zoneIdx=V.zoneIdx,ratio=V.ratio,srcA=V.srcA,designRGB=V.designRGB,isDesign=V.isDesign,logoA=V.logoA;
     var out=ctx.createImageData(W,H), o=out.data, n=W*H, dyW=(V.dy||0)*W;
@@ -472,6 +552,7 @@ function mount(host){
   if(host.__rtpMounted) return; host.__rtpMounted=true;
   var opts={ template:host.dataset.template||"the-fracture", productId:host.dataset.product||"16534",
     oemId:host.dataset.oem||"10294534", lang:host.dataset.lang||"en",
+    mode:host.dataset.mode||null,
     primary:host.dataset.primary||null, secondary:host.dataset.secondary||null,
     trim:host.dataset.trim||null, nameColor:host.dataset.namecolor||null,
     assets: host.dataset.assets ? host.dataset.assets.replace(/\/?$/,"/") : DEFAULT_ASSETS };

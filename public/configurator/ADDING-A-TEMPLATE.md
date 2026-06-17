@@ -41,6 +41,58 @@ are mapped to fit and may be any aspect ratio).
 
 ---
 
+## 1b. Composite mode (panel-based designs, e.g. The Apex)
+
+Some designs are **solid colour blocks** (side panels, yokes, contrast trim) rather
+than allover patterns. For these the blank+overlay pipeline above is the *wrong*
+tool: the panels must register to the exact garment silhouette, and any cover-fit of
+a separate overlay misaligns them. Instead, supply the design as a **finished
+on-body composite** and let the engine recolour by segmented region.
+
+**How it works.** You export the garment **with the design already in place** (real
+mockup shading included), as two transparent PNGs. The engine (`buildComposite` in
+`embed.js`) segments every pixel into a region by colour, then recolours each region
+by its own luminance shading — so registration is exact (the artwork *is* the file)
+and there is no overlay to drift.
+
+**Asset spec (per template, 1500×1500, transparent background):**
+
+| File (in `assets-<slug>/`) | Contents |
+|---|---|
+| `the-apex-front.png` | Front view, garment + design composited, on transparent bg |
+| `the-apex-back.png`  | Back view, same |
+| `logo-momuto.png`    | Brand mark (tinted with trim colour) |
+| `template-slots.json`| Crest / sponsor / logo-momuto slot rects (design-space) |
+
+Colour conventions the segmenter expects (current Apex build):
+- **Primary** = the body/sleeve base colour (any dark, low-green colour).
+- **Secondary** = the panels, authored in **lime `#ccff00`** (high green, low blue).
+- **Trim** = collar + cuffs. They may be the same lime as the panels; the engine
+  splits them off by **position** (collar = top-centre ring; cuffs = upper-outer).
+- Front and back must have the garment in the **same position/scale** (1500×1500),
+  so the Front/Back toggle doesn't jump.
+
+If your secondary colour isn't lime, adjust the `lime` test and the white/neutral
+test at the top of `buildComposite`. For designs with more than ~3 flat regions, or
+true allover/photographic patterns, use the pattern pipeline (§1) instead.
+
+**Build & embed:**
+```
+python3 build-assets.py apex assets-apex --composite     # -> assets-apex.js
+```
+```
+<div id="momuto-rtp" data-template="the-apex" data-mode="composite"
+     data-primary="#1a1a1a" data-secondary="#ccff00" data-trim="#ccff00"
+     data-product="…" data-oem="…" data-lang="en"></div>
+<script src="assets-apex.js" defer></script>
+<script src="embed.js" defer></script>
+```
+The only new knob is `data-mode="composite"`. Everything else (colour pickers,
+presets, crest/sponsor upload, name/number, pricing, add-to-cart) is shared and
+unchanged. See `index-apex.html` for a working standalone page.
+
+---
+
 ## 2. Per-model deliverables checklist
 
 | # | Deliverable | Reusable across models? | Notes |
