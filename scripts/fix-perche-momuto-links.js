@@ -27,6 +27,10 @@ const IT = {
 const OLD = 'perche-momuto';
 const NEW = 'confronto-fornitori-maglie-calcio-2026';
 const DRY_RUN = process.env.DRY_RUN !== 'false';
+// Pause between writes to stay under the OEMSaaS rate limit (code 1000).
+const THROTTLE_MS = Number(process.env.THROTTLE_MS || 600);
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function fetchAll(endpoint) {
   let page = 1;
@@ -62,17 +66,32 @@ function matchingFields(item) {
   return TEXT_FIELDS.filter(f => typeof item[f] === 'string' && item[f].includes(OLD));
 }
 
-async function put(endpoint, id, body) {
-  const res = await fetch(`${IT.host}/${endpoint}/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json', token: IT.token },
-    body: JSON.stringify(body),
-  });
-  const json = await res.json();
-  if (!res.ok || json.code !== 0) {
+async function put(endpoint, id, body, maxAttempts = 5) {
+  const delays = [2000, 4000, 8000, 16000];
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    let res, json;
+    try {
+      res = await fetch(`${IT.host}/${endpoint}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', token: IT.token },
+        body: JSON.stringify(body),
+      });
+      json = await res.json();
+    } catch (err) {
+      json = { msg: err.message };
+    }
+    if (res && res.ok && json && json.code === 0) return json;
+
+    const msg = json?.msg || `HTTP ${res?.status}`;
+    const rateLimited = res?.status === 429 || json?.code === 1000 || /too many requests/i.test(msg);
+    if (rateLimited && attempt < maxAttempts) {
+      const delay = delays[attempt - 1] ?? 16000;
+      console.log(`    ⏳ rate limited — retrying in ${delay / 1000}s (attempt ${attempt}/${maxAttempts})`);
+      await sleep(delay);
+      continue;
+    }
     throw new Error(`PUT /${endpoint}/${id} failed: ${JSON.stringify(json)}`);
   }
-  return json;
 }
 
 // Replace the dead handle everywhere in `content` only (where hrefs live).
@@ -102,6 +121,7 @@ async function fixPages() {
     });
     console.log(`    ✓ updated`);
     fixed++;
+    await sleep(THROTTLE_MS);
   }
   return { scanned: pages.length, fixed };
 }
@@ -125,6 +145,7 @@ async function fixPosts() {
     });
     console.log(`    ✓ updated`);
     fixed++;
+    await sleep(THROTTLE_MS);
   }
   return { scanned: posts.length, fixed };
 }
