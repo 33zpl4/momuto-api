@@ -45,7 +45,12 @@ const DOMAINS = {
     token: process.env.OEMSAAS_TOKEN_FR,
     label: 'fr.momuto.com',
     handle: 'demande-de-design-professionnel-de-maillots',
-    file: path.join(ROOT, 'pages', 'demande-de-design-professionnel-de-maillots')
+    file: path.join(ROOT, 'pages', 'demande-de-design-professionnel-de-maillots'),
+    // Commercial-intent meta (was 10 clicks / 1669 impr, ranking only as a brand sitelink).
+    title: 'Design de Maillot de Foot Personnalisé Gratuit | MOMUTO',
+    meta_title: 'Design de Maillot de Foot Personnalisé Gratuit',
+    meta_descript: 'Recevez gratuitement la maquette de votre maillot de foot personnalisé en 1-2 jours. Révisions gratuites, sans engagement et sans minimum de commande.',
+    meta_keywords: ['design maillot de foot', 'maillot de foot personnalisé', 'maquette maillot gratuite', 'création maillot foot', 'MOMUTO']
   },
   it: {
     host: 'https://openapi.oemapps.com',
@@ -91,10 +96,10 @@ async function updatePage(domain, page, content) {
     headers: { 'Content-Type': 'application/json', token: domain.token },
     body: JSON.stringify({
       content,
-      title: page.title,
-      meta_title: page.meta_title,
-      meta_keywords: page.meta_keywords,
-      meta_descript: page.meta_descript,
+      title: domain.title || page.title,
+      meta_title: domain.meta_title || page.meta_title,
+      meta_keywords: domain.meta_keywords || page.meta_keywords,
+      meta_descript: domain.meta_descript || page.meta_descript,
       handle: page.handle
     })
   });
@@ -125,7 +130,13 @@ async function deployLocale(locale) {
   const page = await getPageByHandle(domain);
   const liveContent = page.content || '';
 
-  if (repoContent === liveContent) {
+  // A meta override differing from what's live also warrants a PUT.
+  const metaInSync =
+    (!domain.title || domain.title === page.title) &&
+    (!domain.meta_title || domain.meta_title === page.meta_title) &&
+    (!domain.meta_descript || domain.meta_descript === page.meta_descript);
+
+  if (repoContent === liveContent && metaInSync) {
     console.log(`✓ ${domain.label}: already up to date (${liveContent.length} chars)`);
     return { locale, unchanged: true };
   }
