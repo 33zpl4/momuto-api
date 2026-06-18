@@ -1,0 +1,311 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Design Your Own Soccer Jersey — Free 3D Maker | MOMUTO",
+  "description": "Design your own soccer jersey free in 3D, or turn your AI concept (ChatGPT, Gemini) into a real, wearable kit. No minimum order, full sublimation, free pro design.",
+  "url": "https://www.momuto.com/pages/design-your-own-soccer-jersey",
+  "datePublished": "2026-06-18",
+  "dateModified": "2026-06-18",
+  "inLanguage": "en-US",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".sj-bluf", ".sj-faq"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MOMUTO",
+    "url": "https://www.momuto.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.momuto.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Custom Soccer Jerseys & Uniforms", "item": "https://www.momuto.com/pages/custom-soccer-jerseys" },
+    { "@type": "ListItem", "position": 3, "name": "Design Your Own Soccer Jersey", "item": "https://www.momuto.com/pages/design-your-own-soccer-jersey" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I design my own soccer jersey online for free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. MOMUTO's 3D soccer jersey designer is free to use with 30+ templates. Set your colors, add your crest, sponsor, and player names and numbers, and rotate the kit in real time. There is no charge to design and no commitment until you place an order."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I turn an AI-generated design into a real soccer jersey?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If you created a jersey concept with ChatGPT, Gemini, Midjourney, or any design tool, you can upload it and MOMUTO's designers adapt it into a production-ready, wearable soccer jersey. A small refundable design deposit applies and is refunded in full on orders of 5 jerseys or more."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I am not a designer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You don't have to be. Send a brief — colors, vibe, references, a sketch, or an AI image — and a professional designer creates a custom soccer jersey mockup for you in 1-2 days, with free revisions. You only design as much or as little as you want."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a minimum order to design your own jersey?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. MOMUTO has no minimum order. Design and order a single jersey or a full team kit. Pricing per jersey drops as the order grows, with no minimum-quantity surcharge."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is the jersey printed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every MOMUTO soccer jersey is full dye-sublimation printed, so your design — including gradients, patterns, crests, names, and numbers — is fused into the fabric and never peels, cracks, or fades. There are no color or placement limits."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Custom Soccer Jersey — Design Your Own",
+  "description": "Design your own soccer jersey in a free 3D tool, or have MOMUTO turn your AI concept into a real, full-sublimation kit. No minimum order, free professional design, delivered worldwide in 25-30 days.",
+  "brand": { "@type": "Brand", "name": "MOMUTO" },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": 4.4,
+    "reviewCount": 17,
+    "bestRating": 5
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": 21.90,
+    "highPrice": 56.80,
+    "offerCount": 7,
+    "availability": "https://schema.org/InStock",
+    "url": "https://www.momuto.com/pages/request-custom-kit-design",
+    "priceValidUntil": "2026-12-31"
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Design Tools", "value": "Free 3D configurator + free professional design service" },
+    { "@type": "PropertyValue", "name": "AI Concept", "value": "AI-generated designs adapted into production-ready kits" },
+    { "@type": "PropertyValue", "name": "Minimum Order", "value": "1 unit" },
+    { "@type": "PropertyValue", "name": "Printing", "value": "Full dye-sublimation" },
+    { "@type": "PropertyValue", "name": "Delivery", "value": "25-30 days worldwide" }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ===== GLOBAL RESETS ===== */
+html, body { background-color: #0a0a0a !important; color: #f5f5f5; }
+h1.title, .title, .page-title { display: none !important; }
+.container_wrapper, .page-width, .container, .main-content {
+  max-width: 100% !important; width: 100% !important;
+  padding: 0 !important; margin: 0 !important;
+  overflow: visible !important;
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ===== VARIABLES ===== */
+:root {
+  --mg-bg: #0a0a0a; --mg-panel: #111; --mg-card: #111;
+  --mg-border: rgba(255,255,255,0.06); --mg-border-hover: rgba(255,255,255,0.12);
+  --mg-white: #f5f5f5; --mg-muted: #a1a1aa; --mg-dim: #71717a;
+  --mg-red: #c8352e; --mg-red-hover: #e04038;
+  --font-display: 'Bebas Neue', sans-serif; --font-body: 'Outfit', sans-serif;
+}
+
+/* ===== PAGE ===== */
+.sj-page { font-family: var(--font-body); background: var(--mg-bg); color: var(--mg-white); width: 100%; padding-bottom: 80px; }
+.sj-container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+/* ===== HERO ===== */
+.sj-hero {
+  background: var(--mg-bg); border-bottom: 1px solid var(--mg-border);
+  padding: 64px 40px 56px; display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.sj-hero h1, .sj-hero .sj-badge, .sj-hero .sj-lede, .sj-hero .sj-trust { text-align: center; }
+.sj-badge {
+  display: inline-block; font-family: var(--font-body); font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--mg-red);
+  background: rgba(200,53,46,0.1); border: 1px solid rgba(200,53,46,0.15); padding: 6px 14px; margin-bottom: 20px;
+}
+.sj-hero h1 {
+  font-family: var(--font-display); font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.03em; line-height: 0.98; color: var(--mg-white);
+  margin: 0 auto 18px; max-width: 15ch;
+}
+.sj-hero h1 .hl { color: var(--mg-red); }
+.sj-lede {
+  font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; color: var(--mg-muted);
+  line-height: 1.7; max-width: 62ch; margin: 0 auto 28px;
+}
+.sj-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.sj-btn {
+  display: inline-block; background: var(--mg-red); color: #fff; font-family: var(--font-body);
+  font-weight: 800; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 16px 34px; text-decoration: none; border: 1px solid var(--mg-red); transition: background 0.2s ease;
+}
+.sj-btn:hover { background: var(--mg-red-hover); border-color: var(--mg-red-hover); }
+.sj-btn.secondary { background: transparent; color: var(--mg-white); border: 1px solid var(--mg-border-hover); }
+.sj-btn.secondary:hover { border-color: var(--mg-white); background: transparent; }
+
+/* ===== BLUF / FACTS ===== */
+.sj-bluf { padding: 40px 0 0; }
+.sj-bluf p { font-family: var(--font-body); font-size: 1rem; font-weight: 300; color: var(--mg-muted); line-height: 1.8; margin-bottom: 1.1em; }
+.sj-bluf p strong { color: var(--mg-white); font-weight: 600; }
+.sj-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin: 36px 0 0; }
+.sj-fact { background: rgba(255,255,255,0.03); border: 1px solid var(--mg-border); padding: 20px; }
+.sj-fact .k { font-family: var(--font-display); font-size: 1.7rem; color: var(--mg-white); line-height: 1; letter-spacing: 0.02em; }
+.sj-fact .l { font-size: 0.78rem; color: var(--mg-muted); margin-top: 8px; line-height: 1.5; }
+
+/* ===== SECTION TITLES ===== */
+.sj-h2 {
+  font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--mg-white);
+  margin: 60px 0 18px 0; line-height: 1; padding-left: 16px; border-left: 3px solid var(--mg-red);
+}
+.sj-p { font-family: var(--font-body); font-size: 0.95rem; font-weight: 300; color: var(--mg-muted); line-height: 1.8; margin-bottom: 1.2em; }
+.sj-p strong { color: var(--mg-white); font-weight: 600; }
+.sj-p a { color: var(--mg-white); text-decoration: underline; }
+
+/* ===== TWO WAYS ===== */
+.sj-ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 1.5em 0; }
+.sj-way { background: var(--mg-panel); border: 1px solid var(--mg-border); padding: 28px; }
+.sj-way i { color: var(--mg-red); font-size: 1.4rem; margin-bottom: 14px; display: block; }
+.sj-way h3 { font-family: var(--font-body); font-weight: 700; font-size: 1.05rem; color: var(--mg-white); margin: 0 0 10px; }
+.sj-way p { font-size: 0.88rem; color: var(--mg-muted); line-height: 1.65; margin: 0 0 16px; }
+.sj-way a.sj-inline { color: #fff; font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; border-bottom: 2px solid var(--mg-red); padding-bottom: 2px; }
+
+/* ===== AI HIGHLIGHT ===== */
+.sj-ai {
+  background: linear-gradient(135deg, rgba(200,53,46,0.10), rgba(255,255,255,0.02));
+  border: 1px solid rgba(200,53,46,0.25); padding: 36px; margin: 1.5em 0;
+}
+.sj-ai .tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mg-red); display: block; margin-bottom: 12px; }
+.sj-ai h3 { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 400; letter-spacing: 0.03em; text-transform: uppercase; color: var(--mg-white); margin: 0 0 12px; line-height: 1; }
+.sj-ai p { font-size: 0.95rem; color: var(--mg-muted); line-height: 1.75; margin: 0 0 14px; font-weight: 300; }
+.sj-ai p strong { color: var(--mg-white); }
+
+/* ===== STEPS ===== */
+.sj-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 1.5em 0; }
+.sj-step { background: var(--mg-panel); border: 1px solid var(--mg-border); padding: 28px 24px; }
+.sj-step .num { font-family: var(--font-display); font-size: 2.2rem; color: var(--mg-red); line-height: 1; display: block; margin-bottom: 12px; }
+.sj-step h3 { font-family: var(--font-body); font-weight: 700; font-size: 0.95rem; color: var(--mg-white); margin: 0 0 8px; }
+.sj-step p { font-size: 0.84rem; color: var(--mg-muted); line-height: 1.6; margin: 0; }
+
+/* ===== FAQ ===== */
+.sj-faq { margin: 1.5em 0; }
+.sj-faq details { border: 1px solid var(--mg-border); border-left: 3px solid var(--mg-red); background: var(--mg-panel); margin-bottom: 10px; padding: 0 22px; }
+.sj-faq summary { font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; color: var(--mg-white); padding: 18px 0; cursor: pointer; list-style: none; }
+.sj-faq summary::-webkit-details-marker { display: none; }
+.sj-faq summary::after { content: "+"; float: right; color: var(--mg-red); font-weight: 700; }
+.sj-faq details[open] summary::after { content: "−"; }
+.sj-faq details p { font-size: 0.9rem; color: var(--mg-muted); line-height: 1.75; margin: 0 0 18px; font-weight: 300; }
+.sj-faq details p a { color: #fff; text-decoration: underline; }
+
+/* ===== TRUST LINE ===== */
+.sj-trust { font-size: 0.8rem; color: var(--mg-dim); margin-top: 18px; letter-spacing: 0.04em; }
+.sj-trust a { color: var(--mg-muted); text-decoration: underline; }
+
+/* ===== CTA BLOCK ===== */
+.sj-cta-block { background: var(--mg-red); padding: 60px 40px; text-align: center; margin: 64px 0 0; }
+.sj-cta-block h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; line-height: 1; margin: 0 0 12px; }
+.sj-cta-block p { color: rgba(255,255,255,0.85); font-size: 0.95rem; font-weight: 300; margin-bottom: 26px; }
+.sj-cta-block .sj-btn { background: #fff; color: #000; border-color: #fff; }
+.sj-cta-block .sj-btn:hover { background: #e5e5e5; }
+.sj-cta-block .sj-btn.secondary { background: transparent; color: #fff; border-color: rgba(255,255,255,0.5); }
+.sj-note { font-size: 0.75rem; color: var(--mg-dim); margin-top: 10px; font-weight: 300; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .sj-container { padding: 0 20px; }
+  .sj-hero { padding: 44px 20px 40px; }
+  .sj-cta-block { padding: 40px 20px; }
+  .sj-ai { padding: 24px; }
+}
+</style>
+<div class="sj-page">
+<div class="sj-hero">
+<div class="sj-badge">Design Your Own Soccer Jersey</div>
+<h1>Create Your Own <span class="hl">Soccer Jersey</span></h1>
+<p class="sj-lede">Design your own soccer jersey free in our real-time 3D tool — or bring your own idea, even an AI-generated concept, and our designers turn it into a real, wearable kit. No minimum order, full-sublimation printing, free professional design.</p>
+<div class="sj-cta-row"><a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn">Open the 3D Designer</a> <a href="/pages/request-custom-kit-design" class="sj-btn secondary">Send Your Idea</a></div>
+<p class="sj-trust">Rated 4.4/5 on <a href="https://www.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> &mdash; trusted by 100+ clubs and teams worldwide.</p>
+</div>
+<div class="sj-container">
+<!-- BLUF -->
+<div class="sj-bluf">
+<p>There are two ways to make your own soccer jersey at MOMUTO. <strong>Design it yourself</strong> in a free real-time 3D configurator with 30+ templates, or <strong>hand us your idea</strong> — a brief, a sketch, or an AI-generated image — and a professional designer builds the kit for you, free, in 1&ndash;2 days. Either way you get <strong>full dye-sublimation</strong> printing, <strong>no minimum order</strong>, and per-player names and numbers included. <strong>Design is always free</strong> — you only pay when you order.</p>
+<div class="sj-facts">
+<div class="sj-fact"><div class="k">Free 3D</div><div class="l">Real-time designer, 30+ templates, no account needed</div></div>
+<div class="sj-fact"><div class="k">AI → real</div><div class="l">Turn a ChatGPT, Gemini or Midjourney concept into a wearable kit</div></div>
+<div class="sj-fact"><div class="k">No min.</div><div class="l">Make one jersey or a full team — no minimum-quantity surcharge</div></div>
+<div class="sj-fact"><div class="k">1&ndash;2 days</div><div class="l">Free professional mockup with free revisions</div></div>
+</div>
+</div>
+<!-- TWO WAYS -->
+<h2 class="sj-h2">Two Ways to Make Your Own</h2>
+<div class="sj-ways">
+<div class="sj-way"><i class="fas fa-cube"></i>
+<h3>1. Design it yourself in 3D</h3>
+<p>Open the free 3D soccer jersey maker, pick a template, set your colors, add your crest, sponsor, names and numbers, and spin the kit in real time. Order straight from the tool when it's right.</p>
+<a class="sj-inline" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en">Open the 3D designer →</a>
+</div>
+<div class="sj-way"><i class="fas fa-wand-magic-sparkles"></i>
+<h3>2. Send us your idea</h3>
+<p>Not a designer? Send a brief, a reference, a hand sketch, or an AI image. A professional designer creates your custom soccer jersey mockup in 1&ndash;2 days, with free revisions until it's right.</p>
+<a class="sj-inline" href="/pages/request-custom-kit-design">Request a free design →</a>
+</div>
+</div>
+<!-- AI CONCEPT -->
+<div class="sj-ai">
+<span class="tag">The MOMUTO difference</span>
+<h3>Turn Your AI Concept Into a Real Soccer Jersey</h3>
+<p>Designed something with <strong>ChatGPT, Gemini, Midjourney</strong>, or any AI tool? Most makers can't use it. MOMUTO can. Upload your AI-generated concept and our designers adapt it into a <strong>production-ready, fully wearable soccer jersey</strong> — sublimated edge to edge, exactly the way the rest of our kits are made.</p>
+<p>A small refundable design deposit applies and is <strong>refunded in full on orders of 5 jerseys or more</strong>, so the people who are ready to play get our designers' full attention.</p>
+<div class="sj-cta-row" style="justify-content:flex-start;"><a href="/pages/request-custom-kit-design" class="sj-btn">Upload Your Concept</a></div>
+</div>
+<!-- HOW IT WORKS -->
+<h2 class="sj-h2">How It Works</h2>
+<div class="sj-steps">
+<div class="sj-step"><span class="num">1</span><h3>Design or upload</h3><p>Build it in the 3D tool, or upload your brief / sketch / AI concept.</p></div>
+<div class="sj-step"><span class="num">2</span><h3>Approve the mockup</h3><p>Get your design (or pro mockup in 1&ndash;2 days) and request free revisions until it's perfect.</p></div>
+<div class="sj-step"><span class="num">3</span><h3>Order — no minimum</h3><p>Order one jersey or a full team. Add per-player names and numbers at no extra cost.</p></div>
+<div class="sj-step"><span class="num">4</span><h3>We make &amp; ship it</h3><p>Full-sublimation production, delivered worldwide in 25&ndash;30 days.</p></div>
+</div>
+<!-- FAQ -->
+<h2 class="sj-h2">Design-Your-Own FAQ</h2>
+<div class="sj-faq">
+<details><summary>Can I design my own soccer jersey online for free?</summary><p>Yes. MOMUTO's 3D soccer jersey designer is free to use with 30+ templates. Set your colors, add your crest, sponsor, and player names and numbers, and rotate the kit in real time. There's no charge to design and no commitment until you order.</p></details>
+<details><summary>Can I turn an AI-generated design into a real soccer jersey?</summary><p>Yes. If you created a jersey concept with ChatGPT, Gemini, Midjourney, or any design tool, you can <a href="/pages/request-custom-kit-design">upload it</a> and our designers adapt it into a production-ready, wearable soccer jersey. A small refundable design deposit applies and is refunded in full on orders of 5 jerseys or more.</p></details>
+<details><summary>What if I'm not a designer?</summary><p>You don't have to be. Send a brief — colors, vibe, references, a sketch, or an AI image — and a professional designer creates a custom soccer jersey mockup for you in 1&ndash;2 days, with free revisions.</p></details>
+<details><summary>Is there a minimum order to design your own jersey?</summary><p>No. MOMUTO has no minimum order. Design and order a single jersey or a full team kit, with no minimum-quantity surcharge.</p></details>
+<details><summary>How is the jersey printed?</summary><p>Every MOMUTO soccer jersey is full dye-sublimation printed, so your design — gradients, patterns, crests, names, and numbers — is fused into the fabric and never peels, cracks, or fades. No color or placement limits.</p></details>
+</div>
+<p class="sj-p">Designing for a club or youth team? See <a href="/pages/custom-youth-club-soccer-uniforms">custom youth &amp; club soccer uniforms</a>, or start from the main <a href="/pages/custom-soccer-jerseys">custom soccer jerseys</a> hub.</p>
+</div>
+<!-- CTA -->
+<div class="sj-cta-block">
+<h2>Make It Yours</h2>
+<p>Design your own soccer jersey in 3D, or send us your idea — including an AI concept — and we'll make it real. Free, no commitment until you order.</p>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn">Design in 3D</a> <a href="/pages/request-custom-kit-design" class="sj-btn secondary">Send Your Idea</a>
+<p class="sj-note">Free design &middot; No minimum order &middot; Full sublimation &middot; Delivery in 25&ndash;30 days</p>
+</div>
+</div>
