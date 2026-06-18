@@ -1,0 +1,202 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Maillot de Foot Personnalisé sur Mesure | MOMUTO",
+  "description": "Créez votre maillot de foot personnalisé : configurateur 3D gratuit ou design professionnel en 1-2 jours. Sans minimum de commande, sublimation intégrale, livraison en 25-30 jours.",
+  "url": "https://fr.momuto.com/pages/maillot-foot-personnalise",
+  "datePublished": "2026-06-18",
+  "dateModified": "2026-06-18",
+  "inLanguage": "fr-FR",
+  "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".sj-bluf", ".sj-faq"] },
+  "publisher": { "@type": "Organization", "name": "MOMUTO", "url": "https://fr.momuto.com" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://fr.momuto.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Maillot de foot personnalisé", "item": "https://fr.momuto.com/pages/maillot-foot-personnalise" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Y a-t-il un minimum de commande pour un maillot de foot personnalisé ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Non. MOMUTO n'impose aucun minimum de commande. Vous pouvez commander un seul maillot ou une équipe complète. Le prix par maillot baisse avec la quantité, sans surcoût lié à une quantité minimale." }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien de temps prend la livraison ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Les maillots personnalisés sont livrés en 25-30 jours dans le monde entier (production puis expédition directe d'usine). Votre maquette de design gratuite est prête en 1-2 jours, et la production ne démarre qu'après votre validation." }
+    },
+    {
+      "@type": "Question",
+      "name": "Le service de design est-il vraiment gratuit ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Oui. MOMUTO propose deux façons gratuites de créer : un configurateur 3D en temps réel avec plus de 30 modèles, et un service de design professionnel où notre équipe réalise une maquette sur mesure en 1-2 jours, révisions gratuites incluses. Vous ne payez qu'à la commande." }
+    },
+    {
+      "@type": "Question",
+      "name": "Puis-je ajouter mon blason de club et mes sponsors ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Oui. Téléversez votre blason et vos logos sponsors, et notre équipe les place sur le maillot. La sublimation intégrale imprime les logos dans le tissu, en couleurs illimitées, sans limite de taille et sans craquèlement." }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte un maillot de foot personnalisé ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "À partir de 38,90 € pour un maillot seul, et dès 21,90 € par maillot à partir de 10 unités (kit complet maillot + short à partir de 26,90 € par joueur à 10 unités). Le design est toujours gratuit." }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+html, body { background-color: #0a0a0a !important; color: #f5f5f5; }
+h1.title, .title, .page-title { display: none !important; }
+.container_wrapper, .page-width, .container, .main-content { max-width:100%!important; width:100%!important; padding:0!important; margin:0!important; overflow:visible!important; }
+*, *::before, *::after { box-sizing: border-box; }
+:root { --mg-bg:#0a0a0a; --mg-panel:#111; --mg-border:rgba(255,255,255,0.06); --mg-border-hover:rgba(255,255,255,0.12); --mg-white:#f5f5f5; --mg-muted:#a1a1aa; --mg-dim:#71717a; --mg-red:#c8352e; --mg-red-hover:#e04038; --font-display:'Bebas Neue',sans-serif; --font-body:'Outfit',sans-serif; }
+.sj-page { font-family:var(--font-body); background:var(--mg-bg); color:var(--mg-white); width:100%; padding-bottom:80px; }
+.sj-container { max-width:1100px; margin:0 auto; padding:0 40px; }
+.sj-hero { background:var(--mg-bg); border-bottom:1px solid var(--mg-border); padding:64px 40px 56px; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.sj-hero h1, .sj-hero .sj-badge, .sj-hero .sj-lede, .sj-hero .sj-trust { text-align:center; }
+.sj-badge { display:inline-block; font-size:0.6rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--mg-red); background:rgba(200,53,46,0.1); border:1px solid rgba(200,53,46,0.15); padding:6px 14px; margin-bottom:20px; }
+.sj-hero h1 { font-family:var(--font-display); font-size:clamp(2.2rem,6vw,4rem); font-weight:400; text-transform:uppercase; letter-spacing:0.03em; line-height:0.98; color:var(--mg-white); margin:0 auto 18px; max-width:18ch; }
+.sj-hero h1 .hl { color:var(--mg-red); }
+.sj-lede { font-size:1.05rem; font-weight:300; color:var(--mg-muted); line-height:1.7; max-width:64ch; margin:0 auto 28px; }
+.sj-cta-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.sj-btn { display:inline-block; background:var(--mg-red); color:#fff; font-weight:800; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.1em; padding:16px 34px; text-decoration:none; border:1px solid var(--mg-red); transition:background 0.2s ease; }
+.sj-btn:hover { background:var(--mg-red-hover); border-color:var(--mg-red-hover); }
+.sj-btn.secondary { background:transparent; color:var(--mg-white); border:1px solid var(--mg-border-hover); }
+.sj-btn.secondary:hover { border-color:var(--mg-white); }
+.sj-trust { font-size:0.8rem; color:var(--mg-dim); margin-top:18px; letter-spacing:0.04em; }
+.sj-trust a { color:var(--mg-muted); text-decoration:underline; }
+.sj-bluf { padding:40px 0 0; }
+.sj-bluf p { font-size:1rem; font-weight:300; color:var(--mg-muted); line-height:1.8; margin-bottom:1.1em; }
+.sj-bluf p strong { color:var(--mg-white); font-weight:600; }
+.sj-equiv { background:var(--mg-panel); border:1px solid var(--mg-border); border-left:3px solid var(--mg-red); padding:18px 22px; font-size:0.92rem; color:var(--mg-muted); line-height:1.7; margin:6px 0 0; }
+.sj-equiv strong { color:var(--mg-white); }
+.sj-facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px; margin:36px 0 0; }
+.sj-fact { background:rgba(255,255,255,0.03); border:1px solid var(--mg-border); padding:20px; }
+.sj-fact .k { font-family:var(--font-display); font-size:1.7rem; color:var(--mg-white); line-height:1; letter-spacing:0.02em; }
+.sj-fact .l { font-size:0.78rem; color:var(--mg-muted); margin-top:8px; line-height:1.5; }
+.sj-h2 { font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.2rem); font-weight:400; text-transform:uppercase; letter-spacing:0.04em; color:var(--mg-white); margin:60px 0 18px 0; line-height:1; padding-left:16px; border-left:3px solid var(--mg-red); }
+.sj-p { font-size:0.95rem; font-weight:300; color:var(--mg-muted); line-height:1.8; margin-bottom:1.2em; }
+.sj-p strong { color:var(--mg-white); font-weight:600; }
+.sj-p a { color:var(--mg-white); text-decoration:underline; }
+.sj-ways { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin:1.5em 0; }
+.sj-way { background:var(--mg-panel); border:1px solid var(--mg-border); padding:28px; }
+.sj-way i { color:var(--mg-red); font-size:1.4rem; margin-bottom:14px; display:block; }
+.sj-way h3 { font-weight:700; font-size:1.05rem; color:var(--mg-white); margin:0 0 10px; }
+.sj-way p { font-size:0.88rem; color:var(--mg-muted); line-height:1.65; margin:0 0 16px; }
+.sj-way a.sj-inline { color:#fff; font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; text-decoration:none; border-bottom:2px solid var(--mg-red); padding-bottom:2px; }
+.sj-table-wrap { overflow-x:auto; margin:1.5em 0; border:1px solid var(--mg-border); }
+.sj-price { width:100%; border-collapse:collapse; font-size:0.9rem; background:#111; }
+.sj-price thead tr { background:#fff; }
+.sj-price th { color:#111; font-weight:700; text-transform:uppercase; font-size:0.65rem; letter-spacing:0.1em; padding:14px 18px; text-align:left; }
+.sj-price td { padding:13px 18px; border-bottom:1px solid var(--mg-border); color:var(--mg-muted); }
+.sj-price tr:last-child td { border-bottom:none; }
+.sj-price .tot { font-weight:700; color:var(--mg-white); }
+.sj-price .best td { background:rgba(200,53,46,0.06); }
+.sj-uc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:1.5em 0; }
+.sj-uc { background:var(--mg-panel); border:1px solid var(--mg-border); padding:24px; transition:border-color 0.2s; }
+.sj-uc:hover { border-color:var(--mg-border-hover); }
+.sj-uc i { color:var(--mg-red); font-size:1.2rem; margin-bottom:12px; display:block; }
+.sj-uc h3 { font-weight:700; font-size:0.95rem; color:var(--mg-white); margin:0 0 8px; }
+.sj-uc p { font-size:0.84rem; color:var(--mg-muted); line-height:1.6; margin:0; }
+.sj-faq { margin:1.5em 0; }
+.sj-faq details { border:1px solid var(--mg-border); border-left:3px solid var(--mg-red); background:var(--mg-panel); margin-bottom:10px; padding:0 22px; }
+.sj-faq summary { font-weight:600; font-size:0.95rem; color:var(--mg-white); padding:18px 0; cursor:pointer; list-style:none; }
+.sj-faq summary::-webkit-details-marker { display:none; }
+.sj-faq summary::after { content:"+"; float:right; color:var(--mg-red); font-weight:700; }
+.sj-faq details[open] summary::after { content:"−"; }
+.sj-faq details p { font-size:0.9rem; color:var(--mg-muted); line-height:1.75; margin:0 0 18px; font-weight:300; }
+.sj-faq details p a { color:#fff; text-decoration:underline; }
+.sj-cta-block { background:var(--mg-red); padding:60px 40px; text-align:center; margin:64px 0 0; }
+.sj-cta-block h2 { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:400; text-transform:uppercase; letter-spacing:0.04em; color:#fff; line-height:1; margin:0 0 12px; }
+.sj-cta-block p { color:rgba(255,255,255,0.85); font-size:0.95rem; font-weight:300; margin-bottom:26px; }
+.sj-cta-block .sj-btn { background:#fff; color:#000; border-color:#fff; }
+.sj-cta-block .sj-btn.secondary { background:transparent; color:#fff; border-color:rgba(255,255,255,0.5); }
+.sj-note { font-size:0.75rem; color:var(--mg-dim); margin-top:10px; font-weight:300; }
+@media (max-width:768px){ .sj-container{padding:0 20px;} .sj-hero{padding:44px 20px 40px;} .sj-cta-block{padding:40px 20px;} .sj-price{font-size:0.8rem;} .sj-price th,.sj-price td{padding:10px 12px;} }
+</style>
+<div class="sj-page">
+<div class="sj-hero">
+<div class="sj-badge">Maillot de foot personnalisé</div>
+<h1>Votre <span class="hl">Maillot de Foot</span> sur Mesure</h1>
+<p class="sj-lede">Créez le maillot de votre équipe dans notre configurateur 3D gratuit, ou confiez-nous votre idée et recevez une maquette professionnelle en 1 à 2 jours. Sans minimum de commande, sublimation intégrale, tailles enfant et adulte.</p>
+<div class="sj-cta-row"><a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr" class="sj-btn">Créer en 3D — gratuit</a> <a href="/pages/demande-de-design-professionnel-de-maillots" class="sj-btn secondary">Demander un design gratuit</a></div>
+<p class="sj-trust">Noté 4,4/5 sur <a href="https://fr.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confiance de 100+ clubs dans le monde.</p>
+</div>
+<div class="sj-container">
+<div class="sj-bluf">
+<p>MOMUTO conçoit des <strong>maillots de foot personnalisés sur mesure</strong> pour les clubs, les équipes amateurs, les académies et les groupes d'amis. Choisissez un modèle dans le <strong>configurateur 3D gratuit</strong> et commandez en quelques minutes, ou envoyez-nous votre brief et notre équipe crée votre maillot — <strong>le design est toujours gratuit</strong>. Chaque maillot est imprimé en <strong>sublimation intégrale</strong> sur un tissu polyester-élasthanne, <strong>sans minimum de commande</strong> (1 maillot comme 100), avec <strong>noms et numéros de chaque joueur inclus</strong> et livraison en <strong>25 à 30 jours</strong>.</p>
+<div class="sj-facts">
+<div class="sj-fact"><div class="k">Sans min.</div><div class="l">Commandez 1 maillot ou une équipe entière — aucun minimum</div></div>
+<div class="sj-fact"><div class="k">1 à 2 jours</div><div class="l">Maquette de design professionnelle gratuite, révisions incluses</div></div>
+<div class="sj-fact"><div class="k">25-30 jours</div><div class="l">Livraison dans le monde entier, directement d'usine</div></div>
+<div class="sj-fact"><div class="k">Sublimation</div><div class="l">Couleurs illimitées, ne craque pas, ne se décolle pas</div></div>
+</div>
+</div>
+<!-- DEUX FACONS -->
+<h2 class="sj-h2">Deux façons de créer votre maillot</h2>
+<div class="sj-ways">
+<div class="sj-way"><i class="fas fa-cube"></i>
+<h3>1. Le configurateur 3D gratuit</h3>
+<p>Ouvrez le configurateur 3D, choisissez un modèle, réglez vos couleurs, ajoutez votre blason, vos sponsors, les noms et numéros, et faites pivoter le maillot en temps réel. Commandez directement depuis l'outil.</p>
+<a class="sj-inline" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr">Ouvrir le configurateur 3D →</a>
+</div>
+<div class="sj-way"><i class="fas fa-wand-magic-sparkles"></i>
+<h3>2. Le design professionnel gratuit</h3>
+<p>Pas designer ? Envoyez un brief, une référence, un croquis ou même une image générée par IA. Un designer professionnel crée votre maquette en 1 à 2 jours, avec révisions gratuites jusqu'à validation.</p>
+<a class="sj-inline" href="/pages/demande-de-design-professionnel-de-maillots">Demander un design gratuit →</a>
+</div>
+</div>
+<!-- PRIX -->
+<h2 class="sj-h2">Tarifs — le design est toujours gratuit</h2>
+<p class="sj-p">Prix dégressifs selon la quantité, sans minimum de commande et sans frais cachés.</p>
+<div class="sj-table-wrap">
+<table class="sj-price">
+<thead><tr><th>Quantité</th><th>Maillot</th><th>Short</th><th>Kit complet</th></tr></thead>
+<tbody>
+<tr><td>1 unité</td><td>38,90 €</td><td>17,90 €</td><td class="tot">56,80 €</td></tr>
+<tr><td>5 à 9 unités</td><td>26,90 €</td><td>11,90 €</td><td class="tot">38,80 € / pièce</td></tr>
+<tr class="best"><td>10 à 19 unités</td><td>21,90 €</td><td>6,00 €</td><td class="tot">26,90 € / pièce</td></tr>
+<tr><td>20 à 49 unités</td><td>18,90 €</td><td>6,00 €</td><td class="tot">24,90 € / pièce</td></tr>
+<tr><td>100+ unités</td><td>16,90 €</td><td>5,00 €</td><td class="tot">21,90 € / pièce</td></tr>
+</tbody>
+</table>
+</div>
+<p class="sj-note">Tissu polyester-élasthanne de série. Maquette professionnelle gratuite livrée en 1-2 jours, révisions incluses.</p>
+<!-- USAGES -->
+<h2 class="sj-h2">Pour chaque type d'équipe</h2>
+<div class="sj-uc-grid">
+<div class="sj-uc"><i class="fas fa-shield-halved"></i><h3>Clubs &amp; équipes</h3><p>Maillots domicile et extérieur avec blason, sponsors et l'effectif complet en noms et numéros.</p></div>
+<div class="sj-uc"><i class="fas fa-children"></i><h3>Jeunes &amp; académies</h3><p>Un seul design décliné sur toutes les catégories, en tailles enfant et adulte, sans minimum.</p></div>
+<div class="sj-uc"><i class="fas fa-futbol"></i><h3>Foot à 5, 7 &amp; loisir</h3><p>Équipez une équipe de foot à 5, à 7 ou de loisir — commandez seulement ce qu'il vous faut.</p></div>
+<div class="sj-uc"><i class="fas fa-briefcase"></i><h3>Entreprises &amp; tournois</h3><p>Équipes d'entreprise, tournois et matchs caritatifs avec des maillots à votre image.</p></div>
+</div>
+<!-- FAQ -->
+<h2 class="sj-h2">Questions fréquentes</h2>
+<div class="sj-faq">
+<details><summary>Y a-t-il un minimum de commande ?</summary><p>Non. MOMUTO n'impose aucun minimum — commandez un seul maillot ou une équipe complète. Le prix par maillot baisse avec la quantité, sans surcoût lié à une quantité minimale.</p></details>
+<details><summary>Combien de temps prend la livraison ?</summary><p>Les maillots personnalisés sont livrés en 25-30 jours dans le monde entier. Votre maquette gratuite est prête en 1-2 jours, et la production ne démarre qu'après votre validation.</p></details>
+<details><summary>Le design est-il vraiment gratuit ?</summary><p>Oui. Deux options gratuites : le configurateur 3D avec plus de 30 modèles, et un service de design professionnel qui réalise votre maquette sur mesure en 1-2 jours. Vous ne payez qu'à la commande.</p></details>
+<details><summary>Puis-je ajouter mon blason et mes sponsors ?</summary><p>Oui. Téléversez votre blason et vos logos : la sublimation intégrale les imprime dans le tissu, en couleurs illimitées, sans limite de taille et sans craquèlement.</p></details>
+<details><summary>Chaque joueur peut-il avoir un nom et un numéro différents ?</summary><p>Oui, sans frais supplémentaires. La personnalisation fait partie de l'impression, ce n'est pas une option payante.</p></details>
+</div>
+<p class="sj-p">Pour aller plus loin : comparez les <a href="/pages/comparatif-fournisseur-maillot-foot-2026">meilleurs fournisseurs de maillots</a>, explorez la <a href="/pages/galerie-maillots-foot-sur-mesure">galerie de maillots sur mesure</a> ou les <a href="/collections/concepts-de-maillots">maillots concept</a>.</p>
+</div>
+<div class="sj-cta-block">
+<h2>Lancez votre maillot</h2>
+<p>Créez-le en 3D, ou laissez notre équipe le concevoir — gratuitement, sans engagement jusqu'à la commande.</p>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr" class="sj-btn">Créer en 3D</a> <a href="/pages/demande-de-design-professionnel-de-maillots" class="sj-btn secondary">Demander un design gratuit</a>
+<p class="sj-note">Sans minimum · Sublimation intégrale · Tailles enfant à adulte · Livraison 25-30 jours</p>
+</div>
+</div>

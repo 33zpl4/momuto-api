@@ -53,7 +53,13 @@ const DOMAINS = {
     token: process.env.OEMSAAS_TOKEN_FR,
     label: 'fr.momuto.com',
     handle: 'galerie-maillots-foot-sur-mesure',
-    file: path.join(ROOT, 'pages', 'galerie-maillots-foot-sur-mesure')
+    file: path.join(ROOT, 'pages', 'galerie-maillots-foot-sur-mesure'),
+    // Commercial-intent meta to lift this page beyond brand sitelinks
+    // (was 1 click / 722 impressions, ranking only under the "momuto" brand SERP).
+    title: 'Galerie de Maillots de Foot Personnalisés sur Mesure',
+    meta_title: 'Galerie de Maillots de Foot Personnalisés sur Mesure',
+    meta_descript: 'Découvrez nos maillots de foot personnalisés sur mesure créés pour des clubs du monde entier. Sans minimum de commande, sublimation intégrale, design gratuit.',
+    meta_keywords: ['maillot de foot personnalisé', 'maillot foot sur mesure', 'galerie maillots personnalisés', 'maillot club personnalisé', 'MOMUTO']
   },
   it: {
     host: 'https://openapi.oemapps.com',
@@ -115,10 +121,10 @@ async function updatePage(domain, page, content) {
     headers: { 'Content-Type': 'application/json', token: domain.token },
     body: JSON.stringify({
       content,
-      title: page.title,
-      meta_title: page.meta_title,
-      meta_keywords: page.meta_keywords,
-      meta_descript: page.meta_descript,
+      title: domain.title || page.title,
+      meta_title: domain.meta_title || page.meta_title,
+      meta_keywords: domain.meta_keywords || page.meta_keywords,
+      meta_descript: domain.meta_descript || page.meta_descript,
       handle: page.handle
     })
   });
@@ -164,7 +170,14 @@ async function deployLocale(locale) {
 
   const mergedContent = cleanLegacyCtaInlineStyles(repoSplit.head + liveSplit.tail);
 
-  if (mergedContent === liveContent) {
+  // A meta override differing from what's live also warrants a PUT, even if
+  // the page body itself is unchanged.
+  const metaInSync =
+    (!domain.title || domain.title === page.title) &&
+    (!domain.meta_title || domain.meta_title === page.meta_title) &&
+    (!domain.meta_descript || domain.meta_descript === page.meta_descript);
+
+  if (mergedContent === liveContent && metaInSync) {
     console.log(`✓ ${domain.label}: already up to date (${liveContent.length} chars)`);
     return { locale, unchanged: true };
   }
