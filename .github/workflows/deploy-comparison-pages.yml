@@ -6,14 +6,15 @@ on:
     paths:
       - 'pages/comparison-en'
       - 'pages/comparison-fr'
+      - 'pages/comparison-it'
       - 'scripts/deploy-comparison-pages.js'
       - '.github/workflows/deploy-comparison-pages.yml'
   workflow_dispatch:
     inputs:
       locales:
-        description: 'Comma-separated locales to deploy (en,fr)'
+        description: 'Comma-separated locales to deploy (en,fr,it)'
         required: false
-        default: 'en,fr'
+        default: 'en,fr,it'
       dry_run:
         description: 'Dry run (do not write to CMS)'
         required: false
@@ -36,6 +37,7 @@ jobs:
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
-          LOCALES: ${{ inputs.locales || 'en,fr' }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          LOCALES: ${{ inputs.locales || 'en,fr,it' }}
           DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
         run: node scripts/deploy-comparison-pages.js
