@@ -40,6 +40,7 @@ const HIGH_PRIORITY_HANDLES = new Set([
   'custom-soccer-jerseys',
   'custom-youth-club-soccer-uniforms',
   'design-your-own-soccer-jersey',
+  'best-custom-soccer-jersey-makers-2026',
   'request-custom-kit-design',
   'faq',
   'printing',
