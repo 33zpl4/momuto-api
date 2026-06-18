@@ -1,0 +1,34 @@
+name: Deploy Design-Your-Own Page
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pages/design-your-own-soccer-jersey'
+      - 'scripts/deploy-design-your-own-page.js'
+      - '.github/workflows/deploy-design-your-own-page.yml'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (do not write to CMS)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Deploy design-your-own page
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+        run: node scripts/deploy-design-your-own-page.js
