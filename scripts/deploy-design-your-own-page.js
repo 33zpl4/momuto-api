@@ -26,7 +26,7 @@ const DOMAIN = {
   file: path.join(ROOT, 'pages', 'design-your-own-soccer-jersey'),
   title: 'Design Your Own Soccer Jersey — Free 3D Maker',
   meta_title: 'Design Your Own Soccer Jersey — Free 3D Maker',
-  meta_descript: 'Design your own soccer jersey free in 3D, or turn your AI concept (ChatGPT, Midjourney) into a real, wearable kit. No minimum order, full sublimation.',
+  meta_descript: 'Design your own soccer jersey free in 3D, or turn your AI concept (ChatGPT, Gemini) into a real, wearable kit. No minimum order, full sublimation.',
   meta_keywords: [
     'design your own soccer jersey',
     'create your own soccer jersey online free',
