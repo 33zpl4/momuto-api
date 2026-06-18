@@ -15,6 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { submitUrls } = require('../lib/indexnow');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -132,6 +133,8 @@ async function main() {
     console.log(`✓ Created ${DOMAIN.handle} on ${DOMAIN.label}`);
     console.log(`  Live at: https://www.momuto.com/pages/${DOMAIN.handle}`);
   }
+
+  await submitUrls([`https://www.momuto.com/pages/${DOMAIN.handle}`]);
 }
 
 main().catch(e => {

@@ -1,0 +1,26 @@
+name: IndexNow Submit
+
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'Comma-separated URLs to submit to IndexNow (Bing/Yandex)'
+        required: true
+        default: 'https://www.momuto.com/pages/custom-soccer-jerseys,https://www.momuto.com/pages/custom-youth-club-soccer-uniforms,https://www.momuto.com/pages/design-your-own-soccer-jersey'
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Submit URLs to IndexNow
+        env:
+          URLS: ${{ inputs.urls }}
+        run: node scripts/indexnow-submit.js

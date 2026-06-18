@@ -37,6 +37,9 @@ const DOMAINS = {
 // Pages that deserve higher priority in the sitemap
 const HIGH_PRIORITY_HANDLES = new Set([
   'custom-kit-gallery',
+  'custom-soccer-jerseys',
+  'custom-youth-club-soccer-uniforms',
+  'design-your-own-soccer-jersey',
   'request-custom-kit-design',
   'faq',
   'printing',
