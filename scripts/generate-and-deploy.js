@@ -1,6 +1,7 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const fs = require('fs');
 const path = require('path');
+const { submitUrls } = require('../lib/indexnow');
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -798,6 +799,10 @@ async function main() {
 
         console.log(`Updating sitemap on ${domain.label}...`);
         await updateSitemap(domain, teamSlug);
+
+        // Ping IndexNow (Bing/Yandex). Non-fatal; only hosts with a hosted
+        // key are submitted (currently momuto.com / EN).
+        await submitUrls([`${domain.baseUrl}/pages/${handle}`]);
       }
 
       if (updateGalleryFlag || galleryOnly) {
