@@ -1,0 +1,716 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Custom Youth & Club Soccer Uniforms | MOMUTO",
+  "description": "Outfit your youth or club soccer team in custom uniforms. No minimum order, youth-to-adult sizing in one design, per-player names & numbers, full sublimation, free design.",
+  "url": "https://www.momuto.com/pages/custom-youth-club-soccer-uniforms",
+  "datePublished": "2026-06-18",
+  "dateModified": "2026-06-18",
+  "inLanguage": "en-US",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".sj-bluf", ".sj-faq"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MOMUTO",
+    "url": "https://www.momuto.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.momuto.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Custom Soccer Jerseys & Uniforms", "item": "https://www.momuto.com/pages/custom-soccer-jerseys" },
+    { "@type": "ListItem", "position": 3, "name": "Youth & Club Soccer Uniforms", "item": "https://www.momuto.com/pages/custom-youth-club-soccer-uniforms" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a minimum order for youth or club soccer uniforms?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. MOMUTO has no minimum order, so a small squad or a whole club can order custom uniforms with no minimum-quantity surcharge. Pricing per jersey drops as the order grows, but you are never forced to buy a fixed batch."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you make youth and kids sizes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. MOMUTO offers youth and adult sizing, so the same design can be ordered across every age group in your club — from the youngest academy squads to senior teams. A full size guide with measurements is available before you order."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can every player have a different size, name, and number?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. One team order can mix any sizes, and each player gets their own name and number at no extra cost. Because the uniforms are full dye-sublimation printed, personalization is part of the print, not an add-on."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a whole club order matching uniforms across different age groups?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Clubs and academies regularly order one unified design across multiple teams and age groups in both youth and adult sizes. Your free design mockup can be shared with coaches and parents for approval before anything is produced."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does delivery take for a team order?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Custom soccer uniforms are delivered in 25-30 days worldwide (production plus shipping direct from the factory). Your free design mockup is ready in 1-2 days, and production does not start until you approve it, so plan team orders a few weeks before the season."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add our club crest and a sponsor logo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Upload your club crest and any sponsor artwork and our design team places it on the uniform. Sublimation prints logos and crests into the fabric in full color, with no size limits and no peeling — and no embroidery surcharge."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Custom Youth & Club Soccer Uniform",
+  "description": "Fully custom, full-sublimation youth and club soccer uniform. Youth-to-adult sizing in one design, per-player names and numbers, no minimum order, free professional design. Delivered worldwide in 25-30 days.",
+  "brand": { "@type": "Brand", "name": "MOMUTO" },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": 4.4,
+    "reviewCount": 17,
+    "bestRating": 5
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": 21.90,
+    "highPrice": 56.80,
+    "offerCount": 7,
+    "availability": "https://schema.org/InStock",
+    "url": "https://www.momuto.com/pages/request-custom-kit-design",
+    "priceValidUntil": "2026-12-31"
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Minimum Order", "value": "1 unit" },
+    { "@type": "PropertyValue", "name": "Sizing", "value": "Youth to adult" },
+    { "@type": "PropertyValue", "name": "Personalization", "value": "Per-player names and numbers included" },
+    { "@type": "PropertyValue", "name": "Printing", "value": "Full dye-sublimation" },
+    { "@type": "PropertyValue", "name": "Design Service", "value": "Free professional design + free 3D configurator" },
+    { "@type": "PropertyValue", "name": "Delivery", "value": "25-30 days worldwide" }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ===== GLOBAL RESETS ===== */
+html, body {
+  background-color: #0a0a0a !important;
+  color: #f5f5f5;
+}
+h1.title, .title, .page-title { display: none !important; }
+.container_wrapper, .page-width, .container, .main-content {
+  max-width: 100% !important; width: 100% !important;
+  padding: 0 !important; margin: 0 !important;
+  overflow: visible !important;
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ===== VARIABLES ===== */
+:root {
+  --mg-bg: #0a0a0a;
+  --mg-panel: #111;
+  --mg-card: #111;
+  --mg-border: rgba(255,255,255,0.06);
+  --mg-border-hover: rgba(255,255,255,0.12);
+  --mg-white: #f5f5f5;
+  --mg-muted: #a1a1aa;
+  --mg-dim: #71717a;
+  --mg-red: #c8352e;
+  --mg-red-hover: #e04038;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+/* ===== PAGE ===== */
+.sj-page {
+  font-family: var(--font-body);
+  background: var(--mg-bg);
+  color: var(--mg-white);
+  width: 100%;
+  padding-bottom: 80px;
+}
+.sj-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ===== HERO ===== */
+.sj-hero {
+  background: var(--mg-bg);
+  border-bottom: 1px solid var(--mg-border);
+  padding: 64px 40px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.sj-hero h1,
+.sj-hero .sj-badge,
+.sj-hero .sj-lede,
+.sj-hero .sj-trust { text-align: center; }
+.sj-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mg-red);
+  background: rgba(200,53,46,0.1);
+  border: 1px solid rgba(200,53,46,0.15);
+  padding: 6px 14px;
+  margin-bottom: 20px;
+}
+.sj-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 0.98;
+  color: var(--mg-white);
+  margin: 0 auto 18px;
+  max-width: 16ch;
+}
+.sj-hero h1 .hl { color: var(--mg-red); }
+.sj-lede {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--mg-muted);
+  line-height: 1.7;
+  max-width: 62ch;
+  margin: 0 auto 28px;
+}
+.sj-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.sj-btn {
+  display: inline-block;
+  background: var(--mg-red);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 16px 34px;
+  text-decoration: none;
+  border: 1px solid var(--mg-red);
+  transition: background 0.2s ease;
+}
+.sj-btn:hover { background: var(--mg-red-hover); border-color: var(--mg-red-hover); }
+.sj-btn.secondary {
+  background: transparent;
+  color: var(--mg-white);
+  border: 1px solid var(--mg-border-hover);
+}
+.sj-btn.secondary:hover { border-color: var(--mg-white); background: transparent; }
+
+/* ===== BLUF / QUICK FACTS ===== */
+.sj-bluf { padding: 40px 0 0; }
+.sj-bluf p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--mg-muted);
+  line-height: 1.8;
+  margin-bottom: 1.1em;
+}
+.sj-bluf p strong { color: var(--mg-white); font-weight: 600; }
+.sj-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  margin: 36px 0 0;
+}
+.sj-fact {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--mg-border);
+  padding: 20px;
+}
+.sj-fact .k {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--mg-white);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.sj-fact .l {
+  font-size: 0.78rem;
+  color: var(--mg-muted);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ===== SECTION TITLES ===== */
+.sj-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--mg-white);
+  margin: 60px 0 18px 0;
+  line-height: 1;
+  padding-left: 16px;
+  border-left: 3px solid var(--mg-red);
+}
+.sj-p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--mg-muted);
+  line-height: 1.8;
+  margin-bottom: 1.2em;
+}
+.sj-p strong { color: var(--mg-white); font-weight: 600; }
+.sj-p a { color: var(--mg-white); text-decoration: underline; }
+
+/* ===== STEPS ===== */
+.sj-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 1.5em 0;
+  counter-reset: step;
+}
+.sj-step {
+  background: var(--mg-panel);
+  border: 1px solid var(--mg-border);
+  padding: 28px 24px;
+  position: relative;
+}
+.sj-step .num {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--mg-red);
+  line-height: 1;
+  display: block;
+  margin-bottom: 12px;
+}
+.sj-step h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--mg-white);
+  margin: 0 0 8px;
+}
+.sj-step p { font-size: 0.84rem; color: var(--mg-muted); line-height: 1.6; margin: 0; }
+
+/* ===== USE CASES ===== */
+.sj-uc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 1.5em 0;
+}
+.sj-uc {
+  background: var(--mg-panel);
+  border: 1px solid var(--mg-border);
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+.sj-uc:hover { border-color: var(--mg-border-hover); }
+.sj-uc i { color: var(--mg-red); font-size: 1.2rem; margin-bottom: 12px; display: block; }
+.sj-uc h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--mg-white);
+  margin: 0 0 8px;
+}
+.sj-uc p { font-size: 0.84rem; color: var(--mg-muted); line-height: 1.6; margin: 0; }
+
+/* ===== SIZING CALLOUT ===== */
+.sj-sizing {
+  background: var(--mg-panel);
+  border: 1px solid var(--mg-border);
+  border-left: 3px solid var(--mg-red);
+  padding: 28px 32px;
+  margin: 1.5em 0;
+}
+.sj-sizing p { font-size: 0.95rem; color: var(--mg-muted); line-height: 1.75; margin: 0 0 14px; font-weight: 300; }
+.sj-sizing p strong { color: var(--mg-white); }
+.sj-sizing a { color: var(--mg-white); font-weight: 600; text-decoration: underline; }
+
+/* ===== FAQ ===== */
+.sj-faq { margin: 1.5em 0; }
+.sj-faq details {
+  border: 1px solid var(--mg-border);
+  border-left: 3px solid var(--mg-red);
+  background: var(--mg-panel);
+  margin-bottom: 10px;
+  padding: 0 22px;
+}
+.sj-faq summary {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--mg-white);
+  padding: 18px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.sj-faq summary::-webkit-details-marker { display: none; }
+.sj-faq summary::after { content: "+"; float: right; color: var(--mg-red); font-weight: 700; }
+.sj-faq details[open] summary::after { content: "−"; }
+.sj-faq details p {
+  font-size: 0.9rem;
+  color: var(--mg-muted);
+  line-height: 1.75;
+  margin: 0 0 18px;
+  font-weight: 300;
+}
+
+/* ===== TRUST LINE ===== */
+.sj-trust {
+  font-size: 0.8rem;
+  color: var(--mg-dim);
+  margin-top: 18px;
+  letter-spacing: 0.04em;
+}
+.sj-trust a { color: var(--mg-muted); text-decoration: underline; }
+
+/* ===== CTA BLOCK ===== */
+.sj-cta-block {
+  background: var(--mg-red);
+  padding: 60px 40px;
+  text-align: center;
+  margin: 64px 0 0;
+}
+.sj-cta-block h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  line-height: 1;
+  margin: 0 0 12px;
+}
+.sj-cta-block p { color: rgba(255,255,255,0.85); font-size: 0.95rem; font-weight: 300; margin-bottom: 26px; }
+.sj-cta-block .sj-btn { background: #fff; color: #000; border-color: #fff; }
+.sj-cta-block .sj-btn:hover { background: #e5e5e5; }
+.sj-cta-block .sj-btn.secondary { background: transparent; color: #fff; border-color: rgba(255,255,255,0.5); }
+.sj-note { font-size: 0.75rem; color: var(--mg-dim); margin-top: 10px; font-weight: 300; }
+
+/* ===== TRUST / SOCIAL PROOF BLOCK ===== */
+.trust-proof {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  background: #0a0a0a;
+  color: #f5f5f5;
+  padding: 6rem 0;
+  overflow: hidden;
+}
+.trust-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+.trust-header { text-align: center; margin-bottom: 4rem; }
+.trust-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #f5f5f5;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+.trust-subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  color: #a1a1aa;
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+.trust-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+.trust-scroll::-webkit-scrollbar { display: none; }
+.trust-card {
+  flex: 0 0 calc((100% - 3 * 1.5rem) / 3.5);
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+.trust-card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-4px); }
+.trust-card-img-wrap { position: relative; aspect-ratio: 4/5; overflow: hidden; background-color: #0a0a0a; }
+.trust-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.trust-card:hover .trust-card-img { transform: scale(1.05); }
+.trust-card-overlay {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+}
+.trust-card-team {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  color: #f5f5f5;
+}
+.trust-card-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #a1a1aa;
+}
+.trust-cta {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 4rem;
+}
+.trust-btn-primary {
+  display: inline-block;
+  background: white;
+  color: black;
+  padding: 18px 40px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.trust-btn-primary:hover { background: #e4e4e7; transform: translateY(-2px); }
+.trust-btn-secondary {
+  font-family: 'Outfit', sans-serif;
+  color: #a1a1aa;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+}
+.trust-btn-secondary:hover { color: #f5f5f5; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .sj-container { padding: 0 20px; }
+  .sj-hero { padding: 44px 20px 40px; }
+  .sj-cta-block { padding: 40px 20px; }
+  .trust-card { flex: 0 0 calc((100% - 1 * 1.5rem) / 1.5); }
+  .trust-title { font-size: 2rem; }
+  .trust-proof { padding: 4rem 0; }
+  .trust-container { padding: 0 20px; }
+}
+</style>
+<div class="sj-page">
+<div class="sj-hero">
+<div class="sj-badge">Youth &amp; Club Soccer Uniforms</div>
+<h1>Outfit Your <span class="hl">Whole Club</span> in Custom Soccer Uniforms</h1>
+<p class="sj-lede">Custom soccer uniforms for youth teams, academies, and club sides — one design across every age group, youth to adult, with each player's name and number included. No minimum order, full-sublimation printing, free professional design.</p>
+<div class="sj-cta-row"><a href="/pages/request-custom-kit-design" class="sj-btn">Request a Free Design</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn secondary">Design in 3D</a></div>
+<p class="sj-trust">Rated 4.4/5 on <a href="https://www.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> &mdash; trusted by 100+ clubs and academies worldwide.</p>
+</div>
+<div class="sj-container">
+<!-- BLUF -->
+<div class="sj-bluf">
+<p>MOMUTO makes <strong>custom youth and club soccer uniforms</strong> for the people who order for a whole team — coaches, club directors, and team parents. Build one design and run it across <strong>every age group in youth and adult sizing</strong>, with a <strong>different name and number for each player</strong> at no extra cost. There's <strong>no minimum order</strong>, so a small squad pays the same per-jersey logic as a full club, and <strong>design is always free</strong> — a real designer sends your mockup in 1&ndash;2 days for the club to approve before anything is made.</p>
+<div class="sj-facts">
+<div class="sj-fact"><div class="k">No min.</div><div class="l">Outfit 7 players or 70 &mdash; no minimum-quantity surcharge</div></div>
+<div class="sj-fact"><div class="k">Youth&ndash;adult</div><div class="l">One design across every age group in your club</div></div>
+<div class="sj-fact"><div class="k">Names &amp; #s</div><div class="l">Per-player personalization included, not an add-on</div></div>
+<div class="sj-fact"><div class="k">25&ndash;30 days</div><div class="l">Worldwide delivery &mdash; plan before the season</div></div>
+</div>
+</div>
+<!-- HOW A TEAM ORDER WORKS -->
+<h2 class="sj-h2">How a Team Order Works</h2>
+<p class="sj-p">Ordering for a group is the part most teams worry about. With MOMUTO it's four simple steps &mdash; and nothing goes to production until the club signs off.</p>
+<div class="sj-steps">
+<div class="sj-step"><span class="num">1</span>
+<h3>Design it</h3>
+<p>Start in the free 3D designer, or send your crest, colors, and idea and our team designs the uniform for you &mdash; free.</p>
+</div>
+<div class="sj-step"><span class="num">2</span>
+<h3>Share &amp; approve</h3>
+<p>Get your mockup in 1&ndash;2 days. Share it with coaches and parents and request free revisions until the club is happy.</p>
+</div>
+<div class="sj-step"><span class="num">3</span>
+<h3>Collect sizes &amp; names</h3>
+<p>Send one list of sizes, names, and numbers. Mix any youth and adult sizes in a single order.</p>
+</div>
+<div class="sj-step"><span class="num">4</span>
+<h3>One delivery</h3>
+<p>The full order is sublimation-printed and shipped together in 25&ndash;30 days, direct from the factory.</p>
+</div>
+</div>
+<!-- AUDIENCES -->
+<h2 class="sj-h2">Built for US Youth &amp; Club Soccer</h2>
+<div class="sj-uc-grid">
+<div class="sj-uc"><i class="fas fa-children"></i>
+<h3>Youth &amp; Academy</h3>
+<p>Kids' soccer uniforms in true youth sizing, with the same design carried up through every age group.</p>
+</div>
+<div class="sj-uc"><i class="fas fa-shield-halved"></i>
+<h3>Club &amp; Travel Teams</h3>
+<p>Home and away kits with your club crest, sponsors, and a full roster of names and numbers.</p>
+</div>
+<div class="sj-uc"><i class="fas fa-futbol"></i>
+<h3>Rec &amp; Youth Leagues</h3>
+<p>Affordable team uniforms with no minimum &mdash; outfit one rec team or a whole league.</p>
+</div>
+<div class="sj-uc"><i class="fas fa-graduation-cap"></i>
+<h3>School &amp; College Club</h3>
+<p>Middle school, high school, and college club soccer teams get a pro look on a team budget.</p>
+</div>
+</div>
+<!-- SIZING -->
+<h2 class="sj-h2">Youth-to-Adult Sizing, One Design</h2>
+<div class="sj-sizing">
+<p><strong>The whole club can wear the same kit.</strong> MOMUTO produces every uniform in youth and adult sizes, so your U8s and your senior team share one identity. Because each piece is printed to order, mixing sizes in a single team order doesn't cost extra and doesn't slow anything down.</p>
+<p>Not sure on sizes? Check the full <a href="/pages/size-guide">size guide</a> with measurements before you order, or ask us and we'll help the club get it right the first time.</p>
+</div>
+<!-- FAQ -->
+<h2 class="sj-h2">Youth &amp; Club Uniform FAQ</h2>
+<div class="sj-faq">
+<details>
+<summary>Is there a minimum order for youth or club soccer uniforms?</summary>
+<p>No. MOMUTO has no minimum order, so a small squad or a whole club can order custom uniforms with no minimum-quantity surcharge. Pricing per jersey drops as the order grows, but you're never forced to buy a fixed batch.</p>
+</details>
+<details>
+<summary>Do you make youth and kids sizes?</summary>
+<p>Yes. MOMUTO offers youth and adult sizing, so the same design can be ordered across every age group in your club — from the youngest academy squads to senior teams. A full <a href="/pages/size-guide">size guide</a> with measurements is available before you order.</p>
+</details>
+<details>
+<summary>Can every player have a different size, name, and number?</summary>
+<p>Yes. One team order can mix any sizes, and each player gets their own name and number at no extra cost. Because the uniforms are full dye-sublimation printed, personalization is part of the print, not an add-on.</p>
+</details>
+<details>
+<summary>Can a whole club order matching uniforms across different age groups?</summary>
+<p>Yes. Clubs and academies regularly order one unified design across multiple teams and age groups in both youth and adult sizes. Your free design mockup can be shared with coaches and parents for approval before anything is produced.</p>
+</details>
+<details>
+<summary>How long does delivery take for a team order?</summary>
+<p>Custom soccer uniforms are delivered in 25&ndash;30 days worldwide (production plus shipping direct from the factory). Your free design mockup is ready in 1&ndash;2 days, and production doesn't start until you approve it, so plan team orders a few weeks before the season.</p>
+</details>
+<details>
+<summary>Can I add our club crest and a sponsor logo?</summary>
+<p>Yes. Upload your club crest and any sponsor artwork and our design team places it on the uniform. Sublimation prints logos and crests into the fabric in full color, with no size limits and no peeling — and no embroidery surcharge.</p>
+</details>
+</div>
+<p class="sj-p">Designing for an adult side or a group of friends instead? Start on the main <a href="/pages/custom-soccer-jerseys">custom soccer jerseys</a> page.</p>
+</div>
+<!-- TRUST / SOCIAL PROOF -->
+<section class="trust-proof">
+    <div class="trust-container">
+        <div class="trust-header">
+            <h2 class="trust-title">Trusted by 100+ Clubs Worldwide</h2>
+            <p class="trust-subtitle">Real clubs. Real kits. From youth academies to senior leagues.</p>
+        </div>
+        <div class="trust-scroll">
+            <div class="trust-card">
+                <div class="trust-card-img-wrap">
+                    <img src="https://cdn.staticsoe.com/pics/c1d0a62529e0649d8abc28c098de24b45d2d1409aa64211fec22a116a60ce514.png" alt="Custom soccer uniform — KERZ" class="trust-card-img" loading="lazy">
+                    <div class="trust-card-overlay">
+                        <div class="trust-card-team">KERZ</div>
+                        <div class="trust-card-desc">Black &amp; gold. Techno culture on the field.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="trust-card">
+                <div class="trust-card-img-wrap">
+                    <img src="https://cdn.staticsoe.com/pics/ec4d3787eacef3c768dc1432dd2ccdafc3ec333f5e76006c04036140bc4b7260.png" alt="Custom soccer uniform — AEK Heritage Floral" class="trust-card-img" loading="lazy">
+                    <div class="trust-card-overlay">
+                        <div class="trust-card-team">AEK</div>
+                        <div class="trust-card-desc">Heritage Floral. White elegance with burgundy &amp; gold.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="trust-card">
+                <div class="trust-card-img-wrap">
+                    <img src="https://cdn.staticsoe.com/pics/646b2d9eeef70514c4ed53899a84c2755489d78d2ae484f66660e4d14fd15c16.png" alt="Custom soccer uniform — Les Défonceurs" class="trust-card-img" loading="lazy">
+                    <div class="trust-card-overlay">
+                        <div class="trust-card-team">LES DÉFONCEURS</div>
+                        <div class="trust-card-desc">Claw Strike. Red &amp; black combat-sport aggression.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="trust-card">
+                <div class="trust-card-img-wrap">
+                    <img src="https://cdn.staticsoe.com/pics/f8e75a66d23a34b4bf24c153ada54731ea34488c0a416bf016d7183408f9da6b.png" alt="Custom soccer uniform — KINGS Shadow Dragon" class="trust-card-img" loading="lazy">
+                    <div class="trust-card-overlay">
+                        <div class="trust-card-team">KINGS</div>
+                        <div class="trust-card-desc">Shadow Dragon. Black-on-black luxury with gold crown.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="trust-card">
+                <div class="trust-card-img-wrap">
+                    <img src="https://cdn.staticsoe.com/pics/2572b5c39f8cbcf5e4d530fcfd8f86e55c1e969b7c9d95088180fb508e6c54b6.png" alt="Custom soccer uniform — Pecados Capitales Duality" class="trust-card-img" loading="lazy">
+                    <div class="trust-card-overlay">
+                        <div class="trust-card-team">PECADOS CAPITALES</div>
+                        <div class="trust-card-desc">Duality. Angels &amp; demons in red, black &amp; gold.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="trust-cta">
+            <a href="/pages/request-custom-kit-design" class="trust-btn-primary">Request Free Design</a>
+            <a href="/pages/custom-kit-gallery" class="trust-btn-secondary">Explore 200+ Custom Kit Designs →</a>
+        </div>
+    </div>
+</section>
+<!-- CTA -->
+<div class="sj-cta-block">
+<h2>Kit Out Your Club</h2>
+<p>Tell us about your team and get a free design back in 1&ndash;2 days &mdash; no commitment until the club orders.</p>
+<a href="/pages/request-custom-kit-design" class="sj-btn">Request a Free Design</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn secondary">Design in 3D</a>
+<p class="sj-note">No minimum order &middot; Youth to adult sizes &middot; Names &amp; numbers included &middot; Delivery in 25&ndash;30 days</p>
+</div>
+</div>
