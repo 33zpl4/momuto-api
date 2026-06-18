@@ -170,7 +170,14 @@ async function deployLocale(locale) {
 
   const mergedContent = cleanLegacyCtaInlineStyles(repoSplit.head + liveSplit.tail);
 
-  if (mergedContent === liveContent) {
+  // A meta override differing from what's live also warrants a PUT, even if
+  // the page body itself is unchanged.
+  const metaInSync =
+    (!domain.title || domain.title === page.title) &&
+    (!domain.meta_title || domain.meta_title === page.meta_title) &&
+    (!domain.meta_descript || domain.meta_descript === page.meta_descript);
+
+  if (mergedContent === liveContent && metaInSync) {
     console.log(`✓ ${domain.label}: already up to date (${liveContent.length} chars)`);
     return { locale, unchanged: true };
   }
