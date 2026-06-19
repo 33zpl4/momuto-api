@@ -1,0 +1,33 @@
+name: ES Phase-1 Harvest (meta only)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/harvest-meta-es.js'
+      - '.github/workflows/harvest-meta-es.yml'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (preview, no writes)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Apply ES harvest meta (content untouched)
+        env:
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+        run: node scripts/harvest-meta-es.js
