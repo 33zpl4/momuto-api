@@ -41,7 +41,7 @@
     {
       "@type": "Question",
       "name": "¿Cuánto cuesta una equipación personalizada en MOMUTO?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Desde 38,90 € la camiseta suelta y desde 21,90 € por camiseta a partir de 10 unidades (equipación completa desde 26,90 € por jugador a 10 unidades). El diseño siempre es gratis y no hay pedido mínimo." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Desde 21,90 € por camiseta a partir de 10 unidades (equipación completa desde 26,90 € por jugador). El diseño siempre es gratis y no hay pedido mínimo." }
     },
     {
       "@type": "Question",
@@ -53,54 +53,96 @@
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <style>
+/* ===== GLOBAL RESETS ===== */
 html, body { background-color: #0a0a0a !important; color: #f5f5f5; }
 h1.title, .title, .page-title { display: none !important; }
-.container_wrapper, .page-width, .container, .main-content { max-width:100%!important; width:100%!important; padding:0!important; margin:0!important; overflow:visible!important; }
+.container_wrapper, .page-width, .container, .main-content {
+  max-width: 100% !important; width: 100% !important;
+  padding: 0 !important; margin: 0 !important; overflow: visible !important;
+}
 *, *::before, *::after { box-sizing: border-box; }
-:root { --mg-bg:#0a0a0a; --mg-panel:#111; --mg-card:#111; --mg-border:rgba(255,255,255,0.06); --mg-border-hover:rgba(255,255,255,0.12); --mg-white:#f5f5f5; --mg-muted:#a1a1aa; --mg-dim:#71717a; --mg-red:#c8352e; --mg-red-hover:#e04038; --font-display:'Bebas Neue',sans-serif; --font-body:'Outfit',sans-serif; }
-.cmp-page { font-family:var(--font-body); background:var(--mg-bg); color:var(--mg-white); width:100%; padding-bottom:80px; }
-.cmp-container { max-width:1100px; margin:0 auto; padding:60px 40px; }
-.cmp-header { background:var(--mg-bg); border-bottom:1px solid var(--mg-border); padding:60px 40px; text-align:center; }
-.cmp-badge { display:inline-block; font-size:0.6rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--mg-red); background:rgba(200,53,46,0.1); border:1px solid rgba(200,53,46,0.15); padding:6px 14px; margin-bottom:20px; }
-.cmp-header h1 { font-family:var(--font-display); font-size:clamp(2rem,5vw,3.4rem); font-weight:400; text-transform:uppercase; letter-spacing:0.04em; line-height:1; color:var(--mg-white); margin:0 0 16px; }
-.cmp-updated { font-size:0.7rem; font-weight:600; color:var(--mg-dim); text-transform:uppercase; letter-spacing:0.12em; }
-.cmp-h2 { font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.2rem); font-weight:400; text-transform:uppercase; letter-spacing:0.04em; color:var(--mg-white); margin:56px 0 18px; line-height:1; padding-left:16px; border-left:3px solid var(--mg-red); }
-.cmp-p { font-size:0.95rem; font-weight:300; color:var(--mg-muted); line-height:1.8; margin-bottom:1.2em; }
-.cmp-p strong { color:var(--mg-white); font-weight:600; }
-.cmp-p a { color:var(--mg-white); text-decoration:underline; }
-.cmp-table-wrap { overflow-x:auto; margin:2em 0; border:1px solid var(--mg-border); }
-.cmp-table { width:100%; border-collapse:collapse; font-size:0.85rem; background:var(--mg-card); }
-.cmp-table thead tr { background:#000; }
-.cmp-table th { color:var(--mg-muted); font-weight:700; text-transform:uppercase; letter-spacing:0.1em; font-size:0.62rem; padding:18px 16px; text-align:left; border-bottom:1px solid var(--mg-border); }
-.cmp-table th:nth-child(2) { color:#fff; background:var(--mg-red); }
-.cmp-table td { border-bottom:1px solid var(--mg-border); padding:14px 16px; vertical-align:middle; color:var(--mg-muted); line-height:1.4; }
-.cmp-table td:first-child { font-weight:600; color:var(--mg-white); font-size:0.8rem; }
-.cmp-table td:nth-child(2) { font-weight:700; color:var(--mg-white); background:rgba(200,53,46,0.05); border-left:1px solid rgba(200,53,46,0.2); border-right:1px solid rgba(200,53,46,0.2); }
-.cmp-check { color:#4ade80; font-weight:700; }
-.cmp-cross { color:var(--mg-dim); }
-.cmp-note { font-size:0.75rem; color:var(--mg-dim); margin-top:8px; font-weight:300; }
-.cmp-box { background:var(--mg-panel); border:1px solid var(--mg-border); border-left:3px solid var(--mg-red); padding:32px 36px; margin:2em 0; }
-.cmp-box h3 { font-family:var(--font-display); font-size:clamp(1.3rem,3vw,1.9rem); font-weight:400; letter-spacing:0.03em; text-transform:uppercase; color:var(--mg-white); margin:0 0 12px; line-height:1; }
-.cmp-box p { font-size:0.95rem; color:var(--mg-muted); line-height:1.75; margin:0 0 12px; font-weight:300; }
-.cmp-box p strong { color:var(--mg-white); }
-.cmp-faq details { border:1px solid var(--mg-border); border-left:3px solid var(--mg-red); background:var(--mg-panel); margin-bottom:10px; padding:0 22px; }
-.cmp-faq summary { font-weight:600; font-size:0.95rem; color:var(--mg-white); padding:18px 0; cursor:pointer; list-style:none; }
-.cmp-faq summary::-webkit-details-marker { display:none; }
-.cmp-faq summary::after { content:"+"; float:right; color:var(--mg-red); font-weight:700; }
-.cmp-faq details[open] summary::after { content:"−"; }
-.cmp-faq details p { font-size:0.9rem; color:var(--mg-muted); line-height:1.75; margin:0 0 18px; font-weight:300; }
-.cmp-cta { background:var(--mg-red); padding:60px 40px; text-align:center; margin:56px 0 0; }
-.cmp-cta h3 { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:400; text-transform:uppercase; letter-spacing:0.04em; color:#fff; line-height:1; margin:0 0 12px; }
-.cmp-cta p { color:rgba(255,255,255,0.85); font-size:0.95rem; font-weight:300; margin-bottom:26px; }
-.cmp-btn { display:inline-block; background:#fff; color:#000; font-weight:800; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.12em; padding:18px 40px; text-decoration:none; margin:6px; border:1px solid #fff; }
-.cmp-btn.secondary { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.5); }
-@media (max-width:768px){ .cmp-container{padding:30px 20px;} .cmp-header{padding:40px 20px;} .cmp-table{font-size:0.78rem;} .cmp-table th,.cmp-table td{padding:10px 12px;} .cmp-cta{padding:40px 20px;} }
+:root {
+  --mg-bg: #0a0a0a; --mg-panel: #111; --mg-card: #111;
+  --mg-border: rgba(255,255,255,0.06); --mg-border-hover: rgba(255,255,255,0.12);
+  --mg-white: #f5f5f5; --mg-muted: #a1a1aa; --mg-dim: #71717a;
+  --mg-red: #c8352e; --mg-red-hover: #e04038;
+  --font-display: 'Bebas Neue', sans-serif; --font-body: 'Outfit', sans-serif;
+}
+.cmp-page { font-family: var(--font-body); background: var(--mg-bg); color: var(--mg-white); width: 100%; padding-bottom: 80px; }
+.cmp-container { max-width: 1100px; margin: 0 auto; padding: 60px 40px; }
+.cmp-header { background: var(--mg-bg); border-bottom: 1px solid var(--mg-border); padding: 60px 40px; text-align: center; margin-bottom: 0; }
+.cmp-header-badge { display: inline-block; font-family: var(--font-body); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mg-red); background: rgba(200,53,46,0.1); border: 1px solid rgba(200,53,46,0.15); padding: 6px 14px; margin-bottom: 20px; }
+.cmp-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; color: var(--mg-white); margin: 0 0 16px 0; }
+.cmp-header .cmp-last-updated { font-size: 0.7rem; font-weight: 600; color: var(--mg-dim); text-transform: uppercase; letter-spacing: 0.12em; }
+.cmp-h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; color: var(--mg-white); margin: 60px 0 20px 0; line-height: 1; padding-left: 16px; border-left: 3px solid var(--mg-red); }
+.cmp-h3 { font-family: var(--font-body); font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mg-white); margin: 36px 0 10px 0; }
+.cmp-p { font-family: var(--font-body); font-size: 0.95rem; font-weight: 300; color: var(--mg-muted); line-height: 1.8; margin-bottom: 1.2em; }
+.cmp-p strong, .cmp-bold { color: var(--mg-white); font-weight: 600; }
+.cmp-p a { color: var(--mg-white); text-decoration: underline; }
+.cmp-table-wrap { overflow-x: auto; margin: 2em 0; border: 1px solid var(--mg-border); }
+.cmp-master-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 0.85rem; background: var(--mg-card); }
+.cmp-master-table thead tr { background: #000; }
+.cmp-master-table th { color: var(--mg-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.62rem; padding: 18px 16px; text-align: left; border-bottom: 1px solid var(--mg-border); }
+.cmp-master-table th:nth-child(2) { color: var(--mg-white); background: var(--mg-red); }
+.cmp-master-table td { border-bottom: 1px solid var(--mg-border); padding: 14px 16px; vertical-align: middle; color: var(--mg-muted); line-height: 1.4; }
+.cmp-master-table td:first-child { font-weight: 600; color: var(--mg-white); font-size: 0.8rem; }
+.cmp-master-table td:nth-child(2) { font-weight: 700; color: var(--mg-white); background: rgba(200,53,46,0.05); border-left: 1px solid rgba(200,53,46,0.2); border-right: 1px solid rgba(200,53,46,0.2); }
+.cmp-master-table tr:last-child td:nth-child(2) { border-bottom: 1px solid rgba(200,53,46,0.2); }
+.cmp-master-table tr:hover td { background: rgba(255,255,255,0.02); }
+.cmp-master-table tr:hover td:nth-child(2) { background: rgba(200,53,46,0.08); }
+.cmp-check { color: #4ade80; font-weight: 700; }
+.cmp-cross { color: var(--mg-dim); }
+.cmp-highlight-box { background: var(--mg-panel); border: 1px solid var(--mg-border); border-left: 3px solid var(--mg-red); padding: 32px 36px; margin: 2em 0; }
+.cmp-highlight-box p { font-size: 0.95rem; color: var(--mg-muted); line-height: 1.75; margin: 0 0 12px; font-weight: 300; }
+.cmp-highlight-box p:last-child { margin-bottom: 0; }
+.cmp-highlight-box p strong { color: var(--mg-white); }
+.cmp-note { font-size: 0.75rem; color: var(--mg-dim); margin-top: 8px; font-weight: 300; }
+.cmp-cta-block { background: var(--mg-red); padding: 60px 40px; text-align: center; margin: 60px 0 0; }
+.cmp-cta-block h3 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; line-height: 1; margin-bottom: 12px; }
+.cmp-cta-block p { color: rgba(255,255,255,0.8); font-size: 0.95rem; font-weight: 300; margin-bottom: 28px; }
+.cmp-cta-btn { display: inline-block; background: #fff; color: #000; font-family: var(--font-body); font-weight: 800; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; padding: 18px 40px; text-decoration: none; margin: 6px; transition: all 0.2s ease; border: 1px solid #fff; }
+.cmp-cta-btn:hover { background: #e5e5e5; }
+.cmp-cta-btn.secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); }
+.cmp-cta-btn.secondary:hover { border-color: #fff; }
+/* ===== DESIGNS CAROUSEL ===== */
+.trust-proof { width: 100vw; position: relative; left: 50%; margin-left: -50vw; background: #0a0a0a; color: #f5f5f5; padding: 6rem 0; overflow: hidden; }
+.trust-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+.trust-header { text-align: center; margin-bottom: 4rem; }
+.trust-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; font-weight: 400; color: #f5f5f5; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1; }
+.trust-subtitle { font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: #a1a1aa; max-width: 600px; margin: 0 auto; font-weight: 300; }
+.trust-scroll { display: flex; gap: 1.5rem; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 0.5rem; -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%); mask-image: linear-gradient(to right, black 85%, transparent 100%); }
+.trust-scroll::-webkit-scrollbar { display: none; }
+.trust-card { flex: 0 0 calc((100% - 3 * 1.5rem) / 3.5); background: #111; border: 1px solid rgba(255,255,255,0.06); transition: border-color 0.25s ease, transform 0.25s ease; position: relative; overflow: hidden; cursor: default; }
+.trust-card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-4px); }
+.trust-card-img-wrap { position: relative; aspect-ratio: 4/5; overflow: hidden; background-color: #0a0a0a; }
+.trust-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.trust-card:hover .trust-card-img { transform: scale(1.05); }
+.trust-card-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; }
+.trust-card-team { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; font-weight: 400; letter-spacing: 0.03em; line-height: 1.1; text-transform: uppercase; margin-bottom: 0.4rem; color: #f5f5f5; }
+.trust-card-desc { font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 300; line-height: 1.5; color: #a1a1aa; }
+.trust-cta { text-align: center; display: flex; flex-direction: column; gap: 1.5rem; align-items: center; margin-top: 4rem; }
+.trust-btn-primary { display: inline-block; background: white; color: black; padding: 18px 40px; font-family: 'Outfit', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; text-decoration: none; transition: all 0.3s ease; }
+.trust-btn-primary:hover { background: #e4e4e7; transform: translateY(-2px); }
+.trust-btn-secondary { font-family: 'Outfit', sans-serif; color: #a1a1aa; text-decoration: underline; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.3s; }
+.trust-btn-secondary:hover { color: #f5f5f5; }
+@media (max-width: 768px) {
+  .cmp-container { padding: 30px 20px; }
+  .cmp-header { padding: 40px 20px; }
+  .cmp-master-table { font-size: 0.75rem; }
+  .cmp-master-table th, .cmp-master-table td { padding: 10px 10px; }
+  .cmp-highlight-box { padding: 24px 20px; }
+  .cmp-cta-block { padding: 40px 20px; }
+  .trust-card { flex: 0 0 calc((100% - 1 * 1.5rem) / 1.5); }
+  .trust-title { font-size: 2rem; }
+  .trust-proof { padding: 4rem 0; }
+  .trust-container { padding: 0 20px; }
+}
 </style>
 <div class="cmp-page">
 <div class="cmp-header">
-<div class="cmp-badge">Comparativa independiente &mdash; 2026</div>
+<div class="cmp-header-badge">Comparativa independiente &mdash; 2026</div>
 <h1>Alternativa a Zentral: Equipaciones Comparadas</h1>
-<p class="cmp-updated">Datos 2026 &mdash; Actualizado en junio de 2026</p>
+<p class="cmp-last-updated">Datos 2026 &mdash; Actualizado en junio de 2026</p>
 </div>
 <div class="cmp-container">
 <div class="cmp-intro">
@@ -111,7 +153,7 @@ h1.title, .title, .page-title { display: none !important; }
 <!-- TABLA -->
 <h2 class="cmp-h2">MOMUTO vs Zentral: la comparativa</h2>
 <div class="cmp-table-wrap">
-<table class="cmp-table">
+<table class="cmp-master-table">
 <thead><tr><th>Factor</th><th>MOMUTO</th><th>Zentral</th></tr></thead>
 <tbody>
 <tr><td>Diseño</td><td>Configurador 3D + concepto con IA</td><td>Diseño manual (por WhatsApp)</td></tr>
@@ -127,9 +169,8 @@ h1.title, .title, .page-title { display: none !important; }
 </div>
 <p class="cmp-note">Datos de fuentes oficiales de cada marca (junio 2026; precios y plazos de zentral.es). Comparativa neutral: comparamos características, no reputaciones.</p>
 <!-- MOAT -->
-<div class="cmp-box cmp-verdict">
-<h3>La diferencia: configurador 3D + IA</h3>
-<p>Con el diseño manual, esperas a que alguien te envíe una propuesta y haces cambios por mensaje. Con MOMUTO, <strong>diseñas y ves tu equipación en 3D al instante</strong>: colores, escudo, sponsors, nombres y dorsales, girándola en tiempo real.</p>
+<div class="cmp-highlight-box cmp-verdict">
+<p><strong>La diferencia: configurador 3D + IA.</strong> Con el diseño manual, esperas a que alguien te envíe una propuesta y haces cambios por mensaje. Con MOMUTO, <strong>diseñas y ves tu equipación en 3D al instante</strong>: colores, escudo, sponsors, nombres y dorsales, girándola en tiempo real.</p>
 <p>Y si ya tienes una idea o una referencia, nuestra <strong>IA genera un concepto</strong> que editas en el configurador. Lo ves en segundos, no en una semana de ida y vuelta. Es la única ventaja de producto que el mercado español no ofrece &mdash; y por la que muchos equipos buscan una alternativa.</p>
 </div>
 <!-- PRECIO / MINIMO -->
@@ -140,22 +181,44 @@ h1.title, .title, .page-title { display: none !important; }
 <p class="cmp-p">Sabes la fecha desde el principio. Tu maqueta llega en <strong>1-2 días</strong>, la producción solo arranca cuando la apruebas y entregamos en <strong>25-30 días</strong>. Producimos a escala, con <strong>capacidad para la temporada alta</strong>: cuando todos los equipos piden antes del inicio de liga, mantenemos el plazo en lugar de acumular cola. Nada de promesas vagas: una fecha clara para estrenar el día del partido.</p>
 <!-- CUANDO -->
 <h2 class="cmp-h2">Cómo elegir</h2>
-<div class="cmp-box">
+<div class="cmp-highlight-box">
 <p><strong>Elige MOMUTO si</strong> quieres ver tu equipación en 3D antes de pedir, partir de una referencia con IA, conocer el precio de antemano y pedir sin mínimo &mdash; ideal para clubes, academias y equipos amateur.</p>
 <p><strong>Para un club entero</strong>, con reposiciones y precios por volumen, mira <a href="/pages/equipaciones-para-clubes-academias">equipaciones para clubes y academias</a>.</p>
 </div>
 <!-- FAQ -->
 <h2 class="cmp-h2">Preguntas frecuentes</h2>
-<div class="cmp-faq">
-<details><summary>¿Cuál es la mejor alternativa a Zentral?</summary><p>Depende de lo que priorices. La diferencia principal es el diseño: MOMUTO ofrece configurador 3D + concepto con IA al instante, frente al diseño manual del mercado español. Además no tiene pedido mínimo (desde 1 unidad, frente a 3 en Zentral) y entrega en 25-30 días. Ambas marcas publican precios parecidos (en torno a 22 €/camiseta a volumen).</p></details>
-<details><summary>¿MOMUTO tiene configurador 3D y diseño con IA?</summary><p>Sí. Diseñas tu equipación en 3D y la ves al instante, o envías una referencia y la IA genera un concepto que editas en el configurador.</p></details>
-<details><summary>¿Cuánto cuesta?</summary><p>Desde 38,90 € la camiseta suelta y desde 21,90 € por camiseta a partir de 10 unidades. El diseño siempre es gratis y sin pedido mínimo.</p></details>
-<details><summary>¿Cuánto tarda la entrega?</summary><p>25-30 días. La maqueta gratuita está lista en 1-2 días y la producción no empieza hasta que la apruebas.</p></details>
+<h3 class="cmp-h3">¿Cuál es la mejor alternativa a Zentral?</h3>
+<p class="cmp-p">Depende de lo que priorices. La diferencia principal es el diseño: MOMUTO ofrece configurador 3D + concepto con IA al instante, frente al diseño manual del mercado español. Además no tiene pedido mínimo (desde 1 unidad, frente a 3 en Zentral) y entrega en 25-30 días. Ambas marcas publican precios parecidos (en torno a 22 €/camiseta a volumen).</p>
+<h3 class="cmp-h3">¿MOMUTO tiene configurador 3D y diseño con IA?</h3>
+<p class="cmp-p">Sí. Diseñas tu equipación en 3D y la ves al instante, o envías una referencia y la IA genera un concepto que editas en el configurador.</p>
+<h3 class="cmp-h3">¿Cuánto cuesta?</h3>
+<p class="cmp-p">Desde 21,90 € por camiseta a partir de 10 unidades (equipación completa desde 26,90 € por jugador). El diseño siempre es gratis y sin pedido mínimo.</p>
+<h3 class="cmp-h3">¿Cuánto tarda la entrega?</h3>
+<p class="cmp-p">25-30 días. La maqueta gratuita está lista en 1-2 días y la producción no empieza hasta que la apruebas.</p>
 </div>
+<!-- CAROUSEL DE DISEÑOS -->
+<section class="trust-proof">
+<div class="trust-container">
+<div class="trust-header">
+<h2 class="trust-title">Diseños reales de equipos MOMUTO</h2>
+<p class="trust-subtitle">Equipos reales. Equipaciones reales. De ligas locales a torneos internacionales.</p>
+</div>
+<div class="trust-scroll">
+<div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/c1d0a62529e0649d8abc28c098de24b45d2d1409aa64211fec22a116a60ce514.png" alt="Equipación personalizada — KERZ" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">KERZ</div><div class="trust-card-desc">Negro y oro. Cultura tecno sobre el campo.</div></div></div></div>
+<div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/ec4d3787eacef3c768dc1432dd2ccdafc3ec333f5e76006c04036140bc4b7260.png" alt="Equipación personalizada — AEK" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">AEK</div><div class="trust-card-desc">Heritage Floral. Elegancia en blanco con burdeos y oro.</div></div></div></div>
+<div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/646b2d9eeef70514c4ed53899a84c2755489d78d2ae484f66660e4d14fd15c16.png" alt="Equipación personalizada — Les Défonceurs" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">LES DÉFONCEURS</div><div class="trust-card-desc">Claw Strike. Rojo y negro, pura agresividad.</div></div></div></div>
+<div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/f8e75a66d23a34b4bf24c153ada54731ea34488c0a416bf016d7183408f9da6b.png" alt="Equipación personalizada — KINGS" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">KINGS</div><div class="trust-card-desc">Shadow Dragon. Negro sobre negro con corona dorada.</div></div></div></div>
+<div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/2572b5c39f8cbcf5e4d530fcfd8f86e55c1e969b7c9d95088180fb508e6c54b6.png" alt="Equipación personalizada — Pecados Capitales" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">PECADOS CAPITALES</div><div class="trust-card-desc">Duality. Ángeles y demonios en rojo, negro y oro.</div></div></div></div>
+</div>
+<div class="trust-cta">
+<a href="/pages/solicitud-de-diseno-personalizado" class="trust-btn-primary">Pedir un diseño gratis</a>
+<a href="/pages/galeria-equipaciones-personalizadas" class="trust-btn-secondary">Ver más diseños →</a>
+</div>
+</div>
+</section>
 <!-- CTA -->
-<div class="cmp-cta">
+<div class="cmp-cta-block">
 <h3>Compruébalo tú mismo</h3>
 <p>Diseña tu equipación en 3D gratis, o envíanos una referencia y nuestra IA crea el concepto. Sin mínimo y sin compromiso.</p>
-<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="cmp-btn">Diseñar en 3D</a> <a href="/pages/solicitud-de-diseno-personalizado" class="cmp-btn secondary">Pedir un diseño gratis</a></div>
-</div>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="cmp-cta-btn">Diseñar en 3D</a> <a href="/pages/solicitud-de-diseno-personalizado" class="cmp-cta-btn secondary">Pedir un diseño gratis</a></div>
 </div>
