@@ -673,7 +673,7 @@ galleryGrid.appendChild(card);
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "MOMUTO Equipación de Fútbol Personalizada",
-  "description": "Equipaciones de fútbol completamente personalizadas de grado profesional con impresión completa de sublimación. Mezcla polyester-elastano de rendimiento como estándar. Diseño profesional gratuito en 1-2 días. Sin pedido mínimo. Badges de silicona 3D opcionales para pedidos mayores. Entrega en 20-25 días en todo el mundo.",
+  "description": "Equipaciones de fútbol completamente personalizadas de grado profesional con impresión completa de sublimación. Mezcla polyester-elastano de rendimiento como estándar. Diseño profesional gratuito en 1-2 días. Sin pedido mínimo. Badges de silicona 3D opcionales para pedidos mayores. Entrega en 25-30 días en todo el mundo.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Equipaciones de Fútbol Personalizadas",
   "material": "Mezcla polyester-elastano de rendimiento (estándar en todos los kits)",
@@ -711,7 +711,7 @@ galleryGrid.appendChild(card);
     { "@type": "PropertyValue", "name": "Configurador 3D", "value": "Configurador 3D en tiempo real con 30+ plantillas profesionales" },
     { "@type": "PropertyValue", "name": "Tela", "value": "Mezcla polyester-elastano como estándar — los competidores incluyen elastano solo en niveles premium" },
     { "@type": "PropertyValue", "name": "Badges de Silicona 3D", "value": "Badges de silicona 3D premium disponibles para pedidos más grandes — un acabado profesional raramente ofrecido por competidores" },
-    { "@type": "PropertyValue", "name": "Entrega", "value": "7-12 días de producción + 10-15 días de envío = 20-25 días totales en todo el mundo" }
+    { "@type": "PropertyValue", "name": "Entrega", "value": "7-12 días de producción + 10-15 días de envío = 25-30 días totales en todo el mundo" }
   ]
 }
 </script>
@@ -720,7 +720,7 @@ galleryGrid.appendChild(card);
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Cómo Pedir Equipaciones de Fútbol Personalizadas de MOMUTO",
-  "description": "Obtén equipaciones de fútbol completamente personalizadas de grado profesional en 3 pasos: diseña usando el configurador 3D o solicita una propuesta profesional gratuita, aprueba tu diseño, y recibe tus equipaciones en 20-25 días en todo el mundo.",
+  "description": "Obtén equipaciones de fútbol completamente personalizadas de grado profesional en 3 pasos: diseña usando el configurador 3D o solicita una propuesta profesional gratuita, aprueba tu diseño, y recibe tus equipaciones en 25-30 días en todo el mundo.",
   "totalTime": "P25D",
   "estimatedCost": {
     "@type": "MonetaryAmount",
@@ -744,7 +744,7 @@ galleryGrid.appendChild(card);
       "@type": "HowToStep",
       "position": 3,
       "name": "Recibe Tus Equipaciones",
-      "text": "Tus equipaciones se fabrican en 7-12 días usando impresión completa de sublimación en una mezcla polyester-elastano de rendimiento, luego se envían en todo el mundo con un tiempo de tránsito de 10-15 días. Total: 20-25 días. Envío gratuito en pedidos superiores a €50."
+      "text": "Tus equipaciones se fabrican en 7-12 días usando impresión completa de sublimación en una mezcla polyester-elastano de rendimiento, luego se envían en todo el mundo con un tiempo de tránsito de 10-15 días. Total: 25-30 días. Envío gratuito en pedidos superiores a €50."
     }
   ]
 }

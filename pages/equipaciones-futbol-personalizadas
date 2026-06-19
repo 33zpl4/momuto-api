@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Equipaciones de Fútbol Personalizadas Sin Mínimo | MOMUTO",
-  "description": "Diseña la equipación de tu equipo con configurador 3D + conceptos con IA. Sin pedido mínimo, sublimación total, entrega en ~3 semanas, tallas de niño a adulto.",
+  "description": "Diseña la equipación de tu equipo con configurador 3D + conceptos con IA. Sin pedido mínimo, sublimación total, entrega en 25-30 días, tallas de niño a adulto.",
   "url": "https://es.momuto.com/pages/equipaciones-futbol-personalizadas",
   "datePublished": "2026-06-19",
   "dateModified": "2026-06-19",
@@ -35,7 +35,7 @@
     {
       "@type": "Question",
       "name": "¿Cuánto tarda la entrega de las equipaciones?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Las equipaciones personalizadas se entregan en unas 3 semanas (producción más envío directo de fábrica). Vuestra maqueta de diseño gratuita está lista en 1-2 días y la producción no empieza hasta que la aprobáis." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Las equipaciones personalizadas se entregan en 25-30 días (producción más envío directo de fábrica). Vuestra maqueta de diseño gratuita está lista en 1-2 días y la producción no empieza hasta que la aprobáis." }
     },
     {
       "@type": "Question",
@@ -146,11 +146,11 @@ h1.title, .title, .page-title { display: none !important; }
 </div>
 <div class="sj-container">
 <div class="sj-bluf">
-<p>MOMUTO crea <strong>equipaciones de fútbol personalizadas</strong> para clubes, equipos amateur, academias y peñas. Elegid una plantilla en el <strong>configurador 3D gratuito</strong> y pedidla en minutos, o enviadnos vuestra idea y nuestro equipo diseña la equipación — <strong>el diseño siempre es gratis</strong>. Cada equipación se imprime en <strong>sublimación total</strong> sobre tejido de poliéster-elastano, <strong>sin pedido mínimo</strong> (1 camiseta o 100), con <strong>nombre y dorsal de cada jugador incluidos</strong> y entrega en <strong>~3 semanas</strong>.</p>
+<p>MOMUTO crea <strong>equipaciones de fútbol personalizadas</strong> para clubes, equipos amateur, academias y peñas. Elegid una plantilla en el <strong>configurador 3D gratuito</strong> y pedidla en minutos, o enviadnos vuestra idea y nuestro equipo diseña la equipación — <strong>el diseño siempre es gratis</strong>. Cada equipación se imprime en <strong>sublimación total</strong> sobre tejido de poliéster-elastano, <strong>sin pedido mínimo</strong> (1 camiseta o 100), con <strong>nombre y dorsal de cada jugador incluidos</strong> y entrega en <strong>25-30 días</strong>.</p>
 <div class="sj-facts">
 <div class="sj-fact"><div class="k">Sin mínimo</div><div class="l">Pedid 1 camiseta o el equipo entero, sin recargos</div></div>
 <div class="sj-fact"><div class="k">3D + IA</div><div class="l">Ved la equipación al instante, antes de pedir</div></div>
-<div class="sj-fact"><div class="k">~3 semanas</div><div class="l">Entrega en todo el mundo, directa de fábrica</div></div>
+<div class="sj-fact"><div class="k">25-30 días</div><div class="l">Entrega en todo el mundo, directa de fábrica</div></div>
 <div class="sj-fact"><div class="k">Niño-adulto</div><div class="l">Un mismo diseño para todas las categorías del club</div></div>
 </div>
 </div>
@@ -173,7 +173,7 @@ h1.title, .title, .page-title { display: none !important; }
 <tr><td>Personalización</td><td>Sublimación total, colores ilimitados</td><td>Según técnica</td></tr>
 <tr><td>Nombres y dorsales</td><td><span class="sj-check">✓</span> Incluidos</td><td>Coste por nombre</td></tr>
 <tr><td>Tallas niño y adulto</td><td><span class="sj-check">✓</span> Mismo diseño</td><td>Variable</td></tr>
-<tr><td>Entrega</td><td>~3 semanas</td><td>Variable</td></tr>
+<tr><td>Entrega</td><td>25-30 días</td><td>Variable</td></tr>
 </tbody>
 </table>
 </div>
@@ -205,7 +205,7 @@ h1.title, .title, .page-title { display: none !important; }
 <h2 class="sj-h2">Preguntas frecuentes</h2>
 <div class="sj-faq">
 <details><summary>¿Hay pedido mínimo?</summary><p>No. MOMUTO no exige pedido mínimo — pedid una sola camiseta o equipad a todo el club. El precio por unidad baja con la cantidad, sin recargos por mínimos.</p></details>
-<details><summary>¿Cuánto tarda la entrega?</summary><p>Las equipaciones se entregan en unas 3 semanas. Vuestra maqueta gratuita está lista en 1-2 días y la producción no empieza hasta que la aprobáis.</p></details>
+<details><summary>¿Cuánto tarda la entrega?</summary><p>Las equipaciones se entregan en 25-30 días. Vuestra maqueta gratuita está lista en 1-2 días y la producción no empieza hasta que la aprobáis.</p></details>
 <details><summary>¿Puedo ver la equipación en 3D antes de pedir?</summary><p>Sí. Con el configurador 3D la diseñáis y la veis al instante. Y si nos enviáis una referencia, nuestra IA genera un concepto que editáis en 3D — sin esperar a un ida y vuelta por WhatsApp.</p></details>
 <details><summary>¿Puedo añadir el escudo y los sponsors?</summary><p>Sí. Subís vuestro escudo y logos: la sublimación total los imprime en la tela, en colores ilimitados, sin límite de tamaño y sin que se cuarteen.</p></details>
 <details><summary>¿Cada jugador puede llevar nombre y dorsal distintos?</summary><p>Sí, sin coste adicional. La personalización forma parte de la impresión, no es un extra.</p></details>
@@ -217,6 +217,6 @@ h1.title, .title, .page-title { display: none !important; }
 <h2>Diseñad vuestra equipación</h2>
 <p>Hacedlo en 3D, o enviadnos una referencia y nuestra IA crea el concepto — gratis y sin compromiso hasta que pedís.</p>
 <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn">Diseñar en 3D</a> <a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn secondary">Pedir un diseño gratis</a>
-<p class="sj-note">Sin pedido mínimo · Sublimación total · Tallas niño a adulto · Entrega en ~3 semanas</p>
+<p class="sj-note">Sin pedido mínimo · Sublimación total · Tallas niño a adulto · Entrega en 25-30 días</p>
 </div>
 </div>

@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Kit da Calcio Personalizzato MOMUTO",
-  "description": "Kit da calcio completamente personalizzabile con stampa a sublimazione totale. Tessuto poliestere-elastan ad alte prestazioni come standard. Tre modi per ordinare: kit Ready-to-Play pre-disegnati al 10% di sconto (da 19,70€/maglia), servizio di design personalizzato gratuito (mockup in 24-48h), o costruttore 3D in tempo reale. Senza ordine minimo. Consegna in 20-25 giorni in tutto il mondo.",
+  "description": "Kit da calcio completamente personalizzabile con stampa a sublimazione totale. Tessuto poliestere-elastan ad alte prestazioni come standard. Tre modi per ordinare: kit Ready-to-Play pre-disegnati al 10% di sconto (da 19,70€/maglia), servizio di design personalizzato gratuito (mockup in 24-48h), o costruttore 3D in tempo reale. Senza ordine minimo. Consegna in 25-30 giorni in tutto il mondo.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Kit da Calcio Personalizzati",
   "material": "Tessuto poliestere-elastan ad alte prestazioni (standard su tutti i kit)",
@@ -56,7 +56,7 @@
     { "@type": "PropertyValue", "name": "Servizio di Design", "value": "Mockup di design professionale gratuito in 24-48h, revisioni gratuite incluse" },
     { "@type": "PropertyValue", "name": "Configuratore 3D", "value": "Configuratore di kit 3D in tempo reale con 30+ template professionali" },
     { "@type": "PropertyValue", "name": "Tessuto", "value": "Misto poliestere-elastan come standard — i competitor includono l'elastan solo nei livelli premium" },
-    { "@type": "PropertyValue", "name": "Consegna", "value": "7-12 giorni di produzione + 10-15 giorni di spedizione = 20-25 giorni totali in tutto il mondo" }
+    { "@type": "PropertyValue", "name": "Consegna", "value": "7-12 giorni di produzione + 10-15 giorni di spedizione = 25-30 giorni totali in tutto il mondo" }
   ]
 }
 </script>
@@ -83,7 +83,7 @@
     {
       "@type": "Question",
       "name": "Quanto tempo ci vuole per ricevere le maglie da calcio personalizzate?",
-      "acceptedAnswer": { "@type": "Answer", "text": "La produzione richiede 7-12 giorni. La spedizione richiede 10-15 giorni in tutto il mondo. Il tempo totale di consegna è tipicamente 20-25 giorni dalla conferma dell'ordine. Spedizione gratuita su ordini superiori a 50€." }
+      "acceptedAnswer": { "@type": "Answer", "text": "La produzione richiede 7-12 giorni. La spedizione richiede 10-15 giorni in tutto il mondo. Il tempo totale di consegna è tipicamente 25-30 giorni dalla conferma dell'ordine. Spedizione gratuita su ordini superiori a 50€." }
     },
     {
       "@type": "Question",
@@ -105,7 +105,7 @@
 <div class="hero-content">
 <h1>Maglie da Calcio Personalizzate per <span class="highlight">Squadre Amateur</span></h1>
 <h3>Qualit&agrave; professionale da 19,70&euro; a maglia &mdash; le disegniamo noi o scegli dalla nostra collezione</h3>
-<p class="hero-intro">MOMUTO aiuta le squadre di calcio amateur a creare kit personalizzati attraverso tre vie: una <strong>collezione Ready-to-Play</strong> con design collaudati al 10% di sconto, un <strong>servizio di design personalizzato gratuito</strong> con mockup in 24-48h, o un <strong>configuratore 3D in tempo reale</strong>. Senza ordine minimo. Stampa professionale a sublimazione. Consegna mondiale in 20-25 giorni.</p>
+<p class="hero-intro">MOMUTO aiuta le squadre di calcio amateur a creare kit personalizzati attraverso tre vie: una <strong>collezione Ready-to-Play</strong> con design collaudati al 10% di sconto, un <strong>servizio di design personalizzato gratuito</strong> con mockup in 24-48h, o un <strong>configuratore 3D in tempo reale</strong>. Senza ordine minimo. Stampa professionale a sublimazione. Consegna mondiale in 25-30 giorni.</p>
 </div>
 </header>
 <section class="social-proof-strip">
@@ -208,7 +208,7 @@
 <li><span class="hiw-num">2</span><div><strong>Configura e invia</strong><p>Scegli i tuoi colori, carica il tuo stemma e logo sponsor. Per il Ready-to-Play, scegli dalla palette di colori. Per il personalizzato, condividi i riferimenti e lascia che i nostri designer interpretino.</p></div></li>
 <li><span class="hiw-num">3</span><div><strong>Ricevi la tua anteprima</strong><p>Le anteprime Ready-to-Play arrivano in 24h. I mockup personalizzati in 24-48h. Entrambi gratuiti. Entrambi con almeno 1 revisione inclusa.</p></div></li>
 <li><span class="hiw-num">4</span><div><strong>Approva e ordina</strong><p>Soddisfatto del risultato? Conferma le taglie e fai l&rsquo;ordine. Nessun impegno fino a questo momento &mdash; l&rsquo;anteprima &egrave; gratuita indipendentemente.</p></div></li>
-<li><span class="hiw-num">5</span><div><strong>Produciamo e spediamo</strong><p>7-12 giorni di produzione con stampa a sublimazione totale + 10-15 giorni di spedizione mondiale. I tuoi kit arrivano in 20-25 giorni. Spedizione gratuita su ordini superiori a 50&euro;.</p></div></li>
+<li><span class="hiw-num">5</span><div><strong>Produciamo e spediamo</strong><p>7-12 giorni di produzione con stampa a sublimazione totale + 10-15 giorni di spedizione mondiale. I tuoi kit arrivano in 25-30 giorni. Spedizione gratuita su ordini superiori a 50&euro;.</p></div></li>
 </ul>
 <p class="hiw-internal-links">Cerchi la via pi&ugrave; rapida? <a href="https://it.momuto.com/pages/collezione-ready-to-play">I kit Ready-to-Play partono da 19,70&euro; con anteprime in 24h.</a><br />Vuoi vedere cosa hanno ordinato altri club? <a href="https://it.momuto.com/pages/squadre-club-momuto">Sfoglia la galleria completa delle squadre.</a></p>
 </div>

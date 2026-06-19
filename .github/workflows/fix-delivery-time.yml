@@ -1,0 +1,36 @@
+name: Fix Delivery Time (25-30 days)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/fix-delivery-time.js'
+      - '.github/workflows/fix-delivery-time.yml'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (preview, no writes)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Normalize delivery time on live pages
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+        run: node scripts/fix-delivery-time.js

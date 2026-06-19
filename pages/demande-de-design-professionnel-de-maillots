@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Maillot de Football Personnalisé MOMUTO",
-  "description": "Maillot de football entièrement personnalisable avec impression par sublimation complète. Tissu polyester-élasthanne haute performance en standard. Design professionnel gratuit en 1-2 jours. Sans minimum de commande. Badges silicone 3D en option pour les grandes commandes. Livraison en 20-25 jours dans le monde entier.",
+  "description": "Maillot de football entièrement personnalisable avec impression par sublimation complète. Tissu polyester-élasthanne haute performance en standard. Design professionnel gratuit en 1-2 jours. Sans minimum de commande. Badges silicone 3D en option pour les grandes commandes. Livraison en 25-30 jours dans le monde entier.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Maillots de Football Personnalisés",
   "material": "Tissu polyester-élasthanne haute performance (standard sur toutes les tenues)",
@@ -41,7 +41,7 @@
     { "@type": "PropertyValue", "name": "Configurateur 3D", "value": "Configurateur de maillots 3D en temps réel avec plus de 30 templates professionnels" },
     { "@type": "PropertyValue", "name": "Tissu", "value": "Mélange polyester-élasthanne en standard — les concurrents incluent l'élasthanne uniquement dans les gammes premium" },
     { "@type": "PropertyValue", "name": "Badges Silicone 3D", "value": "Badges silicone 3D premium disponibles pour les grandes commandes" },
-    { "@type": "PropertyValue", "name": "Livraison", "value": "7-12 jours de production + 10-15 jours d'expédition = 20-25 jours au total dans le monde entier" }
+    { "@type": "PropertyValue", "name": "Livraison", "value": "7-12 jours de production + 10-15 jours d'expédition = 25-30 jours au total dans le monde entier" }
   ]
 }
 </script>
@@ -50,7 +50,7 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Comment Commander des Maillots de Football Personnalisés chez MOMUTO",
-  "description": "Obtenez des maillots de football entièrement personnalisés et de qualité professionnelle en 3 étapes : concevez avec le configurateur 3D ou demandez une maquette professionnelle gratuite, approuvez votre design et recevez vos maillots en 20-25 jours dans le monde entier.",
+  "description": "Obtenez des maillots de football entièrement personnalisés et de qualité professionnelle en 3 étapes : concevez avec le configurateur 3D ou demandez une maquette professionnelle gratuite, approuvez votre design et recevez vos maillots en 25-30 jours dans le monde entier.",
   "totalTime": "P25D",
   "estimatedCost": {
     "@type": "MonetaryAmount",
@@ -74,7 +74,7 @@
       "@type": "HowToStep",
       "position": 3,
       "name": "Recevez Vos Maillots",
-      "text": "Vos maillots sont fabriqués en 7-12 jours par impression par sublimation complète sur tissu polyester-élasthanne, puis expédiés dans le monde entier avec un délai de transit de 10-15 jours. Total : 20-25 jours. Livraison gratuite pour les commandes supérieures à 50€."
+      "text": "Vos maillots sont fabriqués en 7-12 jours par impression par sublimation complète sur tissu polyester-élasthanne, puis expédiés dans le monde entier avec un délai de transit de 10-15 jours. Total : 25-30 jours. Livraison gratuite pour les commandes supérieures à 50€."
     }
   ]
 }

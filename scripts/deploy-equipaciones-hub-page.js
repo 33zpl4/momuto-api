@@ -25,7 +25,7 @@ const DOMAIN = {
   file: path.join(ROOT, 'pages', 'equipaciones-futbol-personalizadas'),
   title: 'Equipaciones de Fútbol Personalizadas Sin Mínimo | MOMUTO',
   meta_title: 'Equipaciones de Fútbol Personalizadas Sin Mínimo | MOMUTO',
-  meta_descript: 'Diseña la equipación de tu equipo con configurador 3D + IA. Sin pedido mínimo, sublimación total, entrega en ~3 semanas. Tallas de niño a adulto.',
+  meta_descript: 'Diseña la equipación de tu equipo con configurador 3D + IA. Sin pedido mínimo, sublimación total, entrega en 25-30 días. Tallas de niño a adulto.',
   meta_keywords: [
     'equipaciones de futbol personalizadas',
     'equipaciones personalizadas',
