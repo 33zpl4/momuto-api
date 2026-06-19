@@ -31,7 +31,7 @@
     {
       "@type": "Question",
       "name": "¿Cuál es la mejor alternativa a Zentral para equipaciones personalizadas?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Depende de lo que priorices. La diferencia principal es el proceso de diseño: MOMUTO ofrece un configurador 3D para ver la equipación al instante y generar conceptos con IA a partir de una referencia, mientras que el diseño de Zentral es manual. MOMUTO no tiene pedido mínimo, publica sus precios (desde 21,90 €/camiseta a 10 unidades) y entrega en 25-30 días." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Depende de lo que priorices. La diferencia principal es el proceso de diseño: MOMUTO ofrece un configurador 3D para ver la equipación al instante y generar conceptos con IA a partir de una referencia, mientras que el diseño de Zentral es manual. MOMUTO no tiene pedido mínimo (desde 1 unidad, frente a 3 en Zentral) y entrega en 25-30 días; ambas marcas publican precios en torno a 22 € por camiseta a volumen." }
     },
     {
       "@type": "Question",
@@ -106,6 +106,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="cmp-intro">
 <p class="cmp-p">Muchos equipos llegan aquí buscando <strong>opiniones de Zentral</strong> o una <strong>alternativa</strong> para crear su equipación. En lugar de opinar por ti, comparamos los hechos que importan a la hora de decidir: cómo se diseña, qué cuesta, cuánto tarda y si hay pedido mínimo. MOMUTO publica esta página, así que juzga los datos por ti mismo.</p>
 <p class="cmp-p"><strong>La diferencia principal en una frase:</strong> el mercado español de equipaciones a medida &mdash; Zentral incluido &mdash; diseña de forma <strong>manual</strong>; MOMUTO te deja <strong>ver tu equipación al instante en 3D</strong> y generar un <strong>concepto con IA</strong> a partir de una referencia. Es lo único que nadie más combina.</p>
+<p class="cmp-p" style="font-size:0.82rem;color:var(--mg-dim);">MOMUTO está valorado <strong>4,4/5</strong> en <a href="https://es.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> (24 opiniones).</p>
 </div>
 <!-- TABLA -->
 <h2 class="cmp-h2">MOMUTO vs Zentral: la comparativa</h2>
@@ -113,27 +114,27 @@ h1.title, .title, .page-title { display: none !important; }
 <table class="cmp-table">
 <thead><tr><th>Factor</th><th>MOMUTO</th><th>Zentral</th></tr></thead>
 <tbody>
-<tr><td>Diseño</td><td>Configurador 3D + concepto con IA</td><td>Diseño manual (consulta)</td></tr>
+<tr><td>Diseño</td><td>Configurador 3D + concepto con IA</td><td>Diseño manual (por WhatsApp)</td></tr>
 <tr><td>Ver antes de pedir</td><td><span class="cmp-check">✓</span> Al instante, en 3D</td><td>Tras intercambio de mensajes</td></tr>
-<tr><td>Pedido mínimo</td><td>Sin mínimo (desde 1)</td><td>⟦confirmar⟧</td></tr>
-<tr><td>Precio</td><td>Transparente &mdash; desde 21,90 €/camiseta (10 uds)</td><td>⟦confirmar: ¿publican precio?⟧</td></tr>
-<tr><td>Diseño incluido</td><td><span class="cmp-check">✓</span> Gratis</td><td>⟦confirmar⟧</td></tr>
+<tr><td>Pedido mínimo</td><td><span class="cmp-check">✓</span> Sin mínimo (desde 1)</td><td>Desde 3 unidades</td></tr>
+<tr><td>Precio (camiseta)</td><td>Desde 21,90 € (10 uds); 38,90 € suelta</td><td>Desde 21,95 €</td></tr>
+<tr><td>Diseño incluido</td><td>Gratis</td><td>Gratis (sin pago previo)</td></tr>
 <tr><td>Personalización</td><td>Sublimación total, colores ilimitados</td><td>Sublimación</td></tr>
-<tr><td>Entrega</td><td>25-30 días</td><td>⟦confirmar⟧</td></tr>
+<tr><td>Entrega</td><td>25-30 días</td><td>4 semanas (2 en reposiciones)</td></tr>
 <tr><td>Fabricación</td><td>Hub textil global (Asia)</td><td>España</td></tr>
 </tbody>
 </table>
 </div>
-<p class="cmp-note">Datos de MOMUTO de fuentes oficiales (junio 2026). Las celdas de Zentral marcadas se confirmarán con su información pública vigente antes de publicar. Comparativa neutral: comparamos características, no reputaciones.</p>
+<p class="cmp-note">Datos de fuentes oficiales de cada marca (junio 2026; precios y plazos de zentral.es). Comparativa neutral: comparamos características, no reputaciones.</p>
 <!-- MOAT -->
 <div class="cmp-box cmp-verdict">
 <h3>La diferencia: configurador 3D + IA</h3>
 <p>Con el diseño manual, esperas a que alguien te envíe una propuesta y haces cambios por mensaje. Con MOMUTO, <strong>diseñas y ves tu equipación en 3D al instante</strong>: colores, escudo, sponsors, nombres y dorsales, girándola en tiempo real.</p>
 <p>Y si ya tienes una idea o una referencia, nuestra <strong>IA genera un concepto</strong> que editas en el configurador. Lo ves en segundos, no en una semana de ida y vuelta. Es la única ventaja de producto que el mercado español no ofrece &mdash; y por la que muchos equipos buscan una alternativa.</p>
 </div>
-<!-- PRECIO -->
-<h2 class="cmp-h2">Precios claros, sin consultar</h2>
-<p class="cmp-p">Mientras la mayoría esconde el precio detrás de un WhatsApp, MOMUTO lo publica: <strong>desde 38,90 €</strong> la camiseta suelta y <strong>desde 21,90 € por camiseta a partir de 10 unidades</strong> (equipación completa desde 26,90 € por jugador). El diseño siempre es gratis y no hay pedido mínimo. <a href="/pages/equipaciones-futbol-personalizadas">Ver equipaciones personalizadas</a>.</p>
+<!-- PRECIO / MINIMO -->
+<h2 class="cmp-h2">No va de precio, va de proceso</h2>
+<p class="cmp-p">Las dos marcas publican precios parecidos &mdash; en torno a <strong>22 € por camiseta</strong> a volumen (Zentral desde 21,95 €; MOMUTO desde 21,90 € a 10 unidades) &mdash; y en ambas el diseño es gratis. Así que la decisión no es el precio, sino <strong>cómo trabajas</strong>: con MOMUTO no hay <strong>pedido mínimo</strong> (desde 1 camiseta, frente a las 3 unidades de Zentral) y ves tu equipación <strong>en 3D al instante</strong> en lugar de esperar una propuesta por mensaje. <a href="/pages/equipaciones-futbol-personalizadas">Ver equipaciones personalizadas</a>.</p>
 <!-- CUANDO -->
 <h2 class="cmp-h2">Cómo elegir</h2>
 <div class="cmp-box">
@@ -143,7 +144,7 @@ h1.title, .title, .page-title { display: none !important; }
 <!-- FAQ -->
 <h2 class="cmp-h2">Preguntas frecuentes</h2>
 <div class="cmp-faq">
-<details><summary>¿Cuál es la mejor alternativa a Zentral?</summary><p>Depende de lo que priorices. La diferencia principal es el diseño: MOMUTO ofrece configurador 3D + concepto con IA al instante, frente al diseño manual del mercado español. Además no tiene pedido mínimo, publica precios (desde 21,90 €/camiseta a 10 uds) y entrega en 25-30 días.</p></details>
+<details><summary>¿Cuál es la mejor alternativa a Zentral?</summary><p>Depende de lo que priorices. La diferencia principal es el diseño: MOMUTO ofrece configurador 3D + concepto con IA al instante, frente al diseño manual del mercado español. Además no tiene pedido mínimo (desde 1 unidad, frente a 3 en Zentral) y entrega en 25-30 días. Ambas marcas publican precios parecidos (en torno a 22 €/camiseta a volumen).</p></details>
 <details><summary>¿MOMUTO tiene configurador 3D y diseño con IA?</summary><p>Sí. Diseñas tu equipación en 3D y la ves al instante, o envías una referencia y la IA genera un concepto que editas en el configurador.</p></details>
 <details><summary>¿Cuánto cuesta?</summary><p>Desde 38,90 € la camiseta suelta y desde 21,90 € por camiseta a partir de 10 unidades. El diseño siempre es gratis y sin pedido mínimo.</p></details>
 <details><summary>¿Cuánto tarda la entrega?</summary><p>25-30 días. La maqueta gratuita está lista en 1-2 días y la producción no empieza hasta que la apruebas.</p></details>
