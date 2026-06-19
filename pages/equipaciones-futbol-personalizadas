@@ -1,0 +1,222 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Equipaciones de Fútbol Personalizadas Sin Mínimo | MOMUTO",
+  "description": "Diseña la equipación de tu equipo con configurador 3D + conceptos con IA. Sin pedido mínimo, sublimación total, entrega en ~3 semanas, tallas de niño a adulto.",
+  "url": "https://es.momuto.com/pages/equipaciones-futbol-personalizadas",
+  "datePublished": "2026-06-19",
+  "dateModified": "2026-06-19",
+  "inLanguage": "es-ES",
+  "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".sj-bluf", ".sj-faq"] },
+  "publisher": { "@type": "Organization", "name": "MOMUTO", "url": "https://es.momuto.com" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://es.momuto.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Equipaciones de fútbol personalizadas", "item": "https://es.momuto.com/pages/equipaciones-futbol-personalizadas" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Hay pedido mínimo para una equipación personalizada?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. MOMUTO no exige pedido mínimo. Podéis pedir una sola camiseta o equipar a todo el club. El precio por unidad baja con la cantidad, sin recargos por mínimos." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tarda la entrega de las equipaciones?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Las equipaciones personalizadas se entregan en unas 3 semanas (producción más envío directo de fábrica). Vuestra maqueta de diseño gratuita está lista en 1-2 días y la producción no empieza hasta que la aprobáis." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo ver la equipación en 3D antes de pedir?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. Con el configurador 3D diseñáis la equipación y la veis al instante, girándola en tiempo real. Además, si nos enviáis una referencia, nuestra IA genera un concepto que podéis editar en 3D. No hay que esperar a un ida y vuelta por WhatsApp para ver el diseño." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo añadir el escudo del club y los sponsors?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. Subís vuestro escudo y los logos de sponsors y nuestro equipo los coloca en la equipación. La sublimación total imprime los logos en la tela, en colores ilimitados, sin límite de tamaño y sin que se cuarteen." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta una equipación de fútbol personalizada?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Desde 38,90 € la camiseta suelta y desde 21,90 € por camiseta a partir de 10 unidades (equipación completa camiseta + pantalón desde 26,90 € por jugador a 10 unidades). El diseño siempre es gratis." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hacéis tallas de niño y de adulto?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. Producimos tallas de niño y de adulto, así que el mismo diseño se puede pedir para todas las categorías del club, desde los más pequeños hasta el primer equipo." }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+html, body { background-color: #0a0a0a !important; color: #f5f5f5; }
+h1.title, .title, .page-title { display: none !important; }
+.container_wrapper, .page-width, .container, .main-content { max-width:100%!important; width:100%!important; padding:0!important; margin:0!important; overflow:visible!important; }
+*, *::before, *::after { box-sizing: border-box; }
+:root { --mg-bg:#0a0a0a; --mg-panel:#111; --mg-border:rgba(255,255,255,0.06); --mg-border-hover:rgba(255,255,255,0.12); --mg-white:#f5f5f5; --mg-muted:#a1a1aa; --mg-dim:#71717a; --mg-red:#c8352e; --mg-red-hover:#e04038; --font-display:'Bebas Neue',sans-serif; --font-body:'Outfit',sans-serif; }
+.sj-page { font-family:var(--font-body); background:var(--mg-bg); color:var(--mg-white); width:100%; padding-bottom:80px; }
+.sj-container { max-width:1100px; margin:0 auto; padding:0 40px; }
+.sj-hero { background:var(--mg-bg); border-bottom:1px solid var(--mg-border); padding:64px 40px 56px; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.sj-hero h1, .sj-hero .sj-badge, .sj-hero .sj-lede, .sj-hero .sj-trust { text-align:center; }
+.sj-badge { display:inline-block; font-size:0.6rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--mg-red); background:rgba(200,53,46,0.1); border:1px solid rgba(200,53,46,0.15); padding:6px 14px; margin-bottom:20px; }
+.sj-hero h1 { font-family:var(--font-display); font-size:clamp(2.2rem,6vw,4rem); font-weight:400; text-transform:uppercase; letter-spacing:0.03em; line-height:0.98; color:var(--mg-white); margin:0 auto 18px; max-width:18ch; }
+.sj-hero h1 .hl { color:var(--mg-red); }
+.sj-lede { font-size:1.05rem; font-weight:300; color:var(--mg-muted); line-height:1.7; max-width:64ch; margin:0 auto 28px; }
+.sj-cta-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.sj-btn { display:inline-block; background:var(--mg-red); color:#fff; font-weight:800; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.1em; padding:16px 34px; text-decoration:none; border:1px solid var(--mg-red); transition:background 0.2s ease; }
+.sj-btn:hover { background:var(--mg-red-hover); border-color:var(--mg-red-hover); }
+.sj-btn.secondary { background:transparent; color:var(--mg-white); border:1px solid var(--mg-border-hover); }
+.sj-btn.secondary:hover { border-color:var(--mg-white); }
+.sj-trust { font-size:0.8rem; color:var(--mg-dim); margin-top:18px; letter-spacing:0.04em; }
+.sj-trust a { color:var(--mg-muted); text-decoration:underline; }
+.sj-bluf { padding:40px 0 0; }
+.sj-bluf p { font-size:1rem; font-weight:300; color:var(--mg-muted); line-height:1.8; margin-bottom:1.1em; }
+.sj-bluf p strong { color:var(--mg-white); font-weight:600; }
+.sj-facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px; margin:36px 0 0; }
+.sj-fact { background:rgba(255,255,255,0.03); border:1px solid var(--mg-border); padding:20px; }
+.sj-fact .k { font-family:var(--font-display); font-size:1.7rem; color:var(--mg-white); line-height:1; letter-spacing:0.02em; }
+.sj-fact .l { font-size:0.78rem; color:var(--mg-muted); margin-top:8px; line-height:1.5; }
+.sj-h2 { font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.2rem); font-weight:400; text-transform:uppercase; letter-spacing:0.04em; color:var(--mg-white); margin:60px 0 18px 0; line-height:1; padding-left:16px; border-left:3px solid var(--mg-red); }
+.sj-p { font-size:0.95rem; font-weight:300; color:var(--mg-muted); line-height:1.8; margin-bottom:1.2em; }
+.sj-p strong { color:var(--mg-white); font-weight:600; }
+.sj-p a { color:var(--mg-white); text-decoration:underline; }
+.sj-ai { background:linear-gradient(135deg, rgba(200,53,46,0.10), rgba(255,255,255,0.02)); border:1px solid rgba(200,53,46,0.25); padding:36px; margin:1.5em 0; }
+.sj-ai .tag { font-size:0.62rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--mg-red); display:block; margin-bottom:12px; }
+.sj-ai h3 { font-family:var(--font-display); font-size:clamp(1.4rem,3vw,2rem); font-weight:400; letter-spacing:0.03em; text-transform:uppercase; color:var(--mg-white); margin:0 0 12px; line-height:1; }
+.sj-ai p { font-size:0.95rem; color:var(--mg-muted); line-height:1.75; margin:0 0 14px; font-weight:300; }
+.sj-ai p strong { color:var(--mg-white); }
+.sj-table-wrap { overflow-x:auto; margin:1.5em 0; border:1px solid var(--mg-border); }
+.sj-price, .sj-cmp { width:100%; border-collapse:collapse; font-size:0.88rem; background:#111; }
+.sj-price thead tr { background:#fff; }
+.sj-price th { color:#111; font-weight:700; text-transform:uppercase; font-size:0.65rem; letter-spacing:0.1em; padding:14px 18px; text-align:left; }
+.sj-price td { padding:13px 18px; border-bottom:1px solid var(--mg-border); color:var(--mg-muted); }
+.sj-price tr:last-child td { border-bottom:none; }
+.sj-price .tot { font-weight:700; color:var(--mg-white); }
+.sj-price .best td { background:rgba(200,53,46,0.06); }
+.sj-cmp thead tr { background:#000; }
+.sj-cmp th { color:var(--mg-muted); font-weight:700; text-transform:uppercase; letter-spacing:0.1em; font-size:0.62rem; padding:16px; text-align:left; border-bottom:1px solid var(--mg-border); }
+.sj-cmp th:nth-child(2) { color:#fff; background:var(--mg-red); }
+.sj-cmp td { border-bottom:1px solid var(--mg-border); padding:13px 16px; color:var(--mg-muted); }
+.sj-cmp td:first-child { color:#fff; font-weight:600; font-size:0.8rem; }
+.sj-cmp td:nth-child(2) { color:#fff; font-weight:700; background:rgba(200,53,46,0.05); border-left:1px solid rgba(200,53,46,0.2); border-right:1px solid rgba(200,53,46,0.2); }
+.sj-check { color:#4ade80; font-weight:700; }
+.sj-cross { color:var(--mg-dim); }
+.sj-uc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:1.5em 0; }
+.sj-uc { background:var(--mg-panel); border:1px solid var(--mg-border); padding:24px; transition:border-color 0.2s; }
+.sj-uc:hover { border-color:var(--mg-border-hover); }
+.sj-uc i { color:var(--mg-red); font-size:1.2rem; margin-bottom:12px; display:block; }
+.sj-uc h3 { font-weight:700; font-size:0.95rem; color:var(--mg-white); margin:0 0 8px; }
+.sj-uc p { font-size:0.84rem; color:var(--mg-muted); line-height:1.6; margin:0; }
+.sj-faq { margin:1.5em 0; }
+.sj-faq details { border:1px solid var(--mg-border); border-left:3px solid var(--mg-red); background:var(--mg-panel); margin-bottom:10px; padding:0 22px; }
+.sj-faq summary { font-weight:600; font-size:0.95rem; color:var(--mg-white); padding:18px 0; cursor:pointer; list-style:none; }
+.sj-faq summary::-webkit-details-marker { display:none; }
+.sj-faq summary::after { content:"+"; float:right; color:var(--mg-red); font-weight:700; }
+.sj-faq details[open] summary::after { content:"−"; }
+.sj-faq details p { font-size:0.9rem; color:var(--mg-muted); line-height:1.75; margin:0 0 18px; font-weight:300; }
+.sj-faq details p a { color:#fff; text-decoration:underline; }
+.sj-note { font-size:0.75rem; color:var(--mg-dim); margin-top:10px; font-weight:300; }
+.sj-cta-block { background:var(--mg-red); padding:60px 40px; text-align:center; margin:64px 0 0; }
+.sj-cta-block h2 { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:400; text-transform:uppercase; letter-spacing:0.04em; color:#fff; line-height:1; margin:0 0 12px; }
+.sj-cta-block p { color:rgba(255,255,255,0.85); font-size:0.95rem; font-weight:300; margin-bottom:26px; }
+.sj-cta-block .sj-btn { background:#fff; color:#000; border-color:#fff; }
+.sj-cta-block .sj-btn.secondary { background:transparent; color:#fff; border-color:rgba(255,255,255,0.5); }
+@media (max-width:768px){ .sj-container{padding:0 20px;} .sj-hero{padding:44px 20px 40px;} .sj-cta-block{padding:40px 20px;} .sj-ai{padding:24px;} .sj-price,.sj-cmp{font-size:0.78rem;} .sj-price th,.sj-price td,.sj-cmp th,.sj-cmp td{padding:10px 12px;} }
+</style>
+<div class="sj-page">
+<div class="sj-hero">
+<div class="sj-badge">Equipaciones de fútbol personalizadas</div>
+<h1>La <span class="hl">Equipación</span> de Vuestro Equipo, a Vuestra Medida</h1>
+<p class="sj-lede">Diseñad la equipación de vuestro club en nuestro configurador 3D gratuito y vedla al instante, o enviadnos una referencia y nuestra IA crea el concepto. Sin pedido mínimo, sublimación total y tallas de niño a adulto.</p>
+<div class="sj-cta-row"><a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn">Diseñar en 3D — gratis</a> <a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn secondary">Pedir un diseño gratis</a></div>
+<p class="sj-trust">Valorado 4,4/5 en <a href="https://es.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confianza de más de 100 clubes.</p>
+</div>
+<div class="sj-container">
+<div class="sj-bluf">
+<p>MOMUTO crea <strong>equipaciones de fútbol personalizadas</strong> para clubes, equipos amateur, academias y peñas. Elegid una plantilla en el <strong>configurador 3D gratuito</strong> y pedidla en minutos, o enviadnos vuestra idea y nuestro equipo diseña la equipación — <strong>el diseño siempre es gratis</strong>. Cada equipación se imprime en <strong>sublimación total</strong> sobre tejido de poliéster-elastano, <strong>sin pedido mínimo</strong> (1 camiseta o 100), con <strong>nombre y dorsal de cada jugador incluidos</strong> y entrega en <strong>~3 semanas</strong>.</p>
+<div class="sj-facts">
+<div class="sj-fact"><div class="k">Sin mínimo</div><div class="l">Pedid 1 camiseta o el equipo entero, sin recargos</div></div>
+<div class="sj-fact"><div class="k">3D + IA</div><div class="l">Ved la equipación al instante, antes de pedir</div></div>
+<div class="sj-fact"><div class="k">~3 semanas</div><div class="l">Entrega en todo el mundo, directa de fábrica</div></div>
+<div class="sj-fact"><div class="k">Niño-adulto</div><div class="l">Un mismo diseño para todas las categorías del club</div></div>
+</div>
+</div>
+<!-- DIFERENCIADOR IA -->
+<div class="sj-ai">
+<span class="tag">Lo que nos diferencia</span>
+<h3>Tráenos una referencia y te la recreamos al instante</h3>
+<p>El mercado español de equipaciones a medida funciona con diseño <strong>manual y por WhatsApp</strong>: esperáis días para <em>ver</em> una propuesta. Con MOMUTO no. Enviadnos cualquier referencia o idea &mdash; incluso una imagen generada con IA &mdash; y la convertimos en un <strong>concepto MOMUTO que editáis en directo en el configurador 3D</strong>. Lo veis en segundos, no en una semana.</p>
+<div class="sj-cta-row" style="justify-content:flex-start;"><a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn">Enviar una referencia</a></div>
+</div>
+<!-- COMPARATIVA -->
+<h2 class="sj-h2">MOMUTO vs. el proceso tradicional</h2>
+<div class="sj-table-wrap">
+<table class="sj-cmp">
+<thead><tr><th>Factor</th><th>MOMUTO</th><th>Proceso manual / WhatsApp</th></tr></thead>
+<tbody>
+<tr><td>Ver el diseño</td><td>Al instante en 3D + IA</td><td>Días de ida y vuelta</td></tr>
+<tr><td>Pedido mínimo</td><td>Ninguno (desde 1)</td><td>Habitual mínimo por equipo</td></tr>
+<tr><td>Diseño</td><td>Configurador 3D y diseñador gratis</td><td>Solo diseño manual</td></tr>
+<tr><td>Personalización</td><td>Sublimación total, colores ilimitados</td><td>Según técnica</td></tr>
+<tr><td>Nombres y dorsales</td><td><span class="sj-check">✓</span> Incluidos</td><td>Coste por nombre</td></tr>
+<tr><td>Tallas niño y adulto</td><td><span class="sj-check">✓</span> Mismo diseño</td><td>Variable</td></tr>
+<tr><td>Entrega</td><td>~3 semanas</td><td>Variable</td></tr>
+</tbody>
+</table>
+</div>
+<!-- PRECIOS -->
+<h2 class="sj-h2">Precios — el diseño siempre es gratis</h2>
+<p class="sj-p">Precios por volumen, sin pedido mínimo y sin costes ocultos.</p>
+<div class="sj-table-wrap">
+<table class="sj-price">
+<thead><tr><th>Cantidad</th><th>Camiseta</th><th>Pantalón</th><th>Equipación completa</th></tr></thead>
+<tbody>
+<tr><td>1 unidad</td><td>38,90 €</td><td>17,90 €</td><td class="tot">56,80 €</td></tr>
+<tr><td>5 a 9 uds.</td><td>26,90 €</td><td>11,90 €</td><td class="tot">38,80 € / ud.</td></tr>
+<tr class="best"><td>10 a 19 uds.</td><td>21,90 €</td><td>6,00 €</td><td class="tot">26,90 € / ud.</td></tr>
+<tr><td>20 a 49 uds.</td><td>18,90 €</td><td>6,00 €</td><td class="tot">24,90 € / ud.</td></tr>
+<tr><td>100+ uds.</td><td>16,90 €</td><td>5,00 €</td><td class="tot">21,90 € / ud.</td></tr>
+</tbody>
+</table>
+</div>
+<p class="sj-note">Tejido poliéster-elastano de serie. Maqueta profesional gratis en 1-2 días, con revisiones incluidas.</p>
+<!-- USOS -->
+<h2 class="sj-h2">Para cada tipo de equipo</h2>
+<div class="sj-uc-grid">
+<div class="sj-uc"><i class="fas fa-shield-halved"></i><h3>Clubes y equipos</h3><p>Equipaciones de local y visitante con vuestro escudo, sponsors y toda la plantilla con nombre y dorsal.</p></div>
+<div class="sj-uc"><i class="fas fa-children"></i><h3>Academias y fútbol base</h3><p>Un mismo diseño para todas las categorías, en tallas de niño y adulto, sin pedido mínimo.</p></div>
+<div class="sj-uc"><i class="fas fa-futbol"></i><h3>Fútbol sala y fútbol 7</h3><p>Equipad a vuestro equipo de fútbol sala, fútbol 7 o liga de empresa — pedid solo lo que necesitáis.</p></div>
+<div class="sj-uc"><i class="fas fa-trophy"></i><h3>Torneos y peñas</h3><p>Equipaciones a medida para torneos, peñas y eventos, con vuestra identidad y a tiempo para la liga.</p></div>
+</div>
+<!-- FAQ -->
+<h2 class="sj-h2">Preguntas frecuentes</h2>
+<div class="sj-faq">
+<details><summary>¿Hay pedido mínimo?</summary><p>No. MOMUTO no exige pedido mínimo — pedid una sola camiseta o equipad a todo el club. El precio por unidad baja con la cantidad, sin recargos por mínimos.</p></details>
+<details><summary>¿Cuánto tarda la entrega?</summary><p>Las equipaciones se entregan en unas 3 semanas. Vuestra maqueta gratuita está lista en 1-2 días y la producción no empieza hasta que la aprobáis.</p></details>
+<details><summary>¿Puedo ver la equipación en 3D antes de pedir?</summary><p>Sí. Con el configurador 3D la diseñáis y la veis al instante. Y si nos enviáis una referencia, nuestra IA genera un concepto que editáis en 3D — sin esperar a un ida y vuelta por WhatsApp.</p></details>
+<details><summary>¿Puedo añadir el escudo y los sponsors?</summary><p>Sí. Subís vuestro escudo y logos: la sublimación total los imprime en la tela, en colores ilimitados, sin límite de tamaño y sin que se cuarteen.</p></details>
+<details><summary>¿Cada jugador puede llevar nombre y dorsal distintos?</summary><p>Sí, sin coste adicional. La personalización forma parte de la impresión, no es un extra.</p></details>
+<details><summary>¿Hacéis tallas de niño y de adulto?</summary><p>Sí, el mismo diseño en todas las categorías, desde el fútbol base hasta el primer equipo.</p></details>
+</div>
+<p class="sj-p">¿Eres un club grande o una academia? Mira <a href="/pages/equipos-momuto">equipaciones para equipos y clubes</a>, explora la <a href="/pages/galeria-equipaciones-personalizadas">galería de equipaciones</a> o compara opciones en <a href="/pages/zentral-opiniones-alternativa">alternativa a Zentral</a>.</p>
+</div>
+<div class="sj-cta-block">
+<h2>Diseñad vuestra equipación</h2>
+<p>Hacedlo en 3D, o enviadnos una referencia y nuestra IA crea el concepto — gratis y sin compromiso hasta que pedís.</p>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn">Diseñar en 3D</a> <a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn secondary">Pedir un diseño gratis</a>
+<p class="sj-note">Sin pedido mínimo · Sublimación total · Tallas niño a adulto · Entrega en ~3 semanas</p>
+</div>
+</div>
