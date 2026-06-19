@@ -1,6 +1,14 @@
 name: Deploy Blog Post
 
+# PUSH (no clicks): edit any blogs/**/*.json and merge to main → the changed
+#   post(s) deploy automatically.
+# DISPATCH: deploy a single post by handle (default dry-run) for one-offs.
+
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'blogs/**/*.json'
   workflow_dispatch:
     inputs:
       post_handle:
@@ -11,19 +19,13 @@ on:
         required: false
         default: 'en'
         type: choice
-        options:
-          - en
-          - fr
-          - es
-          - it
+        options: [en, fr, es, it]
       dry_run:
         description: 'Dry run — preview only, no writes to CMS'
         required: false
         default: 'true'
         type: choice
-        options:
-          - 'true'
-          - 'false'
+        options: ['true', 'false']
 
 jobs:
   deploy:
@@ -31,16 +33,31 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Deploy changed blog posts (push)
+        if: github.event_name == 'push'
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          DRY_RUN: 'false'
+        run: |
+          BEFORE='${{ github.event.before }}'
+          if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then BEFORE="$(git rev-parse HEAD~1)"; fi
+          CHANGED="$(git diff --name-only "$BEFORE" "${{ github.sha }}" -- 'blogs/**/*.json' | tr '\n' ' ')"
+          echo "Changed blog files: $CHANGED"
+          CHANGED_FILES="$CHANGED" node scripts/deploy-blog-post.js
 
-      - name: Deploy blog post
+      - name: Deploy blog post (dispatch)
+        if: github.event_name == 'workflow_dispatch'
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
