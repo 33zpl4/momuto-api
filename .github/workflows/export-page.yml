@@ -1,0 +1,79 @@
+name: Export Page from CMS
+
+# Pulls a live CMS page into the repo (body + SEO meta) for any handle on any
+# locale/subdomain, and commits the files back. Reusable for review/rebuild.
+
+on:
+  workflow_dispatch:
+    inputs:
+      handle:
+        description: 'Page handle (e.g. zentral-opiniones-alternativa)'
+        required: true
+        type: string
+      locale:
+        description: 'Locale / subdomain'
+        required: true
+        default: 'es'
+        type: choice
+        options: [en, es, fr, it]
+      outfile:
+        description: 'Output path (optional; default pages/export-<handle>)'
+        required: false
+        type: string
+      branch:
+        description: 'Branch to commit the exported files to'
+        required: false
+        default: 'main'
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Export page from CMS
+        id: export
+        env:
+          HANDLE: ${{ inputs.handle }}
+          LOCALE: ${{ inputs.locale }}
+          OUTFILE: ${{ inputs.outfile }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+        run: node scripts/export-page.js
+
+      - name: Commit exported files
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ inputs.branch }}
+          OUTFILE: ${{ steps.export.outputs.outfile }}
+          METAFILE: ${{ steps.export.outputs.metafile }}
+        run: |
+          for FILE in "$OUTFILE" "$METAFILE"; do
+            [ -f "$FILE" ] || { echo "missing $FILE"; continue; }
+            CONTENT=$(base64 -w 0 "$FILE")
+            SHA=$(gh api "repos/${{ github.repository }}/contents/${FILE}?ref=${BRANCH}" --jq '.sha' 2>/dev/null || true)
+            if [ -n "$SHA" ]; then
+              gh api --method PUT "repos/${{ github.repository }}/contents/${FILE}" \
+                -f message="Export ${{ inputs.handle }} (${{ inputs.locale }}) from CMS" \
+                -f content="$CONTENT" -f sha="$SHA" -f branch="$BRANCH"
+            else
+              gh api --method PUT "repos/${{ github.repository }}/contents/${FILE}" \
+                -f message="Export ${{ inputs.handle }} (${{ inputs.locale }}) from CMS" \
+                -f content="$CONTENT" -f branch="$BRANCH"
+            fi
+            echo "✓ Committed ${FILE} to ${BRANCH}"
+          done
