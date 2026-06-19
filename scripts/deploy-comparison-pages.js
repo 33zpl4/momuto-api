@@ -55,11 +55,31 @@ const DOMAINS = {
         'MOMUTO vs Owayo'
       ]
     }
+  },
+  es: {
+    host: 'https://openapi.oemapps.com',
+    token: process.env.OEMSAAS_TOKEN_ES,
+    label: 'es.momuto.com',
+    handle: 'zentral-opiniones-alternativa',
+    file: path.join(ROOT, 'pages', 'comparison-es'),
+    meta: {
+      title: 'Alternativa a Zentral: Equipaciones Comparadas | MOMUTO',
+      meta_title: 'Alternativa a Zentral: Equipaciones Comparadas | MOMUTO',
+      meta_descript: '¿Buscas una alternativa a Zentral? Compara con datos el diseño 3D + IA, el precio, los plazos y el pedido mínimo para crear la equipación de tu equipo.',
+      meta_keywords: [
+        'alternativa a zentral',
+        'zentral opiniones',
+        'zentral sports opiniones',
+        'equipaciones de futbol personalizadas',
+        'crear equipacion de futbol',
+        'MOMUTO'
+      ]
+    }
   }
 };
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
-const LOCALES = (process.env.LOCALES || 'en,fr,it')
+const LOCALES = (process.env.LOCALES || 'en,fr,it,es')
   .split(',')
   .map(s => s.trim())
   .filter(Boolean);
