@@ -1,21 +1,23 @@
 'use strict';
 
 /**
- * Deploys a single blog post from blogs/<locale>/<handle>.json (or blogs/<handle>.json for EN).
+ * Deploys blog post(s) from blogs/<locale>/<handle>.json (or blogs/<handle>.json for EN).
+ *
+ * Two modes:
+ *   PUSH  — set CHANGED_FILES="blogs/a.json blogs/fr/b.json ..." (space/newline
+ *           separated). Locale + handle are derived from each path. Used by the
+ *           push trigger so blog edits deploy automatically — no dispatch.
+ *   SINGLE— set POST_HANDLE (+ LOCALE) for a one-off dispatch.
  *
  * Env:
- *   LOCALE=en|fr|es|it  - default en
- *   OEMSAAS_TOKEN_EN/FR/ES/IT  - token for the selected locale
- *   POST_HANDLE         - required: matches filename in blogs/<locale>/
- *   DRY_RUN=true|false  - default true
+ *   DRY_RUN=true|false  - default true (set false to write)
+ *   OEMSAAS_TOKEN_EN/FR/ES/IT - token per locale
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const HOST = 'https://openapi.oemapps.com';
-const LOCALE = (process.env.LOCALE || 'en').toLowerCase();
-const HANDLE = process.env.POST_HANDLE;
 const DRY_RUN = process.env.DRY_RUN !== 'false';
 
 const DOMAIN_MAP = {
@@ -25,19 +27,18 @@ const DOMAIN_MAP = {
   it: { token: process.env.OEMSAAS_TOKEN_IT, url: 'https://it.momuto.com' },
 };
 
-const domain = DOMAIN_MAP[LOCALE];
-if (!domain) { console.error(`Unknown locale: ${LOCALE}`); process.exit(1); }
-const TOKEN = domain.token;
+function blogDirFor(locale) {
+  return locale === 'en'
+    ? path.join(__dirname, '..', 'blogs')
+    : path.join(__dirname, '..', 'blogs', locale);
+}
 
-// ─── API helpers ──────────────────────────────────────────────────────────────
-
-async function fetchPosts() {
+async function fetchPosts(token) {
   let page = 1;
   const pagesize = 50;
   const items = [];
   while (true) {
-    const url = `${HOST}/posts?page=${page}&pagesize=${pagesize}`;
-    const res = await fetch(url, { headers: { token: TOKEN } });
+    const res = await fetch(`${HOST}/posts?page=${page}&pagesize=${pagesize}`, { headers: { token } });
     const json = await res.json();
     if (!res.ok || json.code !== 0) break;
     const list = json.data?.list ?? (Array.isArray(json.data) ? json.data : []);
@@ -49,14 +50,12 @@ async function fetchPosts() {
   return items;
 }
 
-function getHandle(post) {
-  return post.handle || post.alias || post.slug || post.url_key || null;
-}
+const getHandle = (post) => post.handle || post.alias || post.slug || post.url_key || null;
 
-async function updatePost(id, data) {
+async function updatePost(token, id, data) {
   const res = await fetch(`${HOST}/posts/${id}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json', token: TOKEN },
+    headers: { 'Content-Type': 'application/json', token },
     body: JSON.stringify(data),
   });
   const json = await res.json();
@@ -64,67 +63,70 @@ async function updatePost(id, data) {
   return json;
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
+// blogs/<handle>.json → en ; blogs/<locale>/<handle>.json → that locale
+function parsePath(file) {
+  let m = file.match(/^blogs\/(en|fr|es|it)\/(.+)\.json$/);
+  if (m) return { locale: m[1], handle: m[2] };
+  m = file.match(/^blogs\/([^/]+)\.json$/);
+  if (m) return { locale: 'en', handle: m[1] };
+  return null;
+}
 
-async function main() {
-  if (!TOKEN) { console.error(`OEMSAAS_TOKEN_${LOCALE.toUpperCase()} is required`); process.exit(1); }
-  if (!HANDLE) { console.error('POST_HANDLE is required'); process.exit(1); }
+async function deployOne(locale, handle) {
+  const domain = DOMAIN_MAP[locale];
+  if (!domain) { console.warn(`⚠️  ${handle}: unknown locale "${locale}" — skipping`); return; }
+  if (!domain.token) { console.warn(`⚠️  ${handle}: no ${locale} token — skipping`); return; }
 
-  // EN posts live in blogs/, other locales in blogs/<locale>/
-  const blogDir = LOCALE === 'en'
-    ? path.join(__dirname, '..', 'blogs')
-    : path.join(__dirname, '..', 'blogs', LOCALE);
-
-  const dataFile = path.join(blogDir, `${HANDLE}.json`);
-  if (!fs.existsSync(dataFile)) {
-    console.error(`No content file found: blogs/${LOCALE === 'en' ? '' : LOCALE + '/'}${HANDLE}.json`);
-    process.exit(1);
-  }
+  const dataFile = path.join(blogDirFor(locale), `${handle}.json`);
+  if (!fs.existsSync(dataFile)) { console.warn(`⚠️  ${handle}: no file ${dataFile} — skipping`); return; }
 
   const data = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
-
-  if (data.handle && data.handle !== HANDLE) {
-    console.error(`Handle mismatch: file says "${data.handle}", POST_HANDLE is "${HANDLE}"`);
-    process.exit(1);
+  if (data.handle && data.handle !== handle) {
+    throw new Error(`${handle}: file handle "${data.handle}" ≠ path handle`);
   }
 
-  console.log(`Mode: ${DRY_RUN ? 'DRY RUN (no writes)' : 'LIVE'}`);
-  console.log(`Locale: ${LOCALE} → ${domain.url}`);
-  console.log(`Handle: ${HANDLE}`);
-  console.log(`Title: ${data.title}`);
-  console.log(`Meta title length: ${data.meta_title?.length ?? 0} (max 65)`);
-  console.log(`Meta desc length: ${data.meta_descript?.length ?? 0} (max 160)`);
-  console.log(`Content length: ${data.content?.length ?? 0} chars\n`);
+  console.log(`• ${locale} ${handle} — "${data.title}" (meta_title ${data.meta_title?.length ?? 0}/65, desc ${data.meta_descript?.length ?? 0}/160)`);
+  if (DRY_RUN) { console.log('   DRY RUN — no write'); return; }
 
-  if (DRY_RUN) {
-    console.log('[DRY RUN] Content preview (first 400 chars):');
-    console.log(data.content?.slice(0, 400) + '...');
-    console.log('\nSet DRY_RUN=false to deploy.');
-    return;
-  }
+  const posts = await fetchPosts(domain.token);
+  const post = posts.find(p => getHandle(p) === handle);
+  if (!post) { throw new Error(`${handle}: not found in CMS on ${domain.url}`); }
 
-  console.log('Fetching posts from CMS...');
-  const posts = await fetchPosts();
-  console.log(`Found ${posts.length} posts`);
-
-  const post = posts.find(p => getHandle(p) === HANDLE);
-  if (!post) {
-    console.error(`Post not found in CMS with handle: ${HANDLE}`);
-    process.exit(1);
-  }
-
-  console.log(`Updating post id=${post.id}...`);
-  await updatePost(post.id, {
+  await updatePost(domain.token, post.id, {
     title: data.title,
     content: data.content,
     meta_title: data.meta_title,
     meta_descript: data.meta_descript,
     summary: data.summary ?? '',
     author: data.author ?? '',
-    handle: HANDLE,
+    handle,
   });
+  console.log(`   ✅ ${domain.url}/blogs/${handle}`);
+}
 
-  console.log(`✅ Done: ${domain.url}/blogs/${HANDLE}`);
+async function main() {
+  console.log(`Mode: ${DRY_RUN ? 'DRY RUN' : 'LIVE'}\n`);
+
+  let targets;
+  const changed = (process.env.CHANGED_FILES || '').trim();
+  if (changed) {
+    const seen = new Set();
+    targets = changed.split(/\s+/).filter(Boolean).map(parsePath).filter(Boolean)
+      .filter(t => { const k = `${t.locale}/${t.handle}`; if (seen.has(k)) return false; seen.add(k); return true; });
+    if (!targets.length) { console.log('No blog JSON files changed — nothing to deploy.'); return; }
+  } else {
+    const handle = process.env.POST_HANDLE;
+    if (!handle) { console.error('POST_HANDLE required (or set CHANGED_FILES)'); process.exit(1); }
+    targets = [{ locale: (process.env.LOCALE || 'en').toLowerCase(), handle }];
+  }
+
+  const errors = [];
+  for (const t of targets) {
+    try { await deployOne(t.locale, t.handle); }
+    catch (e) { console.error(`❌ ${e.message}`); errors.push(t.handle); }
+  }
+  if (errors.length) { console.error(`\n${errors.length} error(s)`); process.exit(1); }
+  console.log('\n✅ Done.');
 }
 
 main().catch(err => { console.error(err); process.exit(1); });
