@@ -1,0 +1,773 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Mejores webs para crear equipaciones de fútbol personalizadas (2026) — MOMUTO vs Zentral vs Aimar Sport vs Owayo vs Spized",
+  "description": "Comparativa independiente 2026 de las mejores webs para crear equipaciones de fútbol personalizadas: MOMUTO, Zentral, Aimar Sport, Owayo y Spized. Precios, plazos, pedido mínimo, tejido y servicio de diseño comparados.",
+  "url": "https://es.momuto.com/pages/mejores-webs-equipaciones-futbol-personalizadas-2026",
+  "datePublished": "2024-01-01",
+  "dateModified": "2026-06-19",
+  "inLanguage": "es-ES",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".verdict-section", ".analysis-section"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MOMUTO",
+    "url": "https://es.momuto.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tardan las equipaciones de fútbol personalizadas en 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MOMUTO entrega las equipaciones personalizadas en 25-30 días naturales en todo el mundo (7-15 días de producción + 10-15 días de envío directo desde fábrica). Zentral suele tardar unas 4 semanas. Aimar Sport indica 25-30 días hábiles (unas 5-6 semanas naturales). Owayo y Spized se mueven habitualmente entre 3 y 6 semanas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta una equipación de fútbol personalizada?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Precios MOMUTO: 1 camiseta a 38,90 €; 2-4 a 34,90 €/u; 5-9 a 26,90 €/u; 10-19 a 21,90 €/u; 20-49 a 18,90 €/u; 50-99 a 17,90 €/u; 100+ a 16,90 €/u. El pantalón va aparte: 17,90 € (1 ud), 15,90 € (2-4), 11,90 € (5-9), 6,00 € (10+). Para un equipo de 10, el kit completo (camiseta + pantalón) sale a 26,90 € por jugador. El servicio de diseño es siempre gratis."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo pedir una sola equipación personalizada?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. MOMUTO no exige pedido mínimo: puedes pedir desde 1 unidad. Una camiseta suelta cuesta 38,90 € y el kit completo con pantalón 56,80 €, sin recargos ocultos. Es la diferencia clave frente a Zentral (mínimo 3 unidades) y Aimar Sport (mínimo 10 unidades). A partir de 10 kits, el precio baja a 26,90 € por kit completo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿El servicio de diseño es gratis en MOMUTO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. MOMUTO ofrece tres vías de diseño gratuitas: un configurador 3D en tiempo real con más de 30 plantillas, un servicio de diseño profesional con diseñador humano (boceto en 1-2 días y retoques ilimitados) y la adaptación de tus conceptos de IA (ChatGPT, Gemini, Midjourney) a una equipación lista para producción, un servicio único en el mercado. No se paga nada por adelantado."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué tejido usan las equipaciones MOMUTO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Todas las equipaciones MOMUTO usan de serie una mezcla de poliéster y elastano. La mayoría de la competencia trabaja con poliéster 100 %. MOMUTO incluye el elastano sin coste extra, lo que da un corte más ajustado y mejor recuperación de la forma."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿MOMUTO hace envíos a España?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. MOMUTO envía equipaciones de fútbol personalizadas a toda España y Europa en 25-30 días naturales. Envío gratis a partir de 49 € de compra. La atención al cliente está disponible en español por WhatsApp, email e Instagram."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Equipación de Fútbol Personalizada — Camiseta + Pantalón",
+  "description": "Equipación de fútbol totalmente personalizada con impresión por sublimación total. Tejido poliéster-elastano de alto rendimiento, servicio de diseño profesional gratuito, sin pedido mínimo. Entrega en 25-30 días.",
+  "brand": { "@type": "Brand", "name": "MOMUTO" },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": 21.90,
+    "highPrice": 56.80,
+    "offerCount": 7,
+    "availability": "https://schema.org/InStock",
+    "url": "https://es.momuto.com/pages/solicitud-de-diseno-personalizado",
+    "priceValidUntil": "2026-12-31"
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Pedido mínimo", "value": "1 unidad" },
+    { "@type": "PropertyValue", "name": "Servicio de diseño", "value": "Diseñador pro gratis + Configurador 3D + Concepto IA" },
+    { "@type": "PropertyValue", "name": "Tejido", "value": "Mezcla poliéster-elastano" },
+    { "@type": "PropertyValue", "name": "Impresión", "value": "Sublimación total" },
+    { "@type": "PropertyValue", "name": "Entrega", "value": "25-30 días en todo el mundo" }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+/* ===== GLOBAL RESETS ===== */
+html, body {
+  background-color: #0a0a0a !important;
+  color: #f5f5f5;
+}
+h1.title, .title, .page-title { display: none !important; }
+.container_wrapper, .page-width, .container, .main-content {
+  max-width: 100% !important; width: 100% !important;
+  padding: 0 !important; margin: 0 !important;
+  overflow: visible !important;
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ===== VARIABLES ===== */
+:root {
+  --mg-bg: #0a0a0a;
+  --mg-panel: #111;
+  --mg-card: #111;
+  --mg-border: rgba(255,255,255,0.06);
+  --mg-border-hover: rgba(255,255,255,0.12);
+  --mg-white: #f5f5f5;
+  --mg-muted: #a1a1aa;
+  --mg-dim: #71717a;
+  --mg-red: #c8352e;
+  --mg-red-hover: #e04038;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+/* ===== PAGE ===== */
+.cmp-page {
+  font-family: var(--font-body);
+  background: var(--mg-bg);
+  color: var(--mg-white);
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+.cmp-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+/* ===== HEADER ===== */
+.cmp-header {
+  background: var(--mg-bg);
+  border-bottom: 1px solid var(--mg-border);
+  padding: 60px 40px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.cmp-header-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mg-red);
+  background: rgba(200,53,46,0.1);
+  border: 1px solid rgba(200,53,46,0.15);
+  padding: 6px 14px;
+  margin-bottom: 20px;
+}
+
+.cmp-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--mg-white);
+  margin: 0 0 16px 0;
+}
+
+.cmp-header .cmp-last-updated {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--mg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ===== ANSWER BOX ===== */
+.cmp-answer-box {
+  background: rgba(200,53,46,0.06);
+  border: 1px solid rgba(200,53,46,0.2);
+  border-left: 3px solid var(--mg-red);
+  padding: 28px 32px;
+  margin: 0 0 2em 0;
+}
+
+.cmp-answer-box-label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mg-red);
+  margin-bottom: 12px;
+}
+
+.cmp-answer-box p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--mg-muted);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.cmp-answer-box p strong {
+  color: var(--mg-white);
+  font-weight: 600;
+}
+
+/* ===== SECTION TITLES ===== */
+.cmp-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--mg-white);
+  margin: 60px 0 20px 0;
+  line-height: 1;
+  padding-left: 16px;
+  border-left: 3px solid var(--mg-red);
+}
+
+.cmp-h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mg-white);
+  margin: 36px 0 10px 0;
+}
+
+.cmp-p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--mg-muted);
+  line-height: 1.8;
+  margin-bottom: 1.2em;
+}
+
+.cmp-p strong, .cmp-bold {
+  color: var(--mg-white);
+  font-weight: 600;
+}
+
+.cmp-p a { color: var(--mg-white); text-decoration: underline; text-underline-offset: 3px; }
+.cmp-p a:hover { color: var(--mg-red-hover); }
+
+/* ===== PRICING TABLE ===== */
+.cmp-table-wrap {
+  overflow-x: auto;
+  margin: 2em 0;
+  border: 1px solid var(--mg-border);
+}
+
+.cmp-pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  background: var(--mg-card);
+}
+
+.cmp-pricing-table thead tr {
+  background: #ffffff;
+}
+
+.cmp-pricing-table th {
+  color: #111;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+.cmp-pricing-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--mg-border);
+  color: var(--mg-muted);
+  vertical-align: middle;
+}
+
+.cmp-pricing-table tr:last-child td { border-bottom: none; }
+.cmp-pricing-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.cmp-kit-total {
+  font-weight: 700;
+  color: var(--mg-white) !important;
+}
+
+.cmp-best-value td {
+  background: rgba(200,53,46,0.05) !important;
+}
+
+.cmp-best-value-badge {
+  display: inline-block;
+  background: var(--mg-red);
+  color: #fff;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* ===== COMPARISON TABLE ===== */
+.cmp-master-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  background: var(--mg-card);
+}
+
+.cmp-master-table thead tr {
+  background: #000;
+}
+
+.cmp-master-table th {
+  color: var(--mg-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.62rem;
+  padding: 18px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--mg-border);
+}
+
+.cmp-master-table th:nth-child(2) {
+  color: var(--mg-white);
+  background: var(--mg-red);
+}
+
+.cmp-master-table td {
+  border-bottom: 1px solid var(--mg-border);
+  padding: 14px 16px;
+  vertical-align: middle;
+  color: var(--mg-muted);
+  line-height: 1.4;
+}
+
+.cmp-master-table td:first-child {
+  font-weight: 600;
+  color: var(--mg-white);
+  font-size: 0.8rem;
+}
+
+.cmp-master-table td:nth-child(2) {
+  font-weight: 700;
+  color: var(--mg-white);
+  background: rgba(200,53,46,0.05);
+  border-left: 1px solid rgba(200,53,46,0.2);
+  border-right: 1px solid rgba(200,53,46,0.2);
+}
+
+.cmp-master-table tr:last-child td:nth-child(2) {
+  border-bottom: 1px solid rgba(200,53,46,0.2);
+}
+
+.cmp-master-table tr:hover td { background: rgba(255,255,255,0.02); }
+.cmp-master-table tr:hover td:nth-child(2) { background: rgba(200,53,46,0.08); }
+
+.cmp-check { color: #4ade80; font-weight: 700; }
+.cmp-cross { color: var(--mg-dim); }
+
+/* ===== HIGHLIGHT BOX ===== */
+.cmp-highlight-box {
+  background: var(--mg-panel);
+  border: 1px solid var(--mg-border);
+  border-left: 3px solid var(--mg-red);
+  padding: 32px 36px;
+  margin: 2em 0;
+}
+
+.cmp-highlight-box ul {
+  margin: 10px 0 20px 0;
+  padding-left: 1.4em;
+  list-style: none;
+}
+
+.cmp-highlight-box ul li {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--mg-muted);
+  padding-left: 1em;
+  position: relative;
+}
+
+.cmp-highlight-box ul li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--mg-red);
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
+/* ===== NOTE TEXT ===== */
+.cmp-note {
+  font-size: 0.75rem;
+  color: var(--mg-dim);
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+/* ===== CTA BLOCK ===== */
+.cmp-cta-block {
+  background: var(--mg-red);
+  padding: 60px 40px;
+  text-align: center;
+  margin: 60px 0 0;
+}
+
+.cmp-cta-block h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.cmp-cta-block p {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.95rem;
+  font-weight: 300;
+  margin-bottom: 28px;
+}
+
+.cmp-cta-btn {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 18px 40px;
+  text-decoration: none;
+  margin: 6px;
+  transition: all 0.2s ease;
+  border: 1px solid #fff;
+}
+
+.cmp-cta-btn:hover { background: #e5e5e5; }
+
+.cmp-cta-btn.secondary {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.cmp-cta-btn.secondary:hover { border-color: #fff; }
+
+/* ===== DESIGNS CAROUSEL ===== */
+.trust-proof { width: 100vw; position: relative; left: 50%; margin-left: -50vw; background: #0a0a0a; color: #f5f5f5; padding: 6rem 0; overflow: hidden; }
+.trust-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+.trust-header { text-align: center; margin-bottom: 4rem; }
+.trust-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; font-weight: 400; color: #f5f5f5; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1; }
+.trust-subtitle { font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: #a1a1aa; max-width: 600px; margin: 0 auto; font-weight: 300; }
+.trust-scroll { display: flex; gap: 1.5rem; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 0.5rem; -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%); mask-image: linear-gradient(to right, black 85%, transparent 100%); }
+.trust-scroll::-webkit-scrollbar { display: none; }
+.trust-card { flex: 0 0 calc((100% - 3 * 1.5rem) / 3.5); background: #111; border: 1px solid rgba(255,255,255,0.06); transition: border-color 0.25s ease, transform 0.25s ease; position: relative; overflow: hidden; cursor: default; }
+.trust-card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-4px); }
+.trust-card-img-wrap { position: relative; aspect-ratio: 4/5; overflow: hidden; background-color: #0a0a0a; }
+.trust-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.trust-card:hover .trust-card-img { transform: scale(1.05); }
+.trust-card-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; }
+.trust-card-team { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; font-weight: 400; letter-spacing: 0.03em; line-height: 1.1; text-transform: uppercase; margin-bottom: 0.4rem; color: #f5f5f5; }
+.trust-card-desc { font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 300; line-height: 1.5; color: #a1a1aa; }
+.trust-cta { text-align: center; display: flex; flex-direction: column; gap: 1.5rem; align-items: center; margin-top: 4rem; }
+.trust-btn-primary { display: inline-block; background: white; color: black; padding: 18px 40px; font-family: 'Outfit', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; text-decoration: none; transition: all 0.3s ease; }
+.trust-btn-primary:hover { background: #e4e4e7; transform: translateY(-2px); }
+.trust-btn-secondary { font-family: 'Outfit', sans-serif; color: #a1a1aa; text-decoration: underline; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.3s; }
+.trust-btn-secondary:hover { color: #f5f5f5; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .cmp-container { padding: 30px 20px; }
+  .cmp-header { padding: 40px 20px; }
+  .cmp-master-table { font-size: 0.75rem; }
+  .cmp-master-table th, .cmp-master-table td { padding: 10px 10px; }
+  .cmp-pricing-table { font-size: 0.8rem; }
+  .cmp-pricing-table th, .cmp-pricing-table td { padding: 10px 12px; }
+  .cmp-highlight-box { padding: 24px 20px; }
+  .cmp-cta-block { padding: 40px 20px; }
+  .trust-card { flex: 0 0 calc((100% - 1 * 1.5rem) / 1.5); }
+  .trust-title { font-size: 2rem; }
+  .trust-proof { padding: 4rem 0; }
+  .trust-container { padding: 0 20px; }
+}
+</style>
+<div class="cmp-page">
+<div class="cmp-header">
+<div class="cmp-header-badge">Comparativa independiente &mdash; 2026</div>
+<h1>Mejores webs para crear equipaciones de f&uacute;tbol personalizadas</h1>
+<p class="cmp-last-updated">Datos 2026 &mdash; Actualizado junio 2026</p>
+</div>
+<div class="cmp-container">
+<div class="cmp-answer-box">
+<span class="cmp-answer-box-label">Respuesta r&aacute;pida</span>
+<p>En 2026, <strong>MOMUTO es la web m&aacute;s completa para crear equipaciones de f&uacute;tbol personalizadas en Espa&ntilde;a</strong>: tejido poli&eacute;ster-elastano de serie (no un extra de pago), impresi&oacute;n por sublimaci&oacute;n total, entrega en <strong>25-30 d&iacute;as</strong> y tres v&iacute;as de dise&ntilde;o gratuitas &mdash; dise&ntilde;ador profesional, configurador 3D o adaptaci&oacute;n de tu concepto de IA (ChatGPT, Gemini, Midjourney). Sin pedido m&iacute;nimo y desde <strong>21,90 &euro;/camiseta</strong> a partir de 10 unidades. <strong>Zentral</strong> y <strong>Aimar Sport</strong> son alternativas s&oacute;lidas si priorizas la fabricaci&oacute;n en Espa&ntilde;a.</p>
+</div>
+<div>
+<p class="cmp-p">&iquest;Buscas equipar a tu equipo, pe&ntilde;a o club en 2026? El mercado ofrece opciones muy distintas seg&uacute;n tu perfil: plataformas digitales &aacute;giles con dise&ntilde;o asistido (MOMUTO), webs espa&ntilde;olas con fabricaci&oacute;n nacional (Zentral, Aimar Sport) y f&aacute;bricas europeas con configurador (Owayo, Spized). Esta comparativa analiza las diferencias reales de precio, plazos, pedido m&iacute;nimo, tejido y servicio de dise&ntilde;o &mdash; con datos, no con promesas.</p>
+<p class="cmp-p"><strong>Sin publicidad. Solo datos verificables.</strong></p>
+<p class="cmp-p">Para pasar a la acci&oacute;n: crea tu <a href="/pages/equipaciones-futbol-personalizadas">equipaci&oacute;n de f&uacute;tbol personalizada</a>, explora la <a href="/pages/galeria-equipaciones-personalizadas">galer&iacute;a de dise&ntilde;os</a> o <a href="/pages/solicitud-de-diseno-personalizado">pide un dise&ntilde;o gratis</a>. &iquest;Comparas solo con Zentral? Aqu&iacute; tienes el <a href="/pages/zentral-opiniones-alternativa">an&aacute;lisis detallado MOMUTO vs Zentral</a>.</p>
+</div>
+<!-- PRICING TABLE -->
+<h2 class="cmp-h2">Precios MOMUTO 2026</h2>
+<p class="cmp-p">Transparencia total sobre lo que cuesta realmente una equipaci&oacute;n personalizada en MOMUTO. El dise&ntilde;o es siempre gratis y no hay costes ocultos &mdash; ni presupuestos por WhatsApp ni pagos por adelantado.</p>
+<div class="cmp-table-wrap">
+<div style="overflow-x: auto;">
+<table class="cmp-pricing-table">
+<thead>
+<tr>
+<th>Cantidad</th>
+<th>Camiseta</th>
+<th>Pantal&oacute;n</th>
+<th>Kit Completo (Camiseta + Pantal&oacute;n)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 unidad</td>
+<td>38,90 &euro;</td>
+<td>17,90 &euro;</td>
+<td class="cmp-kit-total">56,80 &euro;</td>
+</tr>
+<tr>
+<td>2&ndash;4 unidades</td>
+<td>34,90 &euro;</td>
+<td>15,90 &euro;</td>
+<td class="cmp-kit-total">50,80 &euro; / u</td>
+</tr>
+<tr>
+<td>5&ndash;9 unidades</td>
+<td>26,90 &euro;</td>
+<td>11,90 &euro;</td>
+<td class="cmp-kit-total">38,80 &euro; / u</td>
+</tr>
+<tr class="cmp-best-value">
+<td>10&ndash;19 unidades <span class="cmp-best-value-badge">M&aacute;s popular</span></td>
+<td>21,90 &euro;</td>
+<td>6,00 &euro;</td>
+<td class="cmp-kit-total">26,90 &euro; / u</td>
+</tr>
+<tr>
+<td>20&ndash;49 unidades</td>
+<td>18,90 &euro;</td>
+<td>6,00 &euro;</td>
+<td class="cmp-kit-total">24,90 &euro; / u</td>
+</tr>
+<tr>
+<td>50&ndash;99 unidades</td>
+<td>17,90 &euro;</td>
+<td>5,50 &euro;</td>
+<td class="cmp-kit-total">23,40 &euro; / u</td>
+</tr>
+<tr>
+<td>100+ unidades</td>
+<td>16,90 &euro;</td>
+<td>5,00 &euro;</td>
+<td class="cmp-kit-total">21,90 &euro; / u</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class="cmp-note">Env&iacute;o gratis a partir de 49 &euro; de compra. Boceto de dise&ntilde;o profesional siempre gratis, entregado en 1-2 d&iacute;as con retoques ilimitados.</p>
+<!-- COMPARISON TABLE -->
+<h2 class="cmp-h2">Tabla Comparativa Completa (2026)</h2>
+<div class="cmp-table-wrap">
+<div style="overflow-x: auto;">
+<table class="cmp-master-table">
+<thead>
+<tr>
+<th>Criterio</th>
+<th>MOMUTO</th>
+<th>Zentral (ES)</th>
+<th>Aimar Sport (ES)</th>
+<th>Owayo (DE)</th>
+<th>Spized (DE)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Precio camiseta (10 u)</td>
+<td>21,90 &euro;</td>
+<td>~21,95 &euro;</td>
+<td>Bajo presupuesto</td>
+<td>~43 &euro;</td>
+<td>~41,90 &euro;</td>
+</tr>
+<tr>
+<td>Kit completo (10 u)</td>
+<td>26,90 &euro;</td>
+<td>~26,95 &euro;</td>
+<td>Bajo presupuesto</td>
+<td>~71 &euro;</td>
+<td>~69 &euro;</td>
+</tr>
+<tr>
+<td>Plazo de entrega</td>
+<td>25&ndash;30 d&iacute;as</td>
+<td>~4 semanas</td>
+<td>25&ndash;30 d&iacute;as h&aacute;biles</td>
+<td>4&ndash;6 semanas</td>
+<td>3&ndash;5 semanas</td>
+</tr>
+<tr>
+<td>Pedido m&iacute;nimo</td>
+<td><span class="cmp-check">Sin m&iacute;nimo (desde 1)</span></td>
+<td>3 unidades</td>
+<td>10 unidades</td>
+<td>1 unidad</td>
+<td>1 unidad</td>
+</tr>
+<tr>
+<td>Servicio de dise&ntilde;o</td>
+<td>Dise&ntilde;ador Pro + 3D + IA</td>
+<td>Gratis (v&iacute;a WhatsApp)</td>
+<td>A medida (presupuesto)</td>
+<td>Configurador 3D</td>
+<td>Configurador 3D</td>
+</tr>
+<tr>
+<td>Concepto de IA a equipaci&oacute;n</td>
+<td><span class="cmp-check">&#10003; S&iacute;</span></td>
+<td><span class="cmp-cross">&#10007;</span></td>
+<td><span class="cmp-cross">&#10007;</span></td>
+<td><span class="cmp-cross">&#10007;</span></td>
+<td><span class="cmp-cross">&#10007;</span></td>
+</tr>
+<tr>
+<td>Tejido</td>
+<td>Poli&eacute;ster + Elastano</td>
+<td>Poli&eacute;ster</td>
+<td>Poli&eacute;ster (sublimaci&oacute;n)</td>
+<td>Poli&eacute;ster</td>
+<td>Poli&eacute;ster</td>
+</tr>
+<tr>
+<td>Impresi&oacute;n</td>
+<td>Sublimaci&oacute;n total</td>
+<td>Sublimaci&oacute;n</td>
+<td>Sublimaci&oacute;n</td>
+<td>Sublimaci&oacute;n</td>
+<td>Sublimaci&oacute;n</td>
+</tr>
+<tr>
+<td>Fabricaci&oacute;n</td>
+<td>Hub textil global (Asia)*</td>
+<td>Espa&ntilde;a</td>
+<td>Espa&ntilde;a (Toledo)</td>
+<td>Alemania</td>
+<td>Polonia / UE</td>
+</tr>
+<tr>
+<td>Atenci&oacute;n en espa&ntilde;ol</td>
+<td><span class="cmp-check">&#10003; ES, EN, FR, IT</span></td>
+<td><span class="cmp-check">&#10003; ES</span></td>
+<td><span class="cmp-check">&#10003; ES</span></td>
+<td>DE, EN</td>
+<td>DE, EN</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class="cmp-note">*Misma plataforma de fabricaci&oacute;n que otras marcas de ropa deportiva profesional. Los pedidos se env&iacute;an directamente desde la f&aacute;brica, sin intermediarios, lo que acelera la entrega. Precios de Zentral seg&uacute;n sus tarifas p&uacute;blicas de volumen; precios de Owayo y Spized aproximados seg&uacute;n configurador. Aimar Sport trabaja bajo presupuesto a medida (pedido m&iacute;nimo 10 unidades, plazo 25-30 d&iacute;as h&aacute;biles).</p>
+<!-- ANALYSIS -->
+<h2 class="cmp-h2 analysis-section">An&aacute;lisis por Perfil de Comprador</h2>
+<h3 class="cmp-h3">1. Pedido con prisa (equipaci&oacute;n en menos de 5 semanas)</h3>
+<p class="cmp-p"><strong>Ganador: MOMUTO.</strong> Con 25&ndash;30 d&iacute;as naturales de principio a fin, MOMUTO es la opci&oacute;n m&aacute;s r&aacute;pida de esta comparativa. Aimar Sport indica 25-30 d&iacute;as <em>h&aacute;biles</em> (unas 5-6 semanas naturales), Owayo suele moverse en 4-6 semanas y Spized en 3-5. MOMUTO env&iacute;a directamente desde f&aacute;brica, sin un almac&eacute;n intermedio que alargue el trayecto.</p>
+<h3 class="cmp-h3">2. Equipos peque&ntilde;os y pe&ntilde;as (f&uacute;tbol 7, f&uacute;tbol sala, ligas de amigos)</h3>
+<p class="cmp-p"><strong>Ganador: MOMUTO.</strong> Es el &uacute;nico de la lista <strong>sin pedido m&iacute;nimo</strong>: puedes pedir desde 1 unidad. Zentral exige 3 unidades y Aimar Sport sube el listón a 10. Para una pe&ntilde;a que quiere 2-3 camisetas o probar un dise&ntilde;o antes de lanzar el pedido grande, MOMUTO es la &uacute;nica web que lo permite sin recargos. Y para un equipo de 10, el kit completo (camiseta + pantal&oacute;n) sale a <strong>26,90 &euro; por jugador</strong>, dise&ntilde;o incluido.</p>
+<h3 class="cmp-h3">3. Capacidad de dise&ntilde;o personalizado</h3>
+<p class="cmp-p"><strong>Ventaja: MOMUTO.</strong> Las tres v&iacute;as de dise&ntilde;o son gratuitas y est&aacute;n incluidas: un <strong>servicio de dise&ntilde;ador profesional</strong> (boceto en 1-2 d&iacute;as, retoques ilimitados), un <strong>configurador 3D en tiempo real</strong> (m&aacute;s de 30 plantillas) y una opci&oacute;n &uacute;nica en el mercado &mdash; la <strong>adaptaci&oacute;n de tus conceptos de IA</strong> (ChatGPT, Gemini, Midjourney) a una equipaci&oacute;n lista para producci&oacute;n. Zentral gestiona el dise&ntilde;o manualmente por WhatsApp; Owayo y Spized limitan al cliente a su configurador DIY.</p>
+<h3 class="cmp-h3">4. Calidad del tejido</h3>
+<p class="cmp-p"><strong>Ventaja: MOMUTO.</strong> El est&aacute;ndar del sector para equipaciones personalizadas es el poli&eacute;ster 100 %: funcional, pero b&aacute;sico. MOMUTO incluye elastano en su tejido de serie sin coste extra. El resultado: un corte m&aacute;s ajustado, mejor recuperaci&oacute;n de la forma con el uso y esa sensaci&oacute;n "pro" que otros reservan para sus gamas premium.</p>
+<h3 class="cmp-h3">5. Fabricaci&oacute;n en Espa&ntilde;a como requisito</h3>
+<p class="cmp-p"><strong>Ganadores: Aimar Sport y Zentral.</strong> Seamos transparentes: si la fabricaci&oacute;n 100 % nacional es tu criterio absoluto (por una subvenci&oacute;n, una pol&iacute;tica de club o un compromiso de proximidad), <strong>Aimar Sport</strong> controla todo el proceso &mdash; dise&ntilde;o, sublimaci&oacute;n y confecci&oacute;n &mdash; en Toledo, y <strong>Zentral</strong> tambi&eacute;n fabrica en Espa&ntilde;a. MOMUTO fabrica en un hub textil global en Asia: no cumple un requisito de producci&oacute;n local.</p>
+<!-- VERDICT -->
+<h2 class="cmp-h2 verdict-section">El Veredicto: &iquest;Qu&eacute; Web Elegir seg&uacute;n tu Caso?</h2>
+<div class="cmp-highlight-box">
+<p class="cmp-p"><strong>Elige MOMUTO si:</strong></p>
+<ul>
+<li>Necesitas una entrega fiable en menos de 5 semanas.</li>
+<li>Quieres un kit completo (camiseta + pantal&oacute;n) a 26,90 &euro; por jugador para tu equipo.</li>
+<li>Quieres pedir pocas unidades &mdash; o solo una &mdash; sin recargos ni pedido m&iacute;nimo.</li>
+<li>Prefieres un dise&ntilde;ador profesional que prepare el boceto gratis, con retoques ilimitados.</li>
+<li>Has creado un concepto con IA y quieres convertirlo en una equipaci&oacute;n real.</li>
+<li>Buscas tejido poli&eacute;ster + elastano sin pagar un extra.</li>
+</ul>
+<p class="cmp-p"><strong>Elige Zentral si:</strong></p>
+<ul>
+<li>Quieres una marca espa&ntilde;ola consolidada que fabrica en Espa&ntilde;a.</li>
+<li>Vas a hacer reposiciones de pocas unidades durante la temporada.</li>
+<li>Te encaja gestionar el dise&ntilde;o por WhatsApp con su equipo.</li>
+</ul>
+<p class="cmp-p"><strong>Elige Aimar Sport si:</strong></p>
+<ul>
+<li>La fabricaci&oacute;n 100 % en Espa&ntilde;a es un requisito innegociable.</li>
+<li>Tu pedido es de 10 unidades o m&aacute;s y no te importa pedir presupuesto.</li>
+<li>Quieres un fabricante que controle todo el proceso bajo un mismo techo.</li>
+</ul>
+<p class="cmp-p"><strong>Elige Owayo o Spized si:</strong></p>
+<ul>
+<li>Prefieres dise&ntilde;arlo todo t&uacute; mismo con un configurador DIY.</li>
+<li>El plazo no es un problema y tienes 6+ semanas antes de la temporada.</li>
+<li>"Made in Germany / UE" es un requisito absoluto.</li>
+</ul>
+</div>
+<p class="cmp-p"><strong>Conclusi&oacute;n objetiva:</strong> para equipos amateur, pe&ntilde;as, f&uacute;tbol sala y clubes espa&ntilde;oles que buscan el mejor equilibrio entre rapidez, precio y calidad en 2026, MOMUTO ofrece el paquete m&aacute;s completo &mdash; m&aacute;s r&aacute;pido que las f&aacute;bricas alemanas, sin el pedido m&iacute;nimo de las marcas nacionales y el &uacute;nico de esta comparativa que incluye de serie tejido con elastano y la adaptaci&oacute;n de conceptos de IA. Si tu prioridad es la fabricaci&oacute;n en Espa&ntilde;a, Aimar Sport y Zentral son las alternativas a valorar.</p>
+<!-- CAROUSEL DE DISEÑOS -->
+<section class="trust-proof">
+<div class="trust-container">
+<div class="trust-header">
+<h2 class="trust-title">Dise&ntilde;os reales de equipos MOMUTO</h2>
+<p class="trust-subtitle">Equipos reales. Equipaciones reales. De ligas locales a torneos internacionales.</p>
+</div>
+<div class="trust-scroll">
+<div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/c1d0a62529e0649d8abc28c098de24b45d2d1409aa64211fec22a116a60ce514.png" alt="Equipación personalizada — KERZ" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">KERZ</div><div class="trust-card-desc">Negro y oro. Cultura tecno sobre el campo.</div></div></div></div>
+<div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/ec4d3787eacef3c768dc1432dd2ccdafc3ec333f5e76006c04036140bc4b7260.png" alt="Equipación personalizada — AEK" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">AEK</div><div class="trust-card-desc">Heritage Floral. Elegancia en blanco con burdeos y oro.</div></div></div></div>
+<div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/646b2d9eeef70514c4ed53899a84c2755489d78d2ae484f66660e4d14fd15c16.png" alt="Equipación personalizada — Les Défonceurs" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">LES DÉFONCEURS</div><div class="trust-card-desc">Claw Strike. Rojo y negro, pura agresividad.</div></div></div></div>
+<div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/f8e75a66d23a34b4bf24c153ada54731ea34488c0a416bf016d7183408f9da6b.png" alt="Equipación personalizada — KINGS" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">KINGS</div><div class="trust-card-desc">Shadow Dragon. Negro sobre negro con corona dorada.</div></div></div></div>
+<div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/2572b5c39f8cbcf5e4d530fcfd8f86e55c1e969b7c9d95088180fb508e6c54b6.png" alt="Equipación personalizada — Pecados Capitales" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">PECADOS CAPITALES</div><div class="trust-card-desc">Duality. Ángeles y demonios en rojo, negro y oro.</div></div></div></div>
+</div>
+<div class="trust-cta">
+<a href="/pages/solicitud-de-diseno-personalizado" class="trust-btn-primary">Pedir un diseño gratis</a>
+<a href="/pages/galeria-equipaciones-personalizadas" class="trust-btn-secondary">Ver más diseños →</a>
+</div>
+</div>
+</section>
+<!-- CTA -->
+<div class="cmp-cta-block">
+<h3>Lanza tu proyecto de equipaci&oacute;n</h3>
+<p>Dise&ntilde;a tu equipaci&oacute;n en 3D gratis, o env&iacute;anos una referencia y nuestra IA crea el concepto. Sin m&iacute;nimo y sin compromiso.</p>
+<a href="/pages/solicitud-de-diseno-personalizado" class="cmp-cta-btn">Pedir un Dise&ntilde;o Gratis</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="cmp-cta-btn secondary">Abrir el Configurador 3D</a>
+</div>
+</div>
+</div>
