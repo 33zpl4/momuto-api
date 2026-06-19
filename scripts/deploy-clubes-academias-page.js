@@ -1,7 +1,7 @@
 /**
- * Deploy the ES Tier-1 team hub "Equipaciones de Fútbol Personalizadas".
+ * Deploy the ES Tier-1 club/B2B page "Equipaciones para Clubes y Academias".
  *
- *   ES: https://es.momuto.com/pages/equipaciones-futbol-personalizadas
+ *   ES: https://es.momuto.com/pages/equipaciones-para-clubes-academias
  *
  * Phase-2 centerpiece: a dedicated page for the head team term that no strong
  * page owns today (the homepage absorbs it at ~pos 33). Team language, 3D + IA
@@ -21,18 +21,18 @@ const DOMAIN = {
   host: 'https://openapi.oemapps.com',
   token: process.env.OEMSAAS_TOKEN_ES,
   label: 'es.momuto.com',
-  handle: 'equipaciones-futbol-personalizadas',
-  file: path.join(ROOT, 'pages', 'equipaciones-futbol-personalizadas'),
-  title: 'Equipaciones de Fútbol Personalizadas Sin Mínimo | MOMUTO',
-  meta_title: 'Equipaciones de Fútbol Personalizadas Sin Mínimo | MOMUTO',
-  meta_descript: 'Diseña la equipación de tu equipo con configurador 3D + IA. Sin pedido mínimo, sublimación total, entrega en 25-30 días. Tallas de niño a adulto.',
+  handle: 'equipaciones-para-clubes-academias',
+  file: path.join(ROOT, 'pages', 'equipaciones-para-clubes-academias'),
+  title: 'Equipaciones para Clubes y Academias | MOMUTO',
+  meta_title: 'Equipaciones para Clubes y Academias | MOMUTO',
+  meta_descript: 'Equipa a tu club o academia: personalización total, escudos y sponsors, reposiciones, precios por volumen y sin pedido mínimo. Diseña en 3D y míralo al instante.',
   meta_keywords: [
-    'equipaciones de futbol personalizadas',
-    'equipaciones personalizadas',
-    'crear equipaciones de futbol',
-    'creador de equipaciones de futbol',
-    'camisetas personalizadas equipos de futbol',
-    'configurador equipaciones',
+    'equipaciones para clubes',
+    'equipaciones para equipos de futbol',
+    'fabricante de equipaciones de futbol',
+    'proveedor de equipaciones de futbol',
+    'camisetas personalizadas para equipos de futbol',
+    'equipaciones academia futbol',
     'MOMUTO'
   ]
 };

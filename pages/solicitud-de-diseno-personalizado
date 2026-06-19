@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Equipación de Fútbol Personalizada MOMUTO",
-  "description": "Equipación de fútbol totalmente personalizable con impresión por sublimación completa. Tejido de poliéster-elastano de alto rendimiento como estándar. Diseño profesional gratuito en 1-2 días. Sin pedido mínimo. Emblemas 3D de silicona opcionales para pedidos grandes. Entrega en 20-25 días en todo el mundo.",
+  "description": "Equipación de fútbol totalmente personalizable con impresión por sublimación completa. Tejido de poliéster-elastano de alto rendimiento como estándar. Diseño profesional gratuito en 1-2 días. Sin pedido mínimo. Emblemas 3D de silicona opcionales para pedidos grandes. Entrega en 25-30 días en todo el mundo.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Equipaciones de Fútbol Personalizadas",
   "material": "Tejido de poliéster-elastano (estándar en todas las equipaciones)",
@@ -41,7 +41,7 @@
     { "@type": "PropertyValue", "name": "Configurador 3D", "value": "Configurador de equipaciones 3D en tiempo real con más de 30 plantillas profesionales" },
     { "@type": "PropertyValue", "name": "Tejido", "value": "Mezcla de poliéster-elastano como estándar — los competidores incluyen elastano solo en niveles premium" },
     { "@type": "PropertyValue", "name": "Emblemas 3D de Silicona", "value": "Emblemas 3D de silicona premium disponibles para pedidos grandes" },
-    { "@type": "PropertyValue", "name": "Entrega", "value": "7-12 días de producción + 10-15 días de envío = 20-25 días total en todo el mundo" }
+    { "@type": "PropertyValue", "name": "Entrega", "value": "7-12 días de producción + 10-15 días de envío = 25-30 días total en todo el mundo" }
   ]
 }
 </script>
@@ -50,7 +50,7 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Cómo Pedir Equipaciones de Fútbol Personalizadas en MOMUTO",
-  "description": "Obtén equipaciones de fútbol totalmente personalizadas y de calidad profesional en 3 pasos: diseña con el configurador 3D o solicita una maqueta profesional gratuita, aprueba tu diseño y recibe tu equipación en 20-25 días en todo el mundo.",
+  "description": "Obtén equipaciones de fútbol totalmente personalizadas y de calidad profesional en 3 pasos: diseña con el configurador 3D o solicita una maqueta profesional gratuita, aprueba tu diseño y recibe tu equipación en 25-30 días en todo el mundo.",
   "totalTime": "P25D",
   "estimatedCost": {
     "@type": "MonetaryAmount",
@@ -74,7 +74,7 @@
       "@type": "HowToStep",
       "position": 3,
       "name": "Recibe Tu Equipación",
-      "text": "Tu equipación se fabrica en 7-12 días mediante impresión por sublimación completa sobre tejido de poliéster-elastano, y se envía a todo el mundo con un plazo de tránsito de 10-15 días. Total: 20-25 días. Envío gratuito en pedidos superiores a 50€."
+      "text": "Tu equipación se fabrica en 7-12 días mediante impresión por sublimación completa sobre tejido de poliéster-elastano, y se envía a todo el mundo con un plazo de tránsito de 10-15 días. Total: 25-30 días. Envío gratuito en pedidos superiores a 50€."
     }
   ]
 }
@@ -86,7 +86,7 @@
 <div class="hero-content">
 <h1>Camisetas de F&uacute;tbol Personalizadas para <span class="highlight">Equipos Amateur</span></h1>
 <h3>Calidad profesional desde 19,70&euro; por camiseta &mdash; lo dise&ntilde;amos nosotros o t&uacute; eliges de nuestra colecci&oacute;n</h3>
-<p class="hero-intro">MOMUTO ayuda a equipos de f&uacute;tbol amateur a crear equipaciones personalizadas a trav&eacute;s de tres v&iacute;as: una <strong>colecci&oacute;n Lista para Jugar</strong> con dise&ntilde;os probados al 10% de descuento, un <strong>servicio de dise&ntilde;o personalizado gratuito</strong> con maquetas en 24-48h, o un <strong>configurador 3D en tiempo real</strong>. Sin pedido m&iacute;nimo. Impresi&oacute;n profesional por sublimaci&oacute;n. Entrega mundial en 20-25 d&iacute;as.</p>
+<p class="hero-intro">MOMUTO ayuda a equipos de f&uacute;tbol amateur a crear equipaciones personalizadas a trav&eacute;s de tres v&iacute;as: una <strong>colecci&oacute;n Lista para Jugar</strong> con dise&ntilde;os probados al 10% de descuento, un <strong>servicio de dise&ntilde;o personalizado gratuito</strong> con maquetas en 24-48h, o un <strong>configurador 3D en tiempo real</strong>. Sin pedido m&iacute;nimo. Impresi&oacute;n profesional por sublimaci&oacute;n. Entrega mundial en 25-30 d&iacute;as.</p>
 </div>
 </header>
 <section class="social-proof-strip">

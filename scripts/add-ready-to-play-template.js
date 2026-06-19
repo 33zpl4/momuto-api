@@ -201,7 +201,7 @@ function buildCardHTML(template, lang, sharedCfg, templatePageUrl) {
   const viewCta = { en: 'View this design', es: 'Ver este diseño', fr: 'Voir ce design' }[lang];
   const previewLabel = { en: 'Preview 24h', es: 'Preview 24h', fr: 'Aperçu 24h' }[lang];
   const revisionLabel = { en: '1 revision', es: '1 revisión', fr: '1 révision' }[lang];
-  const deliveryLabel = { en: '20-25 days', es: '20-25 días', fr: '20-25 jours' }[lang];
+  const deliveryLabel = { en: '25-30 days', es: '25-30 días', fr: '25-30 jours' }[lang];
 
   return `    <!-- ${name} -->
     <article class="rtp-col-card" itemscope itemtype="https://schema.org/Product" onclick="window.location.href='${templatePageUrl}'">

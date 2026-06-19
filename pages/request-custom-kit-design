@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "MOMUTO Custom Football Kit",
-  "description": "Fully customizable professional-grade football jersey and shorts with full dye-sublimation printing. Polyester-elastane performance blend as standard. Three ways to order: Ready-to-Play pre-designed kits at 10% off (from €19.70/jersey), free custom design service (mockup in 24-48h), or real-time 3D kit builder. No minimum order. Delivery in 20-25 days worldwide.",
+  "description": "Fully customizable professional-grade football jersey and shorts with full dye-sublimation printing. Polyester-elastane performance blend as standard. Three ways to order: Ready-to-Play pre-designed kits at 10% off (from €19.70/jersey), free custom design service (mockup in 24-48h), or real-time 3D kit builder. No minimum order. Delivery in 25-30 days worldwide.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Custom Football Kits",
   "material": "Polyester-elastane performance blend (standard on all kits)",
@@ -56,7 +56,7 @@
     { "@type": "PropertyValue", "name": "Design Service", "value": "Free professional design mockup in 24-48h, free revisions included" },
     { "@type": "PropertyValue", "name": "3D Configurator", "value": "Real-time 3D kit configurator with 30+ professional templates" },
     { "@type": "PropertyValue", "name": "Fabric", "value": "Polyester-elastane blend as standard — competitors include elastane only in premium tiers" },
-    { "@type": "PropertyValue", "name": "Delivery", "value": "7-12 days production + 10-15 days shipping = 20-25 days total worldwide" }
+    { "@type": "PropertyValue", "name": "Delivery", "value": "7-12 days production + 10-15 days shipping = 25-30 days total worldwide" }
   ]
 }
 </script>
@@ -88,7 +88,7 @@
     {
       "@type": "Question",
       "name": "How long does it take to receive custom football jerseys from MOMUTO?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Production takes 7-12 days. Shipping takes 10-15 days worldwide. Total delivery time is typically 20-25 days from order confirmation. Free shipping on orders over €50." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Production takes 7-12 days. Shipping takes 10-15 days worldwide. Total delivery time is typically 25-30 days from order confirmation. Free shipping on orders over €50." }
     },
     {
       "@type": "Question",
@@ -111,7 +111,7 @@
 <div class="hero-content">
 <h1>Professional Football Kits for <span class="highlight">Grassroots Teams</span></h1>
 <h3>Pro quality from &euro;19.70/jersey &mdash; whether we design it or you choose from our collection</h3>
-<p class="hero-intro">MOMUTO helps grassroots football teams create custom football kits through three routes: a <strong>Ready-to-Play collection</strong> of proven designs at 10% off, a <strong>free custom design service</strong> with mockups in 24-48h, or a <strong>real-time 3D kit builder</strong>. No minimum order. Professional dye-sublimation printing. Worldwide delivery in 20-25 days.</p>
+<p class="hero-intro">MOMUTO helps grassroots football teams create custom football kits through three routes: a <strong>Ready-to-Play collection</strong> of proven designs at 10% off, a <strong>free custom design service</strong> with mockups in 24-48h, or a <strong>real-time 3D kit builder</strong>. No minimum order. Professional dye-sublimation printing. Worldwide delivery in 25-30 days.</p>
 </div>
 </header>
 
@@ -232,7 +232,7 @@
 <li><span class="hiw-num">2</span><div><strong>Configure and submit</strong><p>Pick your colours, upload your badge and sponsor logo. For Ready-to-Play, choose from curated colour swatches. For custom, share references and let our designers interpret.</p></div></li>
 <li><span class="hiw-num">3</span><div><strong>Receive your preview</strong><p>Ready-to-Play previews arrive in 24h. Custom mockups in 24-48h. Both free. Both with at least 1 revision included.</p></div></li>
 <li><span class="hiw-num">4</span><div><strong>Approve and order</strong><p>Happy with the result? Confirm your sizes and place your order. No commitment until this step &mdash; your preview is free regardless.</p></div></li>
-<li><span class="hiw-num">5</span><div><strong>We produce and ship</strong><p>7-12 days production with full dye-sublimation printing + 10-15 days worldwide shipping. Your kits arrive in 20-25 days. Free shipping on orders over &euro;50.</p></div></li>
+<li><span class="hiw-num">5</span><div><strong>We produce and ship</strong><p>7-12 days production with full dye-sublimation printing + 10-15 days worldwide shipping. Your kits arrive in 25-30 days. Free shipping on orders over &euro;50.</p></div></li>
 </ol>
 <p class="hiw-internal-links">Looking for the fastest route? <a href="https://www.momuto.com/pages/ready-to-play">Ready-to-Play kits start at &euro;19.70 with 24h previews.</a><br>Want to see what other clubs ordered? <a href="https://www.momuto.com/pages/teams-clubs-momuto">Browse the full team gallery.</a></p>
 </div>
