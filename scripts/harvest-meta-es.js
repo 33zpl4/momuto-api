@@ -20,9 +20,9 @@ const DRY_RUN = process.env.DRY_RUN === 'true';
 // Exact titles/metas from the ES Phase-1 Harvest Pack (verified vs GSC export).
 const TARGETS = [
   {
-    handle: 'equipos-momuto', // pos 1.2 · 1001 impr · CTR 2.4%
-    meta_title: 'Equipaciones Personalizadas para Equipos y Clubes | MOMUTO',
-    meta_descript: 'Equipa a tu club: personalización 100%, escudos y sponsors, sin pedido mínimo. Diséñala en 3D, míralo al instante y recíbela en ~3 semanas.'
+    handle: 'equipos-momuto', // pos 1.2 · 1001 impr · CTR 2.4% — REAL TEAM PHOTOS (social proof, NOT a selling page)
+    meta_title: 'Equipos que Visten MOMUTO: Equipaciones Reales | MOMUTO',
+    meta_descript: 'Mira a clubes y equipos reales con sus equipaciones MOMUTO personalizadas, sus camisetas en acción. Diseña la de tu equipo sin pedido mínimo.'
   },
   {
     handle: 'solicitud-de-diseno-personalizado', // pos 1.5 · 898 impr · CTR 1.0%
