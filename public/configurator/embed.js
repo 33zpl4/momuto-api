@@ -248,16 +248,20 @@ function run(root, opts){
     // Palette (bundled per template) gives the design's NATIVE source colours so the
     // segmenter is generic. If absent, fall back to the original lime rule (Apex).
     var palette=(ASSET_DATA && ASSET_DATA.palette) || opts.palette || null;
-    var SRC=null, trimNearSecondary=false;
+    var SRC=null, trimNearSecondary=false, hasNeutralSrc=false;
     if(palette){
       SRC=["primary","secondary","trim"].map(function(role){ var c2=hx(palette[role]); var h=rgb2hsv(c2[0],c2[1],c2[2]); return [h[0],h[1],h[2]]; });
       var ts=hx(palette.trim), ss=hx(palette.secondary);
       trimNearSecondary=(Math.abs(ts[0]-ss[0])+Math.abs(ts[1]-ss[1])+Math.abs(ts[2]-ss[2])<60);
+      // a neutral source (white/grey) means white/grey is a real design colour, so the
+      // "freeze inner-collar white" shortcut must NOT apply (it would stop that region
+      // recolouring). Only Kinetic-style palettes (no neutral source) keep it.
+      hasNeutralSrc=SRC.some(function(S){ return S[1]<0.25 && S[2]>0.18; });
     }
-    // shading-robust nearest-source classify -> region 0/1/2
+    // shading-robust nearest-source classify -> region 0/1/2 (3 = frozen white inner collar)
     var classify=function(r,g,b){
       var hsv=rgb2hsv(r,g,b),hue=hsv[0],sat=hsv[1],val=hsv[2];
-      if(sat<0.18 && val>0.47) return 3;            // bright neutral = inner collar facing (kept WHITE, not recoloured)
+      if(sat<0.18 && val>0.47 && !hasNeutralSrc) return 3;   // inner collar white — only when white isn't a design colour
       var best=0,bs=1e9;
       for(var ri=0;ri<3;ri++){ var S=SRC[ri],hs=S[0],ss2=S[1],vs=S[2],sc;
         if(vs<0.24) sc=val+sat;                     // dark source (e.g. black)
