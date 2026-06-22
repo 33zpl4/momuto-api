@@ -248,20 +248,15 @@ function run(root, opts){
     // Palette (bundled per template) gives the design's NATIVE source colours so the
     // segmenter is generic. If absent, fall back to the original lime rule (Apex).
     var palette=(ASSET_DATA && ASSET_DATA.palette) || opts.palette || null;
-    var SRC=null, trimNearSecondary=false, hasNeutralSrc=false;
+    var SRC=null, trimNearSecondary=false;
     if(palette){
       SRC=["primary","secondary","trim"].map(function(role){ var c2=hx(palette[role]); var h=rgb2hsv(c2[0],c2[1],c2[2]); return [h[0],h[1],h[2]]; });
       var ts=hx(palette.trim), ss=hx(palette.secondary);
       trimNearSecondary=(Math.abs(ts[0]-ss[0])+Math.abs(ts[1]-ss[1])+Math.abs(ts[2]-ss[2])<60);
-      // a neutral source (white/grey) means white/grey is a real design colour, so the
-      // "freeze inner-collar white" shortcut must NOT apply (it would stop that region
-      // recolouring). Only Kinetic-style palettes (no neutral source) keep it.
-      hasNeutralSrc=SRC.some(function(S){ return S[1]<0.25 && S[2]>0.18; });
     }
-    // shading-robust nearest-source classify -> region 0/1/2 (3 = frozen white inner collar)
+    // shading-robust nearest-source classify -> region 0/1/2
     var classify=function(r,g,b){
       var hsv=rgb2hsv(r,g,b),hue=hsv[0],sat=hsv[1],val=hsv[2];
-      if(sat<0.18 && val>0.47 && !hasNeutralSrc) return 3;   // inner collar white — only when white isn't a design colour
       var best=0,bs=1e9;
       for(var ri=0;ri<3;ri++){ var S=SRC[ri],hs=S[0],ss2=S[1],vs=S[2],sc;
         if(vs<0.24) sc=val+sat;                     // dark source (e.g. black)
@@ -271,20 +266,33 @@ function run(root, opts){
       }
       return best;
     };
-    // pass 1: classify. region 0=primary 1=secondary 2=trim 255=empty
+    var brightN=new Uint8Array(n);   // bright near-white pixels (candidate inner-collar facing)
+    // pass 1: classify. region 0=primary 1=secondary 2=trim 3=white-facing 255=empty
     for(i=0;i<n;i++){
       var r=d[i*4],g=d[i*4+1],b=d[i*4+2],a=d[i*4+3]; srcA[i]=a;
       if(a<20){region[i]=255;continue;}
       var X=i%W,Y=(i/W)|0; if(X<minx)minx=X;if(X>maxx)maxx=X;if(Y<miny)miny=Y;if(Y>maxy)maxy=Y;
       var lum=0.299*r+0.587*g+0.114*b; lumArr[i]=lum;
+      var mx=Math.max(r,g,b),satv=mx?(mx-Math.min(r,g,b))/mx:0;
+      if(satv<0.20 && mx>140) brightN[i]=1;
       if(palette){ region[i]=classify(r,g,b); }
       else {
-        var mx=Math.max(r,g,b),sat=mx?(mx-Math.min(r,g,b))/mx:0;
         var lime=(g>110)&&(r>60)&&(b<110)&&(g>=b+40)&&(g>=r-12);
-        region[i]= lime?1 : (sat<0.18&&lum>150?3 : 0);  // 3 = neutral inner collar (white)
+        region[i]= lime?1 : 0;
       }
     }
     var gw=maxx-minx+1, gh=maxy-miny+1, cx=(minx+maxx)/2;
+    // inner-collar facing: the white lining inside the neck opening ALWAYS stays white.
+    // When trim itself is near-white (Khala/Legacy/Mosaic, white collar RING that must
+    // still recolour) we isolate only the small inner facing; when trim is a distinct
+    // colour (Kinetic/Prism/Apex) all neck-white is facing, so catch it generously.
+    var whiteTrim = !!(palette && SRC[2][1]<0.20 && SRC[2][2]>0.70);
+    var fy = whiteTrim?0.11:0.16, fx = whiteTrim?0.20:0.30;
+    for(i=0;i<n;i++){
+      if(!brightN[i]) continue;
+      var Xf=i%W,Yf=(i/W)|0;
+      if(Yf<miny+fy*gh && Math.abs(Xf-cx)<fx*gw) region[i]=3;
+    }
     // pass 2: spatial collar/cuff split — only when trim shares the secondary colour
     // (Apex: lime trim == lime panels). When trim is its own colour (Kinetic: cyan) it
     // is already separated by the matcher, so skip.
