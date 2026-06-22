@@ -1,0 +1,47 @@
+<!-- THE MOSAIC — product-page custom block for the 2D configurator.
+     Product __PRODUCT_ID__ / OEM __OEM_ID__ (mamuto3). Composite pipeline. -->
+<style>
+  .rtpx{font-family:'Outfit',-apple-system,sans-serif;max-width:1200px;margin:0 auto;padding:0 16px;}
+  .rtpx-banner{border-left:3px solid #E2214B;padding:16px 22px;margin:8px 0 28px;display:flex;align-items:center;gap:16px;
+    background:linear-gradient(90deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,0) 100%);}
+  .rtpx-banner b{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E2214B;
+    background:rgba(226,33,75,.12);padding:5px 12px;white-space:nowrap;}
+  .rtpx-banner span{font-size:14px;color:#a1a1aa;line-height:1.5;}
+  .rtpx-banner span strong{color:#fff;}
+  .rtpx-hd{text-align:center;max-width:760px;margin:0 auto 18px;}
+  .rtpx-hd .lab{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E2214B;}
+  .rtpx-hd h2{font-family:'Bebas Neue',Oswald,sans-serif;font-weight:600;font-size:52px;line-height:1;
+    text-transform:uppercase;color:#fff;margin:8px 0 12px;letter-spacing:.01em;}
+  .rtpx-hd p{font-size:15px;color:#a1a1aa;line-height:1.7;margin:0;}
+  .rtpx-val{display:flex;justify-content:center;gap:0;max-width:680px;margin:22px auto 6px;
+    border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:14px 0;}
+  .rtpx-val div{flex:1;text-align:center;font-size:12px;color:#a1a1aa;padding:0 14px;border-left:1px solid rgba(255,255,255,.08);}
+  .rtpx-val div:first-child{border-left:none;}
+  .rtpx-val b{color:#fff;font-weight:600;}
+  body{background:#0a0a0a!important;color:#f5f5f5;}
+  @media(max-width:560px){.rtpx-hd h2{font-size:38px;}.rtpx-val{flex-direction:column;gap:10px;}.rtpx-val div{border-left:none;}}
+</style>
+
+<div class="rtpx">
+  <div class="rtpx-banner">
+    <b>Ready-to-Play</b>
+    <span>Designs created by our designers, worn by real clubs. No design phase. <strong>Save time and save 10%.</strong></span>
+  </div>
+  <div class="rtpx-hd">
+    <div class="lab">Ready-to-Play Collection</div>
+    <h2>The Mosaic</h2>
+    <p>Disrupted checkerboard from the early 90s. A dense, irregular grid with a solid badge zone and sponsor bar that give your crest the stage it deserves.</p>
+  </div>
+  <div class="rtpx-val">
+    <div><b>Your colours &amp; crest</b><br>fully customisable</div>
+    <div><b>Instant live preview</b><br>no waiting</div>
+    <div><b>Free proof before print</b><br>reviewed by our team</div>
+  </div>
+</div>
+
+<div id="momuto-rtp" data-template="the-mosaic" data-mode="composite"
+     data-product="__PRODUCT_ID__" data-oem="__OEM_ID__" data-lang="en"
+     data-primary="#001F5B" data-secondary="#FFFFFF" data-trim="#C4A46B"></div>
+
+<script src="https://www.momuto.com/assets-mosaic.js" defer></script>
+<script src="https://www.momuto.com/embed.js?v=14" defer></script>
