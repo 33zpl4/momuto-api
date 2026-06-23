@@ -1,0 +1,49 @@
+<!-- HOW IT WORKS + FAQ — paste below the configurator on RTP product pages. Shared across all 7 models.
+     Uses native <details> accordions (no JS). -->
+<style>
+  .mkt{font-family:'Outfit',-apple-system,sans-serif;max-width:1100px;margin:48px auto 0;padding:0 16px;color:#f5f5f5;}
+  .mkt h2{font-family:'Bebas Neue',Oswald,sans-serif;font-weight:600;font-size:34px;letter-spacing:.02em;text-transform:uppercase;color:#fff;margin:0 0 6px;}
+  .mkt .lab{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E2214B;}
+  .mkt .sub{font-size:15px;color:#a1a1aa;line-height:1.6;margin:0 0 26px;}
+  .mkt-steps{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 56px;}
+  .mkt-step{flex:1 1 220px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px;}
+  .mkt-step .n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#E2214B;color:#fff;font-weight:800;font-size:15px;margin-bottom:12px;}
+  .mkt-step b{display:block;color:#fff;font-size:15px;margin-bottom:5px;}
+  .mkt-step span{font-size:13px;color:#a1a1aa;line-height:1.55;}
+  .mkt-faq details{border-top:1px solid rgba(255,255,255,.1);}
+  .mkt-faq details:last-child{border-bottom:1px solid rgba(255,255,255,.1);}
+  .mkt-faq summary{list-style:none;cursor:pointer;padding:18px 4px;font-size:16px;font-weight:600;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+  .mkt-faq summary::-webkit-details-marker{display:none;}
+  .mkt-faq summary::after{content:'+';font-size:24px;color:#E2214B;font-weight:300;line-height:1;flex-shrink:0;}
+  .mkt-faq details[open] summary::after{content:'\2013';}
+  .mkt-faq p{margin:0 4px 18px;font-size:14px;color:#a1a1aa;line-height:1.7;}
+  .mkt-faq p b{color:#e5e5e5;font-weight:600;}
+  body{background:#0a0a0a!important;}
+  @media(max-width:560px){.mkt h2{font-size:28px;}.mkt-step{flex:1 1 100%;}}
+</style>
+
+<div class="mkt">
+  <div class="lab">Simple process</div>
+  <h2>How it works</h2>
+  <p class="sub">From your colours to your doorstep — no design fees, no surprises.</p>
+  <div class="mkt-steps">
+    <div class="mkt-step"><span class="n">1</span><b>Customise it</b><span>Pick your colours, upload your crest &amp; sponsor, add names and numbers — all in the live preview above.</span></div>
+    <div class="mkt-step"><span class="n">2</span><b>Add your team</b><span>Add to cart, then enter each player's size, name and number. Order one kit or the whole squad.</span></div>
+    <div class="mkt-step"><span class="n">3</span><b>Approve your proof</b><span>Our design team cleans up your logos and sends a free digital proof, usually within 1&ndash;2 days. Revisions are free.</span></div>
+    <div class="mkt-step"><span class="n">4</span><b>We make &amp; ship</b><span>Once you approve, we produce and deliver. Free shipping on orders over &euro;49.</span></div>
+  </div>
+
+  <div class="lab">Good to know</div>
+  <h2>Frequently asked questions</h2>
+  <p class="sub">Everything you need before you order.</p>
+  <div class="mkt-faq">
+    <details><summary>What fabric are the kits made from?</summary><p>A lightweight, breathable <b>polyester-elastane blend</b> with stretch for full freedom of movement. Every design is <b>sublimation-printed</b> &mdash; the colours and logos are dyed into the fabric, so they won't crack, peel or fade like a printed transfer.</p></details>
+    <details><summary>How do I choose the right size?</summary><p>We carry a <b>full youth-to-adult size range</b>. Use the <b>size guide</b> (the "Find your size" link when you add your team) to match each player by chest and height. Between sizes, or mixing kids and adults? Just ask before you approve your proof.</p></details>
+    <details><summary>Jersey only or full kit &mdash; what's included?</summary><p>Your choice. <b>Jersey only</b> is the shirt. <b>Full kit</b> adds matching <b>shorts</b> at a bundle price. Pick on the product above &mdash; the price updates instantly by quantity.</p></details>
+    <details><summary>Is there a minimum order? How does pricing work?</summary><p><b>No minimum</b> &mdash; order a single kit or hundreds. The price per unit drops as your order grows (every tier is shown in the estimate above), and the <b>Ready-to-Play range is 10% cheaper</b> because the design is already done. Design is <b>always free</b>, with no hidden fees.</p></details>
+    <details><summary>How long does it take to arrive?</summary><p>After you approve your proof, production and delivery take roughly <b>20&ndash;25 days</b>. The free proof itself usually lands within <b>1&ndash;2 days</b> of ordering. Need it for a specific date? Tell us and we'll confirm before you order.</p></details>
+    <details><summary>Will it come out exactly like the preview?</summary><p>Yes &mdash; the live preview is your design. Before anything is printed, our team <b>vectorises and cleans your crest &amp; sponsor</b>, refines placement, and sends a <b>free proof to approve</b>. Nothing goes to print until you say go.</p></details>
+    <details><summary>Can I add player names and numbers?</summary><p>Absolutely. Add a name and number per player in your team list at checkout, in your choice of font and colour &mdash; mix and match across the whole squad.</p></details>
+    <details><summary>What if I need a change after ordering?</summary><p>No problem. <b>Revisions are free</b> right up until you approve the proof. If something isn't right, just reply and we'll fix it before production starts.</p></details>
+  </div>
+</div>
