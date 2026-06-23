@@ -196,7 +196,8 @@ function run(root, opts){
   var DEFAULTS={ primary:opts.primary||"#2e3238", secondary:opts.secondary||"#ffffff",
     trim:opts.trim||"#121212", nameColor:opts.nameColor||opts.trim||"#121212" };
   var state={ primary:DEFAULTS.primary, secondary:DEFAULTS.secondary, trim:DEFAULTS.trim, crest:null, sponsor:null, font:"vanguard", nameColor:DEFAULTS.nameColor, kit:"jersey", qty:10 };
-  var CART={ base:"https://design.momuto.com", productId:opts.productId, oemId:opts.oemId, lang:opts.lang };
+  var CART={ base:"https://design.momuto.com", productId:opts.productId, oemId:opts.oemId,
+    productIdKit:opts.productIdKit, oemIdKit:opts.oemIdKit, lang:opts.lang };
 
   async function init(){
     if(opts.mode==="composite") return initComposite();
@@ -571,14 +572,18 @@ function run(root, opts){
   }
   async function handoffToCart(){
     var design=buildDesignPayload();
-    try{ console.log("[rtp] design ->", {template:design.template, colours:design.colours, nameNumber:design.nameNumber,
-      logos:design.logos, preview:{front:design.preview.front.length+"b", back:design.preview.back.length+"b"}}); }catch(e){}
-    // 1) embedded on the product page -> reuse the page's exact goto3d/jump3d procedure
-    var goto3d=document.getElementById("goto3d") || (typeof window.jump3d==="function" && window.jump3d);
+    // Full kit -> route to the Kit SKU (separate product with the RTP-Kit rebate); else the Jersey SKU.
+    var isKit=(state.kit==="kit");
+    var pid=(isKit && CART.productIdKit) ? CART.productIdKit : CART.productId;
+    var oid=(isKit && CART.oemIdKit)     ? CART.oemIdKit     : CART.oemId;
+    try{ console.log("[rtp] handoff ->", {kit:isKit, productId:pid, oemId:oid, template:design.template, colours:design.colours}); }catch(e){}
+    // 1) embedded on the product page -> reuse the page's goto3d/jump3d; prefer a kit-specific hook for full kit
+    var goto3d=(isKit && (document.getElementById("goto3d-kit") || (typeof window.jump3d_kit==="function" && window.jump3d_kit)))
+            || document.getElementById("goto3d") || (typeof window.jump3d==="function" && window.jump3d);
     if(goto3d){ if(typeof goto3d==="function") goto3d(); else goto3d.click(); return; }
-    // 2) standalone (preview/testing) -> replicate the same flow
+    // 2) standalone (preview/testing) -> replicate the same flow with the selected SKU
     var userId=genUserId();
-    var body=new URLSearchParams({ productId:CART.productId, quantity:"1", userId:userId, oemId:CART.oemId,
+    var body=new URLSearchParams({ productId:pid, quantity:"1", userId:userId, oemId:oid,
       lanType:CART.lang, timestamp:String(Math.floor(Date.now()/1000)), ranstr:String(Math.floor(Math.random()*1e10)) });
     try{ var resp=await fetch(CART.base+"/v1/addToEcart",{ method:"POST",
           headers:{"Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"}, body:body });
@@ -599,6 +604,7 @@ function mount(host){
   if(host.__rtpMounted) return; host.__rtpMounted=true;
   var opts={ template:host.dataset.template||"the-fracture", productId:host.dataset.product||"16534",
     oemId:host.dataset.oem||"10294534", lang:host.dataset.lang||"en",
+    productIdKit:host.dataset.productKit||null, oemIdKit:host.dataset.oemKit||null,
     mode:host.dataset.mode||null,
     primary:host.dataset.primary||null, secondary:host.dataset.secondary||null,
     trim:host.dataset.trim||null, nameColor:host.dataset.namecolor||null,
