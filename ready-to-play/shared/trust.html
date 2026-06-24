@@ -1,59 +1,109 @@
-<!-- TRUST / SOCIAL PROOF — paste between the configurator and the FAQ (or just under the buy area).
-     Shared across all 7 RTP product pages.
-     ====================================================================
-     ⚠  REPLACE before publishing — do NOT ship invented social proof:
-        - the stat ([300]+ teams) with your real number
-        - each .club with a real club logo: <img src="..." alt="Club name">
-        - every [Name] / [Club] and quote with REAL testimonials you have permission to use
-        - keep ★★★★★ only if you genuinely have those ratings (e.g. Trustpilot/Google)
-     ==================================================================== -->
+<!-- ============================================================================
+     TRUST / SOCIAL PROOF  (EN / source version)
+     Paste between the configurator and the FAQ on RTP product pages. Shared across all 7 models.
+     Real Trustpilot reviews + real club logos.
+
+     TO TRANSLATE for es / fr / it domains, change ONLY:
+       (a) the .lab / <h2> / .sub headline strings
+       (b) the four review <p> texts  (Spanish/French ORIGINALS are kept in comments
+           beside each card so you can drop them straight into those locales)
+     Reviewer names, country labels, club logos and structure stay identical.
+     ============================================================================ -->
 <style>
   .mtr{font-family:'Outfit',-apple-system,sans-serif;max-width:1100px;margin:48px auto 0;padding:0 16px;color:#f5f5f5;text-align:center;}
   .mtr .lab{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E2214B;}
   .mtr h2{font-family:'Bebas Neue',Oswald,sans-serif;font-weight:600;font-size:34px;letter-spacing:.02em;text-transform:uppercase;color:#fff;margin:6px 0 4px;}
-  .mtr .sub{font-size:15px;color:#a1a1aa;line-height:1.6;margin:0 0 28px;}
-  .mtr .sub b{color:#fff;}
-  .mtr-logos{display:flex;flex-wrap:wrap;gap:14px 36px;justify-content:center;align-items:center;margin:0 0 44px;}
-  .mtr-logos .club{height:42px;display:flex;align-items:center;color:#8b8b92;font-weight:700;letter-spacing:.04em;font-size:15px;text-transform:uppercase;}
-  .mtr-logos img{height:42px;width:auto;filter:grayscale(1) brightness(1.7);opacity:.9;}
-  .mtr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left;}
-  .mtr-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px;display:flex;flex-direction:column;}
-  .mtr-stars{color:#E2214B;font-size:14px;letter-spacing:3px;margin-bottom:10px;}
-  .mtr-card .q{font-size:14px;color:#e5e5e5;line-height:1.65;flex:1;}
-  .mtr-card .by{margin-top:16px;font-size:13px;color:#a1a1aa;}
+  .mtr .sub{font-size:15px;color:#a1a1aa;line-height:1.6;margin:0 0 26px;}
+  /* ---- infinite logo marquee ---- */
+  .mtr-strip{position:relative;overflow:hidden;margin:0 0 44px;padding:6px 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);}
+  .mtr-track{display:flex;width:max-content;align-items:center;animation:mtr-scroll 46s linear infinite;}
+  .mtr-strip:hover .mtr-track{animation-play-state:paused;}
+  .mtr-logo{flex:0 0 auto;width:120px;display:flex;align-items:center;justify-content:center;padding:0 24px;}
+  /* locked WIDTH for consistency; height free (some logos will be taller). */
+  .mtr-logo img{width:auto;height:auto;max-width:104px;max-height:84px;object-fit:contain;
+    opacity:.72;transition:opacity .2s;}
+  .mtr-logo img:hover{opacity:1;}
+  /* If some crests are dark and vanish on the black background, uncomment to force white:
+     .mtr-logo img{filter:grayscale(1) brightness(0) invert(1);} */
+  @keyframes mtr-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media(prefers-reduced-motion:reduce){.mtr-track{animation:none;flex-wrap:wrap;justify-content:center;width:auto;}}
+  /* ---- testimonials ---- */
+  .mtr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:left;}
+  .mtr-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px;display:flex;flex-direction:column;}
+  .mtr-stars{color:#E2214B;font-size:13px;letter-spacing:3px;margin-bottom:10px;}
+  .mtr-card .q{font-size:13.5px;color:#e5e5e5;line-height:1.65;flex:1;}
+  .mtr-card .by{margin-top:16px;font-size:12.5px;color:#a1a1aa;}
   .mtr-card .by b{color:#fff;font-weight:600;}
   body{background:#0a0a0a!important;}
-  @media(max-width:760px){.mtr-grid{grid-template-columns:1fr;}}
+  @media(max-width:860px){.mtr-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.mtr-grid{grid-template-columns:1fr;}}
 </style>
 <div class="mtr">
   <div class="lab">Worn on real pitches</div>
-  <h2>Trusted by clubs across Europe</h2>
-  <p class="sub"><b>[300]+ teams</b> have kitted up with MOMUTO &mdash; from grassroots sides to semi-pro clubs.</p>
+  <h2>Trusted by 150+ teams</h2>
+  <p class="sub">Across Europe and North America.</p>
 
-  <div class="mtr-logos">
-    <div class="club">Club One</div>
-    <div class="club">Club Two</div>
-    <div class="club">Club Three</div>
-    <div class="club">Club Four</div>
-    <div class="club">Club Five</div>
-    <div class="club">Club Six</div>
+  <!-- LOGO MARQUEE — the logo set is listed twice so the scroll loops seamlessly.
+       Edit a club? Edit it in BOTH copies. -->
+  <div class="mtr-strip">
+    <div class="mtr-track">
+      <!-- set #1 -->
+      <div class="mtr-logo"><img loading="lazy" alt="Nottingham Prisas" src="https://cdn.staticsoe.com/pics/431ef8bf79e7e510718cee987cdd8a2538fcdddab1de91fcd7f115cb3bb95fa1.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="Deportivo JCPE" src="https://cdn.staticsoe.com/pics/456424f740bef93d3a16ed3e9e4690a66d6f656ccf2acdc59f007c9371d92a10.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="Peaule Fest" src="https://cdn.staticsoe.com/pics/8a887cbd7caaf5ec6b16516ed14a34fa00eb9ac5b57681ad3479fc1bbf9f5dd8.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="Dreamteam" src="https://cdn.staticsoe.com/pics/e1e1549cd706338477e78d4f34d23d44b45430d0b5ee12087083969583536de6.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="AEK" src="https://cdn.staticsoe.com/pics/6f7d20be5d2add7d3fd0973e818e207001b24749156f7024e5c6f8efc3de3ec4.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="L'Impasse" src="https://cdn.staticsoe.com/pics/e5c3a4c131b9694dbb73c1ffbd5b67b38476702e9a8b0a50bb0ae5a506eecadb.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="Soviet Rockets" src="https://cdn.staticsoe.com/pics/96ab5d6c74ce29ff1bf7d872cfccd762347646df5ff630f2248a8fcb6d45562b.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="All Stars FC Girls" src="https://cdn.staticsoe.com/pics/845d6990df27779910a9f21a03e7b283a82ec95015f2e2ea6f7faf540261de39.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="Gobinet" src="https://cdn.staticsoe.com/pics/84cd7d8e3574013e977e66fde4b0bed12a0f6c5db67ea4572cfce23f16ebf4f8.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="Free FC" src="https://cdn.staticsoe.com/pics/65af24adc790f322babfb0b10061e5edb360654b7829c379153f4cd80c4aa723.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="Los Bloques" src="https://cdn.staticsoe.com/pics/6f32f9df3660fc4175d6ce0e6825473be37beb8f6b9b106c61a3e83ef3d8ee47.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="Ziakerie FC" src="https://cdn.staticsoe.com/pics/745a9a97d0dd25b1e0e5f0b24881a6ec6cc2a2825df48a9bbbf81fccf281a4ed.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="Inter Egara" src="https://cdn.staticsoe.com/pics/c9a0a9bd7ee7b5524005891c3c2cbdcff99239d36601be037b4db49e415d9ed9.png"></div>
+      <div class="mtr-logo"><img loading="lazy" alt="Lario FC" src="https://cdn.staticsoe.com/pics/a28c2f6f8f427f9c57ae99535b01619aa27802ea9fa7f95e5fc43a80c2eb52aa.png"></div>
+      <!-- set #2 (duplicate, aria-hidden) -->
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/431ef8bf79e7e510718cee987cdd8a2538fcdddab1de91fcd7f115cb3bb95fa1.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/456424f740bef93d3a16ed3e9e4690a66d6f656ccf2acdc59f007c9371d92a10.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/8a887cbd7caaf5ec6b16516ed14a34fa00eb9ac5b57681ad3479fc1bbf9f5dd8.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/e1e1549cd706338477e78d4f34d23d44b45430d0b5ee12087083969583536de6.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/6f7d20be5d2add7d3fd0973e818e207001b24749156f7024e5c6f8efc3de3ec4.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/e5c3a4c131b9694dbb73c1ffbd5b67b38476702e9a8b0a50bb0ae5a506eecadb.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/96ab5d6c74ce29ff1bf7d872cfccd762347646df5ff630f2248a8fcb6d45562b.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/845d6990df27779910a9f21a03e7b283a82ec95015f2e2ea6f7faf540261de39.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/84cd7d8e3574013e977e66fde4b0bed12a0f6c5db67ea4572cfce23f16ebf4f8.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/65af24adc790f322babfb0b10061e5edb360654b7829c379153f4cd80c4aa723.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/6f32f9df3660fc4175d6ce0e6825473be37beb8f6b9b106c61a3e83ef3d8ee47.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/745a9a97d0dd25b1e0e5f0b24881a6ec6cc2a2825df48a9bbbf81fccf281a4ed.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/c9a0a9bd7ee7b5524005891c3c2cbdcff99239d36601be037b4db49e415d9ed9.png"></div>
+      <div class="mtr-logo" aria-hidden="true"><img loading="lazy" alt="" src="https://cdn.staticsoe.com/pics/a28c2f6f8f427f9c57ae99535b01619aa27802ea9fa7f95e5fc43a80c2eb52aa.png"></div>
+    </div>
   </div>
 
   <div class="mtr-grid">
     <div class="mtr-card">
       <div class="mtr-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="q">&ldquo;Kitted out the whole squad. The mockup came back next day, we tweaked one number font, and the kits arrived spot-on &mdash; cheaper than our old supplier too.&rdquo;</div>
-      <div class="by"><b>[Name]</b> &mdash; Manager, [Club FC]</div>
+      <div class="q">&ldquo;Great experience for our team's custom jerseys. The design was exactly as we requested and the whole process was smooth &mdash; their team was super responsive and always happy to help. Very happy with the result, highly recommend!&rdquo;</div>
+      <div class="by"><b>Karim</b> &mdash; France</div>
     </div>
     <div class="mtr-card">
       <div class="mtr-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="q">&ldquo;Designing it ourselves and seeing it live sold the committee instantly. Quality is genuinely pro &mdash; the print hasn't faded a bit after a full season.&rdquo;</div>
-      <div class="by"><b>[Name]</b> &mdash; Chairman, [Club]</div>
+      <div class="q">&ldquo;10/10 &mdash; fast, cheap and good quality!&rdquo;</div>
+      <div class="by"><b>Olaya</b> &mdash; Spain</div>
     </div>
+    <!-- ES ORIGINAL: "10/10 camisetas exactamente como las queríamos y entrega en el plazo que nos dijeron, todo perfecto!" -->
     <div class="mtr-card">
       <div class="mtr-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="q">&ldquo;Was nervous paying upfront for custom kit, but approving the mockup before print made it easy. Got exactly what we designed.&rdquo;</div>
-      <div class="by"><b>[Name]</b> &mdash; Captain, [Club]</div>
+      <div class="q">&ldquo;10/10 &mdash; the shirts came out exactly as we wanted, delivered right on the date they promised. All perfect!&rdquo;</div>
+      <div class="by"><b>Ivan Fedi</b> &mdash; Spain</div>
+    </div>
+    <!-- FR ORIGINAL: "Très satisfait de nos maillots personnalisés, super qualité et livraison rapide. Le service client et le contact avec les créateurs est fluide et particulièrement agréable. Merci Momuto je recommande." -->
+    <div class="mtr-card">
+      <div class="mtr-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="q">&ldquo;Really happy with our custom jerseys &mdash; great quality and fast delivery. Customer service and the contact with the designers is smooth and genuinely pleasant. Thanks Momuto, highly recommend.&rdquo;</div>
+      <div class="by"><b>Nohan Dessaint</b> &mdash; France</div>
     </div>
   </div>
 </div>
