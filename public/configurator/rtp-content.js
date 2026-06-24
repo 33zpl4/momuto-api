@@ -28,7 +28,6 @@ var LOGOS=[
  ["Gobinet","https://cdn.staticsoe.com/pics/84cd7d8e3574013e977e66fde4b0bed12a0f6c5db67ea4572cfce23f16ebf4f8.png"],
  ["Free FC","https://cdn.staticsoe.com/pics/65af24adc790f322babfb0b10061e5edb360654b7829c379153f4cd80c4aa723.png"],
  ["Los Bloques","https://cdn.staticsoe.com/pics/6f32f9df3660fc4175d6ce0e6825473be37beb8f6b9b106c61a3e83ef3d8ee47.png"],
- ["Ziakerie FC","https://cdn.staticsoe.com/pics/745a9a97d0dd25b1e0e5f0b24881a6ec6cc2a2825df48a9bbbf81fccf281a4ed.png"],
  ["Inter Egara","https://cdn.staticsoe.com/pics/c9a0a9bd7ee7b5524005891c3c2cbdcff99239d36601be037b4db49e415d9ed9.png"],
  ["Lario FC","https://cdn.staticsoe.com/pics/a28c2f6f8f427f9c57ae99535b01619aa27802ea9fa7f95e5fc43a80c2eb52aa.png"]
 ];
