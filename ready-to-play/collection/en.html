@@ -414,7 +414,7 @@ h1.title, .title, .page-title { display: none !important; }
        Flip RTP_LINK_MODE to 'product' ONLY once the live configurator is verified.
        ============================================================ -->
   <script>
-    window.RTP_LINK_MODE = 'request';
+    window.RTP_LINK_MODE = 'product';
     function rtpCard(slug){
       var url = (window.RTP_LINK_MODE === 'product')
         ? 'https://www.momuto.com/products/' + slug
@@ -480,7 +480,7 @@ h1.title, .title, .page-title { display: none !important; }
       </div>
     </article>
     <!-- THE APEX -->
-    <article class="rtp-col-card" itemscope itemtype="https://schema.org/Product" onclick="window.location.href='https://www.momuto.com/pages/ready-to-play-the-apex'">
+    <article class="rtp-col-card" itemscope itemtype="https://schema.org/Product" onclick="rtpCard('the-apex')">
       <div class="rtp-col-card-img">
         <div class="rtp-col-tags">
           <span class="rtp-col-tag">Aerodynamic</span>
