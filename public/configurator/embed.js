@@ -319,7 +319,7 @@ function run(root, opts){
       if(logo){ var lp=placeDesign(logo, mkSlot(slotJson.front.slots["logo-momuto"]), {contain:true,pad:1.06});
         var logoA=new Uint8Array(n); for(i=0;i<n;i++) logoA[i]=lp.data[i*4+3]; view.logoA=logoA; }
     }
-    if(kind==="back"){ view.nameSlot={ cx:cx, cy:miny+gh*0.34, w:gw*0.50, h:gh*0.50 }; }
+    if(kind==="back"){ view.nameSlot={ cx:cx, cy:miny+gh*0.38, w:gw*0.50, h:gh*0.50 }; }
     return view;
   }
   function renderComposite(V){
@@ -439,7 +439,7 @@ function run(root, opts){
       if(DESIGN_ZONES[zd]!==undefined && place[zd]){ var pd=place[zd].data,a2=pd[i*4+3];
         if(a2>10){designRGB[i*3]=pd[i*4];designRGB[i*3+1]=pd[i*4+1];designRGB[i*3+2]=pd[i*4+2];isDesign[i]=1;} else isDesign[i]=2; } }
     var b0=bbox(0);
-    var nameSlot={ cx:b0.x+b0.w/2, cy:b0.y+b0.h*0.34, w:b0.w*0.64, h:b0.h*0.54 };
+    var nameSlot={ cx:b0.x+b0.w/2, cy:b0.y+b0.h*0.38, w:b0.w*0.64, h:b0.h*0.54 };
     return {kind:"back",zoneIdx:zoneIdx,ratio:ratio,srcA:srcA,designRGB:designRGB,isDesign:isDesign,logoA:null,slots:{},nameSlot:nameSlot,dy:centerDY(srcA,n)};
   }
 
