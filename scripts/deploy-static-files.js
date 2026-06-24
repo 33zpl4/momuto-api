@@ -7,28 +7,28 @@ const DOMAINS = {
     label: 'momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
+    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css', 'rtp-content.js']
   },
   es: {
     token: process.env.OEMSAAS_TOKEN_ES,
     label: 'es.momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'es.momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
+    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css', 'rtp-content.js']
   },
   fr: {
     token: process.env.OEMSAAS_TOKEN_FR,
     label: 'fr.momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'fr.momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
+    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css', 'rtp-content.js']
   },
   it: {
     token: process.env.OEMSAAS_TOKEN_IT,
     label: 'it.momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'it.momuto.com'),
-    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css']
+    files: ['robots.txt', 'sitemap.xml', 'llms.txt', 'blog.css', 'rtp-content.js']
   }
 };
 
@@ -39,6 +39,10 @@ function getFilePath(domain, filename) {
   // Shared files served identically across all stores
   if (filename === 'blog.css') return path.join(SHARED_DIR, 'blog.css');
   if (filename === 'llms.txt' && domain.label === 'momuto.com') return path.join(SHARED_DIR, 'llms.txt');
+  // Shared RTP product-page content script (same file, all stores; data-lang picks locale).
+  // Lives under public/configurator/ so an ordinary push to static/** never triggers a full
+  // static deploy — deploy it surgically with the workflow's file=rtp-content.js input.
+  if (filename === 'rtp-content.js') return path.join('public', 'configurator', 'rtp-content.js');
   return path.join(domain.staticDir, filename);
 }
 

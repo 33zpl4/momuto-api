@@ -78,8 +78,130 @@ var I18N={
     ["What if something isn't right on the mockup?","Change it — free. You can tweak anything right up until you greenlight your mockup, and we only start production once you've approved. No wrong prints, ever."]
    ]
   }
+ },
+ es:{
+  highlights:[
+   ["Tejido","<b>Poliéster-elastano</b> con elasticidad. Estampado por sublimación: los colores se tiñen en la tela, así que nunca se agrietan ni se despegan.",false],
+   ["Qué incluye","<b>Camiseta</b>, o <b>kit completo</b> (camiseta + pantalón). Nombres y dorsales por jugador.",false],
+   ["Producción y envío","<b>~25–30 días</b> tras dar el visto bueno a tu maqueta. Envío gratis a partir de 49 €.",false],
+   ["Compra protegida","Pagas hoy, pero <b>no imprimimos</b> hasta que apruebes una maqueta final, enviada <b>en 24 h</b>. Cambia lo que quieras, gratis.",true]
+  ],
+  trust:{
+   lab:"Vistas en el campo", h2:"Más de 150 equipos confían en nosotros", sub:"En toda Europa y Norteamérica.",
+   reviews:[
+    ["Gran experiencia con las camisetas personalizadas de nuestro equipo. El diseño era exactamente lo que pedimos y todo el proceso fue muy fluido: su equipo respondía rapidísimo y siempre dispuesto a ayudar. ¡Muy contentos con el resultado, totalmente recomendable!","Karim","Francia"],
+    ["10/10: ¡rápido, barato y de buena calidad!","Olaya","España"],
+    ["10/10 camisetas exactamente como las queríamos y entrega en el plazo que nos dijeron, ¡todo perfecto!","Ivan Fedi","España"],
+    ["Muy contentos con nuestras camisetas personalizadas: gran calidad y entrega rápida. La atención al cliente y el contacto con los diseñadores es fluido y muy agradable. ¡Gracias Momuto, lo recomiendo!","Nohan Dessaint","Francia"]
+   ]
+  },
+  how:{
+   lab:"Proceso sencillo", h2:"Cómo funciona",
+   promise:["Compra ahora; lo perfeccionamos antes de imprimir.","Pagas hoy y luego te enviamos una maqueta final en 24 h. No fabricamos ni una camiseta hasta que le das el visto bueno."],
+   steps:[
+    ["Diséñalo","Elige tus colores, sube tu escudo y patrocinador, añade nombres y dorsales: todo en la vista previa de arriba."],
+    ["Pide para tu equipo","Añade al carrito, indica la talla, el nombre y el dorsal de cada jugador y finaliza la compra. Una camiseta o todo el equipo."],
+    ["Aprueba tu maqueta","En 24 h te enviamos una maqueta final de tu equipación exacta. Cambia lo que quieras, gratis. No se imprime nada hasta que la apruebes."],
+    ["Fabricamos y enviamos","Una vez aprobada, producimos y entregamos en ~25–30 días. Envío gratis a partir de 49 €."]
+   ]
+  },
+  faq:{
+   lab:"Buena información", h2:"Preguntas frecuentes", sub:"Todo lo que necesitas saber antes de comprar.",
+   items:[
+    ["¿Pago ahora o después de ver una maqueta?","Pagas al hacer el pedido. En <b>24 horas</b> te enviamos una maqueta final de tu equipación exacta, y <b>no imprimimos nada hasta que le das el visto bueno</b>. ¿Quieres un cambio? Gratis. Tu compra está protegida: nunca recibes una equipación que no hayas aprobado."],
+    ["¿De qué material son las equipaciones?","Una mezcla ligera y transpirable de <b>poliéster-elastano</b> con elasticidad para total libertad de movimiento. Cada diseño se <b>estampa por sublimación</b>: los colores y logos se tiñen en la tela, así que no se agrietan, despegan ni destiñen como una estampación normal."],
+    ["¿Cómo elijo la talla correcta?","Tenemos una <b>gama completa de tallas, de infantil a adulto</b>. Usa la <b>guía de tallas</b> (el enlace «Encuentra tu talla» al añadir tu equipo) para acertar por pecho y altura. ¿Entre tallas o mezclando niños y adultos? Pregúntanos antes de aprobar la maqueta."],
+    ["¿Solo camiseta o kit completo? ¿Qué incluye?","Tú eliges. <b>Solo camiseta</b> es la camiseta. <b>Kit completo</b> añade el <b>pantalón</b> a precio de pack. Elígelo en el producto de arriba: el precio se actualiza al instante según la cantidad."],
+    ["¿Hay pedido mínimo? ¿Cómo funcionan los precios?","<b>Sin mínimo</b>: pide una sola equipación o cientos. El precio por unidad baja cuanto mayor es el pedido (cada tramo se ve en la estimación de arriba), y la <b>gama Ready-to-Play es un 10% más barata</b> porque el diseño ya está hecho. El diseño es <b>siempre gratis</b>, sin costes ocultos."],
+    ["¿Cuánto tarda en llegar?","Te enviamos la maqueta final <b>en 24 h</b> tras el pedido. Una vez la apruebas, la producción y la entrega tardan unos <b>25–30 días</b>. ¿La necesitas para una fecha concreta? Dínoslo antes de comprar y te lo confirmamos."],
+    ["¿Quedará exactamente como la vista previa?","Sí, y la verás primero. Tras tu pedido, nuestro equipo <b>vectoriza y limpia tu escudo y patrocinador</b>, ajusta la colocación y te envía una <b>maqueta final en 24 h</b>. No se imprime nada hasta que le das el visto bueno."],
+    ["¿Puedo añadir nombres y dorsales?","Por supuesto. Añade un nombre y un dorsal por jugador en la lista de tu equipo al finalizar la compra, con la tipografía y el color que elijas. Combina como quieras en toda la plantilla."],
+    ["¿Y si algo no está bien en la maqueta?","Lo cambiamos, gratis. Puedes ajustar lo que sea hasta que apruebes tu maqueta, y solo empezamos a producir cuando la has aprobado. Sin impresiones erróneas, nunca."]
+   ]
+  }
+ },
+ fr:{
+  highlights:[
+   ["Tissu","<b>Polyester-élasthanne</b> extensible. Imprimé par sublimation : les couleurs sont teintes dans le tissu, elles ne craquent ni ne se décollent jamais.",false],
+   ["Ce que vous recevez","<b>Maillot</b>, ou <b>kit complet</b> (maillot + short). Noms et numéros par joueur.",false],
+   ["Fabrication et envoi","<b>~25–30 jours</b> après validation de votre maquette. Livraison offerte dès 49 €.",false],
+   ["Achat protégé","Vous payez aujourd'hui, mais nous <b>n'imprimons rien</b> avant que vous validiez une maquette finale, envoyée <b>sous 24h</b>. Modifiez ce que vous voulez, gratuitement.",true]
+  ],
+  trust:{
+   lab:"Portés sur le terrain", h2:"Plus de 150 équipes nous font confiance", sub:"Partout en Europe et en Amérique du Nord.",
+   reviews:[
+    ["Très bonne expérience pour les maillots personnalisés de notre équipe. Le design était exactement comme demandé et tout le processus a été fluide : leur équipe répondait très vite et toujours prête à aider. Très contents du résultat, je recommande vivement !","Karim","France"],
+    ["10/10 — rapide, pas cher et de bonne qualité !","Olaya","Espagne"],
+    ["10/10, les maillots exactement comme nous les voulions et livrés dans les délais annoncés, tout parfait !","Ivan Fedi","Espagne"],
+    ["Très satisfait de nos maillots personnalisés, super qualité et livraison rapide. Le service client et le contact avec les créateurs est fluide et particulièrement agréable. Merci Momuto, je recommande.","Nohan Dessaint","France"]
+   ]
+  },
+  how:{
+   lab:"Un processus simple", h2:"Comment ça marche",
+   promise:["Achetez maintenant, on perfectionne avant d'imprimer.","Vous payez aujourd'hui, puis on vous envoie une maquette finale sous 24h. On ne fabrique pas un seul maillot avant votre validation."],
+   steps:[
+    ["Personnalisez","Choisissez vos couleurs, importez votre écusson et sponsor, ajoutez noms et numéros — le tout dans l'aperçu en direct ci-dessus."],
+    ["Commandez pour votre équipe","Ajoutez au panier, saisissez la taille, le nom et le numéro de chaque joueur, puis payez. Un maillot ou toute l'équipe."],
+    ["Validez votre maquette","Sous 24h, on vous envoie une maquette finale de votre tenue exacte. Modifiez ce que vous voulez, gratuitement. Rien n'est imprimé avant votre validation."],
+    ["On fabrique et on expédie","Une fois validée, on produit et on livre en ~25–30 jours. Livraison offerte dès 49 €."]
+   ]
+  },
+  faq:{
+   lab:"Bon à savoir", h2:"Questions fréquentes", sub:"Tout ce qu'il faut savoir avant de commander.",
+   items:[
+    ["Je paie maintenant ou après avoir vu une maquette ?","Vous payez à la commande. Sous <b>24 heures</b>, on vous envoie une maquette finale de votre tenue exacte, et <b>on n'imprime rien avant votre validation</b>. Une modification ? Gratuite. Votre achat est protégé : vous ne recevez jamais une tenue que vous n'avez pas approuvée."],
+    ["Quelle est la matière des tenues ?","Un mélange léger et respirant de <b>polyester-élasthanne</b> extensible pour une liberté de mouvement totale. Chaque design est <b>imprimé par sublimation</b> : les couleurs et les logos sont teints dans le tissu, ils ne craquent, ne se décollent ni ne se décolorent comme un flocage classique."],
+    ["Comment choisir la bonne taille ?","Nous proposons une <b>gamme complète, de l'enfant à l'adulte</b>. Utilisez le <b>guide des tailles</b> (le lien « Trouvez votre taille » au moment d'ajouter votre équipe) pour ajuster selon le tour de poitrine et la taille. Entre deux tailles, ou en mélangeant enfants et adultes ? Demandez-nous avant de valider la maquette."],
+    ["Maillot seul ou kit complet — qu'est-ce qui est inclus ?","À vous de choisir. <b>Maillot seul</b>, c'est le maillot. <b>Kit complet</b> ajoute le <b>short</b> à prix de pack. Choisissez sur le produit ci-dessus — le prix se met à jour instantanément selon la quantité."],
+    ["Y a-t-il un minimum de commande ? Comment fonctionnent les prix ?","<b>Aucun minimum</b> — commandez une seule tenue ou des centaines. Le prix unitaire baisse à mesure que la commande grandit (chaque palier est indiqué dans l'estimation ci-dessus), et la <b>gamme Ready-to-Play est 10% moins chère</b> car le design est déjà fait. Le design est <b>toujours gratuit</b>, sans frais cachés."],
+    ["Combien de temps avant la livraison ?","On vous envoie la maquette finale <b>sous 24h</b> après la commande. Une fois validée, la production et la livraison prennent environ <b>25–30 jours</b>. Besoin pour une date précise ? Dites-le-nous avant de commander et on vous confirme."],
+    ["Le rendu sera-t-il exactement comme l'aperçu ?","Oui, et vous le verrez d'abord. Après votre commande, notre équipe <b>vectorise et nettoie votre écusson et sponsor</b>, affine le placement et vous envoie une <b>maquette finale sous 24h</b>. Rien n'est imprimé avant votre validation."],
+    ["Puis-je ajouter les noms et numéros des joueurs ?","Bien sûr. Ajoutez un nom et un numéro par joueur dans la liste de votre équipe au paiement, dans la police et la couleur de votre choix — variez à volonté sur tout l'effectif."],
+    ["Et si quelque chose ne va pas sur la maquette ?","On le modifie — gratuitement. Vous pouvez tout ajuster jusqu'à la validation de votre maquette, et on ne lance la production qu'une fois votre accord donné. Aucune impression ratée, jamais."]
+   ]
+  }
+ },
+ it:{
+  highlights:[
+   ["Tessuto","<b>Poliestere-elastan</b> elasticizzato. Stampa a sublimazione: i colori sono tinti nel tessuto, non si crepano né si staccano mai.",false],
+   ["Cosa ricevi","<b>Maglia</b>, o <b>kit completo</b> (maglia + pantaloncini). Nomi e numeri per ogni giocatore.",false],
+   ["Produzione e spedizione","<b>~25–30 giorni</b> dopo l'approvazione del tuo mockup. Spedizione gratuita sopra i 49 €.",false],
+   ["Acquisto protetto","Paghi oggi, ma <b>non stampiamo</b> finché non approvi un mockup finale, inviato <b>entro 24h</b>. Cambia ciò che vuoi, gratis.",true]
+  ],
+  trust:{
+   lab:"Indossate in campo", h2:"Più di 150 squadre si fidano di noi", sub:"In tutta Europa e Nord America.",
+   reviews:[
+    ["Ottima esperienza per le maglie personalizzate della nostra squadra. Il design era esattamente come richiesto e tutto il processo è stato fluido: il loro team rispondeva velocissimo e sempre disponibile. Molto soddisfatti del risultato, super consigliato!","Karim","Francia"],
+    ["10/10 — veloce, economico e di buona qualità!","Olaya","Spagna"],
+    ["10/10, le maglie esattamente come le volevamo e consegna nei tempi promessi, tutto perfetto!","Ivan Fedi","Spagna"],
+    ["Molto contenti delle nostre maglie personalizzate: ottima qualità e consegna rapida. L'assistenza clienti e il contatto con i designer è fluido e davvero piacevole. Grazie Momuto, lo consiglio.","Nohan Dessaint","Francia"]
+   ]
+  },
+  how:{
+   lab:"Processo semplice", h2:"Come funziona",
+   promise:["Compra ora, lo perfezioniamo prima di stampare.","Paghi oggi, poi ti inviamo un mockup finale entro 24h. Non produciamo nemmeno una maglia finché non dai l'ok."],
+   steps:[
+    ["Personalizzala","Scegli i colori, carica stemma e sponsor, aggiungi nomi e numeri — tutto nell'anteprima live qui sopra."],
+    ["Ordina per la squadra","Aggiungi al carrello, inserisci taglia, nome e numero di ogni giocatore e completa l'ordine. Una maglia o tutta la squadra."],
+    ["Approva il mockup","Entro 24h ti inviamo un mockup finale del tuo kit esatto. Cambia ciò che vuoi, gratis. Nulla va in stampa finché non approvi."],
+    ["Produciamo e spediamo","Dopo la tua approvazione, produciamo e consegniamo in ~25–30 giorni. Spedizione gratuita sopra i 49 €."]
+   ]
+  },
+  faq:{
+   lab:"Buono a sapersi", h2:"Domande frequenti", sub:"Tutto ciò che ti serve prima di ordinare.",
+   items:[
+    ["Pago adesso o dopo aver visto un mockup?","Paghi al momento dell'ordine. Entro <b>24 ore</b> ti inviamo un mockup finale del tuo kit esatto, e <b>non stampiamo nulla finché non dai l'ok</b>. Vuoi una modifica? Gratis. Il tuo acquisto è protetto: non ricevi mai un kit che non hai approvato."],
+    ["Di che materiale sono i kit?","Un tessuto leggero e traspirante in <b>poliestere-elastan</b> elasticizzato per la massima libertà di movimento. Ogni design è <b>stampato a sublimazione</b>: i colori e i loghi sono tinti nel tessuto, quindi non si crepano, staccano o sbiadiscono come una stampa a trasferimento."],
+    ["Come scelgo la taglia giusta?","Abbiamo una <b>gamma completa, dal bambino all'adulto</b>. Usa la <b>guida alle taglie</b> (il link «Trova la tua taglia» quando aggiungi la squadra) per scegliere in base a torace e altezza. Sei tra due taglie, o mischi bambini e adulti? Chiedici prima di approvare il mockup."],
+    ["Solo maglia o kit completo — cosa include?","Scegli tu. <b>Solo maglia</b> è la maglia. <b>Kit completo</b> aggiunge i <b>pantaloncini</b> a prezzo bundle. Scegli sul prodotto qui sopra — il prezzo si aggiorna all'istante in base alla quantità."],
+    ["C'è un ordine minimo? Come funzionano i prezzi?","<b>Nessun minimo</b> — ordina un solo kit o centinaia. Il prezzo unitario scende man mano che l'ordine cresce (ogni fascia è mostrata nella stima qui sopra), e la <b>gamma Ready-to-Play costa il 10% in meno</b> perché il design è già pronto. Il design è <b>sempre gratuito</b>, senza costi nascosti."],
+    ["Quanto tempo ci vuole per la consegna?","Ti inviamo il mockup finale <b>entro 24h</b> dall'ordine. Una volta approvato, produzione e consegna richiedono circa <b>25–30 giorni</b>. Ti serve per una data precisa? Dillo prima di ordinare e te lo confermiamo."],
+    ["Verrà esattamente come l'anteprima?","Sì, e lo vedrai prima tu. Dopo l'ordine, il nostro team <b>vettorializza e pulisce stemma e sponsor</b>, perfeziona il posizionamento e ti invia un <b>mockup finale entro 24h</b>. Nulla va in stampa finché non dai l'ok."],
+    ["Posso aggiungere nomi e numeri dei giocatori?","Assolutamente. Aggiungi nome e numero per ogni giocatore nella lista squadra al checkout, con il font e il colore che preferisci — combina come vuoi su tutta la rosa."],
+    ["E se qualcosa non va nel mockup?","Lo cambiamo — gratis. Puoi modificare qualsiasi cosa fino all'approvazione del mockup, e iniziamo a produrre solo dopo il tuo ok. Nessuna stampa sbagliata, mai."]
+   ]
+  }
  }
- /* ,es:{...}, fr:{...}, it:{...}  // copy `en`, translate; missing locales fall back to en */
 };
 
 var CSS=`
