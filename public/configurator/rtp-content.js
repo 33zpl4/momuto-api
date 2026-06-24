@@ -37,6 +37,15 @@ var LOGOS=[
      Ivan (ES): "10/10 camisetas exactamente como las queríamos y entrega en el plazo que nos dijeron, todo perfecto!"
      Nohan (FR): "Très satisfait de nos maillots personnalisés, super qualité et livraison rapide. Le service client et le contact avec les créateurs est fluide et particulièrement agréable. Merci Momuto je recommande."
 */
+/* ---- inline "ask us" WhatsApp CTA (end of FAQ). Shared number; per-locale text. ---- */
+var WA_NUMBER="34614625408";
+var WA_SVG=`<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:8px"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.736-.612.001.001zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>`;
+var CHAT={
+ en:["Still have a question?","Message us on WhatsApp","I have a question about your Ready-to-Play collection!"],
+ es:["¿Te queda alguna duda?","Escríbenos por WhatsApp","¡Tengo una pregunta sobre vuestra colección Ready-to-Play!"],
+ fr:["Une dernière question ?","Écrivez-nous sur WhatsApp","J'ai une question sur votre collection Ready-to-Play !"],
+ it:["Hai ancora una domanda?","Scrivici su WhatsApp","Ho una domanda sulla vostra collezione Ready-to-Play!"]
+};
 var I18N={
  en:{
   highlights:[
@@ -251,6 +260,10 @@ var CSS=`
 .mkt-faq details[open] summary::after{content:'\\2013';}
 .mkt-faq p{margin:0 4px 18px;font-size:14px;color:#a1a1aa;line-height:1.7;}
 .mkt-faq p b{color:#e5e5e5;font-weight:600;}
+.mkt-chat{display:flex;align-items:center;justify-content:center;gap:8px 14px;flex-wrap:wrap;margin:26px 0 4px;}
+.mkt-chat span{font-size:14px;color:#a1a1aa;}
+.mkt-wa{display:inline-flex;align-items:center;background:#25D366;color:#06311a;font-weight:600;font-size:14px;text-decoration:none;padding:10px 18px;border-radius:999px;transition:transform .1s ease,filter .15s ease;}
+.mkt-wa:hover{filter:brightness(1.07);transform:translateY(-1px);}
 @media(max-width:860px){.mtr-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:560px){.mkt h2{font-size:28px;}.mkt-step{flex:1 1 100%;}.mkt-promise{flex-direction:column;align-items:flex-start;gap:6px;}}
 @media(max-width:480px){.mtr-grid{grid-template-columns:1fr;}}
@@ -277,7 +290,7 @@ function trust(c){
     +'<div class="mtr-strip"><div class="mtr-track">'+a+b+'</div></div>'
     +'<div class="mtr-grid">'+rev+'</div></div>';
 }
-function howfaq(c){
+function howfaq(c, chat){
   var h=c.how,f=c.faq;
   var steps=h.steps.map(function(s,i){
     return '<div class="mkt-step"><span class="n">'+(i+1)+'</span><b>'+s[0]+'</b><span>'+s[1]+'</span></div>';
@@ -285,11 +298,14 @@ function howfaq(c){
   var qs=f.items.map(function(q){
     return '<details><summary>'+q[0]+'</summary><p>'+q[1]+'</p></details>';
   }).join("");
+  var wa='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(chat[2]);
+  var cta='<div class="mkt-chat"><span>'+chat[0]+'</span>'
+    +'<a class="mkt-wa" href="'+wa+'" target="_blank" rel="noopener noreferrer">'+WA_SVG+chat[1]+'</a></div>';
   return '<div class="mkt"><div class="lab">'+h.lab+'</div><h2>'+h.h2+'</h2>'
     +'<div class="mkt-promise"><b>'+h.promise[0]+'</b><span>'+h.promise[1]+'</span></div>'
     +'<div class="mkt-steps">'+steps+'</div>'
     +'<div class="lab">'+f.lab+'</div><h2>'+f.h2+'</h2><p class="sub">'+f.sub+'</p>'
-    +'<div class="mkt-faq">'+qs+'</div></div>';
+    +'<div class="mkt-faq">'+qs+'</div>'+cta+'</div>';
 }
 function faqLd(items){
   return {"@context":"https://schema.org","@type":"FAQPage","mainEntity":items.map(function(q){
@@ -300,7 +316,7 @@ function faqLd(items){
 function render(mount){
   var lang=(mount.getAttribute("data-lang")||"en").toLowerCase();
   var c=I18N[lang]||I18N.en;
-  mount.innerHTML="<style>"+CSS+"</style>"+highlights(c)+trust(c)+howfaq(c);
+  mount.innerHTML="<style>"+CSS+"</style>"+highlights(c)+trust(c)+howfaq(c, CHAT[lang]||CHAT.en);
   try{
     var ld=document.createElement("script");
     ld.type="application/ld+json";
