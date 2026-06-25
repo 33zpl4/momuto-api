@@ -19,6 +19,11 @@ on:
           - es
           - fr
           - it
+      list_only:
+        description: 'List mode (read-only: fetch store, report RTP handle coverage)'
+        required: false
+        default: false
+        type: boolean
       dry_run:
         description: 'Dry run (print payload, send nothing)'
         required: false
@@ -46,5 +51,6 @@ jobs:
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           TARGET_DOMAIN: ${{ github.event.inputs.domain }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
+          LIST_ONLY: ${{ github.event.inputs.list_only }}
           TARGET_HANDLES: ${{ github.event.inputs.handles }}
         run: node scripts/push-product-seo.js

@@ -28,11 +28,9 @@ const ORDER = [
   'the-fracture', 'the-fracture-full-kit',
 ];
 
-// Resolve handle -> product id from the live store via GET /products.
-// Lets the same SEO JSON drive any store without hand-maintaining per-locale ids:
-// after the per-domain manage.momuto.com models are created, this picks up their ids.
-async function idByHandle(domain) {
-  const map = {};
+// Fetch the full product list from the live store via GET /products (paginated).
+async function listProducts(domain) {
+  const all = [];
   let since = '';
   const limit = 200;
   while (true) {
@@ -41,11 +39,38 @@ async function idByHandle(domain) {
     const json = await res.json().catch(() => ({}));
     if (!res.ok || json.code !== 0) throw new Error(`GET /products failed on ${domain.label}: ${JSON.stringify(json)}`);
     const arr = json.data || [];
-    for (const p of arr) if (p.handle) map[p.handle] = p.id;
+    all.push(...arr);
     if (arr.length < limit) break;
     since = arr[arr.length - 1].id;
   }
+  return all;
+}
+
+// Resolve handle -> product id. Lets the same SEO JSON drive any store without
+// hand-maintaining per-locale ids: after the per-domain manage.momuto.com models
+// are created, this picks up their ids.
+function handleMap(list) {
+  const map = {};
+  for (const p of list) if (p.handle) map[p.handle] = p.id;
   return map;
+}
+
+// Read-only report: for each RTP handle, show whether the store has a product,
+// its id, whether the type:3d cart pointer is present, and current SEO title.
+async function listMode(domain, seo) {
+  const list = await listProducts(domain);
+  const byHandle = {};
+  for (const p of list) if (p.handle) byHandle[p.handle] = p;
+  console.log(`\n${domain.label}: ${list.length} total products. RTP handles:`);
+  let found = 0;
+  for (const h of ORDER.filter(x => seo[x])) {
+    const p = byHandle[h];
+    if (!p) { console.log(`  ✗ ${h.padEnd(24)} — NOT FOUND`); continue; }
+    found++;
+    const has3d = /"type"\s*:\s*"3d"/.test(String(p.inner_title || ''));
+    console.log(`  ✓ ${h.padEnd(24)} id=${String(p.id).padEnd(10)} 3d=${has3d ? 'yes' : 'NO '} status=${p.status} seo="${(p.meta_title || '').slice(0, 40)}"`);
+  }
+  console.log(`  → ${found}/${ORDER.filter(x => seo[x]).length} RTP products present on ${domain.label}`);
 }
 
 function buildProducts(seo, only, idMap) {
@@ -84,6 +109,7 @@ async function batchsave(domain, products) {
 async function main() {
   const target = process.env.TARGET_DOMAIN;            // optional: en|es|fr|it
   const dryRun = String(process.env.DRY_RUN || '').toLowerCase() === 'true';
+  const listOnly = String(process.env.LIST_ONLY || '').toLowerCase() === 'true';
   const only = (process.env.TARGET_HANDLES || '')     // optional: comma list, e.g. "the-apex"
     .split(',').map(s => s.trim()).filter(Boolean);
   const domains = target ? { [target]: DOMAINS[target] } : DOMAINS;
@@ -96,11 +122,19 @@ async function main() {
 
     const seo = JSON.parse(fs.readFileSync(seoPath, 'utf8'));
 
+    // Read-only verification mode: fetch the store and report handle coverage.
+    if (listOnly) {
+      if (!domain.token) { console.warn(`  ⚠️  No token for ${domain.label} — cannot list`); continue; }
+      try { await listMode(domain, seo); }
+      catch (err) { console.error(`  ❌ ${domain.label}: ${err.message}`); errors.push(err.message); }
+      continue;
+    }
+
     // Resolve ids by handle from the live store (needs a token). Dry runs and
     // tokenless stores fall back to the product_id baked into the SEO JSON.
     let idMap = null;
     if (!dryRun && domain.token) {
-      try { idMap = await idByHandle(domain); }
+      try { idMap = handleMap(await listProducts(domain)); }
       catch (err) { console.error(`  ❌ ${domain.label}: ${err.message}`); errors.push(err.message); continue; }
     }
 
