@@ -28,8 +28,9 @@ const ORDER = [
   'the-fracture', 'the-fracture-full-kit',
 ];
 
-function buildProducts(seo) {
-  const handles = ORDER.filter(h => seo[h]);
+function buildProducts(seo, only) {
+  let handles = ORDER.filter(h => seo[h]);
+  if (only && only.length) handles = handles.filter(h => only.includes(h));
   return handles.map(h => {
     const e = seo[h];
     return {
@@ -59,6 +60,8 @@ async function batchsave(domain, products) {
 async function main() {
   const target = process.env.TARGET_DOMAIN;            // optional: en|es|fr|it
   const dryRun = String(process.env.DRY_RUN || '').toLowerCase() === 'true';
+  const only = (process.env.TARGET_HANDLES || '')     // optional: comma list, e.g. "the-apex"
+    .split(',').map(s => s.trim()).filter(Boolean);
   const domains = target ? { [target]: DOMAINS[target] } : DOMAINS;
 
   const errors = [];
@@ -66,17 +69,18 @@ async function main() {
     if (!domain) { console.error(`❌ Unknown domain key: ${target}`); process.exit(1); }
     const seoPath = path.join(SEO_DIR, domain.seo);
     if (!fs.existsSync(seoPath)) { console.log(`  ⚠️  ${domain.seo} not found — skipping ${domain.label}`); continue; }
-    if (!domain.token) { console.warn(`  ⚠️  No token for ${domain.label} — skipping`); continue; }
 
     const seo = JSON.parse(fs.readFileSync(seoPath, 'utf8'));
-    const products = buildProducts(seo);
-    console.log(`\n${domain.label}: ${products.length} products from ${domain.seo}`);
+    const products = buildProducts(seo, only);
+    if (!products.length) { console.log(`  ⚠️  No matching products${only.length ? ` for handles [${only.join(', ')}]` : ''} — skipping ${domain.label}`); continue; }
+    console.log(`\n${domain.label}: ${products.length} product(s) from ${domain.seo}${only.length ? ` (filtered: ${only.join(', ')})` : ''}`);
 
     if (dryRun) {
       console.log(JSON.stringify({ products }, null, 2));
       console.log(`  (dry run — nothing sent)`);
       continue;
     }
+    if (!domain.token) { console.warn(`  ⚠️  No token for ${domain.label} — skipping`); continue; }
     try {
       await batchsave(domain, products);
       console.log(`  ✓ Updated SEO on ${products.length} products (${domain.label})`);

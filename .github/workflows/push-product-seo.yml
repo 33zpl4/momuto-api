@@ -24,6 +24,11 @@ on:
         required: false
         default: true
         type: boolean
+      handles:
+        description: 'Limit to these handles (comma list, e.g. the-apex). Blank = all 14.'
+        required: false
+        default: ''
+        type: string
 
 jobs:
   push-seo:
@@ -41,4 +46,5 @@ jobs:
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           TARGET_DOMAIN: ${{ github.event.inputs.domain }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
+          TARGET_HANDLES: ${{ github.event.inputs.handles }}
         run: node scripts/push-product-seo.js
