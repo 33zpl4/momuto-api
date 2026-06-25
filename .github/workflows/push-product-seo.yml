@@ -1,0 +1,44 @@
+name: Push Product SEO (RTP)
+
+# Pushes Ready-to-Play product SEO to the storefront via the OEMSaaS OpenAPI
+# /products/batchsave endpoint. Source: ready-to-play/seo/rtp-seo.<locale>.json.
+# Partial update — only id + SEO fields are sent; price/variants/media/inner_title
+# (the type:3d cart pointer) are left untouched.
+
+on:
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Store to push to (blank = all that have a SEO json)'
+        required: false
+        default: 'en'
+        type: choice
+        options:
+          - ''
+          - en
+          - es
+          - fr
+          - it
+      dry_run:
+        description: 'Dry run (print payload, send nothing)'
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  push-seo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Push product SEO
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          TARGET_DOMAIN: ${{ github.event.inputs.domain }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/push-product-seo.js
