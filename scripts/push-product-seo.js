@@ -28,20 +28,44 @@ const ORDER = [
   'the-fracture', 'the-fracture-full-kit',
 ];
 
-function buildProducts(seo, only) {
+// Resolve handle -> product id from the live store via GET /products.
+// Lets the same SEO JSON drive any store without hand-maintaining per-locale ids:
+// after the per-domain manage.momuto.com models are created, this picks up their ids.
+async function idByHandle(domain) {
+  const map = {};
+  let since = '';
+  const limit = 200;
+  while (true) {
+    const url = `${domain.host}/products?limit=${limit}${since ? `&since_id=${since}` : ''}`;
+    const res = await fetch(url, { headers: { token: domain.token } });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok || json.code !== 0) throw new Error(`GET /products failed on ${domain.label}: ${JSON.stringify(json)}`);
+    const arr = json.data || [];
+    for (const p of arr) if (p.handle) map[p.handle] = p.id;
+    if (arr.length < limit) break;
+    since = arr[arr.length - 1].id;
+  }
+  return map;
+}
+
+function buildProducts(seo, only, idMap) {
   let handles = ORDER.filter(h => seo[h]);
   if (only && only.length) handles = handles.filter(h => only.includes(h));
-  return handles.map(h => {
+  const built = [], missing = [];
+  for (const h of handles) {
     const e = seo[h];
-    return {
-      id: parseInt(e.product_id, 10),
+    const id = (idMap && idMap[h] != null) ? idMap[h] : parseInt(e.product_id, 10);
+    if (!Number.isFinite(id)) { missing.push(h); continue; }
+    built.push({
+      id,
       subtitle: e.subtitle,
       meta_title: e.seo_title,
       meta_descript: e.meta,
       meta_keywords: e.keywords.split(',').map(s => s.trim()).filter(Boolean),
       mini_detail: e.short,
-    };
-  });
+    });
+  }
+  return { built, missing };
 }
 
 async function batchsave(domain, products) {
@@ -71,19 +95,29 @@ async function main() {
     if (!fs.existsSync(seoPath)) { console.log(`  ⚠️  ${domain.seo} not found — skipping ${domain.label}`); continue; }
 
     const seo = JSON.parse(fs.readFileSync(seoPath, 'utf8'));
-    const products = buildProducts(seo, only);
-    if (!products.length) { console.log(`  ⚠️  No matching products${only.length ? ` for handles [${only.join(', ')}]` : ''} — skipping ${domain.label}`); continue; }
-    console.log(`\n${domain.label}: ${products.length} product(s) from ${domain.seo}${only.length ? ` (filtered: ${only.join(', ')})` : ''}`);
+
+    // Resolve ids by handle from the live store (needs a token). Dry runs and
+    // tokenless stores fall back to the product_id baked into the SEO JSON.
+    let idMap = null;
+    if (!dryRun && domain.token) {
+      try { idMap = await idByHandle(domain); }
+      catch (err) { console.error(`  ❌ ${domain.label}: ${err.message}`); errors.push(err.message); continue; }
+    }
+
+    const { built, missing } = buildProducts(seo, only, idMap);
+    if (missing.length) console.warn(`  ⚠️  ${domain.label}: no product found for handle(s): ${missing.join(', ')} — skipped (create the model in manage.momuto.com first)`);
+    if (!built.length) { console.log(`  ⚠️  No resolvable products${only.length ? ` for handles [${only.join(', ')}]` : ''} — skipping ${domain.label}`); continue; }
+    console.log(`\n${domain.label}: ${built.length} product(s) from ${domain.seo}${idMap ? ' (ids resolved by handle)' : ' (ids from JSON)'}${only.length ? ` (filtered: ${only.join(', ')})` : ''}`);
 
     if (dryRun) {
-      console.log(JSON.stringify({ products }, null, 2));
+      console.log(JSON.stringify({ products: built }, null, 2));
       console.log(`  (dry run — nothing sent)`);
       continue;
     }
     if (!domain.token) { console.warn(`  ⚠️  No token for ${domain.label} — skipping`); continue; }
     try {
-      await batchsave(domain, products);
-      console.log(`  ✓ Updated SEO on ${products.length} products (${domain.label})`);
+      await batchsave(domain, built);
+      console.log(`  ✓ Updated SEO on ${built.length} products (${domain.label})`);
     } catch (err) {
       console.error(`  ❌ ${domain.label}: ${err.message}`);
       errors.push(err.message);
