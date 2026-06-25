@@ -1,0 +1,395 @@
+<!-- ============================================================================
+     MOMUTO homepage blocks — FR ORIGINAL (reference copy)
+     Two sections: "Éditions Limitées" (limited-edition grid) and
+     "Héritage Espagnol" (Spanish-regions carousel).
+     This is the verbatim source pulled from the FR site (momuto.fr) and kept
+     here so the EN version (limited-heritage.en.html) can be re-derived/tweaked.
+     ============================================================================ -->
+
+<!-- Font import — skip if already loaded by the hero block above -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    /* --- GLOBAL RESET & FONTS --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .section-limited, .section-regions, .section-limited *, .section-regions * {
+        font-family: 'Outfit', sans-serif;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* --- STRICT CONTAINER WIDTH --- */
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        width: 100%;
+    }
+
+    /* --- SECTIONS --- */
+    .section-limited,
+    .section-regions {
+        width: 100%;
+        padding: 6rem 0;
+        background: #ffffff;
+    }
+
+    .section-regions {
+        border-top: 1px solid #e4e4e7;
+    }
+
+    /* --- HEADERS --- */
+    .section-header {
+        margin-bottom: 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .section-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        color: #111;
+    }
+
+    .section-subtitle {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 400;
+        max-width: 600px;
+        color: #71717a;
+    }
+
+    /* Arrows */
+    .btn-arrow {
+        width: 50px; height: 50px;
+        border: 1px solid #e4e4e7; color: #111;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; transition: all 0.2s;
+        background: transparent;
+        font-size: 1.5rem;
+        font-family: 'Outfit', sans-serif;
+    }
+    .btn-arrow:hover { background: #111; color: white; border-color: #111; }
+
+    /* Text Link */
+    .btn-text-link {
+        font-family: 'Outfit', sans-serif;
+        color: #111;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border-bottom: 2px solid #111;
+        padding-bottom: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: opacity 0.3s;
+    }
+    .btn-text-link:hover { opacity: 0.7; }
+
+    /* --- SECTION 1: LIMITED EDITIONS GRID --- */
+    .limited-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    .limited-card {
+        background: transparent;
+        display: block;
+    }
+
+    .limited-image {
+        width: 100%;
+        height: 580px;
+        background: #f4f4f5;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+    }
+
+    .limited-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .limited-card:hover .limited-image img {
+        transform: scale(1.03);
+    }
+
+    .limited-info {
+        border-left: 2px solid #e4e4e7;
+        padding-left: 20px;
+        transition: border-color 0.3s;
+    }
+
+    .limited-card:hover .limited-info { border-color: #111; }
+
+    .limited-name {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 2rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #111;
+        margin-bottom: 0.5rem;
+    }
+
+    .limited-desc {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1rem;
+        color: #52525b;
+        margin-bottom: 1rem;
+        font-weight: 400;
+    }
+
+    .limited-meta {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .price-current {
+        font-family: 'Outfit', sans-serif;
+        color: #111; font-weight: 700; font-size: 1.2rem;
+    }
+    .price-old {
+        font-family: 'Outfit', sans-serif;
+        color: #a1a1aa; text-decoration: line-through;
+    }
+
+    /* --- SECTION 2: HERITAGE CAROUSEL --- */
+    .carousel-wrapper { position: relative; }
+
+    .products-carousel {
+        display: flex;
+        gap: 30px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        padding-bottom: 2rem;
+    }
+    .products-carousel::-webkit-scrollbar { display: none; }
+
+    .region-card {
+        flex: 0 0 340px;
+        background: transparent;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .region-image {
+        width: 100%;
+        height: 460px;
+        background: #f4f4f5;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+    .region-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .region-card:hover .region-image img { transform: scale(1.05); }
+
+    .region-info { padding-right: 10px; }
+
+    .region-name {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+        color: #111;
+    }
+
+    .region-desc {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.95rem;
+        color: #52525b;
+        font-style: italic;
+        margin-bottom: 0.5rem;
+        min-height: 3em;
+    }
+
+    .region-price {
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        color: #111;
+        font-size: 1rem;
+        display: block;
+        margin-top: 0.5rem;
+    }
+
+    /* Badges */
+    .badge {
+        position: absolute;
+        top: 20px; left: 20px;
+        padding: 6px 12px;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        z-index: 2;
+    }
+    .badge-white { background: #fff; color: #111; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .badge-dark { background: #111; color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .section-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+        .nav-arrows { display: none; }
+        .limited-grid { grid-template-columns: 1fr; gap: 3rem; }
+        .limited-image { height: 450px; }
+        .container { padding: 0 20px; }
+    }
+</style>
+
+<section class="section-limited">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">Éditions Limitées</h2>
+                <p class="section-subtitle">Designs conceptuels. Stock limité. Une fois épuisés, c'est fini.</p>
+            </div>
+            <div class="header-cta">
+                <a href="/collections/all" class="btn-text-link">VOIR TOUT →</a>
+            </div>
+        </div>
+
+        <div class="limited-grid">
+
+            <a href="https://www.momuto.fr/products/italie-homme-vitruve-maillot" class="limited-card">
+                <div class="limited-image">
+                    <span class="badge badge-white">Best Seller</span>
+                    <img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251001/99d320285b6040e33806e486795f542c.jpg" alt="Maillot Italie Vitruve">
+                </div>
+                <div class="limited-info">
+                    <h3 class="limited-name">Italie x Vitruve</h3>
+                    <p class="limited-desc">La Renaissance du Calcio. La fierté Azzurri réinventée par l'art de Da Vinci.</p>
+                    <div class="limited-meta">
+                        <span class="price-current">40 €</span>
+                        <span class="price-old">54,90 €</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.momuto.fr/products/maillot-glory-du-bernabeu" class="limited-card">
+                <div class="limited-image">
+                    <span class="badge badge-white">Dernières Pièces</span>
+                    <img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251001/61b8af5169521de199c7b5c9498b824b.jpg" alt="Maillot Gloire Bernabeu">
+                </div>
+                <div class="limited-info">
+                    <h3 class="limited-name">Gloire du Bernabéu</h3>
+                    <p class="limited-desc">Hommage au temple blanc. Un stade ne se construit pas, il se gagne. L'histoire dans chaque couture.</p>
+                    <div class="limited-meta">
+                        <span class="price-current">49,90 €</span>
+                        <span class="price-old">64,90 €</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<section class="section-regions">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">Héritage Espagnol</h2>
+                <p class="section-subtitle">La culture tissée dans le maillot. Un hommage aux racines de l'Espagne.</p>
+            </div>
+            <div class="nav-arrows" style="display:flex; gap:10px;">
+                <button class="btn-arrow" id="prevBtn">←</button>
+                <button class="btn-arrow" id="nextBtn">→</button>
+            </div>
+        </div>
+
+        <div class="carousel-wrapper">
+            <div class="products-carousel" id="spainCarousel">
+
+                <a href="https://www.momuto.es/products/tributo-a-andalucia" class="region-card">
+                    <div class="region-image">
+                        <span class="badge badge-dark">Disponible</span>
+                        <img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251001/047192b9b9f17762860616450a4806a1.jpg" alt="Maillot Andalousie">
+                    </div>
+                    <div class="region-info">
+                        <h3 class="region-name">Andalousie</h3>
+                        <p class="region-desc">"Vert espoir, jaune soleil. Un hommage à l'art du sud."</p>
+                        <span class="region-price">49,90 €</span>
+                    </div>
+                </a>
+
+                <a href="https://www.momuto.es/products/tributo-a-aragon" class="region-card">
+                    <div class="region-image">
+                        <span class="badge badge-white">Bientôt</span>
+                        <img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251001/983daeffb068da436f5be6111f68a1e4.jpg" alt="Maillot Aragon">
+                    </div>
+                    <div class="region-info">
+                        <h3 class="region-name">Aragon</h3>
+                        <p class="region-desc">"Rouge ardent. Jaune résilient. Noblesse et caractère."</p>
+                        <span class="region-price">—</span>
+                    </div>
+                </a>
+
+                <a href="https://www.momuto.es/products/tributo-a-madrid" class="region-card">
+                    <div class="region-image">
+                        <span class="badge badge-white">Bientôt</span>
+                        <img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251001/1ade38176085b299b723f99683ecca00.jpg" alt="Maillot Madrid">
+                    </div>
+                    <div class="region-info">
+                        <h3 class="region-name">Madrid</h3>
+                        <p class="region-desc">"Sept étoiles sur la poitrine. Capitale de passion et de fierté."</p>
+                        <span class="region-price">—</span>
+                    </div>
+                </a>
+
+                <a href="https://www.momuto.es/products/tributo-a-asturies" class="region-card">
+                    <div class="region-image">
+                        <span class="badge badge-white">Bientôt</span>
+                        <img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251001/7491483e645f5d48e1a0e668d6468768.jpg" alt="Maillot Asturies">
+                    </div>
+                    <div class="region-info">
+                        <h3 class="region-name">Asturies</h3>
+                        <p class="region-desc">"Vert montagne, bleu océan. La force du nord."</p>
+                        <span class="region-price">—</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const carousel = document.getElementById('spainCarousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    if (carousel && prevBtn && nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: 360, behavior: 'smooth' });
+        });
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: -360, behavior: 'smooth' });
+        });
+    }
+</script>
