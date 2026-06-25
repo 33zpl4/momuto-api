@@ -28,6 +28,31 @@ const ORDER = [
   'the-fracture', 'the-fracture-full-kit',
 ];
 
+// Stores may deploy slightly different handles per locale (e.g. `the-fracture-jersey`
+// instead of `the-fracture`, or `the-prism-kit` instead of `the-prism-full-kit`).
+// For each canonical SEO key, generate the handle variations we'll accept.
+function aliasesFor(key) {
+  const isKit = key.endsWith('-full-kit');
+  const base = isKit ? key.slice(0, -'-full-kit'.length) : key;
+  if (isKit) {
+    return [key, `${base}-kit`, `${base}-kit-complet`, `${base}-kit-completo`,
+            `${base}-kit-completa`, `${base}-jersey-shorts`, `${base}-jersey-and-shorts`,
+            `${base}-complete-kit`, `${base}-full-kit-jersey`];
+  }
+  return [key, `${base}-jersey`, `${base}-maillot`, `${base}-maglia`, `${base}-camiseta`, `${base}-shirt`];
+}
+
+// Find the first alias of `key` present in the store's handle->value map.
+// Returns { value, handle } or null. Lookup is case-insensitive.
+function resolveHandle(map, key) {
+  for (const a of aliasesFor(key)) {
+    if (map[a] != null) return { value: map[a], handle: a };
+    const lc = a.toLowerCase();
+    if (map[lc] != null) return { value: map[lc], handle: lc };
+  }
+  return null;
+}
+
 // Fetch the full product list from the live store via GET /products (paginated).
 async function listProducts(domain) {
   const all = [];
@@ -64,11 +89,13 @@ async function listMode(domain, seo) {
   console.log(`\n${domain.label}: ${list.length} total products. RTP handles:`);
   let found = 0;
   for (const h of ORDER.filter(x => seo[x])) {
-    const p = byHandle[h];
-    if (!p) { console.log(`  ✗ ${h.padEnd(24)} — NOT FOUND`); continue; }
+    const r = resolveHandle(byHandle, h);
+    if (!r) { console.log(`  ✗ ${h.padEnd(24)} — NOT FOUND (tried: ${aliasesFor(h).join(', ')})`); continue; }
     found++;
+    const p = r.value;
+    const via = r.handle === h ? '' : ` via "${r.handle}"`;
     const has3d = /"type"\s*:\s*"3d"/.test(String(p.inner_title || ''));
-    console.log(`  ✓ ${h.padEnd(24)} id=${String(p.id).padEnd(10)} 3d=${has3d ? 'yes' : 'NO '} status=${p.status} seo="${(p.meta_title || '').slice(0, 40)}"`);
+    console.log(`  ✓ ${h.padEnd(24)} id=${String(p.id).padEnd(10)} 3d=${has3d ? 'yes' : 'NO '} status=${p.status} seo="${(p.meta_title || '').slice(0, 40)}"${via}`);
   }
   console.log(`  → ${found}/${ORDER.filter(x => seo[x]).length} RTP products present on ${domain.label}`);
 }
@@ -79,8 +106,18 @@ function buildProducts(seo, only, idMap) {
   const built = [], missing = [];
   for (const h of handles) {
     const e = seo[h];
-    const id = (idMap && idMap[h] != null) ? idMap[h] : parseInt(e.product_id, 10);
-    if (!Number.isFinite(id)) { missing.push(h); continue; }
+    let id;
+    if (idMap) {
+      // Live run: id must come from the store (via handle or an alias). Don't fall
+      // back to a JSON id here — that could target the wrong store's product.
+      const r = resolveHandle(idMap, h);
+      if (!r) { missing.push(h); continue; }
+      id = r.value;
+    } else {
+      // Dry run / no token: use the id baked into the SEO JSON.
+      id = parseInt(e.product_id, 10);
+      if (!Number.isFinite(id)) { missing.push(h); continue; }
+    }
     built.push({
       id,
       subtitle: e.subtitle,
