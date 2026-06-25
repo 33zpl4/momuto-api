@@ -1,0 +1,60 @@
+# Source-of-truth SEO for the 7 Ready-to-Play templates (EN).
+# Each entry: identity + jersey copy. Kit copy is derived (jersey + shorts framing).
+SEO = {
+ "the-apex": {
+   "name":"The Apex","colors":"Navy & Volt","identity":"Sharp angular shoulder panels — a clean, modern attacking look.",
+   "subtitle":"Ready-to-Play — Customize in seconds",
+   "seo_title":"The Apex — Custom Football Jersey | MOMUTO",
+   "meta":"Customize The Apex football jersey — your colors, name and number, previewed live. Ready-to-Play from €19.70. No minimum order, every order purchase-protected.",
+   "keywords":"custom football jersey, the apex jersey, momuto, ready to play kit, personalized soccer jersey, custom team kit",
+   "short":"Bold angular shoulder panels in navy & volt by default — fully recolorable. Add your name and number and play this week.",
+ },
+ "the-kinetic": {
+   "name":"The Kinetic","colors":"Purple, Black & Cyan","identity":"Electric motion lines built for speed.",
+   "subtitle":"Ready-to-Play — Customize in seconds",
+   "seo_title":"The Kinetic — Custom Football Jersey | MOMUTO",
+   "meta":"Customize The Kinetic football jersey — your colors, name and number, previewed live. Ready-to-Play from €19.70. No minimum order, purchase-protected.",
+   "keywords":"custom football jersey, the kinetic jersey, momuto, ready to play kit, personalized soccer jersey, custom team kit",
+   "short":"Electric motion lines in purple, black & cyan by default — recolor every zone, add your name and number, see it live.",
+ },
+ "the-khala": {
+   "name":"The Khala","colors":"Green, Black & Red","identity":"Bold solid side panels and a fearless front.",
+   "subtitle":"Ready-to-Play — Customize in seconds",
+   "seo_title":"The Khala — Custom Football Jersey | MOMUTO",
+   "meta":"Customize The Khala football jersey — bold side panels in your club colors, name and number, previewed live. Ready-to-Play from €19.70. No minimum.",
+   "keywords":"custom football jersey, the khala jersey, momuto, ready to play kit, personalized soccer jersey, custom team kit",
+   "short":"Bold solid side panels and a striking front — fully recolorable to your club colors. Name and number included.",
+ },
+ "the-legacy": {
+   "name":"The Legacy","colors":"Gold, Navy & Green","identity":"Heritage stripes, timeless by design.",
+   "subtitle":"Ready-to-Play — Customize in seconds",
+   "seo_title":"The Legacy — Custom Football Jersey | MOMUTO",
+   "meta":"Customize The Legacy football jersey — timeless heritage stripes in your colors, name and number, previewed live. Ready-to-Play from €19.70.",
+   "keywords":"custom football jersey, the legacy jersey, momuto, ready to play kit, personalized soccer jersey, classic football kit",
+   "short":"Timeless heritage stripes in gold, navy & green by default — recolor to your club, add your name and number.",
+ },
+ "the-mosaic": {
+   "name":"The Mosaic","colors":"Tan, Black & Magenta","identity":"Tiled artwork you wear on the pitch.",
+   "subtitle":"Ready-to-Play — Customize in seconds",
+   "seo_title":"The Mosaic — Custom Football Jersey | MOMUTO",
+   "meta":"Customize The Mosaic football jersey — wear-the-art tiled design in your colors, name and number, previewed live. Ready-to-Play from €19.70.",
+   "keywords":"custom football jersey, the mosaic jersey, momuto, ready to play kit, personalized soccer jersey, patterned football kit",
+   "short":"A tiled, artful pattern in tan, black & magenta by default — fully recolorable. Make it yours, name and number included.",
+ },
+ "the-prism": {
+   "name":"The Prism","colors":"Maroon, Grey & Green","identity":"Faceted geometry — every angle counts.",
+   "subtitle":"Ready-to-Play — Customize in seconds",
+   "seo_title":"The Prism — Custom Football Jersey | MOMUTO",
+   "meta":"Customize The Prism football jersey — faceted geometric design in your colors, name and number, previewed live. Ready-to-Play from €19.70.",
+   "keywords":"custom football jersey, the prism jersey, momuto, ready to play kit, personalized soccer jersey, geometric football kit",
+   "short":"Faceted geometric panels in maroon, grey & green by default — recolor every zone, add your name and number, see it live.",
+ },
+ "the-fracture": {
+   "name":"The Fracture","colors":"Bold multi-tone","identity":"Angular shards that break the standard.",
+   "subtitle":"Ready-to-Play — Customize in seconds",
+   "seo_title":"The Fracture — Custom Football Jersey | MOMUTO",
+   "meta":"Customize The Fracture football jersey — striking angular shard design in your colors, name and number, previewed live. Ready-to-Play from €19.70.",
+   "keywords":"custom football jersey, the fracture jersey, momuto, ready to play kit, personalized soccer jersey, modern football kit",
+   "short":"A striking angular shard pattern — fully recolorable to your club. Add your name and number and play this week.",
+ },
+}

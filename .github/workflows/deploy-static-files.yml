@@ -25,6 +25,7 @@ on:
           - llms.txt
           - sitemap.xml
           - blog.css
+          - rtp-content.js
   push:
     paths:
       - 'static/**'

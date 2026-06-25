@@ -1,0 +1,266 @@
+<!-- ============================================================================
+     MOMUTO homepage block — EN translation
+     "Trust / social proof" section: 150+ clubs scroller + dual CTA.
+     CSS / structure are IDENTICAL to the FR original (trust-proof.fr.html) —
+     only the copy and the two CTA hrefs are localized.
+
+     CTA links mapped to the live EN (momuto.com) page handles:
+       FR /pages/demande-de-design-professionnel-de-maillots
+         → EN /pages/request-custom-kit-design
+       FR /pages/equipes-clubs-momuto
+         → EN /pages/teams-clubs-momuto
+     ============================================================================ -->
+
+<!-- Font import — skip if already loaded above -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    .trust-proof {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        margin-left: -50vw;
+        background: #0a0a0a;
+        color: #f5f5f5;
+        padding: 6rem 0;
+        overflow: hidden;
+    }
+
+    .trust-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+    }
+
+    .trust-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .trust-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 400;
+        color: #f5f5f5;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        line-height: 1;
+    }
+
+    .trust-subtitle {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.1rem;
+        color: #a1a1aa;
+        max-width: 600px;
+        margin: 0 auto;
+        font-weight: 300;
+    }
+
+    .trust-scroll {
+        display: flex;
+        gap: 1.5rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        padding-bottom: 0.5rem;
+        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    }
+    .trust-scroll::-webkit-scrollbar { display: none; }
+
+    .trust-card {
+        flex: 0 0 calc((100% - 3 * 1.5rem) / 3.5);
+        background: #111;
+        border: 1px solid rgba(255,255,255,0.06);
+        transition: border-color 0.25s ease, transform 0.25s ease;
+        position: relative;
+        overflow: hidden;
+        cursor: default;
+    }
+
+    .trust-card:hover {
+        border-color: rgba(255,255,255,0.12);
+        transform: translateY(-4px);
+    }
+
+    .trust-card-img-wrap {
+        position: relative;
+        aspect-ratio: 4/5;
+        overflow: hidden;
+        background-color: #0a0a0a;
+    }
+
+    .trust-card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .trust-card:hover .trust-card-img {
+        transform: scale(1.05);
+    }
+
+    .trust-card-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.5rem;
+    }
+
+    .trust-card-team {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        letter-spacing: 0.03em;
+        line-height: 1.1;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        color: #f5f5f5;
+    }
+
+    .trust-card-desc {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 300;
+        line-height: 1.5;
+        color: #a1a1aa;
+    }
+
+    .trust-cta {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+        margin-top: 4rem;
+    }
+
+    .trust-btn-primary {
+        display: inline-block;
+        background: white;
+        color: black;
+        padding: 18px 40px;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .trust-btn-primary:hover {
+        background: #e4e4e7;
+        transform: translateY(-2px);
+    }
+
+    .trust-btn-secondary {
+        font-family: 'Outfit', sans-serif;
+        color: #a1a1aa;
+        text-decoration: underline;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: color 0.3s;
+    }
+
+    .trust-btn-secondary:hover { color: #f5f5f5; }
+
+    @media (max-width: 768px) {
+        .trust-card { flex: 0 0 calc((100% - 1 * 1.5rem) / 1.5); }
+        .trust-title { font-size: 2rem; }
+        .trust-proof { padding: 4rem 0; }
+        .trust-container { padding: 0 20px; }
+    }
+</style>
+
+<section class="trust-proof">
+    <div class="trust-container">
+
+        <div class="trust-header">
+            <h2 class="trust-title">OVER 150 CLUBS KITTED BY MOMUTO</h2>
+            <p class="trust-subtitle">Real clubs. Real jerseys. From local leagues to international tournaments.</p>
+        </div>
+
+        <div class="trust-scroll">
+
+            <div class="trust-card">
+                <div class="trust-card-img-wrap">
+                    <img src="https://cdn.staticsoe.com/pics/c1d0a62529e0649d8abc28c098de24b45d2d1409aa64211fec22a116a60ce514.png"
+                         alt="Custom football jersey — KERZ"
+                         class="trust-card-img" loading="lazy">
+                    <div class="trust-card-overlay">
+                        <div class="trust-card-team">KERZ</div>
+                        <div class="trust-card-desc">Black & gold. Techno culture on the pitch.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trust-card">
+                <div class="trust-card-img-wrap">
+                    <img src="https://cdn.staticsoe.com/pics/ec4d3787eacef3c768dc1432dd2ccdafc3ec333f5e76006c04036140bc4b7260.png"
+                         alt="Custom football jersey — AEK Heritage Floral"
+                         class="trust-card-img" loading="lazy">
+                    <div class="trust-card-overlay">
+                        <div class="trust-card-team">AEK</div>
+                        <div class="trust-card-desc">Heritage Floral. White, burgundy & gold elegance.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trust-card">
+                <div class="trust-card-img-wrap">
+                    <img src="https://cdn.staticsoe.com/pics/646b2d9eeef70514c4ed53899a84c2755489d78d2ae484f66660e4d14fd15c16.png"
+                         alt="Custom football jersey — Les Défonceurs"
+                         class="trust-card-img" loading="lazy">
+                    <div class="trust-card-overlay">
+                        <div class="trust-card-team">LES DÉFONCEURS</div>
+                        <div class="trust-card-desc">Claw Strike. Combat-sport aggression in red & black.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trust-card">
+                <div class="trust-card-img-wrap">
+                    <img src="https://cdn.staticsoe.com/pics/f8e75a66d23a34b4bf24c153ada54731ea34488c0a416bf016d7183408f9da6b.png"
+                         alt="Custom football jersey — KINGS Shadow Dragon"
+                         class="trust-card-img" loading="lazy">
+                    <div class="trust-card-overlay">
+                        <div class="trust-card-team">KINGS</div>
+                        <div class="trust-card-desc">Shadow Dragon. Black-on-black luxury with a gold crown.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trust-card">
+                <div class="trust-card-img-wrap">
+                    <img src="https://cdn.staticsoe.com/pics/2572b5c39f8cbcf5e4d530fcfd8f86e55c1e969b7c9d95088180fb508e6c54b6.png"
+                         alt="Custom football jersey — Pecados Capitales Duality"
+                         class="trust-card-img" loading="lazy">
+                    <div class="trust-card-overlay">
+                        <div class="trust-card-team">PECADOS CAPITALES</div>
+                        <div class="trust-card-desc">Duality. Angels & demons in red, black & gold.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="trust-cta">
+            <a href="/pages/request-custom-kit-design" class="trust-btn-primary">REQUEST A FREE DESIGN</a>
+            <a href="/pages/teams-clubs-momuto" class="trust-btn-secondary">EXPLORE 200+ JERSEY DESIGNS →</a>
+        </div>
+
+    </div>
+</section>
