@@ -1,0 +1,300 @@
+<!-- ============================================================================
+     MOMUTO homepage block — FR ORIGINAL (reference copy)
+     "Comment ça marche" — three ways to get your jerseys (RTP / Custom / 3D).
+     Verbatim source from the FR site (momuto.fr), kept here so the EN version
+     (how-it-works.en.html) can be re-derived/tweaked.
+     ============================================================================ -->
+
+<!-- Font import — skip if already loaded above -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  .ways-section {
+    background: #0a0a0a;
+    padding: 5rem 1.5rem;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    box-sizing: border-box;
+  }
+
+  .ways-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .ways-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .ways-eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0 0 0.75rem;
+  }
+
+  .ways-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: #fff;
+    letter-spacing: 0.04em;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .ways-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .ways-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .way-card {
+    position: relative;
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 2.5rem 2rem 2rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .way-card--featured {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .way-number {
+    position: absolute;
+    top: -1.2rem;
+    right: 1.2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 8rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.045);
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.02em;
+  }
+
+  .way-badge {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    background: #fff;
+    padding: 0.25rem 0.6rem;
+    margin-bottom: 1.5rem;
+    align-self: flex-start;
+  }
+
+  .way-badge--hidden {
+    visibility: hidden;
+  }
+
+  .way-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin: 0 0 0.5rem;
+  }
+
+  .way-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    color: #fff;
+    margin: 0 0 1.25rem;
+    line-height: 1.05;
+  }
+
+  .way-desc {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.65;
+    margin: 0 0 1.5rem;
+    flex: 1;
+  }
+
+  .way-desc strong {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+  }
+
+  .way-price {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0 0 1.25rem;
+    letter-spacing: 0.02em;
+  }
+
+  .way-price strong {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .way-btn {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    background: #fff;
+    color: #0a0a0a;
+    border: 1px solid #fff;
+    transition: background 0.2s, color 0.2s;
+    text-align: center;
+  }
+
+  .way-btn:hover {
+    background: transparent;
+    color: #fff;
+  }
+
+  .way-btn--outline {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .way-btn--outline:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .ways-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .ways-strip-item {
+    padding: 1rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .ways-strip-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+
+  .ways-strip-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .ways-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section class="ways-section">
+  <div class="ways-inner">
+
+    <div class="ways-header">
+      <p class="ways-eyebrow">Comment ça marche</p>
+      <h2 class="ways-heading">TROIS FAÇONS D'OBTENIR VOS MAILLOTS</h2>
+    </div>
+
+    <div class="ways-grid">
+
+      <!-- Carte 1 : Prêt à jouer -->
+      <div class="way-card">
+        <span class="way-number">01</span>
+        <span class="way-badge">Meilleur Prix</span>
+        <p class="way-label">Commande Immédiate</p>
+        <h3 class="way-title">PRÊT À JOUER</h3>
+        <p class="way-desc">
+          Maillots pré-conçus disponibles maintenant. Choisissez votre taille, ajoutez votre nom et numéro — c'est prêt. <strong>Aucun délai de design, aucun minimum.</strong>
+        </p>
+        <p class="way-price">À partir de <strong>€19,70</strong> / maillot</p>
+        <a href="/pages/pret-a-jouer" class="way-btn">COMMANDER MAINTENANT</a>
+      </div>
+
+      <!-- Carte 2 : Design sur mesure (featured) -->
+      <div class="way-card way-card--featured">
+        <span class="way-number">02</span>
+        <span class="way-badge">Le Plus Populaire</span>
+        <p class="way-label">Service Design Gratuit</p>
+        <h3 class="way-title">DESIGN SUR MESURE</h3>
+        <p class="way-desc">
+          Envoyez-nous votre brief, vos couleurs de club, ou votre <strong>concept IA</strong> — nos designers senior le transforment en maillot prêt à produire en 1–2 jours. Révisions gratuites et illimitées.
+        </p>
+        <p class="way-price">À partir de <strong>€21,90</strong> / maillot · Design toujours gratuit</p>
+        <a href="/pages/demande-de-design-professionnel-de-maillots" class="way-btn">DEMANDER UN DESIGN GRATUIT</a>
+      </div>
+
+      <!-- Carte 3 : Configurateur 3D -->
+      <div class="way-card">
+        <span class="way-number">03</span>
+        <span class="way-badge way-badge--hidden">spacer</span>
+        <p class="way-label">En Autonomie</p>
+        <h3 class="way-title">CONFIGURATEUR 3D</h3>
+        <p class="way-desc">
+          Concevez votre maillot en direct dans le navigateur. <strong>Plus de 30 modèles professionnels,</strong> contrôle total des couleurs et des logos. Commandez directement — sans attente, sans allers-retours.
+        </p>
+        <p class="way-price">À partir de <strong>€21,90</strong> / maillot · 10+ unités</p>
+        <a id="jump3d" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr" class="way-btn way-btn--outline">OUVRIR LE CONFIGURATEUR</a>
+      </div>
+
+    </div>
+
+    <div class="ways-strip">
+      <div class="ways-strip-item">
+        <span class="ways-strip-price">€19,70</span>
+        <span class="ways-strip-label">prix minimum / maillot</span>
+      </div>
+      <div class="ways-strip-item">
+        <span class="ways-strip-price">0</span>
+        <span class="ways-strip-label">minimum de commande</span>
+      </div>
+      <div class="ways-strip-item">
+        <span class="ways-strip-price">25–30</span>
+        <span class="ways-strip-label">jours de livraison mondiale</span>
+      </div>
+    </div>
+
+  </div>
+</section>
