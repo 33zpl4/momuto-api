@@ -1,17 +1,17 @@
 # Ready-to-Play — Product SEO (EN, source of truth)
 
-Applies to the 14 RTP storefront products (7 jerseys + 7 full kits) in the ENG store.
-The `Inner title` (the type:3d cart pointer), price, media and handle are **unchanged** — only
-Subtitle / SEO Title / SEO Description / SEO Keywords / Short Description are set here.
+Applies to the 14 RTP storefront products (7 jerseys + 7 full kits).
+The Inner title (type:3d cart pointer), price, media and handle are unchanged — only
+Subtitle / SEO Title / SEO Description / SEO Keywords / Short Description are set.
 
-Translate this file per locale (fr/it/es) to migrate. Brand model names ("The Prism") stay; only descriptive copy translates.
+Translate per locale (fr/it/es). Brand model names ("The Prism") stay; descriptive copy translates.
 
 ## The Apex  ·  /products/the-apex
 - **Subtitle:** Ready-to-Play — Customize in seconds
 - **SEO Title** (42): The Apex — Custom Football Jersey | MOMUTO
 - **Meta Description** (159): Customize The Apex football jersey — your colors, name and number, previewed live. Ready-to-Play from €19.70. No minimum order, every order purchase-protected.
 - **Keywords:** custom football jersey, the apex jersey, momuto, ready to play kit, personalized soccer jersey, custom team kit
-- **Short Description:** Bold angular shoulder panels in navy & volt by default — fully recolorable. Add your name and number and play this week.
+- **Short Description:** Bold angular shoulder panels in navy & volt by default — fully recolorable. Add your name and number and make it yours.
 
 ## The Apex - Full Kit  ·  /products/the-apex-full-kit
 - **Subtitle:** Ready-to-Play Full Kit — Jersey + Shorts
@@ -95,7 +95,7 @@ Translate this file per locale (fr/it/es) to migrate. Brand model names ("The Pr
 - **SEO Title** (46): The Fracture — Custom Football Jersey | MOMUTO
 - **Meta Description** (146): Customize The Fracture football jersey — striking angular shard design in your colors, name and number, previewed live. Ready-to-Play from €19.70.
 - **Keywords:** custom football jersey, the fracture jersey, momuto, ready to play kit, personalized soccer jersey, modern football kit
-- **Short Description:** A striking angular shard pattern — fully recolorable to your club. Add your name and number and play this week.
+- **Short Description:** A striking angular shard pattern — fully recolorable to your club. Add your name and number and make it yours.
 
 ## The Fracture - Full Kit  ·  /products/the-fracture-full-kit
 - **Subtitle:** Ready-to-Play Full Kit — Jersey + Shorts
