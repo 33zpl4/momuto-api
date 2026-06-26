@@ -617,7 +617,7 @@
   </ul>
   <div class="gate-email-row">
     <input type="email" class="gate-email-input" id="gateEmail" placeholder="Votre adresse e-mail" />
-    <a href="https://buy.stripe.com/3cI9AT4rqbSA3rh99j3wQ0g" class="gate-pay-btn" id="gatePayBtn">Envoyer Mon Concept &middot; 15 € &rarr;</a>
+    <a href="https://buy.stripe.com/fZu6oH8HG4q8aTJgBL3wQ0h" class="gate-pay-btn" id="gatePayBtn">Envoyer Mon Concept &middot; 15 € &rarr;</a>
   </div>
   <p class="gate-refund-note">Paiement sécurisé via Stripe &bull; Crédité sur votre commande dès 5 maillots</p>
   <hr class="gate-divider" />
@@ -760,7 +760,7 @@
   // Prefill Stripe email from gate input
   var gateEmail = document.getElementById('gateEmail');
   var gatePayBtn = document.getElementById('gatePayBtn');
-  var baseStripeUrl = 'https://buy.stripe.com/3cI9AT4rqbSA3rh99j3wQ0g';
+  var baseStripeUrl = 'https://buy.stripe.com/fZu6oH8HG4q8aTJgBL3wQ0h';
 
   if (gateEmail && gatePayBtn) {
     gateEmail.addEventListener('input', function() {
