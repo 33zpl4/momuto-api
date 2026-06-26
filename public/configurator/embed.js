@@ -177,7 +177,7 @@ var I18N={
   perkArmband:"<b>Fascia da capitano in omaggio</b> · ordini di 10+ pezzi",reset:"Reimposta",cta:"Aggiungi al carrello ▸",swTitle:"Scegli un colore",
   perJersey:"maglia",perKit:"kit completo",badge:"PRONTI A GIOCARE · −10%",units:"unità",estimated:"stimato",finalPrice:"prezzo finale al checkout"}
 };
-function buildHTML(t){ return
+function buildHTML(t){ return '' +
  '<div class="wrap">'
 +'  <div class="stage"><canvas id="cv" width="1500" height="1500"></canvas><div id="busy">'+t.busy+'</div>'
 +'    <div class="vtog" id="vtog"><button data-v="front" class="on">'+t.vFront+'</button><button data-v="back">'+t.vBack+'</button></div>'
