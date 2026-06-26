@@ -145,49 +145,82 @@ var CSS = ":host{display:block;--brand:#E2214B;--bg:#0e0f13;--panel:#1a1c22;--li
 +".perk .pi{color:var(--brand);width:15px;text-align:center;flex-shrink:0;}"
 +".perk b{color:var(--txt);font-weight:600;}";
 
-var HTML =
+
+// ---- UI i18n (configurator interface strings; data-lang picks the locale) ----
+var I18N={
+ en:{busy:"Loading…",vFront:"Front",vBack:"Back",hColours:"Colours",lPrimary:"Primary",lSecondary:"Secondary",
+  lTrim:"Trim (collar &amp; cuffs)",hBadges:"Your badges",lCrest:"Team crest",lSponsor:"Sponsor",upload:"Upload ▸",
+  svc:"JPG or PNG both work — plain backgrounds are auto-trimmed here in the preview. Every crest &amp; sponsor is then <b>vectorised &amp; cleaned by our design team</b>, placement refined, and you receive a <b>free proof to approve before printing</b>.",
+  hPerso:"Personalisation · Back",lName:"Name &amp; number",hEstimate:"Order estimate",ktJersey:"Jersey only",ktKit:"Full kit",
+  ksKit:"jersey + shorts",lQuantity:"Quantity",perkFlag:"<b>Free team flag</b> with crest · orders of 10+ pieces",
+  perkArmband:"<b>Free captain armband</b> · orders of 10+ pieces",reset:"Reset",cta:"Add to cart ▸",swTitle:"Pick a colour",
+  perJersey:"jersey",perKit:"full kit",badge:"READY-TO-PLAY · −10%",units:"units",estimated:"estimated",finalPrice:"final price at checkout"},
+ fr:{busy:"Chargement…",vFront:"Avant",vBack:"Dos",hColours:"Couleurs",lPrimary:"Primaire",lSecondary:"Secondaire",
+  lTrim:"Bordures (col &amp; poignets)",hBadges:"Vos badges",lCrest:"Blason de l'équipe",lSponsor:"Sponsor",upload:"Importer ▸",
+  svc:"JPG ou PNG, les deux fonctionnent — les fonds unis sont détourés automatiquement dans l'aperçu. Chaque blason &amp; sponsor est ensuite <b>vectorisé &amp; nettoyé par notre équipe de design</b>, le placement affiné, et vous recevez un <b>bon à tirer gratuit à valider avant impression</b>.",
+  hPerso:"Personnalisation · Dos",lName:"Nom &amp; numéro",hEstimate:"Estimation de commande",ktJersey:"Maillot seul",ktKit:"Kit complet",
+  ksKit:"maillot + short",lQuantity:"Quantité",perkFlag:"<b>Drapeau d'équipe offert</b> avec blason · commandes de 10+ pièces",
+  perkArmband:"<b>Brassard de capitaine offert</b> · commandes de 10+ pièces",reset:"Réinitialiser",cta:"Ajouter au panier ▸",swTitle:"Choisir une couleur",
+  perJersey:"maillot",perKit:"kit complet",badge:"PRÊT À JOUER · −10%",units:"unités",estimated:"estimé",finalPrice:"prix final au paiement"},
+ es:{busy:"Cargando…",vFront:"Frente",vBack:"Espalda",hColours:"Colores",lPrimary:"Primario",lSecondary:"Secundario",
+  lTrim:"Ribete (cuello &amp; puños)",hBadges:"Tus escudos",lCrest:"Escudo del equipo",lSponsor:"Patrocinador",upload:"Subir ▸",
+  svc:"JPG o PNG, ambos funcionan — los fondos lisos se recortan automáticamente en la vista previa. Cada escudo &amp; patrocinador se <b>vectoriza y limpia con nuestro equipo de diseño</b>, se refina la ubicación y recibes una <b>prueba gratuita para aprobar antes de imprimir</b>.",
+  hPerso:"Personalización · Espalda",lName:"Nombre &amp; número",hEstimate:"Estimación del pedido",ktJersey:"Solo camiseta",ktKit:"Kit completo",
+  ksKit:"camiseta + pantalón",lQuantity:"Cantidad",perkFlag:"<b>Bandera del equipo gratis</b> con escudo · pedidos de 10+ piezas",
+  perkArmband:"<b>Brazalete de capitán gratis</b> · pedidos de 10+ piezas",reset:"Restablecer",cta:"Añadir al carrito ▸",swTitle:"Elegir un color",
+  perJersey:"camiseta",perKit:"kit completo",badge:"LISTO PARA JUGAR · −10%",units:"unidades",estimated:"estimado",finalPrice:"precio final al pagar"},
+ it:{busy:"Caricamento…",vFront:"Fronte",vBack:"Retro",hColours:"Colori",lPrimary:"Primario",lSecondary:"Secondario",
+  lTrim:"Bordo (colletto &amp; polsini)",hBadges:"I tuoi stemmi",lCrest:"Stemma della squadra",lSponsor:"Sponsor",upload:"Carica ▸",
+  svc:"JPG o PNG, entrambi vanno bene — gli sfondi uniti vengono ritagliati automaticamente nell'anteprima. Ogni stemma &amp; sponsor viene poi <b>vettorializzato &amp; ripulito dal nostro team di design</b>, il posizionamento perfezionato, e ricevi una <b>bozza gratuita da approvare prima della stampa</b>.",
+  hPerso:"Personalizzazione · Retro",lName:"Nome &amp; numero",hEstimate:"Stima dell'ordine",ktJersey:"Solo maglia",ktKit:"Kit completo",
+  ksKit:"maglia + pantaloncini",lQuantity:"Quantità",perkFlag:"<b>Bandiera della squadra in omaggio</b> con stemma · ordini di 10+ pezzi",
+  perkArmband:"<b>Fascia da capitano in omaggio</b> · ordini di 10+ pezzi",reset:"Reimposta",cta:"Aggiungi al carrello ▸",swTitle:"Scegli un colore",
+  perJersey:"maglia",perKit:"kit completo",badge:"PRONTI A GIOCARE · −10%",units:"unità",estimated:"stimato",finalPrice:"prezzo finale al checkout"}
+};
+function buildHTML(t){ return
  '<div class="wrap">'
-+'  <div class="stage"><canvas id="cv" width="1500" height="1500"></canvas><div id="busy">Loading…</div>'
-+'    <div class="vtog" id="vtog"><button data-v="front" class="on">Front</button><button data-v="back">Back</button></div>'
++'  <div class="stage"><canvas id="cv" width="1500" height="1500"></canvas><div id="busy">'+t.busy+'</div>'
++'    <div class="vtog" id="vtog"><button data-v="front" class="on">'+t.vFront+'</button><button data-v="back">'+t.vBack+'</button></div>'
 +'  </div>'
 +'  <div class="panel">'
-+'    <h2>Colours</h2>'
-+'    <div class="zone"><label>Primary</label><button class="sw" id="primarySw" data-k="primary"></button></div>'
-+'    <div class="zone"><label>Secondary</label><button class="sw" id="secondarySw" data-k="secondary"></button></div>'
-+'    <div class="zone"><label>Trim (collar &amp; cuffs)</label><button class="sw" id="trimSw" data-k="trim"></button></div>'
-+'    <h2>Your badges</h2>'
++'    <h2>'+t.hColours+'</h2>'
++'    <div class="zone"><label>'+t.lPrimary+'</label><button class="sw" id="primarySw" data-k="primary"></button></div>'
++'    <div class="zone"><label>'+t.lSecondary+'</label><button class="sw" id="secondarySw" data-k="secondary"></button></div>'
++'    <div class="zone"><label>'+t.lTrim+'</label><button class="sw" id="trimSw" data-k="trim"></button></div>'
++'    <h2>'+t.hBadges+'</h2>'
 +'    <div class="uploads">'
-+'      <label class="up">Team crest <span class="pill" id="crestName">Upload ▸</span><input type="file" id="crest" accept="image/*" hidden></label>'
-+'      <label class="up">Sponsor <span class="pill" id="sponsorName">Upload ▸</span><input type="file" id="sponsor" accept="image/*" hidden></label>'
++'      <label class="up">'+t.lCrest+' <span class="pill" id="crestName">'+t.upload+'</span><input type="file" id="crest" accept="image/*" hidden></label>'
++'      <label class="up">'+t.lSponsor+' <span class="pill" id="sponsorName">'+t.upload+'</span><input type="file" id="sponsor" accept="image/*" hidden></label>'
 +'    </div>'
-+'    <p class="svc">JPG or PNG both work — plain backgrounds are auto-trimmed here in the preview. Every crest &amp; sponsor is then <b>vectorised &amp; cleaned by our design team</b>, placement refined, and you receive a <b>free proof to approve before printing</b>.</p>'
++'    <p class="svc">'+t.svc+'</p>'
 +'    <div id="perso" style="display:none">'
-+'      <h2>Personalisation · Back</h2>'
++'      <h2>'+t.hPerso+'</h2>'
 +'      <div class="fonts" id="fonts"></div>'
-+'      <div class="zone"><label>Name &amp; number</label><button class="sw" id="nameColorSw" data-k="nameColor"></button></div>'
++'      <div class="zone"><label>'+t.lName+'</label><button class="sw" id="nameColorSw" data-k="nameColor"></button></div>'
 +'    </div>'
 +'    <div class="presets" id="presets"></div>'
-+'    <h2>Order estimate</h2>'
++'    <h2>'+t.hEstimate+'</h2>'
 +'    <div class="kit" id="kit">'
-+'      <button data-kit="jersey" class="on"><span class="kt">Jersey only</span><span class="kp" id="kpJersey"></span></button>'
-+'      <button data-kit="kit"><span class="kt">Full kit</span><span class="kp" id="kpKit"></span><span class="ks">jersey + shorts</span></button>'
++'      <button data-kit="jersey" class="on"><span class="kt">'+t.ktJersey+'</span><span class="kp" id="kpJersey"></span></button>'
++'      <button data-kit="kit"><span class="kt">'+t.ktKit+'</span><span class="kp" id="kpKit"></span><span class="ks">'+t.ksKit+'</span></button>'
 +'    </div>'
-+'    <div class="qtyrow"><label>Quantity</label><div class="qstep"><button id="qminus" type="button">−</button><input id="qty" type="number" min="1" value="10"><button id="qplus" type="button">+</button></div></div>'
++'    <div class="qtyrow"><label>'+t.lQuantity+'</label><div class="qstep"><button id="qminus" type="button">−</button><input id="qty" type="number" min="1" value="10"><button id="qplus" type="button">+</button></div></div>'
 +'    <div class="priceblk" id="est"></div>'
 +'    <div class="perks" id="promo" style="display:none">'
-+'      <div class="perk"><span class="pi">&#9873;</span><span><b>Free team flag</b> with crest · orders of 10+ pieces</span></div>'
-+'      <div class="perk"><span class="pi">&#9733;</span><span><b>Free captain armband</b> · orders of 10+ pieces</span></div>'
++'      <div class="perk"><span class="pi">&#9873;</span><span>'+t.perkFlag+'</span></div>'
++'      <div class="perk"><span class="pi">&#9733;</span><span>'+t.perkArmband+'</span></div>'
 +'    </div>'
-+'    <div class="row"><button class="reset" id="reset">Reset</button><button class="cta" id="order">Add to cart ▸</button></div>'
++'    <div class="row"><button class="reset" id="reset">'+t.reset+'</button><button class="cta" id="order">'+t.cta+'</button></div>'
 +'  </div>'
 +'</div>'
 +'<div class="sw-modal" id="swModal"><div class="sw-card">'
-+'  <div class="sw-head"><span id="swTitle">Pick a colour</span><button id="swClose">✕</button></div>'
++'  <div class="sw-head"><span id="swTitle">'+t.swTitle+'</span><button id="swClose">✕</button></div>'
 +'  <div class="sw-grid" id="swGrid"></div>'
-+'</div></div>';
++'</div></div>'; }
 
 // ---- per-instance engine ----
 function run(root, opts){
+  var T=opts.t||I18N.en;
   var A=opts.assets;
   var assetSrc=function(name){ return (ASSET_DATA && ASSET_DATA[name]) ? ASSET_DATA[name] : (A+name); };
   var cv=root.getElementById("cv"), ctx=cv.getContext("2d",{willReadFrequently:true});
@@ -542,10 +575,10 @@ function run(root, opts){
       root.getElementById("kpJersey").innerHTML="<s>"+euro(tierBase("jersey",q))+"</s>"+euro(unitPrice("jersey",q));
       root.getElementById("kpKit").innerHTML="<s>"+euro(tierBase("kit",q))+"</s>"+euro(unitPrice("kit",q));
       // live price block for the selected kit
-      var unit=unitPrice(state.kit,q), orig=tierBase(state.kit,q), total=unit*q, label=state.kit==="kit"?"full kit":"jersey";
+      var unit=unitPrice(state.kit,q), orig=tierBase(state.kit,q), total=unit*q, label=state.kit==="kit"?T.perKit:T.perJersey;
       root.getElementById("est").innerHTML=
-        '<div class="pr-row"><div class="pr-main"><span class="pr-cur">'+euro(unit)+'</span><span class="pr-orig">'+euro(orig)+'</span><span class="pr-per">/ '+label+'</span></div><span class="pr-badge">READY-TO-PLAY · −10%</span></div>'
-        +'<div class="pr-detail">'+q+' units · estimated <b>'+euro(total)+'</b> · final price at checkout</div>';
+        '<div class="pr-row"><div class="pr-main"><span class="pr-cur">'+euro(unit)+'</span><span class="pr-orig">'+euro(orig)+'</span><span class="pr-per">/ '+label+'</span></div><span class="pr-badge">'+T.badge+'</span></div>'
+        +'<div class="pr-detail">'+q+' '+T.units+' · '+T.estimated+' <b>'+euro(total)+'</b> · '+T.finalPrice+'</div>';
       root.getElementById("promo").style.display=(state.kit==="kit")?"block":"none";
     }
     root.querySelectorAll("#kit button").forEach(function(btn){
@@ -609,8 +642,9 @@ function mount(host){
     primary:host.dataset.primary||null, secondary:host.dataset.secondary||null,
     trim:host.dataset.trim||null, nameColor:host.dataset.namecolor||null,
     assets: host.dataset.assets ? host.dataset.assets.replace(/\/?$/,"/") : DEFAULT_ASSETS };
+  opts.t=I18N[opts.lang]||I18N.en;
   var root=host.attachShadow({mode:"open"});
-  root.innerHTML="<style>"+CSS+"</style>"+HTML;
+  root.innerHTML="<style>"+CSS+"</style>"+buildHTML(opts.t);
   host.__rtp=run(root,opts);
 }
 function boot(){ document.querySelectorAll("#momuto-rtp,[data-momuto-rtp]").forEach(mount); }
