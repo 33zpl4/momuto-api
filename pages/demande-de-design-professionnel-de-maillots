@@ -226,6 +226,7 @@
   white-space: nowrap;
 }
 .gate-pay-btn:hover { background: #e04038; }
+.gate-pay-btn.is-disabled { opacity: 0.45; cursor: not-allowed; }
 .gate-refund-note {
   font-family: 'Outfit', sans-serif;
   font-size: 0.75rem;
@@ -757,19 +758,41 @@
     }, 300);
   }
 
-  // Prefill Stripe email from gate input
+  // Gate: require a valid email, capture it as a lead (best-effort), then go to Stripe
   var gateEmail = document.getElementById('gateEmail');
   var gatePayBtn = document.getElementById('gatePayBtn');
   var baseStripeUrl = 'https://buy.stripe.com/fZu6oH8HG4q8aTJgBL3wQ0h';
 
   if (gateEmail && gatePayBtn) {
-    gateEmail.addEventListener('input', function() {
-      var email = this.value.trim();
-      if (email) {
-        gatePayBtn.href = baseStripeUrl + '?prefilled_email=' + encodeURIComponent(email);
-      } else {
-        gatePayBtn.href = baseStripeUrl;
-      }
+    var validEmail = function (v) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((v || '').trim()); };
+    var setReady = function (on) {
+      gatePayBtn.classList.toggle('is-disabled', !on);
+      gatePayBtn.setAttribute('aria-disabled', on ? 'false' : 'true');
+      gatePayBtn.href = on
+        ? baseStripeUrl + '?prefilled_email=' + encodeURIComponent(gateEmail.value.trim())
+        : baseStripeUrl;
+    };
+    setReady(false);
+    gateEmail.addEventListener('input', function () { setReady(validEmail(this.value)); });
+
+    gatePayBtn.addEventListener('click', function (e) {
+      var email = gateEmail.value.trim();
+      e.preventDefault();
+      if (!validEmail(email)) { gateEmail.focus(); return; }
+      var navigated = false;
+      var go = function () {
+        if (navigated) return; navigated = true;
+        window.location.href = baseStripeUrl + '?prefilled_email=' + encodeURIComponent(email);
+      };
+      var locale = (location.hostname.match(/^(es|fr|it)\./) || [])[1] || 'en';
+      try {
+        fetch('https://momuto-api.vercel.app/api/lead', {
+          method: 'POST', keepalive: true,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, locale: locale, source: window.location.href })
+        }).then(go, go);
+      } catch (_) { go(); }
+      setTimeout(go, 1200); // safety: never trap the user
     });
   }
 
