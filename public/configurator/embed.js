@@ -222,7 +222,9 @@ function buildHTML(t){ return '' +
 +'</div></div>'; }
 
 // ---- per-instance engine ----
-var LOGO_DEFAULTS={"the-fracture":"#000000"};
+var LOGO_DEFAULTS={"the-fracture":"#000000","the-legacy":"#ffffff"};
+// high-frequency patterns: anti-alias the hard region edges by softening the recolor base
+var SMOOTH_TEMPLATES={"the-mosaic":1,"the-prism":1};
 function run(root, opts){
   var T=opts.t||I18N.en;
   var A=opts.assets;
@@ -372,7 +374,9 @@ function run(root, opts){
       var k=ratio[i];
       o[i*4]=Math.min(255,col[0]*k); o[i*4+1]=Math.min(255,col[1]*k); o[i*4+2]=Math.min(255,col[2]*k); o[i*4+3]=srcA[i];
     }
-    ctx.putImageData(out,0,0);
+    if(SMOOTH_TEMPLATES[opts.template]){ var _b=offscreen(W,H); _b.getContext("2d").putImageData(out,0,0);
+      ctx.clearRect(0,0,W,H); ctx.save(); ctx.filter="blur(0.9px)"; ctx.drawImage(_b,0,0); ctx.restore(); }
+    else { ctx.putImageData(out,0,0); }
     if(V.kind==="front"){ drawLogo(state.crest,V.slots.crest); drawLogo(state.sponsor,V.slots.sponsor); }
     else drawNameNumber(V);
   }
@@ -503,7 +507,9 @@ function run(root, opts){
       var oi=i+dyW; if(oi<0||oi>=n) continue;
       o[oi*4]=Math.min(255,r*ratio[i*3]); o[oi*4+1]=Math.min(255,g*ratio[i*3+1]); o[oi*4+2]=Math.min(255,b*ratio[i*3+2]); o[oi*4+3]=srcA[i];
     }
-    ctx.putImageData(out,0,0);
+    if(SMOOTH_TEMPLATES[opts.template]){ var _b=offscreen(W,H); _b.getContext("2d").putImageData(out,0,0);
+      ctx.clearRect(0,0,W,H); ctx.save(); ctx.filter="blur(0.9px)"; ctx.drawImage(_b,0,0); ctx.restore(); }
+    else { ctx.putImageData(out,0,0); }
     ctx.save(); ctx.translate(0, V.dy||0);
     if(V.kind==="front"){ drawLogo(state.crest,V.slots.crest); drawLogo(state.sponsor,V.slots.sponsor); }
     else drawNameNumber(V);
