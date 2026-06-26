@@ -26,6 +26,14 @@ on:
           - sitemap.xml
           - blog.css
           - rtp-content.js
+          - embed.js
+          - assets-apex.js
+          - assets-kinetic.js
+          - assets-khala.js
+          - assets-legacy.js
+          - assets-mosaic.js
+          - assets-prism.js
+          - assets-fracture.js
   push:
     paths:
       - 'static/**'
