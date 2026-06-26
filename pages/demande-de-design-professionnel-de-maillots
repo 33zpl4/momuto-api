@@ -417,8 +417,10 @@
   .transform-arrow-col {
     height: 32px;
     width: 100%;
-    transform: rotate(90deg);
+    transform: none;
+    background: transparent;
   }
+  .transform-arrow-col i { transform: rotate(90deg); }
   .transform-meta {
     grid-template-columns: 1fr;
   }
