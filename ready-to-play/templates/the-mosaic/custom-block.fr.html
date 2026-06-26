@@ -44,9 +44,10 @@
      data-product-kit="16911" data-oem-kit="10205000"
      data-primary="#001F5B" data-secondary="#FFFFFF" data-trim="#C4A46B"></div>
 
-<script src="https://www.momuto.com/assets-mosaic.js" defer></script>
-<script src="https://www.momuto.com/embed.js?v=16" defer></script>
-
-<!-- Shared RTP content: Highlights / Trust / How-it-works / FAQ (data-lang picks locale) -->
 <div id="rtp-content" data-lang="fr"></div>
-<script src="https://www.momuto.com/rtp-content.js?v=1" defer></script>
+
+<!-- One stable loader: derives the asset bundle from data-template and loads the
+     configurator (assets + embed.js) and shared content (rtp-content.js) with an
+     automatic runtime cache-bust. Update embed.js / assets / rtp-content once via
+     Deploy Static Files and it propagates — no ?v= bump or re-paste. -->
+<script src="https://www.momuto.com/rtp-loader.js" defer></script>

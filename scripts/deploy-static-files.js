@@ -49,6 +49,9 @@ function getFilePath(domain, filename) {
   // Lives under public/configurator/ so an ordinary push to static/** never triggers a full
   // static deploy — deploy it surgically with the workflow's file=rtp-content.js input.
   if (filename === 'rtp-content.js') return path.join('public', 'configurator', 'rtp-content.js');
+  // Stable loader the product-page blocks reference — derives assets from data-template
+  // and cache-busts embed/content at runtime so engine updates need no ?v= bump / re-paste.
+  if (filename === 'rtp-loader.js') return path.join('public', 'configurator', 'rtp-loader.js');
   // Configurator engine + per-template asset bundles. Locale-independent (same file
   // every store; embed.js reads data-lang). Self-host per store so updates propagate
   // via this workflow. Deploy surgically with the file=embed.js / file=assets-<slug>.js input.

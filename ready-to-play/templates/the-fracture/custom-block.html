@@ -44,5 +44,10 @@
      data-product-kit="16759" data-oem-kit="10299141"
      data-primary="#000000" data-secondary="#F5F1E8" data-trim="#808080"></div>
 
-<script src="https://www.momuto.com/assets-fracture.js" defer></script>
-<script src="https://www.momuto.com/embed.js?v=15" defer></script>
+<div id="rtp-content" data-lang="en"></div>
+
+<!-- One stable loader: derives the asset bundle from data-template and loads the
+     configurator (assets + embed.js) and shared content (rtp-content.js) with an
+     automatic runtime cache-bust. Update embed.js / assets / rtp-content once via
+     Deploy Static Files and it propagates — no ?v= bump or re-paste. -->
+<script src="https://www.momuto.com/rtp-loader.js" defer></script>

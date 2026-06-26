@@ -26,6 +26,7 @@ on:
           - sitemap.xml
           - blog.css
           - rtp-content.js
+          - rtp-loader.js
           - embed.js
           - assets-apex.js
           - assets-kinetic.js

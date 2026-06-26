@@ -314,12 +314,19 @@ custom block — EN, FR, ES, IT — loads `https://www.momuto.com/embed.js` and
 `https://www.momuto.com/assets-<slug>.js`. The bundles are locale-independent
 (`embed.js` reads `data-lang`), so one copy serves all four stores cross-origin.
 
-**To update the engine or an asset (one action, propagates everywhere):**
-1. Edit `public/configurator/embed.js` (or `assets-<slug>.js`).
-2. Run the **Deploy Static Files** workflow with `domain=en, file=embed.js`
-   (or `file=assets-<slug>.js`). `www` = the EN store, so this updates the
-   canonical copy that every store's blocks load.
-3. Bump `?v=` in the blocks if you need to bust the CDN cache immediately.
+**Blocks reference one stable loader — no `?v=` / re-paste trap.** Each product-page
+block ends with a single `<script src="https://www.momuto.com/rtp-loader.js" defer>`.
+`rtp-loader.js` runs fresh on every page load (even when the file is cached), derives
+the asset bundle from `data-template`, and loads `assets-<slug>.js` (daily cache key)
++ `embed.js` (hourly) + `rtp-content.js` (hourly) with a runtime cache-bust.
+
+**To update the engine or an asset (one action, propagates on its own):**
+1. Edit `public/configurator/embed.js` (or `assets-<slug>.js` / `rtp-content.js`).
+2. Run **Deploy Static Files** with `domain=en, file=embed.js` (etc.). `www` = the EN
+   store; every store's blocks load from there.
+3. That's it — `embed.js`/`rtp-content.js` refresh within the hour, assets within the
+   day, with **no `?v=` bump and no re-pasting blocks**. (`rtp-loader.js` itself rarely
+   changes; if it does, deploy it the same way.)
 
 **Per-store self-hosting (optional escape hatch).** `deploy-static-files.js` can
 also push `embed.js` / `assets-*.js` to `es`/`fr`/`it` (the DiyFile must be created
