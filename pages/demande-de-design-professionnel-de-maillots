@@ -317,7 +317,7 @@
   object-fit: contain;
   box-sizing: border-box;
   padding: 16px;
-  background: radial-gradient(ellipse at 50% 40%, #1c1c20 0%, #121216 58%, #0a0a0b 100%);
+  background: #0d0d0f;
   filter: brightness(0.97);
   transition: filter 0.35s, transform 0.5s;
 }
@@ -410,6 +410,7 @@
   color: #3f3f46;
 }
 @media (max-width: 640px) {
+  .transform-side img { aspect-ratio: auto; padding: 6px; }
   .transform-item {
     grid-template-columns: 1fr;
   }
@@ -539,7 +540,7 @@
 <div class="transform-meta">
 <div>
 <p class="transform-input-type">Visuel IA + Brief</p>
-<p class="transform-desc"><strong>Rayures écailles de serpent vectorisées, blason panthère reconstruit.</strong> Dégradé retravaillé pour la sublimation, griffures redessinées, sponsor et numéro placés. Fichier de production livré.</p>
+<p class="transform-desc"><strong>Rayures écailles de serpent vectorisées, blason panthère reconstruit.</strong> Dégradé retravaillé pour la sublimation, griffures redessinées, sponsor et numéro placés. Validé avec vous, puis nous le produisons.</p>
 </div>
 </div>
 </div>
@@ -557,7 +558,7 @@
 <div class="transform-meta">
 <div>
 <p class="transform-input-type">Croquis + Brief</p>
-<p class="transform-desc"><strong>Flammes dessinées à la main transformées en graphismes vectoriels nets.</strong> Fines rayures alignées, proportions ajustées au tissu, blason et numéro construits. Prêt pour la sublimation.</p>
+<p class="transform-desc"><strong>Flammes dessinées à la main transformées en graphismes vectoriels nets.</strong> Fines rayures alignées, proportions ajustées au tissu, blason et numéro construits. Validé avec vous, puis nous le produisons.</p>
 </div>
 </div>
 </div>
@@ -575,7 +576,7 @@
 <div class="transform-meta">
 <div>
 <p class="transform-input-type">Planche Concept + Brief</p>
-<p class="transform-desc"><strong>Motif ange divisé interprété, blason reconstruit.</strong> Palette noir / rouge / or respectée, typographie dorée posée, disposition des sponsors confirmée. Équipement complet livré.</p>
+<p class="transform-desc"><strong>Motif ange divisé interprété, blason reconstruit.</strong> Palette noir / rouge / or respectée, typographie dorée posée, disposition des sponsors confirmée. Validé avec vous, puis nous le produisons.</p>
 </div>
 </div>
 </div>
@@ -593,7 +594,7 @@
 <div class="transform-meta">
 <div>
 <p class="transform-input-type">Visuel IA + Sponsors</p>
-<p class="transform-desc"><strong>Graphisme dragon vectorisé, équilibre des tons noir-sur-noir ajusté.</strong> Blason nettoyé, sponsors placés, nom et numéro posés. Fichier de production livré.</p>
+<p class="transform-desc"><strong>Graphisme dragon vectorisé, équilibre des tons noir-sur-noir ajusté.</strong> Blason nettoyé, sponsors placés, nom et numéro posés. Validé avec vous, puis nous le produisons.</p>
 </div>
 </div>
 </div>

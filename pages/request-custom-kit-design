@@ -317,7 +317,7 @@
   object-fit: contain;
   box-sizing: border-box;
   padding: 16px;
-  background: radial-gradient(ellipse at 50% 40%, #1c1c20 0%, #121216 58%, #0a0a0b 100%);
+  background: #0d0d0f;
   filter: brightness(0.97);
   transition: filter 0.35s, transform 0.5s;
 }
@@ -410,6 +410,7 @@
   color: #3f3f46;
 }
 @media (max-width: 640px) {
+  .transform-side img { aspect-ratio: auto; padding: 6px; }
   .transform-item {
     grid-template-columns: 1fr;
   }
@@ -539,7 +540,7 @@
 <div class="transform-meta">
 <div>
 <p class="transform-input-type">AI Render + Club Brief</p>
-<p class="transform-desc"><strong>Snake-scale stripes vectorized, panther crest rebuilt.</strong> Gradient reworked for dye-sublimation, claw graphic redrawn, sponsor and number block set. Production file delivered.</p>
+<p class="transform-desc"><strong>Snake-scale stripes vectorized, panther crest rebuilt.</strong> Gradient reworked for dye-sublimation, claw graphic redrawn, sponsor and number block set. Validated with you, then we produce it.</p>
 </div>
 </div>
 </div>
@@ -557,7 +558,7 @@
 <div class="transform-meta">
 <div>
 <p class="transform-input-type">Hand Sketch + Brief</p>
-<p class="transform-desc"><strong>Hand-drawn flames illustrated into clean vector graphics.</strong> Pinstripes set true, proportions refined for fabric, crest and number block built. Ready for sublimation.</p>
+<p class="transform-desc"><strong>Hand-drawn flames illustrated into clean vector graphics.</strong> Pinstripes set true, proportions refined for fabric, crest and number block built. Validated with you, then we produce it.</p>
 </div>
 </div>
 </div>
@@ -575,7 +576,7 @@
 <div class="transform-meta">
 <div>
 <p class="transform-input-type">Concept Board + Brief</p>
-<p class="transform-desc"><strong>Split angel motif interpreted, crest rebuilt.</strong> Black / red / gold palette matched, gold typography set, sponsor layout confirmed. Complete kit delivered.</p>
+<p class="transform-desc"><strong>Split angel motif interpreted, crest rebuilt.</strong> Black / red / gold palette matched, gold typography set, sponsor layout confirmed. Validated with you, then we produce it.</p>
 </div>
 </div>
 </div>
@@ -593,7 +594,7 @@
 <div class="transform-meta">
 <div>
 <p class="transform-input-type">AI Render + Sponsors</p>
-<p class="transform-desc"><strong>Dragon graphic vectorized, black-on-black tonal balance dialed in.</strong> Crest cleaned, sponsor blocks placed, name and number set. Production file delivered.</p>
+<p class="transform-desc"><strong>Dragon graphic vectorized, black-on-black tonal balance dialed in.</strong> Crest cleaned, sponsor blocks placed, name and number set. Validated with you, then we produce it.</p>
 </div>
 </div>
 </div>
