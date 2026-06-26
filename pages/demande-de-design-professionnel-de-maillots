@@ -1,82 +1,19 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Maillot de Football Personnalisé MOMUTO",
-  "description": "Maillot de football entièrement personnalisable avec impression par sublimation complète. Tissu polyester-élasthanne haute performance en standard. Design professionnel gratuit en 1-2 jours. Sans minimum de commande. Badges silicone 3D en option pour les grandes commandes. Livraison en 25-30 jours dans le monde entier.",
+  "@type": "Service",
+  "name": "MOMUTO Design de Maillot Personnalisé",
+  "description": "Envoyez-nous votre concept — un visuel IA, un croquis ou un brief — et un designer senior le transforme en maillot de foot personnalisé prêt pour la production. Première maquette en 24-48h, révisions illimitées. 15 € pour démarrer, intégralement crédités sur les commandes de 5 maillots ou plus.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
-  "category": "Maillots de Football Personnalisés",
-  "material": "Tissu polyester-élasthanne haute performance (standard sur toutes les tenues)",
-  "color": "Entièrement personnalisable",
   "offers": {
-    "@type": "AggregateOffer",
+    "@type": "Offer",
+    "price": "15.00",
     "priceCurrency": "EUR",
-    "lowPrice": "20.90",
-    "highPrice": "38.90",
-    "offerCount": "1",
+    "description": "Frais de design pour démarrer — intégralement crédités sur les commandes de 5+ maillots",
     "availability": "https://schema.org/InStock",
-    "priceValidUntil": "2026-12-31",
-    "seller": { "@type": "Organization", "name": "MOMUTO" },
-    "shippingDetails": {
-      "@type": "OfferShippingDetails",
-      "deliveryTime": {
-        "@type": "ShippingDeliveryTime",
-        "handlingTime": { "@type": "QuantitativeValue", "minValue": 7, "maxValue": 12, "unitCode": "DAY" },
-        "transitTime": { "@type": "QuantitativeValue", "minValue": 10, "maxValue": 15, "unitCode": "DAY" }
-      },
-      "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "EUR" }
-    }
+    "priceValidUntil": "2026-12-31"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.4",
-    "reviewCount": "17",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
-  "additionalProperty": [
-    { "@type": "PropertyValue", "name": "Minimum de Commande", "value": "Sans minimum — commandez 1 ou 100+ maillots" },
-    { "@type": "PropertyValue", "name": "Méthode d'Impression", "value": "Sublimation complète — garantie à vie contre le décollement, craquelures ou décoloration" },
-    { "@type": "PropertyValue", "name": "Service de Design", "value": "Maquette de design professionnel gratuite en 1-2 jours, révisions gratuites incluses" },
-    { "@type": "PropertyValue", "name": "Configurateur 3D", "value": "Configurateur de maillots 3D en temps réel avec plus de 30 templates professionnels" },
-    { "@type": "PropertyValue", "name": "Tissu", "value": "Mélange polyester-élasthanne en standard — les concurrents incluent l'élasthanne uniquement dans les gammes premium" },
-    { "@type": "PropertyValue", "name": "Badges Silicone 3D", "value": "Badges silicone 3D premium disponibles pour les grandes commandes" },
-    { "@type": "PropertyValue", "name": "Livraison", "value": "7-12 jours de production + 10-15 jours d'expédition = 25-30 jours au total dans le monde entier" }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "Comment Commander des Maillots de Football Personnalisés chez MOMUTO",
-  "description": "Obtenez des maillots de football entièrement personnalisés et de qualité professionnelle en 3 étapes : concevez avec le configurateur 3D ou demandez une maquette professionnelle gratuite, approuvez votre design et recevez vos maillots en 25-30 jours dans le monde entier.",
-  "totalTime": "P25D",
-  "estimatedCost": {
-    "@type": "MonetaryAmount",
-    "currency": "EUR",
-    "value": "À partir de 20,90€ par maillot (10+ unités) ou 38,90€ pour un maillot individuel"
-  },
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "name": "Concevez Votre Maillot",
-      "text": "Utilisez le configurateur 3D de MOMUTO avec plus de 30 templates professionnels pour concevoir instantanément, ou soumettez votre brief (blason, couleurs, références) via le site web, WhatsApp ou email pour recevoir une maquette personnalisée gratuite en 1-2 jours."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "name": "Révisez et Approuvez",
-      "text": "Examinez la maquette de votre design et demandez des révisions — toutes gratuites. Confirmez votre commande avec votre répartition de tailles. Sans minimum de commande. Option badges silicone 3D disponible pour les commandes plus importantes."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "name": "Recevez Vos Maillots",
-      "text": "Vos maillots sont fabriqués en 7-12 jours par impression par sublimation complète sur tissu polyester-élasthanne, puis expédiés dans le monde entier avec un délai de transit de 10-15 jours. Total : 25-30 jours. Livraison gratuite pour les commandes supérieures à 50€."
-    }
-  ]
+  "provider": { "@type": "Organization", "name": "MOMUTO", "url": "https://www.momuto.com" }
 }
 </script>
 <script type="application/ld+json">
@@ -86,331 +23,764 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Comment fonctionne le service de design gratuit de maillots de football de MOMUTO ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Soumettez votre brief via le formulaire — nom d'équipe, blason, couleurs et références. Nos designers créent une maquette entièrement personnalisée en 24–48 heures, gratuitement. Toutes les révisions sont également gratuites jusqu'à votre satisfaction. Sans engagement jusqu'à la confirmation de commande." }
+      "name": "Pourquoi 15 € pour démarrer ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un designer senior consacre de vraies heures à votre concept — recherche, illustration, vectorisation et révisions illimitées. Les 15 € permettent au studio de se concentrer sur les équipes qui construisent quelque chose de réel, et ils sont intégralement crédités sur votre commande dès 5 maillots — donc pour toute vraie commande d’équipe, cela ne coûte rien."
+      }
     },
     {
       "@type": "Question",
-      "name": "Y a-t-il un minimum de commande pour les maillots de football personnalisés MOMUTO ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Non. MOMUTO n'a aucun minimum de commande. Vous pouvez commander un seul maillot ou une équipe complète de 50+. Les prix commencent à 20,90€ par maillot pour les commandes importantes et 38,90€ pour un maillot individuel." }
+      "name": "Quand les 15 € sont-ils crédités ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dès que votre commande atteint 5 maillots ou plus, ils sont crédités sur le total de votre commande au paiement."
+      }
     },
     {
       "@type": "Question",
-      "name": "Combien de temps faut-il pour recevoir des maillots de football personnalisés MOMUTO ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "La production prend 7–12 jours. L'expédition prend 10–15 jours dans le monde entier. Le délai de livraison total est généralement de 20–25 jours à compter de la confirmation de commande. Livraison gratuite pour les commandes supérieures à 50€." }
+      "name": "Qu’est-ce qui est inclus ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un designer senior sur votre concept, une première maquette en 24–48h, des révisions illimitées, le travail d’illustration et de vectorisation (concepts IA, croquis, maillots de référence, graphismes sur-mesure), et des fichiers prêts pour la production en impression sublimation."
+      }
     },
     {
       "@type": "Question",
-      "name": "Puis-je soumettre mon propre design ou un concept de maillot généré par IA à MOMUTO ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Oui. Si vous avez créé un concept de maillot avec des outils comme ChatGPT, Midjourney, Gemini ou tout autre logiciel de design, vous pouvez le télécharger via le formulaire de design personnalisé. Pour les commandes de 10+ maillots, MOMUTO adapte votre design pour la production sans frais supplémentaires. Un acompte de design de 15€ s'applique — entièrement remboursé pour les commandes de 5 maillots ou plus. Cela nous permet de nous concentrer sur les équipes vraiment décidées et de consacrer à chaque design le temps qu'il mérite." }
+      "name": "Puis-je envoyer un concept généré par IA (ChatGPT, Midjourney) ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui — c’est exactement à cela que ce service est destiné. Importez votre visuel IA et notre designer l’adaptera en maillot prêt pour la production tout en préservant votre vision. Cela inclut la vectorisation des formes, la reproduction des dégradés et textures, et l’ajustement aux contraintes réelles du tissu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Et si je n’ai qu’un brief, sans concept ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aucun problème. Décrivez vos couleurs, votre direction de style et toute référence (maillots existants, palettes, ambiance). Plus il y a de détails, mieux c’est, mais nos designers travaillent à partir de briefs tous les jours. Vous recevrez une maquette en 24–48h dans tous les cas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vous préférez le faire vous-même ? Quelles sont les options gratuites ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Deux options gratuites : le Configurateur 3D vous permet de créer en temps réel avec plus de 30 modèles et un aperçu instantané. La collection Ready-to-Play propose des maillots professionnels pré-conçus à -10 % par rapport au sur-mesure, avec un aperçu personnalisé en direct."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Y a-t-il une commande minimum ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Vous pouvez commander à partir d’un seul maillot. Les prix démarrent à 38,90 € pour un maillot et descendent à 20,90 € par maillot dès 10 unités. Les 15 € sont crédités sur votre commande dès 5 maillots."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "En combien de temps vais-je recevoir les maillots ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "25–30 jours après confirmation de commande : 7–15 jours de production + 10–15 jours de livraison mondiale. Livraison offerte dès 50 € d’achat."
+      }
     }
   ]
 }
 </script>
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <!-- inject:design-request.css -->
+<style>
+/* ── PAID CONFIRMATION BANNER ── */
+.paid-banner {
+  display: none;
+  background: #14532d;
+  border-bottom: 1px solid #166534;
+  padding: 18px 40px;
+  text-align: center;
+}
+.paid-banner-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.paid-banner-icon { color: #4ade80; font-size: 1.1rem; }
+.paid-banner p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #bbf7d0;
+  margin: 0;
+}
+.paid-banner p strong { color: #fff; font-weight: 700; }
+
+/* ── PAYMENT GATE SECTION ── */
+.gate-section {
+  padding: 6rem 20px;
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.gate-container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.gate-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c8352e;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.gate-box {
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-top: 3px solid #c8352e;
+  padding: 48px;
+}
+.gate-box h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #f5f5f5;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.gate-price {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: #a1a1aa;
+  margin-bottom: 32px;
+}
+.gate-price strong { color: #f5f5f5; font-weight: 600; }
+.gate-features {
+  list-style: none;
+  margin: 0 0 36px 0;
+  padding: 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 28px;
+}
+.gate-features li {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #a1a1aa;
+  padding: 9px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.gate-features li:last-child { border-bottom: none; }
+.gate-features li i { color: #4ade80; font-size: 0.75rem; flex-shrink: 0; }
+.gate-features li strong { color: #f5f5f5; font-weight: 600; }
+.gate-email-row {
+  display: flex;
+  gap: 0;
+  margin-bottom: 12px;
+}
+.gate-email-input {
+  flex: 1;
+  padding: 16px 18px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-right: none;
+  color: #f5f5f5;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.gate-email-input::placeholder {
+  color: #71717a;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.gate-email-input:focus { border-color: rgba(255,255,255,0.3); }
+.gate-pay-btn {
+  display: inline-block;
+  background: #c8352e;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 16px 28px;
+  text-decoration: none;
+  border: 1px solid #c8352e;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.gate-pay-btn:hover { background: #e04038; }
+.gate-refund-note {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: #71717a;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.gate-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin: 32px 0;
+}
+.gate-alt {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: #71717a;
+  text-align: center;
+}
+.gate-alt a {
+  color: #a1a1aa;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #c8352e;
+}
+.gate-alt a:hover { color: #f5f5f5; }
+
+/* ── TRANSFORMATION SECTION ── */
+.transform-section {
+  padding: 6rem 20px;
+  background: #0d0d0d;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.transform-header {
+  max-width: 700px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+.transform-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c8352e;
+  margin-bottom: 14px;
+}
+.transform-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #f5f5f5;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.transform-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: #71717a;
+  line-height: 1.6;
+}
+.transform-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.transform-item {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.transform-side {
+  position: relative;
+  overflow: hidden;
+}
+.transform-side img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/10;
+  object-fit: contain;
+  box-sizing: border-box;
+  padding: 16px;
+  background: radial-gradient(ellipse at 50% 40%, #1c1c20 0%, #121216 58%, #0a0a0b 100%);
+  filter: brightness(0.97);
+  transition: filter 0.35s, transform 0.5s;
+}
+.transform-item:hover .transform-side img { filter: brightness(1.03); transform: scale(1.015); }
+.transform-side-label {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #fff;
+  background: rgba(0,0,0,0.75);
+  padding: 5px 10px;
+}
+.transform-side-label.label-after {
+  background: #c8352e;
+}
+.transform-arrow-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d0d0d;
+  color: #c8352e;
+  font-size: 0.9rem;
+}
+.transform-meta {
+  padding: 20px 28px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+.transform-input-type {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #71717a;
+  margin-bottom: 6px;
+}
+.transform-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: #a1a1aa;
+  line-height: 1.55;
+}
+.transform-desc strong { color: #f5f5f5; font-weight: 600; }
+.transform-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #f5f5f5;
+  letter-spacing: 0.04em;
+  text-align: right;
+  white-space: nowrap;
+}
+.transform-time-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #71717a;
+  text-align: right;
+}
+.transform-placeholder {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px dashed rgba(255,255,255,0.07);
+}
+.transform-placeholder span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #3f3f46;
+}
+@media (max-width: 640px) {
+  .transform-item {
+    grid-template-columns: 1fr;
+  }
+  .transform-arrow-col {
+    height: 32px;
+    width: 100%;
+    transform: rotate(90deg);
+  }
+  .transform-meta {
+    grid-template-columns: 1fr;
+  }
+  .transform-time, .transform-time-label { text-align: left; }
+}
+
+/* ── PATH CARD — studio variant ── */
+.path-card-studio {
+  border-color: #c8352e !important;
+  background: rgba(200,53,46,0.04) !important;
+}
+.gate-badge {
+  display: inline-block;
+  background: #c8352e;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 4px 10px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 600px) {
+  .gate-box { padding: 28px 20px; }
+  .gate-email-row { flex-direction: column; }
+  .gate-email-input { border-right: 1px solid rgba(255,255,255,0.1); border-bottom: none; }
+  .gate-pay-btn { width: 100%; text-align: center; }
+}
+</style>
+
+<!-- ── PAID BANNER (shown only after Stripe redirect) ── -->
+<div class="paid-banner" id="paidBanner">
+  <div class="paid-banner-inner">
+    <i class="fas fa-check-circle paid-banner-icon"></i>
+    <p><strong>C’est parti &mdash; votre concept est dans la file.</strong> Parlez-nous de votre équipe et importez votre référence ci-dessous ; votre première maquette arrive en 24&ndash;48h.</p>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
 <header class="hero full-bleed">
 <div class="hero-content">
-<h1>Maillots de Football Professionnels pour <span class="highlight">&Eacute;quipes Amateur</span></h1>
-<h3>Que nous le concevions, ou que vous le cr&eacute;iez&mdash;obtenez une qualit&eacute; pro d&egrave;s 20,90&euro;.</h3>
-<p class="hero-intro">MOMUTO aide les &eacute;quipes de football amateur &agrave; cr&eacute;er des tenues personnalis&eacute;es via trois approches&nbsp;: un service de design gratuit, un configurateur 3D en temps r&eacute;el, ou des designs pr&ecirc;ts &agrave; jouer. Sans minimum de commande. Impression professionnelle par sublimation. Livraison mondiale.</p>
+<h1>Maillots de Foot Personnalisés pour <span class="highlight">Équipes Ambitieuses</span></h1>
+<h3>Envoyez-nous votre concept &mdash; une idée IA, un croquis, vos couleurs &mdash; et un designer senior le transforme en maillot prêt pour la production. Ou créez-le vous-même, gratuitement.</h3>
+<p class="hero-intro">MOMUTO propose trois approches : des maillots <strong>Ready-to-Play</strong> pré-conçus à -10 %, un <strong>configurateur 3D en temps réel</strong> pour le faire vous-même, ou le <strong>Design Personnalisé</strong> &mdash; envoyez votre concept et un designer senior le transforme en maillot portable, prêt pour la production. Première maquette en 24&ndash;48h, révisions illimitées. 15 € pour démarrer, intégralement crédités dès 5 maillots.</p>
 </div>
 </header>
+
+<!-- ── SOCIAL PROOF ── -->
 <section class="social-proof-strip">
 <div class="proof-container">
 <div class="proof-stats">
-<div class="proof-stat"><span class="stat-number">100+</span>
-<div class="stat-label">&Eacute;quipes Satisfaites</div>
+<div class="proof-stat"><span class="stat-number">150+</span><div class="stat-label">Équipes Satisfaites</div></div>
+<div class="proof-stat"><span class="stat-number">10+</span><div class="stat-label">Pays</div></div>
+<div class="proof-stat"><span class="stat-number">98%</span><div class="stat-label">Satisfaction</div></div>
 </div>
-<div class="proof-stat"><span class="stat-number">10+</span>
-<div class="stat-label">Pays</div>
-</div>
-<div class="proof-stat"><span class="stat-number">98%</span>
-<div class="stat-label">Satisfaction</div>
-</div>
-</div>
-<div class="proof-teams"><span class="proof-team">Madrid &bull; ETSII</span> <span class="proof-team">Danemark &bull; Superleague</span> <span class="proof-team">France &bull; D&eacute;partemental</span> <span class="proof-team">Canaries &bull; Superliga</span></div>
+<div class="proof-teams"><span class="proof-team">Madrid &bull; ETSII</span> <span class="proof-team">Denmark &bull; Superleague</span> <span class="proof-team">France &bull; D&eacute;partemental</span> <span class="proof-team">Canarias &bull; Superliga</span></div>
 </div>
 </section>
+
+<!-- ── THREE PATHS ── -->
 <section class="path-section">
 <div class="path-container">
 <div class="path-header">
-<h2>Design de Maillot de Football Personnalis&eacute; pour &Eacute;quipes, Clubs et Tournois</h2>
-<p>Que vous ayez besoin d&rsquo;une identit&eacute; d&rsquo;&eacute;quipe totalement originale, que vous souhaitiez concevoir votre maillot en ligne, ou pr&eacute;f&eacute;riez partir de templates &eacute;prouv&eacute;s, MOMUTO vous offre trois fa&ccedil;ons de cr&eacute;er un maillot de football professionnel personnalis&eacute;.</p>
+<h2>Choisissez Votre Approche</h2>
+<p>Créez-le vous-même en quelques secondes &mdash; gratuitement. Ou envoyez-nous votre concept et un designer senior le réalise pour vous.</p>
 </div>
 <div class="path-options">
+
 <div class="path-card" style="border-color: var(--accent-red);">
 <div class="path-icon"><i class="fas fa-tshirt"></i></div>
-<h3>Collection Pr&ecirc;t-&agrave;-Jouer</h3>
-<div class="path-for">&Eacute;quipes press&eacute;es ou qui aiment les mod&egrave;les &eacute;prouv&eacute;s</div>
-<p class="path-description">Partez de designs &eacute;prouv&eacute;s port&eacute;s par de vraies &eacute;quipes. Choisissez vos couleurs, uploadez votre blason, obtenez une maquette sous 24h. <strong>10&nbsp;% moins cher que le design sur mesure.</strong></p>
-<a href="https://fr.momuto.com/pages/collection-ready-to-play" class="path-cta path-cta-primary">Parcourir le Catalogue</a></div>
-<div class="path-card">
-<div class="path-icon"><i class="fas fa-pencil-alt"></i></div>
-<h3>Service de Design Sur Mesure</h3>
-<div class="path-for">&Eacute;quipes voulant une identit&eacute; unique et professionnelle</div>
-<p class="path-description">Travaillez avec notre &eacute;quipe pour cr&eacute;er un maillot enti&egrave;rement original &mdash; ou adaptez un design que vous avez d&eacute;j&agrave; cr&eacute;&eacute; (g&eacute;n&eacute;r&eacute; par IA, dessin&eacute; &agrave; la main, ou cr&eacute;&eacute; avec n&rsquo;importe quel outil). Maquette gratuite sous 24-48h, r&eacute;visions gratuites, sans engagement.</p>
-<a href="#cta-form" class="path-cta">Demander un Design Gratuit</a></div>
+<h3>Ready-to-Play</h3>
+<div class="path-for">Gratuit &middot; Designs éprouvés &middot; -10 % &middot; Aperçu en direct</div>
+<p class="path-description">Designs professionnels portés par de vrais clubs. Choisissez-en un, vos couleurs, importez votre blason &mdash; c’est prêt. Même tissu et impression que le sur-mesure. Dès 19,70 €/maillot.</p>
+<a href="https://fr.momuto.com/pages/ready-to-play" class="path-cta path-cta-primary">Voir Ready-to-Play</a>
+</div>
+
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-cube"></i></div>
 <h3>Configurateur 3D</h3>
-<div class="path-for">Cr&eacute;atifs qui veulent le contr&ocirc;le total</div>
-<p class="path-description">Utilisez notre configurateur 3D de maillots de football pour concevoir votre tenue en ligne, tester les couleurs, placer les logos et visualiser le r&eacute;sultat avant de commander.</p>
-<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr" class="path-cta">Ouvrir le Configurateur 3D</a></div>
+<div class="path-for">Gratuit &middot; À faire soi-même &middot; Aperçu instantané</div>
+<p class="path-description">Créez votre maillot en ligne en temps réel &mdash; plus de 30 modèles, contrôle total des couleurs, placement du blason, aperçu 3D instantané. Commandez directement quand vous êtes satisfait.</p>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr" class="path-cta">Ouvrir le Configurateur 3D</a>
 </div>
-<div class="comparison-section">
-<h3>Quelle option convient &agrave; votre &eacute;quipe&nbsp;?</h3>
-<div class="comparison-grid">
-<div class="comparison-card">
-<div class="comparison-icon"><i class="fas fa-tshirt"></i></div>
-<div class="comparison-option">Pr&ecirc;t-&agrave;-Jouer</div>
-<div class="comparison-best-for">Pour les &eacute;quipes qui veulent aller vite &mdash; 10&nbsp;% de r&eacute;duction</div>
-<div class="comparison-benefit">Mod&egrave;les &eacute;prouv&eacute;s, vos couleurs. La voie la plus rapide de la d&eacute;cision au terrain. 10&nbsp;% moins cher que le design sur mesure.</div>
+
+<div class="path-card path-card-studio">
+<div class="gate-badge">Design Personnalisé</div>
+<div class="path-icon"><i class="fas fa-pencil-ruler"></i></div>
+<h3>Du Concept au Maillot</h3>
+<div class="path-for">15 € pour démarrer &middot; Crédités dès 5 maillots &middot; Maquette en 24&ndash;48h</div>
+<p class="path-description">Vous avez un concept, un visuel IA, un croquis ou simplement un bon brief ? Envoyez-le &mdash; un designer senior le transforme en maillot prêt pour la production. Illustration, vectorisation et révisions illimitées incluses.</p>
+<a href="#payment-gate" class="path-cta" id="studioPathCta">Envoyer Mon Concept</a>
 </div>
-<div class="comparison-card">
-<div class="comparison-icon"><i class="fas fa-pencil-alt"></i></div>
-<div class="comparison-option">Design Sur Mesure</div>
-<div class="comparison-best-for">Pour les &eacute;quipes voulant une identit&eacute; unique</div>
-<div class="comparison-benefit">Maillot enti&egrave;rement original construit autour de votre blason et couleurs. R&eacute;visions gratuites jusqu&rsquo;&agrave; satisfaction.</div>
-</div>
-<div class="comparison-card">
-<div class="comparison-icon"><i class="fas fa-cube"></i></div>
-<div class="comparison-option">Configurateur 3D</div>
-<div class="comparison-best-for">Pour les &eacute;quipes voulant le contr&ocirc;le</div>
-<div class="comparison-benefit">Concevez en ligne instantan&eacute;ment. Visualisez votre maillot en 3D avant de commander quoi que ce soit.</div>
-</div>
-</div>
+
 </div>
 </div>
 </section>
-<section class="action-teaser">
-<div class="teaser-container">
-<div class="teaser-header">
-<h2>Voyez Nos Maillots en Action</h2>
-<p>Vraies &eacute;quipes, vrais matchs, passion authentique</p>
+
+<!-- ── TRANSFORMATIONS ── -->
+<section class="transform-section">
+<div class="transform-header">
+<p class="transform-eyebrow">Nos Réalisations</p>
+<h2 class="transform-title">Votre Concept. Prêt pour la Production.</h2>
+<p class="transform-sub">Quatre projets réels. Le concept reçu à gauche. Le maillot prêt pour la production à droite.</p>
 </div>
-<div class="action-grid">
-<div class="action-preview"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg" alt="Atl&eacute;tico Guanche en action" />
-<div class="action-overlay">
-<div class="team-name">Atl&eacute;tico Guanche</div>
-<div class="team-location">Las Palmas &bull; Superliga</div>
+<div class="transform-grid">
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/1363fdd2412a9a6b668e7f50c3d5c6497b4cbd7042266ec5b63f6615efbb1a56.jpg" alt="La Vidriera FC — AI concept render (input)" loading="lazy">
+<span class="transform-side-label">Source &mdash; Visuel IA</span>
 </div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/11f5c073dc1c3d62cee9d5b4c39f166f8347637cfce733ea868d96030bfa6c5e.png" alt="La Vidriera FC — MOMUTO production kit" loading="lazy">
+<span class="transform-side-label label-after">Design MOMUTO</span>
 </div>
-<div class="action-preview"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg" alt="Olympique Mehunois en action" />
-<div class="action-overlay">
-<div class="team-name">Olympique Mehunois</div>
-<div class="team-location">France &bull; D&eacute;partemental</div>
-</div>
-</div>
-<div class="action-preview"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg" alt="Mango CF en action" />
-<div class="action-overlay">
-<div class="team-name">Mango CF</div>
-<div class="team-location">Madrid &bull; ETSII</div>
-</div>
-</div>
-<div class="action-preview"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg" alt="Elche Koslovaco en action" />
-<div class="action-overlay">
-<div class="team-name">Elche Koslovaco</div>
-<div class="team-location">Las Palmas &bull; Superliga</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Visuel IA + Brief</p>
+<p class="transform-desc"><strong>Rayures écailles de serpent vectorisées, blason panthère reconstruit.</strong> Dégradé retravaillé pour la sublimation, griffures redessinées, sponsor et numéro placés. Fichier de production livré.</p>
 </div>
 </div>
 </div>
-<div style="text-align: center;"><a href="https://fr.momuto.com/pages/equipes-clubs-momuto" class="view-gallery-btn">Voir la Galerie Compl&egrave;te</a></div>
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/80438223b0b91b596f01d1b874c2f19d7440c1802812125f2209717a4f1c1e07.jpeg" alt="Seefelds — hand-drawn flame kit sketch (input)" loading="lazy">
+<span class="transform-side-label">Source &mdash; Croquis</span>
 </div>
-</section>
-<section class="why-section">
-<div class="why-container">
-<div class="why-header">
-<h2>Pourquoi les &Eacute;quipes Choisissent MOMUTO</h2>
-<p>Du prix &agrave; la livraison en passant par la qualit&eacute; du tissu, les &eacute;quipes choisissent g&eacute;n&eacute;ralement MOMUTO pour les m&ecirc;mes raisons&nbsp;: co&ucirc;t par joueur r&eacute;duit, d&eacute;lai plus court, service de design gratuit et sans minimum de commande. Vous comparez avec des fournisseurs comme Owayo, Spized ou Jersix&nbsp;? Nous avons analys&eacute; les diff&eacute;rences dans notre <a href="https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026">comparatif complet de maillots</a>.</p>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/d358bfaa66a1a6ef5afab054b3a627b7874de81a4ee5953cb1a8979554bc2285.png" alt="Seefelds — MOMUTO production kit" loading="lazy">
+<span class="transform-side-label label-after">Design MOMUTO</span>
 </div>
-<div class="why-grid">
-<div class="why-card">
-<div class="why-card-icon"><i class="fas fa-truck"></i></div>
-<h3>Livraison Plus Rapide</h3>
-<p>20&ndash;25 jours dans le monde entier depuis la confirmation de commande&nbsp;: 7&ndash;12 jours de production + 10&ndash;15 jours d&rsquo;exp&eacute;dition. Livraison gratuite pour les commandes sup&eacute;rieures &agrave; 50&euro;. <a href="https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026">Voir le comparatif de livraison.</a></p>
-</div>
-<div class="why-card">
-<div class="why-card-icon"><i class="fas fa-tag"></i></div>
-<h3>Meilleur Prix par &Eacute;quipe</h3>
-<p>Maillots &agrave; partir de 20,90&euro; l&rsquo;unit&eacute; pour les grandes commandes, 38,90&euro; pour un maillot individuel. Sans minimum &mdash; sans obligation d&rsquo;achat en gros. <a href="https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026">Comparer les prix avec les concurrents.</a></p>
-</div>
-<div class="why-card">
-<div class="why-card-icon"><i class="fas fa-layer-group"></i></div>
-<h3>Tissu Haute Performance en Standard</h3>
-<p>M&eacute;lange polyester-&eacute;lasthanne sur toutes les tenues &mdash; pas seulement les gammes premium. &Eacute;vacue la transpiration, suit vos mouvements, r&eacute;siste toute une saison.</p>
-</div>
-<div class="why-card">
-<div class="why-card-icon"><i class="fas fa-pencil-ruler"></i></div>
-<h3>Design Professionnel Gratuit</h3>
-<p>Maquette personnalis&eacute;e livr&eacute;e en 24&ndash;48h, r&eacute;visions gratuites incluses. Sans engagement jusqu&rsquo;&agrave; la confirmation de commande &mdash; sans frais de design, jamais.</p>
-</div>
-<div class="why-card">
-<div class="why-card-icon"><i class="fas fa-box-open"></i></div>
-<h3>Sans Minimum de Commande</h3>
-<p>Commandez 1 maillot ou 100+. Sans frais d&rsquo;&eacute;chantillon, sans obligation de commande en gros. Chaque commande &mdash; aussi petite soit-elle &mdash; b&eacute;n&eacute;ficie de la m&ecirc;me qualit&eacute; de production.</p>
-</div>
-<div class="why-card">
-<div class="why-card-icon"><i class="fas fa-award"></i></div>
-<h3>Finitions Premium</h3>
-<p>Impression par sublimation compl&egrave;te avec garantie &agrave; vie contre le d&eacute;collement ou la d&eacute;coloration. Badges silicone 3D en option pour les grandes commandes &mdash; une finition professionnelle rarement propos&eacute;e &agrave; ce prix.</p>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Croquis + Brief</p>
+<p class="transform-desc"><strong>Flammes dessinées à la main transformées en graphismes vectoriels nets.</strong> Fines rayures alignées, proportions ajustées au tissu, blason et numéro construits. Prêt pour la sublimation.</p>
 </div>
 </div>
 </div>
-</section>
-<section class="how-it-works-section">
-<div class="hiw-container">
-<h2>Comment fonctionne le service de design de maillots MOMUTO</h2>
-<ul class="hiw-steps">
-<li><span class="hiw-num">1</span><div><strong>Partagez votre brief</strong><p>Indiquez-nous le nom de votre &eacute;quipe, votre blason, vos couleurs et toute r&eacute;f&eacute;rence. Soumettez via le formulaire ci-dessous, WhatsApp ou email. Cela prend 2 minutes.</p></div></li>
-<li><span class="hiw-num">2</span><div><strong>Recevez votre maquette sous 24&ndash;48h</strong><p>Nos designers cr&eacute;ent une maquette de maillot de football enti&egrave;rement personnalis&eacute;e, gratuitement.</p></div></li>
-<li><span class="hiw-num">3</span><div><strong>Demandez des r&eacute;visions si n&eacute;cessaire</strong><p>Toutes les r&eacute;visions sont gratuites. Nous affinons jusqu&rsquo;&agrave; votre satisfaction.</p></div></li>
-<li><span class="hiw-num">4</span><div><strong>Confirmez les tailles et les d&eacute;tails de commande</strong><p>Soumettez votre r&eacute;partition de tailles et nous pr&eacute;parons la production.</p></div></li>
-<li><span class="hiw-num">5</span><div><strong>Nous produisons et exp&eacute;dions vos maillots</strong><p>7&ndash;12 jours de production + 10&ndash;15 jours d&rsquo;exp&eacute;dition. Vos maillots arrivent en 20&ndash;25 jours dans le monde entier.</p></div></li>
-</ul>
-<p class="hiw-internal-links">Vous pr&eacute;f&eacute;rez concevoir vous-m&ecirc;me&nbsp;? <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr">Utilisez notre configurateur 3D de maillots.</a><br />Vous voulez voir ce que d&rsquo;autres clubs ont command&eacute;&nbsp;? <a href="https://fr.momuto.com/pages/equipes-clubs-momuto">Parcourez la galerie compl&egrave;te des &eacute;quipes.</a></p>
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/25ff712975b6c266aa5c9265b6532c6122c4c633cbd75225942a2e6d884eb842.png" alt="Pecados Capitales — concept board (input)" loading="lazy">
+<span class="transform-side-label">Source &mdash; Planche Concept</span>
+</div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/ec78916fd71c968d956652b1e2453e39eaeb55f8f4eb8779e89a92c992ba911f.png" alt="Pecados Capitales — MOMUTO production kit" loading="lazy">
+<span class="transform-side-label label-after">Design MOMUTO</span>
+</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Planche Concept + Brief</p>
+<p class="transform-desc"><strong>Motif ange divisé interprété, blason reconstruit.</strong> Palette noir / rouge / or respectée, typographie dorée posée, disposition des sponsors confirmée. Équipement complet livré.</p>
+</div>
+</div>
+</div>
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/0b5177b519804889ae2e329b9c8e8239ad19316d485d90a8c2f66c3bf01cf40f.jpg" alt="Kings — AI concept render (input)" loading="lazy">
+<span class="transform-side-label">Source &mdash; Visuel IA</span>
+</div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/2f0ddfc2e032643727db21f9cf433df70176294aaab3edbb04746cc722ae0cc5.png" alt="Kings — MOMUTO production kit" loading="lazy">
+<span class="transform-side-label label-after">Design MOMUTO</span>
+</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Visuel IA + Sponsors</p>
+<p class="transform-desc"><strong>Graphisme dragon vectorisé, équilibre des tons noir-sur-noir ajusté.</strong> Blason nettoyé, sponsors placés, nom et numéro posés. Fichier de production livré.</p>
+</div>
+</div>
+</div>
+
 </div>
 </section>
-<section class="form-section">
+
+<!-- ── PAYMENT GATE ── -->
+<section class="gate-section" id="payment-gate">
+<div class="gate-container">
+<p class="gate-eyebrow">Design Personnalisé &mdash; Du Concept au Maillot Prêt à Produire</p>
+<div class="gate-box">
+  <h2>Envoyez-Nous Votre Concept</h2>
+  <p class="gate-price"><strong>15 € pour démarrer</strong> &mdash; intégralement crédités sur les commandes de 5 maillots ou plus</p>
+  <ul class="gate-features">
+    <li><i class="fas fa-check"></i><span><strong>Un designer senior sur votre concept</strong> sous 24h</span></li>
+    <li><i class="fas fa-check"></i><span><strong>Première maquette livrée</strong> en 24&ndash;48h</span></li>
+    <li><i class="fas fa-check"></i><span><strong>Révisions illimitées</strong> jusqu’à satisfaction</span></li>
+    <li><i class="fas fa-check"></i><span><strong>Illustration &amp; vectorisation</strong> incluses &mdash; concepts IA, croquis, graphismes sur-mesure</span></li>
+    <li><i class="fas fa-check"></i><span><strong>Fichiers prêts pour la production</strong> en impression sublimation</span></li>
+    <li><i class="fas fa-check"></i><span><strong>15 € crédités sur votre commande</strong> dès 5 maillots</span></li>
+  </ul>
+  <div class="gate-email-row">
+    <input type="email" class="gate-email-input" id="gateEmail" placeholder="Votre adresse e-mail" />
+    <a href="https://buy.stripe.com/3cI9AT4rqbSA3rh99j3wQ0g" class="gate-pay-btn" id="gatePayBtn">Envoyer Mon Concept &middot; 15 € &rarr;</a>
+  </div>
+  <p class="gate-refund-note">Paiement sécurisé via Stripe &bull; Crédité sur votre commande dès 5 maillots</p>
+  <hr class="gate-divider" />
+  <p class="gate-alt">Vous préférez le faire vous-même ? &nbsp;<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr">Configurateur 3D</a> et <a href="https://fr.momuto.com/pages/ready-to-play">Ready-to-Play</a> sont gratuits, instantanés et à vous.</p>
+</div>
+</div>
+</section>
+
+<!-- ── BRIEF FORM (hidden until paid) ── -->
+<section class="form-section" id="brief-form-section" style="display:none;">
 <div class="form-container">
 <div class="form-content" id="cta-form">
 <div class="form-intro">
-<h2>Option 1&nbsp;: Demandez Votre Design Sur Mesure</h2>
-<p>Vous voulez quelque chose d&rsquo;unique&nbsp;? Compl&eacute;tez votre brief ci-dessous et recevez une maquette professionnelle gratuite sous 24-48h. Vous avez d&eacute;j&agrave; un design&nbsp;? T&eacute;l&eacute;chargez-le ci-dessous &mdash; nous l&rsquo;adapterons pour la production.</p>
+<h2>Parlez-Nous de Votre Maillot</h2>
+<p>C’est parti. Importez votre concept &mdash; un visuel IA, un croquis, ou simplement vos couleurs et références &mdash; plus vous en partagez, meilleure sera la première maquette.</p>
 </div>
 <div class="progress-indicator">
-<div class="progress-step active"><span class="step-label">1</span> <span class="step-text">D&eacute;tails</span></div>
+<div class="progress-step active"><span class="step-label">1</span> <span class="step-text">Details</span></div>
 <div class="progress-step" id="progress2"><span class="step-label">2</span> <span class="step-text">Style</span></div>
-<div class="progress-step" id="progress3"><span class="step-label">3</span> <span class="step-text">Envoyer</span></div>
+<div class="progress-step" id="progress3"><span class="step-label">3</span> <span class="step-text">Submit</span></div>
 </div>
-<div id="formContentWrapper"><form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://momuto-api.vercel.app/api/submit"><input type="hidden" name="_next" value="https://fr.momuto.com/pages/design-personnalise-confirme" />
+<div id="formContentWrapper">
+<form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://momuto-api.vercel.app/api/submit">
+<input type="hidden" name="_next" value="https://fr.momuto.com/pages/design-personnalise-confirme" />
+
 <div class="form-step active" id="step1">
 <div class="form-section-inner">
-<div class="input-group"><input type="text" id="customerName" name="firstname" placeholder="Votre Nom / Manager" required="" /></div>
-<div class="input-group"><input type="email" id="customerEmail" name="email" placeholder="Email de Contact" required="" /></div>
-<div class="input-group"><input type="text" id="teamName" name="company" placeholder="Nom de l'&Eacute;quipe" required="" /></div>
-<div class="input-group"><input type="text" id="leagueName" name="industry" placeholder="Championnat ou Tournoi" required="" /></div>
+<div class="input-group"><input type="text" id="customerName" name="firstname" placeholder="Votre Nom / Responsable" required /></div>
+<div class="input-group"><input type="email" id="customerEmail" name="email" placeholder="E-mail de Contact" required /></div>
+<div class="input-group"><input type="text" id="teamName" name="company" placeholder="Nom de l’Équipe" required /></div>
+<div class="input-group"><input type="text" id="leagueName" name="industry" placeholder="Ligue ou Tournoi" required /></div>
 </div>
-<div class="form-navigation" style="justify-content: flex-end;"><button type="button" class="next-step">&Eacute;TAPE SUIVANTE</button></div>
+<div class="form-navigation" style="justify-content: flex-end;"><button type="button" class="next-step">NEXT STEP</button></div>
 </div>
+
 <div class="form-step" id="step2">
 <div class="form-section-inner">
-<h4>1. Badge de l'&Eacute;quipe <span style="color:#e2214b">*</span></h4>
-<div class="custom-file-upload"><label for="clubCrest"><i class="fas fa-upload"></i> T&eacute;l&eacute;charger Fichier</label> <input type="file" id="clubCrest" name="upload_file" accept="image/*" onchange="previewLogo(this)" />
-<div id="fileNameDisplay"></div>
-<div id="crestError" style="display:none;color:#e2214b;font-size:0.8rem;margin-top:6px">Veuillez t&eacute;l&eacute;charger le badge de votre &eacute;quipe pour continuer.</div>
-<div id="logoPreview" style="margin-top: 10px; max-width: 100px;"></div>
-</div>
+<h4>1. Blason de l’Équipe</h4>
+<div class="custom-file-upload"><label for="clubCrest"><i class="fas fa-upload"></i> Importer le Blason</label> <input type="file" id="clubCrest" name="upload_file" accept="image/*" onchange="previewLogo(this)" /><div id="fileNameDisplay"></div><div id="logoPreview" style="margin-top: 10px; max-width: 100px;"></div></div>
 </div>
 <div class="form-section-inner">
-<h4>1b. Vous avez d&eacute;j&agrave; un concept de design&nbsp;?</h4>
-<p style="font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-bottom: 15px; font-weight: 300;">Vous avez cr&eacute;&eacute; quelque chose avec ChatGPT, Midjourney, Gemini ou un autre outil&nbsp;? T&eacute;l&eacute;chargez-le ici et nous l&rsquo;adapterons pour la production. Ignorez cette &eacute;tape si vous voulez que nous concevions depuis z&eacute;ro.</p>
-<div class="custom-file-upload"><label for="designConcept"><i class="fas fa-upload"></i> T&eacute;l&eacute;charger le Concept</label> <input type="file" id="designConcept" name="design_concept" accept="image/*,.pdf" onchange="previewDesign(this)" /><div id="designNameDisplay"></div><div id="designPreview" style="margin-top: 10px; max-width: 200px;"></div></div>
+<h4>1b. Concept de Design (optionnel)</h4>
+<p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 15px; font-weight: 300;">AI render, sketch, reference kit, or any visual concept. Skip if you&rsquo;d rather brief us in words.</p>
+<div class="custom-file-upload"><label for="designConcept"><i class="fas fa-upload"></i> Importer le Concept</label> <input type="file" id="designConcept" name="design_concept" accept="image/*,.pdf" onchange="previewDesign(this)" /><div id="designNameDisplay"></div><div id="designPreview" style="margin-top: 10px; max-width: 200px;"></div></div>
 </div>
 <div class="form-section-inner">
 <h4>2. Couleurs Principales</h4>
 <div class="colors-row">
-<div class="color-col"><label>Primaire</label>
-<div class="color-circle" id="primaryColorCircle" style="background-color: #e2214b;" onclick="openColorModal('primary')"></div>
-</div>
-<div class="color-col"><label>Secondaire</label>
-<div class="color-circle" id="secondaryColorCircle" style="background-color: #ffffff;" onclick="openColorModal('secondary')"></div>
-</div>
+<div class="color-col"><label>Primaire</label><div class="color-circle" id="primaryColorCircle" style="background-color: #e2214b;" onclick="openColorModal('primary')"></div></div>
+<div class="color-col"><label>Secondaire</label><div class="color-circle" id="secondaryColorCircle" style="background-color: #ffffff;" onclick="openColorModal('secondary')"></div></div>
 </div>
 </div>
 <div class="form-section-inner">
 <h4>3. Style Visuel</h4>
-<p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 15px;">De 1 (Classique) &agrave; 10 (Moderne/Audacieux)</p>
+<p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 15px;">De 1 (Classique) à 10 (Moderne/Audacieux)</p>
 <div class="style-scale"><span>1</span> <input type="range" id="stylePreference" name="stylePreference" min="1" max="10" value="5" /> <span>10</span></div>
 <div class="style-extremes">
-<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/7717020eb4f7350ff2eaf310f87346f7.jpg" alt="Style Classique" />
-<p>Classique</p>
-</div>
-<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/aa44aa9cce491bdfc97c04586417a837.jpg" alt="Style Audacieux" />
-<p>Audacieux</p>
-</div>
+<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/7717020eb4f7350ff2eaf310f87346f7.jpg" alt="Style Classique" /><p>Classique</p></div>
+<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/aa44aa9cce491bdfc97c04586417a837.jpg" alt="Style Audacieux" /><p>Audacieux</p></div>
 </div>
 </div>
 <div class="form-section-inner">
-<h4>4. Quantit&eacute; Estim&eacute;e</h4>
-<div class="size-slider">
-<div class="size-track"></div>
+<h4>4. Quantité Estimée</h4>
+<div class="size-slider"><div class="size-track"></div>
 <div class="size-options">
-<div class="size-option"><input type="radio" id="size-1-4" name="orderSize" value="1-4" class="size-radio" checked="checked" /> <label for="size-1-4" class="size-label"> <span class="size-button"></span> 1-4 </label></div>
-<div class="size-option"><input type="radio" id="size-5-10" name="orderSize" value="5-10" class="size-radio" /> <label for="size-5-10" class="size-label"> <span class="size-button"></span> 5-10 </label></div>
-<div class="size-option"><input type="radio" id="size-11-20" name="orderSize" value="11-20" class="size-radio" /> <label for="size-11-20" class="size-label"> <span class="size-button"></span> 11-20 </label></div>
-<div class="size-option"><input type="radio" id="size-21-50" name="orderSize" value="21-50" class="size-radio" /> <label for="size-21-50" class="size-label"> <span class="size-button"></span> 21-50 </label></div>
-<div class="size-option"><input type="radio" id="size-51-plus" name="orderSize" value="51+" class="size-radio" /> <label for="size-51-plus" class="size-label"> <span class="size-button"></span> 51+ </label></div>
+<div class="size-option"><input type="radio" id="size-1-4" name="orderSize" value="1-4" class="size-radio" checked /> <label for="size-1-4" class="size-label"><span class="size-button"></span> 1-4</label></div>
+<div class="size-option"><input type="radio" id="size-5-10" name="orderSize" value="5-10" class="size-radio" /> <label for="size-5-10" class="size-label"><span class="size-button"></span> 5-10</label></div>
+<div class="size-option"><input type="radio" id="size-11-20" name="orderSize" value="11-20" class="size-radio" /> <label for="size-11-20" class="size-label"><span class="size-button"></span> 11-20</label></div>
+<div class="size-option"><input type="radio" id="size-21-50" name="orderSize" value="21-50" class="size-radio" /> <label for="size-21-50" class="size-label"><span class="size-button"></span> 21-50</label></div>
+<div class="size-option"><input type="radio" id="size-51-plus" name="orderSize" value="51+" class="size-radio" /> <label for="size-51-plus" class="size-label"><span class="size-button"></span> 51+</label></div>
 </div>
 </div>
 </div>
-<div class="form-navigation"><button type="button" class="prev-step">RETOUR</button> <button type="button" class="next-step">CONTINUER</button></div>
+<div class="form-navigation"><button type="button" class="prev-step">RETOUR</button> <button type="button" class="next-step">CONTINUE</button></div>
 </div>
+
 <div class="form-step" id="step3">
-<div style="text-align: center; margin-bottom: 30px;">
-<h3>Tout est Pr&ecirc;t&nbsp;!</h3>
-<p style="color: rgba(255,255,255,0.7);">V&eacute;rifiez vos d&eacute;tails et envoyez. Vous recevrez votre design sous 24-48h.</p>
+<div style="text-align: center; margin-bottom: 30px;"><h3>All Set!</h3><p style="color: rgba(255,255,255,0.7);">Review your details and submit. Your designer will be in touch within 24h.</p></div>
+<div class="terms-checkbox"><input type="checkbox" id="termsAccept" name="termsAccept" required /> <label for="termsAccept"> J’accepte la <a href="https://fr.momuto.com/pages/privacy-policy" target="_blank" rel="noopener">politique de confidentialité</a>.</label></div>
+<div class="form-navigation"><button type="button" class="prev-step">RETOUR</button> <button type="submit" class="submit-form">ENVOYER LE BRIEF</button></div>
 </div>
-<div class="terms-checkbox"><input type="checkbox" id="termsAccept" name="termsAccept" required="" /> <label for="termsAccept"> J&rsquo;accepte la <a href="https://fr.momuto.com/pages/politique-de-confidentialite" target="_blank" rel="noopener">politique de confidentialit&eacute;</a>. </label></div>
-<div class="form-navigation"><button type="button" class="prev-step">RETOUR</button> <button type="submit" class="submit-form">ENVOYER LA DEMANDE</button></div>
+
+<input type="hidden" id="primaryColorValue" name="primaryColorValue" value="#e2214b" />
+<input type="hidden" id="secondaryColorValue" name="secondaryColorValue" value="#ffffff" />
+</form>
 </div>
-<input type="hidden" id="primaryColorValue" name="primaryColorValue" value="#e2214b" /> <input type="hidden" id="secondaryColorValue" name="secondaryColorValue" value="#ffffff" /><input type="text" name="_honey" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" tabindex="-1" autocomplete="off" aria-hidden="true" /></form></div>
 <div id="confirmationMessage" style="display: none;">
 <div class="success-icon"><i class="fas fa-check-circle"></i></div>
-<h3>Demande Re&ccedil;ue&nbsp;!</h3>
-<p>L&rsquo;&eacute;quipe design Momuto va se mettre au travail.</p>
-<div class="social-follow">
-<p>En attendant, d&eacute;couvrez notre travail&nbsp;:</p>
-<a href="https://www.instagram.com/momutofc" target="_blank" class="instagram-link" rel="noopener"> <i class="fab fa-instagram"></i> @momutofc </a></div>
+<h3>Brief Received!</h3>
+<p>Your senior designer will be in touch within 24h.</p>
+<div class="social-follow" style="margin-top:20px;"><p style="color:var(--text-muted); font-size:0.85rem;">In the meantime, check out our work:</p><a href="https://www.instagram.com/momuto_es" target="_blank" rel="noopener" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">@momuto_es</a></div>
 </div>
 </div>
 </div>
 </section>
+
+<!-- ── FAQ ── -->
 <section class="faq-section">
 <div class="faq-container">
-<h2>Questions fr&eacute;quentes sur les maillots de football personnalis&eacute;s</h2>
+<h2>Questions Fréquentes</h2>
 <div class="faq-list">
-<div class="faq-item">
-<h3>Comment fonctionne le service de design gratuit de maillots de football de MOMUTO&nbsp;?</h3>
-<p>Soumettez votre brief via le formulaire ci-dessus &mdash; nom d&rsquo;&eacute;quipe, blason, couleurs et r&eacute;f&eacute;rences. Nos designers cr&eacute;ent une maquette enti&egrave;rement personnalis&eacute;e en 24&ndash;48&nbsp;heures, gratuitement. Toutes les r&eacute;visions sont &eacute;galement gratuites jusqu&rsquo;&agrave; votre satisfaction.</p>
-</div>
-<div class="faq-item">
-<h3>Y a-t-il un minimum de commande pour les maillots de football personnalis&eacute;s&nbsp;?</h3>
-<p>Non. MOMUTO n&rsquo;a aucun minimum de commande. Vous pouvez commander un seul maillot ou une &eacute;quipe compl&egrave;te de 50+. Les prix commencent &agrave; 20,90&euro; par maillot pour les commandes importantes et 38,90&euro; pour un maillot individuel.</p>
-</div>
-<div class="faq-item">
-<h3>Combien de temps faut-il pour recevoir des maillots de football personnalis&eacute;s&nbsp;?</h3>
-<p>La production prend 7&ndash;12&nbsp;jours. L&rsquo;exp&eacute;dition prend 10&ndash;15&nbsp;jours dans le monde entier. Le d&eacute;lai de livraison total est g&eacute;n&eacute;ralement de 20&ndash;25&nbsp;jours &agrave; compter de la confirmation de commande.</p>
-</div>
-<div class="faq-item">
-<h3>Puis-je t&eacute;l&eacute;charger le blason de mon club et choisir mes propres couleurs&nbsp;?</h3>
-<p>Oui. Le formulaire de demande de design vous permet de t&eacute;l&eacute;charger votre blason directement et de s&eacute;lectionner des couleurs primaires et secondaires. Vous pouvez &eacute;galement partager des r&eacute;f&eacute;rences via WhatsApp ou email si vous pr&eacute;f&eacute;rez.</p>
-</div>
-<div class="faq-item">
-<h3>Quelle m&eacute;thode d&rsquo;impression MOMUTO utilise-t-il&nbsp;?</h3>
-<p>MOMUTO utilise l&rsquo;impression par sublimation compl&egrave;te sur un tissu polyester-&eacute;lasthanne haute performance. La sublimation signifie que les couleurs sont int&eacute;gr&eacute;es dans le tissu &mdash; et non imprim&eacute;es dessus &mdash; elles ne se d&eacute;collent, ne se craquellent ni ne se d&eacute;colorent donc jamais.</p>
-</div>
-<div class="faq-item">
-<h3>Puis-je concevoir le maillot moi-m&ecirc;me plut&ocirc;t que de demander une maquette&nbsp;?</h3>
-<p>Oui. Utilisez notre <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr">configurateur 3D de maillots</a> pour concevoir votre tenue en ligne en temps r&eacute;el. Vous pouvez &eacute;galement parcourir notre <a href="https://fr.momuto.com/pages/collection-ready-to-play">collection pr&ecirc;t-&agrave;-jouer</a> si vous pr&eacute;f&eacute;rez partir de templates &eacute;prouv&eacute;s.</p>
-</div>
-<div class="faq-item">
-<h3>Puis-je soumettre mon propre design ou un concept g&eacute;n&eacute;r&eacute; par IA&nbsp;?</h3>
-<p>Oui. Si vous avez cr&eacute;&eacute; un concept de maillot avec des outils comme ChatGPT, Midjourney, Gemini ou tout autre logiciel de design, vous pouvez le t&eacute;l&eacute;charger via le formulaire de design personnalis&eacute;. Pour les commandes de 10+ maillots, nous adaptons votre design pour la production sans frais suppl&eacute;mentaires. Un acompte de design de 15&euro; s&rsquo;applique &mdash; enti&egrave;rement rembours&eacute; pour les commandes de 5 maillots ou plus. Cela nous permet de nous concentrer sur les &eacute;quipes vraiment d&eacute;cid&eacute;es et de consacrer &agrave; chaque design le temps qu&rsquo;il m&eacute;rite.</p>
-</div>
+<div class="faq-item"><h3>Pourquoi 15 € pour démarrer ?</h3><p>Un designer senior consacre de vraies heures à votre concept &mdash; recherche, illustration, vectorisation et révisions illimitées. Les 15 € permettent au studio de se concentrer sur les équipes qui construisent quelque chose de réel, et ils sont intégralement crédités sur votre commande dès 5 maillots &mdash; donc pour toute vraie commande d’équipe, cela ne coûte rien.</p></div>
+<div class="faq-item"><h3>Quand les 15 € sont-ils crédités ?</h3><p>Dès que votre commande atteint 5 maillots ou plus, ils sont crédités sur le total de votre commande au paiement.</p></div>
+<div class="faq-item"><h3>Qu’est-ce qui est inclus ?</h3><p>Un designer senior sur votre concept, une première maquette en 24&ndash;48h, des révisions illimitées, le travail d’illustration et de vectorisation (concepts IA, croquis, maillots de référence, graphismes sur-mesure), et des fichiers prêts pour la production en impression sublimation.</p></div>
+<div class="faq-item"><h3>Puis-je envoyer un concept généré par IA (ChatGPT, Midjourney) ?</h3><p>Oui &mdash; c’est exactement à cela que ce service est destiné. Importez votre visuel IA et notre designer l’adaptera en maillot prêt pour la production tout en préservant votre vision. Cela inclut la vectorisation des formes, la reproduction des dégradés et textures, et l’ajustement aux contraintes réelles du tissu.</p></div>
+<div class="faq-item"><h3>Et si je n’ai qu’un brief, sans concept ?</h3><p>Aucun problème. Décrivez vos couleurs, votre direction de style et toute référence (maillots existants, palettes, ambiance). Plus il y a de détails, mieux c’est, mais nos designers travaillent à partir de briefs tous les jours. Vous recevrez une maquette en 24&ndash;48h dans tous les cas.</p></div>
+<div class="faq-item"><h3>Vous préférez le faire vous-même ? Quelles sont les options gratuites ?</h3><p>Deux options gratuites : le <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr">Configurateur 3D</a> vous permet de créer en temps réel avec plus de 30 modèles et un aperçu instantané. La <a href="https://fr.momuto.com/pages/ready-to-play">collection Ready-to-Play</a> propose des maillots professionnels pré-conçus à -10 % par rapport au sur-mesure, avec un aperçu personnalisé en direct.</p></div>
+<div class="faq-item"><h3>Y a-t-il une commande minimum ?</h3><p>Non. Vous pouvez commander à partir d’un seul maillot. Les prix démarrent à 38,90 € pour un maillot et descendent à 20,90 € par maillot dès 10 unités. Les 15 € sont crédités sur votre commande dès 5 maillots.</p></div>
+<div class="faq-item"><h3>En combien de temps vais-je recevoir les maillots ?</h3><p>25&ndash;30 jours après confirmation de commande : 7&ndash;15 jours de production + 10&ndash;15 jours de livraison mondiale. Livraison offerte dès 50 € d’achat.</p></div>
 </div>
 </div>
 </section>
+
+<!-- ── COLOR MODAL ── -->
 <div id="colorModal" class="color-modal" style="display: none;">
 <div id="colorModalOverlay" class="modal-overlay" onclick="closeColorModal()"></div>
 <div class="color-modal-content">
-<div class="color-modal-header">
-<h3>S&eacute;lectionner Couleur</h3>
-<button class="close-modal" onclick="closeColorModal()">&times;</button></div>
-<div class="color-modal-body">
-<div id="colorSwatches"></div>
+<div class="color-modal-header"><h3>Select Color</h3><button class="close-modal" onclick="closeColorModal()">&times;</button></div>
+<div class="color-modal-body"><div id="colorSwatches"></div></div>
 </div>
 </div>
-</div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var isPaid = params.get('paid') === 'true';
+
+  if (isPaid) {
+    // Show confirmation banner
+    document.getElementById('paidBanner').style.display = 'block';
+    // Hide payment gate, show form
+    document.getElementById('payment-gate').style.display = 'none';
+    document.getElementById('brief-form-section').style.display = 'block';
+    // Scroll to form smoothly after a short delay
+    setTimeout(function() {
+      document.getElementById('cta-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+
+  // Prefill Stripe email from gate input
+  var gateEmail = document.getElementById('gateEmail');
+  var gatePayBtn = document.getElementById('gatePayBtn');
+  var baseStripeUrl = 'https://buy.stripe.com/3cI9AT4rqbSA3rh99j3wQ0g';
+
+  if (gateEmail && gatePayBtn) {
+    gateEmail.addEventListener('input', function() {
+      var email = this.value.trim();
+      if (email) {
+        gatePayBtn.href = baseStripeUrl + '?prefilled_email=' + encodeURIComponent(email);
+      } else {
+        gatePayBtn.href = baseStripeUrl;
+      }
+    });
+  }
+
+  // Smooth scroll for Studio path card CTA
+  var studioCta = document.getElementById('studioPathCta');
+  if (studioCta) {
+    studioCta.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('payment-gate').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+})();
+</script>
 <!-- inject:design-request.js -->
