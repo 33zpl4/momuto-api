@@ -14,16 +14,10 @@ function injectShared(template) {
     .replace('<!-- inject:design-request.js -->',  `<script>\n${js}\n</script>`);
 }
 
-// Additional EN-only pages deployed alongside the main locale pages
-const EXTRA_EN_PAGES = [
-  {
-    host: 'https://openapi.oemapps.com',
-    token: () => process.env.OEMSAAS_TOKEN_EN,
-    label: 'momuto.com',
-    handle: 'custom-kit-design-studio',
-    file: path.join(ROOT, 'pages', 'custom-kit-design-studio')
-  }
-];
+// Additional EN-only pages deployed alongside the main locale pages.
+// (The deposit-gated studio was folded into the ranked request-custom-kit-design
+// page — Option B — so there's no separate studio page to deploy anymore.)
+const EXTRA_EN_PAGES = [];
 
 const DOMAINS = {
   en: {
