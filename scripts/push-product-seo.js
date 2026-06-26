@@ -94,8 +94,10 @@ async function listMode(domain, seo) {
     found++;
     const p = r.value;
     const via = r.handle === h ? '' : ` via "${r.handle}"`;
-    const has3d = /"type"\s*:\s*"3d"/.test(String(p.inner_title || ''));
-    console.log(`  ✓ ${h.padEnd(24)} id=${String(p.id).padEnd(10)} 3d=${has3d ? 'yes' : 'NO '} status=${p.status} seo="${(p.meta_title || '').slice(0, 40)}"${via}`);
+    // data-oem = ABCSHOPPY storefront id (p.id); data-product = configurator id (inner_title productId)
+    const m = String(p.inner_title || '').match(/"productId"\s*:\s*"?(\d+)"?/);
+    const cfg = m ? m[1] : '?';
+    console.log(`  ✓ ${h.padEnd(24)} oem=${String(p.id).padEnd(10)} cfg=${String(cfg).padEnd(8)} status=${p.status} seo="${(p.meta_title || '').slice(0, 30)}"${via}`);
   }
   console.log(`  → ${found}/${ORDER.filter(x => seo[x]).length} RTP products present on ${domain.label}`);
 }
