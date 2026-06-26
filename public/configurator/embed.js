@@ -113,6 +113,7 @@ var CSS = ":host{display:block;--brand:#E2214B;--bg:#0e0f13;--panel:#1a1c22;--li
 +".vtog{position:absolute;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:2px;z-index:5;background:rgba(26,28,34,.9);border:1px solid var(--line);border-radius:999px;padding:3px;}"
 +".vtog button{border:none;background:none;color:var(--mut);padding:7px 22px;cursor:pointer;font-size:13px;font-weight:600;border-radius:999px;}"
 +".vtog button.on{background:var(--brand);color:#fff;}"
++"@media(max-width:680px){.vtog{top:auto;bottom:10px;}}"
 +".fonts{display:flex;gap:8px;margin:10px 0 2px;}"
 +".fontchip{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 4px;border:1px solid var(--line);background:#22252c;border-radius:8px;cursor:pointer;}"
 +".fontchip img{height:18px;max-width:100%;object-fit:contain;}"
@@ -187,12 +188,14 @@ function buildHTML(t){ return '' +
 +'    <div class="zone"><label>'+t.lPrimary+'</label><button class="sw" id="primarySw" data-k="primary"></button></div>'
 +'    <div class="zone"><label>'+t.lSecondary+'</label><button class="sw" id="secondarySw" data-k="secondary"></button></div>'
 +'    <div class="zone"><label>'+t.lTrim+'</label><button class="sw" id="trimSw" data-k="trim"></button></div>'
++'    <div id="badges">'
 +'    <h2>'+t.hBadges+'</h2>'
 +'    <div class="uploads">'
 +'      <label class="up">'+t.lCrest+' <span class="pill" id="crestName">'+t.upload+'</span><input type="file" id="crest" accept="image/*" hidden></label>'
 +'      <label class="up">'+t.lSponsor+' <span class="pill" id="sponsorName">'+t.upload+'</span><input type="file" id="sponsor" accept="image/*" hidden></label>'
 +'    </div>'
 +'    <p class="svc">'+t.svc+'</p>'
++'    </div>'
 +'    <div id="perso" style="display:none">'
 +'      <h2>'+t.hPerso+'</h2>'
 +'      <div class="fonts" id="fonts"></div>'
@@ -219,6 +222,7 @@ function buildHTML(t){ return '' +
 +'</div></div>'; }
 
 // ---- per-instance engine ----
+var LOGO_DEFAULTS={"the-fracture":"#000000"};
 function run(root, opts){
   var T=opts.t||I18N.en;
   var A=opts.assets;
@@ -228,6 +232,7 @@ function run(root, opts){
   // per-template signature colours via data-primary/secondary/trim/namecolor; falls back to marble
   var DEFAULTS={ primary:opts.primary||"#2e3238", secondary:opts.secondary||"#ffffff",
     trim:opts.trim||"#121212", nameColor:opts.nameColor||opts.trim||"#121212" };
+  var LOGOCOL = opts.logoColor || LOGO_DEFAULTS[opts.template] || null;
   var state={ primary:DEFAULTS.primary, secondary:DEFAULTS.secondary, trim:DEFAULTS.trim, crest:null, sponsor:null, font:"vanguard", nameColor:DEFAULTS.nameColor, kit:"jersey", qty:10 };
   var CART={ base:"https://design.momuto.com", productId:opts.productId, oemId:opts.oemId,
     productIdKit:opts.productIdKit, oemIdKit:opts.oemIdKit, lang:opts.lang };
@@ -349,7 +354,7 @@ function run(root, opts){
       var DW=slotJson.front.root.w, DH=slotJson.front.root.h;
       var mkSlot=function(rc){return {x:minx+rc.x/DW*gw, y:miny+rc.y/DH*gh, w:rc.w/DW*gw, h:rc.h/DH*gh};};
       view.slots={ sponsor:mkSlot(slotJson.front.slots.sponsor), crest:mkSlot(slotJson.front.slots.crest) };
-      if(logo){ var lp=placeDesign(logo, mkSlot(slotJson.front.slots["logo-momuto"]), {contain:true,pad:1.06});
+      if(logo){ var lp=placeDesign(logo, mkSlot(slotJson.front.slots["logo-momuto"]), {contain:true,pad:0.975});
         var logoA=new Uint8Array(n); for(i=0;i<n;i++) logoA[i]=lp.data[i*4+3]; view.logoA=logoA; }
     }
     if(kind==="back"){ view.nameSlot={ cx:cx, cy:miny+gh*0.38, w:gw*0.50, h:gh*0.50 }; }
@@ -359,11 +364,11 @@ function run(root, opts){
     cv.style.transform="";
     var region=V.region, ratio=V.ratio, srcA=V.srcA, logoA=V.logoA, n=W*H;
     var out=ctx.createImageData(W,H), o=out.data;
-    var P=hx(state.primary), S=hx(state.secondary), T=hx(state.trim);
+    var P=hx(state.primary), S=hx(state.secondary), T=hx(state.trim); var LG=LOGOCOL?hx(LOGOCOL):T;
     for(var i=0;i<n;i++){
       var z=region[i]; if(z>3) continue;
       var col = z===0?P : z===1?S : z===2?T : WHITE;   // 3 = neutral inner collar, not recoloured
-      if(logoA && logoA[i]>110) col=T;
+      if(logoA && logoA[i]>110) col=LG;
       var k=ratio[i];
       o[i*4]=Math.min(255,col[0]*k); o[i*4+1]=Math.min(255,col[1]*k); o[i*4+2]=Math.min(255,col[2]*k); o[i*4+3]=srcA[i];
     }
@@ -427,7 +432,7 @@ function run(root, opts){
     var map=function(dx,dy){return [cx2+(dx-DW/2)*sc, cy2+(dy-DH/2)*sc];};
     var mkSlot=function(rc){var p1=map(rc.x,rc.y),p2=map(rc.x+rc.w,rc.y+rc.h);return {x:p1[0],y:p1[1],w:p2[0]-p1[0],h:p2[1]-p1[1]};};
     var slots={ sponsor:mkSlot(slotJson.front.slots.sponsor), crest:mkSlot(slotJson.front.slots.crest) };
-    var lp=placeDesign(logo, mkSlot(slotJson.front.slots["logo-momuto"]), {contain:true,pad:1.06});
+    var lp=placeDesign(logo, mkSlot(slotJson.front.slots["logo-momuto"]), {contain:true,pad:0.975});
     var logoA=new Uint8Array(n); for(i=0;i<n;i++) logoA[i]=lp.data[i*4+3];
     return {kind:"front",zoneIdx:zoneIdx,ratio:ratio,srcA:srcA,designRGB:designRGB,isDesign:isDesign,logoA:logoA,slots:slots,dy:centerDY(srcA,n)};
   }
@@ -482,7 +487,7 @@ function run(root, opts){
     cv.style.transform="";
     var zoneIdx=V.zoneIdx,ratio=V.ratio,srcA=V.srcA,designRGB=V.designRGB,isDesign=V.isDesign,logoA=V.logoA;
     var out=ctx.createImageData(W,H), o=out.data, n=W*H, dyW=(V.dy||0)*W;
-    var P=hx(state.primary), S=hx(state.secondary), T=hx(state.trim);
+    var P=hx(state.primary), S=hx(state.secondary), T=hx(state.trim); var LG=LOGOCOL?hx(LOGOCOL):T;
     for(var i=0;i<n;i++){
       var z=zoneIdx[i]; if(z<0) continue;
       var r,g,b;
@@ -494,7 +499,7 @@ function run(root, opts){
         if(bdist>OFFTOL){ r=dr;g=dg;b=db; } else { var t=TONE_T[bi]; r=P[0]+t*(S[0]-P[0]); g=P[1]+t*(S[1]-P[1]); b=P[2]+t*(S[2]-P[2]); }
       } else if(isDesign[i]===2 && (z===3||z===4)){ r=T[0];g=T[1];b=T[2]; }
       else { r=S[0];g=S[1];b=S[2]; }
-      if(logoA && logoA[i]>110){ r=T[0];g=T[1];b=T[2]; }
+      if(logoA && logoA[i]>110){ r=LG[0];g=LG[1];b=LG[2]; }
       var oi=i+dyW; if(oi<0||oi>=n) continue;
       o[oi*4]=Math.min(255,r*ratio[i*3]); o[oi*4+1]=Math.min(255,g*ratio[i*3+1]); o[oi*4+2]=Math.min(255,b*ratio[i*3+2]); o[oi*4+3]=srcA[i];
     }
@@ -629,7 +634,8 @@ function run(root, opts){
   init();
   return { get state(){return state;}, render:render, setView:function(v){active=v;
     root.querySelectorAll("#vtog button").forEach(function(x){x.classList.toggle("on",x.dataset.v===v);});
-    var p=root.getElementById("perso"); if(p)p.style.display=v==="back"?"block":"none"; render();},
+    var p=root.getElementById("perso"); if(p)p.style.display=v==="back"?"block":"none";
+    var b=root.getElementById("badges"); if(b)b.style.display=v==="back"?"none":"block"; render();},
     captureView:captureView, payload:buildDesignPayload, addToCart:handoffToCart };
 }
 
@@ -640,7 +646,7 @@ function mount(host){
     productIdKit:host.dataset.productKit||null, oemIdKit:host.dataset.oemKit||null,
     mode:host.dataset.mode||null,
     primary:host.dataset.primary||null, secondary:host.dataset.secondary||null,
-    trim:host.dataset.trim||null, nameColor:host.dataset.namecolor||null,
+    trim:host.dataset.trim||null, nameColor:host.dataset.namecolor||null, logoColor:host.dataset.logo||null,
     assets: host.dataset.assets ? host.dataset.assets.replace(/\/?$/,"/") : DEFAULT_ASSETS };
   opts.t=I18N[opts.lang]||I18N.en;
   var root=host.attachShadow({mode:"open"});
