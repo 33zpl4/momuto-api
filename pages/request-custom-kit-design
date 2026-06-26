@@ -31,7 +31,7 @@
     {
       "@type": "Product",
       "name": "Ready-to-Play Football Kit",
-      "description": "Pre-designed football kit templates created by MOMUTO designers and worn by real clubs. Choose your colours, upload your badge, receive a pro preview in 24h. 10% cheaper than custom design. Available designs: The Kinetic, The Legacy, The Apex, The Mosaic, The Fracture, The Chevron.",
+      "description": "Pre-designed football kit templates created by MOMUTO designers and worn by real clubs. Choose your colours live, upload your badge, and order now. 10% cheaper than custom design. Available designs: The Kinetic, The Legacy, The Apex, The Mosaic, The Fracture, The Prism, The Khala.",
       "url": "https://www.momuto.com/pages/ready-to-play",
       "offers": { "@type": "Offer", "price": "19.70", "priceCurrency": "EUR", "description": "Ready-to-Play jersey price (10% off vs custom). Full kit from €24.20." }
     },
@@ -52,7 +52,7 @@
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Minimum Order", "value": "No minimum — order 1 kit or 100+" },
     { "@type": "PropertyValue", "name": "Printing Method", "value": "Full dye-sublimation — lifetime guarantee against peeling, cracking, or fading" },
-    { "@type": "PropertyValue", "name": "Ready-to-Play Collection", "value": "6 pre-designed templates at 10% off vs custom. Pro preview in 24h. Designs: The Kinetic, The Legacy, The Apex, The Mosaic, The Fracture, The Chevron." },
+    { "@type": "PropertyValue", "name": "Ready-to-Play Collection", "value": "7 pre-designed templates at 10% off vs custom. Customise live, order now. Designs: The Kinetic, The Legacy, The Apex, The Mosaic, The Fracture, The Prism, The Khala." },
     { "@type": "PropertyValue", "name": "Design Service", "value": "Free professional design mockup in 24-48h, free revisions included" },
     { "@type": "PropertyValue", "name": "3D Configurator", "value": "Real-time 3D kit configurator with 30+ professional templates" },
     { "@type": "PropertyValue", "name": "Fabric", "value": "Polyester-elastane blend as standard — competitors include elastane only in premium tiers" },
@@ -68,12 +68,12 @@
     {
       "@type": "Question",
       "name": "What is the MOMUTO Ready-to-Play collection?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Ready-to-Play is MOMUTO's collection of pre-designed football kit templates created by professional designers and already worn by real clubs. You pick a design, choose your team colours, upload your badge, and receive a personalised preview within 24 hours. Ready-to-Play kits are 10% cheaper than custom designs — from €19.70 per jersey — because you skip the design phase while getting the same quality." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Ready-to-Play is MOMUTO's collection of pre-designed football kit templates created by professional designers and already worn by real clubs. You pick a design, choose your team colours, upload your badge, and see your design live as you customise. Ready-to-Play kits are 10% cheaper than custom designs — from €19.70 per jersey — because you skip the design phase while getting the same quality." }
     },
     {
       "@type": "Question",
       "name": "What is the difference between Ready-to-Play and custom design at MOMUTO?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Custom design is fully bespoke — MOMUTO's designers create a unique kit from scratch based on your brief, with free revisions included. It takes 24-48h for the first mockup and costs €21.90/jersey (10+ units). Ready-to-Play starts from proven pre-designed templates. You choose colours and upload your badge, get a preview in 24h, and pay €19.70/jersey (10% less). Both use the same fabric, printing, and production quality." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Custom design is fully bespoke — MOMUTO's designers create a unique kit from scratch based on your brief, with free revisions included. It takes 24-48h for the first mockup and costs €21.90/jersey (10+ units). Ready-to-Play starts from proven pre-designed templates. You choose colours and upload your badge live, and pay €19.70/jersey (10% less). Both use the same fabric, printing, and production quality." }
     },
     {
       "@type": "Question",
@@ -110,8 +110,8 @@
 <header class="hero full-bleed">
 <div class="hero-content">
 <h1>Professional Football Kits for <span class="highlight">Grassroots Teams</span></h1>
-<h3>Pro quality from &euro;19.70/jersey &mdash; whether we design it or you choose from our collection</h3>
-<p class="hero-intro">MOMUTO helps grassroots football teams create custom football kits through three routes: a <strong>Ready-to-Play collection</strong> of proven designs at 10% off, a <strong>free custom design service</strong> with mockups in 24-48h, or a <strong>real-time 3D kit builder</strong>. No minimum order. Professional dye-sublimation printing. Worldwide delivery in 25-30 days.</p>
+<h3>Pro quality from &euro;19.70/jersey &mdash; choose a proven design and customise it live, or have us design one free</h3>
+<p class="hero-intro">MOMUTO helps grassroots football teams create custom football kits through three routes: a <strong>Ready-to-Play collection</strong> of proven designs you customise live and order at 10% off, a <strong>free custom design service</strong> with mockups in 24-48h, or a <strong>real-time 3D kit builder</strong>. No minimum order. Professional dye-sublimation printing. Worldwide delivery in 25-30 days.</p>
 </div>
 </header>
 
@@ -139,9 +139,9 @@
 <div class="path-card" style="border-color: var(--accent-red);">
 <div class="path-icon"><i class="fas fa-tshirt"></i></div>
 <h3>Ready-to-Play Collection</h3>
-<div class="path-for">Proven designs &middot; 10% off &middot; Preview in 24h</div>
-<p class="path-description">Designs created by our team, worn by real clubs. Pick one, choose your colours, upload your badge &mdash; done. Same quality as custom, 10% less, and faster. From &euro;19.70/jersey.</p>
-<a href="https://www.momuto.com/pages/ready-to-play" class="path-cta" class="path-cta path-cta-primary">Browse Ready-to-Play</a>
+<div class="path-for">Proven designs &middot; 10% off &middot; Customise live</div>
+<p class="path-description">Designs created by our team, worn by real clubs. Pick one, customise your colours live, upload your badge &mdash; and order in minutes. Same quality as custom, 10% less. From &euro;19.70/jersey.</p>
+<a href="https://www.momuto.com/pages/ready-to-play" class="path-cta path-cta-primary">Shop Ready-to-Play</a>
 </div>
 
 <div class="path-card">
@@ -169,7 +169,7 @@
 <div class="comparison-icon"><i class="fas fa-tshirt"></i></div>
 <div class="comparison-option">Ready-to-Play</div>
 <div class="comparison-best-for">Best for: teams who see a design they like</div>
-<div class="comparison-benefit">Proven designs worn by real clubs. Pick your colours, get a preview in 24h, save 10% vs custom. From &euro;19.70/jersey. Full kits available.</div>
+<div class="comparison-benefit">Proven designs worn by real clubs. Customise your colours live, save 10% vs custom. From &euro;19.70/jersey. Full kits available.</div>
 </div>
 <div class="comparison-card">
 <div class="comparison-icon"><i class="fas fa-pencil-alt"></i></div>
@@ -216,7 +216,7 @@
 <div class="why-card"><div class="why-card-icon"><i class="fas fa-truck"></i></div><h3>Faster Delivery</h3><p>20&ndash;25 days worldwide from order confirmation: 7&ndash;12 days production + 10&ndash;15 days shipping. Free shipping on orders over &euro;50.</p></div>
 <div class="why-card"><div class="why-card-icon"><i class="fas fa-tag"></i></div><h3>Better Squad Pricing</h3><p>Ready-to-Play from &euro;19.70/jersey. Custom from &euro;21.90. Single kits &euro;38.90. No minimum order &mdash; no forced bulk entry.</p></div>
 <div class="why-card"><div class="why-card-icon"><i class="fas fa-layer-group"></i></div><h3>Performance Fabric as Standard</h3><p>Polyester-elastane blend on every kit &mdash; not reserved for premium tiers. Wicks sweat, moves with you, built to last a full season.</p></div>
-<div class="why-card"><div class="why-card-icon"><i class="fas fa-pencil-ruler"></i></div><h3>Free Professional Design</h3><p>Custom mockup delivered in 24&ndash;48h, free revisions included. Or choose Ready-to-Play for a proven design with 24h preview and 10% off.</p></div>
+<div class="why-card"><div class="why-card-icon"><i class="fas fa-pencil-ruler"></i></div><h3>Free Professional Design</h3><p>Custom mockup delivered in 24&ndash;48h, free revisions included. Or choose Ready-to-Play for a proven design you customise live, at 10% off.</p></div>
 <div class="why-card"><div class="why-card-icon"><i class="fas fa-box-open"></i></div><h3>No Minimum Order</h3><p>Order 1 kit or 100+. No sample surcharges, no forced bulk entry. Every order &mdash; however small &mdash; gets the same production quality.</p></div>
 <div class="why-card"><div class="why-card-icon"><i class="fas fa-award"></i></div><h3>Premium Finishing Options</h3><p>Full dye-sublimation printing with a lifetime guarantee against peeling or fading. Optional 3D silicon badges available for larger orders.</p></div>
 </div>
@@ -230,11 +230,11 @@
 <ol class="hiw-steps">
 <li><span class="hiw-num">1</span><div><strong>Choose your route</strong><p>Browse the <a href="https://www.momuto.com/pages/ready-to-play" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">Ready-to-Play collection</a> for proven designs at 10% off. Or submit a brief below for a fully custom design. Or <a href="https://www.momuto.com/pages/custom-soccer-jersey-designer" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">build it yourself in 3D</a>.</p></div></li>
 <li><span class="hiw-num">2</span><div><strong>Configure and submit</strong><p>Pick your colours, upload your badge and sponsor logo. For Ready-to-Play, choose from curated colour swatches. For custom, share references and let our designers interpret.</p></div></li>
-<li><span class="hiw-num">3</span><div><strong>Receive your preview</strong><p>Ready-to-Play previews arrive in 24h. Custom mockups in 24-48h. Both free. Both with at least 1 revision included.</p></div></li>
+<li><span class="hiw-num">3</span><div><strong>See your design</strong><p>Ready-to-Play shows your kit live as you customise. Custom mockups arrive in 24-48h. Both free, both with a proof to approve before print.</p></div></li>
 <li><span class="hiw-num">4</span><div><strong>Approve and order</strong><p>Happy with the result? Confirm your sizes and place your order. No commitment until this step &mdash; your preview is free regardless.</p></div></li>
 <li><span class="hiw-num">5</span><div><strong>We produce and ship</strong><p>7-12 days production with full dye-sublimation printing + 10-15 days worldwide shipping. Your kits arrive in 25-30 days. Free shipping on orders over &euro;50.</p></div></li>
 </ol>
-<p class="hiw-internal-links">Looking for the fastest route? <a href="https://www.momuto.com/pages/ready-to-play">Ready-to-Play kits start at &euro;19.70 with 24h previews.</a><br>Want to see what other clubs ordered? <a href="https://www.momuto.com/pages/teams-clubs-momuto">Browse the full team gallery.</a></p>
+<p class="hiw-internal-links">Looking for the fastest route? <a href="https://www.momuto.com/pages/ready-to-play">Ready-to-Play kits start at &euro;19.70 &mdash; customise live and order.</a><br>Want to see what other clubs ordered? <a href="https://www.momuto.com/pages/teams-clubs-momuto">Browse the full team gallery.</a></p>
 </div>
 </section>
 
@@ -333,13 +333,13 @@
 <div class="faq-container">
 <h2>Frequently asked questions about custom football kits</h2>
 <div class="faq-list">
-<div class="faq-item"><h3>What is the MOMUTO Ready-to-Play collection?</h3><p>Ready-to-Play is a collection of pre-designed football kit templates created by MOMUTO's designers and already worn by real clubs. You pick a design (like The Kinetic, The Legacy, The Apex, The Mosaic, The Fracture, or The Chevron), choose your team colours from a curated palette, upload your badge, and receive a personalised preview within 24 hours. Ready-to-Play kits cost 10% less than custom designs &mdash; from &euro;19.70 per jersey &mdash; because you skip the design phase while getting the same quality.</p></div>
-<div class="faq-item"><h3>What's the difference between Ready-to-Play and custom design?</h3><p>Custom design is fully bespoke &mdash; our designers create a unique kit from scratch based on your brief, with free revisions included. First mockup in 24-48h. From &euro;21.90/jersey. Ready-to-Play uses proven pre-designed templates: you choose colours and upload your badge, get a preview in 24h, and pay 10% less. Both use the same professional fabric, dye-sublimation printing, and production process.</p></div>
+<div class="faq-item"><h3>What is the MOMUTO Ready-to-Play collection?</h3><p>Ready-to-Play is a collection of pre-designed football kit templates created by MOMUTO's designers and already worn by real clubs. You pick a design (like The Kinetic, The Legacy, The Apex, The Mosaic, The Fracture, The Prism, or The Khala), choose your team colours from a curated palette, upload your badge, and see your design live as you customise. Ready-to-Play kits cost 10% less than custom designs &mdash; from &euro;19.70 per jersey &mdash; because you skip the design phase while getting the same quality.</p></div>
+<div class="faq-item"><h3>What's the difference between Ready-to-Play and custom design?</h3><p>Custom design is fully bespoke &mdash; our designers create a unique kit from scratch based on your brief, with free revisions included. First mockup in 24-48h. From &euro;21.90/jersey. Ready-to-Play uses proven pre-designed templates: you choose colours and upload your badge live, and pay 10% less. Both use the same professional fabric, dye-sublimation printing, and production process.</p></div>
 <div class="faq-item"><h3>How does MOMUTO's free custom design service work?</h3><p>Submit your brief through the form above &mdash; team name, badge, colors, and any references. Our designers create a fully custom mockup in 24&ndash;48 hours, free of charge. All revisions are also free until you're happy. There's no commitment until you confirm the order.</p></div>
 <div class="faq-item"><h3>Is there a minimum order for custom football kits?</h3><p>No. MOMUTO has no minimum order. You can order a single kit or a full squad of 50+. Pricing starts at &euro;19.70 per jersey for Ready-to-Play or &euro;21.90 for custom design on larger orders, and &euro;38.90 for a single jersey.</p></div>
 <div class="faq-item"><h3>How long does it take to receive custom football jerseys?</h3><p>Production takes 7&ndash;12 days. Shipping takes 10&ndash;15 days worldwide. Total delivery time is typically 20&ndash;25 days from order confirmation. Free shipping on orders over &euro;50.</p></div>
 <div class="faq-item"><h3>What printing method does MOMUTO use?</h3><p>MOMUTO uses full dye-sublimation printing on a polyester-elastane performance blend. Sublimation means colors are embedded into the fabric &mdash; not printed on top &mdash; so they never peel, crack, or fade. This applies to both Ready-to-Play and custom design kits.</p></div>
-<div class="faq-item"><h3>Can I design the kit myself instead of requesting a mockup?</h3><p>Yes. Use our <a href="https://www.momuto.com/pages/custom-soccer-jersey-designer">3D soccer jersey designer</a> to build your kit online in real time. You can also browse the <a href="https://www.momuto.com/pages/ready-to-play">Ready-to-Play collection</a> if you prefer to start from proven designs &mdash; with a 10% discount and 24h previews.</p></div>
+<div class="faq-item"><h3>Can I design the kit myself instead of requesting a mockup?</h3><p>Yes. Use our <a href="https://www.momuto.com/pages/custom-soccer-jersey-designer">3D soccer jersey designer</a> to build your kit online in real time. You can also browse the <a href="https://www.momuto.com/pages/ready-to-play">Ready-to-Play collection</a> if you prefer to start from proven designs &mdash; with a 10% discount, customised live.</p></div>
 <div class="faq-item"><h3>Do Ready-to-Play kits include shorts?</h3><p>Yes. Each Ready-to-Play design is available as jersey only (from &euro;19.70) or as a full kit with matching shorts (from &euro;24.20). Orders of 10+ full kits also include a free team flag with your crest and a captain armband.</p></div>
 <div class="faq-item">
 <h3>Can I submit my own design or an AI-generated concept?</h3>
