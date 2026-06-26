@@ -8,6 +8,7 @@ on:
   push:
     branches: [main]
     paths:
+      - 'blogs/*.json'
       - 'blogs/**/*.json'
   workflow_dispatch:
     inputs:
@@ -52,7 +53,7 @@ jobs:
         run: |
           BEFORE='${{ github.event.before }}'
           if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then BEFORE="$(git rev-parse HEAD~1)"; fi
-          CHANGED="$(git diff --name-only "$BEFORE" "${{ github.sha }}" -- 'blogs/**/*.json' | tr '\n' ' ')"
+          CHANGED="$(git diff --name-only "$BEFORE" "${{ github.sha }}" -- 'blogs/*.json' 'blogs/**/*.json' | tr '\n' ' ')"
           echo "Changed blog files: $CHANGED"
           CHANGED_FILES="$CHANGED" node scripts/deploy-blog-post.js
 
