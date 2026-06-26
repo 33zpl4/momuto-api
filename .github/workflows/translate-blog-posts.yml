@@ -1,5 +1,7 @@
-name: Translate Blog Posts to Italian
+name: Translate Blog Posts (FR / ES / IT)
 
+# Translates EN blog post(s) to the chosen locale(s) via Claude and upserts to
+# <locale>.momuto.com. The EN post must already be live (it's read from the CMS).
 on:
   workflow_dispatch:
     inputs:
@@ -7,6 +9,17 @@ on:
         description: 'EN post handle to translate (blank = all posts)'
         required: false
         default: ''
+      locales:
+        description: 'Target locales'
+        required: false
+        default: 'fr,es,it'
+        type: choice
+        options:
+          - 'fr,es,it'
+          - 'fr'
+          - 'es'
+          - 'it'
+          - 'fr,es'
       dry_run:
         description: 'Dry run — preview translations without writing to CMS'
         required: false
@@ -15,36 +28,40 @@ on:
         options:
           - 'false'
           - 'true'
-      patch_meta:
-        description: 'Patch metadata only (image/status) — skip content re-translation'
-        required: false
-        default: 'false'
-        type: choice
-        options:
-          - 'false'
-          - 'true'
 
 jobs:
-  translate:
+  prepare:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set.outputs.matrix }}
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - id: set
+        run: |
+          IFS=',' read -ra L <<< "${{ github.event.inputs.locales }}"
+          json=$(printf '%s\n' "${L[@]}" | sed 's/^ *//;s/ *$//' | grep -E '^(fr|es|it)$' | jq -R . | jq -cs .)
+          echo "matrix={\"locale\":$json}" >> "$GITHUB_OUTPUT"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+  translate:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
       - name: Install dependencies
         run: npm install
-
-      - name: Translate blog posts
+      - name: Translate to ${{ matrix.locale }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          TARGET_LOCALE: ${{ matrix.locale }}
           POST_HANDLE: ${{ github.event.inputs.post_handle }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
-          PATCH_META: ${{ github.event.inputs.patch_meta }}
         run: node scripts/translate-blog-posts.js
