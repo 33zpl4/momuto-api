@@ -304,3 +304,26 @@ block for the exact markup.
   URL and grep for a known token to confirm the deployed version.
 - **Add-to-cart blocked / CSP:** files must be same-origin on momuto.com, not a
   third-party host.
+
+---
+
+## 10. Deploying `embed.js` / `assets-<slug>.js` (engine + art)
+
+**Hosting model: single canonical source on `www.momuto.com`.** Every product-page
+custom block — EN, FR, ES, IT — loads `https://www.momuto.com/embed.js` and
+`https://www.momuto.com/assets-<slug>.js`. The bundles are locale-independent
+(`embed.js` reads `data-lang`), so one copy serves all four stores cross-origin.
+
+**To update the engine or an asset (one action, propagates everywhere):**
+1. Edit `public/configurator/embed.js` (or `assets-<slug>.js`).
+2. Run the **Deploy Static Files** workflow with `domain=en, file=embed.js`
+   (or `file=assets-<slug>.js`). `www` = the EN store, so this updates the
+   canonical copy that every store's blocks load.
+3. Bump `?v=` in the blocks if you need to bust the CDN cache immediately.
+
+**Per-store self-hosting (optional escape hatch).** `deploy-static-files.js` can
+also push `embed.js` / `assets-*.js` to `es`/`fr`/`it` (the DiyFile must be created
+empty in that store's admin first). Only do this if a store must be independent of
+`www` — then also repoint that store's block `<script src>` to its own domain.
+Note: asset bundles are ~0.8–1.8 MB; test the largest (`assets-fracture.js`) first
+in case the DiyFile PUT has a size cap.
