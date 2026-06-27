@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "MOMUTO Custom Kit Design",
-  "description": "Send us your concept — an AI render, a sketch, or a brief — and a senior designer turns it into a production-ready custom football kit. First mockup in 24-48h, unlimited revisions. €15 to start, credited in full to orders of 5+ jerseys.",
+  "description": "Send us your concept — an AI render, a sketch, or a brief — and a designer turns it into a production-ready custom football kit. First mockup in 24-48h, revisions until it’s right. €15 to start, credited in full to orders of 5+ jerseys.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "offers": {
     "@type": "Offer",
@@ -26,7 +26,7 @@
       "name": "Why is there a €15 fee to start?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A senior designer gives your concept real hours — research, illustration, vectorization, and unlimited revisions. The €15 keeps the studio focused on teams building something real, and it’s credited in full to your order at 5 or more jerseys — so for any real team order it costs nothing."
+        "text": "A designer gives your concept real hours — research, illustration, vectorization, and revisions until it’s right. The €15 keeps the studio focused on teams building something real, and it’s credited in full to your order at 5 or more jerseys — so for any real team order it costs nothing."
       }
     },
     {
@@ -42,7 +42,7 @@
       "name": "What’s included?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A senior designer on your concept, first mockup in 24–48h, unlimited revisions, illustration and vectorization work (AI concepts, sketches, reference kits, custom graphics), and production-ready files for dye-sublimation printing."
+        "text": "A designer on your concept, first mockup in 24–48h, revisions until it’s right, illustration and vectorization work (AI concepts, sketches, reference kits, custom graphics), and production-ready files for dye-sublimation printing."
       }
     },
     {
@@ -465,8 +465,8 @@
 <header class="hero full-bleed">
 <div class="hero-content">
 <h1>Custom Football Kits for <span class="highlight">Serious Teams</span></h1>
-<h3>Send us your concept &mdash; an AI idea, a sketch, your colours &mdash; and a senior designer turns it into a production-ready kit. Or design it yourself, free.</h3>
-<p class="hero-intro">MOMUTO gives teams three routes: <strong>Ready-to-Play</strong> pre-designed kits at 10% off, a <strong>real-time 3D configurator</strong> to build it yourself, or <strong>Custom Design</strong> &mdash; send your concept and a senior designer turns it into a wearable, production-ready kit. First mockup in 24&ndash;48h, unlimited revisions. €15 to start, credited in full at 5+ jerseys.</p>
+<h3>Send us your concept &mdash; an AI idea, a sketch, your colours &mdash; and a designer turns it into a production-ready kit. Or design it yourself, free.</h3>
+<p class="hero-intro">MOMUTO gives teams three routes: <strong>Ready-to-Play</strong> pre-designed kits at 10% off, a <strong>real-time 3D configurator</strong> to build it yourself, or <strong>Custom Design</strong> &mdash; send your concept and a designer turns it into a wearable, production-ready kit. First mockup in 24&ndash;48h, revisions until it’s right. €15 to start, credited in full at 5+ jerseys.</p>
 </div>
 </header>
 
@@ -487,7 +487,7 @@
 <div class="path-container">
 <div class="path-header">
 <h2>Choose Your Route</h2>
-<p>Design it yourself in seconds &mdash; free. Or send us your concept and a senior designer builds it for you.</p>
+<p>Design it yourself in seconds &mdash; free. Or send us your concept and a designer builds it for you.</p>
 </div>
 <div class="path-options">
 
@@ -512,7 +512,7 @@
 <div class="path-icon"><i class="fas fa-pencil-ruler"></i></div>
 <h3>Concept to Kit</h3>
 <div class="path-for">&euro;15 to start &middot; Credited at 5+ jerseys &middot; Mockup in 24&ndash;48h</div>
-<p class="path-description">Have a concept, an AI render, a sketch, or just a strong brief? Send it over &mdash; a senior designer turns it into a production-ready kit. Illustration, vectorization, unlimited revisions included.</p>
+<p class="path-description">Have a concept, an AI render, a sketch, or just a strong brief? Send it over &mdash; a designer turns it into a production-ready kit. Illustration, vectorization, and we refine it until it’s right.</p>
 <a href="#payment-gate" class="path-cta" id="studioPathCta">Send My Concept</a>
 </div>
 
@@ -612,9 +612,9 @@
   <h2>Send Us Your Concept</h2>
   <p class="gate-price"><strong>&euro;15 to start</strong> &mdash; credited in full to orders of 5 or more jerseys</p>
   <ul class="gate-features">
-    <li><i class="fas fa-check"></i><span><strong>Senior designer on your concept</strong> within 24h</span></li>
+    <li><i class="fas fa-check"></i><span><strong>A designer on your concept</strong> within 24h</span></li>
     <li><i class="fas fa-check"></i><span><strong>First mockup delivered</strong> in 24&ndash;48h</span></li>
-    <li><i class="fas fa-check"></i><span><strong>Unlimited revisions</strong> until you&rsquo;re happy</span></li>
+    <li><i class="fas fa-check"></i><span><strong>We refine it with you</strong> until it&rsquo;s right</span></li>
     <li><i class="fas fa-check"></i><span><strong>Illustration &amp; vectorization</strong> included &mdash; AI concepts, sketches, custom graphics</span></li>
     <li><i class="fas fa-check"></i><span><strong>Production-ready files</strong> for dye-sublimation printing</span></li>
     <li><i class="fas fa-check"></i><span><strong>&euro;15 credited to your order</strong> at 5+ jerseys</span></li>
@@ -712,7 +712,7 @@
 <div id="confirmationMessage" style="display: none;">
 <div class="success-icon"><i class="fas fa-check-circle"></i></div>
 <h3>Brief Received!</h3>
-<p>Your senior designer will be in touch within 24h.</p>
+<p>Your designer will be in touch within 24h.</p>
 <div class="social-follow" style="margin-top:20px;"><p style="color:var(--text-muted); font-size:0.85rem;">In the meantime, check out our work:</p><a href="https://www.instagram.com/momuto_es" target="_blank" rel="noopener" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">@momuto_es</a></div>
 </div>
 </div>
@@ -724,9 +724,9 @@
 <div class="faq-container">
 <h2>Frequently Asked Questions</h2>
 <div class="faq-list">
-<div class="faq-item"><h3>Why is there a €15 fee to start?</h3><p>A senior designer gives your concept real hours &mdash; research, illustration, vectorization, and unlimited revisions. The €15 keeps the studio focused on teams building something real, and it&rsquo;s credited in full to your order at 5 or more jerseys &mdash; so for any real team order it costs nothing.</p></div>
+<div class="faq-item"><h3>Why is there a €15 fee to start?</h3><p>A designer gives your concept real hours &mdash; research, illustration, vectorization, and revisions until it’s right. The €15 keeps the studio focused on teams building something real, and it&rsquo;s credited in full to your order at 5 or more jerseys &mdash; so for any real team order it costs nothing.</p></div>
 <div class="faq-item"><h3>When is the €15 credited back?</h3><p>When your order reaches 5 or more jerseys, it&rsquo;s credited to your order total at checkout.</p></div>
-<div class="faq-item"><h3>What&rsquo;s included?</h3><p>A senior designer on your concept, first mockup in 24&ndash;48h, unlimited revisions, illustration and vectorization work (AI concepts, sketches, reference kits, custom graphics), and production-ready files for dye-sublimation printing.</p></div>
+<div class="faq-item"><h3>What&rsquo;s included?</h3><p>A designer on your concept, first mockup in 24&ndash;48h, revisions until it’s right, illustration and vectorization work (AI concepts, sketches, reference kits, custom graphics), and production-ready files for dye-sublimation printing.</p></div>
 <div class="faq-item"><h3>Can I submit an AI-generated concept (ChatGPT, Midjourney)?</h3><p>Yes &mdash; that&rsquo;s exactly what this is built for. Upload your AI render and our designer will adapt it into a production-ready kit while preserving your vision. This includes vectorizing custom shapes, replicating gradients and textures, and adjusting for real fabric constraints.</p></div>
 <div class="faq-item"><h3>What if I just have a brief and no concept?</h3><p>That&rsquo;s fine. Describe your colours, style direction, and any references (existing kits, palettes, mood). The more detail the better, but our designers work from briefs every day. You&rsquo;ll get a mockup in 24&ndash;48h regardless.</p></div>
 <div class="faq-item"><h3>Prefer to design it yourself? What are the free options?</h3><p>Two free routes: the <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en">3D Kit Builder</a> lets you design in real time with 30+ templates and instant preview. The <a href="https://www.momuto.com/pages/ready-to-play">Ready-to-Play collection</a> has professional pre-designed kits at 10% off custom pricing, with a personalised 24h preview.</p></div>

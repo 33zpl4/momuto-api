@@ -216,9 +216,9 @@ async function sendCustomerEmail(to, subject, html, replyTo) {
     method: 'POST',
     headers: { Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from:     `MOMUTO Design Studio <${FROM_EMAIL}>`,
+      from:     `MOMUTO <info@momuto.com>`,
       to:       [to],
-      reply_to: replyTo || TEAM_EMAIL,
+      reply_to: replyTo || 'info@momuto.com',
       subject,
       html,
     }),
@@ -327,7 +327,7 @@ module.exports = async function handler(req, res) {
       try {
         const { subject: cSubj, html: cHtml } =
           emailConceptReceived({ name: lead.name, team: lead.team, lang });
-        await sendCustomerEmail(lead.email, cSubj, cHtml, TEAM_EMAIL);
+        await sendCustomerEmail(lead.email, cSubj, cHtml, 'info@momuto.com');
       } catch (custErr) {
         console.error('[submit] customer email failed for lead', lead.id, custErr.message);
       }

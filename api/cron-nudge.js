@@ -41,7 +41,7 @@ async function sendNudge(to, subject, html) {
     method: 'POST',
     headers: { Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: `MOMUTO Design Studio <${FROM_EMAIL}>`, to: [to], reply_to: TEAM_EMAIL, subject, html,
+      from: `MOMUTO <info@momuto.com>`, to: [to], reply_to: 'info@momuto.com', subject, html,
     }),
   });
   if (!r.ok) console.error('[cron-nudge] Resend error:', r.status, await r.text());

@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "MOMUTO Design de Maillot Personnalisé",
-  "description": "Envoyez-nous votre concept — un visuel IA, un croquis ou un brief — et un designer senior le transforme en maillot de foot personnalisé prêt pour la production. Première maquette en 24-48h, révisions illimitées. 15 € pour démarrer, intégralement crédités sur les commandes de 5 maillots ou plus.",
+  "description": "Envoyez-nous votre concept — un visuel IA, un croquis ou un brief — et un designer le transforme en maillot de foot personnalisé prêt pour la production. Première maquette en 24-48h, révisions jusqu’à ce que ce soit parfait. 15 € pour démarrer, intégralement crédités sur les commandes de 5 maillots ou plus.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "offers": {
     "@type": "Offer",
@@ -26,7 +26,7 @@
       "name": "Pourquoi 15 € pour démarrer ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Un designer senior consacre de vraies heures à votre concept — recherche, illustration, vectorisation et révisions illimitées. Les 15 € permettent au studio de se concentrer sur les équipes qui construisent quelque chose de réel, et ils sont intégralement crédités sur votre commande dès 5 maillots — donc pour toute vraie commande d’équipe, cela ne coûte rien."
+        "text": "Un designer consacre de vraies heures à votre concept — recherche, illustration, vectorisation et révisions jusqu’à ce que ce soit parfait. Les 15 € permettent au studio de se concentrer sur les équipes qui construisent quelque chose de réel, et ils sont intégralement crédités sur votre commande dès 5 maillots — donc pour toute vraie commande d’équipe, cela ne coûte rien."
       }
     },
     {
@@ -42,7 +42,7 @@
       "name": "Qu’est-ce qui est inclus ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Un designer senior sur votre concept, une première maquette en 24–48h, des révisions illimitées, le travail d’illustration et de vectorisation (concepts IA, croquis, maillots de référence, graphismes sur-mesure), et des fichiers prêts pour la production en impression sublimation."
+        "text": "Un designer sur votre concept, une première maquette en 24–48h, des révisions jusqu’à ce que ce soit parfait, le travail d’illustration et de vectorisation (concepts IA, croquis, maillots de référence, graphismes sur-mesure), et des fichiers prêts pour la production en impression sublimation."
       }
     },
     {
@@ -465,8 +465,8 @@
 <header class="hero full-bleed">
 <div class="hero-content">
 <h1>Maillots de Foot Personnalisés pour <span class="highlight">Équipes Ambitieuses</span></h1>
-<h3>Envoyez-nous votre concept &mdash; une idée IA, un croquis, vos couleurs &mdash; et un designer senior le transforme en maillot prêt pour la production. Ou créez-le vous-même, gratuitement.</h3>
-<p class="hero-intro">MOMUTO propose trois approches : des maillots <strong>Ready-to-Play</strong> pré-conçus à -10 %, un <strong>configurateur 3D en temps réel</strong> pour le faire vous-même, ou le <strong>Design Personnalisé</strong> &mdash; envoyez votre concept et un designer senior le transforme en maillot portable, prêt pour la production. Première maquette en 24&ndash;48h, révisions illimitées. 15 € pour démarrer, intégralement crédités dès 5 maillots.</p>
+<h3>Envoyez-nous votre concept &mdash; une idée IA, un croquis, vos couleurs &mdash; et un designer le transforme en maillot prêt pour la production. Ou créez-le vous-même, gratuitement.</h3>
+<p class="hero-intro">MOMUTO propose trois approches : des maillots <strong>Ready-to-Play</strong> pré-conçus à -10 %, un <strong>configurateur 3D en temps réel</strong> pour le faire vous-même, ou le <strong>Design Personnalisé</strong> &mdash; envoyez votre concept et un designer le transforme en maillot portable, prêt pour la production. Première maquette en 24&ndash;48h, révisions jusqu’à ce que ce soit parfait. 15 € pour démarrer, intégralement crédités dès 5 maillots.</p>
 </div>
 </header>
 
@@ -487,7 +487,7 @@
 <div class="path-container">
 <div class="path-header">
 <h2>Choisissez Votre Approche</h2>
-<p>Créez-le vous-même en quelques secondes &mdash; gratuitement. Ou envoyez-nous votre concept et un designer senior le réalise pour vous.</p>
+<p>Créez-le vous-même en quelques secondes &mdash; gratuitement. Ou envoyez-nous votre concept et un designer le réalise pour vous.</p>
 </div>
 <div class="path-options">
 
@@ -512,7 +512,7 @@
 <div class="path-icon"><i class="fas fa-pencil-ruler"></i></div>
 <h3>Du Concept au Maillot</h3>
 <div class="path-for">15 € pour démarrer &middot; Crédités dès 5 maillots &middot; Maquette en 24&ndash;48h</div>
-<p class="path-description">Vous avez un concept, un visuel IA, un croquis ou simplement un bon brief ? Envoyez-le &mdash; un designer senior le transforme en maillot prêt pour la production. Illustration, vectorisation et révisions illimitées incluses.</p>
+<p class="path-description">Vous avez un concept, un visuel IA, un croquis ou simplement un bon brief ? Envoyez-le &mdash; un designer le transforme en maillot prêt pour la production. Illustration, vectorisation, et on l’affine jusqu’à ce que ce soit parfait.</p>
 <a href="#payment-gate" class="path-cta" id="studioPathCta">Envoyer Mon Concept</a>
 </div>
 
@@ -612,9 +612,9 @@
   <h2>Envoyez-Nous Votre Concept</h2>
   <p class="gate-price"><strong>15 € pour démarrer</strong> &mdash; intégralement crédités sur les commandes de 5 maillots ou plus</p>
   <ul class="gate-features">
-    <li><i class="fas fa-check"></i><span><strong>Un designer senior sur votre concept</strong> sous 24h</span></li>
+    <li><i class="fas fa-check"></i><span><strong>Un designer sur votre concept</strong> sous 24h</span></li>
     <li><i class="fas fa-check"></i><span><strong>Première maquette livrée</strong> en 24&ndash;48h</span></li>
-    <li><i class="fas fa-check"></i><span><strong>Révisions illimitées</strong> jusqu’à satisfaction</span></li>
+    <li><i class="fas fa-check"></i><span><strong>On l’affine avec vous</strong> jusqu’à ce que ce soit parfait</span></li>
     <li><i class="fas fa-check"></i><span><strong>Illustration &amp; vectorisation</strong> incluses &mdash; concepts IA, croquis, graphismes sur-mesure</span></li>
     <li><i class="fas fa-check"></i><span><strong>Fichiers prêts pour la production</strong> en impression sublimation</span></li>
     <li><i class="fas fa-check"></i><span><strong>15 € crédités sur votre commande</strong> dès 5 maillots</span></li>
@@ -724,9 +724,9 @@
 <div class="faq-container">
 <h2>Questions Fréquentes</h2>
 <div class="faq-list">
-<div class="faq-item"><h3>Pourquoi 15 € pour démarrer ?</h3><p>Un designer senior consacre de vraies heures à votre concept &mdash; recherche, illustration, vectorisation et révisions illimitées. Les 15 € permettent au studio de se concentrer sur les équipes qui construisent quelque chose de réel, et ils sont intégralement crédités sur votre commande dès 5 maillots &mdash; donc pour toute vraie commande d’équipe, cela ne coûte rien.</p></div>
+<div class="faq-item"><h3>Pourquoi 15 € pour démarrer ?</h3><p>Un designer consacre de vraies heures à votre concept &mdash; recherche, illustration, vectorisation et révisions jusqu’à ce que ce soit parfait. Les 15 € permettent au studio de se concentrer sur les équipes qui construisent quelque chose de réel, et ils sont intégralement crédités sur votre commande dès 5 maillots &mdash; donc pour toute vraie commande d’équipe, cela ne coûte rien.</p></div>
 <div class="faq-item"><h3>Quand les 15 € sont-ils crédités ?</h3><p>Dès que votre commande atteint 5 maillots ou plus, ils sont crédités sur le total de votre commande au paiement.</p></div>
-<div class="faq-item"><h3>Qu’est-ce qui est inclus ?</h3><p>Un designer senior sur votre concept, une première maquette en 24&ndash;48h, des révisions illimitées, le travail d’illustration et de vectorisation (concepts IA, croquis, maillots de référence, graphismes sur-mesure), et des fichiers prêts pour la production en impression sublimation.</p></div>
+<div class="faq-item"><h3>Qu’est-ce qui est inclus ?</h3><p>Un designer sur votre concept, une première maquette en 24&ndash;48h, des révisions jusqu’à ce que ce soit parfait, le travail d’illustration et de vectorisation (concepts IA, croquis, maillots de référence, graphismes sur-mesure), et des fichiers prêts pour la production en impression sublimation.</p></div>
 <div class="faq-item"><h3>Puis-je envoyer un concept généré par IA (ChatGPT, Midjourney) ?</h3><p>Oui &mdash; c’est exactement à cela que ce service est destiné. Importez votre visuel IA et notre designer l’adaptera en maillot prêt pour la production tout en préservant votre vision. Cela inclut la vectorisation des formes, la reproduction des dégradés et textures, et l’ajustement aux contraintes réelles du tissu.</p></div>
 <div class="faq-item"><h3>Et si je n’ai qu’un brief, sans concept ?</h3><p>Aucun problème. Décrivez vos couleurs, votre direction de style et toute référence (maillots existants, palettes, ambiance). Plus il y a de détails, mieux c’est, mais nos designers travaillent à partir de briefs tous les jours. Vous recevrez une maquette en 24&ndash;48h dans tous les cas.</p></div>
 <div class="faq-item"><h3>Vous préférez le faire vous-même ? Quelles sont les options gratuites ?</h3><p>Deux options gratuites : le <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr">Configurateur 3D</a> vous permet de créer en temps réel avec plus de 30 modèles et un aperçu instantané. La <a href="https://fr.momuto.com/pages/ready-to-play">collection Ready-to-Play</a> propose des maillots professionnels pré-conçus à -10 % par rapport au sur-mesure, avec un aperçu personnalisé en direct.</p></div>
