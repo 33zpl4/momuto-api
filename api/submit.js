@@ -318,7 +318,11 @@ module.exports = async function handler(req, res) {
 
     // ── Customer confirmation — custom-design deposit brief only ──
     // (RTP / free-request submits don't get the "your €15 is in" relief email.)
-    if (fields._flow === 'custom-deposit' && lead.email) {
+    // Explicit _flow flag, OR the deposit brief's confirmation _next URL so it
+    // works on already-live forms before the page is redeployed to the CMS.
+    const isDepositBrief = fields._flow === 'custom-deposit'
+      || /customized-design-confirmed|design-personnalise-confirme/.test(fields._next || '');
+    if (isDepositBrief && lead.email) {
       const lang = localeFrom(fields._source_url || req.headers['referer'] || '');
       try {
         const { subject: cSubj, html: cHtml } =
