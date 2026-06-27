@@ -646,6 +646,7 @@
 <div id="formContentWrapper">
 <form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://momuto-api.vercel.app/api/submit">
 <input type="hidden" name="_next" value="https://www.momuto.com/pages/customized-design-confirmed" />
+<input type="hidden" name="_flow" value="custom-deposit" />
 
 <div class="form-step active" id="step1">
 <div class="form-section-inner">

@@ -20,6 +20,7 @@
 const Busboy = require('busboy');
 const { put } = require('@vercel/blob');
 const { kv }  = require('@vercel/kv');
+const { emailConceptReceived } = require('../lib/emails');
 
 const RESEND_KEY  = process.env.RESEND_API_KEY;
 const TEAM_EMAIL  = process.env.TEAM_EMAIL  || 'info@momuto.com';
@@ -202,6 +203,29 @@ async function sendEmail(fields, subject, html, replyTo) {
   }
 }
 
+// ── Customer confirmation (custom-design deposit flow only) ──────────────────
+
+function localeFrom(str) {
+  const m = (str || '').match(/^https?:\/\/(es|fr|it)\./);
+  return m ? m[1] : 'en';
+}
+
+async function sendCustomerEmail(to, subject, html, replyTo) {
+  if (!RESEND_KEY || !to) return;
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from:     `MOMUTO Design Studio <${FROM_EMAIL}>`,
+      to:       [to],
+      reply_to: replyTo || TEAM_EMAIL,
+      subject,
+      html,
+    }),
+  });
+  if (!res.ok) console.error('[submit] customer Resend error:', res.status, await res.text());
+}
+
 // ── KV helpers ───────────────────────────────────────────────────────────────
 
 async function saveLead(lead) {
@@ -282,7 +306,7 @@ module.exports = async function handler(req, res) {
     };
     await saveLead(lead);
 
-    // ── Send email, record outcome ────────────────────
+    // ── Send team email, record outcome ───────────────
     const { subject, html, replyTo } = buildEmail(fields, files);
     try {
       await sendEmail(fields, subject, html, replyTo);
@@ -290,6 +314,19 @@ module.exports = async function handler(req, res) {
     } catch (emailErr) {
       console.error('[submit] email failed for lead', lead.id, emailErr.message);
       await kv.set(`lead:${lead.id}`, { ...lead, emailError: emailErr.message });
+    }
+
+    // ── Customer confirmation — custom-design deposit brief only ──
+    // (RTP / free-request submits don't get the "your €15 is in" relief email.)
+    if (fields._flow === 'custom-deposit' && lead.email) {
+      const lang = localeFrom(fields._source_url || req.headers['referer'] || '');
+      try {
+        const { subject: cSubj, html: cHtml } =
+          emailConceptReceived({ name: lead.name, team: lead.team, lang });
+        await sendCustomerEmail(lead.email, cSubj, cHtml, TEAM_EMAIL);
+      } catch (custErr) {
+        console.error('[submit] customer email failed for lead', lead.id, custErr.message);
+      }
     }
 
   } catch (err) {
