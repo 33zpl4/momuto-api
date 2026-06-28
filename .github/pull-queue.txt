@@ -3,3 +3,5 @@
 fr creer-maillot-foot-ia-chatgpt-gemini
 
 # trigger: pull-fr-ai-post
+
+# trigger: pull-fr-ai-post-retry
