@@ -193,6 +193,11 @@
   padding: 2px 10px;
 }
 
+/* Per-locale label — tag the box with lang="fr|es|it" to localize it. */
+.prompt-box[lang="fr"]::before { content: "COPIER CE PROMPT"; }
+.prompt-box[lang="es"]::before { content: "COPIAR ESTE PROMPT"; }
+.prompt-box[lang="it"]::before { content: "COPIA QUESTO PROMPT"; }
+
 /* ── Side-by-side image comparison ────────────────────────────── */
 /* Usage: <div class="comparison-block"><div class="comparison-grid">...</div></div> */
 .comparison-block {
