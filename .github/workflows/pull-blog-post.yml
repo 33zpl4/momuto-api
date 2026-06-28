@@ -1,17 +1,18 @@
 name: Pull CMS Content
 
-# Fetches a single CMS object (post / page / product) into the repo so it can be
-# edited locally and redeployed. The sync commit is marked [skip ci].
+# Fetches CMS objects (post / page / product) into the repo so they can be edited
+# and redeployed. The sync commit is marked [skip ci].
 #   post    → blogs/<locale>/<handle>.json   (curated, round-trips via Deploy Blog Post)
 #   page    → cms/pages/<locale>/<handle>.json     (full raw object)
 #   product → cms/products/<locale>/<handle>.json  (full raw object)
 
 on:
-  # Click-free: append a request line to .github/pull-queue.txt and push. Format:
+  # Click-free: list one request per line in .github/pull-queue.txt and push.
+  # ALL non-comment lines are pulled in a single run. Line format:
   #   "<type> <locale> <handle>"   e.g. "page fr request-..."  /  "product fr the-fracture"
   #   "<locale> <handle>"          shorthand → type defaults to post
-  # The runner (which has CMS network + secrets, unlike the sandbox) fetches the
-  # object from the LAST non-comment line and commits it back, marked [skip ci].
+  # The runner (which has CMS network + secrets, unlike the sandbox) fetches each
+  # object and commits them back, marked [skip ci].
   push:
     branches: [main]
     paths:
@@ -46,25 +47,18 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Resolve target (push = last queue line, dispatch = inputs)
+      - name: Build request list (push = all queue lines, dispatch = inputs)
         id: tgt
         run: |
+          Q="$RUNNER_TEMP/queue.txt"
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            TYPE="${{ github.event.inputs.cms_type }}"; LOC="${{ github.event.inputs.locale }}"; H="${{ github.event.inputs.handle }}"
+            echo "${{ github.event.inputs.cms_type }} ${{ github.event.inputs.locale }} ${{ github.event.inputs.handle }}" > "$Q"
           else
-            LINE="$(grep -vE '^[[:space:]]*(#|$)' .github/pull-queue.txt | tail -1 || true)"
-            read -r A B C <<< "$LINE"
-            case "$A" in
-              post|page|product) TYPE="$A"; LOC="$B"; H="$C" ;;
-              "")                TYPE="";    LOC="";   H=""  ;;
-              *)                 TYPE="post"; LOC="$A"; H="$B" ;;
-            esac
+            grep -vE '^[[:space:]]*(#|$)' .github/pull-queue.txt > "$Q" || true
           fi
-          [ -z "$TYPE" ] && TYPE="post"
-          [ -z "$H" ] && { echo "No active request in queue — nothing to pull."; echo "skip=true" >> "$GITHUB_OUTPUT"; }
-          echo "type=$TYPE"   >> "$GITHUB_OUTPUT"
-          echo "locale=$LOC"  >> "$GITHUB_OUTPUT"
-          echo "handle=$H"    >> "$GITHUB_OUTPUT"
+          N=$(grep -cvE '^[[:space:]]*$' "$Q" || true)
+          echo "queue=$Q" >> "$GITHUB_OUTPUT"
+          if [ "${N:-0}" -eq 0 ]; then echo "No active requests — nothing to pull."; echo "skip=true" >> "$GITHUB_OUTPUT"; fi
 
       - name: Pull from CMS
         if: steps.tgt.outputs.skip != 'true'
@@ -73,21 +67,29 @@ jobs:
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
-          CMS_TYPE: ${{ steps.tgt.outputs.type }}
-          LOCALE:   ${{ steps.tgt.outputs.locale }}
-          HANDLE:   ${{ steps.tgt.outputs.handle }}
-        run: node scripts/pull-cms.js
+        run: |
+          while read -r A B C; do
+            [ -z "$A" ] && continue
+            case "$A" in
+              post|page|product) T="$A"; L="$B"; H="$C" ;;
+              *)                 T="post"; L="$A"; H="$B" ;;
+            esac
+            [ -z "$H" ] && continue
+            echo "::group::pull $T $L $H"
+            CMS_TYPE="$T" LOCALE="$L" HANDLE="$H" node scripts/pull-cms.js || echo "  (failed: $T $L $H)"
+            echo "::endgroup::"
+          done < "${{ steps.tgt.outputs.queue }}"
 
-      - name: Commit pulled file
+      - name: Commit pulled files
         if: steps.tgt.outputs.skip != 'true'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add blogs cms 2>/dev/null || git add blogs
           if git diff --cached --quiet; then
-            echo "No changes — ${{ steps.tgt.outputs.type }} already in sync."
+            echo "No changes — already in sync."
             exit 0
           fi
-          git commit -m "Pull ${{ steps.tgt.outputs.type }} ${{ steps.tgt.outputs.handle }} (${{ steps.tgt.outputs.locale }}) from CMS [skip ci]"
+          git commit -m "Pull $(git diff --cached --name-only | wc -l | tr -d ' ') CMS object(s) from CMS [skip ci]"
           git pull --rebase origin main
           git push

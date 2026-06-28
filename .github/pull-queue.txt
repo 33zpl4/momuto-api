@@ -1,14 +1,16 @@
-# CMS pull queue — append a request as the LAST non-comment line, then push.
-# The "Pull CMS Content" workflow fetches that object and commits it back [skip ci].
-#
-# Format:
-#   <type> <locale> <handle>     types: post | page | product
-#   <locale> <handle>            shorthand → type defaults to post
-#
-# Examples:
-#   post fr creer-maillot-foot-ia-chatgpt-gemini
-#   page fr demande-de-design-professionnel-de-maillots
-#   product fr the-fracture
-#   fr some-blog-handle
-#
-# (no active line below = nothing to pull)
+# CMS pull queue — one request per line: "<type> <locale> <handle>" (type optional → post).
+# All non-comment lines are pulled on push.
+
+# --- AI-to-real posts (where the before/after transformations belong) ---
+en ai-to-reality-kit-maker-guide
+es diseno-camisetas-chatgpt-ia-realidad
+it creare-kit-calcio-con-intelligenza-artificiale
+
+# --- duplicate AI-reframed posts I created by mistake (to review/revert) ---
+fr maillots-foot-concept-du-croquis-au-vrai-maillot
+es equipaciones-futbol-concepto-del-boceto-al-jersey-real
+it concept-kit-calcio-dal-bozzetto-alla-maglia-reale
+
+# --- original concept-jersey posts that rank (fan designs for real teams) ---
+fr l-art-des-concepts-de-maillots-comment-les-fans-reinventent-le-football
+es el-arte-de-los-conceptos-de-camisetas-como-los-aficionados-reinventan-el-futbol
