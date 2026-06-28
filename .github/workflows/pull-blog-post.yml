@@ -5,6 +5,13 @@ name: Pull Blog Post
 # The sync commit is marked [skip ci] so it does not re-trigger a deploy.
 
 on:
+  # Click-free: append "<locale> <handle>" as the last line of .github/pull-queue.txt
+  # and push. The runner (which has network + secrets, unlike the sandbox) fetches
+  # the post and commits it back, marked [skip ci].
+  push:
+    branches: [main]
+    paths:
+      - '.github/pull-queue.txt'
   workflow_dispatch:
     inputs:
       post_handle:
@@ -29,14 +36,26 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Resolve target (push = last queue line, dispatch = inputs)
+        id: tgt
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            LINE="$(grep -vE '^\s*(#|$)' .github/pull-queue.txt | tail -1)"
+            echo "locale=$(echo "$LINE" | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+            echo "handle=$(echo "$LINE" | awk '{print $2}')" >> "$GITHUB_OUTPUT"
+          else
+            echo "locale=${{ github.event.inputs.locale }}" >> "$GITHUB_OUTPUT"
+            echo "handle=${{ github.event.inputs.post_handle }}" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Pull post from CMS
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
-          POST_HANDLE: ${{ github.event.inputs.post_handle }}
-          LOCALE: ${{ github.event.inputs.locale }}
+          POST_HANDLE: ${{ steps.tgt.outputs.handle }}
+          LOCALE: ${{ steps.tgt.outputs.locale }}
         run: node scripts/pull-blog-post.js
 
       - name: Commit pulled file
@@ -48,5 +67,6 @@ jobs:
             exit 0
           fi
           git add blogs/
-          git commit -m "Pull blog post ${{ github.event.inputs.post_handle }} (${{ github.event.inputs.locale }}) from CMS [skip ci]"
+          git commit -m "Pull blog post ${{ steps.tgt.outputs.handle }} (${{ steps.tgt.outputs.locale }}) from CMS [skip ci]"
+          git pull --rebase origin main
           git push
