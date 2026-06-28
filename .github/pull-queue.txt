@@ -1,7 +1,14 @@
-# Pull queue — append "<locale> <handle>" as the LAST line and push.
-# The Pull Blog Post workflow fetches the last line's post into blogs/<locale>/.
-fr creer-maillot-foot-ia-chatgpt-gemini
-
-# trigger: pull-fr-ai-post
-
-# trigger: pull-fr-ai-post-retry
+# CMS pull queue — append a request as the LAST non-comment line, then push.
+# The "Pull CMS Content" workflow fetches that object and commits it back [skip ci].
+#
+# Format:
+#   <type> <locale> <handle>     types: post | page | product
+#   <locale> <handle>            shorthand → type defaults to post
+#
+# Examples:
+#   post fr creer-maillot-foot-ia-chatgpt-gemini
+#   page fr demande-de-design-professionnel-de-maillots
+#   product fr the-fracture
+#   fr some-blog-handle
+#
+# (no active line below = nothing to pull)
