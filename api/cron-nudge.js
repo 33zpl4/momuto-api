@@ -61,12 +61,17 @@ module.exports = async function handler(req, res) {
   const completed = new Set(
     leads.filter(l => l.type !== 'deposit_intent' && l.email).map(l => norm(l.email))
   );
+  // Emails that actually PAID (set by /api/stripe-webhook) → real signal, never nudge.
+  const paidEmails = new Set(
+    leads.filter(l => l.paid && l.email).map(l => norm(l.email))
+  );
 
   const results = { sent: [], skipped: 0 };
 
   for (const lead of leads) {
     if (lead.type !== 'deposit_intent') continue;
     if (lead.nudgeSent) { results.skipped++; continue; }
+    if (lead.paid || paidEmails.has(norm(lead.email))) { results.skipped++; continue; }
     if (!lead.email || completed.has(norm(lead.email))) { results.skipped++; continue; }
 
     const age = hoursSince(lead.receivedAt);
