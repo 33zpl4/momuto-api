@@ -464,7 +464,7 @@
 <!-- ── HERO ── -->
 <header class="hero full-bleed">
 <div class="hero-content">
-<h1>Custom Football Kits for <span class="highlight">Serious Teams</span></h1>
+<h1>Custom Football Kits <span class="highlight">No One Else Can Wear</span></h1>
 <h3>Send us your concept &mdash; an AI idea, a sketch, your colours &mdash; and a designer turns it into a production-ready kit. Or design it yourself, free.</h3>
 <p class="hero-intro">MOMUTO gives teams three routes: <strong>Ready-to-Play</strong> pre-designed kits at 10% off, a <strong>real-time 3D configurator</strong> to build it yourself, or <strong>Custom Design</strong> &mdash; send your concept and a designer turns it into a wearable, production-ready kit. First mockup in 24&ndash;48h, revisions until it’s right. €15 to start, credited in full at 5+ jerseys.</p>
 </div>
@@ -664,7 +664,7 @@
 <div class="custom-file-upload"><label for="clubCrest"><i class="fas fa-upload"></i> Upload Badge</label> <input type="file" id="clubCrest" name="upload_file" accept="image/*" onchange="previewLogo(this)" /><div id="fileNameDisplay"></div><div id="logoPreview" style="margin-top: 10px; max-width: 100px;"></div></div>
 </div>
 <div class="form-section-inner">
-<h4>1b. Design Concept (optional)</h4>
+<h4>1b. Design Concept</h4>
 <p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 15px; font-weight: 300;">AI render, sketch, reference kit, or any visual concept. Skip if you&rsquo;d rather brief us in words.</p>
 <div class="custom-file-upload"><label for="designConcept"><i class="fas fa-upload"></i> Upload Concept</label> <input type="file" id="designConcept" name="design_concept" accept="image/*,.pdf" onchange="previewDesign(this)" /><div id="designNameDisplay"></div><div id="designPreview" style="margin-top: 10px; max-width: 200px;"></div></div>
 </div>
@@ -680,8 +680,8 @@
 <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 15px;">From 1 (Classic) to 10 (Modern/Bold)</p>
 <div class="style-scale"><span>1</span> <input type="range" id="stylePreference" name="stylePreference" min="1" max="10" value="5" /> <span>10</span></div>
 <div class="style-extremes">
-<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/7717020eb4f7350ff2eaf310f87346f7.jpg" alt="Classic Style" /><p>Classic</p></div>
-<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/aa44aa9cce491bdfc97c04586417a837.jpg" alt="Bold Style" /><p>Bold</p></div>
+<div class="extreme"><img src="https://cdn.staticsoe.com/pics/538150ba1ae900eeb8bcd554369039ef895a3f0ca4921acd104f3def905a9a79.png" alt="Classic Style" /><p>Classic</p></div>
+<div class="extreme"><img src="https://cdn.staticsoe.com/pics/f3184bab61ef27ee9d496b45c4632c611e7ae04ef574c76cfc29ee3404a7b9c3.png" alt="Bold Style" /><p>Bold</p></div>
 </div>
 </div>
 <div class="form-section-inner">

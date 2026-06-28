@@ -464,7 +464,7 @@
 <!-- ── HERO ── -->
 <header class="hero full-bleed">
 <div class="hero-content">
-<h1>Maillots de Foot Personnalisés pour <span class="highlight">Équipes Ambitieuses</span></h1>
+<h1>Maillots de Foot Personnalisés <span class="highlight">que Personne d'Autre ne Portera</span></h1>
 <h3>Envoyez-nous votre concept &mdash; une idée IA, un croquis, vos couleurs &mdash; et un designer le transforme en maillot prêt pour la production. Ou créez-le vous-même, gratuitement.</h3>
 <p class="hero-intro">MOMUTO propose trois approches : des maillots <strong>Ready-to-Play</strong> pré-conçus à -10 %, un <strong>configurateur 3D en temps réel</strong> pour le faire vous-même, ou le <strong>Design Personnalisé</strong> &mdash; envoyez votre concept et un designer le transforme en maillot portable, prêt pour la production. Première maquette en 24&ndash;48h, révisions jusqu’à ce que ce soit parfait. 15 € pour démarrer, intégralement crédités dès 5 maillots.</p>
 </div>
@@ -664,7 +664,7 @@
 <div class="custom-file-upload"><label for="clubCrest"><i class="fas fa-upload"></i> Importer le Blason</label> <input type="file" id="clubCrest" name="upload_file" accept="image/*" onchange="previewLogo(this)" /><div id="fileNameDisplay"></div><div id="logoPreview" style="margin-top: 10px; max-width: 100px;"></div></div>
 </div>
 <div class="form-section-inner">
-<h4>1b. Concept de Design (optionnel)</h4>
+<h4>1b. Concept de Design</h4>
 <p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 15px; font-weight: 300;">AI render, sketch, reference kit, or any visual concept. Skip if you&rsquo;d rather brief us in words.</p>
 <div class="custom-file-upload"><label for="designConcept"><i class="fas fa-upload"></i> Importer le Concept</label> <input type="file" id="designConcept" name="design_concept" accept="image/*,.pdf" onchange="previewDesign(this)" /><div id="designNameDisplay"></div><div id="designPreview" style="margin-top: 10px; max-width: 200px;"></div></div>
 </div>
@@ -680,8 +680,8 @@
 <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 15px;">De 1 (Classique) à 10 (Moderne/Audacieux)</p>
 <div class="style-scale"><span>1</span> <input type="range" id="stylePreference" name="stylePreference" min="1" max="10" value="5" /> <span>10</span></div>
 <div class="style-extremes">
-<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/7717020eb4f7350ff2eaf310f87346f7.jpg" alt="Style Classique" /><p>Classique</p></div>
-<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250228/aa44aa9cce491bdfc97c04586417a837.jpg" alt="Style Audacieux" /><p>Audacieux</p></div>
+<div class="extreme"><img src="https://cdn.staticsoe.com/pics/538150ba1ae900eeb8bcd554369039ef895a3f0ca4921acd104f3def905a9a79.png" alt="Style Classique" /><p>Classique</p></div>
+<div class="extreme"><img src="https://cdn.staticsoe.com/pics/f3184bab61ef27ee9d496b45c4632c611e7ae04ef574c76cfc29ee3404a7b9c3.png" alt="Style Audacieux" /><p>Audacieux</p></div>
 </div>
 </div>
 <div class="form-section-inner">
