@@ -1,3 +1,5 @@
 # Pull queue — append "<locale> <handle>" as the LAST line and push.
 # The Pull Blog Post workflow fetches the last line's post into blogs/<locale>/.
 fr creer-maillot-foot-ia-chatgpt-gemini
+
+# trigger: pull-fr-ai-post
