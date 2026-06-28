@@ -100,6 +100,8 @@ async function deployOne(locale, handle) {
     summary: data.summary ?? '',
     author: data.author ?? '',
     handle,
+    // round-trip publish state when the file declares it (0 = draft/unpublished)
+    ...(data.status != null ? { status: data.status } : {}),
   });
   console.log(`   ✅ ${domain.url}/blogs/${handle}`);
 }
