@@ -1,0 +1,52 @@
+name: Pull Blog Post
+
+# Fetches a single CMS blog post into the repo (blogs/<locale>/<handle>.json) and
+# commits it, so it can be edited locally and redeployed via Deploy Blog Post.
+# The sync commit is marked [skip ci] so it does not re-trigger a deploy.
+
+on:
+  workflow_dispatch:
+    inputs:
+      post_handle:
+        description: 'CMS url handle of the post to pull'
+        required: true
+      locale:
+        description: 'Site locale'
+        required: false
+        default: 'fr'
+        type: choice
+        options: [en, fr, es, it]
+
+permissions:
+  contents: write
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pull post from CMS
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          POST_HANDLE: ${{ github.event.inputs.post_handle }}
+          LOCALE: ${{ github.event.inputs.locale }}
+        run: node scripts/pull-blog-post.js
+
+      - name: Commit pulled file
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No changes — post already in sync."
+            exit 0
+          fi
+          git add blogs/
+          git commit -m "Pull blog post ${{ github.event.inputs.post_handle }} (${{ github.event.inputs.locale }}) from CMS [skip ci]"
+          git push
