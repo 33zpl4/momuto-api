@@ -63,6 +63,17 @@ async function updatePost(token, id, data) {
   return json;
 }
 
+async function createPost(token, data) {
+  const res = await fetch(`${HOST}/posts`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', token },
+    body: JSON.stringify(data),
+  });
+  const json = await res.json();
+  if (!res.ok || json.code !== 0) throw new Error(`POST /posts failed: ${JSON.stringify(json)}`);
+  return json;
+}
+
 // blogs/<handle>.json → en ; blogs/<locale>/<handle>.json → that locale
 function parsePath(file) {
   let m = file.match(/^blogs\/(en|fr|es|it)\/(.+)\.json$/);
@@ -88,11 +99,7 @@ async function deployOne(locale, handle) {
   console.log(`• ${locale} ${handle} — "${data.title}" (meta_title ${data.meta_title?.length ?? 0}/65, desc ${data.meta_descript?.length ?? 0}/160)`);
   if (DRY_RUN) { console.log('   DRY RUN — no write'); return; }
 
-  const posts = await fetchPosts(domain.token);
-  const post = posts.find(p => getHandle(p) === handle);
-  if (!post) { throw new Error(`${handle}: not found in CMS on ${domain.url}`); }
-
-  await updatePost(domain.token, post.id, {
+  const payload = {
     title: data.title,
     content: data.content,
     meta_title: data.meta_title,
@@ -102,7 +109,16 @@ async function deployOne(locale, handle) {
     handle,
     // round-trip publish state when the file declares it (0 = draft/unpublished)
     ...(data.status != null ? { status: data.status } : {}),
-  });
+  };
+
+  const posts = await fetchPosts(domain.token);
+  const post = posts.find(p => getHandle(p) === handle);
+  if (post) {
+    await updatePost(domain.token, post.id, payload);
+  } else {
+    await createPost(domain.token, payload);   // new post → create instead of failing
+    console.log(`   ✨ created`);
+  }
   console.log(`   ✅ ${domain.url}/blogs/${handle}`);
 }
 
