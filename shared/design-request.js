@@ -5,7 +5,18 @@
         document.getElementById(`step${step}`).classList.add('active');
         document.querySelectorAll('.progress-step').forEach((s, i) => { if(i + 1 <= step) { s.classList.add('active'); } else { s.classList.remove('active'); } });
     }
-    function nextStep() { if (validateCurrentStep()) { if (currentStep < totalSteps) { currentStep++; showStep(currentStep); document.getElementById('cta-form').scrollIntoView({behavior: 'smooth', block: 'start'}); } } }
+    // Deterministic scroll to the top of the form. scrollIntoView fired mid-reflow
+    // (step 2 is long, step 3 short) could land on the FAQ below — read the position
+    // after the layout settles, then scroll, with a nav offset.
+    function scrollFormTop() {
+        var el = document.getElementById('cta-form');
+        if (!el) return;
+        requestAnimationFrame(function () {
+            var y = el.getBoundingClientRect().top + window.pageYOffset - 90;
+            window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'smooth' });
+        });
+    }
+    function nextStep() { if (validateCurrentStep()) { if (currentStep < totalSteps) { currentStep++; showStep(currentStep); scrollFormTop(); } } }
     function prevStep() { if (currentStep > 1) { currentStep--; showStep(currentStep); } }
     function validateCurrentStep() {
         const currentStepElement = document.getElementById(`step${currentStep}`);
