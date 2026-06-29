@@ -9,13 +9,16 @@
     // (step 2 is long, step 3 short) could land on the FAQ below — read the position
     // after the layout settles, then scroll, with a nav offset.
     function scrollFormTop() {
-        var el = document.getElementById('brief-form-section') || document.getElementById('cta-form');
+        var el = document.querySelector('.form-container')
+              || document.getElementById('brief-form-section')
+              || document.getElementById('cta-form');
         if (!el) return;
-        // Wait for the step swap (long step 2 → short step 3) to reflow, then jump.
-        setTimeout(function () {
-            var y = el.getBoundingClientRect().top + window.pageYOffset - 90;
-            window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'auto' });
-        }, 60);
+        var go = function () { el.scrollIntoView({ behavior: 'auto', block: 'start' }); };
+        // Scroll once after the step reflow, then again — the CMS theme also runs a
+        // "form functionality" handler on click that can scroll us back down; the
+        // second pass re-corrects after it has run.
+        setTimeout(go, 50);
+        setTimeout(go, 250);
     }
     function nextStep() { if (validateCurrentStep()) { if (currentStep < totalSteps) { currentStep++; showStep(currentStep); scrollFormTop(); } } }
     function prevStep() { if (currentStep > 1) { currentStep--; showStep(currentStep); } }
