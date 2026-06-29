@@ -9,12 +9,13 @@
     // (step 2 is long, step 3 short) could land on the FAQ below — read the position
     // after the layout settles, then scroll, with a nav offset.
     function scrollFormTop() {
-        var el = document.getElementById('cta-form');
+        var el = document.getElementById('brief-form-section') || document.getElementById('cta-form');
         if (!el) return;
-        requestAnimationFrame(function () {
+        // Wait for the step swap (long step 2 → short step 3) to reflow, then jump.
+        setTimeout(function () {
             var y = el.getBoundingClientRect().top + window.pageYOffset - 90;
-            window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'smooth' });
-        });
+            window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'auto' });
+        }, 60);
     }
     function nextStep() { if (validateCurrentStep()) { if (currentStep < totalSteps) { currentStep++; showStep(currentStep); scrollFormTop(); } } }
     function prevStep() { if (currentStep > 1) { currentStep--; showStep(currentStep); } }
@@ -43,7 +44,8 @@
         document.querySelectorAll('.prev-step').forEach(btn => { btn.addEventListener('click', prevStep); });
         document.getElementById('proposalForm').addEventListener('submit', function(e) { if (!validateCurrentStep()) { e.preventDefault(); return; } });
         document.querySelectorAll('input, select').forEach(input => { input.addEventListener('input', function() { this.style.borderColor = 'rgba(255,255,255,0.3)'; }); });
-        document.querySelector('a[href="#cta-form"]').addEventListener('click', function(e) { e.preventDefault(); document.getElementById('cta-form').scrollIntoView({behavior: 'smooth'}); });
+        var topLink = document.querySelector('a[href="#cta-form"]');
+        if (topLink) { topLink.addEventListener('click', function(e) { e.preventDefault(); scrollFormTop(); }); }
     });
     function previewLogo(input) {
         const preview = document.getElementById('logoPreview');
