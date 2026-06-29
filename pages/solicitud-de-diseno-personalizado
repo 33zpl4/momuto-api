@@ -296,7 +296,7 @@
 <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 15px;">Del 1 (Cl&aacute;sico) al 10 (Moderno/Audaz)</p>
 <div class="style-scale"><span>1</span> <input type="range" id="stylePreference" name="stylePreference" min="1" max="10" value="5" /> <span>10</span></div>
 <div class="style-extremes">
-<div class="extreme"><img src="https://cdn.staticsoe.com/pics/538150ba1ae900eeb8bcd554369039ef895a3f0ca4921acd104f3def905a9a79.png" alt="Estilo Cl&aacute;sico" />
+<div class="extreme"><img src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20260129/b73f2059037c0ac1782023bdfdc67c9c.png" alt="Estilo Cl&aacute;sico" />
 <p>Cl&aacute;sico</p>
 </div>
 <div class="extreme"><img src="https://cdn.staticsoe.com/pics/f3184bab61ef27ee9d496b45c4632c611e7ae04ef574c76cfc29ee3404a7b9c3.png" alt="Estilo Audaz" />
