@@ -71,6 +71,7 @@ jobs:
           while read -r A B C; do
             [ -z "$A" ] && continue
             case "$A" in
+              inventory)         T="inventory"; L="$B"; H="-" ;;
               post|page|product) T="$A"; L="$B"; H="$C" ;;
               *)                 T="post"; L="$A"; H="$B" ;;
             esac

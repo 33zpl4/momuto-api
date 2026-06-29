@@ -14,3 +14,5 @@ it concept-kit-calcio-dal-bozzetto-alla-maglia-reale
 # --- original concept-jersey posts that rank (fan designs for real teams) ---
 fr l-art-des-concepts-de-maillots-comment-les-fans-reinventent-le-football
 es el-arte-de-los-conceptos-de-camisetas-como-los-aficionados-reinventan-el-futbol
+
+inventory fr

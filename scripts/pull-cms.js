@@ -84,11 +84,27 @@ async function main() {
   const type   = (process.env.CMS_TYPE || 'post').toLowerCase();
   const locale = (process.env.LOCALE || 'fr').toLowerCase();
   const handle = process.env.HANDLE || process.env.POST_HANDLE;
-
-  if (!ENDPOINT[type]) { console.error(`Unknown CMS_TYPE "${type}" — use post | page | product`); process.exit(1); }
-  if (!handle) { console.error('HANDLE required'); process.exit(1); }
-  const token = TOKENS[locale];
+  const token  = TOKENS[locale];
   if (!token) { console.error(`No ${locale} token set`); process.exit(1); }
+
+  // Inventory mode: list every post + page (handle/title/status) into a manifest.
+  if (type === 'inventory') {
+    const inv = {};
+    for (const [t, ep] of [['posts', 'posts'], ['pages', 'pages']]) {
+      const items = await fetchAll(ep, token);
+      inv[t] = items.map(o => ({ handle: getHandle(o), title: o.title || o.name || '', status: o.status ?? null }))
+                    .filter(x => x.handle)
+                    .sort((a, b) => a.handle.localeCompare(b.handle));
+    }
+    const file = path.join(ROOT, 'cms', 'inventory', `${locale}.json`);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, JSON.stringify(inv, null, 2) + '\n');
+    console.log(`✅ Inventory ${locale}: ${inv.posts.length} posts, ${inv.pages.length} pages → cms/inventory/${locale}.json`);
+    return;
+  }
+
+  if (!ENDPOINT[type]) { console.error(`Unknown CMS_TYPE "${type}" — use post | page | product | inventory`); process.exit(1); }
+  if (!handle) { console.error('HANDLE required'); process.exit(1); }
 
   const items = await fetchAll(ENDPOINT[type], token);
   const item = items.find(o => getHandle(o) === handle || String(o.id) === String(handle));
