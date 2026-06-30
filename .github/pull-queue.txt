@@ -1,8 +1,2 @@
-# CMS pull queue — "<type> <locale> <handle>" per line (type optional → post). All lines pulled on push.
-fr pourquoi-creer-un-maillot-de-foot-pour-club-avec-le-configurateur-3d-momuto
-fr qualite-maillot-football
-fr comment-creer-le-maillot-de-football-ideal-guide-des-couleurs
-fr comparatif-meilleur-fournisseur-maillot-foot-france
-fr l-incroyable-flexibilite-des-kits-d-equipe-de-foot-personnalisables
-fr pourquoi-customiser-votre-maillot-de-foot-et-comment-le-faire
-fr maillots-sur-mesure-design-ia-retour-experience
+# CMS pull queue — "<type> <locale> <handle>" per line. All lines pulled on push.
+inventory es
