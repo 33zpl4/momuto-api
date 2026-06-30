@@ -1,2 +1,10 @@
 # CMS pull queue — "<type> <locale> <handle>" per line. All lines pulled on push.
-inventory es
+es por-que-crear-una-camiseta-de-futbol-para-club-con-el-configurador-3d-momuto
+es crea-tu-camiseta-de-futbol-unica-con-el-configurador-3d-momuto
+es camisetas-futbol-premium-materiales-tecnicas
+es como-crear-la-camiseta-de-futbol-ideal-guia-de-colores
+es comparativa-equipaciones-futbol-personalizadas-espana
+es flexibilidad-equipamientos-de-futbol-personalizables
+es por-que-personalizar-tu-camiseta-de-futbol-y-como-hacerlo
+es camisetas-futbol-sin-pedido-minimo-una-unidad
+es equipaciones-futbol-urgentes-entrega-20-dias
