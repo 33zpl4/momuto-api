@@ -1,0 +1,66 @@
+name: Deploy CMS Page
+
+# Round-trips an edited CMS page back to the CMS. Pull a page first with the
+# Pull CMS Content workflow (writes cms/pages/<locale>/<handle>.json with its
+# id), edit the `content`, and push → the changed page(s) deploy automatically.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'cms/pages/**/*.json'
+  workflow_dispatch:
+    inputs:
+      page_handle:
+        description: 'CMS page handle (must match cms/pages/<locale>/<handle>.json)'
+        required: true
+      locale:
+        description: 'Site locale'
+        required: false
+        default: 'fr'
+        type: choice
+        options: [en, fr, es, it]
+      dry_run:
+        description: 'Dry run — preview only, no writes to CMS'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Deploy changed CMS pages (push)
+        if: github.event_name == 'push'
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          DRY_RUN: 'false'
+        run: |
+          BEFORE='${{ github.event.before }}'
+          if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then BEFORE="$(git rev-parse HEAD~1)"; fi
+          CHANGED="$(git diff --name-only "$BEFORE" "${{ github.sha }}" -- 'cms/pages/**/*.json' | tr '\n' ' ')"
+          echo "Changed CMS pages: $CHANGED"
+          CHANGED_FILES="$CHANGED" node scripts/deploy-cms-page.js
+
+      - name: Deploy CMS page (dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          LOCALE: ${{ github.event.inputs.locale }}
+          PAGE_HANDLE: ${{ github.event.inputs.page_handle }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/deploy-cms-page.js
