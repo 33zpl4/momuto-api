@@ -202,6 +202,11 @@ static/                               ← Static files for all domains
 package.json
 ```
 
+## Planning docs
+
+See [`docs/`](./docs/) for strategy/handoff docs. Notably:
+- **US plan** — [`docs/us-hub-plan.md`](./docs/us-hub-plan.md): moving US-English SEO to `us.momuto.com` and the exact EN→US mirror strategy.
+
 ## After deployment
 
 Remember to:
