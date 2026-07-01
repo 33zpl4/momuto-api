@@ -39,6 +39,14 @@
     },
     {
       "@type": "Question",
+      "name": "L’acompte de 15 € est-il remboursable ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Si vous préférez ne pas continuer après le premier concept, dites-le-nous et on vous rembourse vos 15 € intégralement — sans justification. Pour une commande de 5 maillots ou plus, ils sont de toute façon crédités sur votre commande : dans les deux cas, cela ne coûte rien."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Qu’est-ce qui est inclus ?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -737,6 +745,7 @@
 <div class="faq-list">
 <div class="faq-item"><h3>Pourquoi 15 € pour démarrer ?</h3><p>Un designer consacre de vraies heures à votre concept &mdash; recherche, illustration, vectorisation et révisions jusqu’à ce que ce soit parfait. Les 15 € permettent au studio de se concentrer sur les équipes qui construisent quelque chose de réel, et ils sont intégralement crédités sur votre commande dès 5 maillots &mdash; donc pour toute vraie commande d’équipe, cela ne coûte rien.</p></div>
 <div class="faq-item"><h3>Quand les 15 € sont-ils crédités ?</h3><p>Dès que votre commande atteint 5 maillots ou plus, ils sont crédités sur le total de votre commande au paiement.</p></div>
+<div class="faq-item"><h3>L’acompte de 15 € est-il remboursable ?</h3><p>Oui. Si vous préférez ne pas continuer après le premier concept, dites-le-nous et on vous rembourse vos 15 € intégralement &mdash; sans justification. Pour une commande de 5 maillots ou plus, ils sont de toute façon crédités sur votre commande : dans les deux cas, cela ne coûte rien.</p></div>
 <div class="faq-item"><h3>Qu’est-ce qui est inclus ?</h3><p>Un designer sur votre concept, une première maquette en 24&ndash;48h, des révisions jusqu’à ce que ce soit parfait, le travail d’illustration et de vectorisation (concepts IA, croquis, maillots de référence, graphismes sur-mesure), et des fichiers prêts pour la production en impression sublimation.</p></div>
 <div class="faq-item"><h3>Puis-je envoyer un concept généré par IA (ChatGPT, Midjourney) ?</h3><p>Oui &mdash; c’est exactement à cela que ce service est destiné. Importez votre visuel IA et notre designer l’adaptera en maillot prêt pour la production tout en préservant votre vision. Cela inclut la vectorisation des formes, la reproduction des dégradés et textures, et l’ajustement aux contraintes réelles du tissu.</p></div>
 <div class="faq-item"><h3>Et si je n’ai qu’un brief, sans concept ?</h3><p>Aucun problème. Décrivez vos couleurs, votre direction de style et toute référence (maillots existants, palettes, ambiance). Plus il y a de détails, mieux c’est, mais nos designers travaillent à partir de briefs tous les jours. Vous recevrez une maquette en 24&ndash;48h dans tous les cas.</p></div>

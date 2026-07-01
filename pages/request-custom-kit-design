@@ -39,6 +39,14 @@
     },
     {
       "@type": "Question",
+      "name": "Is the €15 deposit refundable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If you prefer not to continue after the first concept, just tell us and we’ll refund your €15 in full — no questions asked. For orders of 5 or more jerseys it’s credited to your order anyway, so either way it costs nothing."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "What’s included?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -737,6 +745,7 @@
 <div class="faq-list">
 <div class="faq-item"><h3>Why is there a €15 fee to start?</h3><p>A designer gives your concept real hours &mdash; research, illustration, vectorization, and revisions until it’s right. The €15 keeps the studio focused on teams building something real, and it&rsquo;s credited in full to your order at 5 or more jerseys &mdash; so for any real team order it costs nothing.</p></div>
 <div class="faq-item"><h3>When is the €15 credited back?</h3><p>When your order reaches 5 or more jerseys, it&rsquo;s credited to your order total at checkout.</p></div>
+<div class="faq-item"><h3>Is the €15 deposit refundable?</h3><p>Yes. If you prefer not to continue after the first concept, just tell us and we&rsquo;ll refund your €15 in full &mdash; no questions asked. For orders of 5 or more jerseys it&rsquo;s credited to your order anyway, so either way it costs nothing.</p></div>
 <div class="faq-item"><h3>What&rsquo;s included?</h3><p>A designer on your concept, first mockup in 24&ndash;48h, revisions until it’s right, illustration and vectorization work (AI concepts, sketches, reference kits, custom graphics), and production-ready files for dye-sublimation printing.</p></div>
 <div class="faq-item"><h3>Can I submit an AI-generated concept (ChatGPT, Midjourney)?</h3><p>Yes &mdash; that&rsquo;s exactly what this is built for. Upload your AI render and our designer will adapt it into a production-ready kit while preserving your vision. This includes vectorizing custom shapes, replicating gradients and textures, and adjusting for real fabric constraints.</p></div>
 <div class="faq-item"><h3>What if I just have a brief and no concept?</h3><p>That&rsquo;s fine. Describe your colours, style direction, and any references (existing kits, palettes, mood). The more detail the better, but our designers work from briefs every day. You&rsquo;ll get a mockup in 24&ndash;48h regardless.</p></div>
