@@ -227,6 +227,16 @@
 }
 .gate-pay-btn:hover { background: #e04038; }
 .gate-pay-btn.is-disabled { opacity: 0.45; cursor: not-allowed; }
+.gate-refund-guarantee {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #d4d4d8;
+  margin: 16px 0 8px;
+  text-align: center;
+}
+.gate-refund-guarantee strong { color: #fff; font-weight: 600; }
 .gate-refund-note {
   font-family: 'Outfit', sans-serif;
   font-size: 0.75rem;
@@ -623,6 +633,7 @@
     <input type="email" class="gate-email-input" id="gateEmail" placeholder="Votre adresse e-mail" />
     <a href="https://buy.stripe.com/fZu6oH8HG4q8aTJgBL3wQ0h" class="gate-pay-btn" id="gatePayBtn">Envoyer Mon Concept &middot; 15 € &rarr;</a>
   </div>
+  <p class="gate-refund-guarantee">Vous préférez ne pas continuer après le premier concept ? Dites-le-nous &mdash; on vous rembourse vos <strong>15 €</strong>.</p>
   <p class="gate-refund-note">Paiement sécurisé via Stripe &bull; Crédité sur votre commande dès 5 maillots</p>
   <hr class="gate-divider" />
   <p class="gate-alt">Vous préférez le faire vous-même ? &nbsp;<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr">Configurateur 3D</a> et <a href="https://fr.momuto.com/pages/ready-to-play">Ready-to-Play</a> sont gratuits, instantanés et à vous.</p>
