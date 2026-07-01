@@ -1,11 +1,2 @@
 # CMS pull queue
-post it crea-maglia-calcio-personalizzata-configuratore-3d
-post it guida-configuratore-3d-maglia-calcio-personalizzata-momuto
-post it maglie-calcio-concept-arte-storia-futuro
-post it guida-colori-kit-calcio-personalizzato
-post it kit-calcio-alta-qualita-tessuti-tecniche
-post it divisa-calcio-personalizzata-club-configuratore-3d
-post it creare-divisa-calcio-club-configuratore-3d-momuto
-post it divise-da-calcio-personalizzate-perche-scegliere-momuto
-post it perche-personalizzare-il-kit-da-calcio-e-come-farlo
-post it migliori-fornitori-divise-calcio-personalizzate-2025
+inventory en
