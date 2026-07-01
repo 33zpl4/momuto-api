@@ -1,12 +1,3 @@
 # CMS pull queue
-post en high-quality-soccer-kits
-post en how-to-create-the-perfect-football-kit-colour-guide
-post en why-create-a-football-kit-for-your-club-with-the-momuto-3d-configurator
-post en why-personalize-your-football-kit-and-how-to-do-it
-post en why-you-should-choose-customizable-football-team-kits
-post en best-custom-football-kit-suppliers-2025-review
-post en wool-cotton-polyester-the-evolution-of-football-kits
-post en craft-your-perfect-custom-soccer-jersey-with-momuto-s-3d-configurator-guide
-post en ai-to-reality-kit-maker-guide
-post en sublimated-kits-revolution-in-team-sportswear
-post en elite-football-kit-aesthetics-how-top-clubs-harmonise-logo-and-colours
+page fr design-personnalise-confirme
+page en customized-design-confirmed
