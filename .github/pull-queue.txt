@@ -1,3 +1,2 @@
 # CMS pull queue
-page fr design-personnalise-confirme
-page en customized-design-confirmed
+product en the-apex-full-kit
