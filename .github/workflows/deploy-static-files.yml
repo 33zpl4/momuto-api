@@ -26,6 +26,7 @@ on:
           - sitemap.xml
           - blog.css
           - rtp-content.js
+          - custom-content.js
           - rtp-loader.js
           - embed.js
           - assets-apex.js
@@ -38,6 +39,7 @@ on:
   push:
     paths:
       - 'static/**'
+      - 'public/configurator/custom-content.js'
 
 jobs:
   deploy-static:
