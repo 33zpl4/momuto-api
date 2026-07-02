@@ -6,6 +6,13 @@ name: Push Product SEO (RTP)
 # (the type:3d cart pointer) are left untouched.
 
 on:
+  # Click-free: edit ready-to-play/seo/rtp-seo.<locale>.json and push → the
+  # changed locale's product SEO is pushed live (the integration token can't
+  # trigger workflow_dispatch, so we use a push trigger like the other deploys).
+  push:
+    branches: [main]
+    paths:
+      - 'ready-to-play/seo/rtp-seo.*.json'
   workflow_dispatch:
     inputs:
       domain:
@@ -43,7 +50,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Push product SEO
+      - name: Push product SEO (dispatch)
+        if: github.event_name == 'workflow_dispatch'
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
@@ -54,3 +62,23 @@ jobs:
           LIST_ONLY: ${{ github.event.inputs.list_only }}
           TARGET_HANDLES: ${{ github.event.inputs.handles }}
         run: node scripts/push-product-seo.js
+
+      - name: Push changed product SEO (push, live)
+        if: github.event_name == 'push'
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          DRY_RUN: 'false'
+        run: |
+          BEFORE='${{ github.event.before }}'
+          if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then BEFORE="$(git rev-parse HEAD~1)"; fi
+          CHANGED="$(git diff --name-only "$BEFORE" "${{ github.sha }}" -- 'ready-to-play/seo/rtp-seo.*.json')"
+          echo "Changed SEO files: $CHANGED"
+          for f in $CHANGED; do
+            LOC="$(basename "$f" | sed -E 's/rtp-seo\.(en|es|fr|it)\.json/\1/')"
+            echo "::group::push $LOC (live)"
+            TARGET_DOMAIN="$LOC" DRY_RUN=false node scripts/push-product-seo.js
+            echo "::endgroup::"
+          done
