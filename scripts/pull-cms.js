@@ -36,6 +36,10 @@ const ENDPOINT = { post: 'posts', page: 'pages', product: 'products' };
 const getHandle = (o) => o.handle || o.alias || o.slug || o.url_key || null;
 
 async function fetchAll(endpoint, token) {
+  // The /products endpoint uses cursor pagination (?limit&since_id) and returns
+  // json.data as a flat array — unlike posts/pages (?page&pagesize, json.data.list).
+  if (endpoint === 'products') return fetchAllProducts(token);
+
   let page = 1; const pagesize = 50; const items = [];
   while (true) {
     const res = await fetch(`${HOST}/${endpoint}?page=${page}&pagesize=${pagesize}`, { headers: { token } });
@@ -51,6 +55,20 @@ async function fetchAll(endpoint, token) {
     page++;
   }
   return items;
+}
+
+async function fetchAllProducts(token) {
+  const all = []; let since = ''; const limit = 200;
+  while (true) {
+    const res = await fetch(`${HOST}/products?limit=${limit}${since ? `&since_id=${since}` : ''}`, { headers: { token } });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok || json.code !== 0) { console.error(`  products error: ${JSON.stringify(json).slice(0, 200)}`); break; }
+    const arr = json.data || [];
+    all.push(...arr);
+    if (arr.length < limit) break;
+    since = arr[arr.length - 1].id;
+  }
+  return all;
 }
 
 const ROOT = path.join(__dirname, '..');

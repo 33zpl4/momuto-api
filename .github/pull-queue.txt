@@ -1,2 +1,3 @@
 # CMS pull queue
+# repull after products pagination fix
 product fr maillot-pornic-fc
