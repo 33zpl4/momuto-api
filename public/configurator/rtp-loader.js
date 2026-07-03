@@ -41,8 +41,10 @@
     load(BASE + "rtp-content.js?h=" + hour);
   }
 
-  // 3) Custom-product page content (dark theme + trust + FAQ), same hourly cache-bust.
+  // 3) Custom-product page content (dark theme + trust + FAQ).
+  //    Busts per-MINUTE while we're actively iterating on the template, so edits
+  //    show within ~a minute (switch back to "?h="+hour once the template is final).
   if (document.getElementById("momuto-custom") || document.querySelector("[data-momuto-custom]")) {
-    load(BASE + "custom-content.js?h=" + hour);
+    load(BASE + "custom-content.js?m=" + Math.floor(Date.now() / 60000));
   }
 })();
