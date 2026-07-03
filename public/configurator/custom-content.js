@@ -51,7 +51,7 @@ var I18N={
   highlights:[
    ["Fabric","<b>Polyester-elastane</b> with stretch. Sublimation-printed — colours dyed in, so they never crack or peel.",false],
    ["What you get","<b>Jersey</b>, or <b>full kit</b> (jersey + shorts). Names &amp; numbers per player.",false],
-   ["Made &amp; shipped","<b>~25–30 days</b> after you greenlight your mockup. Free shipping over €49.",false],
+   ["Made &amp; shipped","<b>~25–30 days</b> after your order. Free shipping over €49.",false],
    ["You're protected","Pay today, but we <b>don't print</b> until you approve a final mockup — sent <b>within 24h</b>. Change anything, free.",true]
   ],
   trust:{
@@ -78,10 +78,10 @@ var I18N={
    items:[
     ["Do I pay now, or after I see a mockup?","You pay when you order. Within <b>24 hours</b> we send a final mockup of your exact kit — and we <b>don't print a single piece until you greenlight it</b>. Want a change? Free. Your purchase is protected: you never get a kit you didn't approve."],
     ["What fabric are the kits made from?","A lightweight, breathable <b>polyester-elastane blend</b> with stretch for full freedom of movement. Every design is <b>sublimation-printed</b> — the colours and logos are dyed into the fabric, so they won't crack, peel or fade like a printed transfer."],
-    ["How do I choose the right size?","We carry a <b>full youth-to-adult size range</b>. Use the <b>size guide</b> (the \"Find your size\" link when you add your team) to match each player by chest and height. Between sizes, or mixing kids and adults? Just ask before you greenlight your mockup."],
+    ["How do I choose the right size?","We carry a <b>full youth-to-adult size range</b>. Use the <b>size guide</b> (the \"Find your size\" link when you add your team) to match each player by chest and height. Between sizes, or mixing kids and adults? Just ask before you order."],
     ["Jersey only or full kit — what's included?","Your choice. <b>Jersey only</b> is the shirt. <b>Full kit</b> adds matching <b>shorts</b>. It depends on the product — check the option above."],
     ["Is there a minimum order? How does pricing work?","<b>No minimum</b> — order a single kit or hundreds. The price per unit drops as your order grows, with no hidden fees."],
-    ["How long until it arrives?","We send your final mockup <b>within 24h</b> of ordering. Once you greenlight it, production and delivery take roughly <b>25–30 days</b>. Need it for a specific date? Tell us before you order and we'll confirm."],
+    ["How long until it arrives?","Production and delivery take roughly <b>25–30 days</b> after your order. Need it for a specific date? Tell us before you order and we'll confirm."],
     ["Will it come out exactly like the preview?","Yes — and you'll see it first. After you order, our team <b>vectorises and cleans your crest &amp; sponsor</b>, refines placement, and sends a <b>final mockup within 24h</b>. Nothing goes to print until you greenlight it."],
     ["Can I add player names and numbers?","Absolutely. Add a name and number per player in your team list at checkout, in your choice of font and colour — mix and match across the whole squad."],
     ["What if something isn't right on the mockup?","Change it — free. You can tweak anything right up until you greenlight your mockup, and we only start production once you've approved. No wrong prints, ever."]
@@ -92,7 +92,7 @@ var I18N={
   highlights:[
    ["Tejido","<b>Poliéster-elastano</b> con elasticidad. Estampado por sublimación: los colores se tiñen en la tela, así que nunca se agrietan ni se despegan.",false],
    ["Qué incluye","<b>Camiseta</b>, o <b>kit completo</b> (camiseta + pantalón). Nombres y dorsales por jugador.",false],
-   ["Producción y envío","<b>~25–30 días</b> tras dar el visto bueno a tu maqueta. Envío gratis a partir de 49 €.",false],
+   ["Producción y envío","<b>~25–30 días</b> tras tu pedido. Envío gratis a partir de 49 €.",false],
    ["Compra protegida","Pagas hoy, pero <b>no imprimimos</b> hasta que apruebes una maqueta final, enviada <b>en 24 h</b>. Cambia lo que quieras, gratis.",true]
   ],
   trust:{
@@ -119,10 +119,10 @@ var I18N={
    items:[
     ["¿Pago ahora o después de ver una maqueta?","Pagas al hacer el pedido. En <b>24 horas</b> te enviamos una maqueta final de tu equipación exacta, y <b>no imprimimos nada hasta que le das el visto bueno</b>. ¿Quieres un cambio? Gratis. Tu compra está protegida: nunca recibes una equipación que no hayas aprobado."],
     ["¿De qué material son las equipaciones?","Una mezcla ligera y transpirable de <b>poliéster-elastano</b> con elasticidad para total libertad de movimiento. Cada diseño se <b>estampa por sublimación</b>: los colores y logos se tiñen en la tela, así que no se agrietan, despegan ni destiñen como una estampación normal."],
-    ["¿Cómo elijo la talla correcta?","Tenemos una <b>gama completa de tallas, de infantil a adulto</b>. Usa la <b>guía de tallas</b> (el enlace «Encuentra tu talla» al añadir tu equipo) para acertar por pecho y altura. ¿Entre tallas o mezclando niños y adultos? Pregúntanos antes de aprobar la maqueta."],
+    ["¿Cómo elijo la talla correcta?","Tenemos una <b>gama completa de tallas, de infantil a adulto</b>. Usa la <b>guía de tallas</b> (el enlace «Encuentra tu talla» al añadir tu equipo) para acertar por pecho y altura. ¿Entre tallas o mezclando niños y adultos? Pregúntanos antes de comprar."],
     ["¿Solo camiseta o kit completo? ¿Qué incluye?","Tú eliges. <b>Solo camiseta</b> es la camiseta. <b>Kit completo</b> añade el <b>pantalón</b>. Depende del producto: revisa la opción de arriba."],
     ["¿Hay pedido mínimo? ¿Cómo funcionan los precios?","<b>Sin mínimo</b>: pide una sola equipación o cientos. El precio por unidad baja cuanto mayor es el pedido, sin costes ocultos."],
-    ["¿Cuánto tarda en llegar?","Te enviamos la maqueta final <b>en 24 h</b> tras el pedido. Una vez la apruebas, la producción y la entrega tardan unos <b>25–30 días</b>. ¿La necesitas para una fecha concreta? Dínoslo antes de comprar y te lo confirmamos."],
+    ["¿Cuánto tarda en llegar?","La producción y la entrega tardan unos <b>25–30 días</b> tras tu pedido. ¿La necesitas para una fecha concreta? Dínoslo antes de comprar y te lo confirmamos."],
     ["¿Quedará exactamente como la vista previa?","Sí, y la verás primero. Tras tu pedido, nuestro equipo <b>vectoriza y limpia tu escudo y patrocinador</b>, ajusta la colocación y te envía una <b>maqueta final en 24 h</b>. No se imprime nada hasta que le das el visto bueno."],
     ["¿Puedo añadir nombres y dorsales?","Por supuesto. Añade un nombre y un dorsal por jugador en la lista de tu equipo al finalizar la compra, con la tipografía y el color que elijas. Combina como quieras en toda la plantilla."],
     ["¿Y si algo no está bien en la maqueta?","Lo cambiamos, gratis. Puedes ajustar lo que sea hasta que apruebes tu maqueta, y solo empezamos a producir cuando la has aprobado. Sin impresiones erróneas, nunca."]
@@ -133,7 +133,7 @@ var I18N={
   highlights:[
    ["Tissu","<b>Polyester-élasthanne</b> extensible. Imprimé par sublimation : les couleurs sont teintes dans le tissu, elles ne craquent ni ne se décollent jamais.",false],
    ["Ce que vous recevez","<b>Maillot</b>, ou <b>kit complet</b> (maillot + short). Noms et numéros par joueur.",false],
-   ["Fabrication et envoi","<b>~25–30 jours</b> après validation de votre maquette. Livraison offerte dès 49 €.",false],
+   ["Fabrication et envoi","<b>~25–30 jours</b> après votre commande. Livraison offerte dès 49 €.",false],
    ["Achat protégé","Vous payez aujourd'hui, mais nous <b>n'imprimons rien</b> avant que vous validiez une maquette finale, envoyée <b>sous 24h</b>. Modifiez ce que vous voulez, gratuitement.",true]
   ],
   trust:{
@@ -160,10 +160,10 @@ var I18N={
    items:[
     ["Je paie maintenant ou après avoir vu une maquette ?","Vous payez à la commande. Sous <b>24 heures</b>, on vous envoie une maquette finale de votre tenue exacte, et <b>on n'imprime rien avant votre validation</b>. Une modification ? Gratuite. Votre achat est protégé : vous ne recevez jamais une tenue que vous n'avez pas approuvée."],
     ["Quelle est la matière des tenues ?","Un mélange léger et respirant de <b>polyester-élasthanne</b> extensible pour une liberté de mouvement totale. Chaque design est <b>imprimé par sublimation</b> : les couleurs et les logos sont teints dans le tissu, ils ne craquent, ne se décollent ni ne se décolorent comme un flocage classique."],
-    ["Comment choisir la bonne taille ?","Nous proposons une <b>gamme complète, de l'enfant à l'adulte</b>. Utilisez le <b>guide des tailles</b> (le lien « Trouvez votre taille » au moment d'ajouter votre équipe) pour ajuster selon le tour de poitrine et la taille. Entre deux tailles, ou en mélangeant enfants et adultes ? Demandez-nous avant de valider la maquette."],
+    ["Comment choisir la bonne taille ?","Nous proposons une <b>gamme complète, de l'enfant à l'adulte</b>. Utilisez le <b>guide des tailles</b> (le lien « Trouvez votre taille » au moment d'ajouter votre équipe) pour ajuster selon le tour de poitrine et la taille. Entre deux tailles, ou en mélangeant enfants et adultes ? Demandez-nous avant de commander."],
     ["Maillot seul ou kit complet — qu'est-ce qui est inclus ?","À vous de choisir. <b>Maillot seul</b>, c'est le maillot. <b>Kit complet</b> ajoute le <b>short</b>. Cela dépend du produit — vérifiez l'option ci-dessus."],
     ["Y a-t-il un minimum de commande ? Comment fonctionnent les prix ?","<b>Aucun minimum</b> — commandez une seule tenue ou des centaines. Le prix unitaire baisse à mesure que la commande grandit, sans frais cachés."],
-    ["Combien de temps avant la livraison ?","On vous envoie la maquette finale <b>sous 24h</b> après la commande. Une fois validée, la production et la livraison prennent environ <b>25–30 jours</b>. Besoin pour une date précise ? Dites-le-nous avant de commander et on vous confirme."],
+    ["Combien de temps avant la livraison ?","La production et la livraison prennent environ <b>25–30 jours</b> après votre commande. Besoin pour une date précise ? Dites-le-nous avant de commander et on vous confirme."],
     ["Le rendu sera-t-il exactement comme l'aperçu ?","Oui, et vous le verrez d'abord. Après votre commande, notre équipe <b>vectorise et nettoie votre écusson et sponsor</b>, affine le placement et vous envoie une <b>maquette finale sous 24h</b>. Rien n'est imprimé avant votre validation."],
     ["Puis-je ajouter les noms et numéros des joueurs ?","Bien sûr. Ajoutez un nom et un numéro par joueur dans la liste de votre équipe au paiement, dans la police et la couleur de votre choix — variez à volonté sur tout l'effectif."],
     ["Et si quelque chose ne va pas sur la maquette ?","On le modifie — gratuitement. Vous pouvez tout ajuster jusqu'à la validation de votre maquette, et on ne lance la production qu'une fois votre accord donné. Aucune impression ratée, jamais."]
@@ -174,7 +174,7 @@ var I18N={
   highlights:[
    ["Tessuto","<b>Poliestere-elastan</b> elasticizzato. Stampa a sublimazione: i colori sono tinti nel tessuto, non si crepano né si staccano mai.",false],
    ["Cosa ricevi","<b>Maglia</b>, o <b>kit completo</b> (maglia + pantaloncini). Nomi e numeri per ogni giocatore.",false],
-   ["Produzione e spedizione","<b>~25–30 giorni</b> dopo l'approvazione del tuo mockup. Spedizione gratuita sopra i 49 €.",false],
+   ["Produzione e spedizione","<b>~25–30 giorni</b> dopo il tuo ordine. Spedizione gratuita sopra i 49 €.",false],
    ["Acquisto protetto","Paghi oggi, ma <b>non stampiamo</b> finché non approvi un mockup finale, inviato <b>entro 24h</b>. Cambia ciò che vuoi, gratis.",true]
   ],
   trust:{
@@ -201,10 +201,10 @@ var I18N={
    items:[
     ["Pago adesso o dopo aver visto un mockup?","Paghi al momento dell'ordine. Entro <b>24 ore</b> ti inviamo un mockup finale del tuo kit esatto, e <b>non stampiamo nulla finché non dai l'ok</b>. Vuoi una modifica? Gratis. Il tuo acquisto è protetto: non ricevi mai un kit che non hai approvato."],
     ["Di che materiale sono i kit?","Un tessuto leggero e traspirante in <b>poliestere-elastan</b> elasticizzato per la massima libertà di movimento. Ogni design è <b>stampato a sublimazione</b>: i colori e i loghi sono tinti nel tessuto, quindi non si crepano, staccano o sbiadiscono come una stampa a trasferimento."],
-    ["Come scelgo la taglia giusta?","Abbiamo una <b>gamma completa, dal bambino all'adulto</b>. Usa la <b>guida alle taglie</b> (il link «Trova la tua taglia» quando aggiungi la squadra) per scegliere in base a torace e altezza. Sei tra due taglie, o mischi bambini e adulti? Chiedici prima di approvare il mockup."],
+    ["Come scelgo la taglia giusta?","Abbiamo una <b>gamma completa, dal bambino all'adulto</b>. Usa la <b>guida alle taglie</b> (il link «Trova la tua taglia» quando aggiungi la squadra) per scegliere in base a torace e altezza. Sei tra due taglie, o mischi bambini e adulti? Chiedici prima di ordinare."],
     ["Solo maglia o kit completo — cosa include?","Scegli tu. <b>Solo maglia</b> è la maglia. <b>Kit completo</b> aggiunge i <b>pantaloncini</b>. Dipende dal prodotto — controlla l'opzione qui sopra."],
     ["C'è un ordine minimo? Come funzionano i prezzi?","<b>Nessun minimo</b> — ordina un solo kit o centinaia. Il prezzo unitario scende man mano che l'ordine cresce, senza costi nascosti."],
-    ["Quanto tempo ci vuole per la consegna?","Ti inviamo il mockup finale <b>entro 24h</b> dall'ordine. Una volta approvato, produzione e consegna richiedono circa <b>25–30 giorni</b>. Ti serve per una data precisa? Dillo prima di ordinare e te lo confermiamo."],
+    ["Quanto tempo ci vuole per la consegna?","Produzione e consegna richiedono circa <b>25–30 giorni</b> dopo il tuo ordine. Ti serve per una data precisa? Dillo prima di ordinare e te lo confermiamo."],
     ["Verrà esattamente come l'anteprima?","Sì, e lo vedrai prima tu. Dopo l'ordine, il nostro team <b>vettorializza e pulisce stemma e sponsor</b>, perfeziona il posizionamento e ti invia un <b>mockup finale entro 24h</b>. Nulla va in stampa finché non dai l'ok."],
     ["Posso aggiungere nomi e numeri dei giocatori?","Assolutamente. Aggiungi nome e numero per ogni giocatore nella lista squadra al checkout, con il font e il colore che preferisci — combina come vuoi su tutta la rosa."],
     ["E se qualcosa non va nel mockup?","Lo cambiamo — gratis. Puoi modificare qualsiasi cosa fino all'approvazione del mockup, e iniziamo a produrre solo dopo il tuo ok. Nessuna stampa sbagliata, mai."]
@@ -214,10 +214,10 @@ var I18N={
 };
 
 var CSS=`
-body{background:#0a0a0a!important;color:#f5f5f5;}
+body.momuto-custom-page{background:#0a0a0a!important;color:#f5f5f5;}
 .rtpc{}
 .mkh{font-family:'Outfit',-apple-system,sans-serif;max-width:1100px;margin:28px auto 0;padding:0 16px;}
-.mkh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.mkh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 .mkh-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;}
 .mkh-card.hl{border-color:rgba(226,33,75,.45);background:rgba(226,33,75,.06);}
 .mkh-card .t{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E2214B;margin-bottom:6px;}
@@ -270,12 +270,19 @@ body{background:#0a0a0a!important;color:#f5f5f5;}
 @media(max-width:480px){.mtr-grid{grid-template-columns:1fr;}}
 @media(max-width:760px){.mkh-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:420px){.mkh-grid{grid-template-columns:1fr;}}
+/* theme overrides (only where the custom block renders) */
+body.momuto-custom-page .control-product_detail-title{color:#fff!important;}
+body.momuto-custom-page .product-router-nav{background:transparent!important;}
+body.momuto-custom-page .control-product_detail-price_box,
+body.momuto-custom-page #plugin-product-price,
+body.momuto-custom-page .price_append2{display:none!important;}
+body.momuto-custom-page .product-preview img{max-height:560px!important;width:auto!important;margin:0 auto;object-fit:contain;}
 `;
 
 function stripTags(s){return String(s).replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&mdash;/g,"—");}
 
 function highlights(c){
-  var cards=c.highlights.map(function(x){
+  var cards=c.highlights.slice(0,3).map(function(x){
     return '<div class="mkh-card'+(x[2]?" hl":"")+'"><div class="t">'+x[0]+'</div><div class="d">'+x[1]+'</div></div>';
   }).join("");
   return '<div class="mkh"><div class="mkh-grid">'+cards+'</div></div>';
@@ -308,6 +315,14 @@ function howfaq(c, chat){
     +'<div class="lab">'+f.lab+'</div><h2>'+f.h2+'</h2><p class="sub">'+f.sub+'</p>'
     +'<div class="mkt-faq">'+qs+'</div>'+cta+'</div>';
 }
+function faqKeep(items){return items.filter(function(_,i){return [1,2,3,4,5,7].indexOf(i)>-1;});}
+function faqSection(c){
+  var f=c.faq;
+  var qs=faqKeep(f.items).map(function(q){
+    return '<details><summary>'+q[0]+'</summary><p>'+q[1]+'</p></details>';
+  }).join("");
+  return '<div class="mkt"><div class="lab">'+f.lab+'</div><h2>'+f.h2+'</h2><p class="sub">'+f.sub+'</p><div class="mkt-faq">'+qs+'</div></div>';
+}
 function faqLd(items){
   return {"@context":"https://schema.org","@type":"FAQPage","mainEntity":items.map(function(q){
     return {"@type":"Question","name":stripTags(q[0]),"acceptedAnswer":{"@type":"Answer","text":stripTags(q[1])}};
@@ -317,11 +332,12 @@ function faqLd(items){
 function render(mount){
   var lang=(mount.getAttribute("data-lang")||"en").toLowerCase();
   var c=I18N[lang]||I18N.en;
-  mount.innerHTML="<style>"+CSS+"</style>"+highlights(c)+trust(c)+howfaq(c, CHAT[lang]||CHAT.en);
+  document.body.classList.add("momuto-custom-page");
+  mount.innerHTML="<style>"+CSS+"</style>"+highlights(c)+trust(c)+faqSection(c);
   try{
     var ld=document.createElement("script");
     ld.type="application/ld+json";
-    ld.textContent=JSON.stringify(faqLd(c.faq.items));
+    ld.textContent=JSON.stringify(faqLd(faqKeep(c.faq.items)));
     document.head.appendChild(ld);
   }catch(e){}
 }
