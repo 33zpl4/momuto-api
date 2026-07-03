@@ -276,7 +276,13 @@ body.momuto-custom-page .product-router-nav{background:transparent!important;}
 body.momuto-custom-page .control-product_detail-price_box,
 body.momuto-custom-page #plugin-product-price,
 body.momuto-custom-page .price_append2{display:none!important;}
-body.momuto-custom-page .product-preview img{max-height:560px!important;width:auto!important;margin:0 auto;object-fit:contain;}
+/* hide the empty native Détail + Témoignages tabs (we supply this content) */
+body.momuto-custom-page #product-tabs{display:none!important;}
+/* preview images: bigger, stacked one on top of the other */
+body.momuto-custom-page .product-preview .preview_bigtiledown_wrapper{display:block!important;width:100%!important;}
+body.momuto-custom-page .product-preview .swiper-slide{width:100%!important;float:none!important;margin:0 0 16px!important;}
+body.momuto-custom-page .product-preview img{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain;}
+body.momuto-custom-page .product-preview .bigtiledown-pagination{display:none!important;}
 `;
 
 function stripTags(s){return String(s).replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&mdash;/g,"—");}
