@@ -278,13 +278,8 @@ body.momuto-custom-page #plugin-product-price,
 body.momuto-custom-page .price_append2{display:none!important;}
 /* hide the empty native Détail + Témoignages tabs (we supply this content) */
 body.momuto-custom-page #product-tabs{display:none!important;}
-body.momuto-custom-page .product-preview .bigtiledown-pagination{display:none!important;}
-/* preview images: side-by-side, horizontal scroll (desktop), contained + sharp */
-@media(min-width:767px){
-body.momuto-custom-page .product-preview .preview_bigtiledown_wrapper{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;gap:16px;width:100%!important;scroll-snap-type:x mandatory;padding-bottom:10px;}
-body.momuto-custom-page .product-preview .swiper-slide{flex:0 0 auto!important;width:auto!important;float:none!important;margin:0!important;scroll-snap-align:center;}
-body.momuto-custom-page .product-preview img{width:auto!important;height:auto!important;max-height:560px!important;max-width:none!important;object-fit:contain;}
-}
+/* SIZE ONLY — the theme's "Image display form" dropdown controls the layout/format */
+body.momuto-custom-page .product-preview img{max-height:560px!important;}
 `;
 
 function stripTags(s){return String(s).replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&mdash;/g,"—");}
