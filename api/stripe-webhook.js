@@ -18,6 +18,7 @@
 
 const crypto = require('crypto');
 const { kv } = require('@vercel/kv');
+const { emailDepositPaid } = require('../lib/emails');
 
 const SECRET     = process.env.STRIPE_WEBHOOK_SECRET;
 const RESEND_KEY = process.env.RESEND_API_KEY;
@@ -69,6 +70,18 @@ async function notifyTeam(email, amount, currency) {
   }).catch(() => {});
 }
 
+// Customer-facing: confirm the deposit + prompt the brief (?paid=true CTA). Sent
+// once per payer (guarded by the paid checks below), localized from the lead.
+async function notifyCustomer(email, locale) {
+  if (!RESEND_KEY) return;
+  const { subject, html } = emailDepositPaid({ lang: locale || 'en' });
+  await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ from: 'MOMUTO <info@momuto.com>', to: [email], reply_to: 'info@momuto.com', subject, html }),
+  }).catch(() => {});
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   if (!SECRET) { console.error('[stripe-webhook] STRIPE_WEBHOOK_SECRET not set'); return res.status(500).json({ error: 'Not configured' }); }
@@ -101,20 +114,25 @@ module.exports = async function handler(req, res) {
     const ids = (await kv.smembers('leads:all')) || [];
     const leads = await Promise.all(ids.map(async id => [id, await kv.get(`lead:${id}`)]));
     const match = leads.find(([, l]) => l && l.type === 'deposit_intent' && norm(l.email) === email);
+    // Already-paid guard makes the whole handler idempotent on Stripe retries —
+    // the customer "deposit received" email fires exactly once per payer.
+    const alreadyPaid = leads.some(([, l]) => l && l.paid && norm(l.email) === email);
 
     if (match) {
       const [id, lead] = match;
       if (!lead.paid) {
         await kv.set(`lead:${id}`, { ...lead, paid: true, paidAt, stripeAmount: amount, stripeCurrency: currency, stripeSessionId: session.id });
         await notifyTeam(email, amount, currency);
+        await notifyCustomer(email, lead.locale);
         console.log(`[stripe-webhook] marked paid: ${email} (${id})`);
       }
-    } else {
+    } else if (!alreadyPaid) {
       const id = `lead_${Date.now()}`;
       await kv.set(`lead:${id}`, { id, receivedAt: paidAt, type: 'deposit_paid', email, paid: true, paidAt,
         locale: null, stripeAmount: amount, stripeCurrency: currency, stripeSessionId: session.id });
       await kv.sadd('leads:all', id);
       await notifyTeam(email, amount, currency);
+      await notifyCustomer(email, null);
       console.log(`[stripe-webhook] paid, no prior lead — created: ${email}`);
     }
   } catch (err) {
