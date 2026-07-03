@@ -113,3 +113,69 @@ Keep it kit-aware and locale-aware (`CART.lang`). Don't regress the 3D-tool flow
 2. In `momuto-api`, open `public/configurator/embed.js` at `handoffToCart` (~L617) and
    `buildDesignPayload` (~L610).
 3. Wire (2)→(1) as above; deploy `embed.js`; run the acceptance test.
+
+---
+
+# IMPLEMENTATION UPDATE (findings + what was built)
+
+Reverse-engineered the 3D tool's real contract from the built bundles
+(`design-momuto/3d-configurator/`, module `5732` in `339.cc1be486ebdbd5260ce1.js`
++ the non-bundled `/static/tshirt-client-20231122a.js`). **Two of the brief's
+assumptions were wrong**, so the approach changed. Details:
+
+## What the 3D tool actually does
+- **Logo/preview upload:** `POST design.momuto.com/upload`, `multipart/form-data`,
+  single field **`file`** (the raw File) → `{ status:true, data:{ url } }`.
+  **Anonymous — no login/token.** Reusable from the 2D flow verbatim.
+- **Save design:** `POST /v1/addToCart` with JSON
+  `{ userId, token, configId, urlThumbnailFront, urlThumbnailBack, suitName,
+  suit:<blob>, quantity }`. Colours / name / number / logo-URLs live *inside* the
+  `suit` blob and `layers[]`.
+- Plain **axios**, no `baseURL`/interceptors → all paths are relative to
+  `design.momuto.com` (page origin). No client-side OSS/Aliyun SDK — upload is
+  server-mediated. (The `/upload/v1729684294/combine` fragment in the brief was a
+  red herring — a Cloudinary HDR env-map for 3D lighting.)
+
+## Why we did NOT mirror `/v1/addToCart` (the brief's literal step)
+1. **It requires a logged-in session** (`userId`+`token`; it force-pops a login
+   widget when `checkValid()` is null). RTP is an anonymous, client-generated-`userId`
+   quick-buy — adding a login wall would be a major UX regression.
+2. **It uses `suitName`/`collectionName`/`configId`, not `productId`/`oemId`** —
+   those two fields do not exist anywhere in the 3D build. Calling it from RTP would
+   create a *3D-suit* line, not the RTP SKU (with its −10% pricing) the customer chose.
+
+So mirroring it would produce the wrong order under a forced login.
+
+## What was implemented (in `public/configurator/embed.js`)
+Kept the RTP `/v1/addToEcart` path (correct product/pricing, anonymous) and
+**enriched it** instead:
+1. Upload handler now stashes the **raw File** (`state.crestFile`/`state.sponsorFile`)
+   alongside the knockout preview.
+2. New `uploadImage()` reuses the **anonymous `/upload`** endpoint (multipart `file`
+   → `data.url`); new `dataURLtoBlob()` converts canvas previews to blobs.
+3. `handoffToCart()` (RTP path) uploads crest + sponsor + front/back previews to OSS,
+   then adds to the `addToEcart` body: a self-describing `design` JSON blob **plus**
+   flattened fields (`primaryColor/secondaryColor/trimColor/nameColor/font/template/kit`
+   and `crestUrl/sponsorUrl/previewFront/previewBack`). Kit- and locale-aware.
+4. **Best-effort by design:** any upload/CORS failure leaves the order exactly as
+   before (SKU added + redirect) — checkout is never blocked. The `goto3d`/`jump3d`
+   embedded branch is unchanged (the 3D tool owns that order).
+
+## OPEN — must be verified in a real browser on the live site (sandbox can't reach `design.momuto.com`)
+1. **Does the backend persist the extra `addToEcart` fields to the OEM record?**
+   This is the crux. If `/v1/addToEcart` ignores unknown fields, the colours/logos
+   still won't surface and we need the real OEM-save endpoint/field-names (backend,
+   in neither repo). Confirm on `manage.momuto.com` after a test order.
+2. **CORS:** `www.momuto.com` → `design.momuto.com/upload` is cross-origin and reads
+   the JSON response. The existing `addToEcart` reads `resp.status` cross-origin so
+   CORS is likely already allowed for the store origins, but `/upload` must be checked.
+3. **Field-name match:** the backend may expect specific names (e.g. inside `suit`).
+   We send both a `design` blob and flattened fields to maximise pickup; adjust to the
+   real schema once known.
+
+## Deploy
+`embed.js` is intentionally **NOT** added to the `deploy-static-files.yml` push
+trigger — that trigger has no branch filter, so it would auto-ship this unverified
+checkout change to the live store on push. Deploy manually via
+**Deploy Static Files** → `workflow_dispatch` with `file=embed.js` after the live
+acceptance test passes (or add the push path once verified).
