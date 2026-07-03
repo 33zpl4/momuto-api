@@ -278,11 +278,13 @@ body.momuto-custom-page #plugin-product-price,
 body.momuto-custom-page .price_append2{display:none!important;}
 /* hide the empty native Détail + Témoignages tabs (we supply this content) */
 body.momuto-custom-page #product-tabs{display:none!important;}
-/* preview images: bigger, stacked one on top of the other */
-body.momuto-custom-page .product-preview .preview_bigtiledown_wrapper{display:block!important;width:100%!important;}
-body.momuto-custom-page .product-preview .swiper-slide{width:100%!important;float:none!important;margin:0 0 16px!important;}
-body.momuto-custom-page .product-preview img{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain;}
 body.momuto-custom-page .product-preview .bigtiledown-pagination{display:none!important;}
+/* preview images: side-by-side, horizontal scroll (desktop), contained + sharp */
+@media(min-width:767px){
+body.momuto-custom-page .product-preview .preview_bigtiledown_wrapper{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;gap:16px;width:100%!important;scroll-snap-type:x mandatory;padding-bottom:10px;}
+body.momuto-custom-page .product-preview .swiper-slide{flex:0 0 auto!important;width:auto!important;float:none!important;margin:0!important;scroll-snap-align:center;}
+body.momuto-custom-page .product-preview img{width:auto!important;height:auto!important;max-height:560px!important;max-width:none!important;object-fit:contain;}
+}
 `;
 
 function stripTags(s){return String(s).replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&mdash;/g,"—");}
@@ -340,6 +342,10 @@ function render(mount){
   var c=I18N[lang]||I18N.en;
   document.body.classList.add("momuto-custom-page");
   mount.innerHTML="<style>"+CSS+"</style>"+highlights(c)+trust(c)+faqSection(c);
+  // theme serves preview images as a 416px thumbnail -> upsize to a sharp source (originals are 1500px)
+  try{ document.querySelectorAll(".product-preview img").forEach(function(img){
+    if(/x-oss-process=image\/resize/.test(img.src)) img.src=img.src.replace(/,w_\d+/, ",w_1200");
+  }); }catch(e){}
   try{
     var ld=document.createElement("script");
     ld.type="application/ld+json";
