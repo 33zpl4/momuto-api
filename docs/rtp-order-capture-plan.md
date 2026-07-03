@@ -179,3 +179,45 @@ trigger — that trigger has no branch filter, so it would auto-ship this unveri
 checkout change to the live store on push. Deploy manually via
 **Deploy Static Files** → `workflow_dispatch` with `file=embed.js` after the live
 acceptance test passes (or add the push path once verified).
+
+---
+
+# DECISION UPDATE — email-to-ops is the source of truth (supersedes the addToEcart plan)
+
+Per the store owner: **the guaranteed capture of an RTP order's design is an
+email to ops via Resend, not enrichment of the addToEcart order POST.** The
+addToEcart enrichment is removed until a live test proves the backend persists
+extra fields; the live order call is left unchanged (zero checkout risk).
+
+## What ships now
+- **`api/rtp-design.js`** (new Vercel function, modeled on `api/submit.js`):
+  Busboy multipart → emails `info@momuto.com` via Resend with the hex colours
+  (swatches), name/number colour + font, kit, qty, product/OEM/order-UUID,
+  template, language, source, the **uploaded logos + preview attached as files**,
+  and the **OSS URLs linked**. Origin-allowlisted with CORS; returns
+  `{ok:true}`. Registered in `vercel.json` (`maxDuration: 30`). Verified locally
+  end-to-end (multipart parse, email assembly, attachments, OPTIONS/403/405
+  guards).
+- **`embed.js` `handoffToCart()`** (RTP path): keeps the anonymous `/upload`
+  (durable OSS links), then `await`s a best-effort multipart POST to
+  `CART.designApi` (`https://momuto-api.vercel.app/api/rtp-design`) carrying the
+  design fields + raw logos + previews + OSS URLs, **before** the cart handoff.
+  The `addToEcart` call is back to its original 6 fields (no unverified design
+  fields). All network steps are best-effort with abort-timeouts (uploads 7 s,
+  email 12 s) so checkout is never blocked; on any failure the order proceeds
+  exactly as before. The `goto3d`/`jump3d` branch is unchanged.
+
+## Deploy
+- **`api/rtp-design.js`** carries zero checkout risk (never touches the order
+  call) → safe to deploy with the Vercel app (merge to the production branch;
+  the `momuto-api.vercel.app` prod URL is what `embed.js` targets). Feature-branch
+  pushes only get a Vercel preview; until prod-deployed, `embed.js`'s POST 404s
+  and is swallowed (order still fine).
+- **`embed.js`** still deploys via **Deploy Static Files → `workflow_dispatch`,
+  `file=embed.js`** (OEMSaaS DiyFile). Its order POST is now unchanged, but it's a
+  live storefront file so keep it on manual dispatch.
+
+## Live acceptance
+Place a test RTP order (custom colours + crest + sponsor + name/number, full-kit
+path) → confirm ops receives the email with colours, font, logos (attached +
+OSS links), and the preview. Order/pricing unaffected.
