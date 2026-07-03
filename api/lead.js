@@ -96,6 +96,18 @@ module.exports = async function handler(req, res) {
     const email = (body.email || '').trim();
     if (!validEmail(email)) return res.status(400).json({ error: 'Invalid email' });
 
+    // Dedupe: the gate can fire twice (double-click, blur + pay-click). If an
+    // unpaid deposit_intent lead already exists for this email, don't create a
+    // second one and don't re-notify — one intent per email, one email out.
+    const idxKey = `depositlead:${email.toLowerCase()}`;
+    const existingId = await kv.get(idxKey);
+    if (existingId) {
+      const existing = await kv.get(`lead:${existingId}`);
+      if (existing && !existing.paid) {
+        return res.status(200).json({ ok: true, deduped: true });
+      }
+    }
+
     const lead = {
       id: `lead_${Date.now()}`,
       receivedAt: new Date().toISOString(),
@@ -107,6 +119,7 @@ module.exports = async function handler(req, res) {
     };
     await kv.set(`lead:${lead.id}`, lead);
     await kv.sadd('leads:all', lead.id);
+    await kv.set(idxKey, lead.id); // email -> lead index for dedupe
     try { await notifyTeam(lead); await kv.set(`lead:${lead.id}`, { ...lead, emailSent: true }); }
     catch (e) { await kv.set(`lead:${lead.id}`, { ...lead, emailError: e.message }); }
 

@@ -65,6 +65,12 @@ module.exports = async function handler(req, res) {
   const paidEmails = new Set(
     leads.filter(l => l.paid && l.email).map(l => norm(l.email))
   );
+  // Emails already nudged on ANY lead → one nudge per person, even if the gate
+  // recorded duplicate deposit_intent leads for the same email. Grows as we send
+  // this run so two same-email leads never both fire.
+  const nudgedEmails = new Set(
+    leads.filter(l => l.nudgeSent && l.email).map(l => norm(l.email))
+  );
 
   const results = { sent: [], skipped: 0 };
 
@@ -73,6 +79,7 @@ module.exports = async function handler(req, res) {
     if (lead.nudgeSent) { results.skipped++; continue; }
     if (lead.paid || paidEmails.has(norm(lead.email))) { results.skipped++; continue; }
     if (!lead.email || completed.has(norm(lead.email))) { results.skipped++; continue; }
+    if (nudgedEmails.has(norm(lead.email))) { results.skipped++; continue; } // dedupe by email
 
     const age = hoursSince(lead.receivedAt);
     if (age < MIN_AGE_H || age > MAX_AGE_DAYS * 24) { results.skipped++; continue; }
@@ -81,6 +88,7 @@ module.exports = async function handler(req, res) {
       const { subject, html } = emailDepositNudge({ lang: lead.locale || 'en' });
       await sendNudge(lead.email, subject, html);
       await kv.set(`lead:${lead.id}`, { ...lead, nudgeSent: true, nudgeAt: new Date().toISOString() });
+      nudgedEmails.add(norm(lead.email)); // block any duplicate lead for this email this run
       results.sent.push(lead.email);
       console.log(`[cron-nudge] nudged ${lead.email} (${lead.locale || 'en'})`);
     } catch (err) {
