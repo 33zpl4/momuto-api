@@ -203,8 +203,8 @@ extra fields; the live order call is left unchanged (zero checkout risk).
   `CART.designApi` (`https://momuto-api.vercel.app/api/rtp-design`) carrying the
   design fields + raw logos + previews + OSS URLs, **before** the cart handoff.
   The `addToEcart` call is back to its original 6 fields (no unverified design
-  fields). All network steps are best-effort with abort-timeouts (uploads 7 s,
-  email 12 s) so checkout is never blocked; on any failure the order proceeds
+  fields). All network steps are best-effort with abort-timeouts (uploads 5 s,
+  email 8 s) so checkout is never blocked; on any failure the order proceeds
   exactly as before. The `goto3d`/`jump3d` branch is unchanged.
 
 ## Deploy

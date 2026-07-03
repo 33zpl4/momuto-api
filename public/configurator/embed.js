@@ -629,7 +629,7 @@ function run(root, opts){
     if(!fileOrBlob) return null;
     try{
       var fd=new FormData(); fd.append("file", fileOrBlob, filename||"logo.png");
-      var r=await fetch(CART.base+"/upload",{ method:"POST", body:fd, signal:timeoutSignal(7000) });
+      var r=await fetch(CART.base+"/upload",{ method:"POST", body:fd, signal:timeoutSignal(5000) });
       if(!r.ok){ try{ console.warn("[rtp] upload HTTP", r.status); }catch(_){} return null; }
       var j=await r.json();
       return (j && j.status && j.data && j.data.url) ? j.data.url : null;
@@ -688,7 +688,7 @@ function run(root, opts){
       if(state.sponsorFile) fd.append("sponsor", state.sponsorFile, state.sponsorFile.name||"sponsor.png");
       fd.append("preview-front", dataURLtoBlob(design.preview.front), "preview-front.png");
       fd.append("preview-back",  dataURLtoBlob(design.preview.back),  "preview-back.png");
-      var dResp=await fetch(CART.designApi,{ method:"POST", body:fd, signal:timeoutSignal(12000) });
+      var dResp=await fetch(CART.designApi,{ method:"POST", body:fd, signal:timeoutSignal(8000) });
       try{ console.log("[rtp] rtp-design ->", dResp.status); }catch(_){}
     }catch(e){ try{ console.warn("[rtp] rtp-design notify failed (order still proceeds):", e); }catch(_){} }
     // Order handoff: unchanged addToEcart contract (leave the design off it until a live test
