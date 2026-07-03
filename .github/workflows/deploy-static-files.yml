@@ -40,6 +40,7 @@ on:
     paths:
       - 'static/**'
       - 'public/configurator/custom-content.js'
+      - 'public/configurator/rtp-loader.js'
 
 jobs:
   deploy-static:

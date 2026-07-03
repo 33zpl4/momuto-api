@@ -40,4 +40,9 @@
   if (document.getElementById("rtp-content") || document.querySelector("[data-rtp-content]")) {
     load(BASE + "rtp-content.js?h=" + hour);
   }
+
+  // 3) Custom-product page content (dark theme + trust + FAQ), same hourly cache-bust.
+  if (document.getElementById("momuto-custom") || document.querySelector("[data-momuto-custom]")) {
+    load(BASE + "custom-content.js?h=" + hour);
+  }
 })();
