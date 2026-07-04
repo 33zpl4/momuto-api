@@ -1,0 +1,23 @@
+name: Create Test Product (one-off)
+
+# Runs on the GitHub runner (which can reach openapi.oemapps.com) to POST a
+# hidden test product and log exactly what the create endpoint returns.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/create-test-product.js'
+  workflow_dispatch: {}
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Create test product
+        env:
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+        run: node scripts/create-test-product.js
