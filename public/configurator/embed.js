@@ -236,9 +236,11 @@ function run(root, opts){
   var DEFAULTS={ primary:opts.primary||"#2e3238", secondary:opts.secondary||"#ffffff",
     trim:opts.trim||"#121212", nameColor:opts.nameColor||opts.trim||"#121212" };
   var LOGOCOL = opts.logoColor || LOGO_DEFAULTS[opts.template] || null;
-  var state={ primary:DEFAULTS.primary, secondary:DEFAULTS.secondary, trim:DEFAULTS.trim, crest:null, sponsor:null, font:"vanguard", nameColor:DEFAULTS.nameColor, kit:"jersey", qty:10 };
+  var state={ primary:DEFAULTS.primary, secondary:DEFAULTS.secondary, trim:DEFAULTS.trim, crest:null, sponsor:null, crestFile:null, sponsorFile:null, font:"vanguard", nameColor:DEFAULTS.nameColor, kit:"jersey", qty:10 };
   var CART={ base:"https://design.momuto.com", productId:opts.productId, oemId:opts.oemId,
-    productIdKit:opts.productIdKit, oemIdKit:opts.oemIdKit, lang:opts.lang };
+    productIdKit:opts.productIdKit, oemIdKit:opts.oemIdKit, lang:opts.lang,
+    // Ops notification endpoint (guaranteed source of truth for the order's design).
+    designApi:opts.designApi||"https://momuto-api.vercel.app/api/rtp-design" };
 
   async function init(){
     if(opts.mode==="composite") return initComposite();
@@ -554,6 +556,7 @@ function run(root, opts){
       root.getElementById(inputId).addEventListener("change",function(e){
         var f=e.target.files[0]; if(!f)return;
         root.getElementById(nameId).textContent=f.name.slice(0,14);
+        state[key+"File"]=f;   // keep the ORIGINAL file for OSS upload; production needs the real logo, not just the knockout preview
         var im=new Image(); im.onload=function(){state[key]=knockoutBg(im);render();}; im.src=URL.createObjectURL(f); });
     };
     handleUp("crest","crestName","crest"); handleUp("sponsor","sponsorName","sponsor");
@@ -608,6 +611,31 @@ function run(root, opts){
   }
 
   function captureView(v){ var prev=active; active=v; render(); var url=cv.toDataURL("image/png"); active=prev; render(); return url; }
+  // ---- OSS upload (mirrors the 3D tool's contract) -----------------------
+  // The 3D configurator persists every logo/preview via POST design.momuto.com/upload
+  // (multipart, field "file") -> { status:true, data:{ url } }. That endpoint is
+  // anonymous (no login/token), so the RTP 2D flow reuses it verbatim to turn the
+  // in-browser crest/sponsor/preview bitmaps into hosted URLs the order can carry.
+  function dataURLtoBlob(u){
+    var parts=String(u).split(","), meta=parts[0]||"", b64=parts[1]||"";
+    var mime=(meta.match(/data:([^;]+)/)||[])[1]||"image/png";
+    var bin=atob(b64), n=bin.length, arr=new Uint8Array(n);
+    while(n--) arr[n]=bin.charCodeAt(n);
+    return new Blob([arr],{type:mime});
+  }
+  // Abort a fetch after ms so a hung cross-origin request can never stall checkout.
+  function timeoutSignal(ms){ if(typeof AbortController==="undefined") return undefined;
+    var c=new AbortController(); setTimeout(function(){ try{c.abort();}catch(_){}}, ms); return c.signal; }
+  async function uploadImage(fileOrBlob, filename){
+    if(!fileOrBlob) return null;
+    try{
+      var fd=new FormData(); fd.append("file", fileOrBlob, filename||"logo.png");
+      var r=await fetch(CART.base+"/upload",{ method:"POST", body:fd, signal:timeoutSignal(5000) });
+      if(!r.ok){ try{ console.warn("[rtp] upload HTTP", r.status); }catch(_){} return null; }
+      var j=await r.json();
+      return (j && j.status && j.data && j.data.url) ? j.data.url : null;
+    }catch(e){ try{ console.warn("[rtp] upload failed (order still proceeds):", e); }catch(_){} return null; }
+  }
   function buildDesignPayload(){
     return { tool:"rtp-2d-configurator", template:opts.template, suit:"mamuto3",
       colours:{ primary:state.primary, secondary:state.secondary, trim:state.trim },
@@ -622,18 +650,57 @@ function run(root, opts){
     var pid=(isKit && CART.productIdKit) ? CART.productIdKit : CART.productId;
     var oid=(isKit && CART.oemIdKit)     ? CART.oemIdKit     : CART.oemId;
     try{ console.log("[rtp] handoff ->", {kit:isKit, productId:pid, oemId:oid, template:design.template, colours:design.colours}); }catch(e){}
-    // 1) embedded on the product page -> reuse the page's goto3d/jump3d; prefer a kit-specific hook for full kit
+    // 1) embedded on a page that hosts the 3D tool -> reuse its goto3d/jump3d handoff
+    //    (unchanged: the 3D tool owns that order and does its own upload/save).
     var goto3d=(isKit && (document.getElementById("goto3d-kit") || (typeof window.jump3d_kit==="function" && window.jump3d_kit)))
             || document.getElementById("goto3d") || (typeof window.jump3d==="function" && window.jump3d);
     if(goto3d){ if(typeof goto3d==="function") goto3d(); else goto3d.click(); return; }
-    // 2) standalone (preview/testing) -> replicate the same flow with the selected SKU
+    // 2) RTP product path. The order itself still goes through the unchanged addToEcart
+    //    call below (no unverified customisation fields on it). The customer's design is
+    //    captured out-of-band by emailing ops via /api/rtp-design — the guaranteed source
+    //    of truth — BEFORE the cart handoff. Everything here is best-effort: any failure
+    //    (upload, email) leaves the order exactly as before and never blocks checkout.
     var userId=genUserId();
+    var orderBtn=root.getElementById("order"), btnTxt=orderBtn?orderBtn.textContent:"";
+    if(orderBtn){ orderBtn.disabled=true; orderBtn.textContent=(T&&T.adding)||"…"; }
+    // Upload logos + previews to the 3D tool's anonymous OSS endpoint so ops get durable links.
+    var up=await Promise.all([
+      uploadImage(state.crestFile,   "crest.png"),
+      uploadImage(state.sponsorFile, "sponsor.png"),
+      uploadImage(dataURLtoBlob(design.preview.front), "preview-front.png"),
+      uploadImage(dataURLtoBlob(design.preview.back),  "preview-back.png")
+    ]);
+    var crestUrl=up[0], sponsorUrl=up[1], previewFront=up[2], previewBack=up[3];
+    // Notify ops with the full design. Send the raw logos + previews as files (so the email
+    // is complete even if the cross-origin OSS upload was blocked) AND the OSS URLs when present.
+    try{
+      var fontLabel=(FONTS.filter(function(f){return f[0]===state.font;})[0]||[])[1]||state.font;
+      var fd=new FormData();
+      fd.append("template", opts.template||""); fd.append("kit", state.kit); fd.append("qty", String(state.qty));
+      fd.append("primary", state.primary); fd.append("secondary", state.secondary); fd.append("trim", state.trim);
+      fd.append("nameColor", state.nameColor); fd.append("font", state.font); fd.append("fontLabel", fontLabel);
+      fd.append("productId", pid||""); fd.append("oemId", oid||""); fd.append("userId", userId); fd.append("lang", CART.lang||"");
+      fd.append("source", (typeof location!=="undefined" && location.href) || "");
+      if(crestUrl)     fd.append("crestUrl", crestUrl);
+      if(sponsorUrl)   fd.append("sponsorUrl", sponsorUrl);
+      if(previewFront) fd.append("previewFrontUrl", previewFront);
+      if(previewBack)  fd.append("previewBackUrl", previewBack);
+      if(state.crestFile)   fd.append("crest",   state.crestFile,   state.crestFile.name||"crest.png");
+      if(state.sponsorFile) fd.append("sponsor", state.sponsorFile, state.sponsorFile.name||"sponsor.png");
+      fd.append("preview-front", dataURLtoBlob(design.preview.front), "preview-front.png");
+      fd.append("preview-back",  dataURLtoBlob(design.preview.back),  "preview-back.png");
+      var dResp=await fetch(CART.designApi,{ method:"POST", body:fd, signal:timeoutSignal(8000) });
+      try{ console.log("[rtp] rtp-design ->", dResp.status); }catch(_){}
+    }catch(e){ try{ console.warn("[rtp] rtp-design notify failed (order still proceeds):", e); }catch(_){} }
+    // Order handoff: unchanged addToEcart contract (leave the design off it until a live test
+    // proves the backend persists extra fields — the email above already captured everything).
     var body=new URLSearchParams({ productId:pid, quantity:"1", userId:userId, oemId:oid,
       lanType:CART.lang, timestamp:String(Math.floor(Date.now()/1000)), ranstr:String(Math.floor(Math.random()*1e10)) });
     try{ var resp=await fetch(CART.base+"/v1/addToEcart",{ method:"POST",
           headers:{"Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"}, body:body });
          console.log("[rtp] addToEcart ->", resp.status); }
     catch(e){ console.warn("[rtp] addToEcart failed (will still redirect):", e); }
+    if(orderBtn){ orderBtn.disabled=false; orderBtn.textContent=btnTxt; }
     window.location.href = CART.base+"/cart?uuid="+userId+"&langguage="+CART.lang;
   }
 
