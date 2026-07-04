@@ -2,7 +2,8 @@
    Usage on a page (e.g. the momuto.com product page):
      <div id="momuto-rtp" data-template="the-fracture" data-product="16534" data-oem="10294534" data-lang="en"></div>
      <script src="https://<host>/configurator/embed.js" defer></script>
-   Mounts into a Shadow DOM (style-isolated). "Add to cart" reuses the page's #goto3d / window.jump3d. */
+   Mounts into a Shadow DOM (style-isolated). "Add to cart" reuses the page's #goto3d / window.jump3d.
+   Logo placement pad = 0.975 (−8% vs the old 1.06). */
 (function(){
 "use strict";
 var SELF = document.currentScript || (function(){var s=document.getElementsByTagName("script");return s[s.length-1];})();
