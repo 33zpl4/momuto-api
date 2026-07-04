@@ -41,7 +41,6 @@ on:
       - 'static/**'
       - 'public/configurator/custom-content.js'
       - 'public/configurator/rtp-loader.js'
-      - 'public/configurator/embed.js'
 
 jobs:
   deploy-static:
