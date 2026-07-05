@@ -46,6 +46,22 @@ var CHAT={
  fr:["Une dernière question ?","Écrivez-nous sur WhatsApp","J'ai une question sur ce maillot personnalisé !"],
  it:["Hai ancora una domanda?","Scrivici su WhatsApp","Ho una domanda su questa maglia personalizzata!"]
 };
+/* ---- price-estimator strings (replaces the native qty stepper, which never
+        reaches the roster cart; see estimator() below). es/fr/it fall back to en. ---- */
+var EST={
+ en:{title:"Price estimate", team:"Team size", jersey:"jersey", kit:"kit", units:"units",
+     est:"est.", total:"total", popular:"Most chosen",
+     note:"Sizes &amp; final quantities on the next step.", ship:"Free shipping over €49."},
+ es:{title:"Precio estimado", team:"Tamaño del equipo", jersey:"camiseta", kit:"kit", units:"unidades",
+     est:"aprox.", total:"total", popular:"El más elegido",
+     note:"Tallas y cantidades finales en el siguiente paso.", ship:"Envío gratis desde 49 €."},
+ fr:{title:"Prix estimé", team:"Taille de l'équipe", jersey:"maillot", kit:"kit", units:"unités",
+     est:"estimé", total:"total", popular:"Le plus choisi",
+     note:"Tailles et quantités finales à l'étape suivante.", ship:"Livraison offerte dès 49 €."},
+ it:{title:"Prezzo stimato", team:"Dimensione squadra", jersey:"maglia", kit:"kit", units:"unità",
+     est:"stima", total:"totale", popular:"Il più scelto",
+     note:"Taglie e quantità finali al passaggio successivo.", ship:"Spedizione gratis oltre 49 €."}
+};
 var I18N={
  en:{
   highlights:[
@@ -280,6 +296,29 @@ body.momuto-custom-page .price_append2{display:none!important;}
 body.momuto-custom-page #product-tabs{display:none!important;}
 /* SIZE ONLY — the theme's "Image display form" dropdown controls the layout/format */
 body.momuto-custom-page .product-preview img{max-height:560px!important;}
+/* hide the native quantity stepper — a single PDP quantity never reaches the order
+   (the cart rebuilds quantities per player), so we replace it with the price estimator */
+body.momuto-custom-page #mo-quantity,
+body.momuto-custom-page .control-product_detail-quantity_box{display:none!important;}
+/* price estimator (injected above #goto3d) */
+.mest{font-family:'Outfit',-apple-system,sans-serif;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px;margin:0 0 14px;color:#f5f5f5;}
+.mest-hd{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E2214B;margin-bottom:10px;}
+.mest-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.mest-team{font-size:13px;color:#a1a1aa;}
+.mest-step{display:inline-flex;align-items:center;background:#1d1f21;border:1px solid rgba(255,255,255,.1);border-radius:8px;overflow:hidden;}
+.mest-step button{width:34px;height:34px;background:none;border:none;color:#fff;font-size:20px;line-height:1;cursor:pointer;}
+.mest-step button:hover{background:rgba(255,255,255,.06);}
+.mest-step input{width:48px;height:34px;background:none;border:none;color:#fff;text-align:center;font-size:15px;font-weight:600;-moz-appearance:textfield;}
+.mest-step input::-webkit-outer-spin-button,.mest-step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.mest-price{font-size:15px;color:#e5e5e5;margin-top:12px;}
+.mest-price b{color:#fff;font-size:20px;font-weight:700;}
+.mest-price s{color:#71717a;font-size:14px;margin-right:4px;}
+.mest-price .per{color:#a1a1aa;font-size:13px;}
+.mest-pop{display:inline-block;background:#E2214B;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:8px;vertical-align:2px;}
+.mest-sum{font-size:13px;color:#a1a1aa;margin-top:4px;}
+.mest-sum b{color:#fff;}
+.mest-note{font-size:12px;color:#71717a;margin-top:10px;line-height:1.5;}
+.mest-note .ship{color:#a1a1aa;}
 `;
 
 function stripTags(s){return String(s).replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&mdash;/g,"—");}
@@ -332,6 +371,82 @@ function faqLd(items){
   })};
 }
 
+/* ---- price estimator ---------------------------------------------------------
+   Replaces the (order-irrelevant) native qty stepper with a live price readout.
+   Prices come ONLY from pricing.js (window.MOMUTO_PRICING) — the single source of
+   truth shared with the RTP widget. If pricing.js can't load, the estimator simply
+   doesn't render (never shows a guessed price). Custom/3D products use STANDARD
+   tier prices (no RTP discount). ---------------------------------------------- */
+function detectKind(mount){
+  var override=(mount.getAttribute("data-kit")||"").toLowerCase();
+  if(override==="kit"||override==="jersey") return override;
+  var el=document.querySelector(".control-product_detail-title, .product-info-subtitle, .product-info-title");
+  var txt=((el&&el.textContent)||document.title||"").toLowerCase();
+  return /\bkit\b|ensemble|completo|full kit|maillot \+ short/.test(txt) ? "kit" : "jersey";
+}
+function estimator(lang, kind){
+  var P=window.MOMUTO_PRICING; if(!P) return null;
+  var t=EST[lang]||EST.en;
+  kind=(kind==="kit")?"kit":"jersey";
+  var euro=function(n){return "€"+n.toFixed(2);};
+  var kindLabel=(kind==="kit")?t.kit:t.jersey;
+  var wrap=document.createElement("div");
+  wrap.className="mest";
+  wrap.innerHTML=
+    '<div class="mest-hd">'+t.title+'</div>'
+   +'<div class="mest-row"><span class="mest-team">'+t.team+'</span>'
+   +'<span class="mest-step"><button type="button" data-d="-1" aria-label="-">−</button>'
+   +'<input type="number" min="1" value="10" inputmode="numeric" aria-label="'+t.team+'">'
+   +'<button type="button" data-d="1" aria-label="+">+</button></span></div>'
+   +'<div class="mest-out"></div>'
+   +'<div class="mest-note"><span class="roster">'+t.note+'</span> · <span class="ship">'+t.ship+'</span></div>';
+  var input=wrap.querySelector("input"), out=wrap.querySelector(".mest-out");
+  function draw(){
+    var q=Math.max(1, parseInt(input.value,10)||1);
+    var unit=P.unitPrice(kind,q), one=P.unitPrice(kind,1), total=P.total(kind,q);
+    var strike=(unit<one)?'<s>'+euro(one)+'</s> ':'';
+    var pop=(q>=P.POPULAR_MIN && q<20)?'<span class="mest-pop">'+t.popular+'</span>':'';
+    out.innerHTML='<div class="mest-price">'+strike+'<b>'+euro(unit)+'</b> <span class="per">/ '+kindLabel+'</span>'+pop+'</div>'
+      +'<div class="mest-sum">'+q+' '+t.units+' · '+t.est+' <b>'+euro(total)+'</b> '+t.total+'</div>';
+  }
+  wrap.querySelectorAll("button[data-d]").forEach(function(b){
+    b.onclick=function(){ input.value=Math.max(1,(parseInt(input.value,10)||1)+parseInt(b.getAttribute("data-d"),10)); draw(); };
+  });
+  input.addEventListener("input",draw);
+  input.addEventListener("change",function(){ input.value=Math.max(1,parseInt(input.value,10)||1); draw(); });
+  draw();
+  return wrap;
+}
+// load pricing.js (single source of truth) then run cb; no-op on failure
+function withPricing(cb){
+  if(window.MOMUTO_PRICING) return cb();
+  var s=document.createElement("script");
+  s.src="https://www.momuto.com/pricing.js?v=1"; s.defer=true;
+  s.onload=function(){ if(window.MOMUTO_PRICING) cb(); };
+  s.onerror=function(){ try{console.warn("[momuto] pricing.js failed to load — price estimate hidden");}catch(e){} };
+  document.head.appendChild(s);
+}
+// wait for a theme-rendered element (product detail area paints after our defer script)
+function waitFor(sel, cb, tries){
+  tries=(tries==null)?40:tries;
+  var el=document.querySelector(sel);
+  if(el) return cb(el);
+  if(tries<=0) return;
+  setTimeout(function(){ waitFor(sel, cb, tries-1); }, 150);
+}
+function mountEstimator(mount){
+  if(document.getElementById("mo-est")) return;
+  waitFor("#goto3d", function(btn){
+    if(document.getElementById("mo-est")) return;
+    withPricing(function(){
+      var est=estimator((mount.getAttribute("data-lang")||"en").toLowerCase(), detectKind(mount));
+      if(!est) return;
+      est.id="mo-est";
+      btn.parentNode.insertBefore(est, btn);
+    });
+  });
+}
+
 function render(mount){
   var lang=(mount.getAttribute("data-lang")||"en").toLowerCase();
   var c=I18N[lang]||I18N.en;
@@ -351,7 +466,7 @@ function render(mount){
 
 function boot(){
   var m=document.getElementById("momuto-custom")||document.querySelector("[data-momuto-custom]");
-  if(m && !m.__rtpc){ m.__rtpc=1; render(m); }
+  if(m && !m.__rtpc){ m.__rtpc=1; render(m); mountEstimator(m); }
 }
 if(document.readyState!=="loading") boot(); else document.addEventListener("DOMContentLoaded",boot);
 })();

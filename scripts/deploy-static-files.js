@@ -13,7 +13,7 @@ const DOMAINS = {
     label: 'momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'momuto.com'),
-    files: ['robots.txt', 'llms.txt', 'blog.css', '0137a8dc25c5cd9835ec4170134b07b4.txt', 'rtp-content.js', 'custom-content.js', 'rtp-loader.js']
+    files: ['robots.txt', 'llms.txt', 'blog.css', '0137a8dc25c5cd9835ec4170134b07b4.txt', 'rtp-content.js', 'custom-content.js', 'rtp-loader.js', 'pricing.js']
   },
   es: {
     token: process.env.OEMSAAS_TOKEN_ES,
@@ -51,6 +51,10 @@ function getFilePath(domain, filename) {
   if (filename === 'rtp-content.js') return path.join('public', 'configurator', 'rtp-content.js');
   // Shared custom-product page content script (same file, all stores; data-lang picks locale).
   if (filename === 'custom-content.js') return path.join('public', 'configurator', 'custom-content.js');
+  // Canonical kit pricing (single source of truth). EN-hosted, referenced by
+  // custom-content.js (3D PDP estimator) and embed.js (RTP widget) — one file to
+  // update when prices change. See public/configurator/pricing.js.
+  if (filename === 'pricing.js') return path.join('public', 'configurator', 'pricing.js');
   // Stable loader the product-page blocks reference — derives assets from data-template
   // and cache-busts embed/content at runtime so engine updates need no ?v= bump / re-paste.
   if (filename === 'rtp-loader.js') return path.join('public', 'configurator', 'rtp-loader.js');
