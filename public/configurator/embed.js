@@ -693,9 +693,12 @@ function run(root, opts){
       var dResp=await fetch(CART.designApi,{ method:"POST", body:fd, signal:timeoutSignal(8000) });
       try{ console.log("[rtp] rtp-design ->", dResp.status); }catch(_){}
     }catch(e){ try{ console.warn("[rtp] rtp-design notify failed (order still proceeds):", e); }catch(_){} }
-    // Order handoff: unchanged addToEcart contract (leave the design off it until a live test
+    // Order handoff: addToEcart contract (leave the design off it until a live test
     // proves the backend persists extra fields — the email above already captured everything).
-    var body=new URLSearchParams({ productId:pid, quantity:"1", userId:userId, oemId:oid,
+    // quantity now carries the shopper's selected qty; verify the live /cart shows it
+    // (if /cart still seeds 1, the backend ignores this field and the fix is design-side).
+    var qty=String(Math.max(1, parseInt(state.qty,10)||1));
+    var body=new URLSearchParams({ productId:pid, quantity:qty, userId:userId, oemId:oid,
       lanType:CART.lang, timestamp:String(Math.floor(Date.now()/1000)), ranstr:String(Math.floor(Math.random()*1e10)) });
     // Bounded wait: if the cart backend hangs we stop waiting and redirect anyway
     // (the request is already sent; aborting only stops us blocking the shopper).
