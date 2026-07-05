@@ -39,7 +39,9 @@ function matchOrigin(req) {
   const origin = req.headers['origin'] || '';
   if (ALLOWED_ORIGINS.includes(origin)) return origin;
   const referer = req.headers['referer'] || '';
-  return ALLOWED_ORIGINS.find(o => referer.startsWith(o)) || '';
+  // Match the referer's origin exactly (o or o + "/path…"), never a prefix of a
+  // longer hostname — "https://momuto.com.evil.com" must not pass.
+  return ALLOWED_ORIGINS.find(o => referer === o || referer.startsWith(o + '/')) || '';
 }
 
 function setCors(req, res) {
@@ -72,7 +74,7 @@ function parseForm(req) {
       const chunks = [];
       stream.on('data', c => chunks.push(c));
       stream.on('close', () => {
-        files.push({ fieldName, filename, mimeType, buffer: Buffer.concat(chunks) });
+        files.push({ fieldName, filename, mimeType, buffer: Buffer.concat(chunks), truncated: !!stream.truncated });
       });
     });
 
@@ -84,11 +86,23 @@ function parseForm(req) {
 
 // ── Build ops email ──────────────────────────────────────────────────────────
 
+// All field values come from an unauthenticated browser POST, so anything that
+// lands inside the email HTML must be escaped (or validated, for hex/URL slots).
+const esc = s => String(s).replace(/[&<>"']/g,
+  c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const isHex = s => /^#[0-9a-f]{3,8}$/i.test(s);
+const isHttpsUrl = s => /^https:\/\/[^\s"'<>\\]+$/i.test(s);
+
+// Resend rejects emails over 40 MB post-base64; keep raw attachment bytes under
+// this so the email always sends (OSS links remain for anything skipped).
+const MAX_ATTACH_BYTES = 24 * 1024 * 1024;
+
 function buildEmail(fields, files) {
   const g = k => (fields[k] == null ? '' : String(fields[k]));
-  const template = g('template') || '—';
+  const e = k => esc(g(k));
+  const template = e('template') || '—';
   const kit      = g('kit') === 'kit' ? 'Full kit (jersey + shorts)' : 'Jersey only';
-  const qty      = g('qty') || '—';
+  const qty      = e('qty') || '—';
 
   const row = (label, value) => `
     <tr>
@@ -98,21 +112,21 @@ function buildEmail(fields, files) {
       <td style="padding:10px 14px;border:1px solid #e4e4e7;font-size:0.9rem;color:#1a1a1a">${value || '—'}</td>
     </tr>`;
 
-  const swatch = hex => hex
+  const swatch = hex => isHex(hex)
     ? `<span style="display:inline-block;width:14px;height:14px;background:${hex};
                     border:1px solid #ccc;vertical-align:middle;margin-right:6px;
                     border-radius:2px"></span><code style="font-size:0.8rem">${hex}</code>`
-    : '—';
+    : (hex ? esc(hex) : '—');
 
-  const link = (label, url) => url
-    ? `<a href="${url}" style="color:#c8352e;font-weight:600">${label}</a>`
+  const link = (label, url) => isHttpsUrl(url)
+    ? `<a href="${esc(url)}" style="color:#c8352e;font-weight:600">${label}</a>`
     : '<span style="color:#a1a1aa">—</span>';
 
   // A logo cell shows whether the file is attached and links its OSS copy if present.
   const logoCell = (fieldName, url) => {
     const f = files.find(x => x.fieldName === fieldName);
     const parts = [];
-    if (f) parts.push(`attached (${Math.round(f.buffer.length / 1024)} KB)`);
+    if (f) parts.push(`attached (${Math.round(f.buffer.length / 1024)} KB)${f.truncated ? ' — <b>truncated at the 15 MB limit</b>' : ''}`);
     if (url) parts.push(link('OSS link', url));
     if (!parts.length) return '<span style="color:#a1a1aa">Not uploaded</span>';
     return parts.join(' &middot; ');
@@ -137,15 +151,15 @@ function buildEmail(fields, files) {
       ${row('Secondary', swatch(g('secondary')))}
       ${row('Trim / cuffs', swatch(g('trim')))}
       ${row('Name / number colour', swatch(g('nameColor')))}
-      ${row('Font', g('fontLabel') || g('font'))}
+      ${row('Font', e('fontLabel') || e('font'))}
       ${row('Crest', logoCell('crest', g('crestUrl')))}
       ${row('Sponsor', logoCell('sponsor', g('sponsorUrl')))}
       ${row('Preview', `${link('Front', g('previewFrontUrl'))} &middot; ${link('Back', g('previewBackUrl'))}`)}
-      ${row('Product ID', g('productId'))}
-      ${row('OEM ID', g('oemId'))}
-      ${row('Order / UUID', g('userId'))}
-      ${row('Language', g('lang'))}
-      ${g('source') ? row('Source', `<a href="${g('source')}" style="color:#c8352e;font-size:0.8rem">${g('source')}</a>`) : ''}
+      ${row('Product ID', e('productId'))}
+      ${row('OEM ID', e('oemId'))}
+      ${row('Order / UUID', e('userId'))}
+      ${row('Language', e('lang'))}
+      ${isHttpsUrl(g('source')) ? row('Source', `<a href="${esc(g('source'))}" style="color:#c8352e;font-size:0.8rem">${esc(g('source'))}</a>`) : ''}
     </table>
 
     <p style="font-size:0.75rem;color:#a1a1aa;margin:0;padding-top:16px;border-top:1px solid #e4e4e7">
@@ -155,15 +169,27 @@ function buildEmail(fields, files) {
   </div>
 </div>`;
 
-  const subject = `RTP Design — ${template} — ${kit} · ${qty} units`;
+  const subject = `RTP Design — ${g('template') || '—'} — ${kit} · ${g('qty') || '—'} units`;
 
-  // Attach every file we received (logos + any previews), base64 for Resend.
-  const attachments = files.map(f => ({
-    filename: f.filename || `${f.fieldName}.png`,
-    content: f.buffer.toString('base64'),
-  }));
+  // Attach the files we received (logos + previews), base64 for Resend — but stay
+  // under Resend's total email size cap so an oversized logo can't sink the whole
+  // email. Skipped files keep their OSS links above.
+  const attachments = [];
+  const skipped = [];
+  let used = 0;
+  for (const f of files) {
+    if (used + f.buffer.length > MAX_ATTACH_BYTES) { skipped.push(f.filename || f.fieldName); continue; }
+    used += f.buffer.length;
+    attachments.push({
+      filename: f.filename || `${f.fieldName}.png`,
+      content: f.buffer.toString('base64'),
+    });
+  }
+  const htmlOut = skipped.length
+    ? html.replace('</table>', `${row('Not attached (too large)', esc(skipped.join(', ')))}</table>`)
+    : html;
 
-  return { subject, html, attachments };
+  return { subject, html: htmlOut, attachments };
 }
 
 // ── Send via Resend ──────────────────────────────────────────────────────────
@@ -171,7 +197,7 @@ function buildEmail(fields, files) {
 async function sendEmail(subject, html, attachments) {
   if (!RESEND_KEY) {
     console.warn('[rtp-design] RESEND_API_KEY not set — skipping email');
-    return;
+    return false;
   }
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -186,7 +212,9 @@ async function sendEmail(subject, html, attachments) {
   });
   if (!res.ok) {
     console.error('[rtp-design] Resend error:', res.status, await res.text());
+    return false;
   }
+  return true;
 }
 
 // ── Handler ──────────────────────────────────────────────────────────────────
@@ -204,9 +232,15 @@ module.exports = async function handler(req, res) {
 
   try {
     const { fields, files } = await parseForm(req);
+    // Log the full design (minus file bytes) so Vercel logs keep a recoverable
+    // record of every submission even if the Resend email fails.
+    console.log('[rtp-design] design:', JSON.stringify({
+      ...fields,
+      files: files.map(f => ({ field: f.fieldName, name: f.filename, kb: Math.round(f.buffer.length / 1024), truncated: f.truncated })),
+    }));
     const { subject, html, attachments } = buildEmail(fields, files);
-    await sendEmail(subject, html, attachments);
-    return res.status(200).json({ ok: true });
+    const sent = await sendEmail(subject, html, attachments);
+    return res.status(200).json({ ok: sent });
   } catch (err) {
     console.error('[rtp-design] fatal:', err.message);
     // Non-fatal to the caller: the configurator awaits this best-effort and proceeds regardless.

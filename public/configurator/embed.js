@@ -156,28 +156,28 @@ var I18N={
   hPerso:"Personalisation · Back",lName:"Name &amp; number",hEstimate:"Order estimate",ktJersey:"Jersey only",ktKit:"Full kit",
   ksKit:"jersey + shorts",lQuantity:"Quantity",perkFlag:"<b>Free team flag</b> with crest · orders of 10+ pieces",
   perkArmband:"<b>Free captain armband</b> · orders of 10+ pieces",reset:"Reset",cta:"Add to cart ▸",swTitle:"Pick a colour",
-  perJersey:"jersey",perKit:"full kit",badge:"READY-TO-PLAY · −10%",units:"units",estimated:"estimated",finalPrice:"final price at checkout"},
+  perJersey:"jersey",perKit:"full kit",badge:"READY-TO-PLAY · −10%",units:"units",estimated:"estimated",finalPrice:"final price at checkout",adding:"Adding…"},
  fr:{busy:"Chargement…",vFront:"Avant",vBack:"Dos",hColours:"Couleurs",lPrimary:"Primaire",lSecondary:"Secondaire",
   lTrim:"Bordures (col &amp; poignets)",hBadges:"Vos badges",lCrest:"Blason de l'équipe",lSponsor:"Sponsor",upload:"Importer ▸",
   svc:"JPG ou PNG, les deux fonctionnent — les fonds unis sont détourés automatiquement dans l'aperçu. Chaque blason &amp; sponsor est ensuite <b>vectorisé &amp; nettoyé par notre équipe de design</b>, le placement affiné, et vous recevez un <b>bon à tirer gratuit à valider avant impression</b>.",
   hPerso:"Personnalisation · Dos",lName:"Nom &amp; numéro",hEstimate:"Estimation de commande",ktJersey:"Maillot seul",ktKit:"Kit complet",
   ksKit:"maillot + short",lQuantity:"Quantité",perkFlag:"<b>Drapeau d'équipe offert</b> avec blason · commandes de 10+ pièces",
   perkArmband:"<b>Brassard de capitaine offert</b> · commandes de 10+ pièces",reset:"Réinitialiser",cta:"Ajouter au panier ▸",swTitle:"Choisir une couleur",
-  perJersey:"maillot",perKit:"kit complet",badge:"PRÊT À JOUER · −10%",units:"unités",estimated:"estimé",finalPrice:"prix final au paiement"},
+  perJersey:"maillot",perKit:"kit complet",badge:"PRÊT À JOUER · −10%",units:"unités",estimated:"estimé",finalPrice:"prix final au paiement",adding:"Ajout…"},
  es:{busy:"Cargando…",vFront:"Frente",vBack:"Espalda",hColours:"Colores",lPrimary:"Primario",lSecondary:"Secundario",
   lTrim:"Ribete (cuello &amp; puños)",hBadges:"Tus escudos",lCrest:"Escudo del equipo",lSponsor:"Patrocinador",upload:"Subir ▸",
   svc:"JPG o PNG, ambos funcionan — los fondos lisos se recortan automáticamente en la vista previa. Cada escudo &amp; patrocinador se <b>vectoriza y limpia con nuestro equipo de diseño</b>, se refina la ubicación y recibes una <b>prueba gratuita para aprobar antes de imprimir</b>.",
   hPerso:"Personalización · Espalda",lName:"Nombre &amp; número",hEstimate:"Estimación del pedido",ktJersey:"Solo camiseta",ktKit:"Kit completo",
   ksKit:"camiseta + pantalón",lQuantity:"Cantidad",perkFlag:"<b>Bandera del equipo gratis</b> con escudo · pedidos de 10+ piezas",
   perkArmband:"<b>Brazalete de capitán gratis</b> · pedidos de 10+ piezas",reset:"Restablecer",cta:"Añadir al carrito ▸",swTitle:"Elegir un color",
-  perJersey:"camiseta",perKit:"kit completo",badge:"LISTO PARA JUGAR · −10%",units:"unidades",estimated:"estimado",finalPrice:"precio final al pagar"},
+  perJersey:"camiseta",perKit:"kit completo",badge:"LISTO PARA JUGAR · −10%",units:"unidades",estimated:"estimado",finalPrice:"precio final al pagar",adding:"Añadiendo…"},
  it:{busy:"Caricamento…",vFront:"Fronte",vBack:"Retro",hColours:"Colori",lPrimary:"Primario",lSecondary:"Secondario",
   lTrim:"Bordo (colletto &amp; polsini)",hBadges:"I tuoi stemmi",lCrest:"Stemma della squadra",lSponsor:"Sponsor",upload:"Carica ▸",
   svc:"JPG o PNG, entrambi vanno bene — gli sfondi uniti vengono ritagliati automaticamente nell'anteprima. Ogni stemma &amp; sponsor viene poi <b>vettorializzato &amp; ripulito dal nostro team di design</b>, il posizionamento perfezionato, e ricevi una <b>bozza gratuita da approvare prima della stampa</b>.",
   hPerso:"Personalizzazione · Retro",lName:"Nome &amp; numero",hEstimate:"Stima dell'ordine",ktJersey:"Solo maglia",ktKit:"Kit completo",
   ksKit:"maglia + pantaloncini",lQuantity:"Quantità",perkFlag:"<b>Bandiera della squadra in omaggio</b> con stemma · ordini di 10+ pezzi",
   perkArmband:"<b>Fascia da capitano in omaggio</b> · ordini di 10+ pezzi",reset:"Reimposta",cta:"Aggiungi al carrello ▸",swTitle:"Scegli un colore",
-  perJersey:"maglia",perKit:"kit completo",badge:"PRONTI A GIOCARE · −10%",units:"unità",estimated:"stimato",finalPrice:"prezzo finale al checkout"}
+  perJersey:"maglia",perKit:"kit completo",badge:"PRONTI A GIOCARE · −10%",units:"unità",estimated:"stimato",finalPrice:"prezzo finale al checkout",adding:"Aggiunta…"}
 };
 function buildHTML(t){ return '' +
  '<div class="wrap">'
@@ -557,7 +557,7 @@ function run(root, opts){
         var f=e.target.files[0]; if(!f)return;
         root.getElementById(nameId).textContent=f.name.slice(0,14);
         state[key+"File"]=f;   // keep the ORIGINAL file for OSS upload; production needs the real logo, not just the knockout preview
-        var im=new Image(); im.onload=function(){state[key]=knockoutBg(im);render();}; im.src=URL.createObjectURL(f); });
+        var im=new Image(); im.onload=function(){URL.revokeObjectURL(im.src);state[key]=knockoutBg(im);render();}; im.src=URL.createObjectURL(f); });
     };
     handleUp("crest","crestName","crest"); handleUp("sponsor","sponsorName","sponsor");
     var perso=root.getElementById("perso");
@@ -664,11 +664,12 @@ function run(root, opts){
     var orderBtn=root.getElementById("order"), btnTxt=orderBtn?orderBtn.textContent:"";
     if(orderBtn){ orderBtn.disabled=true; orderBtn.textContent=(T&&T.adding)||"…"; }
     // Upload logos + previews to the 3D tool's anonymous OSS endpoint so ops get durable links.
+    var previewFrontBlob=dataURLtoBlob(design.preview.front), previewBackBlob=dataURLtoBlob(design.preview.back);
     var up=await Promise.all([
       uploadImage(state.crestFile,   "crest.png"),
       uploadImage(state.sponsorFile, "sponsor.png"),
-      uploadImage(dataURLtoBlob(design.preview.front), "preview-front.png"),
-      uploadImage(dataURLtoBlob(design.preview.back),  "preview-back.png")
+      uploadImage(previewFrontBlob, "preview-front.png"),
+      uploadImage(previewBackBlob,  "preview-back.png")
     ]);
     var crestUrl=up[0], sponsorUrl=up[1], previewFront=up[2], previewBack=up[3];
     // Notify ops with the full design. Send the raw logos + previews as files (so the email
@@ -687,8 +688,8 @@ function run(root, opts){
       if(previewBack)  fd.append("previewBackUrl", previewBack);
       if(state.crestFile)   fd.append("crest",   state.crestFile,   state.crestFile.name||"crest.png");
       if(state.sponsorFile) fd.append("sponsor", state.sponsorFile, state.sponsorFile.name||"sponsor.png");
-      fd.append("preview-front", dataURLtoBlob(design.preview.front), "preview-front.png");
-      fd.append("preview-back",  dataURLtoBlob(design.preview.back),  "preview-back.png");
+      fd.append("preview-front", previewFrontBlob, "preview-front.png");
+      fd.append("preview-back",  previewBackBlob,  "preview-back.png");
       var dResp=await fetch(CART.designApi,{ method:"POST", body:fd, signal:timeoutSignal(8000) });
       try{ console.log("[rtp] rtp-design ->", dResp.status); }catch(_){}
     }catch(e){ try{ console.warn("[rtp] rtp-design notify failed (order still proceeds):", e); }catch(_){} }
@@ -696,8 +697,11 @@ function run(root, opts){
     // proves the backend persists extra fields — the email above already captured everything).
     var body=new URLSearchParams({ productId:pid, quantity:"1", userId:userId, oemId:oid,
       lanType:CART.lang, timestamp:String(Math.floor(Date.now()/1000)), ranstr:String(Math.floor(Math.random()*1e10)) });
+    // Bounded wait: if the cart backend hangs we stop waiting and redirect anyway
+    // (the request is already sent; aborting only stops us blocking the shopper).
     try{ var resp=await fetch(CART.base+"/v1/addToEcart",{ method:"POST",
-          headers:{"Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"}, body:body });
+          headers:{"Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"}, body:body,
+          signal:timeoutSignal(10000) });
          console.log("[rtp] addToEcart ->", resp.status); }
     catch(e){ console.warn("[rtp] addToEcart failed (will still redirect):", e); }
     if(orderBtn){ orderBtn.disabled=false; orderBtn.textContent=btnTxt; }

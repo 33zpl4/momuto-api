@@ -42,7 +42,8 @@ function isAllowedOrigin(req) {
   const referer = req.headers['referer'] || '';
   return (
     ALLOWED_ORIGINS.some(o => origin === o) ||
-    ALLOWED_ORIGINS.some(o => referer.startsWith(o))
+    // exact origin or origin + "/path…" — never a prefix of a longer hostname
+    ALLOWED_ORIGINS.some(o => referer === o || referer.startsWith(o + '/'))
   );
 }
 
