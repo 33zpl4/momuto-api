@@ -51,19 +51,15 @@ var CHAT={
 var EST={
  en:{title:"Price estimate", team:"Team size", jersey:"jersey", kit:"kit", units:"units",
      est:"est.", total:"total", popular:"Most chosen",
-     bump:"Add {n} more — {q} for {total}, cheaper",
      note:"Sizes &amp; final quantities on the next step.", ship:"Free shipping over €49."},
  es:{title:"Precio estimado", team:"Tamaño del equipo", jersey:"camiseta", kit:"kit", units:"unidades",
      est:"aprox.", total:"total", popular:"El más elegido",
-     bump:"Añade {n} más — {q} por {total}, más barato",
      note:"Tallas y cantidades finales en el siguiente paso.", ship:"Envío gratis desde 49 €."},
  fr:{title:"Prix estimé", team:"Taille de l'équipe", jersey:"maillot", kit:"kit", units:"unités",
      est:"estimé", total:"total", popular:"Le plus choisi",
-     bump:"Ajoutez-en {n} — {q} pour {total}, moins cher",
      note:"Tailles et quantités finales à l'étape suivante.", ship:"Livraison offerte dès 49 €."},
  it:{title:"Prezzo stimato", team:"Dimensione squadra", jersey:"maglia", kit:"kit", units:"unità",
      est:"stima", total:"totale", popular:"Il più scelto",
-     bump:"Aggiungine {n} — {q} per {total}, meno caro",
      note:"Taglie e quantità finali al passaggio successivo.", ship:"Spedizione gratis oltre 49 €."}
 };
 var I18N={
@@ -321,10 +317,6 @@ body.momuto-custom-page .control-product_detail-quantity_box{display:none!import
 .mest-pop{display:inline-block;background:#E2214B;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:8px;vertical-align:2px;}
 .mest-sum{font-size:13px;color:#a1a1aa;margin-top:4px;}
 .mest-sum b{color:#fff;}
-.mest-bump{margin-top:10px;}
-.mest-bump button{width:100%;text-align:left;background:rgba(226,33,75,.10);border:1px solid rgba(226,33,75,.40);color:#fff;font-family:inherit;font-size:13px;font-weight:600;padding:9px 12px;border-radius:8px;cursor:pointer;transition:background .12s ease;}
-.mest-bump button:hover{background:rgba(226,33,75,.18);}
-.mest-bump button::before{content:'↑ ';color:#E2214B;font-weight:700;}
 .mest-note{font-size:12px;color:#71717a;margin-top:10px;line-height:1.5;}
 .mest-note .ship{color:#a1a1aa;}
 `;
@@ -407,9 +399,8 @@ function estimator(lang, kind){
    +'<input type="number" min="1" value="10" inputmode="numeric" aria-label="'+t.team+'">'
    +'<button type="button" data-d="1" aria-label="+">+</button></span></div>'
    +'<div class="mest-out"></div>'
-   +'<div class="mest-bump"></div>'
    +'<div class="mest-note"><span class="roster">'+t.note+'</span> · <span class="ship">'+t.ship+'</span></div>';
-  var input=wrap.querySelector("input"), out=wrap.querySelector(".mest-out"), bump=wrap.querySelector(".mest-bump");
+  var input=wrap.querySelector("input"), out=wrap.querySelector(".mest-out");
   function draw(){
     var q=Math.max(1, parseInt(input.value,10)||1);
     var unit=P.unitPrice(kind,q), one=P.unitPrice(kind,1), total=P.total(kind,q);
@@ -417,13 +408,6 @@ function estimator(lang, kind){
     var pop=(q>=P.POPULAR_MIN && q<20)?'<span class="mest-pop">'+t.popular+'</span>':'';
     out.innerHTML='<div class="mest-price">'+strike+'<b>'+euro(unit)+'</b> <span class="per">/ '+kindLabel+'</span>'+pop+'</div>'
       +'<div class="mest-sum">'+q+' '+t.units+' · '+t.est+' <b>'+euro(total)+'</b> '+t.total+'</div>';
-    // "buy more, pay less" nudge at tier boundaries (e.g. 5 cheaper than 4)
-    var b=P.bestValueBump(kind,q);
-    if(b){
-      bump.innerHTML='<button type="button">'+t.bump.replace("{n}",b.qty-q).replace("{q}",b.qty).replace("{total}",euro(b.total))+'</button>';
-      bump.firstChild.onclick=function(){ input.value=b.qty; draw(); };
-      bump.style.display="block";
-    } else { bump.innerHTML=""; bump.style.display="none"; }
   }
   wrap.querySelectorAll("button[data-d]").forEach(function(b){
     b.onclick=function(){ input.value=Math.max(1,(parseInt(input.value,10)||1)+parseInt(b.getAttribute("data-d"),10)); draw(); };
