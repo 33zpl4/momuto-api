@@ -19,9 +19,12 @@
  *   RESEND_API_KEY — resend.com
  *   TEAM_EMAIL     — where notifications go (default info@momuto.com)
  *   FROM_EMAIL     — verified sender (default info@momuto.com)
+ *   KV_REST_API_URL / KV_REST_API_TOKEN — Vercel KV (rate limiting; same store
+ *   api/submit.js uses). Missing/failing KV fails OPEN — emails still send.
  */
 
 const Busboy = require('busboy');
+const { kv } = require('@vercel/kv');
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
 const TEAM_EMAIL = process.env.TEAM_EMAIL || 'info@momuto.com';
@@ -52,6 +55,44 @@ function setCors(req, res) {
   res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
+
+// ── Rate limit ───────────────────────────────────────────────────────────────
+// The origin allowlist stops casual cross-site posts, but any non-browser
+// client can spoof those headers — and a token shipped inside the public
+// embed.js would be equally readable. So the real guard is a send budget:
+// a small per-IP allowance plus a global daily ceiling (inbox flood guard).
+// Fail-open: a KV hiccup must never cost a real customer's design email,
+// and the design JSON is already in the function log before we get here.
+
+const RL_IP_MAX = 8, RL_IP_WINDOW_S = 3600; // email sends per IP per hour
+const RL_DAY_MAX = 300;                     // email sends per UTC day, all IPs
+
+function clientIp(req) {
+  // x-real-ip is set by Vercel's edge; the x-forwarded-for fallback is
+  // client-influenceable, but faking unique IPs only escapes the per-IP
+  // budget — the daily ceiling still holds.
+  return req.headers['x-real-ip']
+    || String(req.headers['x-forwarded-for'] || '').split(',')[0].trim()
+    || 'unknown';
+}
+
+async function rateLimited(req) {
+  try {
+    const day = new Date().toISOString().slice(0, 10);
+    const ipKey  = `rtp-design:rl:ip:${clientIp(req)}`;
+    const dayKey = `rtp-design:rl:day:${day}`;
+    const [ipN, dayN] = await Promise.all([kv.incr(ipKey), kv.incr(dayKey)]);
+    if (ipN === 1)  await kv.expire(ipKey, RL_IP_WINDOW_S);
+    if (dayN === 1) await kv.expire(dayKey, 26 * 3600);
+    if (ipN > RL_IP_MAX || dayN > RL_DAY_MAX) {
+      console.warn('[rtp-design] rate limited: ip=%s ipCount=%d dayCount=%d', clientIp(req), ipN, dayN);
+      return true;
+    }
+  } catch (err) {
+    console.warn('[rtp-design] rate-limit check failed (allowing):', err.message);
+  }
+  return false;
 }
 
 // ── Parse multipart form (keep file buffers for attachment) ──────────────────
@@ -238,6 +279,11 @@ module.exports = async function handler(req, res) {
       ...fields,
       files: files.map(f => ({ field: f.fieldName, name: f.filename, kb: Math.round(f.buffer.length / 1024), truncated: f.truncated })),
     }));
+    if (await rateLimited(req)) {
+      // The design is preserved in the log line above; we only decline to
+      // send yet another email.
+      return res.status(429).json({ ok: false, error: 'rate_limited' });
+    }
     const { subject, html, attachments } = buildEmail(fields, files);
     const sent = await sendEmail(subject, html, attachments);
     return res.status(200).json({ ok: sent });
