@@ -45,7 +45,21 @@
     // Total for a quantity.
     total:function(kind,qty,opts){ return Math.round(api.unitPrice(kind,qty,opts)*normQty(qty)*100)/100; },
     // The quantity breakpoints for this kind (e.g. for "next tier at N" hints).
-    tiers:function(kind){ return (PRICING[kind]||PRICING.jersey).map(function(r){return r[0];}); }
+    tiers:function(kind){ return (PRICING[kind]||PRICING.jersey).map(function(r){return r[0];}); },
+    // Tier boundaries make "buy more, pay less" literally true (e.g. 5 costs less than 4).
+    // Return the nearest larger quantity whose TOTAL is <= the total at qty, or null if
+    // qty is already the best value. {qty, total, save} — save = money saved vs current.
+    bestValueBump:function(kind,qty,opts){
+      var q=normQty(qty), curTotal=api.total(kind,q,opts), starts=api.tiers(kind);
+      for(var i=0;i<starts.length;i++){
+        var c=starts[i];
+        if(c>q){
+          var ct=api.total(kind,c,opts);
+          if(ct<=curTotal) return { qty:c, total:ct, save:Math.round((curTotal-ct)*100)/100 };
+        }
+      }
+      return null;
+    }
   };
 
   if(typeof module!=="undefined"&&module.exports){ module.exports=api; }
