@@ -28,6 +28,7 @@ on:
           - rtp-content.js
           - custom-content.js
           - rtp-loader.js
+          - pricing.js
           - embed.js
           - assets-apex.js
           - assets-kinetic.js
