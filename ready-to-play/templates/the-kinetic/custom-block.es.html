@@ -1,0 +1,53 @@
+<!-- THE KINETIC — bloque de producto (ES) para el configurador 2D.
+     Product 16930 / OEM 10758863 (mamuto3). Pipeline composite. -->
+<style>
+  .rtpx{font-family:'Outfit',-apple-system,sans-serif;max-width:1200px;margin:0 auto;padding:0 16px;}
+  .rtpx-banner{border-left:3px solid #E2214B;padding:16px 22px;margin:8px 0 28px;display:flex;align-items:center;gap:16px;
+    background:linear-gradient(90deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,0) 100%);}
+  .rtpx-banner b{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E2214B;
+    background:rgba(226,33,75,.12);padding:5px 12px;white-space:nowrap;}
+  .rtpx-banner span{font-size:14px;color:#a1a1aa;line-height:1.5;}
+  .rtpx-banner span strong{color:#fff;}
+  .rtpx-hd{text-align:center;max-width:760px;margin:0 auto 18px;}
+  .rtpx-hd .lab{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E2214B;}
+  .rtpx-hd h2{font-family:'Bebas Neue',Oswald,sans-serif;font-weight:600;font-size:52px;line-height:1;
+    text-transform:uppercase;color:#fff;margin:8px 0 12px;letter-spacing:.01em;}
+  .rtpx-hd p{font-size:15px;color:#a1a1aa;line-height:1.7;margin:0;}
+  .rtpx-val{display:flex;justify-content:center;gap:0;max-width:680px;margin:22px auto 6px;
+    border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:14px 0;}
+  .rtpx-val div{flex:1;text-align:center;font-size:12px;color:#a1a1aa;padding:0 14px;border-left:1px solid rgba(255,255,255,.08);}
+  .rtpx-val div:first-child{border-left:none;}
+  .rtpx-val b{color:#fff;font-weight:600;}
+  body{background:#0a0a0a!important;color:#f5f5f5;}
+  @media(max-width:560px){.rtpx-hd h2{font-size:38px;}.rtpx-val{flex-direction:column;gap:10px;}.rtpx-val div{border-left:none;}}
+</style>
+
+<div class="rtpx">
+  <div class="rtpx-banner">
+    <b>Ready-to-Play</b>
+    <span>Diseños de nuestro equipo, vestidos por clubes reales. Sin fase de diseño. <strong>Ahorra tiempo y un 10%.</strong></span>
+  </div>
+  <div class="rtpx-hd">
+    <div class="lab">Colección Ready-to-Play</div>
+    <h2>The Kinetic</h2>
+    <p>Agresividad por diseño. Gráficos fracturados que simulan el movimiento a máxima velocidad. Para equipos que juegan hacia adelante.</p>
+  </div>
+  <div class="rtpx-val">
+    <div><b>Tus colores y escudo</b><br>totalmente personalizable</div>
+    <div><b>Vista previa al instante</b><br>sin esperas</div>
+    <div><b>Prueba gratis antes de imprimir</b><br>la revisa nuestro equipo</div>
+  </div>
+</div>
+
+<div id="momuto-rtp" data-template="the-kinetic" data-mode="composite"
+     data-product="16930" data-oem="10758863" data-lang="es"
+     data-product-kit="16925" data-oem-kit="10758858"
+     data-primary="#000000" data-secondary="#C8102E" data-trim="#FFFFFF"></div>
+
+<div id="rtp-content" data-lang="es"></div>
+
+<!-- Un único loader estable: deriva el bundle de assets de data-template y carga el
+     configurador (assets + embed.js) y el contenido compartido (rtp-content.js) con
+     cache-bust automático. Actualiza embed.js / assets / rtp-content una vez con
+     Deploy Static Files y se propaga solo — sin bump de ?v= ni re-pegado. -->
+<script src="https://www.momuto.com/rtp-loader.js" defer></script>
