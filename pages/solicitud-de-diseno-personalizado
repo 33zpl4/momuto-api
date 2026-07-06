@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Equipación de Fútbol Personalizada MOMUTO",
-  "description": "Equipación de fútbol totalmente personalizable con impresión por sublimación completa. Tejido de poliéster-elastano de alto rendimiento como estándar. Diseño profesional gratuito en 1-2 días. Sin pedido mínimo. Emblemas 3D de silicona opcionales para pedidos grandes. Entrega en 25-30 días en todo el mundo.",
+  "description": "Equipación de fútbol totalmente personalizable con impresión por sublimación completa. Tejido de poliéster-elastano de alto rendimiento como estándar. Diseño personalizado con depósito de 15€, acreditado en pedidos de 5+ camisetas. Sin pedido mínimo. Emblemas 3D de silicona opcionales para pedidos grandes. Entrega en 25-30 días en todo el mundo.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Equipaciones de Fútbol Personalizadas",
   "material": "Tejido de poliéster-elastano (estándar en todas las equipaciones)",
@@ -37,7 +37,7 @@
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Pedido Mínimo", "value": "Sin mínimo — pide 1 o 100+ equipaciones" },
     { "@type": "PropertyValue", "name": "Método de Impresión", "value": "Sublimación completa — garantía de por vida contra descascarillado, grietas o decoloración" },
-    { "@type": "PropertyValue", "name": "Servicio de Diseño", "value": "Maqueta de diseño profesional gratuita en 1-2 días, revisiones gratuitas incluidas" },
+    { "@type": "PropertyValue", "name": "Servicio de Diseño", "value": "Maqueta de diseño profesional en 24-48h con revisiones incluidas; depósito de 15€ acreditado en pedidos de 5+ camisetas" },
     { "@type": "PropertyValue", "name": "Configurador 3D", "value": "Configurador de equipaciones 3D en tiempo real con más de 30 plantillas profesionales" },
     { "@type": "PropertyValue", "name": "Tejido", "value": "Mezcla de poliéster-elastano como estándar — los competidores incluyen elastano solo en niveles premium" },
     { "@type": "PropertyValue", "name": "Emblemas 3D de Silicona", "value": "Emblemas 3D de silicona premium disponibles para pedidos grandes" },
@@ -50,7 +50,7 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Cómo Pedir Equipaciones de Fútbol Personalizadas en MOMUTO",
-  "description": "Obtén equipaciones de fútbol totalmente personalizadas y de calidad profesional en 3 pasos: diseña con el configurador 3D o solicita una maqueta profesional gratuita, aprueba tu diseño y recibe tu equipación en 25-30 días en todo el mundo.",
+  "description": "Obtén equipaciones de fútbol totalmente personalizadas y de calidad profesional en 3 pasos: diseña con el configurador 3D o solicita una maqueta profesional (depósito de 15€, acreditado en pedidos de 5+), aprueba tu diseño y recibe tu equipación en 25-30 días en todo el mundo.",
   "totalTime": "P25D",
   "estimatedCost": {
     "@type": "MonetaryAmount",
@@ -62,7 +62,7 @@
       "@type": "HowToStep",
       "position": 1,
       "name": "Diseña Tu Equipación",
-      "text": "Usa el configurador 3D de MOMUTO con más de 30 plantillas profesionales para diseñar al instante, o envía tu brief (escudo, colores, referencias) a través del sitio web, WhatsApp o email para recibir una maqueta personalizada gratuita en 1-2 días."
+      "text": "Usa el configurador 3D de MOMUTO con más de 30 plantillas profesionales para diseñar al instante, o envía tu brief (escudo, colores, referencias) a través del sitio web, WhatsApp o email para recibir una maqueta personalizada en 24-48h (depósito de 15€, acreditado en pedidos de 5+ camisetas)."
     },
     {
       "@type": "HowToStep",
@@ -82,11 +82,53 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <!-- inject:design-request.css -->
+<style>
+/* ── BANNER DE PAGO CONFIRMADO ── */
+.paid-banner { display:none; background:#14532d; border-bottom:1px solid #166534; padding:18px 40px; text-align:center; }
+.paid-banner-inner { max-width:800px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:12px; }
+.paid-banner-icon { color:#4ade80; font-size:1.1rem; }
+.paid-banner p { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:500; color:#bbf7d0; margin:0; }
+.paid-banner p strong { color:#fff; font-weight:700; }
+/* ── PASARELA DE PAGO ── */
+.gate-section { padding:6rem 20px; background:#0a0a0a; border-top:1px solid rgba(255,255,255,0.06); }
+.gate-container { max-width:640px; margin:0 auto; }
+.gate-eyebrow { font-family:'Outfit',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#c8352e; margin-bottom:16px; text-align:center; }
+.gate-box { background:#111; border:1px solid rgba(255,255,255,0.06); border-top:3px solid #c8352e; padding:48px; }
+.gate-box h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,4vw,2.8rem); font-weight:400; text-transform:uppercase; letter-spacing:0.04em; color:#f5f5f5; line-height:1; margin-bottom:6px; }
+.gate-price { font-family:'Outfit',sans-serif; font-size:0.78rem; font-weight:300; color:#a1a1aa; margin-bottom:32px; }
+.gate-price strong { color:#f5f5f5; font-weight:600; }
+.gate-features { list-style:none; margin:0 0 36px 0; padding:0; border-top:1px solid rgba(255,255,255,0.06); padding-top:28px; }
+.gate-features li { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:300; color:#a1a1aa; padding:9px 0; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.04); }
+.gate-features li:last-child { border-bottom:none; }
+.gate-features li i { color:#4ade80; font-size:0.75rem; flex-shrink:0; }
+.gate-features li strong { color:#f5f5f5; font-weight:600; }
+.gate-email-row { display:flex; gap:0; margin-bottom:12px; }
+.gate-email-input { flex:1; padding:16px 18px; background:transparent; border:1px solid rgba(255,255,255,0.1); border-right:none; color:#f5f5f5; font-family:'Outfit',sans-serif; font-size:0.88rem; font-weight:400; outline:none; transition:border-color 0.2s; }
+.gate-email-input::placeholder { color:#71717a; font-size:0.78rem; letter-spacing:0.05em; text-transform:uppercase; }
+.gate-email-input:focus { border-color:rgba(255,255,255,0.3); }
+.gate-pay-btn { display:inline-block; background:#c8352e; color:#fff; font-family:'Outfit',sans-serif; font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; padding:16px 28px; text-decoration:none; border:1px solid #c8352e; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
+.gate-pay-btn:hover { background:#e04038; }
+.gate-pay-btn.is-disabled { opacity:0.45; cursor:not-allowed; }
+.gate-refund-guarantee { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:400; line-height:1.5; color:#d4d4d8; margin:16px 0 8px; text-align:center; }
+.gate-refund-guarantee strong { color:#fff; font-weight:600; }
+.gate-refund-note { font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:300; color:#71717a; margin-bottom:32px; text-align:center; }
+.gate-divider { border:none; border-top:1px solid rgba(255,255,255,0.06); margin:32px 0; }
+.gate-alt { font-family:'Outfit',sans-serif; font-size:0.82rem; font-weight:300; color:#71717a; text-align:center; }
+.gate-alt a { color:#a1a1aa; font-weight:600; text-decoration:underline; text-underline-offset:3px; text-decoration-color:#c8352e; }
+.gate-alt a:hover { color:#f5f5f5; }
+@media (max-width:640px) { .gate-box { padding:32px 22px; } .gate-email-row { flex-direction:column; gap:10px; } .gate-email-input { border-right:1px solid rgba(255,255,255,0.1); } .gate-pay-btn { width:100%; text-align:center; } }
+</style>
+<div class="paid-banner" id="paidBanner">
+<div class="paid-banner-inner">
+<i class="fas fa-check-circle paid-banner-icon"></i>
+<p><strong>&iexcl;Listo &mdash; tu concepto est&aacute; en la cola!</strong> Cu&eacute;ntanos sobre tu equipo y sube tu referencia abajo; tu primera maqueta llega en 24&ndash;48h.</p>
+</div>
+</div>
 <header class="hero full-bleed">
 <div class="hero-content">
 <h1>Camisetas de F&uacute;tbol Personalizadas para <span class="highlight">Equipos Amateur</span></h1>
 <h3>Calidad profesional desde 19,70&euro; por camiseta &mdash; lo dise&ntilde;amos nosotros o t&uacute; eliges de nuestra colecci&oacute;n</h3>
-<p class="hero-intro">MOMUTO ayuda a equipos de f&uacute;tbol amateur a crear equipaciones personalizadas a trav&eacute;s de tres v&iacute;as: una <strong>colecci&oacute;n Lista para Jugar</strong> con dise&ntilde;os probados al 10% de descuento, un <strong>servicio de dise&ntilde;o personalizado gratuito</strong> con maquetas en 24-48h, o un <strong>configurador 3D en tiempo real</strong>. Sin pedido m&iacute;nimo. Impresi&oacute;n profesional por sublimaci&oacute;n. Entrega mundial en 25-30 d&iacute;as.</p>
+<p class="hero-intro">MOMUTO ayuda a equipos de f&uacute;tbol amateur a crear equipaciones personalizadas a trav&eacute;s de tres v&iacute;as: una <strong>colecci&oacute;n Lista para Jugar</strong> con dise&ntilde;os probados al 10% de descuento, un <strong>servicio de dise&ntilde;o personalizado</strong> con maquetas en 24-48h (15&euro; para empezar, acreditados en pedidos de 5+ camisetas), o un <strong>configurador 3D en tiempo real</strong>. Sin pedido m&iacute;nimo. Impresi&oacute;n profesional por sublimaci&oacute;n. Entrega mundial en 25-30 d&iacute;as.</p>
 </div>
 </header>
 <section class="social-proof-strip">
@@ -121,9 +163,9 @@
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-pencil-alt"></i></div>
 <h3>Servicio de Dise&ntilde;o Personalizado</h3>
-<div class="path-for">100% &uacute;nico &middot; Maqueta gratuita &middot; Revisiones gratuitas incluidas</div>
-<p class="path-description">&iquest;Quieres algo que nadie m&aacute;s tenga? Nuestros dise&ntilde;adores crean una equipaci&oacute;n totalmente original a partir de tu brief &mdash; o adaptan un dise&ntilde;o que ya hayas creado (generado por IA, dibujado a mano, o creado con cualquier herramienta). Maqueta gratuita en 24-48h, revisiones gratuitas, sin compromiso. Desde 21,90&euro; por camiseta.</p>
-<a href="#cta-form" class="path-cta">Solicitar Dise&ntilde;o Gratuito</a></div>
+<div class="path-for">100% &uacute;nico &middot; 15&euro; para empezar &middot; Se acreditan en pedidos de 5+</div>
+<p class="path-description">&iquest;Quieres algo que nadie m&aacute;s tenga? Nuestros dise&ntilde;adores crean una equipaci&oacute;n totalmente original a partir de tu brief &mdash; o adaptan un dise&ntilde;o que ya hayas creado (generado por IA, dibujado a mano, o creado con cualquier herramienta). Primera maqueta en 24-48h, revisiones incluidas. 15&euro; para empezar, acreditados &iacute;ntegros en pedidos de 5+ camisetas. Desde 21,90&euro; por camiseta.</p>
+<a href="#payment-gate" class="path-cta" id="studioPathCta">Enviar Mi Concepto</a></div>
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-cube"></i></div>
 <h3>Configurador 3D</h3>
@@ -144,7 +186,7 @@
 <div class="comparison-icon"><i class="fas fa-pencil-alt"></i></div>
 <div class="comparison-option">Dise&ntilde;o Personalizado</div>
 <div class="comparison-best-for">Para equipos que quieren una identidad &uacute;nica</div>
-<div class="comparison-benefit">Equipaci&oacute;n totalmente original creada desde cero. Maqueta gratuita en 24-48h, revisiones gratuitas incluidas, sin compromiso. Desde 21,90&euro; por camiseta.</div>
+<div class="comparison-benefit">Equipaci&oacute;n totalmente original creada desde cero. Primera maqueta en 24-48h, revisiones incluidas. 15&euro; para empezar, acreditados &iacute;ntegros en pedidos de 5+ camisetas. Desde 21,90&euro; por camiseta.</div>
 </div>
 <div class="comparison-card">
 <div class="comparison-icon"><i class="fas fa-cube"></i></div>
@@ -195,7 +237,7 @@
 <div class="why-container">
 <div class="why-header">
 <h2>Por Qu&eacute; los Equipos Eligen MOMUTO</h2>
-<p>Desde el precio hasta la entrega, pasando por la calidad del tejido, los equipos suelen elegir MOMUTO por los mismos motivos: menor coste por equipaci&oacute;n, entrega m&aacute;s r&aacute;pida, servicio de dise&ntilde;o gratuito y sin pedido m&iacute;nimo. &iquest;Comparas con proveedores como Owayo, Spized o Jersix? Hemos analizado las diferencias en nuestra <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">comparativa completa de equipaciones</a>.</p>
+<p>Desde el precio hasta la entrega, pasando por la calidad del tejido, los equipos suelen elegir MOMUTO por los mismos motivos: menor coste por equipaci&oacute;n, entrega m&aacute;s r&aacute;pida, dise&ntilde;o personalizado a bajo coste y sin pedido m&iacute;nimo. &iquest;Comparas con proveedores como Owayo, Spized o Jersix? Hemos analizado las diferencias en nuestra <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">comparativa completa de equipaciones</a>.</p>
 </div>
 <div class="why-grid">
 <div class="why-card">
@@ -215,8 +257,8 @@
 </div>
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-pencil-ruler"></i></div>
-<h3>Dise&ntilde;o Profesional Gratuito</h3>
-<p>Maqueta personalizada en 24&ndash;48h, revisiones gratuitas incluidas. Sin compromiso hasta confirmar el pedido &mdash; sin honorarios de dise&ntilde;o, nunca.</p>
+<h3>Dise&ntilde;o Profesional a Bajo Coste</h3>
+<p>Maqueta personalizada en 24&ndash;48h, revisiones incluidas. Solo 15&euro; para empezar &mdash; acreditados &iacute;ntegros en pedidos de 5+ camisetas, as&iacute; que para un equipo el dise&ntilde;o sale pr&aacute;cticamente gratis.</p>
 </div>
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-box-open"></i></div>
@@ -236,7 +278,7 @@
 <h2>C&oacute;mo funciona el servicio de dise&ntilde;o de equipaciones MOMUTO</h2>
 <ul class="hiw-steps">
 <li><span class="hiw-num">1</span><div><strong>Elige tu v&iacute;a</strong><p>Explora la <a href="https://es.momuto.com/pages/coleccion-ready-to-play" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">colecci&oacute;n Lista para Jugar</a> con dise&ntilde;os probados al 10% de descuento. O env&iacute;a un brief para un dise&ntilde;o totalmente personalizado. O <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">cr&eacute;alo t&uacute; mismo en 3D</a>.</p></div></li>
-<li><span class="hiw-num">2</span><div><strong>Recibe tu maqueta en 24&ndash;48h</strong><p>Nuestros dise&ntilde;adores crean una maqueta de equipaci&oacute;n de f&uacute;tbol totalmente personalizada, de forma gratuita.</p></div></li>
+<li><span class="hiw-num">2</span><div><strong>Recibe tu maqueta en 24&ndash;48h</strong><p>Nuestros dise&ntilde;adores crean una maqueta de equipaci&oacute;n de f&uacute;tbol totalmente personalizada. Solo 15&euro; para empezar, acreditados en pedidos de 5+ camisetas.</p></div></li>
 <li><span class="hiw-num">3</span><div><strong>Solicita revisiones si es necesario</strong><p>Todas las revisiones son gratuitas. Ajustamos hasta que est&eacute;s satisfecho.</p></div></li>
 <li><span class="hiw-num">4</span><div><strong>Confirma tallas y detalles del pedido</strong><p>Env&iacute;a el desglose de tallas y preparamos la producci&oacute;n.</p></div></li>
 <li><span class="hiw-num">5</span><div><strong>Producimos y enviamos tu equipaci&oacute;n</strong><p>7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Tu equipaci&oacute;n llega en 20&ndash;25 d&iacute;as en todo el mundo.</p></div></li>
@@ -244,19 +286,47 @@
 <p class="hiw-internal-links">&iquest;Buscas la v&iacute;a m&aacute;s r&aacute;pida? <a href="https://es.momuto.com/pages/coleccion-ready-to-play">La colecci&oacute;n Lista para Jugar empieza desde 19,70&euro; con maquetas en 24h.</a><br />&iquest;Quieres ver lo que han pedido otros clubes? <a href="https://es.momuto.com/pages/equipos-momuto">Explora la galer&iacute;a completa de equipos.</a></p>
 </div>
 </section>
-<section class="form-section">
+<!-- ── PASARELA DE PAGO ── -->
+<section class="gate-section" id="payment-gate">
+<div class="gate-container">
+<p class="gate-eyebrow">Dise&ntilde;o Personalizado &mdash; De tu concepto a una equipaci&oacute;n lista para producci&oacute;n</p>
+<div class="gate-box">
+<h2>Env&iacute;anos Tu Concepto</h2>
+<p class="gate-price"><strong>15&euro; para empezar</strong> &mdash; acreditados &iacute;ntegros en pedidos de 5 camisetas o m&aacute;s</p>
+<ul class="gate-features">
+<li><i class="fas fa-check"></i><span><strong>Un dise&ntilde;ador con tu concepto</strong> en menos de 24h</span></li>
+<li><i class="fas fa-check"></i><span><strong>Primera maqueta entregada</strong> en 24&ndash;48h</span></li>
+<li><i class="fas fa-check"></i><span><strong>La afinamos contigo</strong> hasta que est&eacute; perfecta</span></li>
+<li><i class="fas fa-check"></i><span><strong>Ilustraci&oacute;n y vectorizaci&oacute;n</strong> incluidas &mdash; conceptos IA, bocetos, gr&aacute;ficos a medida</span></li>
+<li><i class="fas fa-check"></i><span><strong>Archivos listos para producci&oacute;n</strong> para impresi&oacute;n por sublimaci&oacute;n</span></li>
+<li><i class="fas fa-check"></i><span><strong>15&euro; acreditados a tu pedido</strong> con 5+ camisetas</span></li>
+</ul>
+<div class="gate-email-row">
+<input type="email" class="gate-email-input" id="gateEmail" placeholder="Tu direcci&oacute;n de email" />
+<a href="https://buy.stripe.com/4gM4gzga82i04vletD3wQ0i" class="gate-pay-btn" id="gatePayBtn">Enviar Mi Concepto &middot; 15&euro; &rarr;</a>
+</div>
+<p class="gate-refund-guarantee">&iquest;Prefieres no continuar tras el primer concepto? Solo d&iacute;noslo &mdash; te devolvemos tus <strong>15&euro;</strong>.</p>
+<p class="gate-refund-note">Pago seguro con Stripe &bull; Acreditado a tu pedido con 5+ camisetas</p>
+<hr class="gate-divider" />
+<p class="gate-alt">&iquest;Prefieres dise&ntilde;arlo t&uacute; mismo? &nbsp;<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">Configurador 3D</a> y <a href="https://es.momuto.com/pages/coleccion-ready-to-play">Lista para Jugar</a> son gratis, instant&aacute;neos y tuyos.</p>
+</div>
+</div>
+</section>
+
+<!-- ── BRIEF (oculto hasta el pago) ── -->
+<section class="form-section" id="brief-form-section" style="display:none;">
 <div class="form-container">
 <div class="form-content" id="cta-form">
 <div class="form-intro">
-<h2>Solicita Tu Dise&ntilde;o Personalizado</h2>
-<p>&iquest;Quieres algo totalmente &uacute;nico? Completa tu brief y recibe una maqueta profesional gratuita en 24-48h. &iquest;Ya tienes un dise&ntilde;o? S&uacute;belo abajo &mdash; lo adaptamos para producci&oacute;n. &iquest;Prefieres una v&iacute;a m&aacute;s r&aacute;pida? <a href="https://es.momuto.com/pages/coleccion-ready-to-play" style="color:var(--accent-red);text-decoration:underline;font-weight:700;">Explora la colecci&oacute;n Lista para Jugar con 10% de descuento &rarr;</a></p>
+<h2>Completa Tu Brief</h2>
+<p>Cu&eacute;ntanos sobre tu equipo y sube tu escudo y referencias. Recibir&aacute;s tu primera maqueta profesional en 24-48h y la afinamos contigo hasta que est&eacute; perfecta. &iquest;Ya tienes un dise&ntilde;o? S&uacute;belo abajo &mdash; lo adaptamos para producci&oacute;n.</p>
 </div>
 <div class="progress-indicator">
 <div class="progress-step active"><span class="step-label">1</span> <span class="step-text">Detalles</span></div>
 <div class="progress-step" id="progress2"><span class="step-label">2</span> <span class="step-text">Estilo</span></div>
 <div class="progress-step" id="progress3"><span class="step-label">3</span> <span class="step-text">Enviar</span></div>
 </div>
-<div id="formContentWrapper"><form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://momuto-api.vercel.app/api/submit"><input type="hidden" name="_next" value="https://es.momuto.com/pages/confirmacion-solicitud-diseno-personalizado" />
+<div id="formContentWrapper"><form id="proposalForm" enctype="multipart/form-data" method="POST" action="https://momuto-api.vercel.app/api/submit"><input type="hidden" name="_next" value="https://es.momuto.com/pages/confirmacion-solicitud-diseno-personalizado" /><input type="hidden" name="_flow" value="custom-deposit" />
 <div class="form-step active" id="step1">
 <div class="form-section-inner">
 <div class="input-group"><input type="text" id="customerName" name="firstname" placeholder="Tu Nombre / Manager" required="" /></div>
@@ -344,8 +414,8 @@
 <h2>Preguntas frecuentes sobre equipaciones de f&uacute;tbol personalizadas</h2>
 <div class="faq-list">
 <div class="faq-item">
-<h3>&iquest;C&oacute;mo funciona el servicio de dise&ntilde;o gratuito de equipaciones de MOMUTO?</h3>
-<p>Env&iacute;a tu brief a trav&eacute;s del formulario de arriba &mdash; nombre del equipo, escudo, colores y cualquier referencia. Nuestros dise&ntilde;adores crean una maqueta totalmente personalizada en 24&ndash;48 horas, de forma gratuita. Todas las revisiones tambi&eacute;n son gratuitas hasta quedar satisfecho.</p>
+<h3>&iquest;C&oacute;mo funciona el servicio de dise&ntilde;o personalizado de MOMUTO?</h3>
+<p>Reserva tu concepto con un dep&oacute;sito de 15&euro; y env&iacute;a tu brief &mdash; nombre del equipo, escudo, colores y cualquier referencia. Nuestros dise&ntilde;adores crean una maqueta totalmente personalizada en 24&ndash;48 horas, con revisiones incluidas hasta quedar satisfecho. Los 15&euro; se acreditan &iacute;ntegros en pedidos de 5 camisetas o m&aacute;s &mdash; as&iacute; que para un equipo el dise&ntilde;o sale pr&aacute;cticamente gratis.</p>
 </div>
 <div class="faq-item">
 <h3>&iquest;Hay un pedido m&iacute;nimo para equipaciones de f&uacute;tbol personalizadas?</h3>
@@ -389,4 +459,61 @@
 </div>
 </div>
 </div>
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var isPaid = params.get('paid') === 'true';
+  if (isPaid) {
+    var pb = document.getElementById('paidBanner'); if (pb) pb.style.display = 'block';
+    var pg = document.getElementById('payment-gate'); if (pg) pg.style.display = 'none';
+    var bf = document.getElementById('brief-form-section'); if (bf) bf.style.display = 'block';
+    setTimeout(function() {
+      var f = document.getElementById('cta-form'); if (f) f.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+  // Gate: require a valid email, capture it as a lead (best-effort), then go to Stripe
+  var gateEmail = document.getElementById('gateEmail');
+  var gatePayBtn = document.getElementById('gatePayBtn');
+  var baseStripeUrl = 'https://buy.stripe.com/4gM4gzga82i04vletD3wQ0i';
+  if (gateEmail && gatePayBtn) {
+    var validEmail = function (v) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((v || '').trim()); };
+    var setReady = function (on) {
+      gatePayBtn.classList.toggle('is-disabled', !on);
+      gatePayBtn.setAttribute('aria-disabled', on ? 'false' : 'true');
+      gatePayBtn.href = on
+        ? baseStripeUrl + '?prefilled_email=' + encodeURIComponent(gateEmail.value.trim())
+        : baseStripeUrl;
+    };
+    setReady(false);
+    gateEmail.addEventListener('input', function () { setReady(validEmail(this.value)); });
+    gatePayBtn.addEventListener('click', function (e) {
+      var email = gateEmail.value.trim();
+      e.preventDefault();
+      if (!validEmail(email)) { gateEmail.focus(); return; }
+      var navigated = false;
+      var go = function () {
+        if (navigated) return; navigated = true;
+        window.location.href = baseStripeUrl + '?prefilled_email=' + encodeURIComponent(email);
+      };
+      var locale = (location.hostname.match(/^(es|fr|it)\./) || [])[1] || 'en';
+      try {
+        fetch('https://momuto-api.vercel.app/api/lead', {
+          method: 'POST', keepalive: true,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, locale: locale, source: window.location.href })
+        }).then(go, go);
+      } catch (_) { go(); }
+      setTimeout(go, 1200); // safety: never trap the user
+    });
+  }
+  // Studio path-card CTA → smooth-scroll to the gate
+  var studioCta = document.getElementById('studioPathCta');
+  if (studioCta) {
+    studioCta.addEventListener('click', function(e) {
+      e.preventDefault();
+      var pg = document.getElementById('payment-gate'); if (pg) pg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+})();
+</script>
 <!-- inject:design-request.js -->
