@@ -223,7 +223,7 @@ function buildHTML(t){ return '' +
 +'</div></div>'; }
 
 // ---- per-instance engine ----
-var LOGO_DEFAULTS={"the-fracture":"#000000","the-legacy":"#ffffff"};
+var LOGO_DEFAULTS={"the-legacy":"#ffffff"};  // logo colour follows trim for all models unless pinned here
 // high-frequency patterns: anti-alias the hard region edges by softening the recolor base
 var SMOOTH_TEMPLATES={"the-mosaic":1,"the-prism":1};
 function run(root, opts){

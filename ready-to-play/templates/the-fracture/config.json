@@ -35,9 +35,9 @@
     "https://cdn.staticsoe.com/pics/4295c15439a7dc80e2d278960cf3d45fc1dd84e0b22f0470a4b32556d2fb9f71.png"
   ],
   "default_colors": {
-    "primary":   { "hex": "#000000", "name": "black" },
+    "primary":   { "hex": "#808080", "name": "grey" },
     "secondary": { "hex": "#F5F1E8", "name": "off-white" },
-    "trim":      { "hex": "#808080", "name": "grey" }
+    "trim":      { "hex": "#000000", "name": "black" }
   },
   "status": "published"
 }
