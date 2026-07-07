@@ -11,7 +11,7 @@
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "EUR",
-    "lowPrice": "20.90",
+    "lowPrice": "21.90",
     "highPrice": "38.90",
     "offerCount": "1",
     "availability": "https://schema.org/InStock",
@@ -55,7 +55,7 @@
   "estimatedCost": {
     "@type": "MonetaryAmount",
     "currency": "EUR",
-    "value": "Desde 20,90€ por camiseta (10+ unidades) o 38,90€ por una camiseta individual"
+    "value": "Desde 21,90€ por camiseta (10+ unidades) o 38,90€ por una camiseta individual"
   },
   "step": [
     {
@@ -243,12 +243,12 @@
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-truck"></i></div>
 <h3>Entrega M&aacute;s R&aacute;pida</h3>
-<p>20&ndash;25 d&iacute;as en todo el mundo desde la confirmaci&oacute;n del pedido: 7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Env&iacute;o gratuito en pedidos superiores a 50&euro;. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Ver comparativa de entrega.</a></p>
+<p>2525&ndash;30 d&iacute;asndash;30 d&iacute;as en todo el mundo desde la confirmaci&oacute;n del pedido: 7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Env&iacute;o gratuito en pedidos superiores a 50&euro;. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Ver comparativa de entrega.</a></p>
 </div>
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-tag"></i></div>
 <h3>Mejor Precio por Equipo</h3>
-<p>Camisetas desde 20,90&euro; por unidad en pedidos grandes, 38,90&euro; para una camiseta individual. Sin pedido m&iacute;nimo &mdash; sin obligaci&oacute;n de compra a granel. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Comparar precios con competidores.</a></p>
+<p>Camisetas desde 21,90&euro; por unidad en pedidos grandes, 38,90&euro; para una camiseta individual. Sin pedido m&iacute;nimo &mdash; sin obligaci&oacute;n de compra a granel. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Comparar precios con competidores.</a></p>
 </div>
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-layer-group"></i></div>
@@ -281,7 +281,7 @@
 <li><span class="hiw-num">2</span><div><strong>Recibe tu maqueta en 24&ndash;48h</strong><p>Nuestros dise&ntilde;adores crean una maqueta de equipaci&oacute;n de f&uacute;tbol totalmente personalizada. Solo 15&euro; para empezar, acreditados en pedidos de 5+ camisetas.</p></div></li>
 <li><span class="hiw-num">3</span><div><strong>Solicita revisiones si es necesario</strong><p>Todas las revisiones son gratuitas. Ajustamos hasta que est&eacute;s satisfecho.</p></div></li>
 <li><span class="hiw-num">4</span><div><strong>Confirma tallas y detalles del pedido</strong><p>Env&iacute;a el desglose de tallas y preparamos la producci&oacute;n.</p></div></li>
-<li><span class="hiw-num">5</span><div><strong>Producimos y enviamos tu equipaci&oacute;n</strong><p>7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Tu equipaci&oacute;n llega en 20&ndash;25 d&iacute;as en todo el mundo.</p></div></li>
+<li><span class="hiw-num">5</span><div><strong>Producimos y enviamos tu equipaci&oacute;n</strong><p>7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Tu equipaci&oacute;n llega en 2525&ndash;30 d&iacute;asndash;30 d&iacute;as en todo el mundo.</p></div></li>
 </ul>
 <p class="hiw-internal-links">&iquest;Buscas la v&iacute;a m&aacute;s r&aacute;pida? <a href="https://es.momuto.com/pages/coleccion-ready-to-play">La colecci&oacute;n Lista para Jugar empieza desde 19,70&euro; con maquetas en 24h.</a><br />&iquest;Quieres ver lo que han pedido otros clubes? <a href="https://es.momuto.com/pages/equipos-momuto">Explora la galer&iacute;a completa de equipos.</a></p>
 </div>
@@ -419,11 +419,11 @@
 </div>
 <div class="faq-item">
 <h3>&iquest;Hay un pedido m&iacute;nimo para equipaciones de f&uacute;tbol personalizadas?</h3>
-<p>No. MOMUTO no tiene pedido m&iacute;nimo. Puedes pedir una sola camiseta o un equipo completo de 50+. El precio empieza desde 20,90&euro; por camiseta en pedidos grandes y 38,90&euro; para una camiseta individual.</p>
+<p>No. MOMUTO no tiene pedido m&iacute;nimo. Puedes pedir una sola camiseta o un equipo completo de 50+. El precio empieza desde 21,90&euro; por camiseta en pedidos grandes y 38,90&euro; para una camiseta individual.</p>
 </div>
 <div class="faq-item">
 <h3>&iquest;Cu&aacute;nto tiempo tarda en llegar la equipaci&oacute;n de f&uacute;tbol personalizada?</h3>
-<p>La producci&oacute;n tarda 7&ndash;12 d&iacute;as. El env&iacute;o tarda 10&ndash;15 d&iacute;as en todo el mundo. El tiempo total de entrega es normalmente de 20&ndash;25 d&iacute;as desde la confirmaci&oacute;n del pedido.</p>
+<p>La producci&oacute;n tarda 7&ndash;12 d&iacute;as. El env&iacute;o tarda 10&ndash;15 d&iacute;as en todo el mundo. El tiempo total de entrega es normalmente de 2525&ndash;30 d&iacute;asndash;30 d&iacute;as desde la confirmaci&oacute;n del pedido.</p>
 </div>
 <div class="faq-item">
 <h3>&iquest;Puedo subir el escudo de mi club y elegir mis propios colores?</h3>
