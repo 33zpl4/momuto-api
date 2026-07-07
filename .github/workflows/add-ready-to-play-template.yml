@@ -1,10 +1,11 @@
 name: Add Ready-to-Play Template
 
+# Manual only. This workflow REGENERATES the collection cards from config.json and
+# auto-commits them — so a push trigger silently reverts any hand edit to the cards
+# whose value differs from config (it once flipped "Vista previa en vivo" back to
+# "Preview 24h"). Run it deliberately, with an explicit template_slug, when you
+# actually want to (re)generate a template's card. Never on an incidental push.
 on:
-  push:
-    paths:
-      - 'ready-to-play/templates/**/config.json'
-      - 'ready-to-play/templates/**/*.html'
   workflow_dispatch:
     inputs:
       template_slug:
