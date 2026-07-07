@@ -17,12 +17,15 @@ diagnosing "this got reverted."
   - ⚠️ **No branch filter.** Pushing collection changes on a *feature branch*
     deploys straight to the **live stores**. There is no staging. If you don't
     want it live yet, don't push collection files.
-- **The template-adder can regenerate these files.** `scripts/add-ready-to-play-template.js`
-  (`add-ready-to-play-template.yml`) rebuilds cards via `buildCardHTML()`. That
-  function is the **canonical card shape** — hand edits to the collection HTML
-  must match what it emits, or the next template-add run produces a diff (looks
-  like a "revert"). Fixed in #174 to emit purchase cards (`/products/…`,
-  "Customize & buy"). If you change card copy, change it in **both** places.
+- **The template-adder regenerates these files — MANUAL only now.**
+  `scripts/add-ready-to-play-template.js` (`add-ready-to-play-template.yml`)
+  rebuilds the cards from each template's `config.json` via `buildCardHTML()`,
+  then auto-commits them. **As of #179 it runs on `workflow_dispatch` only.** It
+  used to trigger on every push to `templates/**` and silently revert hand edits
+  (see "Card text comes from config.json" below) — that push trigger is gone.
+  Run it deliberately, with a `template_slug`, when you actually want to
+  (re)generate a card. `buildCardHTML()` is the **canonical card shape**; #174
+  made it emit purchase cards (`/products/…`, "Customize & buy").
 
 ## Card = product link (buy-now), NOT the design-request page
 
@@ -77,6 +80,31 @@ moves fast; someone else's PR may have already fixed (or changed) the thing.
 > local main** concluded "ES was never updated" — wrong. Always `git fetch` and
 > inspect `origin/main` before judging a revert.
 
+## Card text comes from config.json — NOT the HTML
+
+`buildCardHTML()` assembles each card from **two** sources:
+- `config.json` → `tags` — the two pill tags (design descriptor + the
+  "live preview" label).
+- hardcoded `specsByLang` in `add-ready-to-play-template.js` — the spec rows,
+  the buy CTA, delivery text.
+
+**The `collection/*.html` files are generated output, not the source.** If you
+edit a label in the HTML but not in `config.json`, the next regeneration run
+overwrites your edit with the config value.
+
+This is exactly how `"Preview 24h"` kept coming back: the HTML was hand-fixed to
+`"Vista previa en vivo"`, but every `config.json` still had
+`tags: [..., "Preview 24h"]`, and the (then push-triggered) workflow regenerated
+the stale label and **auto-committed it to main** — including onto feature
+branches. Fixed in #179 by de-staling all 7 configs *and* removing the push
+trigger.
+
+**Rule: change card text in `config.json` first** (per locale: en/es/fr), then
+regenerate (or hand-match the HTML). Canonical live-preview label per locale
+(also lives in `specsByLang`):
+en `Live preview` · es `Vista previa en vivo` · fr `Aperçu en direct` ·
+it `Anteprima dal vivo` (it has no config `tags`; regeneration falls back to en).
+
 ## Verifying a locale is correct (repo-side)
 
 ```
@@ -84,4 +112,5 @@ L=es   # en|es|fr|it
 grep -c 'products/the-'            ready-to-play/collection/$L.html   # want 10
 grep -c 'pages/ready-to-play-the-' ready-to-play/collection/$L.html   # want 0
 grep -c 'fa-clock\|Preview 24h'    ready-to-play/collection/$L.html   # want 0 (stale labels)
+grep -rc '"Preview 24h"' ready-to-play/templates/*/config.json        # want 0 (stale default)
 ```
