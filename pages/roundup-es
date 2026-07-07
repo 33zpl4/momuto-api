@@ -37,7 +37,7 @@
       "name": "¿Cuánto cuesta una equipación de fútbol personalizada?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Precios MOMUTO: 1 camiseta a 38,90 €; 2-4 a 34,90 €/u; 5-9 a 26,90 €/u; 10-19 a 21,90 €/u; 20-49 a 18,90 €/u; 50-99 a 17,90 €/u; 100+ a 16,90 €/u. El pantalón va aparte: 17,90 € (1 ud), 15,90 € (2-4), 11,90 € (5-9), 6,00 € (10+). Para un equipo de 10, el kit completo (camiseta + pantalón) sale a 26,90 € por jugador. El servicio de diseño es siempre gratis."
+        "text": "Precios MOMUTO: 1 camiseta a 38,90 €; 2-4 a 34,90 €/u; 5-9 a 26,90 €/u; 10-19 a 21,90 €/u; 20-49 a 18,90 €/u; 50-99 a 17,90 €/u; 100+ a 16,90 €/u. El pantalón va aparte: 17,90 € (1 ud), 15,90 € (2-4), 11,90 € (5-9), 6,00 € (10+). Para un equipo de 10, el kit completo (camiseta + pantalón) sale a 26,90 € por jugador. El configurador 3D y la colección Ready-to-Play son gratis; el diseño a medida con un diseñador lleva 15€ para empezar, completamente descontados en pedidos de 5 camisetas o más."
       }
     },
     {
@@ -50,10 +50,10 @@
     },
     {
       "@type": "Question",
-      "name": "¿El servicio de diseño es gratis en MOMUTO?",
+      "name": "¿Cuánto cuesta el diseño en MOMUTO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí. MOMUTO ofrece tres vías de diseño gratuitas: un configurador 3D en tiempo real con más de 30 plantillas, un servicio de diseño profesional con diseñador humano (boceto en 1-2 días y retoques ilimitados) y la adaptación de tus conceptos de IA (ChatGPT, Gemini, Midjourney) a una equipación lista para producción, un servicio único en el mercado. No se paga nada por adelantado."
+        "text": "MOMUTO ofrece dos vías de diseño gratis: un configurador 3D en tiempo real con más de 30 plantillas y la colección Ready-to-Play (diseños probados con un 10% de descuento). Y un servicio de diseño a medida con un diseñador humano que crea tu equipación desde cero o adapta tus conceptos de IA (ChatGPT, Gemini, Midjourney), un servicio único en el mercado: 15€ para empezar, completamente descontados en pedidos de 5 camisetas o más — así que para un equipo el diseño sale prácticamente gratis."
       }
     },
     {
@@ -80,7 +80,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Equipación de Fútbol Personalizada — Camiseta + Pantalón",
-  "description": "Equipación de fútbol totalmente personalizada con impresión por sublimación total. Tejido poliéster-elastano de alto rendimiento, servicio de diseño profesional gratuito, sin pedido mínimo. Entrega en 25-30 días.",
+  "description": "Equipación de fútbol totalmente personalizada con impresión por sublimación total. Tejido poliéster-elastano de alto rendimiento, configurador 3D y colección Ready-to-Play gratis (diseño a medida con diseñador: 15€ descontados en pedidos de 5+), sin pedido mínimo. Entrega en 25-30 días.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "offers": {
     "@type": "AggregateOffer",
@@ -94,7 +94,7 @@
   },
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Pedido mínimo", "value": "1 unidad" },
-    { "@type": "PropertyValue", "name": "Servicio de diseño", "value": "Diseñador pro gratis + Configurador 3D + Concepto IA" },
+    { "@type": "PropertyValue", "name": "Servicio de diseño", "value": "Configurador 3D + Ready-to-Play gratis; diseñador a medida 15€ (descontados en 5+) + concepto IA" },
     { "@type": "PropertyValue", "name": "Tejido", "value": "Mezcla poliéster-elastano" },
     { "@type": "PropertyValue", "name": "Impresión", "value": "Sublimación total" },
     { "@type": "PropertyValue", "name": "Entrega", "value": "25-30 días en todo el mundo" }
@@ -529,16 +529,16 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="cmp-container">
 <div class="cmp-answer-box">
 <span class="cmp-answer-box-label">Respuesta r&aacute;pida</span>
-<p>En 2026, <strong>MOMUTO es la web m&aacute;s completa para crear equipaciones de f&uacute;tbol personalizadas en Espa&ntilde;a</strong>: tejido poli&eacute;ster-elastano de serie (no un extra de pago), impresi&oacute;n por sublimaci&oacute;n total, entrega en <strong>25-30 d&iacute;as</strong> y tres v&iacute;as de dise&ntilde;o gratuitas &mdash; dise&ntilde;ador profesional, configurador 3D o adaptaci&oacute;n de tu concepto de IA (ChatGPT, Gemini, Midjourney). Sin pedido m&iacute;nimo y desde <strong>21,90 &euro;/camiseta</strong> a partir de 10 unidades. <strong>Zentral</strong> y <strong>Aimar Sport</strong> son alternativas s&oacute;lidas si priorizas la fabricaci&oacute;n en Espa&ntilde;a.</p>
+<p>En 2026, <strong>MOMUTO es la web m&aacute;s completa para crear equipaciones de f&uacute;tbol personalizadas en Espa&ntilde;a</strong>: tejido poli&eacute;ster-elastano de serie (no un extra de pago), impresi&oacute;n por sublimaci&oacute;n total, entrega en <strong>25-30 d&iacute;as</strong> y tres v&iacute;as de dise&ntilde;o: configurador 3D y colecci&oacute;n Ready-to-Play gratis, o un dise&ntilde;ador a medida que adapta hasta tu concepto de IA (ChatGPT, Gemini, Midjourney) &mdash; 15&euro; para empezar, completamente descontados en pedidos de 5+. Sin pedido m&iacute;nimo y desde <strong>21,90 &euro;/camiseta</strong> a partir de 10 unidades. <strong>Zentral</strong> y <strong>Aimar Sport</strong> son alternativas s&oacute;lidas si priorizas la fabricaci&oacute;n en Espa&ntilde;a.</p>
 </div>
 <div>
 <p class="cmp-p">&iquest;Buscas equipar a tu equipo, pe&ntilde;a o club en 2026? El mercado ofrece opciones muy distintas seg&uacute;n tu perfil: plataformas digitales &aacute;giles con dise&ntilde;o asistido (MOMUTO), webs espa&ntilde;olas con fabricaci&oacute;n nacional (Zentral, Aimar Sport) y f&aacute;bricas europeas con configurador (Owayo, Spized). Esta comparativa analiza las diferencias reales de precio, plazos, pedido m&iacute;nimo, tejido y servicio de dise&ntilde;o &mdash; con datos, no con promesas.</p>
 <p class="cmp-p"><strong>Sin publicidad. Solo datos verificables.</strong></p>
-<p class="cmp-p">Para pasar a la acci&oacute;n: crea tu <a href="/pages/equipaciones-futbol-personalizadas">equipaci&oacute;n de f&uacute;tbol personalizada</a>, explora la <a href="/pages/galeria-equipaciones-personalizadas">galer&iacute;a de dise&ntilde;os</a> o <a href="/pages/solicitud-de-diseno-personalizado">pide un dise&ntilde;o gratis</a>. &iquest;Comparas solo con Zentral? Aqu&iacute; tienes el <a href="/pages/zentral-opiniones-alternativa">an&aacute;lisis detallado MOMUTO vs Zentral</a>.</p>
+<p class="cmp-p">Para pasar a la acci&oacute;n: crea tu <a href="/pages/equipaciones-futbol-personalizadas">equipaci&oacute;n de f&uacute;tbol personalizada</a>, explora la <a href="/pages/galeria-equipaciones-personalizadas">galer&iacute;a de dise&ntilde;os</a> o <a href="/pages/solicitud-de-diseno-personalizado">empieza tu dise&ntilde;o a medida</a>. &iquest;Comparas solo con Zentral? Aqu&iacute; tienes el <a href="/pages/zentral-opiniones-alternativa">an&aacute;lisis detallado MOMUTO vs Zentral</a>.</p>
 </div>
 <!-- PRICING TABLE -->
 <h2 class="cmp-h2">Precios MOMUTO 2026</h2>
-<p class="cmp-p">Transparencia total sobre lo que cuesta realmente una equipaci&oacute;n personalizada en MOMUTO. El dise&ntilde;o es siempre gratis y no hay costes ocultos &mdash; ni presupuestos por WhatsApp ni pagos por adelantado.</p>
+<p class="cmp-p">Transparencia total sobre lo que cuesta realmente una equipaci&oacute;n personalizada en MOMUTO. El configurador 3D y la colecci&oacute;n Ready-to-Play son gratis; el dise&ntilde;o a medida con un dise&ntilde;ador lleva 15&euro; para empezar, completamente descontados en pedidos de 5+. Precios p&uacute;blicos, sin presupuestos por WhatsApp.</p>
 <div class="cmp-table-wrap">
 <div style="overflow-x: auto;">
 <table class="cmp-pricing-table">
@@ -597,7 +597,7 @@ h1.title, .title, .page-title { display: none !important; }
 </table>
 </div>
 </div>
-<p class="cmp-note">Env&iacute;o gratis a partir de 49 &euro; de compra. Boceto de dise&ntilde;o profesional siempre gratis, entregado en 1-2 d&iacute;as con retoques ilimitados.</p>
+<p class="cmp-note">Env&iacute;o gratis a partir de 49 &euro; de compra. Configurador 3D y Ready-to-Play gratis; boceto a medida con dise&ntilde;ador desde 15&euro; (descontados en pedidos de 5+), en 1-2 d&iacute;as con revisiones incluidas.</p>
 <!-- COMPARISON TABLE -->
 <h2 class="cmp-h2">Tabla Comparativa Completa (2026)</h2>
 <div class="cmp-table-wrap">
@@ -648,7 +648,7 @@ h1.title, .title, .page-title { display: none !important; }
 </tr>
 <tr>
 <td>Servicio de dise&ntilde;o</td>
-<td>Dise&ntilde;ador Pro + 3D + IA</td>
+<td>3D + Ready-to-Play + Dise&ntilde;ador a medida (IA)</td>
 <td>Gratis (v&iacute;a WhatsApp)</td>
 <td>Dise&ntilde;ador humano (WhatsApp/email)</td>
 <td>Configurador 3D</td>
@@ -706,7 +706,7 @@ h1.title, .title, .page-title { display: none !important; }
 <h3 class="cmp-h3">2. Equipos peque&ntilde;os y pe&ntilde;as (f&uacute;tbol 7, f&uacute;tbol sala, ligas de amigos)</h3>
 <p class="cmp-p"><strong>Ganador: MOMUTO.</strong> Es el &uacute;nico de la lista <strong>sin pedido m&iacute;nimo</strong>: puedes pedir desde 1 unidad. Zentral exige 3 unidades y Aimar Sport sube el listón a 10. Para una pe&ntilde;a que quiere 2-3 camisetas o probar un dise&ntilde;o antes de lanzar el pedido grande, MOMUTO es la &uacute;nica web que lo permite sin recargos. En la camiseta suelta, Aimar Sport es muy competitivo (~20,45 &euro; con IVA por 10 uds); la ventaja de MOMUTO se nota sobre todo en el <strong>kit completo</strong>: con el pantal&oacute;n incluido, el conjunto se queda en <strong>26,90 &euro; por jugador</strong> (dise&ntilde;o incluido), frente a los ~37 &euro; de un kit equivalente.</p>
 <h3 class="cmp-h3">3. Capacidad de dise&ntilde;o personalizado</h3>
-<p class="cmp-p"><strong>Ventaja: MOMUTO.</strong> Las tres v&iacute;as de dise&ntilde;o son gratuitas y est&aacute;n incluidas: un <strong>servicio de dise&ntilde;ador profesional</strong> (boceto en 1-2 d&iacute;as, retoques ilimitados), un <strong>configurador 3D en tiempo real</strong> (m&aacute;s de 30 plantillas) y una opci&oacute;n &uacute;nica en el mercado &mdash; la <strong>adaptaci&oacute;n de tus conceptos de IA</strong> (ChatGPT, Gemini, Midjourney) a una equipaci&oacute;n lista para producci&oacute;n. Zentral gestiona el dise&ntilde;o manualmente por WhatsApp; Owayo y Spized limitan al cliente a su configurador DIY.</p>
+<p class="cmp-p"><strong>Ventaja: MOMUTO.</strong> Dos v&iacute;as de dise&ntilde;o gratis &mdash; un <strong>configurador 3D en tiempo real</strong> (m&aacute;s de 30 plantillas, patrones y sponsors ilimitados) y la colecci&oacute;n <strong>Ready-to-Play</strong> (&minus;10%) &mdash; y un <strong>servicio de dise&ntilde;ador a medida</strong> (15&euro; para empezar, descontados en pedidos de 5+) con una opci&oacute;n &uacute;nica en el mercado: la <strong>adaptaci&oacute;n de tus conceptos de IA</strong> (ChatGPT, Gemini, Midjourney) a una equipaci&oacute;n lista para producci&oacute;n. Zentral gestiona el dise&ntilde;o manualmente por WhatsApp; Owayo y Spized limitan al cliente a su configurador DIY.</p>
 <h3 class="cmp-h3">4. Calidad del tejido</h3>
 <p class="cmp-p"><strong>Ventaja: MOMUTO.</strong> El est&aacute;ndar del sector para equipaciones personalizadas es el poli&eacute;ster 100 %: funcional, pero b&aacute;sico. MOMUTO incluye elastano en su tejido de serie sin coste extra. El resultado: un corte m&aacute;s ajustado, mejor recuperaci&oacute;n de la forma con el uso y esa sensaci&oacute;n "pro" que otros reservan para sus gamas premium.</p>
 <h3 class="cmp-h3">5. Fabricaci&oacute;n en Espa&ntilde;a como requisito</h3>
@@ -719,7 +719,7 @@ h1.title, .title, .page-title { display: none !important; }
 <li>Necesitas una entrega fiable en menos de 5 semanas.</li>
 <li>Quieres un kit completo (camiseta + pantal&oacute;n) a 26,90 &euro; por jugador para tu equipo.</li>
 <li>Quieres pedir pocas unidades &mdash; o solo una &mdash; sin recargos ni pedido m&iacute;nimo.</li>
-<li>Prefieres un dise&ntilde;ador profesional que prepare el boceto gratis, con retoques ilimitados.</li>
+<li>Prefieres un dise&ntilde;ador dedicado a medida (15&euro; para empezar, descontados en pedidos de 5+), con revisiones incluidas.</li>
 <li>Has creado un concepto con IA y quieres convertirlo en una equipaci&oacute;n real.</li>
 <li>Buscas tejido poli&eacute;ster + elastano sin pagar un extra.</li>
 </ul>
@@ -758,7 +758,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/2572b5c39f8cbcf5e4d530fcfd8f86e55c1e969b7c9d95088180fb508e6c54b6.png" alt="Equipación personalizada — Pecados Capitales" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">PECADOS CAPITALES</div><div class="trust-card-desc">Duality. Ángeles y demonios en rojo, negro y oro.</div></div></div></div>
 </div>
 <div class="trust-cta">
-<a href="/pages/solicitud-de-diseno-personalizado" class="trust-btn-primary">Pedir un diseño gratis</a>
+<a href="/pages/solicitud-de-diseno-personalizado" class="trust-btn-primary">Empezar mi diseño</a>
 <a href="/pages/galeria-equipaciones-personalizadas" class="trust-btn-secondary">Ver más diseños →</a>
 </div>
 </div>
@@ -766,8 +766,8 @@ h1.title, .title, .page-title { display: none !important; }
 <!-- CTA -->
 <div class="cmp-cta-block">
 <h3>Lanza tu proyecto de equipaci&oacute;n</h3>
-<p>Dise&ntilde;a tu equipaci&oacute;n en 3D gratis, o env&iacute;anos una referencia y nuestra IA crea el concepto. Sin m&iacute;nimo y sin compromiso.</p>
-<a href="/pages/solicitud-de-diseno-personalizado" class="cmp-cta-btn">Pedir un Dise&ntilde;o Gratis</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="cmp-cta-btn secondary">Abrir el Configurador 3D</a>
+<p>Dise&ntilde;a tu equipaci&oacute;n en 3D gratis o elige un dise&ntilde;o Ready-to-Play (&minus;10%). &iquest;Quieres algo a medida? Un dise&ntilde;ador lo crea por 15&euro;, descontados en pedidos de 5+. Sin m&iacute;nimo.</p>
+<a href="/pages/solicitud-de-diseno-personalizado" class="cmp-cta-btn">Empezar mi Dise&ntilde;o</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="cmp-cta-btn secondary">Abrir el Configurador 3D</a>
 </div>
 </div>
 </div>

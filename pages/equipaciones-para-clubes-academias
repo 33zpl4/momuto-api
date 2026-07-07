@@ -41,7 +41,7 @@
     {
       "@type": "Question",
       "name": "¿Hay descuentos por volumen?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sí. El precio por camiseta baja por tramos de cantidad, sin recargos por mínimos. A partir de 20, 50 y 100 unidades el precio por jugador es progresivamente menor, y el diseño siempre es gratis." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. El precio por camiseta baja por tramos de cantidad, sin recargos por mínimos. A partir de 20, 50 y 100 unidades el precio por jugador es progresivamente menor. Diseñar en 3D es gratis; el diseño a medida con diseñador lleva 15€ que se descuentan por completo en pedidos de 5+ camisetas — así que para un club el diseño sale gratis." }
     },
     {
       "@type": "Question",
@@ -171,7 +171,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="sj-badge">Equipaciones para clubes y academias</div>
 <h1>Equipad a Todo <span class="hl">Vuestro Club</span></h1>
 <p class="sj-lede">Equipaciones personalizadas para clubes y academias: una misma identidad para todas las categorías, escudos y sponsors, reposiciones cuando las necesitéis, precios por volumen y sin pedido mínimo. Diseñad en 3D y vedlo al instante.</p>
-<div class="sj-cta-row"><a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn">Pedir presupuesto / diseño gratis</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn secondary">Diseñar en 3D</a></div>
+<div class="sj-cta-row"><a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn">Pedir presupuesto</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn secondary">Diseñar en 3D</a></div>
 <p class="sj-trust">Valorado 4,4/5 en <a href="https://es.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confianza de más de 150 clubes.</p>
 </div>
 <div class="sj-container">
@@ -190,12 +190,12 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="sj-feat-card"><i class="fas fa-layer-group"></i><h3>Una identidad, todas las categorías</h3><p>El mismo diseño para alevines, cadetes, juvenil y sénior, en tallas de niño y adulto. El club entero, uniforme.</p></div>
 <div class="sj-feat-card"><i class="fas fa-rotate"></i><h3>Reposiciones sin complicaciones</h3><p>Guardamos vuestro diseño. Pedid más unidades durante la temporada &mdash; fichajes, roturas, nuevas categorías &mdash; sin pedido mínimo.</p></div>
 <div class="sj-feat-card"><i class="fas fa-id-badge"></i><h3>Escudo y sponsors ilimitados</h3><p>Sublimación total: escudo, patrocinadores y dorsales impresos en la tela, en colores ilimitados y sin recargo por logo.</p></div>
-<div class="sj-feat-card"><i class="fas fa-euro-sign"></i><h3>Precios por volumen</h3><p>El precio por jugador baja a partir de 20, 50 y 100 unidades. Diseño gratis y sin costes ocultos.</p></div>
+<div class="sj-feat-card"><i class="fas fa-euro-sign"></i><h3>Precios por volumen</h3><p>El precio por jugador baja a partir de 20, 50 y 100 unidades. Diseña gratis en 3D y sin costes ocultos.</p></div>
 <div class="sj-feat-card"><i class="fas fa-cube"></i><h3>Diseño 3D + IA, al instante</h3><p>Ved la equipación en 3D antes de pedir, o enviadnos una referencia y nuestra IA crea el concepto. Sin esperas por WhatsApp.</p></div>
 <div class="sj-feat-card"><i class="fas fa-truck-fast"></i><h3>Directo de fábrica</h3><p>Somos fabricante, no intermediario. Eso significa mejor precio por volumen y entrega en 25-30 días.</p></div>
 </div>
 <!-- PRECIOS POR VOLUMEN -->
-<h2 class="sj-h2">Precios por volumen — el diseño siempre es gratis</h2>
+<h2 class="sj-h2">Precios por volumen — con diseño gratis en 3D</h2>
 <p class="sj-p">Cuanto más grande es el pedido del club, menor es el precio por jugador. Sin pedido mínimo y sin costes ocultos.</p>
 <div class="sj-table-wrap">
 <table class="sj-price">
@@ -218,8 +218,8 @@ h1.title, .title, .page-title { display: none !important; }
 <!-- COMO FUNCIONA -->
 <h2 class="sj-h2">Cómo equipamos a vuestro club</h2>
 <div class="sj-steps">
-<div class="sj-step"><span class="num">1</span><h3>Diseñamos</h3><p>Usad el configurador 3D o enviadnos escudo, colores e idea (o una referencia). Maqueta gratis en 1-2 días.</p></div>
-<div class="sj-step"><span class="num">2</span><h3>Aprobáis</h3><p>Compartid la maqueta con la directiva y pedid revisiones gratis hasta que el club esté conforme.</p></div>
+<div class="sj-step"><span class="num">1</span><h3>Diseñamos</h3><p>Usad gratis el configurador 3D, o enviadnos escudo, colores e idea (o una referencia) para un diseño a medida: 15€ para empezar, que se descuentan por completo en pedidos de 5+ camisetas. Maqueta en 1-2 días.</p></div>
+<div class="sj-step"><span class="num">2</span><h3>Aprobáis</h3><p>Compartid la maqueta con la directiva y pedid revisiones (incluidas) hasta que el club esté conforme.</p></div>
 <div class="sj-step"><span class="num">3</span><h3>Tallas y dorsales</h3><p>Enviáis una lista con tallas, nombres y dorsales de toda la plantilla. Mezcláis tallas de niño y adulto sin coste extra.</p></div>
 <div class="sj-step"><span class="num">4</span><h3>Una entrega</h3><p>Producimos en sublimación total y enviamos todo junto en 25-30 días, directo de fábrica.</p></div>
 </div>
@@ -236,7 +236,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="sj-faq">
 <details><summary>¿Hacéis pedidos grandes para todo el club?</summary><p>Sí. Equipamos a clubes y academias enteras, con todas las categorías bajo un mismo diseño y en tallas de niño y adulto. El precio por unidad baja con la cantidad: desde 21,90 € por camiseta a 10 unidades hasta 16,90 € a partir de 100.</p></details>
 <details><summary>¿Puedo pedir reposiciones más adelante?</summary><p>Sí. Guardamos vuestro diseño y podéis pedir reposiciones cuando queráis, con el mismo diseño y sin pedido mínimo. Ideal para fichajes, roturas o nuevas categorías a lo largo de la temporada.</p></details>
-<details><summary>¿Hay descuentos por volumen?</summary><p>Sí. El precio por camiseta baja por tramos de cantidad, sin recargos por mínimos. A partir de 20, 50 y 100 unidades el precio por jugador es progresivamente menor, y el diseño siempre es gratis.</p></details>
+<details><summary>¿Hay descuentos por volumen?</summary><p>Sí. El precio por camiseta baja por tramos de cantidad, sin recargos por mínimos. A partir de 20, 50 y 100 unidades el precio por jugador es progresivamente menor. Diseñar en 3D es gratis; el diseño a medida con diseñador lleva 15€ que se descuentan por completo en pedidos de 5+ camisetas — así que para un club el diseño sale gratis.</p></details>
 <details><summary>¿Puedo añadir el escudo y varios sponsors?</summary><p>Sí. Subís vuestro escudo y todos los logos de sponsors que necesitéis. La sublimación total los imprime en la tela en colores ilimitados, sin límite de tamaño ni de número de patrocinadores.</p></details>
 <details><summary>¿Producís tallas de niño y de adulto?</summary><p>Sí, el mismo diseño en tallas de niño y de adulto, y podéis mezclar tallas en un mismo pedido sin coste extra.</p></details>
 <details><summary>¿Sois fabricante directo?</summary><p>Sí. MOMUTO diseña y fabrica las equipaciones y las envía directas de fábrica, sin intermediarios — por eso los precios por volumen son competitivos y la entrega es de 25-30 días.</p></details>
@@ -245,8 +245,8 @@ h1.title, .title, .page-title { display: none !important; }
 </div>
 <div class="sj-cta-block">
 <h2>Equipad a vuestro club</h2>
-<p>Contadnos cómo es vuestro club y os enviamos una maqueta gratis en 1-2 días, con presupuesto por volumen. Sin compromiso.</p>
-<a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn">Pedir presupuesto / diseño gratis</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn secondary">Diseñar en 3D</a>
+<p>Contadnos cómo es vuestro club y os enviamos una maqueta en 1-2 días, con presupuesto por volumen. Sin compromiso.</p>
+<a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn">Pedir presupuesto</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn secondary">Diseñar en 3D</a>
 <p class="sj-note">Sin pedido mínimo · Reposiciones · Escudo y sponsors · Tallas niño a adulto · Entrega 25-30 días</p>
 </div>
 </div>
