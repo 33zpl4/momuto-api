@@ -6,6 +6,7 @@
     "api/orders.js":         { "maxDuration": 15 },
     "api/order-tracking.js":   { "maxDuration": 15 },
     "api/order-delivered.js":  { "maxDuration": 15 },
+    "api/order-3d-paid.js":    { "maxDuration": 15 },
     "api/cron-orders.js":    { "maxDuration": 30 },
     "api/cron-nudge.js":     { "maxDuration": 30 },
     "api/stripe-webhook.js": { "maxDuration": 10 }
