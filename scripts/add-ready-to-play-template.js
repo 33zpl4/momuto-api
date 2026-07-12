@@ -180,7 +180,7 @@ function escapeHtml(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function buildCardHTML(template, lang, sharedCfg, templatePageUrl) {
+function buildCardHTML(template, lang, sharedCfg, productUrl) {
   const name = escapeHtml(template.name);
   const category = escapeHtml(template.category?.[lang] || template.category?.en || '');
   const tagsArr = template.tags?.[lang] || template.tags?.en || [];
@@ -198,13 +198,20 @@ function buildCardHTML(template, lang, sharedCfg, templatePageUrl) {
   const priceOriginal = `€${p.jersey_original.toFixed(2)}`;
   const perLabel = { en: '/ jersey', es: '/ camiseta', fr: '/ maillot' }[lang];
   const badgeLabel = `-${p.discount_pct}% READY-TO-PLAY`;
-  const viewCta = { en: 'View this design', es: 'Ver este diseño', fr: 'Voir ce design' }[lang];
-  const previewLabel = { en: 'Preview 24h', es: 'Preview 24h', fr: 'Aperçu 24h' }[lang];
-  const revisionLabel = { en: '1 revision', es: '1 revisión', fr: '1 révision' }[lang];
-  const deliveryLabel = { en: '25-30 days', es: '25-30 días', fr: '25-30 jours' }[lang];
+  // Purchase card (matches the hand-maintained collection): "Customize & buy" → the product page.
+  const buyCta = { en: 'Customize &amp; buy', es: 'Personaliza y compra', fr: 'Personnaliser &amp; acheter', it: 'Personalizza e acquista' }[lang];
+  const specsByLang = {
+    en: [['fa-bolt', 'Live preview'], ['fa-check', 'Free proof before print'], ['fa-truck', '25-30 days']],
+    es: [['fa-bolt', 'Vista previa en vivo'], ['fa-check', 'Prueba gratis antes de imprimir'], ['fa-truck', '25-30 días']],
+    fr: [['fa-bolt', 'Aperçu en direct'], ['fa-check', 'Bon à tirer gratuit'], ['fa-truck', '25-30 jours']],
+    it: [['fa-bolt', 'Anteprima dal vivo'], ['fa-check', 'Bozza gratuita'], ['fa-truck', '25-30 giorni']],
+  };
+  const specsHtml = (specsByLang[lang] || specsByLang.en)
+    .map(function (s) { return `          <div class="rtp-col-spec"><i class="fas ${s[0]}"></i> ${s[1]}</div>`; })
+    .join('\n');
 
   return `    <!-- ${name} -->
-    <article class="rtp-col-card" itemscope itemtype="https://schema.org/Product" onclick="window.location.href='${templatePageUrl}'">
+    <article class="rtp-col-card" itemscope itemtype="https://schema.org/Product" onclick="window.location.href='${productUrl}'">
       <div class="rtp-col-card-img">
         <div class="rtp-col-tags">
 ${tagsHtml}
@@ -222,11 +229,9 @@ ${tagsHtml}
           <span class="rtp-col-card-price-badge">${badgeLabel}</span>
         </div>
         <div class="rtp-col-card-specs">
-          <div class="rtp-col-spec"><i class="fas fa-clock"></i> ${previewLabel}</div>
-          <div class="rtp-col-spec"><i class="fas fa-check"></i> ${revisionLabel}</div>
-          <div class="rtp-col-spec"><i class="fas fa-truck"></i> ${deliveryLabel}</div>
+${specsHtml}
         </div>
-        <div class="rtp-col-card-btn">${viewCta} <i class="fas fa-arrow-right"></i></div>
+        <div class="rtp-col-card-btn">${buyCta} <i class="fas fa-arrow-right"></i></div>
       </div>
     </article>`;
 }
@@ -324,7 +329,8 @@ async function main() {
 
       // 3. Inject/update card in local collection HTML and redeploy
       const collectionHTML = loadCollectionHTML(lang);
-      const cardHTML = buildCardHTML(template, lang, shared, templatePageUrl);
+      const productUrl = `${domain.baseUrl}/products/${slug}`;
+      const cardHTML = buildCardHTML(template, lang, shared, productUrl);
       const updatedCollection = upsertCardInCollection(collectionHTML, cardHTML, template.name);
 
       saveCollectionHTML(lang, updatedCollection);
