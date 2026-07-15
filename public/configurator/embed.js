@@ -57,8 +57,13 @@ function genUserId(){var hh=function(n){var s="";while(s.length<n)s+=Math.floor(
 // A template without an entry simply shows no button. Per-page override:
 // data-config3d="<configId>" on the #momuto-rtp block.
 var CONFIG3D={
-  "the-fracture":"a5og26yh"
-  // "the-apex": pending, "the-legacy": pending, "the-kinetic": pending, "the-khala": pending
+  "the-fracture":"a5og26yh",
+  "the-apex":"pu497uw0",
+  "the-kinetic":"erkxhuy3",
+  "the-khala":"jqocml2b",
+  "the-legacy":"u7xwysn6",
+  "the-prism":"84bealsh",
+  "the-mosaic":"xwmywt2u"
 };
 // goodsInfoSave derives store + language from fromUrlHost (en/fr/es only — the
 // design server routes checkout to those three storefronts; no IT mapping yet,
