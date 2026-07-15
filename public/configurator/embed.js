@@ -47,6 +47,32 @@ function centerDY(srcA,n){ /* ALIGN_V3: no-op. Front/back alignment now comes fr
 function genUserId(){var hh=function(n){var s="";while(s.length<n)s+=Math.floor(Math.random()*16).toString(16);return s;};
   return hh(2)+Math.floor(Date.now()/1000).toString(16)+hh(8);}
 
+// ---- "Customize in 3D" entry (canonical kit configs) ----
+// Registry of canonical 3D configIds per template — the configs only WE save under
+// (authoring workflow + full mechanics: design-momuto/docs/product-page-linking.md).
+// The button opens goodsInfoSave, which CLONES the canonical design into a fresh
+// configId for the visitor. NEVER link configurator.html with these ids directly
+// (every visitor would save into the same code) and NEVER reuse a uuid across
+// visitors (uuid is the cart key) — hence the per-click genUserId() below.
+// A template without an entry simply shows no button. Per-page override:
+// data-config3d="<configId>" on the #momuto-rtp block.
+var CONFIG3D={
+  "the-fracture":"a5og26yh"
+  // "the-apex": pending, "the-legacy": pending, "the-kinetic": pending, "the-khala": pending
+};
+// goodsInfoSave derives store + language from fromUrlHost (en/fr/es only — the
+// design server routes checkout to those three storefronts; no IT mapping yet,
+// so IT pages fall back to showing no button rather than an EN checkout).
+var STORE3D={ en:"https://www.momuto.com", fr:"https://fr.momuto.com", es:"https://es.momuto.com" };
+function build3dUrl(configId, lang, backUrl){
+  return "https://design.momuto.com/goodsInfoSave"
+    +"?uuid="+genUserId()
+    +"&sysType=oem"
+    +"&fromUrlHost="+encodeURIComponent(STORE3D[lang]||STORE3D.en)
+    +"&collectionName=configId="+encodeURIComponent(configId)+"%26suitName=mamuto3suit1"
+    +"&focus=1&back="+encodeURIComponent(backUrl||"");   // forwarded once the GoodInfoAction patch is live
+}
+
 function knockoutBg(img){
   var w=img.width,h=img.height,c=offscreen(w,h),x=c.getContext("2d",{willReadFrequently:true});
   x.drawImage(img,0,0);
@@ -98,6 +124,8 @@ var CSS = ":host{display:block;--brand:#E2214B;--bg:#0e0f13;--panel:#1a1c22;--li
 +".row button{flex:1;padding:11px;border-radius:8px;border:none;cursor:pointer;font-weight:600;font-size:13px;}"
 +".reset{background:#22252c;color:var(--txt);border:1px solid var(--line)!important;}"
 +".cta{background:var(--brand);color:#fff;}"
++".cta3d{background:rgba(226,33,75,.08);color:#fff;border:1px solid var(--brand)!important;}"
++".cta3d:hover{background:var(--brand);}"
 +".svc{margin:11px 0 2px;font-size:11px;color:var(--mut);line-height:1.55;}"
 +".svc b{color:var(--txt);font-weight:600;}"
 +"#busy{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:14px;}"
@@ -155,31 +183,31 @@ var I18N={
   svc:"JPG or PNG both work — plain backgrounds are auto-trimmed here in the preview. Every crest &amp; sponsor is then <b>vectorised &amp; cleaned by our design team</b>, placement refined, and you receive a <b>free proof to approve before printing</b>.",
   hPerso:"Personalisation · Back",lName:"Name &amp; number",hEstimate:"Order estimate",ktJersey:"Jersey only",ktKit:"Full kit",
   ksKit:"jersey + shorts",lQuantity:"Quantity",perkFlag:"<b>Free team flag</b> with crest · orders of 10+ pieces",
-  perkArmband:"<b>Free captain armband</b> · orders of 10+ pieces",reset:"Reset",cta:"Add to cart ▸",swTitle:"Pick a colour",
+  perkArmband:"<b>Free captain armband</b> · orders of 10+ pieces",reset:"Reset",cta:"Add to cart ▸",cta3d:"Customize in 3D ▸",swTitle:"Pick a colour",
   perJersey:"jersey",perKit:"full kit",badge:"READY-TO-PLAY · −10%",units:"units",estimated:"estimated",finalPrice:"final price at checkout"},
  fr:{busy:"Chargement…",vFront:"Avant",vBack:"Dos",hColours:"Couleurs",lPrimary:"Primaire",lSecondary:"Secondaire",
   lTrim:"Bordures (col &amp; poignets)",hBadges:"Vos badges",lCrest:"Blason de l'équipe",lSponsor:"Sponsor",upload:"Importer ▸",
   svc:"JPG ou PNG, les deux fonctionnent — les fonds unis sont détourés automatiquement dans l'aperçu. Chaque blason &amp; sponsor est ensuite <b>vectorisé &amp; nettoyé par notre équipe de design</b>, le placement affiné, et vous recevez un <b>bon à tirer gratuit à valider avant impression</b>.",
   hPerso:"Personnalisation · Dos",lName:"Nom &amp; numéro",hEstimate:"Estimation de commande",ktJersey:"Maillot seul",ktKit:"Kit complet",
   ksKit:"maillot + short",lQuantity:"Quantité",perkFlag:"<b>Drapeau d'équipe offert</b> avec blason · commandes de 10+ pièces",
-  perkArmband:"<b>Brassard de capitaine offert</b> · commandes de 10+ pièces",reset:"Réinitialiser",cta:"Ajouter au panier ▸",swTitle:"Choisir une couleur",
+  perkArmband:"<b>Brassard de capitaine offert</b> · commandes de 10+ pièces",reset:"Réinitialiser",cta:"Ajouter au panier ▸",cta3d:"Personnaliser en 3D ▸",swTitle:"Choisir une couleur",
   perJersey:"maillot",perKit:"kit complet",badge:"PRÊT À JOUER · −10%",units:"unités",estimated:"estimé",finalPrice:"prix final au paiement"},
  es:{busy:"Cargando…",vFront:"Frente",vBack:"Espalda",hColours:"Colores",lPrimary:"Primario",lSecondary:"Secundario",
   lTrim:"Ribete (cuello &amp; puños)",hBadges:"Tus escudos",lCrest:"Escudo del equipo",lSponsor:"Patrocinador",upload:"Subir ▸",
   svc:"JPG o PNG, ambos funcionan — los fondos lisos se recortan automáticamente en la vista previa. Cada escudo &amp; patrocinador se <b>vectoriza y limpia con nuestro equipo de diseño</b>, se refina la ubicación y recibes una <b>prueba gratuita para aprobar antes de imprimir</b>.",
   hPerso:"Personalización · Espalda",lName:"Nombre &amp; número",hEstimate:"Estimación del pedido",ktJersey:"Solo camiseta",ktKit:"Kit completo",
   ksKit:"camiseta + pantalón",lQuantity:"Cantidad",perkFlag:"<b>Bandera del equipo gratis</b> con escudo · pedidos de 10+ piezas",
-  perkArmband:"<b>Brazalete de capitán gratis</b> · pedidos de 10+ piezas",reset:"Restablecer",cta:"Añadir al carrito ▸",swTitle:"Elegir un color",
+  perkArmband:"<b>Brazalete de capitán gratis</b> · pedidos de 10+ piezas",reset:"Restablecer",cta:"Añadir al carrito ▸",cta3d:"Personalizar en 3D ▸",swTitle:"Elegir un color",
   perJersey:"camiseta",perKit:"kit completo",badge:"LISTO PARA JUGAR · −10%",units:"unidades",estimated:"estimado",finalPrice:"precio final al pagar"},
  it:{busy:"Caricamento…",vFront:"Fronte",vBack:"Retro",hColours:"Colori",lPrimary:"Primario",lSecondary:"Secondario",
   lTrim:"Bordo (colletto &amp; polsini)",hBadges:"I tuoi stemmi",lCrest:"Stemma della squadra",lSponsor:"Sponsor",upload:"Carica ▸",
   svc:"JPG o PNG, entrambi vanno bene — gli sfondi uniti vengono ritagliati automaticamente nell'anteprima. Ogni stemma &amp; sponsor viene poi <b>vettorializzato &amp; ripulito dal nostro team di design</b>, il posizionamento perfezionato, e ricevi una <b>bozza gratuita da approvare prima della stampa</b>.",
   hPerso:"Personalizzazione · Retro",lName:"Nome &amp; numero",hEstimate:"Stima dell'ordine",ktJersey:"Solo maglia",ktKit:"Kit completo",
   ksKit:"maglia + pantaloncini",lQuantity:"Quantità",perkFlag:"<b>Bandiera della squadra in omaggio</b> con stemma · ordini di 10+ pezzi",
-  perkArmband:"<b>Fascia da capitano in omaggio</b> · ordini di 10+ pezzi",reset:"Reimposta",cta:"Aggiungi al carrello ▸",swTitle:"Scegli un colore",
+  perkArmband:"<b>Fascia da capitano in omaggio</b> · ordini di 10+ pezzi",reset:"Reimposta",cta:"Aggiungi al carrello ▸",cta3d:"Personalizza in 3D ▸",swTitle:"Scegli un colore",
   perJersey:"maglia",perKit:"kit completo",badge:"PRONTI A GIOCARE · −10%",units:"unità",estimated:"stimato",finalPrice:"prezzo finale al checkout"}
 };
-function buildHTML(t){ return '' +
+function buildHTML(t, has3d){ return '' +
  '<div class="wrap">'
 +'  <div class="stage"><canvas id="cv" width="1500" height="1500"></canvas><div id="busy">'+t.busy+'</div>'
 +'    <div class="vtog" id="vtog"><button data-v="front" class="on">'+t.vFront+'</button><button data-v="back">'+t.vBack+'</button></div>'
@@ -214,6 +242,7 @@ function buildHTML(t){ return '' +
 +'      <div class="perk"><span class="pi">&#9873;</span><span>'+t.perkFlag+'</span></div>'
 +'      <div class="perk"><span class="pi">&#9733;</span><span>'+t.perkArmband+'</span></div>'
 +'    </div>'
++(has3d?'    <div class="row"><button class="cta3d" id="to3d">'+t.cta3d+'</button></div>':'')
 +'    <div class="row"><button class="reset" id="reset">'+t.reset+'</button><button class="cta" id="order">'+t.cta+'</button></div>'
 +'  </div>'
 +'</div>'
@@ -608,7 +637,14 @@ function run(root, opts){
     qtyEl.addEventListener("input",function(){ if(qtyEl.value){ state.qty=parseInt(qtyEl.value,10)||1; updateEstimate(); } });
     updateEstimate();
     root.getElementById("order").onclick=function(){ handoffToCart(); };
+    // "Customize in 3D": mint a per-visitor uuid and enter the 3D tool with this
+    // kit's canonical design cloned in (see CONFIG3D above). Same-tab navigation —
+    // the tool's BACK TO SHOP chip returns here (once the server patch is live).
+    var to3d=root.getElementById("to3d");
+    if(to3d) to3d.onclick=function(){ var u=url3d(); if(u) window.location.href=u; };
   }
+  function url3d(){ if(!opts.config3d) return null;
+    return build3dUrl(opts.config3d, CART.lang, location.origin+location.pathname); }
 
   function captureView(v){ var prev=active; active=v; render(); var url=cv.toDataURL("image/png"); active=prev; render(); return url; }
   // ---- OSS upload (mirrors the 3D tool's contract) -----------------------
@@ -710,7 +746,7 @@ function run(root, opts){
     root.querySelectorAll("#vtog button").forEach(function(x){x.classList.toggle("on",x.dataset.v===v);});
     var p=root.getElementById("perso"); if(p)p.style.display=v==="back"?"block":"none";
     var b=root.getElementById("badges"); if(b)b.style.display=v==="back"?"none":"block"; render();},
-    captureView:captureView, payload:buildDesignPayload, addToCart:handoffToCart };
+    captureView:captureView, payload:buildDesignPayload, addToCart:handoffToCart, url3d:url3d };
 }
 
 function mount(host){
@@ -723,8 +759,11 @@ function mount(host){
     trim:host.dataset.trim||null, nameColor:host.dataset.namecolor||null, logoColor:host.dataset.logo||null,
     assets: host.dataset.assets ? host.dataset.assets.replace(/\/?$/,"/") : DEFAULT_ASSETS };
   opts.t=I18N[opts.lang]||I18N.en;
+  // canonical 3D config for this kit: per-page override, else the registry;
+  // only for stores goodsInfoSave can route checkout to (no IT yet).
+  opts.config3d=(STORE3D[opts.lang] && (host.dataset.config3d||CONFIG3D[opts.template]))||null;
   var root=host.attachShadow({mode:"open"});
-  root.innerHTML="<style>"+CSS+"</style>"+buildHTML(opts.t);
+  root.innerHTML="<style>"+CSS+"</style>"+buildHTML(opts.t, !!opts.config3d);
   host.__rtp=run(root,opts);
 }
 function boot(){ document.querySelectorAll("#momuto-rtp,[data-momuto-rtp]").forEach(mount); }
