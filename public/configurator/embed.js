@@ -188,28 +188,32 @@ var I18N={
   svc:"JPG or PNG both work — plain backgrounds are auto-trimmed here in the preview. Every crest &amp; sponsor is then <b>vectorised &amp; cleaned by our design team</b>, placement refined, and you receive a <b>free proof to approve before printing</b>.",
   hPerso:"Personalisation · Back",lName:"Name &amp; number",hEstimate:"Order estimate",ktJersey:"Jersey only",ktKit:"Full kit",
   ksKit:"jersey + shorts",lQuantity:"Quantity",perkFlag:"<b>Free team flag</b> with crest · orders of 10+ pieces",
-  perkArmband:"<b>Free captain armband</b> · orders of 10+ pieces",reset:"Reset",cta:"Add to cart ▸",cta3d:"Customize in 3D ▸",swTitle:"Pick a colour",
+  perkArmband:"<b>Free captain armband</b> · orders of 10+ pieces",reset:"Reset",cta:"Add to cart ▸",cta3d:"Make it yours in 3D ▸",
+  svc3d:"Try the colours here for a feel — then <b>make it yours in the 3D designer</b>: your crest &amp; sponsor, player names &amp; numbers, shorts, and checkout.",swTitle:"Pick a colour",
   perJersey:"jersey",perKit:"full kit",badge:"READY-TO-PLAY · −10%",units:"units",estimated:"estimated",finalPrice:"final price at checkout"},
  fr:{busy:"Chargement…",vFront:"Avant",vBack:"Dos",hColours:"Couleurs",lPrimary:"Primaire",lSecondary:"Secondaire",
   lTrim:"Bordures (col &amp; poignets)",hBadges:"Vos badges",lCrest:"Blason de l'équipe",lSponsor:"Sponsor",upload:"Importer ▸",
   svc:"JPG ou PNG, les deux fonctionnent — les fonds unis sont détourés automatiquement dans l'aperçu. Chaque blason &amp; sponsor est ensuite <b>vectorisé &amp; nettoyé par notre équipe de design</b>, le placement affiné, et vous recevez un <b>bon à tirer gratuit à valider avant impression</b>.",
   hPerso:"Personnalisation · Dos",lName:"Nom &amp; numéro",hEstimate:"Estimation de commande",ktJersey:"Maillot seul",ktKit:"Kit complet",
   ksKit:"maillot + short",lQuantity:"Quantité",perkFlag:"<b>Drapeau d'équipe offert</b> avec blason · commandes de 10+ pièces",
-  perkArmband:"<b>Brassard de capitaine offert</b> · commandes de 10+ pièces",reset:"Réinitialiser",cta:"Ajouter au panier ▸",cta3d:"Personnaliser en 3D ▸",swTitle:"Choisir une couleur",
+  perkArmband:"<b>Brassard de capitaine offert</b> · commandes de 10+ pièces",reset:"Réinitialiser",cta:"Ajouter au panier ▸",cta3d:"Personnalisez-le en 3D ▸",
+  svc3d:"Essayez les couleurs ici pour vous faire une idée — puis <b>personnalisez-le dans le configurateur 3D</b> : votre écusson &amp; sponsor, noms &amp; numéros, short, et paiement.",swTitle:"Choisir une couleur",
   perJersey:"maillot",perKit:"kit complet",badge:"PRÊT À JOUER · −10%",units:"unités",estimated:"estimé",finalPrice:"prix final au paiement"},
  es:{busy:"Cargando…",vFront:"Frente",vBack:"Espalda",hColours:"Colores",lPrimary:"Primario",lSecondary:"Secundario",
   lTrim:"Ribete (cuello &amp; puños)",hBadges:"Tus escudos",lCrest:"Escudo del equipo",lSponsor:"Patrocinador",upload:"Subir ▸",
   svc:"JPG o PNG, ambos funcionan — los fondos lisos se recortan automáticamente en la vista previa. Cada escudo &amp; patrocinador se <b>vectoriza y limpia con nuestro equipo de diseño</b>, se refina la ubicación y recibes una <b>prueba gratuita para aprobar antes de imprimir</b>.",
   hPerso:"Personalización · Espalda",lName:"Nombre &amp; número",hEstimate:"Estimación del pedido",ktJersey:"Solo camiseta",ktKit:"Kit completo",
   ksKit:"camiseta + pantalón",lQuantity:"Cantidad",perkFlag:"<b>Bandera del equipo gratis</b> con escudo · pedidos de 10+ piezas",
-  perkArmband:"<b>Brazalete de capitán gratis</b> · pedidos de 10+ piezas",reset:"Restablecer",cta:"Añadir al carrito ▸",cta3d:"Personalizar en 3D ▸",swTitle:"Elegir un color",
+  perkArmband:"<b>Brazalete de capitán gratis</b> · pedidos de 10+ piezas",reset:"Restablecer",cta:"Añadir al carrito ▸",cta3d:"Hazla tuya en 3D ▸",
+  svc3d:"Prueba los colores aquí para hacerte una idea — luego <b>hazla tuya en el diseñador 3D</b>: tu escudo &amp; patrocinador, nombres &amp; dorsales, pantalón y pago.",swTitle:"Elegir un color",
   perJersey:"camiseta",perKit:"kit completo",badge:"LISTO PARA JUGAR · −10%",units:"unidades",estimated:"estimado",finalPrice:"precio final al pagar"},
  it:{busy:"Caricamento…",vFront:"Fronte",vBack:"Retro",hColours:"Colori",lPrimary:"Primario",lSecondary:"Secondario",
   lTrim:"Bordo (colletto &amp; polsini)",hBadges:"I tuoi stemmi",lCrest:"Stemma della squadra",lSponsor:"Sponsor",upload:"Carica ▸",
   svc:"JPG o PNG, entrambi vanno bene — gli sfondi uniti vengono ritagliati automaticamente nell'anteprima. Ogni stemma &amp; sponsor viene poi <b>vettorializzato &amp; ripulito dal nostro team di design</b>, il posizionamento perfezionato, e ricevi una <b>bozza gratuita da approvare prima della stampa</b>.",
   hPerso:"Personalizzazione · Retro",lName:"Nome &amp; numero",hEstimate:"Stima dell'ordine",ktJersey:"Solo maglia",ktKit:"Kit completo",
   ksKit:"maglia + pantaloncini",lQuantity:"Quantità",perkFlag:"<b>Bandiera della squadra in omaggio</b> con stemma · ordini di 10+ pezzi",
-  perkArmband:"<b>Fascia da capitano in omaggio</b> · ordini di 10+ pezzi",reset:"Reimposta",cta:"Aggiungi al carrello ▸",cta3d:"Personalizza in 3D ▸",swTitle:"Scegli un colore",
+  perkArmband:"<b>Fascia da capitano in omaggio</b> · ordini di 10+ pezzi",reset:"Reimposta",cta:"Aggiungi al carrello ▸",cta3d:"Rendila tua in 3D ▸",
+  svc3d:"Prova i colori qui per farti un'idea — poi <b>rendila tua nel configuratore 3D</b>: stemma &amp; sponsor, nomi &amp; numeri, pantaloncini e checkout.",swTitle:"Scegli un colore",
   perJersey:"maglia",perKit:"kit completo",badge:"PRONTI A GIOCARE · −10%",units:"unità",estimated:"stimato",finalPrice:"prezzo finale al checkout"}
 };
 function buildHTML(t, has3d){ return '' +
@@ -222,6 +226,10 @@ function buildHTML(t, has3d){ return '' +
 +'    <div class="zone"><label>'+t.lPrimary+'</label><button class="sw" id="primarySw" data-k="primary"></button></div>'
 +'    <div class="zone"><label>'+t.lSecondary+'</label><button class="sw" id="secondarySw" data-k="secondary"></button></div>'
 +'    <div class="zone"><label>'+t.lTrim+'</label><button class="sw" id="trimSw" data-k="trim"></button></div>'
+// Migrated templates (has3d) drop the crest/sponsor upload + name/number editors —
+// those now live in the 3D tool. The colour swatches stay as the "try the colours"
+// toy; the CTA takes the customer into 3D to finish (crest, names, order).
++(has3d?'':''
 +'    <div id="badges">'
 +'    <h2>'+t.hBadges+'</h2>'
 +'    <div class="uploads">'
@@ -234,7 +242,8 @@ function buildHTML(t, has3d){ return '' +
 +'      <h2>'+t.hPerso+'</h2>'
 +'      <div class="fonts" id="fonts"></div>'
 +'      <div class="zone"><label>'+t.lName+'</label><button class="sw" id="nameColorSw" data-k="nameColor"></button></div>'
-+'    </div>'
++'    </div>')
++(has3d?'    <p class="svc">'+t.svc3d+'</p>':'')
 +'    <div class="presets" id="presets"></div>'
 +'    <h2>'+t.hEstimate+'</h2>'
 +'    <div class="kit" id="kit">'
@@ -247,8 +256,9 @@ function buildHTML(t, has3d){ return '' +
 +'      <div class="perk"><span class="pi">&#9873;</span><span>'+t.perkFlag+'</span></div>'
 +'      <div class="perk"><span class="pi">&#9733;</span><span>'+t.perkArmband+'</span></div>'
 +'    </div>'
-+(has3d?'    <div class="row"><button class="cta3d" id="to3d">'+t.cta3d+'</button></div>':'')
-+'    <div class="row"><button class="reset" id="reset">'+t.reset+'</button><button class="cta" id="order">'+t.cta+'</button></div>'
++(has3d
+  ? '    <div class="row"><button class="reset" id="reset">'+t.reset+'</button><button class="cta" id="to3d">'+t.cta3d+'</button></div>'
+  : '    <div class="row"><button class="reset" id="reset">'+t.reset+'</button><button class="cta" id="order">'+t.cta+'</button></div>')
 +'  </div>'
 +'</div>'
 +'<div class="sw-modal" id="swModal"><div class="sw-card">'
@@ -593,15 +603,16 @@ function run(root, opts){
         state[key+"File"]=f;   // keep the ORIGINAL file for OSS upload; production needs the real logo, not just the knockout preview
         var im=new Image(); im.onload=function(){state[key]=knockoutBg(im);render();}; im.src=URL.createObjectURL(f); });
     };
-    handleUp("crest","crestName","crest"); handleUp("sponsor","sponsorName","sponsor");
+    if(root.getElementById("crest")) handleUp("crest","crestName","crest");
+    if(root.getElementById("sponsor")) handleUp("sponsor","sponsorName","sponsor");
     var perso=root.getElementById("perso");
     root.querySelectorAll("#vtog button").forEach(function(btn){
       btn.onclick=function(){ active=btn.dataset.v;
         root.querySelectorAll("#vtog button").forEach(function(x){x.classList.toggle("on",x===btn);});
-        perso.style.display = active==="back"?"block":"none"; render(); };
+        if(perso) perso.style.display = active==="back"?"block":"none"; render(); };
     });
     var fb=root.getElementById("fonts");
-    FONTS.forEach(function(F){ var key=F[0],label=F[1], f=fontImg[key], c=document.createElement("button");
+    if(fb) FONTS.forEach(function(F){ var key=F[0],label=F[1], f=fontImg[key], c=document.createElement("button");
       c.className="fontchip"+(state.font===key?" on":"");
       var ph=120, srcY=f.height*0.25, srcH=f.height*0.73, sc=ph/srcH, pw=Math.round(f.width*sc);
       var pcv=offscreen(pw,ph), px=pcv.getContext("2d");
@@ -641,7 +652,8 @@ function run(root, opts){
     qtyEl.addEventListener("change",function(){ setQty(parseInt(qtyEl.value,10)||1); });
     qtyEl.addEventListener("input",function(){ if(qtyEl.value){ state.qty=parseInt(qtyEl.value,10)||1; updateEstimate(); } });
     updateEstimate();
-    root.getElementById("order").onclick=function(){ handoffToCart(); };
+    var orderBtn=root.getElementById("order");
+    if(orderBtn) orderBtn.onclick=function(){ handoffToCart(); };
     // "Customize in 3D": mint a per-visitor uuid and enter the 3D tool with this
     // kit's canonical design cloned in (see CONFIG3D above). Same-tab navigation —
     // the tool's BACK TO SHOP chip returns here (once the server patch is live).
