@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Equipación de Fútbol Personalizada MOMUTO",
-  "description": "Equipación de fútbol totalmente personalizable con impresión por sublimación completa. Tejido de poliéster-elastano de alto rendimiento como estándar. Diseño personalizado con depósito de 15€, acreditado en pedidos de 5+ camisetas. Sin pedido mínimo. Emblemas 3D de silicona opcionales para pedidos grandes. Entrega en 25-30 días en todo el mundo.",
+  "description": "Equipación de fútbol totalmente personalizable con impresión por sublimación completa. Tejido de poliéster-elastano de alto rendimiento como estándar. Diseño personalizado con depósito de 15€, descontado en pedidos de 5+ camisetas. Sin pedido mínimo. Emblemas 3D de silicona opcionales para pedidos grandes. Entrega en 25-30 días en todo el mundo.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Equipaciones de Fútbol Personalizadas",
   "material": "Tejido de poliéster-elastano (estándar en todas las equipaciones)",
@@ -11,7 +11,7 @@
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "EUR",
-    "lowPrice": "20.90",
+    "lowPrice": "21.90",
     "highPrice": "38.90",
     "offerCount": "1",
     "availability": "https://schema.org/InStock",
@@ -37,7 +37,7 @@
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Pedido Mínimo", "value": "Sin mínimo — pide 1 o 100+ equipaciones" },
     { "@type": "PropertyValue", "name": "Método de Impresión", "value": "Sublimación completa — garantía de por vida contra descascarillado, grietas o decoloración" },
-    { "@type": "PropertyValue", "name": "Servicio de Diseño", "value": "Maqueta de diseño profesional en 24-48h con revisiones incluidas; depósito de 15€ acreditado en pedidos de 5+ camisetas" },
+    { "@type": "PropertyValue", "name": "Servicio de Diseño", "value": "Maqueta de diseño profesional en 24-48h con revisiones incluidas; depósito de 15€ descontado en pedidos de 5+ camisetas" },
     { "@type": "PropertyValue", "name": "Configurador 3D", "value": "Configurador de equipaciones 3D en tiempo real con más de 30 plantillas profesionales" },
     { "@type": "PropertyValue", "name": "Tejido", "value": "Mezcla de poliéster-elastano como estándar — los competidores incluyen elastano solo en niveles premium" },
     { "@type": "PropertyValue", "name": "Emblemas 3D de Silicona", "value": "Emblemas 3D de silicona premium disponibles para pedidos grandes" },
@@ -50,19 +50,19 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Cómo Pedir Equipaciones de Fútbol Personalizadas en MOMUTO",
-  "description": "Obtén equipaciones de fútbol totalmente personalizadas y de calidad profesional en 3 pasos: diseña con el configurador 3D o solicita una maqueta profesional (depósito de 15€, acreditado en pedidos de 5+), aprueba tu diseño y recibe tu equipación en 25-30 días en todo el mundo.",
+  "description": "Obtén equipaciones de fútbol totalmente personalizadas y de calidad profesional en 3 pasos: diseña con el configurador 3D o solicita una maqueta profesional (depósito de 15€, descontado en pedidos de 5+), aprueba tu diseño y recibe tu equipación en 25-30 días en todo el mundo.",
   "totalTime": "P25D",
   "estimatedCost": {
     "@type": "MonetaryAmount",
     "currency": "EUR",
-    "value": "Desde 20,90€ por camiseta (10+ unidades) o 38,90€ por una camiseta individual"
+    "value": "Desde 21,90€ por camiseta (10+ unidades) o 38,90€ por una camiseta individual"
   },
   "step": [
     {
       "@type": "HowToStep",
       "position": 1,
       "name": "Diseña Tu Equipación",
-      "text": "Usa el configurador 3D de MOMUTO con más de 30 plantillas profesionales para diseñar al instante, o envía tu brief (escudo, colores, referencias) a través del sitio web, WhatsApp o email para recibir una maqueta personalizada en 24-48h (depósito de 15€, acreditado en pedidos de 5+ camisetas)."
+      "text": "Usa el configurador 3D de MOMUTO con más de 30 plantillas profesionales para diseñar al instante, o envía tu brief (escudo, colores, referencias) a través del sitio web, WhatsApp o email para recibir una maqueta personalizada en 24-48h (depósito de 15€, descontado en pedidos de 5+ camisetas)."
     },
     {
       "@type": "HowToStep",
@@ -128,7 +128,7 @@
 <div class="hero-content">
 <h1>Camisetas de F&uacute;tbol Personalizadas para <span class="highlight">Equipos Amateur</span></h1>
 <h3>Calidad profesional desde 19,70&euro; por camiseta &mdash; lo dise&ntilde;amos nosotros o t&uacute; eliges de nuestra colecci&oacute;n</h3>
-<p class="hero-intro">MOMUTO ayuda a equipos de f&uacute;tbol amateur a crear equipaciones personalizadas a trav&eacute;s de tres v&iacute;as: una <strong>colecci&oacute;n Lista para Jugar</strong> con dise&ntilde;os probados al 10% de descuento, un <strong>servicio de dise&ntilde;o personalizado</strong> con maquetas en 24-48h (15&euro; para empezar, acreditados en pedidos de 5+ camisetas), o un <strong>configurador 3D en tiempo real</strong>. Sin pedido m&iacute;nimo. Impresi&oacute;n profesional por sublimaci&oacute;n. Entrega mundial en 25-30 d&iacute;as.</p>
+<p class="hero-intro">MOMUTO ayuda a equipos de f&uacute;tbol amateur a crear equipaciones personalizadas a trav&eacute;s de tres v&iacute;as: una <strong>colecci&oacute;n Ready-to-Play</strong> con dise&ntilde;os probados al 10% de descuento, un <strong>servicio de dise&ntilde;o personalizado</strong> con maquetas en 24-48h (15&euro; para empezar, descontados en pedidos de 5+ camisetas), o un <strong>configurador 3D en tiempo real</strong>. Sin pedido m&iacute;nimo. Impresi&oacute;n profesional por sublimaci&oacute;n. Entrega mundial en 25-30 d&iacute;as.</p>
 </div>
 </header>
 <section class="social-proof-strip">
@@ -156,15 +156,15 @@
 <div class="path-options">
 <div class="path-card" style="border-color: var(--accent-red);">
 <div class="path-icon"><i class="fas fa-tshirt"></i></div>
-<h3>Colecci&oacute;n Lista para Jugar</h3>
+<h3>Colecci&oacute;n Ready-to-Play</h3>
 <div class="path-for">Dise&ntilde;os probados &middot; 10% de descuento &middot; Maqueta en 24h</div>
 <p class="path-description">Dise&ntilde;os creados por nuestro equipo, portados por clubes reales. Elige uno, escoge tus colores, sube tu escudo &mdash; listo. Misma calidad que el dise&ntilde;o a medida, 10% menos, y m&aacute;s r&aacute;pido. Desde 19,70&euro; por camiseta.</p>
 <a href="https://es.momuto.com/pages/coleccion-ready-to-play" class="path-cta path-cta-primary">Explorar el Cat&aacute;logo</a></div>
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-pencil-alt"></i></div>
 <h3>Servicio de Dise&ntilde;o Personalizado</h3>
-<div class="path-for">100% &uacute;nico &middot; 15&euro; para empezar &middot; Se acreditan en pedidos de 5+</div>
-<p class="path-description">&iquest;Quieres algo que nadie m&aacute;s tenga? Nuestros dise&ntilde;adores crean una equipaci&oacute;n totalmente original a partir de tu brief &mdash; o adaptan un dise&ntilde;o que ya hayas creado (generado por IA, dibujado a mano, o creado con cualquier herramienta). Primera maqueta en 24-48h, revisiones incluidas. 15&euro; para empezar, acreditados &iacute;ntegros en pedidos de 5+ camisetas. Desde 21,90&euro; por camiseta.</p>
+<div class="path-for">100% &uacute;nico &middot; 15&euro; para empezar &middot; Se descuentan en pedidos de 5+</div>
+<p class="path-description">&iquest;Quieres algo que nadie m&aacute;s tenga? Nuestros dise&ntilde;adores crean una equipaci&oacute;n totalmente original a partir de tu brief &mdash; o adaptan un dise&ntilde;o que ya hayas creado (generado por IA, dibujado a mano, o creado con cualquier herramienta). Primera maqueta en 24-48h, revisiones incluidas. 15&euro; para empezar, completamente descontados en pedidos de 5+ camisetas. Desde 21,90&euro; por camiseta.</p>
 <a href="#payment-gate" class="path-cta" id="studioPathCta">Enviar Mi Concepto</a></div>
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-cube"></i></div>
@@ -178,7 +178,7 @@
 <div class="comparison-grid">
 <div class="comparison-card" style="border-left: 3px solid var(--accent-red);">
 <div class="comparison-icon"><i class="fas fa-tshirt"></i></div>
-<div class="comparison-option">Lista para Jugar</div>
+<div class="comparison-option">Ready-to-Play</div>
 <div class="comparison-best-for">Para equipos que quieren rapidez &mdash; 10% de descuento</div>
 <div class="comparison-benefit">Dise&ntilde;os probados portados por clubes reales. Elige colores, maqueta en 24h, 10% menos que el dise&ntilde;o personalizado. Desde 19,70&euro; por camiseta. Equipaciones completas disponibles.</div>
 </div>
@@ -186,7 +186,7 @@
 <div class="comparison-icon"><i class="fas fa-pencil-alt"></i></div>
 <div class="comparison-option">Dise&ntilde;o Personalizado</div>
 <div class="comparison-best-for">Para equipos que quieren una identidad &uacute;nica</div>
-<div class="comparison-benefit">Equipaci&oacute;n totalmente original creada desde cero. Primera maqueta en 24-48h, revisiones incluidas. 15&euro; para empezar, acreditados &iacute;ntegros en pedidos de 5+ camisetas. Desde 21,90&euro; por camiseta.</div>
+<div class="comparison-benefit">Equipaci&oacute;n totalmente original creada desde cero. Primera maqueta en 24-48h, revisiones incluidas. 15&euro; para empezar, completamente descontados en pedidos de 5+ camisetas. Desde 21,90&euro; por camiseta.</div>
 </div>
 <div class="comparison-card">
 <div class="comparison-icon"><i class="fas fa-cube"></i></div>
@@ -243,12 +243,12 @@
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-truck"></i></div>
 <h3>Entrega M&aacute;s R&aacute;pida</h3>
-<p>20&ndash;25 d&iacute;as en todo el mundo desde la confirmaci&oacute;n del pedido: 7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Env&iacute;o gratuito en pedidos superiores a 50&euro;. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Ver comparativa de entrega.</a></p>
+<p>2525&ndash;30 d&iacute;asndash;30 d&iacute;as en todo el mundo desde la confirmaci&oacute;n del pedido: 7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Env&iacute;o gratuito en pedidos superiores a 50&euro;. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Ver comparativa de entrega.</a></p>
 </div>
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-tag"></i></div>
 <h3>Mejor Precio por Equipo</h3>
-<p>Camisetas desde 20,90&euro; por unidad en pedidos grandes, 38,90&euro; para una camiseta individual. Sin pedido m&iacute;nimo &mdash; sin obligaci&oacute;n de compra a granel. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Comparar precios con competidores.</a></p>
+<p>Camisetas desde 21,90&euro; por unidad en pedidos grandes, 38,90&euro; para una camiseta individual. Sin pedido m&iacute;nimo &mdash; sin obligaci&oacute;n de compra a granel. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Comparar precios con competidores.</a></p>
 </div>
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-layer-group"></i></div>
@@ -258,7 +258,7 @@
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-pencil-ruler"></i></div>
 <h3>Dise&ntilde;o Profesional a Bajo Coste</h3>
-<p>Maqueta personalizada en 24&ndash;48h, revisiones incluidas. Solo 15&euro; para empezar &mdash; acreditados &iacute;ntegros en pedidos de 5+ camisetas, as&iacute; que para un equipo el dise&ntilde;o sale pr&aacute;cticamente gratis.</p>
+<p>Maqueta personalizada en 24&ndash;48h, revisiones incluidas. Solo 15&euro; para empezar &mdash; completamente descontados en pedidos de 5+ camisetas, as&iacute; que para un equipo el dise&ntilde;o sale pr&aacute;cticamente gratis.</p>
 </div>
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-box-open"></i></div>
@@ -277,13 +277,13 @@
 <div class="hiw-container">
 <h2>C&oacute;mo funciona el servicio de dise&ntilde;o de equipaciones MOMUTO</h2>
 <ul class="hiw-steps">
-<li><span class="hiw-num">1</span><div><strong>Elige tu v&iacute;a</strong><p>Explora la <a href="https://es.momuto.com/pages/coleccion-ready-to-play" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">colecci&oacute;n Lista para Jugar</a> con dise&ntilde;os probados al 10% de descuento. O env&iacute;a un brief para un dise&ntilde;o totalmente personalizado. O <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">cr&eacute;alo t&uacute; mismo en 3D</a>.</p></div></li>
-<li><span class="hiw-num">2</span><div><strong>Recibe tu maqueta en 24&ndash;48h</strong><p>Nuestros dise&ntilde;adores crean una maqueta de equipaci&oacute;n de f&uacute;tbol totalmente personalizada. Solo 15&euro; para empezar, acreditados en pedidos de 5+ camisetas.</p></div></li>
+<li><span class="hiw-num">1</span><div><strong>Elige tu v&iacute;a</strong><p>Explora la <a href="https://es.momuto.com/pages/coleccion-ready-to-play" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">colecci&oacute;n Ready-to-Play</a> con dise&ntilde;os probados al 10% de descuento. O env&iacute;a un brief para un dise&ntilde;o totalmente personalizado. O <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">cr&eacute;alo t&uacute; mismo en 3D</a>.</p></div></li>
+<li><span class="hiw-num">2</span><div><strong>Recibe tu maqueta en 24&ndash;48h</strong><p>Nuestros dise&ntilde;adores crean una maqueta de equipaci&oacute;n de f&uacute;tbol totalmente personalizada. Solo 15&euro; para empezar, descontados en pedidos de 5+ camisetas.</p></div></li>
 <li><span class="hiw-num">3</span><div><strong>Solicita revisiones si es necesario</strong><p>Todas las revisiones son gratuitas. Ajustamos hasta que est&eacute;s satisfecho.</p></div></li>
 <li><span class="hiw-num">4</span><div><strong>Confirma tallas y detalles del pedido</strong><p>Env&iacute;a el desglose de tallas y preparamos la producci&oacute;n.</p></div></li>
-<li><span class="hiw-num">5</span><div><strong>Producimos y enviamos tu equipaci&oacute;n</strong><p>7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Tu equipaci&oacute;n llega en 20&ndash;25 d&iacute;as en todo el mundo.</p></div></li>
+<li><span class="hiw-num">5</span><div><strong>Producimos y enviamos tu equipaci&oacute;n</strong><p>7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Tu equipaci&oacute;n llega en 2525&ndash;30 d&iacute;asndash;30 d&iacute;as en todo el mundo.</p></div></li>
 </ul>
-<p class="hiw-internal-links">&iquest;Buscas la v&iacute;a m&aacute;s r&aacute;pida? <a href="https://es.momuto.com/pages/coleccion-ready-to-play">La colecci&oacute;n Lista para Jugar empieza desde 19,70&euro; con maquetas en 24h.</a><br />&iquest;Quieres ver lo que han pedido otros clubes? <a href="https://es.momuto.com/pages/equipos-momuto">Explora la galer&iacute;a completa de equipos.</a></p>
+<p class="hiw-internal-links">&iquest;Buscas la v&iacute;a m&aacute;s r&aacute;pida? <a href="https://es.momuto.com/pages/coleccion-ready-to-play">La colecci&oacute;n Ready-to-Play empieza desde 19,70&euro; con maquetas en 24h.</a><br />&iquest;Quieres ver lo que han pedido otros clubes? <a href="https://es.momuto.com/pages/equipos-momuto">Explora la galer&iacute;a completa de equipos.</a></p>
 </div>
 </section>
 <!-- ── PASARELA DE PAGO ── -->
@@ -292,14 +292,14 @@
 <p class="gate-eyebrow">Dise&ntilde;o Personalizado &mdash; De tu concepto a una equipaci&oacute;n lista para producci&oacute;n</p>
 <div class="gate-box">
 <h2>Env&iacute;anos Tu Concepto</h2>
-<p class="gate-price"><strong>15&euro; para empezar</strong> &mdash; acreditados &iacute;ntegros en pedidos de 5 camisetas o m&aacute;s</p>
+<p class="gate-price"><strong>15&euro; para empezar</strong> &mdash; completamente descontados en pedidos de 5 camisetas o m&aacute;s</p>
 <ul class="gate-features">
 <li><i class="fas fa-check"></i><span><strong>Un dise&ntilde;ador con tu concepto</strong> en menos de 24h</span></li>
 <li><i class="fas fa-check"></i><span><strong>Primera maqueta entregada</strong> en 24&ndash;48h</span></li>
 <li><i class="fas fa-check"></i><span><strong>La afinamos contigo</strong> hasta que est&eacute; perfecta</span></li>
 <li><i class="fas fa-check"></i><span><strong>Ilustraci&oacute;n y vectorizaci&oacute;n</strong> incluidas &mdash; conceptos IA, bocetos, gr&aacute;ficos a medida</span></li>
 <li><i class="fas fa-check"></i><span><strong>Archivos listos para producci&oacute;n</strong> para impresi&oacute;n por sublimaci&oacute;n</span></li>
-<li><i class="fas fa-check"></i><span><strong>15&euro; acreditados a tu pedido</strong> con 5+ camisetas</span></li>
+<li><i class="fas fa-check"></i><span><strong>15&euro; completamente descontados</strong> en pedidos de 5+ camisetas</span></li>
 </ul>
 <div class="gate-email-row">
 <input type="email" class="gate-email-input" id="gateEmail" placeholder="Tu direcci&oacute;n de email" />
@@ -308,7 +308,7 @@
 <p class="gate-refund-guarantee">&iquest;Prefieres no continuar tras el primer concepto? Solo d&iacute;noslo &mdash; te devolvemos tus <strong>15&euro;</strong>.</p>
 <p class="gate-refund-note">Pago seguro con Stripe &bull; Acreditado a tu pedido con 5+ camisetas</p>
 <hr class="gate-divider" />
-<p class="gate-alt">&iquest;Prefieres dise&ntilde;arlo t&uacute; mismo? &nbsp;<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">Configurador 3D</a> y <a href="https://es.momuto.com/pages/coleccion-ready-to-play">Lista para Jugar</a> son gratis, instant&aacute;neos y tuyos.</p>
+<p class="gate-alt">&iquest;Prefieres dise&ntilde;arlo t&uacute; mismo? &nbsp;<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">Configurador 3D</a> y <a href="https://es.momuto.com/pages/coleccion-ready-to-play">Ready-to-Play</a> son gratis, instant&aacute;neos y tuyos.</p>
 </div>
 </div>
 </section>
@@ -415,15 +415,15 @@
 <div class="faq-list">
 <div class="faq-item">
 <h3>&iquest;C&oacute;mo funciona el servicio de dise&ntilde;o personalizado de MOMUTO?</h3>
-<p>Reserva tu concepto con un dep&oacute;sito de 15&euro; y env&iacute;a tu brief &mdash; nombre del equipo, escudo, colores y cualquier referencia. Nuestros dise&ntilde;adores crean una maqueta totalmente personalizada en 24&ndash;48 horas, con revisiones incluidas hasta quedar satisfecho. Los 15&euro; se acreditan &iacute;ntegros en pedidos de 5 camisetas o m&aacute;s &mdash; as&iacute; que para un equipo el dise&ntilde;o sale pr&aacute;cticamente gratis.</p>
+<p>Reserva tu concepto con un dep&oacute;sito de 15&euro; y env&iacute;a tu brief &mdash; nombre del equipo, escudo, colores y cualquier referencia. Nuestros dise&ntilde;adores crean una maqueta totalmente personalizada en 24&ndash;48 horas, con revisiones incluidas hasta quedar satisfecho. Los 15&euro; se descuentan por completo en pedidos de 5 camisetas o m&aacute;s &mdash; as&iacute; que para un equipo el dise&ntilde;o sale pr&aacute;cticamente gratis.</p>
 </div>
 <div class="faq-item">
 <h3>&iquest;Hay un pedido m&iacute;nimo para equipaciones de f&uacute;tbol personalizadas?</h3>
-<p>No. MOMUTO no tiene pedido m&iacute;nimo. Puedes pedir una sola camiseta o un equipo completo de 50+. El precio empieza desde 20,90&euro; por camiseta en pedidos grandes y 38,90&euro; para una camiseta individual.</p>
+<p>No. MOMUTO no tiene pedido m&iacute;nimo. Puedes pedir una sola camiseta o un equipo completo de 50+. El precio empieza desde 21,90&euro; por camiseta en pedidos grandes y 38,90&euro; para una camiseta individual.</p>
 </div>
 <div class="faq-item">
 <h3>&iquest;Cu&aacute;nto tiempo tarda en llegar la equipaci&oacute;n de f&uacute;tbol personalizada?</h3>
-<p>La producci&oacute;n tarda 7&ndash;12 d&iacute;as. El env&iacute;o tarda 10&ndash;15 d&iacute;as en todo el mundo. El tiempo total de entrega es normalmente de 20&ndash;25 d&iacute;as desde la confirmaci&oacute;n del pedido.</p>
+<p>La producci&oacute;n tarda 7&ndash;12 d&iacute;as. El env&iacute;o tarda 10&ndash;15 d&iacute;as en todo el mundo. El tiempo total de entrega es normalmente de 2525&ndash;30 d&iacute;asndash;30 d&iacute;as desde la confirmaci&oacute;n del pedido.</p>
 </div>
 <div class="faq-item">
 <h3>&iquest;Puedo subir el escudo de mi club y elegir mis propios colores?</h3>
@@ -438,8 +438,8 @@
 <p>S&iacute;. Usa nuestro <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">configurador 3D de camisetas</a> para dise&ntilde;ar tu equipaci&oacute;n online en tiempo real. Tambi&eacute;n puedes explorar nuestra <a href="https://es.momuto.com/pages/coleccion-ready-to-play">colecci&oacute;n lista para jugar</a> si prefieres empezar desde dise&ntilde;os probados &mdash; con un 10% de descuento y maquetas en 24h.</p>
 </div>
 <div class="faq-item">
-<h3>&iquest;Las equipaciones Lista para Jugar incluyen pantalones cortos?</h3>
-<p>S&iacute;. Cada dise&ntilde;o Lista para Jugar est&aacute; disponible solo como camiseta (desde 19,70&euro;) o como equipaci&oacute;n completa con pantalones cortos a juego (desde 24,20&euro;). Los pedidos de 10+ equipaciones completas incluyen adem&aacute;s una bandera de equipo con tu escudo y un braz alete de capit&aacute;n gratuitos.</p>
+<h3>&iquest;Las equipaciones Ready-to-Play incluyen pantalones cortos?</h3>
+<p>S&iacute;. Cada dise&ntilde;o Ready-to-Play est&aacute; disponible solo como camiseta (desde 19,70&euro;) o como equipaci&oacute;n completa con pantalones cortos a juego (desde 24,20&euro;). Los pedidos de 10+ equipaciones completas incluyen adem&aacute;s una bandera de equipo con tu escudo y un braz alete de capit&aacute;n gratuitos.</p>
 </div>
 <div class="faq-item">
 <h3>&iquest;Puedo enviar mi propio dise&ntilde;o o un concepto generado por IA?</h3>

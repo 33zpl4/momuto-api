@@ -41,12 +41,12 @@
     {
       "@type": "Question",
       "name": "¿Cuánto cuesta una equipación personalizada en MOMUTO?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Desde 21,90 € por camiseta a partir de 10 unidades (equipación completa desde 26,90 € por jugador). El diseño siempre es gratis y no hay pedido mínimo." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Desde 21,90 € por camiseta a partir de 10 unidades (equipación completa desde 26,90 € por jugador). El configurador 3D y la colección Ready-to-Play son gratis; el diseño a medida con un diseñador lleva 15€ para empezar, completamente descontados en pedidos de 5+. Sin pedido mínimo." }
     },
     {
       "@type": "Question",
       "name": "¿Cuánto tarda la entrega?",
-      "acceptedAnswer": { "@type": "Answer", "text": "MOMUTO entrega las equipaciones personalizadas en 25-30 días. La maqueta de diseño gratuita está lista en 1-2 días y la producción no empieza hasta que la apruebas." }
+      "acceptedAnswer": { "@type": "Answer", "text": "MOMUTO entrega las equipaciones personalizadas en 25-30 días. La maqueta de diseño está lista en 1-2 días y la producción no empieza hasta que la apruebas." }
     }
   ]
 }
@@ -160,7 +160,7 @@ h1.title, .title, .page-title { display: none !important; }
 <tr><td>Ver antes de pedir</td><td><span class="cmp-check">✓</span> Al instante, en 3D</td><td>Tras intercambio de mensajes</td></tr>
 <tr><td>Pedido mínimo</td><td><span class="cmp-check">✓</span> Sin mínimo (desde 1)</td><td>Desde 3 unidades</td></tr>
 <tr><td>Precio</td><td>Camiseta desde 21,90 € · Kit desde 26,90 € (10 uds)</td><td>Camiseta 21,95 € · Kit 26,95 € (mín. 3 uds)</td></tr>
-<tr><td>Diseño incluido</td><td>Gratis</td><td>Gratis (sin pago previo)</td></tr>
+<tr><td>Diseño incluido</td><td>3D y Ready-to-Play gratis · a medida 15€ (descontado en 5+)</td><td>Gratis (sin pago previo)</td></tr>
 <tr><td>Personalización</td><td>Sublimación total, colores ilimitados</td><td>Sublimación</td></tr>
 <tr><td>Entrega</td><td>25-30 días</td><td>4 semanas (2 en reposiciones)</td></tr>
 <tr><td>Fabricación</td><td>Hub textil global (Asia)</td><td>España</td></tr>
@@ -175,7 +175,7 @@ h1.title, .title, .page-title { display: none !important; }
 </div>
 <!-- PRECIO / MINIMO -->
 <h2 class="cmp-h2">No va de precio, va de proceso</h2>
-<p class="cmp-p">Las dos marcas publican precios parecidos &mdash; en torno a <strong>22 € por camiseta</strong> a volumen (Zentral desde 21,95 €; MOMUTO desde 21,90 € a 10 unidades) &mdash; y en ambas el diseño es gratis. Así que la decisión no es el precio, sino <strong>cómo trabajas</strong>: con MOMUTO no hay <strong>pedido mínimo</strong> &mdash; puedes pedir <strong>una sola camiseta</strong>, mientras que en Zentral el mínimo es de <strong>3 unidades</strong> &mdash; y ves tu equipación <strong>en 3D al instante</strong> en lugar de esperar una propuesta por mensaje. <a href="/pages/equipaciones-futbol-personalizadas">Ver equipaciones personalizadas</a>.</p>
+<p class="cmp-p">Las dos marcas publican precios parecidos &mdash; en torno a <strong>22 € por camiseta</strong> a volumen (Zentral desde 21,95 €; MOMUTO desde 21,90 € a 10 unidades) &mdash; y en ambas puedes diseñar gratis (en MOMUTO con el configurador 3D o Ready-to-Play; el diseño a medida con diseñador lleva 15€, descontados en pedidos de 5+). Así que la decisión no es el precio, sino <strong>cómo trabajas</strong>: con MOMUTO no hay <strong>pedido mínimo</strong> &mdash; puedes pedir <strong>una sola camiseta</strong>, mientras que en Zentral el mínimo es de <strong>3 unidades</strong> &mdash; y ves tu equipación <strong>en 3D al instante</strong> en lugar de esperar una propuesta por mensaje. <a href="/pages/equipaciones-futbol-personalizadas">Ver equipaciones personalizadas</a>.</p>
 <!-- PLAZO -->
 <h2 class="cmp-h2">Plazo predecible, también en temporada alta</h2>
 <p class="cmp-p">Sabes la fecha desde el principio. Tu maqueta llega en <strong>1-2 días</strong>, la producción solo arranca cuando la apruebas y entregamos en <strong>25-30 días</strong>. Producimos a escala, con <strong>capacidad para la temporada alta</strong>: cuando todos los equipos piden antes del inicio de liga, mantenemos el plazo en lugar de acumular cola. Nada de promesas vagas: una fecha clara para estrenar el día del partido.</p>
@@ -192,9 +192,9 @@ h1.title, .title, .page-title { display: none !important; }
 <h3 class="cmp-h3">¿MOMUTO tiene configurador 3D y diseño con IA?</h3>
 <p class="cmp-p">Sí. Diseñas tu equipación en 3D y la ves al instante, o envías una referencia y la IA genera un concepto que editas en el configurador.</p>
 <h3 class="cmp-h3">¿Cuánto cuesta?</h3>
-<p class="cmp-p">Desde 21,90 € por camiseta a partir de 10 unidades (equipación completa desde 26,90 € por jugador). El diseño siempre es gratis y sin pedido mínimo.</p>
+<p class="cmp-p">Desde 21,90 € por camiseta a partir de 10 unidades (equipación completa desde 26,90 € por jugador). El configurador 3D y Ready-to-Play son gratis; el diseño a medida con diseñador lleva 15€ para empezar (descontados en pedidos de 5+). Sin pedido mínimo.</p>
 <h3 class="cmp-h3">¿Cuánto tarda la entrega?</h3>
-<p class="cmp-p">25-30 días. La maqueta gratuita está lista en 1-2 días y la producción no empieza hasta que la apruebas.</p>
+<p class="cmp-p">25-30 días. La maqueta está lista en 1-2 días y la producción no empieza hasta que la apruebas.</p>
 </div>
 <!-- CAROUSEL DE DISEÑOS -->
 <section class="trust-proof">
@@ -211,7 +211,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/2572b5c39f8cbcf5e4d530fcfd8f86e55c1e969b7c9d95088180fb508e6c54b6.png" alt="Equipación personalizada — Pecados Capitales" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">PECADOS CAPITALES</div><div class="trust-card-desc">Duality. Ángeles y demonios en rojo, negro y oro.</div></div></div></div>
 </div>
 <div class="trust-cta">
-<a href="/pages/solicitud-de-diseno-personalizado" class="trust-btn-primary">Pedir un diseño gratis</a>
+<a href="/pages/solicitud-de-diseno-personalizado" class="trust-btn-primary">Empezar mi diseño</a>
 <a href="/pages/galeria-equipaciones-personalizadas" class="trust-btn-secondary">Ver más diseños →</a>
 </div>
 </div>
@@ -219,6 +219,6 @@ h1.title, .title, .page-title { display: none !important; }
 <!-- CTA -->
 <div class="cmp-cta-block">
 <h3>Compruébalo tú mismo</h3>
-<p>Diseña tu equipación en 3D gratis, o envíanos una referencia y nuestra IA crea el concepto. Sin mínimo y sin compromiso.</p>
-<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="cmp-cta-btn">Diseñar en 3D</a> <a href="/pages/solicitud-de-diseno-personalizado" class="cmp-cta-btn secondary">Pedir un diseño gratis</a></div>
+<p>Diseña tu equipación en 3D gratis o elige un diseño Ready-to-Play (−10%). ¿Quieres algo a medida? Un diseñador lo crea por 15€, descontados en pedidos de 5+. Sin mínimo.</p>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="cmp-cta-btn">Diseñar en 3D</a> <a href="/pages/solicitud-de-diseno-personalizado" class="cmp-cta-btn secondary">Empezar mi diseño</a></div>
 </div>

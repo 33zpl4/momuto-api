@@ -1,0 +1,37 @@
+name: Deploy ES City Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/deploy-city-pages.js'
+      - '.github/workflows/deploy-city-pages.yml'
+  workflow_dispatch:
+    inputs:
+      city_keys:
+        description: 'Comma-separated city keys (default: all)'
+        required: false
+      dry_run:
+        description: 'Dry run (do not write to CMS)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Deploy ES city pages
+        env:
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          CITY_KEYS: ${{ inputs.city_keys }}
+          DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+        run: node scripts/deploy-city-pages.js
