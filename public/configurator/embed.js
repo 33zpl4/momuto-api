@@ -69,13 +69,14 @@ var CONFIG3D={
 // design server routes checkout to those three storefronts; no IT mapping yet,
 // so IT pages fall back to showing no button rather than an EN checkout).
 var STORE3D={ en:"https://www.momuto.com", fr:"https://fr.momuto.com", es:"https://es.momuto.com" };
-function build3dUrl(configId, lang, backUrl){
+function build3dUrl(configId, lang, backUrl, mc){
   return "https://design.momuto.com/goodsInfoSave"
     +"?uuid="+genUserId()
     +"&sysType=oem"
     +"&fromUrlHost="+encodeURIComponent(STORE3D[lang]||STORE3D.en)
     +"&collectionName=configId="+encodeURIComponent(configId)+"%26suitName=mamuto3suit1"
-    +"&focus=1&back="+encodeURIComponent(backUrl||"");   // forwarded once the GoodInfoAction patch is live
+    +"&focus=1&back="+encodeURIComponent(backUrl||"")   // forwarded once the GoodInfoAction patch is live
+    +(mc?"&mc="+encodeURIComponent(mc):"");              // toy colours the customer changed (from:to hex pairs)
 }
 
 function knockoutBg(img){
@@ -661,7 +662,13 @@ function run(root, opts){
     if(to3d) to3d.onclick=function(){ var u=url3d(); if(u) window.location.href=u; };
   }
   function url3d(){ if(!opts.config3d) return null;
-    return build3dUrl(opts.config3d, CART.lang, location.origin+location.pathname); }
+    // carry only the colours the customer actually changed: from=kit default, to=pick
+    var mc=["primary","secondary","trim"].map(function(k){
+      var d=DEFAULTS[k], v=state[k];
+      return (d && v && String(d).toLowerCase()!==String(v).toLowerCase())
+        ? String(d).replace("#","")+":"+String(v).replace("#","") : null;
+    }).filter(Boolean).join(",");
+    return build3dUrl(opts.config3d, CART.lang, location.origin+location.pathname, mc); }
 
   function captureView(v){ var prev=active; active=v; render(); var url=cv.toDataURL("image/png"); active=prev; render(); return url; }
   // ---- OSS upload (mirrors the 3D tool's contract) -----------------------
