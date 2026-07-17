@@ -55,7 +55,7 @@ const PAGES = [
     handle: 'richiesta-design-personalizzato',
     title: 'Richiedi il Tuo Design Personalizzato | MOMUTO',
     meta_title: 'Richiesta Design Gratuito Maglie Calcio | MOMUTO',
-    meta_keywords: ['richiesta design maglia calcio', 'design personalizzato gratuito', 'maglie su misura'],
+    meta_keywords: ['richiesta design maglia calcio', 'design personalizzato maglie', 'maglie su misura'],
     meta_descript: 'Invia la tua proposta e ricevi un mockup professionale gratuito in 24-48 ore. Design gratuito, senza ordine minimo, consegna in 20-25 giorni.',
     content: '<p>Pagina in costruzione.</p>',
   },

@@ -35,7 +35,7 @@
     {
       "@type": "Question",
       "name": "Combien de temps prend la livraison ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Les maillots personnalisés sont livrés en 25-30 jours dans le monde entier (production puis expédition directe d'usine). Votre maquette de design gratuite est prête en 1-2 jours, et la production ne démarre qu'après votre validation." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Les maillots personnalisés sont livrés en 25-30 jours dans le monde entier (production puis expédition directe d'usine). Votre maquette de design est prête en 1-2 jours, et la production ne démarre qu'après votre validation." }
     },
     {
       "@type": "Question",

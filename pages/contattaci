@@ -8,7 +8,7 @@
       "name": "Qual è l'ordine minimo per i kit da calcio personalizzati MOMUTO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MOMUTO non ha un ordine minimo. Una singola maglia personalizzata parte da €38.90. Per ordini di squadra di 10 o più pezzi, il kit completo (maglia + pantaloncini) scende a €26.90 a giocatore con design professionale gratuito incluso. Gestiamo squadre di calcio a 5, squadre complete, organizzazioni esports e ordini singoli allo stesso modo."
+        "text": "MOMUTO non ha un ordine minimo. Una singola maglia personalizzata parte da €38.90. Per ordini di squadra di 10 o più pezzi, il kit completo (maglia + pantaloncini) scende a €26.90 a giocatore — design in 3D gratuito o modelli Ready-to-Play con il 10% di sconto. Gestiamo squadre di calcio a 5, squadre complete, organizzazioni esports e ordini singoli allo stesso modo."
       }
     },
     {
@@ -16,15 +16,15 @@
       "name": "Quanto tempo ci vuole per ricevere i kit da calcio personalizzati MOMUTO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MOMUTO consegna kit personalizzati in 25–30 giorni in tutto il mondo. La produzione richiede 7–15 giorni e la spedizione 10–15 giorni direttamente dalla fabbrica. Il mockup di design professionale gratuito viene consegnato entro 1–2 giorni dal ricevimento del brief, con revisioni gratuite incluse."
+        "text": "MOMUTO consegna kit personalizzati in 25–30 giorni in tutto il mondo. La produzione richiede 7–15 giorni e la spedizione 10–15 giorni direttamente dalla fabbrica. Il mockup di design professionale viene consegnato entro 1–2 giorni dal ricevimento del brief, con revisioni incluse (acconto di 15 €, interamente accreditato sull'ordine da 5 maglie)."
       }
     },
     {
       "@type": "Question",
-      "name": "Il servizio di design è davvero gratuito?",
+      "name": "Quanto costa il servizio di design?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sì. MOMUTO offre due opzioni di design gratuite: un configuratore 3D in tempo reale con oltre 30 template professionali, oppure un servizio di design professionale gratuito dove il team MOMUTO crea un mockup completamente personalizzato in 1–2 giorni con revisioni gratuite incluse. Paghi solo quando effettui un ordine."
+        "text": "Le vie in autonomia sono gratuite: il configuratore 3D in tempo reale (oltre 30 template) e i modelli Ready-to-Play del nostro studio, personalizzabili in 3D con il 10% di sconto. Il servizio di design su misura — il team MOMUTO crea il tuo mockup in 1–2 giorni con revisioni incluse — richiede un acconto di 15 €, interamente accreditato sull'ordine da 5 maglie."
       }
     },
     {
@@ -32,7 +32,7 @@
       "name": "MOMUTO può realizzare kit da un design generato con l'AI?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sì. MOMUTO è uno dei pochi fornitori di kit personalizzati che accetta concept generati con l'AI (da ChatGPT, Midjourney, Gemini o qualsiasi altro strumento) e li converte in kit pronti per la produzione. I designer professionisti gestiscono l'intera traduzione tecnica — upscaling della risoluzione, mappatura delle cuciture, scala delle taglie dalla S alla XXL e conversione del colore per la sublimazione. Gratuito per ordini di 10 o più kit. Si applica un deposito di design di €15 — interamente rimborsato per ordini di 5 maglie o più. Questo ci permette di concentrarci sui team davvero decisi e di dedicare a ogni design il tempo che merita."
+        "text": "Sì. MOMUTO è uno dei pochi fornitori di kit personalizzati che accetta concept generati con l'AI (da ChatGPT, Midjourney, Gemini o qualsiasi altro strumento) e li converte in kit pronti per la produzione. I designer professionisti gestiscono l'intera traduzione tecnica — upscaling della risoluzione, mappatura delle cuciture, scala delle taglie dalla S alla XXL e conversione del colore per la sublimazione. Si applica un acconto di design di €15 — interamente accreditato sull'ordine da 5 maglie o più. Questo ci permette di concentrarci sui team davvero decisi e di dedicare a ogni design il tempo che merita."
       }
     },
     {
@@ -40,7 +40,7 @@
       "name": "Non ho un logo o un design — MOMUTO può aiutarmi?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sì. Il team di design MOMUTO lavora da zero. Condividi i tuoi colori, il nome della squadra, un riferimento stilistico o anche uno schizzo approssimativo — un designer professionista costruirà un'identità completa per il tuo kit in 1–2 giorni, gratuitamente, con revisioni incluse. Nessuna competenza di design richiesta."
+        "text": "Sì. Il team di design MOMUTO lavora da zero. Condividi i tuoi colori, il nome della squadra, un riferimento stilistico o anche uno schizzo approssimativo — un designer professionista costruirà un'identità completa per il tuo kit in 1–2 giorni, con revisioni incluse (acconto di 15 €, accreditato sull'ordine da 5 maglie). Nessuna competenza di design richiesta."
       }
     }
   ]
@@ -422,19 +422,19 @@
 <div class="cnt-faq-grid">
 <details class="cnt-faq-item">
 <summary class="cnt-faq-q">Qual &egrave; l&rsquo;ordine minimo?</summary>
-<div class="cnt-faq-a">Non c&rsquo;&egrave; un minimo. Una singola maglia parte da <strong>&euro;38.90</strong>. Per ordini di 10+ kit, il kit completo (maglia + pantaloncini) scende a <strong>&euro;26.90 a giocatore</strong> &mdash; con design professionale gratuito incluso. Gestiamo squadre di calcio a 5, squadre complete, organizzazioni esports e ordini singoli allo stesso modo.</div>
+<div class="cnt-faq-a">Non c&rsquo;&egrave; un minimo. Una singola maglia parte da <strong>&euro;38.90</strong>. Per ordini di 10+ kit, il kit completo (maglia + pantaloncini) scende a <strong>&euro;26.90 a giocatore</strong> &mdash; design in 3D gratuito o modelli Ready-to-Play con il 10% di sconto. Gestiamo squadre di calcio a 5, squadre complete, organizzazioni esports e ordini singoli allo stesso modo.</div>
 </details>
 <details class="cnt-faq-item">
 <summary class="cnt-faq-q">Quali sono i tempi di consegna?</summary>
-<div class="cnt-faq-a">I kit personalizzati vengono consegnati in <strong>25&ndash;30 giorni in tutto il mondo</strong> &mdash; 7&ndash;15 giorni di produzione pi&ugrave; 10&ndash;15 giorni di spedizione diretta dalla fabbrica. Il tuo mockup di design gratuito &egrave; pronto entro <strong>1&ndash;2 giorni</strong> dal tuo brief, revisioni incluse. Spediamo in tutta Europa, Nord America e oltre.</div>
+<div class="cnt-faq-a">I kit personalizzati vengono consegnati in <strong>25&ndash;30 giorni in tutto il mondo</strong> &mdash; 7&ndash;15 giorni di produzione pi&ugrave; 10&ndash;15 giorni di spedizione diretta dalla fabbrica. Il tuo mockup di design &egrave; pronto entro <strong>1&ndash;2 giorni</strong> dal tuo brief, revisioni incluse (acconto di 15 &euro;, accreditato sull&rsquo;ordine da 5 maglie). Spediamo in tutta Europa, Nord America e oltre.</div>
 </details>
 <details class="cnt-faq-item">
-<summary class="cnt-faq-q">Il servizio di design &egrave; davvero gratuito?</summary>
-<div class="cnt-faq-a">S&igrave;, completamente gratuito. Scegli tra un <strong>configuratore 3D in tempo reale</strong> con oltre 30 template, oppure inviaci la tua idea e un <strong>designer professionista</strong> creer&agrave; il tuo mockup personalizzato in 1&ndash;2 giorni con revisioni illimitate. Paghi solo quando approvi il design e effettui l&rsquo;ordine.</div>
+<summary class="cnt-faq-q">Quanto costa il servizio di design?</summary>
+<div class="cnt-faq-a">Le vie in autonomia sono gratuite: il <strong>configuratore 3D in tempo reale</strong> con oltre 30 template e i <strong>modelli Ready-to-Play</strong> con il 10% di sconto. Preferisci che disegni tutto un <strong>designer professionista</strong>? Mockup in 1&ndash;2 giorni con revisioni incluse &mdash; acconto di 15 &euro;, interamente accreditato sull&rsquo;ordine da 5 maglie.</div>
 </details>
 <details class="cnt-faq-item">
 <summary class="cnt-faq-q">Potete lavorare da un design generato con l&rsquo;AI?</summary>
-<div class="cnt-faq-a">S&igrave; &mdash; e siamo uno dei pochi fornitori in grado di farlo. Inviaci un&rsquo;immagine da <strong>ChatGPT, Midjourney, Gemini</strong> o qualsiasi strumento di design. I nostri designer gestiscono l&rsquo;intera traduzione tecnica: upscaling della risoluzione a vettori 8K, mappatura delle cuciture, scala delle taglie dalla S alla XXL e conversione del colore per la sublimazione. <strong>Gratuito per ordini di 10+ kit.</strong> Si applica un deposito di design di &euro;15 &mdash; interamente rimborsato per ordini di 5 maglie o pi&ugrave;. Questo ci permette di concentrarci sui team davvero decisi e di dedicare a ogni design il tempo che merita.</div>
+<div class="cnt-faq-a">S&igrave; &mdash; e siamo uno dei pochi fornitori in grado di farlo. Inviaci un&rsquo;immagine da <strong>ChatGPT, Midjourney, Gemini</strong> o qualsiasi strumento di design. I nostri designer gestiscono l&rsquo;intera traduzione tecnica: upscaling della risoluzione a vettori 8K, mappatura delle cuciture, scala delle taglie dalla S alla XXL e conversione del colore per la sublimazione. Si applica un acconto di design di &euro;15 &mdash; interamente accreditato sull&rsquo;ordine da 5 maglie o pi&ugrave;. Questo ci permette di concentrarci sui team davvero decisi e di dedicare a ogni design il tempo che merita.</div>
 </details>
 <details class="cnt-faq-item">
 <summary class="cnt-faq-q">Non ho un logo o un design &mdash; potete aiutarmi?</summary>

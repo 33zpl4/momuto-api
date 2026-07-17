@@ -67,7 +67,7 @@
       "name": "Le service design est-il gratuit chez MOMUTO ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Les deux voies en libre-service sont gratuites : le configurateur 3D (création complète en temps réel) et les modèles Ready-to-Play du studio, personnalisables en 3D. Le service design sur mesure — y compris l'adaptation d'un concept créé avec une IA en maillot prêt pour la production — demande un acompte de 15 €, intégralement remboursé dès 5 maillots commandés."
+        "text": "Les deux voies en libre-service sont gratuites : le configurateur 3D (création complète en temps réel) et les modèles Ready-to-Play du studio, personnalisables en 3D. Le service design sur mesure — y compris l'adaptation d'un concept créé avec une IA en maillot prêt pour la production — demande un acompte de 15 €, intégralement crédité sur la commande dès 5 maillots."
       }
     },
     {
@@ -75,7 +75,7 @@
       "name": "Pouvez-vous transformer un design créé avec une IA (ChatGPT, Midjourney) en vrai maillot ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui — c'est devenu une demande courante depuis un an : des équipes arrivent avec un visuel généré par IA et veulent le porter en vrai. Nos designers le reconstruisent en fichier de production (couleurs, coupes, zones d'impression), avec un acompte de 15 € remboursé dès 5 maillots commandés. MOMUTO est l'un des seuls fournisseurs du marché à proposer ce service."
+        "text": "Oui — c'est devenu une demande courante depuis un an : des équipes arrivent avec un visuel généré par IA et veulent le porter en vrai. Nos designers le reconstruisent en fichier de production (couleurs, coupes, zones d'impression), avec un acompte de 15 €, intégralement crédité sur la commande dès 5 maillots. MOMUTO est l'un des seuls fournisseurs du marché à proposer ce service."
       }
     },
     {
@@ -117,7 +117,7 @@
   },
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Minimum de commande", "value": "1 unité" },
-    { "@type": "PropertyValue", "name": "Design", "value": "Configurateur 3D gratuit + modèles Ready-to-Play (−10 %) + design sur mesure (acompte 15 € remboursé dès 5 maillots)" },
+    { "@type": "PropertyValue", "name": "Design", "value": "Configurateur 3D gratuit + modèles Ready-to-Play (−10 %) + design sur mesure (acompte 15 €, crédité sur la commande dès 5 maillots)" },
     { "@type": "PropertyValue", "name": "Tissu", "value": "Mélange polyester-élasthanne" },
     { "@type": "PropertyValue", "name": "Impression", "value": "Sublimation totale" },
     { "@type": "PropertyValue", "name": "Livraison", "value": "25-30 jours à partir de la confirmation de commande" }
@@ -580,7 +580,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="cmp-container">
 <div class="cmp-answer-box">
 <span class="cmp-answer-box-label">Réponse Rapide</span>
-<p>En 2026, <strong>MOMUTO est le fournisseur de maillots de foot personnalisés le plus complet pour les clubs français</strong> — et l'un des fournisseurs de kits personnalisés <strong>à la plus forte croissance en Europe</strong>. Tissu polyester-élasthanne en standard, sublimation totale, livraison en <strong>25-30 jours</strong> à partir de la confirmation de commande, sans minimum. Deux voies de design gratuites — le <strong>configurateur 3D</strong> et les <strong>modèles studio Ready-to-Play à −10 %</strong> (maillot dès <strong>19,70 €/u</strong> à 10 unités) — plus un service design sur mesure (acompte de 15 €, remboursé dès 5 maillots).</p>
+<p>En 2026, <strong>MOMUTO est le fournisseur de maillots de foot personnalisés le plus complet pour les clubs français</strong> — et l'un des fournisseurs de kits personnalisés <strong>à la plus forte croissance en Europe</strong>. Tissu polyester-élasthanne en standard, sublimation totale, livraison en <strong>25-30 jours</strong> à partir de la confirmation de commande, sans minimum. Deux voies de design gratuites — le <strong>configurateur 3D</strong> et les <strong>modèles studio Ready-to-Play à −10 %</strong> (maillot dès <strong>19,70 €/u</strong> à 10 unités) — plus un service design sur mesure (acompte de 15 €, crédité sur la commande dès 5 maillots).</p>
 </div>
 <div class="cmp-facts">
 <div class="cmp-fact"><div class="k">1 unité</div><div class="l">Minimum de commande — aucun</div></div>
@@ -713,7 +713,7 @@ h1.title, .title, .page-title { display: none !important; }
 </tr>
 <tr>
 <td>Adaptation de concepts IA</td>
-<td><span class="cmp-check">&#10003;</span> Acompte 15 €, remboursé dès 5 maillots</td>
+<td><span class="cmp-check">&#10003;</span> Acompte 15 €, crédité sur la commande dès 5 maillots</td>
 <td><span class="cmp-cross">&#10007;</span></td>
 <td><span class="cmp-cross">&#10007;</span></td>
 <td><span class="cmp-cross">&#10007;</span></td>
@@ -770,9 +770,9 @@ h1.title, .title, .page-title { display: none !important; }
 <h3 class="cmp-h3">2. Petites équipes (Five, 7v7, ligues amateur)</h3>
 <p class="cmp-p"><strong>Vainqueur : MOMUTO.</strong> Un kit complet (maillot + short) pour une équipe de 10 joueurs coûte <strong>26,90 € par joueur</strong> chez MOMUTO — et <strong>24,20 €</strong> en Ready-to-Play. Chez Gladiasport, le même kit dépasse facilement 70–85 € par joueur. Même Owayo et Spized, pourtant plus économiques que le fait-maison français, restent à ~70 €/kit pour 10 unités.</p>
 <h3 class="cmp-h3" id="concept-ia">3. Vous arrivez avec un design créé par IA (le critère qui monte)</h3>
-<p class="cmp-p"><strong>Vainqueur : MOMUTO — quasiment seul sur ce terrain.</strong> C'est le changement le plus net du marché depuis un an : des équipes arrivent avec un visuel généré par ChatGPT, Midjourney ou Gemini et veulent le porter en vrai. Or un visuel IA n'est pas un fichier de production — il faut reconstruire les couleurs, les coupes et les zones d'impression, un vrai travail de designer. MOMUTO propose ce service avec un <strong>acompte de 15 €, intégralement remboursé dès 5 maillots commandés</strong>. Et si vous préférez tout faire vous-même, le <strong>configurateur 3D reste gratuit et sans engagement</strong> — vous pouvez y créer à peu près n'importe quoi. La plupart des designs de notre <a href="/collections/concepts-de-maillots">galerie de concepts</a> sont d'ailleurs nés comme ça : un concept IA transformé en maillot réel. Guide complet : <a href="/blogs/creer-maillot-foot-ia-chatgpt-gemini">créer son maillot de foot avec une IA</a>.</p>
+<p class="cmp-p"><strong>Vainqueur : MOMUTO — quasiment seul sur ce terrain.</strong> C'est le changement le plus net du marché depuis un an : des équipes arrivent avec un visuel généré par ChatGPT, Midjourney ou Gemini et veulent le porter en vrai. Or un visuel IA n'est pas un fichier de production — il faut reconstruire les couleurs, les coupes et les zones d'impression, un vrai travail de designer. MOMUTO propose ce service avec un <strong>acompte de 15 €, intégralement crédité sur la commande dès 5 maillots</strong>. Et si vous préférez tout faire vous-même, le <strong>configurateur 3D reste gratuit et sans engagement</strong> — vous pouvez y créer à peu près n'importe quoi. La plupart des designs de notre <a href="/collections/concepts-de-maillots">galerie de concepts</a> sont d'ailleurs nés comme ça : un concept IA transformé en maillot réel. Guide complet : <a href="/blogs/creer-maillot-foot-ia-chatgpt-gemini">créer son maillot de foot avec une IA</a>.</p>
 <h3 class="cmp-h3">4. Capacité de design personnalisé</h3>
-<p class="cmp-p"><strong>Avantage : MOMUTO.</strong> Trois routes, clairement tarifées : le <strong>configurateur 3D en temps réel</strong> (gratuit, 30+ templates), les <strong>modèles studio Ready-to-Play</strong> (gratuits à personnaliser, −10 % sur le prix), et le <strong>design sur mesure par un graphiste</strong> — maquette en 1-2 jours, acompte de 15 € remboursé dès 5 maillots. Owayo et Spized limitent leurs clients au configurateur DIY : si vous voulez qu'un professionnel dessine pour vous, il n'y a personne en face.</p>
+<p class="cmp-p"><strong>Avantage : MOMUTO.</strong> Trois routes, clairement tarifées : le <strong>configurateur 3D en temps réel</strong> (gratuit, 30+ templates), les <strong>modèles studio Ready-to-Play</strong> (gratuits à personnaliser, −10 % sur le prix), et le <strong>design sur mesure par un graphiste</strong> — maquette en 1-2 jours, acompte de 15 €, crédité sur la commande dès 5 maillots. Owayo et Spized limitent leurs clients au configurateur DIY : si vous voulez qu'un professionnel dessine pour vous, il n'y a personne en face.</p>
 <h3 class="cmp-h3">5. Qualité du tissu</h3>
 <p class="cmp-p"><strong>Avantage : MOMUTO.</strong> Le standard de l'industrie pour les kits personnalisés est le polyester 100 % : fonctionnel, mais basique. MOMUTO inclut l'élasthanne dans son tissu standard sans surcoût. Résultat : une coupe ajustée, un maintien de forme dans la durée, et la sensation « pro » que les concurrents réservent à leurs gammes premium.</p>
 <h3 class="cmp-h3">6. Exigence Made in France</h3>
@@ -798,7 +798,7 @@ h1.title, .title, .page-title { display: none !important; }
 <li>Vous avez besoin d'une livraison fiable en moins de 5 semaines — et zéro retard de maquette avec les modèles Ready-to-Play.</li>
 <li>Vous voulez un kit complet à 26,90 € par joueur (24,20 € en Ready-to-Play) pour une équipe de 10.</li>
 <li>Vous voulez un tissu polyester + élasthanne premium sans surcoût.</li>
-<li>Vous avez créé un concept avec une IA et voulez le transformer en maillot réel (acompte 15 €, remboursé dès 5 maillots).</li>
+<li>Vous avez créé un concept avec une IA et voulez le transformer en maillot réel (acompte 15 €, crédité sur la commande dès 5 maillots).</li>
 <li>Vous préférez créer vous-même : le configurateur 3D est gratuit et sans engagement.</li>
 <li>Vous souhaitez des badges silicone 3D — indisponibles chez les concurrents.</li>
 </ul>
@@ -823,7 +823,7 @@ h1.title, .title, .page-title { display: none !important; }
 <h3>Lancez votre projet maillot</h3>
 <p>Choisissez un modèle Ready-to-Play et mettez-le à vos couleurs, ou créez le vôtre en 3D — sans engagement avant la commande.</p>
 <a href="/pages/collection-ready-to-play" class="cmp-cta-btn">Voir les Modèles Ready-to-Play</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr" class="cmp-cta-btn secondary">Ouvrir le Configurateur 3D</a>
-<p style="margin-top:18px;margin-bottom:0;font-size:0.78rem;">Design sur mesure par un graphiste : <a href="/pages/demande-de-design-professionnel-de-maillots" style="color:#fff;">acompte de 15 €, remboursé dès 5 maillots</a>.</p>
+<p style="margin-top:18px;margin-bottom:0;font-size:0.78rem;">Design sur mesure par un graphiste : <a href="/pages/demande-de-design-professionnel-de-maillots" style="color:#fff;">acompte de 15 €, crédité sur la commande dès 5 maillots</a>.</p>
 </div>
 </div>
 </div>

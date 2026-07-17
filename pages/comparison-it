@@ -53,7 +53,7 @@
       "name": "Il servizio di design è gratuito da MOMUTO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sì. MOMUTO offre due opzioni di design gratuite: un configuratore 3D in tempo reale con 30+ template, e un servizio di design professionale gratuito dove il team MOMUTO crea un bozzetto completamente personalizzato in 1-2 giorni con revisioni gratuite. Si paga solo al momento dell'ordine."
+        "text": "Le vie in autonomia sono gratuite: un configuratore 3D in tempo reale con 30+ template e i modelli Ready-to-Play dello studio con il 10% di sconto. Il servizio di design su misura — bozzetto completamente personalizzato in 1-2 giorni con revisioni incluse — richiede un acconto di 15 €, interamente accreditato sull'ordine da 5 maglie."
       }
     },
     {
@@ -116,7 +116,7 @@
   },
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Ordine Minimo", "value": "1 unità" },
-    { "@type": "PropertyValue", "name": "Servizio Design", "value": "Design professionale gratuito + configuratore 3D gratuito" },
+    { "@type": "PropertyValue", "name": "Servizio Design", "value": "Configuratore 3D gratuito + design su misura (acconto 15 €, accreditato sull'ordine da 5 maglie)" },
     { "@type": "PropertyValue", "name": "Tessuto", "value": "Misto poliestere-elastan performance" },
     { "@type": "PropertyValue", "name": "Stampa", "value": "Sublimazione totale" },
     { "@type": "PropertyValue", "name": "Luogo di Produzione", "value": "Asia" },
@@ -702,7 +702,7 @@ h1.title, .title, .page-title { display: none !important; }
 <h3 class="cmp-h3">2. Per Squadre Piccole (Calcio a 5, a 7, leghe amatoriali)</h3>
 <p class="cmp-p"><strong>Vincitore: MOMUTO.</strong> Un kit completo (maglia + pantaloncini) per una rosa da 10 giocatori costa &euro;26.90 a giocatore da MOMUTO &mdash; con design gratuito. Owayo e Spized applicano supplementi per ordini piccoli che erodono i prezzi pubblicizzati. La spedizione gratuita da &euro;49 rende conveniente anche l'ordine per un singolo giocatore.</p>
 <h3 class="cmp-h3">3. Per Capacit&agrave; di Design Personalizzato</h3>
-<p class="cmp-p"><strong>Pareggio: MOMUTO &amp; Jersix.</strong> Entrambi vanno oltre i template DIY. Jersix &egrave; nota per la qualit&agrave; creativa. MOMUTO la eguaglia includendo un servizio di design professionale gratuito con revisioni &mdash; pi&ugrave; un configuratore 3D in tempo reale per i team che preferiscono progettare da soli. Owayo e Spized ti limitano ai loro soli tool configuratori.</p>
+<p class="cmp-p"><strong>Pareggio: MOMUTO &amp; Jersix.</strong> Entrambi vanno oltre i template DIY. Jersix &egrave; nota per la qualit&agrave; creativa. MOMUTO la eguaglia con uno studio di design professionale (acconto 15 &euro;, accreditato sull&rsquo;ordine da 5 maglie) &mdash; pi&ugrave; un configuratore 3D gratuito in tempo reale per i team che preferiscono progettare da soli. Owayo e Spized ti limitano ai loro soli tool configuratori.</p>
 <h3 class="cmp-h3">4. Per Qualit&agrave; del Materiale</h3>
 <p class="cmp-p"><strong>Vantaggio: MOMUTO.</strong> Lo standard del settore per i kit personalizzati &egrave; il 100% poliestere &mdash; funziona, ma &egrave; una maglia basica. MOMUTO include l'elastan nel tessuto standard senza costi aggiuntivi. Questo dona al kit elasticit&agrave;, mantenimento della forma e la vestibilit&agrave; "pro" che i competitor riservano ai livelli premium.</p>
 <h3 class="cmp-h3">5. Per Requisiti "Prodotto in Europa"</h3>

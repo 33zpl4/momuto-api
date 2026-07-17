@@ -91,7 +91,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Custom Youth & Club Soccer Uniform",
-  "description": "Fully custom, full-sublimation youth and club soccer uniform. Youth-to-adult sizing in one design, per-player names and numbers, no minimum order, free professional design. Delivered worldwide in 25-30 days.",
+  "description": "Fully custom, full-sublimation youth and club soccer uniform. Youth-to-adult sizing in one design, per-player names and numbers, no minimum order, free 3D design tools. Delivered worldwide in 25-30 days.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -114,7 +114,7 @@
     { "@type": "PropertyValue", "name": "Sizing", "value": "Youth to adult" },
     { "@type": "PropertyValue", "name": "Personalization", "value": "Per-player names and numbers included" },
     { "@type": "PropertyValue", "name": "Printing", "value": "Full dye-sublimation" },
-    { "@type": "PropertyValue", "name": "Design Service", "value": "Free professional design + free 3D configurator" },
+    { "@type": "PropertyValue", "name": "Design Service", "value": "Free 3D configurator + custom design (€15 deposit, credited to orders of 5+ jerseys)" },
     { "@type": "PropertyValue", "name": "Delivery", "value": "25-30 days worldwide" }
   ]
 }
@@ -554,8 +554,8 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="sj-hero">
 <div class="sj-badge">Youth &amp; Club Soccer Uniforms</div>
 <h1>Outfit Your <span class="hl">Whole Club</span> in Custom Soccer Uniforms</h1>
-<p class="sj-lede">Custom soccer uniforms for youth teams, academies, and club sides — one design across every age group, youth to adult, with each player's name and number included. No minimum order, full-sublimation printing, free professional design.</p>
-<div class="sj-cta-row"><a href="/pages/request-custom-kit-design" class="sj-btn">Request a Free Design</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn secondary">Design in 3D</a></div>
+<p class="sj-lede">Custom soccer uniforms for youth teams, academies, and club sides — one design across every age group, youth to adult, with each player's name and number included. No minimum order, full-sublimation printing, and a free 3D design tool — or our design studio builds it for you (€15 deposit, credited to orders of 5+ jerseys).</p>
+<div class="sj-cta-row"><a href="/pages/request-custom-kit-design" class="sj-btn">Request a Custom Design</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn secondary">Design in 3D</a></div>
 <p class="sj-trust">Rated 4.4/5 on <a href="https://www.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> &mdash; trusted by 150+ clubs and academies worldwide.</p>
 </div>
 <div class="sj-container">
@@ -701,7 +701,7 @@ h1.title, .title, .page-title { display: none !important; }
             </div>
         </div>
         <div class="trust-cta">
-            <a href="/pages/request-custom-kit-design" class="trust-btn-primary">Request Free Design</a>
+            <a href="/pages/request-custom-kit-design" class="trust-btn-primary">Request a Custom Design</a>
             <a href="/pages/custom-kit-gallery" class="trust-btn-secondary">Explore 200+ Custom Kit Designs →</a>
         </div>
     </div>
@@ -709,8 +709,8 @@ h1.title, .title, .page-title { display: none !important; }
 <!-- CTA -->
 <div class="sj-cta-block">
 <h2>Kit Out Your Club</h2>
-<p>Tell us about your team and get a free design back in 1&ndash;2 days &mdash; no commitment until the club orders.</p>
-<a href="/pages/request-custom-kit-design" class="sj-btn">Request a Free Design</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn secondary">Design in 3D</a>
+<p>Tell us about your team and get a professional design back in 1&ndash;2 days &mdash; a €15 deposit applies, fully credited to orders of 5+ jerseys.</p>
+<a href="/pages/request-custom-kit-design" class="sj-btn">Request a Custom Design</a> <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn secondary">Design in 3D</a>
 <p class="sj-note">No minimum order &middot; Youth to adult sizes &middot; Names &amp; numbers included &middot; Delivery in 25&ndash;30 days</p>
 </div>
 </div>

@@ -46,7 +46,7 @@
     {
       "@type": "Question",
       "name": "¿Cuánto tarda la entrega?",
-      "acceptedAnswer": { "@type": "Answer", "text": "MOMUTO entrega las equipaciones personalizadas en 25-30 días. La maqueta de diseño gratuita está lista en 1-2 días y la producción no empieza hasta que la apruebas." }
+      "acceptedAnswer": { "@type": "Answer", "text": "MOMUTO entrega las equipaciones personalizadas en 25-30 días. La maqueta de diseño está lista en 1-2 días y la producción no empieza hasta que la apruebas." }
     }
   ]
 }
@@ -194,7 +194,7 @@ h1.title, .title, .page-title { display: none !important; }
 <h3 class="cmp-h3">¿Cuánto cuesta?</h3>
 <p class="cmp-p">Desde 21,90 € por camiseta a partir de 10 unidades (equipación completa desde 26,90 € por jugador). El diseño siempre es gratis y sin pedido mínimo.</p>
 <h3 class="cmp-h3">¿Cuánto tarda la entrega?</h3>
-<p class="cmp-p">25-30 días. La maqueta gratuita está lista en 1-2 días y la producción no empieza hasta que la apruebas.</p>
+<p class="cmp-p">25-30 días. La maqueta está lista en 1-2 días y la producción no empieza hasta que la apruebas.</p>
 </div>
 <!-- CAROUSEL DE DISEÑOS -->
 <section class="trust-proof">
@@ -211,7 +211,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="trust-card"><div class="trust-card-img-wrap"><img src="https://cdn.staticsoe.com/pics/2572b5c39f8cbcf5e4d530fcfd8f86e55c1e969b7c9d95088180fb508e6c54b6.png" alt="Equipación personalizada — Pecados Capitales" class="trust-card-img" loading="lazy"><div class="trust-card-overlay"><div class="trust-card-team">PECADOS CAPITALES</div><div class="trust-card-desc">Duality. Ángeles y demonios en rojo, negro y oro.</div></div></div></div>
 </div>
 <div class="trust-cta">
-<a href="/pages/solicitud-de-diseno-personalizado" class="trust-btn-primary">Pedir un diseño gratis</a>
+<a href="/pages/solicitud-de-diseno-personalizado" class="trust-btn-primary">Encargar un diseño a medida</a>
 <a href="/pages/galeria-equipaciones-personalizadas" class="trust-btn-secondary">Ver más diseños →</a>
 </div>
 </div>
@@ -220,5 +220,5 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="cmp-cta-block">
 <h3>Compruébalo tú mismo</h3>
 <p>Diseña tu equipación en 3D gratis, o envíanos una referencia y nuestra IA crea el concepto. Sin mínimo y sin compromiso.</p>
-<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="cmp-cta-btn">Diseñar en 3D</a> <a href="/pages/solicitud-de-diseno-personalizado" class="cmp-cta-btn secondary">Pedir un diseño gratis</a></div>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="cmp-cta-btn">Diseñar en 3D</a> <a href="/pages/solicitud-de-diseno-personalizado" class="cmp-cta-btn secondary">Encargar un diseño a medida</a></div>
 </div>
