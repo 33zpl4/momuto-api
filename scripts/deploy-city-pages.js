@@ -115,7 +115,7 @@ ${c.scene.map(s => `<div class="sj-uc"><i class="fas ${s.icon}"></i><h3>${s.titl
 <div class="sj-ai">
 <span class="tag">La vía rápida</span>
 <h3>Modelos listos para jugar, a los colores de tu equipo</h3>
-<p>Siete modelos diseñados por nuestro estudio, listos para personalizar: cambiadles los colores con el juego de colores de la página del modelo, seguid en el <strong>configurador 3D</strong> con dorsales, nombres y vuestro escudo, y pedid al momento — sin esperar maqueta. ${c.color_note}</p>
+<p>Modelos diseñados por nuestro estudio — una colección que no deja de crecer — listos para personalizar: cambiadles los colores con el juego de colores de la página del modelo, seguid en el <strong>configurador 3D</strong> con dorsales, nombres y vuestro escudo, y pedid al momento — sin esperar maqueta. ${c.color_note}</p>
 <p><strong>Camiseta desde ${String(PRICE.jersey_current).replace('.', ',')} €/ud y equipación completa desde ${String(PRICE.kit_current).replace('.', ',')} €/ud</strong> a partir de ${PRICE.min_quantity} unidades, con el −${PRICE.discount_pct} % Ready-to-Play ya aplicado. Y si preferís algo 100 % vuestro, nuestros diseñadores lo crean a medida: señal de 15 €, descontada íntegra del pedido a partir de 5 camisetas.</p>
 <div class="sj-cta-row" style="justify-content:flex-start;"><a href="${RTP_PATH}" class="sj-btn">Ver la colección</a> <a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn secondary">Encargar un diseño a medida</a></div>
 </div>
