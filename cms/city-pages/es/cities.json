@@ -1,0 +1,270 @@
+{
+  "_readme": "Per-city REAL content for the ES local pages. The shared template (hero, facts, RTP+3D block, pricing, shared FAQ, CTA) lives in scripts/deploy-city-pages.js — this file holds only what is genuinely local: federation, league landscape, football culture, use-cases, colour identity for RTP suggestions, local FAQ. Do not invent stats or league names — federations and structures here are stable, verifiable facts.",
+  "cities": [
+    {
+      "slug": "madrid",
+      "handle": "camisetas-futbol-personalizadas-madrid",
+      "name": "Madrid",
+      "en_ciudad": "en Madrid",
+      "region": "Comunidad de Madrid",
+      "meta_title": "Camisetas de Fútbol Personalizadas Madrid | Sin Mínimo | MOMUTO",
+      "meta_descript": "Camisetas y equipaciones de fútbol personalizadas para equipos de Madrid: ligas municipales, ligas de empresa, peñas y clubes de base. Configurador 3D, sin pedido mínimo, entrega puerta a puerta.",
+      "keywords": ["camisetas futbol personalizadas madrid", "equipaciones futbol madrid", "camisetas equipo futbol madrid", "equipaciones personalizadas madrid", "camisetas futbol 7 madrid"],
+      "intro": [
+        "Madrid vive el fútbol amateur como pocas ciudades: cientos de equipos compiten cada fin de semana en las <strong>ligas municipales de los polideportivos</strong>, en las categorías de la <strong>Real Federación de Fútbol de Madrid (RFFM)</strong> y en las ligas de empresa que llenan los campos entre semana. Del fútbol 7 nocturno en la Casa de Campo a los equipos de barrio de Vallecas, Carabanchel o Tetuán, cada equipo necesita una camiseta propia — y esperarla dos meses o pagar mínimos absurdos no tiene sentido.",
+        "MOMUTO diseña y produce <strong>camisetas de fútbol personalizadas para equipos de Madrid</strong> sin pedido mínimo: una camiseta para el capitán o la equipación completa de las tres categorías del club. La diseñáis vosotros en el configurador 3D en minutos, elegís un modelo listo para jugar y lo ponéis a vuestros colores, o nos la encargáis a nuestros diseñadores."
+      ],
+      "scene": [
+        { "icon": "fa-city", "title": "Ligas municipales y RFFM", "text": "Equipaciones para equipos federados y de ligas de los polideportivos madrileños, con dorsal, nombre y escudo incluidos." },
+        { "icon": "fa-briefcase", "title": "Ligas de empresa", "text": "Camisetas para el equipo de la oficina: pedidos pequeños, sin mínimo, y repetición fácil cuando entra gente nueva." },
+        { "icon": "fa-moon", "title": "Fútbol 7 y fútbol sala", "text": "Del fútbol 7 nocturno a la liga de sala del barrio — tejido técnico transpirable, de niño a adulto." },
+        { "icon": "fa-users", "title": "Peñas y torneos", "text": "Camisetas para tu peña o para el torneo de primavera, con vuestra identidad y a tiempo para la convocatoria." }
+      ],
+      "color_note": "Del blanco clásico al rojiblanco de toda la vida: elige un modelo Ready-to-Play y ponlo a los colores de tu barrio con el juego de colores, antes de entrar al 3D.",
+      "faq_local": [
+        { "q": "¿Entregáis en Madrid?", "a": "Sí. Enviamos a toda la Comunidad de Madrid puerta a puerta. La entrega estándar de una equipación personalizada es de 25-30 días desde que aprobáis el diseño — y los modelos Ready-to-Play no necesitan esperar maqueta: los personalizáis en 3D y pedís al momento." },
+        { "q": "¿Servís a ligas municipales y equipos de empresa de Madrid?", "a": "Sí, es nuestro caso más habitual: equipos de ligas municipales, ligas de empresa y peñas. No hay pedido mínimo, así que da igual si sois 8 de fútbol sala o un club con tres categorías." }
+      ],
+      "siblings": ["zaragoza", "sevilla", "barcelona"]
+    },
+    {
+      "slug": "barcelona",
+      "handle": "camisetas-futbol-personalizadas-barcelona",
+      "name": "Barcelona",
+      "en_ciudad": "en Barcelona",
+      "region": "Cataluña",
+      "meta_title": "Camisetas de Fútbol Personalizadas Barcelona | Sin Mínimo | MOMUTO",
+      "meta_descript": "Camisetas y equipaciones de fútbol personalizadas para equipos de Barcelona: lligues comarcals, fútbol sala, escuelas y peñas. Configurador 3D, sin pedido mínimo, entrega puerta a puerta.",
+      "keywords": ["camisetas futbol personalizadas barcelona", "equipaciones futbol barcelona", "samarretes futbol personalitzades", "equipaciones personalizadas barcelona", "camisetas futbol sala barcelona"],
+      "intro": [
+        "En Barcelona y su área metropolitana el fútbol de base y amateur es enorme: las <strong>lligues comarcals de la Federació Catalana de Futbol (FCF)</strong>, las ligas escolares, el fútbol sala de los pabellones y los equipos de barrio de Gràcia, Sants o el Baix Llobregat compiten todo el año. Cada temporada, cientos de equipos buscan una equipación propia sin pasar por mínimos de pedido ni semanas de idas y venidas por WhatsApp.",
+        "MOMUTO produce <strong>camisetas de fútbol personalizadas para equipos de Barcelona</strong> sin pedido mínimo. Diseñáis la samarreta en el configurador 3D y la veis al instante, elegís un modelo listo para jugar y lo ponéis a vuestros colores, o encargáis el diseño a nuestro equipo."
+      ],
+      "scene": [
+        { "icon": "fa-shield-halved", "title": "Clubs de la FCF i lligues comarcals", "text": "Equipaciones para clubes federados y ligas comarcales, con escudo, sponsors y toda la plantilla con nombre y dorsal." },
+        { "icon": "fa-school", "title": "Escuelas y fútbol base", "text": "Un mismo diseño en tallas de niño y adulto para todas las categorías de la escola o el club de barrio." },
+        { "icon": "fa-futbol", "title": "Fútbol sala de pabellón", "text": "Barcelona es tierra de sala: camisetas técnicas transpirables para equipos de 8-12 jugadores, sin mínimo." },
+        { "icon": "fa-umbrella-beach", "title": "Torneos y peñas", "text": "Del torneo de verano a la peña del bar: vuestra camiseta, con vuestra identidad, a tiempo." }
+      ],
+      "color_note": "Blaugrana, blanquiazul perico o los colores de tu barrio: elige un modelo Ready-to-Play y recolóralo en segundos antes de afinarlo en 3D.",
+      "faq_local": [
+        { "q": "¿Entregáis en Barcelona?", "a": "Sí. Enviamos a toda Cataluña puerta a puerta. Una equipación personalizada tarda 25-30 días desde que aprobáis el diseño; los modelos Ready-to-Play se personalizan en 3D y se piden al momento, sin esperar maqueta." },
+        { "q": "¿Podéis poner el texto de la camiseta en catalán?", "a": "Sí, por supuesto. Nombres, lemas y cualquier texto van impresos por sublimación exactamente como los escribáis — en catalán, castellano o el idioma que queráis." }
+      ],
+      "siblings": ["valencia", "zaragoza", "madrid"]
+    },
+    {
+      "slug": "valencia",
+      "handle": "camisetas-futbol-personalizadas-valencia",
+      "name": "Valencia",
+      "en_ciudad": "en Valencia",
+      "region": "Comunitat Valenciana",
+      "meta_title": "Camisetas de Fútbol Personalizadas Valencia | Sin Mínimo | MOMUTO",
+      "meta_descript": "Camisetas y equipaciones de fútbol personalizadas para equipos de Valencia: FFCV, fútbol 8 base, ligas de l'Horta y peñas. Configurador 3D, sin pedido mínimo, entrega puerta a puerta.",
+      "keywords": ["camisetas futbol personalizadas valencia", "equipaciones futbol valencia", "equipaciones personalizadas valencia", "camisetas equipo futbol valencia", "camisetas futbol 8 valencia"],
+      "intro": [
+        "La Comunitat Valenciana es una de las regiones con más fútbol de base de España: la <strong>Federació de Futbol de la Comunitat Valenciana (FFCV)</strong> mueve cada fin de semana miles de partidos, del fútbol 8 de los más pequeños a las ligas de los pueblos de l'Horta, pasando por el fútbol sala y las ligas de empresa de la capital.",
+        "MOMUTO crea <strong>camisetas de fútbol personalizadas para equipos de Valencia</strong> sin pedido mínimo: la equipación completa del club en todas sus categorías o una sola camiseta para el torneo de las fiestas del pueblo. En el configurador 3D la diseñáis y la veis girar al instante — o elegís un modelo listo para jugar y lo ponéis a vuestros colores."
+      ],
+      "scene": [
+        { "icon": "fa-shield-halved", "title": "Clubes FFCV y fútbol base", "text": "Del prebenjamín al primer equipo: mismo diseño en tallas de niño y adulto, con nombre y dorsal incluidos." },
+        { "icon": "fa-tree-city", "title": "Ligas de los pueblos", "text": "Equipos de l'Horta, la Ribera o el Camp de Túria: equipaciones propias sin mínimos ni sorpresas." },
+        { "icon": "fa-futbol", "title": "Fútbol sala y fútbol 8", "text": "Camisetas técnicas para pabellón y fútbol 8, transpirables para la liga y el verano valenciano." },
+        { "icon": "fa-fire", "title": "Peñas y fiestas", "text": "La camiseta de la peña para las fiestas o el torneo de 24 horas — con vuestra identidad, a tiempo." }
+      ],
+      "color_note": "Blanquinegre, taronja o los colores de tu pueblo: elige un modelo Ready-to-Play, recolóralo con el juego de colores y afínalo en 3D.",
+      "faq_local": [
+        { "q": "¿Entregáis en Valencia?", "a": "Sí. Enviamos a toda la Comunitat Valenciana puerta a puerta. Una equipación personalizada tarda 25-30 días desde que aprobáis el diseño; los modelos Ready-to-Play se personalizan en 3D y se piden al momento." },
+        { "q": "¿Lleváis equipaciones para fútbol 8 infantil?", "a": "Sí. Producimos tallas de niño y de adulto con el mismo diseño, así que el club puede vestir igual desde el fútbol 8 de los pequeños hasta el equipo amateur." }
+      ],
+      "siblings": ["alicante", "barcelona", "murcia"]
+    },
+    {
+      "slug": "sevilla",
+      "handle": "camisetas-futbol-personalizadas-sevilla",
+      "name": "Sevilla",
+      "en_ciudad": "en Sevilla",
+      "region": "Andalucía",
+      "meta_title": "Camisetas de Fútbol Personalizadas Sevilla | Sin Mínimo | MOMUTO",
+      "meta_descript": "Camisetas y equipaciones de fútbol personalizadas para equipos de Sevilla: ligas de barrio, RFAF, peñas y clubes de base. Configurador 3D, sin pedido mínimo, entrega puerta a puerta.",
+      "keywords": ["camisetas futbol personalizadas sevilla", "equipaciones futbol sevilla", "equipaciones personalizadas sevilla", "camisetas equipo futbol sevilla", "camisetas futbol 7 sevilla"],
+      "intro": [
+        "Sevilla es fútbol de barrio en estado puro: Triana, el Cerro, la Macarena, Nervión — cada distrito tiene sus equipos, sus peñas y su liga. A eso se suman las categorías de la <strong>Real Federación Andaluza de Fútbol (RFAF)</strong>, las ligas municipales de los distritos y un fútbol 7 que se juega hasta bien entrada la noche para esquivar el calor.",
+        "MOMUTO produce <strong>camisetas de fútbol personalizadas para equipos de Sevilla</strong> sin pedido mínimo, en tejido técnico transpirable pensado para jugar con calor. Diseñadla en el configurador 3D y vedla al instante, elegid un modelo listo para jugar y ponedlo a vuestros colores, o encargad el diseño a nuestro equipo."
+      ],
+      "scene": [
+        { "icon": "fa-people-group", "title": "Fútbol de barrio y peñas", "text": "La camiseta de tu peña o de tu equipo de barrio, con vuestra identidad — rojiblanca, verdiblanca o la vuestra propia." },
+        { "icon": "fa-shield-halved", "title": "Clubes RFAF y fútbol base", "text": "Equipaciones federadas con escudo y sponsors, mismo diseño de benjamines a seniors." },
+        { "icon": "fa-temperature-high", "title": "Hecho para el calor", "text": "Sublimación sobre poliéster técnico transpirable: la impresión no pesa ni se cuartea, ideal para la liga sevillana." },
+        { "icon": "fa-trophy", "title": "Torneos y ligas municipales", "text": "Del torneo de feria a la liga del distrito: sin mínimos, con dorsales y nombres incluidos." }
+      ],
+      "color_note": "Rojiblanco, verdiblanco o los colores de tu barrio: elige un modelo Ready-to-Play y recolóralo en segundos antes de rematarlo en 3D.",
+      "faq_local": [
+        { "q": "¿Entregáis en Sevilla?", "a": "Sí. Enviamos a toda Andalucía puerta a puerta. Una equipación personalizada tarda 25-30 días desde que aprobáis el diseño; los modelos Ready-to-Play se personalizan en 3D y se piden al momento." },
+        { "q": "¿Las camisetas aguantan el calor de la liga sevillana?", "a": "Sí. Usamos poliéster técnico transpirable y la sublimación imprime el diseño en la propia tela: no añade capas de plástico que den calor ni se cuartean con los lavados." }
+      ],
+      "siblings": ["malaga", "madrid", "murcia"]
+    },
+    {
+      "slug": "malaga",
+      "handle": "camisetas-futbol-personalizadas-malaga",
+      "name": "Málaga",
+      "en_ciudad": "en Málaga",
+      "region": "Andalucía",
+      "meta_title": "Camisetas de Fútbol Personalizadas Málaga | Sin Mínimo | MOMUTO",
+      "meta_descript": "Camisetas y equipaciones de fútbol personalizadas para equipos de Málaga y la Costa del Sol: ligas municipales, equipos internacionales y clubes de base. Configurador 3D, sin pedido mínimo.",
+      "keywords": ["camisetas futbol personalizadas malaga", "equipaciones futbol malaga", "equipaciones personalizadas malaga", "camisetas equipo futbol costa del sol", "custom football shirts costa del sol"],
+      "intro": [
+        "Málaga y la Costa del Sol tienen un fútbol amateur único en España: a las ligas municipales y a los clubes de la <strong>Real Federación Andaluza de Fútbol (RFAF)</strong> se suma una enorme comunidad internacional — equipos de residentes británicos, nórdicos y de media Europa que compiten todo el año gracias al clima.",
+        "MOMUTO crea <strong>camisetas de fútbol personalizadas para equipos de Málaga</strong> sin pedido mínimo, en tejido técnico transpirable. Diseñadla en 3D y vedla al instante, elegid un modelo listo para jugar y ponedlo a vuestros colores, o encargad el diseño a nuestros diseñadores. Atendemos igual de bien en español y en inglés — algo que en la Costa se agradece."
+      ],
+      "scene": [
+        { "icon": "fa-city", "title": "Ligas municipales", "text": "Equipos de los polideportivos de Málaga capital y su provincia: equipaciones propias sin mínimos." },
+        { "icon": "fa-earth-europe", "title": "Equipos internacionales", "text": "International leagues de la Costa del Sol: pedidos en español o inglés, tallas europeas y entrega a domicilio." },
+        { "icon": "fa-shield-halved", "title": "Clubes RFAF y base", "text": "Del fútbol base al senior, mismo diseño en tallas de niño y adulto, con escudo y sponsors." },
+        { "icon": "fa-sun", "title": "Fútbol todo el año", "text": "Tejido transpirable y sublimación que no pesa: pensado para jugar con sol de enero a diciembre." }
+      ],
+      "color_note": "Blanquiazul malaguista o los colores de tu equipo: elige un modelo Ready-to-Play y recolóralo con el juego de colores antes de entrar al 3D.",
+      "faq_local": [
+        { "q": "¿Entregáis en Málaga y la Costa del Sol?", "a": "Sí. Enviamos puerta a puerta a toda la provincia — Málaga capital, Marbella, Fuengirola, Torremolinos y el resto de la Costa. Una equipación personalizada tarda 25-30 días desde que aprobáis el diseño." },
+        { "q": "Can we order in English?", "a": "Of course. The whole flow — 3D designer, Ready-to-Play models and our design team — is available in English at momuto.com, and we deliver anywhere on the Costa del Sol." }
+      ],
+      "siblings": ["sevilla", "canarias", "murcia"]
+    },
+    {
+      "slug": "bilbao",
+      "handle": "camisetas-futbol-personalizadas-bilbao",
+      "name": "Bilbao",
+      "en_ciudad": "en Bilbao",
+      "region": "Bizkaia",
+      "meta_title": "Camisetas de Fútbol Personalizadas Bilbao | Sin Mínimo | MOMUTO",
+      "meta_descript": "Camisetas y equipaciones de fútbol personalizadas para equipos de Bilbao y Bizkaia: fútbol base, cuadrillas, torneos de pueblo y clubes. Configurador 3D, sin pedido mínimo.",
+      "keywords": ["camisetas futbol personalizadas bilbao", "equipaciones futbol bilbao", "equipaciones personalizadas bizkaia", "camisetas equipo futbol bilbao", "futbol taldeentzako kamisetak"],
+      "intro": [
+        "En Bilbao y en toda Bizkaia el fútbol se vive desde la cantera: pocas zonas de Europa cuidan tanto el fútbol base, con los clubes de la <strong>Federación Vizcaína de Fútbol</strong> llenando los campos cada sábado, los torneos de las fiestas de los pueblos y las cuadrillas que montan equipo para cualquier excusa.",
+        "MOMUTO produce <strong>camisetas de fútbol personalizadas para equipos de Bilbao</strong> sin pedido mínimo: la equipación del club en todas sus categorías o las camisetas de la cuadrilla para el torneo de fiestas. Diseñadla en el configurador 3D y vedla al momento, elegid un modelo listo para jugar y ponedlo a vuestros colores, o encargádnosla."
+      ],
+      "scene": [
+        { "icon": "fa-child-reaching", "title": "Cantera y fútbol base", "text": "Mismo diseño de txikis a seniors, en tallas de niño y adulto, con nombre y dorsal incluidos." },
+        { "icon": "fa-shield-halved", "title": "Clubes federados", "text": "Equipaciones para clubes de la Federación Vizcaína, con escudo, sponsors y reposiciones fáciles." },
+        { "icon": "fa-people-group", "title": "Cuadrillas y torneos de pueblo", "text": "Las camisetas de la cuadrilla para las fiestas o el torneo — sin mínimo, aunque seáis siete." },
+        { "icon": "fa-cloud-rain", "title": "Hecho para jugar con sirimiri", "text": "Tejido técnico que no se empapa y sublimación que aguanta lavados: pensado para la liga del norte." }
+      ],
+      "color_note": "Rojiblanco de toda la vida o los colores de tu pueblo: elige un modelo Ready-to-Play y recolóralo en segundos antes de afinarlo en 3D.",
+      "faq_local": [
+        { "q": "¿Entregáis en Bilbao y Bizkaia?", "a": "Sí. Enviamos puerta a puerta a todo Euskadi. Una equipación personalizada tarda 25-30 días desde que aprobáis el diseño; los modelos Ready-to-Play se personalizan en 3D y se piden al momento." },
+        { "q": "¿Podéis imprimir los nombres en euskera?", "a": "Bai, noski. Los textos van sublimados exactamente como los escribáis — en euskera, castellano o el idioma que queráis, sin coste extra." }
+      ],
+      "siblings": ["zaragoza", "madrid", "barcelona"]
+    },
+    {
+      "slug": "zaragoza",
+      "handle": "camisetas-futbol-personalizadas-zaragoza",
+      "name": "Zaragoza",
+      "en_ciudad": "en Zaragoza",
+      "region": "Aragón",
+      "meta_title": "Camisetas de Fútbol Personalizadas Zaragoza | Sin Mínimo | MOMUTO",
+      "meta_descript": "Camisetas y equipaciones de fútbol personalizadas para equipos de Zaragoza: ligas municipales, fútbol base aragonés y peñas. Ya vestimos a equipos de la ciudad. Configurador 3D, sin pedido mínimo.",
+      "keywords": ["camisetas futbol personalizadas zaragoza", "equipaciones futbol zaragoza", "equipaciones personalizadas zaragoza", "camisetas equipo futbol aragon", "camisetas futbol 7 zaragoza"],
+      "intro": [
+        "Zaragoza es una ciudad de fútbol de toda la vida: las ligas municipales de los campos del Actur, Delicias o Torrero, el fútbol base de la <strong>Federación Aragonesa de Fútbol</strong> y las peñas que llenan los bares cada jornada. Y no lo decimos de oídas: <strong>en Zaragoza ya vestimos a equipos como UNIÓN ZARAGOZA</strong>, cuya equipación diseñamos y producimos.",
+        "MOMUTO crea <strong>camisetas de fútbol personalizadas para equipos de Zaragoza</strong> sin pedido mínimo. Diseñadla en el configurador 3D y vedla girar al instante, elegid un modelo listo para jugar y ponedlo a vuestros colores, o encargad el diseño a nuestro equipo como hizo Unión Zaragoza."
+      ],
+      "proof": {
+        "tag": "Equipos reales de Zaragoza",
+        "title": "La equipación de UNIÓN ZARAGOZA la hicimos nosotros",
+        "text": "Diseño a medida, escudo bordado en la tela por sublimación y toda la plantilla con nombre y dorsal. Mira <a href=\"/pages/union-zaragoza-diseno-equipacion\">cómo fue el proceso de diseño de Unión Zaragoza</a> o el resto de <a href=\"/pages/equipos-momuto\">equipos que ya juegan con MOMUTO</a>."
+      },
+      "scene": [
+        { "icon": "fa-city", "title": "Ligas municipales", "text": "Equipos del Actur, Delicias, Torrero o San José: equipación propia sin mínimos ni sorpresas." },
+        { "icon": "fa-shield-halved", "title": "Clubes de la FAF y base", "text": "Del fútbol base al regional: mismo diseño en tallas de niño y adulto, escudo y sponsors incluidos." },
+        { "icon": "fa-users", "title": "Peñas zaragocistas", "text": "La camiseta de la peña con vuestra identidad — blanquilla, azul o la que elijáis." },
+        { "icon": "fa-wind", "text": "Tejido técnico para jugar con cierzo en enero y con 35 grados en junio: transpirable y resistente.", "title": "Para el clima de Zaragoza" }
+      ],
+      "color_note": "Blanquillo, azul o los colores de tu barrio: elige un modelo Ready-to-Play y recolóralo con el juego de colores antes de entrar al 3D.",
+      "faq_local": [
+        { "q": "¿Entregáis en Zaragoza?", "a": "Sí. Enviamos a todo Aragón puerta a puerta. Una equipación personalizada tarda 25-30 días desde que aprobáis el diseño; los modelos Ready-to-Play se personalizan en 3D y se piden al momento." },
+        { "q": "¿Habéis trabajado con equipos de Zaragoza?", "a": "Sí — la equipación de UNIÓN ZARAGOZA es diseño y producción MOMUTO, y puedes ver el proceso completo en su página. Nos podéis pedir algo del mismo nivel para vuestro club." }
+      ],
+      "siblings": ["madrid", "bilbao", "barcelona"]
+    },
+    {
+      "slug": "canarias",
+      "handle": "camisetas-futbol-personalizadas-canarias",
+      "name": "Canarias",
+      "en_ciudad": "en Canarias",
+      "region": "Islas Canarias",
+      "meta_title": "Camisetas de Fútbol Personalizadas Canarias | Sin Mínimo | MOMUTO",
+      "meta_descript": "Camisetas y equipaciones de fútbol personalizadas para equipos de Canarias: ligas insulares de Las Palmas y Tenerife, fútbol base y peñas. Configurador 3D, sin pedido mínimo, envío a las islas.",
+      "keywords": ["camisetas futbol personalizadas canarias", "equipaciones futbol canarias", "equipaciones personalizadas tenerife", "camisetas equipo futbol las palmas", "camisetas futbol gran canaria"],
+      "intro": [
+        "El fútbol canario tiene su propio ecosistema: las competiciones insulares e interinsulares de las federaciones de <strong>Las Palmas y de Tenerife</strong>, un fútbol base enorme en proporción a su población y una cultura de club de barrio que se vive igual en Gran Canaria que en La Laguna. Lo que no siempre es fácil desde las islas es conseguir equipaciones a medida sin mínimos y sin líos de envío.",
+        "MOMUTO produce <strong>camisetas de fútbol personalizadas para equipos de Canarias</strong> sin pedido mínimo y con <strong>envío a las islas</strong>. Diseñadla en el configurador 3D y vedla al instante, elegid un modelo listo para jugar y ponedlo a vuestros colores, o encargad el diseño a nuestro equipo."
+      ],
+      "scene": [
+        { "icon": "fa-shield-halved", "title": "Ligas insulares y base", "text": "Equipaciones para clubes de las federaciones de Las Palmas y Tenerife, de benjamines a regional." },
+        { "icon": "fa-umbrella-beach", "title": "Fútbol todo el año", "text": "Tejido técnico transpirable pensado para jugar con calor doce meses al año." },
+        { "icon": "fa-people-group", "title": "Peñas y torneos", "text": "La camiseta de la peña amarilla o blanquiazul, o la del torneo del pueblo — sin mínimos." },
+        { "icon": "fa-boxes-packing", "title": "Envío a las islas resuelto", "text": "Entrega puerta a puerta en las islas, con la documentación de envío gestionada por nosotros." }
+      ],
+      "color_note": "Amarillo pío-pío, blanquiazul o los colores de tu isla: elige un modelo Ready-to-Play y recolóralo antes de entrar al 3D.",
+      "faq_local": [
+        { "q": "¿Enviáis a Canarias? ¿Hay problemas de aduana?", "a": "Sí, enviamos a todas las islas puerta a puerta y gestionamos nosotros la documentación del envío. Contad con unos días más que en península sobre el plazo estándar de 25-30 días." },
+        { "q": "¿Servís tanto a la provincia de Las Palmas como a la de Tenerife?", "a": "Sí, entregamos en las dos provincias y en todas las islas — de Lanzarote a El Hierro." }
+      ],
+      "siblings": ["malaga", "sevilla", "madrid"]
+    },
+    {
+      "slug": "murcia",
+      "handle": "camisetas-futbol-personalizadas-murcia",
+      "name": "Murcia",
+      "en_ciudad": "en Murcia",
+      "region": "Región de Murcia",
+      "meta_title": "Camisetas de Fútbol Personalizadas Murcia | Sin Mínimo | MOMUTO",
+      "meta_descript": "Camisetas y equipaciones de fútbol personalizadas para equipos de Murcia: fútbol sala, ligas municipales, FFRM y peñas. Configurador 3D, sin pedido mínimo, entrega puerta a puerta.",
+      "keywords": ["camisetas futbol personalizadas murcia", "equipaciones futbol murcia", "equipaciones personalizadas murcia", "camisetas futbol sala murcia", "camisetas equipo futbol murcia"],
+      "intro": [
+        "Murcia es, probablemente, la región de España donde más se vive el <strong>fútbol sala</strong> por metro cuadrado — y a los pabellones se suman las ligas municipales, los clubes de la <strong>Federación de Fútbol de la Región de Murcia (FFRM)</strong> y los equipos de las pedanías que compiten todo el año.",
+        "MOMUTO crea <strong>camisetas de fútbol personalizadas para equipos de Murcia</strong> sin pedido mínimo: perfectas para plantillas cortas de sala (8-12 jugadores) o para el club entero. Diseñadla en el configurador 3D y vedla al instante, elegid un modelo listo para jugar y ponedlo a vuestros colores, o encargádnosla."
+      ],
+      "scene": [
+        { "icon": "fa-futbol", "title": "Fútbol sala", "text": "Tierra de sala: camisetas técnicas para plantillas cortas, sin mínimo de pedido — aunque seáis ocho." },
+        { "icon": "fa-city", "title": "Ligas municipales y pedanías", "text": "Equipos de Murcia capital, Cartagena, Lorca y las pedanías: equipación propia sin sorpresas." },
+        { "icon": "fa-shield-halved", "title": "Clubes FFRM y base", "text": "Mismo diseño de benjamines a seniors, en tallas de niño y adulto, con escudo y dorsales." },
+        { "icon": "fa-temperature-high", "title": "Para el calor murciano", "text": "Poliéster técnico transpirable y sublimación que no pesa: hecho para jugar a 35 grados." }
+      ],
+      "color_note": "Grana, pimentonero o los colores de tu pedanía: elige un modelo Ready-to-Play y recolóralo con el juego de colores antes del 3D.",
+      "faq_local": [
+        { "q": "¿Entregáis en Murcia?", "a": "Sí. Enviamos puerta a puerta a toda la Región — Murcia capital, Cartagena, Lorca y el resto. Una equipación personalizada tarda 25-30 días desde que aprobáis el diseño." },
+        { "q": "¿Hacéis equipaciones para fútbol sala?", "a": "Sí, es uno de nuestros pedidos más habituales en Murcia: camisetas técnicas transpirables para plantillas de 8-12 jugadores, sin pedido mínimo y con dorsales y nombres incluidos." }
+      ],
+      "siblings": ["alicante", "valencia", "malaga"]
+    },
+    {
+      "slug": "alicante",
+      "handle": "camisetas-futbol-personalizadas-alicante",
+      "name": "Alicante",
+      "en_ciudad": "en Alicante",
+      "region": "Comunitat Valenciana",
+      "meta_title": "Camisetas de Fútbol Personalizadas Alicante | Sin Mínimo | MOMUTO",
+      "meta_descript": "Camisetas y equipaciones de fútbol personalizadas para equipos de Alicante y la Costa Blanca: FFCV, ligas de la Vega Baja, equipos internacionales y peñas. Sin pedido mínimo.",
+      "keywords": ["camisetas futbol personalizadas alicante", "equipaciones futbol alicante", "equipaciones personalizadas alicante", "camisetas equipo futbol costa blanca", "custom football shirts costa blanca"],
+      "intro": [
+        "De la Vega Baja a la Marina Alta, la provincia de Alicante juega al fútbol todo el año: los clubes de la <strong>Federació de Futbol de la Comunitat Valenciana (FFCV)</strong> en su delegación alicantina, las ligas municipales de Alicante y Elche, y — como en toda la Costa Blanca — una comunidad internacional enorme con sus propias ligas de residentes.",
+        "MOMUTO produce <strong>camisetas de fútbol personalizadas para equipos de Alicante</strong> sin pedido mínimo, con atención en español y en inglés. Diseñadla en el configurador 3D y vedla al instante, elegid un modelo listo para jugar y ponedlo a vuestros colores, o encargad el diseño a nuestro equipo."
+      ],
+      "scene": [
+        { "icon": "fa-shield-halved", "title": "Clubes FFCV y base", "text": "Del fútbol 8 al senior: mismo diseño en tallas de niño y adulto, con dorsal, nombre y escudo." },
+        { "icon": "fa-city", "title": "Ligas de Alicante y Elche", "text": "Equipos de las ligas municipales y de empresa: equipación propia sin mínimos ni sorpresas." },
+        { "icon": "fa-earth-europe", "title": "Costa Blanca internacional", "text": "International leagues de Torrevieja a Calpe: pedidos en inglés y entrega a domicilio." },
+        { "icon": "fa-sun", "title": "Fútbol todo el año", "text": "Tejido transpirable y sublimación ligera, pensados para jugar con sol de enero a diciembre." }
+      ],
+      "color_note": "Blanquiazul herculano, franjiverde o los colores de tu equipo: elige un modelo Ready-to-Play y recolóralo antes de entrar al 3D.",
+      "faq_local": [
+        { "q": "¿Entregáis en Alicante y la Costa Blanca?", "a": "Sí. Enviamos puerta a puerta a toda la provincia — Alicante, Elche, Torrevieja, Benidorm, Dénia y el resto. Una equipación personalizada tarda 25-30 días desde que aprobáis el diseño." },
+        { "q": "Can we order in English?", "a": "Of course. The 3D designer, the Ready-to-Play models and our design team are all available in English at momuto.com, and we deliver anywhere in the Alicante province." }
+      ],
+      "siblings": ["valencia", "murcia", "malaga"]
+    }
+  ]
+}
