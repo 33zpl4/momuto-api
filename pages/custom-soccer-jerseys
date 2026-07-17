@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Custom Soccer Jerseys & Uniforms — Design Your Team's Kit | MOMUTO",
-  "description": "Design custom soccer jerseys and uniforms online with MOMUTO's free 3D tool. No minimum order, full dye-sublimation, youth-to-adult sizing, free professional design in 1-2 days.",
+  "description": "Design custom soccer jerseys and uniforms online with MOMUTO's free 3D tool. No minimum order, full dye-sublimation, youth-to-adult sizing, professional design mockups in 1-2 days.",
   "url": "https://www.momuto.com/pages/custom-soccer-jerseys",
   "datePublished": "2026-06-17",
   "dateModified": "2026-06-17",
@@ -87,7 +87,7 @@
       "name": "Is the design service really free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. MOMUTO offers two free ways to design: a real-time 3D configurator with 30+ templates, and a free professional design service where our team creates a fully custom mockup in 1-2 days with free revisions. You only pay when you place an order."
+        "text": "The self-serve routes are free: a real-time 3D configurator with 30+ templates, and studio-designed Ready-to-Play models at a permanent 10% discount. Want our team to design it? Fully custom mockup in 1-2 days with revisions included — €15 deposit, fully credited to orders of 5+ jerseys."
       }
     }
   ]
@@ -98,7 +98,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Custom Soccer Jersey & Uniform",
-  "description": "Fully custom, full-sublimation soccer jersey and uniform. Polyester-elastane performance fabric, free professional design, no minimum order, youth-to-adult sizing. Delivered worldwide in 25-30 days.",
+  "description": "Fully custom, full-sublimation soccer jersey and uniform. Polyester-elastane performance fabric, free 3D design tools, no minimum order, youth-to-adult sizing. Delivered worldwide in 25-30 days.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -118,7 +118,7 @@
   },
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Minimum Order", "value": "1 unit" },
-    { "@type": "PropertyValue", "name": "Design Service", "value": "Free professional design + free 3D configurator" },
+    { "@type": "PropertyValue", "name": "Design Service", "value": "Free 3D configurator + custom design (€15 deposit, credited to orders of 5+ jerseys)" },
     { "@type": "PropertyValue", "name": "Fabric", "value": "Polyester-elastane performance blend" },
     { "@type": "PropertyValue", "name": "Printing", "value": "Full dye-sublimation" },
     { "@type": "PropertyValue", "name": "Sizing", "value": "Youth to adult" },
@@ -470,7 +470,7 @@ h1.title, .title, .page-title { display: none !important; }
 <p class="sj-equiv"><strong>Soccer or football &mdash; it's the same sport, and the same kit.</strong> MOMUTO works as both a soccer jersey maker and a football kit designer. Whatever you call it, you get the same fully custom jersey, shorts, and uniform built to your team's identity.</p>
 <div class="sj-facts">
 <div class="sj-fact"><div class="k">No min.</div><div class="l">Order a single jersey or a full club &mdash; no minimum-quantity surcharges</div></div>
-<div class="sj-fact"><div class="k">1&ndash;2 days</div><div class="l">Free professional design mockup, with free revisions</div></div>
+<div class="sj-fact"><div class="k">1&ndash;2 days</div><div class="l">Professional design mockup with revisions (&euro;15 deposit, credited from 5 jerseys)</div></div>
 <div class="sj-fact"><div class="k">25&ndash;30 days</div><div class="l">Worldwide delivery, direct from the factory</div></div>
 <div class="sj-fact"><div class="k">Youth&ndash;adult</div><div class="l">One design across every age group for clubs and academies</div></div>
 </div>

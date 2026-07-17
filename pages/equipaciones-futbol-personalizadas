@@ -35,7 +35,7 @@
     {
       "@type": "Question",
       "name": "¿Cuánto tarda la entrega de las equipaciones?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Las equipaciones personalizadas se entregan en 25-30 días (producción más envío directo de fábrica). Vuestra maqueta de diseño gratuita está lista en 1-2 días y la producción no empieza hasta que la aprobáis." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Las equipaciones personalizadas se entregan en 25-30 días (producción más envío directo de fábrica). Vuestra maqueta de diseño está lista en 1-2 días y la producción no empieza hasta que la aprobáis." }
     },
     {
       "@type": "Question",
@@ -50,7 +50,7 @@
     {
       "@type": "Question",
       "name": "¿Cuánto cuesta una equipación de fútbol personalizada?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Desde 38,90 € la camiseta suelta y desde 21,90 € por camiseta a partir de 10 unidades (equipación completa camiseta + pantalón desde 26,90 € por jugador a 10 unidades). El diseño siempre es gratis." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Desde 38,90 € la camiseta suelta y desde 21,90 € por camiseta a partir de 10 unidades (equipación completa camiseta + pantalón desde 26,90 € por jugador a 10 unidades). Diseñar en el configurador 3D o elegir un modelo Ready-to-Play no cuesta nada; el diseño a medida de nuestro estudio lleva una señal de 15 €, descontada íntegra del pedido a partir de 5 camisetas." }
     },
     {
       "@type": "Question",
@@ -141,12 +141,12 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="sj-badge">Equipaciones de fútbol personalizadas</div>
 <h1>La <span class="hl">Equipación</span> de Vuestro Equipo, a Vuestra Medida</h1>
 <p class="sj-lede">Diseñad la equipación de vuestro club en nuestro configurador 3D gratuito y vedla al instante, o enviadnos una referencia y nuestra IA crea el concepto. Sin pedido mínimo, sublimación total y tallas de niño a adulto.</p>
-<div class="sj-cta-row"><a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn">Diseñar en 3D — gratis</a> <a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn secondary">Pedir un diseño gratis</a></div>
-<p class="sj-trust">Valorado 4,4/5 en <a href="https://es.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confianza de más de 150 clubes.</p>
+<div class="sj-cta-row"><a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn">Diseñar en 3D — gratis</a> <a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn secondary">Encargar un diseño a medida</a></div>
+<p class="sj-trust">Valorado 4,5/5 en <a href="https://es.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confianza de más de 150 clubes.</p>
 </div>
 <div class="sj-container">
 <div class="sj-bluf">
-<p>MOMUTO crea <strong>equipaciones de fútbol personalizadas</strong> para clubes, equipos amateur, academias y peñas. Elegid una plantilla en el <strong>configurador 3D gratuito</strong> y pedidla en minutos, o enviadnos vuestra idea y nuestro equipo diseña la equipación — <strong>el diseño siempre es gratis</strong>. Cada equipación se imprime en <strong>sublimación total</strong> sobre tejido de poliéster-elastano, <strong>sin pedido mínimo</strong> (1 camiseta o 100), con <strong>nombre y dorsal de cada jugador incluidos</strong> y entrega en <strong>25-30 días</strong>.</p>
+<p>MOMUTO crea <strong>equipaciones de fútbol personalizadas</strong> para clubes, equipos amateur, academias y peñas. Elegid una plantilla en el <strong>configurador 3D gratuito</strong> y pedidla en minutos, o enviadnos vuestra idea y nuestro equipo diseña la equipación a medida — <strong>señal de 15 €, descontada íntegra del pedido a partir de 5 camisetas</strong>. Cada equipación se imprime en <strong>sublimación total</strong> sobre tejido de poliéster-elastano, <strong>sin pedido mínimo</strong> (1 camiseta o 100), con <strong>nombre y dorsal de cada jugador incluidos</strong> y entrega en <strong>25-30 días</strong>.</p>
 <div class="sj-facts">
 <div class="sj-fact"><div class="k">Sin mínimo</div><div class="l">Pedid 1 camiseta o el equipo entero, sin recargos</div></div>
 <div class="sj-fact"><div class="k">3D + IA</div><div class="l">Ved la equipación al instante, antes de pedir</div></div>
@@ -169,7 +169,7 @@ h1.title, .title, .page-title { display: none !important; }
 <tbody>
 <tr><td>Ver el diseño</td><td>Al instante en 3D + IA</td><td>Días de ida y vuelta</td></tr>
 <tr><td>Pedido mínimo</td><td>Ninguno (desde 1)</td><td>Habitual mínimo por equipo</td></tr>
-<tr><td>Diseño</td><td>Configurador 3D y diseñador gratis</td><td>Solo diseño manual</td></tr>
+<tr><td>Diseño</td><td>Configurador 3D gratis + estudio de diseño (señal 15 €, descontada desde 5 camisetas)</td><td>Solo diseño manual</td></tr>
 <tr><td>Personalización</td><td>Sublimación total, colores ilimitados</td><td>Según técnica</td></tr>
 <tr><td>Nombres y dorsales</td><td><span class="sj-check">✓</span> Incluidos</td><td>Coste por nombre</td></tr>
 <tr><td>Tallas niño y adulto</td><td><span class="sj-check">✓</span> Mismo diseño</td><td>Variable</td></tr>
@@ -178,8 +178,8 @@ h1.title, .title, .page-title { display: none !important; }
 </table>
 </div>
 <!-- PRECIOS -->
-<h2 class="sj-h2">Precios — el diseño siempre es gratis</h2>
-<p class="sj-p">Precios por volumen, sin pedido mínimo y sin costes ocultos.</p>
+<h2 class="sj-h2">Precios claros, sin mínimos</h2>
+<p class="sj-p">Precios por volumen, sin pedido mínimo y sin costes ocultos. Diseñar en 3D o partir de un modelo Ready-to-Play no cuesta nada; el diseño a medida del estudio lleva una señal de 15 €, descontada íntegra del pedido a partir de 5 camisetas.</p>
 <div class="sj-table-wrap">
 <table class="sj-price">
 <thead><tr><th>Cantidad</th><th>Camiseta</th><th>Pantalón</th><th>Equipación completa</th></tr></thead>
@@ -192,7 +192,7 @@ h1.title, .title, .page-title { display: none !important; }
 </tbody>
 </table>
 </div>
-<p class="sj-note">Tejido poliéster-elastano de serie. Maqueta profesional gratis en 1-2 días, con revisiones incluidas.</p>
+<p class="sj-note">Tejido poliéster-elastano de serie. Maqueta profesional en 1-2 días, con revisiones incluidas.</p>
 <!-- USOS -->
 <h2 class="sj-h2">Para cada tipo de equipo</h2>
 <div class="sj-uc-grid">
@@ -205,7 +205,7 @@ h1.title, .title, .page-title { display: none !important; }
 <h2 class="sj-h2">Preguntas frecuentes</h2>
 <div class="sj-faq">
 <details><summary>¿Hay pedido mínimo?</summary><p>No. MOMUTO no exige pedido mínimo — pedid una sola camiseta o equipad a todo el club. El precio por unidad baja con la cantidad, sin recargos por mínimos.</p></details>
-<details><summary>¿Cuánto tarda la entrega?</summary><p>Las equipaciones se entregan en 25-30 días. Vuestra maqueta gratuita está lista en 1-2 días y la producción no empieza hasta que la aprobáis.</p></details>
+<details><summary>¿Cuánto tarda la entrega?</summary><p>Las equipaciones se entregan en 25-30 días. Vuestra maqueta está lista en 1-2 días y la producción no empieza hasta que la aprobáis.</p></details>
 <details><summary>¿Puedo ver la equipación en 3D antes de pedir?</summary><p>Sí. Con el configurador 3D la diseñáis y la veis al instante. Y si nos enviáis una referencia, nuestra IA genera un concepto que editáis en 3D — sin esperar a un ida y vuelta por WhatsApp.</p></details>
 <details><summary>¿Puedo añadir el escudo y los sponsors?</summary><p>Sí. Subís vuestro escudo y logos: la sublimación total los imprime en la tela, en colores ilimitados, sin límite de tamaño y sin que se cuarteen.</p></details>
 <details><summary>¿Cada jugador puede llevar nombre y dorsal distintos?</summary><p>Sí, sin coste adicional. La personalización forma parte de la impresión, no es un extra.</p></details>
@@ -217,8 +217,8 @@ h1.title, .title, .page-title { display: none !important; }
 </div>
 <div class="sj-cta-block">
 <h2>Diseñad vuestra equipación</h2>
-<p>Hacedlo en 3D, o enviadnos una referencia y nuestra IA crea el concepto — gratis y sin compromiso hasta que pedís.</p>
-<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn">Diseñar en 3D</a> <a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn secondary">Pedir un diseño gratis</a>
+<p>Hacedlo en 3D sin coste, o enviadnos una referencia y la convertimos en un diseño a medida — señal de 15 €, descontada del pedido a partir de 5 camisetas.</p>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="sj-btn">Diseñar en 3D</a> <a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn secondary">Encargar un diseño a medida</a>
 <p class="sj-note">Sin pedido mínimo · Sublimación total · Tallas niño a adulto · Entrega en 25-30 días</p>
 </div>
 </div>

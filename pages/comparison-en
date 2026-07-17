@@ -53,7 +53,7 @@
       "name": "Is the design service free at MOMUTO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. MOMUTO offers two free design options: a real-time 3D configurator with 30+ templates, and a free professional human design service where MOMUTO's team creates a fully custom mockup in 1-2 days with free revisions. You only pay when you place an order."
+        "text": "The self-serve routes are free: a real-time 3D configurator with 30+ templates, and studio-designed Ready-to-Play models at a permanent 10% discount, customisable in 3D. The professional custom design service — including adapting AI-generated concepts for production — takes a €15 deposit, fully credited to orders of 5+ jerseys."
       }
     },
     {
@@ -85,7 +85,7 @@
       "name": "How does MOMUTO compare to Owayo for custom football kits?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MOMUTO is faster (25-30 days vs 4-6 weeks), includes elastane fabric as standard (Owayo uses 100% polyester), offers a free professional design service, and has no minimum order surcharges. Both offer full sublimation printing."
+        "text": "MOMUTO is faster (25-30 days vs 4-6 weeks), includes elastane fabric as standard (Owayo uses 100% polyester), pairs a free 3D configurator with a professional design studio, and has no minimum order surcharges. Both offer full sublimation printing."
       }
     }
   ]
@@ -96,7 +96,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Custom Football Kit — Jersey + Shorts",
-  "description": "Fully custom sublimation-printed football kit. Polyester-elastane performance fabric, free professional design service, no minimum order. Delivered worldwide in 25-30 days.",
+  "description": "Fully custom sublimation-printed football kit. Polyester-elastane performance fabric, free 3D design tools, no minimum order. Delivered worldwide in 25-30 days.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -116,7 +116,7 @@
   },
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Minimum Order", "value": "1 unit" },
-    { "@type": "PropertyValue", "name": "Design Service", "value": "Free professional design + free 3D configurator" },
+    { "@type": "PropertyValue", "name": "Design Service", "value": "Free 3D configurator + Ready-to-Play models (-10%) + custom design (\u20ac15 deposit, credited to orders of 5+ jerseys)" },
     { "@type": "PropertyValue", "name": "Fabric", "value": "Polyester-elastane performance blend" },
     { "@type": "PropertyValue", "name": "Printing", "value": "Full dye-sublimation" },
     { "@type": "PropertyValue", "name": "Production Location", "value": "Asia" },
@@ -702,9 +702,9 @@ h1.title, .title, .page-title { display: none !important; }
 <h3 class="cmp-h3">1. For Urgent Orders (Need kits in under 5 weeks)</h3>
 <p class="cmp-p"><strong>Winner: MOMUTO.</strong> At 25&ndash;30 days total, MOMUTO is the fastest option in this comparison. Jersix is competitive at 3&ndash;4 weeks but this can slip. Owayo and Spized regularly take 4&ndash;6 weeks. Crucially, MOMUTO ships direct from factory &mdash; there's no European warehouse adding a second transit leg.</p>
 <h3 class="cmp-h3">2. For Small Teams (5-a-side, 7-a-side, social leagues)</h3>
-<p class="cmp-p"><strong>Winner: MOMUTO.</strong> A full kit (jersey + shorts) for a 10-player squad costs &euro;26.90 per player at MOMUTO &mdash; with free design. Owayo and Spized apply surcharges to small orders that erode their advertised prices. Free shipping from &euro;49 makes single-player orders viable too.</p>
+<p class="cmp-p"><strong>Winner: MOMUTO.</strong> A full kit (jersey + shorts) for a 10-player squad costs &euro;26.90 per player at MOMUTO &mdash; designed free in the 3D configurator, or from a Ready-to-Play model at &euro;24.20. Owayo and Spized apply surcharges to small orders that erode their advertised prices. Free shipping from &euro;49 makes single-player orders viable too.</p>
 <h3 class="cmp-h3">3. For Custom Design Capability</h3>
-<p class="cmp-p"><strong>Tie: MOMUTO &amp; Jersix.</strong> Both go beyond DIY templates. Jersix is known for creative output. MOMUTO matches this by including a free professional human design service with revisions &mdash; plus a real-time 3D configurator for teams who prefer to design themselves. Owayo and Spized lock you into their configurator tools only.</p>
+<p class="cmp-p"><strong>Tie: MOMUTO &amp; Jersix.</strong> Both go beyond DIY templates. Jersix is known for creative output. MOMUTO matches this with a professional design studio (&euro;15 deposit, fully credited to orders of 5+ jerseys) &mdash; plus a free real-time 3D configurator and studio-designed Ready-to-Play models for teams who prefer the fast lane. Owayo and Spized lock you into their configurator tools only.</p>
 <h3 class="cmp-h3">4. For Material Quality</h3>
 <p class="cmp-p"><strong>Advantage: MOMUTO.</strong> The industry standard for custom kits is 100% polyester &mdash; it does the job, but it's a basic shirt feel. MOMUTO includes elastane in the standard fabric blend at no extra charge. This gives the kit stretch, shape retention, and the "pro fit" that competitors reserve for premium tiers.</p>
 <h3 class="cmp-h3">5. For "Made in Europe" Requirements</h3>
@@ -761,6 +761,6 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="cmp-cta-block">
 <h3>Ready to design your kit?</h3>
 <p>Free design mockup in 1&ndash;2 days. No commitment until you order.</p>
-<a href="/pages/request-custom-kit-design" class="cmp-cta-btn">Get Free Design</a> <a href="/pages/custom-kit-gallery" class="cmp-cta-btn secondary">View Kit Gallery</a></div>
+<a href="/pages/request-custom-kit-design" class="cmp-cta-btn">Request a Custom Design</a> <a href="/pages/custom-kit-gallery" class="cmp-cta-btn secondary">View Kit Gallery</a></div>
 </div>
 </div>

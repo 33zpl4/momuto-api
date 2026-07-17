@@ -83,7 +83,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Custom Soccer Jersey — Design Your Own",
-  "description": "Design your own soccer jersey in a free 3D tool, or have MOMUTO turn your AI concept into a real, full-sublimation kit. No minimum order, free professional design, delivered worldwide in 25-30 days.",
+  "description": "Design your own soccer jersey in a free 3D tool, or have MOMUTO turn your AI concept into a real, full-sublimation kit. No minimum order, free 3D design tools, delivered worldwide in 25-30 days.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -102,7 +102,7 @@
     "priceValidUntil": "2026-12-31"
   },
   "additionalProperty": [
-    { "@type": "PropertyValue", "name": "Design Tools", "value": "Free 3D configurator + free professional design service" },
+    { "@type": "PropertyValue", "name": "Design Tools", "value": "Free 3D configurator + custom design (€15 deposit, credited to orders of 5+ jerseys)" },
     { "@type": "PropertyValue", "name": "AI Concept", "value": "AI-generated designs adapted into production-ready kits" },
     { "@type": "PropertyValue", "name": "Minimum Order", "value": "1 unit" },
     { "@type": "PropertyValue", "name": "Printing", "value": "Full dye-sublimation" },
@@ -245,7 +245,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="sj-hero">
 <div class="sj-badge">Design Your Own Soccer Jersey</div>
 <h1>Create Your Own <span class="hl">Soccer Jersey</span></h1>
-<p class="sj-lede">Design your own soccer jersey free in our real-time 3D tool — or bring your own idea, even an AI-generated concept, and our designers turn it into a real, wearable kit. No minimum order, full-sublimation printing, free professional design.</p>
+<p class="sj-lede">Design your own soccer jersey free in our real-time 3D tool — or bring your own idea, even an AI-generated concept, and our designers turn it into a real, wearable kit. No minimum order, full-sublimation printing — a €15 design deposit applies to studio work, fully credited to orders of 5+ jerseys.</p>
 <div class="sj-cta-row"><a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn">Open the 3D Designer</a> <a href="/pages/request-custom-kit-design" class="sj-btn secondary">Send Your Idea</a></div>
 <p class="sj-trust">Rated 4.4/5 on <a href="https://www.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> &mdash; trusted by 150+ clubs and teams worldwide.</p>
 </div>
@@ -271,7 +271,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="sj-way"><i class="fas fa-wand-magic-sparkles"></i>
 <h3>2. Send us your idea</h3>
 <p>Not a designer? Send a brief, a reference, a hand sketch, or an AI image. A professional designer creates your custom soccer jersey mockup in 1&ndash;2 days, with free revisions until it's right.</p>
-<a class="sj-inline" href="/pages/request-custom-kit-design">Request a free design →</a>
+<a class="sj-inline" href="/pages/request-custom-kit-design">Request a custom design →</a>
 </div>
 </div>
 <!-- AI CONCEPT -->
@@ -306,6 +306,6 @@ h1.title, .title, .page-title { display: none !important; }
 <h2>Make It Yours</h2>
 <p>Design your own soccer jersey in 3D, or send us your idea — including an AI concept — and we'll make it real. Free, no commitment until you order.</p>
 <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn">Design in 3D</a> <a href="/pages/request-custom-kit-design" class="sj-btn secondary">Send Your Idea</a>
-<p class="sj-note">Free design &middot; No minimum order &middot; Full sublimation &middot; Delivery in 25&ndash;30 days</p>
+<p class="sj-note">No minimum order &middot; Full sublimation &middot; Delivery in 25&ndash;30 days</p>
 </div>
 </div>

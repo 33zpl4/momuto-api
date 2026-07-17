@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Kit da Calcio Personalizzato MOMUTO",
-  "description": "Kit da calcio completamente personalizzabile con stampa a sublimazione totale. Tessuto poliestere-elastan ad alte prestazioni come standard. Tre modi per ordinare: kit Ready-to-Play pre-disegnati al 10% di sconto (da 19,70€/maglia), servizio di design personalizzato gratuito (mockup in 24-48h), o costruttore 3D in tempo reale. Senza ordine minimo. Consegna in 25-30 giorni in tutto il mondo.",
+  "description": "Kit da calcio completamente personalizzabile con stampa a sublimazione totale. Tessuto poliestere-elastan ad alte prestazioni come standard. Tre modi per ordinare: kit Ready-to-Play pre-disegnati al 10% di sconto (da 19,70€/maglia), servizio di design personalizzato con mockup in 24-48h (acconto di 15 €, interamente accreditato sull'ordine da 5 maglie), o costruttore 3D in tempo reale. Senza ordine minimo. Consegna in 25-30 giorni in tutto il mondo.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Kit da Calcio Personalizzati",
   "material": "Tessuto poliestere-elastan ad alte prestazioni (standard su tutti i kit)",
@@ -38,7 +38,7 @@
     {
       "@type": "Product",
       "name": "Kit da Calcio Design Personalizzato",
-      "description": "Kit da calcio completamente su misura progettato da zero dal team di design MOMUTO. Mockup professionale gratuito in 24-48h, revisioni gratuite incluse, nessun impegno fino all'ordine.",
+      "description": "Kit da calcio completamente su misura progettato da zero dal team di design MOMUTO. Mockup professionale in 24-48h con revisioni incluse — acconto di 15 €, interamente accreditato sull'ordine da 5 maglie.",
       "offers": { "@type": "Offer", "price": "21.90", "priceCurrency": "EUR", "description": "Prezzo maglia personalizzata da 10+ unità. Kit completo da 26,90€." }
     }
   ],
@@ -53,7 +53,7 @@
     { "@type": "PropertyValue", "name": "Ordine Minimo", "value": "Senza minimo — ordina 1 kit o 100+" },
     { "@type": "PropertyValue", "name": "Metodo di Stampa", "value": "Sublimazione totale — garanzia a vita contro scrostatura, crepe o scolorimento" },
     { "@type": "PropertyValue", "name": "Collezione Ready-to-Play", "value": "6 template pre-disegnati al 10% di sconto vs personalizzato. Anteprima in 24h." },
-    { "@type": "PropertyValue", "name": "Servizio di Design", "value": "Mockup di design professionale gratuito in 24-48h, revisioni gratuite incluse" },
+    { "@type": "PropertyValue", "name": "Servizio di Design", "value": "Mockup professionale in 24-48h, revisioni incluse — acconto di 15 € accreditato sull'ordine da 5 maglie" },
     { "@type": "PropertyValue", "name": "Configuratore 3D", "value": "Configuratore di kit 3D in tempo reale con 30+ template professionali" },
     { "@type": "PropertyValue", "name": "Tessuto", "value": "Misto poliestere-elastan come standard — i competitor includono l'elastan solo nei livelli premium" },
     { "@type": "PropertyValue", "name": "Consegna", "value": "7-12 giorni di produzione + 10-15 giorni di spedizione = 25-30 giorni totali in tutto il mondo" }
@@ -72,8 +72,8 @@
     },
     {
       "@type": "Question",
-      "name": "Come funziona il servizio di design gratuito di MOMUTO?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Invia il tuo brief tramite il modulo — nome della squadra, stemma, colori e qualsiasi riferimento. I designer MOMUTO creano un mockup completamente personalizzato in 24-48 ore, gratuitamente. Tutte le revisioni sono incluse fino alla tua soddisfazione. Nessun impegno fino alla conferma dell'ordine." }
+      "name": "Come funziona il servizio di design personalizzato di MOMUTO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Invia il tuo brief tramite il modulo — nome della squadra, stemma, colori e qualsiasi riferimento. I designer MOMUTO creano un mockup completamente personalizzato in 24-48 ore, con un acconto di 15 € interamente accreditato sull'ordine da 5 maglie. Tutte le revisioni sono incluse fino alla tua soddisfazione." }
     },
     {
       "@type": "Question",
@@ -88,7 +88,7 @@
     {
       "@type": "Question",
       "name": "Posso inviare il mio design o un concept generato dall'IA?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sì. Se hai creato un concept di kit con strumenti come ChatGPT, Midjourney, Gemini o qualsiasi software di design, puoi caricarlo tramite il modulo. Per ordini di 10+ kit, MOMUTO adatta il tuo design per la produzione senza costi aggiuntivi. Si applica un deposito di design di €15 — interamente rimborsato per ordini di 5 maglie o più. Questo ci permette di concentrarci sui team davvero decisi e di dedicare a ogni design il tempo che merita." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Sì. Se hai creato un concept di kit con strumenti come ChatGPT, Midjourney, Gemini o qualsiasi software di design, puoi caricarlo tramite il modulo. MOMUTO adatta il tuo design per la produzione con un acconto di 15 € — interamente accreditato sull'ordine da 5 maglie o più. Questo ci permette di concentrarci sui team davvero decisi e di dedicare a ogni design il tempo che merita." }
     },
     {
       "@type": "Question",
@@ -105,7 +105,7 @@
 <div class="hero-content">
 <h1>Maglie da Calcio Personalizzate per <span class="highlight">Squadre Amateur</span></h1>
 <h3>Qualit&agrave; professionale da 19,70&euro; a maglia &mdash; le disegniamo noi o scegli dalla nostra collezione</h3>
-<p class="hero-intro">MOMUTO aiuta le squadre di calcio amateur a creare kit personalizzati attraverso tre vie: una <strong>collezione Ready-to-Play</strong> con design collaudati al 10% di sconto, un <strong>servizio di design personalizzato gratuito</strong> con mockup in 24-48h, o un <strong>configuratore 3D in tempo reale</strong>. Senza ordine minimo. Stampa professionale a sublimazione. Consegna mondiale in 25-30 giorni.</p>
+<p class="hero-intro">MOMUTO aiuta le squadre di calcio amateur a creare kit personalizzati attraverso tre vie: una <strong>collezione Ready-to-Play</strong> con design collaudati al 10% di sconto, un <strong>servizio di design personalizzato</strong> con mockup in 24-48h (acconto 15 €, accreditato sull'ordine da 5 maglie), o un <strong>configuratore 3D in tempo reale</strong>. Senza ordine minimo. Stampa professionale a sublimazione. Consegna mondiale in 25-30 giorni.</p>
 </div>
 </header>
 <section class="social-proof-strip">
@@ -134,9 +134,9 @@
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-pencil-alt"></i></div>
 <h3>Servizio di Design Personalizzato</h3>
-<div class="path-for">100% unico &middot; Mockup gratuito &middot; Revisioni gratuite incluse</div>
-<p class="path-description">Vuoi qualcosa che nessun altro ha? I nostri designer creano un kit completamente originale dal tuo brief &mdash; o adattano un design che hai gi&agrave; creato (generato da IA, disegnato a mano, o creato con qualsiasi strumento). Mockup gratuito in 24-48h, revisioni gratuite, senza impegno. Da 21,90&euro; a maglia.</p>
-<a href="#cta-form" class="path-cta">Richiedi Design Gratuito</a></div>
+<div class="path-for">100% unico &middot; Acconto 15 € accreditato da 5 maglie &middot; Revisioni incluse</div>
+<p class="path-description">Vuoi qualcosa che nessun altro ha? I nostri designer creano un kit completamente originale dal tuo brief &mdash; o adattano un design che hai gi&agrave; creato (generato da IA, disegnato a mano, o creato con qualsiasi strumento). Mockup in 24-48h (acconto 15 €, accreditato sull'ordine da 5 maglie), revisioni incluse. Da 21,90&euro; a maglia.</p>
+<a href="#cta-form" class="path-cta">Richiedi un Design su Misura</a></div>
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-cube"></i></div>
 <h3>Configuratore 3D</h3>
@@ -157,7 +157,7 @@
 <div class="comparison-icon"><i class="fas fa-pencil-alt"></i></div>
 <div class="comparison-option">Design Personalizzato</div>
 <div class="comparison-best-for">Per le squadre che vogliono un&rsquo;identit&agrave; unica</div>
-<div class="comparison-benefit">Kit completamente originale creato da zero. Mockup gratuito in 24-48h, revisioni gratuite incluse, senza impegno. Da 21,90&euro; a maglia.</div>
+<div class="comparison-benefit">Kit completamente originale creato da zero. Mockup in 24-48h (acconto 15 €, accreditato sull'ordine da 5 maglie), revisioni incluse. Da 21,90&euro; a maglia.</div>
 </div>
 <div class="comparison-card">
 <div class="comparison-icon"><i class="fas fa-cube"></i></div>
@@ -188,7 +188,7 @@
 <div class="why-container">
 <div class="why-header">
 <h2>Perch&eacute; le Squadre Scelgono MOMUTO</h2>
-<p>Dal prezzo alla consegna alla qualit&agrave; del tessuto, le squadre scelgono MOMUTO per gli stessi motivi: costo per giocatore pi&ugrave; basso, consegna pi&ugrave; rapida, supporto al design gratuito e nessun ordine minimo. Stai confrontando con fornitori come Owayo, Spized o Jersix? Abbiamo analizzato le differenze nella nostra <a href="https://it.momuto.com/pages/confronto-fornitori-maglie-calcio">comparativa completa dei kit</a>.</p>
+<p>Dal prezzo alla consegna alla qualit&agrave; del tessuto, le squadre scelgono MOMUTO per gli stessi motivi: costo per giocatore pi&ugrave; basso, consegna pi&ugrave; rapida, strumenti di design 3D gratuiti e nessun ordine minimo. Stai confrontando con fornitori come Owayo, Spized o Jersix? Abbiamo analizzato le differenze nella nostra <a href="https://it.momuto.com/pages/confronto-fornitori-maglie-calcio">comparativa completa dei kit</a>.</p>
 </div>
 <div class="why-grid">
 <div class="why-card"><div class="why-card-icon"><i class="fas fa-truck"></i></div><h3>Consegna Pi&ugrave; Rapida</h3><p>20&ndash;25 giorni in tutto il mondo dalla conferma dell&rsquo;ordine: 7&ndash;12 giorni di produzione + 10&ndash;15 giorni di spedizione. Spedizione gratuita su ordini superiori a 50&euro;.</p></div>
@@ -207,7 +207,7 @@
 <li><span class="hiw-num">1</span><div><strong>Scegli la tua via</strong><p>Sfoglia la <a href="https://it.momuto.com/pages/collezione-ready-to-play" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">collezione Ready-to-Play</a> per design collaudati al 10% di sconto. O invia un brief per un design completamente personalizzato. O <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">costruiscilo tu stesso in 3D</a>.</p></div></li>
 <li><span class="hiw-num">2</span><div><strong>Configura e invia</strong><p>Scegli i tuoi colori, carica il tuo stemma e logo sponsor. Per il Ready-to-Play, scegli dalla palette di colori. Per il personalizzato, condividi i riferimenti e lascia che i nostri designer interpretino.</p></div></li>
 <li><span class="hiw-num">3</span><div><strong>Ricevi la tua anteprima</strong><p>Le anteprime Ready-to-Play arrivano in 24h. I mockup personalizzati in 24-48h. Entrambi gratuiti. Entrambi con almeno 1 revisione inclusa.</p></div></li>
-<li><span class="hiw-num">4</span><div><strong>Approva e ordina</strong><p>Soddisfatto del risultato? Conferma le taglie e fai l&rsquo;ordine. Nessun impegno fino a questo momento &mdash; l&rsquo;anteprima &egrave; gratuita indipendentemente.</p></div></li>
+<li><span class="hiw-num">4</span><div><strong>Approva e ordina</strong><p>Soddisfatto del risultato? Conferma le taglie e fai l&rsquo;ordine. Nessun impegno oltre l&rsquo;acconto fino a questo momento &mdash; e da 5 maglie l&rsquo;acconto ti viene interamente accreditato.</p></div></li>
 <li><span class="hiw-num">5</span><div><strong>Produciamo e spediamo</strong><p>7-12 giorni di produzione con stampa a sublimazione totale + 10-15 giorni di spedizione mondiale. I tuoi kit arrivano in 25-30 giorni. Spedizione gratuita su ordini superiori a 50&euro;.</p></div></li>
 </ul>
 <p class="hiw-internal-links">Cerchi la via pi&ugrave; rapida? <a href="https://it.momuto.com/pages/collezione-ready-to-play">I kit Ready-to-Play partono da 19,70&euro; con anteprime in 24h.</a><br />Vuoi vedere cosa hanno ordinato altri club? <a href="https://it.momuto.com/pages/squadre-club-momuto">Sfoglia la galleria completa delle squadre.</a></p>
@@ -218,7 +218,7 @@
 <div class="form-content" id="cta-form">
 <div class="form-intro">
 <h2>Richiedi il Tuo Design Personalizzato</h2>
-<p>Vuoi qualcosa di completamente unico? Compila il brief e ricevi un mockup professionale gratuito in 24-48h. Hai gi&agrave; un design? Caricalo qui sotto &mdash; lo adattiamo per la produzione. Preferisci una via pi&ugrave; rapida? <a href="https://it.momuto.com/pages/collezione-ready-to-play" style="color:var(--accent-red);text-decoration:underline;font-weight:700;">Sfoglia i design Ready-to-Play con il 10% di sconto &rarr;</a></p>
+<p>Vuoi qualcosa di completamente unico? Compila il brief e ricevi un mockup professionale in 24-48h (acconto 15 €, accreditato sull'ordine da 5 maglie). Hai gi&agrave; un design? Caricalo qui sotto &mdash; lo adattiamo per la produzione. Preferisci una via pi&ugrave; rapida? <a href="https://it.momuto.com/pages/collezione-ready-to-play" style="color:var(--accent-red);text-decoration:underline;font-weight:700;">Sfoglia i design Ready-to-Play con il 10% di sconto &rarr;</a></p>
 </div>
 <div class="progress-indicator">
 <div class="progress-step active"><span class="step-label">1</span> <span class="step-text">Dettagli</span></div>
@@ -299,13 +299,13 @@
 <h2>Domande frequenti sulle maglie da calcio personalizzate</h2>
 <div class="faq-list">
 <div class="faq-item"><h3>Cos&rsquo;&egrave; la collezione Ready-to-Play di MOMUTO?</h3><p>Ready-to-Play &egrave; una collezione di template di kit pre-disegnati da designer professionisti e gi&agrave; indossati da veri club. Scegli un design, i colori della tua squadra, carica il tuo stemma e ricevi un&rsquo;anteprima personalizzata entro 24 ore. I kit Ready-to-Play costano il 10% in meno rispetto al design personalizzato &mdash; da 19,70&euro; a maglia &mdash; perch&eacute; salti la fase di design mantenendo la stessa qualit&agrave;.</p></div>
-<div class="faq-item"><h3>Come funziona il servizio di design gratuito di MOMUTO?</h3><p>Invia il tuo brief tramite il modulo qui sopra &mdash; nome della squadra, stemma, colori e qualsiasi riferimento. I nostri designer creano un mockup completamente personalizzato in 24&ndash;48 ore, gratuitamente. Tutte le revisioni sono anch&rsquo;esse gratuite fino alla tua soddisfazione. Nessun impegno fino alla conferma dell&rsquo;ordine.</p></div>
+<div class="faq-item"><h3>Come funziona il servizio di design personalizzato di MOMUTO?</h3><p>Invia il tuo brief tramite il modulo qui sopra &mdash; nome della squadra, stemma, colori e qualsiasi riferimento. I nostri designer creano un mockup completamente personalizzato in 24&ndash;48 ore, con un acconto di 15 € interamente accreditato sull&rsquo;ordine da 5 maglie. Tutte le revisioni sono incluse fino alla tua soddisfazione. Nessun impegno fino alla conferma dell&rsquo;ordine.</p></div>
 <div class="faq-item"><h3>C&rsquo;&egrave; un ordine minimo per le maglie da calcio personalizzate?</h3><p>No. MOMUTO non ha ordine minimo. Puoi ordinare una sola maglia o una squadra completa di 50+. I prezzi partono da 19,70&euro; a maglia per il Ready-to-Play o 21,90&euro; per il design personalizzato su ordini pi&ugrave; grandi, e 38,90&euro; per una maglia singola.</p></div>
 <div class="faq-item"><h3>Quanto tempo ci vuole per ricevere le maglie da calcio personalizzate?</h3><p>La produzione richiede 7&ndash;12 giorni. La spedizione richiede 10&ndash;15 giorni in tutto il mondo. Il tempo totale di consegna &egrave; tipicamente 20&ndash;25 giorni dalla conferma dell&rsquo;ordine. Spedizione gratuita su ordini superiori a 50&euro;.</p></div>
 <div class="faq-item"><h3>Che metodo di stampa usa MOMUTO?</h3><p>MOMUTO utilizza la stampa a sublimazione totale su tessuto misto poliestere-elastan ad alte prestazioni. La sublimazione significa che i colori vengono incorporati nel tessuto &mdash; non stampati sopra &mdash; quindi non si scrostano, creano ni scoloriscono mai. Vale sia per i kit Ready-to-Play che per il design personalizzato.</p></div>
 <div class="faq-item"><h3>Posso progettare il kit io stesso invece di richiedere un mockup?</h3><p>S&igrave;. Usa il nostro <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">configuratore 3D di maglie</a> per progettare il tuo kit online in tempo reale. Puoi anche esplorare la <a href="https://it.momuto.com/pages/collezione-ready-to-play">collezione Ready-to-Play</a> se preferisci partire da design collaudati &mdash; con il 10% di sconto e anteprime in 24h.</p></div>
 <div class="faq-item"><h3>I kit Ready-to-Play includono i pantaloncini?</h3><p>S&igrave;. Ogni design Ready-to-Play &egrave; disponibile solo come maglia (da 19,70&euro;) o come kit completo con pantaloncini abbinati (da 24,20&euro;). Gli ordini di 10+ kit completi includono anche una bandiera della squadra con il tuo stemma e una fascia da capitano gratuite.</p></div>
-<div class="faq-item"><h3>Posso inviare il mio design o un concept generato dall&rsquo;IA?</h3><p>S&igrave;. Se hai creato un concept di kit con strumenti come ChatGPT, Midjourney, Gemini o qualsiasi software di design, puoi caricarlo tramite il modulo di design personalizzato. Per ordini di 10+ kit, MOMUTO adatta il tuo design per la produzione senza costi aggiuntivi. Si applica un deposito di design di &euro;15 &mdash; interamente rimborsato per ordini di 5 maglie o pi&ugrave;. Questo ci permette di concentrarci sui team davvero decisi e di dedicare a ogni design il tempo che merita.</p></div>
+<div class="faq-item"><h3>Posso inviare il mio design o un concept generato dall&rsquo;IA?</h3><p>S&igrave;. Se hai creato un concept di kit con strumenti come ChatGPT, Midjourney, Gemini o qualsiasi software di design, puoi caricarlo tramite il modulo di design personalizzato. MOMUTO adatta il tuo design per la produzione con un acconto di 15 &euro; &mdash; interamente accreditato sull&rsquo;ordine da 5 maglie o pi&ugrave;. Questo ci permette di concentrarci sui team davvero decisi e di dedicare a ogni design il tempo che merita.</p></div>
 </div>
 </div>
 </section>

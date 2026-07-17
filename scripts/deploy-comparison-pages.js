@@ -32,7 +32,23 @@ const DOMAINS = {
     token: process.env.OEMSAAS_TOKEN_FR,
     label: 'fr.momuto.com',
     handle: 'comparatif-fournisseur-maillot-foot-2026',
-    file: path.join(ROOT, 'pages', 'comparison-fr')
+    file: path.join(ROOT, 'pages', 'comparison-fr'),
+    // July 2026: retitled fournisseur-first — the money cluster is category
+    // queries ("fournisseur maillot de foot" ~2.3k impr), not brand-vs-brand.
+    meta: {
+      title: 'Meilleur Fournisseur de Maillots de Foot 2026 — Comparatif | MOMUTO',
+      meta_title: 'Meilleur Fournisseur de Maillots de Foot 2026 — Comparatif Complet | MOMUTO',
+      meta_descript: 'Comparatif 2026 des fournisseurs de maillots de foot personnalisés : MOMUTO, Gladiasport, Owayo, Spized, Kipsta. Prix réels, délais, tissu, design 3D + IA — et la vérité sur le maillot à 5 €.',
+      meta_keywords: [
+        'fournisseur maillot de foot',
+        'meilleur fournisseur maillot de foot',
+        'grossiste maillot de foot',
+        'fournisseur maillot de foot pas cher',
+        'comparatif maillot foot personnalisé',
+        'maillot foot personnalisé 2026',
+        'MOMUTO'
+      ]
+    }
   },
   it: {
     host: 'https://openapi.oemapps.com',

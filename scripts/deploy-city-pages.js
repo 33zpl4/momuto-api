@@ -46,7 +46,7 @@ const FONTS = '<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&a
 const FAQ_SHARED = [
   { q: '¿Hay pedido mínimo?', a: 'No. MOMUTO no exige pedido mínimo — pedid una sola camiseta o equipad a todo el club. El precio por unidad baja con la cantidad, sin recargos por mínimos.' },
   { q: '¿Puedo ver la camiseta antes de pedirla?', a: 'Sí, siempre. Los modelos Ready-to-Play se personalizan en el configurador 3D y los veis girar en tiempo real antes de pedir. Y todo pedido pasa además por nuestros diseñadores, que revisan y preparan el arte final para imprenta.' },
-  { q: '¿El diseño profesional es gratis?', a: 'Los caminos exprés sí: elegir un modelo Ready-to-Play o diseñar desde cero en el configurador 3D no cuesta nada hasta que pedís. Si queréis que nuestros diseñadores creen un diseño a medida para vosotros, pedimos una señal de 15 € que se descuenta íntegra del pedido.' },
+  { q: '¿El diseño profesional es gratis?', a: 'Los caminos exprés sí: elegir un modelo Ready-to-Play o diseñar desde cero en el configurador 3D no cuesta nada hasta que pedís. Si queréis que nuestros diseñadores creen un diseño a medida para vosotros, pedimos una señal de 15 €, descontada íntegra del pedido a partir de 5 camisetas.' },
   { q: '¿Puedo añadir el escudo y los sponsors?', a: 'Sí. Subís vuestro escudo y logos: la sublimación total los imprime en la tela, en colores ilimitados, sin límite de tamaño y sin que se cuarteen.' },
   { q: '¿Cada jugador puede llevar nombre y dorsal distintos?', a: 'Sí, sin coste adicional. La personalización forma parte de la impresión, no es un extra.' },
   { q: '¿Hacéis tallas de niño y de adulto?', a: 'Sí, el mismo diseño en todas las categorías, desde el fútbol base hasta el primer equipo.' }
@@ -93,7 +93,7 @@ ${CSS}
 <h1>Camisetas de Fútbol <span class="hl">Personalizadas</span> ${c.en_ciudad}</h1>
 <p class="sj-lede">Equipaciones a medida para los equipos de ${c.name}: elegid un modelo Ready-to-Play y ponedlo a vuestros colores en 3D, diseñad desde cero en el configurador, o encargádselo a nuestros diseñadores. Sin pedido mínimo y con entrega puerta a puerta ${c.en_ciudad}.</p>
 <div class="sj-cta-row"><a href="${RTP_PATH}" class="sj-btn">Ver modelos Ready-to-Play</a> <a href="${D3_URL}" class="sj-btn secondary">Diseñar en 3D</a></div>
-<p class="sj-trust">Valorado 4,4/5 en <a href="https://es.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confianza de más de 150 clubes.</p>
+<p class="sj-trust">Valorado 4,5/5 en <a href="https://es.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confianza de más de 150 clubes.</p>
 </div>
 <div class="sj-container">
 <div class="sj-bluf">
@@ -116,7 +116,7 @@ ${c.scene.map(s => `<div class="sj-uc"><i class="fas ${s.icon}"></i><h3>${s.titl
 <span class="tag">La vía rápida</span>
 <h3>Modelos listos para jugar, a los colores de tu equipo</h3>
 <p>Siete modelos diseñados por nuestro estudio, listos para personalizar: cambiadles los colores con el juego de colores de la página del modelo, seguid en el <strong>configurador 3D</strong> con dorsales, nombres y vuestro escudo, y pedid al momento — sin esperar maqueta. ${c.color_note}</p>
-<p><strong>Camiseta desde ${String(PRICE.jersey_current).replace('.', ',')} €/ud y equipación completa desde ${String(PRICE.kit_current).replace('.', ',')} €/ud</strong> a partir de ${PRICE.min_quantity} unidades, con el −${PRICE.discount_pct} % Ready-to-Play ya aplicado. Y si preferís algo 100 % vuestro, nuestros diseñadores lo crean a medida: señal de 15 € que se descuenta íntegra del pedido.</p>
+<p><strong>Camiseta desde ${String(PRICE.jersey_current).replace('.', ',')} €/ud y equipación completa desde ${String(PRICE.kit_current).replace('.', ',')} €/ud</strong> a partir de ${PRICE.min_quantity} unidades, con el −${PRICE.discount_pct} % Ready-to-Play ya aplicado. Y si preferís algo 100 % vuestro, nuestros diseñadores lo crean a medida: señal de 15 €, descontada íntegra del pedido a partir de 5 camisetas.</p>
 <div class="sj-cta-row" style="justify-content:flex-start;"><a href="${RTP_PATH}" class="sj-btn">Ver la colección</a> <a href="/pages/solicitud-de-diseno-personalizado" class="sj-btn secondary">Encargar un diseño a medida</a></div>
 </div>
 <!-- PRECIOS -->
