@@ -16,11 +16,16 @@
   .bj-heading { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:clamp(2.2rem,5vw,3.2rem); color:#fff; letter-spacing:0.04em; margin:0; line-height:1; }
   .bj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
   @media (max-width:768px) { .bj-grid { grid-template-columns:1fr; gap:1.25rem; } }
-  .bj-card { text-decoration:none; display:flex; flex-direction:column; background:#111; border:1px solid rgba(255,255,255,0.06); transition:border-color 0.2s; }
+  .bj-card { min-width:0; text-decoration:none; display:flex; flex-direction:column; background:#111; border:1px solid rgba(255,255,255,0.06); transition:border-color 0.2s; }
   .bj-card:hover { border-color:rgba(255,255,255,0.18); }
   .bj-imgwrap { width:100%; aspect-ratio:16/10; overflow:hidden; background:#161616; }
-  .bj-imgwrap img { width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease; }
+  .bj-imgwrap img { display:block; width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease; }
   .bj-card:hover .bj-imgwrap img { transform:scale(1.04); }
+  .bj-split { display:flex; }
+  .bj-half { position:relative; width:50%; height:100%; overflow:hidden; }
+  .bj-half img { width:100%; height:100%; object-fit:cover; }
+  .bj-half + .bj-half { border-left:1px solid rgba(255,255,255,0.3); }
+  .bj-tag { position:absolute; left:8px; bottom:8px; font-family:'Outfit',sans-serif; font-size:0.55rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#fff; background:rgba(0,0,0,0.55); padding:3px 7px; }
   .bj-title { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:1.5rem; letter-spacing:0.05em; color:#fff; margin:1.2rem 1.4rem 0.5rem; line-height:1.05; }
   .bj-hook { font-family:'Outfit',sans-serif; font-size:0.85rem; font-weight:300; color:rgba(255,255,255,0.55); line-height:1.6; margin:0 1.4rem 1rem; flex:1; }
   .bj-read { font-family:'Outfit',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#fff; margin:0 1.4rem 1.4rem; }
@@ -37,18 +42,17 @@
     </div>
     <div class="bj-grid">
       <a class="bj-card" href="/blogs/creer-maillot-foot-ia-chatgpt-gemini">
-        <div class="bj-imgwrap">
-          <!-- PASTE THE POST'S COVER IMAGE URL below (grab it from the post itself) -->
-          <img src="PASTE_POST_COVER_IMAGE_URL_HERE" alt="DU CONCEPT IA AU VRAI MAILLOT — MOMUTO blog" loading="lazy" width="480" height="300">
+        <div class="bj-imgwrap bj-split">
+          <div class="bj-half"><img src="https://cdn.staticsoe.com/pics/0b5177b519804889ae2e329b9c8e8239ad19316d485d90a8c2f66c3bf01cf40f.jpg" alt="Concept de maillot généré par IA" loading="lazy" width="600" height="750"><span class="bj-tag">Concept IA</span></div>
+          <div class="bj-half"><img src="https://cdn.staticsoe.com/pics/2f0ddfc2e032643727db21f9cf433df70176294aaab3edbb04746cc722ae0cc5.png" alt="Le design MOMUTO recréé, prêt pour la production" loading="lazy" width="600" height="750"><span class="bj-tag">Recréation MOMUTO</span></div>
         </div>
-        <h3 class="bj-title">DU CONCEPT IA AU VRAI MAILLOT</h3>
-        <p class="bj-hook">ChatGPT, Gemini, Midjourney : comment transformer un visuel généré en maillot que votre équipe portera vraiment.</p>
+        <h3 class="bj-title">DU CONCEPT IA AU DESIGN MOMUTO</h3>
+        <p class="bj-hook">ChatGPT, Gemini, Midjourney : comment un visuel généré devient un design MOMUTO recréé, prêt pour la production.</p>
         <span class="bj-read">Lire l’article →</span>
       </a>
       <a class="bj-card" href="/blogs/l-art-des-concepts-de-maillots-comment-les-fans-reinventent-le-football">
         <div class="bj-imgwrap">
-          <!-- PASTE THE POST'S COVER IMAGE URL below (grab it from the post itself) -->
-          <img src="PASTE_POST_COVER_IMAGE_URL_HERE" alt="L'ART DES CONCEPTS DE MAILLOTS — MOMUTO blog" loading="lazy" width="480" height="300">
+          <img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20230831/376d652e73548068a9a423dc89bffd85.jpg" alt="L'ART DES CONCEPTS DE MAILLOTS — MOMUTO blog" loading="lazy" width="480" height="300">
         </div>
         <h3 class="bj-title">L'ART DES CONCEPTS DE MAILLOTS</h3>
         <p class="bj-hook">Comment les fans réinventent le design football — et finissent par porter leurs propres créations.</p>
@@ -56,8 +60,7 @@
       </a>
       <a class="bj-card" href="/blogs/creez-votre-maillot-de-football-unique-avec-le-configurateur-3d-momuto">
         <div class="bj-imgwrap">
-          <!-- PASTE THE POST'S COVER IMAGE URL below (grab it from the post itself) -->
-          <img src="PASTE_POST_COVER_IMAGE_URL_HERE" alt="MAÎTRISEZ LE DESIGNER 3D — MOMUTO blog" loading="lazy" width="480" height="300">
+          <img src="https://design.momuto.com/3d-configurator/asset/promo/hive-3d-kit-maker.webp" alt="MAÎTRISEZ LE DESIGNER 3D — MOMUTO blog" loading="lazy" width="480" height="300">
         </div>
         <h3 class="bj-title">MAÎTRISEZ LE DESIGNER 3D</h3>
         <p class="bj-hook">Toutes les astuces du configurateur — couleurs, écussons, numéros — avant de dépenser un centime.</p>
