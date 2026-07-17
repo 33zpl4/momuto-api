@@ -1,0 +1,44 @@
+name: Deploy ES City Pages
+
+# Builds the ES local city pages ("camisetas de fútbol personalizadas en
+# <ciudad>") from cms/city-pages/es/cities.json + the shared template in
+# scripts/deploy-city-pages.js, and upserts them into the es.momuto.com CMS.
+#
+#   • Dispatch: pick a single city (or all) and dry_run true/false.
+#   • Push to main touching the city data or the script: deploys ALL cities
+#     (same convention as deploy-cms-page.yml).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'cms/city-pages/es/cities.json'
+      - 'scripts/deploy-city-pages.js'
+  workflow_dispatch:
+    inputs:
+      city:
+        description: 'City slug (e.g. madrid) — empty deploys all'
+        required: false
+        default: ''
+        type: string
+      dry_run:
+        description: 'Dry run — build + preview only, no CMS writes'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build + deploy city pages
+        env:
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          DRY_RUN: ${{ github.event_name == 'push' && 'false' || inputs.dry_run }}
+          CITY: ${{ inputs.city }}
+        run: node scripts/deploy-city-pages.js
