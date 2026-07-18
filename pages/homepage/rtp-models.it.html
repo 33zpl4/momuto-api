@@ -1,0 +1,78 @@
+<!-- ============================================================================
+     MOMUTO homepage block — Ready-to-Play strip — Nike-style large tiles, single CTA to the collection.
+     Paste-only (no auto-deploy), same convention as the other homepage blocks.
+     ============================================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  .rtp-section { background:#0a0a0a; padding:4.5rem 0 5rem; width:100vw; position:relative; left:50%; margin-left:-50vw; box-sizing:border-box; }
+  .rtp-inner { max-width:1280px; margin:0 auto; padding:0 1.5rem; }
+  .rtp-header { text-align:center; margin-bottom:2.5rem; }
+  .rtp-eyebrow { font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin:0 0 0.75rem; }
+  .rtp-heading { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:clamp(2.2rem,5vw,3.2rem); color:#fff; letter-spacing:0.04em; margin:0 0 0.9rem; line-height:1; }
+  .rtp-sub { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:300; color:rgba(255,255,255,0.55); max-width:56ch; margin:0 auto; line-height:1.65; }
+  /* Nike-style: the product IS the tile — big image, minimal chrome */
+  .rtp-row { display:grid; grid-auto-flow:column; grid-auto-columns:clamp(300px,30vw,400px); gap:0.75rem; overflow-x:auto; padding-bottom:0.75rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:rgba(255,255,255,0.15) transparent; }
+  .rtp-card { scroll-snap-align:start; text-decoration:none; display:flex; flex-direction:column; gap:0.15rem; }
+  .rtp-imgwrap { width:100%; aspect-ratio:4/5; background:#111; display:flex; align-items:center; justify-content:center; margin-bottom:0.9rem; overflow:hidden; }
+  .rtp-imgwrap img { width:92%; height:92%; object-fit:contain; transition:transform 0.35s ease; }
+  .rtp-card:hover .rtp-imgwrap img { transform:scale(1.05); }
+  .rtp-name { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:1.35rem; letter-spacing:0.06em; color:#fff; }
+  .rtp-price { font-family:'Outfit',sans-serif; font-size:0.78rem; font-weight:400; color:rgba(255,255,255,0.4); letter-spacing:0.04em; }
+  .rtp-ctas { display:flex; justify-content:center; margin-top:2.4rem; }
+  .rtp-btn { display:inline-block; font-family:'Outfit',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; padding:1rem 2.4rem; background:#fff; color:#0a0a0a; border:1px solid #fff; transition:background 0.2s,color 0.2s; }
+  .rtp-btn:hover { background:transparent; color:#fff; }
+  @media (max-width:768px) { .rtp-row { grid-auto-columns:78vw; } }
+</style>
+
+<section class="rtp-section">
+  <div class="rtp-inner">
+    <div class="rtp-header">
+      <p class="rtp-eyebrow">Collezione Ready-to-Play</p>
+      <h2 class="rtp-heading">PRONTE A GIOCARE. PRONTE DA INDOSSARE.</h2>
+      <p class="rtp-sub">Design dello studio a −10% permanente — una collezione che continua a crescere. Scegli un modello, cambia i colori e fallo tuo in 3D.</p>
+    </div>
+    <div class="rtp-row">
+      <a class="rtp-card" href="/products/the-fracture">
+        <div class="rtp-imgwrap"><img src="https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png" alt="THE FRACTURE — maglia da calcio MOMUTO — Ready-to-Play" loading="lazy" width="520" height="640"></div>
+        <span class="rtp-name">THE FRACTURE</span>
+        <span class="rtp-price">da 19,70 € / maglia</span>
+      </a>
+      <a class="rtp-card" href="/products/the-apex">
+        <div class="rtp-imgwrap"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp" alt="THE APEX — maglia da calcio MOMUTO — Ready-to-Play" loading="lazy" width="520" height="640"></div>
+        <span class="rtp-name">THE APEX</span>
+        <span class="rtp-price">da 19,70 € / maglia</span>
+      </a>
+      <a class="rtp-card" href="/products/the-kinetic">
+        <div class="rtp-imgwrap"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp" alt="THE KINETIC — maglia da calcio MOMUTO — Ready-to-Play" loading="lazy" width="520" height="640"></div>
+        <span class="rtp-name">THE KINETIC</span>
+        <span class="rtp-price">da 19,70 € / maglia</span>
+      </a>
+      <a class="rtp-card" href="/products/the-khala">
+        <div class="rtp-imgwrap"><img src="https://cdn.staticsoe.com/pics/368482b72b5c435b66cfbbabce8943e8ca57434ee5715699faf727aa36709d72.png" alt="THE KHALA — maglia da calcio MOMUTO — Ready-to-Play" loading="lazy" width="520" height="640"></div>
+        <span class="rtp-name">THE KHALA</span>
+        <span class="rtp-price">da 19,70 € / maglia</span>
+      </a>
+      <a class="rtp-card" href="/products/the-legacy">
+        <div class="rtp-imgwrap"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp" alt="THE LEGACY — maglia da calcio MOMUTO — Ready-to-Play" loading="lazy" width="520" height="640"></div>
+        <span class="rtp-name">THE LEGACY</span>
+        <span class="rtp-price">da 19,70 € / maglia</span>
+      </a>
+      <a class="rtp-card" href="/products/the-prism">
+        <div class="rtp-imgwrap"><img src="https://cdn.staticsoe.com/pics/8861a904ded03b3141c5878a5b9d6fc864330eee737204b3d186d724d6c82c51.png" alt="THE PRISM — maglia da calcio MOMUTO — Ready-to-Play" loading="lazy" width="520" height="640"></div>
+        <span class="rtp-name">THE PRISM</span>
+        <span class="rtp-price">da 19,70 € / maglia</span>
+      </a>
+      <a class="rtp-card" href="/products/the-mosaic">
+        <div class="rtp-imgwrap"><img src="https://cdn.staticsoe.com/pics/ae9deb9e17f800bd3140e6d66fb130a31813b202b8bf60485eea441fe361ebc5.png" alt="THE MOSAIC — maglia da calcio MOMUTO — Ready-to-Play" loading="lazy" width="520" height="640"></div>
+        <span class="rtp-name">THE MOSAIC</span>
+        <span class="rtp-price">da 19,70 € / maglia</span>
+      </a>
+    </div>
+    <div class="rtp-ctas">
+      <a href="/pages/collezione-ready-to-play" class="rtp-btn">VEDI LA COLLEZIONE</a>
+    </div>
+  </div>
+</section>
