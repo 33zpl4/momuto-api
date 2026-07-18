@@ -271,11 +271,20 @@ async function rebuildDomain(domain, fetched, alternatesMap) {
   }
 
   // Products → /products/[handle]
+  // Per-order "3d-preview" products (created at checkout so the platform cart
+  // shows the customer's actual design) must NEVER reach the sitemap: they are
+  // unpolished customer designs and thin near-duplicate pages. Tagged via
+  // inner_title at creation; title-prefix match is the fallback net.
+  let skippedPreviews = 0;
+  const PREVIEW_TITLE = /^(Your custom design|Votre design personnalisé|Tu diseño personalizado|Il tuo design personalizzato)\b/;
   for (const p of products) {
     const slug = getSlug(p);
     if (!slug) continue;
+    const inner = String(p.inner_title || '');
+    if (inner.includes('3d-preview') || PREVIEW_TITLE.test(String(p.title || ''))) { skippedPreviews++; continue; }
     entries.push({ loc: `${domain.baseUrl}/products/${slug}`, lastmod: getLastmod(p, today), changefreq: 'monthly', priority: '0.8' });
   }
+  if (skippedPreviews) console.log(`  (excluded ${skippedPreviews} 3d-preview order products from sitemap)`);
 
   // Blog index + posts → /blogs/[handle]
   entries.push({ loc: `${domain.baseUrl}/blogs`, lastmod: today, changefreq: 'weekly', priority: '0.7' });

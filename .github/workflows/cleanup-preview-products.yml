@@ -1,0 +1,49 @@
+name: Cleanup 3D Preview Products
+
+# Unpublishes stale per-order "3d-preview" products (created at checkout so
+# the platform cart shows the customer's real design). They should not stay
+# publicly browsable — unpolished customer designs, thin pages.
+#
+#   • Daily at 05:00 UTC (unpublish, age >= 3 days).
+#   • Dispatch for a dry run or to change mode/age.
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — list only, no writes'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+      mode:
+        description: 'unpublish (reversible) or delete'
+        required: false
+        default: 'unpublish'
+        type: choice
+        options: ['unpublish', 'delete']
+      age_days:
+        description: 'Minimum age in days'
+        required: false
+        default: '3'
+        type: string
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Sweep preview products
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          DRY_RUN: ${{ github.event_name == 'schedule' && 'false' || inputs.dry_run }}
+          MODE: ${{ inputs.mode || 'unpublish' }}
+          AGE_DAYS: ${{ inputs.age_days || '3' }}
+        run: node scripts/cleanup-preview-products.js
