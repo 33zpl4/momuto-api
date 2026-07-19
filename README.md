@@ -37,6 +37,10 @@ You can confirm this in OEMSaaS Admin → Settings → System → Developer
 
 ## Creating a new team page
 
+> 📘 **Full step-by-step agent procedure:** see [`ADD_TEAM.md`](ADD_TEAM.md) —
+> slug rules, config schema, color-selection rules, the `add-to-gallery` switch,
+> image updates, and gallery-removal caveats.
+
 ### ⚠️ Pre-deployment checklist
 
 **CRITICAL:** Before committing a team config, verify these match the actual jersey image:
