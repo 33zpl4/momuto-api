@@ -52,6 +52,15 @@ module.exports = async function handler(req, res) {
     const order = await kv.get(`order:${id}`);
     if (!order || !order.paidAt) continue;  // only process paid orders
 
+    // Excluded orders (e.g. historical orders the webhook picked up on a
+    // platform re-sync) must never receive lifecycle mail, even if they are
+    // still listed in orders:active. admin-orders removes them, this is belt.
+    if (order.stopLifecycle || order.status === 'excluded') {
+      await kv.srem('orders:active', id);
+      results.skipped.push(id);
+      continue;
+    }
+
     const days = daysSince(order.paidAt);   // clock starts from payment date
     const sent = order.emailsSent || [];
 
