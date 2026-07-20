@@ -29,6 +29,9 @@
     },
     "api/order-3d-paid.js": {
       "maxDuration": 15
+    },
+    "api/admin-orders.js": {
+      "maxDuration": 30
     }
   },
   "crons": [
