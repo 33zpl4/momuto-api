@@ -38,7 +38,7 @@
     {
       "@type": "Question",
       "name": "Di chi è il design finale?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Tuo. La ricreazione è costruita dal tuo concept, per la tua squadra, e non rivendiamo mai il tuo design. Con il tuo permesso, possiamo mostrare la trasformazione da concept a maglia nella nostra galleria." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Tuo. La ricreazione è costruita dal tuo concept, per la tua squadra, e non rivendiamo mai il tuo design. I progetti completati possono comparire come casi prima/dopo nella nostra galleria — dicci se preferisci non comparire e non lo faremo." }
     },
     {
       "@type": "Question",
@@ -204,7 +204,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <details><summary>Una maglia disegnata con l'IA si pu&ograve; davvero fabbricare?</summary><p>S&igrave; &mdash; ma non direttamente. I render IA sono immagini, non file di produzione: gradienti non calibrati, pattern che ignorano le cuciture, forme non vettorializzate. I nostri designer ricostruiscono il concept come file pronto per la produzione preservando la tua visione, e lo fabbrichiamo. Primo bozzetto in 24&ndash;48h.</p></details>
 <details><summary>Quali strumenti IA posso usare?</summary><p>Qualsiasi. ChatGPT, Midjourney, Gemini, DALL&middot;E, generatori specializzati &mdash; ma anche schizzi, file Photoshop e foto di vecchie maglie. Se puoi mostrarlo, possiamo ricostruirlo.</p></details>
 <details><summary>Posso ordinare una sola maglia?</summary><p>S&igrave; &mdash; nessun ordine minimo. Maglie singole per regali, pezzi da portfolio e collezionisti. Il deposito design di 15&nbsp;&euro; &egrave; interamente accreditato sugli ordini di 5 o pi&ugrave; maglie.</p></details>
-<details><summary>Di chi &egrave; il design finale?</summary><p>Tuo. Lo costruiamo dal tuo concept, per la tua squadra, e non lo rivendiamo mai. Con il tuo permesso, possiamo mostrare la trasformazione nella nostra galleria.</p></details>
+<details><summary>Di chi &egrave; il design finale?</summary><p>Tuo. Lo costruiamo dal tuo concept, per la tua squadra, e non lo rivendiamo mai. I progetti completati possono comparire come casi prima/dopo nella nostra galleria &mdash; dicci se preferisci non comparire.</p></details>
 <details><summary>Quanto costa?</summary><p>15&nbsp;&euro; per mettere un designer sul tuo concept &mdash; interamente accreditati a partire da 5 maglie, rimborsati se non prosegui. Maglie da 20,90&nbsp;&euro;/unit&agrave; da 10 in su (38,90&nbsp;&euro; il singolo pezzo).</p></details>
 </div>
 </section>

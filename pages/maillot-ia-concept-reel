@@ -38,7 +38,7 @@
     {
       "@type": "Question",
       "name": "Qui possède le design final ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Vous. La recréation est construite à partir de votre concept, pour votre équipe, et nous ne revendons jamais votre design. Avec votre accord, nous pouvons présenter la transformation concept-maillot dans notre galerie." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Vous. La recréation est construite à partir de votre concept, pour votre équipe, et nous ne revendons jamais votre design. Les projets terminés peuvent apparaître en études de cas avant/après dans notre galerie — dites-nous si vous préférez ne pas y figurer, et nous ne le ferons pas." }
     },
     {
       "@type": "Question",
@@ -204,7 +204,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <details><summary>Un design de maillot g&eacute;n&eacute;r&eacute; par IA peut-il vraiment &ecirc;tre fabriqu&eacute; ?</summary><p>Oui &mdash; mais pas directement. Les rendus IA sont des images, pas des fichiers de production : d&eacute;grad&eacute;s non calibr&eacute;s, motifs qui ignorent les coutures, formes non vectoris&eacute;es. Nos designers reconstruisent le concept en fichier pr&ecirc;t &agrave; produire en pr&eacute;servant votre vision, puis nous le fabriquons. Premi&egrave;re maquette en 24&ndash;48h.</p></details>
 <details><summary>Quels outils IA puis-je utiliser ?</summary><p>Tous. ChatGPT, Midjourney, Gemini, DALL&middot;E, g&eacute;n&eacute;rateurs sp&eacute;cialis&eacute;s &mdash; mais aussi croquis, fichiers Photoshop et photos d'anciens maillots. Si vous pouvez le montrer, nous pouvons le reconstruire.</p></details>
 <details><summary>Puis-je commander un seul maillot ?</summary><p>Oui &mdash; pas de commande minimale. Maillots &agrave; l'unit&eacute; pour cadeaux, pi&egrave;ces de portfolio et collectionneurs. L'acompte design de 15&nbsp;&euro; est int&eacute;gralement cr&eacute;dit&eacute; sur les commandes de 5 maillots ou plus.</p></details>
-<details><summary>Qui poss&egrave;de le design final ?</summary><p>Vous. Nous le construisons &agrave; partir de votre concept, pour votre &eacute;quipe, et nous ne le revendons jamais. Avec votre accord, nous pouvons pr&eacute;senter la transformation dans notre galerie.</p></details>
+<details><summary>Qui poss&egrave;de le design final ?</summary><p>Vous. Nous le construisons &agrave; partir de votre concept, pour votre &eacute;quipe, et nous ne le revendons jamais. Les projets termin&eacute;s peuvent appara&icirc;tre en &eacute;tudes de cas avant/apr&egrave;s dans notre galerie &mdash; dites-nous si vous pr&eacute;f&eacute;rez ne pas y figurer.</p></details>
 <details><summary>Combien &ccedil;a co&ucirc;te ?</summary><p>15&nbsp;&euro; pour mettre un designer sur votre concept &mdash; int&eacute;gralement cr&eacute;dit&eacute;s d&egrave;s 5 maillots, rembours&eacute;s si vous ne poursuivez pas. Maillots &agrave; partir de 20,90&nbsp;&euro;/unit&eacute; d&egrave;s 10 (38,90&nbsp;&euro; &agrave; l'unit&eacute;).</p></details>
 </div>
 </section>

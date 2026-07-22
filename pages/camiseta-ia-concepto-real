@@ -38,7 +38,7 @@
     {
       "@type": "Question",
       "name": "¿De quién es el diseño final?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Tuyo. La recreación se construye a partir de tu concepto, para tu equipo, y nunca revendemos tu diseño. Con tu permiso, podemos mostrar la transformación de concepto a camiseta en nuestra galería." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Tuyo. La recreación se construye a partir de tu concepto, para tu equipo, y nunca revendemos tu diseño. Los proyectos terminados pueden aparecer como casos antes/después en nuestra galería — dinos si prefieres no aparecer y no lo haremos." }
     },
     {
       "@type": "Question",
@@ -204,7 +204,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <details><summary>&iquest;Se puede fabricar de verdad una camiseta dise&ntilde;ada con IA?</summary><p>S&iacute; &mdash; pero no directamente. Los dise&ntilde;os de IA son im&aacute;genes, no archivos de producci&oacute;n: degradados sin calibrar, patrones que ignoran las costuras, formas sin vectorizar. Nuestros dise&ntilde;adores reconstruyen el concepto como archivo listo para producir preservando tu visi&oacute;n, y lo fabricamos. Primera propuesta en 24&ndash;48h.</p></details>
 <details><summary>&iquest;Qu&eacute; herramientas de IA puedo usar?</summary><p>Cualquiera. ChatGPT, Midjourney, Gemini, DALL&middot;E, generadores especializados &mdash; y tambi&eacute;n bocetos, archivos de Photoshop y fotos de camisetas antiguas. Si puedes ense&ntilde;arlo, podemos reconstruirlo.</p></details>
 <details><summary>&iquest;Puedo pedir una sola camiseta?</summary><p>S&iacute; &mdash; sin pedido m&iacute;nimo. Camisetas sueltas para regalos, piezas de portfolio y coleccionistas. El dep&oacute;sito de dise&ntilde;o de 15&nbsp;&euro; se abona &iacute;ntegramente en pedidos de 5 o m&aacute;s camisetas.</p></details>
-<details><summary>&iquest;De qui&eacute;n es el dise&ntilde;o final?</summary><p>Tuyo. Lo construimos a partir de tu concepto, para tu equipo, y nunca lo revendemos. Con tu permiso, podemos mostrar la transformaci&oacute;n en nuestra galer&iacute;a.</p></details>
+<details><summary>&iquest;De qui&eacute;n es el dise&ntilde;o final?</summary><p>Tuyo. Lo construimos a partir de tu concepto, para tu equipo, y nunca lo revendemos. Los proyectos terminados pueden aparecer como casos antes/despu&eacute;s en nuestra galer&iacute;a &mdash; dinos si prefieres no aparecer.</p></details>
 <details><summary>&iquest;Cu&aacute;nto cuesta?</summary><p>15&nbsp;&euro; para poner a un dise&ntilde;ador con tu concepto &mdash; abonados &iacute;ntegramente a partir de 5 camisetas, devueltos si no contin&uacute;as. Camisetas desde 21,90&nbsp;&euro;/unidad a partir de 10 (38,90&nbsp;&euro; la unidad).</p></details>
 </div>
 </section>
