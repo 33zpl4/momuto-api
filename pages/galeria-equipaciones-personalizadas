@@ -348,9 +348,10 @@
 <section class="hero">
 <div class="hero-badge">El Archivo MOMUTO</div>
 <h1 class="hero-title">Dise&ntilde;o de Equipaciones de F&uacute;tbol a Medida.<br /><span class="highlight-red">Identidad.</span></h1>
-<p class="hero-subtitle">Explora los dise&ntilde;os personalizados que hemos creado para clubes de f&uacute;tbol de todo el mundo. Sin plantillas. Solo identidad pura.</p>
+<p class="hero-subtitle">Cada camiseta de abajo empez&oacute; como una referencia que un equipo nos envi&oacute; &mdash; un dise&ntilde;o hecho con IA, un boceto a mano, una foto, una idea. Nuestros dise&ntilde;adores la recrearon como una equipaci&oacute;n real, lista para fabricar. Ese es nuestro oficio: <strong>t&uacute; lo imaginas, nosotros lo hacemos realidad.</strong></p>
 <div class="stats-grid">
-<div class="stat-item"><span class="stat-number">150+</span> <span class="stat-label">Equipos Vestidos</span></div>
+<div class="stat-item"><span class="stat-number">150+</span> <span class="stat-label">Dise&ntilde;os Recreados</span></div>
+<div class="stat-item"><span class="stat-number">48h</span> <span class="stat-label">De Referencia a Propuesta</span></div>
 <div class="stat-item"><span class="stat-number">10+</span> <span class="stat-label">Pa&iacute;ses</span></div>
 <div class="stat-item"><span class="stat-number">25-30 D&iacute;as</span> <span class="stat-label">Tiempo de Entrega</span></div>
 </div>
@@ -363,9 +364,9 @@
 <div style="text-align: center;"><button id="loadMoreBtn" class="btn-outline">Ver M&aacute;s Dise&ntilde;os</button></div>
 </section>
 <section class="cta-section">
-<h2>&iquest;Listo para destacar?</h2>
-<p>&Uacute;nete al club. Recibe tu propuesta de dise&ntilde;o gratuita en 48 horas.</p>
-<a href="https://es.momuto.com/pages/solicitud-de-diseno-personalizado" class="btn-primary">Solicitar Dise&ntilde;o Personalizado</a></section>
+<h2>&iquest;Tienes un concepto? Lo hacemos realidad.</h2>
+<p>Env&iacute;anos lo que sea &mdash; un dise&ntilde;o hecho con IA, un boceto, una captura de pantalla, o simplemente tus colores &mdash; y un dise&ntilde;ador lo convierte en una equipaci&oacute;n lista para fabricar. Primera propuesta en 48 horas. Dep&oacute;sito de 15&nbsp;&euro;, abonado &iacute;ntegramente al pedido a partir de 5 camisetas. Mira <a href="https://es.momuto.com/pages/camiseta-ia-concepto-real" style="color:var(--mg-red);">c&oacute;mo convertimos conceptos de IA en camisetas reales</a>.</p>
+<a href="https://es.momuto.com/pages/solicitud-de-diseno-personalizado" class="btn-primary">Enviar Tu Concepto</a></section>
 <script>
         const designs = [
     {
@@ -673,7 +674,7 @@ galleryGrid.appendChild(card);
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "MOMUTO Equipación de Fútbol Personalizada",
-  "description": "Equipaciones de fútbol completamente personalizadas de grado profesional con impresión completa de sublimación. Mezcla polyester-elastano de rendimiento como estándar. Diseño profesional gratuito en 1-2 días. Sin pedido mínimo. Badges de silicona 3D opcionales para pedidos mayores. Entrega en 25-30 días en todo el mundo.",
+  "description": "Equipaciones de fútbol completamente personalizadas de grado profesional con impresión completa de sublimación. Mezcla polyester-elastano de rendimiento como estándar. Recreación de tu concepto (diseño IA, boceto, referencia) por un diseñador en 1-2 días — depósito de 15 €, abonado íntegramente a partir de 5 camisetas. Sin pedido mínimo. Badges de silicona 3D opcionales para pedidos mayores. Entrega en 25-30 días en todo el mundo.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Equipaciones de Fútbol Personalizadas",
   "material": "Mezcla polyester-elastano de rendimiento (estándar en todos los kits)",
@@ -699,15 +700,15 @@ galleryGrid.appendChild(card);
   },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.4",
-    "reviewCount": "17",
+    "ratingValue": "4.5",
+    "reviewCount": "30",
     "bestRating": "5",
     "worstRating": "1"
   },
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Pedido Mínimo", "value": "Sin mínimo — pide 1 kit o 100+" },
     { "@type": "PropertyValue", "name": "Método de Impresión", "value": "Sublimación total de tinta — garantía de por vida contra desprendimientos, grietas o decoloración" },
-    { "@type": "PropertyValue", "name": "Servicio de Diseño", "value": "Propuesta de diseño profesional gratuita en 1-2 días, revisiones ilimitadas incluidas" },
+    { "@type": "PropertyValue", "name": "Servicio de Diseño", "value": "Propuesta de diseño profesional en 1-2 días, revisiones incluidas — depósito de 15 €, abonado íntegramente en pedidos de 5 o más camisetas" },
     { "@type": "PropertyValue", "name": "Configurador 3D", "value": "Configurador 3D en tiempo real con 30+ plantillas profesionales" },
     { "@type": "PropertyValue", "name": "Tela", "value": "Mezcla polyester-elastano como estándar — los competidores incluyen elastano solo en niveles premium" },
     { "@type": "PropertyValue", "name": "Badges de Silicona 3D", "value": "Badges de silicona 3D premium disponibles para pedidos más grandes — un acabado profesional raramente ofrecido por competidores" },
@@ -720,7 +721,7 @@ galleryGrid.appendChild(card);
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Cómo Pedir Equipaciones de Fútbol Personalizadas de MOMUTO",
-  "description": "Obtén equipaciones de fútbol completamente personalizadas de grado profesional en 3 pasos: diseña usando el configurador 3D o solicita una propuesta profesional gratuita, aprueba tu diseño, y recibe tus equipaciones en 25-30 días en todo el mundo.",
+  "description": "Obtén equipaciones de fútbol completamente personalizadas de grado profesional en 3 pasos: diseña usando el configurador 3D o envía tu concepto para recrearlo (depósito de 15 €, abonado a partir de 5 camisetas), aprueba tu diseño, y recibe tus equipaciones en 25-30 días en todo el mundo.",
   "totalTime": "P25D",
   "estimatedCost": {
     "@type": "MonetaryAmount",
@@ -732,13 +733,13 @@ galleryGrid.appendChild(card);
       "@type": "HowToStep",
       "position": 1,
       "name": "Diseña Tu Equipación",
-      "text": "Usa el configurador 3D en tiempo real de MOMUTO con 30+ plantillas profesionales para diseñar al instante, o envía tu brief (escudo, colores, referencias) a través del sitio web, WhatsApp o correo electrónico para recibir una propuesta completamente personalizada y gratuita en 1-2 días."
+      "text": "Usa el configurador 3D en tiempo real de MOMUTO con 30+ plantillas profesionales para diseñar al instante, o envía tu concepto (diseño IA, boceto, escudo, colores, referencias) a través del sitio web, WhatsApp o correo electrónico para recibir una propuesta completamente personalizada en 1-2 días — depósito de 15 €, abonado íntegramente a partir de 5 camisetas."
     },
     {
       "@type": "HowToStep",
       "position": 2,
       "name": "Revisa y Aprueba",
-      "text": "Revisa tu propuesta de diseño y solicita cualquier revisión — todo gratuito. Confirma tu pedido con el desglose de tallas. Sin pedido mínimo. Actualización opcional de badges de silicona 3D disponible para pedidos más grandes."
+      "text": "Revisa tu propuesta de diseño y solicita cualquier revisión — incluidas. Confirma tu pedido con el desglose de tallas. Sin pedido mínimo. Actualización opcional de badges de silicona 3D disponible para pedidos más grandes."
     },
     {
       "@type": "HowToStep",
