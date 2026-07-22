@@ -211,6 +211,57 @@ function buildPageHTML(config, content, domain) {
   const accentColor = config.accent_color || config.primary_color || '#e63946';
   const hasHomeAway = !!(config.away_image_url);
   const hasBack = !!config.back_image_url;
+  const hasRef = !!config.reference_image_url;
+
+  // "Concept we received → MOMUTO recreation" split. Optional: only renders
+  // when teams/<slug>/config.json has reference_image_url (the customer's own
+  // AI render / sketch / photo). reference_type picks the label; anything
+  // unknown falls back to the generic one. Existing configs are untouched.
+  const REF_I18N = {
+    en: { heading: 'From Concept to Kit', received: 'The concept we received', recreated: 'MOMUTO recreation',
+          types: { 'ai-concept': 'AI concept', 'sketch': 'Hand-drawn sketch', 'photo': 'Photo reference', 'old-kit': 'Old kit reference' }, generic: 'Reference',
+          blurb: (team) => `This design didn't start in our studio — it started with ${team}'s own reference. Our designers rebuilt it for real fabric, seams and sublimation printing.`,
+          more: 'See how we turn concepts into real kits', moreUrl: 'https://www.momuto.com/pages/ai-concept-to-real-kit' },
+    es: { heading: 'Del Concepto a la Camiseta', received: 'El concepto recibido', recreated: 'Recreación MOMUTO',
+          types: { 'ai-concept': 'Concepto IA', 'sketch': 'Boceto a mano', 'photo': 'Referencia fotográfica', 'old-kit': 'Camiseta antigua' }, generic: 'Referencia',
+          blurb: (team) => `Este diseño no nació en nuestro estudio: nació de la referencia que nos envió ${team}. Nuestros diseñadores lo reconstruyeron para tela real, costuras y sublimación.`,
+          more: 'Mira cómo convertimos conceptos en camisetas reales', moreUrl: 'https://es.momuto.com/pages/camiseta-ia-concepto-real' },
+    fr: { heading: 'Du Concept au Maillot', received: 'Le concept reçu', recreated: 'Recréation MOMUTO',
+          types: { 'ai-concept': 'Concept IA', 'sketch': 'Croquis à la main', 'photo': 'Référence photo', 'old-kit': 'Ancien maillot' }, generic: 'Référence',
+          blurb: (team) => `Ce design n'est pas né dans notre studio — il est né de la référence envoyée par ${team}. Nos designers l'ont reconstruit pour le vrai tissu, les coutures et la sublimation.`,
+          more: 'Voyez comment nous transformons les concepts en vrais maillots', moreUrl: 'https://fr.momuto.com/pages/maillot-ia-concept-reel' },
+    it: { heading: 'Dal Concept alla Maglia', received: 'Il concept ricevuto', recreated: 'Ricreazione MOMUTO',
+          types: { 'ai-concept': 'Concept IA', 'sketch': 'Schizzo a mano', 'photo': 'Riferimento fotografico', 'old-kit': 'Vecchia maglia' }, generic: 'Riferimento',
+          blurb: (team) => `Questo design non è nato nel nostro studio: è nato dal riferimento inviato da ${team}. I nostri designer l'hanno ricostruito per tessuto vero, cuciture e sublimazione.`,
+          more: 'Scopri come trasformiamo i concept in maglie vere', moreUrl: 'https://it.momuto.com/pages/maglia-ia-concetto-reale' },
+  };
+  const refI18n = REF_I18N[domain.lang] || REF_I18N.en;
+  const refTypeLabel = refI18n.types[config.reference_type] || refI18n.generic;
+
+  const refCSS = hasRef ? `
+.ref-section { max-width: 700px; margin: 0 auto 4rem; padding: 0 1.5rem; }
+.ref-title { font-weight: 900; font-size: 1.8rem; text-transform: uppercase; margin-bottom: 0.5rem; color: white; text-align: center; }
+.ref-blurb { color: var(--text-muted); font-size: 0.9rem; text-align: center; margin-bottom: 2rem; }
+.ref-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); }
+.ref-side { position: relative; background: #0d0d0d; }
+.ref-side img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 4/5; }
+.ref-lab { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 10px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(0,0,0,0.78); color: var(--text-muted); }
+.ref-lab.after { color: #fff; background: var(--accent); }
+.ref-type { text-align: center; margin-top: 0.9rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.ref-more { text-align: center; margin-top: 1.2rem; }
+.ref-more a { color: var(--text-muted); font-size: 0.82rem; }` : '';
+
+  const referenceSection = hasRef ? `
+<div class="ref-section">
+  <h2 class="ref-title">${refI18n.heading}</h2>
+  <p class="ref-blurb">${safe(refI18n.blurb(config.team_name))}</p>
+  <div class="ref-split">
+    <div class="ref-side"><img src="${safe(config.reference_image_url)}" alt="${safe(config.team_name)} — ${refTypeLabel}" loading="lazy" /><span class="ref-lab">${refI18n.received}</span></div>
+    <div class="ref-side"><img src="${safe(config.image_url)}" alt="${safe(config.team_name)} — ${refI18n.recreated}" loading="lazy" /><span class="ref-lab after">${refI18n.recreated}</span></div>
+  </div>
+  <div class="ref-type">${refTypeLabel}</div>
+  <div class="ref-more"><a href="${refI18n.moreUrl}">${refI18n.more} &rarr;</a></div>
+</div>` : '';
 
   // Home/away kit toggle CSS + front/back toggle CSS — unified toolbar row
   const homeAwayCSS = hasHomeAway ? `
@@ -488,7 +539,7 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 .lightbox-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 9999; touch-action: none; }
 .lightbox-overlay.active { display: flex; justify-content: center; align-items: center; }
 .lightbox-img { max-width: 100%; max-height: 100%; transition: transform 0.2s; }
-.lightbox-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; cursor: pointer; z-index: 10001; }${toggleCSS}${homeAwayCSS}
+.lightbox-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; cursor: pointer; z-index: 10001; }${toggleCSS}${homeAwayCSS}${refCSS}
 </style>
 
 <section class="hero">
@@ -515,7 +566,7 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
     <p class="story-p" style="opacity:0.7;font-size:0.85rem;">${safe(content.design_story_full)}</p>
   </div>
 </div>
-
+${referenceSection}
 <div class="performance-section">
   <h2 class="performance-title">${domain.performanceTitle}</h2>
   <p class="performance-subtitle">${domain.performanceSubtitle}</p>

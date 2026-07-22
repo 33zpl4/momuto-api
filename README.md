@@ -74,9 +74,25 @@ Create a file at `teams/[team-slug]/config.json`:
   "secondary_color": "#hexcolor",
   "accent_color": "#hexcolor",
   "image_url": "https://cdn.staticsoe.com/pics/...",
-  "back_image_url": "https://cdn.staticsoe.com/pics/..."  ← optional, enables front/back toggle
+  "back_image_url": "https://cdn.staticsoe.com/pics/...",  ← optional, enables front/back toggle
+  "reference_image_url": "https://cdn.staticsoe.com/pics/...",  ← optional, see below
+  "reference_type": "ai-concept"  ← optional: ai-concept | sketch | photo | old-kit
 }
 ```
+
+### Concept → recreation split ("From Concept to Kit")
+
+When `reference_image_url` is present, the page renders a side-by-side section
+under the design story: the customer's original reference on the left ("The
+concept we received") and our kit on the right ("MOMUTO recreation"), with a
+link to the AI-concept hub page (`/pages/ai-concept-to-real-kit` and locale
+equivalents). `reference_type` picks the label; unknown/absent values fall
+back to a generic "Reference". Labels are localized per store automatically.
+
+This is the proof engine for the concept-to-real positioning: whenever a
+deposit customer agrees to be featured, add their original reference to the
+config and the team page becomes a before/after case study. Configs without
+the field are completely unaffected.
 
 ### Front/Back toggle
 

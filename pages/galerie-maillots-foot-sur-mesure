@@ -348,9 +348,10 @@
 <section class="hero">
 <div class="hero-badge">Les Archives MOMUTO</div>
 <h1 class="hero-title">Cr&eacute;ation de Maillots de Football Sur Mesure.<br /><span class="highlight-red">Identit&eacute;.</span></h1>
-<p class="hero-subtitle">D&eacute;couvrez les designs personnalis&eacute;s que nous avons cr&eacute;&eacute;s pour des clubs de football du monde entier. Pas de mod&egrave;les. Juste une identit&eacute; pure.</p>
+<p class="hero-subtitle">Chaque maillot ci-dessous est parti d'une r&eacute;f&eacute;rence qu'une &eacute;quipe nous a envoy&eacute;e &mdash; un rendu IA, un croquis, une photo, une id&eacute;e. Nos designers l'ont recr&eacute;&eacute;e en maillot r&eacute;el, pr&ecirc;t &agrave; produire. C'est notre m&eacute;tier&nbsp;: <strong>vous l'imaginez, on le fabrique.</strong></p>
 <div class="stats-grid">
-<div class="stat-item"><span class="stat-number">150+</span> <span class="stat-label">&Eacute;quipes Habill&eacute;es</span></div>
+<div class="stat-item"><span class="stat-number">150+</span> <span class="stat-label">Designs Recr&eacute;&eacute;s</span></div>
+<div class="stat-item"><span class="stat-number">48h</span> <span class="stat-label">De la R&eacute;f&eacute;rence &agrave; la Maquette</span></div>
 <div class="stat-item"><span class="stat-number">10+</span> <span class="stat-label">Pays</span></div>
 <div class="stat-item"><span class="stat-number">25-30 Jours</span> <span class="stat-label">D&eacute;lai de Livraison</span></div>
 </div>
@@ -363,9 +364,9 @@
 <div style="text-align: center;"><button id="loadMoreBtn" class="btn-outline">Voir Plus de Designs</button></div>
 </section>
 <section class="cta-section">
-<h2>Pr&ecirc;t &agrave; vous d&eacute;marquer ?</h2>
-<p>Rejoignez le club. Recevez votre proposition de design en 48 heures — acompte de 15 €, intégralement crédité sur la commande dès 5 maillots.</p>
-<a href="https://fr.momuto.com/pages/demande-de-design-professionnel-de-maillots" class="btn-primary">Demander un Design Personnalis&eacute;</a></section>
+<h2>Vous avez un concept ? On le rend r&eacute;el.</h2>
+<p>Envoyez-nous n'importe quoi &mdash; un rendu IA, un croquis, une capture d'&eacute;cran, ou simplement vos couleurs &mdash; et un designer le transforme en maillot pr&ecirc;t &agrave; produire. Premi&egrave;re maquette en 48 heures. Acompte de 15&nbsp;&euro;, int&eacute;gralement cr&eacute;dit&eacute; sur la commande d&egrave;s 5 maillots. D&eacute;couvrez <a href="https://fr.momuto.com/pages/maillot-ia-concept-reel" style="color:var(--mg-red);">comment nous transformons les concepts IA en vrais maillots</a>.</p>
+<a href="https://fr.momuto.com/pages/demande-de-design-professionnel-de-maillots" class="btn-primary">Envoyer Votre Concept</a></section>
 <script>
         const designs = [
     {
@@ -674,7 +675,7 @@ galleryGrid.appendChild(card);
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "MOMUTO Maillot de Football Personnalisé",
-  "description": "Maillots de football entièrement personnalisés de qualité professionnelle avec impression complète par sublimation. Mélange polyester-élasthanne haute performance en standard. Design professionnel gratuit en 1-2 jours. Pas de commande minimale. Badges silicone 3D optionnels pour les commandes plus importantes. Livraison en 25-30 jours dans le monde entier.",
+  "description": "Maillots de football entièrement personnalisés de qualité professionnelle avec impression complète par sublimation. Mélange polyester-élasthanne haute performance en standard. Recréation de votre concept (rendu IA, croquis, référence) par un designer en 1-2 jours — acompte de 15 €, intégralement crédité dès 5 maillots. Pas de commande minimale. Badges silicone 3D optionnels pour les commandes plus importantes. Livraison en 25-30 jours dans le monde entier.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Maillots de Football Personnalisés",
   "material": "Mélange polyester-élasthanne haute performance (standard sur tous les maillots)",
@@ -700,15 +701,15 @@ galleryGrid.appendChild(card);
   },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.4",
-    "reviewCount": "17",
+    "ratingValue": "4.5",
+    "reviewCount": "30",
     "bestRating": "5",
     "worstRating": "1"
   },
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Commande Minimale", "value": "Pas de minimum — commandez 1 maillot ou 100+" },
     { "@type": "PropertyValue", "name": "Méthode d'Impression", "value": "Sublimation complète — garantie à vie contre le pelage, les craquelures ou la décoloration" },
-    { "@type": "PropertyValue", "name": "Service de Design", "value": "Proposa de design professionnel gratuite en 1-2 jours, révisions illimitées incluses" },
+    { "@type": "PropertyValue", "name": "Service de Design", "value": "Proposition de design professionnelle en 1-2 jours, révisions incluses — acompte de 15 €, intégralement crédité sur les commandes de 5 maillots ou plus" },
     { "@type": "PropertyValue", "name": "Configurateur 3D", "value": "Configurateur 3D en temps réel avec 30+ modèles professionnels" },
     { "@type": "PropertyValue", "name": "Tissu", "value": "Mélange polyester-élasthanne en standard — les concurrents incluent l'élasthanne uniquement dans les niveaux premium" },
     { "@type": "PropertyValue", "name": "Badges Silicone 3D", "value": "Badges silicone 3D premium disponibles pour les commandes plus importantes — une finition professionnelle rarement proposée par les concurrents" },
@@ -721,7 +722,7 @@ galleryGrid.appendChild(card);
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Comment Commander des Maillots de Football Personnalisés chez MOMUTO",
-  "description": "Obtenez des maillots de football entièrement personnalisés de qualité professionnelle en 3 étapes : concevez à l'aide du configurateur 3D ou demandez une proposta gratuite, approuvez votre design, et recevez vos maillots en 25-30 jours dans le monde entier.",
+  "description": "Obtenez des maillots de football entièrement personnalisés de qualité professionnelle en 3 étapes : concevez à l'aide du configurateur 3D ou envoyez votre concept à recréer (acompte de 15 €, crédité dès 5 maillots), approuvez votre design, et recevez vos maillots en 25-30 jours dans le monde entier.",
   "totalTime": "P25D",
   "estimatedCost": {
     "@type": "MonetaryAmount",
@@ -733,13 +734,13 @@ galleryGrid.appendChild(card);
       "@type": "HowToStep",
       "position": 1,
       "name": "Concevez Votre Maillot",
-      "text": "Utilisez le configurateur 3D en temps réel de MOMUTO avec 30+ modèles professionnels pour concevoir instantanément, ou soumettez votre brief (badge, couleurs, références) via le site web, WhatsApp ou email pour recevoir une proposta entièrement personnalisée et gratuite en 1-2 jours."
+      "text": "Utilisez le configurateur 3D en temps réel de MOMUTO avec 30+ modèles professionnels pour concevoir instantanément, ou envoyez votre concept (rendu IA, croquis, badge, couleurs, références) via le site web, WhatsApp ou email pour recevoir une proposition entièrement personnalisée en 1-2 jours — acompte de 15 €, intégralement crédité dès 5 maillots."
     },
     {
       "@type": "HowToStep",
       "position": 2,
       "name": "Examinez et Approuvez",
-      "text": "Examinez votre proposta de design et demandez les révisions que vous souhaitez — toutes gratuites. Confirmez votre commande avec la répartition des tailles. Pas de commande minimale. Mise à niveau optionnelle du badge silicone 3D disponible pour les commandes plus importantes."
+      "text": "Examinez votre proposition de design et demandez les révisions que vous souhaitez — incluses. Confirmez votre commande avec la répartition des tailles. Pas de commande minimale. Mise à niveau optionnelle du badge silicone 3D disponible pour les commandes plus importantes."
     },
     {
       "@type": "HowToStep",

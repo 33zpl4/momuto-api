@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Kit da Calcio Personalizzato MOMUTO",
-  "description": "Maglia e pantaloncini da calcio professionali 100% personalizzabili con stampa a sublimazione totale. Tessuto performance in poliestere-elastan come standard. Design professionale gratuito in 1-2 giorni. Nessun ordine minimo. Badge in silicone 3D opzionali per ordini più grandi. Consegna in 25-30 giorni in tutto il mondo.",
+  "description": "Maglia e pantaloncini da calcio professionali 100% personalizzabili con stampa a sublimazione totale. Tessuto performance in poliestere-elastan come standard. Ricreazione del tuo concept (render IA, schizzo, riferimento) da parte di un designer in 1-2 giorni — deposito di 15 €, interamente accreditato sugli ordini di 5 o più maglie. Nessun ordine minimo. Badge in silicone 3D opzionali per ordini più grandi. Consegna in 25-30 giorni in tutto il mondo.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "category": "Kit da Calcio Personalizzati",
   "material": "Tessuto performance in poliestere-elastan (standard su tutti i kit)",
@@ -29,15 +29,15 @@
   },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.4",
-    "reviewCount": "17",
+    "ratingValue": "4.5",
+    "reviewCount": "30",
     "bestRating": "5",
     "worstRating": "1"
   },
   "additionalProperty": [
     { "@type": "PropertyValue", "name": "Ordine Minimo", "value": "Nessun minimo — ordina 1 kit o 100+" },
     { "@type": "PropertyValue", "name": "Metodo di Stampa", "value": "Sublimazione totale — garanzia a vita contro sfaldamento, crepe o sbiadimento" },
-    { "@type": "PropertyValue", "name": "Servizio Design", "value": "Bozzetto professionale gratuito in 1-2 giorni, revisioni gratuite incluse" },
+    { "@type": "PropertyValue", "name": "Servizio Design", "value": "Bozzetto professionale in 1-2 giorni, revisioni incluse — deposito di 15 €, interamente accreditato sugli ordini di 5 o più maglie" },
     { "@type": "PropertyValue", "name": "Configuratore 3D", "value": "Configuratore kit 3D in tempo reale con 30+ template professionali" },
     { "@type": "PropertyValue", "name": "Tessuto", "value": "Misto poliestere-elastan come standard — i competitor includono l'elastan solo nei livelli premium" },
     { "@type": "PropertyValue", "name": "Badge in Silicone 3D", "value": "Badge premium in silicone 3D disponibili per ordini più grandi — una finitura professionale raramente offerta dai competitor" },
@@ -50,7 +50,7 @@
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Come Ordinare Kit da Calcio Personalizzati da MOMUTO",
-  "description": "Ottieni kit da calcio professionali completamente personalizzati in 3 passaggi: progetta usando il configuratore 3D o richiedi un bozzetto professionale gratuito, approva il design e ricevi i tuoi kit in 25-30 giorni in tutto il mondo.",
+  "description": "Ottieni kit da calcio professionali completamente personalizzati in 3 passaggi: progetta usando il configuratore 3D o invia il tuo concept da ricreare (deposito di 15 €, accreditato a partire da 5 maglie), approva il design e ricevi i tuoi kit in 25-30 giorni in tutto il mondo.",
   "totalTime": "P30D",
   "estimatedCost": {
     "@type": "MonetaryAmount",
@@ -62,13 +62,13 @@
       "@type": "HowToStep",
       "position": 1,
       "name": "Progetta il Tuo Kit",
-      "text": "Usa il configuratore 3D in tempo reale di MOMUTO con 30+ template professionali per progettare istantaneamente, oppure invia il tuo brief (stemma, colori, riferimenti) tramite il sito, WhatsApp o email per ricevere un bozzetto completamente personalizzato e gratuito in 1-2 giorni."
+      "text": "Usa il configuratore 3D in tempo reale di MOMUTO con 30+ template professionali per progettare istantaneamente, oppure invia il tuo concept (render IA, schizzo, stemma, colori, riferimenti) tramite il sito, WhatsApp o email per ricevere un bozzetto completamente personalizzato in 1-2 giorni — deposito di 15 €, interamente accreditato a partire da 5 maglie."
     },
     {
       "@type": "HowToStep",
       "position": 2,
       "name": "Revisiona e Approva",
-      "text": "Esamina il bozzetto del tuo design e richiedi eventuali modifiche — tutte gratuite. Conferma l'ordine con la suddivisione delle taglie. Nessun ordine minimo. Upgrade opzionale con badge in silicone 3D disponibile per ordini più grandi."
+      "text": "Esamina il bozzetto del tuo design e richiedi eventuali modifiche — incluse. Conferma l'ordine con la suddivisione delle taglie. Nessun ordine minimo. Upgrade opzionale con badge in silicone 3D disponibile per ordini più grandi."
     },
     {
       "@type": "HowToStep",
@@ -415,9 +415,10 @@
 <section class="hero">
 <div class="hero-badge">L'Archivio MOMUTO</div>
 <h1 class="hero-title">Design Su Misura.<br />Vera <span class="highlight-red">Identit&agrave;.</span></h1>
-<p class="hero-subtitle">Esplora i design personalizzati che abbiamo creato per squadre di calcio di tutto il mondo. Nessun template. Solo pura identit&agrave;.</p>
+<p class="hero-subtitle">Ogni maglia qui sotto &egrave; nata da un riferimento che una squadra ci ha inviato &mdash; un render IA, uno schizzo a mano, una foto, un'idea. I nostri designer l'hanno ricreata come una maglia vera, pronta per la produzione. &Egrave; il nostro mestiere: <strong>tu la immagini, noi la realizziamo.</strong></p>
 <div class="stats-grid">
-<div class="stat-item"><span class="stat-number">150+</span> <span class="stat-label">Squadre Vestite</span></div>
+<div class="stat-item"><span class="stat-number">150+</span> <span class="stat-label">Design Ricreati</span></div>
+<div class="stat-item"><span class="stat-number">48h</span> <span class="stat-label">Dal Riferimento al Bozzetto</span></div>
 <div class="stat-item"><span class="stat-number">10+</span> <span class="stat-label">Paesi</span></div>
 <div class="stat-item"><span class="stat-number">25-30 Giorni</span> <span class="stat-label">Tempi di Consegna</span></div>
 </div>
@@ -430,9 +431,9 @@
 <div style="text-align: center;"><button id="loadMoreBtn" class="btn-outline">Vedi Altri Design</button></div>
 </section>
 <section class="cta-section">
-<h2>Pronto a distinguerti?</h2>
-<p>Unisciti al club. Ricevi la tua proposta di design gratuita in 48 ore.</p>
-<a href="https://www.momuto.com/pages/request-custom-kit-design#cta-form" class="btn-primary">Richiedi il Design Personalizzato</a></section>
+<h2>Hai un concept? Lo rendiamo reale.</h2>
+<p>Inviaci qualsiasi cosa &mdash; un render IA, uno schizzo, uno screenshot, o semplicemente i tuoi colori &mdash; e un designer lo trasforma in una maglia pronta per la produzione. Primo bozzetto in 48 ore. Deposito di 15&nbsp;&euro;, interamente accreditato sull'ordine a partire da 5 maglie. Scopri <a href="https://it.momuto.com/pages/maglia-ia-concetto-reale" style="color:var(--mg-red);">come trasformiamo i concept IA in maglie vere</a>.</p>
+<a href="https://it.momuto.com/pages/richiesta-design-personalizzato" class="btn-primary">Invia il Tuo Concept</a></section>
 <script>
         const designs = [
     {

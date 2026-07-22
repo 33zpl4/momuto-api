@@ -1,0 +1,46 @@
+name: Deploy Concept Pages
+
+# AI-concept expert hub (EN/FR/ES/IT) + stag/despedida vertical (EN/FR/ES).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pages/ai-concept-to-real-kit'
+      - 'pages/maillot-ia-concept-reel'
+      - 'pages/camiseta-ia-concepto-real'
+      - 'pages/maglia-ia-concetto-reale'
+      - 'pages/bachelor-party-football-shirts'
+      - 'pages/maillot-evg-personnalise'
+      - 'pages/camisetas-despedida-de-soltero'
+      - 'scripts/deploy-concept-pages.js'
+      - '.github/workflows/deploy-concept-pages.yml'
+  workflow_dispatch:
+    inputs:
+      only:
+        description: 'Single page handle to deploy (empty = all)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run (no writes to CMS)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Deploy pages
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          ONLY: ${{ github.event.inputs.only }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run || 'false' }}
+        run: node scripts/deploy-concept-pages.js
