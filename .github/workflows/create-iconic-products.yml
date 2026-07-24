@@ -7,6 +7,17 @@ name: Create Iconic Series Products
 on:
   workflow_dispatch:
     inputs:
+      probe:
+        description: 'DIAGNOSTIC: try each size-variant shape against the API with throwaway hidden products. Ignores all other inputs.'
+        required: false
+        default: false
+        type: boolean
+      size_shape:
+        description: 'Size payload shape (set this to the probe WINNER)'
+        required: false
+        default: 'titles'
+        type: choice
+        options: ['titles', 'zeroed', 'optionsonly', 'variantsonly']
       inspect:
         description: 'READ-ONLY: dump an existing product''s options shape (e.g. im-05-the-116th). Ignores all other inputs.'
         required: false
@@ -54,11 +65,11 @@ jobs:
           node-version: '20'
 
       - name: Rebuild pages (body_html must match the repo)
-        if: inputs.inspect == ''
+        if: inputs.inspect == '' && inputs.probe != true
         run: node scripts/build-iconic-pages.js --lang ${{ inputs.lang }}
 
       - name: Fail if the build is stale
-        if: inputs.inspect == ''
+        if: inputs.inspect == '' && inputs.probe != true
         run: |
           if ! git diff --quiet -- iconic-series/build; then
             echo "::error::iconic-series/build is out of date with the source data."
@@ -73,8 +84,13 @@ jobs:
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          ICONIC_SIZE_SHAPE: ${{ inputs.size_shape }}
         run: |
           ARGS="--lang ${{ inputs.lang }}"
+          if [ "${{ inputs.probe }}" = "true" ]; then
+            node scripts/create-iconic-products.js $ARGS --probe
+            exit $?
+          fi
           if [ -n "${{ inputs.inspect }}" ]; then
             node scripts/create-iconic-products.js $ARGS --inspect "${{ inputs.inspect }}"
             exit $?
