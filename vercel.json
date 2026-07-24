@@ -32,6 +32,9 @@
     },
     "api/admin-orders.js": {
       "maxDuration": 30
+    },
+    "api/checkout-beacon.js": {
+      "maxDuration": 10
     }
   },
   "crons": [
