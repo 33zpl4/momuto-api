@@ -27,6 +27,7 @@ on:
           - blog.css
           - rtp-content.js
           - custom-content.js
+          - iconic-content.js
           - rtp-loader.js
           - pricing.js
           - embed.js
@@ -42,6 +43,10 @@ on:
       - 'static/**'
       - 'public/configurator/custom-content.js'
       - 'public/configurator/rtp-loader.js'
+      # iconic-series/shared/iconic-content.js is deliberately NOT listed here.
+      # This push trigger has no branch filter, so adding it would deploy the
+      # file to the live store from any branch — the exact failure mode
+      # docs/rtp-collection.md records. Deploy it via workflow_dispatch.
 
 jobs:
   deploy-static:
