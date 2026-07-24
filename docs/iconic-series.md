@@ -126,10 +126,22 @@ Guards:
 
 ### Unverified — check on the first product
 
-**`spec_mode: 2` (size variants) has not been tested against this API.** The
-only worked example in the repo is Pornic, which is `spec_mode: 1` with a
-single variant; the `options` / `option1_value_title` shape here is written
-from the field list in the API doc, not from a known-good response.
+**`spec_mode: 2` (size variants) is being established by trial.** The only
+worked example in the repo is Pornic, which is `spec_mode: 1` with empty
+`options`, so the shape came from the API doc's field list rather than a
+known-good response.
+
+Established so far, from real API responses:
+
+| Field | Value | How we know |
+|---|---|---|
+| `options[].option_name` | `"Size"` | `option_title` → `option_name不能为空` |
+| `variants[].option1_title` / `option1_value_title` | `"Size"` / `"XS"` | present on the live Pornic product |
+
+Note `variants[].option1` and `option1_value` exist on Pornic as **numbers**
+(0) and look like internal ids. If a later error names them, they likely need
+the ids the API assigns when it creates the option — meaning options may have
+to be created before variants can reference them.
 
 So: create **one** product hidden, on **one** store, and check in manage that
 sizes XS–XXL appear as selectable options and the Détail body rendered intact.
