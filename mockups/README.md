@@ -37,7 +37,9 @@ create a `.json` config with the same base name you'll refer to it by:
   `south`.
 - **`blend`** — `over` for solid prints; `multiply` can help artwork sit into
   light fabric.
-- **`output.maxWidth`** — final mockup is downscaled to this width;
+- **`output.size`** — exact square output in px (1500 matches the drop 01 CMS
+  assets; the garment PSDs are 3992x3993, so `maxWidth` alone yields 1501 tall).
+  **`output.maxWidth`** — width-only downscale, keeps aspect;
   `background` fills any transparency in the template.
 
 To calibrate the print box, run debug mode and eyeball the red rectangle:

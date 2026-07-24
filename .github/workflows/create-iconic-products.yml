@@ -1,0 +1,78 @@
+name: Create Iconic Series Products
+
+# MANUAL ONLY. This writes to the live stores — there is no staging.
+# No push trigger, deliberately: docs/rtp-collection.md records the RTP
+# collection deploy having no branch filter and shipping feature-branch work
+# straight to production, twice.
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Product slug (e.g. el-himno). Leave empty to use "drop".'
+        required: false
+        type: string
+      drop:
+        description: 'Drop folder (drop-01 / drop-02) — only if slug is empty'
+        required: false
+        type: string
+      lang:
+        description: 'Store'
+        required: true
+        default: 'en'
+        type: choice
+        options: ['en', 'es', 'fr', 'it']
+      dry_run:
+        description: 'Dry run — print the payload, send nothing'
+        required: true
+        default: true
+        type: boolean
+      publish:
+        description: 'Publish immediately (status 1). Leave OFF to create hidden.'
+        required: true
+        default: false
+        type: boolean
+      update:
+        description: 'Update existing products (needs product_id) instead of creating'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Rebuild pages (body_html must match the repo)
+        run: node scripts/build-iconic-pages.js --lang ${{ inputs.lang }}
+
+      - name: Fail if the build is stale
+        run: |
+          if ! git diff --quiet -- iconic-series/build; then
+            echo "::error::iconic-series/build is out of date with the source data."
+            echo "Run 'node scripts/build-iconic-pages.js' locally, commit the result, then re-run."
+            git diff --stat -- iconic-series/build
+            exit 1
+          fi
+
+      - name: Create / update products
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+        run: |
+          ARGS="--lang ${{ inputs.lang }}"
+          [ -n "${{ inputs.slug }}" ] && ARGS="$ARGS --slug ${{ inputs.slug }}"
+          [ -n "${{ inputs.drop }}" ] && ARGS="$ARGS --drop ${{ inputs.drop }}"
+          [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
+          [ "${{ inputs.publish }}" = "true" ] && ARGS="$ARGS --publish"
+          [ "${{ inputs.update }}" = "true" ] && ARGS="$ARGS --update"
+          echo "create-iconic-products.js $ARGS"
+          node scripts/create-iconic-products.js $ARGS

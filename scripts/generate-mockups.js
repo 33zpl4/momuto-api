@@ -195,8 +195,13 @@ async function generateOne(template, svgPath, outDir) {
   let img = sharp(imagePath).flatten({ background: out.background || '#ffffff' });
   img = img.composite([{ input: art, left, top, blend: config.blend || 'over' }]);
 
-  if (out.maxWidth) {
-    // Composite coordinates are in template pixels, so resize only afterwards.
+  // Composite coordinates are in template pixels, so resize only afterwards.
+  // `size` forces exact square output — the garment PSDs export 3992x3993, so
+  // maxWidth alone would yield 1500x1501 and not match the drop 01 assets.
+  if (out.size) {
+    img = sharp(await img.toBuffer())
+      .resize({ width: out.size, height: out.size, fit: 'fill' });
+  } else if (out.maxWidth) {
     img = sharp(await img.toBuffer()).resize({ width: out.maxWidth, withoutEnlargement: true });
   }
 

@@ -1,0 +1,46 @@
+{
+  "collection_handle": "iconic-football-series",
+  "price": "€39",
+  "shared_js": "https://www.momuto.com/configurator/iconic-content.js",
+  "_comment_grid": "series_grid_drop = which drop's pieces the 'More from the series' grid shows on EVERY page (current drop is the merchandising push). A piece never links to itself.",
+  "series_grid_drop": "drop-02",
+  "_comment_locales": "Titles and plate lines NEVER translate — they are artwork names and factual captions. Only story/technique/meta/banner_subtitle are localised, and they are written natively per locale, not translated word-for-word from EN.",
+  "locales": [
+    "en",
+    "es",
+    "fr",
+    "it"
+  ],
+  "drops": {
+    "drop-01": {
+      "label": "DROP 01",
+      "edition": "Drop 01 – Archive Release"
+    },
+    "drop-02": {
+      "label": "DROP 02",
+      "edition": "Drop 02 – Summer 2026"
+    }
+  },
+  "strings": {
+    "en": {
+      "series_name": "Iconic Series",
+      "banner_subtitle": "Piece {{NUMBER}} of the Iconic Series. {{DROP_BLURB}}",
+      "moment_label_suffix": "The Moment",
+      "series_label": "The Collection",
+      "series_heading": "More from the Iconic Series",
+      "back_to_top": "View the full collection →",
+      "detail_series": "Series",
+      "detail_edition": "Edition",
+      "detail_format": "Format",
+      "detail_technique": "Technique",
+      "format_value": "Archive Print",
+      "cart_label": "ADD TO CART"
+    }
+  },
+  "drop_blurbs": {
+    "en": {
+      "drop-01": "Five defining moments in football, reframed through expressive sketch illustration.",
+      "drop-02": "Five moments from the summer of 2026, reframed through expressive sketch illustration."
+    }
+  }
+}
