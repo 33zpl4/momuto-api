@@ -151,6 +151,43 @@ titles and it links them. Read the live shape any time with:
 node scripts/create-iconic-products.js --inspect im-01-the-volley
 ```
 
+### Product fields, matched to the live shirts
+
+Read off `im-01-the-volley` via `--inspect` and reproduced, rather than
+invented:
+
+| Field | Value | Note |
+|---|---|---|
+| `subtitle` | `Iconic Series — Drop 02, Summer 2026` | per-drop, in `config.drops` |
+| `mini_detail` | `<p><strong>IM–06 // El Himno</strong></p><h2>€39</h2><p>…spec line…</p>` | short block above the buy button |
+| `meta_title` | `El Himno – Iconic Series IM-06 \| MOMUTO` | en-dash separator |
+| `collections` | `[{ collection_id: 129055 }]` | **without this the product never joins the collection page** |
+| `free_shipping` / `taxable` | `1` / `0` | `config.product_defaults` |
+| `inventory_tracking` / `_policy` | `0` / `1` | ditto |
+
+`meta_keywords`, `tags`, `product_type` and `vendor` are all empty on the live
+products, so they are not sent. `spu` is server-assigned.
+
+Quirk worth preserving: the live products write the accession number with an
+**en dash in `mini_detail`** (`IM–01`) and a **hyphen in `meta_title`**
+(`IM-01`). Reproduced as-is.
+
+### ⚠️ body_html may be the wrong channel
+
+`im-01-the-volley` has **`body_html: 0 chars`**. The four-block page content on
+the drop 01 products lives in the CMS page-builder (the block ids in their CSS —
+`#block-section-6301440` — confirm this), not on the product record.
+
+So sending our generated page as `body_html` puts it in the *Détail* tab, which
+may not be where the drop 01 blocks render. This is the next thing to verify on
+the first hidden product: create it, look at the page, and check whether the
+banner/moment/grid appear where they do on a drop 01 shirt.
+
+If they don't, the options are (a) keep `body_html` and accept a different
+layout position, or (b) find whether product decoration blocks are writable —
+`scripts/deploy-ready-to-play-collection.js` does `PUT /pages/{id}` for CMS
+*pages*, but product blocks are a different surface and may be builder-only.
+
 ### Diagnostics and cleanup
 
 - `--inspect <handle|url>` — read-only dump of an existing product's options

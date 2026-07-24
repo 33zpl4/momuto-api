@@ -147,6 +147,18 @@ function buildBody(item, lang, { publish }) {
   const images = [{ src: item.image, alt: `${alt}, back` }];
   if (item.image_front) images.push({ src: item.image_front, alt: `${alt}, front` });
 
+  const dropCfg = config.drops[item.drop];
+  const strings = config.strings[lang];
+
+  // mini_detail is the short block above the buy button. Shape copied verbatim
+  // from im-01-the-volley: ref + title, price as an h2, then the spec line.
+  // Note the number uses an EN DASH here but a HYPHEN in meta_title — that is
+  // how the live products read, so it is reproduced rather than normalised.
+  const enDash = item.number.replace(/-/g, '–');
+  const hyphen = item.number.replace(/[–—]/g, '-');
+  const miniDetail = `<p><strong>${enDash} // ${item.display_title}</strong></p>` +
+    `<h2>${config.price}</h2><p>${strings.spec_line}</p>`;
+
   return {
     title: item.display_title,
     handle: item.handle,
@@ -158,9 +170,14 @@ function buildBody(item, lang, { publish }) {
     images,
     body_html: bodyHtml,
     status: publish ? 1 : 0,
-    subtitle: copy.subtitle || `${config.strings[lang].series_name} · ${item.number}`,
-    meta_title: copy.meta_title,
+    subtitle: dropCfg.subtitle,
+    mini_detail: miniDetail,
+    meta_title: copy.meta_title || `${item.display_title} – ${strings.series_name} ${hyphen} | MOMUTO`,
     meta_descript: copy.meta_description,
+    // Without this the product never joins /collections/<handle> — it would
+    // exist only at its direct URL.
+    collections: [{ collection_id: config.collection_id }],
+    ...config.product_defaults,
     product_detail: 1,
   };
 }
