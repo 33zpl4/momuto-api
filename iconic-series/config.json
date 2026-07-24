@@ -1,7 +1,7 @@
 {
   "collection_handle": "iconic-football-series",
   "price": "€39",
-  "shared_js": "https://www.momuto.com/configurator/iconic-content.js",
+  "shared_js": "https://www.momuto.com/iconic-content.js",
   "_comment_grid": "series_grid_drop = which drop's pieces the 'More from the series' grid shows on EVERY page (current drop is the merchandising push). A piece never links to itself.",
   "series_grid_drop": "drop-02",
   "_comment_locales": "Titles and plate lines NEVER translate — they are artwork names and factual captions. Only story/technique/meta/banner_subtitle are localised, and they are written natively per locale, not translated word-for-word from EN.",

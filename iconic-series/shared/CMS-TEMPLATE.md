@@ -18,8 +18,18 @@ this one block.
 **3. This script tag, in the template markup:**
 
 ```html
-<script src="https://www.momuto.com/configurator/iconic-content.js" defer></script>
+<script src="https://www.momuto.com/iconic-content.js" defer></script>
 ```
+
+⚠️ **The path is the site root, not `/configurator/`.** CMS "DIY files" are
+served from `https://www.momuto.com/<file>` — `rtp-loader.js` hard-codes that
+same base. A `/configurator/...` URL is the Vercel app and 404s here, which
+looks exactly like "the page renders but nothing is styled".
+
+Deploy the file with the other theme scripts rather than pasting it:
+`scripts/deploy-static-files.js` now maps `iconic-content.js` →
+`iconic-series/shared/iconic-content.js`, so it ships on the EN store with
+`custom-content.js` and friends and stays in sync with the repo.
 
 ⚠️ **It must live in the template, not in `body_html`.** A `<script>` tag inside
 an HTML string injected via `innerHTML` never executes — that is the HTML spec,

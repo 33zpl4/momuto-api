@@ -13,7 +13,7 @@ const DOMAINS = {
     label: 'momuto.com',
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'momuto.com'),
-    files: ['robots.txt', 'llms.txt', 'blog.css', '0137a8dc25c5cd9835ec4170134b07b4.txt', 'rtp-content.js', 'custom-content.js', 'rtp-loader.js', 'pricing.js']
+    files: ['robots.txt', 'llms.txt', 'blog.css', '0137a8dc25c5cd9835ec4170134b07b4.txt', 'rtp-content.js', 'custom-content.js', 'rtp-loader.js', 'pricing.js', 'iconic-content.js']
   },
   es: {
     token: process.env.OEMSAAS_TOKEN_ES,
@@ -51,6 +51,7 @@ function getFilePath(domain, filename) {
   if (filename === 'rtp-content.js') return path.join('public', 'configurator', 'rtp-content.js');
   // Shared custom-product page content script (same file, all stores; data-lang picks locale).
   if (filename === 'custom-content.js') return path.join('public', 'configurator', 'custom-content.js');
+  if (filename === 'iconic-content.js') return path.join('iconic-series', 'shared', 'iconic-content.js');
   // Canonical kit pricing (single source of truth). EN-hosted, referenced by
   // custom-content.js (3D PDP estimator) and embed.js (RTP widget) — one file to
   // update when prices change. See public/configurator/pricing.js.
