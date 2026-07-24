@@ -238,22 +238,41 @@
   // copy arrives inside the detail tab, i.e. below the product — so lift it to
   // the top of the content area to match. Purely visual: the markup is already
   // in the HTML source either way, so nothing changes for crawlers.
+  // Anchors that sit at the top of the product area, best first. The banner
+  // arrives inside the detail tab (below the gallery) and belongs above it,
+  // as it is on a drop 01 page.
+  var BANNER_ANCHORS = [
+    '.product-grid-bottom',
+    '.control-product_detail',
+    '.product-detail',
+    '.product-info',
+  ];
+
   function liftBanner() {
     var banner = document.querySelector('.iconic-series-banner');
     if (!banner || banner.hasAttribute('data-lifted')) return;
 
-    // Walk up from the banner to the outermost block that still sits inside
-    // the page body, and insert above THAT. Anchoring to a named container
-    // fails because every candidate already contains the banner (it arrives
-    // inside the detail tab, which is nested in the product wrapper).
-    var top = banner;
-    while (top.parentNode && top.parentNode !== document.body &&
-           top.parentNode.tagName !== 'MAIN' && top.parentNode !== document.documentElement) {
-      top = top.parentNode;
+    for (var i = 0; i < BANNER_ANCHORS.length; i++) {
+      var anchor = document.querySelector(BANNER_ANCHORS[i]);
+      // NB: no containment check. insertBefore detaches the node from its
+      // current parent first, so moving the banner out of an ancestor and
+      // above it is valid — an earlier `if (anchor.contains(banner)) return`
+      // is exactly why this silently did nothing.
+      if (anchor && anchor.parentNode && anchor !== banner && !banner.contains(anchor)) {
+        anchor.parentNode.insertBefore(banner, anchor);
+        banner.setAttribute('data-lifted', BANNER_ANCHORS[i]);
+        return;
+      }
     }
-    if (!top.parentNode || top === banner) return;
-    top.parentNode.insertBefore(banner, top);
-    banner.setAttribute('data-lifted', '');
+
+    // No known anchor: report the ancestor chain so the selector list can be
+    // extended without a manual DOM hunt.
+    var chain = [], n = banner.parentNode, hops = 0;
+    while (n && n !== document.body && hops++ < 12) {
+      chain.push(n.tagName.toLowerCase() + (n.className ? '.' + String(n.className).trim().split(/\s+/).join('.') : ''));
+      n = n.parentNode;
+    }
+    console.warn('[iconic] banner not lifted — no anchor matched. Ancestors:\n  ' + chain.join('\n  '));
   }
 
   function init() {
@@ -266,9 +285,12 @@
     // The theme mounts the detail tab and the cart controls asynchronously,
     // so re-run the DOM-dependent bits once things settle.
     setTimeout(function () { liftBanner(); initAccordions(); }, 400);
-    console.log('[iconic] ready · lang ' + lang +
-      ' · banner ' + (document.querySelector('.iconic-series-banner') ? 'found' : 'MISSING') +
-      ' · cart ' + (document.querySelector('.secondary_btn.product-cart') ? 'found' : 'MISSING'));
+    setTimeout(function () {
+      var b = document.querySelector('.iconic-series-banner');
+      console.log('[iconic] ready · lang ' + lang +
+        ' · banner ' + (b ? (b.getAttribute('data-lifted') ? 'lifted via ' + b.getAttribute('data-lifted') : 'NOT lifted') : 'MISSING') +
+        ' · cart ' + (document.querySelector('.secondary_btn.product-cart') ? 'found' : 'MISSING'));
+    }, 600);
   }
 
   if (document.readyState === 'loading') {
