@@ -32,11 +32,14 @@
     },
     "api/admin-orders.js": {
       "maxDuration": 30
-    },
-    "api/checkout-beacon.js": {
-      "maxDuration": 10
     }
   },
+  "rewrites": [
+    {
+      "source": "/api/checkout-beacon",
+      "destination": "/api/lead?type=checkout-beacon"
+    }
+  ],
   "crons": [
     {
       "path": "/api/cron-orders",

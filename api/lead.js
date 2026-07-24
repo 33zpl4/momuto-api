@@ -13,6 +13,7 @@
  */
 
 const { kv } = require('@vercel/kv');
+const checkoutBeacon = require('../lib/checkout-beacon');
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
 const TEAM_EMAIL = process.env.TEAM_EMAIL || 'info@momuto.com';
@@ -79,6 +80,14 @@ async function notifyTeam(lead) {
 }
 
 module.exports = async function handler(req, res) {
+  // /api/checkout-beacon is rewritten onto this function (vercel.json): the
+  // Hobby plan allows 12 serverless functions per deployment and api/ already
+  // holds 12, so the beacon can't be a file of its own. Match both the rewrite
+  // query and the original path — which one req exposes varies by runtime.
+  if ((req.query && req.query.type === 'checkout-beacon') || /checkout-beacon/.test(req.url || '')) {
+    return checkoutBeacon(req, res);
+  }
+
   const origin = originOf(req);
   if (origin) {
     res.setHeader('Access-Control-Allow-Origin', origin);
