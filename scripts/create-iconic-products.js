@@ -218,13 +218,30 @@ async function inspect(handleOrUrl, token) {
     if (hit) {
       console.log(`FOUND "${hit.title}" · id ${hit.id} · handle ${hit.handle}`);
       console.log(`spec_mode: ${hit.spec_mode}`);
-      console.log(`\noptions:\n${JSON.stringify(hit.options, null, 2)}`);
+
+      // Everything we have to match when creating a sibling product. Dumped
+      // rather than guessed — body_html is elided, it's the one field we own.
+      const META = ['title', 'handle', 'subtitle', 'mini_detail', 'meta_title', 'meta_descript',
+        'meta_keywords', 'tags', 'product_type', 'vendor', 'spu', 'status',
+        'free_shipping', 'taxable', 'inventory_tracking', 'inventory_policy', 'collections'];
+      console.log('\n── metadata ──');
+      for (const k of META) {
+        if (hit[k] === undefined) continue;
+        const v = hit[k];
+        console.log(`${k}: ${typeof v === 'object' ? JSON.stringify(v) : JSON.stringify(v)}`);
+      }
+      console.log(`body_html: <${(hit.body_html || '').length} chars>`);
+      console.log(`images: ${(hit.images || []).length}` +
+        ((hit.images || [])[0] ? ` · first alt ${JSON.stringify(hit.images[0].alt)}` : ''));
+
+      console.log(`\n── options ──\n${JSON.stringify(hit.options, null, 2)}`);
       const v = (hit.variants || [])[0];
       console.log(`\nvariants: ${(hit.variants || []).length}`);
       if (v) {
         const optFields = Object.fromEntries(Object.entries(v).filter(([k]) => /^option/i.test(k)));
         console.log(`variant[0] option fields:\n${JSON.stringify(optFields, null, 2)}`);
-        console.log(`variant[0] price/sku: ${v.price} / ${v.sku}`);
+        console.log(`variant[0] price/sku/weight: ${v.price} / ${v.sku} / ${v.weight}`);
+        console.log(`variant[0] inventory: qty ${v.inventory_quantity}, tracking ${v.inventory_tracking}, policy ${v.inventory_policy}`);
       }
       return;
     }
