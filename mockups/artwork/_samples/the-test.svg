@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <rect x="30" y="10" width="340" height="6" fill="#fff"/>
+  <text x="200" y="40" font-family="serif" font-size="30" fill="#fff" text-anchor="middle" letter-spacing="6">THE TEST</text>
+  <rect x="30" y="55" width="340" height="6" fill="#fff"/>
+  <rect x="40" y="80" width="320" height="480" fill="#fff"/>
+  <rect x="52" y="92" width="296" height="456" fill="none" stroke="#111" stroke-width="3"/>
+  <circle cx="200" cy="280" r="90" fill="none" stroke="#111" stroke-width="4"/>
+  <path d="M140 420 Q 200 300 260 420 T 320 480" fill="none" stroke="#111" stroke-width="5"/>
+</svg>

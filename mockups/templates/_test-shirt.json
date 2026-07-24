@@ -1,0 +1,6 @@
+{
+  "image": "_test-shirt.tif",
+  "print": { "x": 660, "y": 560, "width": 680, "height": 1000, "gravity": "north" },
+  "blend": "over",
+  "output": { "format": "jpg", "quality": 90, "maxWidth": 2000, "background": "#ffffff" }
+}
