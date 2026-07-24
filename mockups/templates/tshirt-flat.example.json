@@ -1,0 +1,6 @@
+{
+  "image": "tshirt-black-flat.tif",
+  "print": { "x": 700, "y": 480, "width": 620, "height": 880, "gravity": "north" },
+  "blend": "over",
+  "output": { "format": "jpg", "quality": 90, "maxWidth": 2000, "background": "#ffffff" }
+}

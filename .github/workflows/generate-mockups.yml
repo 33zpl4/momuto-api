@@ -1,0 +1,54 @@
+name: Generate Mockups
+
+on:
+  push:
+    paths:
+      - 'mockups/artwork/**'
+      - 'mockups/templates/**'
+      - 'scripts/generate-mockups.js'
+  workflow_dispatch:
+    inputs:
+      template:
+        description: 'Template name (default: all)'
+        required: false
+        type: string
+      artwork:
+        description: 'Artwork file or folder (default: all of mockups/artwork/)'
+        required: false
+        type: string
+
+jobs:
+  mockups:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install sharp
+
+      - name: Generate mockups
+        run: |
+          ARGS=""
+          [ -n "${{ inputs.template }}" ] && ARGS="$ARGS --template ${{ inputs.template }}"
+          [ -n "${{ inputs.artwork }}" ] && ARGS="$ARGS --artwork ${{ inputs.artwork }}"
+          node scripts/generate-mockups.js $ARGS
+
+      - name: Commit output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add mockups/output
+          if git diff --cached --quiet; then
+            echo "No new mockups"
+          else
+            git commit -m "Generate mockups [skip ci]"
+            git push
+          fi
