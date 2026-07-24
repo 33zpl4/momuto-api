@@ -24,7 +24,9 @@ const sharp = require('sharp');
 const ROOT = path.join(__dirname, '..');
 const TEMPLATES_DIR = path.join(ROOT, 'mockups', 'templates');
 const ARTWORK_DIR = path.join(ROOT, 'mockups', 'artwork');
+const PRINTS_DIR = path.join(ROOT, 'mockups', 'prints');
 const OUTPUT_DIR = path.join(ROOT, 'mockups', 'output');
+const RASTER_RE = /\.(png|jpe?g)$/;
 
 // ── CLI ──────────────────────────────────────────────────────────────────────
 
@@ -67,24 +69,64 @@ function loadTemplates(onlyName) {
   return templates;
 }
 
+// Mountable artwork: .svg files, or composed print masters (.png/.jpg from
+// scripts/compose-print.js). In batch mode an .svg with a sidecar .json is
+// skipped — it gets composed into a print first, and the print is what mounts.
+function isMountable(p) {
+  return p.endsWith('.svg') || RASTER_RE.test(p);
+}
+
 function findArtwork(target) {
-  const start = target ? path.resolve(target) : ARTWORK_DIR;
-  if (!fs.existsSync(start)) return [];
-  if (fs.statSync(start).isFile()) return start.endsWith('.svg') ? [start] : [];
-  const skipUnderscore = !target; // _ = demo/test, included only when asked for explicitly
+  if (target) {
+    const start = path.resolve(target);
+    if (!fs.existsSync(start)) return [];
+    if (fs.statSync(start).isFile()) return isMountable(start) ? [start] : [];
+    const found = [];
+    (function walk(dir) {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const p = path.join(dir, entry.name);
+        if (entry.isDirectory()) walk(p);
+        else if (isMountable(p)) found.push(p);
+      }
+    })(start);
+    return found.sort();
+  }
   const found = [];
-  (function walk(dir) {
+  (function walk(dir, exts) {
+    if (!fs.existsSync(dir)) return;
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      if (skipUnderscore && entry.name.startsWith('_')) continue;
+      if (entry.name.startsWith('_')) continue; // demo/test, explicit only
       const p = path.join(dir, entry.name);
-      if (entry.isDirectory()) walk(p);
-      else if (entry.name.endsWith('.svg')) found.push(p);
+      if (entry.isDirectory()) walk(p, exts);
+      else if (exts.test(p)) {
+        if (p.endsWith('.svg') && fs.existsSync(p.replace(/\.svg$/, '.json'))) continue;
+        found.push(p);
+      }
     }
-  })(start);
+  })(ARTWORK_DIR, /\.svg$/);
+  (function walkPrints(dir) {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name.startsWith('_')) continue;
+      const p = path.join(dir, entry.name);
+      if (entry.isDirectory()) walkPrints(p);
+      else if (RASTER_RE.test(p)) found.push(p);
+    }
+  })(PRINTS_DIR);
   return found.sort();
 }
 
 // ── Rendering ────────────────────────────────────────────────────────────────
+
+async function prepArtwork(artPath, boxW, boxH) {
+  if (RASTER_RE.test(artPath)) {
+    return sharp(artPath)
+      .resize({ width: boxW, height: boxH, fit: 'inside', withoutEnlargement: false })
+      .png()
+      .toBuffer();
+  }
+  return rasterizeSvg(artPath, boxW, boxH);
+}
 
 async function rasterizeSvg(svgPath, boxW, boxH) {
   const svg = fs.readFileSync(svgPath);
@@ -121,7 +163,7 @@ async function generateOne(template, svgPath, outDir) {
   const { print } = config;
   const out = config.output || {};
 
-  const art = await rasterizeSvg(svgPath, print.width, print.height);
+  const art = await prepArtwork(svgPath, print.width, print.height);
   const artMeta = await sharp(art).metadata();
   const { left, top } = placeInBox(artMeta, print);
 
@@ -134,8 +176,9 @@ async function generateOne(template, svgPath, outDir) {
   }
 
   const format = (out.format || 'jpg').replace('jpeg', 'jpg');
-  const rel = path.relative(ARTWORK_DIR, svgPath).replace(/\.svg$/, '');
-  const base = rel.startsWith('..') ? path.basename(svgPath, '.svg') : rel;
+  const srcDir = RASTER_RE.test(svgPath) ? PRINTS_DIR : ARTWORK_DIR;
+  const rel = path.relative(srcDir, svgPath).replace(/\.(svg|png|jpe?g)$/, '');
+  const base = rel.startsWith('..') ? path.basename(rel) : rel;
   const outPath = path.join(outDir, `${base}--${name}.${format}`);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
 
@@ -171,10 +214,12 @@ async function debugPlacement(template, outDir) {
   const args = parseArgs(process.argv);
   const templates = loadTemplates(args.template);
   if (!templates.length) {
-    console.error(args.template
-      ? `No template named "${args.template}" in mockups/templates/`
-      : 'No templates found in mockups/templates/ (need image + <name>.json)');
-    process.exit(1);
+    if (args.template) {
+      console.error(`No template named "${args.template}" in mockups/templates/`);
+      process.exit(1);
+    }
+    console.log('No garment templates in mockups/templates/ yet — nothing to mount.');
+    return;
   }
 
   if (args.debug) {

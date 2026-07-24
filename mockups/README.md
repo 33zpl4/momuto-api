@@ -50,6 +50,36 @@ node scripts/generate-mockups.js --debug --template tshirt-black-flat
 Adjust `x/y/width/height`, re-run, repeat until it matches where prints go.
 This is a one-time job per template.
 
+## Drop 02+: composed prints (frame + title + plate + number)
+
+Drop 02 designs are **composed** before mounting: raw illustration + three
+strings → the framed print with title bar, bottom plate rail and accession
+number, built from the drop 01 frame geometry
+(`frames/iconic-frame.svg`, extracted verbatim from
+`reference/drop-01/the-116th-05.svg`; the plate rail is the title-bar rules
+mirrored into the frame bottom). Text is set live in Trajan Pro
+(`fonts/`), so no per-design vectorized titles are needed.
+
+Drop a raw SVG plus a sidecar `.json` with the same basename:
+
+```json
+{
+  "title": "EL HIMNO",
+  "plate": "ARG 2–1 ENG · 15.07.26",
+  "number": "IM-07",
+  "panel": "#EFE7D8",
+  "recolor": { "#e67929": "panel" }
+}
+```
+
+`recolor` rewrites artwork fills before rendering (`"panel"` = the panel
+color) — that's how the vectorization-helper orange becomes the series cream.
+`node scripts/compose-print.js` (no args = everything with a sidecar) writes
+screen-resolution print masters to `prints/…`, which the mockup generator
+then mounts. Artwork **with** a sidecar is never mounted raw. Production
+print files still come from the illustrator's working file — `prints/` is
+for mockups and CMS imagery only.
+
 ## 2. Drop in artwork
 
 Save raw SVGs under `mockups/artwork/<collection>/<drop>/`, e.g.
