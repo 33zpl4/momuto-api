@@ -12,8 +12,8 @@
   "output": {
     "format": "jpg",
     "quality": 90,
-    "maxWidth": 2000,
-    "background": "#ffffff"
+    "background": "#ffffff",
+    "size": 1500
   },
   "fabric": 0.35
 }
