@@ -148,7 +148,13 @@ async function send(url, method, token, body) {
  * object is the known-good spec_mode 2 payload — worth reading rather than
  * guessing at. Same cursor pagination as scripts/pull-cms.js.
  */
-async function inspect(handle, token) {
+async function inspect(handleOrUrl, token) {
+  // Accept a pasted product URL as well as a bare handle.
+  const handle = String(handleOrUrl).trim()
+    .replace(/^https?:\/\/[^/]+/, '')
+    .replace(/^\/?products\//, '')
+    .replace(/[/?#].*$/, '');
+  if (handle !== String(handleOrUrl).trim()) console.log(`handle: ${handle}`);
   const limit = 100;
   let since = '';
   for (let page = 0; page < 50; page++) {
