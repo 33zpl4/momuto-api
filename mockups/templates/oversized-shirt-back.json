@@ -1,0 +1,19 @@
+{
+  "image": "oversized-shirt-back.jpg",
+  "skip": "-front\\.png$",
+  "print": {
+    "x": 1286,
+    "y": 920,
+    "width": 1360,
+    "height": 1910,
+    "gravity": "north"
+  },
+  "blend": "over",
+  "output": {
+    "format": "jpg",
+    "quality": 90,
+    "maxWidth": 2000,
+    "background": "#ffffff"
+  },
+  "fabric": 0.35
+}

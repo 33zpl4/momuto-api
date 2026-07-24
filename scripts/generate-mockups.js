@@ -158,14 +158,39 @@ function placeInBox(artMeta, print) {
   return { left, top };
 }
 
+// Make the print react to the garment: lift the shirt's own luminance under
+// the print box (the wrinkles are already in the photo), recentre it around
+// neutral grey scaled by `strength`, and hard-light it onto the print —
+// the code equivalent of the mockup PSD's Hard-Light/28%-Fill smart object.
+async function applyFabric(art, artMeta, imagePath, left, top, strength) {
+  const shading = await sharp(imagePath)
+    .extract({ left, top, width: artMeta.width, height: artMeta.height })
+    .greyscale()
+    .blur(2)
+    .linear(strength, 128 * (1 - strength))
+    .toBuffer();
+  const alpha = await sharp(art).ensureAlpha().extractChannel(3).raw().toBuffer({ resolveWithObject: true });
+  const shaded = await sharp(art)
+    .composite([{ input: shading, blend: 'hard-light' }])
+    .removeAlpha()
+    .toBuffer();
+  return sharp(shaded)
+    .joinChannel(alpha.data, { raw: { width: alpha.info.width, height: alpha.info.height, channels: 1 } })
+    .png()
+    .toBuffer();
+}
+
 async function generateOne(template, svgPath, outDir) {
   const { config, imagePath, name } = template;
   const { print } = config;
   const out = config.output || {};
 
-  const art = await prepArtwork(svgPath, print.width, print.height);
+  let art = await prepArtwork(svgPath, print.width, print.height);
   const artMeta = await sharp(art).metadata();
   const { left, top } = placeInBox(artMeta, print);
+  if (config.fabric) {
+    art = await applyFabric(art, artMeta, imagePath, left, top, config.fabric);
+  }
 
   let img = sharp(imagePath).flatten({ background: out.background || '#ffffff' });
   img = img.composite([{ input: art, left, top, blend: config.blend || 'over' }]);
@@ -237,7 +262,15 @@ async function debugPlacement(template, outDir) {
 
   let failed = 0;
   for (const t of templates) {
-    for (const svg of artwork) {
+    // Pair artwork to templates: config "match"/"skip" are regexes tested
+    // against the artwork basename (front lockups vs back prints).
+    const eligible = artwork.filter(a => {
+      const base = path.basename(a);
+      if (t.config.match && !new RegExp(t.config.match).test(base)) return false;
+      if (t.config.skip && new RegExp(t.config.skip).test(base)) return false;
+      return true;
+    });
+    for (const svg of eligible) {
       try {
         const outPath = await generateOne(t, svg, args.out);
         console.log(`✓ ${path.relative(ROOT, outPath)}`);

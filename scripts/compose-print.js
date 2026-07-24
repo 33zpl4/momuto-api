@@ -33,6 +33,7 @@ const sharp = require('sharp');
 
 const ROOT = path.join(__dirname, '..');
 const TEMPLATE = path.join(ROOT, 'mockups', 'frames', 'iconic-frame.svg');
+const FRONT_TEMPLATE = path.join(ROOT, 'mockups', 'frames', 'front-lockup.svg');
 const FONTS_DIR = path.join(ROOT, 'mockups', 'fonts');
 const ARTWORK_DIR = path.join(ROOT, 'mockups', 'artwork');
 const PRINTS_DIR = path.join(ROOT, 'mockups', 'prints');
@@ -94,7 +95,21 @@ async function composeOne(svgPath) {
   const outPath = path.join(PRINTS_DIR, rel.startsWith('..') ? path.basename(rel) : rel);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   await sharp(Buffer.from(printSvg), { density: 72 * SCALE }).png().toFile(outPath);
+
+  await composeFront(spec, outPath.replace(/\.png$/, '-front.png'));
   return outPath;
+}
+
+// Front chest lockup: momuto wordmark + accession number (drop 01 sets the
+// number with an en dash — IM–05 — so a hyphen in the sidecar is upgraded).
+async function composeFront(spec, outPath) {
+  const number = spec.number.replace('-', '–');
+  const svg = fs.readFileSync(FRONT_TEMPLATE, 'utf8').replace('{{NUMBER}}', escapeXml(number));
+  // Lockup doc is 107.75x48.5mm; density 400 ≈ 1700px wide, then trim to ink.
+  await sharp(Buffer.from(svg), { density: 400 })
+    .trim({ threshold: 10 })
+    .png()
+    .toFile(outPath);
 }
 
 // No args: compose every artwork that has a sidecar (skipping _demo/_incoming files).
