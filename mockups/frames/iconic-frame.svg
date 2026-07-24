@@ -22,5 +22,5 @@
  </g>
   <text x="627.7" y="118.7" text-anchor="middle" style="font-weight:bold;font-size:48.2px;font-family:'Trajan Pro';letter-spacing:1.81px;fill:#ffffff">{{TITLE}}</text>
   <text x="625.4" y="{{PLATE_Y}}" text-anchor="middle" style="font-weight:bold;font-size:{{PLATE_SIZE}}px;font-family:'Trajan Pro';letter-spacing:{{PLATE_SPACING}}px;fill:#ffffff">{{PLATE}}</text>
-  <text x="972" y="1145" text-anchor="end" style="font-weight:normal;font-size:15px;font-family:'Trajan Pro';letter-spacing:1.8px;fill:#ffffff">{{NUMBER}}</text>
+  <text x="967" y="1145" text-anchor="end" style="font-weight:normal;font-size:15px;font-family:'Trajan Pro';letter-spacing:1.8px;fill:#ffffff">{{NUMBER}}</text>
 </svg>
