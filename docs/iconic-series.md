@@ -99,3 +99,43 @@ and card `alt` text is derived from `display_title`.
   meanwhile).
 - `es` / `fr` / `it` strings, drop blurbs and `product-details.<lang>.html`
   are not written yet. EN is complete for all ten products.
+
+## Creating the products
+
+`scripts/create-iconic-products.js` turns a built page into a live product via
+`POST /products` (see `docs/cms-product-create-api.md`). These shirts have no 3D
+customizer, so `inner_title` is omitted — the configId/productId dependency in
+that doc does not apply.
+
+```
+node scripts/create-iconic-products.js --slug el-himno --dry-run [--verbose]
+```
+
+Run it from the **Create Iconic Series Products** workflow (`workflow_dispatch`
+only — no push trigger, for the reason in the Deploying section). Defaults:
+`dry_run` on, `publish` off, so a mis-click prints a payload instead of
+publishing a product.
+
+Guards:
+- refuses to run without `--slug` or `--drop` (no implicit "all")
+- creates **hidden** (`status: 0`) unless `--publish`
+- the workflow rebuilds the pages and **fails if `iconic-series/build` is stale**,
+  so what ships always matches the committed source
+- `--update` writes `body_html`/SEO to an existing `product_id` instead of
+  creating a duplicate — this is the drop 01 retrofit path
+
+### Unverified — check on the first product
+
+**`spec_mode: 2` (size variants) has not been tested against this API.** The
+only worked example in the repo is Pornic, which is `spec_mode: 1` with a
+single variant; the `options` / `option1_value_title` shape here is written
+from the field list in the API doc, not from a known-good response.
+
+So: create **one** product hidden, on **one** store, and check in manage that
+sizes XS–XXL appear as selectable options and the Détail body rendered intact.
+Only then batch the rest. Same for `--update`: `batchsave` is documented as a
+partial update and is only known to carry SEO fields — whether it accepts
+`body_html` needs one real call to establish.
+
+After a create, record the returned id as `"product_id"` in the product JSON so
+`--update` can target it later.
