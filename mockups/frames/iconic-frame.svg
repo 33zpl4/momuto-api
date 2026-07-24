@@ -20,7 +20,7 @@
   <path d="M246 89.5 l0 -3.5 90 0 90 0 0 3.5 0 3.5 -90 0 -90 0 0 -3.5z"/>
   <path d="M829.4 91.6 c-0.3 -0.8 -0.4 -2.3 -0.2 -3.3 0.3 -1.7 4.4 -1.8 89.6 -2.1 l89.2 -0.2 0 3.5 0 3.5 -89 0 c-76.6 0 -89.1 -0.2 -89.6 -1.4z"/>
  </g>
-  <text x="627.7" y="118.7" text-anchor="middle" style="font-weight:bold;font-size:48.2px;font-family:'Trajan Pro';letter-spacing:1.81px;fill:#ffffff">{{TITLE}}</text>
+  <text x="627.7" y="{{TITLE_Y}}" text-anchor="middle" style="font-weight:bold;font-size:{{TITLE_SIZE}}px;font-family:'Trajan Pro';letter-spacing:{{TITLE_SPACING}}px;fill:#ffffff">{{TITLE}}</text>
   <text x="625.4" y="{{PLATE_Y}}" text-anchor="middle" style="font-weight:bold;font-size:{{PLATE_SIZE}}px;font-family:'Trajan Pro';letter-spacing:{{PLATE_SPACING}}px;fill:#ffffff">{{PLATE}}</text>
   <text x="967" y="1145" text-anchor="end" style="font-weight:normal;font-size:15px;font-family:'Trajan Pro';letter-spacing:1.8px;fill:#ffffff">{{NUMBER}}</text>
 </svg>

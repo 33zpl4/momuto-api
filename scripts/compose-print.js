@@ -54,28 +54,32 @@ function escapeXml(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-// The plate line should fill the gap between its flanking rules regardless of
-// how long the string is. Measure the rendered ink at a base size, then scale
-// size + tracking to hit the target width (capped so short plates don't balloon).
-const PLATE_GAP = 474; // usable width between the plate rule stacks, template px
-const PLATE_BAND_CENTER = 1092.75; // vertical center of the plate rules
-async function fitPlate(text) {
-  const base = 30, baseTracking = 3.2, maxSize = 33;
-  const probe = `<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="120">
-    <text x="10" y="80" style="font-weight:bold;font-size:${base}px;font-family:'Trajan Pro';letter-spacing:${baseTracking}px;fill:#fff">${escapeXml(text)}</text></svg>`;
+// The rule stacks flanking the title and plate are fixed frame art, so text
+// has to fit the gap between them. Measure the rendered ink at a base size,
+// then scale size + tracking by the same factor (tracking must scale too, or
+// a shrunk line looks loosely spaced).
+async function fitText(text, { base, tracking, gap, maxScale, bandCenter }) {
+  const probe = `<svg xmlns="http://www.w3.org/2000/svg" width="4000" height="160">
+    <text x="10" y="110" style="font-weight:bold;font-size:${base}px;font-family:'Trajan Pro';letter-spacing:${tracking}px;fill:#fff">${escapeXml(text)}</text></svg>`;
   const { info } = await sharp(Buffer.from(probe), { density: 288 })
     .trim({ threshold: 10 })
     .toBuffer({ resolveWithObject: true });
-  const naturalWidth = info.width / 4; // rendered at 4x
-  const f = Math.min(PLATE_GAP / naturalWidth, maxSize / base);
+  const naturalWidth = info.width / 4; // probe renders at 4x
+  const f = Math.min(gap / naturalWidth, maxScale);
   const size = base * f;
   return {
     size: size.toFixed(2),
-    spacing: (baseTracking * f).toFixed(2),
-    // caps sit optically centered on the rules band (cap height ≈ 0.78 em)
-    y: (PLATE_BAND_CENTER + size * 0.39).toFixed(1),
+    spacing: (tracking * f).toFixed(2),
+    // caps sit optically centered on the band (cap height ≈ 0.78 em)
+    y: (bandCenter + size * 0.39).toFixed(1),
   };
 }
+
+// Plate: a caption filling its rail — grows as well as shrinks (capped).
+const PLATE = { base: 30, tracking: 3.2, gap: 474, maxScale: 33 / 30, bandCenter: 1092.75 };
+// Title: the artwork's name — held at the drop 01 reference size across the
+// collection (maxScale 1), shrinking only when a long title would hit the rules.
+const TITLE = { base: 43.37, tracking: 1.63, gap: 386, maxScale: 1, bandCenter: 103.5 };
 
 async function renderArtwork(svgPath, spec) {
   let svg = fs.readFileSync(svgPath, 'utf8');
@@ -107,11 +111,15 @@ async function composeOne(svgPath) {
   }
 
   const art = await renderArtwork(svgPath, spec);
-  const plate = await fitPlate(spec.plate);
+  const plate = await fitText(spec.plate, PLATE);
+  const title = await fitText(spec.title, TITLE);
   const printSvg = fs.readFileSync(TEMPLATE, 'utf8')
     .replace('{{PANEL}}', spec.panel || '#ffffff')
     .replace('{{ART_HREF}}', `data:image/png;base64,${art.toString('base64')}`)
     .replace('{{TITLE}}', escapeXml(spec.title))
+    .replace('{{TITLE_SIZE}}', title.size)
+    .replace('{{TITLE_SPACING}}', title.spacing)
+    .replace('{{TITLE_Y}}', title.y)
     .replace('{{PLATE}}', escapeXml(spec.plate))
     .replace('{{PLATE_SIZE}}', plate.size)
     .replace('{{PLATE_SPACING}}', plate.spacing)
