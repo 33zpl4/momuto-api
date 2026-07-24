@@ -402,9 +402,19 @@ async function main() {
 
       if (args.update) {
         if (!item.product_id) throw new Error('--update needs "product_id" in the product JSON');
+        // Send the whole editorial surface, not just body_html: a product
+        // created before a payload fix keeps its stale subtitle/mini_detail
+        // otherwise, and those are the fields visible above the buy button.
         const data = await send(`${HOST}/products/batchsave`, 'POST', token, {
-          products: [{ id: item.product_id, body_html: body.body_html,
-            meta_title: body.meta_title, meta_descript: body.meta_descript }],
+          products: [{
+            id: item.product_id,
+            title: body.title,
+            subtitle: body.subtitle,
+            mini_detail: body.mini_detail,
+            body_html: body.body_html,
+            meta_title: body.meta_title,
+            meta_descript: body.meta_descript,
+          }],
         });
         console.log(`✓ updated ${item.slug} (id ${item.product_id})`, JSON.stringify(data).slice(0, 200));
       } else {

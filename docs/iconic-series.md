@@ -194,6 +194,20 @@ the page show **everything twice** — once from the template, once from
 that product's custom template (or point it at the shared one) *first*, then
 push `body_html`. Do not run `--update` across drop 01 blind.
 
+### Live debugging
+
+`iconic-content.js` logs one line on every page:
+
+```
+[iconic] ready · lang en · banner found · cart found
+```
+
+- **no line at all** → the script isn't loading. Check the tag is in the
+  template (not `body_html`) and points at `https://www.momuto.com/iconic-content.js`
+- **`banner MISSING`** → `body_html` didn't render; the marker guard bailed
+- **`cart MISSING`** → the theme hasn't mounted the buy controls, or the
+  product is hidden (`status: 0`) and the storefront omits them in preview
+
 ### Diagnostics and cleanup
 
 - `--inspect <handle|url>` — read-only dump of an existing product's options

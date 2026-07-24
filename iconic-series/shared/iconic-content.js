@@ -172,6 +172,8 @@
 
   function initAccordions() {
     document.querySelectorAll('.accordion-header').forEach(function (header) {
+      if (header.hasAttribute('data-bound')) return; // init runs twice; don't double-bind
+      header.setAttribute('data-bound', '');
       header.addEventListener('click', function () {
         var item = header.parentElement;
         document.querySelectorAll('.accordion-item').forEach(function (i) {
@@ -238,11 +240,20 @@
   // in the HTML source either way, so nothing changes for crawlers.
   function liftBanner() {
     var banner = document.querySelector('.iconic-series-banner');
-    if (!banner) return;
-    var anchor = document.querySelector('.product-grid-bottom, .product-detail, .control-product_detail, main');
-    if (!anchor || !anchor.parentNode) return;
-    if (anchor.contains(banner)) return;
-    anchor.parentNode.insertBefore(banner, anchor);
+    if (!banner || banner.hasAttribute('data-lifted')) return;
+
+    // Walk up from the banner to the outermost block that still sits inside
+    // the page body, and insert above THAT. Anchoring to a named container
+    // fails because every candidate already contains the banner (it arrives
+    // inside the detail tab, which is nested in the product wrapper).
+    var top = banner;
+    while (top.parentNode && top.parentNode !== document.body &&
+           top.parentNode.tagName !== 'MAIN' && top.parentNode !== document.documentElement) {
+      top = top.parentNode;
+    }
+    if (!top.parentNode || top === banner) return;
+    top.parentNode.insertBefore(banner, top);
+    banner.setAttribute('data-lifted', '');
   }
 
   function init() {
@@ -252,6 +263,12 @@
     initSizeGuide(lang);
     initCartArea();
     liftBanner();
+    // The theme mounts the detail tab and the cart controls asynchronously,
+    // so re-run the DOM-dependent bits once things settle.
+    setTimeout(function () { liftBanner(); initAccordions(); }, 400);
+    console.log('[iconic] ready · lang ' + lang +
+      ' · banner ' + (document.querySelector('.iconic-series-banner') ? 'found' : 'MISSING') +
+      ' · cart ' + (document.querySelector('.secondary_btn.product-cart') ? 'found' : 'MISSING'));
   }
 
   if (document.readyState === 'loading') {
