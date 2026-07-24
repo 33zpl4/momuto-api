@@ -132,8 +132,9 @@ async function composeOne(svgPath) {
 async function composeFront(spec, outPath) {
   const number = spec.number.replace('-', '–');
   const svg = fs.readFileSync(FRONT_TEMPLATE, 'utf8').replace('{{NUMBER}}', escapeXml(number));
-  // Lockup doc is 107.75x48.5mm; density 400 ≈ 1700px wide, then trim to ink.
-  await sharp(Buffer.from(svg), { density: 400 })
+  // Lockup doc is in mm units, where librsvg applies density twice (ink width
+  // scales with density squared): 184 lands ≈ 2000px wide. Trimmed to ink.
+  await sharp(Buffer.from(svg), { density: 184 })
     .trim({ threshold: 10 })
     .png()
     .toFile(outPath);
