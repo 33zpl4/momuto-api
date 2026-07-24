@@ -37,8 +37,8 @@ const FONTS_DIR = path.join(ROOT, 'mockups', 'fonts');
 const ARTWORK_DIR = path.join(ROOT, 'mockups', 'artwork');
 const PRINTS_DIR = path.join(ROOT, 'mockups', 'prints');
 
-const SCALE = 2; // template is 1024x1536; render the print master at 2x
-const PANEL = { x: 183, y: 313, width: 658, height: 824 }; // template px (art stops above the plate band)
+const SCALE = 2; // template is 782x1098; render the print master at 2x
+const PANEL = { x: 262.6, y: 150.5, width: 729, height: 906.5 }; // frame opening, template px
 
 function ensureFonts() {
   const dest = path.join(os.homedir(), '.fonts');
@@ -62,8 +62,8 @@ async function renderArtwork(svgPath, spec) {
   }
   const buf = Buffer.from(svg);
   const meta = await sharp(buf).metadata();
-  const boxW = PANEL.width * SCALE;
-  const boxH = PANEL.height * SCALE;
+  const boxW = Math.round(PANEL.width * SCALE);
+  const boxH = Math.round(PANEL.height * SCALE);
   // Render dense enough that cover-cropping never upscales.
   const density = 72 * Math.max(boxW / meta.width, boxH / meta.height);
   return sharp(buf, { density: Math.min(density, 2400) })

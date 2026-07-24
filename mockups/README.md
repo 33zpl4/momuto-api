@@ -54,11 +54,12 @@ This is a one-time job per template.
 
 Drop 02 designs are **composed** before mounting: raw illustration + three
 strings → the framed print with title bar, bottom plate rail and accession
-number, built from the drop 01 frame geometry
-(`frames/iconic-frame.svg`, extracted verbatim from
-`reference/drop-01/the-116th-05.svg`; the plate rail is the title-bar rules
-mirrored into the frame bottom). Text is set live in Trajan Pro
-(`fonts/`), so no per-design vectorized titles are needed.
+number. The frame is the drop 02 vector (`frames/iconic-frame.svg`, white
+group taken verbatim from `reference/frame-concept.svg` — thin-margin
+borders, short plate rules, and the stepped number tab bottom-right; the
+black backdrop group is dropped so the print stays transparent). Text is
+set live in Trajan Pro (`fonts/`), so no per-design vectorized titles are
+needed.
 
 Drop a raw SVG plus a sidecar `.json` with the same basename:
 
