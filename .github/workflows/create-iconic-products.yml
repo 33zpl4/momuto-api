@@ -7,6 +7,10 @@ name: Create Iconic Series Products
 on:
   workflow_dispatch:
     inputs:
+      inspect:
+        description: 'READ-ONLY: dump an existing product''s options shape (e.g. im-05-the-116th). Ignores all other inputs.'
+        required: false
+        type: string
       slug:
         description: 'Product slug (e.g. el-himno). Leave empty to use "drop".'
         required: false
@@ -50,9 +54,11 @@ jobs:
           node-version: '20'
 
       - name: Rebuild pages (body_html must match the repo)
+        if: inputs.inspect == ''
         run: node scripts/build-iconic-pages.js --lang ${{ inputs.lang }}
 
       - name: Fail if the build is stale
+        if: inputs.inspect == ''
         run: |
           if ! git diff --quiet -- iconic-series/build; then
             echo "::error::iconic-series/build is out of date with the source data."
@@ -69,6 +75,10 @@ jobs:
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
         run: |
           ARGS="--lang ${{ inputs.lang }}"
+          if [ -n "${{ inputs.inspect }}" ]; then
+            node scripts/create-iconic-products.js $ARGS --inspect "${{ inputs.inspect }}"
+            exit $?
+          fi
           [ -n "${{ inputs.slug }}" ] && ARGS="$ARGS --slug ${{ inputs.slug }}"
           [ -n "${{ inputs.drop }}" ] && ARGS="$ARGS --drop ${{ inputs.drop }}"
           [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"

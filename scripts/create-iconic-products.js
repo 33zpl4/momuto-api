@@ -36,10 +36,11 @@ const config = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8')
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 function parseArgs(argv) {
-  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false };
+  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
-    if (k === '--slug') a.slug = argv[++i];
+    if (k === '--inspect') a.inspect = argv[++i];
+    else if (k === '--slug') a.slug = argv[++i];
     else if (k === '--drop') a.drop = argv[++i];
     else if (k === '--lang') a.lang = argv[++i];
     else if (k === '--dry-run') a.dryRun = true;
@@ -141,8 +142,52 @@ async function send(url, method, token, body) {
   return json.data || {};
 }
 
+/**
+ * READ-ONLY. Page through GET /products and dump the options/variants shape of
+ * an existing product. The drop 01 shirts already have XS–XXL sizes, so their
+ * object is the known-good spec_mode 2 payload — worth reading rather than
+ * guessing at. Same cursor pagination as scripts/pull-cms.js.
+ */
+async function inspect(handle, token) {
+  const limit = 100;
+  let since = '';
+  for (let page = 0; page < 50; page++) {
+    const res = await fetch(`${HOST}/products?limit=${limit}${since ? `&since_id=${since}` : ''}`, { headers: { token } });
+    const json = await res.json();
+    if (json.code !== 0) throw new Error(`API code ${json.code}: ${json.msg}`);
+    const items = json.data?.products || json.data?.list || json.data || [];
+    if (!Array.isArray(items) || !items.length) break;
+
+    const hit = items.find(p => p.handle === handle || String(p.id) === handle);
+    if (hit) {
+      console.log(`FOUND "${hit.title}" · id ${hit.id} · handle ${hit.handle}`);
+      console.log(`spec_mode: ${hit.spec_mode}`);
+      console.log(`\noptions:\n${JSON.stringify(hit.options, null, 2)}`);
+      const v = (hit.variants || [])[0];
+      console.log(`\nvariants: ${(hit.variants || []).length}`);
+      if (v) {
+        const optFields = Object.fromEntries(Object.entries(v).filter(([k]) => /^option/i.test(k)));
+        console.log(`variant[0] option fields:\n${JSON.stringify(optFields, null, 2)}`);
+        console.log(`variant[0] price/sku: ${v.price} / ${v.sku}`);
+      }
+      return;
+    }
+    since = items[items.length - 1].id;
+    if (items.length < limit) break;
+  }
+  console.error(`No product matching "${handle}". Pass a handle (im-05-the-116th) or a numeric id.`);
+  process.exit(1);
+}
+
 async function main() {
   const args = parseArgs(process.argv);
+
+  if (args.inspect) {
+    const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
+    if (!process.env[tv]) { console.error(`No ${tv} in the environment.`); process.exit(1); }
+    await inspect(args.inspect, process.env[tv]);
+    return;
+  }
 
   if (!args.slug && !args.drop) {
     console.error('Refusing to run without a target. Pass --slug <slug> or --drop <drop-0N>.');
