@@ -120,7 +120,7 @@ function renderPage(item, all, lang) {
   const details = fs.readFileSync(detailsPath, 'utf8')
     .replace(/<!--[\s\S]*?-->/g, '') // authoring notes stay in source, not output
     .replace(/\{\{NUMBER\}\}/g, escapeHtml(item.number))
-    .replace(/\{\{EDITION\}\}/g, escapeHtml(dropCfg.edition))
+    .replace(/\{\{EDITION\}\}/g, escapeHtml(dropCfg.edition[lang] || dropCfg.edition.en))
     .trim()
     .split('\n').map(l => (l.trim() ? '        ' + l : l)).join('\n');
 

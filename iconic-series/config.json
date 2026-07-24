@@ -14,13 +14,33 @@
   "drops": {
     "drop-01": {
       "label": "DROP 01",
-      "edition": "Drop 01 – Archive Release",
-      "subtitle": "Iconic Series — Drop 01, Archive Release"
+      "edition": {
+        "en": "Drop 01 – Archive Release",
+        "es": "Drop 01 – Edición de Archivo",
+        "fr": "Drop 01 – Édition d'Archive",
+        "it": "Drop 01 – Edizione d'Archivio"
+      },
+      "subtitle": {
+        "en": "Iconic Series — Drop 01, Archive Release",
+        "es": "Iconic Series — Drop 01, Edición de Archivo",
+        "fr": "Iconic Series — Drop 01, Édition d'Archive",
+        "it": "Iconic Series — Drop 01, Edizione d'Archivio"
+      }
     },
     "drop-02": {
       "label": "DROP 02",
-      "edition": "Drop 02 – Summer 2026",
-      "subtitle": "Iconic Series — Drop 02, Summer 2026"
+      "edition": {
+        "en": "Drop 02 – Summer 2026",
+        "es": "Drop 02 – Verano 2026",
+        "fr": "Drop 02 – Été 2026",
+        "it": "Drop 02 – Estate 2026"
+      },
+      "subtitle": {
+        "en": "Iconic Series — Drop 02, Summer 2026",
+        "es": "Iconic Series — Drop 02, Verano 2026",
+        "fr": "Iconic Series — Drop 02, Été 2026",
+        "it": "Iconic Series — Drop 02, Estate 2026"
+      }
     }
   },
   "strings": {
@@ -38,12 +58,69 @@
       "format_value": "Archive Print",
       "cart_label": "ADD TO CART",
       "spec_line": "220 GSM premium cotton · Relaxed fit · Matte screen print · Archive format"
+    },
+    "es": {
+      "series_name": "Iconic Series",
+      "banner_subtitle": "Pieza {{NUMBER}} de la Iconic Series. {{DROP_BLURB}}",
+      "moment_label_suffix": "El Momento",
+      "series_label": "La Colección",
+      "series_heading": "Más de la Iconic Series",
+      "back_to_top": "Ver la colección completa →",
+      "detail_series": "Serie",
+      "detail_edition": "Edición",
+      "detail_format": "Formato",
+      "detail_technique": "Técnica",
+      "format_value": "Impresión de Archivo",
+      "cart_label": "AÑADIR AL CARRITO",
+      "spec_line": "Algodón premium 220 g/m² · Corte relajado · Serigrafía mate · Formato archivo"
+    },
+    "fr": {
+      "series_name": "Iconic Series",
+      "banner_subtitle": "Pièce {{NUMBER}} de l'Iconic Series. {{DROP_BLURB}}",
+      "moment_label_suffix": "Le Moment",
+      "series_label": "La Collection",
+      "series_heading": "Plus de l'Iconic Series",
+      "back_to_top": "Voir toute la collection →",
+      "detail_series": "Série",
+      "detail_edition": "Édition",
+      "detail_format": "Format",
+      "detail_technique": "Technique",
+      "format_value": "Tirage d'Archive",
+      "cart_label": "AJOUTER AU PANIER",
+      "spec_line": "Coton premium 220 g/m² · Coupe ample · Sérigraphie mate · Format archive"
+    },
+    "it": {
+      "series_name": "Iconic Series",
+      "banner_subtitle": "Pezzo {{NUMBER}} della Iconic Series. {{DROP_BLURB}}",
+      "moment_label_suffix": "Il Momento",
+      "series_label": "La Collezione",
+      "series_heading": "Altro dalla Iconic Series",
+      "back_to_top": "Vedi tutta la collezione →",
+      "detail_series": "Serie",
+      "detail_edition": "Edizione",
+      "detail_format": "Formato",
+      "detail_technique": "Tecnica",
+      "format_value": "Stampa d'Archivio",
+      "cart_label": "AGGIUNGI AL CARRELLO",
+      "spec_line": "Cotone premium 220 g/m² · Vestibilità morbida · Serigrafia opaca · Formato archivio"
     }
   },
   "drop_blurbs": {
     "en": {
       "drop-01": "Five defining moments in football, reframed through expressive sketch illustration.",
       "drop-02": "Five moments from the summer of 2026, reframed through expressive sketch illustration."
+    },
+    "es": {
+      "drop-01": "Cinco momentos que definieron el fútbol, reinterpretados con ilustración expresiva a mano alzada.",
+      "drop-02": "Cinco momentos del verano de 2026, reinterpretados con ilustración expresiva a mano alzada."
+    },
+    "fr": {
+      "drop-01": "Cinq moments qui ont défini le football, réinterprétés au trait, en dessin expressif.",
+      "drop-02": "Cinq moments de l'été 2026, réinterprétés au trait, en dessin expressif."
+    },
+    "it": {
+      "drop-01": "Cinque momenti che hanno definito il calcio, reinterpretati con illustrazione espressiva a mano libera.",
+      "drop-02": "Cinque momenti dell'estate 2026, reinterpretati con illustrazione espressiva a mano libera."
     }
   },
   "collection_id": 129055,

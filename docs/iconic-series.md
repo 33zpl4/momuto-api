@@ -71,11 +71,23 @@ the page data carry the accession number. One is a copy, so the builder
 French store; `LE RECORD` stays French on the Spanish one. They are artwork
 names — translating them breaks the collection.
 
-Localised fields are `moment_title`, `moment_body`, `technique`, `meta_*` and
-the shared `strings`/`drop_blurbs`. Write them **natively per locale**, not
-word-for-word from English: the copy is short and literary, and a literal
-translation reads like a translation. Where a phrase has no natural equivalent,
-rewrite the sentence rather than forcing it.
+Localised fields are `moment_title`, `moment_body`, `technique`, `meta_*`, plus
+the shared `strings`, `drop_blurbs`, and the per-locale `edition` / `subtitle`
+on each drop. Write them **natively per locale**, not word-for-word from
+English: the copy is short and literary, and a literal translation reads like
+one. Where a phrase has no natural equivalent, rewrite the sentence.
+
+Choices made in the existing copy, worth keeping consistent:
+
+- **Move names use the term each language actually uses.** The bicycle kick is
+  `Chilena` (es) / `Retourné Acrobatique` (fr) / `Rovesciata` (it) — not a
+  translation of "bicycle".
+- **`220 GSM` becomes `220 g/m²`** everywhere but EN. It is the unit these
+  markets read.
+- **Artwork names stay put inside the sentence.** `The Volley que detuvo el
+  tiempo`, `Il record che resta solo` — the name is the constant, the sentence
+  around it is the translation.
+- Meta descriptions are kept **≤200 characters** to match the live EN ones.
 
 ## Deploying
 
@@ -97,8 +109,9 @@ and card `alt` text is derived from `display_title`.
 - `image` is empty for all drop-02 products — set each one after the mockups
   are uploaded to the CMS, then rebuild (the grid renders a TODO comment
   meanwhile).
-- `es` / `fr` / `it` strings, drop blurbs and `product-details.<lang>.html`
-  are not written yet. EN is complete for all ten products.
+- All four locales are complete: 40 pages (10 products × en/es/fr/it).
+- Drop 01 products still render from their own custom templates — repoint them
+  at the shared template *before* pushing `body_html`, or the page duplicates.
 
 ## Creating the products
 

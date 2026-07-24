@@ -170,7 +170,7 @@ function buildBody(item, lang, { publish }) {
     images,
     body_html: bodyHtml,
     status: publish ? 1 : 0,
-    subtitle: dropCfg.subtitle,
+    subtitle: dropCfg.subtitle[lang] || dropCfg.subtitle.en,
     mini_detail: miniDetail,
     meta_title: copy.meta_title || `${item.display_title} – ${strings.series_name} ${hyphen} | MOMUTO`,
     meta_descript: copy.meta_description,
