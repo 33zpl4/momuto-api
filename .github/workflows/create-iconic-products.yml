@@ -7,6 +7,25 @@ name: Create Iconic Series Products
 on:
   workflow_dispatch:
     inputs:
+      delete_ids:
+        description: 'CLEANUP: comma-separated product ids to hard-delete (e.g. the zz-iconic-probe ones). Ignores all other inputs.'
+        required: false
+        type: string
+      probe:
+        description: 'DIAGNOSTIC: try each size-variant shape against the API with throwaway hidden products. Ignores all other inputs.'
+        required: false
+        default: false
+        type: boolean
+      size_shape:
+        description: 'Size payload shape (set this to the probe WINNER)'
+        required: false
+        default: 'titles'   # established by --probe
+        type: choice
+        options: ['titles', 'zeroed', 'optionsonly', 'variantsonly']
+      inspect:
+        description: 'READ-ONLY: dump an existing product''s options shape (e.g. im-05-the-116th). Ignores all other inputs.'
+        required: false
+        type: string
       slug:
         description: 'Product slug (e.g. el-himno). Leave empty to use "drop".'
         required: false
@@ -50,9 +69,11 @@ jobs:
           node-version: '20'
 
       - name: Rebuild pages (body_html must match the repo)
+        if: inputs.inspect == '' && inputs.probe != true && inputs.delete_ids == ''
         run: node scripts/build-iconic-pages.js --lang ${{ inputs.lang }}
 
       - name: Fail if the build is stale
+        if: inputs.inspect == '' && inputs.probe != true && inputs.delete_ids == ''
         run: |
           if ! git diff --quiet -- iconic-series/build; then
             echo "::error::iconic-series/build is out of date with the source data."
@@ -67,8 +88,21 @@ jobs:
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          ICONIC_SIZE_SHAPE: ${{ inputs.size_shape }}
         run: |
           ARGS="--lang ${{ inputs.lang }}"
+          if [ -n "${{ inputs.delete_ids }}" ]; then
+            node scripts/create-iconic-products.js $ARGS --delete "${{ inputs.delete_ids }}"
+            exit $?
+          fi
+          if [ "${{ inputs.probe }}" = "true" ]; then
+            node scripts/create-iconic-products.js $ARGS --probe
+            exit $?
+          fi
+          if [ -n "${{ inputs.inspect }}" ]; then
+            node scripts/create-iconic-products.js $ARGS --inspect "${{ inputs.inspect }}"
+            exit $?
+          fi
           [ -n "${{ inputs.slug }}" ] && ARGS="$ARGS --slug ${{ inputs.slug }}"
           [ -n "${{ inputs.drop }}" ] && ARGS="$ARGS --drop ${{ inputs.drop }}"
           [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"

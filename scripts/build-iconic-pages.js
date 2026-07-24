@@ -154,7 +154,7 @@ function renderPage(item, all, lang) {
     .replace(/\{\{SERIES_CARDS\}\}/g, cards.html)
     .replace(/\{\{COLLECTION_HANDLE\}\}/g, config.collection_handle)
     .replace(/\{\{BACK_LINK\}\}/g, strings.back_to_top)
-    .replace(/\{\{SHARED_JS\}\}/g, config.shared_js);
+    ;
 
   const left = html.match(/\{\{[A-Z_]+\}\}/g);
   if (left) throw new Error(`${item.slug}.${lang}: unfilled placeholders ${[...new Set(left)].join(', ')}`);

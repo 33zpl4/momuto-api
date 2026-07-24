@@ -65,6 +65,7 @@
       <a href="/collections/{{COLLECTION_HANDLE}}" class="back-to-top">{{BACK_LINK}}</a>
     </div>
   </div>
-
-  <script src="{{SHARED_JS}}" defer></script>
 </div>
+<!-- iconic-content.js is loaded by the shared CMS product template, NOT from
+     here: a <script> tag inside body_html is inert if the CMS injects the
+     string via innerHTML. See docs/iconic-series.md → "The shared template". -->

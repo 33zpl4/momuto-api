@@ -36,10 +36,13 @@ const config = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8')
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 function parseArgs(argv) {
-  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false };
+  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
-    if (k === '--slug') a.slug = argv[++i];
+    if (k === '--delete') a.delete = argv[++i];
+    else if (k === '--probe') a.probe = true;
+    else if (k === '--inspect') a.inspect = argv[++i];
+    else if (k === '--slug') a.slug = argv[++i];
     else if (k === '--drop') a.drop = argv[++i];
     else if (k === '--lang') a.lang = argv[++i];
     else if (k === '--dry-run') a.dryRun = true;
@@ -68,6 +71,62 @@ function loadDrop(drop) {
     .sort((a, b) => a.number.localeCompare(b.number));
 }
 
+/**
+ * The size options + variants half of the payload.
+ *
+ * On a live product the variants reference the option and value by *id*
+ * (`option1: 7294970`, `option1_value: 36429091`) — ids the API assigns at
+ * create time, so they cannot be sent on the create itself. Sending titles
+ * alone returned `数据不存在` (data does not exist).
+ *
+ * SHAPE is which way round we ask for it; `--probe` establishes the answer
+ * empirically against throwaway hidden products. Set via ICONIC_SIZE_SHAPE.
+ */
+const SHAPES = {
+  // options declared; variants carry titles only and the API links them
+  titles: (item, price) => ({
+    options: [{ option_name: 'Size', position: 0, values: SIZES.map((s, i) => ({ option_value: s, position: i })) }],
+    variants: SIZES.map((s, i) => ({
+      price, option1_title: 'Size', option1_value_title: s,
+      sku: `${item.number.replace(/[–—]/g, '-')}-${s}`, position: i,
+    })),
+  }),
+  // as above but with the id fields explicitly zeroed, as they appear on a
+  // spec_mode 1 product where they are unused
+  zeroed: (item, price) => ({
+    options: [{ option_name: 'Size', position: 0, values: SIZES.map((s, i) => ({ option_value: s, position: i })) }],
+    variants: SIZES.map((s, i) => ({
+      price, option1_title: 'Size', option1_value_title: s, option1: 0, option1_value: 0,
+      sku: `${item.number.replace(/[–—]/g, '-')}-${s}`, position: i,
+    })),
+  }),
+  // declare the options and let the API generate the variant matrix itself
+  optionsonly: (item, price) => ({
+    options: [{ option_name: 'Size', position: 0, values: SIZES.map((s, i) => ({ option_value: s, position: i })) }],
+    variants: [{ price }],
+  }),
+  // variants describe the sizes; no separate options array
+  variantsonly: (item, price) => ({
+    variants: SIZES.map((s, i) => ({
+      price, option1_title: 'Size', option1_value_title: s,
+      sku: `${item.number.replace(/[–—]/g, '-')}-${s}`, position: i,
+    })),
+  }),
+};
+
+/**
+ * "titles" is the established shape — --probe confirmed it produces all six
+ * size variants, with the API assigning the option/value ids and linking the
+ * variants itself. The earlier `数据不存在` was 1-based `position` on values
+ * the API expects to be 0-based, not the linkage.
+ */
+function sizeShape(item, price) {
+  const name = process.env.ICONIC_SIZE_SHAPE || 'titles';
+  const fn = SHAPES[name];
+  if (!fn) throw new Error(`unknown ICONIC_SIZE_SHAPE "${name}" (${Object.keys(SHAPES).join(', ')})`);
+  return fn(item, price);
+}
+
 function buildBody(item, lang, { publish }) {
   const copy = item.page?.[lang];
   if (!copy?.moment_body) throw new Error(`no ${lang} copy — nothing to publish`);
@@ -88,28 +147,37 @@ function buildBody(item, lang, { publish }) {
   const images = [{ src: item.image, alt: `${alt}, back` }];
   if (item.image_front) images.push({ src: item.image_front, alt: `${alt}, front` });
 
+  const dropCfg = config.drops[item.drop];
+  const strings = config.strings[lang];
+
+  // mini_detail is the short block above the buy button. Shape copied verbatim
+  // from im-01-the-volley: ref + title, price as an h2, then the spec line.
+  // Note the number uses an EN DASH here but a HYPHEN in meta_title — that is
+  // how the live products read, so it is reproduced rather than normalised.
+  const enDash = item.number.replace(/-/g, '–');
+  const hyphen = item.number.replace(/[–—]/g, '-');
+  const miniDetail = `<p><strong>${enDash} // ${item.display_title}</strong></p>` +
+    `<h2>${config.price}</h2><p>${strings.spec_line}</p>`;
+
   return {
     title: item.display_title,
     handle: item.handle,
-    // spec_mode 2 = size options. The option object wants `option_name` —
-    // `option_title` returns "option_name不能为空" (option_name cannot be
-    // empty). `option1_title`/`option1_value_title` on the variants match the
-    // field names on the live Pornic product.
+    // spec_mode 2 = size options. Shape mirrors the live im-01-the-volley
+    // product read back via --inspect: option_name (not option_title), and
+    // 0-based `position` on both the option and its values.
     spec_mode: 2,
-    options: [{ option_name: 'Size', position: 1, values: SIZES.map((s, i) => ({ option_value: s, position: i + 1 })) }],
-    variants: SIZES.map(s => ({
-      price,
-      option1_title: 'Size',
-      option1_value_title: s,
-      sku: `${item.number.replace(/[–—]/g, '-')}-${s}`,
-      inventory_tracking: 0,
-    })),
+    ...sizeShape(item, price),
     images,
     body_html: bodyHtml,
     status: publish ? 1 : 0,
-    subtitle: copy.subtitle || `${config.strings[lang].series_name} · ${item.number}`,
-    meta_title: copy.meta_title,
+    subtitle: dropCfg.subtitle,
+    mini_detail: miniDetail,
+    meta_title: copy.meta_title || `${item.display_title} – ${strings.series_name} ${hyphen} | MOMUTO`,
     meta_descript: copy.meta_description,
+    // Without this the product never joins /collections/<handle> — it would
+    // exist only at its direct URL.
+    collections: [{ collection_id: config.collection_id }],
+    ...config.product_defaults,
     product_detail: 1,
   };
 }
@@ -141,8 +209,159 @@ async function send(url, method, token, body) {
   return json.data || {};
 }
 
+/**
+ * READ-ONLY. Page through GET /products and dump the options/variants shape of
+ * an existing product. The drop 01 shirts already have XS–XXL sizes, so their
+ * object is the known-good spec_mode 2 payload — worth reading rather than
+ * guessing at. Same cursor pagination as scripts/pull-cms.js.
+ */
+async function inspect(handleOrUrl, token) {
+  // Accept a pasted product URL as well as a bare handle.
+  const handle = String(handleOrUrl).trim()
+    .replace(/^https?:\/\/[^/]+/, '')
+    .replace(/^\/?products\//, '')
+    .replace(/[/?#].*$/, '');
+  if (handle !== String(handleOrUrl).trim()) console.log(`handle: ${handle}`);
+  const limit = 100;
+  let since = '';
+  for (let page = 0; page < 50; page++) {
+    const res = await fetch(`${HOST}/products?limit=${limit}${since ? `&since_id=${since}` : ''}`, { headers: { token } });
+    const json = await res.json();
+    if (json.code !== 0) throw new Error(`API code ${json.code}: ${json.msg}`);
+    const items = json.data?.products || json.data?.list || json.data || [];
+    if (!Array.isArray(items) || !items.length) break;
+
+    const hit = items.find(p => p.handle === handle || String(p.id) === handle);
+    if (hit) {
+      console.log(`FOUND "${hit.title}" · id ${hit.id} · handle ${hit.handle}`);
+      console.log(`spec_mode: ${hit.spec_mode}`);
+
+      // Everything we have to match when creating a sibling product. Dumped
+      // rather than guessed — body_html is elided, it's the one field we own.
+      const META = ['title', 'handle', 'subtitle', 'mini_detail', 'meta_title', 'meta_descript',
+        'meta_keywords', 'tags', 'product_type', 'vendor', 'spu', 'status',
+        'free_shipping', 'taxable', 'inventory_tracking', 'inventory_policy', 'collections'];
+      console.log('\n── metadata ──');
+      for (const k of META) {
+        if (hit[k] === undefined) continue;
+        const v = hit[k];
+        console.log(`${k}: ${typeof v === 'object' ? JSON.stringify(v) : JSON.stringify(v)}`);
+      }
+      console.log(`body_html: <${(hit.body_html || '').length} chars>`);
+      console.log(`images: ${(hit.images || []).length}` +
+        ((hit.images || [])[0] ? ` · first alt ${JSON.stringify(hit.images[0].alt)}` : ''));
+
+      console.log(`\n── options ──\n${JSON.stringify(hit.options, null, 2)}`);
+      const v = (hit.variants || [])[0];
+      console.log(`\nvariants: ${(hit.variants || []).length}`);
+      if (v) {
+        const optFields = Object.fromEntries(Object.entries(v).filter(([k]) => /^option/i.test(k)));
+        console.log(`variant[0] option fields:\n${JSON.stringify(optFields, null, 2)}`);
+        console.log(`variant[0] price/sku/weight: ${v.price} / ${v.sku} / ${v.weight}`);
+        console.log(`variant[0] inventory: qty ${v.inventory_quantity}, tracking ${v.inventory_tracking}, policy ${v.inventory_policy}`);
+      }
+      return;
+    }
+    since = items[items.length - 1].id;
+    if (items.length < limit) break;
+  }
+  console.error(`No product matching "${handle}". Pass a handle (im-05-the-116th) or a numeric id.`);
+  process.exit(1);
+}
+
+/**
+ * Try each size shape against the real API with a throwaway hidden product,
+ * and report which one it accepts. One run settles the question instead of a
+ * round trip per guess. Products are created hidden with a zz- handle; the
+ * ids are printed so they can be deleted afterwards.
+ */
+async function probe(token) {
+  const stamp = process.env.GITHUB_RUN_ID || 'local';
+  const created = [];
+  let winner = null;
+
+  for (const name of Object.keys(SHAPES)) {
+    const item = {
+      number: 'ZZ-00', display_title: `ZZ probe ${name} — delete me`,
+      handle: `zz-iconic-probe-${name}-${stamp}`,
+      image: 'https://cdn.staticsoe.com/pics/13a865fb887709ed02d9f3b2a116bf420ff89e230b08db9c795f6b9cded3730d.webp',
+    };
+    const body = {
+      title: item.display_title,
+      handle: item.handle,
+      spec_mode: name === 'variantsonly' ? 2 : 2,
+      ...SHAPES[name](item, '39.00'),
+      images: [{ src: item.image, alt: 'probe' }],
+      status: 0,
+      product_detail: 1,
+    };
+    try {
+      const data = await send(`${HOST}/products`, 'POST', token, body);
+      created.push({ name, id: data.id });
+      console.log(`✓ ${name.padEnd(13)} accepted → product id ${data.id}`);
+      const opts = data.options?.[0];
+      const v0 = (data.variants || [])[0];
+      console.log(`  variants: ${(data.variants || []).length}` +
+        (opts ? ` · option id ${opts.id} "${opts.option_name}" with ${opts.values?.length} values` : ' · no options returned') +
+        (v0 ? ` · variant[0] option1=${v0.option1} option1_value=${v0.option1_value} "${v0.option1_value_title}"` : ''));
+      if (!winner && (data.variants || []).length === SIZES.length) winner = name;
+    } catch (err) {
+      console.log(`✗ ${name.padEnd(13)} ${err.message}`);
+    }
+  }
+
+  console.log('\n────────────────────────────────────────');
+  if (winner) {
+    console.log(`WINNER: "${winner}" produced all ${SIZES.length} size variants.`);
+    console.log(`Set it in the workflow env: ICONIC_SIZE_SHAPE=${winner}`);
+  } else if (created.length) {
+    console.log('Some shapes were accepted but none produced the full size matrix.');
+    console.log('Check the variant counts above and inspect one in manage.');
+  } else {
+    console.log('No shape was accepted. Paste this output and we go again.');
+  }
+  if (created.length) {
+    console.log(`\nDELETE THESE probe products: ${created.map(c => `${c.name}=${c.id}`).join(', ')}`);
+    console.log('(handles start zz-iconic-probe-, all created hidden)');
+  }
+}
+
+// Hard-delete products by id. Used to clear the throwaway probe products;
+// same endpoint scripts/cleanup-preview-products.js uses in MODE=delete.
+async function deleteProducts(ids, token) {
+  for (const id of ids) {
+    const res = await fetch(`${HOST}/products/${id}`, { method: 'DELETE', headers: { token } });
+    const text = await res.text();
+    let json = {};
+    try { json = JSON.parse(text); } catch { /* some deletes return empty */ }
+    if (res.ok && (json.code === 0 || json.code === undefined)) console.log(`✓ deleted ${id}`);
+    else console.error(`✗ ${id}: HTTP ${res.status} ${text.slice(0, 200)}`);
+  }
+}
+
 async function main() {
   const args = parseArgs(process.argv);
+
+  if (args.delete) {
+    const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
+    if (!process.env[tv]) { console.error(`No ${tv} in the environment.`); process.exit(1); }
+    await deleteProducts(args.delete.split(',').map(s => s.trim()).filter(Boolean), process.env[tv]);
+    return;
+  }
+
+  if (args.probe) {
+    const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
+    if (!process.env[tv]) { console.error(`No ${tv} in the environment.`); process.exit(1); }
+    await probe(process.env[tv]);
+    return;
+  }
+
+  if (args.inspect) {
+    const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
+    if (!process.env[tv]) { console.error(`No ${tv} in the environment.`); process.exit(1); }
+    await inspect(args.inspect, process.env[tv]);
+    return;
+  }
 
   if (!args.slug && !args.drop) {
     console.error('Refusing to run without a target. Pass --slug <slug> or --drop <drop-0N>.');

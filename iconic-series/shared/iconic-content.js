@@ -25,7 +25,12 @@
     // theme overrides — dark mode
     'body{background-color:#0a0a0a!important;color:#f4f2ee!important;}',
     '.product-router-nav-warp,.product-router-nav{display:none!important;}',
-    '#product-tabs,.product-tabs-card{display:none!important;}',
+    // NOTE: drop 01 hid #product-tabs because its content lived in a custom
+    // per-product template. Ours arrives as body_html, which renders INSIDE
+    // that tab — hiding it would hide the whole page. Instead strip the tab
+    // chrome and let the panel read as page content.
+    '.product-tabs-card .tab-nav,.product-tabs-card .tabs-header,#product-tabs .tab-nav{display:none!important;}',
+    '#product-tabs,.product-tabs-card{background:transparent!important;border:none!important;padding:0!important;}',
     'h1{font-family:"Playfair Display",serif;font-size:24px;font-weight:400;color:#f4f2ee!important;margin:12px 0;letter-spacing:-.01em;}',
     '.product-info-describe h2,.control-product_detail-describe h2{color:#f4f2ee!important;font-family:"Playfair Display",serif;font-size:28px!important;font-weight:400!important;margin:12px 0;}',
     '.product-info-subtitle{color:#8c8882!important;}',
@@ -227,12 +232,26 @@
     });
   }
 
+  // The banner sits at the very top of a drop 01 page, above the gallery. Our
+  // copy arrives inside the detail tab, i.e. below the product — so lift it to
+  // the top of the content area to match. Purely visual: the markup is already
+  // in the HTML source either way, so nothing changes for crawlers.
+  function liftBanner() {
+    var banner = document.querySelector('.iconic-series-banner');
+    if (!banner) return;
+    var anchor = document.querySelector('.product-grid-bottom, .product-detail, .control-product_detail, main');
+    if (!anchor || !anchor.parentNode) return;
+    if (anchor.contains(banner)) return;
+    anchor.parentNode.insertBefore(banner, anchor);
+  }
+
   function init() {
     var marker = document.querySelector('[data-iconic-page]');
     var lang = (marker && marker.getAttribute('data-lang')) || 'en';
     initAccordions();
     initSizeGuide(lang);
     initCartArea();
+    liftBanner();
   }
 
   if (document.readyState === 'loading') {
