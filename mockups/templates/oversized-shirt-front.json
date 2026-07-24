@@ -2,10 +2,10 @@
   "image": "oversized-shirt-front.jpg",
   "match": "-front\\.png$",
   "print": {
-    "x": 2175,
-    "y": 1229,
-    "width": 460,
-    "height": 207,
+    "x": 2210,
+    "y": 1245,
+    "width": 390,
+    "height": 175,
     "gravity": "center"
   },
   "blend": "over",
