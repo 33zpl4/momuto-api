@@ -91,11 +91,12 @@ function buildBody(item, lang, { publish }) {
   return {
     title: item.display_title,
     handle: item.handle,
-    // spec_mode 2 = size options. NOT yet proven against this API: the only
-    // worked example in the repo (Pornic) is spec_mode 1, single variant.
-    // Verify on the first hidden product before batching.
+    // spec_mode 2 = size options. The option object wants `option_name` —
+    // `option_title` returns "option_name不能为空" (option_name cannot be
+    // empty). `option1_title`/`option1_value_title` on the variants match the
+    // field names on the live Pornic product.
     spec_mode: 2,
-    options: [{ option_title: 'Size', values: SIZES.map(s => ({ option_value: s })) }],
+    options: [{ option_name: 'Size', position: 1, values: SIZES.map((s, i) => ({ option_value: s, position: i + 1 })) }],
     variants: SIZES.map(s => ({
       price,
       option1_title: 'Size',
@@ -130,7 +131,13 @@ async function send(url, method, token, body) {
   try { json = JSON.parse(text); } catch {
     throw new Error(`HTTP ${res.status}, non-JSON response: ${text.slice(0, 500)}`);
   }
-  if (json.code !== 0) throw new Error(`API code ${json.code}: ${json.msg}`);
+  if (json.code !== 0) {
+    // Errors come back in Chinese; surface the offending field plainly so the
+    // next fix targets it instead of guessing at the whole payload again.
+    const field = /([a-z_0-9.]+)\s*(不能为空|不能為空|格式|错误|無效|无效)/i.exec(json.msg);
+    const hint = field ? `  (field: "${field[1]}" — 不能为空 = cannot be empty)` : '';
+    throw new Error(`API code ${json.code}: ${json.msg}${hint}`);
+  }
   return json.data || {};
 }
 
