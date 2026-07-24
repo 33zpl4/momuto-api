@@ -3,7 +3,7 @@
   "handle": "im-08-le-record",
   "number": "IM–08",
   "display_title": "Le Record",
-  "image": "",
+  "image": "https://cdn.staticsoe.com/pics/26e9554b59cbcbb5076043c57fe79fcabce932b1e8d5acc5c42be7c0a2c78d13.webp",
   "page": {
     "en": {
       "moment_title": "The record <em>that stood alone.</em>",
@@ -12,5 +12,6 @@
       "meta_title": "Le Record — Iconic Series T-Shirt | MOMUTO",
       "meta_description": "Premium heavyweight cotton tee. Le Record, piece IM–08 of the MOMUTO Iconic Series: the all-time scoring record, drawn in expressive sketch illustration."
     }
-  }
+  },
+  "image_front": "https://cdn.staticsoe.com/pics/e2e3eff62ed3636f3f42281f92dca51ce9c14ea9b56fe6ec2991e97be53b9d1b.webp"
 }

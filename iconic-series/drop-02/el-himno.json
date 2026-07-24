@@ -3,7 +3,7 @@
   "handle": "im-06-el-himno",
   "number": "IM–06",
   "display_title": "El Himno",
-  "image": "",
+  "image": "https://cdn.staticsoe.com/pics/13a865fb887709ed02d9f3b2a116bf420ff89e230b08db9c795f6b9cded3730d.webp",
   "page": {
     "en": {
       "moment_title": "The anthem <em>that shook the stadium.</em>",
@@ -12,5 +12,6 @@
       "meta_title": "El Himno — Iconic Series T-Shirt | MOMUTO",
       "meta_description": "Premium heavyweight cotton tee. El Himno, piece IM–06 of the MOMUTO Iconic Series: the anthem before a semi-final, drawn in expressive sketch illustration."
     }
-  }
+  },
+  "image_front": "https://cdn.staticsoe.com/pics/cc34ab5dceb53e6f916e79cc106a37be8cae4e05322fd44e7c704b02f4f089f8.webp"
 }
