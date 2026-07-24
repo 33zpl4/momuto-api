@@ -84,12 +84,18 @@ branch-filtered. `docs/rtp-collection.md` records what happens otherwise: the
 RTP collection deploy has no branch filter, so pushing a feature branch writes
 straight to the live stores with no staging. It has bitten us twice.
 
+## Defects the retrofit fixes
+
+All five drop 01 pages read `collection reference (IM–01)` — correct on
+IM-01 by luck, wrong on the other four. The IM-01 page's own series grid also
+labelled the IM-04 card `alt="The Bicycle"`. Both classes of error are
+structurally impossible now: the number comes from data and is cross-checked,
+and card `alt` text is derived from `display_title`.
+
 ## Open
 
 - `image` is empty for all drop-02 products — set each one after the mockups
   are uploaded to the CMS, then rebuild (the grid renders a TODO comment
   meanwhile).
-- Drop 01 `moment_*` copy exists only for `the-116th`; the other four need
-  their live copy pasted in, or new copy written.
 - `es` / `fr` / `it` strings, drop blurbs and `product-details.<lang>.html`
-  are not written yet.
+  are not written yet. EN is complete for all ten products.
