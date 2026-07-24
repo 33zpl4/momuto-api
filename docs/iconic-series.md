@@ -172,21 +172,27 @@ Quirk worth preserving: the live products write the accession number with an
 **en dash in `mini_detail`** (`IM–01`) and a **hyphen in `meta_title`**
 (`IM-01`). Reproduced as-is.
 
-### ⚠️ body_html may be the wrong channel
+### body_html vs per-product templates
 
-`im-01-the-volley` has **`body_html: 0 chars`**. The four-block page content on
-the drop 01 products lives in the CMS page-builder (the block ids in their CSS —
-`#block-section-6301440` — confirm this), not on the product record.
+`im-01-the-volley` has **`body_html: 0 chars`**. Drop 01 works differently: each
+product has its **own custom CMS template** with the four blocks pasted into it
+by hand. Ten products means ten templates to build and maintain.
 
-So sending our generated page as `body_html` puts it in the *Détail* tab, which
-may not be where the drop 01 blocks render. This is the next thing to verify on
-the first hidden product: create it, look at the page, and check whether the
-banner/moment/grid appear where they do on a drop 01 shirt.
+Drop 02 uses `body_html` instead — the content arrives through the API and every
+product shares **one** template. That is the entire point of this pipeline: no
+CMS builder step per product.
 
-If they don't, the options are (a) keep `body_html` and accept a different
-layout position, or (b) find whether product decoration blocks are writable —
-`scripts/deploy-ready-to-play-collection.js` does `PUT /pages/{id}` for CMS
-*pages*, but product blocks are a different surface and may be builder-only.
+This costs nothing in search terms. Crawlers read the HTML source, and
+`body_html` *is* in the source. If it renders in a position you don't want,
+`shared/iconic-content.js` already loads on the page and can move or restyle
+the node — cosmetic, and under our control.
+
+**⚠️ The drop 01 retrofit trap.** Those products already render their content
+from a custom template. Pushing `body_html` to them via `--update` would make
+the page show **everything twice** — once from the template, once from
+`body_html`. So the retrofit is a two-step per product: strip the blocks from
+that product's custom template (or point it at the shared one) *first*, then
+push `body_html`. Do not run `--update` across drop 01 blind.
 
 ### Diagnostics and cleanup
 
