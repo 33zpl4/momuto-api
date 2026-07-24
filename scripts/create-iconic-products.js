@@ -36,10 +36,11 @@ const config = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8')
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 function parseArgs(argv) {
-  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false };
+  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
-    if (k === '--probe') a.probe = true;
+    if (k === '--delete') a.delete = argv[++i];
+    else if (k === '--probe') a.probe = true;
     else if (k === '--inspect') a.inspect = argv[++i];
     else if (k === '--slug') a.slug = argv[++i];
     else if (k === '--drop') a.drop = argv[++i];
@@ -113,6 +114,12 @@ const SHAPES = {
   }),
 };
 
+/**
+ * "titles" is the established shape — --probe confirmed it produces all six
+ * size variants, with the API assigning the option/value ids and linking the
+ * variants itself. The earlier `数据不存在` was 1-based `position` on values
+ * the API expects to be 0-based, not the linkage.
+ */
 function sizeShape(item, price) {
   const name = process.env.ICONIC_SIZE_SHAPE || 'titles';
   const fn = SHAPES[name];
@@ -285,8 +292,28 @@ async function probe(token) {
   }
 }
 
+// Hard-delete products by id. Used to clear the throwaway probe products;
+// same endpoint scripts/cleanup-preview-products.js uses in MODE=delete.
+async function deleteProducts(ids, token) {
+  for (const id of ids) {
+    const res = await fetch(`${HOST}/products/${id}`, { method: 'DELETE', headers: { token } });
+    const text = await res.text();
+    let json = {};
+    try { json = JSON.parse(text); } catch { /* some deletes return empty */ }
+    if (res.ok && (json.code === 0 || json.code === undefined)) console.log(`✓ deleted ${id}`);
+    else console.error(`✗ ${id}: HTTP ${res.status} ${text.slice(0, 200)}`);
+  }
+}
+
 async function main() {
   const args = parseArgs(process.argv);
+
+  if (args.delete) {
+    const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
+    if (!process.env[tv]) { console.error(`No ${tv} in the environment.`); process.exit(1); }
+    await deleteProducts(args.delete.split(',').map(s => s.trim()).filter(Boolean), process.env[tv]);
+    return;
+  }
 
   if (args.probe) {
     const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
