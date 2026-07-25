@@ -78,7 +78,7 @@
         "collection_id": {
           "en": 129055,
           "es": null,
-          "fr": null,
+          "fr": 144943,
           "it": null
         }
       }
@@ -103,55 +103,74 @@
         "copy": {
           "en": {
             "eyebrow": "Iconic Series // Drop 02",
-            "t1": "Summer",
+            "t1": "World Cup",
             "t2": "2026",
-            "sub": "The moments that defined a summer. Reframed.",
+            "sub": "The moments that defined a World Cup. Reframed.",
             "cta": "Explore Drop 02",
             "intro_label": "The Archive 02",
             "intro_heading": "One summer,<br><em>already history.</em>",
-            "intro_body": "Drop 02 turns the summer of 2026 into archive prints — an anthem, a substitute’s winner, a record that stood alone, a drum, and a goalkeeper who refused to be finished. Same frame. New chapter.",
+            "intro_body": "Drop 02 turns the 2026 World Cup into archive prints — an anthem, a substitute’s winner, a record that stood alone, a drum, and a goalkeeper who refused to be finished. Same frame. New chapter.",
             "system_title": "Five moments.<br><em>One summer.</em>"
           },
           "es": {
             "eyebrow": "Iconic Series // Drop 02",
-            "t1": "Verano",
+            "t1": "Mundial",
             "t2": "2026",
-            "sub": "Los momentos que definieron un verano. Reinterpretados.",
+            "sub": "Los momentos que definieron un Mundial. Reinterpretados.",
             "cta": "Explorar el Drop 02",
             "intro_label": "El Archivo 02",
             "intro_heading": "Un verano,<br><em>ya es historia.</em>",
-            "intro_body": "El Drop 02 convierte el verano de 2026 en estampas de archivo: un himno, el gol de un suplente, un récord que quedó solo, un tambor y un portero que se negó a acabar. El mismo marco. Nuevo capítulo.",
+            "intro_body": "El Drop 02 convierte el Mundial 2026 en estampas de archivo: un himno, el gol de un suplente, un récord que quedó solo, un tambor y un portero que se negó a acabar. El mismo marco. Nuevo capítulo.",
             "system_title": "Cinco momentos.<br><em>Un verano.</em>"
           },
           "fr": {
             "eyebrow": "Iconic Series // Drop 02",
-            "t1": "Été",
+            "t1": "Coupe du Monde",
             "t2": "2026",
-            "sub": "Les moments qui ont défini un été. Réinterprétés.",
+            "sub": "Les moments qui ont défini une Coupe du Monde. Réinterprétés.",
             "cta": "Explorer le Drop 02",
             "intro_label": "L'Archive 02",
             "intro_heading": "Un été,<br><em>déjà de l’histoire.</em>",
-            "intro_body": "Le Drop 02 transforme l’été 2026 en tirages d’archive : un hymne, le but d’un remplaçant, un record resté seul, un tambour, et un gardien qui a refusé d’en finir. Même cadre. Nouveau chapitre.",
+            "intro_body": "Le Drop 02 transforme la Coupe du Monde 2026 en tirages d’archive : un hymne, le but d’un remplaçant, un record resté seul, un tambour, et un gardien qui a refusé d’en finir. Même cadre. Nouveau chapitre.",
             "system_title": "Cinq moments.<br><em>Un été.</em>"
           },
           "it": {
             "eyebrow": "Iconic Series // Drop 02",
-            "t1": "Estate",
+            "t1": "Mondiali",
             "t2": "2026",
-            "sub": "I momenti che hanno definito un’estate. Reinterpretati.",
+            "sub": "I momenti che hanno definito un Mondiale. Reinterpretati.",
             "cta": "Esplora il Drop 02",
             "intro_label": "L'Archivio 02",
             "intro_heading": "Un’estate,<br><em>già storia.</em>",
-            "intro_body": "Il Drop 02 trasforma l’estate 2026 in stampe d’archivio: un inno, il gol di un subentrato, un record rimasto solo, un tamburo e un portiere che si è rifiutato di finire. Stessa cornice. Nuovo capitolo.",
+            "intro_body": "Il Drop 02 trasforma i Mondiali 2026 in stampe d’archivio: un inno, il gol di un subentrato, un record rimasto solo, un tamburo e un portiere che si è rifiutato di finire. Stessa cornice. Nuovo capitolo.",
             "system_title": "Cinque momenti.<br><em>Un’estate.</em>"
           }
         },
         "collection_id": {
-          "en": null,
+          "en": 130456,
           "es": null,
-          "fr": null,
+          "fr": 145074,
           "it": null
-        }
+        },
+        "meta": {
+          "en": {
+            "title": "World Cup 2026 T-Shirts | Iconic Series Drop 02 | MOMUTO",
+            "description": "Five moments from the 2026 World Cup, reframed as archive prints. 220 GSM premium cotton tees, limited run. Iconic Series Drop 02 by MOMUTO."
+          },
+          "es": {
+            "title": "Camisetas Mundial 2026 | Iconic Series Drop 02 | MOMUTO",
+            "description": "Cinco momentos del Mundial 2026, reinterpretados como estampas de archivo. Camisetas de algodón premium 220 g/m², serie limitada. Iconic Series Drop 02 de MOMUTO."
+          },
+          "fr": {
+            "title": "T-Shirts Coupe du Monde 2026 | Iconic Series Drop 02 | MOMUTO",
+            "description": "Cinq moments de la Coupe du Monde 2026, réinterprétés au trait et encadrés comme des pièces d’archive. T-shirts coton premium 220 g/m², série limitée. Iconic Series Drop 02 par MOMUTO."
+          },
+          "it": {
+            "title": "T-Shirt Mondiali 2026 | Iconic Series Drop 02 | MOMUTO",
+            "description": "Cinque momenti dei Mondiali 2026, reinterpretati come stampe d’archivio. T-shirt in cotone premium 220 g/m², serie limitata. Iconic Series Drop 02 di MOMUTO."
+          }
+        },
+        "_comment_meta": "SEO for the CMS collection record (name / meta description). Not used by the page build — paste into each store when the collection is created."
       }
     }
   },
@@ -232,25 +251,25 @@
   "drop_blurbs": {
     "en": {
       "drop-01": "Five defining moments in football, reframed through expressive sketch illustration.",
-      "drop-02": "Five moments from the summer of 2026, reframed through expressive sketch illustration."
+      "drop-02": "Five moments from the 2026 World Cup, reframed through expressive sketch illustration."
     },
     "es": {
       "drop-01": "Cinco momentos que definieron el fútbol, reinterpretados con ilustración expresiva a mano alzada.",
-      "drop-02": "Cinco momentos del verano de 2026, reinterpretados con ilustración expresiva a mano alzada."
+      "drop-02": "Cinco momentos del Mundial 2026, reinterpretados con ilustración expresiva a mano alzada."
     },
     "fr": {
       "drop-01": "Cinq moments qui ont défini le football, réinterprétés au trait, en dessin expressif.",
-      "drop-02": "Cinq moments de l'été 2026, réinterprétés au trait, en dessin expressif."
+      "drop-02": "Cinq moments de la Coupe du Monde 2026, réinterprétés au trait, en dessin expressif."
     },
     "it": {
       "drop-01": "Cinque momenti che hanno definito il calcio, reinterpretati con illustrazione espressiva a mano libera.",
-      "drop-02": "Cinque momenti dell'estate 2026, reinterpretati con illustrazione espressiva a mano libera."
+      "drop-02": "Cinque momenti dei Mondiali 2026, reinterpretati con illustrazione espressiva a mano libera."
     }
   },
   "collection_id": {
     "en": 129055,
     "es": null,
-    "fr": null,
+    "fr": 144943,
     "it": null
   },
   "product_defaults": {

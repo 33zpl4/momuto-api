@@ -126,16 +126,26 @@ script tag on, and a `<style>` injected via innerHTML does apply (only
 | | drop 01 | drop 02 |
 |---|---|---|
 | handle | `iconic-football-series` | `iconic-series-drop-02` |
-| h1 | "Iconic Series" | "Summer 2026" |
+| h1 | "Iconic Series" | "World Cup 2026" (localised per store) |
 
 **Drop 01's copy is reproduced verbatim from the live page**, so regenerating
 it changes nothing that already ranks — only the structure becomes data-driven.
 
 **Drop 02 deliberately gets a different `<h1>`.** Two collection pages sharing
-"Iconic Series" as their heading would compete for the same query; "Summer
-2026" also catches the seasonal intent, while the eyebrow carries the brand.
-Flip `t1`/`t2` in `config.drops.drop-02.collection.copy` if you'd rather they
-match.
+"Iconic Series" as their heading would compete for the same query; "World Cup
+2026" catches the tournament intent instead, while the eyebrow carries the
+brand. It is localised per store — *Mundial 2026*, *Coupe du Monde 2026*,
+*Mondiali 2026* — via `t1`/`t2` in `config.drops.drop-02.collection.copy`.
+
+`config.drops.drop-02.collection.meta` holds the SEO title and description for
+the **CMS collection record** itself. The build does not consume it — it is
+recorded so the four stores get the same text rather than four improvised
+versions.
+
+The naming of the tournament is deliberate and confined to prose and meta. The
+`edition` and `subtitle` fields keep the seasonal label ("Drop 02 – Summer
+2026") because that is an edition name, not a search target, and it frames the
+drop rather than describing it.
 
 Each page links to the other at the foot, so neither drop is orphaned.
 

@@ -3,5 +3,6 @@
   "plate": "NOR 2–1 BRA · 05.07.26",
   "number": "IM-09",
   "panel": "#EFE7D8",
-  "recolor": { "#fb5f29": "panel" }
+  "recolor": { "#fb5f29": "panel" },
+  "_comment_red": "The jersey is a separate layer in the SVG (inkscape:label=\"red-tshirt\") — a clipped duplicate of the orange plate, filled #ee1e2b via style. It is not in this map on purpose: recolor keys match fill=\"...\" attributes, and the layer carries none, so the cream remap cannot reach it."
 }

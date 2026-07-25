@@ -1,11 +1,12 @@
 {
   "image": "oversized-shirt-front.jpg",
   "match": "-front\\.png$",
+  "_comment_print": "Box shrunk 10% from 390x175 about the same centre (drop 01 comparison); x/y moved by half the difference so the lockup does not drift.",
   "print": {
-    "x": 2210,
-    "y": 1245,
-    "width": 390,
-    "height": 175,
+    "x": 2230,
+    "y": 1254,
+    "width": 351,
+    "height": 158,
     "gravity": "center"
   },
   "blend": "over",
