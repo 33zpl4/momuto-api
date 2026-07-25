@@ -329,14 +329,23 @@ So `--update` is two calls per product:
 | `POST /products/batchsave` | title, subtitle, mini_detail, body_html, SEO |
 | `PUT /products/{id}` | `images` only |
 
-`PUT /products/{id}` is the same endpoint `scripts/cleanup-preview-products.js`
-uses to flip `status`, so it is known to accept a partial body without
-disturbing the rest of the product.
+**`PUT /products/{id}` REPLACES — it does not merge.** `{ id, images }` came
+back `title不能为空`. So the payload is the live product read straight back via
+`GET /products/{id}` with nothing changed but `images`:
 
-**Keep the images payload minimal — `{ id, images }`.** Do not fold the
-editorial fields into it. Whether PUT merges or replaces is still unverified,
-and a replacing PUT without `variants` would take the six sizes with it and
-break the buy button. The batchsave call already covers those fields.
+```
+GET  /products/{id}   →  the whole product
+PUT  /products/{id}   ←  { ...that, images: ours }
+```
+
+Never compose the PUT body by hand. A field you didn't know the product had is
+a field you'd silently drop, and `variants` above all — a PUT without them takes
+the six sizes and the buy button with them. `putImages()` refuses to send if the
+read-back has no `title` or no `variants` rather than PUTting blind.
+
+(`scripts/cleanup-preview-products.js` sends `{ id, status }` to this endpoint.
+Given the validation above, that call is suspect — it either fails silently or
+`status` is special-cased. Worth checking before trusting it.)
 
 This matters on every mockup re-render: a new render means a new CDN URL, and
 the gallery is the one surface `body_html` cannot reach. `--audit` diffs the

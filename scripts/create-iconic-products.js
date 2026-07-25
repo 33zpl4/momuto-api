@@ -254,15 +254,35 @@ function updatePayload(item, body, lang) {
  * photos didn't. `PUT /products/{id}` is the endpoint that takes them;
  * scripts/cleanup-preview-products.js already uses it to flip `status`.
  *
- * Deliberately MINIMAL — { id, images } and nothing else. That mirrors the one
- * usage proven not to disturb the rest of the product. Do not be tempted to
- * fold the editorial fields in here: if PUT turns out to replace rather than
- * merge, a payload without `variants` would take the six sizes with it.
+ * PUT is a REPLACE, not a merge: `{ id, images }` came back `title不能为空`.
+ * So the only safe payload is the live product read straight back with nothing
+ * changed but `images` — anything we compose ourselves risks dropping a field
+ * we never knew the product had. `variants` above all: a PUT without them
+ * would take the six sizes and the buy button with them.
  */
-function imagesPayload(item, body, lang) {
+async function putImages(item, body, lang, token) {
   const id = productIdFor(item, lang);
   if (!id) throw new Error(`needs product_id.${lang} in the product JSON`);
-  return { id, images: body.images };
+
+  const live = await fetchProduct(id, token);
+  if (!live) throw new Error(`could not read product ${id} back — refusing to PUT blind`);
+  if (!live.title) throw new Error(`product ${id} read back without a title — refusing to PUT`);
+  if (!Array.isArray(live.variants) || !live.variants.length) {
+    throw new Error(`product ${id} read back with no variants — refusing to PUT (it would drop the sizes)`);
+  }
+
+  return send(`${HOST}/products/${id}`, 'PUT', token, { ...live, images: body.images });
+}
+
+/** Single-product read. The list endpoint omits heavyweight fields. */
+async function fetchProduct(id, token) {
+  try {
+    const res = await fetch(`${HOST}/products/${id}`, { headers: { token } });
+    const json = await res.json().catch(() => ({}));
+    if (json.code !== 0) return null;
+    const p = json.data?.product || json.data || null;
+    return p && typeof p === 'object' && !Array.isArray(p) ? p : null;
+  } catch { return null; }
 }
 
 function summarise(payload, verbose) {
@@ -334,11 +354,8 @@ async function inspect(handleOrUrl, token) {
       // hit comes from the LIST endpoint, which may omit body_html. Re-read the
       // product on its own before reporting a length anyone might act on.
       let bodySrc = 'list', body = hit.body_html || '';
-      try {
-        const one = await fetch(`${HOST}/products/${hit.id}`, { headers: { token } }).then(r => r.json());
-        const p = one.code === 0 ? (one.data?.product || one.data) : null;
-        if (p && !Array.isArray(p) && p.body_html !== undefined) { body = p.body_html || ''; bodySrc = 'GET /products/{id}'; }
-      } catch { /* fall back to the list value, labelled as such */ }
+      const one = await fetchProduct(hit.id, token);
+      if (one && one.body_html !== undefined) { body = one.body_html || ''; bodySrc = 'GET /products/{id}'; }
       console.log(`body_html: <${body.length} chars> (source: ${bodySrc})`);
       console.log(`images: ${(hit.images || []).length}` +
         ((hit.images || [])[0] ? ` · first alt ${JSON.stringify(hit.images[0].alt)}` : ''));
@@ -495,13 +512,9 @@ async function audit(drop, lang, token, writeIds = false) {
   for (const item of items) {
     const p = live.get(item.handle);
     if (!p) continue;
-    try {
-      const res = await fetch(`${HOST}/products/${p.id}`, { headers: { token } });
-      const json = await res.json().catch(() => ({}));
-      const one = json.code === 0 ? (json.data?.product || json.data || null) : null;
-      if (one && typeof one === 'object' && !Array.isArray(one)) { single.set(item.handle, one); singleWorks = true; }
-      else if (singleWorks === null) singleWorks = false;
-    } catch { if (singleWorks === null) singleWorks = false; }
+    const one = await fetchProduct(p.id, token);
+    if (one) { single.set(item.handle, one); singleWorks = true; }
+    else if (singleWorks === null) singleWorks = false;
   }
   console.log(singleWorks
     ? 'body_html read per product (GET /products/{id})\n'
@@ -678,8 +691,9 @@ async function main() {
         console.log(`POST ${endpoint}`);
         console.log(JSON.stringify(summarise(payload, args.verbose), null, 2));
         if (args.update) {
-          console.log(`\nthen PUT ${HOST}/products/${productIdFor(item, args.lang)}`);
-          console.log(JSON.stringify(imagesPayload(item, body, args.lang), null, 2));
+          console.log(`\nthen GET ${HOST}/products/${productIdFor(item, args.lang)}`);
+          console.log('     PUT it back unchanged except for these images:');
+          console.log(JSON.stringify(body.images, null, 2));
         }
         console.log();
         continue;
@@ -690,8 +704,9 @@ async function main() {
         console.log(`✓ updated ${item.slug} (id ${productIdFor(item, args.lang)})`, JSON.stringify(data).slice(0, 200));
         // batchsave is documented as a partial update and observed to ignore
         // `images` — the gallery stayed on the old mockups after a clean run.
-        // PUT /products/{id} is the endpoint that does take them.
-        const img = await send(`${HOST}/products/${productIdFor(item, args.lang)}`, 'PUT', token, imagesPayload(item, body, args.lang));
+        // PUT /products/{id} takes them, but replaces rather than merges, so
+        // putImages reads the live product back and changes only the gallery.
+        const img = await putImages(item, body, args.lang, token);
         console.log(`  images → PUT`, JSON.stringify(img).slice(0, 120));
       } else {
         const data = await send(`${HOST}/products`, 'POST', token, body);
