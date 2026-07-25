@@ -11,6 +11,11 @@ on:
         description: 'READ-ONLY: diff a drop''s LIVE products against the repo (e.g. drop-02). Ignores all other inputs.'
         required: false
         type: string
+      write_ids:
+        description: 'With audit + lang=en: write each live product_id into its JSON (prints a patch to commit). Never writes for other stores — ids are per-store.'
+        required: false
+        default: false
+        type: boolean
       collections:
         description: 'READ-ONLY: list this store''s collections with their ids (try "iconic"). Ignores all other inputs.'
         required: false
@@ -100,8 +105,15 @@ jobs:
         run: |
           ARGS="--lang ${{ inputs.lang }}"
           if [ -n "${{ inputs.audit }}" ]; then
-            node scripts/create-iconic-products.js $ARGS --audit "${{ inputs.audit }}"
-            exit $?
+            [ "${{ inputs.write_ids }}" = "true" ] && ARGS="$ARGS --write-ids"
+            node scripts/create-iconic-products.js $ARGS --audit "${{ inputs.audit }}" || exit $?
+            # The runner's checkout is throwaway, so surface the edit as a diff
+            # to paste rather than pretending it was persisted.
+            if ! git diff --quiet -- iconic-series; then
+              echo "::notice::product_ids recorded — apply the patch below and commit."
+              git --no-pager diff -- iconic-series
+            fi
+            exit 0
           fi
           if [ -n "${{ inputs.collections }}" ]; then
             node scripts/create-iconic-products.js $ARGS --collections "${{ inputs.collections }}"

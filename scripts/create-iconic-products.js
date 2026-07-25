@@ -36,10 +36,11 @@ const config = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8')
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 function parseArgs(argv) {
-  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null, audit: null };
+  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null, audit: null, writeIds: false };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
     if (k === '--audit') a.audit = argv[++i];
+    else if (k === '--write-ids') a.writeIds = true;
     else if (k === '--collections') a.collections = argv[++i] || 'all';
     else if (k === '--delete') a.delete = argv[++i];
     else if (k === '--probe') a.probe = true;
@@ -398,7 +399,7 @@ async function listCollections(token, filter) {
  * keep the old values silently — this is how you find out which, and it also
  * reports each product_id so --update can target them.
  */
-async function audit(drop, lang, token) {
+async function audit(drop, lang, token, writeIds = false) {
   const items = loadDrop(drop);
   const byHandle = new Map(items.map(i => [i.handle, i]));
 
@@ -433,7 +434,11 @@ async function audit(drop, lang, token) {
     const bodyDrift = String(p.body_html ?? '').length !== want.body_html.length;
     const variants = (p.variants || []).length;
 
-    if (!diffs.length && !collDrift && !bodyDrift && variants === SIZES.length) {
+    const liveImgs = (p.images || []).map(i => i.src);
+    const wantImgs = want.images.map(i => i.src);
+    const imgDrift = JSON.stringify(liveImgs) !== JSON.stringify(wantImgs);
+
+    if (!diffs.length && !collDrift && !bodyDrift && !imgDrift && variants === SIZES.length) {
       console.log(`✓ ${item.handle.padEnd(22)} id ${p.id} — in sync`);
     } else {
       drifted++;
@@ -444,16 +449,49 @@ async function audit(drop, lang, token) {
         console.log(`      repo: ${JSON.stringify(String(want[f] ?? '').slice(0, 90))}`);
       }
       if (collDrift) console.log(`    collections  live: [${liveColls}]  repo: [${wantColls}]`);
+      if (imgDrift) {
+        console.log(`    images       live: ${liveImgs.length}  repo: ${wantImgs.length}`);
+        for (let i = 0; i < Math.max(liveImgs.length, wantImgs.length); i++) {
+          if (liveImgs[i] === wantImgs[i]) continue;
+          console.log(`      [${i}] live: ${liveImgs[i] || '—'}`);
+          console.log(`      [${i}] repo: ${wantImgs[i] || '—'}`);
+        }
+      }
       if (bodyDrift) console.log(`    body_html    live: ${String(p.body_html ?? '').length} chars  repo: ${want.body_html.length} chars`);
       if (variants !== SIZES.length) console.log(`    variants     live: ${variants}  expected: ${SIZES.length}`);
     }
   }
 
   console.log(`\n${live.size}/${items.length} found · ${drifted} drifted · ${missing} missing`);
+
+  // Only the EN store's ids belong in the shared product JSON — every other
+  // store assigns its own, and writing those would point --update at the
+  // wrong products.
+  if (writeIds && lang !== 'en') {
+    console.log('\n--write-ids refused: ids are per-store and the JSON holds the EN one.');
+  } else if (writeIds) {
+    let wrote = 0;
+    for (const item of items) {
+      const p = live.get(item.handle);
+      if (!p) continue;
+      const file = path.join(DIR, drop, `${item.slug}.json`);
+      const json = JSON.parse(fs.readFileSync(file, 'utf8'));
+      if (String(json.product_id ?? '') === String(p.id)) continue;
+      json.product_id = String(p.id);
+      fs.writeFileSync(file, JSON.stringify(json, null, 2) + '\n');
+      console.log(`  recorded ${item.slug} → product_id ${p.id}`);
+      wrote++;
+    }
+    console.log(wrote ? `\n${wrote} id(s) written — commit them, then run with update: true.`
+                      : '\nAll ids already recorded.');
+  }
+
   if (drifted) {
-    console.log('\nTo bring them in line, record each id as "product_id" in');
-    console.log(`iconic-series/${drop}/<slug>.json, then run with update: true.`);
-    console.log('NOTE: --update sends title/subtitle/mini_detail/body_html/SEO — NOT collections.');
+    if (!writeIds) {
+      console.log('\nTo bring them in line, record each id as "product_id" in');
+      console.log(`iconic-series/${drop}/<slug>.json (or re-run with write_ids), then update: true.`);
+    }
+    console.log('NOTE: --update sends title/subtitle/mini_detail/body_html/SEO/images — NOT collections.');
     console.log('Collection membership stays as set in the CMS.');
   }
 }
@@ -464,7 +502,7 @@ async function main() {
   if (args.audit) {
     const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
     if (!process.env[tv]) { console.error(`No ${tv} in the environment.`); process.exit(1); }
-    await audit(args.audit, args.lang, process.env[tv]);
+    await audit(args.audit, args.lang, process.env[tv], args.writeIds);
     return;
   }
 
@@ -547,6 +585,11 @@ async function main() {
             body_html: body.body_html,
             meta_title: body.meta_title,
             meta_descript: body.meta_descript,
+            // Re-rendered mockups mean new CDN URLs, and the gallery is the
+            // one surface body_html cannot reach. Whether batchsave replaces
+            // the array or ignores it is unproven — --audit reports the live
+            // image list, so check there rather than assuming it landed.
+            images: body.images,
           }],
         });
         console.log(`✓ updated ${item.slug} (id ${item.product_id})`, JSON.stringify(data).slice(0, 200));

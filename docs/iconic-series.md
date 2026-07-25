@@ -286,15 +286,22 @@ push `body_html`. Do not run `--update` across drop 01 blind.
 
 ### Diagnostics and cleanup
 
+- `--audit <drop>` — read-only diff of every live product in a drop against
+  what the repo would send: title, subtitle, mini_detail, SEO, collections,
+  `body_html` length, variant count and the **image list**. Add `--write-ids`
+  (EN only) to record each live `product_id` into its JSON — the workflow
+  prints the resulting patch, since the runner's checkout is thrown away.
 - `--inspect <handle|url>` — read-only dump of an existing product's options
   and variant fields.
 - `--probe` — re-run the shape experiment (creates hidden `zz-iconic-probe-*`
   products and prints their ids).
 - `--delete <id,id>` — hard-delete by id, for clearing probe leftovers.
 
-`batchsave` carrying `body_html` (the `--update` path for the drop 01 retrofit)
-is still unproven — it's documented as a partial update and only known to
-carry SEO fields.
+`batchsave` carrying `body_html` and `images` (the `--update` path) is still
+unproven — it's documented as a partial update and only known for certain to
+carry SEO fields. `images` matters when mockups are re-rendered: the CDN URL
+changes, and the product gallery is the one surface `body_html` cannot reach.
+Confirm it landed with `--audit`, which diffs the live image list; don't assume.
 
 After a create, record the returned id as `"product_id"` in the product JSON so
 `--update` can target it later.
