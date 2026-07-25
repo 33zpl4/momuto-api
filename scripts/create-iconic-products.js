@@ -36,10 +36,11 @@ const config = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8')
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 function parseArgs(argv) {
-  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null, audit: null };
+  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null, audit: null, writeIds: false };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
     if (k === '--audit') a.audit = argv[++i];
+    else if (k === '--write-ids') a.writeIds = true;
     else if (k === '--collections') a.collections = argv[++i] || 'all';
     else if (k === '--delete') a.delete = argv[++i];
     else if (k === '--probe') a.probe = true;
@@ -139,6 +140,16 @@ function idFor(value, lang) {
   return typeof value === 'object' ? (value[lang] ?? null) : value;
 }
 
+/**
+ * Product ids are PER STORE, like collection ids. Accepts either a bare string
+ * (legacy, EN-only) or a { en, es, fr, it } object.
+ */
+function productIdFor(item, lang) {
+  const v = item.product_id;
+  if (v == null) return null;
+  return typeof v === 'object' ? (v[lang] ?? null) : (lang === 'en' ? v : null);
+}
+
 function collectionsFor(drop, lang) {
   const series = idFor(config.collection_id, lang);
   const dropId = idFor(config.drops[drop]?.collection?.collection_id, lang);
@@ -207,10 +218,78 @@ function buildBody(item, lang, { publish }) {
   };
 }
 
-function summarise(body, verbose) {
-  if (verbose) return body;
-  const { body_html, ...rest } = body;
-  return { ...rest, body_html: `<${body_html.length} chars of HTML — pass --verbose to print it>` };
+/**
+ * The --update body. Sends the whole editorial surface, not just body_html: a
+ * product created before a payload fix keeps its stale subtitle/mini_detail
+ * otherwise, and those are the fields visible above the buy button.
+ *
+ * `images` matters when mockups are re-rendered — the CDN URL changes and the
+ * gallery is the one surface body_html cannot reach. Whether batchsave replaces
+ * the array or ignores it is unproven, so confirm with --audit afterwards.
+ *
+ * Not sent: collections. Membership stays as set in the CMS.
+ */
+function updatePayload(item, body, lang) {
+  const id = productIdFor(item, lang);
+  if (!id) throw new Error(`--update needs product_id.${lang} in the product JSON`);
+  return {
+    products: [{
+      id,
+      title: body.title,
+      subtitle: body.subtitle,
+      mini_detail: body.mini_detail,
+      body_html: body.body_html,
+      meta_title: body.meta_title,
+      meta_descript: body.meta_descript,
+      images: body.images,
+    }],
+  };
+}
+
+/**
+ * The gallery, sent separately.
+ *
+ * `batchsave` is documented as a partial update carrying SEO fields, and a
+ * clean 5-product run confirmed it silently drops `images` — meta landed, the
+ * photos didn't. `PUT /products/{id}` is the endpoint that takes them;
+ * scripts/cleanup-preview-products.js already uses it to flip `status`.
+ *
+ * PUT is a REPLACE, not a merge: `{ id, images }` came back `title不能为空`.
+ * So the only safe payload is the live product read straight back with nothing
+ * changed but `images` — anything we compose ourselves risks dropping a field
+ * we never knew the product had. `variants` above all: a PUT without them
+ * would take the six sizes and the buy button with them.
+ */
+async function putImages(item, body, lang, token) {
+  const id = productIdFor(item, lang);
+  if (!id) throw new Error(`needs product_id.${lang} in the product JSON`);
+
+  const live = await fetchProduct(id, token);
+  if (!live) throw new Error(`could not read product ${id} back — refusing to PUT blind`);
+  if (!live.title) throw new Error(`product ${id} read back without a title — refusing to PUT`);
+  if (!Array.isArray(live.variants) || !live.variants.length) {
+    throw new Error(`product ${id} read back with no variants — refusing to PUT (it would drop the sizes)`);
+  }
+
+  return send(`${HOST}/products/${id}`, 'PUT', token, { ...live, images: body.images });
+}
+
+/** Single-product read. The list endpoint omits heavyweight fields. */
+async function fetchProduct(id, token) {
+  try {
+    const res = await fetch(`${HOST}/products/${id}`, { headers: { token } });
+    const json = await res.json().catch(() => ({}));
+    if (json.code !== 0) return null;
+    const p = json.data?.product || json.data || null;
+    return p && typeof p === 'object' && !Array.isArray(p) ? p : null;
+  } catch { return null; }
+}
+
+function summarise(payload, verbose) {
+  if (verbose) return payload;
+  const elide = b => ({ ...b, body_html: `<${String(b.body_html || '').length} chars of HTML — pass --verbose to print it>` });
+  if (Array.isArray(payload.products)) return { products: payload.products.map(elide) };
+  return elide(payload);
 }
 
 async function send(url, method, token, body) {
@@ -272,7 +351,12 @@ async function inspect(handleOrUrl, token) {
         const v = hit[k];
         console.log(`${k}: ${typeof v === 'object' ? JSON.stringify(v) : JSON.stringify(v)}`);
       }
-      console.log(`body_html: <${(hit.body_html || '').length} chars>`);
+      // hit comes from the LIST endpoint, which may omit body_html. Re-read the
+      // product on its own before reporting a length anyone might act on.
+      let bodySrc = 'list', body = hit.body_html || '';
+      const one = await fetchProduct(hit.id, token);
+      if (one && one.body_html !== undefined) { body = one.body_html || ''; bodySrc = 'GET /products/{id}'; }
+      console.log(`body_html: <${body.length} chars> (source: ${bodySrc})`);
       console.log(`images: ${(hit.images || []).length}` +
         ((hit.images || [])[0] ? ` · first alt ${JSON.stringify(hit.images[0].alt)}` : ''));
 
@@ -398,7 +482,7 @@ async function listCollections(token, filter) {
  * keep the old values silently — this is how you find out which, and it also
  * reports each product_id so --update can target them.
  */
-async function audit(drop, lang, token) {
+async function audit(drop, lang, token, writeIds = false) {
   const items = loadDrop(drop);
   const byHandle = new Map(items.map(i => [i.handle, i]));
 
@@ -419,9 +503,28 @@ async function audit(drop, lang, token) {
   const FIELDS = ['title', 'subtitle', 'mini_detail', 'meta_title', 'meta_descript'];
   let drifted = 0, missing = 0;
 
+  // The list endpoint is the only reader this script has ever used, and list
+  // endpoints routinely omit heavyweight fields. A body_html of 0 chars read
+  // that way does NOT prove the product has no body — and acting on it would
+  // push a duplicate page. Re-read each product on its own before believing it.
+  const single = new Map();
+  let singleWorks = null;
+  for (const item of items) {
+    const p = live.get(item.handle);
+    if (!p) continue;
+    const one = await fetchProduct(p.id, token);
+    if (one) { single.set(item.handle, one); singleWorks = true; }
+    else if (singleWorks === null) singleWorks = false;
+  }
+  console.log(singleWorks
+    ? 'body_html read per product (GET /products/{id})\n'
+    : '⚠ GET /products/{id} unavailable — body_html below comes from the LIST\n' +
+      '  endpoint, which may omit it. Do NOT read 0 chars as "no body_html".\n');
+
   for (const item of items) {
     const p = live.get(item.handle);
     if (!p) { console.log(`✗ ${item.handle} — NOT on this store`); missing++; continue; }
+    const full = single.get(item.handle) || p;
 
     const want = buildBody({ ...item }, lang, { publish: false });
     const diffs = FIELDS.filter(f => String(p[f] ?? '') !== String(want[f] ?? ''));
@@ -430,10 +533,17 @@ async function audit(drop, lang, token) {
     const wantColls = want.collections.map(c => c.collection_id).sort();
     const collDrift = JSON.stringify(liveColls) !== JSON.stringify(wantColls);
 
-    const bodyDrift = String(p.body_html ?? '').length !== want.body_html.length;
+    // The CMS stores body_html trimmed, so a repo file's trailing newline shows
+    // up as a permanent 1-char drift on every product. Compare trimmed.
+    const liveBody = String(full.body_html ?? '');
+    const bodyDrift = liveBody.trim() !== want.body_html.trim();
     const variants = (p.variants || []).length;
 
-    if (!diffs.length && !collDrift && !bodyDrift && variants === SIZES.length) {
+    const liveImgs = (p.images || []).map(i => i.src);
+    const wantImgs = want.images.map(i => i.src);
+    const imgDrift = JSON.stringify(liveImgs) !== JSON.stringify(wantImgs);
+
+    if (!diffs.length && !collDrift && !bodyDrift && !imgDrift && variants === SIZES.length) {
       console.log(`✓ ${item.handle.padEnd(22)} id ${p.id} — in sync`);
     } else {
       drifted++;
@@ -444,16 +554,62 @@ async function audit(drop, lang, token) {
         console.log(`      repo: ${JSON.stringify(String(want[f] ?? '').slice(0, 90))}`);
       }
       if (collDrift) console.log(`    collections  live: [${liveColls}]  repo: [${wantColls}]`);
-      if (bodyDrift) console.log(`    body_html    live: ${String(p.body_html ?? '').length} chars  repo: ${want.body_html.length} chars`);
+      if (imgDrift) {
+        console.log(`    images       live: ${liveImgs.length}  repo: ${wantImgs.length}`);
+        for (let i = 0; i < Math.max(liveImgs.length, wantImgs.length); i++) {
+          if (liveImgs[i] === wantImgs[i]) continue;
+          console.log(`      [${i}] live: ${liveImgs[i] || '—'}`);
+          console.log(`      [${i}] repo: ${wantImgs[i] || '—'}`);
+        }
+      }
+      if (bodyDrift) {
+        console.log(`    body_html    live: ${liveBody.length} chars  repo: ${want.body_html.length} chars`);
+        // Our pages carry this marker. Finding it means the content is already
+        // on the page from somewhere else — a custom template — and pushing
+        // body_html would render the whole thing twice. This is the drop 01
+        // retrofit trap, and it does not announce itself.
+        if (!liveBody.includes('data-iconic-page') && singleWorks) {
+          console.log('      ↳ no body_html on the product. If the page already renders our');
+          console.log('        content, it comes from a template — strip that FIRST or the');
+          console.log('        page will duplicate.');
+        }
+      }
       if (variants !== SIZES.length) console.log(`    variants     live: ${variants}  expected: ${SIZES.length}`);
     }
   }
 
   console.log(`\n${live.size}/${items.length} found · ${drifted} drifted · ${missing} missing`);
+
+  // Only the EN store's ids belong in the shared product JSON — every other
+  // store assigns its own, and writing those would point --update at the
+  // wrong products.
+  if (writeIds) {
+    let wrote = 0;
+    for (const item of items) {
+      const p = live.get(item.handle);
+      if (!p) continue;
+      const file = path.join(DIR, drop, `${item.slug}.json`);
+      const json = JSON.parse(fs.readFileSync(file, 'utf8'));
+      if (typeof json.product_id === 'string') json.product_id = { en: json.product_id };
+      json.product_id = json.product_id || {};
+      if (String(json.product_id[lang] ?? '') === String(p.id)) continue;
+      json.product_id[lang] = String(p.id);
+      fs.writeFileSync(file, JSON.stringify(json, null, 2) + '\n');
+      console.log(`  recorded ${item.slug} → product_id.${lang} ${p.id}`);
+      wrote++;
+    }
+    console.log(wrote ? `\n${wrote} id(s) written — commit them, then run with update: true.`
+                      : '\nAll ids already recorded.');
+  }
+
   if (drifted) {
-    console.log('\nTo bring them in line, record each id as "product_id" in');
-    console.log(`iconic-series/${drop}/<slug>.json, then run with update: true.`);
-    console.log('NOTE: --update sends title/subtitle/mini_detail/body_html/SEO — NOT collections.');
+    const noId = items.filter(i => live.has(i.handle) && !productIdFor(i, lang)).map(i => i.slug);
+    if (noId.length && !writeIds) {
+      console.log(`\n${noId.join(', ')} have no product_id.${lang} — re-run with write_ids, then update: true.`);
+    } else if (!noId.length) {
+      console.log('\nAll ids recorded — run with update: true to push the drift above.');
+    }
+    console.log('NOTE: --update sends title/subtitle/mini_detail/body_html/SEO/images — NOT collections.');
     console.log('Collection membership stays as set in the CMS.');
   }
 }
@@ -464,7 +620,7 @@ async function main() {
   if (args.audit) {
     const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
     if (!process.env[tv]) { console.error(`No ${tv} in the environment.`); process.exit(1); }
-    await audit(args.audit, args.lang, process.env[tv]);
+    await audit(args.audit, args.lang, process.env[tv], args.writeIds);
     return;
   }
 
@@ -520,48 +676,93 @@ async function main() {
   console.log(`${args.dryRun ? 'DRY RUN — nothing will be sent' : 'LIVE'} · store ${args.lang.toUpperCase()} · ` +
     `${items.length} product(s) · status ${args.publish ? '1 (published)' : '0 (hidden)'}\n`);
 
-  let failed = 0;
+  // A create has no natural idempotency: POST /products with a handle that
+  // already exists makes a SECOND product at a suffixed URL rather than
+  // refusing. A partly-failed run is the normal case (one product rejected,
+  // the rest created), so the obvious next move — re-run it — is exactly what
+  // duplicates the store. Read the catalogue once and skip what's already there.
+  const existing = (!args.update && !args.dryRun) ? await liveHandles(token) : new Map();
+
+  let failed = 0, skipped = 0;
   for (const item of items) {
     try {
+      if (existing.has(item.handle)) {
+        const hit = existing.get(item.handle);
+        console.log(`⊘ ${item.slug} already on this store (id ${hit.id}) — not creating a duplicate.`);
+        console.log(`  record it: set "product_id": { "${args.lang}": "${hit.id}" } in iconic-series/${item.drop}/${item.slug}.json`);
+        console.log('  then use update: true to push copy, SEO and images.');
+        skipped++;
+        continue;
+      }
+
       const body = buildBody(item, args.lang, { publish: args.publish });
+
+      // A dry run has to print what would actually go out. Build the exact
+      // payload for whichever path is selected, then either show it or send it.
+      const endpoint = args.update ? `${HOST}/products/batchsave` : `${HOST}/products`;
+      const payload = args.update ? updatePayload(item, body, args.lang) : body;
 
       if (args.dryRun) {
         console.log(`── ${item.slug} ${'─'.repeat(Math.max(0, 60 - item.slug.length))}`);
-        console.log(`POST ${HOST}/products`);
-        console.log(JSON.stringify(summarise(body, args.verbose), null, 2));
+        console.log(`POST ${endpoint}`);
+        console.log(JSON.stringify(summarise(payload, args.verbose), null, 2));
+        if (args.update) {
+          console.log(`\nthen GET ${HOST}/products/${productIdFor(item, args.lang)}`);
+          console.log('     PUT it back unchanged except for these images:');
+          console.log(JSON.stringify(body.images, null, 2));
+        }
         console.log();
         continue;
       }
 
       if (args.update) {
-        if (!item.product_id) throw new Error('--update needs "product_id" in the product JSON');
-        // Send the whole editorial surface, not just body_html: a product
-        // created before a payload fix keeps its stale subtitle/mini_detail
-        // otherwise, and those are the fields visible above the buy button.
-        const data = await send(`${HOST}/products/batchsave`, 'POST', token, {
-          products: [{
-            id: item.product_id,
-            title: body.title,
-            subtitle: body.subtitle,
-            mini_detail: body.mini_detail,
-            body_html: body.body_html,
-            meta_title: body.meta_title,
-            meta_descript: body.meta_descript,
-          }],
-        });
-        console.log(`✓ updated ${item.slug} (id ${item.product_id})`, JSON.stringify(data).slice(0, 200));
+        const data = await send(endpoint, 'POST', token, payload);
+        console.log(`✓ updated ${item.slug} (id ${productIdFor(item, args.lang)})`, JSON.stringify(data).slice(0, 200));
+        // batchsave is documented as a partial update and observed to ignore
+        // `images` — the gallery stayed on the old mockups after a clean run.
+        // PUT /products/{id} takes them, but replaces rather than merges, so
+        // putImages reads the live product back and changes only the gallery.
+        const img = await putImages(item, body, args.lang, token);
+        console.log(`  images → PUT`, JSON.stringify(img).slice(0, 120));
       } else {
         const data = await send(`${HOST}/products`, 'POST', token, body);
         console.log(`✓ created ${item.slug} → id ${data.id} · /products/${body.handle} · status ${body.status}`);
-        console.log(`  record it: set "product_id": "${data.id}" in iconic-series/${item.drop}/${item.slug}.json`);
+        console.log(`  record it: set "product_id": { "${args.lang}": "${data.id}" } in iconic-series/${item.drop}/${item.slug}.json`);
       }
     } catch (err) {
       failed++;
       console.error(`✗ ${item.slug}: ${err.message}`);
+      if (/数据不存在/.test(err.message)) {
+        console.error('    数据不存在 = "data does not exist" — the API resolved a reference');
+        console.error('    that isn\'t there. Past cause: a `position` outside the range the');
+        console.error('    API expects (they are 0-based). Check the collection ids for this');
+        console.error(`    store too: ${JSON.stringify(collectionsFor(item.drop, args.lang))}`);
+      }
     }
   }
 
+  if (skipped) console.log(`\n${skipped} skipped (already on this store) · re-running is safe.`);
   if (failed) process.exit(1);
+}
+
+/**
+ * handle → live product, for the whole store. One catalogue pass, so the create
+ * loop can tell "already there" from "needs creating" without a request each.
+ */
+async function liveHandles(token) {
+  const map = new Map();
+  let since = '';
+  for (let page = 0; page < 50; page++) {
+    const res = await fetch(`${HOST}/products?limit=100${since ? `&since_id=${since}` : ''}`, { headers: { token } });
+    const json = await res.json().catch(() => ({}));
+    if (json.code !== 0) throw new Error(`API code ${json.code}: ${json.msg}`);
+    const batch = json.data?.products || json.data?.list || json.data || [];
+    if (!Array.isArray(batch) || !batch.length) break;
+    for (const p of batch) map.set(p.handle, p);
+    since = batch[batch.length - 1].id;
+    if (batch.length < 100) break;
+  }
+  return map;
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

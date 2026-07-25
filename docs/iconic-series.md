@@ -106,12 +106,14 @@ and card `alt` text is derived from `display_title`.
 
 ## Open
 
-- `image` is empty for all drop-02 products — set each one after the mockups
-  are uploaded to the CMS, then rebuild (the grid renders a TODO comment
-  meanwhile).
 - All four locales are complete: 40 pages (10 products × en/es/fr/it).
+- Drop 02 is live on **EN** (meta, body and galleries all pushed) and **FR**.
+  ES and IT are blocked on their `iconic-series-drop-02` collection being
+  created in each CMS — find the ids with `--collections iconic --lang <store>`,
+  set them in `config.json`, then create.
 - Drop 01 products still render from their own custom templates — repoint them
   at the shared template *before* pushing `body_html`, or the page duplicates.
+- Everything on EN is `status: 0` (hidden) until published.
 
 ## Collection pages
 
@@ -250,7 +252,15 @@ Quirk worth preserving: the live products write the accession number with an
 
 ### body_html vs per-product templates
 
-`im-01-the-volley` has **`body_html: 0 chars`**. Drop 01 works differently: each
+⚠️ **`body_html: 0 chars` is not evidence of an empty body.** Every reader in
+this script goes through `GET /products` (the list endpoint), and list endpoints
+routinely omit heavyweight fields. `--audit` and `--inspect` now re-read each
+product via `GET /products/{id}` and label which source the number came from; if
+that endpoint is unavailable they say so rather than reporting a length you
+might act on. Acting on a false zero means pushing `body_html` onto a page that
+already has content — the duplication trap below.
+
+`im-01-the-volley` reads **`body_html: 0 chars`**. Drop 01 works differently: each
 product has its **own custom CMS template** with the four blocks pasted into it
 by hand. Ten products means ten templates to build and maintain.
 
@@ -286,15 +296,49 @@ push `body_html`. Do not run `--update` across drop 01 blind.
 
 ### Diagnostics and cleanup
 
+- `--audit <drop>` — read-only diff of every live product in a drop against
+  what the repo would send: title, subtitle, mini_detail, SEO, collections,
+  `body_html` length, variant count and the **image list**. Add `--write-ids`
+  to record each live `product_id` into its JSON under the `--lang` being
+  audited — the workflow prints the resulting patch, since the runner's
+  checkout is thrown away.
+
+`product_id` is **per store**, like `collection_id`:
+
+```json
+"product_id": { "en": "10304414", "es": null, "fr": null, "it": null }
+```
+
+A bare string is still read as the EN id. `--update` on a store with no id for
+that locale fails loudly rather than writing to whatever id it finds.
 - `--inspect <handle|url>` — read-only dump of an existing product's options
   and variant fields.
 - `--probe` — re-run the shape experiment (creates hidden `zz-iconic-probe-*`
   products and prints their ids).
 - `--delete <id,id>` — hard-delete by id, for clearing probe leftovers.
 
-`batchsave` carrying `body_html` (the `--update` path for the drop 01 retrofit)
-is still unproven — it's documented as a partial update and only known to
-carry SEO fields.
+### The update path is two calls
+
+`--update` writes twice per product, because no single endpoint takes
+everything:
+
+| call | carries |
+|---|---|
+| `POST /products/batchsave` | title, subtitle, mini_detail, body_html, SEO |
+| `PUT /products/{id}` | `images` |
+
+`batchsave` silently discards `images` (returns `code 0`, gallery unchanged),
+and `PUT` replaces rather than merges — so `putImages()` reads the live product
+back via `GET /products/{id}` and PUTs it returned unchanged except for the
+gallery, refusing to send at all if the read-back has no `title` or `variants`.
+
+**Why, and what else this implies for any CMS write, is in
+[oemsaas-api-notes.md](./oemsaas-api-notes.md).** Read it before extending this
+script or writing another one against the same API.
+
+This matters on every mockup re-render: a new render means a new CDN URL, and
+the gallery is the one surface `body_html` cannot reach. `--audit` diffs the
+live image list — use it to confirm rather than assuming the write landed.
 
 After a create, record the returned id as `"product_id"` in the product JSON so
 `--update` can target it later.
