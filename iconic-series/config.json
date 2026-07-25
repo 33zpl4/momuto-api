@@ -77,7 +77,7 @@
         },
         "collection_id": {
           "en": 129055,
-          "es": null,
+          "es": 440551,
           "fr": 144943,
           "it": null
         }
@@ -148,7 +148,7 @@
         },
         "collection_id": {
           "en": 130456,
-          "es": null,
+          "es": 443756,
           "fr": 145074,
           "it": null
         },
@@ -171,6 +171,61 @@
           }
         },
         "_comment_meta": "SEO for the CMS collection record (name / meta description). Not used by the page build — paste into each store when the collection is created."
+      },
+      "homepage": {
+        "_comment": "Retargets the EXISTING pages/homepage/iconic-series.<lang>.html block to drop 02 — one Iconic band on the homepage, not two. cards[0] is the locale's lead; cards[2] carries iconic-card--hide-mobile and is the one that disappears on phones, so put the weakest there.",
+        "cards": {
+          "en": [
+            "viking-row",
+            "los-suplentes",
+            "le-record"
+          ],
+          "es": [
+            "los-suplentes",
+            "viking-row",
+            "le-record"
+          ],
+          "fr": [
+            "le-record",
+            "viking-row",
+            "los-suplentes"
+          ],
+          "it": [
+            "viking-row",
+            "los-suplentes",
+            "le-record"
+          ]
+        },
+        "copy": {
+          "en": {
+            "eyebrow": "In-House Collection · World Cup 2026",
+            "heading": "THE ICONIC SERIES",
+            "view_all": "View all 5 →",
+            "footer_desc": "Five moments from the 2026 World Cup, reframed as archive prints. Limited editions, designed in-house.",
+            "cta": "EXPLORE DROP 02"
+          },
+          "es": {
+            "eyebrow": "Colección Propia · Mundial 2026",
+            "heading": "THE ICONIC SERIES",
+            "view_all": "Ver las 5 →",
+            "footer_desc": "Cinco momentos del Mundial 2026, reinterpretados como estampas de archivo. Ediciones limitadas, diseñadas en casa.",
+            "cta": "EXPLORAR EL DROP 02"
+          },
+          "fr": {
+            "eyebrow": "Collection Propre · Coupe du Monde 2026",
+            "heading": "LA SÉRIE ICONIQUE",
+            "view_all": "Voir les 5 →",
+            "footer_desc": "Cinq moments de la Coupe du Monde 2026, réinterprétés en tirages d'archive. Éditions limitées, conçues en interne.",
+            "cta": "EXPLORER LE DROP 02"
+          },
+          "it": {
+            "eyebrow": "Collezione Interna · Mondiali 2026",
+            "heading": "THE ICONIC SERIES",
+            "view_all": "Vedi tutte e 5 →",
+            "footer_desc": "Cinque momenti dei Mondiali 2026, reinterpretati come stampe d'archivio. Edizioni limitate, disegnate internamente.",
+            "cta": "ESPLORA IL DROP 02"
+          }
+        }
       }
     }
   },
@@ -268,7 +323,7 @@
   },
   "collection_id": {
     "en": 129055,
-    "es": null,
+    "es": 440551,
     "fr": 144943,
     "it": null
   },
