@@ -75,7 +75,12 @@
             "system_title": "Cinque momenti.<br><em>Una serie.</em>"
           }
         },
-        "collection_id": 129055
+        "collection_id": {
+          "en": 129055,
+          "es": null,
+          "fr": null,
+          "it": null
+        }
       }
     },
     "drop-02": {
@@ -141,7 +146,12 @@
             "system_title": "Cinque momenti.<br><em>Un’estate.</em>"
           }
         },
-        "collection_id": null
+        "collection_id": {
+          "en": null,
+          "es": null,
+          "fr": null,
+          "it": null
+        }
       }
     }
   },
@@ -237,12 +247,17 @@
       "drop-02": "Cinque momenti dell'estate 2026, reinterpretati con illustrazione espressiva a mano libera."
     }
   },
-  "collection_id": 129055,
+  "collection_id": {
+    "en": 129055,
+    "es": null,
+    "fr": null,
+    "it": null
+  },
   "product_defaults": {
     "free_shipping": 1,
     "taxable": 0,
     "inventory_tracking": 0,
     "inventory_policy": 1
   },
-  "_comment_collections": "collection_id (top level) = the SERIES collection, every product joins it. drops.<drop>.collection.collection_id = that drop's own collection, if it has one; products join both. Leave null to skip."
+  "_comment_collections": "Collection ids are PER STORE. collection_id = the SERIES collection (every product joins it); drops.<drop>.collection.collection_id = that drop's own. Find them with: create-iconic-products.js --collections iconic --lang <store>"
 }
