@@ -208,10 +208,38 @@ function buildBody(item, lang, { publish }) {
   };
 }
 
-function summarise(body, verbose) {
-  if (verbose) return body;
-  const { body_html, ...rest } = body;
-  return { ...rest, body_html: `<${body_html.length} chars of HTML — pass --verbose to print it>` };
+/**
+ * The --update body. Sends the whole editorial surface, not just body_html: a
+ * product created before a payload fix keeps its stale subtitle/mini_detail
+ * otherwise, and those are the fields visible above the buy button.
+ *
+ * `images` matters when mockups are re-rendered — the CDN URL changes and the
+ * gallery is the one surface body_html cannot reach. Whether batchsave replaces
+ * the array or ignores it is unproven, so confirm with --audit afterwards.
+ *
+ * Not sent: collections. Membership stays as set in the CMS.
+ */
+function updatePayload(item, body) {
+  if (!item.product_id) throw new Error('--update needs "product_id" in the product JSON');
+  return {
+    products: [{
+      id: item.product_id,
+      title: body.title,
+      subtitle: body.subtitle,
+      mini_detail: body.mini_detail,
+      body_html: body.body_html,
+      meta_title: body.meta_title,
+      meta_descript: body.meta_descript,
+      images: body.images,
+    }],
+  };
+}
+
+function summarise(payload, verbose) {
+  if (verbose) return payload;
+  const elide = b => ({ ...b, body_html: `<${String(b.body_html || '').length} chars of HTML — pass --verbose to print it>` });
+  if (Array.isArray(payload.products)) return { products: payload.products.map(elide) };
+  return elide(payload);
 }
 
 async function send(url, method, token, body) {
@@ -462,8 +490,10 @@ async function audit(drop, lang, token, writeIds = false) {
     const wantColls = want.collections.map(c => c.collection_id).sort();
     const collDrift = JSON.stringify(liveColls) !== JSON.stringify(wantColls);
 
+    // The CMS stores body_html trimmed, so a repo file's trailing newline shows
+    // up as a permanent 1-char drift on every product. Compare trimmed.
     const liveBody = String(full.body_html ?? '');
-    const bodyDrift = liveBody.length !== want.body_html.length;
+    const bodyDrift = liveBody.trim() !== want.body_html.trim();
     const variants = (p.variants || []).length;
 
     const liveImgs = (p.images || []).map(i => i.src);
@@ -530,9 +560,11 @@ async function audit(drop, lang, token, writeIds = false) {
   }
 
   if (drifted) {
-    if (!writeIds) {
-      console.log('\nTo bring them in line, record each id as "product_id" in');
-      console.log(`iconic-series/${drop}/<slug>.json (or re-run with write_ids), then update: true.`);
+    const noId = items.filter(i => live.has(i.handle) && !i.product_id).map(i => i.slug);
+    if (noId.length && !writeIds) {
+      console.log(`\n${noId.join(', ')} have no "product_id" — re-run with write_ids, then update: true.`);
+    } else if (!noId.length) {
+      console.log('\nAll ids recorded — run with update: true to push the drift above.');
     }
     console.log('NOTE: --update sends title/subtitle/mini_detail/body_html/SEO/images — NOT collections.');
     console.log('Collection membership stays as set in the CMS.');
@@ -606,35 +638,21 @@ async function main() {
     try {
       const body = buildBody(item, args.lang, { publish: args.publish });
 
+      // A dry run has to print what would actually go out. Build the exact
+      // payload for whichever path is selected, then either show it or send it.
+      const endpoint = args.update ? `${HOST}/products/batchsave` : `${HOST}/products`;
+      const payload = args.update ? updatePayload(item, body) : body;
+
       if (args.dryRun) {
         console.log(`── ${item.slug} ${'─'.repeat(Math.max(0, 60 - item.slug.length))}`);
-        console.log(`POST ${HOST}/products`);
-        console.log(JSON.stringify(summarise(body, args.verbose), null, 2));
+        console.log(`POST ${endpoint}`);
+        console.log(JSON.stringify(summarise(payload, args.verbose), null, 2));
         console.log();
         continue;
       }
 
       if (args.update) {
-        if (!item.product_id) throw new Error('--update needs "product_id" in the product JSON');
-        // Send the whole editorial surface, not just body_html: a product
-        // created before a payload fix keeps its stale subtitle/mini_detail
-        // otherwise, and those are the fields visible above the buy button.
-        const data = await send(`${HOST}/products/batchsave`, 'POST', token, {
-          products: [{
-            id: item.product_id,
-            title: body.title,
-            subtitle: body.subtitle,
-            mini_detail: body.mini_detail,
-            body_html: body.body_html,
-            meta_title: body.meta_title,
-            meta_descript: body.meta_descript,
-            // Re-rendered mockups mean new CDN URLs, and the gallery is the
-            // one surface body_html cannot reach. Whether batchsave replaces
-            // the array or ignores it is unproven — --audit reports the live
-            // image list, so check there rather than assuming it landed.
-            images: body.images,
-          }],
-        });
+        const data = await send(endpoint, 'POST', token, payload);
         console.log(`✓ updated ${item.slug} (id ${item.product_id})`, JSON.stringify(data).slice(0, 200));
       } else {
         const data = await send(`${HOST}/products`, 'POST', token, body);
