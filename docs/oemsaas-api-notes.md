@@ -136,6 +136,17 @@ and the API links them. Do not try to send ids you invented.
 only at its direct URL and appears on no collection page.** It is not implied by
 anything else in the payload.
 
+### `POST /products` is not idempotent
+
+A create with a handle that already exists does **not** refuse — it makes a
+second product and suffixes the URL. That is worse than it sounds, because a
+partly-failed run is the *normal* case: one product rejected, four created. The
+obvious response — re-run it — is precisely what duplicates the store.
+
+So a create loop needs an existence check of its own. Read the catalogue once
+(`GET /products`, handle → product) and skip what's already there, rather than
+trusting the API to reject a duplicate. It won't.
+
 ### Ids are per store
 
 Collection ids **and** product ids are per-store. EN's `129055` is meaningless

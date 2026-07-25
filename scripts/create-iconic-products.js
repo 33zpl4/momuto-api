@@ -676,9 +676,25 @@ async function main() {
   console.log(`${args.dryRun ? 'DRY RUN — nothing will be sent' : 'LIVE'} · store ${args.lang.toUpperCase()} · ` +
     `${items.length} product(s) · status ${args.publish ? '1 (published)' : '0 (hidden)'}\n`);
 
-  let failed = 0;
+  // A create has no natural idempotency: POST /products with a handle that
+  // already exists makes a SECOND product at a suffixed URL rather than
+  // refusing. A partly-failed run is the normal case (one product rejected,
+  // the rest created), so the obvious next move — re-run it — is exactly what
+  // duplicates the store. Read the catalogue once and skip what's already there.
+  const existing = (!args.update && !args.dryRun) ? await liveHandles(token) : new Map();
+
+  let failed = 0, skipped = 0;
   for (const item of items) {
     try {
+      if (existing.has(item.handle)) {
+        const hit = existing.get(item.handle);
+        console.log(`⊘ ${item.slug} already on this store (id ${hit.id}) — not creating a duplicate.`);
+        console.log(`  record it: set "product_id": { "${args.lang}": "${hit.id}" } in iconic-series/${item.drop}/${item.slug}.json`);
+        console.log('  then use update: true to push copy, SEO and images.');
+        skipped++;
+        continue;
+      }
+
       const body = buildBody(item, args.lang, { publish: args.publish });
 
       // A dry run has to print what would actually go out. Build the exact
@@ -716,10 +732,37 @@ async function main() {
     } catch (err) {
       failed++;
       console.error(`✗ ${item.slug}: ${err.message}`);
+      if (/数据不存在/.test(err.message)) {
+        console.error('    数据不存在 = "data does not exist" — the API resolved a reference');
+        console.error('    that isn\'t there. Past cause: a `position` outside the range the');
+        console.error('    API expects (they are 0-based). Check the collection ids for this');
+        console.error(`    store too: ${JSON.stringify(collectionsFor(item.drop, args.lang))}`);
+      }
     }
   }
 
+  if (skipped) console.log(`\n${skipped} skipped (already on this store) · re-running is safe.`);
   if (failed) process.exit(1);
+}
+
+/**
+ * handle → live product, for the whole store. One catalogue pass, so the create
+ * loop can tell "already there" from "needs creating" without a request each.
+ */
+async function liveHandles(token) {
+  const map = new Map();
+  let since = '';
+  for (let page = 0; page < 50; page++) {
+    const res = await fetch(`${HOST}/products?limit=100${since ? `&since_id=${since}` : ''}`, { headers: { token } });
+    const json = await res.json().catch(() => ({}));
+    if (json.code !== 0) throw new Error(`API code ${json.code}: ${json.msg}`);
+    const batch = json.data?.products || json.data?.list || json.data || [];
+    if (!Array.isArray(batch) || !batch.length) break;
+    for (const p of batch) map.set(p.handle, p);
+    since = batch[batch.length - 1].id;
+    if (batch.length < 100) break;
+  }
+  return map;
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
