@@ -115,6 +115,44 @@ and card `alt` text is derived from `display_title`.
   at the shared template *before* pushing `body_html`, or the page duplicates.
 - Everything on EN is `status: 0` (hidden) until published.
 
+## The homepage band
+
+`build/homepage/<drop>.<lang>.html`, 4 files. This **replaces**
+`pages/homepage/iconic-series.<lang>.html` — paste over that block, don't add
+below it. Two Iconic bands on one page compete for the same click, and the site
+already points every product page's series grid at the current drop
+(`series_grid_drop`), so the homepage should say the same thing.
+
+Structure and CSS are lifted verbatim from the drop 01 block at build time, so
+the section keeps matching its siblings on the page. Only the cards and copy
+change. It is generated rather than hand-written because of the image URLs: a
+mockup re-render changes them, and four hand-maintained copies is precisely how
+a stale URL survives unnoticed.
+
+**Position.** The documented homepage order (`docs/search-strategy-2026h2.md`)
+is a custom-kit funnel: hero → RTP strip → how it works → pro design → social
+proof. Drop 02 sits directly below the hero **for the launch window only** —
+it is the one time-sensitive thing on the page and the World Cup association
+decays. Move it back below the RTP strip when that fades; the hero already
+carries the RTP CTA, so the funnel survives the temporary demotion.
+
+**Card order is per locale**, in `config.drops.<drop>.homepage.cards`:
+
+| store | leads with | why |
+|---|---|---|
+| es | Los Suplentes | ESP 1–0 ARG, the final |
+| fr | Le Record | FRA, the all-time scoring record |
+| en / it | Viking Row | neither store has a home nation in this drop; it is the most visually distinctive piece |
+
+Two rules when changing that list:
+
+- **`cards[2]` is hidden on mobile** (`iconic-card--hide-mobile`, inherited from
+  the drop 01 block). Put the weakest piece there — only two cards show on a
+  phone.
+- **Never lead EN with El Himno.** Its plate line is `ARG 2–1 ENG`, an England
+  defeat. Fine as a product, wrong as the first thing an English-language
+  visitor sees.
+
 ## Collection pages
 
 Generated from the same product data, one per drop per locale
