@@ -36,10 +36,11 @@ const config = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8')
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 function parseArgs(argv) {
-  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null };
+  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null, audit: null };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
-    if (k === '--collections') a.collections = argv[++i] || 'all';
+    if (k === '--audit') a.audit = argv[++i];
+    else if (k === '--collections') a.collections = argv[++i] || 'all';
     else if (k === '--delete') a.delete = argv[++i];
     else if (k === '--probe') a.probe = true;
     else if (k === '--inspect') a.inspect = argv[++i];
@@ -391,8 +392,81 @@ async function listCollections(token, filter) {
   console.log('  drops.drop-02.collection.collection_id.<lang> = the drop 02 collection');
 }
 
+/**
+ * READ-ONLY. Fetch every product of a drop and diff the live record against
+ * what the current payload would send. Products created before a payload fix
+ * keep the old values silently — this is how you find out which, and it also
+ * reports each product_id so --update can target them.
+ */
+async function audit(drop, lang, token) {
+  const items = loadDrop(drop);
+  const byHandle = new Map(items.map(i => [i.handle, i]));
+
+  // one pass over the catalogue rather than a request per product
+  const live = new Map();
+  let since = '';
+  for (let page = 0; page < 50; page++) {
+    const res = await fetch(`${HOST}/products?limit=100${since ? `&since_id=${since}` : ''}`, { headers: { token } });
+    const json = await res.json().catch(() => ({}));
+    if (json.code !== 0) throw new Error(`API code ${json.code}: ${json.msg}`);
+    const batch = json.data?.products || json.data?.list || json.data || [];
+    if (!Array.isArray(batch) || !batch.length) break;
+    for (const p of batch) if (byHandle.has(p.handle)) live.set(p.handle, p);
+    since = batch[batch.length - 1].id;
+    if (batch.length < 100) break;
+  }
+
+  const FIELDS = ['title', 'subtitle', 'mini_detail', 'meta_title', 'meta_descript'];
+  let drifted = 0, missing = 0;
+
+  for (const item of items) {
+    const p = live.get(item.handle);
+    if (!p) { console.log(`✗ ${item.handle} — NOT on this store`); missing++; continue; }
+
+    const want = buildBody({ ...item }, lang, { publish: false });
+    const diffs = FIELDS.filter(f => String(p[f] ?? '') !== String(want[f] ?? ''));
+
+    const liveColls = (p.collections || []).map(c => c.id).sort();
+    const wantColls = want.collections.map(c => c.collection_id).sort();
+    const collDrift = JSON.stringify(liveColls) !== JSON.stringify(wantColls);
+
+    const bodyDrift = String(p.body_html ?? '').length !== want.body_html.length;
+    const variants = (p.variants || []).length;
+
+    if (!diffs.length && !collDrift && !bodyDrift && variants === SIZES.length) {
+      console.log(`✓ ${item.handle.padEnd(22)} id ${p.id} — in sync`);
+    } else {
+      drifted++;
+      console.log(`⚠ ${item.handle.padEnd(22)} id ${p.id}`);
+      for (const f of diffs) {
+        console.log(`    ${f}`);
+        console.log(`      live: ${JSON.stringify(String(p[f] ?? '').slice(0, 90))}`);
+        console.log(`      repo: ${JSON.stringify(String(want[f] ?? '').slice(0, 90))}`);
+      }
+      if (collDrift) console.log(`    collections  live: [${liveColls}]  repo: [${wantColls}]`);
+      if (bodyDrift) console.log(`    body_html    live: ${String(p.body_html ?? '').length} chars  repo: ${want.body_html.length} chars`);
+      if (variants !== SIZES.length) console.log(`    variants     live: ${variants}  expected: ${SIZES.length}`);
+    }
+  }
+
+  console.log(`\n${live.size}/${items.length} found · ${drifted} drifted · ${missing} missing`);
+  if (drifted) {
+    console.log('\nTo bring them in line, record each id as "product_id" in');
+    console.log(`iconic-series/${drop}/<slug>.json, then run with update: true.`);
+    console.log('NOTE: --update sends title/subtitle/mini_detail/body_html/SEO — NOT collections.');
+    console.log('Collection membership stays as set in the CMS.');
+  }
+}
+
 async function main() {
   const args = parseArgs(process.argv);
+
+  if (args.audit) {
+    const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
+    if (!process.env[tv]) { console.error(`No ${tv} in the environment.`); process.exit(1); }
+    await audit(args.audit, args.lang, process.env[tv]);
+    return;
+  }
 
   if (args.collections) {
     const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;

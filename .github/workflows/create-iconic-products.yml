@@ -7,6 +7,10 @@ name: Create Iconic Series Products
 on:
   workflow_dispatch:
     inputs:
+      audit:
+        description: 'READ-ONLY: diff a drop''s LIVE products against the repo (e.g. drop-02). Ignores all other inputs.'
+        required: false
+        type: string
       collections:
         description: 'READ-ONLY: list this store''s collections with their ids (try "iconic"). Ignores all other inputs.'
         required: false
@@ -73,11 +77,11 @@ jobs:
           node-version: '20'
 
       - name: Rebuild pages (body_html must match the repo)
-        if: inputs.inspect == '' && inputs.probe != true && inputs.delete_ids == '' && inputs.collections == ''
+        if: inputs.inspect == '' && inputs.probe != true && inputs.delete_ids == '' && inputs.collections == '' && inputs.audit == ''
         run: node scripts/build-iconic-pages.js --lang ${{ inputs.lang }}
 
       - name: Fail if the build is stale
-        if: inputs.inspect == '' && inputs.probe != true && inputs.delete_ids == '' && inputs.collections == ''
+        if: inputs.inspect == '' && inputs.probe != true && inputs.delete_ids == '' && inputs.collections == '' && inputs.audit == ''
         run: |
           if ! git diff --quiet -- iconic-series/build; then
             echo "::error::iconic-series/build is out of date with the source data."
@@ -95,6 +99,10 @@ jobs:
           ICONIC_SIZE_SHAPE: ${{ inputs.size_shape }}
         run: |
           ARGS="--lang ${{ inputs.lang }}"
+          if [ -n "${{ inputs.audit }}" ]; then
+            node scripts/create-iconic-products.js $ARGS --audit "${{ inputs.audit }}"
+            exit $?
+          fi
           if [ -n "${{ inputs.collections }}" ]; then
             node scripts/create-iconic-products.js $ARGS --collections "${{ inputs.collections }}"
             exit $?
