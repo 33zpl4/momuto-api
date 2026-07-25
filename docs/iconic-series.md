@@ -250,7 +250,15 @@ Quirk worth preserving: the live products write the accession number with an
 
 ### body_html vs per-product templates
 
-`im-01-the-volley` has **`body_html: 0 chars`**. Drop 01 works differently: each
+⚠️ **`body_html: 0 chars` is not evidence of an empty body.** Every reader in
+this script goes through `GET /products` (the list endpoint), and list endpoints
+routinely omit heavyweight fields. `--audit` and `--inspect` now re-read each
+product via `GET /products/{id}` and label which source the number came from; if
+that endpoint is unavailable they say so rather than reporting a length you
+might act on. Acting on a false zero means pushing `body_html` onto a page that
+already has content — the duplication trap below.
+
+`im-01-the-volley` reads **`body_html: 0 chars`**. Drop 01 works differently: each
 product has its **own custom CMS template** with the four blocks pasted into it
 by hand. Ten products means ten templates to build and maintain.
 

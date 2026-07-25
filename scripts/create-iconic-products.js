@@ -273,7 +273,15 @@ async function inspect(handleOrUrl, token) {
         const v = hit[k];
         console.log(`${k}: ${typeof v === 'object' ? JSON.stringify(v) : JSON.stringify(v)}`);
       }
-      console.log(`body_html: <${(hit.body_html || '').length} chars>`);
+      // hit comes from the LIST endpoint, which may omit body_html. Re-read the
+      // product on its own before reporting a length anyone might act on.
+      let bodySrc = 'list', body = hit.body_html || '';
+      try {
+        const one = await fetch(`${HOST}/products/${hit.id}`, { headers: { token } }).then(r => r.json());
+        const p = one.code === 0 ? (one.data?.product || one.data) : null;
+        if (p && !Array.isArray(p) && p.body_html !== undefined) { body = p.body_html || ''; bodySrc = 'GET /products/{id}'; }
+      } catch { /* fall back to the list value, labelled as such */ }
+      console.log(`body_html: <${body.length} chars> (source: ${bodySrc})`);
       console.log(`images: ${(hit.images || []).length}` +
         ((hit.images || [])[0] ? ` · first alt ${JSON.stringify(hit.images[0].alt)}` : ''));
 
@@ -420,9 +428,32 @@ async function audit(drop, lang, token, writeIds = false) {
   const FIELDS = ['title', 'subtitle', 'mini_detail', 'meta_title', 'meta_descript'];
   let drifted = 0, missing = 0;
 
+  // The list endpoint is the only reader this script has ever used, and list
+  // endpoints routinely omit heavyweight fields. A body_html of 0 chars read
+  // that way does NOT prove the product has no body — and acting on it would
+  // push a duplicate page. Re-read each product on its own before believing it.
+  const single = new Map();
+  let singleWorks = null;
+  for (const item of items) {
+    const p = live.get(item.handle);
+    if (!p) continue;
+    try {
+      const res = await fetch(`${HOST}/products/${p.id}`, { headers: { token } });
+      const json = await res.json().catch(() => ({}));
+      const one = json.code === 0 ? (json.data?.product || json.data || null) : null;
+      if (one && typeof one === 'object' && !Array.isArray(one)) { single.set(item.handle, one); singleWorks = true; }
+      else if (singleWorks === null) singleWorks = false;
+    } catch { if (singleWorks === null) singleWorks = false; }
+  }
+  console.log(singleWorks
+    ? 'body_html read per product (GET /products/{id})\n'
+    : '⚠ GET /products/{id} unavailable — body_html below comes from the LIST\n' +
+      '  endpoint, which may omit it. Do NOT read 0 chars as "no body_html".\n');
+
   for (const item of items) {
     const p = live.get(item.handle);
     if (!p) { console.log(`✗ ${item.handle} — NOT on this store`); missing++; continue; }
+    const full = single.get(item.handle) || p;
 
     const want = buildBody({ ...item }, lang, { publish: false });
     const diffs = FIELDS.filter(f => String(p[f] ?? '') !== String(want[f] ?? ''));
@@ -431,7 +462,8 @@ async function audit(drop, lang, token, writeIds = false) {
     const wantColls = want.collections.map(c => c.collection_id).sort();
     const collDrift = JSON.stringify(liveColls) !== JSON.stringify(wantColls);
 
-    const bodyDrift = String(p.body_html ?? '').length !== want.body_html.length;
+    const liveBody = String(full.body_html ?? '');
+    const bodyDrift = liveBody.length !== want.body_html.length;
     const variants = (p.variants || []).length;
 
     const liveImgs = (p.images || []).map(i => i.src);
@@ -457,7 +489,18 @@ async function audit(drop, lang, token, writeIds = false) {
           console.log(`      [${i}] repo: ${wantImgs[i] || '—'}`);
         }
       }
-      if (bodyDrift) console.log(`    body_html    live: ${String(p.body_html ?? '').length} chars  repo: ${want.body_html.length} chars`);
+      if (bodyDrift) {
+        console.log(`    body_html    live: ${liveBody.length} chars  repo: ${want.body_html.length} chars`);
+        // Our pages carry this marker. Finding it means the content is already
+        // on the page from somewhere else — a custom template — and pushing
+        // body_html would render the whole thing twice. This is the drop 01
+        // retrofit trap, and it does not announce itself.
+        if (!liveBody.includes('data-iconic-page') && singleWorks) {
+          console.log('      ↳ no body_html on the product. If the page already renders our');
+          console.log('        content, it comes from a template — strip that FIRST or the');
+          console.log('        page will duplicate.');
+        }
+      }
       if (variants !== SIZES.length) console.log(`    variants     live: ${variants}  expected: ${SIZES.length}`);
     }
   }
