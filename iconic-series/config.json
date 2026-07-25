@@ -74,7 +74,8 @@
             "intro_body": "La Iconic Series cattura i momenti decisivi con illustrazione espressiva a mano libera, incorniciati in un formato da museo. Da collezione per progetto. Limitati per scelta.",
             "system_title": "Cinque momenti.<br><em>Una serie.</em>"
           }
-        }
+        },
+        "collection_id": 129055
       }
     },
     "drop-02": {
@@ -139,7 +140,8 @@
             "intro_body": "Il Drop 02 trasforma l’estate 2026 in stampe d’archivio: un inno, il gol di un subentrato, un record rimasto solo, un tamburo e un portiere che si è rifiutato di finire. Stessa cornice. Nuovo capitolo.",
             "system_title": "Cinque momenti.<br><em>Un’estate.</em>"
           }
-        }
+        },
+        "collection_id": null
       }
     }
   },
@@ -241,5 +243,6 @@
     "taxable": 0,
     "inventory_tracking": 0,
     "inventory_policy": 1
-  }
+  },
+  "_comment_collections": "collection_id (top level) = the SERIES collection, every product joins it. drops.<drop>.collection.collection_id = that drop's own collection, if it has one; products join both. Leave null to skip."
 }

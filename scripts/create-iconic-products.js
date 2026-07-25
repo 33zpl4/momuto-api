@@ -174,9 +174,14 @@ function buildBody(item, lang, { publish }) {
     mini_detail: miniDetail,
     meta_title: copy.meta_title || `${item.display_title} – ${strings.series_name} ${hyphen} | MOMUTO`,
     meta_descript: copy.meta_description,
-    // Without this the product never joins /collections/<handle> — it would
-    // exist only at its direct URL.
-    collections: [{ collection_id: config.collection_id }],
+    // Every product joins the SERIES collection; a drop with its own
+    // collection adds a second membership. Without any of this the product
+    // exists only at its direct URL and appears on no collection page.
+    collections: [
+      { collection_id: config.collection_id },
+      ...(dropCfg.collection?.collection_id && dropCfg.collection.collection_id !== config.collection_id
+        ? [{ collection_id: dropCfg.collection.collection_id }] : []),
+    ],
     ...config.product_defaults,
     product_detail: 1,
   };

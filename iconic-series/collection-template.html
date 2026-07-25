@@ -81,6 +81,9 @@
     max-width: 1100px; margin: 0 auto;
     display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: center;
   }
+  /* no photo yet — single column rather than an empty cell */
+  .intro-inner.no-image { grid-template-columns: 1fr; max-width: 760px; }
+  .intro-inner.no-image .intro-body { max-width: none; }
   .intro-label {
     font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
     color: var(--accent); margin-bottom: 32px; font-weight: 500;
@@ -192,7 +195,7 @@
 </section>
 
 <section class="intro">
-  <div class="intro-inner">
+  <div class="intro-inner{{INTRO_NO_IMAGE}}">
     <div class="intro-text">
       <div class="intro-label">{{INTRO_LABEL}}</div>
       <h2 class="intro-heading">{{INTRO_HEADING}}</h2>

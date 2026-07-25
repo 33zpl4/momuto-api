@@ -225,9 +225,10 @@ function renderCollection(drop, items, lang) {
     .replace(/\{\{INTRO_LABEL\}\}/g, escapeHtml(copy.intro_label))
     .replace(/\{\{INTRO_HEADING\}\}/g, copy.intro_heading) // trusted: carries <br>/<em>
     .replace(/\{\{INTRO_BODY\}\}/g, escapeHtml(copy.intro_body))
+    .replace(/\{\{INTRO_NO_IMAGE\}\}/g, coll.intro_image ? '' : ' no-image')
     .replace(/\{\{INTRO_IMAGE\}\}/g, coll.intro_image
       ? `<img src="${coll.intro_image}" alt="${escapeHtml(copy.eyebrow)}">`
-      : `<!-- TODO intro image: set "intro_image" in config.drops.${drop}.collection -->`)
+      : '')
     .replace(/\{\{PRODUCT_CARDS\}\}/g, cards)
     .replace(/\{\{SYSTEM_LABEL\}\}/g, escapeHtml(strings.series_label))
     .replace(/\{\{SYSTEM_TITLE\}\}/g, copy.system_title) // trusted: carries <br>/<em>
@@ -237,7 +238,6 @@ function renderCollection(drop, items, lang) {
 
   const left = html.match(/\{\{[A-Z_0-9]+\}\}/g);
   if (left) throw new Error(`collection ${drop}.${lang}: unfilled ${[...new Set(left)].join(', ')}`);
-  if (!coll.intro_image) missing.push(`${drop} intro image`);
   return { html, missing };
 }
 

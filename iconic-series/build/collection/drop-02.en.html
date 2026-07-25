@@ -81,6 +81,9 @@
     max-width: 1100px; margin: 0 auto;
     display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: center;
   }
+  /* no photo yet — single column rather than an empty cell */
+  .intro-inner.no-image { grid-template-columns: 1fr; max-width: 760px; }
+  .intro-inner.no-image .intro-body { max-width: none; }
   .intro-label {
     font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
     color: var(--accent); margin-bottom: 32px; font-weight: 500;
@@ -192,13 +195,13 @@
 </section>
 
 <section class="intro">
-  <div class="intro-inner">
+  <div class="intro-inner no-image">
     <div class="intro-text">
       <div class="intro-label">The Archive 02</div>
       <h2 class="intro-heading">One summer,<br><em>already history.</em></h2>
       <p class="intro-body">Drop 02 turns the summer of 2026 into archive prints — an anthem, a substitute’s winner, a record that stood alone, a drum, and a goalkeeper who refused to be finished. Same frame. New chapter.</p>
     </div>
-    <div class="intro-image"><!-- TODO intro image: set "intro_image" in config.drops.drop-02.collection --></div>
+    <div class="intro-image"></div>
   </div>
 </section>
 

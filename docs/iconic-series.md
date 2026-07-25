@@ -139,6 +139,33 @@ match.
 
 Each page links to the other at the foot, so neither drop is orphaned.
 
+Drop 02 launches **without an intro photo** — the intro collapses to a single
+centred column rather than leaving an empty grid cell. Set
+`config.drops.drop-02.collection.intro_image` when the shoot happens and
+rebuild; the two-column layout returns on its own.
+
+### Two pages ≠ two collections, unless you make it so
+
+`/collections/<handle>` needs a real **CMS collection** to own the URL;
+`/pages/<handle>` is just a page (that is how RTP does its "collection" page —
+see `docs/rtp-collection.md`). Both patterns exist in the store.
+
+We use collections, so drop 02 needs one created in the CMS with handle
+`iconic-series-drop-02`. Membership is then **both**:
+
+| | joins |
+|---|---|
+| drop 01 products | series collection `129055` |
+| drop 02 products | series collection `129055` **and** the new drop 02 collection |
+
+`config.collection_id` is the series; `config.drops.<drop>.collection.collection_id`
+is that drop's own. Set the drop 02 id once the CMS assigns it — until then it
+is `null` and the create script simply sends the series membership.
+
+Keeping every product in the series collection is what stops the archive from
+fragmenting a drop at a time. The custom page HTML decides what is *displayed*;
+collection membership decides what the CMS *knows*.
+
 ## Creating the products
 
 `scripts/create-iconic-products.js` turns a built page into a live product via
