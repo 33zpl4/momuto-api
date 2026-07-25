@@ -134,6 +134,9 @@
     ['XL', '112-124', '97-109', '112-120'], ['XXL', '124-136', '109-121', '120-128']
   ];
 
+  // One EN-hosted file serves all four stores (the custom-content.js pattern),
+  // so the modal has to carry every locale — it reads data-lang off the marker
+  // the page template stamps.
   var SIZE_I18N = {
     en: { title: 'SIZE GUIDE', units: 'MEASUREMENTS IN CM', how: 'HOW TO MEASURE',
       cols: ['SIZE', 'CHEST', 'WAIST', 'HIPS'],
@@ -141,6 +144,27 @@
         ['1. CHEST CIRCUMFERENCE', 'Measure at the widest point of the chest under the armpits and make sure the tape is straight and taut in back as well.'],
         ['2. WAIST CIRCUMFERENCE', 'Measure at the narrowest point of the waist just above the navel.'],
         ['3. HIPS CIRCUMFERENCE', 'Measure at the widest point of the hips and make sure the tape is straight and taut in back as well.']
+      ] },
+    es: { title: 'GUÍA DE TALLAS', units: 'MEDIDAS EN CM', how: 'CÓMO MEDIR',
+      cols: ['TALLA', 'PECHO', 'CINTURA', 'CADERA'],
+      steps: [
+        ['1. CONTORNO DE PECHO', 'Mide por la parte más ancha del pecho, bajo las axilas, manteniendo la cinta recta y ajustada también por la espalda.'],
+        ['2. CONTORNO DE CINTURA', 'Mide por la parte más estrecha de la cintura, justo por encima del ombligo.'],
+        ['3. CONTORNO DE CADERA', 'Mide por la parte más ancha de la cadera, manteniendo la cinta recta y ajustada también por detrás.']
+      ] },
+    fr: { title: 'GUIDE DES TAILLES', units: 'MESURES EN CM', how: 'COMMENT MESURER',
+      cols: ['TAILLE', 'POITRINE', 'TOUR DE TAILLE', 'HANCHES'],
+      steps: [
+        ['1. TOUR DE POITRINE', 'Mesurez à l’endroit le plus large de la poitrine, sous les aisselles, en gardant le mètre droit et bien tendu dans le dos également.'],
+        ['2. TOUR DE TAILLE', 'Mesurez à l’endroit le plus étroit de la taille, juste au-dessus du nombril.'],
+        ['3. TOUR DE HANCHES', 'Mesurez à l’endroit le plus large des hanches, en gardant le mètre droit et bien tendu à l’arrière également.']
+      ] },
+    it: { title: 'GUIDA ALLE TAGLIE', units: 'MISURE IN CM', how: 'COME MISURARE',
+      cols: ['TAGLIA', 'TORACE', 'VITA', 'FIANCHI'],
+      steps: [
+        ['1. CIRCONFERENZA TORACE', 'Misura nel punto più ampio del torace, sotto le ascelle, tenendo il metro dritto e ben teso anche sulla schiena.'],
+        ['2. CIRCONFERENZA VITA', 'Misura nel punto più stretto della vita, appena sopra l’ombelico.'],
+        ['3. CIRCONFERENZA FIANCHI', 'Misura nel punto più ampio dei fianchi, tenendo il metro dritto e ben teso anche dietro.']
       ] }
   };
 

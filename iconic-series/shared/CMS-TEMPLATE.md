@@ -45,6 +45,26 @@ brings all of it.
 - any hard-coded `IM–0X` reference — that is how the live drop 01 pages all
   ended up reading `IM–01`
 
+## Same template, all drops, all stores
+
+**One template covers drop 01 and drop 02** — and every future drop. Nothing in
+it is drop-specific; the drop label, edition and copy all arrive via
+`body_html`.
+
+**The same script tag goes on all four stores**, pointing at the EN-hosted
+file:
+
+```html
+<script src="https://www.momuto.com/iconic-content.js" defer></script>
+```
+
+That is the house pattern — `custom-content.js` and `pricing.js` are EN-hosted
+and shared the same way. Do not deploy per-store copies; they drift.
+
+The script localises itself from `data-lang`, which the page template stamps on
+the marker div. The size-guide modal carries en/es/fr/it, so it opens in the
+right language on each store.
+
 ## Assigning it
 
 - **Drop 02** — point the new products at this template. They have no template
