@@ -120,7 +120,7 @@ function renderPage(item, all, lang) {
   const details = fs.readFileSync(detailsPath, 'utf8')
     .replace(/<!--[\s\S]*?-->/g, '') // authoring notes stay in source, not output
     .replace(/\{\{NUMBER\}\}/g, escapeHtml(item.number))
-    .replace(/\{\{EDITION\}\}/g, escapeHtml(dropCfg.edition))
+    .replace(/\{\{EDITION\}\}/g, escapeHtml(dropCfg.edition[lang] || dropCfg.edition.en))
     .trim()
     .split('\n').map(l => (l.trim() ? '        ' + l : l)).join('\n');
 
@@ -162,6 +162,85 @@ function renderPage(item, all, lang) {
   return { html, missingImages: cards.missingImages };
 }
 
+// ── Collection page ──────────────────────────────────────────────────────────
+
+/**
+ * One collection page per drop per locale, generated from the same product
+ * data as the product pages. Drop 01's copy is reproduced verbatim from the
+ * live page so regenerating it changes nothing that already ranks.
+ *
+ * Self-contained HTML with inline <style> — this is a CMS *page*, with no
+ * template to hang a script tag on, and a <style> injected via innerHTML does
+ * apply (unlike <script>).
+ */
+function renderCollection(drop, items, lang) {
+  const dropCfg = config.drops[drop];
+  const coll = dropCfg.collection;
+  if (!coll) throw new Error(`no collection config for ${drop}`);
+  const copy = coll.copy[lang];
+  if (!copy) throw new Error(`no ${lang} collection copy for ${drop}`);
+  const strings = config.strings[lang];
+
+  const mine = items.filter(p => p.drop === drop);
+  const missing = [];
+
+  const cards = mine.map(p => {
+    if (!p.image || !p.image_front) missing.push(`${p.slug} (${!p.image ? 'back' : 'front'})`);
+    const name = escapeHtml(p.display_title);
+    return [
+      `    <div class="product-card">`,
+      `      <div class="card-image">`,
+      `        <div class="swap">`,
+      `          <img class="back" loading="lazy" src="${p.image || ''}" alt="${name} – ${escapeHtml(strings.detail_series)}">`,
+      `          <img class="front" loading="lazy" src="${p.image_front || ''}" alt="${name}">`,
+      `        </div>`,
+      `      </div>`,
+      `      <div class="card-meta">`,
+      `        <div>`,
+      `          <div class="card-ref">${escapeHtml(p.number)}</div>`,
+      `          <div class="card-name"><a href="/products/${p.handle}" class="card-name-link">${name}</a></div>`,
+      `        </div>`,
+      `        <div class="card-price">${escapeHtml(config.price)}</div>`,
+      `      </div>`,
+      `    </div>`,
+    ].join('\n');
+  }).join('\n');
+
+  const archive = mine.map(p => {
+    const status = p.archive_status === 'signature' ? strings.status_signature : strings.status_available;
+    return `      <div class="archive-item"><span class="archive-ref">${escapeHtml(p.number)}</span> ` +
+      `<span class="archive-name">${escapeHtml(p.display_title)}</span> ` +
+      `<span class="archive-status">${escapeHtml(status)}</span></div>`;
+  }).join('\n');
+
+  const other = Object.keys(config.drops).find(d => d !== drop);
+  const otherHandle = config.drops[other]?.collection?.handle || config.collection_handle;
+
+  const html = fs.readFileSync(path.join(DIR, 'collection-template.html'), 'utf8')
+    .replace(/\{\{HERO_EYEBROW\}\}/g, escapeHtml(copy.eyebrow))
+    .replace(/\{\{HERO_TITLE_1\}\}/g, escapeHtml(copy.t1))
+    .replace(/\{\{HERO_TITLE_2\}\}/g, escapeHtml(copy.t2))
+    .replace(/\{\{HERO_SUB\}\}/g, escapeHtml(copy.sub))
+    .replace(/\{\{HERO_CTA\}\}/g, escapeHtml(copy.cta))
+    .replace(/\{\{INTRO_LABEL\}\}/g, escapeHtml(copy.intro_label))
+    .replace(/\{\{INTRO_HEADING\}\}/g, copy.intro_heading) // trusted: carries <br>/<em>
+    .replace(/\{\{INTRO_BODY\}\}/g, escapeHtml(copy.intro_body))
+    .replace(/\{\{INTRO_NO_IMAGE\}\}/g, coll.intro_image ? '' : ' no-image')
+    .replace(/\{\{INTRO_IMAGE\}\}/g, coll.intro_image
+      ? `<img src="${coll.intro_image}" alt="${escapeHtml(copy.eyebrow)}">`
+      : '')
+    .replace(/\{\{PRODUCT_CARDS\}\}/g, cards)
+    .replace(/\{\{SYSTEM_LABEL\}\}/g, escapeHtml(strings.series_label))
+    .replace(/\{\{SYSTEM_TITLE\}\}/g, copy.system_title) // trusted: carries <br>/<em>
+    .replace(/\{\{ARCHIVE_ITEMS\}\}/g, archive)
+    .replace(/\{\{OTHER_DROP_URL\}\}/g, `/collections/${otherHandle}`)
+    .replace(/\{\{OTHER_DROP_LABEL\}\}/g, escapeHtml(strings.other_drop));
+
+  const left = html.match(/\{\{[A-Z_0-9]+\}\}/g);
+  if (left) throw new Error(`collection ${drop}.${lang}: unfilled ${[...new Set(left)].join(', ')}`);
+  return { html, missing };
+}
+
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 const args = parseArgs(process.argv);
@@ -196,6 +275,24 @@ for (const item of all) {
         console.error(`✗ ${item.slug}.${lang}: ${err.message}`);
         failed++;
       }
+    }
+  }
+}
+
+// Collection pages: one per drop per locale, from the same data.
+for (const drop of drops) {
+  for (const lang of langs) {
+    try {
+      const { html, missing } = renderCollection(drop, all, lang);
+      missing.forEach(m => missingImages.add(m));
+      const out = path.join(BUILD, 'collection', `${drop}.${lang}.html`);
+      fs.mkdirSync(path.dirname(out), { recursive: true });
+      fs.writeFileSync(out, html);
+      console.log(`✓ ${path.relative(ROOT, out)}`);
+      written++;
+    } catch (err) {
+      if (/no \w+ collection copy|no collection config/.test(err.message)) { skipped++; }
+      else { console.error(`✗ collection ${drop}.${lang}: ${err.message}`); failed++; }
     }
   }
 }

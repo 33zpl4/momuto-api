@@ -71,11 +71,23 @@ the page data carry the accession number. One is a copy, so the builder
 French store; `LE RECORD` stays French on the Spanish one. They are artwork
 names — translating them breaks the collection.
 
-Localised fields are `moment_title`, `moment_body`, `technique`, `meta_*` and
-the shared `strings`/`drop_blurbs`. Write them **natively per locale**, not
-word-for-word from English: the copy is short and literary, and a literal
-translation reads like a translation. Where a phrase has no natural equivalent,
-rewrite the sentence rather than forcing it.
+Localised fields are `moment_title`, `moment_body`, `technique`, `meta_*`, plus
+the shared `strings`, `drop_blurbs`, and the per-locale `edition` / `subtitle`
+on each drop. Write them **natively per locale**, not word-for-word from
+English: the copy is short and literary, and a literal translation reads like
+one. Where a phrase has no natural equivalent, rewrite the sentence.
+
+Choices made in the existing copy, worth keeping consistent:
+
+- **Move names use the term each language actually uses.** The bicycle kick is
+  `Chilena` (es) / `Retourné Acrobatique` (fr) / `Rovesciata` (it) — not a
+  translation of "bicycle".
+- **`220 GSM` becomes `220 g/m²`** everywhere but EN. It is the unit these
+  markets read.
+- **Artwork names stay put inside the sentence.** `The Volley que detuvo el
+  tiempo`, `Il record che resta solo` — the name is the constant, the sentence
+  around it is the translation.
+- Meta descriptions are kept **≤200 characters** to match the live EN ones.
 
 ## Deploying
 
@@ -97,8 +109,62 @@ and card `alt` text is derived from `display_title`.
 - `image` is empty for all drop-02 products — set each one after the mockups
   are uploaded to the CMS, then rebuild (the grid renders a TODO comment
   meanwhile).
-- `es` / `fr` / `it` strings, drop blurbs and `product-details.<lang>.html`
-  are not written yet. EN is complete for all ten products.
+- All four locales are complete: 40 pages (10 products × en/es/fr/it).
+- Drop 01 products still render from their own custom templates — repoint them
+  at the shared template *before* pushing `body_html`, or the page duplicates.
+
+## Collection pages
+
+Generated from the same product data, one per drop per locale
+(`build/collection/<drop>.<lang>.html`, 8 files).
+
+Unlike the product pages these are **self-contained** — CSS is inline rather
+than in `iconic-content.js`. They are CMS *pages* with no template to hang a
+script tag on, and a `<style>` injected via innerHTML does apply (only
+`<script>` doesn't). 8 pages is bounded duplication; 40 would not be.
+
+| | drop 01 | drop 02 |
+|---|---|---|
+| handle | `iconic-football-series` | `iconic-series-drop-02` |
+| h1 | "Iconic Series" | "Summer 2026" |
+
+**Drop 01's copy is reproduced verbatim from the live page**, so regenerating
+it changes nothing that already ranks — only the structure becomes data-driven.
+
+**Drop 02 deliberately gets a different `<h1>`.** Two collection pages sharing
+"Iconic Series" as their heading would compete for the same query; "Summer
+2026" also catches the seasonal intent, while the eyebrow carries the brand.
+Flip `t1`/`t2` in `config.drops.drop-02.collection.copy` if you'd rather they
+match.
+
+Each page links to the other at the foot, so neither drop is orphaned.
+
+Drop 02 launches **without an intro photo** — the intro collapses to a single
+centred column rather than leaving an empty grid cell. Set
+`config.drops.drop-02.collection.intro_image` when the shoot happens and
+rebuild; the two-column layout returns on its own.
+
+### Two pages ≠ two collections, unless you make it so
+
+`/collections/<handle>` needs a real **CMS collection** to own the URL;
+`/pages/<handle>` is just a page (that is how RTP does its "collection" page —
+see `docs/rtp-collection.md`). Both patterns exist in the store.
+
+We use collections, so drop 02 needs one created in the CMS with handle
+`iconic-series-drop-02`. Membership is then **both**:
+
+| | joins |
+|---|---|
+| drop 01 products | series collection `129055` |
+| drop 02 products | series collection `129055` **and** the new drop 02 collection |
+
+`config.collection_id` is the series; `config.drops.<drop>.collection.collection_id`
+is that drop's own. Set the drop 02 id once the CMS assigns it — until then it
+is `null` and the create script simply sends the series membership.
+
+Keeping every product in the series collection is what stops the archive from
+fragmenting a drop at a time. The custom page HTML decides what is *displayed*;
+collection membership decides what the CMS *knows*.
 
 ## Creating the products
 

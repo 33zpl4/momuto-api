@@ -14,13 +14,145 @@
   "drops": {
     "drop-01": {
       "label": "DROP 01",
-      "edition": "Drop 01 – Archive Release",
-      "subtitle": "Iconic Series — Drop 01, Archive Release"
+      "edition": {
+        "en": "Drop 01 – Archive Release",
+        "es": "Drop 01 – Edición de Archivo",
+        "fr": "Drop 01 – Édition d'Archive",
+        "it": "Drop 01 – Edizione d'Archivio"
+      },
+      "subtitle": {
+        "en": "Iconic Series — Drop 01, Archive Release",
+        "es": "Iconic Series — Drop 01, Edición de Archivo",
+        "fr": "Iconic Series — Drop 01, Édition d'Archive",
+        "it": "Iconic Series — Drop 01, Edizione d'Archivio"
+      },
+      "collection": {
+        "handle": "iconic-football-series",
+        "intro_image": "https://cdn.staticsoe.com/pics/3c4352dc7c2390eacc665f2b38141ded51a47fd067ed3d0399a2dd5fff09f10e.png",
+        "copy": {
+          "en": {
+            "eyebrow": "Drop 01 // Archive Limited",
+            "t1": "Iconic",
+            "t2": "Series",
+            "sub": "Defining moments in football. Reframed.",
+            "cta": "Explore Collection",
+            "intro_label": "The Archive 01",
+            "intro_heading": "Football history,<br><em>reinterpreted.</em>",
+            "intro_body": "The Iconic Series captures defining moments through expressive sketch illustration, framed in a museum-inspired format. Collectible by design. Limited by intent.",
+            "system_title": "Five moments.<br><em>One series.</em>"
+          },
+          "es": {
+            "eyebrow": "Drop 01 // Archivo Limitado",
+            "t1": "Iconic",
+            "t2": "Series",
+            "sub": "Momentos que definieron el fútbol. Reinterpretados.",
+            "cta": "Explorar la colección",
+            "intro_label": "El Archivo 01",
+            "intro_heading": "Historia del fútbol,<br><em>reinterpretada.</em>",
+            "intro_body": "La Iconic Series captura momentos decisivos con ilustración expresiva a mano alzada, enmarcados en un formato de museo. Coleccionables por diseño. Limitados por convicción.",
+            "system_title": "Cinco momentos.<br><em>Una serie.</em>"
+          },
+          "fr": {
+            "eyebrow": "Drop 01 // Archive Limitée",
+            "t1": "Iconic",
+            "t2": "Series",
+            "sub": "Les moments qui ont défini le football. Réinterprétés.",
+            "cta": "Explorer la collection",
+            "intro_label": "L'Archive 01",
+            "intro_heading": "L'histoire du football,<br><em>réinterprétée.</em>",
+            "intro_body": "L'Iconic Series capture les moments décisifs au trait, en dessin expressif, encadrés dans un format inspiré du musée. Objets de collection par conception. Limités par choix.",
+            "system_title": "Cinq moments.<br><em>Une série.</em>"
+          },
+          "it": {
+            "eyebrow": "Drop 01 // Archivio Limitato",
+            "t1": "Iconic",
+            "t2": "Series",
+            "sub": "I momenti che hanno definito il calcio. Reinterpretati.",
+            "cta": "Esplora la collezione",
+            "intro_label": "L'Archivio 01",
+            "intro_heading": "La storia del calcio,<br><em>reinterpretata.</em>",
+            "intro_body": "La Iconic Series cattura i momenti decisivi con illustrazione espressiva a mano libera, incorniciati in un formato da museo. Da collezione per progetto. Limitati per scelta.",
+            "system_title": "Cinque momenti.<br><em>Una serie.</em>"
+          }
+        },
+        "collection_id": {
+          "en": 129055,
+          "es": null,
+          "fr": null,
+          "it": null
+        }
+      }
     },
     "drop-02": {
       "label": "DROP 02",
-      "edition": "Drop 02 – Summer 2026",
-      "subtitle": "Iconic Series — Drop 02, Summer 2026"
+      "edition": {
+        "en": "Drop 02 – Summer 2026",
+        "es": "Drop 02 – Verano 2026",
+        "fr": "Drop 02 – Été 2026",
+        "it": "Drop 02 – Estate 2026"
+      },
+      "subtitle": {
+        "en": "Iconic Series — Drop 02, Summer 2026",
+        "es": "Iconic Series — Drop 02, Verano 2026",
+        "fr": "Iconic Series — Drop 02, Été 2026",
+        "it": "Iconic Series — Drop 02, Estate 2026"
+      },
+      "collection": {
+        "handle": "iconic-series-drop-02",
+        "intro_image": "",
+        "copy": {
+          "en": {
+            "eyebrow": "Iconic Series // Drop 02",
+            "t1": "Summer",
+            "t2": "2026",
+            "sub": "The moments that defined a summer. Reframed.",
+            "cta": "Explore Drop 02",
+            "intro_label": "The Archive 02",
+            "intro_heading": "One summer,<br><em>already history.</em>",
+            "intro_body": "Drop 02 turns the summer of 2026 into archive prints — an anthem, a substitute’s winner, a record that stood alone, a drum, and a goalkeeper who refused to be finished. Same frame. New chapter.",
+            "system_title": "Five moments.<br><em>One summer.</em>"
+          },
+          "es": {
+            "eyebrow": "Iconic Series // Drop 02",
+            "t1": "Verano",
+            "t2": "2026",
+            "sub": "Los momentos que definieron un verano. Reinterpretados.",
+            "cta": "Explorar el Drop 02",
+            "intro_label": "El Archivo 02",
+            "intro_heading": "Un verano,<br><em>ya es historia.</em>",
+            "intro_body": "El Drop 02 convierte el verano de 2026 en estampas de archivo: un himno, el gol de un suplente, un récord que quedó solo, un tambor y un portero que se negó a acabar. El mismo marco. Nuevo capítulo.",
+            "system_title": "Cinco momentos.<br><em>Un verano.</em>"
+          },
+          "fr": {
+            "eyebrow": "Iconic Series // Drop 02",
+            "t1": "Été",
+            "t2": "2026",
+            "sub": "Les moments qui ont défini un été. Réinterprétés.",
+            "cta": "Explorer le Drop 02",
+            "intro_label": "L'Archive 02",
+            "intro_heading": "Un été,<br><em>déjà de l’histoire.</em>",
+            "intro_body": "Le Drop 02 transforme l’été 2026 en tirages d’archive : un hymne, le but d’un remplaçant, un record resté seul, un tambour, et un gardien qui a refusé d’en finir. Même cadre. Nouveau chapitre.",
+            "system_title": "Cinq moments.<br><em>Un été.</em>"
+          },
+          "it": {
+            "eyebrow": "Iconic Series // Drop 02",
+            "t1": "Estate",
+            "t2": "2026",
+            "sub": "I momenti che hanno definito un’estate. Reinterpretati.",
+            "cta": "Esplora il Drop 02",
+            "intro_label": "L'Archivio 02",
+            "intro_heading": "Un’estate,<br><em>già storia.</em>",
+            "intro_body": "Il Drop 02 trasforma l’estate 2026 in stampe d’archivio: un inno, il gol di un subentrato, un record rimasto solo, un tamburo e un portiere che si è rifiutato di finire. Stessa cornice. Nuovo capitolo.",
+            "system_title": "Cinque momenti.<br><em>Un’estate.</em>"
+          }
+        },
+        "collection_id": {
+          "en": null,
+          "es": null,
+          "fr": null,
+          "it": null
+        }
+      }
     }
   },
   "strings": {
@@ -37,20 +169,95 @@
       "detail_technique": "Technique",
       "format_value": "Archive Print",
       "cart_label": "ADD TO CART",
-      "spec_line": "220 GSM premium cotton · Relaxed fit · Matte screen print · Archive format"
+      "spec_line": "220 GSM premium cotton · Relaxed fit · Matte screen print · Archive format",
+      "status_available": "Available",
+      "status_signature": "Signature",
+      "other_drop": "View the other drop →"
+    },
+    "es": {
+      "series_name": "Iconic Series",
+      "banner_subtitle": "Pieza {{NUMBER}} de la Iconic Series. {{DROP_BLURB}}",
+      "moment_label_suffix": "El Momento",
+      "series_label": "La Colección",
+      "series_heading": "Más de la Iconic Series",
+      "back_to_top": "Ver la colección completa →",
+      "detail_series": "Serie",
+      "detail_edition": "Edición",
+      "detail_format": "Formato",
+      "detail_technique": "Técnica",
+      "format_value": "Impresión de Archivo",
+      "cart_label": "AÑADIR AL CARRITO",
+      "spec_line": "Algodón premium 220 g/m² · Corte relajado · Serigrafía mate · Formato archivo",
+      "status_available": "Disponible",
+      "status_signature": "Signature",
+      "other_drop": "Ver el otro drop →"
+    },
+    "fr": {
+      "series_name": "Iconic Series",
+      "banner_subtitle": "Pièce {{NUMBER}} de l'Iconic Series. {{DROP_BLURB}}",
+      "moment_label_suffix": "Le Moment",
+      "series_label": "La Collection",
+      "series_heading": "Plus de l'Iconic Series",
+      "back_to_top": "Voir toute la collection →",
+      "detail_series": "Série",
+      "detail_edition": "Édition",
+      "detail_format": "Format",
+      "detail_technique": "Technique",
+      "format_value": "Tirage d'Archive",
+      "cart_label": "AJOUTER AU PANIER",
+      "spec_line": "Coton premium 220 g/m² · Coupe ample · Sérigraphie mate · Format archive",
+      "status_available": "Disponible",
+      "status_signature": "Signature",
+      "other_drop": "Voir l'autre drop →"
+    },
+    "it": {
+      "series_name": "Iconic Series",
+      "banner_subtitle": "Pezzo {{NUMBER}} della Iconic Series. {{DROP_BLURB}}",
+      "moment_label_suffix": "Il Momento",
+      "series_label": "La Collezione",
+      "series_heading": "Altro dalla Iconic Series",
+      "back_to_top": "Vedi tutta la collezione →",
+      "detail_series": "Serie",
+      "detail_edition": "Edizione",
+      "detail_format": "Formato",
+      "detail_technique": "Tecnica",
+      "format_value": "Stampa d'Archivio",
+      "cart_label": "AGGIUNGI AL CARRELLO",
+      "spec_line": "Cotone premium 220 g/m² · Vestibilità morbida · Serigrafia opaca · Formato archivio",
+      "status_available": "Disponibile",
+      "status_signature": "Signature",
+      "other_drop": "Vedi l'altro drop →"
     }
   },
   "drop_blurbs": {
     "en": {
       "drop-01": "Five defining moments in football, reframed through expressive sketch illustration.",
       "drop-02": "Five moments from the summer of 2026, reframed through expressive sketch illustration."
+    },
+    "es": {
+      "drop-01": "Cinco momentos que definieron el fútbol, reinterpretados con ilustración expresiva a mano alzada.",
+      "drop-02": "Cinco momentos del verano de 2026, reinterpretados con ilustración expresiva a mano alzada."
+    },
+    "fr": {
+      "drop-01": "Cinq moments qui ont défini le football, réinterprétés au trait, en dessin expressif.",
+      "drop-02": "Cinq moments de l'été 2026, réinterprétés au trait, en dessin expressif."
+    },
+    "it": {
+      "drop-01": "Cinque momenti che hanno definito il calcio, reinterpretati con illustrazione espressiva a mano libera.",
+      "drop-02": "Cinque momenti dell'estate 2026, reinterpretati con illustrazione espressiva a mano libera."
     }
   },
-  "collection_id": 129055,
+  "collection_id": {
+    "en": 129055,
+    "es": null,
+    "fr": null,
+    "it": null
+  },
   "product_defaults": {
     "free_shipping": 1,
     "taxable": 0,
     "inventory_tracking": 0,
     "inventory_policy": 1
-  }
+  },
+  "_comment_collections": "Collection ids are PER STORE. collection_id = the SERIES collection (every product joins it); drops.<drop>.collection.collection_id = that drop's own. Find them with: create-iconic-products.js --collections iconic --lang <store>"
 }

@@ -3,7 +3,7 @@
   "handle": "im-01-the-volley",
   "number": "IM–01",
   "display_title": "The Volley",
-  "image": "https://cdn.staticsoe.com/pics/a98f3b2708dba51e0361fbe5e2b3969a2a1db98404cc3a7d31c6cdd2b2103f37.jpg",
+  "image": "https://cdn.staticsoe.com/pics/fb01a02c15727ba58707ccd67b4a41e5d598f99bc22c81f634e93e519abb9d12.webp",
   "page": {
     "en": {
       "moment_title": "The Volley <em>that stopped time.</em>",
@@ -11,6 +11,28 @@
       "technique": "Volley",
       "meta_title": "The Volley — Iconic Series T-Shirt | MOMUTO",
       "meta_description": "Premium heavyweight cotton tee. The Volley, piece IM–01 of the MOMUTO Iconic Series, drawn in expressive sketch illustration."
+    },
+    "es": {
+      "moment_title": "The Volley <em>que detuvo el tiempo.</em>",
+      "moment_body": "Hay goles que se marcan. Otros se esculpen. The Volley captura la fracción de segundo en que técnica, instinto y descaro coincidieron: un disparo tan puro que trascendió el partido y se quedó en la memoria del fútbol.",
+      "technique": "Volea",
+      "meta_title": "The Volley – Iconic Series IM-01 | MOMUTO",
+      "meta_description": "Hay goles que se marcan. Otros se esculpen. IM-01 de la Iconic Series captura la volea más definitoria del fútbol, en formato de boceto de archivo. Camiseta de algodón premium 220 g/m²."
+    },
+    "fr": {
+      "moment_title": "The Volley <em>qui a arrêté le temps.</em>",
+      "moment_body": "Certains buts se marquent. D'autres se sculptent. The Volley saisit la fraction de seconde où la technique, l'instinct et l'audace se sont rejoints : une frappe si pure qu'elle a dépassé le match pour entrer dans la mémoire du football.",
+      "technique": "Volée",
+      "meta_title": "The Volley – Iconic Series IM-01 | MOMUTO",
+      "meta_description": "Certains buts se marquent. D'autres se sculptent. IM-01 de l'Iconic Series capture la volée la plus décisive du football, en format croquis d'archive. T-shirt en coton premium 220 g/m²."
+    },
+    "it": {
+      "moment_title": "The Volley <em>che fermò il tempo.</em>",
+      "moment_body": "Certi gol si segnano. Altri si scolpiscono. The Volley cattura la frazione di secondo in cui tecnica, istinto e audacia si sono incontrati: un tiro così puro da superare la partita ed entrare nella memoria del calcio.",
+      "technique": "Tiro al Volo",
+      "meta_title": "The Volley – Iconic Series IM-01 | MOMUTO",
+      "meta_description": "Certi gol si segnano. Altri si scolpiscono. IM-01 della Iconic Series cattura il tiro al volo più iconico del calcio, in formato schizzo d'archivio. T-shirt in cotone premium 220 g/m²."
     }
-  }
+  },
+  "image_front": "https://cdn.staticsoe.com/pics/a9b76c07663ec0331fd5ca37ef680779faf6c8db6abc7fe566f3fb1955401d45.webp"
 }

@@ -36,10 +36,11 @@ const config = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8')
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 function parseArgs(argv) {
-  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null };
+  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
-    if (k === '--delete') a.delete = argv[++i];
+    if (k === '--collections') a.collections = argv[++i] || 'all';
+    else if (k === '--delete') a.delete = argv[++i];
     else if (k === '--probe') a.probe = true;
     else if (k === '--inspect') a.inspect = argv[++i];
     else if (k === '--slug') a.slug = argv[++i];
@@ -127,6 +128,28 @@ function sizeShape(item, price) {
   return fn(item, price);
 }
 
+/**
+ * Collection ids are PER STORE — the EN series collection is 129055, the ES /
+ * FR / IT stores have their own. Both config fields accept either a plain
+ * number (legacy, EN-only) or a { en, es, fr, it } object.
+ */
+function idFor(value, lang) {
+  if (value == null) return null;
+  return typeof value === 'object' ? (value[lang] ?? null) : value;
+}
+
+function collectionsFor(drop, lang) {
+  const series = idFor(config.collection_id, lang);
+  const dropId = idFor(config.drops[drop]?.collection?.collection_id, lang);
+  const ids = [series, dropId].filter(id => id != null);
+  const unique = [...new Set(ids)];
+  if (!unique.length) {
+    throw new Error(`no collection id for lang "${lang}" — run --collections to find it, ` +
+      `then set collection_id.${lang} in iconic-series/config.json`);
+  }
+  return unique.map(collection_id => ({ collection_id }));
+}
+
 function buildBody(item, lang, { publish }) {
   const copy = item.page?.[lang];
   if (!copy?.moment_body) throw new Error(`no ${lang} copy — nothing to publish`);
@@ -170,13 +193,14 @@ function buildBody(item, lang, { publish }) {
     images,
     body_html: bodyHtml,
     status: publish ? 1 : 0,
-    subtitle: dropCfg.subtitle,
+    subtitle: dropCfg.subtitle[lang] || dropCfg.subtitle.en,
     mini_detail: miniDetail,
     meta_title: copy.meta_title || `${item.display_title} – ${strings.series_name} ${hyphen} | MOMUTO`,
     meta_descript: copy.meta_description,
-    // Without this the product never joins /collections/<handle> — it would
-    // exist only at its direct URL.
-    collections: [{ collection_id: config.collection_id }],
+    // Every product joins the SERIES collection; a drop with its own
+    // collection adds a second membership. Without any of this the product
+    // exists only at its direct URL and appears on no collection page.
+    collections: collectionsFor(item.drop, lang),
     ...config.product_defaults,
     product_detail: 1,
   };
@@ -339,8 +363,43 @@ async function deleteProducts(ids, token) {
   }
 }
 
+/**
+ * READ-ONLY. List the store's collections with their ids, so the per-store
+ * collection_id can be recorded without hunting through the CMS. Ids differ
+ * per store — the EN series collection is 129055, the others are not.
+ */
+async function listCollections(token, filter) {
+  const seen = [];
+  let page = 1;
+  for (; page <= 20; page++) {
+    const res = await fetch(`${HOST}/collections?page=${page}&pagesize=50`, { headers: { token } });
+    const json = await res.json().catch(() => ({}));
+    if (json.code !== 0) throw new Error(`API code ${json.code}: ${json.msg}`);
+    const items = json.data?.collections || json.data?.list || json.data || [];
+    if (!Array.isArray(items) || !items.length) break;
+    seen.push(...items);
+    if (items.length < 50) break;
+  }
+  const rx = filter && filter !== 'all' ? new RegExp(filter, 'i') : null;
+  const rows = seen.filter(c => !rx || rx.test(c.handle || '') || rx.test(c.title || ''));
+  console.log(`${seen.length} collections on this store; ${rows.length} shown\n`);
+  for (const c of rows) {
+    console.log(`id ${String(c.id).padEnd(10)} handle ${String(c.handle || '—').padEnd(34)} ${c.title || ''}`);
+  }
+  console.log('\nRecord these in iconic-series/config.json:');
+  console.log('  collection_id.<lang>                        = the SERIES collection');
+  console.log('  drops.drop-02.collection.collection_id.<lang> = the drop 02 collection');
+}
+
 async function main() {
   const args = parseArgs(process.argv);
+
+  if (args.collections) {
+    const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
+    if (!process.env[tv]) { console.error(`No ${tv} in the environment.`); process.exit(1); }
+    await listCollections(process.env[tv], args.collections);
+    return;
+  }
 
   if (args.delete) {
     const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
