@@ -36,12 +36,13 @@ const config = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8')
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 function parseArgs(argv) {
-  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null, audit: null, writeIds: false, collectionSeo: null };
+  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null, audit: null, writeIds: false, collectionSeo: null, collectionPage: false };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
     if (k === '--audit') a.audit = argv[++i];
     else if (k === '--write-ids') a.writeIds = true;
     else if (k === '--collection-seo') a.collectionSeo = argv[++i];
+    else if (k === '--collection-page') a.collectionPage = true;
     else if (k === '--collections') a.collections = argv[++i] || 'all';
     else if (k === '--delete') a.delete = argv[++i];
     else if (k === '--probe') a.probe = true;
@@ -496,15 +497,25 @@ async function listCollections(token, filter) {
  * Locales absent from `collection.meta` are skipped — an unlisted store keeps
  * whatever it already has.
  */
-async function collectionSeo(drop, lang, token, dryRun) {
+async function collectionSeo(drop, lang, token, dryRun, withPage = false) {
   const coll = config.drops[drop]?.collection;
   if (!coll) throw new Error(`no collection config for ${drop}`);
   const id = idFor(coll.collection_id, lang);
   if (!id) throw new Error(`no collection id for ${lang} — run --collections first`);
   const meta = coll.meta?.[lang];
-  if (!meta) {
+  if (!meta && !withPage) {
     console.log(`· ${drop}/${lang}: no meta in config — leaving the CMS record alone.`);
     return;
+  }
+
+  // The page body lives in `top_descript` on the collection record, so the
+  // built collection page can be pushed instead of pasted. Opt-in: on drop 01
+  // this overwrites copy that is live and ranking.
+  let pageHtml = null;
+  if (withPage) {
+    const f = path.join(DIR, 'build', 'collection', `${drop}.${lang}.html`);
+    if (!fs.existsSync(f)) throw new Error(`missing ${path.relative(ROOT, f)} — run build-iconic-pages.js first`);
+    pageHtml = fs.readFileSync(f, 'utf8').trim();
   }
 
   let live = null;
@@ -531,13 +542,20 @@ async function collectionSeo(drop, lang, token, dryRun) {
   }
 
   const body = { ...live };
-  if ('title' in live) body.title = meta.title;
-  if ('meta_title' in live) body.meta_title = meta.title;
-  if ('meta_descript' in live) body.meta_descript = meta.description;
-  if ('meta_description' in live) body.meta_description = meta.description;
+  if (meta) {
+    if ('title' in live) body.title = meta.title;
+    if ('meta_title' in live) body.meta_title = meta.title;
+    if ('meta_descript' in live) body.meta_descript = meta.description;
+    if ('meta_description' in live) body.meta_description = meta.description;
+  }
+  if (pageHtml !== null) body.top_descript = pageHtml;
 
   console.log(`\n${dryRun ? 'DRY RUN — would PUT' : 'PUT'} ${HOST}/collections/${id}`);
-  for (const k of present) console.log(`  ${k}: ${JSON.stringify(live[k])} → ${JSON.stringify(body[k])}`);
+  if (meta) for (const k of present) console.log(`  ${k}: ${JSON.stringify(live[k])} → ${JSON.stringify(body[k])}`);
+  if (pageHtml !== null) {
+    console.log(`  top_descript: ${String(live.top_descript || '').length} chars → ${pageHtml.length} chars`);
+    if (!String(live.top_descript || '').trim()) console.log('    (was empty — this is the first push of the page body)');
+  }
   if (dryRun) return;
 
   const out = await send(`${HOST}/collections/${id}`, 'PUT', token, body);
@@ -703,7 +721,7 @@ async function main() {
     const tv = `OEMSAAS_TOKEN_${args.lang.toUpperCase()}`;
     if (!process.env[tv]) { console.error(`No ${tv} in the environment.`); process.exit(1); }
     const which = args.collectionSeo === 'all' ? Object.keys(config.drops) : [args.collectionSeo];
-    for (const d of which) await collectionSeo(d, args.lang, process.env[tv], args.dryRun);
+    for (const d of which) await collectionSeo(d, args.lang, process.env[tv], args.dryRun, args.collectionPage);
     return;
   }
 

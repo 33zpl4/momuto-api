@@ -35,7 +35,32 @@ An acknowledgement is not evidence.
 | `GET /products/{id}` | Single product, complete. Use this whenever a field's *value* matters. |
 | `DELETE /products/{id}` | Hard delete. |
 | `GET /collections?page=&pagesize=` | List collections (this is how you find `collection_id`). |
+| `GET /collections/{id}` | Single collection — **includes the page body**, see below. |
+| `PUT /collections/{id}` | Update a collection. Assume REPLACE, like products. |
 | `PUT /pages/{id}` | CMS pages. |
+
+### A collection carries its own page
+
+`GET /collections/{id}` returns, alongside the SEO fields:
+
+```
+title, meta_title, meta_descript, meta_keywords[]
+top_descript      ← THE COLLECTION PAGE HTML, in full
+bottom_descript
+handle, src, sort_order, product_count, created_at, updated_at, metafields[]
+```
+
+`top_descript` is where a custom collection page actually lives. So collection
+pages are **API-updatable** — they do not have to be pasted into the CMS.
+
+This corrects a note in `scripts/fix-perche-momuto-links.js`, which records
+collections as "report-only … updated via xlsx import". That was never true of
+the API; it just hadn't been tried. Anything that skipped collections on that
+basis is worth revisiting.
+
+`product_count`, `created_at` and `updated_at` come back on the read and are
+presumably derived. Read-modify-write sends them back untouched, which is the
+safest thing available — don't hand-build the body.
 
 ### `batchsave` silently drops fields
 
