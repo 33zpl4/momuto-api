@@ -24,6 +24,11 @@ on:
         description: 'Push a drop''s collection name + meta for this store (drop-01 / drop-02 / all). Honours dry_run. Locales with no meta in config are skipped.'
         required: false
         type: string
+      collection_page:
+        description: 'With collection_seo: ALSO push the built collection page into top_descript (that is where the page body lives). Off = SEO fields only.'
+        required: false
+        default: false
+        type: boolean
       delete_ids:
         description: 'CLEANUP: comma-separated product ids to hard-delete (e.g. the zz-iconic-probe ones). Ignores all other inputs.'
         required: false
@@ -125,6 +130,7 @@ jobs:
           fi
           if [ -n "${{ inputs.collection_seo }}" ]; then
             [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
+            [ "${{ inputs.collection_page }}" = "true" ] && ARGS="$ARGS --collection-page"
             node scripts/create-iconic-products.js $ARGS --collection-seo "${{ inputs.collection_seo }}"
             exit $?
           fi

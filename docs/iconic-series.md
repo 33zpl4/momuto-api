@@ -159,9 +159,14 @@ Generated from the same product data, one per drop per locale
 (`build/collection/<drop>.<lang>.html`, 8 files).
 
 Unlike the product pages these are **self-contained** — CSS is inline rather
-than in `iconic-content.js`. They are CMS *pages* with no template to hang a
-script tag on, and a `<style>` injected via innerHTML does apply (only
-`<script>` doesn't). 8 pages is bounded duplication; 40 would not be.
+than in `iconic-content.js`. There is no template to hang a script tag on, and
+a `<style>` injected via innerHTML does apply (only `<script>` doesn't). 8 pages
+is bounded duplication; 40 would not be.
+
+**They can be pushed, not pasted.** The page body lives in `top_descript` on
+the collection record, so `--collection-seo <drop> --collection-page` writes it
+via `PUT /collections/{id}`. Off by default: on drop 01 this overwrites copy
+that is live and ranking.
 
 | | drop 01 | drop 02 |
 |---|---|---|
