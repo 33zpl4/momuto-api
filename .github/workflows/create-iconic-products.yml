@@ -20,6 +20,10 @@ on:
         description: 'READ-ONLY: list this store''s collections with their ids (try "iconic"). Ignores all other inputs.'
         required: false
         type: string
+      collection_seo:
+        description: 'Push a drop''s collection name + meta for this store (drop-01 / drop-02 / all). Honours dry_run. Locales with no meta in config are skipped.'
+        required: false
+        type: string
       delete_ids:
         description: 'CLEANUP: comma-separated product ids to hard-delete (e.g. the zz-iconic-probe ones). Ignores all other inputs.'
         required: false
@@ -82,11 +86,11 @@ jobs:
           node-version: '20'
 
       - name: Rebuild pages (body_html must match the repo)
-        if: inputs.inspect == '' && inputs.probe != true && inputs.delete_ids == '' && inputs.collections == '' && inputs.audit == ''
+        if: inputs.inspect == '' && inputs.probe != true && inputs.delete_ids == '' && inputs.collections == '' && inputs.audit == '' && inputs.collection_seo == ''
         run: node scripts/build-iconic-pages.js --lang ${{ inputs.lang }}
 
       - name: Fail if the build is stale
-        if: inputs.inspect == '' && inputs.probe != true && inputs.delete_ids == '' && inputs.collections == '' && inputs.audit == ''
+        if: inputs.inspect == '' && inputs.probe != true && inputs.delete_ids == '' && inputs.collections == '' && inputs.audit == '' && inputs.collection_seo == ''
         run: |
           if ! git diff --quiet -- iconic-series/build; then
             echo "::error::iconic-series/build is out of date with the source data."
@@ -117,6 +121,11 @@ jobs:
           fi
           if [ -n "${{ inputs.collections }}" ]; then
             node scripts/create-iconic-products.js $ARGS --collections "${{ inputs.collections }}"
+            exit $?
+          fi
+          if [ -n "${{ inputs.collection_seo }}" ]; then
+            [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
+            node scripts/create-iconic-products.js $ARGS --collection-seo "${{ inputs.collection_seo }}"
             exit $?
           fi
           if [ -n "${{ inputs.delete_ids }}" ]; then

@@ -79,7 +79,14 @@
           "en": 129055,
           "es": 440551,
           "fr": 144943,
-          "it": null
+          "it": 281102
+        },
+        "_comment_meta": "SEO for the CMS collection record. Only locales listed here get pushed by --collection-seo; absent locales are left exactly as they are in the CMS. IT only: its title was English on the Italian store.",
+        "meta": {
+          "it": {
+            "title": "T-Shirt Momenti Iconici del Calcio | MOMUTO",
+            "description": "Momenti che hanno definito il calcio, reinterpretati come stampe d'archivio. T-shirt in cotone premium 220 g/m², serie limitata. Iconic Series di MOMUTO."
+          }
         }
       }
     },
@@ -150,7 +157,7 @@
           "en": 130456,
           "es": 443756,
           "fr": 145074,
-          "it": null
+          "it": 396378
         },
         "meta": {
           "en": {
@@ -325,7 +332,7 @@
     "en": 129055,
     "es": 440551,
     "fr": 144943,
-    "it": null
+    "it": 281102
   },
   "product_defaults": {
     "free_shipping": 1,

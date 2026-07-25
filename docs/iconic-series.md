@@ -334,6 +334,14 @@ push `body_html`. Do not run `--update` across drop 01 blind.
 
 ### Diagnostics and cleanup
 
+- `--collection-seo <drop|all> --lang <store>` — push the collection's name and
+  meta description from `config.drops.<drop>.collection.meta.<lang>`. A locale
+  with no `meta` entry is **skipped**, so unlisted stores keep what they have.
+  `--dry-run` dumps the whole live collection object — that's the point of it
+  here, since collections have no established write path in this repo
+  (`fix-perche-momuto-links.js` records them as xlsx-import-only) and the SEO
+  field names are unconfirmed. The live path refuses rather than PUTting a body
+  built on a guess.
 - `--audit <drop>` — read-only diff of every live product in a drop against
   what the repo would send: title, subtitle, mini_detail, SEO, collections,
   `body_html` length, variant count and the **image list**. Add `--write-ids`
