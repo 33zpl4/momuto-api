@@ -113,6 +113,32 @@ and card `alt` text is derived from `display_title`.
 - Drop 01 products still render from their own custom templates — repoint them
   at the shared template *before* pushing `body_html`, or the page duplicates.
 
+## Collection pages
+
+Generated from the same product data, one per drop per locale
+(`build/collection/<drop>.<lang>.html`, 8 files).
+
+Unlike the product pages these are **self-contained** — CSS is inline rather
+than in `iconic-content.js`. They are CMS *pages* with no template to hang a
+script tag on, and a `<style>` injected via innerHTML does apply (only
+`<script>` doesn't). 8 pages is bounded duplication; 40 would not be.
+
+| | drop 01 | drop 02 |
+|---|---|---|
+| handle | `iconic-football-series` | `iconic-series-drop-02` |
+| h1 | "Iconic Series" | "Summer 2026" |
+
+**Drop 01's copy is reproduced verbatim from the live page**, so regenerating
+it changes nothing that already ranks — only the structure becomes data-driven.
+
+**Drop 02 deliberately gets a different `<h1>`.** Two collection pages sharing
+"Iconic Series" as their heading would compete for the same query; "Summer
+2026" also catches the seasonal intent, while the eyebrow carries the brand.
+Flip `t1`/`t2` in `config.drops.drop-02.collection.copy` if you'd rather they
+match.
+
+Each page links to the other at the foot, so neither drop is orphaned.
+
 ## Creating the products
 
 `scripts/create-iconic-products.js` turns a built page into a live product via

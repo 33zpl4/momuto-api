@@ -3,7 +3,7 @@
   "handle": "im-01-the-volley",
   "number": "IM–01",
   "display_title": "The Volley",
-  "image": "https://cdn.staticsoe.com/pics/a98f3b2708dba51e0361fbe5e2b3969a2a1db98404cc3a7d31c6cdd2b2103f37.jpg",
+  "image": "https://cdn.staticsoe.com/pics/fb01a02c15727ba58707ccd67b4a41e5d598f99bc22c81f634e93e519abb9d12.webp",
   "page": {
     "en": {
       "moment_title": "The Volley <em>that stopped time.</em>",
@@ -33,5 +33,6 @@
       "meta_title": "The Volley – Iconic Series IM-01 | MOMUTO",
       "meta_description": "Certi gol si segnano. Altri si scolpiscono. IM-01 della Iconic Series cattura il tiro al volo più iconico del calcio, in formato schizzo d'archivio. T-shirt in cotone premium 220 g/m²."
     }
-  }
+  },
+  "image_front": "https://cdn.staticsoe.com/pics/a9b76c07663ec0331fd5ca37ef680779faf6c8db6abc7fe566f3fb1955401d45.webp"
 }
