@@ -140,6 +140,16 @@ function idFor(value, lang) {
   return typeof value === 'object' ? (value[lang] ?? null) : value;
 }
 
+/**
+ * Product ids are PER STORE, like collection ids. Accepts either a bare string
+ * (legacy, EN-only) or a { en, es, fr, it } object.
+ */
+function productIdFor(item, lang) {
+  const v = item.product_id;
+  if (v == null) return null;
+  return typeof v === 'object' ? (v[lang] ?? null) : (lang === 'en' ? v : null);
+}
+
 function collectionsFor(drop, lang) {
   const series = idFor(config.collection_id, lang);
   const dropId = idFor(config.drops[drop]?.collection?.collection_id, lang);
@@ -219,11 +229,12 @@ function buildBody(item, lang, { publish }) {
  *
  * Not sent: collections. Membership stays as set in the CMS.
  */
-function updatePayload(item, body) {
-  if (!item.product_id) throw new Error('--update needs "product_id" in the product JSON');
+function updatePayload(item, body, lang) {
+  const id = productIdFor(item, lang);
+  if (!id) throw new Error(`--update needs product_id.${lang} in the product JSON`);
   return {
     products: [{
-      id: item.product_id,
+      id,
       title: body.title,
       subtitle: body.subtitle,
       mini_detail: body.mini_detail,
@@ -248,9 +259,10 @@ function updatePayload(item, body) {
  * fold the editorial fields in here: if PUT turns out to replace rather than
  * merge, a payload without `variants` would take the six sizes with it.
  */
-function imagesPayload(item, body) {
-  if (!item.product_id) throw new Error('needs "product_id" in the product JSON');
-  return { id: item.product_id, images: body.images };
+function imagesPayload(item, body, lang) {
+  const id = productIdFor(item, lang);
+  if (!id) throw new Error(`needs product_id.${lang} in the product JSON`);
+  return { id, images: body.images };
 }
 
 function summarise(payload, verbose) {
@@ -558,19 +570,19 @@ async function audit(drop, lang, token, writeIds = false) {
   // Only the EN store's ids belong in the shared product JSON — every other
   // store assigns its own, and writing those would point --update at the
   // wrong products.
-  if (writeIds && lang !== 'en') {
-    console.log('\n--write-ids refused: ids are per-store and the JSON holds the EN one.');
-  } else if (writeIds) {
+  if (writeIds) {
     let wrote = 0;
     for (const item of items) {
       const p = live.get(item.handle);
       if (!p) continue;
       const file = path.join(DIR, drop, `${item.slug}.json`);
       const json = JSON.parse(fs.readFileSync(file, 'utf8'));
-      if (String(json.product_id ?? '') === String(p.id)) continue;
-      json.product_id = String(p.id);
+      if (typeof json.product_id === 'string') json.product_id = { en: json.product_id };
+      json.product_id = json.product_id || {};
+      if (String(json.product_id[lang] ?? '') === String(p.id)) continue;
+      json.product_id[lang] = String(p.id);
       fs.writeFileSync(file, JSON.stringify(json, null, 2) + '\n');
-      console.log(`  recorded ${item.slug} → product_id ${p.id}`);
+      console.log(`  recorded ${item.slug} → product_id.${lang} ${p.id}`);
       wrote++;
     }
     console.log(wrote ? `\n${wrote} id(s) written — commit them, then run with update: true.`
@@ -578,9 +590,9 @@ async function audit(drop, lang, token, writeIds = false) {
   }
 
   if (drifted) {
-    const noId = items.filter(i => live.has(i.handle) && !i.product_id).map(i => i.slug);
+    const noId = items.filter(i => live.has(i.handle) && !productIdFor(i, lang)).map(i => i.slug);
     if (noId.length && !writeIds) {
-      console.log(`\n${noId.join(', ')} have no "product_id" — re-run with write_ids, then update: true.`);
+      console.log(`\n${noId.join(', ')} have no product_id.${lang} — re-run with write_ids, then update: true.`);
     } else if (!noId.length) {
       console.log('\nAll ids recorded — run with update: true to push the drift above.');
     }
@@ -659,15 +671,15 @@ async function main() {
       // A dry run has to print what would actually go out. Build the exact
       // payload for whichever path is selected, then either show it or send it.
       const endpoint = args.update ? `${HOST}/products/batchsave` : `${HOST}/products`;
-      const payload = args.update ? updatePayload(item, body) : body;
+      const payload = args.update ? updatePayload(item, body, args.lang) : body;
 
       if (args.dryRun) {
         console.log(`── ${item.slug} ${'─'.repeat(Math.max(0, 60 - item.slug.length))}`);
         console.log(`POST ${endpoint}`);
         console.log(JSON.stringify(summarise(payload, args.verbose), null, 2));
         if (args.update) {
-          console.log(`\nthen PUT ${HOST}/products/${item.product_id}`);
-          console.log(JSON.stringify(imagesPayload(item, body), null, 2));
+          console.log(`\nthen PUT ${HOST}/products/${productIdFor(item, args.lang)}`);
+          console.log(JSON.stringify(imagesPayload(item, body, args.lang), null, 2));
         }
         console.log();
         continue;
@@ -675,16 +687,16 @@ async function main() {
 
       if (args.update) {
         const data = await send(endpoint, 'POST', token, payload);
-        console.log(`✓ updated ${item.slug} (id ${item.product_id})`, JSON.stringify(data).slice(0, 200));
+        console.log(`✓ updated ${item.slug} (id ${productIdFor(item, args.lang)})`, JSON.stringify(data).slice(0, 200));
         // batchsave is documented as a partial update and observed to ignore
         // `images` — the gallery stayed on the old mockups after a clean run.
         // PUT /products/{id} is the endpoint that does take them.
-        const img = await send(`${HOST}/products/${item.product_id}`, 'PUT', token, imagesPayload(item, body));
+        const img = await send(`${HOST}/products/${productIdFor(item, args.lang)}`, 'PUT', token, imagesPayload(item, body, args.lang));
         console.log(`  images → PUT`, JSON.stringify(img).slice(0, 120));
       } else {
         const data = await send(`${HOST}/products`, 'POST', token, body);
         console.log(`✓ created ${item.slug} → id ${data.id} · /products/${body.handle} · status ${body.status}`);
-        console.log(`  record it: set "product_id": "${data.id}" in iconic-series/${item.drop}/${item.slug}.json`);
+        console.log(`  record it: set "product_id": { "${args.lang}": "${data.id}" } in iconic-series/${item.drop}/${item.slug}.json`);
       }
     } catch (err) {
       failed++;

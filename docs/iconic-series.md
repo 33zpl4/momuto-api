@@ -297,8 +297,18 @@ push `body_html`. Do not run `--update` across drop 01 blind.
 - `--audit <drop>` — read-only diff of every live product in a drop against
   what the repo would send: title, subtitle, mini_detail, SEO, collections,
   `body_html` length, variant count and the **image list**. Add `--write-ids`
-  (EN only) to record each live `product_id` into its JSON — the workflow
-  prints the resulting patch, since the runner's checkout is thrown away.
+  to record each live `product_id` into its JSON under the `--lang` being
+  audited — the workflow prints the resulting patch, since the runner's
+  checkout is thrown away.
+
+`product_id` is **per store**, like `collection_id`:
+
+```json
+"product_id": { "en": "10304414", "es": null, "fr": null, "it": null }
+```
+
+A bare string is still read as the EN id. `--update` on a store with no id for
+that locale fails loudly rather than writing to whatever id it finds.
 - `--inspect <handle|url>` — read-only dump of an existing product's options
   and variant fields.
 - `--probe` — re-run the shape experiment (creates hidden `zz-iconic-probe-*`

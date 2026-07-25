@@ -12,7 +12,7 @@ on:
         required: false
         type: string
       write_ids:
-        description: 'With audit + lang=en: write each live product_id into its JSON (prints a patch to commit). Never writes for other stores — ids are per-store.'
+        description: 'With audit: write each live product_id into its JSON under the chosen lang (prints a patch to commit). Ids are per-store.'
         required: false
         default: false
         type: boolean

@@ -35,5 +35,10 @@
     }
   },
   "image_front": "https://cdn.staticsoe.com/pics/d4c21a3f8bcb866b5a475759b2bd2682c4e9eb45bf6021b063e40f8fe1932abe.webp",
-  "product_id": "10304417"
+  "product_id": {
+    "en": "10304417",
+    "es": null,
+    "fr": null,
+    "it": null
+  }
 }
