@@ -106,12 +106,14 @@ and card `alt` text is derived from `display_title`.
 
 ## Open
 
-- `image` is empty for all drop-02 products — set each one after the mockups
-  are uploaded to the CMS, then rebuild (the grid renders a TODO comment
-  meanwhile).
 - All four locales are complete: 40 pages (10 products × en/es/fr/it).
+- Drop 02 is live on **EN** (meta, body and galleries all pushed) and **FR**.
+  ES and IT are blocked on their `iconic-series-drop-02` collection being
+  created in each CMS — find the ids with `--collections iconic --lang <store>`,
+  set them in `config.json`, then create.
 - Drop 01 products still render from their own custom templates — repoint them
   at the shared template *before* pushing `body_html`, or the page duplicates.
+- Everything on EN is `status: 0` (hidden) until published.
 
 ## Collection pages
 
@@ -315,37 +317,24 @@ that locale fails loudly rather than writing to whatever id it finds.
   products and prints their ids).
 - `--delete <id,id>` — hard-delete by id, for clearing probe leftovers.
 
-### `batchsave` drops `images` — settled
+### The update path is two calls
 
-`POST /products/batchsave` is documented as a partial update carrying SEO
-fields, and that is literally what it does. A clean 5-product `--update` run
-returned `code 0` for every product: the meta landed, **the galleries stayed on
-the old mockups.** No error, no warning — the field is simply ignored.
-
-So `--update` is two calls per product:
+`--update` writes twice per product, because no single endpoint takes
+everything:
 
 | call | carries |
 |---|---|
 | `POST /products/batchsave` | title, subtitle, mini_detail, body_html, SEO |
-| `PUT /products/{id}` | `images` only |
+| `PUT /products/{id}` | `images` |
 
-**`PUT /products/{id}` REPLACES — it does not merge.** `{ id, images }` came
-back `title不能为空`. So the payload is the live product read straight back via
-`GET /products/{id}` with nothing changed but `images`:
+`batchsave` silently discards `images` (returns `code 0`, gallery unchanged),
+and `PUT` replaces rather than merges — so `putImages()` reads the live product
+back via `GET /products/{id}` and PUTs it returned unchanged except for the
+gallery, refusing to send at all if the read-back has no `title` or `variants`.
 
-```
-GET  /products/{id}   →  the whole product
-PUT  /products/{id}   ←  { ...that, images: ours }
-```
-
-Never compose the PUT body by hand. A field you didn't know the product had is
-a field you'd silently drop, and `variants` above all — a PUT without them takes
-the six sizes and the buy button with them. `putImages()` refuses to send if the
-read-back has no `title` or no `variants` rather than PUTting blind.
-
-(`scripts/cleanup-preview-products.js` sends `{ id, status }` to this endpoint.
-Given the validation above, that call is suspect — it either fails silently or
-`status` is special-cased. Worth checking before trusting it.)
+**Why, and what else this implies for any CMS write, is in
+[oemsaas-api-notes.md](./oemsaas-api-notes.md).** Read it before extending this
+script or writing another one against the same API.
 
 This matters on every mockup re-render: a new render means a new CDN URL, and
 the gallery is the one surface `body_html` cannot reach. `--audit` diffs the

@@ -1,5 +1,10 @@
 # CMS product-create API — `POST /products`
 
+> ⚠️ This doc covers **create**. For update, read, and every behaviour that
+> isn't in the vendor's documentation — which endpoints silently discard fields,
+> which replace rather than merge, which omit data on read — see
+> **[oemsaas-api-notes.md](./oemsaas-api-notes.md)** first.
+
 The OEMSaaS OpenAPI **can create a product** (what manage.momuto.com does under the
 hood). This is how we can turn a validated design into an orderable product from a
 chat command — no manual manage step. Source: the OpenAPI "New / 新增 product" doc,
