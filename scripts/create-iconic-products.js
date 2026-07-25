@@ -235,6 +235,24 @@ function updatePayload(item, body) {
   };
 }
 
+/**
+ * The gallery, sent separately.
+ *
+ * `batchsave` is documented as a partial update carrying SEO fields, and a
+ * clean 5-product run confirmed it silently drops `images` — meta landed, the
+ * photos didn't. `PUT /products/{id}` is the endpoint that takes them;
+ * scripts/cleanup-preview-products.js already uses it to flip `status`.
+ *
+ * Deliberately MINIMAL — { id, images } and nothing else. That mirrors the one
+ * usage proven not to disturb the rest of the product. Do not be tempted to
+ * fold the editorial fields in here: if PUT turns out to replace rather than
+ * merge, a payload without `variants` would take the six sizes with it.
+ */
+function imagesPayload(item, body) {
+  if (!item.product_id) throw new Error('needs "product_id" in the product JSON');
+  return { id: item.product_id, images: body.images };
+}
+
 function summarise(payload, verbose) {
   if (verbose) return payload;
   const elide = b => ({ ...b, body_html: `<${String(b.body_html || '').length} chars of HTML — pass --verbose to print it>` });
@@ -647,6 +665,10 @@ async function main() {
         console.log(`── ${item.slug} ${'─'.repeat(Math.max(0, 60 - item.slug.length))}`);
         console.log(`POST ${endpoint}`);
         console.log(JSON.stringify(summarise(payload, args.verbose), null, 2));
+        if (args.update) {
+          console.log(`\nthen PUT ${HOST}/products/${item.product_id}`);
+          console.log(JSON.stringify(imagesPayload(item, body), null, 2));
+        }
         console.log();
         continue;
       }
@@ -654,6 +676,11 @@ async function main() {
       if (args.update) {
         const data = await send(endpoint, 'POST', token, payload);
         console.log(`✓ updated ${item.slug} (id ${item.product_id})`, JSON.stringify(data).slice(0, 200));
+        // batchsave is documented as a partial update and observed to ignore
+        // `images` — the gallery stayed on the old mockups after a clean run.
+        // PUT /products/{id} is the endpoint that does take them.
+        const img = await send(`${HOST}/products/${item.product_id}`, 'PUT', token, imagesPayload(item, body));
+        console.log(`  images → PUT`, JSON.stringify(img).slice(0, 120));
       } else {
         const data = await send(`${HOST}/products`, 'POST', token, body);
         console.log(`✓ created ${item.slug} → id ${data.id} · /products/${body.handle} · status ${body.status}`);

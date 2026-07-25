@@ -305,11 +305,32 @@ push `body_html`. Do not run `--update` across drop 01 blind.
   products and prints their ids).
 - `--delete <id,id>` — hard-delete by id, for clearing probe leftovers.
 
-`batchsave` carrying `body_html` and `images` (the `--update` path) is still
-unproven — it's documented as a partial update and only known for certain to
-carry SEO fields. `images` matters when mockups are re-rendered: the CDN URL
-changes, and the product gallery is the one surface `body_html` cannot reach.
-Confirm it landed with `--audit`, which diffs the live image list; don't assume.
+### `batchsave` drops `images` — settled
+
+`POST /products/batchsave` is documented as a partial update carrying SEO
+fields, and that is literally what it does. A clean 5-product `--update` run
+returned `code 0` for every product: the meta landed, **the galleries stayed on
+the old mockups.** No error, no warning — the field is simply ignored.
+
+So `--update` is two calls per product:
+
+| call | carries |
+|---|---|
+| `POST /products/batchsave` | title, subtitle, mini_detail, body_html, SEO |
+| `PUT /products/{id}` | `images` only |
+
+`PUT /products/{id}` is the same endpoint `scripts/cleanup-preview-products.js`
+uses to flip `status`, so it is known to accept a partial body without
+disturbing the rest of the product.
+
+**Keep the images payload minimal — `{ id, images }`.** Do not fold the
+editorial fields into it. Whether PUT merges or replaces is still unverified,
+and a replacing PUT without `variants` would take the six sizes with it and
+break the buy button. The batchsave call already covers those fields.
+
+This matters on every mockup re-render: a new render means a new CDN URL, and
+the gallery is the one surface `body_html` cannot reach. `--audit` diffs the
+live image list — use it to confirm rather than assuming the write landed.
 
 After a create, record the returned id as `"product_id"` in the product JSON so
 `--update` can target it later.
