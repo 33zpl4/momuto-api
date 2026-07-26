@@ -49,16 +49,11 @@ var CONFIG = {
   // "left sleeve up 25px" is nudge: [0, -25].
   //
   // `expect: [w, h]` is the slot's own SOURCE canvas, measured by
-  // inspect-template.jsx.
-  //
-  // replaceContents does NOT fit artwork to the frame — it keeps the slot's
-  // existing transform and drops the new file in at its natural pixel size. A
-  // file at 2/3 of the expected canvas therefore renders at 2/3 size, with the
-  // garment's solid fills showing around it.
-  //
-  // So the script compensates: it scales the slot by expect/actual after
-  // replacing, and scales it back after export. Artwork at any canvas size
-  // works, as long as elements are positioned proportionally within it.
+  // inspect-template.jsx. It is only used when placeInside is FALSE — see the
+  // note on placeInside at the bottom of this block. In the default mode the
+  // artwork is fitted to the .psb canvas from the inside, which needs no
+  // outside estimate, so `expect` is advisory: matching it saves a resample and
+  // nothing more.
   //
   // `count` asserts how many layers the address resolves to. If a template is
   // edited and the number shifts, the run STOPS — a silently unreplaced
