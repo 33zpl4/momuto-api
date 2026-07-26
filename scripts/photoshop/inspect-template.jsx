@@ -42,10 +42,18 @@ function smartObjectSource(layer) {
     var sizeKey = stringIDToTypeID('size');
     if (!so.hasKey(sizeKey)) return null;
     var sz = so.getObjectValue(sizeKey);
-    return {
-      w: Math.round(sz.getUnitDoubleValue(stringIDToTypeID('width'))),
-      h: Math.round(sz.getUnitDoubleValue(stringIDToTypeID('height')))
+    // The descriptor stores these as a plain double on some versions and a unit
+    // double on others. Try both rather than fail on the one that isn't used.
+    var read = function (key) {
+      var id = stringIDToTypeID(key);
+      try { return sz.getUnitDoubleValue(id); } catch (e1) {}
+      try { return sz.getDouble(id); } catch (e2) {}
+      try { return sz.getInteger(id); } catch (e3) {}
+      return null;
     };
+    var w = read('width'), h = read('height');
+    if (w == null || h == null) return null;
+    return { w: Math.round(w), h: Math.round(h) };
   } catch (e) { return null; }
 }
 
