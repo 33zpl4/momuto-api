@@ -266,7 +266,14 @@ function templatePath(psd) {
 function exportFlat(doc, size, outFile) {
   var dup = doc.duplicate();
   try {
-    dup.flatten();
+    // Do NOT flatten() for PNG. Document.flatten() fills transparent areas with
+    // WHITE, and these templates have their BACKGROUND layer hidden — the shirt
+    // is meant to come out on transparency. Saving a layered document as PNG
+    // writes the composite anyway, so adjustment layers, blend modes, shadows
+    // and highlights all bake in exactly as they render on screen.
+    // JPEG has no alpha, so flattening is the right thing there.
+    if (CONFIG.format === 'jpg') dup.flatten();
+
     // Force BOTH dimensions. These canvases are square (6200, 6000, 5000) but
     // the t-shirt templates are 3992×3993, where a width-only resize yields
     // 1500×1501.

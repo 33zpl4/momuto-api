@@ -41,7 +41,23 @@ function describeLayer(layer, depth, out) {
           '  ' + (px(b[2]) - px(b[0])) + '×' + (px(b[3]) - px(b[1])) + ']';
   } catch (e2) { box = '  [no bounds]'; }
 
-  out.push(pad + layer.name + '   · ' + kind + box + (layer.visible ? '' : '   (hidden)'));
+  // How a layer COMPOSITES decides whether it reaches the artwork below it.
+  // A 'shadows' layer clipped to the layer beneath, or set to Normal at 100%,
+  // behaves completely differently from one set to Multiply — and none of that
+  // shows up in the layer name. This is what to read when a mockup looks flat.
+  var comp = [];
+  try {
+    var bm = String(layer.blendMode).replace('BlendMode.', '').toLowerCase();
+    if (bm !== 'normal') comp.push(bm);
+    if (Math.round(layer.opacity) !== 100) comp.push('opacity ' + Math.round(layer.opacity) + '%');
+    if (Math.round(layer.fillOpacity) !== 100) comp.push('fill ' + Math.round(layer.fillOpacity) + '%');
+    if (layer.grouped) comp.push('CLIPPED to layer below');
+  } catch (e3) { comp.push('composite unknown'); }
+  try { if (layer.kind === LayerKind.SMARTOBJECT && layer.grouped) comp.push('clipped'); } catch (e4) {}
+
+  out.push(pad + layer.name + '   · ' + kind + box +
+    (comp.length ? '   {' + comp.join(', ') + '}' : '') +
+    (layer.visible ? '' : '   (hidden)'));
 }
 
 function main() {
@@ -58,6 +74,8 @@ function main() {
   out.push('mode     : ' + String(doc.mode).replace('DocumentMode.', ''));
   out.push('');
   out.push('LAYERS (top to bottom — the ones marked SMART OBJECT are the drop-in slots)');
+  out.push('Anything in {braces} is non-default compositing: blend mode, opacity,');
+  out.push('or CLIPPED, which limits a layer to the one directly beneath it.');
   out.push('');
   for (var i = 0; i < doc.layers.length; i++) describeLayer(doc.layers[i], 0, out);
 
