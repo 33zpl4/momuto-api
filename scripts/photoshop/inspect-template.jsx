@@ -11,7 +11,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26c · authoring size read by opening each slot';
+var VERSION = '2026-07-26d · also lists what is INSIDE each slot';
 
 // Leave empty to inspect whatever document is already open.
 // Windows paths: use forward slashes — "C:/Users/you/mockups/jersey.psd"
@@ -63,10 +63,21 @@ function smartObjectSource(layer) {
   // SLOW PATH — open the embedded contents and read the canvas directly. Slower
   // but version-proof: it is the same thing you would see by double-clicking the
   // slot. Closed without saving, so the template is untouched.
+  //
+  // Also lists what is INSIDE. That matters enormously: a slot whose .psb holds
+  // construction layers (collar stripes, edge rectangles) is destroyed by
+  // replaceContents, which substitutes the whole document. Such a slot needs the
+  // artwork PLACED INTO it as a layer instead.
   try {
     executeAction(stringIDToTypeID('placedLayerEditContents'), undefined, DialogModes.NO);
     var inner = app.activeDocument;
-    var res = { w: px(inner.width), h: px(inner.height), how: 'opened' };
+    var names = [];
+    try {
+      for (var li = 0; li < inner.layers.length; li++) {
+        names.push(inner.layers[li].name + (inner.layers[li].visible ? '' : ' (hidden)'));
+      }
+    } catch (eNames) {}
+    var res = { w: px(inner.width), h: px(inner.height), how: 'opened', inner: names };
     inner.close(SaveOptions.DONOTSAVECHANGES);
     app.activeDocument = doc;
     return res;
@@ -118,8 +129,18 @@ function describeLayer(layer, depth, out) {
   try {
     if (layer.kind === LayerKind.SMARTOBJECT) {
       var so = smartObjectSource(layer);
-      src = so ? '   AUTHOR ARTWORK AT ' + so.w + '×' + so.h + ' [' + so.how + ']'
-               : '   (source size unreadable — double-click the slot and check Image ▸ Image Size)';
+      if (so) {
+        src = '   AUTHOR ARTWORK AT ' + so.w + '×' + so.h;
+        if (so.inner && so.inner.length) {
+          src += '\n' + pad + '        contents: ' + so.inner.join(' | ');
+          if (so.inner.length > 1) {
+            src += '\n' + pad + '        ⚠ ' + so.inner.length + ' layers inside — replaceContents would DESTROY them.' +
+                   '\n' + pad + '          This slot needs the artwork PLACED INTO it, not substituted.';
+          }
+        }
+      } else {
+        src = '   (source size unreadable — double-click the slot and check Image ▸ Image Size)';
+      }
     }
   } catch (e5) {}
 

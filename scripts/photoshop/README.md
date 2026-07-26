@@ -168,6 +168,31 @@ replaces** and nothing else changes.
 `tif` and `psd` are accepted but not measured, so those get no compensation —
 author them at the slot's exact size.
 
+### ⚠ Some slots are structured documents, not blank canvases
+
+`COLLAR BOTTOM`'s `.psb` contains six layers — `mid-collar`, `half-collar`,
+`top-thin-collar`, `top-THICK-collar`, `Rectangle 1` and the dropped artwork.
+They are collar-construction pieces: the thin stripe around the collar edge is
+drawn by `top-thin-collar`, not by the artwork.
+
+**`replaceContents` substitutes the entire document**, so all of that is
+destroyed and only the raw artwork remains. Dragging a file into the opened
+`.psb` by hand *adds* a layer and keeps them — which is why the manual collar
+has its stripe and the scripted one does not.
+
+The inspector now lists what is inside every slot and flags any with more than
+one layer:
+
+```
+COLLAR BOTTOM · SMART OBJECT   AUTHOR ARTWORK AT 2171×355
+        contents: mid-collar (hidden) | half-collar (hidden) | kalikamis-collarbottom | top-thin-collar | top-THICK-collar (hidden) | Rectangle 1
+        ⚠ 6 layers inside — replaceContents would DESTROY them.
+          This slot needs the artwork PLACED INTO it, not substituted.
+```
+
+Run the inspector before trusting any slot: a single-layer `.psb` is safe to
+replace, a multi-layer one is not.
+
 ### What replaceContents actually does
 
 **It does not fit artwork to the frame.** It keeps the slot's existing transform
