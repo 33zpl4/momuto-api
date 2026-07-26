@@ -98,6 +98,31 @@ absent, and the run says so.
 | shorts | `R LEG DESIGN` | — | `-shorts` | ● |
 | shorts | `BELT DESIGN` | — | `-belt` | |
 
+### What the shading layers actually do
+
+Confirmed from the template, not assumed:
+
+```
+highlights  {screen, opacity 25%}        ← NOT clipped
+shadows     {linearburn, opacity 80%}    ← NOT clipped
+Brillo/contraste 1   {CLIPPED to layer below}
+Tono/saturación 1    {CLIPPED to layer below}
+```
+
+`shadows` and `highlights` sit above the `SMARTS` group and are **not clipped**,
+so they composite over whatever artwork is dropped in. A PNG export of the
+layered document therefore carries them — the script does not need to do
+anything special, and a mockup that looks flat is not flat because the shading
+was dropped.
+
+The two adjustment layers **are** clipped, so they tint only the `SMARTS` group.
+That is deliberate: they colour the artwork without touching the collar, cuffs
+and stitching in `PARTS`.
+
+Worth re-running the inspector after any template edit — a `shadows` layer that
+someone clips, or knocks to Normal, would quietly stop doing its job and nothing
+else in the pipeline would notice.
+
 ### Addressing repeated layer names
 
 `admiral-psd` has **three** layers called `JERSEY DESIGN` — the body plus both

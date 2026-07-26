@@ -3,12 +3,14 @@ canvas   : 6200 × 6200 @ 300 dpi
 mode     : RGB
 
 LAYERS (top to bottom — the ones marked SMART OBJECT are the drop-in slots)
+Anything in {braces} is non-default compositing: blend mode, opacity,
+or CLIPPED, which limits a layer to the one directly beneath it.
 
 [group] JERSEY
-  highlights   · normal  [1242,620 → 4966,5160  3724×4540]
-  shadows   · normal  [1242,620 → 4966,5160  3724×4540]
-  Brillo/contraste 1   · brightnesscontrast  [0,0 → 6200,6200  6200×6200]
-  Tono/saturación 1   · huesaturation  [0,0 → 6200,6200  6200×6200]
+  highlights   · normal  [1242,620 → 4966,5160  3724×4540]   {screen, opacity 25%}
+  shadows   · normal  [1242,620 → 4966,5160  3724×4540]   {linearburn, opacity 80%}
+  Brillo/contraste 1   · brightnesscontrast  [0,0 → 6200,6200  6200×6200]   {CLIPPED to layer below}
+  Tono/saturación 1   · huesaturation  [0,0 → 6200,6200  6200×6200]   {CLIPPED to layer below}
   [group] SMARTS
     JERSEY DESIGN   · SMART OBJECT  ← replaceable  [1725,959 → 4489,5160  2764×4201]
     SLEEVE DESIGN   · SMART OBJECT  ← replaceable  [3845,1040 → 4966,2654  1121×1614]
