@@ -2,8 +2,8 @@
 // build-jersey-mockups.jsx — batch the drag-and-drop step.
 //
 // One template PSD per view, each with several drop-in smart objects and its own
-// export size. Point it at a folder of raw artwork and it produces every view of
-// every design in one pass.
+// export size. Point it at a folder of raw artwork and it produces whatever
+// views that artwork supports — all three, or just the front, or just shorts.
 //
 // Photoshop ▸ File ▸ Scripts ▸ Browse… ▸ pick this file.
 //
@@ -22,7 +22,7 @@
 var CONFIG = {
   artworkDir:   'C:/Users/ayala/momuto/incoming',      // drop the .svg sets here
   outDir:       'C:/Users/ayala/momuto/mockups-out',   // created if missing
-  templatesDir: 'C:/Users/ayala/momuto/templates',     // the three .tif files
+  templatesDir: 'C:/Users/ayala/momuto/templates',     // the template files
 
   // ── Slot addressing ──────────────────────────────────────────────────────
   // `layer` alone  → every visible layer of that name gets the same file.
@@ -37,6 +37,11 @@ var CONFIG = {
   // supply <slug>-shoulderleft.svg and -shoulderright.svg separately, or a
   // single shared <slug>-shoulders.svg, with no config change either way.
   //
+  // `required: true` means the view cannot be exported without that artwork.
+  // Everything else is OPTIONAL: if the file is absent the slot keeps the
+  // template's own placeholder and the run reports it. That is what makes a
+  // front-only approval set work without generating collar and shoulder files.
+  //
   // `count` asserts how many layers the address resolves to. If a template is
   // edited and the number shifts, the run STOPS — a silently unreplaced
   // shoulder panel is the exact failure this prevents.
@@ -47,11 +52,11 @@ var CONFIG = {
       suffix: 'front',
       size: 1500,
       slots: [
-        { layer: 'JERSEY DESIGN', at: [1725, 959], file: 'front',                          count: 1 },  // body
-        { layer: 'JERSEY DESIGN', at: [1723, 736], file: ['shoulderleft',  'shoulders'],   count: 1 },
-        { layer: 'JERSEY DESIGN', at: [3596, 746], file: ['shoulderright', 'shoulders'],   count: 1 },
-        { layer: 'SLEEVE DESIGN', at: [1242, 995], file: ['sleeveleft',    'sleeves'],     count: 1 },
-        { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveright',  'sleeves'],     count: 1 },
+        { layer: 'JERSEY DESIGN', at: [1725, 959],  file: 'front',                        count: 1, required: true },
+        { layer: 'JERSEY DESIGN', at: [1723, 736],  file: ['shoulderleft',  'shoulders'], count: 1 },
+        { layer: 'JERSEY DESIGN', at: [3596, 746],  file: ['shoulderright', 'shoulders'], count: 1 },
+        { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveleft',    'sleeves'],   count: 1 },
+        { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveright',   'sleeves'],   count: 1 },
         { layer: 'COLLAR TOP',    file: 'collartop',    count: 1 },
         { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1 }
         // TAPE DESIGN is deliberately absent — it stays white, so leaving the
@@ -64,10 +69,10 @@ var CONFIG = {
       suffix: 'back',
       size: 1500,
       slots: [
-        { layer: 'JERSEY DESIGN',       file: 'back',                            count: 1 },
-        { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'],        count: 1 },
-        { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'],        count: 1 },
-        { layer: 'COLLAR DESIGN',       file: 'collarback',                      count: 1 }
+        { layer: 'JERSEY DESIGN',       file: 'back',                     count: 1, required: true },
+        { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'], count: 1 },
+        { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'], count: 1 },
+        { layer: 'COLLAR DESIGN',       file: 'collarback',               count: 1 }
         // No shoulder slots on the back template — its SHOULDERS layer is a
         // solid fill, not a smart object, so back shoulders take a flat colour.
       ]
@@ -76,10 +81,9 @@ var CONFIG = {
       psd: '141087-mens-shorts.tif',                 // 5000×5000
       suffix: 'shorts',
       size: 1000,
-      optional: true,
       slots: [
-        { layer: 'L LEG DESIGN',  file: 'shorts', count: 1 },
-        { layer: 'R LEG DESIGN',  file: 'shorts', count: 1 },
+        { layer: 'L LEG DESIGN',  file: 'shorts', count: 1, required: true },
+        { layer: 'R LEG DESIGN',  file: 'shorts', count: 1, required: true },
         { layer: 'BELT DESIGN',   file: 'belt',   count: 1 }   // the waistband
       ]
     }
@@ -114,7 +118,7 @@ function topLeft(layer) {
   return [Math.round(b[0].as('px')), Math.round(b[1].as('px'))];
 }
 
-function nearestFirst(layers, at) {
+function atPosition(layers, at) {
   var hits = [];
   for (var i = 0; i < layers.length; i++) {
     var tl = topLeft(layers[i]);
@@ -133,9 +137,8 @@ function replaceSmartObject(doc, layer, file) {
 }
 
 // Kind names deliberately carry no internal hyphen ('collarback', not
-// 'collar-back'): findSlugs() matches on a trailing '-<view>', so a file called
-// <slug>-collar-back.svg would be read as the design 'x-collar' the day the
-// lead view changes. Unhyphenated kinds cannot collide under any ordering.
+// 'collar-back'): slug discovery matches on a trailing '-<kind>', so a file
+// called <slug>-collar-back.svg would be read as a design named 'x-collar'.
 function artworkFor(slug, kinds) {
   var list = (kinds instanceof Array) ? kinds : [kinds];
   for (var k = 0; k < list.length; k++) {
@@ -151,18 +154,31 @@ function kindLabel(kinds) {
   return (kinds instanceof Array) ? kinds.join(' or ') : kinds;
 }
 
-// Slugs come from the first NON-optional view, so a stray shorts file on its own
-// never invents a design.
-function findSlugs() {
-  var lead = null;
-  for (var t = 0; t < CONFIG.templates.length; t++) {
-    if (CONFIG.templates[t].psd && !CONFIG.templates[t].optional) { lead = CONFIG.templates[t].suffix; break; }
+/**
+ * A design exists if ANY view's required artwork is present — so a front-only
+ * set, a shorts-only revision, or the full kit all get discovered. Scanning only
+ * the front would make a back-only or shorts-only run report "no designs found".
+ *
+ * Only REQUIRED kinds create a slug. A stray <slug>-collartop.svg on its own
+ * therefore never invents a design.
+ */
+function findSlugs(active) {
+  var kinds = [], seenKind = {};
+  for (var a = 0; a < active.length; a++) {
+    for (var s = 0; s < active[a].slots.length; s++) {
+      var slot = active[a].slots[s];
+      if (!slot.required) continue;
+      var list = (slot.file instanceof Array) ? slot.file : [slot.file];
+      for (var k = 0; k < list.length; k++) {
+        if (!seenKind[list[k]]) { seenKind[list[k]] = true; kinds.push(list[k]); }
+      }
+    }
   }
-  if (!lead) return [];
+  if (!kinds.length) return [];
 
+  var rx = new RegExp('^(.+)-(' + kinds.join('|') + ')\\.(' + CONFIG.extensions.join('|') + ')$', 'i');
   var files = new Folder(CONFIG.artworkDir).getFiles();
   var slugs = [], seen = {};
-  var rx = new RegExp('^(.+)-' + lead + '\\.(' + CONFIG.extensions.join('|') + ')$', 'i');
   for (var i = 0; i < files.length; i++) {
     if (!(files[i] instanceof File)) continue;
     var m = decodeURI(files[i].name).match(rx);
@@ -201,8 +217,9 @@ function exportFlat(doc, size, outFile) {
   }
 }
 
-// Resolve and validate every slot in a template before writing anything.
-function resolveSlots(doc, view, log) {
+// Resolve and validate every slot in a template. Called on each open, because
+// layer references do not survive closing the document.
+function resolveSlots(doc, view, log, quiet) {
   for (var s = 0; s < view.slots.length; s++) {
     var slot = view.slots[s];
     var named = findLayers(doc, slot.layer, []);
@@ -218,9 +235,9 @@ function resolveSlots(doc, view, log) {
 
     var addr = slot.layer;
     if (slot.at) {
-      usable = nearestFirst(usable, slot.at);
+      usable = atPosition(usable, slot.at);
       addr += ' @ ' + slot.at[0] + ',' + slot.at[1];
-    } else if (hidden) {
+    } else if (hidden && !quiet) {
       log.push('    · ' + slot.layer + ': ' + hidden + ' hidden copy skipped');
     }
 
@@ -258,17 +275,17 @@ function main() {
   if (!active.length) { alert('No template PSD paths set in CONFIG.templates.'); return; }
   if (!new Folder(CONFIG.outDir).exists) new Folder(CONFIG.outDir).create();
 
-  var slugs = findSlugs();
+  var slugs = findSlugs(active);
   if (!slugs.length) {
     alert('No designs found in:\n' + CONFIG.artworkDir +
-          '\n\nExpecting files named <slug>-' + active[0].suffix + '.' + CONFIG.extensions[0]);
+          '\n\nA design needs at least one of: <slug>-front, <slug>-back, <slug>-shorts');
     return;
   }
 
   var prevDialogs = app.displayDialogs;
   app.displayDialogs = DialogModes.NO;
 
-  var log = [], made = 0, want = 0;
+  var log = [], made = 0;
 
   try {
     // Each template opens ONCE and every design runs through it — that is where
@@ -276,22 +293,43 @@ function main() {
     for (var a = 0; a < active.length; a++) {
       var view = active[a];
       var doc = app.open(new File(view.path));
+      var dirty = {};      // slot index → holds a previous design's artwork
+
       try {
         log.push('── ' + view.suffix + ' (' + view.size + '×' + view.size + ')');
-        resolveSlots(doc, view, log);
+        resolveSlots(doc, view, log, false);
 
         for (var i = 0; i < slugs.length; i++) {
-          var jobs = [], missing = [];
+          // Work out what this design can fill before touching anything.
+          var jobs = [], fills = {}, blank = [], lacks = null;
           for (var s = 0; s < view.slots.length; s++) {
-            var art = artworkFor(slugs[i], view.slots[s].file);
-            if (art) jobs.push({ slot: view.slots[s], file: art });
-            else missing.push(kindLabel(view.slots[s].file));
+            var slot = view.slots[s];
+            var art = artworkFor(slugs[i], slot.file);
+            if (art) { jobs.push({ index: s, slot: slot, file: art }); fills[s] = true; }
+            else if (slot.required) { lacks = kindLabel(slot.file); break; }
+            else blank.push(kindLabel(slot.file));
           }
-          if (missing.length) {
-            if (!view.optional) { log.push('    · ' + slugs[i] + ' — no ' + missing.join(' / ') + ' file, skipped'); want++; }
+
+          if (lacks) {
+            // Not an error — a front-only or jersey-only set is a normal thing
+            // to ask for. Say what was skipped and why, then carry on.
+            log.push('    – ' + slugs[i] + ': no ' + lacks + ' artwork, view skipped');
             continue;
           }
-          want++;
+
+          // A slot this design does not fill still holds the LAST design's
+          // artwork, because the template stays open across the batch. Reopening
+          // resets every slot to the template's own placeholder. Without this a
+          // front-only set silently inherits the previous team's collar.
+          var stale = false;
+          for (var d in dirty) { if (dirty.hasOwnProperty(d) && !fills[d]) { stale = true; break; } }
+          if (stale) {
+            doc.close(SaveOptions.DONOTSAVECHANGES);
+            doc = app.open(new File(view.path));
+            resolveSlots(doc, view, log, true);
+            dirty = {};
+            for (var j2 = 0; j2 < jobs.length; j2++) jobs[j2].slot = view.slots[jobs[j2].index];
+          }
 
           var swaps = 0;
           for (var j = 0; j < jobs.length; j++) {
@@ -299,10 +337,12 @@ function main() {
               replaceSmartObject(doc, jobs[j].slot.refs[r], jobs[j].file);
               swaps++;
             }
+            dirty[jobs[j].index] = true;
           }
 
           exportFlat(doc, view.size, new File(CONFIG.outDir + '/' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format));
-          log.push('    ✓ ' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format + '  (' + swaps + ' slots)');
+          log.push('    ✓ ' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format + '  (' + swaps + ' slots)' +
+            (blank.length ? '  · template default kept for: ' + blank.join(', ') : ''));
           made++;
         }
       } catch (inner) {
@@ -316,7 +356,7 @@ function main() {
     app.displayDialogs = prevDialogs;
   }
 
-  alert(made + ' of ' + want + ' exported from ' + slugs.length + ' design(s)\n\n' + log.join('\n') +
+  alert(made + ' image(s) exported from ' + slugs.length + ' design(s)\n\n' + log.join('\n') +
         '\n\nNext: node compress-mockups.js "' + CONFIG.outDir + '"');
 }
 

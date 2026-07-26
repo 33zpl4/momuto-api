@@ -77,22 +77,26 @@ typo'd path says so immediately instead of failing three templates deep.
 Mapping as configured. `count` is an **assertion**, not a hint — if a template
 is edited and a slot count shifts, the run stops rather than half-applying.
 
-| view | slot | address | ← file (first that exists) |
-|---|---|---|---|
-| front | `JERSEY DESIGN` | `@1725,959` | `-front` |
-| front | `JERSEY DESIGN` | `@1723,736` | `-shoulderleft` → `-shoulders` |
-| front | `JERSEY DESIGN` | `@3596,746` | `-shoulderright` → `-shoulders` |
-| front | `SLEEVE DESIGN` | `@1242,995` | `-sleeveleft` → `-sleeves` |
-| front | `SLEEVE DESIGN` | `@3845,1040` | `-sleeveright` → `-sleeves` |
-| front | `COLLAR TOP` | — | `-collartop` |
-| front | `COLLAR BOTTOM` | — | `-collarbottom` |
-| back | `JERSEY DESIGN` | — | `-back` |
-| back | `LEFT SLEEVE DESIGN` | — | `-sleeveleft` → `-sleeves` |
-| back | `RIGHT SLEEVE DESIGN` | — | `-sleeveright` → `-sleeves` |
-| back | `COLLAR DESIGN` | — | `-collarback` |
-| shorts | `L LEG DESIGN` | — | `-shorts` |
-| shorts | `R LEG DESIGN` | — | `-shorts` |
-| shorts | `BELT DESIGN` | — | `-belt` |
+**Required** slots are marked ●. A view exports if its required artwork is
+present; every other slot keeps the template's own placeholder when its file is
+absent, and the run says so.
+
+| view | slot | address | ← file (first that exists) | |
+|---|---|---|---|---|
+| front | `JERSEY DESIGN` | `@1725,959` | `-front` | ● |
+| front | `JERSEY DESIGN` | `@1723,736` | `-shoulderleft` → `-shoulders` | |
+| front | `JERSEY DESIGN` | `@3596,746` | `-shoulderright` → `-shoulders` | |
+| front | `SLEEVE DESIGN` | `@1242,995` | `-sleeveleft` → `-sleeves` | |
+| front | `SLEEVE DESIGN` | `@3845,1040` | `-sleeveright` → `-sleeves` | |
+| front | `COLLAR TOP` | — | `-collartop` | |
+| front | `COLLAR BOTTOM` | — | `-collarbottom` | |
+| back | `JERSEY DESIGN` | — | `-back` | ● |
+| back | `LEFT SLEEVE DESIGN` | — | `-sleeveleft` → `-sleeves` | |
+| back | `RIGHT SLEEVE DESIGN` | — | `-sleeveright` → `-sleeves` | |
+| back | `COLLAR DESIGN` | — | `-collarback` | |
+| shorts | `L LEG DESIGN` | — | `-shorts` | ● |
+| shorts | `R LEG DESIGN` | — | `-shorts` | ● |
+| shorts | `BELT DESIGN` | — | `-belt` | |
 
 ### Addressing repeated layer names
 
@@ -141,15 +145,45 @@ kinds cannot collide under any ordering.
 ```
 
 …or drop `<slug>-shoulders.svg` / `<slug>-sleeves.svg` in place of the left/right
-pairs. A view whose files are incomplete is skipped and reported rather than
-exported half-dressed.
+pairs.
 
-Any number of designs at once. Each PSD is opened **once** and every design run
-through it, which is where the time saving actually comes from on a batch.
+Any number of designs at once. Each template is opened **once** and every design
+run through it, which is where the time saving comes from on a batch.
 
-`optional: true` on shorts means a design without a shorts file is skipped
-quietly, and slugs are only discovered from a non-optional view — so a stray
-shorts file can never invent a design that doesn't exist.
+## Partial sets — jersey only, front only, shorts only
+
+**Nothing has to be complete.** These all work:
+
+| what's in `artworkDir` | what comes out |
+|---|---|
+| all 8–12 files | front, back, shorts |
+| no `-shorts` file | front + back; shorts reported as skipped |
+| only `-front` | front only, collar/shoulders left at the template default |
+| only `-shorts` | shorts only |
+| only `-collartop` | nothing — a non-required file alone is not a design |
+
+Three rules make that safe:
+
+1. **A design is discovered from any REQUIRED file**, not from `-front`
+   specifically. Scanning only the front would make a back-only or shorts-only
+   run report "no designs found".
+2. **A missing required file skips that view and says so** — `– kalikamis: no
+   back artwork, view skipped`. That is a normal outcome, not an error, and it
+   does not stop the other views or the other designs.
+3. **A missing optional file leaves the template's placeholder**, and the log
+   records it: `· template default kept for: collartop, collarbottom`.
+
+### The trap that made this worth doing properly
+
+Because a template stays open across the whole batch, a slot that *this* design
+doesn't fill still contains the **previous** design's artwork. A front-only set
+run after a full one would have silently inherited the last team's collar — and
+it would look completely plausible.
+
+So the builder tracks which slots hold previous artwork and **reopens the
+template** whenever the current design doesn't fill all of them, resetting every
+slot to the template's own placeholder first. Reopening costs a few seconds and
+only happens on partial sets; a full batch never triggers it.
 
 ## 3. Compress
 
