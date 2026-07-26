@@ -53,21 +53,26 @@ called `JERSEY DESIGN` (body plus both shoulder panels) and two called
 leave the rest — a half-applied design, reported as a success. So the builder
 replaces **every** visible layer of a given name and asserts the count.
 
-## 2. Configure the builder
+## 2. Configure the builder — once, not per design
 
-Layer names are already filled in. You only set the three paths:
+Layer names, template filenames, sizes and slot counts are all filled in
+already. **Three folder paths are the only thing to set, and they persist in the
+file** — after this, the daily job is dropping files in `artworkDir` and running
+the script.
 
 ```js
-artworkDir: 'C:/Users/you/momuto/incoming',
-outDir:     'C:/Users/you/momuto/mockups-out',
-templates: [
-  { psd: 'C:/…/admiral-psd.tif',            suffix: 'front',  size: 1500, slots: [ … ] },
-  { psd: 'C:/…/52183 … Back View.tif',      suffix: 'back',   size: 1500, slots: [ … ] },
-  { psd: 'C:/…/141087-mens-shorts.tif',     suffix: 'shorts', size: 1000, optional: true, slots: [ … ] }
-]
+artworkDir:   'C:/Users/ayala/momuto/incoming',      // drop the .svg sets here
+outDir:       'C:/Users/ayala/momuto/mockups-out',   // created if missing
+templatesDir: 'C:/Users/ayala/momuto/templates',     // the three .tif files
 ```
 
-Windows paths use **forward slashes**. Leave a `psd` empty to skip that view.
+Windows paths use **forward slashes**. A template's `psd` may be a bare
+filename, resolved against `templatesDir` — so moving the templates later means
+editing one line, not three. A full path there still works. Leave a `psd` empty
+to skip that view.
+
+Both `artworkDir` and `templatesDir` are checked before anything opens, so a
+typo'd path says so immediately instead of failing three templates deep.
 
 Mapping as configured — `count` is an assertion, not a hint:
 

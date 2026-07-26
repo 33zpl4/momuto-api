@@ -20,10 +20,13 @@
 
 #target photoshop
 
+// ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
+//    Only the contents of artworkDir changes from design to design.
+//    Windows paths use FORWARD slashes.
 var CONFIG = {
-  // Windows paths: forward slashes. "C:/Users/you/momuto/incoming"
-  artworkDir: '',
-  outDir: '',
+  artworkDir:   'C:/Users/ayala/momuto/incoming',      // drop the .svg sets here
+  outDir:       'C:/Users/ayala/momuto/mockups-out',   // created if missing
+  templatesDir: 'C:/Users/ayala/momuto/templates',     // the three .tif/.psd files
 
   // Layer names below are taken verbatim from inspect-template.jsx output.
   //
@@ -33,7 +36,7 @@ var CONFIG = {
   // failure this is here to prevent.
   templates: [
     {
-      psd: '',              // admiral-psd.tif      6200×6200
+      psd: 'admiral-psd.tif',                        // 6200×6200
       suffix: 'front',
       size: 1500,
       slots: [
@@ -47,7 +50,7 @@ var CONFIG = {
       ]
     },
     {
-      psd: '',              // 52183 … Back View.tif   6000×6000
+      psd: '52183 - Men\u2019s Crew Neck Soccer Jersey Mockup - Back View.tif',   // 6000×6000
       suffix: 'back',
       size: 1500,
       slots: [
@@ -58,7 +61,7 @@ var CONFIG = {
       ]
     },
     {
-      psd: '',              // 141087-mens-shorts.tif   5000×5000
+      psd: '141087-mens-shorts.tif',                 // 5000×5000
       suffix: 'shorts',
       size: 1000,
       optional: true,
@@ -105,6 +108,12 @@ function replaceSmartObject(doc, layer, file) {
 // 'collar-back'): findSlugs() matches on a trailing '-<view>', so a file called
 // <slug>-collar-back.svg would be read as the design 'x-collar' the day the
 // lead view changes. Unhyphenated kinds cannot collide under any ordering.
+// A template's `psd` may be a bare filename (resolved against templatesDir) or
+// a full path, so moving the templates means editing one line, not three.
+function templatePath(psd) {
+  return (/[\/\\]/.test(psd) ? psd : CONFIG.templatesDir + '/' + psd);
+}
+
 function artworkFor(slug, kind) {
   for (var i = 0; i < CONFIG.extensions.length; i++) {
     var f = new File(CONFIG.artworkDir + '/' + slug + '-' + kind + '.' + CONFIG.extensions[i]);
@@ -186,11 +195,20 @@ function main() {
     alert('Set artworkDir and outDir at the top of this script first.');
     return;
   }
+  if (!new Folder(CONFIG.artworkDir).exists) {
+    alert('artworkDir does not exist:\n' + CONFIG.artworkDir + '\n\nCreate it, or correct the path at the top of this script.');
+    return;
+  }
+  if (!new Folder(CONFIG.templatesDir).exists) {
+    alert('templatesDir does not exist:\n' + CONFIG.templatesDir + '\n\nPut the three template files there, or correct the path.');
+    return;
+  }
   var active = [];
   for (var t = 0; t < CONFIG.templates.length; t++) {
     var tpl = CONFIG.templates[t];
     if (!tpl.psd) continue;                                   // unconfigured view
-    if (!new File(tpl.psd).exists) { alert('Template not found:\n' + tpl.psd); return; }
+    tpl.path = templatePath(tpl.psd);
+    if (!new File(tpl.path).exists) { alert('Template not found:\n' + tpl.path); return; }
     active.push(tpl);
   }
   if (!active.length) { alert('No template PSD paths set in CONFIG.templates.'); return; }
@@ -213,7 +231,7 @@ function main() {
     // the time goes on a batch, not in any single swap.
     for (var a = 0; a < active.length; a++) {
       var view = active[a];
-      var doc = app.open(new File(view.psd));
+      var doc = app.open(new File(view.path));
       try {
         log.push('── ' + view.suffix + ' (' + view.size + '×' + view.size + ')');
         resolveSlots(doc, view, log);
