@@ -42,6 +42,10 @@ var CONFIG = {
   // template's own placeholder and the run reports it. That is what makes a
   // front-only approval set work without generating collar and shoulder files.
   //
+  // `nudge: [dx, dy]` shifts the slot in px before export and shifts it BACK
+  // afterwards, so a batch never accumulates offsets. Positive dy is DOWN, so
+  // "left sleeve up 25px" is nudge: [0, -25].
+  //
   // `count` asserts how many layers the address resolves to. If a template is
   // edited and the number shifts, the run STOPS — a silently unreplaced
   // shoulder panel is the exact failure this prevents.
@@ -55,8 +59,8 @@ var CONFIG = {
         { layer: 'JERSEY DESIGN', at: [1725, 959],  file: 'front',                        count: 1, required: true },
         { layer: 'JERSEY DESIGN', at: [1723, 736],  file: ['shoulderleft',  'shoulders'], count: 1 },
         { layer: 'JERSEY DESIGN', at: [3596, 746],  file: ['shoulderright', 'shoulders'], count: 1 },
-        { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveleft',    'sleeves'],   count: 1 },
-        { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveright',   'sleeves'],   count: 1 },
+        { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveleft',    'sleeves'],   count: 1, nudge: [0, -25] },
+        { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveright',   'sleeves'],   count: 1, nudge: [0, 0] },
         { layer: 'COLLAR TOP',    file: 'collartop',    count: 1 },
         { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1 }
         // TAPE DESIGN is deliberately absent — it stays white, so leaving the
@@ -127,6 +131,34 @@ function atPosition(layers, at) {
   return hits;
 }
 
+/**
+ * A smart object's layer mask is normally LINKED to the layer, so translating
+ * moves mask and content together and nothing appears to shift. Unlink first,
+ * move, relink. Wrapped because if the action ever changes name the nudge should
+ * degrade to a no-op, not kill the run.
+ */
+function setMaskLinked(linked) {
+  try {
+    var d = new ActionDescriptor();
+    var r = new ActionReference();
+    r.putEnumerated(charIDToTypeID('Lyr '), charIDToTypeID('Ordn'), charIDToTypeID('Trgt'));
+    d.putReference(charIDToTypeID('null'), r);
+    var props = new ActionDescriptor();
+    props.putBoolean(stringIDToTypeID('userMaskLinked'), linked);
+    d.putObject(charIDToTypeID('T   '), charIDToTypeID('Lyr '), props);
+    executeAction(charIDToTypeID('setd'), d, DialogModes.NO);
+    return true;
+  } catch (e) { return false; }
+}
+
+function nudgeLayer(doc, layer, dx, dy) {
+  if (!dx && !dy) return;
+  doc.activeLayer = layer;
+  var hadMask = setMaskLinked(false);
+  layer.translate(UnitValue(dx, 'px'), UnitValue(dy, 'px'));
+  if (hadMask) setMaskLinked(true);
+}
+
 // No DOM method for this — the action is the documented idiom.
 function replaceSmartObject(doc, layer, file) {
   doc.activeLayer = layer;
@@ -185,6 +217,44 @@ function findSlugs(active) {
     if (m && !seen[m[1]]) { seen[m[1]] = true; slugs.push(m[1]); }
   }
   return slugs;
+}
+
+/**
+ * Every artwork kind any slot can consume. Anything in artworkDir that looks
+ * like <slug>-<kind> but whose kind is not in here is almost certainly a typo —
+ * 'collarbotom' for 'collarbottom' — and would otherwise pass as a deliberately
+ * absent optional file. Reported loudly instead.
+ */
+function claimedKinds(active) {
+  var kinds = {};
+  for (var a = 0; a < active.length; a++) {
+    for (var s = 0; s < active[a].slots.length; s++) {
+      var list = (active[a].slots[s].file instanceof Array) ? active[a].slots[s].file : [active[a].slots[s].file];
+      for (var k = 0; k < list.length; k++) kinds[list[k].toLowerCase()] = true;
+    }
+  }
+  return kinds;
+}
+
+function unclaimedFiles(active, slugs) {
+  var kinds = claimedKinds(active);
+  var files = new Folder(CONFIG.artworkDir).getFiles();
+  var out = [];
+  var extRx = new RegExp('\\.(' + CONFIG.extensions.join('|') + ')$', 'i');
+  for (var i = 0; i < files.length; i++) {
+    if (!(files[i] instanceof File)) continue;
+    var name = decodeURI(files[i].name);
+    if (!extRx.test(name)) continue;
+    var stem = name.replace(extRx, '');
+    for (var s = 0; s < slugs.length; s++) {
+      if (stem.length > slugs[s].length + 1 && stem.substring(0, slugs[s].length + 1) === slugs[s] + '-') {
+        var kind = stem.substring(slugs[s].length + 1).toLowerCase();
+        if (!kinds[kind]) out.push(name + '  (no slot wants "' + kind + '")');
+        break;
+      }
+    }
+  }
+  return out;
 }
 
 // A template's `psd` may be a bare filename (resolved against templatesDir) or
@@ -282,10 +352,17 @@ function main() {
     return;
   }
 
+  var log = [], made = 0;
+
+  var orphans = unclaimedFiles(active, slugs);
+  if (orphans.length) {
+    log.push('⚠ files no slot claims — check for a typo:');
+    for (var o = 0; o < orphans.length; o++) log.push('    ' + orphans[o]);
+    log.push('');
+  }
+
   var prevDialogs = app.displayDialogs;
   app.displayDialogs = DialogModes.NO;
-
-  var log = [], made = 0;
 
   try {
     // Each template opens ONCE and every design runs through it — that is where
@@ -340,7 +417,21 @@ function main() {
             dirty[jobs[j].index] = true;
           }
 
+          // Nudge, export, un-nudge. Reversing it is what stops a 10-design
+          // batch from drifting the sleeves 250px up the shirt.
+          for (var n = 0; n < jobs.length; n++) {
+            var nd = jobs[n].slot.nudge;
+            if (!nd) continue;
+            for (var q = 0; q < jobs[n].slot.refs.length; q++) nudgeLayer(doc, jobs[n].slot.refs[q], nd[0], nd[1]);
+          }
+
           exportFlat(doc, view.size, new File(CONFIG.outDir + '/' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format));
+
+          for (var n2 = 0; n2 < jobs.length; n2++) {
+            var nd2 = jobs[n2].slot.nudge;
+            if (!nd2) continue;
+            for (var q2 = 0; q2 < jobs[n2].slot.refs.length; q2++) nudgeLayer(doc, jobs[n2].slot.refs[q2], -nd2[0], -nd2[1]);
+          }
           log.push('    ✓ ' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format + '  (' + swaps + ' slots)' +
             (blank.length ? '  · template default kept for: ' + blank.join(', ') : ''));
           made++;
