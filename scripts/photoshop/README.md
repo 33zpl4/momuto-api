@@ -168,30 +168,27 @@ replaces** and nothing else changes.
 `tif` and `psd` are accepted but not measured, so those get no compensation —
 author them at the slot's exact size.
 
-### ⚠ Some slots are structured documents, not blank canvases
+### What is inside a slot
 
-`COLLAR BOTTOM`'s `.psb` contains six layers — `mid-collar`, `half-collar`,
-`top-thin-collar`, `top-THICK-collar`, `Rectangle 1` and the dropped artwork.
-They are collar-construction pieces: the thin stripe around the collar edge is
-drawn by `top-thin-collar`, not by the artwork.
-
-**`replaceContents` substitutes the entire document**, so all of that is
-destroyed and only the raw artwork remains. Dragging a file into the opened
-`.psb` by hand *adds* a layer and keeps them — which is why the manual collar
-has its stripe and the scripted one does not.
-
-The inspector now lists what is inside every slot and flags any with more than
-one layer:
+The inspector lists each `.psb`'s layers. `COLLAR BOTTOM` holds six:
 
 ```
-COLLAR BOTTOM · SMART OBJECT   AUTHOR ARTWORK AT 2171×355
-        contents: mid-collar (hidden) | half-collar (hidden) | kalikamis-collarbottom | top-thin-collar | top-THICK-collar (hidden) | Rectangle 1
-        ⚠ 6 layers inside — replaceContents would DESTROY them.
-          This slot needs the artwork PLACED INTO it, not substituted.
+contents: mid-collar (hidden) | half-collar (hidden) | <artwork> | top-thin-collar | top-THICK-collar (hidden) | Rectangle 1
 ```
 
-Run the inspector before trusting any slot: a single-layer `.psb` is safe to
-replace, a multi-layer one is not.
+Those are **collar style presets** from when designs were edited inside
+Photoshop by hand — pick a thin or thick collar by toggling a layer. That
+workflow is gone: the dropped SVG now contains the finished collar, full-canvas
+and opaque, so anything beneath it is invisible.
+
+`replaceContents` does substitute the whole document and discard them, but with
+an opaque full-canvas artwork on top that changes nothing visible. **Listed for
+information, not as a problem.**
+
+It would matter for a slot whose artwork is partially transparent, or smaller
+than the canvas — then the layers underneath would show through in the manual
+workflow and be missing in the scripted one. Worth checking the contents list
+before assuming a slot behaves like the others.
 
 ### What replaceContents actually does
 

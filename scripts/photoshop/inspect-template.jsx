@@ -64,10 +64,10 @@ function smartObjectSource(layer) {
   // but version-proof: it is the same thing you would see by double-clicking the
   // slot. Closed without saving, so the template is untouched.
   //
-  // Also lists what is INSIDE. That matters enormously: a slot whose .psb holds
-  // construction layers (collar stripes, edge rectangles) is destroyed by
-  // replaceContents, which substitutes the whole document. Such a slot needs the
-  // artwork PLACED INTO it as a layer instead.
+  // Also lists what is INSIDE, because replaceContents substitutes the whole
+  // document. Usually harmless — the artwork is opaque and fills the canvas, so
+  // whatever it replaced was invisible anyway. Only matters for a slot whose
+  // artwork is transparent or smaller than the canvas.
   try {
     executeAction(stringIDToTypeID('placedLayerEditContents'), undefined, DialogModes.NO);
     var inner = app.activeDocument;
@@ -134,8 +134,9 @@ function describeLayer(layer, depth, out) {
         if (so.inner && so.inner.length) {
           src += '\n' + pad + '        contents: ' + so.inner.join(' | ');
           if (so.inner.length > 1) {
-            src += '\n' + pad + '        ⚠ ' + so.inner.length + ' layers inside — replaceContents would DESTROY them.' +
-                   '\n' + pad + '          This slot needs the artwork PLACED INTO it, not substituted.';
+            src += '\n' + pad + '        note: ' + so.inner.length + ' layers inside. replaceContents substitutes the whole' +
+                   '\n' + pad + '          document, so these go. Harmless when the artwork is opaque and' +
+                   '\n' + pad + '          full-canvas; matters if it is transparent or smaller.';
           }
         }
       } else {
