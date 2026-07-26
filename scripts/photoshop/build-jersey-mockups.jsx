@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26d · warns when artwork canvas does not match the slot';
+var VERSION = '2026-07-26e · rescales artwork to the slot instead of only warning';
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
@@ -49,11 +49,16 @@ var CONFIG = {
   // "left sleeve up 25px" is nudge: [0, -25].
   //
   // `expect: [w, h]` is the slot's own SOURCE canvas, measured by
-  // inspect-template.jsx. replaceContents fits artwork into that frame
-  // preserving aspect ratio, so artwork on any other canvas is scaled and
-  // centred — and every logo inside it moves. Mismatches are REPORTED, not
-  // rejected: a slightly-off file still produces a usable mockup, it just
-  // shifts, and you should know rather than wonder.
+  // inspect-template.jsx.
+  //
+  // replaceContents does NOT fit artwork to the frame — it keeps the slot's
+  // existing transform and drops the new file in at its natural pixel size. A
+  // file at 2/3 of the expected canvas therefore renders at 2/3 size, with the
+  // garment's solid fills showing around it.
+  //
+  // So the script compensates: it scales the slot by expect/actual after
+  // replacing, and scales it back after export. Artwork at any canvas size
+  // works, as long as elements are positioned proportionally within it.
   //
   // `count` asserts how many layers the address resolves to. If a template is
   // edited and the number shifts, the run STOPS — a silently unreplaced
@@ -158,6 +163,24 @@ function setMaskLinked(linked) {
     executeAction(charIDToTypeID('setd'), d, DialogModes.NO);
     return true;
   } catch (e) { return false; }
+}
+
+/**
+ * Undo the size difference between the artwork and the slot's own canvas.
+ *
+ * Handles a non-matching aspect ratio too, by scaling each axis independently —
+ * which distorts, but distorting is visibly wrong and therefore better than
+ * silently cropping or letterboxing the design.
+ */
+function rescaleLayer(doc, layer, fromWH, toWH) {
+  var sx = toWH[0] / fromWH[0] * 100;
+  var sy = toWH[1] / fromWH[1] * 100;
+  if (Math.abs(sx - 100) < 0.01 && Math.abs(sy - 100) < 0.01) return false;
+  doc.activeLayer = layer;
+  var hadMask = setMaskLinked(false);
+  layer.resize(sx, sy, AnchorPosition.MIDDLECENTER);
+  if (hadMask) setMaskLinked(true);
+  return true;
 }
 
 function nudgeLayer(doc, layer, dx, dy) {
@@ -444,18 +467,20 @@ function main() {
             for (var j2 = 0; j2 < jobs.length; j2++) jobs[j2].slot = view.slots[jobs[j2].index];
           }
 
-          // Warn before writing: a canvas that does not match the slot still
-          // produces a mockup, but every positioned element inside it will have
-          // moved. Silence here is what cost a round of "why are the logos off".
+          // Measure every artwork BEFORE replacing, so the compensation factor
+          // is known and can be reversed cleanly afterwards.
           for (var w0 = 0; w0 < jobs.length; w0++) {
             var exp = jobs[w0].slot.expect;
+            jobs[w0].fix = null;
             if (!exp) continue;
             var got = svgCanvas(jobs[w0].file);
             if (!got) continue;                       // not an SVG, or unreadable
-            if (got.w !== exp[0] || got.h !== exp[1]) {
-              log.push('    ⚠ ' + jobs[w0].file.name + ' is ' + got.w + '×' + got.h +
-                       ', slot expects ' + exp[0] + '×' + exp[1] + ' — it will be scaled and re-centred');
-            }
+            if (got.w === exp[0] && got.h === exp[1]) continue;
+            jobs[w0].fix = { from: [got.w, got.h], to: exp };
+            var ar = Math.abs((got.w / got.h) - (exp[0] / exp[1])) / (exp[0] / exp[1]);
+            log.push('    · ' + jobs[w0].file.name + ' is ' + got.w + '×' + got.h +
+                     ' vs ' + exp[0] + '×' + exp[1] + ' — rescaled' +
+                     (ar > 0.01 ? '  ⚠ ASPECT RATIO DIFFERS, it will distort' : ''));
           }
 
           var swaps = 0;
@@ -467,8 +492,14 @@ function main() {
             dirty[jobs[j].index] = true;
           }
 
-          // Nudge, export, un-nudge. Reversing it is what stops a 10-design
-          // batch from drifting the sleeves 250px up the shirt.
+          // Rescale and nudge, export, then undo both. Reversing is what stops
+          // a 10-design batch from compounding every correction.
+          for (var f0 = 0; f0 < jobs.length; f0++) {
+            if (!jobs[f0].fix) continue;
+            for (var q0 = 0; q0 < jobs[f0].slot.refs.length; q0++) {
+              rescaleLayer(doc, jobs[f0].slot.refs[q0], jobs[f0].fix.from, jobs[f0].fix.to);
+            }
+          }
           for (var n = 0; n < jobs.length; n++) {
             var nd = jobs[n].slot.nudge;
             if (!nd) continue;
@@ -481,6 +512,12 @@ function main() {
             var nd2 = jobs[n2].slot.nudge;
             if (!nd2) continue;
             for (var q2 = 0; q2 < jobs[n2].slot.refs.length; q2++) nudgeLayer(doc, jobs[n2].slot.refs[q2], -nd2[0], -nd2[1]);
+          }
+          for (var f2 = 0; f2 < jobs.length; f2++) {
+            if (!jobs[f2].fix) continue;
+            for (var q3 = 0; q3 < jobs[f2].slot.refs.length; q3++) {
+              rescaleLayer(doc, jobs[f2].slot.refs[q3], jobs[f2].fix.to, jobs[f2].fix.from);
+            }
           }
           log.push('    ✓ ' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format + '  (' + swaps + ' slots)' +
             (blank.length ? '  · template default kept for: ' + blank.join(', ') : ''));

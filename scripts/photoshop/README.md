@@ -155,13 +155,24 @@ not match:
 A warning, not a rejection: a mismatched file still produces a usable mockup, it
 just shifts. You should know rather than wonder.
 
-### Author artwork at the slot's own canvas size
+### What replaceContents actually does
 
-`replaceContents` **fits the incoming file into the slot's frame, preserving
-aspect ratio**. Artwork whose canvas differs from the slot's therefore gets
-scaled and centred — and every positioned element inside it moves with it. An
-abstract pattern survives that; a crest, a sponsor and a chest logo do not, and
-the drift reads as "the logos aren't sitting right".
+**It does not fit artwork to the frame.** It keeps the slot's existing transform
+and drops the new file in at its natural pixel size. Artwork at ⅔ of the
+expected canvas therefore renders at ⅔ size, with the garment's solid-fill
+layers visible around it — not a subtle misalignment, a visibly broken mockup.
+
+The script compensates: it measures the SVG's `viewBox`, scales the slot by
+`expect / actual` after replacing, and scales back after export so a batch never
+compounds. **Any canvas size works**, as long as elements sit proportionally
+within it.
+
+Matching the sizes in the table above is still better — no resampling, no
+rounding — but it is now an optimisation rather than a requirement.
+
+If the **aspect ratio** differs the script says so and the artwork will distort,
+because each axis is scaled independently. Distortion is visibly wrong, which is
+preferable to silently cropping or letterboxing part of a design.
 
 So build each SVG at the size the inspector reports as **`AUTHOR ARTWORK AT`**.
 
