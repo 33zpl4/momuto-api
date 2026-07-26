@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26 · shoulders addressed by position, partial sets, nudge, PNG keeps alpha';
+var VERSION = '2026-07-26d · warns when artwork canvas does not match the slot';
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
@@ -48,6 +48,13 @@ var CONFIG = {
   // afterwards, so a batch never accumulates offsets. Positive dy is DOWN, so
   // "left sleeve up 25px" is nudge: [0, -25].
   //
+  // `expect: [w, h]` is the slot's own SOURCE canvas, measured by
+  // inspect-template.jsx. replaceContents fits artwork into that frame
+  // preserving aspect ratio, so artwork on any other canvas is scaled and
+  // centred — and every logo inside it moves. Mismatches are REPORTED, not
+  // rejected: a slightly-off file still produces a usable mockup, it just
+  // shifts, and you should know rather than wonder.
+  //
   // `count` asserts how many layers the address resolves to. If a template is
   // edited and the number shifts, the run STOPS — a silently unreplaced
   // shoulder panel is the exact failure this prevents.
@@ -58,13 +65,13 @@ var CONFIG = {
       suffix: 'front',
       size: 1500,
       slots: [
-        { layer: 'JERSEY DESIGN', at: [1725, 959],  file: 'front',                        count: 1, required: true },
-        { layer: 'JERSEY DESIGN', at: [1723, 736],  file: ['shoulderleft',  'shoulders'], count: 1 },
-        { layer: 'JERSEY DESIGN', at: [3596, 746],  file: ['shoulderright', 'shoulders'], count: 1 },
-        { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveleft',    'sleeves'],   count: 1, nudge: [0, -25] },
-        { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveright',   'sleeves'],   count: 1, nudge: [0, 0] },
-        { layer: 'COLLAR TOP',    file: 'collartop',    count: 1 },
-        { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1 }
+        { layer: 'JERSEY DESIGN', at: [1725, 959],  file: 'front',                        count: 1, required: true, expect: [4469, 5904] },
+        { layer: 'JERSEY DESIGN', at: [1723, 736],  file: ['shoulderleft',  'shoulders'], count: 1, expect: [1671, 679] },
+        { layer: 'JERSEY DESIGN', at: [3596, 746],  file: ['shoulderright', 'shoulders'], count: 1, expect: [1671, 679] },
+        { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2494] },
+        { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2520] },
+        { layer: 'COLLAR TOP',    file: 'collartop',    count: 1, expect: [1500, 252] },
+        { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1, expect: [2171, 355] }
         // TAPE DESIGN is deliberately absent — it stays white, so leaving the
         // slot untouched keeps whatever the template already holds.
         // INNER DESIGN is hidden in the template and is skipped automatically.
@@ -182,6 +189,26 @@ function artworkFor(slug, kinds) {
     }
   }
   return null;
+}
+
+/**
+ * An SVG's canvas, without rasterising it. Inkscape writes both width/height
+ * and a viewBox; the viewBox is the reliable one because width/height may carry
+ * units (mm, pt) while the viewBox is always user units.
+ */
+function svgCanvas(file) {
+  try {
+    if (!/\.svg$/i.test(file.name)) return null;    // only SVG is cheap to read
+    file.open('r');
+    var head = file.read(4000);                      // the <svg> tag is at the top
+    file.close();
+    var vb = head.match(/viewBox\s*=\s*["']\s*[-\d.]+\s+[-\d.]+\s+([\d.]+)\s+([\d.]+)/i);
+    if (vb) return { w: Math.round(parseFloat(vb[1])), h: Math.round(parseFloat(vb[2])) };
+    var w = head.match(/\swidth\s*=\s*["']([\d.]+)/i);
+    var h = head.match(/\sheight\s*=\s*["']([\d.]+)/i);
+    if (w && h) return { w: Math.round(parseFloat(w[1])), h: Math.round(parseFloat(h[1])) };
+    return null;
+  } catch (e) { try { file.close(); } catch (e2) {} return null; }
 }
 
 function kindLabel(kinds) {
@@ -415,6 +442,20 @@ function main() {
             resolveSlots(doc, view, log, true);
             dirty = {};
             for (var j2 = 0; j2 < jobs.length; j2++) jobs[j2].slot = view.slots[jobs[j2].index];
+          }
+
+          // Warn before writing: a canvas that does not match the slot still
+          // produces a mockup, but every positioned element inside it will have
+          // moved. Silence here is what cost a round of "why are the logos off".
+          for (var w0 = 0; w0 < jobs.length; w0++) {
+            var exp = jobs[w0].slot.expect;
+            if (!exp) continue;
+            var got = svgCanvas(jobs[w0].file);
+            if (!got) continue;                       // not an SVG, or unreadable
+            if (got.w !== exp[0] || got.h !== exp[1]) {
+              log.push('    ⚠ ' + jobs[w0].file.name + ' is ' + got.w + '×' + got.h +
+                       ', slot expects ' + exp[0] + '×' + exp[1] + ' — it will be scaled and re-centred');
+            }
           }
 
           var swaps = 0;

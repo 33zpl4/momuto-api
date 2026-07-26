@@ -1,4 +1,4 @@
-inspector: 2026-07-26b · blend mode, clipping, and each slot's authoring size
+inspector: 2026-07-26c · authoring size read by opening each slot
 template : admiral-psd.tif
 canvas   : 6200 × 6200 @ 300 dpi
 mode     : RGB
@@ -17,15 +17,15 @@ centred to fit, which moves every logo inside it.
   Brillo/contraste 1   · brightnesscontrast  [0,0 → 6200,6200  6200×6200]   {CLIPPED to layer below}
   Tono/saturación 1   · huesaturation  [0,0 → 6200,6200  6200×6200]   {CLIPPED to layer below}
   [group] SMARTS
-    JERSEY DESIGN   · SMART OBJECT  ← replaceable  [1725,959 → 4489,5160  2764×4201]   (source size unreadable — double-click the slot and check Image ▸ Image Size)
-    SLEEVE DESIGN   · SMART OBJECT  ← replaceable  [3845,1040 → 4966,2654  1121×1614]   (source size unreadable — double-click the slot and check Image ▸ Image Size)
-    SLEEVE DESIGN   · SMART OBJECT  ← replaceable  [1242,995 → 2419,2636  1177×1641]   (source size unreadable — double-click the slot and check Image ▸ Image Size)
-    TAPE DESIGN   · SMART OBJECT  ← replaceable  [2645,721 → 3571,792  926×71]   (source size unreadable — double-click the slot and check Image ▸ Image Size)
-    INNER DESIGN   · SMART OBJECT  ← replaceable  [2653,777 → 3566,1092  913×315]   (source size unreadable — double-click the slot and check Image ▸ Image Size)
-    JERSEY DESIGN   · SMART OBJECT  ← replaceable  [1723,736 → 2624,1318  901×582]   (source size unreadable — double-click the slot and check Image ▸ Image Size)
-    JERSEY DESIGN   · SMART OBJECT  ← replaceable  [3596,746 → 4492,1339  896×593]   (source size unreadable — double-click the slot and check Image ▸ Image Size)
-    COLLAR TOP   · SMART OBJECT  ← replaceable  [2626,620 → 3593,760  967×140]   (source size unreadable — double-click the slot and check Image ▸ Image Size)
-    COLLAR BOTTOM   · SMART OBJECT  ← replaceable  [2535,649 → 3671,1203  1136×554]   (source size unreadable — double-click the slot and check Image ▸ Image Size)
+    JERSEY DESIGN   · SMART OBJECT  ← replaceable  [1725,959 → 4489,5160  2764×4201]   AUTHOR ARTWORK AT 4469×5904 [opened]
+    SLEEVE DESIGN   · SMART OBJECT  ← replaceable  [3845,1040 → 4966,2654  1121×1614]   AUTHOR ARTWORK AT 1348×2520 [opened]
+    SLEEVE DESIGN   · SMART OBJECT  ← replaceable  [1242,995 → 2419,2636  1177×1641]   AUTHOR ARTWORK AT 1348×2494 [opened]
+    TAPE DESIGN   · SMART OBJECT  ← replaceable  [2645,721 → 3571,792  926×71]   AUTHOR ARTWORK AT 1965×197 [opened]
+    INNER DESIGN   · SMART OBJECT  ← replaceable  [2653,777 → 3566,1092  913×315]   AUTHOR ARTWORK AT 1508×983 [opened]
+    JERSEY DESIGN   · SMART OBJECT  ← replaceable  [1723,736 → 2624,1318  901×582]   AUTHOR ARTWORK AT 1671×679 [opened]
+    JERSEY DESIGN   · SMART OBJECT  ← replaceable  [3596,746 → 4492,1339  896×593]   AUTHOR ARTWORK AT 1671×679 [opened]
+    COLLAR TOP   · SMART OBJECT  ← replaceable  [2626,620 → 3593,760  967×140]   AUTHOR ARTWORK AT 1500×252 [opened]
+    COLLAR BOTTOM   · SMART OBJECT  ← replaceable  [2535,649 → 3671,1203  1136×554]   AUTHOR ARTWORK AT 2171×355 [opened]
   PARTS MERGED   · normal  [1242,620 → 4966,5160  3724×4540]   (hidden)
   [group] PARTS
     SLEEVES STITCHES   · solidfill  [1288,2265 → 4920,2480  3632×215]

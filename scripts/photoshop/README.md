@@ -123,6 +123,38 @@ Worth re-running the inspector after any template edit — a `shadows` layer tha
 someone clips, or knocks to Normal, would quietly stop doing its job and nothing
 else in the pipeline would notice.
 
+### Authoring sizes — front template
+
+Measured from the template. **Build each SVG at exactly this size.**
+
+| file | size |
+|---|---|
+| `<slug>-front` | **4469 × 5904** |
+| `<slug>-shoulders` (both) | **1671 × 679** |
+| `<slug>-sleeveleft` | **1348 × 2494** |
+| `<slug>-sleeveright` | **1348 × 2520** |
+| `<slug>-collartop` | **1500 × 252** |
+| `<slug>-collarbottom` | **2171 × 355** |
+
+Two things fall out of that table:
+
+- **Both shoulders share one canvas**, so a single `-shoulders.svg` is exact for
+  both — no need to make a left and a right.
+- **The sleeves differ by 26 px in height** (2494 vs 2520). One shared
+  `-sleeves.svg` therefore cannot be exact for both; it will be ~1% off on
+  whichever it wasn't authored for. Supplying `-sleeveleft` and `-sleeveright`
+  removes that.
+
+The builder now carries these as `expect` and **warns** when a dropped file does
+not match:
+
+```
+⚠ kalikamis-front.svg is 1000×1500, slot expects 4469×5904 — it will be scaled and re-centred
+```
+
+A warning, not a rejection: a mismatched file still produces a usable mockup, it
+just shifts. You should know rather than wonder.
+
 ### Author artwork at the slot's own canvas size
 
 `replaceContents` **fits the incoming file into the slot's frame, preserving
@@ -138,9 +170,19 @@ bounds — the content usually extends past its mask. One observed slot had boun
 `2764×4201` and a source canvas of `3060×4431`. Authoring to the bounds would
 still have been wrong, just less obviously.
 
-If matching the size exactly is impractical, match the **aspect ratio** at
-minimum: a same-ratio canvas scales uniformly, so everything stays where it
-belongs relative to the garment even if the pixel dimensions differ.
+If matching exactly is impractical, match the **source aspect ratio** — but note
+that is *not* the ratio of the masked bounds, and on this template the two are
+wildly different for every single slot:
+
+| slot | bounds AR | source AR |
+|---|---|---|
+| body | 0.658 | 0.757 |
+| sleeve | 0.695 | 0.535 |
+| shoulder | 1.548 | 2.461 |
+| collar bottom | 2.051 | 6.115 |
+
+The content is warped into the garment shape, so the mask tells you nothing
+about how the artwork should be proportioned. Only the source canvas does.
 
 ### Addressing repeated layer names
 
