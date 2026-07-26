@@ -317,6 +317,25 @@ template** whenever the current design doesn't fill all of them, resetting every
 slot to the template's own placeholder first. Reopening costs a few seconds and
 only happens on partial sets; a full batch never triggers it.
 
+## Debugging a placement — `placeOnly`
+
+When a slot lands wrong and you need to see *why* rather than infer it from the
+export:
+
+```js
+placeOnly: true
+```
+
+The run places the **first** design into every template and then stops. No
+export, no undoing of the rescale or nudge, and the documents are **left open**
+so the placement can be inspected layer by layer — and exported by hand if the
+result is what you wanted.
+
+⚠ **The templates are open and modified. Close them without saving.** The script
+cannot protect you here; leaving them open is the entire point of the mode.
+
+Set it back to `false` for normal runs.
+
 ## 3. Compress
 
 ```

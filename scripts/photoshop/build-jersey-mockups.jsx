@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26f · measures PNGs too, and names the likely typo';
+var VERSION = '2026-07-26g · placeOnly mode: place and stop, no export';
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
@@ -112,7 +112,14 @@ var CONFIG = {
   // slot's bounds (the inspector prints them) and drop that in instead.
   extensions: ['svg', 'png', 'tif', 'psd'],
 
-  format: 'png'   // 'png' (what the proposal pages use) or 'jpg'
+  format: 'png',  // 'png' (what the proposal pages use) or 'jpg'
+
+  // DEBUG. Place the FIRST design into every template, then stop: no export, no
+  // undo of the rescale/nudge, and the documents are LEFT OPEN so the placement
+  // can be inspected and exported by hand. Set back to false for normal runs.
+  //
+  // ⚠ The templates are open and MODIFIED. Close them WITHOUT saving.
+  placeOnly: false
 };
 
 // Two slots on the same template are never within this many px of each other —
@@ -476,6 +483,13 @@ function main() {
     log.push('');
   }
 
+  if (CONFIG.placeOnly) {
+    slugs = slugs.slice(0, 1);
+    log.push('PLACE-ONLY: "' + slugs[0] + '" only. Nothing is exported, nothing is undone,');
+    log.push('and the templates are left OPEN and MODIFIED — close them WITHOUT saving.');
+    log.push('');
+  }
+
   var prevDialogs = app.displayDialogs;
   app.displayDialogs = DialogModes.NO;
 
@@ -562,6 +576,12 @@ function main() {
             for (var q = 0; q < jobs[n].slot.refs.length; q++) nudgeLayer(doc, jobs[n].slot.refs[q], nd[0], nd[1]);
           }
 
+          if (CONFIG.placeOnly) {
+            log.push('    ⏸ ' + slugs[i] + '-' + view.suffix + ': ' + swaps + ' slots placed, left open for inspection');
+            made++;
+            continue;   // no export, and the undo below is skipped with it
+          }
+
           exportFlat(doc, view.size, new File(CONFIG.outDir + '/' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format));
 
           for (var n2 = 0; n2 < jobs.length; n2++) {
@@ -582,8 +602,9 @@ function main() {
       } catch (inner) {
         log.push('    ✗ ' + inner.message);
       } finally {
-        // Leaves the template exactly as it was on disk.
-        doc.close(SaveOptions.DONOTSAVECHANGES);
+        // Leaves the template exactly as it was on disk — unless placeOnly, where
+        // the whole point is to leave it open with the artwork in place.
+        if (!CONFIG.placeOnly) doc.close(SaveOptions.DONOTSAVECHANGES);
       }
     }
   } finally {
