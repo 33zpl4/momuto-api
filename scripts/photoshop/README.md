@@ -75,26 +75,38 @@ Mapping as configured — `count` is an assertion, not a hint:
 |---|---|---|---|
 | front | `JERSEY DESIGN` | `<slug>-front` | 3 |
 | front | `SLEEVE DESIGN` | `<slug>-sleeves` | 2 |
+| front | `COLLAR TOP` | `<slug>-collartop` | 1 |
+| front | `COLLAR BOTTOM` | `<slug>-collarbottom` | 1 |
 | back | `JERSEY DESIGN` | `<slug>-back` | 1 |
 | back | `LEFT/RIGHT SLEEVE DESIGN` | `<slug>-sleeves` | 1 each |
+| back | `COLLAR DESIGN` | `<slug>-collarback` | 1 |
 | shorts | `L/R LEG DESIGN` | `<slug>-shorts` | 1 each |
+| shorts | `BELT DESIGN` | `<slug>-belt` | 1 |
 
-**Commented out pending your answer:** `TAPE DESIGN`, `COLLAR TOP`,
-`COLLAR BOTTOM`, `COLLAR DESIGN`, `BELT DESIGN`. Those slots exist but I don't
-know what you currently drop into them — a separate trim file, or nothing
-because the solid-fill `PARTS` layers handle plain colours. Uncomment with the
-right `file:` once you say.
+Two slots are **deliberately not configured**:
 
-`INNER DESIGN` is hidden in the template, so it's skipped automatically and
-reported.
+- **`TAPE DESIGN`** — always white, so leaving it alone keeps what the template
+  already holds. Configuring it would mean generating an identical white file
+  per design for no gain.
+- **`INNER DESIGN`** — hidden in the template. Skipped automatically and
+  reported, since replacing a hidden layer changes nothing in the export.
 
-Drop artwork in `artworkDir` using the naming you already use:
+**Trim kind names carry no internal hyphen** — `collarback`, not `collar-back`.
+`findSlugs()` matches on a trailing `-<view>`, so `x-collar-back.svg` would be
+read as a design called `x-collar` the day the lead view changes. Unhyphenated
+kinds cannot collide under any ordering.
+
+Drop artwork in `artworkDir`:
 
 ```
-kalikamis-front.svg    →  kalikamis-front.png    1500×1500
-kalikamis-back.svg     →  kalikamis-back.png     1500×1500
-kalikamis-shorts.svg   →  kalikamis-shorts.png   1000×1000
+kalikamis-front.svg          kalikamis-collartop.svg        →  kalikamis-front.png    1500×1500
+kalikamis-back.svg           kalikamis-collarbottom.svg     →  kalikamis-back.png     1500×1500
+kalikamis-sleeves.svg        kalikamis-collarback.svg       →  kalikamis-shorts.png   1000×1000
+kalikamis-shorts.svg         kalikamis-belt.svg
 ```
+
+Eight files per full design set. A view whose files are incomplete is skipped
+and reported rather than exported half-dressed.
 
 Any number of designs at once. Each PSD is opened **once** and every design run
 through it, which is where the time saving actually comes from on a batch.

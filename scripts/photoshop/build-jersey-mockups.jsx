@@ -37,13 +37,13 @@ var CONFIG = {
       suffix: 'front',
       size: 1500,
       slots: [
-        { layer: 'JERSEY DESIGN', file: 'front',   count: 3 },   // body + both shoulders
-        { layer: 'SLEEVE DESIGN', file: 'sleeves', count: 2 },   // left + right
-        // Confirm what belongs in these before enabling them:
-        // { layer: 'TAPE DESIGN',    file: 'tape',   count: 1 },
-        // { layer: 'COLLAR TOP',     file: 'collar', count: 1 },
-        // { layer: 'COLLAR BOTTOM',  file: 'collar', count: 1 }
-        // 'INNER DESIGN' is hidden in the template and is skipped automatically.
+        { layer: 'JERSEY DESIGN',  file: 'front',        count: 3 },   // body + both shoulders
+        { layer: 'SLEEVE DESIGN',  file: 'sleeves',      count: 2 },   // left + right
+        { layer: 'COLLAR TOP',     file: 'collartop',    count: 1 },
+        { layer: 'COLLAR BOTTOM',  file: 'collarbottom', count: 1 }
+        // TAPE DESIGN is deliberately absent — it stays white, so leaving the
+        // slot untouched keeps whatever the template already holds.
+        // INNER DESIGN is hidden in the template and is skipped automatically.
       ]
     },
     {
@@ -51,10 +51,10 @@ var CONFIG = {
       suffix: 'back',
       size: 1500,
       slots: [
-        { layer: 'JERSEY DESIGN',       file: 'back',    count: 1 },
-        { layer: 'LEFT SLEEVE DESIGN',  file: 'sleeves', count: 1 },
-        { layer: 'RIGHT SLEEVE DESIGN', file: 'sleeves', count: 1 }
-        // { layer: 'COLLAR DESIGN',    file: 'collar',  count: 1 }
+        { layer: 'JERSEY DESIGN',       file: 'back',       count: 1 },
+        { layer: 'LEFT SLEEVE DESIGN',  file: 'sleeves',    count: 1 },
+        { layer: 'RIGHT SLEEVE DESIGN', file: 'sleeves',    count: 1 },
+        { layer: 'COLLAR DESIGN',       file: 'collarback', count: 1 }
       ]
     },
     {
@@ -63,9 +63,9 @@ var CONFIG = {
       size: 1000,
       optional: true,
       slots: [
-        { layer: 'L LEG DESIGN', file: 'shorts', count: 1 },
-        { layer: 'R LEG DESIGN', file: 'shorts', count: 1 }
-        // { layer: 'BELT DESIGN', file: 'belt', count: 1 }
+        { layer: 'L LEG DESIGN',  file: 'shorts', count: 1 },
+        { layer: 'R LEG DESIGN',  file: 'shorts', count: 1 },
+        { layer: 'BELT DESIGN',   file: 'belt',   count: 1 }   // the waistband
       ]
     }
   ],
@@ -101,6 +101,10 @@ function replaceSmartObject(doc, layer, file) {
   executeAction(stringIDToTypeID('placedLayerReplaceContents'), d, DialogModes.NO);
 }
 
+// Kind names deliberately carry no internal hyphen ('collarback', not
+// 'collar-back'): findSlugs() matches on a trailing '-<view>', so a file called
+// <slug>-collar-back.svg would be read as the design 'x-collar' the day the
+// lead view changes. Unhyphenated kinds cannot collide under any ordering.
 function artworkFor(slug, kind) {
   for (var i = 0; i < CONFIG.extensions.length; i++) {
     var f = new File(CONFIG.artworkDir + '/' + slug + '-' + kind + '.' + CONFIG.extensions[i]);
