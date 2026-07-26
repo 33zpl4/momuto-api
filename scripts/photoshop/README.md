@@ -74,44 +74,75 @@ to skip that view.
 Both `artworkDir` and `templatesDir` are checked before anything opens, so a
 typo'd path says so immediately instead of failing three templates deep.
 
-Mapping as configured — `count` is an assertion, not a hint:
+Mapping as configured. `count` is an **assertion**, not a hint — if a template
+is edited and a slot count shifts, the run stops rather than half-applying.
 
-| view | slot | ← file | copies |
+| view | slot | address | ← file (first that exists) |
 |---|---|---|---|
-| front | `JERSEY DESIGN` | `<slug>-front` | 3 |
-| front | `SLEEVE DESIGN` | `<slug>-sleeves` | 2 |
-| front | `COLLAR TOP` | `<slug>-collartop` | 1 |
-| front | `COLLAR BOTTOM` | `<slug>-collarbottom` | 1 |
-| back | `JERSEY DESIGN` | `<slug>-back` | 1 |
-| back | `LEFT/RIGHT SLEEVE DESIGN` | `<slug>-sleeves` | 1 each |
-| back | `COLLAR DESIGN` | `<slug>-collarback` | 1 |
-| shorts | `L/R LEG DESIGN` | `<slug>-shorts` | 1 each |
-| shorts | `BELT DESIGN` | `<slug>-belt` | 1 |
+| front | `JERSEY DESIGN` | `@1725,959` | `-front` |
+| front | `JERSEY DESIGN` | `@1723,736` | `-shoulderleft` → `-shoulders` |
+| front | `JERSEY DESIGN` | `@3596,746` | `-shoulderright` → `-shoulders` |
+| front | `SLEEVE DESIGN` | `@1242,995` | `-sleeveleft` → `-sleeves` |
+| front | `SLEEVE DESIGN` | `@3845,1040` | `-sleeveright` → `-sleeves` |
+| front | `COLLAR TOP` | — | `-collartop` |
+| front | `COLLAR BOTTOM` | — | `-collarbottom` |
+| back | `JERSEY DESIGN` | — | `-back` |
+| back | `LEFT SLEEVE DESIGN` | — | `-sleeveleft` → `-sleeves` |
+| back | `RIGHT SLEEVE DESIGN` | — | `-sleeveright` → `-sleeves` |
+| back | `COLLAR DESIGN` | — | `-collarback` |
+| shorts | `L LEG DESIGN` | — | `-shorts` |
+| shorts | `R LEG DESIGN` | — | `-shorts` |
+| shorts | `BELT DESIGN` | — | `-belt` |
 
-Two slots are **deliberately not configured**:
+### Addressing repeated layer names
+
+`admiral-psd` has **three** layers called `JERSEY DESIGN` — the body plus both
+shoulder panels — and **two** called `SLEEVE DESIGN`. Names cannot separate
+them, so those slots are addressed by **position**: `at: [x, y]` is the layer's
+top-left corner, taken straight from the inspector dump and matched within 50 px.
+
+The closest pair on that template is body `1725,959` against left shoulder
+`1723,736` — 2 px apart in x, 223 in y. So x alone would be ambiguous and the
+tolerance has to stay well under 223. Both axes are checked.
+
+If the designer moves a panel, the address stops resolving and the run fails
+loudly. Re-run the inspector and update the coordinates — that beats silently
+dropping the body artwork onto a shoulder.
+
+### `file` accepts a fallback list
+
+`file: ['shoulderleft', 'shoulders']` means: use `<slug>-shoulderleft.svg` if it
+exists, otherwise `<slug>-shoulders.svg`. Since the left and right shoulders are
+usually the same artwork mirrored, a design can ship two files or one shared file
+and neither needs a config change. Sleeves work the same way.
+
+### Slots deliberately not configured
 
 - **`TAPE DESIGN`** — always white, so leaving it alone keeps what the template
-  already holds. Configuring it would mean generating an identical white file
-  per design for no gain.
+  already holds. Configuring it would mean generating an identical white file per
+  design for no gain.
 - **`INNER DESIGN`** — hidden in the template. Skipped automatically and
   reported, since replacing a hidden layer changes nothing in the export.
+- **Back shoulders** — the back template's `SHOULDERS` layer is a solid fill,
+  not a smart object, so back shoulders take a flat colour. Nothing to drop in.
 
 **Trim kind names carry no internal hyphen** — `collarback`, not `collar-back`.
 `findSlugs()` matches on a trailing `-<view>`, so `x-collar-back.svg` would be
 read as a design called `x-collar` the day the lead view changes. Unhyphenated
 kinds cannot collide under any ordering.
 
-Drop artwork in `artworkDir`:
+### Files per design
 
 ```
-kalikamis-front.svg          kalikamis-collartop.svg        →  kalikamis-front.png    1500×1500
-kalikamis-back.svg           kalikamis-collarbottom.svg     →  kalikamis-back.png     1500×1500
-kalikamis-sleeves.svg        kalikamis-collarback.svg       →  kalikamis-shorts.png   1000×1000
-kalikamis-shorts.svg         kalikamis-belt.svg
+<slug>-front.svg           <slug>-collartop.svg       <slug>-shoulderleft.svg
+<slug>-back.svg            <slug>-collarbottom.svg    <slug>-shoulderright.svg
+<slug>-shorts.svg          <slug>-collarback.svg      <slug>-sleeveleft.svg
+<slug>-belt.svg                                       <slug>-sleeveright.svg
 ```
 
-Eight files per full design set. A view whose files are incomplete is skipped
-and reported rather than exported half-dressed.
+…or drop `<slug>-shoulders.svg` / `<slug>-sleeves.svg` in place of the left/right
+pairs. A view whose files are incomplete is skipped and reported rather than
+exported half-dressed.
 
 Any number of designs at once. Each PSD is opened **once** and every design run
 through it, which is where the time saving actually comes from on a batch.
