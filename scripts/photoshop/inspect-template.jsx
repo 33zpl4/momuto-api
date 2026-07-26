@@ -11,7 +11,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26b · blend mode, clipping, and each slot\'s authoring size';
+var VERSION = '2026-07-26c · authoring size read by opening each slot';
 
 // Leave empty to inspect whatever document is already open.
 // Windows paths: use forward slashes — "C:/Users/you/mockups/jersey.psd"
@@ -31,30 +31,49 @@ function px(n) { return Math.round(n.as('px')); }
  * The screenshot case had bounds 2764x4201 but a source canvas of 3060x4431.
  */
 function smartObjectSource(layer) {
+  var doc = app.activeDocument;
+  doc.activeLayer = layer;
+
+  // FAST PATH — the descriptor, if this Photoshop exposes it. Key names and
+  // value types vary by version, so try the plausible ones rather than assume.
   try {
-    app.activeDocument.activeLayer = layer;
     var ref = new ActionReference();
     ref.putEnumerated(charIDToTypeID('Lyr '), charIDToTypeID('Ordn'), charIDToTypeID('Trgt'));
     var d = executeActionGet(ref);
     var soKey = stringIDToTypeID('smartObject');
-    if (!d.hasKey(soKey)) return null;
-    var so = d.getObjectValue(soKey);
-    var sizeKey = stringIDToTypeID('size');
-    if (!so.hasKey(sizeKey)) return null;
-    var sz = so.getObjectValue(sizeKey);
-    // The descriptor stores these as a plain double on some versions and a unit
-    // double on others. Try both rather than fail on the one that isn't used.
-    var read = function (key) {
-      var id = stringIDToTypeID(key);
-      try { return sz.getUnitDoubleValue(id); } catch (e1) {}
-      try { return sz.getDouble(id); } catch (e2) {}
-      try { return sz.getInteger(id); } catch (e3) {}
-      return null;
-    };
-    var w = read('width'), h = read('height');
-    if (w == null || h == null) return null;
-    return { w: Math.round(w), h: Math.round(h) };
-  } catch (e) { return null; }
+    if (d.hasKey(soKey)) {
+      var so = d.getObjectValue(soKey);
+      var sizeKey = stringIDToTypeID('size');
+      if (so.hasKey(sizeKey)) {
+        var sz = so.getObjectValue(sizeKey);
+        var read = function (obj, key) {
+          var id = stringIDToTypeID(key);
+          if (!obj.hasKey(id)) return null;
+          try { return obj.getUnitDoubleValue(id); } catch (e1) {}
+          try { return obj.getDouble(id); } catch (e2) {}
+          try { return obj.getInteger(id); } catch (e3) {}
+          return null;
+        };
+        var w = read(sz, 'width'), h = read(sz, 'height');
+        if (w != null && h != null) return { w: Math.round(w), h: Math.round(h), how: 'descriptor' };
+      }
+    }
+  } catch (eFast) {}
+
+  // SLOW PATH — open the embedded contents and read the canvas directly. Slower
+  // but version-proof: it is the same thing you would see by double-clicking the
+  // slot. Closed without saving, so the template is untouched.
+  try {
+    executeAction(stringIDToTypeID('placedLayerEditContents'), undefined, DialogModes.NO);
+    var inner = app.activeDocument;
+    var res = { w: px(inner.width), h: px(inner.height), how: 'opened' };
+    inner.close(SaveOptions.DONOTSAVECHANGES);
+    app.activeDocument = doc;
+    return res;
+  } catch (eSlow) {
+    try { app.activeDocument = doc; } catch (eRestore) {}
+    return null;
+  }
 }
 
 function describeLayer(layer, depth, out) {
@@ -99,7 +118,7 @@ function describeLayer(layer, depth, out) {
   try {
     if (layer.kind === LayerKind.SMARTOBJECT) {
       var so = smartObjectSource(layer);
-      src = so ? '   AUTHOR ARTWORK AT ' + so.w + '×' + so.h
+      src = so ? '   AUTHOR ARTWORK AT ' + so.w + '×' + so.h + ' [' + so.how + ']'
                : '   (source size unreadable — double-click the slot and check Image ▸ Image Size)';
     }
   } catch (e5) {}
