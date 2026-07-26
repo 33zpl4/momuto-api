@@ -11,13 +11,43 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26 · reports blend mode, opacity and clipping';
+var VERSION = '2026-07-26b · blend mode, clipping, and each slot\'s authoring size';
 
 // Leave empty to inspect whatever document is already open.
 // Windows paths: use forward slashes — "C:/Users/you/mockups/jersey.psd"
 var TEMPLATE = '';
 
 function px(n) { return Math.round(n.as('px')); }
+
+/**
+ * The size artwork should be AUTHORED at.
+ *
+ * replaceContents fits the incoming file into the slot's frame preserving
+ * aspect ratio, so artwork whose canvas differs from the slot's gets scaled and
+ * centred — and every positioned element inside it (logos, crest, sponsor)
+ * moves. Matching this size makes the placement exact.
+ *
+ * This is NOT the layer's bounds: the content usually extends past its mask.
+ * The screenshot case had bounds 2764x4201 but a source canvas of 3060x4431.
+ */
+function smartObjectSource(layer) {
+  try {
+    app.activeDocument.activeLayer = layer;
+    var ref = new ActionReference();
+    ref.putEnumerated(charIDToTypeID('Lyr '), charIDToTypeID('Ordn'), charIDToTypeID('Trgt'));
+    var d = executeActionGet(ref);
+    var soKey = stringIDToTypeID('smartObject');
+    if (!d.hasKey(soKey)) return null;
+    var so = d.getObjectValue(soKey);
+    var sizeKey = stringIDToTypeID('size');
+    if (!so.hasKey(sizeKey)) return null;
+    var sz = so.getObjectValue(sizeKey);
+    return {
+      w: Math.round(sz.getUnitDoubleValue(stringIDToTypeID('width'))),
+      h: Math.round(sz.getUnitDoubleValue(stringIDToTypeID('height')))
+    };
+  } catch (e) { return null; }
+}
 
 function describeLayer(layer, depth, out) {
   var pad = '';
@@ -57,9 +87,18 @@ function describeLayer(layer, depth, out) {
   } catch (e3) { comp.push('composite unknown'); }
   try { if (layer.kind === LayerKind.SMARTOBJECT && layer.grouped) comp.push('clipped'); } catch (e4) {}
 
+  var src = '';
+  try {
+    if (layer.kind === LayerKind.SMARTOBJECT) {
+      var so = smartObjectSource(layer);
+      src = so ? '   AUTHOR ARTWORK AT ' + so.w + '×' + so.h
+               : '   (source size unreadable — double-click the slot and check Image ▸ Image Size)';
+    }
+  } catch (e5) {}
+
   out.push(pad + layer.name + '   · ' + kind + box +
     (comp.length ? '   {' + comp.join(', ') + '}' : '') +
-    (layer.visible ? '' : '   (hidden)'));
+    src + (layer.visible ? '' : '   (hidden)'));
 }
 
 function main() {
@@ -79,6 +118,10 @@ function main() {
   out.push('LAYERS (top to bottom — the ones marked SMART OBJECT are the drop-in slots)');
   out.push('Anything in {braces} is non-default compositing: blend mode, opacity,');
   out.push('or CLIPPED, which limits a layer to the one directly beneath it.');
+  out.push('');
+  out.push('AUTHOR ARTWORK AT is the slot\'s own source canvas. Build the SVG at that');
+  out.push('exact size and the placement is exact. Any other size gets scaled and');
+  out.push('centred to fit, which moves every logo inside it.');
   out.push('');
   for (var i = 0; i < doc.layers.length; i++) describeLayer(doc.layers[i], 0, out);
 

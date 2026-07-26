@@ -123,6 +123,25 @@ Worth re-running the inspector after any template edit — a `shadows` layer tha
 someone clips, or knocks to Normal, would quietly stop doing its job and nothing
 else in the pipeline would notice.
 
+### Author artwork at the slot's own canvas size
+
+`replaceContents` **fits the incoming file into the slot's frame, preserving
+aspect ratio**. Artwork whose canvas differs from the slot's therefore gets
+scaled and centred — and every positioned element inside it moves with it. An
+abstract pattern survives that; a crest, a sponsor and a chest logo do not, and
+the drift reads as "the logos aren't sitting right".
+
+So build each SVG at the size the inspector reports as **`AUTHOR ARTWORK AT`**.
+
+That number is the smart object's **source canvas**, which is *not* the layer's
+bounds — the content usually extends past its mask. One observed slot had bounds
+`2764×4201` and a source canvas of `3060×4431`. Authoring to the bounds would
+still have been wrong, just less obviously.
+
+If matching the size exactly is impractical, match the **aspect ratio** at
+minimum: a same-ratio canvas scales uniformly, so everything stays where it
+belongs relative to the garment even if the pixel dimensions differ.
+
 ### Addressing repeated layer names
 
 `admiral-psd` has **three** layers called `JERSEY DESIGN` — the body plus both
