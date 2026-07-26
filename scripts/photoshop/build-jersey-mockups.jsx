@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26e · rescales artwork to the slot instead of only warning';
+var VERSION = '2026-07-26f · measures PNGs too, and names the likely typo';
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
@@ -219,6 +219,33 @@ function artworkFor(slug, kinds) {
  * and a viewBox; the viewBox is the reliable one because width/height may carry
  * units (mm, pt) while the viewBox is always user units.
  */
+/**
+ * A PNG's dimensions from its IHDR chunk — bytes 16..23, big-endian.
+ * Needed because a PNG is the escape hatch when Photoshop mis-renders an SVG
+ * (text on a path, a font it cannot resolve), and an unmeasured file gets no
+ * scale compensation.
+ */
+function pngCanvas(file) {
+  try {
+    file.encoding = 'BINARY';
+    file.open('r');
+    var head = file.read(24);
+    file.close();
+    if (head.length < 24 || head.substr(1, 3) !== 'PNG') return null;
+    var be32 = function (off) {
+      return ((head.charCodeAt(off) << 24) | (head.charCodeAt(off + 1) << 16) |
+              (head.charCodeAt(off + 2) << 8) | head.charCodeAt(off + 3)) >>> 0;
+    };
+    var w = be32(16), h = be32(20);
+    return (w && h) ? { w: w, h: h } : null;
+  } catch (e) { try { file.close(); } catch (e2) {} return null; }
+}
+
+function artworkCanvas(file) {
+  if (/\.png$/i.test(file.name)) return pngCanvas(file);
+  return svgCanvas(file);
+}
+
 function svgCanvas(file) {
   try {
     if (!/\.svg$/i.test(file.name)) return null;    // only SVG is cheap to read
@@ -288,6 +315,31 @@ function claimedKinds(active) {
   return kinds;
 }
 
+// Cheap edit distance, so an unclaimed file can name what it probably meant.
+function editDistance(a, b) {
+  var prev = [], cur = [], i, j;
+  for (j = 0; j <= b.length; j++) prev[j] = j;
+  for (i = 1; i <= a.length; i++) {
+    cur[0] = i;
+    for (j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1,
+                        prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1));
+    }
+    for (j = 0; j <= b.length; j++) prev[j] = cur[j];
+  }
+  return prev[b.length];
+}
+
+function nearestKind(kind, kinds) {
+  var best = null, bestD = 99;
+  for (var k in kinds) {
+    if (!kinds.hasOwnProperty(k)) continue;
+    var d = editDistance(kind, k);
+    if (d < bestD) { bestD = d; best = k; }
+  }
+  return bestD <= 3 ? best : null;
+}
+
 function unclaimedFiles(active, slugs) {
   var kinds = claimedKinds(active);
   var files = new Folder(CONFIG.artworkDir).getFiles();
@@ -301,7 +353,11 @@ function unclaimedFiles(active, slugs) {
     for (var s = 0; s < slugs.length; s++) {
       if (stem.length > slugs[s].length + 1 && stem.substring(0, slugs[s].length + 1) === slugs[s] + '-') {
         var kind = stem.substring(slugs[s].length + 1).toLowerCase();
-        if (!kinds[kind]) out.push(name + '  (no slot wants "' + kind + '")');
+        if (!kinds[kind]) {
+          var did = nearestKind(kind, kinds);
+          out.push(name + '  → no slot wants "' + kind + '"' +
+                   (did ? '  ·  DID YOU MEAN "' + did + '"?' : ''));
+        }
         break;
       }
     }
@@ -473,7 +529,7 @@ function main() {
             var exp = jobs[w0].slot.expect;
             jobs[w0].fix = null;
             if (!exp) continue;
-            var got = svgCanvas(jobs[w0].file);
+            var got = artworkCanvas(jobs[w0].file);
             if (!got) continue;                       // not an SVG, or unreadable
             if (got.w === exp[0] && got.h === exp[1]) continue;
             jobs[w0].fix = { from: [got.w, got.h], to: exp };

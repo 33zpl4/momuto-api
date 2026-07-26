@@ -155,6 +155,19 @@ not match:
 A warning, not a rejection: a mismatched file still produces a usable mockup, it
 just shifts. You should know rather than wonder.
 
+### PNG is a first-class input
+
+Photoshop sometimes mis-renders an SVG — text converted to a path, or a font it
+cannot resolve, and the type vanishes. The fix is to export that one file as PNG
+and drop it in instead; `extensions` already prefers `svg` and falls back.
+
+The scale compensation works on PNG too: dimensions come from the IHDR chunk
+rather than a `viewBox`. **Export the PNG at the same canvas as the SVG it
+replaces** and nothing else changes.
+
+`tif` and `psd` are accepted but not measured, so those get no compensation —
+author them at the slot's exact size.
+
 ### What replaceContents actually does
 
 **It does not fit artwork to the frame.** It keeps the slot's existing transform
