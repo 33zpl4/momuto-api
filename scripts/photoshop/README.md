@@ -190,6 +190,27 @@ than the canvas — then the layers underneath would show through in the manual
 workflow and be missing in the scripted one. Worth checking the contents list
 before assuming a slot behaves like the others.
 
+### Two ways artwork gets into a slot — `placeInside`
+
+They are genuinely different operations, and the difference is visible:
+
+| | `placeInside: false` | `placeInside: true` (default) |
+|---|---|---|
+| mechanism | `replaceContents` substitutes the smart object's content | opens the slot's `.psb`, places the artwork inside, saves, closes |
+| slot ends up holding | **your SVG file** | an embedded `.psb`, like a hand-made mockup |
+| double-clicking the slot | opens the SVG **in your browser** | opens in Photoshop |
+| sizing | the outer `expect` / rescale compensation | fitted to the `.psb` canvas directly |
+| speed | fast | a save per slot, and the template reopens per design |
+
+`true` is what a manual drag-and-drop does, so it renders like one. That is the
+whole reason it exists: `replaceContents` leaves the slot holding a vector file
+rather than a Photoshop document, and how Photoshop rasterises that — especially
+after a scripted `resize()` — is not something to assume.
+
+In `placeInside` mode the `expect` table becomes advisory. The artwork is scaled
+to the `.psb` canvas from the inside, where the numbers are exact, so a
+mismatched canvas costs a resample and nothing else.
+
 ### What replaceContents actually does
 
 **It does not fit artwork to the frame.** It keeps the slot's existing transform

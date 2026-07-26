@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26g · placeOnly mode: place and stop, no export';
+var VERSION = '2026-07-26h · placeInside: script the manual drag-and-drop';
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
@@ -119,7 +119,23 @@ var CONFIG = {
   // can be inspected and exported by hand. Set back to false for normal runs.
   //
   // ⚠ The templates are open and MODIFIED. Close them WITHOUT saving.
-  placeOnly: false
+  placeOnly: false,
+
+  // HOW artwork gets into a slot. Two genuinely different operations:
+  //
+  //  false — replaceContents. Substitutes the smart object's content with the
+  //          file itself, so the slot ends up holding an SVG. Double-clicking
+  //          it opens the SVG in your browser, not in Photoshop. Fast.
+  //
+  //  true  — open the slot's .psb, PLACE the artwork inside it as a layer
+  //          scaled to that canvas, save, close. This is exactly the manual
+  //          drag-and-drop, so it renders exactly like a hand-made mockup.
+  //          Slower (a save per slot) and the template reopens per design.
+  //
+  // Use true when the output must match a hand-made mockup. `expect` and the
+  // rescale compensation are ignored in that mode — the artwork is fitted to
+  // the .psb canvas directly, which is the same thing done properly.
+  placeInside: true
 };
 
 // Two slots on the same template are never within this many px of each other —
@@ -196,6 +212,50 @@ function nudgeLayer(doc, layer, dx, dy) {
   var hadMask = setMaskLinked(false);
   layer.translate(UnitValue(dx, 'px'), UnitValue(dy, 'px'));
   if (hadMask) setMaskLinked(true);
+}
+
+/**
+ * The manual workflow, scripted: open the slot's .psb, place the artwork inside
+ * as a layer, scale it to that canvas, save, close.
+ *
+ * Saving an embedded .psb writes straight back into the parent document, so the
+ * slot updates the moment it closes. The parent template is still closed
+ * without saving at the end of the run, so nothing on disk changes.
+ */
+function placeInsideSlot(doc, layer, file) {
+  doc.activeLayer = layer;
+  executeAction(stringIDToTypeID('placedLayerEditContents'), undefined, DialogModes.NO);
+  var inner = app.activeDocument;
+  try {
+    // Everything already in the .psb is a leftover: either the template's
+    // placeholder or the previous design. The artwork replaces the lot.
+    for (var i = inner.artLayers.length - 1; i >= 0; i--) {
+      try { inner.artLayers[i].remove(); } catch (eDel) {}
+    }
+
+    var d = new ActionDescriptor();
+    d.putPath(charIDToTypeID('null'), file);
+    d.putEnumerated(charIDToTypeID('FTcs'), charIDToTypeID('QCSt'), charIDToTypeID('Qcsa'));
+    executeAction(charIDToTypeID('Plc '), d, DialogModes.NO);
+
+    // Fill the canvas exactly — this is what `expect` was approximating from
+    // the outside, done from the inside where the numbers are known.
+    var pl = inner.activeLayer;
+    var b = pl.bounds;
+    var w = b[2].as('px') - b[0].as('px');
+    var h = b[3].as('px') - b[1].as('px');
+    var cw = inner.width.as('px'), ch = inner.height.as('px');
+    if (w > 0 && h > 0) {
+      pl.resize(cw / w * 100, ch / h * 100, AnchorPosition.MIDDLECENTER);
+      var nb = pl.bounds;
+      pl.translate(UnitValue(-nb[0].as('px'), 'px'), UnitValue(-nb[1].as('px'), 'px'));
+    }
+    inner.close(SaveOptions.SAVECHANGES);   // writes back into the parent slot
+  } catch (e) {
+    try { inner.close(SaveOptions.DONOTSAVECHANGES); } catch (e2) {}
+    throw e;
+  }
+  app.activeDocument = doc;
 }
 
 // No DOM method for this — the action is the documented idiom.
@@ -527,7 +587,9 @@ function main() {
           // artwork, because the template stays open across the batch. Reopening
           // resets every slot to the template's own placeholder. Without this a
           // front-only set silently inherits the previous team's collar.
-          var stale = false;
+          // placeInside SAVES each .psb, so the template carries the previous
+          // design in every slot it touched — reopen unconditionally.
+          var stale = CONFIG.placeInside && i > 0;
           for (var d in dirty) { if (dirty.hasOwnProperty(d) && !fills[d]) { stale = true; break; } }
           if (stale) {
             doc.close(SaveOptions.DONOTSAVECHANGES);
@@ -546,6 +608,7 @@ function main() {
             var got = artworkCanvas(jobs[w0].file);
             if (!got) continue;                       // not an SVG, or unreadable
             if (got.w === exp[0] && got.h === exp[1]) continue;
+            if (CONFIG.placeInside) continue;   // fitted inside the .psb instead
             jobs[w0].fix = { from: [got.w, got.h], to: exp };
             var ar = Math.abs((got.w / got.h) - (exp[0] / exp[1])) / (exp[0] / exp[1]);
             log.push('    · ' + jobs[w0].file.name + ' is ' + got.w + '×' + got.h +
@@ -556,7 +619,8 @@ function main() {
           var swaps = 0;
           for (var j = 0; j < jobs.length; j++) {
             for (var r = 0; r < jobs[j].slot.refs.length; r++) {
-              replaceSmartObject(doc, jobs[j].slot.refs[r], jobs[j].file);
+              if (CONFIG.placeInside) placeInsideSlot(doc, jobs[j].slot.refs[r], jobs[j].file);
+              else replaceSmartObject(doc, jobs[j].slot.refs[r], jobs[j].file);
               swaps++;
             }
             dirty[jobs[j].index] = true;
