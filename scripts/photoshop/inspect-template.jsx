@@ -11,6 +11,8 @@
 
 #target photoshop
 
+var VERSION = '2026-07-26 · reports blend mode, opacity and clipping';
+
 // Leave empty to inspect whatever document is already open.
 // Windows paths: use forward slashes — "C:/Users/you/mockups/jersey.psd"
 var TEMPLATE = '';
@@ -69,6 +71,7 @@ function main() {
   var doc = app.activeDocument;
 
   var out = [];
+  out.push('inspector: ' + VERSION);
   out.push('template : ' + doc.name);
   out.push('canvas   : ' + px(doc.width) + ' × ' + px(doc.height) + ' @ ' + doc.resolution + ' dpi');
   out.push('mode     : ' + String(doc.mode).replace('DocumentMode.', ''));

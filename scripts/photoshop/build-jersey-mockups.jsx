@@ -16,6 +16,8 @@
 
 #target photoshop
 
+var VERSION = '2026-07-26 · shoulders addressed by position, partial sets, nudge, PNG keeps alpha';
+
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
 //    Windows paths use FORWARD slashes.
@@ -454,7 +456,8 @@ function main() {
     app.displayDialogs = prevDialogs;
   }
 
-  alert(made + ' image(s) exported from ' + slugs.length + ' design(s)\n\n' + log.join('\n') +
+  alert('build-jersey-mockups  [' + VERSION + ']\n\n' +
+    made + ' image(s) exported from ' + slugs.length + ' design(s)\n\n' + log.join('\n') +
         '\n\nNext: node compress-mockups.js "' + CONFIG.outDir + '"');
 }
 
