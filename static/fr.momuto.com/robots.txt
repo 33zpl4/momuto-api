@@ -4,41 +4,53 @@
 # Allow all crawlers by default
 User-agent: *
 Allow: /
+Disallow: /coupons/
 
 # Traditional search engines
 User-agent: Googlebot
 Allow: /
+Disallow: /coupons/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /coupons/
 
 # AI crawlers — explicitly allowed for GEO/LLM visibility
 User-agent: GPTBot
 Allow: /
+Disallow: /coupons/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /coupons/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /coupons/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /coupons/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /coupons/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /coupons/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /coupons/
 
 User-agent: Bytespider
 Allow: /
+Disallow: /coupons/
 
 User-agent: CCBot
 Allow: /
+Disallow: /coupons/
 
 # Sitemap location
 Sitemap: https://fr.momuto.com/sitemap.xml
