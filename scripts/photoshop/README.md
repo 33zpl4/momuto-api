@@ -34,24 +34,59 @@ Photoshop ▸ File ▸ Scripts ▸ Browse… ▸ inspect-template.jsx
 ```
 
 Read-only, saves nothing. Writes `<template>-layers.txt` next to the PSD listing
-every layer, which ones are smart objects, and their pixel bounds. Run it once
-per template (front, back, shorts) to get the real slot names.
+every layer, which ones are smart objects, and their pixel bounds.
+
+**Already done for the three current templates** — the dumps are kept in
+`templates/` as the reference `CONFIG` was written from. Re-run the inspector
+whenever a template changes; the builder asserts the slot counts and will stop
+rather than half-apply a design.
+
+| template | canvas | smart-object slots |
+|---|---|---|
+| `admiral-psd.tif` (front) | 6200² | `JERSEY DESIGN` **×3**, `SLEEVE DESIGN` **×2**, `TAPE DESIGN`, `COLLAR TOP`, `COLLAR BOTTOM`, `INNER DESIGN` (hidden) |
+| `52183 … Back View.tif` | 6000² | `JERSEY DESIGN`, `LEFT SLEEVE DESIGN`, `RIGHT SLEEVE DESIGN`, `COLLAR DESIGN` |
+| `141087-mens-shorts.tif` | 5000² | `L LEG DESIGN`, `R LEG DESIGN`, `BELT DESIGN` |
+
+**The repeated names are the important bit.** `admiral-psd` has three layers
+called `JERSEY DESIGN` (body plus both shoulder panels) and two called
+`SLEEVE DESIGN`. Matching by name and taking the first would replace one and
+leave the rest — a half-applied design, reported as a success. So the builder
+replaces **every** visible layer of a given name and asserts the count.
 
 ## 2. Configure the builder
 
-One entry per view, each with its own PSD, slot and export size:
+Layer names are already filled in. You only set the three paths:
 
 ```js
 artworkDir: 'C:/Users/you/momuto/incoming',
 outDir:     'C:/Users/you/momuto/mockups-out',
 templates: [
-  { psd: 'C:/…/jersey-front.psd',  slot: 'FRONT_ART',  suffix: 'front',  size: 1500 },
-  { psd: 'C:/…/jersey-back.psd',   slot: 'BACK_ART',   suffix: 'back',   size: 1500 },
-  { psd: 'C:/…/shorts.psd',        slot: 'SHORTS_ART', suffix: 'shorts', size: 1000, optional: true }
-],
+  { psd: 'C:/…/admiral-psd.tif',            suffix: 'front',  size: 1500, slots: [ … ] },
+  { psd: 'C:/…/52183 … Back View.tif',      suffix: 'back',   size: 1500, slots: [ … ] },
+  { psd: 'C:/…/141087-mens-shorts.tif',     suffix: 'shorts', size: 1000, optional: true, slots: [ … ] }
+]
 ```
 
 Windows paths use **forward slashes**. Leave a `psd` empty to skip that view.
+
+Mapping as configured — `count` is an assertion, not a hint:
+
+| view | slot | ← file | copies |
+|---|---|---|---|
+| front | `JERSEY DESIGN` | `<slug>-front` | 3 |
+| front | `SLEEVE DESIGN` | `<slug>-sleeves` | 2 |
+| back | `JERSEY DESIGN` | `<slug>-back` | 1 |
+| back | `LEFT/RIGHT SLEEVE DESIGN` | `<slug>-sleeves` | 1 each |
+| shorts | `L/R LEG DESIGN` | `<slug>-shorts` | 1 each |
+
+**Commented out pending your answer:** `TAPE DESIGN`, `COLLAR TOP`,
+`COLLAR BOTTOM`, `COLLAR DESIGN`, `BELT DESIGN`. Those slots exist but I don't
+know what you currently drop into them — a separate trim file, or nothing
+because the solid-fill `PARTS` layers handle plain colours. Uncomment with the
+right `file:` once you say.
+
+`INNER DESIGN` is hidden in the template, so it's skipped automatically and
+reported.
 
 Drop artwork in `artworkDir` using the naming you already use:
 
@@ -100,11 +135,15 @@ quantisation.
 
 - **Templates are never saved.** Every export runs on a duplicate; the original
   closes with `DONOTSAVECHANGES`, so its smart objects are left as they were.
-- **The slot is resolved before anything is written.** A wrong layer name fails
-  that view with a clear message instead of silently exporting the template
-  unchanged, over and over.
+- **Every slot is resolved and counted before anything is written.** A wrong
+  layer name, or a count that no longer matches the template, fails that view
+  with a clear message instead of silently exporting a half-applied design.
+- **All copies of a name are replaced**, not the first. The export log prints
+  the number of slots swapped per design so it can be checked against the table
+  above.
 - **A non-smart-object layer is refused by name** — `replaceContents` on a
   raster layer does nothing at all, which is the worst possible failure.
+- **Hidden slots are skipped and reported** rather than silently replaced.
 - **`resizeImage` forces both dimensions**, because a template canvas may be a
   pixel off square (the existing t-shirt templates are 3992×**3993**) and a
   width-only resize then yields 1500×1501.
