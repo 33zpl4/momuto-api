@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26h · placeInside: script the manual drag-and-drop';
+var VERSION = '2026-07-26i · sleeve files are named by the wearer\'s arm';
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
@@ -38,6 +38,20 @@ var CONFIG = {
   // `file` may be a list — the first artwork that exists wins. So a design can
   // supply <slug>-shoulderleft.svg and -shoulderright.svg separately, or a
   // single shared <slug>-shoulders.svg, with no config change either way.
+  //
+  // SLEEVE NAMING IS BY THE WEARER'S ARM, not by position in the picture.
+  // <slug>-sleeveleft is the sleeve on the player's LEFT arm, wherever that
+  // ends up on screen. The front view mirrors the wearer, so that file goes
+  // into the RIGHT-hand slot on the front and the LEFT-hand slot on the back.
+  //
+  // Naming by picture position would be simpler right up until a sleeve carries
+  // a sponsor: sponsors cannot be mirrored, so left and right sleeves become
+  // genuinely different artwork, and one file per arm has to land on the same
+  // physical arm in both views. Anything view-relative puts it on the wrong arm
+  // in one of them.
+  //
+  // For mirrored or plain sleeves this is all moot — ship one <slug>-sleeves.svg
+  // and both slots in both views take it.
   //
   // `required: true` means the view cannot be exported without that artwork.
   // Everything else is OPTIONAL: if the file is absent the slot keeps the
@@ -68,8 +82,9 @@ var CONFIG = {
         { layer: 'JERSEY DESIGN', at: [1725, 959],  file: 'front',                        count: 1, required: true, expect: [4469, 5904] },
         { layer: 'JERSEY DESIGN', at: [1723, 736],  file: ['shoulderleft',  'shoulders'], count: 1, expect: [1671, 679] },
         { layer: 'JERSEY DESIGN', at: [3596, 746],  file: ['shoulderright', 'shoulders'], count: 1, expect: [1671, 679] },
-        { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2494] },
-        { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2520] },
+        // Front view mirrors the wearer: picture-left is the player's RIGHT arm.
+        { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2494] },
+        { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2520] },
         { layer: 'COLLAR TOP',    file: 'collartop',    count: 1, expect: [1500, 252] },
         { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1, expect: [2171, 355] }
         // TAPE DESIGN is deliberately absent — it stays white, so leaving the
@@ -83,6 +98,8 @@ var CONFIG = {
       size: 1500,
       slots: [
         { layer: 'JERSEY DESIGN',       file: 'back',                     count: 1, required: true },
+        // Back view does not mirror: the template's LEFT/RIGHT are picture-side,
+        // and picture-left is the player's LEFT arm from behind.
         { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'], count: 1 },
         { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'], count: 1 },
         { layer: 'COLLAR DESIGN',       file: 'collarback',               count: 1 }

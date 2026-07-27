@@ -266,6 +266,25 @@ If the designer moves a panel, the address stops resolving and the run fails
 loudly. Re-run the inspector and update the coordinates — that beats silently
 dropping the body artwork onto a shoulder.
 
+### Sleeve naming — by the wearer's arm
+
+`<slug>-sleeveleft` is the sleeve on the **player's left arm**, wherever that
+lands on screen. The script maps it per view:
+
+| view | picture-left slot | picture-right slot |
+|---|---|---|
+| front (mirrors the wearer) | `-sleeveright` | `-sleeveleft` |
+| back (does not mirror) | `-sleeveleft` | `-sleeveright` |
+
+**Why not name them by picture position?** Because sponsors cannot be mirrored.
+The moment a sleeve carries one, left and right become genuinely different
+artwork, and each file has to land on the same *physical* arm in both views. A
+view-relative name puts it on the correct arm in one view and the wrong arm in
+the other — and it looks entirely plausible in each shot taken alone.
+
+For mirrored or plain sleeves none of this matters: ship one
+`<slug>-sleeves.svg` and every sleeve slot in every view takes it.
+
 ### `file` accepts a fallback list
 
 `file: ['shoulderleft', 'shoulders']` means: use `<slug>-shoulderleft.svg` if it
