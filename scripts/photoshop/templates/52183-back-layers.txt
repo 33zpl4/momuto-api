@@ -1,0 +1,33 @@
+template : 52183 - Men’s Crew Neck Soccer Jersey Mockup - Back View.tif
+canvas   : 6000 × 6000 @ 300 dpi
+mode     : RGB
+
+LAYERS (top to bottom — the ones marked SMART OBJECT are the drop-in slots)
+
+shadows   · normal  [1170,758 → 4840,5127  3670×4369]
+[group] JERSEY
+  Brillo/contraste 1   · brightnesscontrast  [0,0 → 6000,6000  6000×6000]
+  Tono/saturación 1   · huesaturation  [0,0 → 6000,6000  6000×6000]
+  [group] SMARTS
+    JERSEY DESIGN   · SMART OBJECT  ← replaceable  [1656,858 → 4346,5130  2690×4272]
+    COLLAR DESIGN   · SMART OBJECT  ← replaceable  [2504,759 → 3506,887  1002×128]
+    LEFT SLEEVE DESIGN   · SMART OBJECT  ← replaceable  [1168,1300 → 1922,2737  754×1437]
+    RIGHT SLEEVE DESIGN   · SMART OBJECT  ← replaceable  [4092,1296 → 4840,2717  748×1421]
+  PARTS MERGED   · normal  [1168,759 → 4840,5130  3672×4371]   (hidden)
+  [group] PARTS
+    SLEEVES STITCHES   · solidfill  [1212,2384 → 4796,2607  3584×223]
+    JERSEY STITCHES   · solidfill  [1953,901 → 4060,5004  2107×4103]   (hidden)
+    COLLAR   · solidfill  [2504,759 → 3506,887  1002×128]   (hidden)
+    CUFFS   · solidfill  [1169,2407 → 4838,2732  3669×325]
+    CUFFS   · solidfill  [1706,2396 → 4288,2737  2582×341]
+    CUFFS   · solidfill  [1168,2508 → 4840,2797  3672×289]   (hidden)
+    SLEEVE   · solidfill  [1204,1027 → 2278,2625  1074×1598]   (hidden)
+    SLEEVE   · solidfill  [3866,1095 → 4806,2609  940×1514]   (hidden)
+    SHOULDERS   · solidfill  [1656,859 → 4346,2500  2690×1641]
+    FRONT   · solidfill  [1945,3207 → 4068,4912  2123×1705]
+    BACK   · solidfill  [1672,858 → 4323,5130  2651×4272]
+    ADD.MASK   · solidfill  [1168,810 → 4809,5130  3641×4320]   (hidden)
+    ADD.MASK   · solidfill  [1174,759 → 4840,5130  3666×4371]   (hidden)
+  FULL COLOR   · solidfill  [0,0 → 6000,6000  6000×6000]
+BLANK IMAGE   · normal  [0,0 → 6000,6000  6000×6000]   (hidden)
+BACKGROUND   · solidfill  [0,0 → 6000,6000  6000×6000]   (hidden)

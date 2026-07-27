@@ -1,0 +1,25 @@
+template : 141087-mens-shorts.tif
+canvas   : 5000 × 5000 @ 72 dpi
+mode     : RGB
+
+LAYERS (top to bottom — the ones marked SMART OBJECT are the drop-in slots)
+
+[group] SHORTS
+  HIGHLIGHTS   · normal  [954,625 → 3994,4405  3040×3780]
+  SHADOWS   · normal  [954,625 → 3994,4405  3040×3780]
+  Brillo/contraste 1   · brightnesscontrast  [0,0 → 5000,5000  5000×5000]
+  Tono/saturación 1   · huesaturation  [0,0 → 5000,5000  5000×5000]
+  [group] DESIGN
+    BELT DESIGN   · SMART OBJECT  ← replaceable  [1282,624 → 3725,986  2443×362]
+    L LEG DESIGN   · SMART OBJECT  ← replaceable  [954,965 → 2454,4336  1500×3371]
+    R LEG DESIGN   · SMART OBJECT  ← replaceable  [2072,861 → 3995,4406  1923×3545]
+  [group] PARTS COLOR
+    LACES   · solidfill  [1944,798 → 2201,1978  257×1180]
+    EYELETS   · solidfill  [1952,777 → 2218,845  266×68]
+    STITCHING   · solidfill  [953,672 → 3995,4282  3042×3610]
+    BELT   · solidfill  [1282,624 → 3725,986  2443×362]
+    NET FABRIC   · solidfill  [1011,932 → 3982,3858  2971×2926]   (hidden)
+    LEGS   · solidfill  [954,861 → 3995,4406  3041×3545]
+  FULL COLOR   · solidfill  [0,0 → 5000,5000  5000×5000]
+BLANK IMAGE   · normal  [0,0 → 5000,5000  5000×5000]   (hidden)
+BACKGROUND   · solidfill  [0,0 → 5000,5000  5000×5000]   (hidden)

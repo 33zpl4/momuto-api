@@ -1,0 +1,50 @@
+inspector: 2026-07-26c · authoring size read by opening each slot
+template : admiral-psd.tif
+canvas   : 6200 × 6200 @ 300 dpi
+mode     : RGB
+
+LAYERS (top to bottom — the ones marked SMART OBJECT are the drop-in slots)
+Anything in {braces} is non-default compositing: blend mode, opacity,
+or CLIPPED, which limits a layer to the one directly beneath it.
+
+AUTHOR ARTWORK AT is the slot's own source canvas. Build the SVG at that
+exact size and the placement is exact. Any other size gets scaled and
+centred to fit, which moves every logo inside it.
+
+[group] JERSEY
+  highlights   · normal  [1242,620 → 4966,5160  3724×4540]   {screen, opacity 25%}
+  shadows   · normal  [1242,620 → 4966,5160  3724×4540]   {linearburn, opacity 80%}
+  Brillo/contraste 1   · brightnesscontrast  [0,0 → 6200,6200  6200×6200]   {CLIPPED to layer below}
+  Tono/saturación 1   · huesaturation  [0,0 → 6200,6200  6200×6200]   {CLIPPED to layer below}
+  [group] SMARTS
+    JERSEY DESIGN   · SMART OBJECT  ← replaceable  [1725,959 → 4489,5160  2764×4201]   AUTHOR ARTWORK AT 4469×5904 [opened]
+    SLEEVE DESIGN   · SMART OBJECT  ← replaceable  [3845,1040 → 4966,2654  1121×1614]   AUTHOR ARTWORK AT 1348×2520 [opened]
+    SLEEVE DESIGN   · SMART OBJECT  ← replaceable  [1242,995 → 2419,2636  1177×1641]   AUTHOR ARTWORK AT 1348×2494 [opened]
+    TAPE DESIGN   · SMART OBJECT  ← replaceable  [2645,721 → 3571,792  926×71]   AUTHOR ARTWORK AT 1965×197 [opened]
+    INNER DESIGN   · SMART OBJECT  ← replaceable  [2653,777 → 3566,1092  913×315]   AUTHOR ARTWORK AT 1508×983 [opened]
+    JERSEY DESIGN   · SMART OBJECT  ← replaceable  [1723,736 → 2624,1318  901×582]   AUTHOR ARTWORK AT 1671×679 [opened]
+    JERSEY DESIGN   · SMART OBJECT  ← replaceable  [3596,746 → 4492,1339  896×593]   AUTHOR ARTWORK AT 1671×679 [opened]
+    COLLAR TOP   · SMART OBJECT  ← replaceable  [2626,620 → 3593,760  967×140]   AUTHOR ARTWORK AT 1500×252 [opened]
+    COLLAR BOTTOM   · SMART OBJECT  ← replaceable  [2535,649 → 3671,1203  1136×554]   AUTHOR ARTWORK AT 2171×355 [opened]
+  PARTS MERGED   · normal  [1242,620 → 4966,5160  3724×4540]   (hidden)
+  [group] PARTS
+    SLEEVES STITCHES   · solidfill  [1288,2265 → 4920,2480  3632×215]
+    TAPE STITCHES   · solidfill  [2646,733 → 3570,782  924×49]
+    JERSEY STITCHES   · solidfill  [2025,4676 → 4183,5034  2158×358]
+    INNER SIDE   · solidfill  [2653,777 → 3566,1092  913×315]
+    CUFFS   · solidfill  [1242,2383 → 4966,2593  3724×210]
+    CUFFS   · solidfill  [1244,1163 → 4964,5159  3720×3996]
+    CUFFS   · solidfill  [1691,2420 → 4510,2614  2819×194]
+    TAPE   · solidfill  [2645,721 → 3571,792  926×71]
+    COLLAR   · solidfill  [2011,620 → 3938,1486  1927×866]
+    SLEEVE   · solidfill  [1279,982 → 2227,2482  948×1500]
+    SLEEVE   · solidfill  [3853,927 → 4929,2499  1076×1572]
+    SHOULDERS   · solidfill  [1723,736 → 4492,1339  2769×603]
+    FRONT   · solidfill  [1725,959 → 4489,5160  2764×4201]
+    BACK   · solidfill  [1971,2208 → 4252,4285  2281×2077]
+    ADD.MASK   · solidfill  [1275,626 → 4966,5160  3691×4534]
+    ADD.MASK   · solidfill  [1242,620 → 4960,5160  3718×4540]
+  FULL COLOR   · solidfill  [0,0 → 6200,6200  6200×6200]
+BLANK IMAGE   · normal  [100,100 → 6100,6100  6000×6000]   (hidden)
+front   · text: "front"  [2833,5578 → 3380,5695  547×117]   (hidden)
+BACKGROUND   · solidfill  [0,0 → 6200,6200  6200×6200]   (hidden)
