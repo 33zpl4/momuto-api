@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26i · sleeve files are named by the wearer\'s arm';
+var VERSION = '2026-07-26j · overlay layers, for sleeve sponsors';
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
@@ -53,6 +53,21 @@ var CONFIG = {
   // For mirrored or plain sleeves this is all moot — ship one <slug>-sleeves.svg
   // and both slots in both views take it.
   //
+  // `over: [...]` stacks EXTRA artwork on top of the base, inside the same
+  // slot. Each entry is a kind (or a fallback list, like `file`) and each is
+  // optional — absent means that layer simply is not added.
+  //
+  // This is how sleeve sponsors work. A sponsor cannot be mirrored, so it must
+  // be its own layer rather than baked into a mirrored base. Authored at the
+  // SAME canvas as the base and transparent everywhere else, it lands in the
+  // right place automatically — and because the slot mapping already knows
+  // which picture-side is which arm, one file per arm is correct in BOTH views.
+  //
+  // Every combination falls out of which files exist: left only, right only,
+  // both the same, both different. Nothing to configure per design.
+  //
+  // ⚠ Requires placeInside — replaceContents can only put ONE file in a slot.
+  //
   // `required: true` means the view cannot be exported without that artwork.
   // Everything else is OPTIONAL: if the file is absent the slot keeps the
   // template's own placeholder and the run reports it. That is what makes a
@@ -83,8 +98,10 @@ var CONFIG = {
         { layer: 'JERSEY DESIGN', at: [1723, 736],  file: ['shoulderleft',  'shoulders'], count: 1, expect: [1671, 679] },
         { layer: 'JERSEY DESIGN', at: [3596, 746],  file: ['shoulderright', 'shoulders'], count: 1, expect: [1671, 679] },
         // Front view mirrors the wearer: picture-left is the player's RIGHT arm.
-        { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2494] },
-        { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2520] },
+        { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2494],
+          over: [['sleevesponsorright', 'sleevesponsor']] },
+        { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2520],
+          over: [['sleevesponsorleft',  'sleevesponsor']] },
         { layer: 'COLLAR TOP',    file: 'collartop',    count: 1, expect: [1500, 252] },
         { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1, expect: [2171, 355] }
         // TAPE DESIGN is deliberately absent — it stays white, so leaving the
@@ -100,8 +117,10 @@ var CONFIG = {
         { layer: 'JERSEY DESIGN',       file: 'back',                     count: 1, required: true },
         // Back view does not mirror: the template's LEFT/RIGHT are picture-side,
         // and picture-left is the player's LEFT arm from behind.
-        { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'], count: 1 },
-        { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'], count: 1 },
+        { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'], count: 1,
+          over: [['sleevesponsorleft',  'sleevesponsor']] },
+        { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'], count: 1,
+          over: [['sleevesponsorright', 'sleevesponsor']] },
         { layer: 'COLLAR DESIGN',       file: 'collarback',               count: 1 }
         // No shoulder slots on the back template — its SHOULDERS layer is a
         // solid fill, not a smart object, so back shoulders take a flat colour.
@@ -234,7 +253,7 @@ function nudgeLayer(doc, layer, dx, dy) {
  * slot updates the moment it closes. The parent template is still closed
  * without saving at the end of the run, so nothing on disk changes.
  */
-function placeInsideSlot(doc, layer, file) {
+function placeInsideSlot(doc, layer, files) {
   doc.activeLayer = layer;
   executeAction(stringIDToTypeID('placedLayerEditContents'), undefined, DialogModes.NO);
   var inner = app.activeDocument;
@@ -245,22 +264,25 @@ function placeInsideSlot(doc, layer, file) {
       try { inner.artLayers[i].remove(); } catch (eDel) {}
     }
 
-    var d = new ActionDescriptor();
-    d.putPath(charIDToTypeID('null'), file);
-    d.putEnumerated(charIDToTypeID('FTcs'), charIDToTypeID('QCSt'), charIDToTypeID('Qcsa'));
-    executeAction(charIDToTypeID('Plc '), d, DialogModes.NO);
-
-    // Fill the canvas exactly — this is what `expect` was approximating from
-    // the outside, done from the inside where the numbers are known.
-    var pl = inner.activeLayer;
-    var b = pl.bounds;
-    var w = b[2].as('px') - b[0].as('px');
-    var h = b[3].as('px') - b[1].as('px');
+    // Bottom to top: base first, then each overlay. Every layer is fitted to
+    // the same canvas, so an overlay authored at the base's size lands exactly
+    // where it was drawn — no per-design positioning.
     var cw = inner.width.as('px'), ch = inner.height.as('px');
-    if (w > 0 && h > 0) {
-      pl.resize(cw / w * 100, ch / h * 100, AnchorPosition.MIDDLECENTER);
-      var nb = pl.bounds;
-      pl.translate(UnitValue(-nb[0].as('px'), 'px'), UnitValue(-nb[1].as('px'), 'px'));
+    for (var f = 0; f < files.length; f++) {
+      var d = new ActionDescriptor();
+      d.putPath(charIDToTypeID('null'), files[f]);
+      d.putEnumerated(charIDToTypeID('FTcs'), charIDToTypeID('QCSt'), charIDToTypeID('Qcsa'));
+      executeAction(charIDToTypeID('Plc '), d, DialogModes.NO);
+
+      var pl = inner.activeLayer;
+      var b = pl.bounds;
+      var w = b[2].as('px') - b[0].as('px');
+      var h = b[3].as('px') - b[1].as('px');
+      if (w > 0 && h > 0) {
+        pl.resize(cw / w * 100, ch / h * 100, AnchorPosition.MIDDLECENTER);
+        var nb = pl.bounds;
+        pl.translate(UnitValue(-nb[0].as('px'), 'px'), UnitValue(-nb[1].as('px'), 'px'));
+      }
     }
     inner.close(SaveOptions.SAVECHANGES);   // writes back into the parent slot
   } catch (e) {
@@ -579,11 +601,23 @@ function main() {
 
         for (var i = 0; i < slugs.length; i++) {
           // Work out what this design can fill before touching anything.
-          var jobs = [], fills = {}, blank = [], lacks = null;
+          var jobs = [], fills = {}, blank = [], lacks = null, overlaid = [], overWarn = false;
           for (var s = 0; s < view.slots.length; s++) {
             var slot = view.slots[s];
             var art = artworkFor(slugs[i], slot.file);
-            if (art) { jobs.push({ index: s, slot: slot, file: art }); fills[s] = true; }
+            if (art) {
+              var stack = [art];
+              if (slot.over && CONFIG.placeInside) {
+                for (var ov = 0; ov < slot.over.length; ov++) {
+                  var extra = artworkFor(slugs[i], slot.over[ov]);
+                  if (extra) { stack.push(extra); overlaid.push(decodeURI(extra.name)); }
+                }
+              } else if (slot.over && slot.over.length) {
+                overWarn = true;
+              }
+              jobs.push({ index: s, slot: slot, file: art, stack: stack });
+              fills[s] = true;
+            }
             else if (slot.required) { lacks = kindLabel(slot.file); break; }
             else blank.push(kindLabel(slot.file));
           }
@@ -631,7 +665,7 @@ function main() {
           var swaps = 0;
           for (var j = 0; j < jobs.length; j++) {
             for (var r = 0; r < jobs[j].slot.refs.length; r++) {
-              if (CONFIG.placeInside) placeInsideSlot(doc, jobs[j].slot.refs[r], jobs[j].file);
+              if (CONFIG.placeInside) placeInsideSlot(doc, jobs[j].slot.refs[r], jobs[j].stack);
               else replaceSmartObject(doc, jobs[j].slot.refs[r], jobs[j].file);
               swaps++;
             }
@@ -672,7 +706,9 @@ function main() {
             }
           }
           log.push('    ✓ ' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format + '  (' + swaps + ' slots)' +
+            (overlaid.length ? '  · overlaid: ' + overlaid.join(', ') : '') +
             (blank.length ? '  · template default kept for: ' + blank.join(', ') : ''));
+          if (overWarn) log.push('      ⚠ overlays need placeInside: true — skipped');
           made++;
         }
       } catch (inner) {

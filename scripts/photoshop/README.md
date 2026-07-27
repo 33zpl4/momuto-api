@@ -285,6 +285,41 @@ the other — and it looks entirely plausible in each shot taken alone.
 For mirrored or plain sleeves none of this matters: ship one
 `<slug>-sleeves.svg` and every sleeve slot in every view takes it.
 
+### Sleeve sponsors — overlay layers
+
+A sponsor cannot be mirrored, so it cannot live in a shared sleeve file. It gets
+its own layer stacked on top of the base, inside the same slot:
+
+```
+<slug>-sleeves.svg              the base pattern, shared by both arms
+<slug>-sleevesponsorleft.svg    sponsor for the player's LEFT arm
+<slug>-sleevesponsorright.svg   sponsor for the player's RIGHT arm
+<slug>-sleevesponsor.svg        fallback used for either arm that has no specific file
+```
+
+**Author the overlay at the same canvas as the base, transparent everywhere
+except the sponsor.** Every layer is fitted to the slot canvas, so the sponsor
+lands exactly where it was drawn — and since the slot mapping already knows
+which picture-side is which arm, one file per arm is correct in **both** views.
+
+Every case falls out of which files exist, with nothing to configure per design:
+
+| situation | files to supply |
+|---|---|
+| no sponsor | none |
+| left arm only | `-sleevesponsorleft` |
+| right arm only | `-sleevesponsorright` |
+| both arms, same sponsor | `-sleevesponsor` |
+| both arms, different | `-sleevesponsorleft` **and** `-sleevesponsorright` |
+
+The run reports what it stacked: `· overlaid: kit-sleevesponsorleft.svg`.
+
+`over` works on any slot, not just sleeves — same pattern would serve a chest
+badge or a hem tag that has to stay unmirrored.
+
+⚠ **Requires `placeInside: true`.** `replaceContents` can only put one file in a
+slot, so overlays are skipped and reported in that mode.
+
 ### `file` accepts a fallback list
 
 `file: ['shoulderleft', 'shoulders']` means: use `<slug>-shoulderleft.svg` if it
