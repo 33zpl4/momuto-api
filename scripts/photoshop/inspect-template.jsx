@@ -11,7 +11,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26d · also lists what is INSIDE each slot';
+var VERSION = '2026-07-27a · inner layers now report their box, for sponsor placement';
 
 // Leave empty to inspect whatever document is already open.
 // Windows paths: use forward slashes — "C:/Users/you/mockups/jersey.psd"
@@ -20,12 +20,12 @@ var TEMPLATE = '';
 function px(n) { return Math.round(n.as('px')); }
 
 /**
- * The size artwork should be AUTHORED at.
+ * The size artwork should be AUTHORED at, plus what is currently inside.
  *
- * replaceContents fits the incoming file into the slot's frame preserving
- * aspect ratio, so artwork whose canvas differs from the slot's gets scaled and
- * centred — and every positioned element inside it (logos, crest, sponsor)
- * moves. Matching this size makes the placement exact.
+ * The builder places artwork INSIDE this canvas and scales it to fit, so an
+ * artwork authored at exactly this size needs no resample and every logo in it
+ * lands where it was drawn. Any other size still works — it is scaled — but a
+ * different ASPECT RATIO will distort.
  *
  * This is NOT the layer's bounds: the content usually extends past its mask.
  * The screenshot case had bounds 2764x4201 but a source canvas of 3060x4431.
@@ -34,47 +34,31 @@ function smartObjectSource(layer) {
   var doc = app.activeDocument;
   doc.activeLayer = layer;
 
-  // FAST PATH — the descriptor, if this Photoshop exposes it. Key names and
-  // value types vary by version, so try the plausible ones rather than assume.
-  try {
-    var ref = new ActionReference();
-    ref.putEnumerated(charIDToTypeID('Lyr '), charIDToTypeID('Ordn'), charIDToTypeID('Trgt'));
-    var d = executeActionGet(ref);
-    var soKey = stringIDToTypeID('smartObject');
-    if (d.hasKey(soKey)) {
-      var so = d.getObjectValue(soKey);
-      var sizeKey = stringIDToTypeID('size');
-      if (so.hasKey(sizeKey)) {
-        var sz = so.getObjectValue(sizeKey);
-        var read = function (obj, key) {
-          var id = stringIDToTypeID(key);
-          if (!obj.hasKey(id)) return null;
-          try { return obj.getUnitDoubleValue(id); } catch (e1) {}
-          try { return obj.getDouble(id); } catch (e2) {}
-          try { return obj.getInteger(id); } catch (e3) {}
-          return null;
-        };
-        var w = read(sz, 'width'), h = read(sz, 'height');
-        if (w != null && h != null) return { w: Math.round(w), h: Math.round(h), how: 'descriptor' };
-      }
-    }
-  } catch (eFast) {}
-
-  // SLOW PATH — open the embedded contents and read the canvas directly. Slower
-  // but version-proof: it is the same thing you would see by double-clicking the
-  // slot. Closed without saving, so the template is untouched.
+  // Open the embedded contents and read the canvas directly — the same thing you
+  // would see by double-clicking the slot. There is a descriptor route
+  // (smartObject ▸ size) that avoids the open, but its key names and value types
+  // vary by Photoshop version and it read as absent on the machine this runs on.
+  // Opening is slower and always right, and it is the only route that can also
+  // report what is inside. Closed without saving, so the template is untouched.
   //
-  // Also lists what is INSIDE, because replaceContents substitutes the whole
-  // document. Usually harmless — the artwork is opaque and fills the canvas, so
-  // whatever it replaced was invisible anyway. Only matters for a slot whose
-  // artwork is transparent or smaller than the canvas.
+  // The inner layer BOUNDS are the reason this matters beyond curiosity: they are
+  // in the slot's own canvas coordinates, which is exactly the coordinate space
+  // build-jersey-mockups.jsx places into. Run this on a mockup you assembled by
+  // hand and the sponsor layer's line IS the `box` to paste into SPONSOR.
   try {
     executeAction(stringIDToTypeID('placedLayerEditContents'), undefined, DialogModes.NO);
     var inner = app.activeDocument;
     var names = [];
     try {
       for (var li = 0; li < inner.layers.length; li++) {
-        names.push(inner.layers[li].name + (inner.layers[li].visible ? '' : ' (hidden)'));
+        var il = inner.layers[li];
+        var where = '';
+        try {
+          var ib = il.bounds;
+          var bx = px(ib[0]), by = px(ib[1]);
+          where = '  box: [' + bx + ', ' + by + ', ' + (px(ib[2]) - bx) + ', ' + (px(ib[3]) - by) + ']';
+        } catch (eB) {}
+        names.push(il.name + (il.visible ? '' : ' (hidden)') + where);
       }
     } catch (eNames) {}
     var res = { w: px(inner.width), h: px(inner.height), how: 'opened', inner: names };
@@ -132,11 +116,9 @@ function describeLayer(layer, depth, out) {
       if (so) {
         src = '   AUTHOR ARTWORK AT ' + so.w + '×' + so.h;
         if (so.inner && so.inner.length) {
-          src += '\n' + pad + '        contents: ' + so.inner.join(' | ');
-          if (so.inner.length > 1) {
-            src += '\n' + pad + '        note: ' + so.inner.length + ' layers inside. replaceContents substitutes the whole' +
-                   '\n' + pad + '          document, so these go. Harmless when the artwork is opaque and' +
-                   '\n' + pad + '          full-canvas; matters if it is transparent or smaller.';
+          src += '\n' + pad + '        contents (box is [x, y, w, h] in THIS slot\'s canvas):';
+          for (var ci = 0; ci < so.inner.length; ci++) {
+            src += '\n' + pad + '          · ' + so.inner[ci];
           }
         }
       } else {
@@ -169,8 +151,13 @@ function main() {
   out.push('or CLIPPED, which limits a layer to the one directly beneath it.');
   out.push('');
   out.push('AUTHOR ARTWORK AT is the slot\'s own source canvas. Build the SVG at that');
-  out.push('exact size and the placement is exact. Any other size gets scaled and');
-  out.push('centred to fit, which moves every logo inside it.');
+  out.push('exact size and it drops in with no resample at all. Any other size is');
+  out.push('scaled to fit — fine, unless the ASPECT RATIO differs, which distorts.');
+  out.push('');
+  out.push('Under each slot, "contents" lists the layers inside it with their box');
+  out.push('[x, y, w, h] in that slot\'s coordinates. Run this on a mockup you built');
+  out.push('by hand and a sponsor layer\'s box is exactly what goes into SPONSOR in');
+  out.push('build-jersey-mockups.jsx — no measuring by hand.');
   out.push('');
   for (var i = 0; i < doc.layers.length; i++) describeLayer(doc.layers[i], 0, out);
 

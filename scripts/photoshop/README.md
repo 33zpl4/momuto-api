@@ -266,6 +266,116 @@ If the designer moves a panel, the address stops resolving and the run fails
 loudly. Re-run the inspector and update the coordinates — that beats silently
 dropping the body artwork onto a shoulder.
 
+### Sleeve naming — by the wearer's arm
+
+`<slug>-sleeveleft` is the sleeve on the **player's left arm**, wherever that
+lands on screen. The script maps it per view:
+
+| view | picture-left slot | picture-right slot |
+|---|---|---|
+| front (mirrors the wearer) | `-sleeveright` | `-sleeveleft` |
+| back (does not mirror) | `-sleeveleft` | `-sleeveright` |
+
+**Why not name them by picture position?** Because sponsors cannot be mirrored.
+The moment a sleeve carries one, left and right become genuinely different
+artwork, and each file has to land on the same *physical* arm in both views. A
+view-relative name puts it on the correct arm in one view and the wrong arm in
+the other — and it looks entirely plausible in each shot taken alone.
+
+For mirrored or plain sleeves none of this matters: ship one
+`<slug>-sleeves.svg` and every sleeve slot in every view takes it.
+
+### Sleeve sponsors — overlay layers
+
+A sponsor cannot be mirrored, so it cannot live in a shared sleeve file. It gets
+its own layer stacked on top of the base, inside the same slot:
+
+```
+<slug>-sleeves.svg              the base pattern, shared by both arms
+<slug>-sleevesponsorleft.svg    sponsor for the player's LEFT arm
+<slug>-sleevesponsorright.svg   sponsor for the player's RIGHT arm
+<slug>-sleevesponsor.svg        fallback used for either arm that has no specific file
+```
+
+**The sponsor file is just the mark on transparency** — any size, any aspect,
+carrying no position of its own. Where it goes is declared by the *slot*:
+
+```js
+over: [{ file: ['sleevesponsorleft', 'sleevesponsor'], boxPct: SPONSOR.frontLeftArm }]
+```
+
+`boxPct` is `[x, y, w, h]` as **fractions of that slot's own canvas**. Fractions
+rather than pixels because the same physical sleeve gets a different canvas in
+each template — the front's two sleeve slots are 1348×2494 and 1348×2520, the
+back's different again. A fraction means the same place in all of them.
+
+⚠ **Crop the sponsor file tight to the mark**, no transparent margin. The fit
+measures the placed layer's bounds, so padding inside the file becomes padding
+inside the box and the mark lands small and off-centre.
+
+**The mark is sized by the box's HEIGHT**, with the width following the logo's
+own aspect; the box width only decides the centre. This is what the reference
+sleeves do — both front sponsors are exactly 180 tall despite aspects of 1.3078
+and 1.1313 — so a wide wordmark and a tall badge come out the same height, which
+is how sponsors are actually specified. (`fit: 'contain'` keeps a mark inside the
+box on both axes instead; right for a badge with a printable-area limit, wrong
+for a sponsor.)
+
+#### Where the four boxes came from
+
+`SPONSOR` at the top of the builder is filled in, measured from
+`mockups/reference/sleeve-sponsor/sleeves-{front,back}-{left,right}.svg` — real
+hand-built sleeves with the sponsor where it belongs. Values outside 0..1 are
+correct, not typos: the panel wraps around the arm, so a mark near the outer edge
+runs past the canvas and the overflow is what disappears around the back.
+
+Two things those files settled:
+
+- **The arm pairing, by evidence.** `front-left` and `back-right` carry an
+  identical `pattern` transform (and near-identical file size), as do
+  `front-right` and `back-left`. So they are named by *picture side*, and
+  picture-left in front is the same physical arm as picture-right in back —
+  which is the mapping the slots already used.
+- **Height is the standardised dimension.** Both front marks are exactly 180
+  tall with different aspect ratios, so sizing goes by height and width follows.
+- **One size cannot serve both views.** Within an arm the mark is the same logo
+  (aspect matches to four decimals), but the right arm's is 180 tall in front
+  and 165 in back, the left arm's 180 and 195. That is the reason the box lives
+  on the slot rather than in the artwork.
+
+  ⚠ The back pair does not agree with itself — 165 and 195, an 18% spread where
+  the front has none — and their mean is exactly 180. The back template renders
+  its two sleeves at within 1% of the same scale, so this reads as hand-jitter
+  around a 180 standard rather than an intended difference. Left as measured,
+  since these files are what was shipped by hand. To unify, set both back
+  heights in `SPONSOR` to `0.272781`.
+
+To re-measure after a template change: run `inspect-template.jsx` on a hand-made
+mockup. Each slot lists its inner layers with a box in that slot's coordinates;
+divide by the slot canvas printed on the line above.
+
+An overlay entry may also be written as a bare kind, `'sleevesponsorleft'`, which
+means "authored at the full sleeve canvas with the sponsor already in position".
+That works, but it needs a separate file per view.
+
+Every case falls out of which files exist, with nothing to configure per design:
+
+| situation | files to supply |
+|---|---|
+| no sponsor | none |
+| left arm only | `-sleevesponsorleft` |
+| right arm only | `-sleevesponsorright` |
+| both arms, same sponsor | `-sleevesponsor` |
+| both arms, different | `-sleevesponsorleft` **and** `-sleevesponsorright` |
+
+The run reports what it stacked: `· overlaid: kit-sleevesponsorleft.svg`.
+
+`over` works on any slot, not just sleeves — same pattern would serve a chest
+badge or a hem tag that has to stay unmirrored.
+
+⚠ **Requires `placeInside: true`.** `replaceContents` can only put one file in a
+slot, so overlays are skipped and reported in that mode.
+
 ### `file` accepts a fallback list
 
 `file: ['shoulderleft', 'shoulders']` means: use `<slug>-shoulderleft.svg` if it
