@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-27c · sponsors sized by height, boxes from the reference sleeves';
+var VERSION = '2026-07-27d · sponsors raised 15px, picture-left front sleeve raised 15px';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -53,11 +53,19 @@ var VERSION = '2026-07-27c · sponsors sized by height, boxes from the reference
 //    To re-measure after a template change: run inspect-template.jsx on a
 //    hand-made mockup. Each slot now lists its inner layers with a box in that
 //    slot's coordinates; divide by the slot canvas printed on the line above.
+//
+//    SPONSOR_RAISE lifts every sponsor off the measured position. The reference
+//    sleeves are the hand-made baseline; this is the correction on top of them,
+//    kept separate so the measurement stays visible and the adjustment stays one
+//    number. 15 px is in the sleeve's own 1348×2494 canvas — the space the SVGs
+//    are drawn in — which is about 8% of the mark's own height.
+var SPONSOR_RAISE = 15 / 2494;
+
 var SPONSOR = {
-  frontRightArm: [-0.146135, 0.568293, 0.660022, 0.272781],   // front template, picture-LEFT slot
-  frontLeftArm:  [ 0.458909, 0.585520, 0.570956, 0.272781],   // front template, picture-RIGHT slot
-  backLeftArm:   [-0.064312, 0.561373, 0.618536, 0.295512],   // back template, LEFT SLEEVE DESIGN
-  backRightArm:  [ 0.476647, 0.568293, 0.605020, 0.250049]    // back template, RIGHT SLEEVE DESIGN
+  frontRightArm: [-0.146135, 0.568293 - SPONSOR_RAISE, 0.660022, 0.272781],   // front template, picture-LEFT slot
+  frontLeftArm:  [ 0.458909, 0.585520 - SPONSOR_RAISE, 0.570956, 0.272781],   // front template, picture-RIGHT slot
+  backLeftArm:   [-0.064312, 0.561373 - SPONSOR_RAISE, 0.618536, 0.295512],   // back template, LEFT SLEEVE DESIGN
+  backRightArm:  [ 0.476647, 0.568293 - SPONSOR_RAISE, 0.605020, 0.250049]    // back template, RIGHT SLEEVE DESIGN
 };
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
@@ -137,9 +145,16 @@ var CONFIG = {
   // template's own placeholder and the run reports it. That is what makes a
   // front-only approval set work without generating collar and shoulder files.
   //
-  // `nudge: [dx, dy]` shifts the slot in px before export and shifts it BACK
-  // afterwards, so a batch never accumulates offsets. Positive dy is DOWN, so
-  // "left sleeve up 25px" is nudge: [0, -25].
+  // `nudge: [dx, dy]` shifts the slot in TEMPLATE px before export and shifts it
+  // BACK afterwards, so a batch never accumulates offsets. Positive dy is DOWN,
+  // so "left sleeve up 25px" is nudge: [0, -25].
+  //
+  // `nudgePct: [dx, dy]` does the same in fractions of the slot's own rendered
+  // size. Prefer it: the artwork canvas is mapped onto that extent, so a
+  // fraction of the canvas is the same fraction here, and "15 px in the sleeve
+  // SVG" is written as -15/2494 whatever the template scales it to. Template px
+  // would have to be recomputed per template — 15 sleeve px is 10 px on the
+  // front template and a different number on the back.
   //
   // `expect: [w, h]` is the slot's own SOURCE canvas, measured by
   // inspect-template.jsx. It is only used when placeInside is FALSE — see the
@@ -162,7 +177,12 @@ var CONFIG = {
         { layer: 'JERSEY DESIGN', at: [1723, 736],  file: ['shoulderleft',  'shoulders'], count: 1, expect: [1671, 679] },
         { layer: 'JERSEY DESIGN', at: [3596, 746],  file: ['shoulderright', 'shoulders'], count: 1, expect: [1671, 679] },
         // Front view mirrors the wearer: picture-left is the player's RIGHT arm.
+        // This sleeve sits fractionally low against the other one — its cuff
+        // reads below the picture-right cuff — so it comes up 15 px of its own
+        // canvas. A template quirk, not a property of any design: the two front
+        // sleeve slots start 45 px apart in y and differ in height.
         { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2494],
+          nudgePct: [0, -15 / 2494],
           over: [{ file: ['sleevesponsorright', 'sleevesponsor'], boxPct: SPONSOR.frontRightArm }] },
         { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2520],
           over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], boxPct: SPONSOR.frontLeftArm }] },
@@ -299,6 +319,25 @@ function rescaleLayer(doc, layer, fromWH, toWH) {
   layer.resize(sx, sy, AnchorPosition.MIDDLECENTER);
   if (hadMask) setMaskLinked(true);
   return true;
+}
+
+/**
+ * A slot's shift in template px, whichever way it was specified.
+ *
+ * nudgePct is a fraction of the layer's own rendered size. The artwork canvas is
+ * mapped onto that extent, so a fraction of the canvas and a fraction of the
+ * rendered size are the same fraction — which is what lets a correction be
+ * written in the units of the SVG being drawn.
+ *
+ * Approximate to the extent that bounds report the MASKED extent rather than the
+ * full transform, so a slot whose artwork runs well past its mask shifts slightly
+ * less than asked. Under a percent here, and it errs small.
+ */
+function resolveNudge(slot, layer) {
+  if (slot.nudge) return [slot.nudge[0], slot.nudge[1]];
+  if (!slot.nudgePct) return null;
+  var b = layerBox(layer);
+  return [slot.nudgePct[0] * b.w, slot.nudgePct[1] * b.h];
 }
 
 function nudgeLayer(doc, layer, dx, dy) {
@@ -734,7 +773,7 @@ function main() {
 
         for (var i = 0; i < slugs.length; i++) {
           // Work out what this design can fill before touching anything.
-          var jobs = [], fills = {}, blank = [], lacks = null, overlaid = [], overWarn = false;
+          var jobs = [], fills = {}, blank = [], lacks = null, overlaid = [], overWarn = false, nudged = [];
           for (var s = 0; s < view.slots.length; s++) {
             var slot = view.slots[s];
             var art = artworkFor(slugs[i], slot.file);
@@ -817,10 +856,18 @@ function main() {
               rescaleLayer(doc, jobs[f0].slot.refs[q0], jobs[f0].fix.from, jobs[f0].fix.to);
             }
           }
+          // Resolved per layer and REMEMBERED, so the undo after export reverses
+          // exactly what was applied rather than recomputing it from bounds that
+          // the nudge itself has moved.
           for (var n = 0; n < jobs.length; n++) {
-            var nd = jobs[n].slot.nudge;
-            if (!nd) continue;
-            for (var q = 0; q < jobs[n].slot.refs.length; q++) nudgeLayer(doc, jobs[n].slot.refs[q], nd[0], nd[1]);
+            jobs[n].moved = [];
+            for (var q = 0; q < jobs[n].slot.refs.length; q++) {
+              var mv = resolveNudge(jobs[n].slot, jobs[n].slot.refs[q]);
+              if (!mv) continue;
+              nudgeLayer(doc, jobs[n].slot.refs[q], mv[0], mv[1]);
+              jobs[n].moved.push({ ref: jobs[n].slot.refs[q], by: mv });
+              nudged.push(jobs[n].slot.addr + ' by ' + Math.round(mv[0]) + ',' + Math.round(mv[1]) + 'px');
+            }
           }
 
           if (CONFIG.placeOnly) {
@@ -832,9 +879,9 @@ function main() {
           exportFlat(doc, view.size, new File(CONFIG.outDir + '/' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format));
 
           for (var n2 = 0; n2 < jobs.length; n2++) {
-            var nd2 = jobs[n2].slot.nudge;
-            if (!nd2) continue;
-            for (var q2 = 0; q2 < jobs[n2].slot.refs.length; q2++) nudgeLayer(doc, jobs[n2].slot.refs[q2], -nd2[0], -nd2[1]);
+            var mvs = jobs[n2].moved;
+            if (!mvs) continue;
+            for (var q2 = 0; q2 < mvs.length; q2++) nudgeLayer(doc, mvs[q2].ref, -mvs[q2].by[0], -mvs[q2].by[1]);
           }
           for (var f2 = 0; f2 < jobs.length; f2++) {
             if (!jobs[f2].fix) continue;
@@ -844,6 +891,7 @@ function main() {
           }
           log.push('    ✓ ' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format + '  (' + swaps + ' slots)' +
             (overlaid.length ? '  · overlaid: ' + overlaid.join(', ') : '') +
+            (nudged.length ? '  · nudged: ' + nudged.join(', ') : '') +
             (blank.length ? '  · template default kept for: ' + blank.join(', ') : ''));
           if (overWarn) log.push('      ⚠ overlays need placeInside: true — skipped');
           made++;
