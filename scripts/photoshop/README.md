@@ -313,9 +313,13 @@ back's different again. A fraction means the same place in all of them.
 measures the placed layer's bounds, so padding inside the file becomes padding
 inside the box and the mark lands small and off-centre.
 
-The mark is fitted preserving aspect and centred, so a wide wordmark and a square
-badge come out at the same height rather than both stretched to the same
-rectangle.
+**The mark is sized by the box's HEIGHT**, with the width following the logo's
+own aspect; the box width only decides the centre. This is what the reference
+sleeves do — both front sponsors are exactly 180 tall despite aspects of 1.3078
+and 1.1313 — so a wide wordmark and a tall badge come out the same height, which
+is how sponsors are actually specified. (`fit: 'contain'` keeps a mark inside the
+box on both axes instead; right for a badge with a printable-area limit, wrong
+for a sponsor.)
 
 #### Where the four boxes came from
 
@@ -332,11 +336,19 @@ Two things those files settled:
   `front-right` and `back-left`. So they are named by *picture side*, and
   picture-left in front is the same physical arm as picture-right in back —
   which is the mapping the slots already used.
+- **Height is the standardised dimension.** Both front marks are exactly 180
+  tall with different aspect ratios, so sizing goes by height and width follows.
 - **One size cannot serve both views.** Within an arm the mark is the same logo
-  (aspect matches exactly), but the right arm's is 180 tall in front and 165 in
-  back, the left arm's 180 and 195. The templates render the sleeves at
-  different apparent scales. That is the reason the box lives on the slot rather
-  than in the artwork.
+  (aspect matches to four decimals), but the right arm's is 180 tall in front
+  and 165 in back, the left arm's 180 and 195. That is the reason the box lives
+  on the slot rather than in the artwork.
+
+  ⚠ The back pair does not agree with itself — 165 and 195, an 18% spread where
+  the front has none — and their mean is exactly 180. The back template renders
+  its two sleeves at within 1% of the same scale, so this reads as hand-jitter
+  around a 180 standard rather than an intended difference. Left as measured,
+  since these files are what was shipped by hand. To unify, set both back
+  heights in `SPONSOR` to `0.272781`.
 
 To re-measure after a template change: run `inspect-template.jsx` on a hand-made
 mockup. Each slot lists its inner layers with a box in that slot's coordinates;

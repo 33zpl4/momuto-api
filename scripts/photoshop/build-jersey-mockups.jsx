@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-27b · sponsor boxes measured from the reference sleeves';
+var VERSION = '2026-07-27c · sponsors sized by height, boxes from the reference sleeves';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -37,10 +37,18 @@ var VERSION = '2026-07-27b · sponsor boxes measured from the reference sleeves'
 //    front-left and back-right carry an identical `pattern` transform, so they
 //    are the same physical arm.
 //
-//    Note the sizes are NOT equal across views — the right arm's mark is 180 tall
-//    in front and 165 in back, the left arm's 180 and 195. The templates render
-//    the sleeves at different apparent scales, so one size cannot serve both.
-//    That is the reason the box lives on the slot.
+//    HEIGHT IS WHAT SIZES A SPONSOR. The two front marks are both exactly 180
+//    tall with aspect ratios of 1.3078 and 1.1313, so the height is the standard
+//    and the width is whatever the logo happens to be. The box width is used
+//    only to centre. (That is `fit: 'height'`, the default for an overlay.)
+//
+//    ⚠ The back heights do not agree: 165 on the right arm, 195 on the left —
+//    an 18% spread, where the front has none. Their MEAN is exactly 180, and the
+//    back template renders its two sleeves at within 1% of the same scale, so
+//    this looks like hand-jitter around a 180 standard rather than an intended
+//    difference. Left as measured, because these files are what was shipped by
+//    hand and reproducing them exactly is the safe default. To unify instead,
+//    set both back heights to 0.272781 — the same 180 the front uses.
 //
 //    To re-measure after a template change: run inspect-template.jsx on a
 //    hand-made mockup. Each slot now lists its inner layers with a box in that
@@ -92,8 +100,12 @@ var CONFIG = {
   // comes in two forms:
   //
   //   'sleevesponsorleft'                        full canvas, as-is
-  //   { file: [...], boxPct: [x, y, w, h] }      fitted into that box, 0..1
+  //   { file: [...], boxPct: [x, y, w, h] }      sized and centred on that box, 0..1
   //   { file: [...], box:    [x, y, w, h] }      same, in slot pixels
+  //
+  // `fit` decides how the box sizes the mark: 'height' (default) scales by the
+  // box height and lets the width follow the logo's aspect; 'contain' keeps it
+  // inside on both axes. Sponsors want 'height' — see SPONSOR at the top.
   //
   // This is how sleeve sponsors work. A sponsor cannot be mirrored, so it must
   // be its own layer rather than baked into a mirrored base. Because the slot
@@ -325,19 +337,27 @@ function fitLayerToCanvas(pl, cw, ch) {
 }
 
 /**
- * Fit inside [x, y, w, h] of the slot's canvas, preserving aspect, centred.
+ * Place a mark at [x, y, w, h] of the slot's canvas, centred on that box.
  *
- * For a sponsor, which is a small mark on a big panel rather than the panel
- * itself. Aspect is preserved because sponsor marks are supplied at whatever
- * shape the sponsor's logo happens to be — a wide wordmark and a square badge
- * both have to end up the same HEIGHT on the sleeve, not both stretched to the
- * same rectangle. Centring in the box is what makes that work for either.
+ * mode 'height' (the default, and what sponsors use) scales by the box HEIGHT
+ * alone and lets the width fall out of the logo's own aspect. The box width is
+ * then only used to find the centre.
+ *
+ * That is not an arbitrary choice — it is what the reference sleeves do. Both
+ * front sponsors are exactly 180 tall despite aspect ratios of 1.3078 and
+ * 1.1313, so height is the standardised dimension and width is whatever the
+ * logo happens to be. A 'contain' fit would look identical on those two files
+ * and then silently undersize the first sponsor whose aspect is wider than the
+ * box, because width, not height, would become the binding constraint.
+ *
+ * mode 'contain' keeps the mark inside the box on both axes. Right for a badge
+ * that must not exceed a printable area; wrong for a sponsor strip.
  */
-function fitLayerInBox(pl, box) {
+function fitLayerInBox(pl, box, mode) {
   var m = layerBox(pl);
   if (m.w <= 0 || m.h <= 0) return;
-  var scale = Math.min(box[2] / m.w, box[3] / m.h) * 100;
-  pl.resize(scale, scale, AnchorPosition.MIDDLECENTER);
+  var scale = (mode === 'contain') ? Math.min(box[2] / m.w, box[3] / m.h) : (box[3] / m.h);
+  pl.resize(scale * 100, scale * 100, AnchorPosition.MIDDLECENTER);
   var n = layerBox(pl);
   pl.translate(UnitValue(box[0] + (box[2] - n.w) / 2 - n.x, 'px'),
                UnitValue(box[1] + (box[3] - n.h) / 2 - n.y, 'px'));
@@ -369,7 +389,7 @@ function placeInsideSlot(doc, layer, stack) {
         var p = stack[f].boxPct;
         box = [p[0] * cw, p[1] * ch, p[2] * cw, p[3] * ch];
       }
-      if (box) fitLayerInBox(pl, box);
+      if (box) fitLayerInBox(pl, box, stack[f].fit);
       else fitLayerToCanvas(pl, cw, ch);
     }
     inner.close(SaveOptions.SAVECHANGES);   // writes back into the parent slot
@@ -401,9 +421,9 @@ function replaceSmartObject(doc, layer, file) {
  */
 function overSpec(entry) {
   if (entry && !(entry instanceof Array) && entry.file) {
-    return { kinds: entry.file, box: entry.box || null, boxPct: entry.boxPct || null };
+    return { kinds: entry.file, box: entry.box || null, boxPct: entry.boxPct || null, fit: entry.fit || 'height' };
   }
-  return { kinds: entry, box: null, boxPct: null };
+  return { kinds: entry, box: null, boxPct: null, fit: 'height' };
 }
 
 // Kind names deliberately carry no internal hyphen ('collarback', not
@@ -725,7 +745,7 @@ function main() {
                   var spec = overSpec(slot.over[ov]);
                   var extra = artworkFor(slugs[i], spec.kinds);
                   if (extra) {
-                    stack.push({ file: extra, box: spec.box, boxPct: spec.boxPct });
+                    stack.push({ file: extra, box: spec.box, boxPct: spec.boxPct, fit: spec.fit });
                     overlaid.push(decodeURI(extra.name) + ((spec.box || spec.boxPct) ? '' : ' (full canvas)'));
                   }
                 }

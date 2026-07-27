@@ -27,18 +27,32 @@ but production artwork is named by the **wearer's arm** (`-sleeveleft` is the
 player's left arm, whichever side of the picture it lands on). That is why
 `front-left` here supplies `SPONSOR.frontRightArm`.
 
+**Height is what sizes a sponsor.** Both front marks are exactly 180 tall while
+their aspect ratios differ (1.3078 and 1.1313), so the height is the standard and
+the width is whatever the logo happens to be. The builder therefore scales by the
+box height and uses the box width only to centre — fitting the mark into the
+rectangle on both axes would look identical on these two files and then quietly
+undersize the first sponsor wider than its box.
+
 **One size cannot serve both views.** Within an arm it is plainly the same logo —
-the aspect ratio matches to four decimals — but not the same size:
+the aspect matches to four decimals — but not the same size:
 
 | arm | front | back |
 |---|---|---|
-| player's right (`front-left`, `back-right`) | 235.40 × 180 | 215.79 × 165 |
-| player's left (`front-right`, `back-left`) | 203.64 × 180 | 220.61 × 195 |
+| player's right (`front-left`, `back-right`) | 235.40 × **180** | 215.79 × **165** |
+| player's left (`front-right`, `back-left`) | 203.64 × **180** | 220.61 × **195** |
 
-The two templates render the sleeves at different apparent scales, so a size
-baked into the artwork would be wrong in one view of each pair. This is why the
-position and size live on the **slot**, as fractions of that slot's canvas, and
-the sponsor file is just the mark.
+So a size baked into the artwork would be wrong in one view of each pair. This is
+why position and size live on the **slot**, as fractions of that slot's canvas,
+and the sponsor file is just the mark.
+
+⚠ **The back pair does not agree with itself.** 165 and 195 is an 18% spread
+where the front has none, and their mean is exactly 180. The back template renders
+its two sleeves at within 1% of the same scale, so there is no reason for the same
+standard to come out different sizes — this looks like hand-jitter around 180
+rather than intent. Left as measured, because these files are what was shipped by
+hand and reproducing them exactly is the safe default. To unify, set both back
+heights in `SPONSOR` to `0.272781` (the same 180).
 
 **The boxes**, as fractions of the canvas — `[x, y, w, h]`, origin top-left:
 
