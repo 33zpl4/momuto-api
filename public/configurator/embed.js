@@ -69,14 +69,36 @@ var CONFIG3D={
 // design server routes checkout to those three storefronts; no IT mapping yet,
 // so IT pages fall back to showing no button rather than an EN checkout).
 var STORE3D={ en:"https://www.momuto.com", fr:"https://fr.momuto.com", es:"https://es.momuto.com" };
-function build3dUrl(configId, lang, backUrl, mc){
+// The STORE product title, carried into the design server so the /cart page can
+// name the line ("Manchester Fiti — Kit Personalizado") instead of showing a bare
+// cart id, and can tell a full kit from a jersey by the title's fixed marker
+// ("Custom Full Kit" / "Kit Complet Personnalisé" / "Kit Personalizado" /
+// "Kit Completo Personalizzato"). Nothing else in the handoff carries it: the
+// chain only passes a cloned configId + suit family. Explicit data-pname wins;
+// otherwise read the product <h1>, else the page title. Never fails the URL —
+// an empty name just leaves the param off and the cart behaves as it does today.
+function productName3d(host){
+  var pick=function(v){ v=(v||"").replace(/\s+/g," ").trim(); return v.length>150?v.slice(0,150):v; };
+  var n=pick(host && host.dataset ? host.dataset.pname : "");
+  if(n) return n;
+  var el=document.querySelector("h1.control-product-detail-title")||document.querySelector(".product-name h1");
+  n=pick(el?el.textContent:"");
+  if(n) return n;
+  // page titles are usually "<product> | <store>" — keep the product half.
+  // Split on the pipe ONLY: kit titles legitimately contain an em dash
+  // ("Manchester Fiti — Kit Personalizado") and splitting on it would drop
+  // the very marker that identifies the product as a kit.
+  return pick(String(document.title||"").split("|")[0]);
+}
+function build3dUrl(configId, lang, backUrl, mc, pname){
   return "https://design.momuto.com/goodsInfoSave"
     +"?uuid="+genUserId()
     +"&sysType=oem"
     +"&fromUrlHost="+encodeURIComponent(STORE3D[lang]||STORE3D.en)
     +"&collectionName=configId="+encodeURIComponent(configId)+"%26suitName=mamuto3suit1"
     +"&focus=1&back="+encodeURIComponent(backUrl||"")   // forwarded once the GoodInfoAction patch is live
-    +(mc?"&mc="+encodeURIComponent(mc):"");              // toy colours the customer changed (from:to hex pairs)
+    +(mc?"&mc="+encodeURIComponent(mc):"")               // toy colours the customer changed (from:to hex pairs)
+    +(pname?"&pname="+encodeURIComponent(pname):"");     // store product title (see productName3d)
 }
 
 function knockoutBg(img){
@@ -668,7 +690,7 @@ function run(root, opts){
       return (d && v && String(d).toLowerCase()!==String(v).toLowerCase())
         ? String(d).replace("#","")+":"+String(v).replace("#","") : null;
     }).filter(Boolean).join(",");
-    return build3dUrl(opts.config3d, CART.lang, location.origin+location.pathname, mc); }
+    return build3dUrl(opts.config3d, CART.lang, location.origin+location.pathname, mc, opts.pname); }
 
   function captureView(v){ var prev=active; active=v; render(); var url=cv.toDataURL("image/png"); active=prev; render(); return url; }
   // ---- OSS upload (mirrors the 3D tool's contract) -----------------------
@@ -786,6 +808,7 @@ function mount(host){
   // canonical 3D config for this kit: per-page override, else the registry;
   // only for stores goodsInfoSave can route checkout to (no IT yet).
   opts.config3d=(STORE3D[opts.lang] && (host.dataset.config3d||CONFIG3D[opts.template]))||null;
+  opts.pname=productName3d(host);
   var root=host.attachShadow({mode:"open"});
   root.innerHTML="<style>"+CSS+"</style>"+buildHTML(opts.t, !!opts.config3d);
   host.__rtp=run(root,opts);
