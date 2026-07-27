@@ -81,7 +81,9 @@ function productName3d(host){
   var pick=function(v){ v=(v||"").replace(/\s+/g," ").trim(); return v.length>150?v.slice(0,150):v; };
   var n=pick(host && host.dataset ? host.dataset.pname : "");
   if(n) return n;
-  var el=document.querySelector("h1.control-product-detail-title")||document.querySelector(".product-name h1");
+  var el=document.querySelector("h1.control-product_detail-title")   // real theme class (underscore)
+       ||document.querySelector("h1.control-product-detail-title")
+       ||document.querySelector(".product-name h1");
   n=pick(el?el.textContent:"");
   if(n) return n;
   // page titles are usually "<product> | <store>" — keep the product half.
