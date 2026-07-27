@@ -16,7 +16,29 @@
 
 #target photoshop
 
-var VERSION = '2026-07-26j · overlay layers, for sleeve sponsors';
+var VERSION = '2026-07-27a · sponsors placed at a fixed box in the slot canvas';
+
+// ── Sponsor placement. [x, y, w, h] in the SLOT'S OWN canvas — the .psb you get
+//    by double-clicking that sleeve, whose size inspect-template.jsx prints as
+//    AUTHOR ARTWORK AT. Not the template canvas, and not the layer's bounds.
+//
+//    null means "not measured yet": the sponsor file is then dropped in at full
+//    canvas, which is only right if it was authored that way. Fill these in and
+//    a plain logo-on-transparent file lands correctly in every view.
+//
+//    How to measure, once, from a mockup you made by hand:
+//      1. Double-click the sleeve slot to open its .psb.
+//      2. Select the sponsor layer, then Window ▸ Info (F8) — or read
+//         Edit ▸ Free Transform, which shows X, Y, W, H directly.
+//      3. X and Y are the top-left of the sponsor's bounding box; W and H its
+//         size. Those four numbers are the box.
+//      4. Close the .psb WITHOUT saving.
+var SPONSOR = {
+  frontLeftArm:  null,   // front template, picture-RIGHT slot   (canvas 1348×2520)
+  frontRightArm: null,   // front template, picture-LEFT slot    (canvas 1348×2494)
+  backLeftArm:   null,   // back template, LEFT SLEEVE DESIGN    (canvas not yet measured)
+  backRightArm:  null    // back template, RIGHT SLEEVE DESIGN   (canvas not yet measured)
+};
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
@@ -54,14 +76,31 @@ var CONFIG = {
   // and both slots in both views take it.
   //
   // `over: [...]` stacks EXTRA artwork on top of the base, inside the same
-  // slot. Each entry is a kind (or a fallback list, like `file`) and each is
-  // optional — absent means that layer simply is not added.
+  // slot. Each entry is optional — absent means that layer is not added — and
+  // comes in two forms:
+  //
+  //   'sleevesponsorleft'                        full canvas, as-is
+  //   { file: [...], box: [x, y, w, h] }         fitted into that box
   //
   // This is how sleeve sponsors work. A sponsor cannot be mirrored, so it must
-  // be its own layer rather than baked into a mirrored base. Authored at the
-  // SAME canvas as the base and transparent everywhere else, it lands in the
-  // right place automatically — and because the slot mapping already knows
-  // which picture-side is which arm, one file per arm is correct in BOTH views.
+  // be its own layer rather than baked into a mirrored base. Because the slot
+  // mapping already knows which picture-side is which arm, one file per arm is
+  // correct in BOTH views.
+  //
+  // Use the `box` form. A sponsor sits at a standard size and position on the
+  // sleeve, and the box is what encodes that — in the SLOT'S OWN canvas
+  // coordinates, which is the part that matters: the front and back templates
+  // give the same physical sleeve different canvases (front 1348×2494, back
+  // its own), so a position baked into the artwork can only be right in one of
+  // them. On the slot, one file lands correctly in both, and the artwork itself
+  // is just a logo on a transparent background at whatever size it came in.
+  //
+  // The box preserves aspect and centres, so a wide wordmark and a square badge
+  // both come out at the same height rather than both stretched to fit.
+  //
+  // The bare-kind form still works and means "authored at the full sleeve canvas
+  // with the sponsor already in position" — fine if that is how the file was
+  // built, but it needs a separate file per view.
   //
   // Every combination falls out of which files exist: left only, right only,
   // both the same, both different. Nothing to configure per design.
@@ -99,9 +138,9 @@ var CONFIG = {
         { layer: 'JERSEY DESIGN', at: [3596, 746],  file: ['shoulderright', 'shoulders'], count: 1, expect: [1671, 679] },
         // Front view mirrors the wearer: picture-left is the player's RIGHT arm.
         { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2494],
-          over: [['sleevesponsorright', 'sleevesponsor']] },
+          over: [{ file: ['sleevesponsorright', 'sleevesponsor'], box: SPONSOR.frontRightArm }] },
         { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2520],
-          over: [['sleevesponsorleft',  'sleevesponsor']] },
+          over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], box: SPONSOR.frontLeftArm }] },
         { layer: 'COLLAR TOP',    file: 'collartop',    count: 1, expect: [1500, 252] },
         { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1, expect: [2171, 355] }
         // TAPE DESIGN is deliberately absent — it stays white, so leaving the
@@ -118,9 +157,9 @@ var CONFIG = {
         // Back view does not mirror: the template's LEFT/RIGHT are picture-side,
         // and picture-left is the player's LEFT arm from behind.
         { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'], count: 1,
-          over: [['sleevesponsorleft',  'sleevesponsor']] },
+          over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], box: SPONSOR.backLeftArm }] },
         { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'], count: 1,
-          over: [['sleevesponsorright', 'sleevesponsor']] },
+          over: [{ file: ['sleevesponsorright', 'sleevesponsor'], box: SPONSOR.backRightArm }] },
         { layer: 'COLLAR DESIGN',       file: 'collarback',               count: 1 }
         // No shoulder slots on the back template — its SHOULDERS layer is a
         // solid fill, not a smart object, so back shoulders take a flat colour.
@@ -253,7 +292,45 @@ function nudgeLayer(doc, layer, dx, dy) {
  * slot updates the moment it closes. The parent template is still closed
  * without saving at the end of the run, so nothing on disk changes.
  */
-function placeInsideSlot(doc, layer, files) {
+function layerBox(pl) {
+  var b = pl.bounds;
+  return {
+    x: b[0].as('px'), y: b[1].as('px'),
+    w: b[2].as('px') - b[0].as('px'),
+    h: b[3].as('px') - b[1].as('px')
+  };
+}
+
+// Fill the slot's canvas edge to edge. Right for a base design: it was authored
+// as the whole panel, so its canvas IS the panel.
+function fitLayerToCanvas(pl, cw, ch) {
+  var m = layerBox(pl);
+  if (m.w <= 0 || m.h <= 0) return;
+  pl.resize(cw / m.w * 100, ch / m.h * 100, AnchorPosition.MIDDLECENTER);
+  var n = layerBox(pl);
+  pl.translate(UnitValue(-n.x, 'px'), UnitValue(-n.y, 'px'));
+}
+
+/**
+ * Fit inside [x, y, w, h] of the slot's canvas, preserving aspect, centred.
+ *
+ * For a sponsor, which is a small mark on a big panel rather than the panel
+ * itself. Aspect is preserved because sponsor marks are supplied at whatever
+ * shape the sponsor's logo happens to be — a wide wordmark and a square badge
+ * both have to end up the same HEIGHT on the sleeve, not both stretched to the
+ * same rectangle. Centring in the box is what makes that work for either.
+ */
+function fitLayerInBox(pl, box) {
+  var m = layerBox(pl);
+  if (m.w <= 0 || m.h <= 0) return;
+  var scale = Math.min(box[2] / m.w, box[3] / m.h) * 100;
+  pl.resize(scale, scale, AnchorPosition.MIDDLECENTER);
+  var n = layerBox(pl);
+  pl.translate(UnitValue(box[0] + (box[2] - n.w) / 2 - n.x, 'px'),
+               UnitValue(box[1] + (box[3] - n.h) / 2 - n.y, 'px'));
+}
+
+function placeInsideSlot(doc, layer, stack) {
   doc.activeLayer = layer;
   executeAction(stringIDToTypeID('placedLayerEditContents'), undefined, DialogModes.NO);
   var inner = app.activeDocument;
@@ -264,25 +341,18 @@ function placeInsideSlot(doc, layer, files) {
       try { inner.artLayers[i].remove(); } catch (eDel) {}
     }
 
-    // Bottom to top: base first, then each overlay. Every layer is fitted to
-    // the same canvas, so an overlay authored at the base's size lands exactly
-    // where it was drawn — no per-design positioning.
+    // Bottom to top: base first, then each overlay. A base fills the canvas; an
+    // overlay with a `box` is fitted into that box instead.
     var cw = inner.width.as('px'), ch = inner.height.as('px');
-    for (var f = 0; f < files.length; f++) {
+    for (var f = 0; f < stack.length; f++) {
       var d = new ActionDescriptor();
-      d.putPath(charIDToTypeID('null'), files[f]);
+      d.putPath(charIDToTypeID('null'), stack[f].file);
       d.putEnumerated(charIDToTypeID('FTcs'), charIDToTypeID('QCSt'), charIDToTypeID('Qcsa'));
       executeAction(charIDToTypeID('Plc '), d, DialogModes.NO);
 
       var pl = inner.activeLayer;
-      var b = pl.bounds;
-      var w = b[2].as('px') - b[0].as('px');
-      var h = b[3].as('px') - b[1].as('px');
-      if (w > 0 && h > 0) {
-        pl.resize(cw / w * 100, ch / h * 100, AnchorPosition.MIDDLECENTER);
-        var nb = pl.bounds;
-        pl.translate(UnitValue(-nb[0].as('px'), 'px'), UnitValue(-nb[1].as('px'), 'px'));
-      }
+      if (stack[f].box) fitLayerInBox(pl, stack[f].box);
+      else fitLayerToCanvas(pl, cw, ch);
     }
     inner.close(SaveOptions.SAVECHANGES);   // writes back into the parent slot
   } catch (e) {
@@ -299,6 +369,21 @@ function replaceSmartObject(doc, layer, file) {
   d.putPath(charIDToTypeID('null'), file);
   d.putInteger(charIDToTypeID('PgNm'), 1);
   executeAction(stringIDToTypeID('placedLayerReplaceContents'), d, DialogModes.NO);
+}
+
+/**
+ * An `over` entry is either a kind (or fallback list), meaning "authored at the
+ * slot's full canvas, drop it in as-is", or {file, box} meaning "this is a small
+ * mark, put it HERE at THIS size".
+ *
+ * The box belongs to the slot, not to the file, and that is the whole point: the
+ * front and back templates give the same physical sleeve different canvases, so
+ * a position baked into the artwork can only ever be right in one of them. Held
+ * on the slot, one sponsor file per arm is correct in both views.
+ */
+function overSpec(entry) {
+  if (entry && !(entry instanceof Array) && entry.file) return { kinds: entry.file, box: entry.box || null };
+  return { kinds: entry, box: null };
 }
 
 // Kind names deliberately carry no internal hyphen ('collarback', not
@@ -407,10 +492,18 @@ function findSlugs(active) {
  */
 function claimedKinds(active) {
   var kinds = {};
+  var add = function (spec) {
+    var list = (spec instanceof Array) ? spec : [spec];
+    for (var k = 0; k < list.length; k++) kinds[list[k].toLowerCase()] = true;
+  };
   for (var a = 0; a < active.length; a++) {
     for (var s = 0; s < active[a].slots.length; s++) {
-      var list = (active[a].slots[s].file instanceof Array) ? active[a].slots[s].file : [active[a].slots[s].file];
-      for (var k = 0; k < list.length; k++) kinds[list[k].toLowerCase()] = true;
+      var slot = active[a].slots[s];
+      add(slot.file);
+      // Overlay kinds count as claimed too. Without this every sponsor file
+      // would be reported as an unrecognised typo — the warning that exists to
+      // catch 'collarbotom' would fire on the one thing that is spelled right.
+      if (slot.over) for (var o = 0; o < slot.over.length; o++) add(overSpec(slot.over[o]).kinds);
     }
   }
   return kinds;
@@ -606,11 +699,15 @@ function main() {
             var slot = view.slots[s];
             var art = artworkFor(slugs[i], slot.file);
             if (art) {
-              var stack = [art];
+              var stack = [{ file: art, box: null }];
               if (slot.over && CONFIG.placeInside) {
                 for (var ov = 0; ov < slot.over.length; ov++) {
-                  var extra = artworkFor(slugs[i], slot.over[ov]);
-                  if (extra) { stack.push(extra); overlaid.push(decodeURI(extra.name)); }
+                  var spec = overSpec(slot.over[ov]);
+                  var extra = artworkFor(slugs[i], spec.kinds);
+                  if (extra) {
+                    stack.push({ file: extra, box: spec.box });
+                    overlaid.push(decodeURI(extra.name) + (spec.box ? '' : ' (full canvas)'));
+                  }
                 }
               } else if (slot.over && slot.over.length) {
                 overWarn = true;

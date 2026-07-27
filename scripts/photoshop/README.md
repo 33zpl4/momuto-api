@@ -297,10 +297,40 @@ its own layer stacked on top of the base, inside the same slot:
 <slug>-sleevesponsor.svg        fallback used for either arm that has no specific file
 ```
 
-**Author the overlay at the same canvas as the base, transparent everywhere
-except the sponsor.** Every layer is fitted to the slot canvas, so the sponsor
-lands exactly where it was drawn — and since the slot mapping already knows
-which picture-side is which arm, one file per arm is correct in **both** views.
+**The sponsor file is just the mark on transparency** — any size, any aspect. It
+does not have to match the sleeve canvas and does not carry its own position.
+Where it goes is declared by the *slot*:
+
+```js
+over: [{ file: ['sleevesponsorleft', 'sleevesponsor'], box: SPONSOR.frontLeftArm }]
+```
+
+`box` is `[x, y, w, h]` in that slot's own canvas. This matters because the front
+and back templates give the same physical sleeve **different canvases** (front
+1348×2494 and 1348×2520, back its own), so a position baked into the artwork can
+only ever be right in one of the two views. Held on the slot, one file per arm is
+correct in **both** — the slot mapping already knows which picture-side is which
+arm.
+
+The mark is fitted into the box preserving aspect and centred, so a wide wordmark
+and a square badge come out at the same height rather than both stretched to the
+same rectangle.
+
+#### Filling in the four boxes
+
+`SPONSOR` at the top of the builder holds four `null`s — front left/right arm,
+back left/right arm. While they are `null` the sponsor file is dropped in at full
+canvas instead, which is only correct if it was authored that way.
+
+To measure them, once, from a mockup assembled by hand: open it, run
+`inspect-template.jsx`, and read the sleeve slots. Each now lists its inner
+layers with `box: [x, y, w, h]` in that slot's coordinates — the same space the
+builder places into — so the sponsor layer's line is the value to paste. They are
+a property of the templates, not of any design.
+
+An overlay entry may also be written as a bare kind, `'sleevesponsorleft'`, which
+means "authored at the full sleeve canvas with the sponsor already in position".
+That works, but it needs a separate file per view.
 
 Every case falls out of which files exist, with nothing to configure per design:
 
