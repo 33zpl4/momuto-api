@@ -16,28 +16,40 @@
 
 #target photoshop
 
-var VERSION = '2026-07-27a · sponsors placed at a fixed box in the slot canvas';
+var VERSION = '2026-07-27b · sponsor boxes measured from the reference sleeves';
 
-// ── Sponsor placement. [x, y, w, h] in the SLOT'S OWN canvas — the .psb you get
-//    by double-clicking that sleeve, whose size inspect-template.jsx prints as
-//    AUTHOR ARTWORK AT. Not the template canvas, and not the layer's bounds.
+// ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
+//    [x, y, w, h], 0..1, origin top-left.
 //
-//    null means "not measured yet": the sponsor file is then dropped in at full
-//    canvas, which is only right if it was authored that way. Fill these in and
-//    a plain logo-on-transparent file lands correctly in every view.
+//    Fractions rather than pixels because the same physical sleeve gets a
+//    different canvas in each template — the front's two sleeve slots are
+//    1348×2494 and 1348×2520, and the back's are different again. A fraction is
+//    the same place in all of them; a pixel count is not.
 //
-//    How to measure, once, from a mockup you made by hand:
-//      1. Double-click the sleeve slot to open its .psb.
-//      2. Select the sponsor layer, then Window ▸ Info (F8) — or read
-//         Edit ▸ Free Transform, which shows X, Y, W, H directly.
-//      3. X and Y are the top-left of the sponsor's bounding box; W and H its
-//         size. Those four numbers are the box.
-//      4. Close the .psb WITHOUT saving.
+//    Values off the 0..1 range are correct, not typos. The panel wraps around the
+//    arm, so a sponsor near the outer edge genuinely runs past the canvas and the
+//    overflow is the part that disappears around the back of the sleeve.
+//
+//    Measured from mockups/reference/sleeve-sponsor/sleeves-{front,back}-{left,right}.svg,
+//    which are hand-built sleeves with the sponsor where it belongs. Those files
+//    are named by PICTURE SIDE; these keys are by the WEARER'S ARM, which is why
+//    front-left maps to frontRightArm. The reference files prove the pairing:
+//    front-left and back-right carry an identical `pattern` transform, so they
+//    are the same physical arm.
+//
+//    Note the sizes are NOT equal across views — the right arm's mark is 180 tall
+//    in front and 165 in back, the left arm's 180 and 195. The templates render
+//    the sleeves at different apparent scales, so one size cannot serve both.
+//    That is the reason the box lives on the slot.
+//
+//    To re-measure after a template change: run inspect-template.jsx on a
+//    hand-made mockup. Each slot now lists its inner layers with a box in that
+//    slot's coordinates; divide by the slot canvas printed on the line above.
 var SPONSOR = {
-  frontLeftArm:  null,   // front template, picture-RIGHT slot   (canvas 1348×2520)
-  frontRightArm: null,   // front template, picture-LEFT slot    (canvas 1348×2494)
-  backLeftArm:   null,   // back template, LEFT SLEEVE DESIGN    (canvas not yet measured)
-  backRightArm:  null    // back template, RIGHT SLEEVE DESIGN   (canvas not yet measured)
+  frontRightArm: [-0.146135, 0.568293, 0.660022, 0.272781],   // front template, picture-LEFT slot
+  frontLeftArm:  [ 0.458909, 0.585520, 0.570956, 0.272781],   // front template, picture-RIGHT slot
+  backLeftArm:   [-0.064312, 0.561373, 0.618536, 0.295512],   // back template, LEFT SLEEVE DESIGN
+  backRightArm:  [ 0.476647, 0.568293, 0.605020, 0.250049]    // back template, RIGHT SLEEVE DESIGN
 };
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
@@ -80,20 +92,21 @@ var CONFIG = {
   // comes in two forms:
   //
   //   'sleevesponsorleft'                        full canvas, as-is
-  //   { file: [...], box: [x, y, w, h] }         fitted into that box
+  //   { file: [...], boxPct: [x, y, w, h] }      fitted into that box, 0..1
+  //   { file: [...], box:    [x, y, w, h] }      same, in slot pixels
   //
   // This is how sleeve sponsors work. A sponsor cannot be mirrored, so it must
   // be its own layer rather than baked into a mirrored base. Because the slot
   // mapping already knows which picture-side is which arm, one file per arm is
   // correct in BOTH views.
   //
-  // Use the `box` form. A sponsor sits at a standard size and position on the
-  // sleeve, and the box is what encodes that — in the SLOT'S OWN canvas
-  // coordinates, which is the part that matters: the front and back templates
-  // give the same physical sleeve different canvases (front 1348×2494, back
-  // its own), so a position baked into the artwork can only be right in one of
-  // them. On the slot, one file lands correctly in both, and the artwork itself
-  // is just a logo on a transparent background at whatever size it came in.
+  // Use `boxPct`, and see SPONSOR at the top for why fractions. The sponsor
+  // artwork is then just the logo on transparency, at any size, carrying no
+  // position of its own — the slot supplies the position.
+  //
+  // CROP THE SPONSOR FILE TIGHT to the mark: no transparent margin. The fit
+  // measures the placed layer's bounds, so padding inside the file becomes
+  // padding inside the box and the mark comes out small and off-centre.
   //
   // The box preserves aspect and centres, so a wide wordmark and a square badge
   // both come out at the same height rather than both stretched to fit.
@@ -138,9 +151,9 @@ var CONFIG = {
         { layer: 'JERSEY DESIGN', at: [3596, 746],  file: ['shoulderright', 'shoulders'], count: 1, expect: [1671, 679] },
         // Front view mirrors the wearer: picture-left is the player's RIGHT arm.
         { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2494],
-          over: [{ file: ['sleevesponsorright', 'sleevesponsor'], box: SPONSOR.frontRightArm }] },
+          over: [{ file: ['sleevesponsorright', 'sleevesponsor'], boxPct: SPONSOR.frontRightArm }] },
         { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2520],
-          over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], box: SPONSOR.frontLeftArm }] },
+          over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], boxPct: SPONSOR.frontLeftArm }] },
         { layer: 'COLLAR TOP',    file: 'collartop',    count: 1, expect: [1500, 252] },
         { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1, expect: [2171, 355] }
         // TAPE DESIGN is deliberately absent — it stays white, so leaving the
@@ -157,9 +170,9 @@ var CONFIG = {
         // Back view does not mirror: the template's LEFT/RIGHT are picture-side,
         // and picture-left is the player's LEFT arm from behind.
         { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'], count: 1,
-          over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], box: SPONSOR.backLeftArm }] },
+          over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], boxPct: SPONSOR.backLeftArm }] },
         { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'], count: 1,
-          over: [{ file: ['sleevesponsorright', 'sleevesponsor'], box: SPONSOR.backRightArm }] },
+          over: [{ file: ['sleevesponsorright', 'sleevesponsor'], boxPct: SPONSOR.backRightArm }] },
         { layer: 'COLLAR DESIGN',       file: 'collarback',               count: 1 }
         // No shoulder slots on the back template — its SHOULDERS layer is a
         // solid fill, not a smart object, so back shoulders take a flat colour.
@@ -351,7 +364,12 @@ function placeInsideSlot(doc, layer, stack) {
       executeAction(charIDToTypeID('Plc '), d, DialogModes.NO);
 
       var pl = inner.activeLayer;
-      if (stack[f].box) fitLayerInBox(pl, stack[f].box);
+      var box = stack[f].box;
+      if (!box && stack[f].boxPct) {
+        var p = stack[f].boxPct;
+        box = [p[0] * cw, p[1] * ch, p[2] * cw, p[3] * ch];
+      }
+      if (box) fitLayerInBox(pl, box);
       else fitLayerToCanvas(pl, cw, ch);
     }
     inner.close(SaveOptions.SAVECHANGES);   // writes back into the parent slot
@@ -382,8 +400,10 @@ function replaceSmartObject(doc, layer, file) {
  * on the slot, one sponsor file per arm is correct in both views.
  */
 function overSpec(entry) {
-  if (entry && !(entry instanceof Array) && entry.file) return { kinds: entry.file, box: entry.box || null };
-  return { kinds: entry, box: null };
+  if (entry && !(entry instanceof Array) && entry.file) {
+    return { kinds: entry.file, box: entry.box || null, boxPct: entry.boxPct || null };
+  }
+  return { kinds: entry, box: null, boxPct: null };
 }
 
 // Kind names deliberately carry no internal hyphen ('collarback', not
@@ -705,8 +725,8 @@ function main() {
                   var spec = overSpec(slot.over[ov]);
                   var extra = artworkFor(slugs[i], spec.kinds);
                   if (extra) {
-                    stack.push({ file: extra, box: spec.box });
-                    overlaid.push(decodeURI(extra.name) + (spec.box ? '' : ' (full canvas)'));
+                    stack.push({ file: extra, box: spec.box, boxPct: spec.boxPct });
+                    overlaid.push(decodeURI(extra.name) + ((spec.box || spec.boxPct) ? '' : ' (full canvas)'));
                   }
                 }
               } else if (slot.over && slot.over.length) {

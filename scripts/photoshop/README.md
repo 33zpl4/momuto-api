@@ -297,36 +297,50 @@ its own layer stacked on top of the base, inside the same slot:
 <slug>-sleevesponsor.svg        fallback used for either arm that has no specific file
 ```
 
-**The sponsor file is just the mark on transparency** — any size, any aspect. It
-does not have to match the sleeve canvas and does not carry its own position.
-Where it goes is declared by the *slot*:
+**The sponsor file is just the mark on transparency** — any size, any aspect,
+carrying no position of its own. Where it goes is declared by the *slot*:
 
 ```js
-over: [{ file: ['sleevesponsorleft', 'sleevesponsor'], box: SPONSOR.frontLeftArm }]
+over: [{ file: ['sleevesponsorleft', 'sleevesponsor'], boxPct: SPONSOR.frontLeftArm }]
 ```
 
-`box` is `[x, y, w, h]` in that slot's own canvas. This matters because the front
-and back templates give the same physical sleeve **different canvases** (front
-1348×2494 and 1348×2520, back its own), so a position baked into the artwork can
-only ever be right in one of the two views. Held on the slot, one file per arm is
-correct in **both** — the slot mapping already knows which picture-side is which
-arm.
+`boxPct` is `[x, y, w, h]` as **fractions of that slot's own canvas**. Fractions
+rather than pixels because the same physical sleeve gets a different canvas in
+each template — the front's two sleeve slots are 1348×2494 and 1348×2520, the
+back's different again. A fraction means the same place in all of them.
 
-The mark is fitted into the box preserving aspect and centred, so a wide wordmark
-and a square badge come out at the same height rather than both stretched to the
-same rectangle.
+⚠ **Crop the sponsor file tight to the mark**, no transparent margin. The fit
+measures the placed layer's bounds, so padding inside the file becomes padding
+inside the box and the mark lands small and off-centre.
 
-#### Filling in the four boxes
+The mark is fitted preserving aspect and centred, so a wide wordmark and a square
+badge come out at the same height rather than both stretched to the same
+rectangle.
 
-`SPONSOR` at the top of the builder holds four `null`s — front left/right arm,
-back left/right arm. While they are `null` the sponsor file is dropped in at full
-canvas instead, which is only correct if it was authored that way.
+#### Where the four boxes came from
 
-To measure them, once, from a mockup assembled by hand: open it, run
-`inspect-template.jsx`, and read the sleeve slots. Each now lists its inner
-layers with `box: [x, y, w, h]` in that slot's coordinates — the same space the
-builder places into — so the sponsor layer's line is the value to paste. They are
-a property of the templates, not of any design.
+`SPONSOR` at the top of the builder is filled in, measured from
+`mockups/reference/sleeve-sponsor/sleeves-{front,back}-{left,right}.svg` — real
+hand-built sleeves with the sponsor where it belongs. Values outside 0..1 are
+correct, not typos: the panel wraps around the arm, so a mark near the outer edge
+runs past the canvas and the overflow is what disappears around the back.
+
+Two things those files settled:
+
+- **The arm pairing, by evidence.** `front-left` and `back-right` carry an
+  identical `pattern` transform (and near-identical file size), as do
+  `front-right` and `back-left`. So they are named by *picture side*, and
+  picture-left in front is the same physical arm as picture-right in back —
+  which is the mapping the slots already used.
+- **One size cannot serve both views.** Within an arm the mark is the same logo
+  (aspect matches exactly), but the right arm's is 180 tall in front and 165 in
+  back, the left arm's 180 and 195. The templates render the sleeves at
+  different apparent scales. That is the reason the box lives on the slot rather
+  than in the artwork.
+
+To re-measure after a template change: run `inspect-template.jsx` on a hand-made
+mockup. Each slot lists its inner layers with a box in that slot's coordinates;
+divide by the slot canvas printed on the line above.
 
 An overlay entry may also be written as a bare kind, `'sleevesponsorleft'`, which
 means "authored at the full sleeve canvas with the sponsor already in position".

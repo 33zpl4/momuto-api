@@ -1,36 +1,61 @@
 # Sleeve sponsor reference
 
-**The uploads originally asked for here are no longer needed.** The question they
-were meant to settle has been answered by changing the script instead. Kept as a
-drop folder in case a specific sponsor case ever needs checking.
+Four hand-built sleeves with the sponsor where it belongs, one per sleeve slot:
 
-## What the question was
-
-The front and back templates give the same physical sleeve **different
-canvases** — front measures 1348×2494 and 1348×2520, back its own. Overlays used
-to be fitted to the whole slot canvas, so a sponsor's position had to be baked
-into the artwork. That only works if the sponsor sits at the same *relative*
-position in every canvas, which there is no reason to expect. The fallback was
-going to be splitting the overlay kinds per view —
-`sleevesponsorleftfront` / `sleevesponsorleftback` — i.e. four files instead of
-two, hand-positioned each time.
-
-## What it does now
-
-The position moved off the artwork and onto the **slot**:
-
-```js
-over: [{ file: ['sleevesponsorleft', 'sleevesponsor'], box: SPONSOR.frontLeftArm }]
+```
+sleeves-front-left.svg    sleeves-front-right.svg
+sleeves-back-left.svg     sleeves-back-right.svg
 ```
 
-`box` is `[x, y, w, h]` in that slot's own canvas. Each of the four sleeve slots
-declares where a sponsor goes in its own coordinates, so differing canvases stop
-mattering — one file per arm is correct in both views, and the file itself is
-just the logo on transparency at whatever size it happens to be. It is fitted
-into the box preserving aspect and centred, so a wide wordmark and a square badge
-come out the same height rather than both stretched to the same rectangle.
+Named by **picture side**. All four are 1348×2494 with three layers: `base`,
+`pattern`, `sponsor`.
 
-Sponsor artwork is therefore named by the **wearer's arm**, same as the sleeves:
+These are the source of the `SPONSOR` table in
+`scripts/photoshop/build-jersey-mockups.jsx`. Keep them: if a template is ever
+replaced, they are what the new boxes get measured against.
+
+## What they establish
+
+**The arm pairing, from the files rather than from reasoning.** `front-left` and
+`back-right` carry an identical `pattern` transform and a near-identical file
+size; so do `front-right` and `back-left`. Picture-left in the front view is
+therefore the same physical arm as picture-right in the back view — which is what
+the slot mapping already assumed, now confirmed.
+
+Note the mismatch in vocabulary: these reference files are named by picture side,
+but production artwork is named by the **wearer's arm** (`-sleeveleft` is the
+player's left arm, whichever side of the picture it lands on). That is why
+`front-left` here supplies `SPONSOR.frontRightArm`.
+
+**One size cannot serve both views.** Within an arm it is plainly the same logo —
+the aspect ratio matches to four decimals — but not the same size:
+
+| arm | front | back |
+|---|---|---|
+| player's right (`front-left`, `back-right`) | 235.40 × 180 | 215.79 × 165 |
+| player's left (`front-right`, `back-left`) | 203.64 × 180 | 220.61 × 195 |
+
+The two templates render the sleeves at different apparent scales, so a size
+baked into the artwork would be wrong in one view of each pair. This is why the
+position and size live on the **slot**, as fractions of that slot's canvas, and
+the sponsor file is just the mark.
+
+**The boxes**, as fractions of the canvas — `[x, y, w, h]`, origin top-left:
+
+| file | → | fraction |
+|---|---|---|
+| `sleeves-front-left`  | `SPONSOR.frontRightArm` | `[-0.146135, 0.568293, 0.660022, 0.272781]` |
+| `sleeves-front-right` | `SPONSOR.frontLeftArm`  | `[ 0.458909, 0.585520, 0.570956, 0.272781]` |
+| `sleeves-back-left`   | `SPONSOR.backLeftArm`   | `[-0.064312, 0.561373, 0.618536, 0.295512]` |
+| `sleeves-back-right`  | `SPONSOR.backRightArm`  | `[ 0.476647, 0.568293, 0.605020, 0.250049]` |
+
+Negative x and widths running past the edge are correct. The panel wraps around
+the arm, so a mark near the outer edge genuinely extends past the canvas and the
+overflow is the part that disappears around the back of the sleeve.
+
+## Supplying sponsors in production
+
+Named by the wearer's arm, same as the sleeves themselves:
 
 ```
 <slug>-sleevesponsorleft.svg    the player's LEFT arm, both views
@@ -38,24 +63,10 @@ Sponsor artwork is therefore named by the **wearer's arm**, same as the sleeves:
 <slug>-sleevesponsor.svg        same mark on both arms
 ```
 
-Any of them may be absent. Left only, right only, both the same, both different —
-all fall out of which files exist.
+Any may be absent — left only, right only, both the same, both different all fall
+out of which files exist.
 
-## The four boxes still need measuring once
-
-`SPONSOR` in `build-jersey-mockups.jsx` holds four `null`s. Until they are filled
-in, a sponsor file is dropped in at full canvas — the old behaviour, correct only
-if the file was authored that way.
-
-Getting the numbers takes one pass, and does not need measuring by hand:
-
-1. Open a jersey mockup you assembled **by hand**, with the sponsors where you
-   want them, in both the front and the back template.
-2. Run `inspect-template.jsx` on each.
-3. Under every sleeve slot the dump now lists its inner layers with
-   `box: [x, y, w, h]` — in that slot's coordinates, which is the same space the
-   builder places into. The sponsor layer's line is the value to paste.
-4. Paste the four into `SPONSOR` at the top of the builder.
-
-They are a property of the templates, not of any design, so this is once and
-never again.
+⚠ **Crop tight to the mark**, no transparent margin. The fit measures the placed
+layer's bounds, so padding inside the file becomes padding inside the box and the
+mark lands small and off-centre. In Inkscape: select the mark, then
+File ▸ Document Properties ▸ Resize page to drawing.
