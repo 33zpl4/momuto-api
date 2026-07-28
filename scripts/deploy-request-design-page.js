@@ -69,6 +69,32 @@ function sanityCheck(content, file) {
   if (h1Count !== 1) {
     throw new Error(`${file} must have exactly 1 <h1> (found ${h1Count})`);
   }
+  // The IT gate ships with a placeholder until the Italian Stripe payment link
+  // exists. A page whose pay button goes nowhere is worse than no page.
+  if (content.includes('__STRIPE_LINK_IT__')) {
+    throw new Error(
+      `${file} still contains the __STRIPE_LINK_IT__ placeholder — create the ` +
+      `Italian Stripe payment link, replace both occurrences, and redeploy. ` +
+      `See docs/it-site-recovery.md step 5.`
+    );
+  }
+  // Every locale that renders the gate must render all three of its moving
+  // parts, or payment succeeds and the brief form never appears.
+  const hasGate = content.includes('id="payment-gate"');
+  if (hasGate) {
+    for (const id of ['paidBanner', 'brief-form-section', 'cta-form', 'gatePayBtn']) {
+      if (!content.includes(id)) {
+        throw new Error(`${file} has a payment gate but no ${id} — refusing to deploy`);
+      }
+    }
+    const stripeLinks = new Set(content.match(/https:\/\/buy\.stripe\.com\/[A-Za-z0-9]+/g) || []);
+    if (stripeLinks.size !== 1) {
+      throw new Error(
+        `${file} references ${stripeLinks.size} distinct Stripe links — expected exactly 1 ` +
+        `(the button href and the script constant must agree)`
+      );
+    }
+  }
 }
 
 async function getPageByHandle(domain) {

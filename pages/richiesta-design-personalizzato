@@ -111,6 +111,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <!-- inject:design-request.css -->
+<style>
+/* ── BANNER DE PAGO CONFIRMADO ── */
+.paid-banner { display:none; background:#14532d; border-bottom:1px solid #166534; padding:18px 40px; text-align:center; }
+.paid-banner-inner { max-width:800px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:12px; }
+.paid-banner-icon { color:#4ade80; font-size:1.1rem; }
+.paid-banner p { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:500; color:#bbf7d0; margin:0; }
+.paid-banner p strong { color:#fff; font-weight:700; }
+/* ── PASARELA DE PAGO ── */
+.gate-section { padding:6rem 20px; background:#0a0a0a; border-top:1px solid rgba(255,255,255,0.06); }
+.gate-container { max-width:640px; margin:0 auto; }
+.gate-eyebrow { font-family:'Outfit',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#c8352e; margin-bottom:16px; text-align:center; }
+.gate-box { background:#111; border:1px solid rgba(255,255,255,0.06); border-top:3px solid #c8352e; padding:48px; }
+.gate-box h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,4vw,2.8rem); font-weight:400; text-transform:uppercase; letter-spacing:0.04em; color:#f5f5f5; line-height:1; margin-bottom:6px; }
+.gate-price { font-family:'Outfit',sans-serif; font-size:0.78rem; font-weight:300; color:#a1a1aa; margin-bottom:32px; }
+.gate-price strong { color:#f5f5f5; font-weight:600; }
+.gate-features { list-style:none; margin:0 0 36px 0; padding:0; border-top:1px solid rgba(255,255,255,0.06); padding-top:28px; }
+.gate-features li { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:300; color:#a1a1aa; padding:9px 0; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.04); }
+.gate-features li:last-child { border-bottom:none; }
+.gate-features li i { color:#4ade80; font-size:0.75rem; flex-shrink:0; }
+.gate-features li strong { color:#f5f5f5; font-weight:600; }
+.gate-email-row { display:flex; gap:0; margin-bottom:12px; }
+.gate-email-input { flex:1; padding:16px 18px; background:transparent; border:1px solid rgba(255,255,255,0.1); border-right:none; color:#f5f5f5; font-family:'Outfit',sans-serif; font-size:0.88rem; font-weight:400; outline:none; transition:border-color 0.2s; }
+.gate-email-input::placeholder { color:#71717a; font-size:0.78rem; letter-spacing:0.05em; text-transform:uppercase; }
+.gate-email-input:focus { border-color:rgba(255,255,255,0.3); }
+.gate-pay-btn { display:inline-block; background:#c8352e; color:#fff; font-family:'Outfit',sans-serif; font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; padding:16px 28px; text-decoration:none; border:1px solid #c8352e; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
+.gate-pay-btn:hover { background:#e04038; }
+.gate-pay-btn.is-disabled { opacity:0.45; cursor:not-allowed; }
+.gate-refund-guarantee { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:400; line-height:1.5; color:#d4d4d8; margin:16px 0 8px; text-align:center; }
+.gate-refund-guarantee strong { color:#fff; font-weight:600; }
+.gate-refund-note { font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:300; color:#71717a; margin-bottom:32px; text-align:center; }
+.gate-divider { border:none; border-top:1px solid rgba(255,255,255,0.06); margin:32px 0; }
+.gate-alt { font-family:'Outfit',sans-serif; font-size:0.82rem; font-weight:300; color:#71717a; text-align:center; }
+.gate-alt a { color:#a1a1aa; font-weight:600; text-decoration:underline; text-underline-offset:3px; text-decoration-color:#c8352e; }
+.gate-alt a:hover { color:#f5f5f5; }
+@media (max-width:640px) { .gate-box { padding:32px 22px; } .gate-email-row { flex-direction:column; gap:10px; } .gate-email-input { border-right:1px solid rgba(255,255,255,0.1); } .gate-pay-btn { width:100%; text-align:center; } }
+</style>
+<div class="paid-banner" id="paidBanner">
+<div class="paid-banner-inner">
+<i class="fas fa-check-circle paid-banner-icon"></i>
+<p><strong>Fatto &mdash; il tuo concept &egrave; in coda!</strong> Raccontaci della tua squadra e carica il tuo riferimento qui sotto; il primo mockup arriva in 24&ndash;48h.</p>
+</div>
+</div>
 <header class="hero full-bleed">
 <div class="hero-content">
 <h1>Maglie da Calcio Personalizzate per <span class="highlight">Squadre Amateur</span></h1>
@@ -223,7 +265,34 @@
 <p class="hiw-internal-links">Cerchi la via pi&ugrave; rapida? <a href="https://it.momuto.com/pages/collezione-ready-to-play">I kit Ready-to-Play partono da 19,70&euro; con anteprime in 24h.</a><br />Vuoi vedere cosa hanno ordinato altri club? <a href="https://it.momuto.com/pages/squadre-club-momuto">Sfoglia la galleria completa delle squadre.</a></p>
 </div>
 </section>
-<section class="form-section">
+<section class="gate-section" id="payment-gate">
+<div class="gate-container">
+<p class="gate-eyebrow">Design su Misura &mdash; Dal tuo concept a un kit pronto per la produzione</p>
+<div class="gate-box">
+<h2>Inviaci il Tuo Concept</h2>
+<p class="gate-price"><strong>15 &euro; per iniziare</strong> &mdash; interamente accreditati sull&rsquo;ordine da 5 maglie o pi&ugrave;</p>
+<ul class="gate-features">
+<li><i class="fas fa-check"></i><span><strong>Un designer sul tuo concept</strong> entro 24h</span></li>
+<li><i class="fas fa-check"></i><span><strong>Primo mockup consegnato</strong> in 24&ndash;48h</span></li>
+<li><i class="fas fa-check"></i><span><strong>Lo perfezioniamo insieme</strong> finch&eacute; non &egrave; quello giusto</span></li>
+<li><i class="fas fa-check"></i><span><strong>Illustrazione e vettorializzazione</strong> incluse &mdash; concept IA, schizzi, grafiche su misura</span></li>
+<li><i class="fas fa-check"></i><span><strong>File pronti per la produzione</strong> per la stampa a sublimazione</span></li>
+<li><i class="fas fa-check"></i><span><strong>15 &euro; accreditati sul tuo ordine</strong> da 5 maglie</span></li>
+</ul>
+<div class="gate-email-row">
+<input type="email" class="gate-email-input" id="gateEmail" placeholder="Il tuo indirizzo email" />
+<a href="__STRIPE_LINK_IT__" class="gate-pay-btn" id="gatePayBtn">Invia il Mio Concept &middot; 15 &euro; &rarr;</a>
+</div>
+<p class="gate-refund-guarantee">Preferisci non proseguire dopo il primo concept? Basta dircelo &mdash; ti rimborsiamo i tuoi <strong>15 &euro;</strong>.</p>
+<p class="gate-refund-note">Pagamento sicuro con Stripe &bull; Accreditato sul tuo ordine da 5 maglie</p>
+<p class="gate-refund-note">Avviando un design accetti che il riferimento inviato e il kit finito possano comparire come prima/dopo nella nostra galleria &mdash; dicci in qualsiasi momento se preferisci restare privato.</p>
+<hr class="gate-divider" />
+<p class="gate-alt">Preferisci progettarlo da solo? &nbsp;<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">Configuratore 3D</a> e <a href="https://it.momuto.com/pages/collezione-ready-to-play">Ready-to-Play</a> sono gratuiti, immediati e tuoi.</p>
+</div>
+</div>
+</section>
+
+<section class="form-section" id="brief-form-section" style="display:none;">
 <div class="form-container">
 <div class="form-content" id="cta-form">
 <div class="form-intro">
@@ -329,3 +398,54 @@
 </div>
 </div>
 <!-- inject:design-request.js -->
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var isPaid = params.get('paid') === 'true';
+
+  if (isPaid) {
+    document.getElementById('paidBanner').style.display = 'block';
+    document.getElementById('payment-gate').style.display = 'none';
+    document.getElementById('brief-form-section').style.display = 'block';
+    setTimeout(function() {
+      document.getElementById('cta-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+
+  var gateEmail = document.getElementById('gateEmail');
+  var gatePayBtn = document.getElementById('gatePayBtn');
+  var baseStripeUrl = '__STRIPE_LINK_IT__';
+
+  if (gateEmail && gatePayBtn) {
+    var validEmail = function (v) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((v || '').trim()); };
+    var setReady = function (on) {
+      gatePayBtn.classList.toggle('is-disabled', !on);
+      gatePayBtn.setAttribute('aria-disabled', on ? 'false' : 'true');
+      gatePayBtn.href = on
+        ? baseStripeUrl + '?prefilled_email=' + encodeURIComponent(gateEmail.value.trim())
+        : baseStripeUrl;
+    };
+    setReady(false);
+    gateEmail.addEventListener('input', function () { setReady(validEmail(this.value)); });
+
+    gatePayBtn.addEventListener('click', function (e) {
+      var email = gateEmail.value.trim();
+      e.preventDefault();
+      if (!validEmail(email)) { gateEmail.focus(); return; }
+      var navigated = false;
+      var go = function () {
+        if (navigated) return; navigated = true;
+        window.location.href = baseStripeUrl + '?prefilled_email=' + encodeURIComponent(email);
+      };
+      try {
+        fetch('https://momuto-api.vercel.app/api/lead', {
+          method: 'POST', keepalive: true,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, locale: 'it', source: window.location.href })
+        }).then(go, go);
+      } catch (_) { go(); }
+      setTimeout(go, 1200); // safety: never trap the user
+    });
+  }
+})();
+</script>

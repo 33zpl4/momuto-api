@@ -10,3 +10,8 @@ inventory it
 # "Kit Sportivi Personalizzati"; retarget it at "divise sportive personalizzate"
 # once it is in the repo. See docs/it-site-recovery.md step 6.
 post it kit-sportivi-personalizzati-crea-design-racconta-storia
+
+# The IT confirmation page exists on the store but has never been pulled, so we
+# do not have its CMS id. Pull it, copy the id into
+# cms/pages/it/design-personalizzato-confermato.json, then deploy that file.
+page it design-personalizzato-confermato
