@@ -111,6 +111,218 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <!-- inject:design-request.css -->
+<style>
+/* ── BANNER DE PAGO CONFIRMADO ── */
+.paid-banner { display:none; background:#14532d; border-bottom:1px solid #166534; padding:18px 40px; text-align:center; }
+.paid-banner-inner { max-width:800px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:12px; }
+.paid-banner-icon { color:#4ade80; font-size:1.1rem; }
+.paid-banner p { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:500; color:#bbf7d0; margin:0; }
+.paid-banner p strong { color:#fff; font-weight:700; }
+/* ── PASARELA DE PAGO ── */
+.gate-section { padding:6rem 20px; background:#0a0a0a; border-top:1px solid rgba(255,255,255,0.06); }
+.gate-container { max-width:640px; margin:0 auto; }
+.gate-eyebrow { font-family:'Outfit',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#c8352e; margin-bottom:16px; text-align:center; }
+.gate-box { background:#111; border:1px solid rgba(255,255,255,0.06); border-top:3px solid #c8352e; padding:48px; }
+.gate-box h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,4vw,2.8rem); font-weight:400; text-transform:uppercase; letter-spacing:0.04em; color:#f5f5f5; line-height:1; margin-bottom:6px; }
+.gate-price { font-family:'Outfit',sans-serif; font-size:0.78rem; font-weight:300; color:#a1a1aa; margin-bottom:32px; }
+.gate-price strong { color:#f5f5f5; font-weight:600; }
+.gate-features { list-style:none; margin:0 0 36px 0; padding:0; border-top:1px solid rgba(255,255,255,0.06); padding-top:28px; }
+.gate-features li { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:300; color:#a1a1aa; padding:9px 0; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.04); }
+.gate-features li:last-child { border-bottom:none; }
+.gate-features li i { color:#4ade80; font-size:0.75rem; flex-shrink:0; }
+.gate-features li strong { color:#f5f5f5; font-weight:600; }
+.gate-email-row { display:flex; gap:0; margin-bottom:12px; }
+.gate-email-input { flex:1; padding:16px 18px; background:transparent; border:1px solid rgba(255,255,255,0.1); border-right:none; color:#f5f5f5; font-family:'Outfit',sans-serif; font-size:0.88rem; font-weight:400; outline:none; transition:border-color 0.2s; }
+.gate-email-input::placeholder { color:#71717a; font-size:0.78rem; letter-spacing:0.05em; text-transform:uppercase; }
+.gate-email-input:focus { border-color:rgba(255,255,255,0.3); }
+.gate-pay-btn { display:inline-block; background:#c8352e; color:#fff; font-family:'Outfit',sans-serif; font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; padding:16px 28px; text-decoration:none; border:1px solid #c8352e; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
+.gate-pay-btn:hover { background:#e04038; }
+.gate-pay-btn.is-disabled { opacity:0.45; cursor:not-allowed; }
+.gate-refund-guarantee { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:400; line-height:1.5; color:#d4d4d8; margin:16px 0 8px; text-align:center; }
+.gate-refund-guarantee strong { color:#fff; font-weight:600; }
+.gate-refund-note { font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:300; color:#71717a; margin-bottom:32px; text-align:center; }
+.gate-divider { border:none; border-top:1px solid rgba(255,255,255,0.06); margin:32px 0; }
+.gate-alt { font-family:'Outfit',sans-serif; font-size:0.82rem; font-weight:300; color:#71717a; text-align:center; }
+.gate-alt a { color:#a1a1aa; font-weight:600; text-decoration:underline; text-underline-offset:3px; text-decoration-color:#c8352e; }
+.gate-alt a:hover { color:#f5f5f5; }
+@media (max-width:640px) { .gate-box { padding:32px 22px; } .gate-email-row { flex-direction:column; gap:10px; } .gate-email-input { border-right:1px solid rgba(255,255,255,0.1); } .gate-pay-btn { width:100%; text-align:center; } }
+/* ── TRANSFORMATION SECTION ── */
+.transform-section {
+  padding: 6rem 20px;
+  background: #0d0d0d;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.transform-header {
+  max-width: 700px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+.transform-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c8352e;
+  margin-bottom: 14px;
+}
+.transform-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #f5f5f5;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.transform-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: #71717a;
+  line-height: 1.6;
+}
+.transform-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.transform-item {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.transform-side {
+  position: relative;
+  overflow: hidden;
+}
+.transform-side img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/10;
+  object-fit: contain;
+  box-sizing: border-box;
+  padding: 16px;
+  background: #0d0d0f;
+  filter: brightness(0.97);
+  transition: filter 0.35s, transform 0.5s;
+}
+.transform-item:hover .transform-side img { filter: brightness(1.03); transform: scale(1.015); }
+.transform-side-label {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #fff;
+  background: rgba(0,0,0,0.75);
+  padding: 5px 10px;
+}
+.transform-side-label.label-after {
+  background: #c8352e;
+}
+.transform-arrow-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d0d0d;
+  color: #c8352e;
+  font-size: 0.9rem;
+}
+.transform-meta {
+  padding: 20px 28px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+.transform-input-type {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #71717a;
+  margin-bottom: 6px;
+}
+.transform-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: #a1a1aa;
+  line-height: 1.55;
+}
+.transform-desc strong { color: #f5f5f5; font-weight: 600; }
+.transform-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #f5f5f5;
+  letter-spacing: 0.04em;
+  text-align: right;
+  white-space: nowrap;
+}
+.transform-time-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #71717a;
+  text-align: right;
+}
+.transform-placeholder {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px dashed rgba(255,255,255,0.07);
+}
+.transform-placeholder span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #3f3f46;
+}
+@media (max-width: 640px) {
+  .transform-side img { aspect-ratio: auto; padding: 6px; }
+  .transform-item {
+    grid-template-columns: 1fr;
+  }
+  .transform-arrow-col {
+    height: 32px;
+    width: 100%;
+    transform: none;
+    background: transparent;
+  }
+  .transform-arrow-col i { transform: rotate(90deg); }
+  .transform-meta {
+    grid-template-columns: 1fr;
+  }
+  .transform-time, .transform-time-label { text-align: left; }
+}
+</style>
+<div class="paid-banner" id="paidBanner">
+<div class="paid-banner-inner">
+<i class="fas fa-check-circle paid-banner-icon"></i>
+<p><strong>Fatto &mdash; il tuo concept &egrave; in coda!</strong> Raccontaci della tua squadra e carica il tuo riferimento qui sotto; il primo mockup arriva in 24&ndash;48h.</p>
+</div>
+</div>
 <header class="hero full-bleed">
 <div class="hero-content">
 <h1>Maglie da Calcio Personalizzate per <span class="highlight">Squadre Amateur</span></h1>
@@ -223,7 +435,117 @@
 <p class="hiw-internal-links">Cerchi la via pi&ugrave; rapida? <a href="https://it.momuto.com/pages/collezione-ready-to-play">I kit Ready-to-Play partono da 19,70&euro; con anteprime in 24h.</a><br />Vuoi vedere cosa hanno ordinato altri club? <a href="https://it.momuto.com/pages/squadre-club-momuto">Sfoglia la galleria completa delle squadre.</a></p>
 </div>
 </section>
-<section class="form-section">
+<section class="transform-section">
+<div class="transform-header">
+<p class="transform-eyebrow">I Nostri Lavori</p>
+<h2 class="transform-title">Il Tuo Concept. Pronto per la Produzione.</h2>
+<p class="transform-sub">Quattro progetti reali. A sinistra il concept ricevuto. A destra la maglia pronta per la produzione.</p>
+</div>
+<div class="transform-grid">
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/1363fdd2412a9a6b668e7f50c3d5c6497b4cbd7042266ec5b63f6615efbb1a56.jpg" alt="La Vidriera FC — render concept IA (input)" loading="lazy">
+<span class="transform-side-label">Input &mdash; Render IA</span>
+</div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/11f5c073dc1c3d62cee9d5b4c39f166f8347637cfce733ea868d96030bfa6c5e.png" alt="La Vidriera FC — kit di produzione MOMUTO" loading="lazy">
+<span class="transform-side-label label-after">Design MOMUTO</span>
+</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Render IA + Brief</p>
+<p class="transform-desc"><strong>Strisce a squame di serpente vettorializzate, stemma della pantera ricostruito.</strong> Gradiente rielaborato per la sublimazione, graffi ridisegnati, sponsor e numero posizionati. Validato con te, poi lo produciamo.</p>
+</div>
+</div>
+</div>
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/80438223b0b91b596f01d1b874c2f19d7440c1802812125f2209717a4f1c1e07.jpeg" alt="Seefelds — schizzo a mano del kit con fiamme (input)" loading="lazy">
+<span class="transform-side-label">Input &mdash; Schizzo</span>
+</div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/d358bfaa66a1a6ef5afab054b3a627b7874de81a4ee5953cb1a8979554bc2285.png" alt="Seefelds — kit di produzione MOMUTO" loading="lazy">
+<span class="transform-side-label label-after">Design MOMUTO</span>
+</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Schizzo + Brief</p>
+<p class="transform-desc"><strong>Fiamme disegnate a mano trasformate in grafiche vettoriali pulite.</strong> Righe sottili allineate, proporzioni adattate al tessuto, stemma e numero costruiti. Validato con te, poi lo produciamo.</p>
+</div>
+</div>
+</div>
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/25ff712975b6c266aa5c9265b6532c6122c4c633cbd75225942a2e6d884eb842.png" alt="Pecados Capitales — tavola concept (input)" loading="lazy">
+<span class="transform-side-label">Input &mdash; Tavola Concept</span>
+</div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/ec78916fd71c968d956652b1e2453e39eaeb55f8f4eb8779e89a92c992ba911f.png" alt="Pecados Capitales — kit di produzione MOMUTO" loading="lazy">
+<span class="transform-side-label label-after">Design MOMUTO</span>
+</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Tavola Concept + Brief</p>
+<p class="transform-desc"><strong>Motivo dell'angelo diviso interpretato, stemma ricostruito.</strong> Palette nero / rosso / oro rispettata, tipografia dorata impostata, disposizione degli sponsor confermata. Validato con te, poi lo produciamo.</p>
+</div>
+</div>
+</div>
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/0b5177b519804889ae2e329b9c8e8239ad19316d485d90a8c2f66c3bf01cf40f.jpg" alt="Kings — render concept IA (input)" loading="lazy">
+<span class="transform-side-label">Input &mdash; Render IA</span>
+</div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/2f0ddfc2e032643727db21f9cf433df70176294aaab3edbb04746cc722ae0cc5.png" alt="Kings — kit di produzione MOMUTO" loading="lazy">
+<span class="transform-side-label label-after">Design MOMUTO</span>
+</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Render IA + Sponsor</p>
+<p class="transform-desc"><strong>Grafica del drago vettorializzata, equilibrio tonale nero-su-nero calibrato.</strong> Stemma ripulito, sponsor posizionati, nome e numero impostati. Validato con te, poi lo produciamo.</p>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="gate-section" id="payment-gate">
+<div class="gate-container">
+<p class="gate-eyebrow">Design su Misura &mdash; Dal tuo concept a un kit pronto per la produzione</p>
+<div class="gate-box">
+<h2>Inviaci il Tuo Concept</h2>
+<p class="gate-price"><strong>15 &euro; per iniziare</strong> &mdash; interamente accreditati sull&rsquo;ordine da 5 maglie o pi&ugrave;</p>
+<ul class="gate-features">
+<li><i class="fas fa-check"></i><span><strong>Un designer sul tuo concept</strong> entro 24h</span></li>
+<li><i class="fas fa-check"></i><span><strong>Primo mockup consegnato</strong> in 24&ndash;48h</span></li>
+<li><i class="fas fa-check"></i><span><strong>Lo perfezioniamo insieme</strong> finch&eacute; non &egrave; quello giusto</span></li>
+<li><i class="fas fa-check"></i><span><strong>Illustrazione e vettorializzazione</strong> incluse &mdash; concept IA, schizzi, grafiche su misura</span></li>
+<li><i class="fas fa-check"></i><span><strong>File pronti per la produzione</strong> per la stampa a sublimazione</span></li>
+<li><i class="fas fa-check"></i><span><strong>15 &euro; accreditati sul tuo ordine</strong> da 5 maglie</span></li>
+</ul>
+<div class="gate-email-row">
+<input type="email" class="gate-email-input" id="gateEmail" placeholder="Il tuo indirizzo email" />
+<a href="https://buy.stripe.com/8x24gzaPO6yg0f51GR3wQ0p" class="gate-pay-btn" id="gatePayBtn">Invia il Mio Concept &middot; 15 &euro; &rarr;</a>
+</div>
+<p class="gate-refund-guarantee">Preferisci non proseguire dopo il primo concept? Basta dircelo &mdash; ti rimborsiamo i tuoi <strong>15 &euro;</strong>.</p>
+<p class="gate-refund-note">Pagamento sicuro con Stripe &bull; Accreditato sul tuo ordine da 5 maglie</p>
+<p class="gate-refund-note">Avviando un design accetti che il riferimento inviato e il kit finito possano comparire come prima/dopo nella nostra galleria &mdash; dicci in qualsiasi momento se preferisci restare privato.</p>
+<hr class="gate-divider" />
+<p class="gate-alt">Preferisci progettarlo da solo? &nbsp;<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">Configuratore 3D</a> e <a href="https://it.momuto.com/pages/collezione-ready-to-play">Ready-to-Play</a> sono gratuiti, immediati e tuoi.</p>
+</div>
+</div>
+</section>
+
+<section class="form-section" id="brief-form-section" style="display:none;">
 <div class="form-container">
 <div class="form-content" id="cta-form">
 <div class="form-intro">
@@ -329,3 +651,54 @@
 </div>
 </div>
 <!-- inject:design-request.js -->
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var isPaid = params.get('paid') === 'true';
+
+  if (isPaid) {
+    document.getElementById('paidBanner').style.display = 'block';
+    document.getElementById('payment-gate').style.display = 'none';
+    document.getElementById('brief-form-section').style.display = 'block';
+    setTimeout(function() {
+      document.getElementById('cta-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+
+  var gateEmail = document.getElementById('gateEmail');
+  var gatePayBtn = document.getElementById('gatePayBtn');
+  var baseStripeUrl = 'https://buy.stripe.com/8x24gzaPO6yg0f51GR3wQ0p';
+
+  if (gateEmail && gatePayBtn) {
+    var validEmail = function (v) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((v || '').trim()); };
+    var setReady = function (on) {
+      gatePayBtn.classList.toggle('is-disabled', !on);
+      gatePayBtn.setAttribute('aria-disabled', on ? 'false' : 'true');
+      gatePayBtn.href = on
+        ? baseStripeUrl + '?prefilled_email=' + encodeURIComponent(gateEmail.value.trim())
+        : baseStripeUrl;
+    };
+    setReady(false);
+    gateEmail.addEventListener('input', function () { setReady(validEmail(this.value)); });
+
+    gatePayBtn.addEventListener('click', function (e) {
+      var email = gateEmail.value.trim();
+      e.preventDefault();
+      if (!validEmail(email)) { gateEmail.focus(); return; }
+      var navigated = false;
+      var go = function () {
+        if (navigated) return; navigated = true;
+        window.location.href = baseStripeUrl + '?prefilled_email=' + encodeURIComponent(email);
+      };
+      try {
+        fetch('https://momuto-api.vercel.app/api/lead', {
+          method: 'POST', keepalive: true,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, locale: 'it', source: window.location.href })
+        }).then(go, go);
+      } catch (_) { go(); }
+      setTimeout(go, 1200); // safety: never trap the user
+    });
+  }
+})();
+</script>

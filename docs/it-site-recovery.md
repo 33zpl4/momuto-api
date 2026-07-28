@@ -76,18 +76,49 @@ Run **Audit & Translate Italian Pages** with `dry_run=true` first.
 > position 4.0) and `/pages/chi-siamo` (53 impressions, position 1.6) are the
 > two worth protecting.
 
-### 5. Take the deposit — BLOCKED, owner action
+### 5. Take the deposit — READY to deploy
 
-`pages/richiesta-design-personalizzato` advertises the €15 deposit in eleven
-places but **has no way to charge it**. EN, FR and ES each have their own Stripe
-payment link driving a `gate-pay-btn`; the Italian page has none and still runs
-the older form-based flow.
+`pages/richiesta-design-personalizzato` advertised the €15 deposit in eleven
+places and had no way to charge it. The gate is now built and matches EN/FR/ES
+exactly — same CSS, same section order, same script: paid-banner, `payment-gate`
+section, and the brief form wrapped in `#brief-form-section` so it only appears
+after payment.
 
-Needed: a Stripe payment link for the Italian store. Once it exists, mirror the
-gate block from `pages/request-custom-kit-design` — the `gate-email-row`,
-`gate-pay-btn`, `gate-refund-guarantee` and `gate-refund-note` markup. The
-deposit FAQ copy is already in place in both the visible FAQ and the FAQPage
-schema (added July 2026), so only the payment path is missing.
+The Italian Stripe payment link exists and is wired into both places (the
+button `href` and the script constant):
+`https://buy.stripe.com/8x24gzaPO6yg0f51GR3wQ0p`. In Stripe, set the
+after-payment redirect to
+`https://it.momuto.com/pages/richiesta-design-personalizzato?paid=true` and turn
+email collection on — the page appends `?prefilled_email=`.
+
+`scripts/deploy-request-design-page.js` guards the deploy: it refuses any page
+still carrying a `__STRIPE_LINK_IT__` placeholder, and for any page with a gate
+it verifies all of `paidBanner`, `brief-form-section`, `cta-form` and
+`gatePayBtn` plus exactly one distinct Stripe URL, so the button and the script
+can never drift apart. The IT page passes.
+
+The page also now carries the concept→production examples section
+(`transform-section`) that EN and FR had and ES/IT never got — the same four
+real projects (La Vidriera FC, Seefelds, Pecados Capitales, Kings) with Italian
+copy, sitting right before the payment gate as social proof at the moment of
+decision.
+
+**Deploy:** run **Deploy Request Design Page** with `LOCALES=it`. Note the
+scroll-to-form behaviour on `?paid=true` only works once this deploy lands —
+the live page is still the old, gate-less version.
+
+**Confirmation page.** The form's `_next` lands on
+`/pages/design-personalizzato-confermato`, which exists on the store but had
+never been pulled, so we do not have its CMS id. The Italian content is written
+in `cms/pages/it/design-personalizzato-confermato.json`; the pull is queued in
+`.github/pull-queue.txt`. Pull it, copy the id into that file, then deploy it
+with `deploy-cms-page.js`.
+
+While writing it, two stale tiles surfaced on the EN and FR confirmation pages:
+"Free — 3D Mockup" and "No commitment — the design is yours either way". Both
+are read *after* the customer has paid the deposit, so both are now wrong and a
+bit insulting. Replaced with the deposit status and the revisions promise on all
+three locales.
 
 ### 6. Then judge the content
 
