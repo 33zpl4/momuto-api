@@ -76,7 +76,7 @@ Run **Audit & Translate Italian Pages** with `dry_run=true` first.
 > position 4.0) and `/pages/chi-siamo` (53 impressions, position 1.6) are the
 > two worth protecting.
 
-### 5. Take the deposit — gate BUILT, needs the Stripe link
+### 5. Take the deposit — READY to deploy
 
 `pages/richiesta-design-personalizzato` advertised the €15 deposit in eleven
 places and had no way to charge it. The gate is now built and matches EN/FR/ES
@@ -84,27 +84,28 @@ exactly — same CSS, same section order, same script: paid-banner, `payment-gat
 section, and the brief form wrapped in `#brief-form-section` so it only appears
 after payment.
 
-The one missing piece is owner-side: **an Italian Stripe payment link.** The
-page ships with `__STRIPE_LINK_IT__` in two places (the button `href` and the
-script constant), and `scripts/deploy-request-design-page.js` refuses to deploy
-while the placeholder is there — a pay button that goes nowhere is worse than no
-page at all. The same check also verifies that any page carrying a gate has all
-of `paidBanner`, `brief-form-section`, `cta-form` and `gatePayBtn`, and exactly
-one distinct Stripe URL, so the button and the script can never drift apart.
+The Italian Stripe payment link exists and is wired into both places (the
+button `href` and the script constant):
+`https://buy.stripe.com/8x24gzaPO6yg0f51GR3wQ0p`. In Stripe, set the
+after-payment redirect to
+`https://it.momuto.com/pages/richiesta-design-personalizzato?paid=true` and turn
+email collection on — the page appends `?prefilled_email=`.
 
-**To create the link** (Stripe Dashboard → Payment links → New):
+`scripts/deploy-request-design-page.js` guards the deploy: it refuses any page
+still carrying a `__STRIPE_LINK_IT__` placeholder, and for any page with a gate
+it verifies all of `paidBanner`, `brief-form-section`, `cta-form` and
+`gatePayBtn` plus exactly one distinct Stripe URL, so the button and the script
+can never drift apart. The IT page passes.
 
-| Field | Value |
-|---|---|
-| Product name | `MOMUTO Design Kit Personalizzato` |
-| Description | `Un designer trasforma il tuo concept in un kit pronto per la produzione · accreditato sugli ordini da 5 maglie in su.` |
-| Price | €15,00, one-off |
-| Currency | EUR |
-| After payment | Redirect → `https://it.momuto.com/pages/richiesta-design-personalizzato?paid=true` |
-| Collect email | On (the page appends `?prefilled_email=`) |
+The page also now carries the concept→production examples section
+(`transform-section`) that EN and FR had and ES/IT never got — the same four
+real projects (La Vidriera FC, Seefelds, Pecados Capitales, Kings) with Italian
+copy, sitting right before the payment gate as social proof at the moment of
+decision.
 
-Then replace both `__STRIPE_LINK_IT__` occurrences and run **Deploy Request
-Design Page** with `LOCALES=it`.
+**Deploy:** run **Deploy Request Design Page** with `LOCALES=it`. Note the
+scroll-to-form behaviour on `?paid=true` only works once this deploy lands —
+the live page is still the old, gate-less version.
 
 **Confirmation page.** The form's `_next` lands on
 `/pages/design-personalizzato-confermato`, which exists on the store but had
