@@ -60,15 +60,17 @@ const DOMAINS = {
     // IT page was previously deployed with English title/meta — force them to Italian.
     meta: {
       title: 'Confronto Fornitori Maglie Calcio 2026 — MOMUTO',
-      meta_title: 'Migliori Fornitori Maglie Calcio Personalizzate 2026 | MOMUTO',
-      meta_descript: 'Confronto indipendente 2026 tra MOMUTO, Jersix, Owayo e Spized: prezzi, consegna, tessuto e design a confronto. Scopri perché le squadre scelgono MOMUTO.',
+      meta_title: 'Maglie Calcio Personalizzate: Confronto Fornitori 2026 | MOMUTO',
+      meta_descript: 'Legea, Erreà, Zeus, Owayo, Jersix o MOMUTO? Prezzi reali, tempi, minimi e tessuti a confronto per CSI, UISP, calcio a 5 e Terza Categoria.',
       meta_keywords: [
+        'maglie calcio personalizzate',
+        'divise calcio personalizzate',
         'confronto fornitori maglie calcio',
         'migliori fornitori maglie calcio personalizzate',
-        'maglie calcio personalizzate 2026',
+        'maglie calcio a 5 personalizzate',
+        'divise CSI UISP',
         'kit calcio personalizzati',
-        'fornitore maglie calcio',
-        'MOMUTO vs Owayo'
+        'MOMUTO vs Legea'
       ]
     }
   },
