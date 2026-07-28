@@ -144,7 +144,9 @@ language classifier, and duplicate pairs split whatever signal the real posts
 earn. `scripts/audit-and-translate-italian-pages.js` exists and handles *pages*
 — it was never pointed at *posts*.
 
-**Fix order for IT** (cheap, mechanical, high leverage):
+**Fix order for IT** (cheap, mechanical, high leverage) — the full sequence,
+with what is already done and what still needs an owner, is in
+`docs/it-site-recovery.md`:
 
 1. Unpublish or delete the 23 FR/EN posts from the IT store (`status: 0`, or
    delete — they exist correctly on `fr`/`www`).
@@ -219,7 +221,7 @@ keeping visible; check nothing broke in the July gallery/teams-page reshuffle.
 
 ## 7. Changes made in this branch
 
-Only one thing was changed in the repo — the fix that was blocking §3:
+The first commit fixed what was blocking §3:
 
 - `blogs/fr/maillots-foot-concept-du-croquis-au-vrai-maillot.json`
 - `blogs/es/equipaciones-futbol-concepto-del-boceto-al-jersey-real.json`
@@ -235,3 +237,44 @@ These deploy on push to `main`; the feature branch does not trigger
 `deploy-blog-post.yml`.
 
 Everything else in this document is a recommendation, not a change.
+
+### Follow-up commits
+
+Everything below landed after the first pass, on the same branch.
+
+**Deposit framing.** Marketing and SEO copy now tells only the positive half of
+the deposit story — €15 to put a designer on the concept, credited in full from
+5 jerseys, so a team order gets the design for nothing. The refund promise is a
+point-of-payment reassurance and stays on the four request-design gate pages,
+where the wording already existed. Removed the back-out framing from the AI hub
+pages in all four locales, three concept posts, two ES guides and the ES
+`llms.txt`; kept the satisfaction framing ("refundable if the first concept
+isn't right") the blog guides use. Three factual fixes surfaced doing it:
+`contact`/`contacto` called the deposit *refunded* on 5+ orders when it is
+*credited*, `contacto` still promised free design from 10 shirts against the
+canonical 5, and `design-your-own-soccer-jersey` — the best-moving page in the
+estate — hedged with "a small refundable design deposit" instead of naming the
+€15.
+
+**Crawl hygiene.** All four store `robots.txt` files block `/account/`,
+`/search`, and any URL carrying percent-encoded CJK (`%E4`–`%E9`, covering
+U+4000–U+9FFF). Accented Latin encodes as `%C3`, so European slugs are
+unaffected. `design.momuto.com/robots.txt` blocks `?userId=` and `?configId=`,
+leaving the bare `configurator.html` from the sitemap as the single indexable
+entry. Note that robots blocks crawling, not indexing — `/account/login` is
+already indexed at position 2.7 and will need a `noindex` or a removal request
+to actually clear. The Chinese test product is a live product on the EN store;
+blocking its URL is a stopgap, deleting the product is the real fix.
+
+**IT store.** `cms/unpublish.json` + `scripts/unpublish-posts.js` +
+`unpublish-posts.yml` — see `docs/it-site-recovery.md`. `comparison-it`
+rewritten for the Italian market. IT metadata pass. Deposit FAQ added to the IT
+request page. The July deposit sweep turned out to have missed `comparison-it`
+(nine stale free-design claims) and `comparison-es` (three); both are now
+correct.
+
+**Still needing an owner, in priority order:** a Stripe payment link for the IT
+store (the Italian request page advertises the deposit but cannot charge it);
+the US store + `OEMSAAS_TOKEN_US` + a currency decision, so `docs/us-hub-plan.md`
+is executable when the trigger is met; deletion of the Chinese test product; and
+a `noindex` route for `/account/*`.
