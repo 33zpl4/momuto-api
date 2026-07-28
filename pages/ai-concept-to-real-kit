@@ -43,7 +43,7 @@
     {
       "@type": "Question",
       "name": "What does it cost to turn an AI concept into a real kit?",
-      "acceptedAnswer": { "@type": "Answer", "text": "The design work starts with a €15 deposit that puts a designer on your concept — illustration, vectorization and revisions until it's right. The deposit is credited in full to any order of 5 or more jerseys, so for a real team order the design work effectively costs nothing. If you decide not to continue after the first mockup, we refund it. Jerseys themselves run from €21.90/unit at 10+ down from €38.90 for a single." }
+      "acceptedAnswer": { "@type": "Answer", "text": "The design work starts with a €15 deposit that puts a designer on your concept — illustration, vectorization and revisions until it's right. The deposit is credited in full to any order of 5 or more jerseys, so for a real team order the design work effectively costs nothing. Jerseys themselves run from €21.90/unit at 10+ down from €38.90 for a single." }
     }
   ]
 }
@@ -192,7 +192,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2>How It Works</h2>
 <div class="grid3">
 <div class="card"><span class="n">1</span><h3>Send your concept</h3><p>AI render, sketch, screenshot, or just a written brief with your colours. Upload it on the request page, or send it by WhatsApp or email.</p></div>
-<div class="card"><span class="n">2</span><h3>&euro;15 puts a designer on it</h3><p>A designer rebuilds your concept as a production-ready kit &mdash; first mockup in 24&ndash;48h, revisions until it's right. The deposit is credited in full to orders of 5+ jerseys, and refunded if you don't continue.</p></div>
+<div class="card"><span class="n">2</span><h3>&euro;15 puts a designer on it</h3><p>A designer rebuilds your concept as a production-ready kit &mdash; first mockup in 24&ndash;48h, revisions until it's right. The deposit is credited in full to orders of 5+ jerseys, so a team order gets the design for nothing.</p></div>
 <div class="card"><span class="n">3</span><h3>We manufacture it</h3><p>Full dye-sublimation on a polyester-elastane performance blend, with names, numbers and sponsors. No minimum order. Delivered worldwide in 25&ndash;30 days.</p></div>
 </div>
 </div>
@@ -205,7 +205,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <details><summary>Which AI tools can I use?</summary><p>Any. ChatGPT, Midjourney, Gemini, DALL&middot;E, niche kit generators &mdash; plus sketches, Photoshop files and photos of old jerseys. If you can show it, we can rebuild it.</p></details>
 <details><summary>Can I order just one jersey?</summary><p>Yes &mdash; no minimum order. Single jerseys for gifts, portfolio pieces and collectors are common. The &euro;15 design deposit is credited in full on orders of 5 or more jerseys.</p></details>
 <details><summary>Who owns the final design?</summary><p>You do. We build it from your concept for your team and never resell it. Finished projects may appear as before/after case studies in our gallery &mdash; tell us if you'd rather not be featured, and we won't.</p></details>
-<details><summary>What does it cost?</summary><p>&euro;15 to put a designer on your concept &mdash; credited in full to orders of 5+ jerseys, refunded if you don't continue. Jerseys from &euro;21.90/unit at 10+ (&euro;38.90 single).</p></details>
+<details><summary>What does it cost?</summary><p>&euro;15 to put a designer on your concept &mdash; credited in full to orders of 5+ jerseys. Jerseys from &euro;21.90/unit at 10+ (&euro;38.90 single).</p></details>
 </div>
 </section>
 

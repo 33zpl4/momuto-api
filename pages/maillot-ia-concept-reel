@@ -43,7 +43,7 @@
     {
       "@type": "Question",
       "name": "Combien coûte la transformation d'un concept IA en vrai maillot ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Le travail de design démarre avec un acompte de 15 € qui met un designer sur votre concept — illustration, vectorisation et révisions jusqu'à ce que ce soit juste. L'acompte est intégralement crédité sur toute commande de 5 maillots ou plus : pour une vraie commande d'équipe, le design ne coûte donc rien. Si vous ne poursuivez pas après la première maquette, nous le remboursons. Les maillots vont de 20,90 €/unité à partir de 10 jusqu'à 38,90 € à l'unité." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Le travail de design démarre avec un acompte de 15 € qui met un designer sur votre concept — illustration, vectorisation et révisions jusqu'à ce que ce soit juste. L'acompte est intégralement crédité sur toute commande de 5 maillots ou plus : pour une vraie commande d'équipe, le design ne coûte donc rien. Les maillots vont de 20,90 €/unité à partir de 10 jusqu'à 38,90 € à l'unité." }
     }
   ]
 }
@@ -192,7 +192,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2>Comment &Ccedil;a Marche</h2>
 <div class="grid3">
 <div class="card"><span class="n">1</span><h3>Envoyez votre concept</h3><p>Rendu IA, croquis, capture d'&eacute;cran, ou simplement un brief &eacute;crit avec vos couleurs. Sur la page de demande, par WhatsApp ou par email.</p></div>
-<div class="card"><span class="n">2</span><h3>15&nbsp;&euro; = un designer dessus</h3><p>Un designer reconstruit votre concept en maillot pr&ecirc;t &agrave; produire &mdash; premi&egrave;re maquette en 24&ndash;48h, r&eacute;visions jusqu'&agrave; ce que ce soit juste. Acompte int&eacute;gralement cr&eacute;dit&eacute; d&egrave;s 5 maillots, rembours&eacute; si vous ne poursuivez pas.</p></div>
+<div class="card"><span class="n">2</span><h3>15&nbsp;&euro; = un designer dessus</h3><p>Un designer reconstruit votre concept en maillot pr&ecirc;t &agrave; produire &mdash; premi&egrave;re maquette en 24&ndash;48h, r&eacute;visions jusqu'&agrave; ce que ce soit juste. Acompte int&eacute;gralement cr&eacute;dit&eacute; d&egrave;s 5 maillots &mdash; pour une commande d&rsquo;&eacute;quipe, le design ne co&ucirc;te rien.</p></div>
 <div class="card"><span class="n">3</span><h3>Nous le fabriquons</h3><p>Sublimation totale sur tissu performance polyester-&eacute;lasthanne, avec noms, num&eacute;ros et sponsors. Pas de minimum. Livr&eacute; partout dans le monde en 25&ndash;30 jours.</p></div>
 </div>
 </div>
@@ -205,7 +205,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <details><summary>Quels outils IA puis-je utiliser ?</summary><p>Tous. ChatGPT, Midjourney, Gemini, DALL&middot;E, g&eacute;n&eacute;rateurs sp&eacute;cialis&eacute;s &mdash; mais aussi croquis, fichiers Photoshop et photos d'anciens maillots. Si vous pouvez le montrer, nous pouvons le reconstruire.</p></details>
 <details><summary>Puis-je commander un seul maillot ?</summary><p>Oui &mdash; pas de commande minimale. Maillots &agrave; l'unit&eacute; pour cadeaux, pi&egrave;ces de portfolio et collectionneurs. L'acompte design de 15&nbsp;&euro; est int&eacute;gralement cr&eacute;dit&eacute; sur les commandes de 5 maillots ou plus.</p></details>
 <details><summary>Qui poss&egrave;de le design final ?</summary><p>Vous. Nous le construisons &agrave; partir de votre concept, pour votre &eacute;quipe, et nous ne le revendons jamais. Les projets termin&eacute;s peuvent appara&icirc;tre en &eacute;tudes de cas avant/apr&egrave;s dans notre galerie &mdash; dites-nous si vous pr&eacute;f&eacute;rez ne pas y figurer.</p></details>
-<details><summary>Combien &ccedil;a co&ucirc;te ?</summary><p>15&nbsp;&euro; pour mettre un designer sur votre concept &mdash; int&eacute;gralement cr&eacute;dit&eacute;s d&egrave;s 5 maillots, rembours&eacute;s si vous ne poursuivez pas. Maillots &agrave; partir de 20,90&nbsp;&euro;/unit&eacute; d&egrave;s 10 (38,90&nbsp;&euro; &agrave; l'unit&eacute;).</p></details>
+<details><summary>Combien &ccedil;a co&ucirc;te ?</summary><p>15&nbsp;&euro; pour mettre un designer sur votre concept &mdash; int&eacute;gralement cr&eacute;dit&eacute;s d&egrave;s 5 maillots &mdash; pour une commande d&rsquo;&eacute;quipe, le design ne co&ucirc;te rien. Maillots &agrave; partir de 20,90&nbsp;&euro;/unit&eacute; d&egrave;s 10 (38,90&nbsp;&euro; &agrave; l'unit&eacute;).</p></details>
 </div>
 </section>
 
