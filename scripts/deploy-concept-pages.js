@@ -99,8 +99,10 @@ async function getExisting(handle, token) {
 }
 
 function pageData(p, content) {
+  // The CMS rejects a keywords string ("meta_keywords必须是数组" — must be an array).
+  const keywords = p.keywords.split(',').map(k => k.trim()).filter(Boolean);
   return { is_default: 0, title: p.meta_title, content, meta_title: p.meta_title,
-    meta_keywords: p.keywords, meta_descript: p.meta_descript, handle: p.handle };
+    meta_keywords: keywords, meta_descript: p.meta_descript, handle: p.handle };
 }
 
 async function upsert(p, content) {
