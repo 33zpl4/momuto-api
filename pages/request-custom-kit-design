@@ -531,7 +531,7 @@
 <h3>Concept to Kit</h3>
 <div class="path-for">&euro;15 to start &middot; Credited at 5+ jerseys &middot; Mockup in 24&ndash;48h</div>
 <p class="path-description">Have a concept, an AI render, a sketch, or just a strong brief? Send it over &mdash; a designer turns it into a production-ready kit. Illustration, vectorization, and we refine it until it’s right.</p>
-<a href="#payment-gate" class="path-cta" id="studioPathCta">Send My Concept</a>
+<a href="#concept-transform" class="path-cta" id="studioPathCta">Send My Concept</a>
 </div>
 
 </div>
@@ -539,7 +539,7 @@
 </section>
 
 <!-- ── TRANSFORMATIONS ── -->
-<section class="transform-section">
+<section class="transform-section" id="concept-transform">
 <div class="transform-header">
 <p class="transform-eyebrow">The Work</p>
 <h2 class="transform-title">Your Concept. Production Ready.</h2>
@@ -826,7 +826,7 @@
   if (studioCta) {
     studioCta.addEventListener('click', function(e) {
       e.preventDefault();
-      document.getElementById('payment-gate').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      (document.getElementById('concept-transform') || document.getElementById('payment-gate')).scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 })();

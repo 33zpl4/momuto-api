@@ -531,7 +531,7 @@
 <h3>Du Concept au Maillot</h3>
 <div class="path-for">15 € pour démarrer &middot; Crédités dès 5 maillots &middot; Maquette en 24&ndash;48h</div>
 <p class="path-description">Vous avez un concept, un visuel IA, un croquis ou simplement un bon brief ? Envoyez-le &mdash; un designer le transforme en maillot prêt pour la production. Illustration, vectorisation, et on l’affine jusqu’à ce que ce soit parfait.</p>
-<a href="#payment-gate" class="path-cta" id="studioPathCta">Envoyer Mon Concept</a>
+<a href="#concept-transform" class="path-cta" id="studioPathCta">Envoyer Mon Concept</a>
 </div>
 
 </div>
@@ -539,7 +539,7 @@
 </section>
 
 <!-- ── TRANSFORMATIONS ── -->
-<section class="transform-section">
+<section class="transform-section" id="concept-transform">
 <div class="transform-header">
 <p class="transform-eyebrow">Nos Réalisations</p>
 <h2 class="transform-title">Votre Concept. Prêt pour la Production.</h2>
@@ -826,7 +826,7 @@
   if (studioCta) {
     studioCta.addEventListener('click', function(e) {
       e.preventDefault();
-      document.getElementById('payment-gate').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      (document.getElementById('concept-transform') || document.getElementById('payment-gate')).scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 })();
