@@ -335,7 +335,7 @@
 <h3>Servicio de Dise&ntilde;o Personalizado</h3>
 <div class="path-for">100% &uacute;nico &middot; 15&euro; para empezar &middot; Se acreditan en pedidos de 5+</div>
 <p class="path-description">&iquest;Quieres algo que nadie m&aacute;s tenga? Nuestros dise&ntilde;adores crean una equipaci&oacute;n totalmente original a partir de tu brief &mdash; o adaptan un dise&ntilde;o que ya hayas creado (generado por IA, dibujado a mano, o creado con cualquier herramienta). Primera maqueta en 24-48h, revisiones incluidas. 15&euro; para empezar, acreditados &iacute;ntegros en pedidos de 5+ camisetas. Desde 21,90&euro; por camiseta.</p>
-<a href="#payment-gate" class="path-cta" id="studioPathCta">Enviar Mi Concepto</a></div>
+<a href="#concept-transform" class="path-cta" id="studioPathCta">Enviar Mi Concepto</a></div>
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-cube"></i></div>
 <h3>Configurador 3D</h3>
@@ -457,7 +457,7 @@
 </div>
 </section>
 <!-- ── PASARELA DE PAGO ── -->
-<section class="transform-section">
+<section class="transform-section" id="concept-transform">
 <div class="transform-header">
 <p class="transform-eyebrow">Nuestros Trabajos</p>
 <h2 class="transform-title">Tu Concepto. Listo para Producci&oacute;n.</h2>
@@ -719,7 +719,7 @@
   var isPaid = params.get('paid') === 'true';
   if (isPaid) {
     var pb = document.getElementById('paidBanner'); if (pb) pb.style.display = 'block';
-    var pg = document.getElementById('payment-gate'); if (pg) pg.style.display = 'none';
+    var pg = document.getElementById('concept-transform') || document.getElementById('payment-gate'); if (pg) pg.style.display = 'none';
     var bf = document.getElementById('brief-form-section'); if (bf) bf.style.display = 'block';
     setTimeout(function() {
       var f = document.getElementById('cta-form'); if (f) f.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -765,7 +765,7 @@
   if (studioCta) {
     studioCta.addEventListener('click', function(e) {
       e.preventDefault();
-      var pg = document.getElementById('payment-gate'); if (pg) pg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var pg = document.getElementById('concept-transform') || document.getElementById('payment-gate'); if (pg) pg.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 })();

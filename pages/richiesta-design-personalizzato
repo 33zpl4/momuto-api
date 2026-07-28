@@ -358,7 +358,7 @@
 <h3>Servizio di Design Personalizzato</h3>
 <div class="path-for">100% unico &middot; Acconto 15 € accreditato da 5 maglie &middot; Revisioni incluse</div>
 <p class="path-description">Vuoi qualcosa che nessun altro ha? I nostri designer creano un kit completamente originale dal tuo brief &mdash; o adattano un design che hai gi&agrave; creato (generato da IA, disegnato a mano, o creato con qualsiasi strumento). Mockup in 24-48h (acconto 15 €, accreditato sull'ordine da 5 maglie), revisioni incluse. Da 21,90&euro; a maglia.</p>
-<a href="#cta-form" class="path-cta">Richiedi un Design su Misura</a></div>
+<a href="#concept-transform" class="path-cta" id="studioPathCta">Richiedi un Design su Misura</a></div>
 <div class="path-card">
 <div class="path-icon"><i class="fas fa-cube"></i></div>
 <h3>Configuratore 3D</h3>
@@ -428,14 +428,14 @@
 <ul class="hiw-steps">
 <li><span class="hiw-num">1</span><div><strong>Scegli la tua via</strong><p>Sfoglia la <a href="https://it.momuto.com/pages/collezione-ready-to-play" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">collezione Ready-to-Play</a> per design collaudati al 10% di sconto. O invia un brief per un design completamente personalizzato. O <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">costruiscilo tu stesso in 3D</a>.</p></div></li>
 <li><span class="hiw-num">2</span><div><strong>Configura e invia</strong><p>Scegli i tuoi colori, carica il tuo stemma e logo sponsor. Per il Ready-to-Play, scegli dalla palette di colori. Per il personalizzato, condividi i riferimenti e lascia che i nostri designer interpretino.</p></div></li>
-<li><span class="hiw-num">3</span><div><strong>Ricevi la tua anteprima</strong><p>Le anteprime Ready-to-Play arrivano in 24h. I mockup personalizzati in 24-48h. Entrambi gratuiti. Entrambi con almeno 1 revisione inclusa.</p></div></li>
+<li><span class="hiw-num">3</span><div><strong>Ricevi la tua anteprima</strong><p>Le anteprime Ready-to-Play arrivano in 24h, gratuite. I mockup su misura in 24&ndash;48h, con l'acconto di 15 &euro; interamente accreditato dall'ordine da 5 maglie. Revisioni incluse in entrambi i casi.</p></div></li>
 <li><span class="hiw-num">4</span><div><strong>Approva e ordina</strong><p>Soddisfatto del risultato? Conferma le taglie e fai l&rsquo;ordine. Nessun impegno oltre l&rsquo;acconto fino a questo momento &mdash; e da 5 maglie l&rsquo;acconto ti viene interamente accreditato.</p></div></li>
 <li><span class="hiw-num">5</span><div><strong>Produciamo e spediamo</strong><p>7-12 giorni di produzione con stampa a sublimazione totale + 10-15 giorni di spedizione mondiale. I tuoi kit arrivano in 25-30 giorni. Spedizione gratuita su ordini superiori a 50&euro;.</p></div></li>
 </ul>
 <p class="hiw-internal-links">Cerchi la via pi&ugrave; rapida? <a href="https://it.momuto.com/pages/collezione-ready-to-play">I kit Ready-to-Play partono da 19,70&euro; con anteprime in 24h.</a><br />Vuoi vedere cosa hanno ordinato altri club? <a href="https://it.momuto.com/pages/squadre-club-momuto">Sfoglia la galleria completa delle squadre.</a></p>
 </div>
 </section>
-<section class="transform-section">
+<section class="transform-section" id="concept-transform">
 <div class="transform-header">
 <p class="transform-eyebrow">I Nostri Lavori</p>
 <h2 class="transform-title">Il Tuo Concept. Pronto per la Produzione.</h2>
@@ -698,6 +698,15 @@
         }).then(go, go);
       } catch (_) { go(); }
       setTimeout(go, 1200); // safety: never trap the user
+    });
+  }
+
+  var studioCta = document.getElementById('studioPathCta');
+  if (studioCta) {
+    studioCta.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = document.getElementById('concept-transform') || document.getElementById('payment-gate');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 })();
