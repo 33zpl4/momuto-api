@@ -1,6 +1,12 @@
 /**
- * Audits all pages on it.momuto.com for language, then translates any
- * English pages to Italian and writes them back.
+ * Audits all pages on it.momuto.com for language, then translates anything
+ * that is not Italian - English or French - back into Italian.
+ *
+ * The IT store demonstrably carries both: 24 of its 65 blog posts were French
+ * or English. Pages were never audited against the current inventory.
+ *
+ * CAUTION: translating rewrites the handle, which changes the live URL. Check
+ * GSC for impressions on the old handle before running with DRY_RUN=false.
  *
  * Modes:
  *   DRY_RUN=true   Fetch + detect language + print report. No writes.
@@ -222,7 +228,8 @@ function renderReport(results) {
   console.log(`║  IT PAGES AUDIT  —  ${new Date().toISOString().split('T')[0]}${' '.repeat(43 - new Date().toISOString().split('T')[0].length)}║`);
   console.log(`╚${bar}╝`);
 
-  let englishCount = 0;
+  let foreignCount = 0;
+  const foreignByLang = {};
   let stubCount = 0;
   let translatedCount = 0;
 
@@ -235,11 +242,14 @@ function renderReport(results) {
     console.log(`│  Words:  ~${r.wordCount}`);
     console.log(`│  ${langIcon} Language: ${lang.toUpperCase()}${r.detection?.language_note ? ` — ${r.detection.language_note}` : ''}`);
 
-    if (lang !== 'it' && lang !== 'stub') englishCount++;
+    if (lang !== 'it' && lang !== 'stub') {
+      foreignCount++;
+      foreignByLang[lang] = (foreignByLang[lang] || 0) + 1;
+    }
     if (lang === 'stub') stubCount++;
 
     if (r.translated) {
-      console.log(`│  🔄 Translated EN→IT:`);
+      console.log(`│  🔄 Translated ${(r.detection?.language ?? '?').toUpperCase()}→IT:`);
       console.log(`│     title:  ${r.translated.title}`);
       console.log(`│     handle: ${r.translated.handle}`);
       if (r.updateError) {
@@ -261,9 +271,13 @@ function renderReport(results) {
   console.log('SUMMARY');
   console.log(`${'─'.repeat(66)}`);
   console.log(`  Total pages:        ${results.length}`);
-  console.log(`  Already Italian:    ${results.length - englishCount - stubCount}`);
+  console.log(`  Already Italian:    ${results.length - foreignCount - stubCount}`);
   console.log(`  Stubs (skipped):    ${stubCount}`);
-  console.log(`  English detected:   ${englishCount}${englishCount > 0 && !DRY_RUN ? ` → ${translatedCount} translated` : englishCount > 0 ? ' → DRY_RUN (not updated)' : ''}`);
+  const breakdown = Object.entries(foreignByLang).map(([l, n]) => `${l}:${n}`).join(' ');
+  console.log(`  Not Italian:        ${foreignCount}${breakdown ? ` (${breakdown})` : ''}${foreignCount > 0 && !DRY_RUN ? ` → ${translatedCount} translated` : foreignCount > 0 ? ' → DRY_RUN (not updated)' : ''}`);
+  // Translation renames the handle, which changes the live URL. On a page that
+  // already has impressions, redirect the old handle before running non-dry.
+  if (foreignCount > 0) console.log('  NOTE: translating renames the handle — check GSC for the old URL first.');
   console.log(`${'═'.repeat(66)}\n`);
 }
 
