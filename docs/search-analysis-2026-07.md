@@ -126,19 +126,22 @@ Italian buyers find MOMUTO; they land on the English, Spanish or French sites.
 The cause is visible in `cms/inventory/it.json`. The IT store holds **65 blog
 posts**, of which:
 
-- **23 are not in Italian** — 14 French (`comment-laver-son-maillot-de-foot…`,
+- **24 are not in Italian** — 15 French (`comment-laver-son-maillot-de-foot…`,
   `pourquoi-creer-un-maillot-de-foot-pour-club…`,
-  `maillots-sublimes-revolution…`, …) and 8–9 English
+  `maillots-sublimes-revolution…`, …) and 9 English
   (`high-quality-soccer-kits`, `wool-cotton-polyester…`,
-  `zidane-vs-maradona-the-legacy…`, …).
-- **9 pairs (18 posts) are near-duplicates of each other**, e.g.
+  `zidane-vs-maradona-the-legacy…`, …). Every one is already published on its
+  own locale.
+- **15 pairs (30 posts) are near-duplicates of each other**, e.g.
   `cura-maglia-calcio-guida-definitiva` vs `cura-maglia-da-calcio-guida-completa`;
   `evoluzione-maglie-calcio-lana-cotone-poliestere` vs
   `evoluzione-maglie-da-calcio-dalla-lana-al-digitale`;
   `perche-personalizzare-il-kit-da-calcio-e-come-farlo` vs
-  `personalizza-kit-calcio-momuto`; `movimento-collaborativo-…` ×2.
+  `personalizza-kit-calcio-momuto`; `movimento-collaborativo-…` ×2. Worst case:
+  four 3D-configurator posts that are really two articles written twice — a
+  four-way split on the most commercially relevant Italian topic.
 
-So roughly **half the IT store is foreign-language or self-cannibalising**. A
+So **39 of 65 posts are foreign-language or self-cannibalising**. A
 site whose blog is one-third French does not read as an Italian site to a
 language classifier, and duplicate pairs split whatever signal the real posts
 earn. `scripts/audit-and-translate-italian-pages.js` exists and handles *pages*
