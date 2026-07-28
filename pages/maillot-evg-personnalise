@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Maillot de Foot Personnalisé EVG & EVJF — MOMUTO",
-  "description": "Un maillot de foot personnalisé pour tout le groupe — le futur marié en vedette, surnoms et numéros sur chaque dos. Créez-le gratuitement en 3D ou envoyez un concept IA. Pas de minimum. Dès 20,90 €/maillot à partir de 10.",
+  "description": "Un maillot de foot personnalisé pour tout le groupe — le futur marié en vedette, surnoms et numéros sur chaque dos. Créez-le gratuitement en 3D ou envoyez un concept IA. Pas de minimum. Dès 21,90 €/maillot à partir de 10.",
   "url": "https://fr.momuto.com/pages/maillot-evg-personnalise",
   "inLanguage": "fr",
   "breadcrumb": {
@@ -38,7 +38,7 @@
     {
       "@type": "Question",
       "name": "Combien coûte un maillot de foot d'EVG personnalisé ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Dès 20,90 € par maillot à partir de 10 unités (38,90 € à l'unité), noms, numéros et impression sublimation pleine couleur inclus. Un EVG type de 10 personnes revient à environ 21 € par tête — moins cher que la première tournée." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Dès 21,90 € par maillot à partir de 10 unités (38,90 € à l'unité), noms, numéros et impression sublimation pleine couleur inclus. Un EVG type de 10 personnes revient à environ 21 € par tête — moins cher que la première tournée." }
     }
   ]
 }
@@ -111,7 +111,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <div class="grid3">
 <div class="card"><span class="n">1</span><h3>Cr&eacute;ez le design</h3><p>Le plus rapide : le configurateur 3D gratuit, en quelques minutes. Ou envoyez une id&eacute;e, un croquis ou un rendu IA &mdash; un designer renvoie une maquette en 24&ndash;48h (acompte de 15&nbsp;&euro;, int&eacute;gralement cr&eacute;dit&eacute; d&egrave;s 5 maillots &mdash; ce qu'un EVG est toujours).</p></div>
 <div class="card"><span class="n">2</span><h3>Ajoutez la liste du groupe</h3><p>Noms, surnoms, num&eacute;ros et une taille par personne. R&eacute;cup&eacute;rez tout &ccedil;a dans le groupe WhatsApp, collez-le.</p></div>
-<div class="card"><span class="n">3</span><h3>Livr&eacute; en 25&ndash;30 jours</h3><p>Production 7&ndash;12 jours, livraison 10&ndash;15. <strong>Commandez au moins 5 semaines avant la f&ecirc;te.</strong> D&egrave;s 20,90&nbsp;&euro;/maillot &agrave; partir de 10 &mdash; environ le prix de la premi&egrave;re tourn&eacute;e.</p></div>
+<div class="card"><span class="n">3</span><h3>Livr&eacute; en 25&ndash;30 jours</h3><p>Production 7&ndash;12 jours, livraison 10&ndash;15. <strong>Commandez au moins 5 semaines avant la f&ecirc;te.</strong> D&egrave;s 21,90&nbsp;&euro;/maillot &agrave; partir de 10 &mdash; environ le prix de la premi&egrave;re tourn&eacute;e.</p></div>
 </div>
 </div>
 </section>
@@ -126,7 +126,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <details><summary>Combien de temps &agrave; l'avance faut-il commander ?</summary><p>Au moins 5 semaines avant la f&ecirc;te : 7&ndash;12 jours de production + 10&ndash;15 jours de livraison. Le design, lui, est rapide &mdash; quelques minutes dans l'outil 3D, ou 24&ndash;48h pour une maquette de designer.</p></details>
 <details><summary>Chaque maillot peut-il avoir un surnom et un num&eacute;ro diff&eacute;rents ?</summary><p>Oui &mdash; un design commun, puis nom/surnom, num&eacute;ro et taille individuels par maillot. Les tailles m&eacute;lang&eacute;es ne co&ucirc;tent rien de plus.</p></details>
 <details><summary>Peut-on utiliser un design g&eacute;n&eacute;r&eacute; par IA ?</summary><p>Oui. G&eacute;n&eacute;rez-le avec ChatGPT ou Midjourney et envoyez-le &mdash; nos designers le reconstruisent en maillot imprimable. Acompte de 15&nbsp;&euro;, int&eacute;gralement cr&eacute;dit&eacute; d&egrave;s 5 maillots.</p></details>
-<details><summary>Combien &ccedil;a co&ucirc;te ?</summary><p>D&egrave;s 20,90&nbsp;&euro;/maillot &agrave; partir de 10 unit&eacute;s (38,90&nbsp;&euro; &agrave; l'unit&eacute;), personnalisation et impression pleine couleur incluses. Un groupe de 10 : environ 21&nbsp;&euro; par t&ecirc;te.</p></details>
+<details><summary>Combien &ccedil;a co&ucirc;te ?</summary><p>D&egrave;s 21,90&nbsp;&euro;/maillot &agrave; partir de 10 unit&eacute;s (38,90&nbsp;&euro; &agrave; l'unit&eacute;), personnalisation et impression pleine couleur incluses. Un groupe de 10 : environ 21&nbsp;&euro; par t&ecirc;te.</p></details>
 </div>
 </section>
 

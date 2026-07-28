@@ -11,7 +11,7 @@
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "EUR",
-    "lowPrice": "20.90",
+    "lowPrice": "21.90",
     "highPrice": "38.90",
     "offerCount": "1",
     "availability": "https://schema.org/InStock",
@@ -55,7 +55,7 @@
   "estimatedCost": {
     "@type": "MonetaryAmount",
     "currency": "EUR",
-    "value": "Desde 20,90€ por camiseta (10+ unidades) o 38,90€ por una camiseta individual"
+    "value": "Desde 21,90€ por camiseta (10+ unidades) o 38,90€ por una camiseta individual"
   },
   "step": [
     {
@@ -248,7 +248,7 @@
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-tag"></i></div>
 <h3>Mejor Precio por Equipo</h3>
-<p>Camisetas desde 20,90&euro; por unidad en pedidos grandes, 38,90&euro; para una camiseta individual. Sin pedido m&iacute;nimo &mdash; sin obligaci&oacute;n de compra a granel. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Comparar precios con competidores.</a></p>
+<p>Camisetas desde 21,90&euro; por unidad en pedidos grandes, 38,90&euro; para una camiseta individual. Sin pedido m&iacute;nimo &mdash; sin obligaci&oacute;n de compra a granel. <a href="https://es.momuto.com/pages/zentral-opiniones-alternativa">Comparar precios con competidores.</a></p>
 </div>
 <div class="why-card">
 <div class="why-card-icon"><i class="fas fa-layer-group"></i></div>
@@ -420,7 +420,7 @@
 </div>
 <div class="faq-item">
 <h3>&iquest;Hay un pedido m&iacute;nimo para equipaciones de f&uacute;tbol personalizadas?</h3>
-<p>No. MOMUTO no tiene pedido m&iacute;nimo. Puedes pedir una sola camiseta o un equipo completo de 50+. El precio empieza desde 20,90&euro; por camiseta en pedidos grandes y 38,90&euro; para una camiseta individual.</p>
+<p>No. MOMUTO no tiene pedido m&iacute;nimo. Puedes pedir una sola camiseta o un equipo completo de 50+. El precio empieza desde 21,90&euro; por camiseta en pedidos grandes y 38,90&euro; para una camiseta individual.</p>
 </div>
 <div class="faq-item">
 <h3>&iquest;Cu&aacute;nto tiempo tarda en llegar la equipaci&oacute;n de f&uacute;tbol personalizada?</h3>

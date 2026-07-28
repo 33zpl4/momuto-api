@@ -683,7 +683,7 @@ galleryGrid.appendChild(card);
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "EUR",
-    "lowPrice": "20.90",
+    "lowPrice": "21.90",
     "highPrice": "38.90",
     "offerCount": "1",
     "availability": "https://schema.org/InStock",
@@ -727,7 +727,7 @@ galleryGrid.appendChild(card);
   "estimatedCost": {
     "@type": "MonetaryAmount",
     "currency": "EUR",
-    "value": "À partir de 20,90 € par maillot (10+ unités) ou 38,90 € pour un maillot individuel"
+    "value": "À partir de 21,90 € par maillot (10+ unités) ou 38,90 € pour un maillot individuel"
   },
   "step": [
     {

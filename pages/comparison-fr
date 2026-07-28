@@ -628,20 +628,20 @@ h1.title, .title, .page-title { display: none !important; }
 <tr class="cmp-best-value">
 <td>10–19 unités <span class="cmp-best-value-badge">Le plus populaire</span></td>
 <td>21,90 €</td>
-<td>6,00 €</td>
+<td>5,00 €</td>
 <td class="cmp-kit-total">26,90 € / u</td>
 </tr>
 <tr>
 <td>20–49 unités</td>
 <td>18,90 €</td>
-<td>6,00 €</td>
-<td class="cmp-kit-total">24,90 € / u</td>
+<td>5,00 €</td>
+<td class="cmp-kit-total">23,90 € / u</td>
 </tr>
 <tr>
 <td>50–99 unités</td>
 <td>17,90 €</td>
-<td>5,50 €</td>
-<td class="cmp-kit-total">23,40 € / u</td>
+<td>5,00 €</td>
+<td class="cmp-kit-total">22,90 € / u</td>
 </tr>
 <tr>
 <td>100+ unités</td>

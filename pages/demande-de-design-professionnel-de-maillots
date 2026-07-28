@@ -82,7 +82,7 @@
       "name": "Y a-t-il une commande minimum ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Non. Vous pouvez commander à partir d’un seul maillot. Les prix démarrent à 38,90 € pour un maillot et descendent à 20,90 € par maillot dès 10 unités. Les 15 € sont crédités sur votre commande dès 5 maillots."
+        "text": "Non. Vous pouvez commander à partir d’un seul maillot. Les prix démarrent à 38,90 € pour un maillot et descendent à 21,90 € par maillot dès 10 unités. Les 15 € sont crédités sur votre commande dès 5 maillots."
       }
     },
     {
@@ -751,7 +751,7 @@
 <div class="faq-item"><h3>Puis-je envoyer un concept généré par IA (ChatGPT, Midjourney) ?</h3><p>Oui &mdash; c’est exactement à cela que ce service est destiné. Importez votre visuel IA et notre designer l’adaptera en maillot prêt pour la production tout en préservant votre vision. Cela inclut la vectorisation des formes, la reproduction des dégradés et textures, et l’ajustement aux contraintes réelles du tissu.</p></div>
 <div class="faq-item"><h3>Et si je n’ai qu’un brief, sans concept ?</h3><p>Aucun problème. Décrivez vos couleurs, votre direction de style et toute référence (maillots existants, palettes, ambiance). Plus il y a de détails, mieux c’est, mais nos designers travaillent à partir de briefs tous les jours. Vous recevrez une maquette en 24&ndash;48h dans tous les cas.</p></div>
 <div class="faq-item"><h3>Vous préférez le faire vous-même ? Quelles sont les options gratuites ?</h3><p>Deux options gratuites : le <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr">Configurateur 3D</a> vous permet de créer en temps réel avec plus de 30 modèles et un aperçu instantané. La <a href="https://fr.momuto.com/pages/ready-to-play">collection Ready-to-Play</a> propose des maillots professionnels pré-conçus à -10 % par rapport au sur-mesure, avec un aperçu personnalisé en direct.</p></div>
-<div class="faq-item"><h3>Y a-t-il une commande minimum ?</h3><p>Non. Vous pouvez commander à partir d’un seul maillot. Les prix démarrent à 38,90 € pour un maillot et descendent à 20,90 € par maillot dès 10 unités. Les 15 € sont crédités sur votre commande dès 5 maillots.</p></div>
+<div class="faq-item"><h3>Y a-t-il une commande minimum ?</h3><p>Non. Vous pouvez commander à partir d’un seul maillot. Les prix démarrent à 38,90 € pour un maillot et descendent à 21,90 € par maillot dès 10 unités. Les 15 € sont crédités sur votre commande dès 5 maillots.</p></div>
 <div class="faq-item"><h3>En combien de temps vais-je recevoir les maillots ?</h3><p>25&ndash;30 jours après confirmation de commande : 7&ndash;15 jours de production + 10&ndash;15 jours de livraison mondiale. Livraison offerte dès 50 € d’achat.</p></div>
 </div>
 </div>

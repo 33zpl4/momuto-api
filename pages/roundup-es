@@ -37,7 +37,7 @@
       "name": "¿Cuánto cuesta una equipación de fútbol personalizada?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Precios MOMUTO: 1 camiseta a 38,90 €; 2-4 a 34,90 €/u; 5-9 a 26,90 €/u; 10-19 a 21,90 €/u; 20-49 a 18,90 €/u; 50-99 a 17,90 €/u; 100+ a 16,90 €/u. El pantalón va aparte: 17,90 € (1 ud), 15,90 € (2-4), 11,90 € (5-9), 6,00 € (10+). Para un equipo de 10, el kit completo (camiseta + pantalón) sale a 26,90 € por jugador. El servicio de diseño es siempre gratis."
+        "text": "Precios MOMUTO: 1 camiseta a 38,90 €; 2-4 a 34,90 €/u; 5-9 a 26,90 €/u; 10-19 a 21,90 €/u; 20-49 a 18,90 €/u; 50-99 a 17,90 €/u; 100+ a 16,90 €/u. El pantalón va aparte: 17,90 € (1 ud), 15,90 € (2-4), 11,90 € (5-9), 5,00 € (10+). Para un equipo de 10, el kit completo (camiseta + pantalón) sale a 26,90 € por jugador. El servicio de diseño es siempre gratis."
       }
     },
     {
@@ -572,20 +572,20 @@ h1.title, .title, .page-title { display: none !important; }
 <tr class="cmp-best-value">
 <td>10&ndash;19 unidades <span class="cmp-best-value-badge">M&aacute;s popular</span></td>
 <td>21,90 &euro;</td>
-<td>6,00 &euro;</td>
+<td>5,00 &euro;</td>
 <td class="cmp-kit-total">26,90 &euro; / u</td>
 </tr>
 <tr>
 <td>20&ndash;49 unidades</td>
 <td>18,90 &euro;</td>
-<td>6,00 &euro;</td>
-<td class="cmp-kit-total">24,90 &euro; / u</td>
+<td>5,00 &euro;</td>
+<td class="cmp-kit-total">23,90 &euro; / u</td>
 </tr>
 <tr>
 <td>50&ndash;99 unidades</td>
 <td>17,90 &euro;</td>
-<td>5,50 &euro;</td>
-<td class="cmp-kit-total">23,40 &euro; / u</td>
+<td>5,00 &euro;</td>
+<td class="cmp-kit-total">22,90 &euro; / u</td>
 </tr>
 <tr>
 <td>100+ unidades</td>

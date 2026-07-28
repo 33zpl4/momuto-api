@@ -682,7 +682,7 @@ galleryGrid.appendChild(card);
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "EUR",
-    "lowPrice": "20.90",
+    "lowPrice": "21.90",
     "highPrice": "38.90",
     "offerCount": "1",
     "availability": "https://schema.org/InStock",
@@ -726,7 +726,7 @@ galleryGrid.appendChild(card);
   "estimatedCost": {
     "@type": "MonetaryAmount",
     "currency": "EUR",
-    "value": "Desde €20,90 por equipación (10+ unidades) o €38,90 por equipación individual"
+    "value": "Desde €21,90 por equipación (10+ unidades) o €38,90 por equipación individual"
   },
   "step": [
     {
