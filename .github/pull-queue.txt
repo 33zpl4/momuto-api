@@ -1,3 +1,12 @@
 # CMS pull queue
-# repull after products pagination fix
-product fr maillot-pornic-fc
+# Lines: "<type> <locale> <handle>", or "<locale> <handle>" (type defaults to post),
+# or "inventory <locale>". Push to main to run; the runner commits results back.
+
+# Refresh the IT inventory after the unpublish run so cms/inventory/it.json
+# reflects the 26 surviving posts rather than the 65 it was audited on.
+inventory it
+
+# Duplicate winner that lives only in the CMS. It won on clicks but is titled
+# "Kit Sportivi Personalizzati"; retarget it at "divise sportive personalizzate"
+# once it is in the repo. See docs/it-site-recovery.md step 6.
+post it kit-sportivi-personalizzati-crea-design-racconta-storia

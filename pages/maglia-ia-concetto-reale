@@ -43,7 +43,7 @@
     {
       "@type": "Question",
       "name": "Quanto costa trasformare un concept IA in una maglia vera?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Il lavoro di design parte con un deposito di 15 € che mette un designer sul tuo concept — illustrazione, vettorializzazione e revisioni finché non è giusto. Il deposito è interamente accreditato su qualsiasi ordine di 5 o più maglie: per un vero ordine di squadra, il design di fatto non costa nulla. Se decidi di non proseguire dopo il primo bozzetto, te lo rimborsiamo. Le maglie vanno da 20,90 €/unità da 10 in su fino a 38,90 € per il singolo pezzo." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Il lavoro di design parte con un deposito di 15 € che mette un designer sul tuo concept — illustrazione, vettorializzazione e revisioni finché non è giusto. Il deposito è interamente accreditato su qualsiasi ordine di 5 o più maglie: per un vero ordine di squadra, il design di fatto non costa nulla. Le maglie vanno da 20,90 €/unità da 10 in su fino a 38,90 € per il singolo pezzo." }
     }
   ]
 }
@@ -192,7 +192,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2>Come Funziona</h2>
 <div class="grid3">
 <div class="card"><span class="n">1</span><h3>Invia il tuo concept</h3><p>Render IA, schizzo, screenshot, o semplicemente un brief scritto con i tuoi colori. Dalla pagina di richiesta, via WhatsApp o email.</p></div>
-<div class="card"><span class="n">2</span><h3>15&nbsp;&euro; = un designer al lavoro</h3><p>Un designer ricostruisce il tuo concept come maglia pronta per la produzione &mdash; primo bozzetto in 24&ndash;48h, revisioni finch&eacute; non &egrave; giusto. Deposito interamente accreditato a partire da 5 maglie, rimborsato se non prosegui.</p></div>
+<div class="card"><span class="n">2</span><h3>15&nbsp;&euro; = un designer al lavoro</h3><p>Un designer ricostruisce il tuo concept come maglia pronta per la produzione &mdash; primo bozzetto in 24&ndash;48h, revisioni finch&eacute; non &egrave; giusto. Deposito interamente accreditato a partire da 5 maglie: per una squadra il design non costa nulla.</p></div>
 <div class="card"><span class="n">3</span><h3>La fabbrichiamo</h3><p>Sublimazione totale su tessuto performance poliestere-elastan, con nomi, numeri e sponsor. Nessun minimo. Consegnato in tutto il mondo in 25&ndash;30 giorni.</p></div>
 </div>
 </div>
@@ -205,7 +205,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <details><summary>Quali strumenti IA posso usare?</summary><p>Qualsiasi. ChatGPT, Midjourney, Gemini, DALL&middot;E, generatori specializzati &mdash; ma anche schizzi, file Photoshop e foto di vecchie maglie. Se puoi mostrarlo, possiamo ricostruirlo.</p></details>
 <details><summary>Posso ordinare una sola maglia?</summary><p>S&igrave; &mdash; nessun ordine minimo. Maglie singole per regali, pezzi da portfolio e collezionisti. Il deposito design di 15&nbsp;&euro; &egrave; interamente accreditato sugli ordini di 5 o pi&ugrave; maglie.</p></details>
 <details><summary>Di chi &egrave; il design finale?</summary><p>Tuo. Lo costruiamo dal tuo concept, per la tua squadra, e non lo rivendiamo mai. I progetti completati possono comparire come casi prima/dopo nella nostra galleria &mdash; dicci se preferisci non comparire.</p></details>
-<details><summary>Quanto costa?</summary><p>15&nbsp;&euro; per mettere un designer sul tuo concept &mdash; interamente accreditati a partire da 5 maglie, rimborsati se non prosegui. Maglie da 20,90&nbsp;&euro;/unit&agrave; da 10 in su (38,90&nbsp;&euro; il singolo pezzo).</p></details>
+<details><summary>Quanto costa?</summary><p>15&nbsp;&euro; per mettere un designer sul tuo concept &mdash; interamente accreditati a partire da 5 maglie. Maglie da 20,90&nbsp;&euro;/unit&agrave; da 10 in su (38,90&nbsp;&euro; il singolo pezzo).</p></details>
 </div>
 </section>
 

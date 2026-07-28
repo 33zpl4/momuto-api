@@ -77,6 +77,16 @@
     },
     {
       "@type": "Question",
+      "name": "Quando viene accreditato l\u2019acconto di 15 \u20ac?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Quando l'ordine raggiunge le 5 maglie o pi\u00f9, l'acconto viene accreditato sul totale al momento del pagamento. Per un ordine di squadra il design non costa quindi nulla." }
+    },
+    {
+      "@type": "Question",
+      "name": "L\u2019acconto di 15 \u20ac \u00e8 rimborsabile?",
+      "acceptedAnswer": { "@type": "Answer", "text": "S\u00ec. Se dopo il primo bozzetto preferisci non proseguire, basta dircelo e ti rimborsiamo i 15 \u20ac per intero, senza domande. Da 5 maglie in su viene comunque accreditato sull'ordine." }
+    },
+    {
+      "@type": "Question",
       "name": "C'è un ordine minimo per le maglie da calcio personalizzate?",
       "acceptedAnswer": { "@type": "Answer", "text": "No. MOMUTO non ha ordine minimo. Puoi ordinare una sola maglia o una squadra completa di 50+. I prezzi partono da 19,70€ a maglia per il Ready-to-Play o 21,90€ per il design personalizzato su ordini più grandi." }
     },
@@ -300,6 +310,8 @@
 <div class="faq-list">
 <div class="faq-item"><h3>Cos&rsquo;&egrave; la collezione Ready-to-Play di MOMUTO?</h3><p>Ready-to-Play &egrave; una collezione di template di kit pre-disegnati da designer professionisti e gi&agrave; indossati da veri club. Scegli un design, i colori della tua squadra, carica il tuo stemma e ricevi un&rsquo;anteprima personalizzata entro 24 ore. I kit Ready-to-Play costano il 10% in meno rispetto al design personalizzato &mdash; da 19,70&euro; a maglia &mdash; perch&eacute; salti la fase di design mantenendo la stessa qualit&agrave;.</p></div>
 <div class="faq-item"><h3>Come funziona il servizio di design personalizzato di MOMUTO?</h3><p>Invia il tuo brief tramite il modulo qui sopra &mdash; nome della squadra, stemma, colori e qualsiasi riferimento. I nostri designer creano un mockup completamente personalizzato in 24&ndash;48 ore, con un acconto di 15 € interamente accreditato sull&rsquo;ordine da 5 maglie. Tutte le revisioni sono incluse fino alla tua soddisfazione. Nessun impegno fino alla conferma dell&rsquo;ordine.</p></div>
+<div class="faq-item"><h3>Quando viene accreditato l&rsquo;acconto di 15 &euro;?</h3><p>Quando l&rsquo;ordine raggiunge le 5 maglie o pi&ugrave;, l&rsquo;acconto viene accreditato sul totale al momento del pagamento. Per un ordine di squadra il design non costa quindi nulla.</p></div>
+<div class="faq-item"><h3>L&rsquo;acconto di 15 &euro; &egrave; rimborsabile?</h3><p>S&igrave;. Se dopo il primo bozzetto preferisci non proseguire, basta dircelo e ti rimborsiamo i 15 &euro; per intero, senza domande. Da 5 maglie in su viene comunque accreditato sull&rsquo;ordine.</p></div>
 <div class="faq-item"><h3>C&rsquo;&egrave; un ordine minimo per le maglie da calcio personalizzate?</h3><p>No. MOMUTO non ha ordine minimo. Puoi ordinare una sola maglia o una squadra completa di 50+. I prezzi partono da 19,70&euro; a maglia per il Ready-to-Play o 21,90&euro; per il design personalizzato su ordini pi&ugrave; grandi, e 38,90&euro; per una maglia singola.</p></div>
 <div class="faq-item"><h3>Quanto tempo ci vuole per ricevere le maglie da calcio personalizzate?</h3><p>La produzione richiede 7&ndash;12 giorni. La spedizione richiede 10&ndash;15 giorni in tutto il mondo. Il tempo totale di consegna &egrave; tipicamente 20&ndash;25 giorni dalla conferma dell&rsquo;ordine. Spedizione gratuita su ordini superiori a 50&euro;.</p></div>
 <div class="faq-item"><h3>Che metodo di stampa usa MOMUTO?</h3><p>MOMUTO utilizza la stampa a sublimazione totale su tessuto misto poliestere-elastan ad alte prestazioni. La sublimazione significa che i colori vengono incorporati nel tessuto &mdash; non stampati sopra &mdash; quindi non si scrostano, creano ni scoloriscono mai. Vale sia per i kit Ready-to-Play che per il design personalizzato.</p></div>

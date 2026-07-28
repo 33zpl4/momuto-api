@@ -43,7 +43,7 @@
     {
       "@type": "Question",
       "name": "¿Cuánto cuesta convertir un concepto de IA en una camiseta real?",
-      "acceptedAnswer": { "@type": "Answer", "text": "El trabajo de diseño empieza con un depósito de 15 € que pone a un diseñador con tu concepto — ilustración, vectorización y revisiones hasta que quede perfecto. El depósito se abona íntegramente en cualquier pedido de 5 o más camisetas: para un pedido real de equipo, el diseño no cuesta nada. Si decides no continuar tras la primera propuesta, te lo devolvemos. Las camisetas van desde 21,90 €/unidad a partir de 10 hasta 38,90 € la unidad." }
+      "acceptedAnswer": { "@type": "Answer", "text": "El trabajo de diseño empieza con un depósito de 15 € que pone a un diseñador con tu concepto — ilustración, vectorización y revisiones hasta que quede perfecto. El depósito se abona íntegramente en cualquier pedido de 5 o más camisetas: para un pedido real de equipo, el diseño no cuesta nada. Las camisetas van desde 21,90 €/unidad a partir de 10 hasta 38,90 € la unidad." }
     }
   ]
 }
@@ -192,7 +192,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2>C&oacute;mo Funciona</h2>
 <div class="grid3">
 <div class="card"><span class="n">1</span><h3>Env&iacute;a tu concepto</h3><p>Dise&ntilde;o IA, boceto, captura de pantalla, o simplemente un brief escrito con tus colores. En la p&aacute;gina de solicitud, por WhatsApp o por email.</p></div>
-<div class="card"><span class="n">2</span><h3>15&nbsp;&euro; = un dise&ntilde;ador con ello</h3><p>Un dise&ntilde;ador reconstruye tu concepto como camiseta lista para producir &mdash; primera propuesta en 24&ndash;48h, revisiones hasta que quede perfecta. Dep&oacute;sito abonado &iacute;ntegramente a partir de 5 camisetas, devuelto si no contin&uacute;as.</p></div>
+<div class="card"><span class="n">2</span><h3>15&nbsp;&euro; = un dise&ntilde;ador con ello</h3><p>Un dise&ntilde;ador reconstruye tu concepto como camiseta lista para producir &mdash; primera propuesta en 24&ndash;48h, revisiones hasta que quede perfecta. Dep&oacute;sito abonado &iacute;ntegramente a partir de 5 camisetas: para un pedido de equipo, el dise&ntilde;o no cuesta nada.</p></div>
 <div class="card"><span class="n">3</span><h3>La fabricamos</h3><p>Sublimaci&oacute;n total en tejido de rendimiento poli&eacute;ster-elastano, con nombres, dorsales y patrocinadores. Sin m&iacute;nimo. Entregado en todo el mundo en 25&ndash;30 d&iacute;as.</p></div>
 </div>
 </div>
@@ -205,7 +205,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <details><summary>&iquest;Qu&eacute; herramientas de IA puedo usar?</summary><p>Cualquiera. ChatGPT, Midjourney, Gemini, DALL&middot;E, generadores especializados &mdash; y tambi&eacute;n bocetos, archivos de Photoshop y fotos de camisetas antiguas. Si puedes ense&ntilde;arlo, podemos reconstruirlo.</p></details>
 <details><summary>&iquest;Puedo pedir una sola camiseta?</summary><p>S&iacute; &mdash; sin pedido m&iacute;nimo. Camisetas sueltas para regalos, piezas de portfolio y coleccionistas. El dep&oacute;sito de dise&ntilde;o de 15&nbsp;&euro; se abona &iacute;ntegramente en pedidos de 5 o m&aacute;s camisetas.</p></details>
 <details><summary>&iquest;De qui&eacute;n es el dise&ntilde;o final?</summary><p>Tuyo. Lo construimos a partir de tu concepto, para tu equipo, y nunca lo revendemos. Los proyectos terminados pueden aparecer como casos antes/despu&eacute;s en nuestra galer&iacute;a &mdash; dinos si prefieres no aparecer.</p></details>
-<details><summary>&iquest;Cu&aacute;nto cuesta?</summary><p>15&nbsp;&euro; para poner a un dise&ntilde;ador con tu concepto &mdash; abonados &iacute;ntegramente a partir de 5 camisetas, devueltos si no contin&uacute;as. Camisetas desde 21,90&nbsp;&euro;/unidad a partir de 10 (38,90&nbsp;&euro; la unidad).</p></details>
+<details><summary>&iquest;Cu&aacute;nto cuesta?</summary><p>15&nbsp;&euro; para poner a un dise&ntilde;ador con tu concepto &mdash; abonados &iacute;ntegramente a partir de 5 camisetas. Camisetas desde 21,90&nbsp;&euro;/unidad a partir de 10 (38,90&nbsp;&euro; la unidad).</p></details>
 </div>
 </section>
 

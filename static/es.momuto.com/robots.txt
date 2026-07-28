@@ -1,56 +1,188 @@
 # MOMUTO robots.txt — es.momuto.com
-# Updated: February 2026
+# Updated: July 2026
 
 # Allow all crawlers by default
 User-agent: *
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 # Traditional search engines
 User-agent: Googlebot
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 User-agent: Bingbot
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 # AI crawlers — explicitly allowed for GEO/LLM visibility
 User-agent: GPTBot
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 User-agent: ChatGPT-User
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 User-agent: OAI-SearchBot
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 User-agent: anthropic-ai
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 User-agent: Bytespider
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 User-agent: CCBot
 Allow: /
 Disallow: /coupons/
+# account pages carry no content and outrank real pages on brand queries
+Disallow: /account/
+# internal search results
+Disallow: /search
+# CJK URLs - nothing on these stores should be in Chinese
+Disallow: /*%E4
+Disallow: /*%E5
+Disallow: /*%E6
+Disallow: /*%E7
+Disallow: /*%E8
+Disallow: /*%E9
 
 # Sitemap location
 Sitemap: https://es.momuto.com/sitemap.xml

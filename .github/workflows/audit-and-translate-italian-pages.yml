@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'Dry run — detect language only, no writes to CMS'
+        description: 'Dry run — detect language only, no writes to CMS (run this first)'
         required: false
         default: 'true'
         type: choice
@@ -31,6 +31,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # Translating rewrites the page handle and therefore the live URL.
+      # Read the dry-run report before running with dry_run=false.
       - name: Audit and translate Italian pages
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
