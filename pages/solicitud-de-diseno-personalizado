@@ -117,6 +117,176 @@
 .gate-alt a { color:#a1a1aa; font-weight:600; text-decoration:underline; text-underline-offset:3px; text-decoration-color:#c8352e; }
 .gate-alt a:hover { color:#f5f5f5; }
 @media (max-width:640px) { .gate-box { padding:32px 22px; } .gate-email-row { flex-direction:column; gap:10px; } .gate-email-input { border-right:1px solid rgba(255,255,255,0.1); } .gate-pay-btn { width:100%; text-align:center; } }
+/* ── TRANSFORMATION SECTION ── */
+.transform-section {
+  padding: 6rem 20px;
+  background: #0d0d0d;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.transform-header {
+  max-width: 700px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+.transform-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c8352e;
+  margin-bottom: 14px;
+}
+.transform-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #f5f5f5;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.transform-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: #71717a;
+  line-height: 1.6;
+}
+.transform-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.transform-item {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.transform-side {
+  position: relative;
+  overflow: hidden;
+}
+.transform-side img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/10;
+  object-fit: contain;
+  box-sizing: border-box;
+  padding: 16px;
+  background: #0d0d0f;
+  filter: brightness(0.97);
+  transition: filter 0.35s, transform 0.5s;
+}
+.transform-item:hover .transform-side img { filter: brightness(1.03); transform: scale(1.015); }
+.transform-side-label {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #fff;
+  background: rgba(0,0,0,0.75);
+  padding: 5px 10px;
+}
+.transform-side-label.label-after {
+  background: #c8352e;
+}
+.transform-arrow-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d0d0d;
+  color: #c8352e;
+  font-size: 0.9rem;
+}
+.transform-meta {
+  padding: 20px 28px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+.transform-input-type {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #71717a;
+  margin-bottom: 6px;
+}
+.transform-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: #a1a1aa;
+  line-height: 1.55;
+}
+.transform-desc strong { color: #f5f5f5; font-weight: 600; }
+.transform-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #f5f5f5;
+  letter-spacing: 0.04em;
+  text-align: right;
+  white-space: nowrap;
+}
+.transform-time-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #71717a;
+  text-align: right;
+}
+.transform-placeholder {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px dashed rgba(255,255,255,0.07);
+}
+.transform-placeholder span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #3f3f46;
+}
+@media (max-width: 640px) {
+  .transform-side img { aspect-ratio: auto; padding: 6px; }
+  .transform-item {
+    grid-template-columns: 1fr;
+  }
+  .transform-arrow-col {
+    height: 32px;
+    width: 100%;
+    transform: none;
+    background: transparent;
+  }
+  .transform-arrow-col i { transform: rotate(90deg); }
+  .transform-meta {
+    grid-template-columns: 1fr;
+  }
+  .transform-time, .transform-time-label { text-align: left; }
+}
 </style>
 <div class="paid-banner" id="paidBanner">
 <div class="paid-banner-inner">
@@ -287,6 +457,89 @@
 </div>
 </section>
 <!-- ── PASARELA DE PAGO ── -->
+<section class="transform-section">
+<div class="transform-header">
+<p class="transform-eyebrow">Nuestros Trabajos</p>
+<h2 class="transform-title">Tu Concepto. Listo para Producci&oacute;n.</h2>
+<p class="transform-sub">Cuatro proyectos reales. A la izquierda, el concepto recibido. A la derecha, la camiseta lista para producci&oacute;n.</p>
+</div>
+<div class="transform-grid">
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/1363fdd2412a9a6b668e7f50c3d5c6497b4cbd7042266ec5b63f6615efbb1a56.jpg" alt="La Vidriera FC — render de concepto IA (input)" loading="lazy">
+<span class="transform-side-label">Input &mdash; Render IA</span>
+</div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/11f5c073dc1c3d62cee9d5b4c39f166f8347637cfce733ea868d96030bfa6c5e.png" alt="La Vidriera FC — camiseta de producción MOMUTO" loading="lazy">
+<span class="transform-side-label label-after">Dise&ntilde;o MOMUTO</span>
+</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Render IA + Brief</p>
+<p class="transform-desc"><strong>Rayas de escamas de serpiente vectorizadas, escudo de la pantera reconstruido.</strong> Degradado reelaborado para la sublimaci&oacute;n, ara&ntilde;azos redibujados, sponsor y dorsal colocados. Validado contigo, y despu&eacute;s lo producimos.</p>
+</div>
+</div>
+</div>
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/80438223b0b91b596f01d1b874c2f19d7440c1802812125f2209717a4f1c1e07.jpeg" alt="Seefelds — boceto a mano del kit de llamas (input)" loading="lazy">
+<span class="transform-side-label">Input &mdash; Boceto</span>
+</div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/d358bfaa66a1a6ef5afab054b3a627b7874de81a4ee5953cb1a8979554bc2285.png" alt="Seefelds — camiseta de producción MOMUTO" loading="lazy">
+<span class="transform-side-label label-after">Dise&ntilde;o MOMUTO</span>
+</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Boceto + Brief</p>
+<p class="transform-desc"><strong>Llamas dibujadas a mano convertidas en gr&aacute;ficos vectoriales limpios.</strong> Rayas finas alineadas, proporciones ajustadas al tejido, escudo y dorsal construidos. Validado contigo, y despu&eacute;s lo producimos.</p>
+</div>
+</div>
+</div>
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/25ff712975b6c266aa5c9265b6532c6122c4c633cbd75225942a2e6d884eb842.png" alt="Pecados Capitales — panel de concepto (input)" loading="lazy">
+<span class="transform-side-label">Input &mdash; Panel de Concepto</span>
+</div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/ec78916fd71c968d956652b1e2453e39eaeb55f8f4eb8779e89a92c992ba911f.png" alt="Pecados Capitales — camiseta de producción MOMUTO" loading="lazy">
+<span class="transform-side-label label-after">Dise&ntilde;o MOMUTO</span>
+</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Panel de Concepto + Brief</p>
+<p class="transform-desc"><strong>Motivo del &aacute;ngel dividido interpretado, escudo reconstruido.</strong> Paleta negro / rojo / oro respetada, tipograf&iacute;a dorada aplicada, disposici&oacute;n de sponsors confirmada. Validado contigo, y despu&eacute;s lo producimos.</p>
+</div>
+</div>
+</div>
+
+<div class="transform-item">
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/0b5177b519804889ae2e329b9c8e8239ad19316d485d90a8c2f66c3bf01cf40f.jpg" alt="Kings — render de concepto IA (input)" loading="lazy">
+<span class="transform-side-label">Input &mdash; Render IA</span>
+</div>
+<div class="transform-arrow-col"><i class="fas fa-arrow-right"></i></div>
+<div class="transform-side">
+<img src="https://cdn.staticsoe.com/pics/2f0ddfc2e032643727db21f9cf433df70176294aaab3edbb04746cc722ae0cc5.png" alt="Kings — camiseta de producción MOMUTO" loading="lazy">
+<span class="transform-side-label label-after">Dise&ntilde;o MOMUTO</span>
+</div>
+<div class="transform-meta">
+<div>
+<p class="transform-input-type">Render IA + Sponsors</p>
+<p class="transform-desc"><strong>Gr&aacute;fico del drag&oacute;n vectorizado, equilibrio tonal negro-sobre-negro calibrado.</strong> Escudo limpiado, sponsors colocados, nombre y dorsal aplicados. Validado contigo, y despu&eacute;s lo producimos.</p>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
 <section class="gate-section" id="payment-gate">
 <div class="gate-container">
 <p class="gate-eyebrow">Dise&ntilde;o Personalizado &mdash; De tu concepto a una equipaci&oacute;n lista para producci&oacute;n</p>
