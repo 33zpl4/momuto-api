@@ -96,24 +96,61 @@ async function pullDiyFiles(store) {
 
 // ---------- 2. custom scripts via GET /scripts ----------
 
+// GET /scripts serves 10 per page and, unlike /diyfiles, ignores the
+// page/pagesize params — so we don't know its pagination vocabulary. Try the
+// common conventions and use the first one where page 2 actually returns
+// different ids than page 1; record every attempt for diagnosis.
+const PAGINATION_CONVENTIONS = [
+  ['page&pagesize', p => `scripts?page=${p}&pagesize=10`],
+  ['page&page_size', p => `scripts?page=${p}&page_size=10`],
+  ['pageindex', p => `scripts?pageindex=${p}&pagesize=10`],
+  ['page_no', p => `scripts?page_no=${p}&page_size=10`],
+  ['pagenum', p => `scripts?pagenum=${p}&pagesize=10`],
+  ['pageNum&pageSize', p => `scripts?pageNum=${p}&pageSize=10`],
+  ['offset&limit', p => `scripts?offset=${(p - 1) * 10}&limit=10`],
+  ['start&limit', p => `scripts?start=${(p - 1) * 10}&limit=10`],
+];
+
+function scriptList(json) {
+  const list = json && json.code === 0 && ((json.data && json.data.list) || json.data);
+  return Array.isArray(list) ? list : null;
+}
+
 async function pullCustomScripts(store) {
-  const seen = new Set();
-  const all = [];
-  // The endpoint pages 10 at a time regardless of pagesize; a page that only
-  // repeats already-seen ids means pagination isn't advancing — stop rather
-  // than loop forever.
-  for (let page = 1; page <= 100; page++) {
-    const { status, json } = await api(store, `scripts?page=${page}&pagesize=50`);
-    if (status !== 200 || !json || json.code !== 0) {
-      console.log(`  scripts list failed on ${store.label} page ${page}: HTTP ${status} code ${json && json.code}`);
+  const report = { store: store.label, attempts: [], chosen: null };
+  let makeUrl = null;
+  let firstPage = null;
+  for (const [name, fn] of PAGINATION_CONVENTIONS) {
+    const p1 = scriptList((await api(store, fn(1))).json);
+    const p2 = scriptList((await api(store, fn(2))).json);
+    const ids1 = p1 ? p1.map(s => s.id) : null;
+    const ids2 = p2 ? p2.map(s => s.id) : null;
+    const advances = !!(ids1 && ids2 && ids2.length && !ids2.some(id => ids1.includes(id)));
+    report.attempts.push({ convention: name, page1: ids1 && ids1.slice(0, 3), page2: ids2 && ids2.slice(0, 3), advances });
+    if (advances) {
+      report.chosen = name;
+      makeUrl = fn;
+      firstPage = p1;
       break;
     }
-    const list = (json.data && json.data.list) || json.data || [];
-    if (!Array.isArray(list) || list.length === 0) break;
-    const fresh = list.filter(s => !seen.has(s.id));
-    if (fresh.length === 0) break;
-    fresh.forEach(s => seen.add(s.id));
-    all.push(...fresh);
+    if (!firstPage && p1) firstPage = p1; // best effort if nothing advances
+  }
+  writeFile(path.join(store.label, 'custom-scripts', 'pagination-report.json'), JSON.stringify(report, null, 2) + '\n');
+  if (!report.chosen) console.log(`  !! ${store.label}: no pagination convention advanced past page 1 — snapshot may be partial`);
+
+  const seen = new Set();
+  const all = [];
+  (firstPage || []).forEach(s => { seen.add(s.id); all.push(s); });
+  if (makeUrl) {
+    for (let page = 2; page <= 200; page++) {
+      const { status, json } = await api(store, makeUrl(page));
+      const list = scriptList(json);
+      if (status !== 200 || !list || list.length === 0) break;
+      const fresh = list.filter(s => !seen.has(s.id));
+      if (fresh.length === 0) break;
+      fresh.forEach(s => seen.add(s.id));
+      all.push(...fresh);
+    }
   }
 
   const index = [];
