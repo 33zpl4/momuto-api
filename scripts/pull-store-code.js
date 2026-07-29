@@ -96,34 +96,73 @@ async function pullDiyFiles(store) {
 
 // ---------- 2. custom scripts via GET /scripts ----------
 
-// GET /scripts serves 10 at a time and ignores every page-number vocabulary
-// (page/pageindex/pagenum/offset — all verified to return the same first 10).
-// The OEMSaaS API paginates /products with a cursor (?limit&since_id=<last
-// id>), and that's what works here: walk since_id until a batch comes back
-// empty or yields nothing new.
+// GET /scripts serves the same first 10 no matter which page-number
+// vocabulary is used, and rejects ?limit with code 1000 — so its real
+// parameter set is unknown. Until a working cursor/filter is found, harvest
+// the plain first page and (EN only) run a battery of parameter experiments,
+// recording each result to scripts-api-experiments.json for diagnosis.
 function scriptList(json) {
   const list = json && json.code === 0 && ((json.data && json.data.list) || json.data);
   return Array.isArray(list) ? list : null;
 }
 
+const SCRIPTS_API_EXPERIMENTS = [
+  'scripts?pagesize=5',
+  'scripts?page=2&pagesize=5',
+  'scripts?since_id=348493',
+  'scripts?since_id=348493&pagesize=10',
+  'scripts?last_id=348493',
+  'scripts?start_id=348493',
+  'scripts?min_id=348494',
+  'scripts?max_id=99999999',
+  'scripts?id=348500',
+  'scripts?ids=348500',
+  'scripts?script_name=checkout',
+  'scripts?name=checkout',
+  'scripts?keyword=checkout',
+  'scripts?search=checkout',
+  'scripts?title=checkout',
+  'scripts?status=1',
+  'scripts?display_routes=all',
+  'scripts?position=1',
+  'scripts?script_type=2',
+  'scripts?sort=id&order=desc',
+  'scripts?order=desc',
+  'scripts?sort=desc',
+  'scripts?orderby=id_desc',
+  'scripts?order_by=id%20desc',
+  'scripts?desc=1',
+  'scripts?sort_field=id&sort_type=desc',
+];
+
+async function runScriptsApiExperiments(store) {
+  const results = [];
+  for (const url of SCRIPTS_API_EXPERIMENTS) {
+    const { status, json, text } = await api(store, url);
+    const list = scriptList(json);
+    results.push({
+      url,
+      status,
+      code: json && json.code,
+      count: list ? list.length : null,
+      first_ids: list ? list.slice(0, 3).map(s => s.id) : null,
+      snippet: list ? undefined : text.slice(0, 150),
+    });
+  }
+  writeFile('scripts-api-experiments.json', JSON.stringify(results, null, 2) + '\n');
+}
+
 async function pullCustomScripts(store) {
   const seen = new Set();
   const all = [];
-  let since = '';
-  for (let i = 0; i < 500; i++) {
-    const { status, json } = await api(store, `scripts?limit=100${since ? `&since_id=${since}` : ''}`);
-    const list = scriptList(json);
-    if (status !== 200 || !list) {
-      console.log(`  scripts list failed on ${store.label}: HTTP ${status} code ${json && json.code}`);
-      break;
-    }
-    if (list.length === 0) break;
-    const fresh = list.filter(s => !seen.has(s.id));
-    if (fresh.length === 0) break;
-    fresh.forEach(s => seen.add(s.id));
-    all.push(...fresh);
-    since = list[list.length - 1].id;
+  const { status, json } = await api(store, 'scripts');
+  const list = scriptList(json);
+  if (status !== 200 || !list) {
+    console.log(`  scripts list failed on ${store.label}: HTTP ${status} code ${json && json.code}`);
+  } else {
+    list.forEach(s => { if (!seen.has(s.id)) { seen.add(s.id); all.push(s); } });
   }
+  if (store.label === 'momuto.com') await runScriptsApiExperiments(store);
 
   const index = [];
   for (const s of all) {
