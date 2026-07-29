@@ -1,0 +1,54 @@
+<!-- pulled from rendered storefront HTML of momuto.com (pages: /).
+     This is the CONTENT of platform custom-script entry 1158313; the platform
+     adds the "script 1158313 Start/End" markers itself on injection. -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Configure the preorder button
+  var preorderButton = document.getElementById('add-cart-3030708');
+  if (preorderButton) {
+    preorderButton.textContent = "RESERVE NOW";
+    preorderButton.style.width = "100%";
+    preorderButton.style.color = "#fff";
+    preorderButton.style.background = "#E2214B";
+    preorderButton.style.border = "1px solid #E2214B";
+    preorderButton.style.borderRadius = "3px";
+    preorderButton.disabled = false;
+  }
+
+  // Setup for the countdown display
+  var countdownDisplay = document.getElementById('buynow-3030708');
+  if (countdownDisplay) {
+    countdownDisplay.style.pointerEvents = 'none';
+    countdownDisplay.style.backgroundColor = '#000';
+    countdownDisplay.style.color = '#fff';
+    countdownDisplay.style.width = "100%";
+
+    // Set the target date and time to the end of the match (estimate around 11 PM Paris time)
+    const endDate = new Date('June 1, 2024 23:10:00 GMT+0200').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endDate - now;
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownDisplay.textContent = `Reservations close in: ${hours}h ${minutes}m ${seconds}s`;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        countdownDisplay.textContent = "Reservation period ended";
+        preorderButton.textContent = "ORDER NOW";
+        preorderButton.disabled = false;
+        preorderButton.style.backgroundColor = "#E2214B";
+        countdownDisplay.style.backgroundColor = "#000"; // Maintain display style when transitioning
+        countdownDisplay.textContent = "Less than 350 units left!";
+      }
+    }
+
+    // Update the countdown every second
+    updateCountdown();
+    var timer = setInterval(updateCountdown, 1000);
+  }
+});
+</script>

@@ -1,0 +1,13 @@
+<!-- pulled from rendered storefront HTML of momuto.com (pages: /).
+     This is the CONTENT of platform custom-script entry 352387; the platform
+     adds the "script 352387 Start/End" markers itself on injection. -->
+<script>
+$(function () {
+    let doLoginHtml = `<a class="account_icon to3d" style="margin-left:10px;" href="https://design.momuto.com/login">
+                        <svg t="1637129772556" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3684" width="22" height="22">
+                            <path fill="#fff" d="M870.4 916.48v-10.24c-15.36-133.12-107.52-250.88-230.4-307.2 122.88-81.92 153.6-250.88 71.68-373.76C629.76 102.4 460.8 71.68 337.92 153.6s-153.6 250.88-71.68 373.76c20.48 25.6 40.96 51.2 71.68 71.68-128 51.2-215.04 168.96-235.52 302.08V916.48c0 20.48 15.36 40.96 40.96 40.96 20.48 0 35.84-15.36 35.84-35.84 20.48-148.48 143.36-266.24 291.84-276.48h30.72c148.48 10.24 271.36 122.88 291.84 271.36 0 20.48 15.36 35.84 35.84 40.96 25.6-5.12 40.96-20.48 40.96-40.96zM291.84 373.76c0-107.52 87.04-194.56 194.56-194.56 107.52 0 194.56 87.04 199.68 194.56-5.12 102.4-81.92 184.32-184.32 194.56h-30.72c-102.4-10.24-179.2-92.16-179.2-194.56z" p-id="3685"></path>
+                        </svg>
+                    </a>`;
+    $('#card-header > div.page-header > div.header_box_wrap.control-all-header-fixed > div > div.action-icon').append(doLoginHtml);
+});
+</script>

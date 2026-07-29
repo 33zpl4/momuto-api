@@ -1,0 +1,93 @@
+<!-- pulled from rendered storefront HTML of momuto.com (pages: /).
+     This is the CONTENT of platform custom-script entry 348493; the platform
+     adds the "script 348493 Start/End" markers itself on injection. -->
+<script>
+$(function () {
+    if (window.location.pathname == '/account/register') {
+        let baseUrl = 'https://design.momuto.com';
+        let uuid = localStorage.getItem('3duuid');
+        if (!uuid) {
+            sendRequestApi('/uuid', {}, 'GET').then(res => {
+                if (res.code == 200) {
+                    uuid = res.uuid;
+                    localStorage.setItem('3duuid', uuid);
+                }
+            })
+        }
+
+        function sendRequestApi(url = "", params = {}, method = 'POST', async = true) {
+            var request_url = baseUrl + url;
+            var randstr = Math.round(Math.random() * 1000000000 + 1000000000);
+            params.timestamp = parseInt(Date.parse(new Date()) / 1000);
+            params.ranstr = randstr;
+            return $.ajax({
+                type: method, url: request_url, data: params, dataType: "json", async: async, success: function (res) {
+                    if (res.code == 1) {
+                        return res;
+                    } else {
+                        return false;
+                    }
+                }, error: function (res) {
+                }
+            });
+        }
+
+        $('#register').hide();
+        let register_html = `<style>.border_red{border-bottom: 1px solid red !important;}</style><div id="registerForSlim" class="main_btn form_btn">REGISTER</div>`;
+        $('#register-form > div:nth-child(9) > div').append(register_html);
+    }
+    let offset = true;
+    $('body').delegate('#registerForSlim', 'click', function () {
+        if (!offset) {
+            return false;
+        }
+        let first_name = $('#first_name').val();
+        if (!first_name) {
+            $('#first_name').addClass('border_red');
+        } else {
+            $('#first_name').removeClass('border_red');
+        }
+        let last_name = $('#last_name').val();
+        if (!first_name) {
+            $('#last_name').addClass('border_red');
+        } else {
+            $('#last_name').removeClass('border_red');
+        }
+        let email = $('#email').val();
+        const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
+        if (!email || !regEmail.test(email)) {
+            $('#email').addClass('border_red');
+        } else {
+            $('#email').removeClass('border_red');
+        }
+        let password = $('#first_name').val();
+        if (!password) {
+            $('#password').addClass('border_red');
+        } else {
+            $('#password').removeClass('border_red');
+        }
+        if (first_name && last_name && email && password) {
+            offset = false;
+            let params = {
+                firstName: first_name,
+                lastName: last_name,
+                email: email,
+                password: password,
+                accountType: '',
+                salutationId: '',
+                vatIds: '',
+                billingAddress: {company: '', department: ''},
+                uuid: uuid
+            };
+            sendRequestApi('/doRegister', params).then(res => {
+                offset = true;
+                if (res.code != 200) {
+                    alert(res.message);
+                    return false;
+                }
+                $('#register').click();
+            })
+        }
+    })
+})
+</script>

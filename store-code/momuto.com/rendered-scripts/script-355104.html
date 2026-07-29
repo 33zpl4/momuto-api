@@ -1,0 +1,21 @@
+<!-- pulled from rendered storefront HTML of momuto.com (pages: /).
+     This is the CONTENT of platform custom-script entry 355104; the platform
+     adds the "script 355104 Start/End" markers itself on injection. -->
+<style>
+    .general-price{ color : #000}
+    </style>
+    
+    <script>
+
+
+        $(document).ready(function(){
+            var  new_price = 26.9 * oemcart_currency['exchange_rate'];
+
+console.log(new_price )
+            $('.general-color').hide();
+
+
+            $('.general-price').html(oemcart_currency['symbol_left'] + ' ' + new_price.toFixed(2))
+            $('.general-color').show();
+        });
+    </script>

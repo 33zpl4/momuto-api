@@ -1,0 +1,118 @@
+{
+  "store": "momuto.com",
+  "attempts": [
+    {
+      "convention": "page&pagesize",
+      "page1": [
+        348435,
+        348436,
+        348471
+      ],
+      "page2": [
+        348435,
+        348436,
+        348471
+      ],
+      "advances": false
+    },
+    {
+      "convention": "page&page_size",
+      "page1": [
+        348435,
+        348436,
+        348471
+      ],
+      "page2": [
+        348435,
+        348436,
+        348471
+      ],
+      "advances": false
+    },
+    {
+      "convention": "pageindex",
+      "page1": [
+        348435,
+        348436,
+        348471
+      ],
+      "page2": [
+        348435,
+        348436,
+        348471
+      ],
+      "advances": false
+    },
+    {
+      "convention": "page_no",
+      "page1": [
+        348435,
+        348436,
+        348471
+      ],
+      "page2": [
+        348435,
+        348436,
+        348471
+      ],
+      "advances": false
+    },
+    {
+      "convention": "pagenum",
+      "page1": [
+        348435,
+        348436,
+        348471
+      ],
+      "page2": [
+        348435,
+        348436,
+        348471
+      ],
+      "advances": false
+    },
+    {
+      "convention": "pageNum&pageSize",
+      "page1": [
+        348435,
+        348436,
+        348471
+      ],
+      "page2": [
+        348435,
+        348436,
+        348471
+      ],
+      "advances": false
+    },
+    {
+      "convention": "offset&limit",
+      "page1": [
+        348435,
+        348436,
+        348471
+      ],
+      "page2": [
+        348435,
+        348436,
+        348471
+      ],
+      "advances": false
+    },
+    {
+      "convention": "start&limit",
+      "page1": [
+        348435,
+        348436,
+        348471
+      ],
+      "page2": [
+        348435,
+        348436,
+        348471
+      ],
+      "advances": false
+    }
+  ],
+  "chosen": null
+}

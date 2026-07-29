@@ -1,0 +1,77 @@
+<!-- pulled from rendered storefront HTML of momuto.com (pages: /).
+     This is the CONTENT of platform custom-script entry 348487; the platform
+     adds the "script 348487 Start/End" markers itself on injection. -->
+<style>
+/* Simplified product recommendation selectors */
+.productrec-item > div {
+    display: flex; 
+    align-items: baseline;
+}
+
+.productrec-item > div > a {
+    flex: 1;
+}
+
+.productrec-wrap .productrec-swiper .productrec-item .product-price .original-price {
+    display: none;
+}
+
+@media screen and (min-width: 1200px) {
+    .page-header .header_box_wrap .header_box .nav {
+        margin-left: 20px;
+    }
+    .page-header .header_box_wrap .header_box .action-icon {
+        margin-right: 20px;
+    }
+}
+
+/* Nav font declarations */
+.page-header .header_box_wrap .header_box .nav a {
+    font-size: 14px;
+    font-family: 'Jost', sans-serif !important;
+    font-weight: 500 !important;
+    line-height: 24px;
+}
+
+.mobile_nav a {
+    font-size: 14px;
+    font-family: 'Jost', sans-serif !important;
+    font-weight: 500 !important;
+    line-height: 24px;
+}
+
+.mobile_nav .panel-menu-item {
+    font-size: 14px;
+    font-family: 'Jost', sans-serif !important;
+    font-weight: 500 !important;
+    line-height: 24px;
+}
+
+a.account_icon.login {
+    display: none !important;
+}
+
+/* Commented out the problematic mobile menu rule - test if this fixes the issue */
+/* #card-header > div.mobile_menu_card.open > div.mobile_menu_wrap > div > div > div > ul > li:nth-child(4){display: none !important;} */
+
+/* If you need to hide a specific menu item, use a more semantic approach like: */
+/* .mobile-menu-item.hidden-item { display: none !important; } */
+/* --- Mobile menu overlap fix (public.js uses left:-260px) --- */
+
+/* Ensure the main UL doesn't rely on its inline left shift */
+.mobile_nav .panel-menu-ul.only-warp-menu {
+  left: 0 !important;
+  transition: transform .25s ease;
+  will-change: transform;
+}
+
+/* Any time the script sets a negative left (ex: -260px), shift by full panel width */
+.mobile_nav .panel-menu-ul.only-warp-menu[style*="left: -"] {
+  transform: translateX(-100%) !important;
+}
+
+/* Safety: submenu panels should sit to the right, not stack on top */
+.mobile_nav .panel-menu-ul.only-ul-left100 {
+  left: 100% !important;
+}
+</style>

@@ -1,0 +1,118 @@
+{
+  "store": "it.momuto.com",
+  "attempts": [
+    {
+      "convention": "page&pagesize",
+      "page1": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "page2": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "advances": false
+    },
+    {
+      "convention": "page&page_size",
+      "page1": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "page2": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "advances": false
+    },
+    {
+      "convention": "pageindex",
+      "page1": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "page2": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "advances": false
+    },
+    {
+      "convention": "page_no",
+      "page1": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "page2": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "advances": false
+    },
+    {
+      "convention": "pagenum",
+      "page1": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "page2": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "advances": false
+    },
+    {
+      "convention": "pageNum&pageSize",
+      "page1": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "page2": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "advances": false
+    },
+    {
+      "convention": "offset&limit",
+      "page1": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "page2": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "advances": false
+    },
+    {
+      "convention": "start&limit",
+      "page1": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "page2": [
+        4131890,
+        4131891,
+        4131892
+      ],
+      "advances": false
+    }
+  ],
+  "chosen": null
+}

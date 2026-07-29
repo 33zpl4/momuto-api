@@ -1,0 +1,38 @@
+<!-- pulled from rendered storefront HTML of momuto.com (pages: /).
+     This is the CONTENT of platform custom-script entry 1120798; the platform
+     adds the "script 1120798 Start/End" markers itself on injection. -->
+<style>
+.nav-li[style*="display: none"] {
+    display: flex !important;
+}
+.more-menu {
+    display: none !important;
+}
+.li.more-menu {
+    display: none !important;
+}
+.nav-li.nav-child-three > div{
+    background: #000;
+}
+/* ===== STANDARDIZED FOOTER MARGINS ===== */
+
+/* Allow footer containers to have proper margins */
+.footer_content_container_wrapper,
+.block_footer .container_wrapper,
+footer .container_wrapper,
+.footer_content.container_wrapper {
+    padding: 0 40px !important; /* Restore footer margins */
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+}
+
+/* Responsive footer margins */
+@media (max-width: 900px) {
+    .footer_content_container_wrapper,
+    .block_footer .container_wrapper,
+    footer .container_wrapper,
+    .footer_content.container_wrapper {
+        padding: 0 20px !important;
+    }
+}
+</style>

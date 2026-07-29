@@ -1,0 +1,84 @@
+<!-- pulled from rendered storefront HTML of momuto.com (pages: /).
+     This is the CONTENT of platform custom-script entry 348480; the platform
+     adds the "script 348480 Start/End" markers itself on injection. -->
+<style>
+@media screen and (min-width: 768px) {
+    .collection_item_sport .item-caption .item-caption-title {
+        font-size: 18px;
+        font-weight: 800;
+        flex: 1;
+    }
+    .collection_item_sport .item-caption {
+        display: flex;
+        align-items: baseline;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .collection_item_sport .item-caption .item-caption-title {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .block_collection_product_tab_title a,
+    .block_title.notCenter > h2 {
+        font-size: 24px !important;
+        line-height: 28px !important;
+    }
+}
+
+/* Section titles - reduced size */
+.block_collection_product_tab_title a,
+.block_title.notCenter > h2,
+.block_title > div > a,
+div.block_title.notCenter > h2 {
+    font-family: 'Jost', sans-serif !important;
+    font-weight: 400 !important;
+    line-height: 34px !important;
+    font-size: 28px !important;
+}
+
+/* Navigation - consistent sizing */
+.page-header .header_box_wrap .header_box .nav ul.tree-wrap li .nav-li-a a,
+.page-header .header_box_wrap .header_box .nav a {
+    font-family: 'Jost', sans-serif !important;
+    font-weight: 400 !important;
+    line-height: 22px !important;
+    font-size: 15px !important;
+}
+
+.collection_item_sport .item-caption {
+    justify-content: space-around;
+}
+
+.item-caption > div:nth-child(1) {
+    width: calc(100% - 110px) !important; /* Fixed spacing */
+    line-height: 25px;
+    overflow: hidden;
+    word-break: break-all;
+    text-align: left;
+}
+
+.collection_item_sport .item-caption-price {
+    width: 110px;
+    text-align: left;
+}
+
+.block_product_img_list {
+    display: none !important;
+}
+
+.general-oldprice {
+    display: none;
+}
+</style>
+
+
+<script>
+    $(document).ready(function () {
+   localStorage.removeItem('goods_buy_type');
+  $('#add-cart-3030708').click(function() {
+    localStorage.setItem('goods_buy_type', '1');
+  });
+  console.log(   localStorage.getItem('order_type_3d'))
+    })
+</script>

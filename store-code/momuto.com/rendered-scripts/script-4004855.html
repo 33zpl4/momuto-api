@@ -1,0 +1,25 @@
+<!-- pulled from rendered storefront HTML of momuto.com (pages: /).
+     This is the CONTENT of platform custom-script entry 4004855; the platform
+     adds the "script 4004855 Start/End" markers itself on injection. -->
+<script>
+(function() {
+  // Listado de URLs que no deben ser indexadas
+  var noIndexPages = [
+    '/products/momuto-pro-jersey',
+    '/products/maillot-momuto-basket-pro',
+    '/pages/customized-design-confirmed',
+    '/pages/solicitud-enviada-sorteo-gratis'
+  ];
+
+  var currentPath = window.location.pathname;
+
+  // Si la ruta actual está en la lista, añadir meta tag
+  if (noIndexPages.indexOf(currentPath) !== -1) {
+    var meta = document.createElement('meta');
+    meta.name = "robots";
+    meta.content = "noindex, nofollow";
+    document.getElementsByTagName('head')[0].appendChild(meta);
+    console.log("SEO: No-Index activado para esta página.");
+  }
+})();
+</script>
