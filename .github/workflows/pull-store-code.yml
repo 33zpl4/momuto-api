@@ -1,0 +1,55 @@
+name: Pull store code (DIY files + custom scripts)
+
+# Snapshots the two "custom code" sections of every OEMSaaS store into the
+# repo under store-code/:
+#   • DIY files via the /diyfiles API (full listing, content verbatim)
+#   • custom scripts — via an API endpoint if the probe in
+#     scripts/pull-store-code.js finds one, and always via the rendered
+#     storefront HTML (<!-- script N Start/End --> blocks) as a fallback
+# Commits the snapshot back to the branch it ran on.
+#
+# Runs automatically when this workflow or the puller script changes on the
+# feature branch, or on manual dispatch.
+
+on:
+  push:
+    branches: [claude/jersey-short-size-options-zkryof]
+    paths:
+      - '.github/workflows/pull-store-code.yml'
+      - 'scripts/pull-store-code.js'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pull DIY files + custom scripts
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+        run: node scripts/pull-store-code.js
+
+      - name: Commit snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add store-code
+          if git diff --cached --quiet; then
+            echo "No changes in store-code/"
+          else
+            git commit -m "Snapshot store DIY files + custom scripts [skip ci]"
+            git push origin HEAD
+          fi
