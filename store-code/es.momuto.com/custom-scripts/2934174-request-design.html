@@ -1,0 +1,308 @@
+<script>
+const targetUrl1 = "https://www.momuto.es/pages/solicitud-de-diseno-personalizado";
+const targetUrl2 = "https://www.momuto.es/pages/sorteo-momuto-round-2-agosto-2025";
+
+// Only run the code if we're on either of the correct pages
+if (window.location.href.includes(targetUrl1) || 
+    window.location.pathname === "/pages/solicitud-de-diseno-personalizado" ||
+    window.location.href.includes(targetUrl2) || 
+    window.location.pathname === "/pages/sorteo-momuto-round-2-agosto-2025") {
+    
+    // Football kit specific colors - update this in your JavaScript file
+    const predefinedColors = [
+      // Row 1 - Primary team colors
+      '#E32B2B', // Deep Red (Manchester United, Liverpool)
+      '#0C2340', // Navy Blue (Tottenham Away, PSG)
+      '#0039A6', // Royal Blue (Chelsea, Everton)
+      '#6CABDD', // Sky Blue (Manchester City, Lazio)
+      '#000000', // Black (For modern kits)
+      '#FFFFFF', // White (Universal for away kits)
+      
+      // Row 2 - More classic team colors
+      '#AC1F25', // AC Milan Red
+      '#0F1731', // Inter Blue
+      '#004D98', // Barcelona Blue
+      '#CB3524', // Atletico Madrid Red
+      '#6E6E6E', // Dark Gray (Third kits)
+      '#C0C0C0', // Silver (Modern designs)
+      
+      // Row 3 - Statement colors
+      '#00954B', // Green (Betis, Sporting)
+      '#4D2674', // Purple (Fiorentina, Real Valladolid)
+      '#D4AF37', // Gold (Accents and special editions)
+      '#FF7800', // Orange (Netherlands)
+      '#FFDA00', // Yellow (Brazil, BVB)
+      '#CDFF00', // Nike Volt (Modern accent)
+      
+      // Row 4 - Special edition colors
+      '#7C003D', // Bordeaux (Torino)
+      '#00A398', // Teal (Popular for third kits)
+      '#192F5D', // Midnight Navy (France)
+      '#8B0000', // Burgundy (Special editions)
+      '#87CEEB', // Light Blue (Lazio)
+      '#005E23'  // Dark Green (Celtic)
+    ];
+
+    // Keep track of which circle user is changing (primary or secondary)
+    let currentTarget = 'primary';
+    
+    // Function to preview uploaded logo
+    function previewLogo(input) {
+      const preview = document.getElementById('logoPreview');
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      
+      // Clear existing preview
+      preview.innerHTML = '';
+      fileNameDisplay.textContent = '';
+      
+      if (input.files && input.files[0]) {
+        const fileName = input.files[0].name;
+        fileNameDisplay.textContent = fileName;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.style.maxWidth = '150px';
+          img.style.maxHeight = '150px';
+          preview.appendChild(img);
+        };
+        
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function initializeFormFunctionality() {
+      console.log("Form functionality initializing");
+      
+      // Form Step Navigation
+      const nextButtons = document.querySelectorAll('.next-step');
+      const prevButtons = document.querySelectorAll('.prev-step');
+      const formSteps = document.querySelectorAll('.form-step');
+      const progressSteps = document.querySelectorAll('.progress-step');
+      
+      nextButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // Find current active step
+          const currentStep = document.querySelector('.form-step.active');
+          const currentIndex = Array.from(formSteps).indexOf(currentStep);
+          
+          // Validate current step
+          if (currentIndex === 0) {
+            const email = document.getElementById('customerEmail');
+            if (!email.value || !email.checkValidity()) {
+              email.focus();
+              return;
+            }
+          }
+          
+          // Hide current step
+          currentStep.classList.remove('active');
+          
+          // Show next step
+          formSteps[currentIndex + 1].classList.add('active');
+          
+          // Update progress indicator
+          progressSteps[currentIndex].classList.add('active');
+          progressSteps[currentIndex + 1].classList.add('active');
+        });
+      });
+      
+      prevButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // Find current active step
+          const currentStep = document.querySelector('.form-step.active');
+          const currentIndex = Array.from(formSteps).indexOf(currentStep);
+          
+          // Hide current step
+          currentStep.classList.remove('active');
+          
+          // Show previous step
+          formSteps[currentIndex - 1].classList.add('active');
+          
+          // Update progress indicator
+          progressSteps[currentIndex].classList.remove('active');
+        });
+      });
+      
+      // Make entire style option clickable
+      document.querySelectorAll('.style-option').forEach(option => {
+        option.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // Find the radio input and select it
+          const radio = this.querySelector('input[type="radio"]');
+          if (radio) {
+            radio.checked = true;
+            
+            // Update visual feedback
+            document.querySelectorAll('.style-option').forEach(opt => {
+              opt.classList.remove('selected');
+            });
+            this.classList.add('selected');
+          }
+        });
+      });
+      
+      // Form Submission
+      const proposalForm = document.getElementById('proposalForm');
+      
+      if (proposalForm) {
+        proposalForm.addEventListener('submit', function(e) {
+          // Only prevent default if validation fails
+          const termsAccept = document.getElementById('termsAccept');
+          if (!termsAccept.checked) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Add visual feedback
+            const termsContainer = document.querySelector('.terms-checkbox');
+            termsContainer.classList.add('error');
+            termsContainer.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+              termsContainer.style.animation = '';
+            }, 500);
+            return;
+          }
+          
+          // Check if file is too large (over 10MB)
+          const fileInput = document.getElementById('clubCrest');
+          if (fileInput && fileInput.files.length > 0) {
+            const fileSize = fileInput.files[0].size;
+            const maxSize = 10 * 1024 * 1024; // 10MB
+            
+            if (fileSize > maxSize) {
+              e.preventDefault();
+              alert('El archivo es demasiado grande. Sube un archivo menor a 10MB.');
+              return;
+            }
+          }
+          
+          // Show loading state
+          const submitButton = document.querySelector('.submit-form');
+          if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Enviando solicitud...';
+          }
+        });
+      }
+      
+      // Order Size Selector
+      const sizeRadios = document.querySelectorAll('.size-radio');
+      
+      sizeRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          // The CSS will handle most of the visual changes via the :checked pseudo-class
+          // This is just for any additional JavaScript functionality you might want to add
+        });
+      });
+      
+      // Set up color picker functionality
+      setupColorPickerUI();
+      
+      console.log("Form functionality initialized successfully");
+    }
+    
+    // Modal-based Color Picker Functionality
+    function initColorSwatches() {
+      const swatchesContainer = document.getElementById('colorSwatches');
+      if (!swatchesContainer) return;
+
+      // Clear out any existing swatches
+      swatchesContainer.innerHTML = '';
+
+      // Create a swatch div for each color
+      predefinedColors.forEach(color => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch';
+        swatch.style.backgroundColor = color;
+        swatch.addEventListener('click', () => selectColor(color));
+        swatchesContainer.appendChild(swatch);
+      });
+    }
+
+    function openColorModal(target) {
+      currentTarget = target; 
+      document.getElementById('colorModal').style.display = 'block';
+      document.getElementById('colorModalOverlay').style.display = 'block';
+
+      // Highlight the currently selected color
+      const currentValue = document.getElementById(target + 'ColorValue').value;
+      highlightSwatch(currentValue);
+    }
+
+    function closeColorModal() {
+      document.getElementById('colorModal').style.display = 'none';
+      document.getElementById('colorModalOverlay').style.display = 'none';
+    }
+
+    function selectColor(color) {
+      // Update the circle's background
+      document.getElementById(currentTarget + 'ColorCircle').style.backgroundColor = color;
+
+      // Update hidden input
+      document.getElementById(currentTarget + 'ColorValue').value = color;
+
+      // Highlight the newly selected swatch
+      highlightSwatch(color);
+
+      // Close the modal automatically (optional)
+      closeColorModal();
+    }
+
+    function highlightSwatch(color) {
+      document.querySelectorAll('.color-swatch').forEach(swatch => {
+        swatch.classList.remove('selected');
+        // Compare backgroundColor to color
+        if (swatch.style.backgroundColor.toLowerCase() === rgbToHex(color)) {
+          swatch.classList.add('selected');
+        }
+      });
+    }
+
+    // Utility: convert "rgb(...)" to "#xxxxxx" so comparisons match
+    function rgbToHex(colorString) {
+      // If already #hex, just return as is
+      if (colorString.startsWith('#')) {
+        return colorString.toLowerCase();
+      }
+
+      // Otherwise parse "rgb(r, g, b)" or "rgba(r, g, b, a)"
+      const ctx = document.createElement('canvas').getContext('2d');
+      ctx.fillStyle = colorString;
+      return ctx.fillStyle; // this converts to #RRGGBB
+    }
+    
+    function setupColorPickerUI() {
+      // Initialize color swatches for the modal
+      initColorSwatches();
+      
+      // Set up click handlers for color circles
+      const primaryColorCircle = document.querySelector('.color-col:nth-child(1) .color-circle');
+      const secondaryColorCircle = document.querySelector('.color-col:nth-child(2) .color-circle');
+      
+      if (primaryColorCircle) {
+        primaryColorCircle.id = 'primaryColorCircle';
+        primaryColorCircle.onclick = function() { openColorModal('primary'); };
+      }
+      
+      if (secondaryColorCircle) {
+        secondaryColorCircle.id = 'secondaryColorCircle';
+        secondaryColorCircle.onclick = function() { openColorModal('secondary'); };
+      }
+    }
+
+    // Make functions globally available for inline onclick handlers
+    window.previewLogo = previewLogo;
+    window.openColorModal = openColorModal;
+    window.closeColorModal = closeColorModal;
+
+    // Run the code once DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeFormFunctionality);
+    } else {
+      initializeFormFunctionality();
+    }
+}
+</script>

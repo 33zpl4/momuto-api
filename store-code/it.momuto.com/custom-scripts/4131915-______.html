@@ -1,0 +1,105 @@
+<style>
+    /* #card-header > div.page-header > div.header_box_wrap.control-all-header-fixed > div > div.nav > ul > li.nav-li.more-menu.hidden { display:block !important} */
+</style>
+
+<script>$('.actions-wrapper').remove(); $('.product_quick-mobile-view').remove();</script>
+
+<script>
+    $(document).ready(function () {
+        $(".price_append2").contents().filter(function () {
+            return this.nodeType === 3; // 文本节点类型
+        }).remove();
+
+        var userAgent = navigator.userAgent.toLowerCase();
+
+        // 使用正则表达式匹配常见的移动设备关键词
+        var isMobile = /iphone|ipad|ipod|android|blackberry|windows phone/.test(userAgent);
+        var number_left = 0;
+        if (isMobile) {
+            number_left = '-260px';
+        } else {
+            number_left = '-1496px';
+        }
+        //添加 货币切换icon
+        let currencyHtml = `<a class="account_icon to_currency" style="margin-left:-135px;" href="#">
+                                <img style="width:22px" src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20231110/be7aeab74c80914a689cb61c5d2dc949.png" />
+                            </a>`;
+        $('#card-header > div.page-header > div.header_box_wrap.control-all-header-fixed > div > div.action-icon').append(currencyHtml);
+
+        //点击 货币icon事件
+        let click_times = 0;
+        $('.to_currency').click(function () {
+            $('#card-header > div.page-header > div.header_box_wrap.control-all-header-fixed > div > div.nav > div > span').click();
+            showMobileMenusStep2();
+
+        })
+        $('#card-header > div.page-header > div.header_box_wrap.control-all-header-fixed > div > div.nav > div > span').click(function () {
+
+            showMobileMenusStep1();
+        })
+        let left_num = '';
+        function showMobileMenusStep2() {
+            $('#card-header > div.mobile_menu_card.open > div.mobile_menu_wrap > div > div > div > ul').css('left', '0px');
+            if (click_times == 0) {
+                setTimeout(function () {
+                    left_num = $('#card-header > div.mobile_menu_card.open > div.mobile_menu_wrap > div > div > div > ul').css('left')
+                    console.log('init_left', left_num)
+                }, 1000)
+
+            }
+            setTimeout(function () {
+                $('#card-header > div.mobile_menu_card.open > div.mobile_menu_wrap > div > div > div > ul > li:nth-child(5) > a').click();
+                if (click_times > 0) {
+                    setTimeout(function () {
+                        if (number_left) {
+                            $('#card-header > div.mobile_menu_card.open > div.mobile_menu_wrap > div > div > div > ul').css('left', number_left);
+                        } else {
+                            $('#card-header > div.mobile_menu_card.open > div.mobile_menu_wrap > div > div > div > ul').css('left', '-70.28vw');
+                        }
+                    }, 600)
+                }
+                click_times++;
+            }, 300)
+        }
+
+        function showMobileMenusStep1() {
+            $('#card-header > div.mobile_menu_card.open > div.mobile_menu_wrap > div > div > div > ul').css('left', '0px');
+
+        }
+        
+        $('.panel-menu-item').click(function () {
+            console.log(number_left)
+
+            setTimeout(function () {
+                $('#card-header > div.mobile_menu_card.open > div.mobile_menu_wrap > div > div > div > ul').css('left', number_left);
+            }, 200)
+        })
+
+
+        //点击遮罩还原 货币list
+        $('.close_mask').click(function () {
+            $(' div.mobile_menu_card.open > div.mobile_menu_wrap > div > div > div > ul').css('left', '0px');
+        })
+        //选择货币 刷新页面
+        var currentUrl = window.location.href;
+        $('.drawer-menu__link').on('click', function (event) {
+            // 阻止默认链接行为
+            event.preventDefault();
+            // 获取 data-type 属性的值
+            var dataType = $(this).data('type');
+            // 获取 URL 中 currency 参数的值
+            var urlParams = new URLSearchParams(window.location.search);
+            var currencyValue = urlParams.get('currency');
+            // 如果 currency 参数不存在，或者与当前点击的 data-type 值不同，则更新数据
+            if (!currencyValue || currencyValue !== dataType) {
+                // 更新 currency 参数的值
+                urlParams.set('currency', dataType);
+                // 构建新的 URL
+                var newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();
+                // 使用新的 URL 刷新页面
+                window.location.href = newUrl;
+            }
+        });
+    });
+
+</script>

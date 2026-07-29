@@ -1,0 +1,34 @@
+<script>
+$(document).ready(function() {
+    function applyChanges() {
+        // Targeting the specific buttons by their classes and text values
+        if ($('.valide_coupon_btn').val() === 'SOLICITAR') {
+            $('.valide_coupon_btn').val('APLICAR');
+        }
+        if ($('#minicart_checkout').text() === 'Comprobación') {
+            $('#minicart_checkout').text('COMPLETAR PEDIDO');
+        }
+    }
+
+    // Apply initial changes
+    applyChanges();
+
+    // Set up a Mutation Observer to watch for changes in the sidebar
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList' || mutation.type === 'subtree') {
+                applyChanges();  // Reapply changes if any nodes are added or changed
+            }
+        });
+    });
+
+    // Configuration of the observer:
+    var config = { childList: true, subtree: true, attributes: true };
+
+    // Target the minicart_wrapper element if it exists
+    var targetNode = document.querySelector('.minicart_wrapper');
+    if (targetNode) {
+        observer.observe(targetNode, config);
+    }
+});
+</script>

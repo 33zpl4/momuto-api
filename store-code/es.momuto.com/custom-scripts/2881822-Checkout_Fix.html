@@ -1,0 +1,47 @@
+<script>
+$(document).ready(function() {
+    setTimeout(function() {
+        // Fixing incorrect labels
+        $('label[for="first_name"]').text('Nombre');
+        $('label[for="last_name"]').text('Apellidos');
+        $('label[for="checkout_shipping_address_address1"]').text('Dirección');
+        $('label[for="checkout_shipping_address_zip"]').text('Código postal');
+        $('label[for="mobilephone"]').text('Nº de teléfono');
+        $('label[for="use_coupon_code-order_contact_information_pc"]').text('Código de descuento');
+        $('label[for="use_coupon_code-order_shipping_method_pc"]').text('Código de descuento');
+        $('label[for="use_coupon_code-order_contact_information"]').text('Código de descuento');
+        $('label[for="use_coupon_code-order_shipping_method"]').text('Código de descuento');
+
+
+    }, 200); // Small delay to ensure elements are loaded
+});
+
+// Ensuring changes persist with MutationObserver (in case the page updates dynamically)
+function observeLabelChange(selector, correctText) {
+    var targetNode = document.querySelector(selector);
+    if (targetNode) {
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.textContent !== correctText) {
+                    mutation.target.textContent = correctText;
+                }
+            });
+        });
+
+        observer.observe(targetNode, { childList: true, characterData: true, subtree: true });
+    }
+}
+
+// Apply MutationObserver to keep labels correct
+observeLabelChange('label[for="first_name"]', 'Nombre');
+observeLabelChange('label[for="last_name"]', 'Apellidos');
+observeLabelChange('label[for="checkout_shipping_address_address1"]', 'Dirección');
+observeLabelChange('label[for="checkout_shipping_address_zip"]', 'Código postal');
+observeLabelChange('label[for="mobilephone"]', 'Nº de teléfono');
+observeLabelChange('label[for="use_coupon_code-order_contact_information_pc"]', 'Código de descuento');
+observeLabelChange('label[for="use_coupon_code-order_shipping_method_pc"]', 'Código de descuento');
+observeLabelChange('label[for="use_coupon_code-order_contact_information"]', 'Código de descuento');
+observeLabelChange('label[for="use_coupon_code-order_shipping_method"]', 'Código de descuento');
+
+
+</script>

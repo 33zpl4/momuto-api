@@ -1,0 +1,15 @@
+<script>
+let timers=null;
+function changeLabel(){ 
+    timers = setInterval(function () {
+        let label_val='Nom';
+        if($(".shipping_address_name div:nth-child(2)  label").text()!=label_val){
+            $(".shipping_address_name div:nth-child(2)  label").text(label_val);
+        }else{
+            clearInterval(timers)
+        }
+    }, 500)
+ }
+changeLabel();    
+setTimeout(changeLabel(),3000)
+</script>

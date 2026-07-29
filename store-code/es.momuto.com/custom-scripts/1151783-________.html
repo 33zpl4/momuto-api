@@ -1,0 +1,29 @@
+<script>
+    $(document).ready(function () {
+        $('ul.list > li').each(function () {
+            if ($(this).text() == 'SUBSCRIBE') {
+                $(this).text('SUSCRÍBETE');
+            }
+        })
+
+        $('div.pc > p').each(function () {
+            if ($(this).text() == 'Dévoilez votre identité footballistique. Personnalisez, jouez, et marquez votre empreinte.') {
+                $(this).text('Forja tu identidad en el campo. Personaliza, juega, deja huella.');
+            }
+        })
+
+        $("#newsletter-input").attr("placeholder", "Introduce tu e-mail");
+
+        $('#add-cart-9407488').click(function () {
+            setTimeout(function () {
+                $('.cart-button > span').each(function () {
+                    if ($(this).text() == 'Comprobación') {
+                        $(this).text('COMPLETAR PEDIDO');
+                    }
+                })
+            },1000)
+
+        })
+
+    })
+</script>

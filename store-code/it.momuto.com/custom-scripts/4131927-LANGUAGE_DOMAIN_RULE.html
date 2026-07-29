@@ -1,0 +1,23 @@
+<script>
+  (function() {
+    // 1. Get the current folder path (e.g., "/pages/contact")
+    var currentPath = window.location.pathname;
+
+    // 2. Define your store URLs
+    var sites = [
+      { lang: "en",        root: "https://www.momuto.com" },
+      { lang: "fr",        root: "https://fr.momuto.com" },
+      { lang: "es",        root: "https://momuto.es" },  /* Change to es.momuto.com after Spanish migration */
+      { lang: "x-default", root: "https://www.momuto.com" }
+    ];
+
+    // 3. Loop through and create the tags
+    sites.forEach(function(site) {
+      var link  = document.createElement('link');
+      link.rel  = 'alternate';
+      link.hreflang = site.lang;
+      link.href = site.root + currentPath; // Adds the path to the domain
+      document.head.appendChild(link);
+    });
+  })();
+</script>

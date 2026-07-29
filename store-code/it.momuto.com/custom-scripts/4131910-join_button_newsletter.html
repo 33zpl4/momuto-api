@@ -1,0 +1,75 @@
+<script>
+window.onload = function() {
+    var subscribeInput = document.getElementById('newsletter-input');
+    var parentElement = subscribeInput.parentElement;
+    
+    // check if parentElement is form
+    if(parentElement.tagName.toLowerCase() !== 'form') {
+        // if parentElement is not form, go up one more level
+        parentElement = parentElement.parentElement;
+    }
+    
+    // create wrapping div
+    var wrapDiv = document.createElement('div');
+    wrapDiv.className = 'input-wrap';
+
+    // create the join button
+    var btn = document.createElement('button');
+    btn.type = 'submit';
+    btn.textContent = 'Join';
+    btn.className = 'submit-btn';
+
+    // append both input and button to the wrapping div
+    wrapDiv.appendChild(subscribeInput);
+    wrapDiv.appendChild(btn);
+
+    // append the wrapping div to the parent element
+    parentElement.appendChild(wrapDiv);
+}
+</script>
+<style>
+
+.input-wrap {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;  /* change as needed */
+    border-radius: 5px;  /* change as needed */
+    overflow: hidden;
+}
+
+#newsletter-input {
+    flex-grow: 1;
+    border: none;
+    padding: 10px;
+}
+
+.submit-btn {
+    min-width: 30px;
+    white-space: nowrap;   
+    background-color: #fff;
+    border: none;
+    color: black;
+    padding: 10px;
+    cursor: pointer;
+    border-left: 1px solid #ccc;  /* change as needed */
+}
+.block_footer #newsletter-input {
+    margin-top: 0px;
+    height: 48px;
+    border-radius: 3px;
+    border: 1px solid #494949;
+    width: 100%;
+    background-color: transparent;
+    padding: 0 16px;
+    box-sizing: border-box;
+    color: var(--footer-color);
+    transition: background-color 0.25s, border-color 0.25s;
+}
+.footer_content, .footer_bottom {
+    box-sizing: border-box;
+    padding-left: 80px!important;
+    padding-right: 80px!important;
+    grid-column-gap: 15px!important;
+}
+
+</style>

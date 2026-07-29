@@ -1,0 +1,1192 @@
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Jost', sans-serif;
+    }
+    
+    /* Force full width */
+    .hero-container {
+      position: relative;
+      width: 100vw !important;
+      margin-left: calc(-50vw + 50%) !important;
+      margin-right: calc(-50vw + 50%) !important;
+      max-width: 100vw !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 100vh;
+      background-color: #000;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    /* Handle potential parent constraints */
+    body, html {
+      overflow-x: hidden;
+    }
+    
+    .content-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      z-index: 10;
+    }
+    
+    .left-content {
+      width: 50%;
+      height: 100%;
+      padding: 5% 5%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+      position: relative;
+      z-index: 20;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    
+    .right-content {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    
+    .jersey-container {
+      width: 80%;
+      height: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    #jerseyImage {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: opacity 0.3s ease;
+    }
+    
+    .left-content h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    
+    .highlight {
+      color: #e2214b;
+      position: relative;
+    }
+    
+    .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #e2214b;
+      box-shadow: 0 0 10px rgba(226,33,75,0.6);
+    }
+    
+    .left-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 500px;
+      text-shadow: 0 0 20px rgba(0,0,0,0.9);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 12px 15px;
+      border-radius: 4px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background-color: #e2214b;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(226,33,75,0.4);
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(226,33,75,0.6);
+    }
+    
+    /* Color theme selector */
+    .color-picker {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+      pointer-events: auto;
+      background-color: rgba(0,0,0,0.5);
+      padding: 12px 20px;
+      border-radius: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+    
+    .color-option {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid rgba(255,255,255,0.5);
+      transition: all 0.2s ease;
+      position: relative;
+      z-index: 101;
+    }
+    
+    .color-option:hover {
+      transform: scale(1.2);
+      border-color: white;
+      box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    }
+    
+    .color-option.active {
+      transform: scale(1.2);
+      border-color: white;
+      box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    }
+    
+    #particle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    canvas#defaultCanvas0 {
+      width: 100% !important;
+      height: 100% !important;
+      left: 0 !important;
+      top: 0 !important;
+      position: absolute !important;
+    }
+    
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modal.show {
+      opacity: 1;
+      display: block;
+    }
+    
+    .modal-content {
+      background-color: rgba(15, 15, 15, 0.95);
+      margin: 10% auto;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 600px;
+      color: white;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .modal.show .modal-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #aaa;
+      transition: color 0.2s ease;
+    }
+    
+    .close-modal:hover {
+      color: white;
+    }
+    
+    /* Options Style */
+    .options-container {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .option {
+      flex: 1;
+      background-color: rgba(40, 40, 40, 0.7);
+      padding: 25px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+    }
+    
+    .option:hover {
+      background-color: rgba(50, 50, 50, 0.9);
+      transform: translateY(-5px);
+    }
+    
+    .option-icon {
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: #e2214b;
+    }
+    
+    .option h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+    
+    .option p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    /* Form Styles */
+    .form-content {
+      max-width: 500px;
+    }
+    
+    .form-step {
+      display: none;
+    }
+    
+    .form-step.active {
+      display: block;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      color: white;
+      font-size: 1rem;
+    }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: #e2214b;
+    }
+    
+    .form-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    
+    .next-step, .prev-step, .submit-form, .close-button {
+      background-color: #e2214b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .prev-step {
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .next-step:hover, .submit-form:hover, .close-button:hover {
+      background-color: #c01d41;
+    }
+    
+    .prev-step:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Style Options */
+    .style-options {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      gap: 15px;
+    }
+    
+    .style-option {
+      text-align: center;
+      cursor: pointer;
+    }
+    
+    .style-option img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .style-option input[type="radio"] {
+      display: none;
+    }
+    
+    .style-option span {
+      display: block;
+      font-size: 14px;
+    }
+    
+    .style-option input[type="radio"]:checked + span {
+      color: #e2214b;
+      font-weight: bold;
+    }
+    
+    .style-option input[type="radio"]:checked ~ img {
+      border-color: #e2214b;
+      transform: scale(1.05);
+    }
+    
+    /* Progress Indicator */
+    .progress-indicator {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+    
+    .progress-step {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .progress-step.active {
+      background-color: #e2214b;
+    }
+    
+    /* Terms Checkbox */
+    .terms-checkbox {
+      margin: 20px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .terms-checkbox input[type="checkbox"] {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+      cursor: pointer;
+      position: relative;
+      top: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 0.1);
+      appearance: none;
+      -webkit-appearance: none;
+      border-radius: 3px;
+    }
+    
+    .terms-checkbox input[type="checkbox"]:checked {
+      background-color: #e2214b;
+      border-color: #e2214b;
+    }
+    
+    .terms-checkbox input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      color: white;
+      font-size: 14px;
+      top: -2px;
+      left: 3px;
+    }
+    
+    .terms-checkbox a {
+      color: #e2214b;
+      text-decoration: none;
+    }
+    
+    /* Confirmation Message */
+    .success-icon {
+      font-size: 48px;
+      color: #2ecc71;
+      margin-bottom: 15px;
+    }
+    
+    /* Instagram Follow - Enhanced Styling */
+    .social-follow {
+      margin: 25px 0;
+      padding: 20px;
+      background-color: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    
+    .social-follow p {
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+    
+    .instagram-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      margin: 5px auto;
+      transition: all 0.25s ease;
+      background-color: rgba(225, 48, 108, 0.2); /* Instagram brand color */
+      padding: 12px 20px;
+      border-radius: 6px;
+      max-width: 220px;
+    }
+    
+    .instagram-link i {
+      font-size: 28px;
+      margin-right: 10px;
+      color: #e2214b;
+    }
+    
+    .instagram-link:hover {
+      transform: translateY(-3px);
+      background-color: rgba(225, 48, 108, 0.3);
+      box-shadow: 0 5px 15px rgba(225, 48, 108, 0.2);
+    }
+    
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+    
+    .terms-checkbox.error {
+      color: #ff6b6b;
+    }
+    
+    @media (max-width: 768px) {
+      .content-wrapper {
+        flex-direction: column;
+      }
+      
+      .left-content {
+        width: 100%;
+        height: auto;
+        padding: 15% 5% 3% 5%;
+      }
+      
+      .right-content {
+        width: 100%;
+        height: 50%;
+      }
+      
+      .left-content h1 {
+        font-size: 2.2rem; /* Reduced from 2.5rem */
+        margin-bottom: 0.75rem; /* Reduced margin */
+      }
+      
+      .left-content p {
+        font-size: 1rem; /* Reduced from default 1.2rem */
+        margin-bottom: 1.5rem; /* Reduced margin */
+        padding: 8px 12px; /* Smaller padding */
+      }
+      
+      .cta-button {
+        padding: 0.75rem 1.5rem; /* Reduced from 1rem 2rem */
+        font-size: 1rem; /* Reduced from 1.2rem */
+      }
+      
+      .modal-content {
+        margin: 10% auto;
+        padding: 20px;
+        width: 90%;
+      }
+      
+      .options-container {
+        flex-direction: column;
+      }
+      
+      .style-options {
+        flex-direction: column;
+      }
+      
+      .style-option {
+        margin-bottom: 15px;
+      }
+      
+      .color-picker {
+        bottom: auto; /* Remove bottom positioning */
+        top: 70%; /* Position at vertical center */
+        transform: translateX(-50%); /* Keep horizontal centering */
+        padding: 8px 15px;
+        gap: 12px;
+      }
+      
+      /* Slightly smaller color options on mobile */
+      .color-option {
+        width: 28px;
+        height: 28px;
+      }
+      
+      .jersey-container {
+        width: 60%;
+        height: 95%;
+        margin-top: -30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-container">
+    <div id="particle-canvas"></div>
+    
+    <div class="content-wrapper">
+      <div class="left-content">
+        <h1>STAND <span class="highlight">OUT</span>.<br>CREATE YOUR<br><span class="highlight">JERSEY</span></h1>
+        <p>Design your unique sportswear with our 3D technology. Customize the colors, patterns and add your name and number.</p>
+        <button id="mainCTA" class="cta-button">GET STARTED</button>
+      </div>
+      <div class="right-content">
+        <div class="jersey-container">
+          <img id="jerseyImage" src="https://cdn.staticsoe.com/uploads/49703/cart/resources/20250226/742356dd15bca56fe2e13deb26b14571.png?text=Jersey+Green" alt="Jersey" />
+        </div>
+      </div>
+    </div>
+    
+    <div class="color-picker">
+      <div class="color-option active" data-color="white" style="background-color: #FFFFFF"></div>
+      <div class="color-option" data-color="red" style="background-color: #e2214b"></div>
+      <div class="color-option" data-color="blue" style="background-color: #3498db"></div>
+      <div class="color-option" data-color="green" style="background-color: #2ecc71"></div>
+      <div class="color-option" data-color="yellow" style="background-color: #f1c40f"></div>
+      <div class="color-option" data-color="purple" style="background-color: #9b59b6"></div>
+    </div>
+    
+    <!-- Choice Modal -->
+    <div id="choiceModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>How would you like to proceed?</h2>
+        
+        <div class="options-container">
+          <div class="option" id="proposalOption">
+            <div class="option-icon">
+              <i class="fas fa-pencil-ruler"></i>
+            </div>
+            <h3>I want a proposal</h3>
+            <p>Our team will design a custom jersey for you</p>
+          </div>
+          
+          <div class="option" id="selfDesignOption">
+            <div class="option-icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <h3>Design it myself</h3>
+            <p>Use our 3D tool to create your own design</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Proposal Form Modal -->
+    <div id="proposalFormModal" class="modal">
+      <div class="modal-content form-content">
+        <span class="close-modal">&times;</span>
+        <div class="progress-indicator">
+          <div class="progress-step active"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
+        
+        <h2>Request a Custom Design</h2>
+        
+        <form id="proposalForm">
+          <div class="form-step active" id="step1">
+            <h3>Where should we send your proposal?</h3>
+            <div class="input-group">
+              <input type="email" id="customerEmail" placeholder="your@email.com" required>
+            </div>
+            <div class="input-group">
+              <input type="text" id="customerSocial" placeholder="@yoursocialhandle (optional)">
+            </div>
+            <button type="button" class="next-step">Continue</button>
+          </div>
+          
+          <div class="form-step" id="step2">
+            <h3>What style of jersey do you prefer?</h3>
+            <div class="style-options">
+              <div class="style-option">
+                <img src="/api/placeholder/100/100" alt="Bold Style">
+                <label>
+                  <input type="radio" name="jerseyStyle" value="bold" checked>
+                  <span>Bold</span>
+                </label>
+              </div>
+              <div class="style-option">
+                <img src="/api/placeholder/100/100" alt="Classic Style">
+                <label>
+                  <input type="radio" name="jerseyStyle" value="classic">
+                  <span>Classic</span>
+                </label>
+              </div>
+              <div class="style-option">
+                <img src="/api/placeholder/100/100" alt="Simple Style">
+                <label>
+                  <input type="radio" name="jerseyStyle" value="simple">
+                  <span>Simple</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-navigation">
+              <button type="button" class="prev-step">Back</button>
+              <button type="button" class="next-step">Continue</button>
+            </div>
+          </div>
+          
+          <div class="form-step" id="step3">
+            <h3>Almost done!</h3>
+            <p>You'll receive a proposal within 24 hours.</p>
+            <div class="terms-checkbox">
+              <input type="checkbox" id="termsAccept" required>
+              <label for="termsAccept">I accept the <a href="#" target="_blank">privacy policy</a> and data use terms.</label>
+            </div>
+            <div class="form-navigation">
+              <button type="button" class="prev-step">Back</button>
+              <button type="submit" class="submit-form">Submit Request</button>
+            </div>
+          </div>
+        </form>
+        
+        <div id="confirmationMessage" style="display:none;">
+          <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3>Request Submitted!</h3>
+          <p>You'll receive your custom design proposal within 24 hours.</p>
+          <!-- Instagram follow prompt -->
+          <div class="social-follow">
+            <p>Follow us on Instagram for design inspiration:</p>
+            <a href="https://instagram.com/momuto" target="_blank" class="instagram-link">
+              <i class="fab fa-instagram"></i> @momuto
+            </a>
+          </div>
+          <button class="close-button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Define variables at global scope
+    let sketch;
+    let p5Instance;
+    
+    // Define the sketch function at global scope so it can be accessed by p5 initialization
+    sketch = function(p) {
+      let particles = [];
+      const particleCount = p.windowWidth <= 768 ? 100 : 180;
+      let isMobileDevice = false;
+      let canvas;
+      let canvasParent;
+      
+      // Check if we're on mobile
+      function checkMobile() {
+        isMobileDevice = p.windowWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        return isMobileDevice;
+      }
+      
+      p.preload = function() {
+        // This runs before setup and can be used to preload resources
+        // Creating a small subset of particles immediately for visual feedback
+        particles = [];
+        for (let i = 0; i < 20; i++) {
+          particles.push(new Particle());
+        }
+      };
+      
+      p.setup = function() {
+        canvasParent = document.getElementById('particle-canvas');
+        canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+        canvas.parent('particle-canvas');
+        p.colorMode(p.HSB, 360, 100, 100, 1);
+        
+        // Check if we're on mobile
+        checkMobile();
+        
+        // Add more particles to reach the full count (since we created some in preload)
+        const remainingParticles = particleCount - particles.length;
+        for (let i = 0; i < remainingParticles; i++) {
+          particles.push(new Particle());
+        }
+        
+        // Create particle clusters for visual appeal
+        createParticleClusters(8);
+        
+        // Setup background color
+        p.background(0, 0, 0, 0.01); // Very transparent initial background
+      };
+      
+      function createParticleClusters(numClusters) {
+        for (let i = 0; i < numClusters; i++) {
+          const centerX = p.random(p.width);
+          const centerY = p.random(p.height);
+          const clusterSize = p.random(8, 15);
+          
+          for (let j = 0; j < clusterSize; j++) {
+            const angle = p.random(p.TWO_PI);
+            const radius = p.random(20, 80);
+            const x = centerX + radius * p.cos(angle);
+            const y = centerY + radius * p.sin(angle);
+            
+            if (x >= 0 && x <= p.width && y >= 0 && y <= p.height) {
+              particles.push(new Particle(x, y));
+            }
+          }
+        }
+      }
+      
+      p.draw = function() {
+        // Semi-transparent background for trail effect (reduced opacity)
+        p.background(0, 0, 0, isMobileDevice ? 0.08 : 0.03);
+        
+        // Update and display particles
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].display();
+        }
+        
+        // Draw connections between particles
+        drawConnections();
+      };
+      
+      function drawConnections() {
+        // Skip more particles on mobile for performance
+        const skipFactor = isMobileDevice ? 3 : 2;
+        // Mobile needs shorter connections to avoid excessive lines
+        const connectionDistance = isMobileDevice ? 80 : 120;
+        
+        for (let i = 0; i < particles.length; i += skipFactor) {
+          let particle = particles[i];
+          
+          for (let j = i + skipFactor; j < particles.length; j += skipFactor) {
+            let other = particles[j];
+            let d = p.dist(particle.pos.x, particle.pos.y, other.pos.x, other.pos.y);
+            
+            if (d < connectionDistance) {
+              // More visible connections with increased alpha
+              let alpha = p.map(d, 0, connectionDistance, 0.8, 0);
+              // Create gradient effect
+              const gradient = p.lerpColor(
+                p.color(particle.hue, particle.sat, 100, alpha),
+                p.color(other.hue, other.sat, 100, alpha),
+                0.5
+              );
+              p.stroke(gradient);
+              p.line(particle.pos.x, particle.pos.y, other.pos.x, other.pos.y);
+            }
+          }
+        }
+      }
+      
+      p.windowResized = function() {
+        p.resizeCanvas(p.windowWidth, p.windowHeight);
+        checkMobile(); // Re-check if we're on mobile
+      };
+      
+      p.mouseMoved = function() {
+        if (!isMobileDevice) {
+          // Only track mouse on non-mobile devices
+          mouseX = p.mouseX;
+          mouseY = p.mouseY;
+        }
+      };
+      
+      p.touchMoved = function() {
+        if (p.touches.length > 0 && !isMobileDevice) {
+          mouseX = p.touches[0].x;
+          mouseY = p.touches[0].y;
+        }
+        return true; // Always allow scrolling
+      };
+      
+      class Particle {
+        constructor(x, y) {
+          // If position is provided, use it; otherwise, random position
+          this.pos = p.createVector(x || p.random(p.width), y || p.random(p.height));
+          
+          // Different velocities for mobile vs desktop
+          if (isMobileDevice) {
+            // Slower particles on mobile
+            this.vel = p.createVector(p.random(-0.5, 0.5), p.random(-0.5, 0.5));
+          } else {
+            // Faster, more dynamic particles on desktop
+            this.vel = p.createVector(p.random(-1, 1), p.random(-1, 1)).mult(1.5);
+          }
+          
+          // Larger particles for better visibility
+          this.size = p.random(3, isMobileDevice ? 5 : 8);
+          
+          // Assign a color - primarily red with some blue and yellow accents
+          const colorRoll = p.random(1);
+          if (colorRoll < 0.6) {
+            // 60% chance of red
+            this.hue = 350;
+            this.sat = 90;
+          } else if (colorRoll < 0.85) {
+            // 25% chance of blue
+            this.hue = 210;
+            this.sat = 80;
+          } else {
+            // 15% chance of yellow
+            this.hue = 45;
+            this.sat = 85;
+          }
+          
+          // Variable attraction to mouse
+          this.mouseAttraction = p.random(0.05, 0.2);
+          
+          // Random lifespan
+          this.lifespan = p.random(100, 200);
+          this.originalLife = this.lifespan;
+          
+          // For desktop, add pulsing effect
+          this.pulse = p.random(0, 2 * p.PI);
+          this.pulseSpeed = p.random(0.02, 0.05);
+        }
+        
+        update() {
+          if (!isMobileDevice) {
+            // On desktop, particles are influenced by mouse
+            let mousePos = p.createVector(p.mouseX, p.mouseY);
+            let dir = p5.Vector.sub(mousePos, this.pos);
+            let distance = dir.mag();
+            
+            if (distance < 200) {
+              dir.normalize();
+              dir.mult(this.mouseAttraction);
+              this.vel.add(dir);
+            }
+          }
+          
+          // Apply velocity to position
+          this.pos.add(this.vel);
+          
+          // Add some random movement - less on mobile
+          if (isMobileDevice) {
+            if (p.frameCount % 3 === 0) { // Less frequent randomness on mobile
+              this.vel.add(p.createVector(p.random(-0.05, 0.05), p.random(-0.05, 0.05)));
+            }
+          } else {
+            this.vel.add(p.createVector(p.random(-0.1, 0.1), p.random(-0.1, 0.1)));
+          }
+          
+          // Dampen velocity slightly
+          this.vel.mult(0.98);
+          
+          // Boundary wrapping
+          if (this.pos.x < 0) this.pos.x = p.width;
+          if (this.pos.x > p.width) this.pos.x = 0;
+          if (this.pos.y < 0) this.pos.y = p.height;
+          if (this.pos.y > p.height) this.pos.y = 0;
+          
+          // Decrease lifespan
+          this.lifespan--;
+          
+          // Reset particle if lifespan is over
+          if (this.lifespan <= 0) {
+            this.pos = p.createVector(p.random(p.width), p.random(p.height));
+            if (isMobileDevice) {
+              this.vel = p.createVector(p.random(-0.5, 0.5), p.random(-0.5, 0.5));
+            } else {
+              this.vel = p.createVector(p.random(-1, 1), p.random(-1, 1)).mult(1.5);
+            }
+            this.lifespan = this.originalLife;
+          }
+          
+          // Update pulse
+          this.pulse += this.pulseSpeed;
+        }
+        
+        display() {
+          // Calculate brightness based on mouse distance on desktop
+          let brightness = 100;
+          if (!isMobileDevice) {
+            let d = p.dist(p.mouseX, p.mouseY, this.pos.x, this.pos.y);
+            brightness = p.map(d, 0, 200, 100, 60);
+            brightness = p.constrain(brightness, 60, 100);
+          }
+          
+          // Calculate size based on lifespan
+          let currentSize = p.map(this.lifespan, 0, this.originalLife, 0, this.size);
+          
+          // For desktop, add pulsing effect
+          if (!isMobileDevice) {
+            currentSize *= 1 + 0.2 * p.sin(this.pulse);
+          }
+          
+          // Draw the particle
+          p.noStroke();
+          p.fill(this.hue, this.sat, brightness, 0.9);
+          p.circle(this.pos.x, this.pos.y, currentSize);
+          
+          // Glowing effect
+          p.fill(this.hue, this.sat, brightness, 0.4);
+          p.circle(this.pos.x, this.pos.y, currentSize * 2);
+          
+          // Extra glow for larger particles
+          if (currentSize > 5) {
+            p.fill(this.hue, this.sat, brightness, 0.2);
+            p.circle(this.pos.x, this.pos.y, currentSize * 3);
+          }
+        }
+      }
+    };
+    
+    // Initialize P5 immediately - this must happen before DOMContentLoaded
+    p5Instance = new p5(sketch);
+    
+    // DOM-related functionality - wrapped in DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize color picker functionality
+      const colorOptions = document.querySelectorAll('.color-option');
+      const jerseyImage = document.getElementById('jerseyImage');
+      
+      // Color to URL mapping
+      const jerseyColors = {
+        'white': 'https://cdn.staticsoe.com/uploads/49703/cart/resources/20250226/0f1ec46d5b4f48b39db6acb27aa72cf9.png?text=Jersey+White',
+        'red': 'https://cdn.staticsoe.com/uploads/49703/cart/resources/20250226/ffa9d2b4ee20122c05543ce4056edca9.png?text=Jersey+Red',
+        'blue': 'https://cdn.staticsoe.com/uploads/49703/cart/resources/20250226/dde4ef9cd4b04b64ef4b43d3ff2dcaab.png?text=Jersey+Blue',
+        'green': 'https://cdn.staticsoe.com/uploads/49703/cart/resources/20250226/742356dd15bca56fe2e13deb26b14571.png?text=Jersey+Green',
+        'yellow': 'https://cdn.staticsoe.com/uploads/49703/cart/resources/20250226/79c4fcb96e584be0deeee10257207fbc.png?text=Jersey+Yellow',
+        'purple': 'https://cdn.staticsoe.com/uploads/49703/cart/resources/20250226/fdff6a721d614dc5bbbd1fcd13a6ac21.png?text=Jersey+Purple'
+      };
+      
+      // Color selection changes jersey image
+      colorOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Update active state
+          document.querySelector('.color-option.active')?.classList.remove('active');
+          this.classList.add('active');
+          
+          // Get new color and update jersey image
+          const newColor = this.getAttribute('data-color');
+          if (jerseyColors[newColor]) {
+            // Fade out and in for smooth transition
+            jerseyImage.style.opacity = 0;
+            setTimeout(() => {
+              jerseyImage.src = jerseyColors[newColor];
+              jerseyImage.style.opacity = 1;
+            }, 300);
+          }
+        });
+      });
+      
+      // Modal Functionality
+      const mainCTA = document.getElementById('mainCTA');
+      const choiceModal = document.getElementById('choiceModal');
+      const proposalFormModal = document.getElementById('proposalFormModal');
+      const closeButtons = document.querySelectorAll('.close-modal');
+      const proposalOption = document.getElementById('proposalOption');
+      const selfDesignOption = document.getElementById('selfDesignOption');
+      
+      // Open choice modal when main CTA is clicked
+      mainCTA.addEventListener('click', function() {
+        choiceModal.classList.add('show');
+      });
+      
+      // Close modals
+      closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          choiceModal.classList.remove('show');
+          proposalFormModal.classList.remove('show');
+        });
+      });
+      
+      // Option selection
+      proposalOption.addEventListener('click', function() {
+        choiceModal.classList.remove('show');
+        setTimeout(() => {
+          proposalFormModal.classList.add('show');
+        }, 300);
+      });
+      
+      selfDesignOption.addEventListener('click', function() {
+        choiceModal.classList.remove('show');
+        // Redirect to 3D configurator
+        window.location.href = 'https://design.momuto.com/3d-configurator/configurator.html?userId=3267bdba1000a68698&configId=8v0y3835&suitName=mamuto3suit1&useGetShare=true&lang=en&langguage=en';
+      });
+      
+      // Make entire style option clickable
+      document.querySelectorAll('.style-option').forEach(option => {
+        option.addEventListener('click', function() {
+          // Find the radio input and select it
+          const radio = this.querySelector('input[type="radio"]');
+          radio.checked = true;
+          
+          // Update visual feedback
+          document.querySelectorAll('.style-option').forEach(opt => {
+            opt.classList.remove('selected');
+          });
+          this.classList.add('selected');
+        });
+      });
+      
+      // Form Step Navigation
+      const nextButtons = document.querySelectorAll('.next-step');
+      const prevButtons = document.querySelectorAll('.prev-step');
+      const formSteps = document.querySelectorAll('.form-step');
+      const progressSteps = document.querySelectorAll('.progress-step');
+      
+      nextButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Find current active step
+          const currentStep = document.querySelector('.form-step.active');
+          const currentIndex = Array.from(formSteps).indexOf(currentStep);
+          
+          // Validate current step
+          if (currentIndex === 0) {
+            const email = document.getElementById('customerEmail');
+            if (!email.value || !email.checkValidity()) {
+              email.focus();
+              return;
+            }
+          }
+          
+          // Hide current step
+          currentStep.classList.remove('active');
+          
+          // Show next step
+          formSteps[currentIndex + 1].classList.add('active');
+          
+          // Update progress indicator
+          progressSteps[currentIndex].classList.add('active');
+          progressSteps[currentIndex + 1].classList.add('active');
+        });
+      });
+      
+      prevButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Find current active step
+          const currentStep = document.querySelector('.form-step.active');
+          const currentIndex = Array.from(formSteps).indexOf(currentStep);
+          
+          // Hide current step
+          currentStep.classList.remove('active');
+          
+          // Show previous step
+          formSteps[currentIndex - 1].classList.add('active');
+          
+          // Update progress indicator
+          progressSteps[currentIndex].classList.remove('active');
+        });
+      });
+      
+      // Form Submission
+      const proposalForm = document.getElementById('proposalForm');
+      const confirmationMessage = document.getElementById('confirmationMessage');
+      const closeConfirmation = document.querySelector('.close-button');
+      
+      proposalForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate checkbox
+        const termsAccept = document.getElementById('termsAccept');
+        if (!termsAccept.checked) {
+          // Add visual feedback that checkbox is required
+          const termsContainer = document.querySelector('.terms-checkbox');
+          termsContainer.classList.add('error');
+          termsContainer.style.animation = 'shake 0.5s';
+          setTimeout(() => {
+            termsContainer.style.animation = '';
+          }, 500);
+          return;
+        }
+        
+        // Show loading state to prevent multiple clicks
+        const submitButton = document.querySelector('.submit-form');
+        submitButton.disabled = true;
+        submitButton.innerHTML = 'Sending...';
+        
+        // Simulate a slight delay before showing confirmation (remove in production)
+        setTimeout(() => {
+          // Hide form and show confirmation
+          proposalForm.style.display = 'none';
+          confirmationMessage.style.display = 'block';
+          
+          // Reset button state
+          submitButton.disabled = false;
+          submitButton.innerHTML = 'Submit Request';
+        }, 800);
+      });
+      
+      closeConfirmation.addEventListener('click', function() {
+        proposalFormModal.classList.remove('show');
+        
+        // Reset the form after closing
+        setTimeout(() => {
+          proposalForm.style.display = 'block';
+          confirmationMessage.style.display = 'none';
+          document.querySelector('.form-step.active').classList.remove('active');
+          formSteps[0].classList.add('active');
+          
+          // Reset progress indicator
+          progressSteps.forEach((step, index) => {
+            if (index === 0) {
+              step.classList.add('active');
+            } else {
+              step.classList.remove('active');
+            }
+          });
+        }, 300);
+      });
+      
+      // Close modal when clicking outside
+      window.addEventListener('click', function(e) {
+        if (e.target === choiceModal) {
+          choiceModal.classList.remove('show');
+        }
+        if (e.target === proposalFormModal) {
+          proposalFormModal.classList.remove('show');
+        }
+      });
+    });
+  </script>

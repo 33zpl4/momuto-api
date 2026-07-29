@@ -1,0 +1,57 @@
+<script>
+    function sendRequestApiHome(url = "", params = {}, method = 'POST', async = true) {
+        let baseUrl = 'https://design.momuto.com';
+        var request_url = baseUrl + url;
+        var randstr = Math.round(Math.random() * 1000000000 + 1000000000);
+        params.timestamp = parseInt(Date.parse(new Date()) / 1000);
+        params.ranstr = randstr;
+        return $.ajax({
+            type: method, url: request_url, data: params, dataType: "json", async: async, success: function (res) {
+                if (res.code == 1) {
+                    return res;
+                } else {
+                    return false;
+                }
+            }, error: function (res) {
+            }
+        });
+    }
+    
+    let uuid = localStorage.getItem('3duuid');
+    if (!uuid) {
+        sendRequestApiHome('/uuid', {}, 'GET').then(res => {
+            if (res.code == 200) {
+                uuid = res.uuid;
+                localStorage.setItem('3duuid', uuid);
+                replace3dJumpUrl(uuid);
+            }
+        })
+    }else{
+        replace3dJumpUrl(uuid);
+    }
+    function replace3dJumpUrl(uuid){
+        var dataUrl=$('#jump3d').data('url');
+        if(dataUrl){
+            var tdurl=$('#jump3d').data('url').toString();
+            tdurl=tdurl.replace('userIdUrl',uuid);
+            $('#jump3d').attr('href',tdurl);
+       }else{
+            var tdurl= $('#jump3d').attr('href');
+            if(tdurl){
+                tdurl=tdurl.replace('userIdUrl',uuid);
+                $('#jump3d').attr('href',tdurl);
+            }
+        }
+    }
+    
+    $(function () {
+        $('.swiper-container-initialized').delegate('ul', 'click', function () {
+            if (uuid) {
+               let rediraUrl = "https://design.momuto.com/3d-configurator/configurator.html?userId=" + uuid + "&configId=46zgeit2&suitName=mamuto3suit1&langguage=fr&lang=fr";
+               window.location.href = rediraUrl;
+            }else{
+                window.reload();
+            }
+        });
+    })
+    </script>

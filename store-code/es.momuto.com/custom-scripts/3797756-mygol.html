@@ -1,0 +1,137 @@
+<style> 
+/* MyGol Iframe Optimization CSS */
+/* Add this to your main.css or create a separate mygol-integration.css */
+
+.mygol-embed {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    margin: 2rem 0;
+}
+
+.mygol-iframe {
+    width: 100%;
+    height: 800px;
+    border: none;
+    display: block;
+    background: var(--white);
+}
+
+/* Attempt to hide MyGol branding (if cross-origin allows) */
+.mygol-iframe {
+    /* Use clip-path to crop unwanted areas */
+    clip-path: inset(60px 0 40px 0); /* Adjust values based on MyGol layout */
+}
+
+/* Mobile optimizations for MyGol iframe */
+@media (max-width: 768px) {
+    .mygol-iframe {
+        height: 600px;
+        /* Different clipping for mobile */
+        clip-path: inset(50px 0 30px 0);
+    }
+    
+    /* Make iframe horizontally scrollable on mobile if needed */
+    .mygol-embed {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Loading state for MyGol iframe */
+.mygol-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.mygol-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--light-gray);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+.mygol-loading-text {
+    color: var(--medium-gray);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Error fallback styling */
+.mygol-error {
+    padding: 3rem;
+    text-align: center;
+    background: var(--light-gray);
+    border-radius: var(--border-radius);
+}
+
+.mygol-error-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.mygol-error-text {
+    color: var(--medium-gray);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Superleague branding overlay (optional) */
+.mygol-branding {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(26, 35, 126, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-family: var(--font-display);
+    z-index: 20;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Advanced iframe customization attempts */
+/* These may work depending on MyGol's CORS policy */
+.mygol-iframe[data-loaded="true"] {
+    /* Custom styles after iframe loads */
+    box-shadow: inset 0 0 0 2px var(--primary-color);
+}
+
+/* Responsive iframe container */
+.iframe-responsive-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.iframe-responsive-container .mygol-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>

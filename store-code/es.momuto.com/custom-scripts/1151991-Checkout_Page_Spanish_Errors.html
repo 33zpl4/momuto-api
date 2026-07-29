@@ -1,0 +1,29 @@
+<script>
+$(document).ready(function() {
+    setTimeout(function() {
+        // Other changes maintained
+        $('label[for="last_name"]').text('Apellidos');
+        $('label[for="checkout_shipping_address_address2"]').text('Apartamento, suite, etc. (Opcional)');
+        $('input.order_discount_code_btn').val('APLICAR');
+
+        // Correcting the button text specifically
+        $('#save_payment_btn span').text('Proceder al pago');  // Ensuring only the payment button is targeted
+
+        // Assuming other buttons need to be set specifically too
+        $('a.order_btn.save_address_btn:not(#save_payment_btn) span').text('Continuar al envío');
+        $('.save_shipping_method_btn span').text('Continuar al pago');
+    }, 200); // Adjust the delay time as needed
+});
+
+var targetNode = document.querySelector('label[for="last_name"]');
+var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.target.textContent !== 'Apellidos') {
+            mutation.target.textContent = 'Apellidos';
+        }
+    });
+});
+
+observer.observe(targetNode, { childList: true, characterData: true, subtree: true });
+
+</script>

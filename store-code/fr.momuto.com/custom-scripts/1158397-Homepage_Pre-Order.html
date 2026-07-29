@@ -1,0 +1,50 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Configure the preorder button
+  var preorderButton = document.getElementById('add-cart-3064169');
+  if (preorderButton) {
+    preorderButton.textContent = "PRÉCOMMANDER MAINTENANT";
+    preorderButton.style.width = "100%";
+    preorderButton.style.color = "#fff";
+    preorderButton.style.background = "#E2214B";
+    preorderButton.style.border = "1px solid #E2214B";
+    preorderButton.style.borderRadius = "3px";
+    preorderButton.disabled = false;
+  }
+
+  // Setup for the countdown display
+  var countdownDisplay = document.getElementById('buynow-3064169');
+  if (countdownDisplay) {
+    countdownDisplay.style.pointerEvents = 'none';
+    countdownDisplay.style.backgroundColor = '#000';
+    countdownDisplay.style.color = '#fff';
+    countdownDisplay.style.width = "100%";
+
+    // Set the target date and time to the end of the match (estimate around 11 PM)
+    const endDate = new Date('June 1, 2024 23:10:00 GMT+0200').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endDate - now;
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownDisplay.textContent = `Fin de la précommande dans : ${hours}h ${minutes}m ${seconds}s`;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        countdownDisplay.textContent = "Précommande terminée";
+        preorderButton.textContent = "COMMANDER MAINTENANT";
+        preorderButton.disabled = false;
+        countdownDisplay.style.backgroundColor = '#000'; // Maintain button style when transitioning
+        countdownDisplay.textContent = "Il reste moins de 400 unités !";
+      }
+    }
+
+    // Update the countdown every second
+    updateCountdown();
+    var timer = setInterval(updateCountdown, 1000);
+  }
+});
+</script>

@@ -1,0 +1,38 @@
+<script>
+(function waitForJQuery() {
+    if (typeof $ === 'undefined') {
+        setTimeout(waitForJQuery, 50);
+        return;
+    }
+    $(document).ready(function() {
+$('.panel-menu-item').click(function(){
+    $(this).parent().find('ul.panel-menu-ul').removeClass('only-ul-show');
+    $(this).find('ul.panel-menu-ul').addClass('only-ul-show');
+});
+        let setp = 0;
+        let onlyWarpDOM = $(".only-warp");
+        let onlyMenuDOM = $(".only-warp-menu");
+        
+        // Cache width ONCE to prevent drift on forward/back clicks
+        let cachedWidth = onlyWarpDOM.width();
+
+        $(".only-ul-li>.et-menu-toggle").off("click").on("click", function(e) {
+            e.stopPropagation();
+            if ($(this).parent().children(".panel-menu-ul").length) {
+                setp++;
+                e.preventDefault();
+                onlyMenuDOM.css({ left: -cachedWidth * setp });
+                $(this).parent().children(".panel-menu-ul").addClass("only-ul-show");
+            }
+        });
+
+        $(".panel-menu-parent").off("click").on("click", function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            setp--;
+            $(this).parent().removeClass("only-ul-show");
+            onlyMenuDOM.css({ left: -cachedWidth * setp });
+        });
+    });
+})();
+</script>

@@ -1,0 +1,27 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  function updateComingSoon(addCartId, buyNowId) {
+    try {
+      var soonAvailableButton = document.getElementById(addCartId);
+      var buyNowButton = document.getElementById(buyNowId);
+
+      if (soonAvailableButton && buyNowButton) {
+        soonAvailableButton.textContent = "BIENTÔT DISPONIBLE";
+        soonAvailableButton.style.pointerEvents = 'none';
+        soonAvailableButton.style.backgroundColor = '#ccc'; // Indicative color for non-availability
+        buyNowButton.style.display = 'none';
+      } else {
+        console.error("Elements not found:", addCartId, buyNowId);
+      }
+    } catch (error) {
+      console.error("Error updating buttons for IDs", addCartId, buyNowId, error);
+    }
+  }
+
+  // Update the settings for the first product
+  updateComingSoon('add-cart-9645275', 'buynow-9645275');
+
+  // Update the settings for the second product
+  updateComingSoon('add-cart-9645270', 'buynow-9645270');
+});
+</script>

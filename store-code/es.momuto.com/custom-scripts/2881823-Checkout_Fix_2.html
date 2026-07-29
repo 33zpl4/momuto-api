@@ -1,0 +1,39 @@
+<script>
+$(document).ready(function() {
+    setTimeout(function() {
+        // Get subtotal
+        var subtotal = parseFloat($('#subtotal_price').attr('data_price'));
+        console.log("Detected subtotal:", subtotal); // Debugging
+
+        // Get the specific shipping cost row on the checkout page
+        var shippingRow = $('.order_total_list li:has(#shipping_price)');
+        var shippingNameElement = shippingRow.find('.name');
+        var shippingValueElement = $('#shipping_price');
+
+        // Ensure disclaimer is only inserted if not already present
+        if ($('.shipping-disclaimer').length === 0) {
+            $('<li class="shipping-disclaimer" style="font-size: 14px; color: #999; margin-top: 10px;">🚚 GRATIS en pedidos de 50€ o más.</li>')
+                .insertAfter(shippingRow);
+        }
+
+        // Show or hide disclaimer based on subtotal
+        if (!isNaN(subtotal) && subtotal < 50) {
+            $('.shipping-disclaimer').show();
+        } else {
+            // Ensure only the correct "Gastos de envío" is modified
+            if (shippingNameElement.text().trim() === "Gastos de envío") {
+                shippingNameElement.text('Gratis para pedidos de más de 50€');
+            }
+            shippingValueElement.text('€ 0.00');
+            $('.shipping-disclaimer').hide();
+        }
+
+        // Hide "Tasa de pago" row if it's always 0
+        var paymentRow = $('div.name:contains("Tasa de pago")').closest('li');
+        if ($('#payment_price').text().trim() === '€ 0.00') {
+            paymentRow.hide();
+        }
+    }, 200); // Small delay to ensure elements are loaded
+});
+
+</script>

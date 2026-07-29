@@ -1,0 +1,162 @@
+<style>
+    .account_login {
+        display: none;
+    }
+</style>
+
+<script>
+
+    function syncAjaxRequestWithRetry(url, maxRetries, async) {
+        var retries = 0;
+
+        function makeRequest() {
+            var response = $.ajax({ url: url, type: 'GET', dataType: 'json', async: async });
+            if (response.status === 200) {
+                return response.responseText
+            } else {
+                console.log(response);
+                retries++;
+                if (retries <= maxRetries) {
+                    console.log('Request failed. Retrying... (Attempt ' + retries + ')');
+                    return makeRequest()
+                } else {
+                    console.log('Max retries exceeded. Request failed.');
+                    return null
+                }
+            }
+        }
+
+        return makeRequest()
+    }
+
+    var maxRetries = 3;
+    const RootbaseUrl = 'https://design.momuto.com';
+    let hideCartUrl = false;
+    url = window.location.pathname;
+    let paymentsAppendHtml = '';
+    let timerPayments = null;
+
+    console.log(url.indexOf('/checkouts/'), 'checkouts')
+    if (url.indexOf('/checkouts/') > -1) {
+
+        console.log('checkouts page')
+        let buy_type = localStorage.getItem('goods_buy_type');
+        let uid = localStorage.getItem('3duuid')
+        let order_no = localStorage.getItem('order_no_3d');
+        let order_type = localStorage.getItem('order_type_3d');
+        let oem_order_no = '';
+        let oem_order_status = 200;
+        if (typeof oemcart_order !== 'undefined') {
+            oem_order_no = oemcart_order && oemcart_order.order_number ? oemcart_order.order_number : '';
+            oem_order_status = oemcart_order && oemcart_order.financial_status ? oemcart_order.financial_status : 200;
+        }
+console.log('buy_type:------'+buy_type)
+console.log('order_type:------'+order_type)
+console.log('order_no:------'+order_no)
+        if (order_no && order_type && !buy_type) {
+console.log('dingzhi');
+            //disabled brower back
+            if (window.history && window.history.pushState) {
+                window.onpopstate = function () {
+                    window.history.pushState('forward', null, '');
+                    window.history.forward(1);
+                };
+            }
+            window.history.pushState('forward', null, '');
+            window.history.forward(1);
+
+            hideCartUrl = true;
+            getDataUrl = RootbaseUrl + '/Order/getGoods?order_no=' + order_no + '&oem_no=' + oem_order_no + '&status=' + oem_order_status + '&uuid=' + uid;
+            let resp = syncAjaxRequestWithRetry(getDataUrl, maxRetries, false);
+            let data = JSON.parse(resp);
+        
+            if (data.code == 200 && data.data ) {
+                let goodsPriceInfo = {
+                    "mamuto2": 42.90, "mamuto2shorts1": 18.99, "mamuto2socks1": 6.00, "mamuto3": 42.90, "mamuto3shorts1": 18.99, "mamuto3socks1": 6.00, "mamuto3basket3": 42.90,
+                };
+                // if(data.email && data.email != ''){
+                //     $('.order_email .order_text_box .order_text').val(data.email)
+                // }else{
+                //     $('.order_email .order_text_box .order_text').val('6411164@gamil.com')
+                // }
+                data.data.forEach(item => {
+                    item.info.forEach(item2 => {
+                        let price = goodsPriceInfo[item.suit_name] ? goodsPriceInfo[item.suit_name] : '';
+                        let title = '';
+                        if (item2.name) {
+                            title = item2.name;
+                        }
+                        if (item2.number) {
+                            title += ' - ' + item2.number;
+                        }
+                        if (!title) {
+                            title = 'MOMUTO Pro Jersey';
+                        }
+
+                            paymentsAppendHtml += '<li class="slim"><a class="order_product_pic"><div class="order_product_pic_img" style="position: relative;"><img src="' + item.urlThumbnailFront + '">' + '</div><div class="order_product_num">' + item2.qty + '</div></a><div class="order_product_content"><div class="order_product_content-info"><div class="order_product_content-header">' + '<a class="product_name">' + title + '</a></div>' +
+                        '<div class="order_product_sku">' + item2.size;
+                    if (item.defind_type < 2) {
+                        paymentsAppendHtml += '</div></div><div class="product_price">' + price + '</div></li>';
+                    }
+
+                    })
+                })
+            }
+        }
+        timerPayments = setInterval(function () {
+            let has = $('.product_info_list>ul').html();
+            if (has && paymentsAppendHtml) {
+                clearInterval(timerPayments);
+                $('.product_info_list>ul').html(paymentsAppendHtml);
+            }
+        }, 500);
+    }
+
+    $(function () {
+        if (url.indexOf('/checkouts/') > -1) {
+            if (url.indexOf('/checkouts/success/') > -1) {
+                //pay success page
+                $('#order_success_quick_register').remove();
+                console.log('success page')
+            } else if (url.indexOf('/47711/checkouts/') > -1) {
+                //pay fail page
+                hideHtml();
+                console.log('fail page')
+            } else {
+                //order custom page
+                hideHtml();
+            }
+        }
+    })
+
+    function hideHtml() {
+        let hideCartUrlTimer = setInterval(function () {
+            if (hideCartUrl) {
+                clearInterval(hideCartUrlTimer);
+                $('.return_cart').attr('href', 'javascript:void(0);');
+                $('.return_cart').html('');
+                $('.order_crumbs a').attr('href', 'javascript:void(0);');
+            }
+        }, 500);
+    }
+
+
+
+
+$('.save_address_btn_text').click(function(){
+        localStorage.removeItem('goods_buy_type');
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

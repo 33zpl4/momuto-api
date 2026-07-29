@@ -1,0 +1,869 @@
+<!-- Jersey Design App Script for CMS -->
+<script>
+const targetUrl = "https://www.momuto.es/pages/design-studio";
+
+// Only run the code if we're on the correct page
+if (window.location.href.includes("design-studio") || 
+    window.location.pathname === "/design-studio" ||
+    window.location.pathname === "/pages/design-studio") {
+    
+    // Jersey Design App Variables
+    let selectedStyle = 'geometric';
+    let intensityValue = 4;
+    let accentEnabled = true;
+    let referenceImageBase64 = null;
+
+    // Remove the API key requirement - we'll handle this server-side
+    function hideApiKeySection() {
+        const apiKeySection = document.querySelector('.api-key-input');
+        if (apiKeySection) {
+            apiKeySection.style.display = 'none';
+        }
+    }
+
+    // GLOBAL FUNCTIONS - accessible from HTML
+    window.handleReferenceImage = function(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                referenceImageBase64 = e.target.result.split(',')[1];
+                
+                // Show preview
+                const preview = document.getElementById('imagePreview');
+                const previewImg = document.getElementById('previewImg');
+                
+                if (previewImg && preview) {
+                    previewImg.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    window.startOver = function() {
+        const formContainer = document.querySelector('.form-container');
+        const resultDiv = document.getElementById('resultDiv');
+        
+        if (formContainer) formContainer.style.display = 'block';
+        if (resultDiv) resultDiv.style.display = 'none';
+    }
+
+    // Enhanced generateJersey function for backend integration
+    async function generateJersey() {
+        // Collect form data
+        const teamName = document.getElementById('teamName')?.value || '';
+        const primaryColor = document.getElementById('primaryColor')?.value || '#dc2626';
+        const secondaryColor = document.getElementById('secondaryColor')?.value || '#000000';
+        const selectedStyleElement = document.querySelector('.style-option.selected');
+        const selectedStyle = selectedStyleElement?.dataset.style || 'geometric';
+        const intensity = document.getElementById('intensitySlider')?.value || '4';
+        const accentColor = accentEnabled ? (document.getElementById('accentColor')?.value || '#fbbf24') : null;
+
+        // Generate prompt
+        const prompt = generatePrompt(teamName, primaryColor, secondaryColor, selectedStyle, intensity, accentColor);
+
+        // Show loading
+        const formContainer = document.querySelector('.form-container');
+        const loadingDiv = document.getElementById('loadingDiv');
+        const resultDiv = document.getElementById('resultDiv');
+
+        if (formContainer) formContainer.style.display = 'none';
+        if (loadingDiv) loadingDiv.style.display = 'block';
+        if (resultDiv) resultDiv.style.display = 'none';
+
+        try {
+            const imageUrl = await callBackendAPI(prompt, referenceImageBase64, {
+                teamName,
+                primaryColor,
+                secondaryColor,
+                selectedStyle,
+                intensity,
+                accentColor
+            });
+            showResult(imageUrl);
+        } catch (error) {
+            alert('Error generating image: ' + error.message);
+            if (formContainer) formContainer.style.display = 'block';
+            if (loadingDiv) loadingDiv.style.display = 'none';
+        }
+    }
+
+    // Backend API call function - updated with your Replit URL
+    async function callBackendAPI(prompt, referenceImageBase64, designData) {
+        const requestData = {
+            prompt: prompt
+        };
+
+        try {
+            // Your actual Replit URL
+            const PROXY_URL = 'https://0f864127-54cb-4639-a51f-3a71b325ecf7-00-nvr2tyazd7eq.spock.replit.dev/generate';
+            
+            const response = await fetch(PROXY_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to generate jersey design');
+            }
+
+            const data = await response.json();
+            return data.imageUrl;
+            
+        } catch (fetchError) {
+            console.error('Error calling API:', fetchError);
+            throw new Error('Failed to generate jersey design: ' + fetchError.message);
+        }
+    }
+
+    function generatePrompt(teamName, primaryColor, secondaryColor, style, intensity, accentColor) {
+        const styleMap = {
+            'clean': 'minimal clean design with subtle accents',
+            'stripes': 'vertical stripe pattern',
+            'geometric': 'simple geometric shapes and patterns',
+            'tech': 'angular tech arrows and modern geometric lines',
+            'textured': 'tone-on-tone textured pattern effects',
+            'split': 'asymmetric color blocking design'
+        };
+
+        const intensityMap = {
+            '1': 'minimal subtle pattern',
+            '2': 'light pattern elements',
+            '3': 'balanced pattern design',
+            '4': 'prominent pattern features',
+            '5': 'bold prominent pattern design'
+        };
+
+        let prompt = `Create a professional soccer football jersey mockup with these EXACT specifications:
+        
+        JERSEY TYPE: Athletic cut soccer jersey, crew neck collar, raglan sleeves, longer torso length for athletic fit
+        
+        BASE COLOR: Use EXACTLY this color ${primaryColor} as the main jersey color
+        
+        PATTERN: ${styleMap[style]} using EXACTLY this color ${secondaryColor}, ${intensityMap[intensity]}
+        
+        CONSTRUCTION: Modern football jersey silhouette like Nike Dri-FIT or Adidas Climacool, technical polyester fabric appearance, sublimation-printed design integrated into fabric
+        
+        PHOTOGRAPHY: Front view, clean studio lighting, white background, realistic fabric texture and drape
+        
+        ABSOLUTELY NO: logos, Nike swoosh, Adidas stripes, team crests, brand symbols, text, numbers, sponsor logos - completely blank jersey front`;
+
+        if (accentColor) {
+            prompt += `\n\nACCENT COLOR: Use EXACTLY this color ${accentColor} for pattern highlights and accent details`;
+        }
+
+        return prompt;
+    }
+
+    function showResult(imageUrl) {
+        const loadingDiv = document.getElementById('loadingDiv');
+        const resultDiv = document.getElementById('resultDiv');
+        const resultImage = document.getElementById('resultImage');
+
+        if (loadingDiv) loadingDiv.style.display = 'none';
+        if (resultImage) resultImage.src = imageUrl;
+        if (resultDiv) resultDiv.style.display = 'block';
+    }
+
+    function initializeJerseyDesigner() {
+        console.log("Jersey Designer functionality initializing on design-studio page");
+
+        // Hide API key section since we're handling this server-side
+        hideApiKeySection();
+
+        // Enhanced style selection - make sure it works with existing HTML
+        document.querySelectorAll('.style-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options
+                document.querySelectorAll('.style-option').forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Update selected style variable
+                selectedStyle = this.dataset.style || 'geometric';
+                
+                console.log('Style selected:', selectedStyle);
+            });
+        });
+
+        // Color picker functionality - enhance existing setup
+        function enhancedColorPicker(inputId, previewId, hexId) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            const hex = document.getElementById(hexId);
+            
+            if (input && preview && hex) {
+                input.addEventListener('input', function() {
+                    preview.style.background = this.value;
+                    hex.textContent = this.value;
+                });
+            }
+        }
+
+        enhancedColorPicker('primaryColor', 'primaryPreview', 'primaryHex');
+        enhancedColorPicker('secondaryColor', 'secondaryPreview', 'secondaryHex');
+        enhancedColorPicker('accentColor', 'accentPreview', 'accentHex');
+
+        // Enhanced intensity slider
+        const intensitySlider = document.getElementById('intensitySlider');
+        const intensityValueDisplay = document.getElementById('intensityValue');
+        const intensityLabels = ['Minimal', 'Light', 'Balanced', 'Prominent', 'Bold'];
+
+        if (intensitySlider && intensityValueDisplay) {
+            intensitySlider.addEventListener('input', function() {
+                intensityValue = parseInt(this.value);
+                intensityValueDisplay.textContent = intensityLabels[intensityValue - 1];
+            });
+        }
+
+        // Enhanced accent toggle
+        const accentToggle = document.getElementById('accentToggle');
+        const accentColorGroup = document.getElementById('accentColorGroup');
+
+        if (accentToggle) {
+            accentToggle.addEventListener('click', function() {
+                accentEnabled = !accentEnabled;
+                this.classList.toggle('active', accentEnabled);
+                
+                if (accentColorGroup) {
+                    accentColorGroup.style.display = accentEnabled ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Enhanced reference image handling
+        const referenceImage = document.getElementById('referenceImage');
+        if (referenceImage) {
+            referenceImage.addEventListener('change', function() {
+                handleReferenceImage(this);
+            });
+        }
+
+        // Replace the existing generate button functionality
+        const generateBtn = document.getElementById('generateBtn');
+        if (generateBtn) {
+            // Remove existing event listeners
+            generateBtn.replaceWith(generateBtn.cloneNode(true));
+            const newGenerateBtn = document.getElementById('generateBtn');
+            
+            newGenerateBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                generateJersey();
+            });
+        }
+
+        // Initialize default values
+        if (intensityValueDisplay) {
+            intensityValueDisplay.textContent = intensityLabels[intensityValue - 1];
+        }
+
+        console.log("Jersey Designer functionality initialized successfully");
+    }
+
+    // Run the code once DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeJerseyDesigner);
+    } else {
+        initializeJerseyDesigner();
+    }
+}
+</script><!-- Jersey Design App Script for CMS -->
+<script>
+const targetUrl = "https://www.momuto.es/pages/design-studio";
+
+// Only run the code if we're on the correct page
+if (window.location.href.includes("design-studio") || 
+    window.location.pathname === "/design-studio" ||
+    window.location.pathname === "/pages/design-studio") {
+    
+    // Jersey Design App Variables
+    let selectedStyle = 'geometric';
+    let intensityValue = 4;
+    let accentEnabled = true;
+    let referenceImageBase64 = null;
+
+    // Remove the API key requirement - we'll handle this server-side
+    function hideApiKeySection() {
+        const apiKeySection = document.querySelector('.api-key-input');
+        if (apiKeySection) {
+            apiKeySection.style.display = 'none';
+        }
+    }
+
+    // GLOBAL FUNCTIONS - accessible from HTML
+    window.handleReferenceImage = function(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                referenceImageBase64 = e.target.result.split(',')[1];
+                
+                // Show preview
+                const preview = document.getElementById('imagePreview');
+                const previewImg = document.getElementById('previewImg');
+                
+                if (previewImg && preview) {
+                    previewImg.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    window.startOver = function() {
+        const formContainer = document.querySelector('.form-container');
+        const resultDiv = document.getElementById('resultDiv');
+        
+        if (formContainer) formContainer.style.display = 'block';
+        if (resultDiv) resultDiv.style.display = 'none';
+    }
+
+    // Enhanced generateJersey function for backend integration
+    async function generateJersey() {
+        // Collect form data
+        const teamName = document.getElementById('teamName')?.value || '';
+        const primaryColor = document.getElementById('primaryColor')?.value || '#dc2626';
+        const secondaryColor = document.getElementById('secondaryColor')?.value || '#000000';
+        const selectedStyleElement = document.querySelector('.style-option.selected');
+        const selectedStyle = selectedStyleElement?.dataset.style || 'geometric';
+        const intensity = document.getElementById('intensitySlider')?.value || '4';
+        const accentColor = accentEnabled ? (document.getElementById('accentColor')?.value || '#fbbf24') : null;
+
+        // Generate prompt
+        const prompt = generatePrompt(teamName, primaryColor, secondaryColor, selectedStyle, intensity, accentColor);
+
+        // Show loading
+        const formContainer = document.querySelector('.form-container');
+        const loadingDiv = document.getElementById('loadingDiv');
+        const resultDiv = document.getElementById('resultDiv');
+
+        if (formContainer) formContainer.style.display = 'none';
+        if (loadingDiv) loadingDiv.style.display = 'block';
+        if (resultDiv) resultDiv.style.display = 'none';
+
+        try {
+            const imageUrl = await callBackendAPI(prompt, referenceImageBase64, {
+                teamName,
+                primaryColor,
+                secondaryColor,
+                selectedStyle,
+                intensity,
+                accentColor
+            });
+            showResult(imageUrl);
+        } catch (error) {
+            alert('Error generating image: ' + error.message);
+            if (formContainer) formContainer.style.display = 'block';
+            if (loadingDiv) loadingDiv.style.display = 'none';
+        }
+    }
+
+    // Backend API call function - simplified for proxy service
+    async function callBackendAPI(prompt, referenceImageBase64, designData) {
+        const requestData = {
+            prompt: prompt
+        };
+
+        try {
+            // Replace this URL with your Replit URL
+            const PROXY_URL = 'https://your-repl-name.username.repl.co/generate';
+            
+            const response = await fetch(PROXY_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to generate jersey design');
+            }
+
+            const data = await response.json();
+            return data.imageUrl;
+            
+        } catch (fetchError) {
+            // Fallback: For now, return a mock response for testing
+            console.log('Proxy service not ready, using mock response');
+            await new Promise(resolve => setTimeout(resolve, 3000)); // Simulate delay
+            
+            // Return a placeholder that shows the design specs
+            return `https://via.placeholder.com/400x500/${designData.primaryColor.replace('#', '')}/${designData.secondaryColor.replace('#', '')}?text=${encodeURIComponent(designData.teamName || 'Jersey Design')}`;
+        }
+    }
+
+    function generatePrompt(teamName, primaryColor, secondaryColor, style, intensity, accentColor) {
+        const styleMap = {
+            'clean': 'minimal clean design with subtle accents',
+            'stripes': 'vertical stripe pattern',
+            'geometric': 'simple geometric shapes and patterns',
+            'tech': 'angular tech arrows and modern geometric lines',
+            'textured': 'tone-on-tone textured pattern effects',
+            'split': 'asymmetric color blocking design'
+        };
+
+        const intensityMap = {
+            '1': 'minimal subtle pattern',
+            '2': 'light pattern elements',
+            '3': 'balanced pattern design',
+            '4': 'prominent pattern features',
+            '5': 'bold prominent pattern design'
+        };
+
+        let prompt = `Create a professional soccer football jersey mockup with these EXACT specifications:
+        
+        JERSEY TYPE: Athletic cut soccer jersey, crew neck collar, raglan sleeves, longer torso length for athletic fit
+        
+        BASE COLOR: Use EXACTLY this color ${primaryColor} as the main jersey color
+        
+        PATTERN: ${styleMap[style]} using EXACTLY this color ${secondaryColor}, ${intensityMap[intensity]}
+        
+        CONSTRUCTION: Modern football jersey silhouette like Nike Dri-FIT or Adidas Climacool, technical polyester fabric appearance, sublimation-printed design integrated into fabric
+        
+        PHOTOGRAPHY: Front view, clean studio lighting, white background, realistic fabric texture and drape
+        
+        ABSOLUTELY NO: logos, Nike swoosh, Adidas stripes, team crests, brand symbols, text, numbers, sponsor logos - completely blank jersey front`;
+
+        if (accentColor) {
+            prompt += `\n\nACCENT COLOR: Use EXACTLY this color ${accentColor} for pattern highlights and accent details`;
+        }
+
+        return prompt;
+    }
+
+    function showResult(imageUrl) {
+        const loadingDiv = document.getElementById('loadingDiv');
+        const resultDiv = document.getElementById('resultDiv');
+        const resultImage = document.getElementById('resultImage');
+
+        if (loadingDiv) loadingDiv.style.display = 'none';
+        if (resultImage) resultImage.src = imageUrl;
+        if (resultDiv) resultDiv.style.display = 'block';
+    }
+
+    function initializeJerseyDesigner() {
+        console.log("Jersey Designer functionality initializing on design-studio page");
+
+        // Hide API key section since we're handling this server-side
+        hideApiKeySection();
+
+        // Enhanced style selection - make sure it works with existing HTML
+        document.querySelectorAll('.style-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options
+                document.querySelectorAll('.style-option').forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Update selected style variable
+                selectedStyle = this.dataset.style || 'geometric';
+                
+                console.log('Style selected:', selectedStyle);
+            });
+        });
+
+        // Color picker functionality - enhance existing setup
+        function enhancedColorPicker(inputId, previewId, hexId) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            const hex = document.getElementById(hexId);
+            
+            if (input && preview && hex) {
+                input.addEventListener('input', function() {
+                    preview.style.background = this.value;
+                    hex.textContent = this.value;
+                });
+            }
+        }
+
+        enhancedColorPicker('primaryColor', 'primaryPreview', 'primaryHex');
+        enhancedColorPicker('secondaryColor', 'secondaryPreview', 'secondaryHex');
+        enhancedColorPicker('accentColor', 'accentPreview', 'accentHex');
+
+        // Enhanced intensity slider
+        const intensitySlider = document.getElementById('intensitySlider');
+        const intensityValueDisplay = document.getElementById('intensityValue');
+        const intensityLabels = ['Minimal', 'Light', 'Balanced', 'Prominent', 'Bold'];
+
+        if (intensitySlider && intensityValueDisplay) {
+            intensitySlider.addEventListener('input', function() {
+                intensityValue = parseInt(this.value);
+                intensityValueDisplay.textContent = intensityLabels[intensityValue - 1];
+            });
+        }
+
+        // Enhanced accent toggle
+        const accentToggle = document.getElementById('accentToggle');
+        const accentColorGroup = document.getElementById('accentColorGroup');
+
+        if (accentToggle) {
+            accentToggle.addEventListener('click', function() {
+                accentEnabled = !accentEnabled;
+                this.classList.toggle('active', accentEnabled);
+                
+                if (accentColorGroup) {
+                    accentColorGroup.style.display = accentEnabled ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Enhanced reference image handling
+        const referenceImage = document.getElementById('referenceImage');
+        if (referenceImage) {
+            referenceImage.addEventListener('change', function() {
+                handleReferenceImage(this);
+            });
+        }
+
+        // Replace the existing generate button functionality
+        const generateBtn = document.getElementById('generateBtn');
+        if (generateBtn) {
+            // Remove existing event listeners
+            generateBtn.replaceWith(generateBtn.cloneNode(true));
+            const newGenerateBtn = document.getElementById('generateBtn');
+            
+            newGenerateBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                generateJersey();
+            });
+        }
+
+        // Initialize default values
+        if (intensityValueDisplay) {
+            intensityValueDisplay.textContent = intensityLabels[intensityValue - 1];
+        }
+
+        console.log("Jersey Designer functionality initialized successfully");
+    }
+
+    // Run the code once DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeJerseyDesigner);
+    } else {
+        initializeJerseyDesigner();
+    }
+}
+</script><!-- Jersey Design App Script for CMS -->
+<script>
+const targetUrl = "https://www.momuto.es/pages/jersey-design"; // Change to your actual URL
+
+// Only run the code if we're on the correct page
+if (window.location.href.includes("jersey-design") || 
+    window.location.pathname === "/jersey-design" ||
+    window.location.pathname === "/pages/jersey-design") {
+    
+    // Jersey Design App Variables
+    let selectedStyle = 'geometric';
+    let intensityValue = 4;
+    let accentEnabled = true;
+    let referenceImageBase64 = null;
+    
+    // Predefined style options with descriptions
+    const styleOptions = {
+        'clean': {
+            icon: '🏛️',
+            name: 'Clean & Classic',
+            description: 'Timeless & Professional'
+        },
+        'stripes': {
+            icon: '📏',
+            name: 'Bold Stripes',
+            description: 'Classic Team Spirit'
+        },
+        'geometric': {
+            icon: '🔷',
+            name: 'Geometric Patterns',
+            description: 'Modern with Personality'
+        },
+        'tech': {
+            icon: '⚡',
+            name: 'Tech/Angular',
+            description: 'Dynamic & Contemporary'
+        },
+        'textured': {
+            icon: '🌊',
+            name: 'Textured/Subtle',
+            description: 'Sophisticated Details'
+        },
+        'split': {
+            icon: '⚡',
+            name: 'Split Design',
+            description: 'Unique & Bold'
+        }
+    };
+
+    const intensityLabels = ['Minimal', 'Light', 'Balanced', 'Prominent', 'Bold'];
+
+    // GLOBAL FUNCTIONS
+    window.selectStyle = function(style) {
+        selectedStyle = style;
+        
+        // Update visual selection
+        document.querySelectorAll('.style-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        
+        const selectedOption = document.querySelector(`[data-style="${style}"]`);
+        if (selectedOption) {
+            selectedOption.classList.add('selected');
+        }
+    }
+
+    window.updateIntensity = function(value) {
+        intensityValue = value;
+        const intensityLabel = document.getElementById('intensityValue');
+        if (intensityLabel) {
+            intensityLabel.textContent = intensityLabels[value - 1];
+        }
+    }
+
+    window.toggleAccent = function() {
+        accentEnabled = !accentEnabled;
+        const toggle = document.getElementById('accentToggle');
+        const colorGroup = document.getElementById('accentColorGroup');
+        
+        if (toggle) {
+            toggle.classList.toggle('active', accentEnabled);
+        }
+        if (colorGroup) {
+            colorGroup.style.display = accentEnabled ? 'block' : 'none';
+        }
+    }
+
+    window.handleReferenceImage = function(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                referenceImageBase64 = e.target.result.split(',')[1];
+                
+                // Show preview
+                const preview = document.getElementById('imagePreview');
+                const previewImg = document.getElementById('previewImg');
+                
+                if (previewImg && preview) {
+                    previewImg.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    window.updateColorPreview = function(inputId, previewId, hexId) {
+        const input = document.getElementById(inputId);
+        const preview = document.getElementById(previewId);
+        const hex = document.getElementById(hexId);
+        
+        if (input && preview && hex) {
+            preview.style.background = input.value;
+            hex.textContent = input.value;
+        }
+    }
+
+    window.generateJersey = async function() {
+        // Collect form data
+        const teamName = document.getElementById('teamName')?.value || '';
+        const primaryColor = document.getElementById('primaryColor')?.value || '#dc2626';
+        const secondaryColor = document.getElementById('secondaryColor')?.value || '#000000';
+        const accentColor = accentEnabled ? (document.getElementById('accentColor')?.value || '#fbbf24') : null;
+
+        // Generate prompt
+        const prompt = generatePrompt(teamName, primaryColor, secondaryColor, selectedStyle, intensityValue, accentColor);
+
+        // Show loading
+        const formContainer = document.querySelector('.form-container');
+        const loadingDiv = document.getElementById('loadingDiv');
+        const resultDiv = document.getElementById('resultDiv');
+
+        if (formContainer) formContainer.style.display = 'none';
+        if (loadingDiv) loadingDiv.style.display = 'block';
+        if (resultDiv) resultDiv.style.display = 'none';
+
+        try {
+            const imageUrl = await callBackendAPI(prompt, referenceImageBase64);
+            showResult(imageUrl);
+        } catch (error) {
+            alert('Error generating image: ' + error.message);
+            if (formContainer) formContainer.style.display = 'block';
+            if (loadingDiv) loadingDiv.style.display = 'none';
+        }
+    }
+
+    window.startOver = function() {
+        const formContainer = document.querySelector('.form-container');
+        const resultDiv = document.getElementById('resultDiv');
+        
+        if (formContainer) formContainer.style.display = 'block';
+        if (resultDiv) resultDiv.style.display = 'none';
+    }
+
+    // Helper Functions
+    function generatePrompt(teamName, primaryColor, secondaryColor, style, intensity, accentColor) {
+        const styleMap = {
+            'clean': 'minimal clean design with subtle accents',
+            'stripes': 'vertical stripe pattern',
+            'geometric': 'simple geometric shapes and patterns',
+            'tech': 'angular tech arrows and modern geometric lines',
+            'textured': 'tone-on-tone textured pattern effects',
+            'split': 'asymmetric color blocking design'
+        };
+
+        const intensityMap = {
+            '1': 'minimal subtle pattern',
+            '2': 'light pattern elements',
+            '3': 'balanced pattern design',
+            '4': 'prominent pattern features',
+            '5': 'bold prominent pattern design'
+        };
+
+        let prompt = `Create a professional soccer football jersey mockup with these EXACT specifications:
+        
+        JERSEY TYPE: Athletic cut soccer jersey, crew neck collar, raglan sleeves, longer torso length for athletic fit
+        
+        BASE COLOR: Use EXACTLY this color ${primaryColor} as the main jersey color
+        
+        PATTERN: ${styleMap[style]} using EXACTLY this color ${secondaryColor}, ${intensityMap[intensity]}
+        
+        CONSTRUCTION: Modern football jersey silhouette like Nike Dri-FIT or Adidas Climacool, technical polyester fabric appearance, sublimation-printed design integrated into fabric
+        
+        PHOTOGRAPHY: Front view, clean studio lighting, white background, realistic fabric texture and drape
+        
+        ABSOLUTELY NO: logos, Nike swoosh, Adidas stripes, team crests, brand symbols, text, numbers, sponsor logos - completely blank jersey front`;
+
+        if (accentColor) {
+            prompt += `\n\nACCENT COLOR: Use EXACTLY this color ${accentColor} for pattern highlights and accent details`;
+        }
+
+        return prompt;
+    }
+
+    async function callBackendAPI(prompt, referenceImageBase64) {
+        // Use your Replit URL
+        const PROXY_URL = 'https://0f864127-54cb-4639-a51f-3a71b325ecf7-00-nvr2tyazd7eq.spock.replit.dev/generate';
+        
+        const requestData = {
+            prompt: prompt
+        };
+
+        try {
+            const response = await fetch(PROXY_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to generate jersey design');
+            }
+
+            const data = await response.json();
+            return data.imageUrl;
+            
+        } catch (fetchError) {
+            console.error('Error calling API:', fetchError);
+            throw new Error('Failed to generate jersey design: ' + fetchError.message);
+        }
+    }
+
+    function showResult(imageUrl) {
+        const loadingDiv = document.getElementById('loadingDiv');
+        const resultDiv = document.getElementById('resultDiv');
+        const resultImage = document.getElementById('resultImage');
+
+        if (loadingDiv) loadingDiv.style.display = 'none';
+        if (resultImage) resultImage.src = imageUrl;
+        if (resultDiv) resultDiv.style.display = 'block';
+    }
+
+    function initializeJerseyDesigner() {
+        console.log("Jersey Designer functionality initializing");
+
+        // Set up color picker change handlers
+        const primaryColor = document.getElementById('primaryColor');
+        const secondaryColor = document.getElementById('secondaryColor');
+        const accentColor = document.getElementById('accentColor');
+
+        if (primaryColor) {
+            primaryColor.addEventListener('input', () => {
+                updateColorPreview('primaryColor', 'primaryPreview', 'primaryHex');
+            });
+        }
+
+        if (secondaryColor) {
+            secondaryColor.addEventListener('input', () => {
+                updateColorPreview('secondaryColor', 'secondaryPreview', 'secondaryHex');
+            });
+        }
+
+        if (accentColor) {
+            accentColor.addEventListener('input', () => {
+                updateColorPreview('accentColor', 'accentPreview', 'accentHex');
+            });
+        }
+
+        // Set up intensity slider
+        const intensitySlider = document.getElementById('intensitySlider');
+        if (intensitySlider) {
+            intensitySlider.addEventListener('input', (e) => {
+                updateIntensity(e.target.value);
+            });
+        }
+
+        // Set up style selection
+        document.querySelectorAll('.style-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const style = this.dataset.style;
+                if (style) {
+                    selectStyle(style);
+                }
+            });
+        });
+
+        // Set up reference image upload
+        const referenceImage = document.getElementById('referenceImage');
+        if (referenceImage) {
+            referenceImage.addEventListener('change', function() {
+                handleReferenceImage(this);
+            });
+        }
+
+        // Set up accent toggle
+        const accentToggle = document.getElementById('accentToggle');
+        if (accentToggle) {
+            accentToggle.addEventListener('click', toggleAccent);
+        }
+
+        // Set up generate button
+        const generateBtn = document.getElementById('generateBtn');
+        if (generateBtn) {
+            generateBtn.addEventListener('click', generateJersey);
+        }
+
+        // Initialize default values
+        updateIntensity(intensityValue);
+        updateColorPreview('primaryColor', 'primaryPreview', 'primaryHex');
+        updateColorPreview('secondaryColor', 'secondaryPreview', 'secondaryHex');
+        updateColorPreview('accentColor', 'accentPreview', 'accentHex');
+
+        console.log("Jersey Designer functionality initialized successfully");
+    }
+
+    // Run the code once DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeJerseyDesigner);
+    } else {
+        initializeJerseyDesigner();
+    }
+}
+</script>

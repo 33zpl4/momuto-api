@@ -1,0 +1,15 @@
+<script>
+    $(document).ready(function () {
+  $('.order_text_box >.text_label ').text('Confirma tu e-mail para altertas de pedido');
+let email_text = $('.email-newsletter > .checkbox_label').html()
+console.log(email_text);
+if(email_text != undefined){
+email_text.replace('Correo electrónico con noticias y ofertas','Suscríbete para recibir novedades y promociones')
+ $('.email-newsletter > .checkbox_label ').html(email_text )
+}
+
+$('.order_total_price > .name').text('Total')
+$('.order_btn.save_address_btn > span').text('Continuar')
+$('.order_crumbs > a:nth-child(1)').text('Carrito')
+    })
+</script>

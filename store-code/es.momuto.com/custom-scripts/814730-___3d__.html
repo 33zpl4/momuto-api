@@ -1,0 +1,14 @@
+<script>
+    var iframe3DTimer = setInterval(iframe3D, 150);
+
+    function iframe3D() {
+        var uuid = localStorage.getItem('3duuid');
+        if (uuid) {
+            clearInterval(iframe3DTimer);
+            var iframeElements = document.createElement('iframe');
+            iframeElements.style = 'display:none;';
+            iframeElements.src = 'https://design.momuto.com/3d-configurator/configurator.html?userId=' + uuid + '&configId=46zgeit2&suitName=mamuto3suit1&langguage=es&lang=es';
+            document.body.appendChild(iframeElements);
+        }
+    }
+</script>

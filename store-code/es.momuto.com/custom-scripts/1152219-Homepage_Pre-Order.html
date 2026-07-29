@@ -1,0 +1,56 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Cambiar el texto del botón de "PRE-PEDIDO" a "RESERVA AHORA"
+  var reserveButton = document.getElementById('add-cart-3032231');
+  if (reserveButton) {
+    reserveButton.textContent = "RESERVA AHORA";
+    reserveButton.style.width = "100%";
+    reserveButton.style.color = "#fff";
+    reserveButton.style.background = "#E2214B";
+    reserveButton.style.border = "1px solid #E2214B";
+    reserveButton.style.borderRadius = "3px";
+    reserveButton.disabled = false;
+  }
+
+  // Configuración para la cuenta atrás, ajustando por la fecha final o hasta que se alcancen las 1000 unidades
+  var countdownDisplay = document.getElementById('buynow-3032231');
+  if (countdownDisplay) {
+    countdownDisplay.style.width = "100%"; // Ajuste opcional del ancho
+    countdownDisplay.style.pointerEvents = 'none'; // Desactivar clics
+    countdownDisplay.style.backgroundColor = '#000'; // Indicar no clickeable
+    countdownDisplay.style.color = '#fff';
+
+    // Establecer la fecha y hora objetivo a las 23:00 del 1 de junio de 2024, hora de París
+    const endDate = new Date('June 1, 2024 23:10:00 GMT+0200').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endDate - now;
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownDisplay.textContent = `Cierre de reservas en: ${hours}h ${minutes}m ${seconds}s`;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        countdownDisplay.textContent = "Reservas cerradas";
+        reserveButton.textContent = "COMPRAR AHORA";
+        reserveButton.disabled = false;
+        reserveButton.style.backgroundColor = "#E2214B";
+        countdownDisplay.style.backgroundColor = "#000"; // Mantener el estilo del display al cambiar
+        countdownDisplay.textContent = "¡Quedan menos de 250 unidades!";
+      }
+    }
+
+    // Actualizar la cuenta atrás cada segundo
+    updateCountdown();
+    var timer = setInterval(updateCountdown, 1000);
+  }
+
+  // Establecer el elemento localStorage para la distinción de personalización en 3D (si es aplicable)
+  $('#add-cart-9407488').click(function() {
+    localStorage.setItem('goods_buy_type', '1');
+  });
+});
+</script>

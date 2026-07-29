@@ -1,0 +1,23 @@
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 1.15,  // Set this to the desired value
+    spaceBetween: 10,
+    observer: true,
+    observeParents: true
+    loop: true
+  });
+</script>
+
+<style>
+@media only screen and (max-width: 600px) {
+  .swiper-slide {
+    width: 60% !important; 
+    min-width: 0 !important;
+  }
+  .collection-product-item-image {
+    width: 80%;
+    height: auto;
+  }
+}
+</style>

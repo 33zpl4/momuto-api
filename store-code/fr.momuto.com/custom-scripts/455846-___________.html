@@ -1,0 +1,16 @@
+<script>
+    $(document).ready(function(){
+       $('#mo-quantity > div:nth-child(1)').on('click',function(){
+        cartNumber = $("#cart_number").html();
+        console.log(cartNumber);
+        console.log("-");
+        return false;
+    });
+       $('#mo-quantity > div:nth-child(3)').on('click',function(){
+        cartNumber = $("#cart_number").html();
+        console.log(cartNumber);
+        console.log("+");
+        return false;
+    });
+    });
+</script>

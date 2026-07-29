@@ -1,0 +1,27 @@
+<script>
+
+window.onload = function() {
+    // Changing 'Qty. ' to 'Qté. '
+    var qtyElement = document.querySelector('.price_append');
+    if(qtyElement) {
+        qtyElement.textContent = 'Cant. ';
+    }
+
+    // Changing 'Unit ' to 'p/u' and moving € symbol after the number
+    // var priceElement = document.querySelector('#showTotal');
+    // if(priceElement) {
+    //     var priceText = priceElement.textContent.trim();
+    //     var unitElement = document.querySelector('.price_append2');
+    //     if(unitElement) {
+    //         unitElement.textContent = priceText + '€ p/u';
+    //     }
+    // }
+
+    // Changing button text to 'Personnalisez votre design'
+    var buttonElement = document.querySelector('#goto3d');
+    if(buttonElement) {
+        buttonElement.textContent = 'Personaliza tu diseño';
+    }
+}
+
+</script>

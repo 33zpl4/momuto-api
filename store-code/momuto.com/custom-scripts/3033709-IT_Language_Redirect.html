@@ -1,0 +1,27 @@
+<script>
+(function () {
+  /* stop if a preference cookie already exists */
+  if (document.cookie.includes('langpref=')) return;
+
+  /* 1) only act for Italian browsers */
+  const wantsItalian = navigator.language?.toLowerCase().startsWith('it');
+  if (!wantsItalian) return;
+
+  /* 2) map English slug → Italian URL */
+  const redirects = {
+    'italy-vitruvian-man-jersey' : '/products/it-italy-vitruvian-man-jersey'
+    /* add more pairs as you add Italian pages */
+  };
+
+  /* 3) test current path */
+  const path = location.pathname;    // e.g. /collections/.../products/italy-vitruvian-man-jersey
+  for (const slug in redirects) {
+    const onEnglish = path.endsWith(slug) && !path.includes('/it-');
+    if (onEnglish) {
+      document.cookie = 'langpref=it;path=/;max-age=' + 60*60*24*14;   // 14-day memory
+      location.replace(redirects[slug]);                               // one-time jump
+      break;
+    }
+  }
+})();
+</script>
