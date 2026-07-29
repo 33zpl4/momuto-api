@@ -1,0 +1,14 @@
+<style>
+##card-footer > div > div.footer_content.container_wrapper > div.menu_item.pc_menu.email{display:none;}
+#card-footer > div > div.footer_content.container_wrapper > div.menu_item.detail_text.pc_menu{display:none;}
+.block_footer #newsletter-input{border-radius: 0 !important;}
+</style>
+<script>
+logoHtml = '<img style="max-width: 120px;  margin-bottom: 20px;" src="https://cdn.staticsoe.com/uploads/45500/cart/resources/20230525/fab9c2e89ea41fbbf6c998a280863d96.png"><p style=“text-align: left;”>Dévoilez votre identité footballistique. Personnalisez, jouez, et marquez votre empreinte.</p>';
+subscribeHtml='<li style="font-weight: 600;font-size: 17px; color:#fff;padding-top: 24px;">SUBSCRIBE</li>';
+$(function(){ 
+    $("#card-footer > div > div.footer_content.container_wrapper > div.menu_item.pc_menu.email > div.pc").html(logoHtml);
+$("#card-footer > div > div.footer_content.container_wrapper > div.menu_item.pc_menu.email > ul").prepend(subscribeHtml);
+});
+
+</script>

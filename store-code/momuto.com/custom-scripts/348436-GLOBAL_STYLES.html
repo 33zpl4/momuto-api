@@ -1,0 +1,25 @@
+<style>
+##card-footer > div > div.footer_content.container_wrapper > div.menu_item.pc_menu.email{display:none;}
+#card-footer > div > div.footer_content.container_wrapper > div.menu_item.detail_text.pc_menu{display:none;}
+.block_footer #newsletter-input{border-radius: 0 !important;}
+    /* Hide Currency Converter/Account Icons if they leak through */
+    .account_icon.to_currency, 
+    a.account_icon.to_currency,
+    .action-icon .account_icon.to_currency,
+    .header_box .account_icon.to_currency {
+        display: none !important;
+        visibility: hidden !important;
+    }
+.mobile_menu_card .mobile_menu_wrap .mobile_nav .panel-menu-mobile .only-warp > .panel-menu-ul > .panel-menu-item {
+    display: flex !important;
+}
+</style>
+<script>
+logoHtml = '<img style="max-width: 120px;  margin-bottom: 20px;" src="https://cdn.staticsoe.com/uploads/45500/cart/resources/20230525/fab9c2e89ea41fbbf6c998a280863d96.png"><p>Define your football identity. Customize, play, be seen.</p>';
+subscribeHtml='<li style="font-weight: 600;font-size: 17px; color:#fff;padding-top: 24px;">SUBSCRIBE</li>';
+$(function(){ 
+    $("#card-footer > div > div.footer_content.container_wrapper > div.menu_item.pc_menu.email > div.pc").html(logoHtml);
+$("#card-footer > div > div.footer_content.container_wrapper > div.menu_item.pc_menu.email > ul").prepend(subscribeHtml);
+});
+
+</script>
