@@ -1,0 +1,46 @@
+name: Test scripts API write access
+
+# One-off probe: can the OEMSaaS /scripts endpoint be written to like
+# /diyfiles? Runs scripts/test-scripts-write.js against the EN store only
+# (create-a-disabled-throwaway first; no-op update fallback) and commits the
+# resulting store-code/scripts-write-test.json to the branch.
+
+on:
+  push:
+    branches: [claude/jersey-short-size-options-zkryof]
+    paths:
+      - '.github/workflows/test-scripts-write.yml'
+      - 'scripts/test-scripts-write.js'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Probe write access
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+        run: node scripts/test-scripts-write.js
+
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add store-code/scripts-write-test.json
+          if git diff --cached --quiet; then
+            echo "No report changes"
+          else
+            git commit -m "scripts API write-access probe report [skip ci]"
+            git push origin HEAD
+          fi
