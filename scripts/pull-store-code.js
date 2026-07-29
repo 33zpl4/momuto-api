@@ -6,11 +6,13 @@
 //   1. DIY files    — full listing via GET /diyfiles (paginated), content saved
 //                     verbatim to store-code/<store>/diy-files/<file_name>,
 //                     plus an index.json with id/type/name per file.
-//   2. Scripts API  — the custom-script section has no endpoint we know of, so
-//                     probe likely paths (GET only). Anything that answers like
-//                     the OEMSaaS API (code:0 + a list) is harvested the same
-//                     way; every probe's outcome lands in probe-report.json so
-//                     a dead end is documented, not silent.
+//   2. Scripts API  — GET /scripts (discovered by probing on 2026-07-29; item
+//                     GET /scripts/{id} is NOT defined). Returns id,
+//                     script_name, display_routes, display_position, status,
+//                     detail (the code). The endpoint serves 10 per page and
+//                     ignores pagesize, so we walk `page` until a page repeats
+//                     or comes back empty. Content goes verbatim to
+//                     custom-scripts/<id>-<slug>.html, metadata to index.json.
 //   3. Rendered     — guaranteed fallback: fetch the public storefront pages
 //      storefront     and cut out every <!-- script N Start/End --> block the
 //                     platform injected. Saved to
@@ -39,13 +41,6 @@ const OUT_ROOT = 'store-code';
 // script manager can scope entries to page types, so home alone is not enough.
 const SCRAPE_PATHS = ['/', '/cart', '/account/login', '/account/register', '/collections/all'];
 
-// Candidate paths for the custom-script section's API. GET only — probing
-// reads, never writes.
-const SCRIPT_ENDPOINT_CANDIDATES = [
-  'scripts', 'script', 'customscripts', 'custom_scripts', 'custom-scripts',
-  'shopscripts', 'shop_scripts', 'storescripts', 'scriptmanage', 'script_manage',
-  'scripttags', 'script_tags', 'trackingcodes', 'tracking_codes', 'codes',
-];
 
 function safeName(name) {
   return String(name).replace(/[^a-zA-Z0-9._-]/g, '_') || '_unnamed_';
@@ -99,36 +94,51 @@ async function pullDiyFiles(store) {
   return all.length;
 }
 
-// ---------- 2. custom-scripts endpoint probe ----------
+// ---------- 2. custom scripts via GET /scripts ----------
 
-async function probeScriptEndpoints(store, report) {
-  for (const cand of SCRIPT_ENDPOINT_CANDIDATES) {
-    const { status, json, text } = await api(store, `${cand}?page=1&pagesize=50`);
-    const entry = { endpoint: cand, status, code: json && json.code, snippet: text.slice(0, 200) };
-    report.push(entry);
-    const list = json && json.code === 0 && ((json.data && json.data.list) || json.data);
-    if (Array.isArray(list) && list.length) {
-      console.log(`  !! ${store.label}: /${cand} answered with a list — harvesting`);
-      entry.harvested = list.length;
-      const index = [];
-      for (const s of list) {
-        const id = s.id || s.script_id || 'unknown';
-        const title = s.title || s.name || '';
-        index.push({ id, title, keys: Object.keys(s) });
-        const body = s.content || s.script || s.html || JSON.stringify(s, null, 2);
-        writeFile(path.join(store.label, 'custom-scripts', `${id}${title ? '-' + safeName(title) : ''}.html`), String(body));
-      }
-      writeFile(path.join(store.label, 'custom-scripts', 'index.json'), JSON.stringify(index, null, 2) + '\n');
+async function pullCustomScripts(store) {
+  const seen = new Set();
+  const all = [];
+  // The endpoint pages 10 at a time regardless of pagesize; a page that only
+  // repeats already-seen ids means pagination isn't advancing — stop rather
+  // than loop forever.
+  for (let page = 1; page <= 100; page++) {
+    const { status, json } = await api(store, `scripts?page=${page}&pagesize=50`);
+    if (status !== 200 || !json || json.code !== 0) {
+      console.log(`  scripts list failed on ${store.label} page ${page}: HTTP ${status} code ${json && json.code}`);
+      break;
     }
+    const list = (json.data && json.data.list) || json.data || [];
+    if (!Array.isArray(list) || list.length === 0) break;
+    const fresh = list.filter(s => !seen.has(s.id));
+    if (fresh.length === 0) break;
+    fresh.forEach(s => seen.add(s.id));
+    all.push(...fresh);
   }
-  // Direct shot at the known EN checkout script id, in case list is gated but
-  // item GET works.
-  if (store.label === 'momuto.com') {
-    for (const cand of ['scripts', 'script', 'customscripts']) {
-      const { status, json, text } = await api(store, `${cand}/348500`);
-      report.push({ endpoint: `${cand}/348500`, status, code: json && json.code, snippet: text.slice(0, 200) });
-    }
+
+  const index = [];
+  for (const s of all) {
+    const slug = s.script_name ? '-' + safeName(s.script_name).slice(0, 60) : '';
+    const fname = `${s.id}${slug}.html`;
+    index.push({
+      id: s.id,
+      script_name: s.script_name,
+      display_routes: s.display_routes,
+      display_scope: s.display_scope,
+      display_position: s.display_position,
+      display_checkout: s.display_checkout,
+      position: s.position,
+      status: s.status,
+      script_type: s.script_type,
+      created_at: s.created_at,
+      updated_at: s.updated_at,
+      saved_as: fname,
+    });
+    writeFile(path.join(store.label, 'custom-scripts', fname), s.detail != null ? String(s.detail) : '');
   }
+  writeFile(path.join(store.label, 'custom-scripts', 'index.json'), JSON.stringify(index, null, 2) + '\n');
+  console.log(`  ${store.label}: ${all.length} custom scripts`);
+  return all.length;
 }
 
 // ---------- 3. rendered storefront scrape ----------
@@ -171,19 +181,16 @@ async function scrapeRenderedScripts(store) {
 // ---------- main ----------
 
 async function main() {
-  const probeReport = {};
   for (const [key, store] of Object.entries(STORES)) {
     console.log(`\n=== ${store.label} (${key}) ===`);
     if (!store.token) {
       console.log('  no token in env — skipping API passes');
     } else {
       await pullDiyFiles(store);
-      probeReport[store.label] = [];
-      await probeScriptEndpoints(store, probeReport[store.label]);
+      await pullCustomScripts(store);
     }
     await scrapeRenderedScripts(store);
   }
-  writeFile('probe-report.json', JSON.stringify(probeReport, null, 2) + '\n');
   console.log('\nDone.');
 }
 
