@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparing your order…</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<body>
+<style>
+    .loading { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; text-align: center; align-items: center; justify-content: center }
+    .loading > h2 { color: #ccc; margin: 0; font: .8em verdana; text-transform: uppercase; letter-spacing: .1em }
+    .loading span { display: inline-block; vertical-align: middle; width: .6em; height: .6em; margin: .19em; background: #007DB6; border-radius: .6em; animation: loading 1s infinite alternate }
+    .loading span:nth-of-type(2) { background: #008FB2; animation-delay: 0.2s }
+    .loading span:nth-of-type(3) { background: #009B9E; animation-delay: 0.4s }
+    .loading span:nth-of-type(4) { background: #00A77D; animation-delay: 0.6s }
+    .loading span:nth-of-type(5) { background: #00B247; animation-delay: 0.8s }
+    .loading span:nth-of-type(6) { background: #5AB027; animation-delay: 1.0s }
+    .loading span:nth-of-type(7) { background: #A0B61E; animation-delay: 1.2s }
+    @keyframes loading { 0% { opacity: 0 } 100% { opacity: 1 } }
+</style>
+<div class="loading">
+    <h2>loading......</h2>
+    <div><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+<script type="text/javascript">
+    /* MOMUTO hardened handoff, v3 (July 2026 — the shipping-only order j59hcqcb3y).
+       On top of the v2 fixes (maxRetries declared before use; bare visits redirect
+       home; failed calls abort to /cart):
+       1. Success now means HTTP 200 AND no error code in the response body — the
+          platform answers business failures ("can't add this product") as HTTP 200
+          + error JSON, which v2 counted as success.
+       2. An unmapped `goods` key aborts instead of silently dropping the line
+          (a dropped line = an unbilled product).
+       3. The 0-euro preview line is added only AFTER every billable line is
+          confirmed, and never counts toward the submit guards — in j59hcqcb3y it
+          was the preview line that "vouched for" an otherwise-empty cart, which
+          then checked out charging shipping only.
+       4. Aborting re-cleans the platform cart, so no sellable preview-only or
+          partially-billed cart is left behind on /cart.
+       5. Every handoff reports a summary (and any failure detail) to
+          https://momuto-api.vercel.app/api/checkout-beacon via sendBeacon —
+          cart/add runs in the customer's browser, so without this a failed add
+          leaves no trace anywhere. Telemetry never blocks checkout. */
+
+    // >>> PER-STORE PRODUCT MAP — do not copy between stores, ids differ <<<
+    // es.momuto.com map: 3800026 = jersey, 3800028 = shorts, 3800023 = socks.
+    // NOTE: the old ES file mapped spized1shorts1 to 3800026 (the JERSEY id);
+    // EN and FR both map that key to their SHORTS product, so it is corrected
+    // to 3800028 here — verify 3800028 is the ES shorts product before deploy.
+    // skus are derived from product_id.
+    var goodsInfo = {
+        "mamuto2": { "product_id": 3800026, "sku_code": "3800026-0-0-0-0-0-0", "quantity": 1, "data_from": "", "property": [] },
+        "mamuto2shorts1": { "product_id": 3800028, "sku_code": "3800028-0-0-0-0-0-0", "quantity": 1, "data_from": "", "property": [] },
+        "mamuto2socks1": { "product_id": 3800023, "sku_code": "3800023-0-0-0-0-0-0", "quantity": 1, "data_from": "", "property": [] },
+        "mamuto3": { "product_id": 3800026, "sku_code": "3800026-0-0-0-0-0-0", "quantity": 1, "data_from": "", "property": [] },
+        "mamuto3shorts1": { "product_id": 3800028, "sku_code": "3800028-0-0-0-0-0-0", "quantity": 1, "data_from": "", "property": [] },
+        "mamuto3socks1": { "product_id": 3800023, "sku_code": "3800023-0-0-0-0-0-0", "quantity": 1, "data_from": "", "property": [] },
+        "spized1shorts1": { "product_id": 3800028, "sku_code": "3800028-0-0-0-0-0-0", "quantity": 1, "data_from": "", "property": [] }
+    };
+
+    var maxRetries = 3;
+    var BEACON_URL = 'https://momuto-api.vercel.app/api/checkout-beacon';
+
+    var order_no = null;
+    var events = []; // everything noteworthy this handoff; shipped with the report
+
+    // The platform's response shape is undocumented, so only flag UNAMBIGUOUS
+    // error signals; anything else passes and the beacon teaches us the shape.
+    function businessError(parsed) {
+        if (!parsed || typeof parsed !== 'object') { return null; }
+        if ('code' in parsed && String(parsed.code) !== '0' && String(parsed.code) !== '200') { return 'code=' + parsed.code; }
+        if (parsed.success === false) { return 'success=false'; }
+        return null;
+    }
+
+    function requestWithRetry(url, data, retriesLeft) {
+        var response = $.ajax({ url: url, type: 'POST', data: data, dataType: 'json', async: false });
+        var parsed = response.responseJSON;
+        if (parsed === undefined) { try { parsed = JSON.parse(response.responseText); } catch (e) { parsed = undefined; } }
+        var error = response.status === 200 ? businessError(parsed) : ('http ' + response.status);
+        if (!error) { return { ok: true }; }
+        console.log('Request to ' + url + ' failed: ' + error);
+        if (retriesLeft > 0) { return requestWithRetry(url, data, retriesLeft - 1); }
+        return { ok: false, error: error, body: String(response.responseText || '').slice(0, 200) };
+    }
+
+    // Fire-and-forget: sendBeacon survives the redirect/submit that follows and a
+    // plain string posts as text/plain (no preflight). Must never block checkout.
+    function report(status) {
+        try {
+            var payload = JSON.stringify({
+                source: 'checkSumbit', store: location.host, status: status,
+                order_no: order_no, events: events.slice(0, 20)
+            });
+            if (navigator.sendBeacon) { navigator.sendBeacon(BEACON_URL, payload); }
+            else { $.ajax({ url: BEACON_URL, type: 'POST', data: payload, contentType: 'text/plain', async: false }); }
+        } catch (e) { }
+    }
+
+    function abortToCart(reason) {
+        events.push({ t: 'abort', reason: reason });
+        // Leave no sellable half-cart behind: a preview-only or partially-billed
+        // cart on /cart checks out as an undercharged order.
+        requestWithRetry('/homeapi/cart/clean', [], 1);
+        report('aborted');
+        window.location.replace('/cart');
+    }
+
+    function getParameterByName(name, url) {
+        if (!url) { url = window.location.href; }
+        name = name.replace(/[[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url);
+        if (!results) { return null; }
+        if (!results[2]) { return ''; }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    (function () {
+        var data = null;
+        try { data = JSON.parse(getParameterByName('data')); } catch (e) { data = null; }
+        if (!data || (!data.goods && !data.oem)) {
+            // bare or malformed visit — don't hang on the spinner forever
+            window.location.replace('/');
+            return;
+        }
+        var goods = data.goods;
+        var oem_goods = data.oem;
+        order_no = data.order_no;
+        localStorage.setItem('order_no_3d', order_no);
+        localStorage.setItem('order_type_3d', 1);
+
+        // a failed clean must abort (otherwise quantities stack on the old cart)
+        var cleaned = requestWithRetry('/homeapi/cart/clean', [], maxRetries);
+        if (!cleaned.ok) {
+            events.push({ t: 'clean-failed', error: cleaned.error, body: cleaned.body });
+            abortToCart('clean failed');
+            return;
+        }
+
+        var cart_qty = [];          // one entry per line actually IN the cart (mirrors the form POST)
+        var billable_expected = 0;  // billable lines the payload asked for
+        var billable_added = 0;     // billable lines confirmed by the platform
+
+        if (goods) {
+            Object.entries(goods).forEach(function (entry) {
+                var key = entry[0], value = entry[1];
+                if (!(value > 0)) { return; }
+                billable_expected++;
+                var postGood = goodsInfo[key];
+                if (!postGood) {
+                    // unmapped suit = a product we'd ship but never bill — abort below
+                    events.push({ t: 'unmapped-goods-key', key: key, qty: value });
+                    return;
+                }
+                postGood.quantity = value;
+                var r = requestWithRetry('/homeapi/cart/add', JSON.stringify(postGood), maxRetries);
+                if (r.ok) { billable_added++; cart_qty.push(value); }
+                else { events.push({ t: 'add-failed', key: key, product_id: postGood.product_id, qty: value, error: r.error, body: r.body }); }
+            });
+        }
+        if (oem_goods) {
+            Object.entries(oem_goods).forEach(function (entry) {
+                var key = entry[0], value = entry[1];
+                if (!(key > 0 && value > 0)) { return; }
+                billable_expected++;
+                var postGood = { "product_id": key, "sku_code": key + '-0-0-0-0-0-0', "quantity": value, "data_from": "", "property": [] };
+                var r = requestWithRetry('/homeapi/cart/add', JSON.stringify(postGood), maxRetries);
+                if (r.ok) { billable_added++; cart_qty.push(value); }
+                else { events.push({ t: 'add-failed', oem_id: key, qty: value, error: r.error, body: r.body }); }
+            });
+        }
+
+        // Every billable line must be confirmed before anything else happens.
+        if (billable_added === 0 || billable_added !== billable_expected) {
+            abortToCart('billable lines ' + billable_added + '/' + billable_expected);
+            return;
+        }
+
+        // Best-effort 0-euro design-preview line (per-order product carrying the
+        // customer's actual jersey renders). Cosmetic only: added strictly after
+        // the billable lines confirmed, in the form so it mirrors the cart, but
+        // NEVER counted toward the guards above.
+        var preview_goods = data.preview;
+        if (preview_goods) {
+            Object.entries(preview_goods).forEach(function (entry) {
+                var key = entry[0], value = entry[1];
+                if (!(key > 0 && value > 0)) { return; }
+                var postGood = { "product_id": key, "sku_code": key + '-0-0-0-0-0-0', "quantity": value, "data_from": "", "property": [] };
+                var r = requestWithRetry('/homeapi/cart/add', JSON.stringify(postGood), maxRetries);
+                if (r.ok) { cart_qty.push(value); }
+                else { events.push({ t: 'preview-add-failed', oem_id: key, error: r.error, body: r.body }); }
+            });
+        }
+
+        report('ok');
+
+        var form = document.createElement('form');
+        form.action = '/cart';
+        form.method = 'POST';
+        cart_qty.forEach(function (element) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'minicart_qty';
+            input.value = element;
+            form.appendChild(input);
+        });
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'coupon_code';
+        input.value = '';
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    })();
+</script>
+</body>
+</html>

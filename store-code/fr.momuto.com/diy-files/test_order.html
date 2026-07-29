@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<body>
+<style>
+    .loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loading > h2 {
+        color: #ccc;
+        margin: 0;
+        font: .8em verdana;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+    }
+
+    .loading span {
+        display: inline-block;
+        vertical-align: middle;
+        width: .6em;
+        height: .6em;
+        margin: .19em;
+        background: #007DB6;
+        border-radius: .6em;
+        animation: loading 1s infinite alternate;
+    }
+
+    .loading span:nth-of-type(2) {
+        background: #008FB2;
+        animation-delay: 0.2s;
+    }
+
+    .loading span:nth-of-type(3) {
+        background: #009B9E;
+        animation-delay: 0.4s;
+    }
+
+    .loading span:nth-of-type(4) {
+        background: #00A77D;
+        animation-delay: 0.6s;
+    }
+
+    .loading span:nth-of-type(5) {
+        background: #00B247;
+        animation-delay: 0.8s;
+    }
+
+    .loading span:nth-of-type(6) {
+        background: #5AB027;
+        animation-delay: 1.0s;
+    }
+
+    .loading span:nth-of-type(7) {
+        background: #A0B61E;
+        animation-delay: 1.2s;
+    }
+
+    @keyframes loading {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+<div class="loading">
+    <h2>loading......</h2>
+    <div><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+
+<script type="text/javascript">
+
+    var goodsInfo = {
+        "mamuto2": {"product_id":4163096,"sku_code":"4163096-0-0-0-0-0-0","quantity":1,"data_from":"","property":[]},
+        "mamuto2shorts1": {"product_id":4163097,"sku_code":"4163097-0-0-0-0-0-0","quantity":1,"data_from":"","property":[]},
+        "mamuto2socks1": {"product_id":4163094,"sku_code":"4174485-0-0-0-0-0-0","quantity":1,"data_from":"","property":[]},
+        "spized1shorts1": {"product_id":4163097,"sku_code":"4163094-0-0-0-0-0-0","quantity":1,"data_from":"","property":[]},
+    };
+
+
+
+    //ajax同步请求，失败后进行重试，超过最大重试次数，接着执行下面，不阻断,
+    function syncAjaxRequestWithRetry(url, data, maxRetries, async) {
+        var retries = 0;
+
+        function makeRequest() {
+            var response = $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                async: async
+            });
+            if (response.status === 200) {
+                return response.responseText;
+            } else if (response.status === 302) {
+                var redirectUrl = response.getResponseHeader('Location');
+                console.log('302 Redirect URL:', redirectUrl);
+            } else {
+                console.log(response);
+                retries++;
+                if (retries <= maxRetries) {
+                    // 重试请求
+                    console.log('Request failed. Retrying... (Attempt ' + retries + ')');
+                    return makeRequest();
+                } else {
+                    console.log('Max retries exceeded. Request failed.');
+                    return null;
+                }
+            }
+        }
+
+        return makeRequest();
+    }
+
+
+    // 获取URL中的参数值
+    function getParameterByName(name, url) {
+        if (!url) {
+            url = window.location.href;
+        }
+        name = name.replace(/[[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) {
+            return null;
+        }
+        if (!results[2]) {
+            return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // 获取URL中的JSON数据
+    var dataParam = getParameterByName('data');
+    // 解析JSON数据
+    //var data = JSON.parse(dataParam);
+    var data ={"goods":{"mamuto2":3},"source":"3d","order_no":"4ej8oucm4z","email":"demo@gmail.com"}
+    var goods = data.goods;
+    var order_no = data.order_no;
+    localStorage.setItem('order_no_3d', order_no);
+    localStorage.setItem('order_type_3d', 1);
+ 
+    //清空购物车
+    syncAjaxRequestWithRetry('/homeapi/cart/clean', [], maxRetries, false);
+
+
+    var maxRetries = 3;//重试次数
+    //依次添加到购物车
+    var cart_qty = [];//购物车数量，post到购物车接口要用到
+
+    Object.entries(goods).forEach(function ([key, value]) {
+        postGood = goodsInfo[key];
+        postGood.quantity = value;
+        //发送请求
+        syncAjaxRequestWithRetry("/homeapi/cart/add", JSON.stringify(postGood), maxRetries, false);
+        cart_qty.push(value);
+    });
+
+
+    //跳转到结算页面
+    var form = document.createElement('form');
+    form.action = '/cart';
+    form.method = 'POST';
+    cart_qty.forEach(function (element) {
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'minicart_qty';
+        input.value = element;
+        form.appendChild(input);
+    });
+
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'coupon_code';
+    input.value = '';
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+
+    form.submit();
+
+
+</script>
+</body>
+
+</html>

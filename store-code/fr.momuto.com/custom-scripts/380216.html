@@ -1,0 +1,14 @@
+{
+  "id": 380216,
+  "script_name": "移除列表页 quick view",
+  "display_routes": "all",
+  "display_scope": 0,
+  "display_position": 1,
+  "display_checkout": 1,
+  "detail": "<script>$('.actions-wrapper').remove();$('.product_quick-mobile-view').remove();</script>\n\n<script>\n    $(document).ready(function () {\n        $(\".price_append2\").contents().filter(function() {\n            return this.nodeType === 3; // 文本节点类型\n        }).remove();\n\n    });\n    </script>",
+  "position": 0,
+  "status": 1,
+  "script_type": 1,
+  "created_at": 1687765877,
+  "updated_at": 1709541469
+}

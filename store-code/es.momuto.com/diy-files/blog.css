@@ -1,0 +1,368 @@
+/* ═══════════════════════════════════════════════════════════════
+   MOMUTO — Shared Blog Styles
+   Deployed via scripts/deploy-blog-css.js to all four stores.
+   Targets: Post Detail (news/detail) + Post List (news/list)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Fonts ─────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Design tokens ─────────────────────────────────────────────── */
+:root {
+  --mg-red:     #c8352e;
+  --mg-text:    #3a3a3a;
+  --mg-muted:   #71717a;
+  --mg-surface: #f5f5f3;
+  --mg-border:  #e4e4e7;
+  --mg-dark:    #0a0a0a;
+}
+
+/* ── CMS-injected post title (.title) ──────────────────────────── */
+/* Restyled — not hidden. The CMS renders this; we don't add our own H1. */
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  color: var(--mg-dark);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  margin-bottom: 1rem;
+}
+
+/* ── Prose container ───────────────────────────────────────────── */
+.post-content,
+.news-detail-content {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--mg-text);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ── Headings ──────────────────────────────────────────────────── */
+.post-content h2,
+.h2-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  color: var(--mg-dark);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--mg-surface);
+  padding-bottom: 0.4rem;
+}
+
+.post-content h3,
+.h3-subheading {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--mg-dark);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.body-p {
+  font-weight: 300;
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Links ─────────────────────────────────────────────────────── */
+.post-content a {
+  color: var(--mg-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── Images ────────────────────────────────────────────────────── */
+.post-content img {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin: 2rem auto;
+  display: block;
+  border-radius: 2px;
+}
+
+/* ── Tables ────────────────────────────────────────────────────── */
+.post-content table,
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+}
+
+.post-content table th,
+.data-table th {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mg-muted);
+  border-bottom: 2px solid var(--mg-border);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+}
+
+.post-content table td,
+.data-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--mg-border);
+}
+
+/* ── AI Answer capsule (GEO 2026 — feeds AI search overviews) ──── */
+/* Usage: <div class="ai-capsule"><span class="ai-capsule-label">AI Search Summary</span><p>...</p></div> */
+.ai-capsule {
+  background: var(--mg-surface);
+  border: 1px solid var(--mg-border);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.ai-capsule-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--mg-red);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+/* ── TL;DR / Key Takeaways box ─────────────────────────────────── */
+.tldr-box {
+  background: var(--mg-surface);
+  border: 1px solid var(--mg-border);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0 2rem;
+  font-size: 0.95rem;
+}
+
+.tldr-box strong,
+.tldr-box b {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mg-muted);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.tldr-box ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.tldr-box li {
+  margin-bottom: 0.35rem;
+}
+
+/* ── Prompt / code box ─────────────────────────────────────────── */
+/* Usage: <div class="prompt-box">your prompt here</div> */
+.prompt-box {
+  background: var(--mg-dark);
+  color: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-radius: 6px;
+  border-left: 4px solid var(--mg-red);
+  font-family: monospace;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin: 2.5rem 0;
+  position: relative;
+}
+
+.prompt-box::before {
+  content: "COPY THIS PROMPT";
+  position: absolute;
+  top: -12px;
+  left: 1.25rem;
+  background: var(--mg-red);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 10px;
+}
+
+/* Per-locale label — tag the box with lang="fr|es|it" to localize it. */
+.prompt-box[lang="fr"]::before { content: "COPIER CE PROMPT"; }
+.prompt-box[lang="es"]::before { content: "COPIAR ESTE PROMPT"; }
+.prompt-box[lang="it"]::before { content: "COPIA QUESTO PROMPT"; }
+
+/* ── Side-by-side image comparison ────────────────────────────── */
+/* Usage: <div class="comparison-block"><div class="comparison-grid">...</div></div> */
+.comparison-block {
+  margin: 3rem 0;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.comparison-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.img-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--mg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.4rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .comparison-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Pull quotes ───────────────────────────────────────────────── */
+.post-content blockquote,
+.pull-quote {
+  border-left: 3px solid var(--mg-red);
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  margin: 2rem 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--mg-dark);
+}
+
+/* ── Callout / Pro-tip box ─────────────────────────────────────── */
+.callout-box {
+  background: var(--mg-surface);
+  border: 1px solid var(--mg-border);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* ── Post meta line (category · date · reading time) ───────────── */
+.post-meta {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mg-muted);
+  margin-bottom: 1.25rem;
+}
+
+.post-meta .category-tag {
+  color: var(--mg-red);
+  margin-right: 0.75rem;
+}
+
+/* ── Author entity ─────────────────────────────────────────────── */
+.author-bio {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 3rem 0 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--mg-border);
+  font-size: 0.9rem;
+}
+
+.author-bio img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.author-bio .author-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--mg-dark);
+}
+
+.author-bio .author-role {
+  font-size: 0.72rem;
+  color: var(--mg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── End CTA card ──────────────────────────────────────────────── */
+/* Default: outlined red border. Add class "dark" for black background variant. */
+/* Usage: <section class="cta-card"> or <section class="cta-card dark"> */
+.cta-card {
+  border: 2px solid var(--mg-red);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  margin: 3rem 0 1rem;
+  text-align: center;
+}
+
+.cta-card.dark {
+  background: var(--mg-dark);
+  border: none;
+}
+
+.cta-card h2,
+.cta-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--mg-dark);
+  margin: 0 0 0.5rem;
+  border: none;
+  padding: 0;
+}
+
+.cta-card.dark h2,
+.cta-card.dark h3 {
+  color: #ffffff;
+}
+
+.cta-card p {
+  color: var(--mg-muted);
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+}
+
+.cta-card.dark p {
+  color: #a1a1aa;
+}
+
+/* Shared button style — use on <a> or <button> inside .cta-card */
+.cta-card a,
+.cta-btn {
+  display: inline-block;
+  background: var(--mg-red);
+  color: #fff !important;
+  text-decoration: none !important;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 2px;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.cta-card a:hover,
+.cta-btn:hover {
+  transform: scale(1.03);
+  opacity: 0.92;
+}
