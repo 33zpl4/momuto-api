@@ -1,0 +1,84 @@
+{
+  "store": "momuto.com",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "scripts",
+      "status": 200,
+      "code": 404,
+      "msg": "接口未定义",
+      "sent": {
+        "script_name": "MOMUTO api write test (safe to delete)",
+        "detail": "<!-- momuto scripts-api write test -->",
+        "display_routes": "all",
+        "position": 1,
+        "status": 0
+      }
+    },
+    {
+      "note": "no-op target before",
+      "detail": "<script>$('.actions-wrapper').remove();$('.product_quick-mobile-view').remove();</script>",
+      "script_name": "移除列表页 quick view"
+    },
+    {
+      "method": "PUT",
+      "path": "scripts/348474",
+      "status": 200,
+      "code": 404,
+      "msg": "接口未定义",
+      "sent": {
+        "script_name": "移除列表页 quick view",
+        "detail": "<script>$('.actions-wrapper').remove();$('.product_quick-mobile-view').remove();</script>",
+        "display_routes": "all",
+        "display_scope": 0,
+        "display_position": 1,
+        "display_checkout": 0,
+        "position": 0,
+        "status": 1,
+        "script_type": 1
+      }
+    },
+    {
+      "method": "POST",
+      "path": "scripts/348474",
+      "status": 200,
+      "code": 404,
+      "msg": "接口未定义",
+      "sent": {
+        "script_name": "移除列表页 quick view",
+        "detail": "<script>$('.actions-wrapper').remove();$('.product_quick-mobile-view').remove();</script>",
+        "display_routes": "all",
+        "display_scope": 0,
+        "display_position": 1,
+        "display_checkout": 0,
+        "position": 0,
+        "status": 1,
+        "script_type": 1
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "scripts",
+      "status": 200,
+      "code": 404,
+      "msg": "接口未定义",
+      "sent": {
+        "id": 348474,
+        "script_name": "移除列表页 quick view",
+        "detail": "<script>$('.actions-wrapper').remove();$('.product_quick-mobile-view').remove();</script>",
+        "display_routes": "all",
+        "display_scope": 0,
+        "display_position": 1,
+        "display_checkout": 0,
+        "position": 0,
+        "status": 1,
+        "script_type": 1
+      }
+    },
+    {
+      "note": "no-op target after",
+      "unchanged": true,
+      "detail_after": "<script>$('.actions-wrapper').remove();$('.product_quick-mobile-view').remove();</script>"
+    }
+  ]
+}
