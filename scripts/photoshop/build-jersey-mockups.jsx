@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-27e · shorts legs take separate files';
+var VERSION = '2026-07-27f · shorts stitching takes the leg colour';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -156,6 +156,25 @@ var CONFIG = {
   // would have to be recomputed per template — 15 sleeve px is 10 px on the
   // front template and a different number on the back.
   //
+  // `tint: ['LAYER', …]` recolours the template's own solid-fill layers to this
+  // slot's artwork. The stitching on the shorts is white in the template, which
+  // reads as piping rather than thread on any kit that is not white — so it takes
+  // the leg's own colour.
+  //
+  // The colour is the artwork's DOMINANT one, read from the channel histograms of
+  // the rasterised .psb. Not a sampled pixel: there is no coordinate that is base
+  // fabric in every design, so a fixed sample point would land on a stripe in one
+  // kit and a crest in the next. The run logs the hex it used.
+  //
+  // `tintColour: 'RRGGBB'` on the slot forces a colour instead of sampling — for
+  // a design split so evenly between two colours that "dominant" is a coin toss.
+  //
+  // ⚠ Sampling needs placeInside. With replaceContents the artwork is never
+  // rasterised anywhere this script can read, so only tintColour works.
+  //
+  // Only the FIRST tinting slot of a view applies, so two legs cannot fight over
+  // the same layer.
+  //
   // `expect: [w, h]` is the slot's own SOURCE canvas, measured by
   // inspect-template.jsx. It is only used when placeInside is FALSE — see the
   // note on placeInside at the bottom of this block. In the default mode the
@@ -225,7 +244,13 @@ var CONFIG = {
         //
         // '-shorts' remains as the fallback, so a design whose legs really are
         // the same still ships one file.
-        { layer: 'L LEG DESIGN',  at: [954, 965],  file: ['shortsright', 'shorts'], count: 1, required: true },
+        //
+        // `tint` recolours the template's own STITCHING fill to this artwork's
+        // dominant colour, so the seams read as thread on the fabric instead of
+        // white piping. Taken from the left leg; put `tintColour: 'RRGGBB'` on
+        // the slot to force a specific colour instead of sampling.
+        { layer: 'L LEG DESIGN',  at: [954, 965],  file: ['shortsright', 'shorts'], count: 1, required: true,
+          tint: ['STITCHING'] },
         { layer: 'R LEG DESIGN',  at: [2072, 861], file: ['shortsleft',  'shorts'], count: 1, required: true },
         { layer: 'BELT DESIGN',   file: 'belt',    count: 1 }   // the waistband
       ]
@@ -412,7 +437,69 @@ function fitLayerInBox(pl, box, mode) {
                UnitValue(box[1] + (box[3] - n.h) / 2 - n.y, 'px'));
 }
 
-function placeInsideSlot(doc, layer, stack) {
+/**
+ * The dominant colour of a document, per channel.
+ *
+ * Histogram mode rather than sampling a pixel, because there is no position that
+ * is base fabric in every design — a fixed sample point lands on a stripe in one
+ * kit and a crest in the next. The most frequent value cannot do that: on flat
+ * vector artwork the base colour is most of the canvas by a wide margin.
+ *
+ * Channels are moded independently, so in principle the result is a colour that
+ * appears nowhere. In practice a design with one dominant colour gives that
+ * colour on all three channels. A design genuinely split near 50/50 between two
+ * colours is the case to watch, which is why the result is logged.
+ */
+function modalRGB(doc) {
+  var out = [];
+  for (var c = 0; c < 3; c++) {
+    var h = doc.channels[c].histogram;
+    var best = 0, bestCount = -1;
+    for (var i = 0; i < h.length; i++) {
+      if (h[i] > bestCount) { bestCount = h[i]; best = i; }
+    }
+    out.push(best);
+  }
+  return { r: out[0], g: out[1], b: out[2] };
+}
+
+function toHex(c) {
+  var parts = [c.r, c.g, c.b], s = '';
+  for (var i = 0; i < 3; i++) {
+    var v = Math.round(parts[i]).toString(16).toUpperCase();
+    s += (v.length < 2 ? '0' + v : v);
+  }
+  return s;
+}
+
+function parseHex(str) {
+  var m = String(str).replace('#', '');
+  if (!/^[0-9a-fA-F]{6}$/.test(m)) return null;
+  return {
+    r: parseInt(m.substr(0, 2), 16),
+    g: parseInt(m.substr(2, 2), 16),
+    b: parseInt(m.substr(4, 2), 16)
+  };
+}
+
+// Solid colour fill layers have no DOM setter — the action is the only route.
+function setSolidFill(doc, layer, c) {
+  doc.activeLayer = layer;
+  var d = new ActionDescriptor();
+  var ref = new ActionReference();
+  ref.putEnumerated(charIDToTypeID('Lyr '), charIDToTypeID('Ordn'), charIDToTypeID('Trgt'));
+  d.putReference(charIDToTypeID('null'), ref);
+  var fill = new ActionDescriptor();
+  var rgb = new ActionDescriptor();
+  rgb.putDouble(charIDToTypeID('Rd  '), c.r);
+  rgb.putDouble(charIDToTypeID('Grn '), c.g);
+  rgb.putDouble(charIDToTypeID('Bl  '), c.b);
+  fill.putObject(charIDToTypeID('Clr '), charIDToTypeID('RGBC'), rgb);
+  d.putObject(charIDToTypeID('T   '), stringIDToTypeID('solidColorLayer'), fill);
+  executeAction(charIDToTypeID('setd'), d, DialogModes.NO);
+}
+
+function placeInsideSlot(doc, layer, stack, sample) {
   doc.activeLayer = layer;
   executeAction(stringIDToTypeID('placedLayerEditContents'), undefined, DialogModes.NO);
   var inner = app.activeDocument;
@@ -441,12 +528,18 @@ function placeInsideSlot(doc, layer, stack) {
       if (box) fitLayerInBox(pl, box, stack[f].fit);
       else fitLayerToCanvas(pl, cw, ch);
     }
+    // Read the colour here, while the artwork is rasterised and alone in the
+    // document. Nothing else in the run has a view of the artwork as pixels.
+    var sampled = sample ? modalRGB(inner) : null;
+
     inner.close(SaveOptions.SAVECHANGES);   // writes back into the parent slot
+    app.activeDocument = doc;
+    return sampled;
   } catch (e) {
     try { inner.close(SaveOptions.DONOTSAVECHANGES); } catch (e2) {}
+    app.activeDocument = doc;
     throw e;
   }
-  app.activeDocument = doc;
 }
 
 // No DOM method for this — the action is the documented idiom.
@@ -776,6 +869,7 @@ function main() {
       var view = active[a];
       var doc = app.open(new File(view.path));
       var dirty = {};      // slot index → holds a previous design's artwork
+      var tinted = false;  // a template fill layer carries a design's colour
 
       try {
         log.push('── ' + view.suffix + ' (' + view.size + '×' + view.size + ')');
@@ -783,7 +877,7 @@ function main() {
 
         for (var i = 0; i < slugs.length; i++) {
           // Work out what this design can fill before touching anything.
-          var jobs = [], fills = {}, blank = [], lacks = null, overlaid = [], overWarn = false, nudged = [];
+          var jobs = [], fills = {}, blank = [], lacks = null, overlaid = [], overWarn = false, nudged = [], tintWarn = false;
           for (var s = 0; s < view.slots.length; s++) {
             var slot = view.slots[s];
             var art = artworkFor(slugs[i], slot.file);
@@ -821,13 +915,14 @@ function main() {
           // front-only set silently inherits the previous team's collar.
           // placeInside SAVES each .psb, so the template carries the previous
           // design in every slot it touched — reopen unconditionally.
-          var stale = CONFIG.placeInside && i > 0;
+          var stale = (CONFIG.placeInside && i > 0) || tinted;
           for (var d in dirty) { if (dirty.hasOwnProperty(d) && !fills[d]) { stale = true; break; } }
           if (stale) {
             doc.close(SaveOptions.DONOTSAVECHANGES);
             doc = app.open(new File(view.path));
             resolveSlots(doc, view, log, true);
             dirty = {};
+            tinted = false;
             for (var j2 = 0; j2 < jobs.length; j2++) jobs[j2].slot = view.slots[jobs[j2].index];
           }
 
@@ -848,14 +943,53 @@ function main() {
                      (ar > 0.01 ? '  ⚠ ASPECT RATIO DIFFERS, it will distort' : ''));
           }
 
-          var swaps = 0;
+          var swaps = 0, tints = [];
           for (var j = 0; j < jobs.length; j++) {
-            for (var r = 0; r < jobs[j].slot.refs.length; r++) {
-              if (CONFIG.placeInside) placeInsideSlot(doc, jobs[j].slot.refs[r], jobs[j].stack);
-              else replaceSmartObject(doc, jobs[j].slot.refs[r], jobs[j].file);
+            var slotJ = jobs[j].slot;
+            var wantColour = slotJ.tint && slotJ.tint.length && !slotJ.tintColour;
+            for (var r = 0; r < slotJ.refs.length; r++) {
+              if (CONFIG.placeInside) {
+                var got = placeInsideSlot(doc, slotJ.refs[r], jobs[j].stack, wantColour);
+                if (slotJ.tint && slotJ.tint.length && !tints.length) {
+                  var c = slotJ.tintColour ? parseHex(slotJ.tintColour) : got;
+                  if (c) tints.push({ layers: slotJ.tint, colour: c, from: decodeURI(jobs[j].file.name) });
+                  else if (slotJ.tintColour) log.push('    ⚠ tintColour "' + slotJ.tintColour + '" is not a 6-digit hex — ignored');
+                }
+              } else {
+                replaceSmartObject(doc, slotJ.refs[r], jobs[j].file);
+                if (slotJ.tint && slotJ.tint.length) {
+                  var forced = slotJ.tintColour ? parseHex(slotJ.tintColour) : null;
+                  if (forced && !tints.length) tints.push({ layers: slotJ.tint, colour: forced, from: 'tintColour' });
+                  else if (!forced) tintWarn = true;   // sampling needs the .psb
+                }
+              }
               swaps++;
             }
             dirty[jobs[j].index] = true;
+          }
+
+          // Recolour the template's own fill layers. Reopening resets them, and
+          // `tinted` guarantees the reopen — otherwise the next design in the
+          // batch would inherit this one's thread colour.
+          var tintLog = [];
+          for (var ti = 0; ti < tints.length; ti++) {
+            for (var tl = 0; tl < tints[ti].layers.length; tl++) {
+              var found = findLayers(doc, tints[ti].layers[tl], []);
+              if (!found.length) { log.push('    ⚠ no layer named "' + tints[ti].layers[tl] + '" to tint'); continue; }
+              var applied = 0;
+              for (var fi = 0; fi < found.length; fi++) {
+                if (found[fi].kind !== LayerKind.SOLIDFILL) {
+                  log.push('    ⚠ "' + tints[ti].layers[tl] + '" is not a solid fill layer — not tinted');
+                  continue;
+                }
+                setSolidFill(doc, found[fi], tints[ti].colour);
+                tinted = true;
+                applied++;
+              }
+              // Only report what actually changed. A tint line for a layer that
+              // silently failed would read as confirmation.
+              if (applied) tintLog.push(tints[ti].layers[tl] + ' #' + toHex(tints[ti].colour));
+            }
           }
 
           // Rescale and nudge, export, then undo both. Reversing is what stops
@@ -902,8 +1036,10 @@ function main() {
           log.push('    ✓ ' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format + '  (' + swaps + ' slots)' +
             (overlaid.length ? '  · overlaid: ' + overlaid.join(', ') : '') +
             (nudged.length ? '  · nudged: ' + nudged.join(', ') : '') +
+            (tintLog.length ? '  · tinted: ' + tintLog.join(', ') : '') +
             (blank.length ? '  · template default kept for: ' + blank.join(', ') : ''));
           if (overWarn) log.push('      ⚠ overlays need placeInside: true — skipped');
+          if (tintWarn) log.push('      ⚠ sampling a colour needs placeInside: true — set tintColour to tint anyway');
           made++;
         }
       } catch (inner) {

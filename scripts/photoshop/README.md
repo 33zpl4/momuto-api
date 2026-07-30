@@ -98,6 +98,32 @@ absent, and the run says so.
 | shorts | `R LEG DESIGN` | `@2072,861` | `-shortsleft` → `-shorts` | ● |
 | shorts | `BELT DESIGN` | — | `-belt` | |
 
+### Stitching takes the design's colour
+
+The shorts template's `STITCHING` is a solid fill, white. On any kit that is not
+white that reads as piping rather than thread, so the left leg slot carries
+`tint: ['STITCHING']` and it gets recoloured to the leg's own colour.
+
+The colour is the artwork's **dominant** one, read from the channel histograms of
+the rasterised `.psb`. Not a sampled pixel: there is no coordinate that is base
+fabric in every design, so a fixed sample point lands on a stripe in one kit and
+a crest in the next. The most frequent value cannot do that — on flat vector
+artwork the base is most of the canvas by a wide margin.
+
+The run logs the hex it used, e.g. `· tinted: STITCHING #7A1F26`. Check it on a
+design split near 50/50 between two colours, where "dominant" is a coin toss;
+`tintColour: 'RRGGBB'` on the slot forces a value instead.
+
+Two limits worth knowing. Sampling needs `placeInside` — with `replaceContents`
+the artwork is never rasterised anywhere the script can read, so only
+`tintColour` works. And the template is reopened after any tint, so the next
+design in a batch cannot inherit the previous one's thread colour.
+
+`tint` works on any slot and any solid-fill layer, so the same line would serve
+the jersey templates' `JERSEY STITCHES`, `SLEEVES STITCHES` and `TAPE STITCHES`,
+or the shorts' `LACES` and `EYELETS`. None are wired up — the shorts stitching is
+the one that was asked for.
+
 Note the mirroring in the `-sleeve*` and `-shorts*` columns: a file names the
 **wearer's** limb, so on the front and shorts templates — both front views — it
 lands on the opposite side of the picture. The shorts slots are addressed by
