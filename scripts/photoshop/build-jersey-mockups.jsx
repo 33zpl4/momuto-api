@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-27f · shorts stitching takes the leg colour';
+var VERSION = '2026-07-27g · fixes the tint action; a tint can no longer lose an export';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -451,9 +451,11 @@ function fitLayerInBox(pl, box, mode) {
  * colours is the case to watch, which is why the result is logged.
  */
 function modalRGB(doc) {
+  if (!doc.channels || doc.channels.length < 3) return null;   // greyscale, indexed…
   var out = [];
   for (var c = 0; c < 3; c++) {
     var h = doc.channels[c].histogram;
+    if (!h || h.length !== 256) return null;
     var best = 0, bestCount = -1;
     for (var i = 0; i < h.length; i++) {
       if (h[i] > bestCount) { bestCount = h[i]; best = i; }
@@ -461,6 +463,41 @@ function modalRGB(doc) {
     out.push(best);
   }
   return { r: out[0], g: out[1], b: out[2] };
+}
+
+/**
+ * Fallback: the most common colour across a 3×3 grid of colour samplers.
+ *
+ * Reads actual colours rather than per-channel modes, so it cannot invent one
+ * that appears nowhere — but nine points is a coarse census, and it inherits the
+ * position problem the histogram avoids, just diluted across nine positions
+ * instead of one. Good enough when the histogram is unavailable; not better.
+ */
+function gridRGB(doc) {
+  var w = doc.width.as('px'), h = doc.height.as('px');
+  var at = [0.2, 0.5, 0.8], counts = {}, best = null, bestN = 0;
+  for (var i = 0; i < at.length; i++) {
+    for (var j = 0; j < at.length; j++) {
+      var s = null;
+      try {
+        s = doc.colorSamplers.add([UnitValue(w * at[i], 'px'), UnitValue(h * at[j], 'px')]);
+        var col = { r: s.color.rgb.red, g: s.color.rgb.green, b: s.color.rgb.blue };
+        var key = toHex(col);
+        counts[key] = (counts[key] || 0) + 1;
+        if (counts[key] > bestN) { bestN = counts[key]; best = col; }
+      } catch (eAdd) {}
+      if (s) { try { s.remove(); } catch (eRm) {} }
+    }
+  }
+  return best;
+}
+
+// Never throws. A colour that cannot be read means the tint is skipped and said
+// so — it must not be able to take an export down with it.
+function dominantRGB(doc) {
+  try { var m = modalRGB(doc); if (m) return m; } catch (eHist) {}
+  try { return gridRGB(doc); } catch (eGrid) {}
+  return null;
 }
 
 function toHex(c) {
@@ -482,21 +519,37 @@ function parseHex(str) {
   };
 }
 
-// Solid colour fill layers have no DOM setter — the action is the only route.
+/**
+ * Recolour a solid colour fill layer. No DOM setter exists; the action is the
+ * only route.
+ *
+ * The target must be referenced as a contentLayer, NOT as a plain layer. A 'Lyr '
+ * reference here fails with "General Photoshop error occurred… Could not complete
+ * the command because of a program error", which reads like a version problem and
+ * is not one.
+ *
+ * Returns false rather than throwing: a stitching colour is a nicety and must
+ * never be able to lose an export.
+ */
 function setSolidFill(doc, layer, c) {
-  doc.activeLayer = layer;
-  var d = new ActionDescriptor();
-  var ref = new ActionReference();
-  ref.putEnumerated(charIDToTypeID('Lyr '), charIDToTypeID('Ordn'), charIDToTypeID('Trgt'));
-  d.putReference(charIDToTypeID('null'), ref);
-  var fill = new ActionDescriptor();
-  var rgb = new ActionDescriptor();
-  rgb.putDouble(charIDToTypeID('Rd  '), c.r);
-  rgb.putDouble(charIDToTypeID('Grn '), c.g);
-  rgb.putDouble(charIDToTypeID('Bl  '), c.b);
-  fill.putObject(charIDToTypeID('Clr '), charIDToTypeID('RGBC'), rgb);
-  d.putObject(charIDToTypeID('T   '), stringIDToTypeID('solidColorLayer'), fill);
-  executeAction(charIDToTypeID('setd'), d, DialogModes.NO);
+  var attempt = function (refType) {
+    doc.activeLayer = layer;
+    var d = new ActionDescriptor();
+    var ref = new ActionReference();
+    ref.putEnumerated(refType, charIDToTypeID('Ordn'), charIDToTypeID('Trgt'));
+    d.putReference(charIDToTypeID('null'), ref);
+    var fill = new ActionDescriptor();
+    var rgb = new ActionDescriptor();
+    rgb.putDouble(charIDToTypeID('Rd  '), c.r);
+    rgb.putDouble(charIDToTypeID('Grn '), c.g);
+    rgb.putDouble(charIDToTypeID('Bl  '), c.b);
+    fill.putObject(charIDToTypeID('Clr '), charIDToTypeID('RGBC'), rgb);
+    d.putObject(charIDToTypeID('T   '), stringIDToTypeID('solidColorLayer'), fill);
+    executeAction(charIDToTypeID('setd'), d, DialogModes.NO);
+  };
+  try { attempt(stringIDToTypeID('contentLayer')); return true; } catch (e1) {}
+  try { attempt(charIDToTypeID('Lyr ')); return true; } catch (e2) {}
+  return false;
 }
 
 function placeInsideSlot(doc, layer, stack, sample) {
@@ -529,8 +582,13 @@ function placeInsideSlot(doc, layer, stack, sample) {
       else fitLayerToCanvas(pl, cw, ch);
     }
     // Read the colour here, while the artwork is rasterised and alone in the
-    // document. Nothing else in the run has a view of the artwork as pixels.
-    var sampled = sample ? modalRGB(inner) : null;
+    // document — nothing else in the run sees the artwork as pixels.
+    //
+    // dominantRGB swallows its own failures, which matters more than it looks:
+    // this sits inside the try that closes WITHOUT saving on error, so anything
+    // throwing here would discard the placement itself and lose the artwork, not
+    // just the colour.
+    var sampled = sample ? dominantRGB(inner) : null;
 
     inner.close(SaveOptions.SAVECHANGES);   // writes back into the parent slot
     app.activeDocument = doc;
@@ -876,6 +934,13 @@ function main() {
         resolveSlots(doc, view, log, false);
 
         for (var i = 0; i < slugs.length; i++) {
+         // One design failing must not cost the rest of the batch. Without this
+         // the first bad design reached the per-view catch and every design after
+         // it was silently never attempted.
+         //
+         // Recovering is safe because the next design reopens the template from
+         // disk, so it cannot inherit a half-finished state from this one.
+         try {
           // Work out what this design can fill before touching anything.
           var jobs = [], fills = {}, blank = [], lacks = null, overlaid = [], overWarn = false, nudged = [], tintWarn = false;
           for (var s = 0; s < view.slots.length; s++) {
@@ -949,11 +1014,16 @@ function main() {
             var wantColour = slotJ.tint && slotJ.tint.length && !slotJ.tintColour;
             for (var r = 0; r < slotJ.refs.length; r++) {
               if (CONFIG.placeInside) {
-                var got = placeInsideSlot(doc, slotJ.refs[r], jobs[j].stack, wantColour);
+                // Not named `got` — that belongs to the canvas-measuring loop
+                // above, and `var` is function-scoped, so reusing it would put two
+                // unrelated meanings on one variable.
+                var sampled = placeInsideSlot(doc, slotJ.refs[r], jobs[j].stack, wantColour);
                 if (slotJ.tint && slotJ.tint.length && !tints.length) {
-                  var c = slotJ.tintColour ? parseHex(slotJ.tintColour) : got;
+                  var c = slotJ.tintColour ? parseHex(slotJ.tintColour) : sampled;
                   if (c) tints.push({ layers: slotJ.tint, colour: c, from: decodeURI(jobs[j].file.name) });
                   else if (slotJ.tintColour) log.push('    ⚠ tintColour "' + slotJ.tintColour + '" is not a 6-digit hex — ignored');
+                  else log.push('    ⚠ could not read a colour from ' + decodeURI(jobs[j].file.name) +
+                                ' — exported untinted (set tintColour to force one)');
                 }
               } else {
                 replaceSmartObject(doc, slotJ.refs[r], jobs[j].file);
@@ -971,25 +1041,32 @@ function main() {
           // Recolour the template's own fill layers. Reopening resets them, and
           // `tinted` guarantees the reopen — otherwise the next design in the
           // batch would inherit this one's thread colour.
+          //
+          // Wrapped end to end: the tint is cosmetic, the export is the job. An
+          // earlier version let a failure here reach the per-view catch, which
+          // abandoned the whole view and produced no image at all.
           var tintLog = [];
-          for (var ti = 0; ti < tints.length; ti++) {
-            for (var tl = 0; tl < tints[ti].layers.length; tl++) {
-              var found = findLayers(doc, tints[ti].layers[tl], []);
-              if (!found.length) { log.push('    ⚠ no layer named "' + tints[ti].layers[tl] + '" to tint'); continue; }
-              var applied = 0;
-              for (var fi = 0; fi < found.length; fi++) {
-                if (found[fi].kind !== LayerKind.SOLIDFILL) {
-                  log.push('    ⚠ "' + tints[ti].layers[tl] + '" is not a solid fill layer — not tinted');
-                  continue;
+          try {
+            for (var ti = 0; ti < tints.length; ti++) {
+              for (var tl = 0; tl < tints[ti].layers.length; tl++) {
+                var found = findLayers(doc, tints[ti].layers[tl], []);
+                if (!found.length) { log.push('    ⚠ no layer named "' + tints[ti].layers[tl] + '" to tint'); continue; }
+                var applied = 0;
+                for (var fi = 0; fi < found.length; fi++) {
+                  if (found[fi].kind !== LayerKind.SOLIDFILL) {
+                    log.push('    ⚠ "' + tints[ti].layers[tl] + '" is not a solid fill layer — not tinted');
+                    continue;
+                  }
+                  if (setSolidFill(doc, found[fi], tints[ti].colour)) { tinted = true; applied++; }
+                  else log.push('    ⚠ could not recolour "' + tints[ti].layers[tl] + '" — exported untinted');
                 }
-                setSolidFill(doc, found[fi], tints[ti].colour);
-                tinted = true;
-                applied++;
+                // Only report what actually changed. A tint line for a layer that
+                // silently failed would read as confirmation.
+                if (applied) tintLog.push(tints[ti].layers[tl] + ' #' + toHex(tints[ti].colour));
               }
-              // Only report what actually changed. A tint line for a layer that
-              // silently failed would read as confirmation.
-              if (applied) tintLog.push(tints[ti].layers[tl] + ' #' + toHex(tints[ti].colour));
             }
+          } catch (eTint) {
+            log.push('    ⚠ tinting failed (' + eTint.message + ') — exported untinted');
           }
 
           // Rescale and nudge, export, then undo both. Reversing is what stops
@@ -1041,6 +1118,17 @@ function main() {
           if (overWarn) log.push('      ⚠ overlays need placeInside: true — skipped');
           if (tintWarn) log.push('      ⚠ sampling a colour needs placeInside: true — set tintColour to tint anyway');
           made++;
+         } catch (perDesign) {
+           log.push('    ✗ ' + slugs[i] + '-' + view.suffix + ': ' + perDesign.message);
+           // Force a clean template for whatever comes next.
+           try {
+             doc.close(SaveOptions.DONOTSAVECHANGES);
+             doc = app.open(new File(view.path));
+             resolveSlots(doc, view, log, true);
+             dirty = {};
+             tinted = false;
+           } catch (eReopen) { throw eReopen; }   // cannot recover the view at all
+         }
         }
       } catch (inner) {
         log.push('    ✗ ' + inner.message);
