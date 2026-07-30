@@ -86,17 +86,24 @@ absent, and the run says so.
 | front | `JERSEY DESIGN` | `@1725,959` | `-front` | ● |
 | front | `JERSEY DESIGN` | `@1723,736` | `-shoulderleft` → `-shoulders` | |
 | front | `JERSEY DESIGN` | `@3596,746` | `-shoulderright` → `-shoulders` | |
-| front | `SLEEVE DESIGN` | `@1242,995` | `-sleeveleft` → `-sleeves` | |
-| front | `SLEEVE DESIGN` | `@3845,1040` | `-sleeveright` → `-sleeves` | |
+| front | `SLEEVE DESIGN` | `@1242,995` | `-sleeveright` → `-sleeves` *(+ `-sleevesponsorright` → `-sleevesponsor`)* | |
+| front | `SLEEVE DESIGN` | `@3845,1040` | `-sleeveleft` → `-sleeves` *(+ `-sleevesponsorleft` → `-sleevesponsor`)* | |
 | front | `COLLAR TOP` | — | `-collartop` | |
 | front | `COLLAR BOTTOM` | — | `-collarbottom` | |
 | back | `JERSEY DESIGN` | — | `-back` | ● |
-| back | `LEFT SLEEVE DESIGN` | — | `-sleeveleft` → `-sleeves` | |
-| back | `RIGHT SLEEVE DESIGN` | — | `-sleeveright` → `-sleeves` | |
+| back | `LEFT SLEEVE DESIGN` | — | `-sleeveleft` → `-sleeves` *(+ `-sleevesponsorleft` → `-sleevesponsor`)* | |
+| back | `RIGHT SLEEVE DESIGN` | — | `-sleeveright` → `-sleeves` *(+ `-sleevesponsorright` → `-sleevesponsor`)* | |
 | back | `COLLAR DESIGN` | — | `-collarback` | |
-| shorts | `L LEG DESIGN` | — | `-shorts` | ● |
-| shorts | `R LEG DESIGN` | — | `-shorts` | ● |
+| shorts | `L LEG DESIGN` | `@954,965` | `-shortsright` → `-shorts` | ● |
+| shorts | `R LEG DESIGN` | `@2072,861` | `-shortsleft` → `-shorts` | ● |
 | shorts | `BELT DESIGN` | — | `-belt` | |
+
+Note the mirroring in the `-sleeve*` and `-shorts*` columns: a file names the
+**wearer's** limb, so on the front and shorts templates — both front views — it
+lands on the opposite side of the picture. The shorts slots are addressed by
+position rather than by their `L`/`R` layer names for exactly that reason; the
+template's `L LEG` is the player's right leg, and trusting the name would put
+every leg logo on the wrong leg.
 
 ### What the shading layers actually do
 
@@ -403,12 +410,17 @@ kinds cannot collide under any ordering.
 ```
 <slug>-front.svg           <slug>-collartop.svg       <slug>-shoulderleft.svg
 <slug>-back.svg            <slug>-collarbottom.svg    <slug>-shoulderright.svg
-<slug>-shorts.svg          <slug>-collarback.svg      <slug>-sleeveleft.svg
-<slug>-belt.svg                                       <slug>-sleeveright.svg
+<slug>-belt.svg            <slug>-collarback.svg      <slug>-sleeveleft.svg
+                                                      <slug>-sleeveright.svg
+<slug>-shortsleft.svg                                 <slug>-sleevesponsorleft.svg
+<slug>-shortsright.svg                                <slug>-sleevesponsorright.svg
 ```
 
-…or drop `<slug>-shoulders.svg` / `<slug>-sleeves.svg` in place of the left/right
-pairs.
+…or drop the shared `<slug>-shoulders.svg` / `-sleeves.svg` / `-sleevesponsor.svg`
+/ `-shorts.svg` in place of any left/right pair whose two sides really are the
+same artwork.
+
+`-left` / `-right` always mean the **wearer's** limb.
 
 Any number of designs at once. Each template is opened **once** and every design
 run through it, which is where the time saving comes from on a batch.
@@ -420,9 +432,10 @@ run through it, which is where the time saving comes from on a batch.
 | what's in `artworkDir` | what comes out |
 |---|---|
 | all 8–12 files | front, back, shorts |
-| no `-shorts` file | front + back; shorts reported as skipped |
+| no shorts file | front + back; shorts reported as skipped |
 | only `-front` | front only, collar/shoulders left at the template default |
-| only `-shorts` | shorts only |
+| only `-shortsleft` + `-shortsright` | shorts only |
+| `-shortsleft` but no `-shortsright` or `-shorts` | shorts skipped — a one-legged pair is never exported |
 | only `-collartop` | nothing — a non-required file alone is not a design |
 
 Three rules make that safe:

@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-27d · sponsors raised 15px, picture-left front sleeve raised 15px';
+var VERSION = '2026-07-27e · shorts legs take separate files';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -215,9 +215,19 @@ var CONFIG = {
       suffix: 'shorts',
       size: 1000,
       slots: [
-        { layer: 'L LEG DESIGN',  file: 'shorts', count: 1, required: true },
-        { layer: 'R LEG DESIGN',  file: 'shorts', count: 1, required: true },
-        { layer: 'BELT DESIGN',   file: 'belt',   count: 1 }   // the waistband
+        // The legs are NOT interchangeable — they carry different logos — so they
+        // take separate files, named by the WEARER'S leg like the sleeves.
+        //
+        // Addressed by position, not by the template's L/R names: this is a front
+        // view (the laces show), so it mirrors the wearer and the template's
+        // picture-left 'L LEG' is the player's RIGHT leg. Trusting the names here
+        // would put every leg logo on the wrong leg.
+        //
+        // '-shorts' remains as the fallback, so a design whose legs really are
+        // the same still ships one file.
+        { layer: 'L LEG DESIGN',  at: [954, 965],  file: ['shortsright', 'shorts'], count: 1, required: true },
+        { layer: 'R LEG DESIGN',  at: [2072, 861], file: ['shortsleft',  'shorts'], count: 1, required: true },
+        { layer: 'BELT DESIGN',   file: 'belt',    count: 1 }   // the waistband
       ]
     }
   ],
