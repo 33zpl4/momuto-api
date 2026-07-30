@@ -158,7 +158,10 @@ competitors cannot fake it:
   `/3d/the-apex`…): the "free 3D designer" query family (846 impressions at
   position 11.5 today, CTR 3.5%) is honestly ours — the tool IS free. Own the
   entire `free` cluster with pages that route into the tool.
-- **RTP model expansion as keyword surface — 7 → 25 models.** Every model is
+- **Studio model expansion as keyword surface — 7 → 25 models.** These are
+  Studio base designs, NOT Ready-to-Play additions — RTP stays a curated 7–12
+  drop line at −10%; the taxonomy and the reasoning live in
+  `docs/product-architecture.md`. Every model is
   a page per locale with title, description and deep link into the tool, and
   today's 7 were never designed to rank. Each new model gets a *search-shaped
   identity*: named and described against a real design-style query niche
