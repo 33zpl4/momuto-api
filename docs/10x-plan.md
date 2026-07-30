@@ -75,30 +75,33 @@ off-site. The link engine, in order of leverage:
 Target: **cluster weighted position ≤5 by November, ≤4 by January. 5,000
 clicks/mo.**
 
-### 2. New sports, starting with basketball (+3,000/mo) — the new boards
+### 2. Basketball — the tool already has it, the internet doesn't know (+3,000/mo)
 
-Zero impressions today outside football. The `custom basketball jersey`
-universe alone rivals the football cluster in volume, is strongest in the US
-(compounding lever 3), and sublimation production is sport-agnostic — the
-factory already makes singlets.
+Zero impressions today outside football — and yet **basketball is already live
+in the 3D tool** (`mamuto3basket3`). The critical path is not product build;
+it is that the brand has deliberately hidden it: nothing on any homepage, no
+RTP basketball entries, one old blog post. The `custom basketball jersey`
+universe rivals the football cluster in volume and is strongest in the US —
+so basketball launches **US-first, fused with lever 3**: the US property
+carries football + basketball from day one, doubling the query surface of the
+same build.
 
-But content-without-product is how thin sites die, and it violates the
-flywheel: **product first.** The sequence:
+The sequence, now all surface work:
 
-1. **Basketball model in the 3D tool** (one GLB + templates — the RTP pipeline
-   already handles per-model templates). This is the owner's product focus
-   pointed at the highest-leverage target.
-2. RTP basketball drop (4–6 designs), EN + ES first (US + Spain basketball
-   culture).
-3. Then the content: hub + cluster on www, `soccer→basketball` mirrored pages
-   on the US property, ES equivalents. The existing stray basketball posts
-   (`canotte-basket…`, `maillots de basket…`) get folded in or absorbed.
-4. Second sport (futsal is already half-owned; esports jerseys are
-   production-identical and the community lives online) — trigger: basketball
-   cluster showing impressions within 6 weeks of content live.
+1. RTP basketball drop (4–6 designs on the existing model) with keyword-built
+   pages (see lever 5's model-page pattern), EN first.
+2. Basketball block on the www homepage + nav; hub page
+   (`custom-basketball-jerseys`) + 3–4 cluster posts in the US lexicon.
+3. Tool entry page `/3d/basketball` targeting `basketball jersey maker` /
+   `basketball uniform designer` — the tool is free and real; nobody else
+   offers a live 3D basketball designer at this price point.
+4. ES second (basketball culture), then the other locales with the season.
+5. Sport #3 (futsal is half-owned; esports is production-identical) triggers
+   when basketball shows impressions — expect faster than football took,
+   since the domain now has authority football didn't start with.
 
-Target: **basketball live in the tool by October, 1,500–3,000 clicks/mo from
-non-football clusters by January.**
+Target: **basketball surfaced everywhere by September, 1,500–3,000 clicks/mo
+from non-football clusters by January.**
 
 ### 3. US → top 3 on the soccer cluster (+3,000/mo)
 
@@ -155,6 +158,27 @@ competitors cannot fake it:
   `/3d/the-apex`…): the "free 3D designer" query family (846 impressions at
   position 11.5 today, CTR 3.5%) is honestly ours — the tool IS free. Own the
   entire `free` cluster with pages that route into the tool.
+- **RTP model expansion as keyword surface — 7 → 25 models.** Every model is
+  a page per locale with title, description and deep link into the tool, and
+  today's 7 were never designed to rank. Each new model gets a *search-shaped
+  identity*: named and described against a real design-style query niche
+  (striped / gradient / retro / camo / two-tone / sash / hooped…), so the
+  catalogue itself becomes a keyword estate across all five sites. The 3D
+  pipeline makes each model cheap; the naming/metadata is where the SEO lives.
+  Basketball models multiply this again.
+- **Country & national concept series.** Competitors rank with these, and our
+  own data already proves the demand: `maillot concept france` (370 impr),
+  `maillot france concept`, `…bresil`, `…japon`, `maillot psg concept` all
+  appear in GSC, the FR concepts collection sits at 2,201 impressions
+  (position 7.3), and the Asperion France concept product page pulls 349
+  impressions on its own. The Blue Samurai Japan collab and the
+  regions-of-Spain tributes are the same pattern already working. Build it as
+  a deliberate series: one unofficial concept design per major football
+  nation (France, Italy, Brazil, Japan, Argentina, England…), each an RTP-style
+  page + customisable in 3D, no federation crests (the Real-Madrid rule
+  applies), collection hubs per locale. Tournament cycles (Euro 2028, WC 2030
+  qualifiers) spike these queries predictably — the series is evergreen
+  inventory that peaks on schedule.
 - **Gallery → tool loop**: every RTP model page and gallery entry deep-links
   into the tool pre-loaded; every tool session ends with a shareable URL.
 
@@ -235,11 +259,13 @@ angry customers instead of 10x revenue:
 
 ## This week
 
-1. Basketball model production starts in the 3D tool (lever 2 critical path —
-   longest lead time, owner's product focus).
+1. Basketball surfacing starts: RTP basketball drop designs + homepage block
+   + US hub page (the model already exists in the tool — no build needed).
 2. US store + `OEMSAAS_TOKEN_US` + currency decision cleared (lever 3
    pre-work; the trigger fires within ~2 months).
 3. ES city-page meta pass (lever 4's cheapest 20%).
 4. First data study drafted from gallery/order data (lever 1's link engine).
 5. Share-page architecture decided for the tool (lever 5 — indexable,
    rich-only, sitemapped).
+6. First 3 country-concept designs picked (France, Italy, Japan — the three
+   with measured query demand already in GSC).
