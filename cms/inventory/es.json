@@ -21,8 +21,18 @@
       "status": 1
     },
     {
+      "handle": "camisetas-futbol-sala-personalizadas",
+      "title": "Camisetas de fútbol sala personalizadas",
+      "status": 1
+    },
+    {
       "handle": "camisetas-futbol-sin-pedido-minimo-una-unidad",
       "title": "Camisetas de fútbol sin pedido mínimo: La revolución que tu equipo necesitaba",
+      "status": 1
+    },
+    {
+      "handle": "camisetas-futbol-torneos",
+      "title": "Camisetas de fútbol para torneos: amigos, empresa, evento",
       "status": 1
     },
     {
@@ -66,6 +76,11 @@
       "status": 1
     },
     {
+      "handle": "cuando-encargar-equipaciones-equipo",
+      "title": "Cuándo encargar las equipaciones de tu equipo (calendario 2026)",
+      "status": 1
+    },
+    {
       "handle": "diseno-camisetas-chatgpt-ia-realidad",
       "title": "De ChatGPT a la realidad: Cómo convertir tu diseño de IA en una camiseta épica",
       "status": 1
@@ -86,9 +101,29 @@
       "status": 1
     },
     {
+      "handle": "equipaciones-de-futbol-para-tu-equipo-guia-completa",
+      "title": "Equipaciones de fútbol para tu equipo: la guía completa (2026)",
+      "status": 1
+    },
+    {
+      "handle": "equipaciones-futbol-7-ligas-locales",
+      "title": "Equipaciones para fútbol 7 y ligas locales",
+      "status": 1
+    },
+    {
+      "handle": "equipaciones-futbol-club-amateur",
+      "title": "Equipaciones de fútbol para club amateur",
+      "status": 1
+    },
+    {
       "handle": "equipaciones-futbol-concepto-del-boceto-al-jersey-real",
       "title": "Equipaciones de Fútbol Concepto: Del Boceto Digital al Jersey Real",
-      "status": 0
+      "status": 1
+    },
+    {
+      "handle": "equipaciones-futbol-empresas",
+      "title": "Equipaciones de fútbol para empresas y eventos",
+      "status": 1
     },
     {
       "handle": "equipaciones-futbol-urgentes-entrega-20-dias",
@@ -96,8 +131,18 @@
       "status": 1
     },
     {
+      "handle": "equipaciones-para-penas",
+      "title": "Equipaciones para peñas de fútbol personalizadas",
+      "status": 1
+    },
+    {
       "handle": "evolucion-camisetas-de-futbol-lana-poliester",
       "title": "Lana, algodón, poliéster: Tras la pista de la evolución de las camisetas de fútbol",
+      "status": 1
+    },
+    {
+      "handle": "financiar-equipaciones-club-patrocinadores",
+      "title": "Financiar las equipaciones del club: patrocinadores y bote",
       "status": 1
     },
     {
@@ -183,6 +228,11 @@
       "status": null
     },
     {
+      "handle": "atletico-guanche-diseno-equipacion",
+      "title": "Diseño Equipación ATLÉTICO GUANCHE | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "atletico-joao-diseno-equipacion",
       "title": "Diseño Equipación ATLETICO JOAO | MOMUTO",
       "status": null
@@ -190,6 +240,16 @@
     {
       "handle": "atletico-resacon-diseno-equipacion",
       "title": "Diseño Equipación ATLÉTICO RESACÓN | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "autoservicio-martin-ruiz-diseno-equipacion",
+      "title": "Diseño Equipación Autoservicio Martín Ruiz | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "bellavia-calcio-diseno-equipacion",
+      "title": "Diseño Equipación BELLAVIA CALCIO | MOMUTO",
       "status": null
     },
     {
@@ -218,28 +278,78 @@
       "status": null
     },
     {
+      "handle": "camiseta-ia-concepto-real",
+      "title": "De Concepto IA a Camiseta de Fútbol Real — La Fabricamos | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "camisetas-despedida-de-soltero",
+      "title": "Camisetas Personalizadas para Despedidas de Soltero y Soltera | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "camisetas-futbol-personalizadas-alicante",
+      "title": "Camisetas de Fútbol Personalizadas Alicante | Sin Mínimo | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "camisetas-futbol-personalizadas-asturias",
       "title": "MOMUTO Asturias",
       "status": null
     },
     {
+      "handle": "camisetas-futbol-personalizadas-barcelona",
+      "title": "Camisetas de Fútbol Personalizadas Barcelona | Sin Mínimo MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "camisetas-futbol-personalizadas-bilbao",
+      "title": "Camisetas de Fútbol Personalizadas Bilbao | Sin Mínimo | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "camisetas-futbol-personalizadas-canarias",
-      "title": "MOMUTO Canarias",
+      "title": "Camisetas de Fútbol Personalizadas Canarias | Sin Mínimo | MOMUTO",
       "status": null
     },
     {
       "handle": "camisetas-futbol-personalizadas-madrid",
-      "title": "MOMUTO Madrid",
+      "title": "Camisetas de Fútbol Personalizadas Madrid | Sin Mínimo | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "camisetas-futbol-personalizadas-malaga",
+      "title": "Camisetas de Fútbol Personalizadas Málaga | Sin Mínimo | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "camisetas-futbol-personalizadas-murcia",
+      "title": "Camisetas de Fútbol Personalizadas Murcia | Sin Mínimo | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "camisetas-futbol-personalizadas-sevilla",
+      "title": "Camisetas de Fútbol Personalizadas Sevilla | Sin Mínimo | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "camisetas-futbol-personalizadas-valencia",
+      "title": "Camisetas de Fútbol Personalizadas Valencia | Sin Mínimo | MOMUTO",
       "status": null
     },
     {
       "handle": "camisetas-futbol-personalizadas-zaragoza",
-      "title": "MOMUTO Zaragoza",
+      "title": "Camisetas de Fútbol Personalizadas Zaragoza | Sin Mínimo | MOMUTO",
       "status": null
     },
     {
       "handle": "carabinieri-mm-diseno-equipacion",
       "title": "Diseño Equipación Carabinieri MM | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "carrosserie-des-meulieres-diseno-equipacion",
+      "title": "Diseño Equipación Carrosserie des Meulières | MOMUTO",
       "status": null
     },
     {
@@ -398,6 +508,11 @@
       "status": null
     },
     {
+      "handle": "fc-fidem-diseno-equipacion",
+      "title": "Diseño Equipación FC FIDEM | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "fc-interim-diseno-equipacion",
       "title": "Diseño Equipación FC INTERIM | MOMUTO",
       "status": null
@@ -410,6 +525,11 @@
     {
       "handle": "fc-plouegat-diseno-equipacion",
       "title": "Diseño Equipación FC PLOUEGAT | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "fc-rivieres-plates-diseno-equipacion",
+      "title": "Diseño Equipación FC Rivières Plates | MOMUTO",
       "status": null
     },
     {
@@ -483,8 +603,23 @@
       "status": null
     },
     {
+      "handle": "hos-diseno-equipacion",
+      "title": "Diseño Equipación HOS | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "ibg-diseno-equipacion",
       "title": "Diseño Equipación IBG | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "impacto-fc-diseno-equipacion",
+      "title": "Diseño Equipación IMPACTO FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "imperial-fenice-diseno-equipacion",
+      "title": "Diseño Equipación IMPERIAL FENICE | MOMUTO",
       "status": null
     },
     {
@@ -495,6 +630,11 @@
     {
       "handle": "juventus-schoonaarde-diseno-equipacion",
       "title": "Diseño Equipación JUVENTUS SCHOONAARDE | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "kali-kamis-diseno-equipacion",
+      "title": "Diseño Equipación KALI KAMIS | MOMUTO",
       "status": null
     },
     {
@@ -608,8 +748,18 @@
       "status": null
     },
     {
+      "handle": "los-matadores-diseno-equipacion",
+      "title": "Diseño Equipación Los Matadores | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "los-primos-diseno-equipacion",
       "title": "Diseño Equipación LOS PRIMOS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "los-vengadores-diseno-equipacion",
+      "title": "Diseño Equipación LOS VENGADORES | MOMUTO",
       "status": null
     },
     {
@@ -648,8 +798,18 @@
       "status": null
     },
     {
+      "handle": "mcs-diseno-equipacion",
+      "title": "Diseño Equipación MCS | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "mejores-webs-equipaciones-futbol-personalizadas-2026",
       "title": "Mejores Webs para Crear Equipaciones de Fútbol Personalizadas (2026) | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "mmg-fc-diseno-equipacion",
+      "title": "Diseño Equipación MMG FC | MOMUTO",
       "status": null
     },
     {
@@ -665,6 +825,11 @@
     {
       "handle": "new-joyas-diseno-equipacion",
       "title": "Diseño Equipación NEW JOYAS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "new-york-dash-diseno-equipacion",
+      "title": "Diseño Equipación New York Dash | MOMUTO",
       "status": null
     },
     {
@@ -693,6 +858,11 @@
       "status": null
     },
     {
+      "handle": "okami7-diseno-equipacion",
+      "title": "Diseño Equipación OKAMI7 | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "pa-fc-diseno-equipacion",
       "title": "Diseño Equipación PA FC | MOMUTO",
       "status": null
@@ -700,6 +870,11 @@
     {
       "handle": "paris-san-miguel-diseno-equipacion",
       "title": "Diseño Equipación PARIS SAN MIGUEL | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "pasta-la-vista-diseno-equipacion",
+      "title": "Diseño Equipación Pasta La Vista | MOMUTO",
       "status": null
     },
     {
@@ -833,6 +1008,21 @@
       "status": null
     },
     {
+      "handle": "sainte-agnes-diseno-equipacion",
+      "title": "Diseño Equipación SAINTE AGNÈS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "sandfields-rangers-diseno-equipacion",
+      "title": "Diseño Equipación SANDFIELDS RANGERS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "sd-ebria-diseno-equipacion",
+      "title": "Diseño Equipación SD EBRIA | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "sd-golfosburgo-diseno-equipacion",
       "title": "Diseño Equipación SD GOLFOSBURGO | MOMUTO",
       "status": null
@@ -938,6 +1128,11 @@
       "status": null
     },
     {
+      "handle": "transportforldn-diseno-equipacion",
+      "title": "Diseño Equipación TransportForLDN | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "ud-chicolove-diseno-equipacion",
       "title": "Diseño Equipación UD CHICOLOVE | MOMUTO",
       "status": null
@@ -965,6 +1160,11 @@
     {
       "handle": "wolf-pack-diseno-equipacion",
       "title": "Diseño Equipación WOLF PACK | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "wrexham-italy-fans-diseno-equipacion",
+      "title": "Diseño Equipación Wrexham Italy Fans | MOMUTO",
       "status": null
     },
     {
