@@ -238,9 +238,13 @@ function buildPageHTML(config, content, domain) {
   // Conditional hero image section
   let imageSection;
   if (hasHomeAway) {
+    // A kit label may be a plain string (same on every domain) or a map keyed
+    // by language (e.g. { en: 'PLAYER', es: 'JUGADOR' }).
+    const localizedLabel = (label) =>
+      (label && typeof label === 'object') ? label[domain.lang] : label;
     const kitLabels = {
-      home: config.kit_label_home || domain.kitLabels?.home || 'HOME',
-      away: config.kit_label_away || domain.kitLabels?.away || 'AWAY'
+      home: localizedLabel(config.kit_label_home) || domain.kitLabels?.home || 'HOME',
+      away: localizedLabel(config.kit_label_away) || domain.kitLabels?.away || 'AWAY'
     };
     imageSection = `
   <div class="kit-toolbar">
