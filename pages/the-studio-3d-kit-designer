@@ -23,12 +23,17 @@
     {
       "@type": "Question",
       "name": "Do I start from a blank jersey?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No — and that is the point. Every starting design in the Studio loads finished, in a colourway chosen by our studio. You recolour it, change the pattern, add your crest, sponsor, name and number. Start from something good and make it yours." }
+      "acceptedAnswer": { "@type": "Answer", "text": "No — and that is the point. Every design in the Studio loads finished, in a colourway chosen by our studio. You recolour it, change the pattern, add your crest, sponsor, name and number. Start from something good and make it yours." }
     },
     {
       "@type": "Question",
       "name": "Is there a minimum order?",
       "acceptedAnswer": { "@type": "Answer", "text": "No minimum. Order one jersey or a full squad. Pricing scales with quantity: €38.90 for a single jersey, from €21.90 each at 10 or more." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Ready-to-Play?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ready-to-Play is a curated selection of Studio designs at −10%. Same designs, same customisation — a rotating selection our studio puts front and centre." }
     },
     {
       "@type": "Question",
@@ -52,92 +57,104 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <style>
   :root {
-    --bg-primary: #0a0a0a; --bg-panel: #111; --bg-card: rgba(255,255,255,0.02);
+    --bg-primary: #0a0a0a; --bg-panel: #101010; --bg-card: rgba(255,255,255,0.02);
     --text-white: #f5f5f5; --text-muted: #a1a1aa; --text-dim: #71717a;
     --accent-red: #c8352e; --accent-red-hover: #e04038;
-    --border-color: rgba(255,255,255,0.06);
+    --line: rgba(255,255,255,0.08);
     --font-display: 'Bebas Neue', sans-serif; --font-body: 'Outfit', sans-serif;
   }
   .studio-page * { margin: 0; padding: 0; box-sizing: border-box; }
   .studio-page { background: var(--bg-primary); color: var(--text-white); font-family: var(--font-body); overflow-x: hidden; }
   .studio-page .title { display: none; }
 
-  /* hero */
-  .st-hero { padding: 6.5rem 20px 4rem; text-align: center; background: var(--bg-primary); }
-  .st-eyebrow { font-family: var(--font-body); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-red); margin-bottom: 1.2rem; }
-  .st-hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 7vw, 5.2rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; line-height: 0.95; margin-bottom: 1.2rem; }
+  /* hero — tight; the grid is the page */
+  .st-hero { padding: 5.5rem 20px 3rem; text-align: center; }
+  .st-eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.1rem; }
+  .st-eyebrow b { color: var(--text-white); font-weight: 700; }
+  .st-hero h1 { font-family: var(--font-display); font-size: clamp(2.6rem, 6.5vw, 4.8rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; line-height: 0.95; margin-bottom: 1rem; }
   .st-hero h1 .free { color: var(--accent-red); }
-  .st-sub { font-size: 1.02rem; font-weight: 300; color: var(--text-muted); max-width: 620px; margin: 0 auto 2.2rem; line-height: 1.6; }
+  .st-sub { font-size: 0.98rem; font-weight: 300; color: var(--text-muted); max-width: 560px; margin: 0 auto 1.8rem; line-height: 1.6; }
   .st-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-  .st-btn { display: inline-block; padding: 16px 34px; font-family: var(--font-body); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
+  .st-btn { display: inline-block; padding: 15px 32px; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
   .st-btn-primary { background: var(--accent-red); color: #fff; }
   .st-btn-primary:hover { background: var(--accent-red-hover); }
-  .st-btn-ghost { border: 1px solid rgba(255,255,255,0.25); color: var(--text-white); }
-  .st-btn-ghost:hover { border-color: #fff; }
-  .st-hero-note { margin-top: 1.1rem; font-size: 0.8rem; font-weight: 300; color: var(--text-dim); }
+  .st-hero-note { margin-top: 1rem; font-size: 0.78rem; font-weight: 300; color: var(--text-dim); }
 
-  /* stat strip */
-  .st-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; max-width: 980px; margin: 0 auto; padding: 0 20px 4rem; }
-  .st-stat { background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.4rem 1rem; text-align: center; }
-  .st-stat b { display: block; font-family: var(--font-display); font-size: 1.7rem; font-weight: 400; color: var(--text-white); }
-  .st-stat span { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+  /* THE GRID — the workshop wall */
+  .st-wall { max-width: 1180px; margin: 0 auto; padding: 2.5rem 20px 4.5rem; }
+  .st-wall-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 0.9rem; margin-bottom: 1.6rem; }
+  .st-wall-head h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+  .st-wall-head p { font-size: 0.8rem; font-weight: 300; color: var(--text-dim); }
+  .st-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .st-card { display: block; text-decoration: none; color: var(--text-white); background: var(--bg-card); border: 1px solid var(--line); }
+  .st-card-imgwrap { aspect-ratio: 4/5; overflow: hidden; background: #141414; }
+  .st-card-imgwrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .st-card:hover .st-card-imgwrap img { transform: scale(1.04); }
+  .st-card-meta { padding: 0.85rem 0.9rem 1rem; }
+  .st-card-name { display: block; font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.05em; }
+  .st-card-style { display: inline-block; margin-top: 0.35rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); border: 1px solid var(--line); padding: 3px 8px; }
+  .st-card-open { display: block; margin-top: 0.6rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .st-card:hover .st-card-open { color: var(--accent-red); }
+  .st-card-more { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.7rem; padding: 1.5rem; border: 1px dashed rgba(255,255,255,0.18); background: none; }
+  .st-card-more i { font-size: 1.4rem; color: var(--text-dim); }
+  .st-card-more b { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; letter-spacing: 0.05em; }
+  .st-card-more span { font-size: 0.78rem; font-weight: 300; color: var(--text-dim); line-height: 1.5; }
+  .st-card-more:hover { border-color: var(--accent-red); }
+  .st-wall-note { margin-top: 1.4rem; font-size: 0.82rem; font-weight: 300; color: var(--text-dim); text-align: center; }
+  .st-wall-note a { color: var(--text-muted); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .st-wall-note a:hover { color: var(--accent-red); }
 
-  /* never blank */
-  .st-blank { background: var(--bg-panel); padding: 5rem 20px; }
-  .st-blank-inner { max-width: 880px; margin: 0 auto; text-align: center; }
-  .st-h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 1.1rem; }
-  .st-blank p { font-size: 0.95rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; max-width: 640px; margin: 0 auto 1rem; }
+  /* never blank — one paragraph, workshop voice */
+  .st-blank { background: var(--bg-panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 4rem 20px; }
+  .st-blank-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .st-h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 1rem; }
+  .st-blank p { font-size: 0.95rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
   .st-blank p strong { color: var(--text-white); font-weight: 600; }
 
-  /* features */
-  .st-features { padding: 5rem 20px; max-width: 1080px; margin: 0 auto; }
-  .st-features .st-h2 { text-align: center; margin-bottom: 3rem; }
-  .st-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .st-feature { background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.8rem 1.6rem; }
-  .st-feature i { color: var(--accent-red); font-size: 1.1rem; margin-bottom: 0.9rem; display: block; }
-  .st-feature h3 { font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; color: var(--text-white); }
-  .st-feature p { font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
+  /* stat strip */
+  .st-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; max-width: 980px; margin: 0 auto; padding: 3.5rem 20px; }
+  .st-stat { background: var(--bg-card); border: 1px solid var(--line); padding: 1.3rem 1rem; text-align: center; }
+  .st-stat b { display: block; font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; }
+  .st-stat span { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
 
-  /* how it works */
-  .st-how { background: var(--bg-panel); padding: 5rem 20px; }
-  .st-how-inner { max-width: 800px; margin: 0 auto; }
-  .st-how .st-h2 { text-align: center; margin-bottom: 3rem; }
-  ol.st-steps { list-style: none !important; margin: 0 !important; padding: 0 !important; counter-reset: none; }
-  ol.st-steps > li { display: flex !important; list-style: none !important; gap: 1.25rem; align-items: baseline; margin: 0 0 1.5rem !important; padding: 0 0 1.5rem !important; border-bottom: 1px solid var(--border-color); }
+  /* steps */
+  .st-how { background: var(--bg-panel); border-top: 1px solid var(--line); padding: 4rem 20px; }
+  .st-how-inner { max-width: 760px; margin: 0 auto; }
+  .st-how .st-h2 { text-align: center; margin-bottom: 2.4rem; }
+  ol.st-steps { list-style: none !important; margin: 0 !important; padding: 0 !important; }
+  ol.st-steps > li { display: flex !important; list-style: none !important; gap: 1.25rem; align-items: baseline; margin: 0 0 1.4rem !important; padding: 0 0 1.4rem !important; border-bottom: 1px solid var(--line); }
   ol.st-steps > li::marker { content: none; }
   ol.st-steps > li:last-child { border-bottom: none; margin-bottom: 0 !important; padding-bottom: 0 !important; }
-  .st-step-num { flex-shrink: 0; width: 2.2rem; font-family: var(--font-display); font-size: 1.9rem; line-height: 1; color: var(--accent-red); }
-  ol.st-steps > li > div { flex: 1; min-width: 0; }
-  ol.st-steps > li > div strong { font-family: var(--font-body); font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.3rem; color: var(--text-white); }
+  .st-step-num { flex-shrink: 0; width: 2.2rem; font-family: var(--font-display); font-size: 1.8rem; line-height: 1; color: var(--text-dim); }
+  ol.st-steps > li > div strong { font-weight: 700; font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.3rem; }
   ol.st-steps > li > div p { font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin: 0 !important; }
 
   /* doors */
-  .st-doors { padding: 5rem 20px; max-width: 1080px; margin: 0 auto; }
-  .st-doors .st-h2 { text-align: center; margin-bottom: 0.8rem; }
-  .st-doors-sub { text-align: center; font-size: 0.92rem; font-weight: 300; color: var(--text-dim); margin-bottom: 3rem; }
-  .st-door-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 800px; margin: 0 auto; }
-  .st-door { background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.8rem 1.6rem; }
-  .st-door h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
-  .st-door p { font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+  .st-doors { padding: 4.5rem 20px; max-width: 880px; margin: 0 auto; }
+  .st-doors .st-h2 { text-align: center; margin-bottom: 2.2rem; }
+  .st-door-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .st-door { background: var(--bg-card); border: 1px solid var(--line); padding: 1.7rem 1.5rem; }
+  .st-door h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.45rem; }
+  .st-door p { font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.9rem; }
   .st-door a { color: var(--accent-red); font-weight: 600; font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
 
   /* faq */
-  .st-faq { background: var(--bg-panel); padding: 5rem 20px; }
-  .st-faq-inner { max-width: 800px; margin: 0 auto; }
-  .st-faq .st-h2 { text-align: center; margin-bottom: 2.5rem; }
-  .st-faq-item { border-bottom: 1px solid var(--border-color); padding: 1.6rem 0; }
-  .st-faq-item:first-of-type { border-top: 1px solid var(--border-color); }
-  .st-faq-item h3 { font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; color: var(--text-white); margin-bottom: 0.5rem; }
+  .st-faq { background: var(--bg-panel); border-top: 1px solid var(--line); padding: 4.5rem 20px; }
+  .st-faq-inner { max-width: 780px; margin: 0 auto; }
+  .st-faq .st-h2 { text-align: center; margin-bottom: 2.2rem; }
+  .st-faq-item { border-bottom: 1px solid var(--line); padding: 1.5rem 0; }
+  .st-faq-item:first-of-type { border-top: 1px solid var(--line); }
+  .st-faq-item h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.45rem; }
   .st-faq-item p { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); line-height: 1.65; }
 
-  /* final cta */
-  .st-final { padding: 5.5rem 20px; text-align: center; }
-  .st-final .st-h2 { margin-bottom: 1rem; }
-  .st-final p { font-size: 0.95rem; font-weight: 300; color: var(--text-muted); max-width: 560px; margin: 0 auto 2rem; line-height: 1.6; }
+  /* final */
+  .st-final { padding: 5rem 20px; text-align: center; }
+  .st-final p { font-size: 0.95rem; font-weight: 300; color: var(--text-muted); max-width: 520px; margin: 0 auto 1.8rem; line-height: 1.6; }
 
-  @media (max-width: 860px) {
+  @media (max-width: 1020px) { .st-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) {
+    .st-grid { grid-template-columns: repeat(2, 1fr); }
     .st-stats { grid-template-columns: repeat(2, 1fr); }
-    .st-feature-grid { grid-template-columns: 1fr; }
     .st-door-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -145,66 +162,94 @@
 <div class="studio-page">
 
 <header class="st-hero">
-  <p class="st-eyebrow">The Studio &middot; MOMUTO 3D Kit Designer</p>
+  <p class="st-eyebrow"><b>The Studio</b> &middot; MOMUTO 3D Kit Designer</p>
   <h1>Design your football kit in 3D. <span class="free">Free.</span></h1>
-  <p class="st-sub">A real-time 3D designer with 30+ finished starting designs. Recolour, add your crest, sponsor, name and number — and see every change live on the jersey. Order from a single unit if you like what you made.</p>
+  <p class="st-sub">Every design below was finished by our studio. Pick one, open it in 3D, and make it yours — colours, crest, sponsor, names and numbers, live on the jersey.</p>
   <div class="st-cta-row">
     <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="st-btn st-btn-primary">Open the Studio &rarr;</a>
-    <a href="/pages/ready-to-play" class="st-btn st-btn-ghost">See finished designs</a>
   </div>
-  <p class="st-hero-note">Free to design &bull; No account needed &bull; Jerseys from &euro;21.90 at 10+ if you order</p>
+  <p class="st-hero-note">Free to design &bull; No account needed &bull; Order from 1 unit &bull; From &euro;21.90 at 10+</p>
 </header>
 
+<section class="st-wall">
+  <div class="st-wall-head">
+    <h2>The designs</h2>
+    <p>Finished starting points &mdash; never a blank jersey</p>
+  </div>
+  <div class="st-grid">
+    <a class="st-card" href="/products/the-fracture">
+      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png" alt="THE FRACTURE — geometric custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE FRACTURE</span><span class="st-card-style">Geometric shards</span><span class="st-card-open">See the design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-apex">
+      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp" alt="THE APEX — angular custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE APEX</span><span class="st-card-style">Angular panels</span><span class="st-card-open">See the design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-kinetic">
+      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp" alt="THE KINETIC — motion lines custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE KINETIC</span><span class="st-card-style">Motion lines</span><span class="st-card-open">See the design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-khala">
+      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/pics/368482b72b5c435b66cfbbabce8943e8ca57434ee5715699faf727aa36709d72.png" alt="THE KHALA — bold panel custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE KHALA</span><span class="st-card-style">Bold side panels</span><span class="st-card-open">See the design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-legacy">
+      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp" alt="THE LEGACY — retro striped custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE LEGACY</span><span class="st-card-style">Heritage stripes</span><span class="st-card-open">See the design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-prism">
+      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/pics/8861a904ded03b3141c5878a5b9d6fc864330eee737204b3d186d724d6c82c51.png" alt="THE PRISM — faceted geometry custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE PRISM</span><span class="st-card-style">Faceted geometry</span><span class="st-card-open">See the design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-mosaic">
+      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/pics/ae9deb9e17f800bd3140e6d66fb130a31813b202b8bf60485eea441fe361ebc5.png" alt="THE MOSAIC — tiled pattern custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE MOSAIC</span><span class="st-card-style">Tiled pattern</span><span class="st-card-open">See the design &rarr;</span></span>
+    </a>
+    <a class="st-card st-card-more" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en">
+      <i class="fas fa-arrow-right"></i>
+      <b>20+ more in the Studio</b>
+      <span>Every one loads finished. Open the Studio and scroll the design menu.</span>
+    </a>
+  </div>
+  <p class="st-wall-note">A rotating selection of these designs is <a href="/pages/ready-to-play">Ready-to-Play at &minus;10%</a>.</p>
+</section>
+
+<section class="st-blank">
+  <div class="st-blank-inner">
+    <h2 class="st-h2">You never start from a blank jersey</h2>
+    <p>Most kit configurators hand you an empty shape in a default colour and wish you luck. The Studio doesn&rsquo;t. <strong>Every design loads finished</strong> — a pattern, a palette, a look our designers already stand behind. Your job isn&rsquo;t to be a designer; it&rsquo;s to <strong>make a good design yours</strong>: your colours, your crest, your sponsor, your names and numbers. Football today — basketball lives in the Studio too.</p>
+  </div>
+</section>
+
 <div class="st-stats">
-  <div class="st-stat"><b>30+</b><span>Starting designs</span></div>
+  <div class="st-stat"><b>30+</b><span>Finished designs</span></div>
   <div class="st-stat"><b>Live</b><span>Real-time 3D preview</span></div>
   <div class="st-stat"><b>1</b><span>Minimum order</span></div>
   <div class="st-stat"><b>25&ndash;30</b><span>Days, worldwide</span></div>
 </div>
 
-<section class="st-blank">
-  <div class="st-blank-inner">
-    <h2 class="st-h2">You never start from a blank jersey</h2>
-    <p>Most kit configurators hand you an empty shape in a default colour and wish you luck. The Studio doesn&rsquo;t. <strong>Every starting design loads finished</strong> — a pattern, a palette, a look our designers already stand behind.</p>
-    <p>Your job isn&rsquo;t to be a designer. It&rsquo;s to <strong>make a good design yours</strong>: your colours, your crest, your sponsor, your names and numbers. The distance from &ldquo;opened the tool&rdquo; to &ldquo;this is our kit&rdquo; is minutes, not evenings.</p>
-  </div>
-</section>
-
-<section class="st-features">
-  <h2 class="st-h2">What you can do in the Studio</h2>
-  <div class="st-feature-grid">
-    <div class="st-feature"><i class="fas fa-palette"></i><h3>Recolour everything</h3><p>Change any zone of the design — body, sleeves, collar, pattern — with a live 3D preview of every choice.</p></div>
-    <div class="st-feature"><i class="fas fa-shield-halved"></i><h3>Your crest &amp; sponsors</h3><p>Upload your club crest and sponsor logos and place them straight onto the jersey.</p></div>
-    <div class="st-feature"><i class="fas fa-shirt"></i><h3>Full kits</h3><p>Jerseys and matching shorts — build the complete matchday kit in one session.</p></div>
-    <div class="st-feature"><i class="fas fa-user-group"></i><h3>Names &amp; numbers</h3><p>Squad names and numbers, printed in full sublimation — they never peel, crack or fade.</p></div>
-    <div class="st-feature"><i class="fas fa-share-nodes"></i><h3>Save &amp; share</h3><p>Share the design with your squad before you decide. Design by committee, for once, works.</p></div>
-    <div class="st-feature"><i class="fas fa-basketball"></i><h3>More than football</h3><p>Basketball jerseys live in the Studio too — same designer, same fabric, same no-minimum rule.</p></div>
-  </div>
-</section>
-
 <section class="st-how">
   <div class="st-how-inner">
     <h2 class="st-h2">From idea to matchday</h2>
     <ol class="st-steps">
-      <li><span class="st-step-num">1</span><div><strong>Pick a starting design</strong><p>30+ finished designs, each in an intentional colourway. Pick the one closest to what&rsquo;s in your head.</p></div></li>
-      <li><span class="st-step-num">2</span><div><strong>Make it yours</strong><p>Colours, pattern, crest, sponsors, names and numbers — all live in 3D, all free, for as long as you like.</p></div></li>
+      <li><span class="st-step-num">1</span><div><strong>Pick a starting design</strong><p>Choose from the wall above, or scroll the full design menu inside the Studio.</p></div></li>
+      <li><span class="st-step-num">2</span><div><strong>Make it yours</strong><p>Colours, pattern, crest, sponsors, names and numbers — all live in 3D, all free, for as long as you like. Share it with your squad before you decide.</p></div></li>
       <li><span class="st-step-num">3</span><div><strong>Order from one unit</strong><p>&euro;38.90 for a single jersey, from &euro;21.90 each at 10+. Full-sublimation print on polyester-elastane, delivered worldwide in 25&ndash;30 days.</p></div></li>
     </ol>
   </div>
 </section>
 
 <section class="st-doors">
-  <h2 class="st-h2">Not in a designing mood?</h2>
-  <p class="st-doors-sub">The Studio is one of three ways to get a MOMUTO kit.</p>
+  <h2 class="st-h2">Two shortcuts, if you want them</h2>
   <div class="st-door-grid">
     <div class="st-door">
       <h3>Ready-to-Play</h3>
-      <p>Finished designs by our studio, worn by real clubs — pick one, add your crest and colours, done. At &minus;10%.</p>
-      <a href="/pages/ready-to-play">Browse Ready-to-Play &rarr;</a>
+      <p>The selected few — a rotating curated selection of Studio designs at &minus;10%. Add your crest and colours, done.</p>
+      <a href="/pages/ready-to-play">Browse the selection &rarr;</a>
     </div>
     <div class="st-door">
       <h3>Bespoke</h3>
-      <p>Have an AI concept, a sketch, or an idea no template can hold? Our designers build it for you. &euro;15 deposit, credited in full from 5 jerseys.</p>
+      <p>Have an AI concept, a sketch, or an idea no design can hold? Our designers build it for you. &euro;15 deposit, credited in full from 5 jerseys.</p>
       <a href="/pages/request-custom-kit-design">Send your concept &rarr;</a>
     </div>
   </div>
@@ -214,8 +259,9 @@
   <div class="st-faq-inner">
     <h2 class="st-h2">Frequently asked questions</h2>
     <div class="st-faq-item"><h3>Is the 3D kit designer free?</h3><p>Yes. The Studio is free to use — design, preview and share as much as you want. You only pay if you order: jerseys from &euro;21.90 each at 10 or more, &euro;38.90 for a single jersey. No account needed to start.</p></div>
-    <div class="st-faq-item"><h3>Do I start from a blank jersey?</h3><p>No — and that&rsquo;s the point. Every starting design in the Studio loads finished, in a colourway chosen by our studio. You recolour it, change the pattern, add your crest, sponsor, name and number. Start from something good and make it yours.</p></div>
+    <div class="st-faq-item"><h3>Do I start from a blank jersey?</h3><p>No — and that&rsquo;s the point. Every design in the Studio loads finished, in a colourway chosen by our studio. You recolour it, change the pattern, add your crest, sponsor, name and number. Start from something good and make it yours.</p></div>
     <div class="st-faq-item"><h3>Is there a minimum order?</h3><p>No minimum. Order one jersey or a full squad. Pricing scales with quantity: &euro;38.90 for a single jersey, from &euro;21.90 each at 10 or more.</p></div>
+    <div class="st-faq-item"><h3>What is Ready-to-Play?</h3><p>Ready-to-Play is a curated selection of Studio designs at &minus;10%. Same designs, same customisation — a rotating selection our studio puts front and centre.</p></div>
     <div class="st-faq-item"><h3>Can I upload my own crest and sponsor logos?</h3><p>Yes. Upload your club crest and sponsor logos directly in the Studio and place them live on the 3D jersey. Names and numbers for the whole squad are added at order time.</p></div>
     <div class="st-faq-item"><h3>How long does delivery take?</h3><p>Production takes 7&ndash;12 days and shipping 10&ndash;15 days — typically 25&ndash;30 days door to door, worldwide. Every kit is full-sublimation printed on polyester-elastane fabric.</p></div>
     <div class="st-faq-item"><h3>I have an AI concept or a sketch — can you make it real?</h3><p>Yes — that&rsquo;s our <a href="/pages/request-custom-kit-design" style="color:var(--accent-red);font-weight:600;">Bespoke service</a>. Send a ChatGPT or Midjourney render, a sketch or a moodboard, and our designers rebuild it as a production-ready kit. First mockup in 24&ndash;48h; &euro;15 deposit, credited in full to orders of 5 or more jerseys.</p></div>
