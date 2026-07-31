@@ -66,6 +66,14 @@ Rotation rules (hard):
 
 ### Door 2 — The Studio *(the tool)*
 
+The Studio surfaces as **the wall of designs**: the hub page presents the idea
+in two sentences and then shows the full catalogue as clickable tiles, each
+routing through its design page into the tool. Aesthetically the Studio is the
+**workshop register** — monochrome, graphite chips carrying the style
+vocabulary, red reserved for the "Open in 3D" action — while the RTP
+collection page is the **front-table register**: red energy, prices on tiles,
+the seasonal banner. Connected, unique, same type system.
+
 The 3D configurator. Design from any catalogue base or from scratch —
 **starting points, never blank canvases**: every base loads looking finished,
 in an intentional colourway. This is a hard product rule and the visible moat
