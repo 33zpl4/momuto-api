@@ -276,6 +276,12 @@ request page. The July deposit sweep turned out to have missed `comparison-it`
 (nine stale free-design claims) and `comparison-es` (three); both are now
 correct.
 
+**Germany** (decided 30 July): next locale after the October IT read, gated on
+IT proving out AND Germany crossing ~200–250 clicks/28d on the EN site (100
+today, +144%). Full reasoning, triggers and launch-complete checklist in
+`docs/de-site-plan.md`. The only pre-trigger action is the German legal pack
+(Impressum/Widerruf/AGB) — long lead time, near-zero cost.
+
 **Still needing an owner, in priority order:** a Stripe payment link for the IT
 store (the Italian request page advertises the deposit but cannot charge it);
 the US store + `OEMSAAS_TOKEN_US` + a currency decision, so `docs/us-hub-plan.md`
