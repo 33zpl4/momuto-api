@@ -1,0 +1,26 @@
+{
+  "team_name": "Caesaraugusta FC",
+  "design_name": "Basílica Heritage",
+  "design_description": "A clean heritage-inspired design featuring a minimalist black (or goalkeeper lavender) base with subtle white side panels that frame the body without distracting from the central artwork. The focal point is a detailed silhouette of the Basílica del Pilar rising above stylized waves representing the Río Ebro, creating a strong visual tribute to Zaragoza and its iconic skyline. The restrained composition leaves generous negative space, allowing the skyline illustration, crest, and sponsor to become the defining elements of the jersey. A Spain flag is placed below the back collar as a subtle heritage detail, while the monochrome trim reinforces the elegant, timeless aesthetic. Overall, the jersey feels sophisticated, locally inspired, and iconic, celebrating Zaragoza's architectural identity through clean, minimalist football design.",
+  "primary_color": "#000000",
+  "secondary_color": "#FFFFFF",
+  "accent_color": "#FFFFFF",
+  "models": [
+    {
+      "name": "Player",
+      "primary_color": "#000000",
+      "secondary_color": "#FFFFFF",
+      "accent_color": "#FFFFFF",
+      "image_url": "https://cdn.staticsoe.com/pics/b3996fa55a42f02c8c5584428d069c73031b8e68286798d96f0ca7e9fdf5e419.png",
+      "back_image_url": "https://cdn.staticsoe.com/pics/e01fba9ac9d2391c31d67fe5213b5bf38abc188045e3deaf4686d262b8b54148.png"
+    },
+    {
+      "name": "Goalkeeper",
+      "primary_color": "#E8D5F2",
+      "secondary_color": "#FFFFFF",
+      "accent_color": "#FFFFFF",
+      "image_url": "https://cdn.staticsoe.com/pics/d1e1f89a68b7d66f0c6c3ad85d4fa6210e3e23fa09864b7c3f09a4805e63dbab.png",
+      "back_image_url": "https://cdn.staticsoe.com/pics/ab747dd444bcef34582d664d46fd45277ad694db14f669985c319ef3054677d9.png"
+    }
+  ]
+}
