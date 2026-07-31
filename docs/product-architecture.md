@@ -1,4 +1,4 @@
-# Product architecture — Collections / Studio / Bespoke
+# Product architecture — The Designs / The Studio / Bespoke
 
 Written 30 July 2026, revised 31 July with the rotation model (owner decision). This is the canonical taxonomy for how MOMUTO presents
 its offer, agreed while planning the model-page expansion (`docs/10x-plan.md`
