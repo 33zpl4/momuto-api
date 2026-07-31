@@ -15,3 +15,7 @@ post it kit-sportivi-personalizzati-crea-design-racconta-storia
 # do not have its CMS id. Pull it, copy the id into
 # cms/pages/it/design-personalizzato-confermato.json, then deploy that file.
 page it design-personalizzato-confermato
+
+# Verify the city-page deploy of 17 July actually landed all 10 - the last ES
+# inventory predates it (4 July) and six cities show zero GSC impressions.
+inventory es
