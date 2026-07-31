@@ -1,0 +1,35 @@
+name: Deploy Studio Page
+
+# "The Studio" — the 3D kit designer hub (docs/product-architecture.md door 2).
+# EN today; locales join scripts/deploy-studio-page.js as they are translated.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pages/the-studio-3d-kit-designer'
+      - 'scripts/deploy-studio-page.js'
+      - '.github/workflows/deploy-studio-page.yml'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (no writes to CMS)'
+        required: true
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Deploy
+        env:
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run || 'false' }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+        run: node scripts/deploy-studio-page.js
