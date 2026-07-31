@@ -80,6 +80,19 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true, dedup: true });
   }
 
+  // Backfill guard: the platform's nightly sync re-pushes OLD orders whose
+  // payment our DB missed the first time; the design server's transition
+  // guard alone reads those as "just paid". The payload's own clocks
+  // (pay_at / first_pay_at / created_at, unix seconds — sent by the updated
+  // WebhookAction.php) tell the truth: anything paid more than STALE_DAYS
+  // ago is a backfill — record it, tell the admin, but NEVER send the
+  // customer a months-late confirmation or start the production lifecycle.
+  const STALE_DAYS = 3;
+  const paidTs = Number(body.pay_at) || Number(body.first_pay_at) || Number(body.platform_created_at) || 0;
+  const paidDate = paidTs ? new Date(paidTs * 1000).toISOString().slice(0, 10) : null;
+  const isStale = !!paidTs && (Date.now() / 1000 - paidTs) > STALE_DAYS * 86400;
+  const isTest = !!Number(body.is_test);
+
   const players = (designs || []).flatMap(d => d.players || []).filter(Boolean);
   const qty = players.reduce((n, p) => n + (parseInt(p.qty, 10) || 1), 0) || '—';
 
@@ -94,42 +107,62 @@ module.exports = async function handler(req, res) {
     total: total || null,
     currency: currency || 'EUR',
     designs: designs || [],
-    invoiceDate: new Date().toISOString().slice(0, 10),
-    notes: '3d-tool order (auto via design-server webhook)',
+    invoiceDate: paidDate || new Date().toISOString().slice(0, 10),
+    notes: (isStale ? `3d-tool order BACKFILL (platform paid ${paidDate}, surfaced late by the nightly re-push)`
+                    : '3d-tool order (auto via design-server webhook)') + (isTest ? ' [platform test order]' : ''),
     lang:  ['en', 'es', 'fr', 'it'].includes(lang) ? lang : 'en',
+    platformPaidAt: paidTs ? new Date(paidTs * 1000).toISOString() : null,
     paidAt: new Date().toISOString(),
-    emailsSent: ['confirmation'],
+    emailsSent: isStale || isTest ? [] : ['confirmation'],
     trackingNumber: null,
     trackingUrl: null,
-    status: 'active',
+    status: isStale || isTest ? 'backfill' : 'active',
+    // same belt cron-orders honours for 'excluded': even if something ever
+    // re-adds a backfill to orders:active, the lifecycle skips it
+    stopLifecycle: isStale || isTest ? true : undefined,
     createdAt: new Date().toISOString(),
   };
 
   await kv.set(`order:${id}`, order);
   await kv.sadd('orders:all', id);
-  await kv.sadd('orders:active', id);
+  if (!isStale && !isTest) {
+    await kv.sadd('orders:active', id); // lifecycle (day-4/day-10/…) — fresh orders only
+  }
 
-  try {
-    const { subject, html } = emailConfirmation3D(order);
-    await sendEmail(order.email, subject, html);
-  } catch (e) {
-    // order is stored either way; surface the send failure to the caller log
-    console.error(`[order-3d-paid] ${id} confirmation send FAILED:`, e.message);
-    return res.status(502).json({ ok: false, stored: true, error: e.message });
+  if (!isStale && !isTest) {
+    try {
+      const { subject, html } = emailConfirmation3D(order);
+      await sendEmail(order.email, subject, html);
+    } catch (e) {
+      // order is stored either way; surface the send failure to the caller log
+      console.error(`[order-3d-paid] ${id} confirmation send FAILED:`, e.message);
+      return res.status(502).json({ ok: false, stored: true, error: e.message });
+    }
   }
 
   // Best-effort heads-up to the team — never fails the request.
   try {
+    const paidLine = paidDate
+      ? `<p>Platform payment date: <strong>${paidDate}</strong>.</p>`
+      : '<p>Platform payment date unknown — the design server is running the pre-timestamp WebhookAction.php; deploy the updated patch for backfill detection.</p>';
+    const subject = isStale
+      ? `🟡 3D order BACKFILL — ${order_no} paid ${paidDate} (${order.currency} ${order.total || '?'}, ${order.lang})`
+      : isTest
+        ? `⚪ 3D TEST order — ${order_no} (${order.currency} ${order.total || '?'}, ${order.lang})`
+        : `🟢 3D order PAID — ${order_no} (${order.currency} ${order.total || '?'}, ${order.lang})`;
     await sendEmail(
       ADMIN_EMAIL,
-      `🟢 3D order PAID — ${order_no} (${order.currency} ${order.total || '?'}, ${order.lang})`,
+      subject,
       `<p>Order <strong>${order_no}</strong> (platform ${plant_order_no || '?'}) paid by ${order.name} &lt;${email}&gt;.</p>` +
+      paidLine +
+      (isStale ? '<p><strong>Backfill:</strong> this is an OLD payment surfacing via the platform\'s nightly re-push — no customer email was sent and no production lifecycle was started. Check whether it was already handled.</p>' : '') +
+      (isTest ? '<p><strong>Platform test order</strong> — no customer email sent, no lifecycle started.</p>' : '') +
       `<p>${qty} jerseys · inspect: <a href="https://design.momuto.com/3d-configurator/inspect.html?configId=${order_no}">design inspector</a></p>`
     );
   } catch (e) {
     console.warn('[order-3d-paid] admin notify failed:', e.message);
   }
 
-  console.log(`[order-3d-paid] ${id} confirmed (${order.lang}) — lifecycle started`);
-  return res.status(200).json({ ok: true });
+  console.log(`[order-3d-paid] ${id} ${isStale ? 'backfill recorded' : isTest ? 'test recorded' : `confirmed (${order.lang}) — lifecycle started`}`);
+  return res.status(200).json({ ok: true, backfill: isStale || undefined, test: isTest || undefined });
 };
