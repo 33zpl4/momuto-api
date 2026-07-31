@@ -91,6 +91,60 @@ Field reference:
 | `accent_color` | ✅ | Hex. **MUST equal `secondary_color`.** Drives the FRONT/BACK toggle + reaction button `.active` color. |
 | `image_url` | ✅ | Front jersey image (the CDN URL the user provides). |
 | `back_image_url` | ⬜ optional | Back jersey image. If present, the page renders a FRONT/BACK toggle. **Omit the key entirely** when there's no back image yet — do not put an empty string or null. |
+| `away_image_url` | ⬜ optional | Front image of the **second kit**. Presence of this key is what turns on the kit selector (see §3.1). |
+| `away_back_image_url` | ⬜ optional | Back image of the second kit. Only meaningful alongside `away_image_url`. |
+| `kit_label_home` | ⬜ optional | Overrides the label of the **first** kit button. String, or a map keyed by language (see §3.1). |
+| `kit_label_away` | ⬜ optional | Overrides the label of the **second** kit button. Same format as `kit_label_home`. |
+
+> ⚠️ **This table is the complete schema.** `scripts/generate-and-deploy.js` reads
+> these keys and no others. Any additional key you invent is **silently ignored** —
+> there is no validation and the deploy still reports success, so the page goes
+> live with missing images instead of failing loudly. In particular there is **no
+> nested/array form** for multiple kits: use the flat `away_*` fields in §3.1.
+
+### 3.1 Teams with two kits (home/away, player/goalkeeper, …)
+
+A team can ship **two kits on one page**. Adding `away_image_url` renders a kit
+selector next to the FRONT/BACK toggle in a single toolbar; the lightbox follows
+whichever kit is selected. There are only ever **two** slots — "home" is the
+first, "away" is the second, whatever you label them.
+
+```json
+{
+  "image_url": "…front of kit 1.png",
+  "back_image_url": "…back of kit 1.png",
+  "away_image_url": "…front of kit 2.png",
+  "away_back_image_url": "…back of kit 2.png",
+  "kit_label_home": { "en": "PLAYER", "es": "JUGADOR", "fr": "JOUEUR", "it": "GIOCATORE" },
+  "kit_label_away": { "en": "GOALKEEPER", "es": "PORTERO", "fr": "GARDIEN", "it": "PORTIERE" }
+}
+```
+
+**Labels.** Omit `kit_label_*` for an ordinary home/away kit — each domain then
+uses its own translated default:
+
+| Domain | First kit | Second kit |
+|--------|-----------|------------|
+| momuto.com | `HOME` | `AWAY` |
+| es.momuto.com | `PRIMERA` | `SEGUNDA` |
+| fr.momuto.com | `DOMICILE` | `EXTÉRIEUR` |
+| it.momuto.com | `CASA` | `TRASFERTA` |
+
+Set `kit_label_*` only when the two kits aren't home/away (player/goalkeeper,
+adult/kids, …). Each accepts either form:
+
+- **A map keyed by language** — `{ "en": "PLAYER", "es": "JUGADOR" }`. Preferred:
+  a plain string would leave the Spanish, French and Italian pages in English.
+  Language keys are `en` / `es` / `fr` / `it`; any language you leave out falls
+  back to the domain default in the table above.
+- **A plain string** — same label on all four domains.
+
+Other notes:
+- `back_image_url` is still optional here; if kit 2 has no back image, the kit
+  falls back to its front image for the BACK view.
+- The gallery card always uses `image_url` (kit 1 front) as its thumbnail.
+- Colors stay single-valued for the whole page — pick them from the **first**
+  kit, and mention the second kit's colors in `design_description`.
 
 Formatting:
 - Straight ASCII quotes in JSON. If the description contains curly quotes `“ ” ‘ ’`
@@ -241,6 +295,22 @@ push:
 - `status: completed` + `conclusion: success` means pages (and, if requested,
   gallery) are live. Runs typically finish in ~1 minute.
 
+> ⚠️ **`conclusion: success` does not mean the page is correct.** The deploy does
+> not validate the config, so a typo'd or unsupported key produces a live page
+> with `src="undefined"` images — and still reports success. If you changed
+> anything about the config's *shape* (not just values), check the rendered page
+> too, or render it locally:
+>
+> ```
+> # exercise the real builder without deploying
+> head -n -4 scripts/generate-and-deploy.js > /tmp/render.js
+> echo 'module.exports = { buildPageHTML, DOMAINS };' >> /tmp/render.js
+> # then require('/tmp/render.js') and assert the HTML has no src="undefined"
+> ```
+>
+> (`/tmp/render.js` needs `scripts/`-relative paths to resolve — put it in a
+> throwaway dir with a `lib/indexnow.js` stub, or just eyeball the live page.)
+
 ---
 
 ## 11. Quick checklist
@@ -251,7 +321,9 @@ push:
 - [ ] `secondary_color` = main contrast color, and `accent_color` **equals** it.
 - [ ] Colors are real values from the jersey, not copied from another team.
 - [ ] `back_image_url` present only if a real back image exists (else omit key).
+- [ ] Only keys from the §3 table are used — no invented/nested ones.
+- [ ] Two kits? Second kit is in `away_image_url` / `away_back_image_url`, and
+      `kit_label_*` is a per-language map if the kits aren't home/away (§3.1).
 - [ ] One team per commit.
 - [ ] `add-to-gallery` in the message **iff** the user wants it in the gallery.
 - [ ] Pushed to the working branch.
-```
