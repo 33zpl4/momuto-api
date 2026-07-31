@@ -33,17 +33,21 @@ Each design gets a **permanent page per locale** — a short story, the design
 vocabulary it targets (striped / gradient / retro / camo / sash / hooped…),
 renders, and one primary CTA: *open it in 3D*, deep-linked with the design
 pre-loaded. Nothing long; the page exists to carry keywords and route into the
-tool. These pages never disappear and never change URL.
+tool. These pages never disappear and never change URL. The full template
+specification — common blocks vs per-design data, handle strategy, the
+RTP-as-state rule — is `docs/design-page-template.md`.
 
 #### Ready-to-Play — the rotating program, not a design class
 
-**"A curated selection of our designs, ready to play. −10%. The selection
-rotates."** RTP is merchandising, not taxonomy: any catalogue design can rotate
+**"A curated selection of our designs, ready to play. −10%. This season's
+selection — rotates each season."** (Owner decision: seasonal, not monthly —
+sport-native and premium. Canonical per-locale wording in
+`docs/design-page-template.md`.) RTP is merchandising, not taxonomy: any catalogue design can rotate
 in or out. What rotation buys:
 
-- **Honest urgency**: "THE APEX is in the Ready-to-Play selection until the
-  next drop — 10% off." A real deadline with no fake scarcity — the design
-  stays; the discount rotates.
+- **Honest urgency**: "THE APEX is in this season's Ready-to-Play selection
+  — 10% off." A real deadline with no fake scarcity — the design stays; the
+  discount rotates with the season.
 - **A return cadence**: rotation day is a newsletter, a social post, and a
   freshness signal on a stable collection URL that keeps its SEO equity.
 - **Curation as the brand signal**: everything in the store is ours; the front
@@ -53,10 +57,10 @@ Rotation rules (hard):
 1. **Pages never rotate — only membership and price do.** A design leaving RTP
    keeps its permanent page at full price. The RTP collection page keeps its
    URL forever.
-2. **Promise only the cadence ops can keep.** "Rotates monthly" ships only
+2. **Promise only the cadence ops can keep.** The seasonal wording ships only
    when the rotation script exists (collection membership + price flip on the
-   store products, both directions, per locale). Until then the public wording
-   is "the selection rotates with each drop" — same story, no date to break.
+   store products, both directions, per locale). A season is a generous window
+   — but it is still a public promise.
 3. Selection size stays small — 6–10 designs in rotation at any time. The
    spotlight only works if it is a spotlight.
 
@@ -81,7 +85,7 @@ included. The refund promise lives on the gate page only.
 > **Bespoke takes a deposit because our designers work on your concept.
 > Catalogue designs and Studio creations are base price because the design
 > work is either already done or done by you. Ready-to-Play is −10% because it
-> is this month's curated selection — the studio's front table.**
+> is this season's curated selection — the studio's front table.**
 
 Never explain a price any other way. Note the story that moved: "you skip the
 design phase" is now the *catalogue vs bespoke* story (true of every finished
@@ -128,7 +132,7 @@ Unlocks:
 - Country concepts and collabs are catalogue designs like any other — they
   can rotate into RTP for their tournament windows, which is the rotation
   mechanic at its best.
-- Honest urgency on every RTP tile: "in the selection until the next drop."
+- Honest urgency on every RTP tile: "in this season's selection."
 
 Forbids:
 - Rotating or deleting design *pages* — only collection membership and price
