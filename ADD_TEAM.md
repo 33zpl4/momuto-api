@@ -256,6 +256,18 @@ updates the gallery image on all domains."
 To add a back image to a team that previously had none: add the
 `back_image_url` key and commit — the FRONT/BACK toggle appears automatically.
 
+**Redeploying without a content change.** The Action deploys the team whose
+`config.json` appears in `git diff HEAD~1 HEAD`, and there is no manual
+dispatch. A commit that touches only `scripts/` (or an empty commit) therefore
+deploys **nothing**. To force a redeploy — e.g. to repair a gallery card — the
+last commit must contain a real edit to that team's `config.json`.
+
+**A broken gallery card is not always fixed by redeploying.** The product page
+is regenerated from scratch every run, but the gallery entry is patched in
+place field-by-field. A card can therefore stay broken while the product page
+looks perfect. If a thumbnail is wrong, check the gallery entry itself rather
+than assuming a successful run repaired it.
+
 ---
 
 ## 8. Removing a team from the gallery
