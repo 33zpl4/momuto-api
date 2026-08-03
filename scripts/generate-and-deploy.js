@@ -597,8 +597,11 @@ async function updateGallery(domain, teamSlug, config, galleryDesc) {
     const entryStart = currentContent.lastIndexOf('{', urlIdx);
     const entryEnd = currentContent.indexOf('}', urlIdx) + 1;
     const existingEntry = currentContent.slice(entryStart, entryEnd);
-    let updatedEntry = existingEntry.replace(/desc:\s*"(?:[^"\\]|\\.)*"/, `desc: ${JSON.stringify(shortDesc)}`);
-    updatedEntry = updatedEntry.replace(/image:\s*"(?:[^"\\]|\\.)*"/, `image: ${JSON.stringify(config.image_url)}`);
+    // Match a quoted value, but fall back to a bare one so an entry left broken
+    // by an earlier bad deploy (e.g. `image: undefined`) can still be repaired.
+    const field = (key) => new RegExp(`${key}:\\s*(?:"(?:[^"\\\\]|\\\\.)*"|[^,\\n}]*)`);
+    let updatedEntry = existingEntry.replace(field('desc'), `desc: ${JSON.stringify(shortDesc)}`);
+    updatedEntry = updatedEntry.replace(field('image'), `image: ${JSON.stringify(config.image_url)}`);
     updatedContent = currentContent.slice(0, entryStart) + updatedEntry + currentContent.slice(entryEnd);
     console.log(`  ✓ Updated desc + image for ${config.team_name} on ${domain.label}`);
   } else {
@@ -758,6 +761,17 @@ async function main() {
   if (!fs.existsSync(configPath)) throw new Error(`Config not found: ${configPath}`);
 
   const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+
+  // Fail loudly rather than deploying a page with `undefined` in place of the
+  // image or the copy — a bad config would otherwise go live reporting success.
+  const missing = ['team_name', 'design_name', 'design_description', 'image_url']
+    .filter(key => typeof config[key] !== 'string' || !config[key].trim());
+  if (missing.length) {
+    throw new Error(
+      `${configPath} is missing required field(s): ${missing.join(', ')}. ` +
+      `See ADD_TEAM.md §3 for the supported schema.`
+    );
+  }
   const updateGalleryFlag = process.env.UPDATE_GALLERY === 'true';
   const galleryOnly = process.env.GALLERY_ONLY === 'true';
 
