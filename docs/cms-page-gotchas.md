@@ -27,20 +27,25 @@ Unscoped, `!important`, top of your `<style>`. Used by the request, concept
 and comparison pages; the Studio page shipped without it and displayed
 "The Studio — Free 3D Football Kit Designer | MOMUTO" as a stray heading.
 
-## 2. The container is not full width
+## 2. The container is not full width — and bleed alone gets clipped
 
 `container_wrapper` boxes your content; a dark page shows as a floating column
-on white. Two working techniques:
+on white. **The `calc(50% - 50vw)` bleed alone is NOT enough**: an ancestor in
+the wrapper chain clips it, leaving white strips at the viewport edges
+(observed live on the Studio page, 3 Aug).
 
-- **Whole-page bleed** (Studio page): on your outermost div —
-  ```css
-  .my-page { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
-  body { overflow-x: hidden; }  /* 100vw can add a scrollbar-width overflow */
-  ```
-- **Per-section bleed** (request pages' `header.hero.full-bleed`): keep content
-  in-container, paint a `::before` stretched to `100vw`
-  (`left:50%; transform:translateX(-50%)`) behind it, `z-index:-1`. Zero
-  layout risk; more rules. Prefer this when only some sections need bleed.
+**The reliable fix, proven on the AI hub pages: paint the `body` itself.**
+```css
+body { background: var(--bg-primary); color: var(--text-white); overflow-x: hidden; }
+```
+Whatever the wrapper does, the page behind it is the right colour. Combine
+with the whole-page bleed margins so section borders still span:
+```css
+.my-page { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+```
+Alternative for light pages needing only some dark bands: per-section
+`::before` stretched to `100vw` (`left:50%; transform:translateX(-50%)`,
+`z-index:-1`) — the request pages' `header.hero.full-bleed` pattern.
 
 ## 3. `.mo-editor-reset` kills `margin: auto` centering on `<p>`
 

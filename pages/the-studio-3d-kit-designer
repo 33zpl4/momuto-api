@@ -65,7 +65,7 @@
   }
   .studio-page * { margin: 0; padding: 0; box-sizing: border-box; }
   .studio-page { background: var(--bg-primary); color: var(--text-white); font-family: var(--font-body); overflow-x: hidden; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
-  body { overflow-x: hidden; } /* 100vw bleed can add a scrollbar-width overflow */
+  body { overflow-x: hidden; background: var(--bg-primary); color: var(--text-white); } /* paint the body itself: the wrapper chain clips the 100vw bleed, leaving white strips (see docs/cms-page-gotchas.md) */
   .title, .page-title { display: none !important; } /* the CMS prints the page title above the content */
 
   /* hero — tight; the grid is the page */
