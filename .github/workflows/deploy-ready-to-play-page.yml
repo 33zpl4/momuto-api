@@ -1,16 +1,17 @@
 name: Deploy Ready to Play Page
 
 # The "Ready to Play" wall — the 3D kit designer hub (docs/product-architecture.md).
-# Filenames keep the historical "studio" slug; the live handle/URL is unchanged.
-# EN today; locales join scripts/deploy-studio-page.js as they are translated.
+# Deploys to /pages/ready-to-play on www (the wall took over the aged
+# collection URL, 4 Aug) and retires /pages/the-studio-3d-kit-designer.
+# EN today; locales join scripts/deploy-ready-to-play-page.js as translated.
 
 on:
   push:
     branches: [main]
     paths:
-      - 'pages/the-studio-3d-kit-designer'
-      - 'scripts/deploy-studio-page.js'
-      - '.github/workflows/deploy-studio-page.yml'
+      - 'pages/ready-to-play'
+      - 'scripts/deploy-ready-to-play-page.js'
+      - '.github/workflows/deploy-ready-to-play-page.yml'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -33,4 +34,4 @@ jobs:
         env:
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run || 'false' }}
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
-        run: node scripts/deploy-studio-page.js
+        run: node scripts/deploy-ready-to-play-page.js

@@ -1,5 +1,12 @@
 # Ready-to-Play collection — how it works & how to not get fooled
 
+> **EN retired (4 Aug 2026).** `/pages/ready-to-play` on www is now the
+> **Ready to Play wall** (`pages/ready-to-play`, deployed by
+> `deploy-ready-to-play-page.js`) — the `en` entry was removed from
+> `deploy-ready-to-play-collection.js`. **Do not re-add it**: it would
+> silently overwrite the wall with the old card grid. Everything below now
+> applies to **FR/ES/IT only**.
+
 The RTP collection page (`/pages/<collection_handle>`) shows the 7 template cards.
 Each card links to a **buyable product page** (`/products/the-<slug>`). This doc
 exists because the collection has bitten us twice: a **stale-checkout misread**

@@ -17,11 +17,10 @@ const ROOT = path.resolve(__dirname, '..');
 const RTP_DIR = path.join(ROOT, 'ready-to-play');
 
 const DOMAINS = {
-  en: {
-    host: 'https://openapi.oemapps.com',
-    token: process.env.OEMSAAS_TOKEN_EN,
-    label: 'momuto.com'
-  },
+  // en removed 4 Aug 2026: /pages/ready-to-play on www is now the Ready to
+  // Play WALL, deployed by deploy-ready-to-play-page.js. Re-adding en here
+  // would silently overwrite the wall with the old card grid — the exact
+  // revert class documented in docs/rtp-collection.md.
   es: {
     host: 'https://openapi.oemapps.com',
     token: process.env.OEMSAAS_TOKEN_ES,

@@ -76,14 +76,17 @@ Rotation rules (hard):
 ### Door 2 — The 3D designer *(the tool)*
 
 The catalogue surfaces as **the wall of designs**: the Ready to Play hub page
-(`/pages/the-studio-3d-kit-designer` — the handle keeps its historical slug;
-URL intact by owner decision) presents the idea in two sentences and then
-shows the full catalogue as clickable tiles, each routing through its design
-page into the tool. One register, not two: the workshop look — monochrome,
-graphite chips carrying the style vocabulary, red reserved for the "Open in
-3D" action — with the seasonal −10% badges sitting directly on the discounted
-tiles. The legacy collection page (`/pages/ready-to-play`) is superseded by
-the hub; 301 it to the hub when we retire it (owner call, not yet executed).
+(**`/pages/ready-to-play`** — the wall took over the aged collection URL in
+place, owner decision 4 Aug, so its equity transfers with no redirect risk)
+presents the idea in two sentences and then shows the full catalogue as
+clickable tiles, each routing through its design page into the tool. One
+register, not two: the workshop look — monochrome, graphite chips carrying
+the style vocabulary, red reserved for the "Open in 3D" action — with the
+seasonal −10% badges sitting directly on the discounted tiles. The
+short-lived `/pages/the-studio-3d-kit-designer` is deleted by the deploy's
+retire step and gets a 301 → `/pages/ready-to-play` in the CMS admin if the
+platform supports redirects. FR/ES/IT keep their old collection pages until
+the wall is translated.
 
 The 3D configurator. Design from any catalogue base or from scratch —
 **starting points, never blank canvases**: every base loads looking finished,
@@ -164,8 +167,9 @@ as their surfaces are touched, not in a dedicated pass.
   the Ready to Play page and the 3D designer.
 - **The tool is "the 3D designer"** (per-locale table above) — descriptive
   and keyword-bearing, not a brand entity.
-- Slugs are not brand surfaces: the hub keeps its historical
-  `the-studio-3d-kit-designer` handle.
+- The hub lives at `/pages/ready-to-play` — the aged URL, matching the line
+  name. The temporary `the-studio-3d-kit-designer` slug is retired (deleted +
+  301).
 
 ## What this unlocks (and what it forbids)
 
