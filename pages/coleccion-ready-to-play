@@ -1,0 +1,298 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "MOMUTO Diseñador 3D de Camisetas",
+  "url": "https://design.momuto.com/3d-configurator/configurator.html",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Web browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Diseñar es gratis. Camisetas desde 21,90 € a partir de 10 unidades si haces pedido." },
+  "publisher": { "@type": "Organization", "name": "MOMUTO", "url": "https://es.momuto.com" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿El diseñador de camisetas 3D es gratis?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. El diseñador es gratuito: diseña, previsualiza y comparte todo lo que quieras. Solo pagas si haces pedido: camisetas desde 21,90 € por unidad a partir de 10, 38,90 € una camiseta suelta. No necesitas cuenta para empezar." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Empiezo desde una camiseta en blanco?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No — y esa es la idea. Cada diseño Ready to Play carga terminado, en una combinación de colores elegida por nuestro estudio de diseño. Tú lo recoloreas, cambias el patrón, añades tu escudo, tu patrocinador, nombre y dorsal. Empieza desde algo bueno y hazlo tuyo." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hay pedido mínimo?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No hay mínimo. Pide una camiseta o la equipación de toda la plantilla. El precio escala con la cantidad: 38,90 € una camiseta suelta, desde 21,90 € por unidad a partir de 10." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es Ready to Play?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ready to Play es este muro: diseños terminados que nuestro estudio de diseño respalda, todos personalizables en 3D o listos para pedir tal cual. Cada temporada elegimos unos pocos diseños en tendencia y los ponemos al −10%; la selección rota, los diseños se quedan." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo subir mi escudo y los logos de mis patrocinadores?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. Sube tu escudo y los logos de tus patrocinadores directamente en el diseñador 3D y colócalos en directo sobre la camiseta. Los nombres y dorsales de toda la plantilla se añaden al hacer el pedido." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tarda la entrega?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La producción tarda 7–12 días y el envío 10–15 días: normalmente 25–30 días puerta a puerta, a todo el mundo. Cada equipación se imprime por sublimación total sobre tejido de poliéster-elastano." }
+    },
+    {
+      "@type": "Question",
+      "name": "Tengo un concepto de IA o un boceto, ¿podéis hacerlo realidad?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí — ese es nuestro servicio de Diseño a Medida. Envía un render de ChatGPT o Midjourney, un boceto o un moodboard, y nuestros diseñadores lo reconstruyen como una equipación lista para producción. Primer mockup en 24–48h; depósito de 15 €, acreditado íntegramente en pedidos de 5+ camisetas." }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+  :root {
+    --bg-primary: #0a0a0a; --bg-panel: #101010; --bg-card: rgba(255,255,255,0.02);
+    --text-white: #f5f5f5; --text-muted: #a1a1aa; --text-dim: #71717a;
+    --accent-red: #c8352e; --accent-red-hover: #e04038;
+    --line: rgba(255,255,255,0.08);
+    --font-display: 'Bebas Neue', sans-serif; --font-body: 'Outfit', sans-serif;
+  }
+  .studio-page * { margin: 0; padding: 0; box-sizing: border-box; }
+  .studio-page { background: var(--bg-primary); color: var(--text-white); font-family: var(--font-body); overflow-x: hidden; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+  body { overflow-x: hidden; background: var(--bg-primary); color: var(--text-white); } /* paint the body itself: the wrapper chain clips the 100vw bleed, leaving white strips (see docs/cms-page-gotchas.md) */
+  .title, .page-title { display: none !important; } /* the CMS prints the page title above the content */
+
+  /* hero — tight; the grid is the page */
+  .st-hero { padding: 5.5rem 20px 3rem; text-align: center; }
+  .st-eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.1rem; }
+  .st-eyebrow b { color: var(--text-white); font-weight: 700; }
+  .st-hero h1 { font-family: var(--font-display); font-size: clamp(2.6rem, 6.5vw, 4.8rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; line-height: 0.95; margin-bottom: 1rem; }
+  .st-hero h1 .free { color: var(--accent-red); }
+  .st-sub { font-size: 0.98rem; font-weight: 300; color: var(--text-muted); max-width: 560px; margin: 0 auto 1.8rem; line-height: 1.6; }
+  .st-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .st-btn { display: inline-block; padding: 15px 32px; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
+  .st-btn-primary { background: var(--accent-red); color: #fff; }
+  .st-btn-primary:hover { background: var(--accent-red-hover); }
+  .st-hero-note { margin-top: 1rem; font-size: 0.78rem; font-weight: 300; color: var(--text-dim); }
+  .mo-editor-reset .st-sub, .mo-editor-reset .st-final p { margin-inline: auto; } /* theme reset zeroes p margin-inline, killing margin:auto centering */
+
+  /* THE GRID — the workshop wall */
+  .st-wall { max-width: 1180px; margin: 0 auto; padding: 2.5rem 20px 4.5rem; }
+  .st-wall-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 0.9rem; margin-bottom: 1.6rem; }
+  .st-wall-head h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+  .st-wall-head p { font-size: 0.8rem; font-weight: 300; color: var(--text-dim); }
+  .st-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .st-card { display: block; text-decoration: none; color: var(--text-white); background: var(--bg-card); border: 1px solid var(--line); }
+  .st-card-imgwrap { position: relative; aspect-ratio: 4/5; overflow: hidden; background: #141414; }
+  .st-card-badge { position: absolute; top: 10px; left: 10px; z-index: 1; background: var(--accent-red); color: #fff; font-size: 0.64rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 9px; }
+  .st-card-imgwrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .st-card:hover .st-card-imgwrap img { transform: scale(1.04); }
+  .st-card-meta { padding: 0.85rem 0.9rem 1rem; }
+  .st-card-name { display: block; font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.05em; }
+  .st-card-style { display: inline-block; margin-top: 0.35rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); border: 1px solid var(--line); padding: 3px 8px; }
+  .st-card-open { display: block; margin-top: 0.6rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .st-card:hover .st-card-open { color: var(--accent-red); }
+  .st-card-more { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.7rem; padding: 1.5rem; border: 1px dashed rgba(255,255,255,0.18); background: none; }
+  .st-card-more i { font-size: 1.4rem; color: var(--text-dim); }
+  .st-card-more b { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; letter-spacing: 0.05em; }
+  .st-card-more span { font-size: 0.78rem; font-weight: 300; color: var(--text-dim); line-height: 1.5; }
+  .st-card-more:hover { border-color: var(--accent-red); }
+  .st-wall-note { margin-top: 1.4rem; font-size: 0.82rem; font-weight: 300; color: var(--text-dim); text-align: center; }
+  .st-wall-note a { color: var(--text-muted); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .st-wall-note a:hover { color: var(--accent-red); }
+
+  /* never blank — one paragraph, workshop voice */
+  .st-blank { background: var(--bg-panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 4rem 20px; }
+  .st-blank-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .st-h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 1rem; }
+  .st-blank p { font-size: 0.95rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
+  .st-blank p strong { color: var(--text-white); font-weight: 600; }
+
+  /* stat strip */
+  .st-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; max-width: 980px; margin: 0 auto; padding: 3.5rem 20px; }
+  .st-stat { background: var(--bg-card); border: 1px solid var(--line); padding: 1.3rem 1rem; text-align: center; }
+  .st-stat b { display: block; font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; }
+  .st-stat span { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+  /* steps */
+  .st-how { background: var(--bg-panel); border-top: 1px solid var(--line); padding: 4rem 20px; }
+  .st-how-inner { max-width: 760px; margin: 0 auto; }
+  .st-how .st-h2 { text-align: center; margin-bottom: 2.4rem; }
+  ol.st-steps { list-style: none !important; margin: 0 !important; padding: 0 !important; }
+  ol.st-steps > li { display: flex !important; list-style: none !important; gap: 1.25rem; align-items: baseline; margin: 0 0 1.4rem !important; padding: 0 0 1.4rem !important; border-bottom: 1px solid var(--line); }
+  ol.st-steps > li::marker { content: none; }
+  ol.st-steps > li:last-child { border-bottom: none; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+  .st-step-num { flex-shrink: 0; width: 2.2rem; font-family: var(--font-display); font-size: 1.8rem; line-height: 1; color: var(--text-dim); }
+  ol.st-steps > li > div strong { font-weight: 700; font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.3rem; }
+  ol.st-steps > li > div p { font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin: 0 !important; }
+
+  /* doors */
+  .st-doors { padding: 4.5rem 20px; max-width: 880px; margin: 0 auto; }
+  .st-doors .st-h2 { text-align: center; margin-bottom: 2.2rem; }
+  .st-door { background: var(--bg-card); border: 1px solid var(--line); padding: 1.7rem 1.5rem; }
+  .st-door-solo { max-width: 560px; margin: 0 auto; text-align: center; }
+  .st-door h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.45rem; }
+  .st-door p { font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.9rem; }
+  .st-door a { color: var(--accent-red); font-weight: 600; font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
+
+  /* faq */
+  .st-faq { background: var(--bg-panel); border-top: 1px solid var(--line); padding: 4.5rem 20px; }
+  .st-faq-inner { max-width: 780px; margin: 0 auto; }
+  .st-faq .st-h2 { text-align: center; margin-bottom: 2.2rem; }
+  .st-faq-item { border-bottom: 1px solid var(--line); padding: 1.5rem 0; }
+  .st-faq-item:first-of-type { border-top: 1px solid var(--line); }
+  .st-faq-item h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.45rem; }
+  .st-faq-item p { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); line-height: 1.65; }
+
+  /* final */
+  .st-final { padding: 5rem 20px; text-align: center; }
+  .st-final p { font-size: 0.95rem; font-weight: 300; color: var(--text-muted); max-width: 520px; margin: 0 auto 1.8rem; line-height: 1.6; }
+
+  @media (max-width: 1020px) { .st-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) {
+    .st-grid { grid-template-columns: repeat(2, 1fr); }
+    .st-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<div class="studio-page">
+
+<header class="st-hero">
+  <p class="st-eyebrow"><b>Ready to Play</b> &middot; Dise&ntilde;ador 3D MOMUTO</p>
+  <h1>Dise&ntilde;a tu camiseta de f&uacute;tbol en 3D. <span class="free">Gratis.</span></h1>
+  <p class="st-sub">Cada dise&ntilde;o de abajo fue terminado por nuestro estudio de dise&ntilde;o y est&aacute; listo para jugar. Elige uno, &aacute;brelo en 3D y hazlo tuyo: colores, escudo, patrocinador, nombres y dorsales, en directo sobre la camiseta.</p>
+  <div class="st-cta-row">
+    <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="st-btn st-btn-primary">Abrir el dise&ntilde;ador 3D &rarr;</a>
+  </div>
+  <p class="st-hero-note">Dise&ntilde;ar es gratis &bull; Sin cuenta &bull; Pide desde 1 unidad &bull; Desde 21,90 &euro; a partir de 10</p>
+</header>
+
+<section class="st-wall">
+  <div class="st-wall-head">
+    <h2>Los dise&ntilde;os</h2>
+    <p>Puntos de partida terminados &mdash; nunca una camiseta en blanco</p>
+  </div>
+  <div class="st-grid">
+    <a class="st-card" href="/products/the-fracture">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Esta temporada</span><img src="https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png" alt="THE FRACTURE — camiseta de fútbol personalizada con diseño geométrico, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE FRACTURE</span><span class="st-card-style">Fragmentos geom&eacute;tricos</span><span class="st-card-open">Ver el dise&ntilde;o &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-apex">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Esta temporada</span><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp" alt="THE APEX — camiseta de fútbol personalizada con paneles angulares, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE APEX</span><span class="st-card-style">Paneles angulares</span><span class="st-card-open">Ver el dise&ntilde;o &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-kinetic">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Esta temporada</span><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp" alt="THE KINETIC — camiseta de fútbol personalizada con líneas de velocidad, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE KINETIC</span><span class="st-card-style">L&iacute;neas de velocidad</span><span class="st-card-open">Ver el dise&ntilde;o &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-khala">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Esta temporada</span><img src="https://cdn.staticsoe.com/pics/368482b72b5c435b66cfbbabce8943e8ca57434ee5715699faf727aa36709d72.png" alt="THE KHALA — camiseta de fútbol personalizada con paneles laterales marcados, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE KHALA</span><span class="st-card-style">Paneles laterales marcados</span><span class="st-card-open">Ver el dise&ntilde;o &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-legacy">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Esta temporada</span><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp" alt="THE LEGACY — camiseta de fútbol personalizada de rayas retro, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE LEGACY</span><span class="st-card-style">Rayas retro</span><span class="st-card-open">Ver el dise&ntilde;o &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-prism">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Esta temporada</span><img src="https://cdn.staticsoe.com/pics/8861a904ded03b3141c5878a5b9d6fc864330eee737204b3d186d724d6c82c51.png" alt="THE PRISM — camiseta de fútbol personalizada de geometría facetada, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE PRISM</span><span class="st-card-style">Geometr&iacute;a facetada</span><span class="st-card-open">Ver el dise&ntilde;o &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/products/the-mosaic">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Esta temporada</span><img src="https://cdn.staticsoe.com/pics/ae9deb9e17f800bd3140e6d66fb130a31813b202b8bf60485eea441fe361ebc5.png" alt="THE MOSAIC — camiseta de fútbol personalizada con patrón de mosaico, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE MOSAIC</span><span class="st-card-style">Patr&oacute;n de mosaico</span><span class="st-card-open">Ver el dise&ntilde;o &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-crossband.png" alt="THE CROSSBAND — camiseta de fútbol personalizada con banda cruzada, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE CROSSBAND</span><span class="st-card-style">Banda cruzada</span><span class="st-card-open">Abrir en 3D &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-cascade.png" alt="THE CASCADE — camiseta de fútbol personalizada de rayas degradadas, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE CASCADE</span><span class="st-card-style">Rayas degradadas</span><span class="st-card-open">Abrir en 3D &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-phantom-camo.png" alt="THE PHANTOM CAMO — camiseta de fútbol personalizada de camuflaje abstracto, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE PHANTOM CAMO</span><span class="st-card-style">Camuflaje abstracto</span><span class="st-card-open">Abrir en 3D &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-jungle.png" alt="THE JUNGLE — camiseta de fútbol personalizada con estampado jungla, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE JUNGLE</span><span class="st-card-style">Estampado jungla</span><span class="st-card-open">Abrir en 3D &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-snake.png" alt="THE SNAKE — camiseta de fútbol personalizada de degradado serpiente, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE SNAKE</span><span class="st-card-style">Degradado serpiente</span><span class="st-card-open">Abrir en 3D &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-eclipse.png" alt="THE ECLIPSE — camiseta de fútbol personalizada con rayas en los hombros, personalizable en 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE ECLIPSE</span><span class="st-card-style">Rayas en hombros</span><span class="st-card-open">Abrir en 3D &rarr;</span></span>
+    </a>
+    <a class="st-card st-card-more" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es">
+      <i class="fas fa-arrow-right"></i>
+      <b>M&aacute;s dise&ntilde;os</b>
+      <span>Cada dise&ntilde;o carga terminado. Abre el dise&ntilde;ador 3D y recorre el men&uacute; de dise&ntilde;os.</span>
+    </a>
+  </div>
+  <p class="st-wall-note">Cada temporada nuestro estudio de dise&ntilde;o elige unos pocos en tendencia y los pone al &minus;10%: llevan la etiqueta. La selecci&oacute;n rota; los dise&ntilde;os se quedan.</p>
+</section>
+
+<section class="st-blank">
+  <div class="st-blank-inner">
+    <h2 class="st-h2">Nunca empiezas desde una camiseta en blanco</h2>
+    <p>La mayor&iacute;a de configuradores te dan una forma vac&iacute;a en un color por defecto y te desean suerte. MOMUTO no. <strong>Cada dise&ntilde;o carga terminado</strong>: un patr&oacute;n, una paleta, un look que nuestros dise&ntilde;adores ya respaldan. Tu trabajo no es ser dise&ntilde;ador; es <strong>hacer tuyo un buen dise&ntilde;o</strong>: tus colores, tu escudo, tu patrocinador, tus nombres y dorsales. Hoy f&uacute;tbol &mdash; el baloncesto tambi&eacute;n est&aacute; en el dise&ntilde;ador.</p>
+  </div>
+</section>
+
+<div class="st-stats">
+  <div class="st-stat"><b>30+</b><span>Dise&ntilde;os terminados</span></div>
+  <div class="st-stat"><b>En vivo</b><span>Vista 3D en tiempo real</span></div>
+  <div class="st-stat"><b>1</b><span>Pedido m&iacute;nimo</span></div>
+  <div class="st-stat"><b>25&ndash;30</b><span>D&iacute;as, a todo el mundo</span></div>
+</div>
+
+<section class="st-how">
+  <div class="st-how-inner">
+    <h2 class="st-h2">De la idea al partido</h2>
+    <ol class="st-steps">
+      <li><span class="st-step-num">1</span><div><strong>Elige un dise&ntilde;o de partida</strong><p>Escoge uno del muro de arriba o recorre el men&uacute; completo dentro del dise&ntilde;ador 3D.</p></div></li>
+      <li><span class="st-step-num">2</span><div><strong>Hazlo tuyo</strong><p>Colores, patr&oacute;n, escudo, patrocinadores, nombres y dorsales &mdash; todo en directo en 3D, todo gratis, el tiempo que quieras. Comp&aacute;rtelo con tu equipo antes de decidir.</p></div></li>
+      <li><span class="st-step-num">3</span><div><strong>Pide desde una unidad</strong><p>38,90 &euro; una camiseta suelta, desde 21,90 &euro; por unidad a partir de 10. Sublimaci&oacute;n total sobre poli&eacute;ster-elastano, entrega mundial en 25&ndash;30 d&iacute;as.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="st-doors">
+  <h2 class="st-h2">&iquest;Prefieres que lo dise&ntilde;emos por ti?</h2>
+  <div class="st-door st-door-solo">
+    <h3>Dise&ntilde;o a Medida</h3>
+    <p>&iquest;Tienes un concepto de IA, un boceto o una idea que ning&uacute;n dise&ntilde;o puede contener? Nuestros dise&ntilde;adores lo construyen por ti. Dep&oacute;sito de 15 &euro;, acreditado &iacute;ntegramente en pedidos de 5+ camisetas.</p>
+    <a href="/pages/solicitud-de-diseno-personalizado">Env&iacute;a tu concepto &rarr;</a>
+  </div>
+</section>
+
+<section class="st-faq">
+  <div class="st-faq-inner">
+    <h2 class="st-h2">Preguntas frecuentes</h2>
+    <div class="st-faq-item"><h3>&iquest;El dise&ntilde;ador de camisetas 3D es gratis?</h3><p>S&iacute;. El dise&ntilde;ador es gratuito: dise&ntilde;a, previsualiza y comparte todo lo que quieras. Solo pagas si haces pedido: camisetas desde 21,90 &euro; por unidad a partir de 10, 38,90 &euro; una camiseta suelta. No necesitas cuenta para empezar.</p></div>
+    <div class="st-faq-item"><h3>&iquest;Empiezo desde una camiseta en blanco?</h3><p>No &mdash; y esa es la idea. Cada dise&ntilde;o Ready to Play carga terminado, en una combinaci&oacute;n de colores elegida por nuestro estudio de dise&ntilde;o. T&uacute; lo recoloreas, cambias el patr&oacute;n, a&ntilde;ades tu escudo, tu patrocinador, nombre y dorsal. Empieza desde algo bueno y hazlo tuyo.</p></div>
+    <div class="st-faq-item"><h3>&iquest;Hay pedido m&iacute;nimo?</h3><p>No hay m&iacute;nimo. Pide una camiseta o la equipaci&oacute;n de toda la plantilla. El precio escala con la cantidad: 38,90 &euro; una camiseta suelta, desde 21,90 &euro; por unidad a partir de 10.</p></div>
+    <div class="st-faq-item"><h3>&iquest;Qu&eacute; es Ready to Play?</h3><p>Ready to Play es este muro: dise&ntilde;os terminados que nuestro estudio de dise&ntilde;o respalda, todos personalizables en 3D o listos para pedir tal cual. Cada temporada elegimos unos pocos dise&ntilde;os en tendencia y los ponemos al &minus;10%; la selecci&oacute;n rota, los dise&ntilde;os se quedan.</p></div>
+    <div class="st-faq-item"><h3>&iquest;Puedo subir mi escudo y los logos de mis patrocinadores?</h3><p>S&iacute;. Sube tu escudo y los logos de tus patrocinadores directamente en el dise&ntilde;ador 3D y col&oacute;calos en directo sobre la camiseta. Los nombres y dorsales de toda la plantilla se a&ntilde;aden al hacer el pedido.</p></div>
+    <div class="st-faq-item"><h3>&iquest;Cu&aacute;nto tarda la entrega?</h3><p>La producci&oacute;n tarda 7&ndash;12 d&iacute;as y el env&iacute;o 10&ndash;15 d&iacute;as: normalmente 25&ndash;30 d&iacute;as puerta a puerta, a todo el mundo. Cada equipaci&oacute;n se imprime por sublimaci&oacute;n total sobre tejido de poli&eacute;ster-elastano.</p></div>
+    <div class="st-faq-item"><h3>Tengo un concepto de IA o un boceto, &iquest;pod&eacute;is hacerlo realidad?</h3><p>S&iacute; &mdash; ese es nuestro <a href="/pages/solicitud-de-diseno-personalizado" style="color:var(--accent-red);font-weight:600;">servicio de Dise&ntilde;o a Medida</a>. Env&iacute;a un render de ChatGPT o Midjourney, un boceto o un moodboard, y nuestros dise&ntilde;adores lo reconstruyen como una equipaci&oacute;n lista para producci&oacute;n. Primer mockup en 24&ndash;48h; dep&oacute;sito de 15 &euro;, acreditado &iacute;ntegramente en pedidos de 5+ camisetas.</p></div>
+  </div>
+</section>
+
+<section class="st-final">
+  <h2 class="st-h2">Tu equipaci&oacute;n est&aacute; a unos minutos</h2>
+  <p>Abre el dise&ntilde;ador, elige un dise&ntilde;o de partida y ve los colores de tu equipo sobre &eacute;l antes de terminarte el caf&eacute;.</p>
+  <div class="st-cta-row">
+    <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" class="st-btn st-btn-primary">Abrir el dise&ntilde;ador 3D &rarr;</a>
+  </div>
+</section>
+
+</div>

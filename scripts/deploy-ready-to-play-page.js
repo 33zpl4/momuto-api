@@ -2,14 +2,15 @@
 
 /**
  * Deploy the "Ready to Play" hub page — the wall of finished designs and the
- * landing for the 3D kit designer (docs/product-architecture.md). EN first;
- * other locales join this map when translated.
+ * landing for the 3D kit designer (docs/product-architecture.md). All four
+ * locales — each wall took over its store's aged collection URL in place.
  *
- * URL decision (4 Aug, owner): the wall lives at /pages/ready-to-play — the
- * aged collection URL, upserted in place so its equity transfers. The
- * short-lived /pages/the-studio-3d-kit-designer is deleted by the retire
- * step below; add the 301 (the-studio-3d-kit-designer → ready-to-play) in
- * the CMS admin if the platform supports URL redirects.
+ * URL decision (4 Aug, owner): the wall lives at each store's collection
+ * handle (en ready-to-play, es coleccion-, fr collection-, it collezione-),
+ * upserted in place so the URL equity transfers. The short-lived EN
+ * /pages/the-studio-3d-kit-designer is deleted by the retire step below;
+ * add the 301 (the-studio-3d-kit-designer → ready-to-play) in the CMS
+ * admin if the platform supports URL redirects.
  *
  * Page body lives in pages/<file> as a CMS-ready HTML fragment (inline
  * <style>, JSON-LD blocks, no <html>/<head> wrapper). Upserts by handle:
@@ -46,6 +47,63 @@ const PAGES = [
       'design football jersey online free',
       'football kit creator',
       'custom football kit designer',
+    ],
+  },
+  {
+    locale: 'es',
+    token: () => process.env.OEMSAAS_TOKEN_ES,
+    domain: 'es.momuto.com',
+    handle: 'coleccion-ready-to-play',
+    file: path.join(ROOT, 'pages', 'coleccion-ready-to-play'),
+    title: 'Ready to Play — Diseñador 3D de Camisetas | MOMUTO',
+    meta_title: 'Crea tu Camiseta de Fútbol en 3D Gratis — Ready to Play | MOMUTO',
+    meta_descript: 'Diseña una camiseta de fútbol real en 3D, gratis. Cada diseño Ready to Play carga terminado: colores, escudo, nombres y dorsales — y pide desde una unidad.',
+    keywords: [
+      'diseñador de camisetas de futbol 3d',
+      'crear camiseta de futbol online gratis',
+      'diseñar camiseta de futbol',
+      'creador de equipaciones de futbol',
+      'camisetas de futbol personalizadas 3d',
+      'hacer camiseta de futbol personalizada',
+      'diseñador de equipaciones',
+    ],
+  },
+  {
+    locale: 'fr',
+    token: () => process.env.OEMSAAS_TOKEN_FR,
+    domain: 'fr.momuto.com',
+    handle: 'collection-ready-to-play',
+    file: path.join(ROOT, 'pages', 'collection-ready-to-play'),
+    title: 'Ready to Play — Créateur de Maillot de Foot 3D | MOMUTO',
+    meta_title: 'Créateur de Maillot de Foot 3D Gratuit — Ready to Play | MOMUTO',
+    meta_descript: 'Créez un vrai maillot de foot en 3D, gratuitement. Chaque design Ready to Play se charge fini : couleurs, écusson, noms et numéros — commandez dès un maillot.',
+    keywords: [
+      'créateur de maillot de foot 3d',
+      'créer son maillot de foot gratuit',
+      'designer maillot de football',
+      'maillot de foot personnalisé 3d',
+      'configurateur maillot de foot',
+      'faire son maillot de foot',
+      'créateur de maillot en ligne',
+    ],
+  },
+  {
+    locale: 'it',
+    token: () => process.env.OEMSAAS_TOKEN_IT,
+    domain: 'it.momuto.com',
+    handle: 'collezione-ready-to-play',
+    file: path.join(ROOT, 'pages', 'collezione-ready-to-play'),
+    title: 'Ready to Play — Designer 3D di Maglie da Calcio | MOMUTO',
+    meta_title: 'Crea la tua Maglia da Calcio 3D Gratis — Ready to Play | MOMUTO',
+    meta_descript: 'Crea una vera maglia da calcio in 3D, gratis. Ogni design Ready to Play si carica già finito: colori, stemma, nomi e numeri — ordina anche una sola maglia.',
+    keywords: [
+      'creare maglia da calcio online',
+      'designer maglie da calcio 3d',
+      'crea la tua maglia da calcio gratis',
+      'maglie da calcio personalizzate 3d',
+      'configuratore maglie da calcio',
+      'disegnare maglia da calcio',
+      'creatore di maglie da calcio',
     ],
   },
 ];
