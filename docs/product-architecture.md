@@ -85,8 +85,10 @@ the style vocabulary, red reserved for the "Open in 3D" action — with the
 seasonal −10% badges sitting directly on the discounted tiles. The
 short-lived `/pages/the-studio-3d-kit-designer` is deleted by the deploy's
 retire step and gets a 301 → `/pages/ready-to-play` in the CMS admin if the
-platform supports redirects. FR/ES/IT keep their old collection pages until
-the wall is translated.
+platform supports redirects. All four locales carry the wall: EN
+`/pages/ready-to-play`, ES `/pages/coleccion-ready-to-play`, FR
+`/pages/collection-ready-to-play`, IT `/pages/collezione-ready-to-play` —
+each took over its store's aged collection URL in place (4 Aug).
 
 The 3D configurator. Design from any catalogue base or from scratch —
 **starting points, never blank canvases**: every base loads looking finished,

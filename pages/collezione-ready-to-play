@@ -1,0 +1,298 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "MOMUTO Designer 3D di Maglie",
+  "url": "https://design.momuto.com/3d-configurator/configurator.html",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Web browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Il design è gratis. Maglie da 21,90 € da 10 unità in su se ordini." },
+  "publisher": { "@type": "Organization", "name": "MOMUTO", "url": "https://it.momuto.com" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Il designer di maglie 3D è gratis?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sì. Il designer è gratuito: progetta, guarda l'anteprima e condividi quanto vuoi. Paghi solo se ordini: maglie da 21,90 € l'una da 10 in su, 38,90 € la maglia singola. Nessun account per iniziare." }
+    },
+    {
+      "@type": "Question",
+      "name": "Parto da una maglia vuota?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No — ed è questo il punto. Ogni design Ready to Play si carica già finito, in una combinazione di colori scelta dal nostro studio di design. Tu cambi i colori e il pattern, aggiungi stemma, sponsor, nome e numero. Parti da qualcosa di buono e fallo tuo." }
+    },
+    {
+      "@type": "Question",
+      "name": "C'è un ordine minimo?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Nessun minimo. Ordina una maglia o l'intera rosa. Il prezzo scala con la quantità: 38,90 € la maglia singola, da 21,90 € l'una da 10 in su." }
+    },
+    {
+      "@type": "Question",
+      "name": "Cos'è Ready to Play?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ready to Play è questo muro: design finiti che il nostro studio di design firma, tutti personalizzabili in 3D o pronti da ordinare così come sono. Ogni stagione scegliamo alcuni design di tendenza e li mettiamo al −10%; la selezione ruota, i design restano." }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso caricare il mio stemma e i loghi degli sponsor?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sì. Carica il tuo stemma e i loghi degli sponsor direttamente nel designer 3D e posizionali in diretta sulla maglia. Nomi e numeri di tutta la rosa si aggiungono al momento dell'ordine." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto tempo richiede la consegna?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La produzione richiede 7–12 giorni e la spedizione 10–15: in genere 25–30 giorni porta a porta, in tutto il mondo. Ogni maglia è stampata in sublimazione totale su tessuto poliestere-elastan." }
+    },
+    {
+      "@type": "Question",
+      "name": "Ho un concept IA o uno schizzo — potete realizzarlo?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sì — è il nostro servizio di Design su Misura. Invia un render di ChatGPT o Midjourney, uno schizzo o un moodboard, e i nostri designer lo ricostruiscono come maglia pronta per la produzione. Primo mockup in 24–48h; deposito di 15 €, accreditato per intero su ordini di 5+ maglie." }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+  :root {
+    --bg-primary: #0a0a0a; --bg-panel: #101010; --bg-card: rgba(255,255,255,0.02);
+    --text-white: #f5f5f5; --text-muted: #a1a1aa; --text-dim: #71717a;
+    --accent-red: #c8352e; --accent-red-hover: #e04038;
+    --line: rgba(255,255,255,0.08);
+    --font-display: 'Bebas Neue', sans-serif; --font-body: 'Outfit', sans-serif;
+  }
+  .studio-page * { margin: 0; padding: 0; box-sizing: border-box; }
+  .studio-page { background: var(--bg-primary); color: var(--text-white); font-family: var(--font-body); overflow-x: hidden; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+  body { overflow-x: hidden; background: var(--bg-primary); color: var(--text-white); } /* paint the body itself: the wrapper chain clips the 100vw bleed, leaving white strips (see docs/cms-page-gotchas.md) */
+  .title, .page-title { display: none !important; } /* the CMS prints the page title above the content */
+
+  /* hero — tight; the grid is the page */
+  .st-hero { padding: 5.5rem 20px 3rem; text-align: center; }
+  .st-eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.1rem; }
+  .st-eyebrow b { color: var(--text-white); font-weight: 700; }
+  .st-hero h1 { font-family: var(--font-display); font-size: clamp(2.6rem, 6.5vw, 4.8rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; line-height: 0.95; margin-bottom: 1rem; }
+  .st-hero h1 .free { color: var(--accent-red); }
+  .st-sub { font-size: 0.98rem; font-weight: 300; color: var(--text-muted); max-width: 560px; margin: 0 auto 1.8rem; line-height: 1.6; }
+  .st-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .st-btn { display: inline-block; padding: 15px 32px; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
+  .st-btn-primary { background: var(--accent-red); color: #fff; }
+  .st-btn-primary:hover { background: var(--accent-red-hover); }
+  .st-hero-note { margin-top: 1rem; font-size: 0.78rem; font-weight: 300; color: var(--text-dim); }
+  .mo-editor-reset .st-sub, .mo-editor-reset .st-final p { margin-inline: auto; } /* theme reset zeroes p margin-inline, killing margin:auto centering */
+
+  /* THE GRID — the workshop wall */
+  .st-wall { max-width: 1180px; margin: 0 auto; padding: 2.5rem 20px 4.5rem; }
+  .st-wall-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 0.9rem; margin-bottom: 1.6rem; }
+  .st-wall-head h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+  .st-wall-head p { font-size: 0.8rem; font-weight: 300; color: var(--text-dim); }
+  .st-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .st-card { display: block; text-decoration: none; color: var(--text-white); background: var(--bg-card); border: 1px solid var(--line); }
+  .st-card-imgwrap { position: relative; aspect-ratio: 4/5; overflow: hidden; background: #141414; }
+  .st-card-badge { position: absolute; top: 10px; left: 10px; z-index: 1; background: var(--accent-red); color: #fff; font-size: 0.64rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 9px; }
+  .st-card-imgwrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .st-card:hover .st-card-imgwrap img { transform: scale(1.04); }
+  .st-card-meta { padding: 0.85rem 0.9rem 1rem; }
+  .st-card-name { display: block; font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.05em; }
+  .st-card-style { display: inline-block; margin-top: 0.35rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); border: 1px solid var(--line); padding: 3px 8px; }
+  .st-card-open { display: block; margin-top: 0.6rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .st-card:hover .st-card-open { color: var(--accent-red); }
+  .st-card-more { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.7rem; padding: 1.5rem; border: 1px dashed rgba(255,255,255,0.18); background: none; }
+  .st-card-more i { font-size: 1.4rem; color: var(--text-dim); }
+  .st-card-more b { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; letter-spacing: 0.05em; }
+  .st-card-more span { font-size: 0.78rem; font-weight: 300; color: var(--text-dim); line-height: 1.5; }
+  .st-card-more:hover { border-color: var(--accent-red); }
+  .st-wall-note { margin-top: 1.4rem; font-size: 0.82rem; font-weight: 300; color: var(--text-dim); text-align: center; }
+  .st-wall-note a { color: var(--text-muted); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .st-wall-note a:hover { color: var(--accent-red); }
+
+  /* never blank — one paragraph, workshop voice */
+  .st-blank { background: var(--bg-panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 4rem 20px; }
+  .st-blank-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .st-h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 400; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 1rem; }
+  .st-blank p { font-size: 0.95rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
+  .st-blank p strong { color: var(--text-white); font-weight: 600; }
+
+  /* stat strip */
+  .st-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; max-width: 980px; margin: 0 auto; padding: 3.5rem 20px; }
+  .st-stat { background: var(--bg-card); border: 1px solid var(--line); padding: 1.3rem 1rem; text-align: center; }
+  .st-stat b { display: block; font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; }
+  .st-stat span { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+  /* steps */
+  .st-how { background: var(--bg-panel); border-top: 1px solid var(--line); padding: 4rem 20px; }
+  .st-how-inner { max-width: 760px; margin: 0 auto; }
+  .st-how .st-h2 { text-align: center; margin-bottom: 2.4rem; }
+  ol.st-steps { list-style: none !important; margin: 0 !important; padding: 0 !important; }
+  ol.st-steps > li { display: flex !important; list-style: none !important; gap: 1.25rem; align-items: baseline; margin: 0 0 1.4rem !important; padding: 0 0 1.4rem !important; border-bottom: 1px solid var(--line); }
+  ol.st-steps > li::marker { content: none; }
+  ol.st-steps > li:last-child { border-bottom: none; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+  .st-step-num { flex-shrink: 0; width: 2.2rem; font-family: var(--font-display); font-size: 1.8rem; line-height: 1; color: var(--text-dim); }
+  ol.st-steps > li > div strong { font-weight: 700; font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.3rem; }
+  ol.st-steps > li > div p { font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin: 0 !important; }
+
+  /* doors */
+  .st-doors { padding: 4.5rem 20px; max-width: 880px; margin: 0 auto; }
+  .st-doors .st-h2 { text-align: center; margin-bottom: 2.2rem; }
+  .st-door { background: var(--bg-card); border: 1px solid var(--line); padding: 1.7rem 1.5rem; }
+  .st-door-solo { max-width: 560px; margin: 0 auto; text-align: center; }
+  .st-door h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.45rem; }
+  .st-door p { font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.9rem; }
+  .st-door a { color: var(--accent-red); font-weight: 600; font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
+
+  /* faq */
+  .st-faq { background: var(--bg-panel); border-top: 1px solid var(--line); padding: 4.5rem 20px; }
+  .st-faq-inner { max-width: 780px; margin: 0 auto; }
+  .st-faq .st-h2 { text-align: center; margin-bottom: 2.2rem; }
+  .st-faq-item { border-bottom: 1px solid var(--line); padding: 1.5rem 0; }
+  .st-faq-item:first-of-type { border-top: 1px solid var(--line); }
+  .st-faq-item h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.45rem; }
+  .st-faq-item p { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); line-height: 1.65; }
+
+  /* final */
+  .st-final { padding: 5rem 20px; text-align: center; }
+  .st-final p { font-size: 0.95rem; font-weight: 300; color: var(--text-muted); max-width: 520px; margin: 0 auto 1.8rem; line-height: 1.6; }
+
+  @media (max-width: 1020px) { .st-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) {
+    .st-grid { grid-template-columns: repeat(2, 1fr); }
+    .st-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<div class="studio-page">
+
+<header class="st-hero">
+  <p class="st-eyebrow"><b>Ready to Play</b> &middot; Designer 3D di Maglie MOMUTO</p>
+  <h1>Disegna la tua maglia da calcio in 3D. <span class="free">Gratis.</span></h1>
+  <p class="st-sub">Ogni design qui sotto &egrave; stato finito dal nostro studio di design ed &egrave; pronto da giocare. Scegline uno, aprilo in 3D e fallo tuo: colori, stemma, sponsor, nomi e numeri, in diretta sulla maglia.</p>
+  <div class="st-cta-row">
+    <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it" class="st-btn st-btn-primary">Apri il designer 3D &rarr;</a>
+  </div>
+  <p class="st-hero-note">Design gratuito &bull; Nessun account &bull; Ordina da 1 unit&agrave; &bull; Da 21,90 &euro; oltre le 10</p>
+</header>
+
+<section class="st-wall">
+  <div class="st-wall-head">
+    <h2>I design</h2>
+    <p>Punti di partenza finiti &mdash; mai una maglia vuota</p>
+  </div>
+  <div class="st-grid">
+    <a class="st-card" href="/products/the-fracture">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Questa stagione</span><img src="https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png" alt="THE FRACTURE — maglia da calcio personalizzata dal design geometrico, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE FRACTURE</span><span class="st-card-style">Frammenti geometrici</span><span class="st-card-open">Vedi il design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/pages/ready-to-play-the-apex">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Questa stagione</span><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp" alt="THE APEX — maglia da calcio personalizzata con pannelli angolari, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE APEX</span><span class="st-card-style">Pannelli angolari</span><span class="st-card-open">Vedi il design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/pages/ready-to-play-the-kinetic">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Questa stagione</span><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp" alt="THE KINETIC — maglia da calcio personalizzata con linee di velocità, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE KINETIC</span><span class="st-card-style">Linee di velocit&agrave;</span><span class="st-card-open">Vedi il design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/pages/ready-to-play-the-khala">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Questa stagione</span><img src="https://cdn.staticsoe.com/pics/368482b72b5c435b66cfbbabce8943e8ca57434ee5715699faf727aa36709d72.png" alt="THE KHALA — maglia da calcio personalizzata con pannelli laterali decisi, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE KHALA</span><span class="st-card-style">Pannelli laterali decisi</span><span class="st-card-open">Vedi il design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/pages/ready-to-play-the-legacy">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Questa stagione</span><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp" alt="THE LEGACY — maglia da calcio personalizzata a righe retrò, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE LEGACY</span><span class="st-card-style">Righe retr&ograve;</span><span class="st-card-open">Vedi il design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/pages/ready-to-play-the-prism">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Questa stagione</span><img src="https://cdn.staticsoe.com/pics/8861a904ded03b3141c5878a5b9d6fc864330eee737204b3d186d724d6c82c51.png" alt="THE PRISM — maglia da calcio personalizzata a geometria sfaccettata, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE PRISM</span><span class="st-card-style">Geometria sfaccettata</span><span class="st-card-open">Vedi il design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="/pages/ready-to-play-the-mosaic">
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; Questa stagione</span><img src="https://cdn.staticsoe.com/pics/ae9deb9e17f800bd3140e6d66fb130a31813b202b8bf60485eea441fe361ebc5.png" alt="THE MOSAIC — maglia da calcio personalizzata con motivo a mosaico, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE MOSAIC</span><span class="st-card-style">Motivo a mosaico</span><span class="st-card-open">Vedi il design &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-crossband.png" alt="THE CROSSBAND — maglia da calcio personalizzata con fascia diagonale, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE CROSSBAND</span><span class="st-card-style">Fascia diagonale</span><span class="st-card-open">Apri in 3D &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-cascade.png" alt="THE CASCADE — maglia da calcio personalizzata a righe sfumate, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE CASCADE</span><span class="st-card-style">Righe sfumate</span><span class="st-card-open">Apri in 3D &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-phantom-camo.png" alt="THE PHANTOM CAMO — maglia da calcio personalizzata camo astratto, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE PHANTOM CAMO</span><span class="st-card-style">Camo astratto</span><span class="st-card-open">Apri in 3D &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-jungle.png" alt="THE JUNGLE — maglia da calcio personalizzata con stampa jungla, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE JUNGLE</span><span class="st-card-style">Stampa jungla</span><span class="st-card-open">Apri in 3D &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-snake.png" alt="THE SNAKE — maglia da calcio personalizzata a sfumatura serpente, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE SNAKE</span><span class="st-card-style">Sfumatura serpente</span><span class="st-card-open">Apri in 3D &rarr;</span></span>
+    </a>
+    <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">
+      <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-eclipse.png" alt="THE ECLIPSE — maglia da calcio personalizzata con righe sulle spalle, personalizzabile in 3D" loading="lazy" width="520" height="640"></div>
+      <span class="st-card-meta"><span class="st-card-name">THE ECLIPSE</span><span class="st-card-style">Righe sulle spalle</span><span class="st-card-open">Apri in 3D &rarr;</span></span>
+    </a>
+    <a class="st-card st-card-more" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it">
+      <i class="fas fa-arrow-right"></i>
+      <b>Altri design</b>
+      <span>Ogni design si carica gi&agrave; finito. Apri il designer 3D e scorri il menu dei design.</span>
+    </a>
+  </div>
+  <p class="st-wall-note">Ogni stagione il nostro studio di design ne sceglie alcuni di tendenza e li mette al &minus;10%: portano l&rsquo;etichetta. La selezione ruota; i design restano.</p>
+</section>
+
+<section class="st-blank">
+  <div class="st-blank-inner">
+    <h2 class="st-h2">Non parti mai da una maglia vuota</h2>
+    <p>La maggior parte dei configuratori ti consegna una sagoma vuota in un colore di default e ti augura buona fortuna. MOMUTO no. <strong>Ogni design si carica gi&agrave; finito</strong> &mdash; un pattern, una palette, un look che i nostri designer firmano gi&agrave;. Il tuo compito non &egrave; fare il designer; &egrave; <strong>fare tuo un buon design</strong>: i tuoi colori, il tuo stemma, il tuo sponsor, i tuoi nomi e numeri. Oggi il calcio &mdash; nel designer c&rsquo;&egrave; anche il basket.</p>
+  </div>
+</section>
+
+<div class="st-stats">
+  <div class="st-stat"><b>30+</b><span>Design finiti</span></div>
+  <div class="st-stat"><b>Live</b><span>Anteprima 3D in tempo reale</span></div>
+  <div class="st-stat"><b>1</b><span>Ordine minimo</span></div>
+  <div class="st-stat"><b>25&ndash;30</b><span>Giorni, in tutto il mondo</span></div>
+</div>
+
+<section class="st-how">
+  <div class="st-how-inner">
+    <h2 class="st-h2">Dall&rsquo;idea alla partita</h2>
+    <ol class="st-steps">
+      <li><span class="st-step-num">1</span><div><strong>Scegli un design di partenza</strong><p>Prendine uno dal muro qui sopra, o scorri il menu completo dentro il designer 3D.</p></div></li>
+      <li><span class="st-step-num">2</span><div><strong>Fallo tuo</strong><p>Colori, pattern, stemma, sponsor, nomi e numeri &mdash; tutto in diretta in 3D, tutto gratis, per quanto vuoi. Condividilo con la squadra prima di decidere.</p></div></li>
+      <li><span class="st-step-num">3</span><div><strong>Ordina anche una sola maglia</strong><p>38,90 &euro; la maglia singola, da 21,90 &euro; l&rsquo;una da 10 in su. Sublimazione totale su poliestere-elastan, consegna in tutto il mondo in 25&ndash;30 giorni.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="st-doors">
+  <h2 class="st-h2">Preferisci che lo disegniamo noi per te?</h2>
+  <div class="st-door st-door-solo">
+    <h3>Design su Misura</h3>
+    <p>Hai un concept IA, uno schizzo o un&rsquo;idea che nessun design pu&ograve; contenere? I nostri designer lo costruiscono per te. Deposito di 15 &euro;, accreditato per intero su ordini di 5+ maglie.</p>
+    <a href="/pages/richiesta-design-personalizzato">Invia il tuo concept &rarr;</a>
+  </div>
+</section>
+
+<section class="st-faq">
+  <div class="st-faq-inner">
+    <h2 class="st-h2">Domande frequenti</h2>
+    <div class="st-faq-item"><h3>Il designer di maglie 3D &egrave; gratis?</h3><p>S&igrave;. Il designer &egrave; gratuito: progetta, guarda l&rsquo;anteprima e condividi quanto vuoi. Paghi solo se ordini: maglie da 21,90 &euro; l&rsquo;una da 10 in su, 38,90 &euro; la maglia singola. Nessun account per iniziare.</p></div>
+    <div class="st-faq-item"><h3>Parto da una maglia vuota?</h3><p>No &mdash; ed &egrave; questo il punto. Ogni design Ready to Play si carica gi&agrave; finito, in una combinazione di colori scelta dal nostro studio di design. Tu cambi i colori e il pattern, aggiungi stemma, sponsor, nome e numero. Parti da qualcosa di buono e fallo tuo.</p></div>
+    <div class="st-faq-item"><h3>C&rsquo;&egrave; un ordine minimo?</h3><p>Nessun minimo. Ordina una maglia o l&rsquo;intera rosa. Il prezzo scala con la quantit&agrave;: 38,90 &euro; la maglia singola, da 21,90 &euro; l&rsquo;una da 10 in su.</p></div>
+    <div class="st-faq-item"><h3>Cos&rsquo;&egrave; Ready to Play?</h3><p>Ready to Play &egrave; questo muro: design finiti che il nostro studio di design firma, tutti personalizzabili in 3D o pronti da ordinare cos&igrave; come sono. Ogni stagione scegliamo alcuni design di tendenza e li mettiamo al &minus;10%; la selezione ruota, i design restano.</p></div>
+    <div class="st-faq-item"><h3>Posso caricare il mio stemma e i loghi degli sponsor?</h3><p>S&igrave;. Carica il tuo stemma e i loghi degli sponsor direttamente nel designer 3D e posizionali in diretta sulla maglia. Nomi e numeri di tutta la rosa si aggiungono al momento dell&rsquo;ordine.</p></div>
+    <div class="st-faq-item"><h3>Quanto tempo richiede la consegna?</h3><p>La produzione richiede 7&ndash;12 giorni e la spedizione 10&ndash;15: in genere 25&ndash;30 giorni porta a porta, in tutto il mondo. Ogni maglia &egrave; stampata in sublimazione totale su tessuto poliestere-elastan.</p></div>
+    <div class="st-faq-item"><h3>Ho un concept IA o uno schizzo &mdash; potete realizzarlo?</h3><p>S&igrave; &mdash; &egrave; il nostro <a href="/pages/richiesta-design-personalizzato" style="color:var(--accent-red);font-weight:600;">servizio di Design su Misura</a>. Invia un render di ChatGPT o Midjourney, uno schizzo o un moodboard, e i nostri designer lo ricostruiscono come maglia pronta per la produzione. Primo mockup in 24&ndash;48h; deposito di 15 &euro;, accreditato per intero su ordini di 5+ maglie.</p></div>
+  </div>
+</section>
+
+<section class="st-final">
+  <h2 class="st-h2">La tua maglia &egrave; a pochi minuti</h2>
+  <p>Apri il designer, scegli un design di partenza e guarda i colori della tua squadra addosso prima di finire il caff&egrave;.</p>
+  <div class="st-cta-row">
+    <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=it&amp;langguage=it" class="st-btn st-btn-primary">Apri il designer 3D &rarr;</a>
+  </div>
+</section>
+
+</div>
