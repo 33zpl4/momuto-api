@@ -15,11 +15,14 @@
  * Auth: x-admin-token == ADMIN_TOKEN, OR x-webhook-secret == D3_ORDER_SECRET
  * (either works, so the value already in Vercel can be reused).
  *
- *   List:    GET  /api/admin-orders?action=list
- *   Exclude: POST /api/admin-orders   { "action":"exclude",
- *                                       "orders":["iwq7a4uhzv","1bs1zottea", ...] }
- *            (order refs may be given raw or already "3d_"-prefixed)
- *   Re-add:  POST /api/admin-orders   { "action":"reactivate", "orders":[...] }
+ *   List:        GET  /api/admin-orders?action=list
+ *   Exclude:     POST /api/admin-orders   { "action":"exclude",
+ *                                           "orders":["iwq7a4uhzv","1bs1zottea", ...] }
+ *                (order refs may be given raw or already "3d_"-prefixed)
+ *   Exclude ALL: POST /api/admin-orders   { "action":"exclude-all" }
+ *                (kill switch: excludes every order currently in orders:active;
+ *                 the response lists each order's id/ref/email for the record)
+ *   Re-add:      POST /api/admin-orders   { "action":"reactivate", "orders":[...] }
  *
  * Exclude sets status:'excluded' + stopLifecycle:true and removes the id from
  * orders:active. The record stays in orders:all and order:<id> for history.
@@ -87,6 +90,35 @@ module.exports = async function handler(req, res) {
     }
     orders.sort((a, b) => String(a.paidAt || '').localeCompare(String(b.paidAt || '')));
     return res.status(200).json({ ok: true, count: orders.length, active: orders });
+  }
+
+  // ---- EXCLUDE ALL (kill switch) ---------------------------------------
+  // Stops lifecycle mail for EVERY currently-active order in one call. New
+  // orders enrolled after this call proceed normally — this only drains the
+  // active set as it stands right now.
+  if (action === 'exclude-all') {
+    const ids = (await kv.smembers('orders:active')) || [];
+    const excludedAt = new Date().toISOString();
+    const results = [];
+    for (const id of ids) {
+      const o = await kv.get(`order:${id}`);
+      if (!o) {
+        await kv.srem('orders:active', id);
+        results.push({ id, status: 'removed_missing' });
+        continue;
+      }
+      await kv.set(`order:${id}`, { ...o, status: 'excluded', stopLifecycle: true, excludedAt });
+      await kv.srem('orders:active', id);
+      results.push({
+        id,
+        status:     'excluded',
+        ref:        o.ref || null,
+        email:      o.email || null,
+        paidAt:     o.paidAt || null,
+        emailsSent: o.emailsSent || [],
+      });
+    }
+    return res.status(200).json({ ok: true, action, count: results.length, results });
   }
 
   // ---- EXCLUDE / REACTIVATE --------------------------------------------
