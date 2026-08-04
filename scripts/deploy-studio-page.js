@@ -1,9 +1,11 @@
 'use strict';
 
 /**
- * Deploy "The Studio" hub page — the door-2 landing for the 3D kit designer
- * (docs/product-architecture.md). EN first; other locales join this map when
- * translated.
+ * Deploy the "Ready to Play" hub page — the wall of finished designs and the
+ * landing for the 3D kit designer (docs/product-architecture.md). EN first;
+ * other locales join this map when translated. The handle keeps its original
+ * "the-studio" slug — the URL stays intact by owner decision (4 Aug); only the
+ * brand layer changed.
  *
  * Page body lives in pages/<file> as a CMS-ready HTML fragment (inline
  * <style>, JSON-LD blocks, no <html>/<head> wrapper). Upserts by handle:
@@ -28,9 +30,9 @@ const PAGES = [
     domain: 'www.momuto.com',
     handle: 'the-studio-3d-kit-designer',
     file: path.join(ROOT, 'pages', 'the-studio-3d-kit-designer'),
-    title: 'The Studio — Free 3D Football Kit Designer | MOMUTO',
-    meta_title: 'Free 3D Football Kit Designer — The Studio | MOMUTO',
-    meta_descript: 'Design a real football kit in 3D, free. Every starting design loads finished — recolour it, add your crest, name and number, and order from one jersey.',
+    title: 'Ready to Play — Free 3D Football Kit Designer | MOMUTO',
+    meta_title: 'Free 3D Football Kit Designer — Ready to Play | MOMUTO',
+    meta_descript: 'Design a real football kit in 3D, free. Every Ready to Play design loads finished — recolour it, add your crest, name and number, and order from one jersey.',
     keywords: [
       '3d football kit designer',
       'football kit designer free',

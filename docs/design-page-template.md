@@ -7,15 +7,17 @@ config.json` and `cms/city-pages/es/cities.json` + `deploy-city-pages.js`).
 
 ## The two rules that shape everything
 
-1. **One page per design, forever.** RTP membership is a *state* on the page
-   (badge + −10% price + link to the selection), never a separate page. When
-   the design rotates out, the badge comes off and the URL, content and
-   equity stay. The RTP *collection* page is where the spotlight aesthetics
-   live — that is the visually distinct RTP surface.
+1. **One page per design, forever.** Seasonal-selection membership is a
+   *state* on the page (badge + −10% price), never a separate page. When the
+   design rotates out, the badge comes off and the URL, content and equity
+   stay. (4 Aug naming collapse, `docs/product-architecture.md`: "Ready to
+   Play" now names the whole catalogue; the selection has no name — its whole
+   identity is the badge, worn on the wall tiles of the Ready to Play hub
+   page and on the design page itself.)
 2. **One primary CTA per page: "Open it in 3D."** The page exists to carry
    keywords and route into the tool. A visitor should never face a choice
-   more complicated than *customise this* — everything else (RTP selection,
-   Bespoke, siblings) is secondary navigation. This is the
+   more complicated than *customise this* — everything else (the seasonal
+   selection, Bespoke, siblings) is secondary navigation. This is the
    no-overcomplication guarantee: the catalogue adds pages, not decisions.
 
 ## Common vs unique — the template split
@@ -28,7 +30,7 @@ config.json` and `cms/city-pages/es/cities.json` + `deploy-city-pages.js`).
 | CTA block | "Open it in 3D" deep link + price line | same action everywhere |
 | Spec strip | poliestere-elastan, full sublimation, no minimum, 25–30 days | the four truths never vary |
 | How-you-get-it | 3 steps (customise → preview → order) | process is process |
-| RTP state layer | badge + −10% + "in this season's selection" (rendered only when member) | merchandising, not content |
+| Seasonal state layer | badge + −10% + "in this season's selection" (rendered only when member) | merchandising, not content |
 | Bespoke pointer | one line: "want something no design can do? → Bespoke" | door cross-reference |
 | JSON-LD skeleton | Product + FAQPage structure | schema is structural |
 
@@ -50,7 +52,7 @@ config.json` and `cms/city-pages/es/cities.json` + `deploy-city-pages.js`).
   "deep_link": { "configId": "...", "suitName": "..." },
   "siblings": ["the-apex", "the-grid"],      // same-style cross-links, 2–3
   "worn_by": ["team-page-handle", ...],      // optional; gallery proof
-  "rtp_member": false                        // the rotating state
+  "rtp_member": false                        // in this season's −10% selection (field name is legacy)
 }
 ```
 
@@ -72,11 +74,12 @@ keywords + routing, and the renders do the selling.
 
 - **Design pages**: editorial register. Big render, story, colorway strip,
   one CTA. Catalogue calm.
-- **RTP collection page**: the spotlight. Seasonal framing, the −10%, the
-  rotation date, the "this season" energy. This page is *supposed* to feel
-  different — it is the front table.
-- A design page in-selection wears only the badge and price of RTP, not its
-  aesthetics. Out of selection, nothing changes but the badge and price.
+- **The wall (Ready to Play hub page)**: carries the seasonal badges directly
+  on the discounted tiles plus one line of copy — the spotlight is a badge,
+  not a page. The legacy RTP collection page is superseded by the hub (301
+  planned; architecture doc).
+- A design page in-selection wears only the badge and −10% price. Out of
+  selection, nothing changes but the badge and price.
 
 ## The seasonal cadence (canonical wording)
 
@@ -96,17 +99,17 @@ locale, both directions) remains the gate on shipping this copy.
 ## Why this is good for SEO *and* UX (the owner's test)
 
 SEO: each page is a distinct style-niche keyword target with a permanent URL,
-rich renders, Product schema, and internal links (siblings, RTP, tool). The
+rich renders, Product schema, and internal links (siblings, the wall, tool). The
 catalogue becomes a keyword estate that grows one design at a time, across
 all locales, with authored effort measured in sentences.
 
 UX: the visitor's experience is *simpler*, not busier — a searcher landing on
 "retro striped football jersey" sees exactly that design, finished, with one
 action. Site navigation gains no new concepts: designs are reached through
-the tool, the gallery, the RTP selection and search. Nobody is ever asked to
-understand the difference between a "design page" and an "RTP page", because
-from the customer's side there is no difference — just designs, some of which
-are in this season's selection.
+the tool, the gallery, the Ready to Play wall and search. Nobody is ever
+asked to understand the difference between a "design page" and a "promo
+page", because from the customer's side there is no difference — just
+designs, some of which are in this season's selection.
 
 ## Build order
 
@@ -118,5 +121,5 @@ are in this season's selection.
    `ready-to-play/templates/*/config.json`), keeping their handles.
 3. First new designs ship with the basketball surfacing (lever 2) — the
    template is the landing surface basketball needs anyway.
-4. RTP state layer + seasonal copy ship together with the rotation script —
+4. The seasonal state layer + copy ship together with the rotation script —
    not before (architecture doc, rotation rule 2).
