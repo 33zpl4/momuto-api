@@ -76,8 +76,9 @@ keywords + routing, and the renders do the selling.
   one CTA. Catalogue calm.
 - **The wall (Ready to Play hub page)**: carries the seasonal badges directly
   on the discounted tiles plus one line of copy — the spotlight is a badge,
-  not a page. The legacy RTP collection page is superseded by the hub (301
-  planned; architecture doc).
+  not a page. On EN the wall took over the collection URL
+  `/pages/ready-to-play` (4 Aug); FR/ES/IT collection pages remain until the
+  wall is translated.
 - A design page in-selection wears only the badge and −10% price. Out of
   selection, nothing changes but the badge and price.
 

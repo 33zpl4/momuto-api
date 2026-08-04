@@ -3,9 +3,13 @@
 /**
  * Deploy the "Ready to Play" hub page — the wall of finished designs and the
  * landing for the 3D kit designer (docs/product-architecture.md). EN first;
- * other locales join this map when translated. The handle keeps its original
- * "the-studio" slug — the URL stays intact by owner decision (4 Aug); only the
- * brand layer changed.
+ * other locales join this map when translated.
+ *
+ * URL decision (4 Aug, owner): the wall lives at /pages/ready-to-play — the
+ * aged collection URL, upserted in place so its equity transfers. The
+ * short-lived /pages/the-studio-3d-kit-designer is deleted by the retire
+ * step below; add the 301 (the-studio-3d-kit-designer → ready-to-play) in
+ * the CMS admin if the platform supports URL redirects.
  *
  * Page body lives in pages/<file> as a CMS-ready HTML fragment (inline
  * <style>, JSON-LD blocks, no <html>/<head> wrapper). Upserts by handle:
@@ -28,8 +32,9 @@ const PAGES = [
     locale: 'en',
     token: () => process.env.OEMSAAS_TOKEN_EN,
     domain: 'www.momuto.com',
-    handle: 'the-studio-3d-kit-designer',
-    file: path.join(ROOT, 'pages', 'the-studio-3d-kit-designer'),
+    handle: 'ready-to-play',
+    file: path.join(ROOT, 'pages', 'ready-to-play'),
+    retire: 'the-studio-3d-kit-designer',
     title: 'Ready to Play — Free 3D Football Kit Designer | MOMUTO',
     meta_title: 'Free 3D Football Kit Designer — Ready to Play | MOMUTO',
     meta_descript: 'Design a real football kit in 3D, free. Every Ready to Play design loads finished — recolour it, add your crest, name and number, and order from one jersey.',
@@ -78,13 +83,14 @@ async function upsert(p) {
   const content = fs.readFileSync(p.file, 'utf8');
   sanityCheck(p, content);
 
+  const existing = await getExisting(p.handle, token);
   const payload = {
     is_default: 0, title: p.title, content,
     meta_title: p.meta_title, meta_keywords: p.keywords,
     meta_descript: p.meta_descript, handle: p.handle,
+    ...(existing?.og_image ? { og_image: existing.og_image } : {}), // PUT replaces whole object — don't drop the social image
   };
 
-  const existing = await getExisting(p.handle, token);
   if (DRY_RUN) {
     console.log(`  DRY_RUN — would ${existing ? 'update' : 'create'} ${p.handle} on ${p.domain} (${content.length} chars)`);
     return;
@@ -102,11 +108,30 @@ async function upsert(p) {
   console.log(`  ✅ ${existing ? 'updated' : 'created'} https://${p.domain}/pages/${p.handle}`);
 }
 
+// One-shot takeover cleanup: once the wall lives at its final handle, the old
+// page must not stay live as a duplicate. Deletes it if the API allows;
+// otherwise tells the operator to remove/301 it in the CMS admin.
+async function retireOld(p) {
+  if (!p.retire) return;
+  const token = p.token();
+  if (!token) return;
+  const old = await getExisting(p.retire, token);
+  if (!old) { console.log(`  ·  retired handle ${p.retire} is no longer on ${p.domain}`); return; }
+  if (DRY_RUN) { console.log(`  DRY_RUN — would DELETE /pages/${old.id} (${p.retire})`); return; }
+  const res = await fetch(`${HOST}/pages/${old.id}`, { method: 'DELETE', headers: { token } });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || (json.code !== undefined && json.code !== 0)) {
+    console.warn(`  ⚠️  could not delete ${p.retire}: ${JSON.stringify(json).slice(0, 150)} — remove or 301 it in the CMS admin`);
+    return;
+  }
+  console.log(`  🗑  deleted /pages/${p.retire} — add the 301 → /pages/${p.handle} in the CMS admin if available`);
+}
+
 async function main() {
-  console.log(`deploy-studio-page — ${PAGES.length} page(s), dry_run=${DRY_RUN}`);
+  console.log(`deploy-ready-to-play-page — ${PAGES.length} page(s), dry_run=${DRY_RUN}`);
   let failed = 0;
   for (const p of PAGES) {
-    try { await upsert(p); }
+    try { await upsert(p); await retireOld(p); }
     catch (e) { console.error(`  FAILED ${p.handle}: ${e.message}`); failed++; }
   }
   if (failed) process.exit(1);
