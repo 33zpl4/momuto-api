@@ -64,8 +64,9 @@
     --font-display: 'Bebas Neue', sans-serif; --font-body: 'Outfit', sans-serif;
   }
   .studio-page * { margin: 0; padding: 0; box-sizing: border-box; }
-  .studio-page { background: var(--bg-primary); color: var(--text-white); font-family: var(--font-body); overflow-x: hidden; }
-  .studio-page .title { display: none; }
+  .studio-page { background: var(--bg-primary); color: var(--text-white); font-family: var(--font-body); overflow-x: hidden; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+  body { overflow-x: hidden; } /* 100vw bleed can add a scrollbar-width overflow */
+  .title, .page-title { display: none !important; } /* the CMS prints the page title above the content */
 
   /* hero — tight; the grid is the page */
   .st-hero { padding: 5.5rem 20px 3rem; text-align: center; }
@@ -79,6 +80,7 @@
   .st-btn-primary { background: var(--accent-red); color: #fff; }
   .st-btn-primary:hover { background: var(--accent-red-hover); }
   .st-hero-note { margin-top: 1rem; font-size: 0.78rem; font-weight: 300; color: var(--text-dim); }
+  .mo-editor-reset .st-sub, .mo-editor-reset .st-final p { margin-inline: auto; } /* theme reset zeroes p margin-inline, killing margin:auto centering */
 
   /* THE GRID — the workshop wall */
   .st-wall { max-width: 1180px; margin: 0 auto; padding: 2.5rem 20px 4.5rem; }
