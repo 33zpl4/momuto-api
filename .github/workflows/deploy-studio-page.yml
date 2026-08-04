@@ -1,6 +1,7 @@
-name: Deploy Studio Page
+name: Deploy Ready to Play Page
 
-# "The Studio" — the 3D kit designer hub (docs/product-architecture.md door 2).
+# The "Ready to Play" wall — the 3D kit designer hub (docs/product-architecture.md).
+# Filenames keep the historical "studio" slug; the live handle/URL is unchanged.
 # EN today; locales join scripts/deploy-studio-page.js as they are translated.
 
 on:

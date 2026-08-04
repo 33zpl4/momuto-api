@@ -2,7 +2,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "The Studio — MOMUTO 3D Kit Designer",
+  "name": "MOMUTO 3D Kit Designer",
   "url": "https://design.momuto.com/3d-configurator/configurator.html",
   "applicationCategory": "DesignApplication",
   "operatingSystem": "Web browser",
@@ -18,12 +18,12 @@
     {
       "@type": "Question",
       "name": "Is the 3D kit designer free?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Studio is free to use — design, preview and share as much as you want. You only pay if you order: jerseys from €21.90 each at 10 or more, €38.90 for a single jersey. No account needed to start." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The designer is free to use — design, preview and share as much as you want. You only pay if you order: jerseys from €21.90 each at 10 or more, €38.90 for a single jersey. No account needed to start." }
     },
     {
       "@type": "Question",
       "name": "Do I start from a blank jersey?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No — and that is the point. Every design in the Studio loads finished, in a colourway chosen by our studio. You recolour it, change the pattern, add your crest, sponsor, name and number. Start from something good and make it yours." }
+      "acceptedAnswer": { "@type": "Answer", "text": "No — and that is the point. Every Ready to Play design loads finished, in a colourway chosen by our design studio. You recolour it, change the pattern, add your crest, sponsor, name and number. Start from something good and make it yours." }
     },
     {
       "@type": "Question",
@@ -32,13 +32,13 @@
     },
     {
       "@type": "Question",
-      "name": "What is Ready-to-Play?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Ready-to-Play is a curated selection of Studio designs at −10%. Same designs, same customisation — a rotating selection our studio puts front and centre." }
+      "name": "What is Ready to Play?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ready to Play is this wall — finished designs our design studio stands behind, every one customisable in 3D or ready to order as it stands. Each season we pick a few on-trend designs and run them at −10%; the selection rotates, the designs stay." }
     },
     {
       "@type": "Question",
       "name": "Can I upload my own crest and sponsor logos?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Upload your club crest and sponsor logos directly in the Studio and place them live on the 3D jersey. Names and numbers for the whole squad are added at order time." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Upload your club crest and sponsor logos directly in the 3D designer and place them live on the jersey. Names and numbers for the whole squad are added at order time." }
     },
     {
       "@type": "Question",
@@ -89,7 +89,8 @@
   .st-wall-head p { font-size: 0.8rem; font-weight: 300; color: var(--text-dim); }
   .st-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .st-card { display: block; text-decoration: none; color: var(--text-white); background: var(--bg-card); border: 1px solid var(--line); }
-  .st-card-imgwrap { aspect-ratio: 4/5; overflow: hidden; background: #141414; }
+  .st-card-imgwrap { position: relative; aspect-ratio: 4/5; overflow: hidden; background: #141414; }
+  .st-card-badge { position: absolute; top: 10px; left: 10px; z-index: 1; background: var(--accent-red); color: #fff; font-size: 0.64rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 9px; }
   .st-card-imgwrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
   .st-card:hover .st-card-imgwrap img { transform: scale(1.04); }
   .st-card-meta { padding: 0.85rem 0.9rem 1rem; }
@@ -134,8 +135,8 @@
   /* doors */
   .st-doors { padding: 4.5rem 20px; max-width: 880px; margin: 0 auto; }
   .st-doors .st-h2 { text-align: center; margin-bottom: 2.2rem; }
-  .st-door-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .st-door { background: var(--bg-card); border: 1px solid var(--line); padding: 1.7rem 1.5rem; }
+  .st-door-solo { max-width: 560px; margin: 0 auto; text-align: center; }
   .st-door h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.45rem; }
   .st-door p { font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.9rem; }
   .st-door a { color: var(--accent-red); font-weight: 600; font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
@@ -157,18 +158,17 @@
   @media (max-width: 760px) {
     .st-grid { grid-template-columns: repeat(2, 1fr); }
     .st-stats { grid-template-columns: repeat(2, 1fr); }
-    .st-door-grid { grid-template-columns: 1fr; }
   }
 </style>
 
 <div class="studio-page">
 
 <header class="st-hero">
-  <p class="st-eyebrow"><b>The Studio</b> &middot; MOMUTO 3D Kit Designer</p>
+  <p class="st-eyebrow"><b>Ready to Play</b> &middot; MOMUTO 3D Kit Designer</p>
   <h1>Design your football kit in 3D. <span class="free">Free.</span></h1>
-  <p class="st-sub">Every design below was finished by our studio. Pick one, open it in 3D, and make it yours — colours, crest, sponsor, names and numbers, live on the jersey.</p>
+  <p class="st-sub">Every design below was finished by our design studio and is ready to play. Pick one, open it in 3D, and make it yours — colours, crest, sponsor, names and numbers, live on the jersey.</p>
   <div class="st-cta-row">
-    <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="st-btn st-btn-primary">Open the Studio &rarr;</a>
+    <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="st-btn st-btn-primary">Open the 3D designer &rarr;</a>
   </div>
   <p class="st-hero-note">Free to design &bull; No account needed &bull; Order from 1 unit &bull; From &euro;21.90 at 10+</p>
 </header>
@@ -180,70 +180,70 @@
   </div>
   <div class="st-grid">
     <a class="st-card" href="/products/the-fracture">
-      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png" alt="THE FRACTURE — geometric custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; This season</span><img src="https://cdn.staticsoe.com/pics/2f2d6a13dca63d7be0dba889582f997489692b268a1051c021a99b9623d40e4a.png" alt="THE FRACTURE — geometric custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
       <span class="st-card-meta"><span class="st-card-name">THE FRACTURE</span><span class="st-card-style">Geometric shards</span><span class="st-card-open">See the design &rarr;</span></span>
     </a>
     <a class="st-card" href="/products/the-apex">
-      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp" alt="THE APEX — angular custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; This season</span><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251204/3d9fea03f4408ada1395806d63127b14.webp" alt="THE APEX — angular custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
       <span class="st-card-meta"><span class="st-card-name">THE APEX</span><span class="st-card-style">Angular panels</span><span class="st-card-open">See the design &rarr;</span></span>
     </a>
     <a class="st-card" href="/products/the-kinetic">
-      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp" alt="THE KINETIC — motion lines custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; This season</span><img src="https://cdn.staticsoe.com/uploads/52561/cart/resources/20251201/12fc5c12474759b46ad5d5d04782b475.webp" alt="THE KINETIC — motion lines custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
       <span class="st-card-meta"><span class="st-card-name">THE KINETIC</span><span class="st-card-style">Motion lines</span><span class="st-card-open">See the design &rarr;</span></span>
     </a>
     <a class="st-card" href="/products/the-khala">
-      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/pics/368482b72b5c435b66cfbbabce8943e8ca57434ee5715699faf727aa36709d72.png" alt="THE KHALA — bold panel custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; This season</span><img src="https://cdn.staticsoe.com/pics/368482b72b5c435b66cfbbabce8943e8ca57434ee5715699faf727aa36709d72.png" alt="THE KHALA — bold panel custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
       <span class="st-card-meta"><span class="st-card-name">THE KHALA</span><span class="st-card-style">Bold side panels</span><span class="st-card-open">See the design &rarr;</span></span>
     </a>
     <a class="st-card" href="/products/the-legacy">
-      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp" alt="THE LEGACY — retro striped custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; This season</span><img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20251203/04c885bb3c4378f460de42af9a8a3db2.webp" alt="THE LEGACY — retro striped custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
       <span class="st-card-meta"><span class="st-card-name">THE LEGACY</span><span class="st-card-style">Heritage stripes</span><span class="st-card-open">See the design &rarr;</span></span>
     </a>
     <a class="st-card" href="/products/the-prism">
-      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/pics/8861a904ded03b3141c5878a5b9d6fc864330eee737204b3d186d724d6c82c51.png" alt="THE PRISM — faceted geometry custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; This season</span><img src="https://cdn.staticsoe.com/pics/8861a904ded03b3141c5878a5b9d6fc864330eee737204b3d186d724d6c82c51.png" alt="THE PRISM — faceted geometry custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
       <span class="st-card-meta"><span class="st-card-name">THE PRISM</span><span class="st-card-style">Faceted geometry</span><span class="st-card-open">See the design &rarr;</span></span>
     </a>
     <a class="st-card" href="/products/the-mosaic">
-      <div class="st-card-imgwrap"><img src="https://cdn.staticsoe.com/pics/ae9deb9e17f800bd3140e6d66fb130a31813b202b8bf60485eea441fe361ebc5.png" alt="THE MOSAIC — tiled pattern custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
+      <div class="st-card-imgwrap"><span class="st-card-badge">&minus;10% &middot; This season</span><img src="https://cdn.staticsoe.com/pics/ae9deb9e17f800bd3140e6d66fb130a31813b202b8bf60485eea441fe361ebc5.png" alt="THE MOSAIC — tiled pattern custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
       <span class="st-card-meta"><span class="st-card-name">THE MOSAIC</span><span class="st-card-style">Tiled pattern</span><span class="st-card-open">See the design &rarr;</span></span>
     </a>
     <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en">
       <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-crossband.png" alt="THE CROSSBAND — sash custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
-      <span class="st-card-meta"><span class="st-card-name">THE CROSSBAND</span><span class="st-card-style">Sash</span><span class="st-card-open">Open in the Studio &rarr;</span></span>
+      <span class="st-card-meta"><span class="st-card-name">THE CROSSBAND</span><span class="st-card-style">Sash</span><span class="st-card-open">Open in 3D &rarr;</span></span>
     </a>
     <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en">
       <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-cascade.png" alt="THE CASCADE — gradient striped custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
-      <span class="st-card-meta"><span class="st-card-name">THE CASCADE</span><span class="st-card-style">Gradient stripes</span><span class="st-card-open">Open in the Studio &rarr;</span></span>
+      <span class="st-card-meta"><span class="st-card-name">THE CASCADE</span><span class="st-card-style">Gradient stripes</span><span class="st-card-open">Open in 3D &rarr;</span></span>
     </a>
     <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en">
       <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-phantom-camo.png" alt="THE PHANTOM CAMO — abstract camo custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
-      <span class="st-card-meta"><span class="st-card-name">THE PHANTOM CAMO</span><span class="st-card-style">Abstract camo</span><span class="st-card-open">Open in the Studio &rarr;</span></span>
+      <span class="st-card-meta"><span class="st-card-name">THE PHANTOM CAMO</span><span class="st-card-style">Abstract camo</span><span class="st-card-open">Open in 3D &rarr;</span></span>
     </a>
     <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en">
       <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-jungle.png" alt="THE JUNGLE — jungle print custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
-      <span class="st-card-meta"><span class="st-card-name">THE JUNGLE</span><span class="st-card-style">Jungle print</span><span class="st-card-open">Open in the Studio &rarr;</span></span>
+      <span class="st-card-meta"><span class="st-card-name">THE JUNGLE</span><span class="st-card-style">Jungle print</span><span class="st-card-open">Open in 3D &rarr;</span></span>
     </a>
     <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en">
       <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-snake.png" alt="THE SNAKE — snakeskin gradient custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
-      <span class="st-card-meta"><span class="st-card-name">THE SNAKE</span><span class="st-card-style">Snakeskin gradient</span><span class="st-card-open">Open in the Studio &rarr;</span></span>
+      <span class="st-card-meta"><span class="st-card-name">THE SNAKE</span><span class="st-card-style">Snakeskin gradient</span><span class="st-card-open">Open in 3D &rarr;</span></span>
     </a>
     <a class="st-card" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en">
       <div class="st-card-imgwrap"><img src="https://design.momuto.com/3d-configurator/asset/finder/the-eclipse.png" alt="THE ECLIPSE — shoulder stripe custom football kit design, customizable in 3D" loading="lazy" width="520" height="640"></div>
-      <span class="st-card-meta"><span class="st-card-name">THE ECLIPSE</span><span class="st-card-style">Shoulder stripes</span><span class="st-card-open">Open in the Studio &rarr;</span></span>
+      <span class="st-card-meta"><span class="st-card-name">THE ECLIPSE</span><span class="st-card-style">Shoulder stripes</span><span class="st-card-open">Open in 3D &rarr;</span></span>
     </a>
     <a class="st-card st-card-more" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en">
       <i class="fas fa-arrow-right"></i>
-      <b>More in the Studio</b>
-      <span>Every design loads finished. Open the Studio and scroll the design menu.</span>
+      <b>More designs</b>
+      <span>Every design loads finished. Open the 3D designer and scroll the design menu.</span>
     </a>
   </div>
-  <p class="st-wall-note">A rotating selection of these designs is <a href="/pages/ready-to-play">Ready-to-Play at &minus;10%</a>.</p>
+  <p class="st-wall-note">Each season our design studio picks a few of these that are on trend and runs them at &minus;10% — they wear the badge. The selection rotates; the designs stay.</p>
 </section>
 
 <section class="st-blank">
   <div class="st-blank-inner">
     <h2 class="st-h2">You never start from a blank jersey</h2>
-    <p>Most kit configurators hand you an empty shape in a default colour and wish you luck. The Studio doesn&rsquo;t. <strong>Every design loads finished</strong> — a pattern, a palette, a look our designers already stand behind. Your job isn&rsquo;t to be a designer; it&rsquo;s to <strong>make a good design yours</strong>: your colours, your crest, your sponsor, your names and numbers. Football today — basketball lives in the Studio too.</p>
+    <p>Most kit configurators hand you an empty shape in a default colour and wish you luck. MOMUTO doesn&rsquo;t. <strong>Every design loads finished</strong> — a pattern, a palette, a look our designers already stand behind. Your job isn&rsquo;t to be a designer; it&rsquo;s to <strong>make a good design yours</strong>: your colours, your crest, your sponsor, your names and numbers. Football today — basketball is in the designer too.</p>
   </div>
 </section>
 
@@ -258,7 +258,7 @@
   <div class="st-how-inner">
     <h2 class="st-h2">From idea to matchday</h2>
     <ol class="st-steps">
-      <li><span class="st-step-num">1</span><div><strong>Pick a starting design</strong><p>Choose from the wall above, or scroll the full design menu inside the Studio.</p></div></li>
+      <li><span class="st-step-num">1</span><div><strong>Pick a starting design</strong><p>Choose from the wall above, or scroll the full design menu inside the 3D designer.</p></div></li>
       <li><span class="st-step-num">2</span><div><strong>Make it yours</strong><p>Colours, pattern, crest, sponsors, names and numbers — all live in 3D, all free, for as long as you like. Share it with your squad before you decide.</p></div></li>
       <li><span class="st-step-num">3</span><div><strong>Order from one unit</strong><p>&euro;38.90 for a single jersey, from &euro;21.90 each at 10+. Full-sublimation print on polyester-elastane, delivered worldwide in 25&ndash;30 days.</p></div></li>
     </ol>
@@ -266,29 +266,22 @@
 </section>
 
 <section class="st-doors">
-  <h2 class="st-h2">Two shortcuts, if you want them</h2>
-  <div class="st-door-grid">
-    <div class="st-door">
-      <h3>Ready-to-Play</h3>
-      <p>The selected few — a rotating curated selection of Studio designs at &minus;10%. Add your crest and colours, done.</p>
-      <a href="/pages/ready-to-play">Browse the selection &rarr;</a>
-    </div>
-    <div class="st-door">
-      <h3>Bespoke</h3>
-      <p>Have an AI concept, a sketch, or an idea no design can hold? Our designers build it for you. &euro;15 deposit, credited in full from 5 jerseys.</p>
-      <a href="/pages/request-custom-kit-design">Send your concept &rarr;</a>
-    </div>
+  <h2 class="st-h2">Rather have it designed for you?</h2>
+  <div class="st-door st-door-solo">
+    <h3>Bespoke</h3>
+    <p>Have an AI concept, a sketch, or an idea no design can hold? Our designers build it for you. &euro;15 deposit, credited in full from 5 jerseys.</p>
+    <a href="/pages/request-custom-kit-design">Send your concept &rarr;</a>
   </div>
 </section>
 
 <section class="st-faq">
   <div class="st-faq-inner">
     <h2 class="st-h2">Frequently asked questions</h2>
-    <div class="st-faq-item"><h3>Is the 3D kit designer free?</h3><p>Yes. The Studio is free to use — design, preview and share as much as you want. You only pay if you order: jerseys from &euro;21.90 each at 10 or more, &euro;38.90 for a single jersey. No account needed to start.</p></div>
-    <div class="st-faq-item"><h3>Do I start from a blank jersey?</h3><p>No — and that&rsquo;s the point. Every design in the Studio loads finished, in a colourway chosen by our studio. You recolour it, change the pattern, add your crest, sponsor, name and number. Start from something good and make it yours.</p></div>
+    <div class="st-faq-item"><h3>Is the 3D kit designer free?</h3><p>Yes. The designer is free to use — design, preview and share as much as you want. You only pay if you order: jerseys from &euro;21.90 each at 10 or more, &euro;38.90 for a single jersey. No account needed to start.</p></div>
+    <div class="st-faq-item"><h3>Do I start from a blank jersey?</h3><p>No — and that&rsquo;s the point. Every Ready to Play design loads finished, in a colourway chosen by our design studio. You recolour it, change the pattern, add your crest, sponsor, name and number. Start from something good and make it yours.</p></div>
     <div class="st-faq-item"><h3>Is there a minimum order?</h3><p>No minimum. Order one jersey or a full squad. Pricing scales with quantity: &euro;38.90 for a single jersey, from &euro;21.90 each at 10 or more.</p></div>
-    <div class="st-faq-item"><h3>What is Ready-to-Play?</h3><p>Ready-to-Play is a curated selection of Studio designs at &minus;10%. Same designs, same customisation — a rotating selection our studio puts front and centre.</p></div>
-    <div class="st-faq-item"><h3>Can I upload my own crest and sponsor logos?</h3><p>Yes. Upload your club crest and sponsor logos directly in the Studio and place them live on the 3D jersey. Names and numbers for the whole squad are added at order time.</p></div>
+    <div class="st-faq-item"><h3>What is Ready to Play?</h3><p>Ready to Play is this wall — finished designs our design studio stands behind, every one customisable in 3D or ready to order as it stands. Each season we pick a few on-trend designs and run them at &minus;10%; the selection rotates, the designs stay.</p></div>
+    <div class="st-faq-item"><h3>Can I upload my own crest and sponsor logos?</h3><p>Yes. Upload your club crest and sponsor logos directly in the 3D designer and place them live on the jersey. Names and numbers for the whole squad are added at order time.</p></div>
     <div class="st-faq-item"><h3>How long does delivery take?</h3><p>Production takes 7&ndash;12 days and shipping 10&ndash;15 days — typically 25&ndash;30 days door to door, worldwide. Every kit is full-sublimation printed on polyester-elastane fabric.</p></div>
     <div class="st-faq-item"><h3>I have an AI concept or a sketch — can you make it real?</h3><p>Yes — that&rsquo;s our <a href="/pages/request-custom-kit-design" style="color:var(--accent-red);font-weight:600;">Bespoke service</a>. Send a ChatGPT or Midjourney render, a sketch or a moodboard, and our designers rebuild it as a production-ready kit. First mockup in 24&ndash;48h; &euro;15 deposit, credited in full to orders of 5 or more jerseys.</p></div>
   </div>
@@ -296,9 +289,9 @@
 
 <section class="st-final">
   <h2 class="st-h2">Your kit is a few minutes away</h2>
-  <p>Open the Studio, pick a starting design, and see your team&rsquo;s colours on it before you&rsquo;ve finished your coffee.</p>
+  <p>Open the designer, pick a starting design, and see your team&rsquo;s colours on it before you&rsquo;ve finished your coffee.</p>
   <div class="st-cta-row">
-    <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="st-btn st-btn-primary">Open the Studio &rarr;</a>
+    <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="st-btn st-btn-primary">Open the 3D designer &rarr;</a>
   </div>
 </section>
 
