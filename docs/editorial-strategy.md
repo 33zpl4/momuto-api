@@ -66,6 +66,34 @@ series ships only after the authority base exists.
    of choice, why 90% of teams don't need a blank canvas, how a finished
    design still becomes yours.
 
+## "Concept" means two things — never conflate them
+
+A standing distinction (owner, 6 Aug). Both use the word; they are different
+audiences with opposite commercial value, and one surface cannot serve both.
+
+**A. The concept kit as fan art.** Recreated or imagined shirts for real
+clubs and national teams, made by fans and amateur designers. This is what
+*maillot concept* means to a French searcher, and it is a large audience
+already finding us. MOMUTO has made two itself — **Italy × Vitruvian Man**
+and the **Bernabéu tribute** — with an article about them. They do not sell
+in volume, and that is fine: this is a **brand and editorial** play, not a
+commercial one. It belongs to the Design Culture pillar, published in
+**French first**, where the audience already is. (Naming real clubs here is
+allowed — editorial is the only surface that may.)
+
+**B. "I made this with AI — make it real."** Nascent, growing, and
+commercial: these searchers intend to buy. It is our strongest position
+against competitors because it is a *technology* capability, not a service
+promise — we process and rebuild AI concepts at a speed others cannot. This
+gets its own commercial surface.
+
+**Vocabulary follows the queries, not our preferences.** Whatever we call B
+internally, the public words are whatever people actually type — today the
+search data says **"generator"** far more than "AI concept" (*jersey
+generator*, *football kit generator*, *ai jersey maker*). Re-check the query
+data before naming any surface in this cluster; the vocabulary is still
+forming and will move.
+
 ## MOMUTO guardrails (non-negotiable)
 
 - **Real clubs and real kits are named ONLY in editorial** (blog posts).
@@ -94,6 +122,15 @@ series ships only after the authority base exists.
 - **State facts plainly, with numbers, early.** LLMs quote pages that
   commit to concrete figures ("production takes 7–12 days"), not pages
   that hedge. Every Football Reality article opens with a facts box.
+- **Be exact about what we do, directional about how big we are** (owner,
+  6 Aug). Operational facts — production and delivery windows, decision lag,
+  on-time rate, revision rounds, AI-brief share — are stated precisely;
+  they are what a reader or a model acts on. Business scale — traffic,
+  impressions, order counts, revenue — is told as **trajectory and turning
+  points**, never raw counts: *"five months ago nobody in the US found us;
+  today it is our second-biggest audience"*. Absolute numbers date instantly,
+  invite comparison with players a hundred times our size, and make a real
+  growth story read as a small one.
 - **FAQPage JSON-LD with visible parity** — the estate pattern, on every
   practical article.
 - **Stable URLs, permanent pages** — same rule as design pages. Update in

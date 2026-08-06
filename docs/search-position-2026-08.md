@@ -15,14 +15,23 @@ numbers to put in them.
 | Avg position | 13.5 | 11.7 | **−1.8** |
 
 Clicks up, impressions up more, and average position improving at the same
-time — visibility is growing faster than we are converting it. **This table
-is first-party data D23** (see the shopping list in the synthesis) and it is
-publishable as-is: growth stats with a stated window are exactly the kind of
-authority signal that makes a brand quotable.
+time — visibility is growing faster than we are converting it. Brand demand
+is growing alongside it: searches for "momuto" by name are now roughly four
+in every ten clicks we receive.
 
-Brand demand is real too: **2,222 searches for "momuto"** in the window at
-position 1.13 (65.6% CTR), out of 2,225 brand clicks total — 42% of all
-clicks are people looking for us by name.
+> **Publishing rule — trajectory, not absolutes (owner, 6 Aug).** These
+> figures are for deciding what to build, not for printing. In editorial we
+> tell the *story the numbers paint* — "five months ago no one in the US
+> found us; today it is our second-biggest audience" — not the raw counts.
+> Absolute traffic numbers date instantly, invite comparison with players a
+> hundred times our size, and make a growth story read as a small one. The
+> trajectory is true, durable and stronger.
+>
+> **This does not apply to operational facts.** Production days, delivery
+> windows, decision lag, on-time rate, revision counts, AI-brief share — those
+> must be stated plainly and precisely, because they are what a reader (or a
+> model) needs to *act on*, and they are what makes us citable. The rule:
+> **be exact about what we do, directional about how big we are.**
 
 ## Finding 1 — We rank. We are not clicked. This is the biggest lever.
 
@@ -53,28 +62,42 @@ internal links all now say "Free 3D Football Kit Designer". This is the
 highest-value non-editorial work available, and it is already committed;
 merging it is the action.
 
-## Finding 2 — "Concept" is a French editorial audience, not a buying one
+## Finding 2 — "Concept" is two different audiences sharing one word
 
-The FR concept cluster: **7,725 impressions, position 8.1, CTR 0.94%.**
-We rank on page one and are almost never clicked.
+This distinction is the whole strategy for the cluster, and conflating the
+two is how a page ends up ranking at position 8 with a 0.94% CTR.
 
-That CTR is not a failure of copy — it is a signal of intent. People
-searching *maillot concept* want to **look at concept kits**, read about
-them, and see what designers are making. They are not shopping. Our
-commercial pages therefore lose the click to galleries and fan sites.
+**Meaning A — the concept kit as fan art.** Recreated or imagined versions
+of real clubs' and national teams' shirts, made by fans and amateur
+designers. This is what *maillot concept* means to a French searcher.
+MOMUTO has made two of these itself (Italy × Vitruvian Man; the Bernabéu
+tribute) and published an article on them — but they do not sell, and they
+were never supposed to. **This audience is an editorial audience.** They
+want to look, read, and see what designers are making; they are not
+shopping, which is precisely why our commercial pages lose the click to
+galleries and fan sites.
 
-Two facts confirm the audience is editorial:
+The data says the audience is real and already at our door:
+- FR concept cluster: **7,725 impressions, position 8.1, CTR 0.94%**
 - `fr/blogs/l-art-des-concepts-de-maillots…` — 6,249 impressions, position
-  7.7. Our best-performing *impression* page after the homepages is a blog
-  post about concept-kit art.
+  7.7. Our best *impression* page after the homepages is a blog post about
+  concept-kit art.
 - `fr/collections/concepts-de-maillots` — 4,470 impressions, position 6.8.
 
-**What this demands:** feed them editorial and capture them into the brand,
-don't try to sell on the first click. This is the single strongest argument
-in the data for the Design Culture pillar — and it says **publish the trend
-and culture pieces in French, not only English.** The Nigeria number-audit
-piece (synthesis shelf #3) has a ready-made French audience that the English
-site does not yet have.
+**Meaning B — "I made this with AI and want it made real."** A different
+person with a different job to be done, and a commercial one. Nascent, and
+growing (Finding 3). These searchers convert; the fan-art audience does not.
+
+**What this demands:** stop asking one surface to serve both. Meaning A gets
+editorial — the Design Culture pillar, published **in French first**, where
+the audience already is. Capture them into the brand; do not sell on the
+first click. (Our own two concepts are legitimate editorial subjects: real
+clubs may be named in editorial, never on product surfaces — the standing
+rule.) Meaning B gets its own commercial surface, in the vocabulary those
+searchers actually use.
+
+The Nigeria number-audit piece (synthesis shelf #3) has a ready-made French
+audience that the English site does not yet have.
 
 ## Finding 3 — The AI-to-real cluster is early, and that is the opportunity
 
@@ -103,29 +126,31 @@ AI-generated images** (shopping-list D17). The owner's estimate is ~90%; the
 measured number, with a window, is a sentence no competitor can write and
 LLMs will quote.
 
-## Finding 4 — The United States is the biggest visible gap in the account
+## Finding 4 — The US went from nothing to our second-biggest audience
 
-| Country | Clicks | Impressions | Pos | CTR |
-|---|---|---|---|---|
-| France | 1,484 | 25,809 | 8.3 | 5.75% |
-| Spain | 825 | 9,932 | 13.3 | 8.31% |
-| **United States** | **271** | **20,937** | **22.9** | **1.29%** |
+**Read this as a trajectory, not a snapshot.** Five months ago US traffic was
+effectively zero — not because the demand was absent but because we were not
+using the word *soccer* anywhere. Since we started, it has become our
+**second-largest impression market**, behind only France.
 
-The US is our **second-largest impression market and our worst-performing
-one** — position 22.9 against France's 8.3. The vocabulary gap is the whole
-story:
+Position 22.9 is poor in isolation and irrelevant in context: it is the
+position of a market we entered a few months ago and have barely optimized
+for. The finding is not "we rank badly in the US". It is **"the moment we
+began speaking American, the US answered — and we have barely started."**
 
-- "soccer" queries: 4,855 impressions at **position 29.1**
-- "uniform" queries: 1,445 impressions at **position 36.3**
-  (*custom football uniform builder*, *football uniform customizer*,
-  *custom football uniform maker* — all position 27–39)
+The remaining vocabulary gap shows exactly how much room is left:
+- "soccer" queries: position 29.1
+- "uniform" queries: position 36.3 (*custom football uniform builder*,
+  *football uniform customizer*, *custom football uniform maker* — all
+  position 27–39)
 
-We rank for British and European vocabulary and are invisible for American.
-The demand is already arriving; we are not speaking the language.
+Every one of those is a term we have never targeted with a real page. The
+headroom is the story.
 
-**What this demands:** this is the data that justifies the US push — and it
-is the honest basis for the announcement piece the owner sketched
-("MOMUTO prepares its US debut amidst growing demand"). See the sequencing
+**What this demands:** the US push, and the honest basis for the
+announcement piece the owner sketched. The framing writes itself and needs
+no absolute numbers: *we stopped translating and started speaking; the
+market answered; now we are building for it properly.* See the sequencing
 warning below.
 
 ## Finding 5 — Basketball is at absolute zero
@@ -201,10 +226,14 @@ going anywhere; it is growing.
 
 ## First-party data this document adds to the shopping list
 
-- **D23 — Search growth**: clicks, impressions and average position by
-  period, with the window stated. Already measured above; use in the
-  year-in-review and the US announcement.
-- **D24 — Brand search volume**: searches for "momuto" per period. A clean
-  proxy for brand growth and a legitimate authority stat.
-- **D25 — Market mix**: clicks by country per period — the honest basis for
-  "growing demand in the US".
+Per the publishing rule above, these are told as direction and turning
+points, not as counts:
+
+- **D23 — Search growth**: measured internally; published as trajectory
+  ("visibility roughly doubling over a quarter", "growing faster than we can
+  convert it"). Use in the year-in-review.
+- **D24 — Brand search**: the share of our traffic that arrives typing our
+  name. Published as a proportion or a direction, never a raw count.
+- **D25 — Market mix**: the shape of where demand comes from, and the
+  turning points — *the US went from nothing to second-largest once we
+  changed one word*. That sentence is the US announcement's spine.
