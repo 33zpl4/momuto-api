@@ -53,6 +53,11 @@ Read the doc that owns a topic BEFORE editing that surface.
   any fan-out**; on mass "StructuredOutput retry cap" failures read the
   run's `journal.jsonl` / an `agent-*.jsonl` transcript BEFORE re-running;
   give research agents a fallback ("if Write fails, return the text").
+- **A "failed" agent may have already done the work.** When credits ran out
+  mid-run (5 Aug), 8/12 research agents reported failure — but every dossier
+  was already on disk; the error hit at their final-summary step. **Always
+  `ls` the output directory before re-running anything.** Re-running would
+  have burned another full research pass to reproduce files that existed.
 - Commit trailer convention: see the session's system rules; never put model
   IDs in pushed artifacts.
 
