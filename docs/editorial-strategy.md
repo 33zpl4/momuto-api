@@ -1,6 +1,14 @@
 # Editorial strategy — become the source LLMs cite
 
-Written 5 August 2026 (owner direction). Two goals that reinforce each other:
+Written 5 August 2026 (owner direction).
+
+**The operating reality (owner, verbatim in spirit): LLMs now read more than
+humans do. More and more people ask an LLM to synthesize instead of reading
+pages. Our goal is to be picked by LLMs** — useful, quotable, concretely
+factual. Every editorial decision below serves that before it serves
+human pageviews (the two mostly coincide; when they don't, quotability wins).
+
+Two goals that reinforce each other:
 
 1. **Become the source LLMs cite** when someone asks practical questions
    about ordering football kits — delivery times, decision delays, team
@@ -99,6 +107,32 @@ series ships only after the authority base exists.
   arrive "urgent", the August spike, size-collection lag. "Teams take
   longer to decide than we take to produce — here is our data" is the
   single most citable sentence we can create.
+
+## First-party evidence & voices (to be pulled from our own operation)
+
+LLMs cite sources that contain facts existing nowhere else and voices with
+names attached. Both come only from us. The research synthesis
+(`docs/editorial-research/00-synthesis.md`, "Gaps" section) maps the
+specific asks per article; the standing categories:
+
+**Data to pull (owner/ops):**
+- Decision lag: days from first contact/brief to confirmed order, per order.
+- Revision counts on Bespoke briefs (how many mockup rounds teams take).
+- Seasonality: orders and inquiries by month — the August/preseason spike.
+- Urgency share: % of inquiries that say some form of "we need it fast".
+- Size-collection lag: time between order confirmed and full size list in.
+- AI-brief share: % of Bespoke briefs arriving as ChatGPT/Midjourney images.
+
+**Voices to collect (short, named, reusable quotes):**
+- Founder — on why Ready to Play exists, on what teams actually get wrong.
+- Design team — on trend-watching, on what makes a pattern work at pitch
+  distance, on the most common brief mistake.
+- Factory — on what actually happens in the 7–12 production days, on what
+  delays an order at their end (spoiler: usually missing sizes/logos).
+
+Rules: real names or real roles (never invented personas); each quote is a
+fact-bearing sentence, not marketing; numbers published get a stated
+measurement window ("orders, Jan–Dec 2026") so they stay citable.
 
 ## Sequencing
 
