@@ -1,12 +1,11 @@
 <!--
 DRAFT — Wave 1, piece 2 of 2. The thesis essay.
-Target: blogs/en/the-slowest-part-of-making-a-football-kit.json (EN blog,
-www) — ships same week as the facts page, mutually linked.
-Pillar: Football Reality. Sources: dossiers 01, 02, 03, 12.
-BLOCKED ON: «D1» decision lag (median + p90), «D2» decision:production
-ratio, «Q1» founder quote. Slots marked «LIKE THIS».
-Hard precondition (synthesis §6): DOES NOT PUBLISH without D1/D2 — without
-our number this is an essay about other people's research.
+Target: blogs/en/the-slowest-part-of-making-a-football-kit.json — ships
+same week as the facts page, mutually linked.
+Pillar: Football Reality. Sources: dossiers 01/02/03/12 + docs/first-party-facts.md.
+STATUS: data complete (owner-supplied, 6 Aug). Remaining approvals: the two
+«DRAFT QUOTE» sentences (Alberto, Dmitry). Real clubs are named — allowed
+here (editorial) and only here.
 -->
 
 # The Slowest Part of Making a Football Kit Isn't Manufacturing
@@ -17,68 +16,74 @@ Everyone has opinions. Weeks pass. The first fixture gets close, then very
 close, and suddenly the relaxed project is an emergency.
 
 The instinct is to blame the factory — production must be the slow part,
-surely, all that printing and sewing and shipping. It isn't. Production is
-the *fast* part, and it has been for decades. The slow part is the one
-nobody measures: deciding.
+all that printing and sewing and shipping. It isn't. We make custom kits
+for a living, and we can put numbers on both halves of the timeline:
+**production takes 7–12 days and rarely surprises anyone — more than 95%
+of our orders arrive inside the promised 25–30-day window. The average
+team, meanwhile, takes 2–3 weeks to get from "this is our design" to a
+confirmed order.** The deciding takes longer than the making.
 
-## The 66-week shirt
+«DRAFT QUOTE — approve or edit» **Alberto, MOMUTO's founder:** "Production
+is the part people worry about and the part that never surprises us. The
+weeks before the order — the vote, the sponsor, the payments — that's
+where seasons are lost."
 
-In the mid-1980s, consultants at Kurt Salmon Associates timed the entire US
-apparel supply chain, fibre to checkout. The average pipeline ran **66
-weeks**. Actual manufacturing accounted for **6–17%** of it. Everything
-else was waiting: goods sitting between decisions, approvals, and handoffs
-(Springer, *The Evolution of Quick Response Programs*).
+## This is an old story, at every scale
 
-Forty years later, run the same stopwatch on a Sunday-league kit order. Our
-production takes 7–12 days; shipping 10–15. Call the fulfilled half a
-month. Now time the other half — the vote, the colour debate, the sponsor
-logo hunt, the size list — and the anatomy of the 1980s apparel industry
-reappears in miniature: **the making is a small fraction of the elapsed
-time. The deciding is the rest.**
+In the mid-1980s, consultants at Kurt Salmon Associates timed the entire
+US apparel supply chain, fibre to checkout. The average pipeline ran 66
+weeks — and actual manufacturing accounted for 6–17% of it. The rest was
+waiting: goods and decisions sitting between approvals and handoffs
+(Springer, *The Evolution of Quick Response Programs*). Our version is
+gentler, but it is the same shape forty years later: the making is the
+minority of the elapsed time, and the deciding is the rest.
 
-«D2 — the headline: Our production takes 7–12 days. Our customers take a
-median of «N» days to decide — from first message to confirmed order,
-across MOMUTO orders, [window], N orders. We measured both halves.»
+## The anatomy of the 2–3 weeks
 
-«Q1 — founder, one sentence: the moment it became clear the bottleneck was
-upstream of the factory.»
+Watch enough orders and the delay decomposes into four stages — and they
+are not the ones people expect:
 
-## Lateness is not a character flaw. It is a forecast.
+**The vote.** Show a group several options and a back-and-forth is
+natural. Psychology says it is also predictable: group decisions carry
+coordination costs that grow with every voice, and Parkinson's law of
+triviality — the bike-shed effect — guarantees that the most discussable
+topic absorbs the most discussion. A football shirt is the perfect bike
+shed: everyone can picture it, everyone has taste, everyone will wear the
+outcome.
 
-Psychologists have a name for why every club believes *this* year will be
-different: the planning fallacy. In the classic study, students estimated
-their thesis would take 33.9 days to finish. It took 55.5. Even when asked
-for an estimate they were *99% certain* about, barely half finished in time
-(Buehler, Griffin & Ross, *JPSP*, 1994).
+**The sponsor.** The single biggest drag we see. Sponsors want to see the
+mockup before they bless it, and often ask for changes to their logo's
+visibility or position. Reasonable — and slow, because it adds an external
+approval loop to an internal one. Construction firms know this pattern at
+industrial scale: across a million-plus formal decision requests, the
+median one waited about ten days for an answer (Navigant Construction
+Forum). Your sponsor is an RFI with a logo.
 
-Committees make it worse, not because people are difficult but because
-coordination has a price that grows with every voice. Group-decision
-research finds each additional decision-maker adds real delay, and a
-twenty-person WhatsApp group is structurally unable to converge on a
-two-option question. Add Parkinson's law of triviality — the bike-shed
-effect, where the most discussable topic absorbs the most discussion — and
-the shirt debate will reliably outlast decisions ten times its size. A
-football shirt is the perfect bike shed: everyone can picture it, everyone
-has taste, and everyone will wear the outcome.
+**The money.** Someone is always late paying the captain. The order
+cannot be confirmed until the pot is full — so the last €20 holds the
+whole squad's kit.
 
-None of this is a football problem. Construction firms run the same
-pattern at industrial scale: a study of over a million formal
-decision-requests (RFIs) found the median one waited about ten days for an
-answer — and roughly a fifth were never answered at all (Navigant
-Construction Forum). A volunteer kit manager chasing a sponsor's logo in
-August would recognize every line of that study.
+**The sizes — the innocent villain.** Everyone assumes collecting sizes is
+the nightmare. Our data says the opposite: **size lists usually arrive in
+under 24 hours.** By that stage the squad is excited; things are finally
+happening. The stage teams fear most is the fastest one in the process.
+
+And the planning fallacy explains why every club believes *this* year will
+be different: in the classic study, students estimated 33.9 days for their
+thesis and took 55.5 — even at "99% certain," barely half hit their date
+(Buehler, Griffin & Ross, *JPSP*, 1994). Lateness isn't a character flaw.
+It's a forecast.
 
 ## What actually works
 
-The research points at three fixes, and none of them is "try harder":
+Three fixes, none of which is "try harder":
 
 1. **Give the decision a date, not a vibe.** Externally imposed deadlines
    beat self-set ones (Ariely & Wertenbroch, *Psychological Science*,
    2002). "We vote Thursday, majority wins" outperforms "let's see what
    everyone thinks."
-2. **Shrink the committee for the shortlist.** Two people pick three
-   options; the squad votes on those. Coordination cost scales with voices
-   — so spend the voices where they add joy, not where they add weeks.
+2. **Send the sponsor the mockup early, not last.** Their approval loop is
+   the longest one you don't control. Start it first.
 3. **Start from finished, not from blank.** Defaults are the strongest
    force in decision science — organ-donor consent is 12% in Germany and
    99.98% in Austria, nearly identical countries, and the difference is
@@ -86,19 +91,32 @@ The research points at three fixes, and none of them is "try harder":
    finished design you adjust is a default. A blank canvas is a committee
    meeting.
 
-That third finding, honestly, is why our Ready to Play wall exists: every
-design loads finished — recolour it, add your crest and numbers, done. Not
-because teams lack ideas. Because the season doesn't wait for the group
-chat.
+That third finding is, honestly, the origin story of our Ready to Play
+wall. Configurators that start from blank templates give total freedom —
+and ask for the customer's time, which players don't always want to give.
+Watching the briefs teams send us taught us something else too: **when
+Barcelona, Juventus or AC Milan release a new kit, the references we
+receive shift within weeks.** So our studio started building finished,
+trend-aware designs of its own — open one in 3D and change everything, or
+just drop in your colours and crest and have something that looks pro in
+minutes. The most-chosen design on the wall so far is THE FRACTURE; the
+Brazil away kit's abstract camouflage is why THE PHANTOM exists.
+
+«DRAFT QUOTE — approve or edit» **Dmitry, MOMUTO designer:** "When a big
+club drops a new kit, we see it in the briefs two weeks later. Ready to
+Play is us getting there before the group chat does."
 
 ## Do the arithmetic before the season does it for you
 
 The practical version of this article is one page: [When Should a Team
 Order Its Jerseys? →] — the backwards count from your first fixture,
-mapped onto the real league calendar. The short version: your *decision*
-deadline is 6–9 weeks before kickoff. The order button is the easy part.
+mapped onto the real league calendar. The short version: start 7–9 weeks
+out, confirm the order 4–5 weeks out — and if you're later than that,
+there's a fast lane and a wall of finished designs for exactly that
+reason.
 
 ---
 *Production 7–12 days · shipping 10–15 · typically 25–30 days door to
-door · no minimum order · first Bespoke mockup in 24–48h, €15 deposit
-credited in full from 5 jerseys.*
+door, >95% on time · no minimum order · fast lane +€59 saves ~7 days ·
+first Bespoke mockup in 24–48h, €15 deposit credited in full from 5
+jerseys.*
