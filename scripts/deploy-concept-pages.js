@@ -35,7 +35,7 @@ const DOMAIN = { en: 'www.momuto.com', fr: 'fr.momuto.com', es: 'es.momuto.com',
 const PAGES = [
   {
     handle: 'ai-concept-to-real-kit', locale: 'en',
-    meta_title: 'AI Concept to Real Football Kit — We Make It Wearable | MOMUTO',
+    meta_title: 'AI Football Kit Generator to Real Kit — Made Wearable | MOMUTO',
     meta_descript: 'Turn any AI-generated jersey concept (ChatGPT, Midjourney, Gemini) into a manufactured, wearable football kit. Designer recreation in 48h. €15 deposit, credited in full at 5+ jerseys.',
     keywords: 'ai football kit generator, ai jersey design real, turn ai design into real jersey, concept kit made real, custom football kit from ai',
   },
