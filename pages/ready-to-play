@@ -47,6 +47,11 @@
     },
     {
       "@type": "Question",
+      "name": "Is this a football kit generator?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — with one difference. A typical jersey generator hands you a blank template and basic colour fills. MOMUTO's 3D designer starts every design finished — recolour it, add your crest, sponsor, names and numbers — and anything you generate can be manufactured and delivered, typically 25–30 days door to door. Already generated a design elsewhere (ChatGPT, Midjourney)? Our designers rebuild it as a real kit." }
+    },
+    {
+      "@type": "Question",
       "name": "I have an AI concept or a sketch — can you make it real?",
       "acceptedAnswer": { "@type": "Answer", "text": "Yes — that is our Bespoke service. Send a ChatGPT or Midjourney render, a sketch or a moodboard, and our designers rebuild it as a production-ready kit. First mockup in 24–48h; €15 deposit, credited in full to orders of 5 or more jerseys." }
     }
@@ -295,6 +300,7 @@
     <div class="st-faq-item"><h3>What is Ready to Play?</h3><p>Ready to Play is this wall — finished designs our design studio stands behind, every one customisable in 3D or ready to order as it stands. Each season we pick a few on-trend designs and run them at &minus;10%; the selection rotates, the designs stay.</p></div>
     <div class="st-faq-item"><h3>Can I upload my own crest and sponsor logos?</h3><p>Yes. Upload your club crest and sponsor logos directly in the 3D designer and place them live on the jersey. Names and numbers for the whole squad are added at order time.</p></div>
     <div class="st-faq-item"><h3>How long does delivery take?</h3><p>Production takes 7&ndash;12 days and shipping 10&ndash;15 days — typically 25&ndash;30 days door to door, worldwide. Every kit is full-sublimation printed on polyester-elastane fabric.</p></div>
+    <div class="st-faq-item"><h3>Is this a football kit generator?</h3><p>Yes — with one difference. A typical jersey generator hands you a blank template and basic colour fills. MOMUTO&rsquo;s 3D designer starts every design finished — recolour it, add your crest, sponsor, names and numbers — and anything you generate can be manufactured and delivered, typically 25&ndash;30 days door to door. Already generated a design elsewhere (ChatGPT, Midjourney)? Our designers rebuild it as a real kit.</p></div>
     <div class="st-faq-item"><h3>I have an AI concept or a sketch — can you make it real?</h3><p>Yes — that&rsquo;s our <a href="/pages/request-custom-kit-design" style="color:var(--accent-red);font-weight:600;">Bespoke service</a>. Send a ChatGPT or Midjourney render, a sketch or a moodboard, and our designers rebuild it as a production-ready kit. First mockup in 24&ndash;48h; &euro;15 deposit, credited in full to orders of 5 or more jerseys.</p></div>
   </div>
 </section>

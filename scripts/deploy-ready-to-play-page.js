@@ -47,6 +47,8 @@ const PAGES = [
       'design football jersey online free',
       'football kit creator',
       'custom football kit designer',
+      'football kit generator',
+      'jersey generator',
     ],
   },
   {
