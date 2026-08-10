@@ -10,7 +10,7 @@
  */
 
 const { kv } = require('@vercel/kv');
-const { emailDay4, emailDay10 } = require('../lib/emails');
+const { emailDay4, emailDay10, emailConfirmation3D } = require('../lib/emails');
 
 const RESEND_KEY  = process.env.RESEND_API_KEY;
 const FROM_EMAIL  = process.env.FROM_EMAIL_ORDERS || process.env.FROM_EMAIL || 'orders@momuto.com';
@@ -22,13 +22,14 @@ function isAuthorised(req) {
 }
 
 async function sendEmail(to, subject, html) {
-  if (!RESEND_KEY) { console.warn('[cron] RESEND_API_KEY not set'); return; }
+  if (!RESEND_KEY) { console.warn('[cron] RESEND_API_KEY not set'); return false; }
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ from: `MOMUTO <${FROM_EMAIL}>`, to: [to], subject, html }),
   });
   if (!r.ok) console.error('[cron] Resend error:', r.status, await r.text());
+  return r.ok;
 }
 
 function daysSince(dateStr) {
@@ -46,7 +47,7 @@ module.exports = async function handler(req, res) {
   const ids = (await kv.smembers('orders:active')) || [];
   console.log(`[cron] checking ${ids.length} active orders`);
 
-  const results = { day4: [], day10: [], skipped: [] };
+  const results = { confirmationRetry: [], day4: [], day10: [], skipped: [] };
 
   for (const id of ids) {
     const order = await kv.get(`order:${id}`);
@@ -62,23 +63,44 @@ module.exports = async function handler(req, res) {
     }
 
     const days = daysSince(order.paidAt);   // clock starts from payment date
-    const sent = order.emailsSent || [];
 
     try {
+      // Retry belt for 3D confirmations: order-3d-paid stores the order first
+      // and marks 'confirmation' only after Resend accepts the send, so an
+      // order missing it here is one whose confirmation FAILED. Retry daily
+      // until it lands; no lifecycle mail before the confirmation exists.
+      if (id.startsWith('3d_') && !(order.emailsSent || []).includes('confirmation')) {
+        const { subject, html } = emailConfirmation3D(order);
+        if (await sendEmail(order.email, subject, html)) {
+          order.emailsSent = [...(order.emailsSent || []), 'confirmation'];
+          await kv.set(`order:${id}`, order);
+          results.confirmationRetry.push(id);
+          console.log(`[cron] confirmation RETRIED ok for ${id} (${order.team})`);
+        } else {
+          results.skipped.push(id);
+          continue;
+        }
+      }
+
+      const sent = order.emailsSent || [];
+      // lifecycle marks are set only when Resend actually accepted the send —
+      // a failed day-4/day-10 retries on the next daily run
       if (days >= 4 && !sent.includes('day4')) {
         const { subject, html } = emailDay4(order);
-        await sendEmail(order.email, subject, html);
-        const updated = { ...order, emailsSent: [...sent, 'day4'] };
-        await kv.set(`order:${id}`, updated);
-        results.day4.push(id);
-        console.log(`[cron] day4 sent for ${id} (${order.team})`);
+        if (await sendEmail(order.email, subject, html)) {
+          const updated = { ...order, emailsSent: [...sent, 'day4'] };
+          await kv.set(`order:${id}`, updated);
+          results.day4.push(id);
+          console.log(`[cron] day4 sent for ${id} (${order.team})`);
+        }
       } else if (days >= 10 && !sent.includes('day10')) {
         const { subject, html } = emailDay10(order);
-        await sendEmail(order.email, subject, html);
-        const updated = { ...order, emailsSent: [...sent, 'day10'] };
-        await kv.set(`order:${id}`, updated);
-        results.day10.push(id);
-        console.log(`[cron] day10 sent for ${id} (${order.team})`);
+        if (await sendEmail(order.email, subject, html)) {
+          const updated = { ...order, emailsSent: [...sent, 'day10'] };
+          await kv.set(`order:${id}`, updated);
+          results.day10.push(id);
+          console.log(`[cron] day10 sent for ${id} (${order.team})`);
+        }
       } else {
         results.skipped.push(id);
       }
