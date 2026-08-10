@@ -15,8 +15,11 @@
  * server. While either side is unset, this endpoint refuses loudly (503)
  * instead of silently doing nothing — misconfiguration must be visible.
  *
- * Idempotent: webhook re-fires for an already-processed order return 200
- * without sending anything again.
+ * Idempotent AND retry-safe: webhook re-fires for an order whose
+ * confirmation went out return 200 without sending again — but "processed"
+ * is marked only AFTER Resend accepts the send. An order stored by an
+ * attempt whose send failed stays retryable: a webhook retry hits the send
+ * path again, and cron-orders re-attempts daily as a belt.
  *
  * Backfill guard: the platform re-pushes orderUpdate webhooks in a nightly
  * re-sync batch, so an OLD order whose original payment webhook was missed
@@ -95,17 +98,27 @@ module.exports = async function handler(req, res) {
   const isBackfill    = paidTs > 0 && (Date.now() - paidTs) > BACKFILL_DAYS * 86400000;
   const isTest        = parseInt(is_test, 10) === 1;
 
-  // Idempotency: the platform re-fires webhooks; only the first one acts.
+  // Idempotency: the platform re-fires webhooks; a processed order returns
+  // 200 without re-sending. "Processed" means the confirmation actually WENT
+  // OUT (or the order is a backfill/test/excluded record) — an order stored
+  // by an attempt whose Resend call failed stays retryable, so a webhook
+  // retry or the daily cron sweep can deliver the email instead of a
+  // dedup-before-send swallowing it forever.
   const existing = await kv.get(`order:${id}`);
-  if (existing && existing.paidAt) {
+  if (existing && existing.paidAt &&
+      ((existing.emailsSent || []).includes('confirmation') ||
+       existing.stopLifecycle || existing.status !== 'active')) {
     console.log(`[order-3d-paid] ${id} already processed — dedup`);
     return res.status(200).json({ ok: true, dedup: true });
   }
+  const isRetry = !!(existing && existing.paidAt);
 
   const players = (designs || []).flatMap(d => d.players || []).filter(Boolean);
   const qty = players.reduce((n, p) => n + (parseInt(p.qty, 10) || 1), 0) || '—';
 
-  const order = {
+  // On a retry keep the stored record (original clocks, any admin edits) and
+  // only re-attempt the send; otherwise build the order fresh.
+  const order = isRetry ? { ...existing } : {
     id,
     name:  name || 'Coach',
     email,
@@ -121,7 +134,7 @@ module.exports = async function handler(req, res) {
     lang:  ['en', 'es', 'fr', 'it'].includes(lang) ? lang : 'en',
     paidAt: platformPaidAt || new Date().toISOString(),
     platformPaidAt,
-    emailsSent: ['confirmation'],
+    emailsSent: [],
     trackingNumber: null,
     trackingUrl: null,
     status: 'active',
@@ -158,10 +171,26 @@ module.exports = async function handler(req, res) {
   try {
     const { subject, html } = emailConfirmation3D(order);
     await sendEmail(order.email, subject, html);
+    // mark sent ONLY after Resend accepted it — this is what dedup keys on
+    order.emailsSent = [...(order.emailsSent || []), 'confirmation'];
+    await kv.set(`order:${id}`, order);
   } catch (e) {
-    // order is stored either way; surface the send failure to the caller log
+    // order is stored and stays retryable (webhook retry / cron sweep);
+    // tell the team NOW instead of leaving it to a server-side log
     console.error(`[order-3d-paid] ${id} confirmation send FAILED:`, e.message);
-    return res.status(502).json({ ok: false, stored: true, error: e.message });
+    try {
+      await sendEmail(
+        ADMIN_EMAIL,
+        `🔴 3D order confirmation FAILED — ${order_no}`,
+        `<p>Order <strong>${order_no}</strong> (platform ${plant_order_no || '?'}) is PAID but the ` +
+        `confirmation email to ${order.email} failed: ${e.message}</p>` +
+        `<p>It stays retryable (webhook retry + daily cron sweep). ` +
+        `Inspect: <a href="https://design.momuto.com/3d-configurator/inspect.html?configId=${order_no}">design inspector</a></p>`
+      );
+    } catch (e2) {
+      console.error('[order-3d-paid] failure admin notify ALSO failed:', e2.message);
+    }
+    return res.status(502).json({ ok: false, stored: true, retryable: true, error: e.message });
   }
 
   // Best-effort heads-up to the team — never fails the request.
