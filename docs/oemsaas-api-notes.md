@@ -225,6 +225,34 @@ Not the API, but the same class of hard-won:
 
 ---
 
+## Email notification templates (API surface, Aug 2026)
+
+The vendor API documentation lists a notification-template surface we had
+never used (titles from the doc index — paths were not given):
+
+- `GET  Get email notification list`
+- `GET  Get email notification details`
+- `PUT  Email notification of changes`
+- `PUT  Email notification status modification`
+
+This is how the platform's transactional emails (abandoned cart, its order
+confirmation, shipping notices…) are read and edited programmatically — the
+same class of override as the checkSumbit DiyFile. Because the doc gives
+titles without paths, `scripts/dump-email-notifications.js` PROBES likely
+endpoints (GET only) and dumps every template per store into
+`cms/email-notifications/<lang>/` via the "Dump email notification
+templates" workflow (auto-runs on merge; also workflow_dispatch). The dumps
+are the read-before-write baseline for any redesign: PUT replaces, so
+read-modify-write, exactly as with products. If no probe hits, open the API
+doc's email-notification page, copy the real path into the script's
+CANDIDATES list and re-run.
+
+Motivation (Aug 2026): redesigning the abandoned-cart email — since the
+per-design €0 preview products ride in the platform cart, its abandoned-cart
+email can show the customer THEIR OWN design.
+
+---
+
 ## Method, not just facts
 
 The findings above came from four habits worth reusing on any similar task:
