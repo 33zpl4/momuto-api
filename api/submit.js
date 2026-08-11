@@ -178,8 +178,8 @@ function buildEmail(fields, files) {
 
 async function sendEmail(fields, subject, html, replyTo) {
   if (!RESEND_KEY) {
-    console.warn('[submit] RESEND_API_KEY not set — skipping email');
-    return;
+    // throw so the lead is recorded with emailError instead of a silent skip
+    throw new Error('RESEND_API_KEY not set');
   }
 
   const res = await fetch('https://api.resend.com/emails', {
@@ -200,6 +200,10 @@ async function sendEmail(fields, subject, html, replyTo) {
   if (!res.ok) {
     const body = await res.text();
     console.error('[submit] Resend error:', res.status, body);
+    // MUST throw: the caller marks emailSent:true unless this rejects — a
+    // swallowed Resend error used to record the lead as notified when the
+    // team email never went out (leads the team "never received").
+    throw new Error(`Resend ${res.status}: ${String(body).slice(0, 180)}`);
   }
 }
 
