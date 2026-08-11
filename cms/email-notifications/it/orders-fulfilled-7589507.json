@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 7589507,
+    "event_id": 7,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "<div>Hey there!</div>\n<div></div>\n<div>Exciting news &ndash; your MOMUTO order has shipped! It&rsquo;s time to get ready to rock your new gear. We've made sure everything is top-notch and ready for action.</div>\n<div></div>\n<div>Thanks for bringing us along on your style journey. We can't wait for you to see what you've got!</div>\n<div></div>\n<div>Cheers,</div>\n<div>Team MOMUTO</div>\n<div></div>",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at&nbsp;<a href=\"mailto:info@momuto.com\" target=\"_blank\" rel=\"noopener\">info@momuto.com</a>.",
+    "email_title": "Your MOMUTO Order is On Its Way!",
+    "status": 1,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "33BC12EE-A48B-733B-5D24-D464B5DEA362"
+}

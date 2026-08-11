@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 250893,
+    "event_id": 40,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "You order has been refunded.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Order Refunded",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "B153D391-FB7C-6BFB-737E-C205515CF6DB"
+}

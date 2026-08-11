@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 272638,
+    "event_id": 22,
+    "delay_time": 300,
+    "coupon": "",
+    "top_html_oss_bucket": "You added items to your shopping cart and haven't completed your purchase.\nYou can complete it now while they're still available.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Complete Your Purchase",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "FFB9D4FF-CB2A-5910-7956-3008F74BC84A"
+}

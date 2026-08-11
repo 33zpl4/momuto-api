@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 272640,
+    "event_id": 40,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "<div>Salut !</div>\n<div></div>\n<div>Nous vous informons que le remboursement de votre commande a &eacute;t&eacute; effectu&eacute;. Les fonds devraient &ecirc;tre refl&eacute;t&eacute;s sur votre moyen de paiement sous peu.</div>\n<div></div>\n<div>Team MOMUTO</div>",
+    "bottom_html_oss_bucket": "Si vous avez des questions, r&eacute;pondez directement &agrave; cet e-mail ou contactez-nous &agrave;&nbsp;<a href=\"mailto:info@momuto.com\">info@momuto.com</a>",
+    "email_title": "Remboursement de votre commande MOMUTO",
+    "status": 1,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "C675E875-594A-F7C8-A01D-C4C02684BC04"
+}

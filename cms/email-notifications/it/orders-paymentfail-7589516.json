@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 7589516,
+    "event_id": 44,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "We noticed that you attempted to pay for your order but your payment was not successful. We understand how frustrating this can be and we're here to help.<br \\/>Please contact us at {support_email} and let us know the details of the payment issue. We'll be happy to help you resolve any issues and ensure that your order is processed correctly.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Oops! Your payment has failed",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "7E024BB2-8B27-57D5-5551-DF5CDF841C26"
+}

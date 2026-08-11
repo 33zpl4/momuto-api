@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 272639,
+    "event_id": 23,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "买家已经支付，购买了您的商品，请及时处理订单。",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "订单通知",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "E4F94C5F-8A20-D7C4-56C5-70DEBC79211B"
+}

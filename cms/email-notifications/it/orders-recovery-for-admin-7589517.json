@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 7589517,
+    "event_id": 45,
+    "delay_time": 300,
+    "coupon": "",
+    "top_html_oss_bucket": "生成一笔新的弃单，我们建议您查看并确认，请尽快与客户联系，了解他们取消订单的原因。",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "弃单通知",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "E6503CB0-FDCB-7F58-2117-CE109FCB666E"
+}

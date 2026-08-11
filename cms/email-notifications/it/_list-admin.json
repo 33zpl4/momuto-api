@@ -1,0 +1,70 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "list": [
+      {
+        "event_id": 23,
+        "event_name": "订单支付（管理员）",
+        "event_code": "orders/paid_for_admin",
+        "email_event_type": "admin",
+        "email_event_status": 0,
+        "event_descript": "",
+        "status": 0,
+        "event_notice_id": 7589512,
+        "coupon": "",
+        "delay_time": 0,
+        "email_cover": "https://cdn.statics-cdn-abc.com/statics/cart/emails/orders_paid_for_admin.png",
+        "event_tip": "",
+        "param": ""
+      },
+      {
+        "event_id": 43,
+        "event_name": "订单支付失败（管理员）",
+        "event_code": "orders/payfail_for_admin",
+        "email_event_type": "admin",
+        "email_event_status": 0,
+        "event_descript": "",
+        "status": 0,
+        "event_notice_id": 7589515,
+        "coupon": "",
+        "delay_time": 0,
+        "email_cover": "https://cdn.statics-cdn-abc.com/statics/cart/emails/payfail_for_admin.png",
+        "event_tip": "",
+        "param": ""
+      },
+      {
+        "event_id": 45,
+        "event_name": "弃单通知（管理员）",
+        "event_code": "orders/recovery_for_admin",
+        "email_event_type": "admin",
+        "email_event_status": 0,
+        "event_descript": "",
+        "status": 0,
+        "event_notice_id": 7589517,
+        "coupon": "",
+        "delay_time": 300,
+        "email_cover": "https://cdn.statics-cdn-abc.com/statics/cart/emails/recovery_for_admin.png",
+        "event_tip": "",
+        "param": ""
+      },
+      {
+        "event_id": 52,
+        "event_name": "潜在重复支付(管理员)",
+        "event_code": "orders/repeated_payment",
+        "email_event_type": "admin",
+        "email_event_status": 0,
+        "event_descript": "",
+        "status": 0,
+        "event_notice_id": 7589523,
+        "coupon": "",
+        "delay_time": 0,
+        "email_cover": "https://cdn.statics-cdn-abc.com/statics/cart/emails/repeated_payment.png",
+        "event_tip": "",
+        "param": ""
+      }
+    ],
+    "totalCount": 4
+  },
+  "trace_id": "A2688297-2D7F-E0DA-1CA5-4585A5F4703C"
+}

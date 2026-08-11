@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 351975,
+    "event_id": 43,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "<p>买家支付失败，我们建议您查看错误信息并尝试解决问题。如果您需要进一步的技术支持，请联系我们的技术团队，我们将竭诚为您提供帮助，确保您的订单能够正常处理。<br \\/>错误信息如下：<br \\/>店铺ID: {store_id}<br \\/>订单号: {order_number}<br \\/>域名: {domain}<br \\/>支付方式: {payment_type}<br \\/>错误原因: {error_reason}</p>",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "订单支付失败通知",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "6CB09642-FF53-1FCB-23C6-4A722D07C804"
+}

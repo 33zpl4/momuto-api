@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 272631,
+    "event_id": 2,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "<div>Bonjour et bienvenue dans la famille MOMUTO !</div>\n<div></div>\n<div>Nous sommes ravis de vous avoir &agrave; bord. Si vous avez des questions ou besoin d'assistance, n'h&eacute;sitez pas &agrave; nous contacter. Joyeux shopping !</div>\n<div></div>\n<div></div>\n<div>Team MOMUTO</div>\n<div></div>",
+    "bottom_html_oss_bucket": "<div>Si vous avez des questions, r&eacute;pondez directement &agrave; cet e-mail ou contactez-nous &agrave; <a href=\"mailto:info@momuto.com\">info@momuto.com</a></div>",
+    "email_title": "Bienvenue chez MOMUTO !",
+    "status": 1,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "5494F69C-09EF-CEA7-22E2-CA44171185F2"
+}

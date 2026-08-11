@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 310070,
+    "event_id": 21,
+    "delay_time": 1800,
+    "coupon": "",
+    "top_html_oss_bucket": "You added items to your shopping cart and haven't completed your purchase.\nDid you face any problems during checkout? If so, please give this email a reply,we will resolve your issues right away. If you are still interested, you can continue to complete the payment within its valid time.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Did you face any problems",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "A8A4B6D0-6211-9FB8-ECCD-0C6AEB18693D"
+}

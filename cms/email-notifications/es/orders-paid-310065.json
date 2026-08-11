@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 310065,
+    "event_id": 5,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "<div>Hola,</div>\n<div></div>\n<div>&iexcl;Buenas noticias! Tu pago ha sido procesado con &eacute;xito y hemos recibido tu pedido correctamente. Nuestro equipo lo revisar&aacute; para prepararlo cuanto antes.&nbsp;</div>\n<div></div>\n<div>Te informaremos tan pronto como tu pedido est&eacute; en camino. &iexcl;Gracias por confiar en MOMUTO!</div>\n<div></div>\n<div>Saludos,</div>\n<div>Equipo MOMUTO</div>\n<div></div>",
+    "bottom_html_oss_bucket": "Si quieres ponerte en contacto con nosotros, escribe a <a href=\"mailto:info@momuto.com\" target=\"_blank\" rel=\"noopener\">info@momuto.com</a>",
+    "email_title": "¡Gracias por tu pedido!",
+    "status": 1,
+    "logo": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20240919/52561_a8dbb04c36698d4cdbc5049b95aca288.png",
+    "param": ""
+  },
+  "trace_id": "11DE24EC-B674-8391-F077-B15841ACFA8A"
+}

@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 250886,
+    "event_id": 6,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "Order was canceled at your request and your payment has been voided .",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Your order has been canceled",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "0A707E94-740B-423E-F8B6-A357608E8C12"
+}

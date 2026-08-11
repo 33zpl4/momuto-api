@@ -1,0 +1,55 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "list": [
+      {
+        "event_id": 22,
+        "event_name": "购物车召回（阶段一）",
+        "event_code": "carts/recovery_1",
+        "email_event_type": "recovery",
+        "email_event_status": 0,
+        "event_descript": "",
+        "status": 1,
+        "event_notice_id": 250891,
+        "coupon": "",
+        "delay_time": 1799,
+        "email_cover": "https://cdn.staticsoe.com/statics/cart/emails/carts_recovery_1.png",
+        "event_tip": "",
+        "param": ""
+      },
+      {
+        "event_id": 21,
+        "event_name": "购物车召回（阶段二）",
+        "event_code": "carts/recovery_2",
+        "email_event_type": "recovery",
+        "email_event_status": 0,
+        "event_descript": "",
+        "status": 0,
+        "event_notice_id": 250890,
+        "coupon": "",
+        "delay_time": 1800,
+        "email_cover": "https://cdn.staticsoe.com/statics/cart/emails/carts_recovery_2.png",
+        "event_tip": "",
+        "param": ""
+      },
+      {
+        "event_id": 20,
+        "event_name": "购物车召回（阶段三）",
+        "event_code": "carts/recovery_3",
+        "email_event_type": "recovery",
+        "email_event_status": 0,
+        "event_descript": "",
+        "status": 0,
+        "event_notice_id": 250889,
+        "coupon": "",
+        "delay_time": 86400,
+        "email_cover": "https://cdn.staticsoe.com/statics/cart/emails/carts_recovery_3.png",
+        "event_tip": "",
+        "param": ""
+      }
+    ],
+    "totalCount": 3
+  },
+  "trace_id": "16D4F98B-98AF-A8D5-0F06-DBDBB1C5B871"
+}

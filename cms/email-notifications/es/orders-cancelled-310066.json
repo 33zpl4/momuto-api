@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 310066,
+    "event_id": 6,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "Order was canceled at your request and your payment has been voided .",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Your order has been canceled",
+    "status": 1,
+    "logo": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20240919/52561_3151dfd9f4c0d91b83ea094a6a1db7ad.png",
+    "param": ""
+  },
+  "trace_id": "479CEB85-6A8A-7E56-F23E-DDD1DFB00F72"
+}

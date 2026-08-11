@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 7589511,
+    "event_id": 22,
+    "delay_time": 1799,
+    "coupon": "",
+    "top_html_oss_bucket": "<div></div>\n<div>Thank you for choosing MOMUTO! We noticed you were browsing our unique, fully-customizable football kits and iconic concept jerseys, and we wanted to remind you to complete your purchase.</div>\n<div></div>\n<div>At MOMUTO, we're all about innovation and passion for the game. Launched in 2023, our goal is to bring fresh energy to football apparel and one day dress professional teams. We believe every kit tells a story, and we're excited to help you create yours.</div>\n<div></div>\n<div>Complete your purchase today and join us on this exciting journey. Whether it's a team kit or a tribute to an iconic team, your MOMUTO jersey is crafted with care and a commitment to quality.</div>\n<div></div>\n<div>Thank you for being a part of MOMUTO's story. Let's make football history together!</div>",
+    "bottom_html_oss_bucket": "If you have any questions or need assistance, our team is here to help. Contact <a href=\"mailto:info@momuto.com\" target=\"_blank\" rel=\"noopener\">info@momuto.com</a>",
+    "email_title": "Complete Your Purchase and Join the MOMUTO Journey!",
+    "status": 1,
+    "logo": "https://cdn.statics-cdn-abc.com/pics/42ebb76c4f72b34a37be2a3a195a62195a2b444cc74e99202c0f777d226324e4.jpg",
+    "param": ""
+  },
+  "trace_id": "E9E8064B-CCE0-E54A-61D7-2BEDE078FDE8"
+}
