@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 3565641,
+    "event_id": 55,
+    "delay_time": 604800,
+    "coupon": "",
+    "top_html_oss_bucket": "Your {expire_points} points are expiring soon on {expire_date}. Make a purchase to use them  now before they are lost.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Your Points Will Expire Soon",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "47896FD8-9364-97A8-7F88-1F698A45A21C"
+}

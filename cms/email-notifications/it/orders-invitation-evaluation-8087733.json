@@ -1,0 +1,20 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 8087733,
+    "event_id": 63,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "Your order is currently being processed.We would appreciate your valuable feedback.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Review Your Order",
+    "status": 0,
+    "logo": "",
+    "param": {
+      "trigger_timing": "1",
+      "trigger_time_hour": "168"
+    }
+  },
+  "trace_id": "FB3924BF-C0E0-A06D-896F-1EC32873B482"
+}

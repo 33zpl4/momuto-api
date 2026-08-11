@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 272633,
+    "event_id": 6,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "<p>Nous sommes d&eacute;sol&eacute;s d'apprendre que vous avez annul&eacute; votre commande.</p>\n<p>Si vous avez rencontr&eacute; un probl&egrave;me ou si vous avez des feedbacks, n'h&eacute;sitez pas &agrave; nous le faire savoir. Nous sommes toujours l&agrave; pour vous aider.</p>\n<p>Team MOMUTO</p>",
+    "bottom_html_oss_bucket": "Si vous avez des questions, r&eacute;pondez directement &agrave; cet e-mail ou contactez-nous &agrave;&nbsp;<a href=\"mailto:info@momuto.com\">info@momuto.com</a>",
+    "email_title": "Annulation de votre commande chez MOMUTO",
+    "status": 1,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "CA75C360-A016-74C5-BE7A-B1AE4F834467"
+}

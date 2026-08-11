@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 3711068,
+    "event_id": 56,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "Welcome to our store! Here is your email verification code for registration. If you did not request registration, you can safely delete this email.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Email Verify",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "B3F91AE2-8633-7BDC-3F4A-A6C91FD03E88"
+}

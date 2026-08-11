@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 7589504,
+    "event_id": 2,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "<div>Hey there,</div>\n<div></div>\n<div>You&rsquo;re in! Thanks for signing up to join the MOMUTO family. You're now part of a community that's all about bold and unique designs, just like you.</div>\n<div></div>\n<div>Get ready for exclusive updates, special offers, and first looks at our latest gear. We promise to keep things fresh and exciting &mdash; just how you like it.</div>\n<div></div>\n<div>We're thrilled to have you with us. Let&rsquo;s make some noise in the style game together!</div>\n<div></div>\n<div>Stay bold,</div>\n<div>Team MOMUTO</div>\n<div></div>",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at&nbsp;<a href=\"mailto:info@momuto.com\" target=\"_blank\" rel=\"noopener\">info@momuto.com</a>.",
+    "email_title": "Welcome to the MOMUTO Family!",
+    "status": 1,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "6924A796-80B8-12D0-CA3B-9180E5517B6D"
+}

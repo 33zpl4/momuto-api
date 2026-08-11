@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 3255229,
+    "event_id": 53,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "{reward_points} points have been awarded to you as a result of recent account activity. This could be attributed to a completed task, a refund, or a gift from your merchant.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Congratulations! You've Earned a Points Reward",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "3F55F21A-911A-336A-1C86-E1153CC263B6"
+}

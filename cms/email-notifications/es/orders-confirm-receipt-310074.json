@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 310074,
+    "event_id": 42,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "Your order has been delivered. Thank you for your purchase.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Order Delivered",
+    "status": 1,
+    "logo": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20240919/52561_b7fcec9bed2665514be411702aaa20b9.png",
+    "param": ""
+  },
+  "trace_id": "7D07F52C-CB64-5853-0919-7D76496CA9A9"
+}

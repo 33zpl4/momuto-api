@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 310064,
+    "event_id": 2,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "<div>&iexcl;Hola!</div>\n<div></div>\n<div>&iexcl;Estamos emocionados de darte la bienvenida a MOMUTO!</div>\n<div></div>\n<div>Explora nuestra gama de camisetas y equipaciones personalizables o nuestra colecci&oacute;n de camisetas concepto en la web. Prep&aacute;rate para disfrutar de ofertas exclusivas, noticias y mucho m&aacute;s.</div>\n<div></div>\n<div>&iexcl;Gracias por registrarte y bienvenido al juego!</div>\n<div></div>\n<div>Un saludo,</div>\n<div>Equipo MOMUTO</div>",
+    "bottom_html_oss_bucket": "Si quieres ponerte en contacto con nosotros, escribe a <a href=\"mailto:info@momuto.com\" target=\"_blank\" rel=\"noopener\">info@momuto.com</a>",
+    "email_title": "¡Bienvenido a MOMUTO!",
+    "status": 1,
+    "logo": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20240919/52561_431a4493c2872a674636f86dae06342a.png",
+    "param": ""
+  },
+  "trace_id": "D9C40D87-42B3-CE08-2873-5CE7DDC03BBA"
+}

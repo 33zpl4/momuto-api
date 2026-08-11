@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 272634,
+    "event_id": 7,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "<div>Bonne nouvelle ! Votre commande a &eacute;t&eacute; exp&eacute;di&eacute;e et est en route vers vous.</div>\n<div></div>\n<div>Vous pouvez suivre votre colis sur le site.</div>\n<div></div>\n<div>Team MOMUTO</div>",
+    "bottom_html_oss_bucket": "Si vous avez des questions, r&eacute;pondez directement &agrave; cet e-mail ou contactez-nous &agrave;&nbsp;<a href=\"mailto:info@momuto.com\">info@momuto.com</a>",
+    "email_title": "Votre commande MOMUTO est en route !",
+    "status": 1,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "6A23D524-34DB-CD3A-0992-7259F0EBDAA5"
+}

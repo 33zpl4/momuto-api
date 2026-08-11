@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 310067,
+    "event_id": 7,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "Your order is on the way to you. Track your shipment to see the delivery status.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Your order is on the way",
+    "status": 1,
+    "logo": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20240919/52561_4af1f398c1ff5e848d3c9e12b733872a.png",
+    "param": ""
+  },
+  "trace_id": "FF30EE95-9A90-FE87-E553-81D1F847FA3C"
+}

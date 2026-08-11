@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 2388463,
+    "event_id": 51,
+    "delay_time": 3600,
+    "coupon": "",
+    "top_html_oss_bucket": "<p>We are excited to invite you to join {store_name} and become a valued member! As a member, you'll enjoy exclusive offers, the latest news, and a personalized shopping experience.</p><p>To get started, simply click on the \"REGISTER\" button below and create your account:</p>",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Join {store_name} and Unlock Exclusive Benefits",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "56E3BD57-8126-F1DB-811E-A6EA74B6782F"
+}

@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 2508978,
+    "event_id": 52,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "买家存在潜在的重复支付情况，这可能是支付通道结果返回有延迟，期间买家再次支付导致。强烈建议您立即核查并采取适当的措施（如退款），以避免可能的困扰或客诉。<br \\/><p>以下是潜在重复支付的订单信息：<br \\/>店铺ID: {store_id}<br \\/>订单号: {order_number}<br \\/>买家邮箱: {order_email}<br \\/>域名: {domain}<br \\/>重复支付金额: {pay_amount}<br \\/>重复支付流水号: {pay_transaction}<br \\/>支付方式: {payment_type}<br \\/>时间: {pay_at}</p>",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "潜在重复支付",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "B65DB97B-EC30-0A17-9177-7AB8705E3129"
+}

@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 250889,
+    "event_id": 20,
+    "delay_time": 86400,
+    "coupon": "",
+    "top_html_oss_bucket": "We've sent an email to check on your pending order.\nDid you face any problems while checking out? If so, please give this email a reply and we will resolve your issues right away.\nDue to the high demand of orders, we can only reserve your order for 24 hours before we give it to the next customer in line ):",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "We can only hold your order for another 24 hours",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "51F17DDB-FD04-53B3-E3BE-A19E76CC6F2B"
+}

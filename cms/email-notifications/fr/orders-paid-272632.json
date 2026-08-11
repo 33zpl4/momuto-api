@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 272632,
+    "event_id": 5,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "<p>Merci pour votre commande chez MOMUTO ! 🙌</p>\n<p>Nous avons bien re&ccedil;u votre paiement et pr&eacute;parons votre colis avec soin.</p>\n<p></p>\n<p>🛠️ Statut : Commande confirm&eacute;e</p>\n<p>📦 Vous recevrez un email d&egrave;s que votre commande sera exp&eacute;di&eacute;e, avec le lien de suivi.</p>\n<p>📩 Si vous avez la moindre question d&rsquo;ici l&agrave;, notre &eacute;quipe est &agrave; votre &eacute;coute.</p>\n<p></p>\n<p>Merci encore pour votre confiance,</p>\n<p>&ndash; L&rsquo;&eacute;quipe MOMUTO</p>",
+    "bottom_html_oss_bucket": "Si vous avez des questions, r&eacute;pondez directement &agrave; cet e-mail ou contactez-nous &agrave;&nbsp;<a href=\"mailto:info@momuto.com\">info@momuto.com</a>",
+    "email_title": "Confirmation de votre commande chez MOMUTO",
+    "status": 1,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "D14554E9-0879-7469-AADF-BF227B3A9B99"
+}

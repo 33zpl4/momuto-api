@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 3434571,
+    "event_id": 54,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "{deduct_points} points have been deducted as a result of recent account activity. This could be attributed to merchant's decision, or a successful point redemption.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Notice: Deduction of Points from Your Account",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "4488F6D3-D76F-01C4-D2BA-0CE26DA376E9"
+}
