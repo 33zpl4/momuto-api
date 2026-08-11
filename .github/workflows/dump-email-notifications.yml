@@ -1,0 +1,49 @@
+name: Dump email notification templates
+
+# GET-only audit: probes the platform's email-notification API (abandoned
+# cart, order confirmation…), dumps every template per store into
+# cms/email-notifications/, and commits the result back. The dumps are the
+# read-before-write baseline for redesigning the abandoned-cart email.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/dump-email-notifications.js'
+      - '.github/workflows/dump-email-notifications.yml'
+  workflow_dispatch:
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Dump notification templates (GET only)
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+        run: node scripts/dump-email-notifications.js
+
+      - name: Commit dumps back
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cms/email-notifications
+          if git diff --cached --quiet; then
+            echo "nothing new"
+            exit 0
+          fi
+          git commit -m "Email notification templates dump [skip ci]"
+          git pull --rebase origin main
+          git push
