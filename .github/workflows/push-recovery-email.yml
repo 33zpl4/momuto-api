@@ -1,0 +1,43 @@
+name: Push abandoned-cart recovery email
+
+# Pushes cms/email-notifications/src/recovery-1.<lang>.json to each store's
+# carts/recovery_1 template via PUT /eventnotices/{id} (read-modify-write:
+# only email_title + top/bottom HTML change; delay, coupon, on/off, logo
+# stay untouched). Old values are logged in the run for rollback; the
+# pre-change templates are also versioned in cms/email-notifications/<lang>/.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'cms/email-notifications/src/**'
+      - 'scripts/push-recovery-email.js'
+      - '.github/workflows/push-recovery-email.yml'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (preview, no writes)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Push recovery-1 templates
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+        run: node scripts/push-recovery-email.js

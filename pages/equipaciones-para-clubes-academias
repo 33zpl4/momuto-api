@@ -201,7 +201,7 @@ h1.title, .title, .page-title { display: none !important; }
 <table class="sj-price">
 <thead><tr><th>Cantidad</th><th>Camiseta</th><th>Pantalón</th><th>Equipación completa</th></tr></thead>
 <tbody>
-<tr><td>10 a 19 uds.</td><td>21,90 €</td><td>6,00 €</td><td class="tot">26,90 € / jugador</td></tr>
+<tr><td>10 a 19 uds.</td><td>21,90 €</td><td>5,00 €</td><td class="tot">26,90 € / jugador</td></tr>
 <tr><td>20 a 49 uds.</td><td>18,90 €</td><td>6,00 €</td><td class="tot">24,90 € / jugador</td></tr>
 <tr><td>50 a 99 uds.</td><td>17,90 €</td><td>5,50 €</td><td class="tot">23,40 € / jugador</td></tr>
 <tr class="best"><td>100+ uds.</td><td>16,90 €</td><td>5,00 €</td><td class="tot">21,90 € / jugador</td></tr>
