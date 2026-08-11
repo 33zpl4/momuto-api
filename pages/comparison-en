@@ -45,7 +45,7 @@
       "name": "Can I order just one custom jersey?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. MOMUTO has no minimum order. A single custom jersey costs €38.90 with shorts at €17.90, giving a full kit for €56.80. There are no sample fees or hidden surcharges. Orders of 10+ kits drop to €26.90 per full kit (€21.90 jersey + €6.00 shorts)."
+        "text": "Yes. MOMUTO has no minimum order. A single custom jersey costs €38.90 with shorts at €17.90, giving a full kit for €56.80. There are no sample fees or hidden surcharges. Orders of 10+ kits drop to €26.90 per full kit (€21.90 jersey + €5.00 shorts)."
       }
     },
     {
@@ -567,7 +567,7 @@ h1.title, .title, .page-title { display: none !important; }
 <tr class="cmp-best-value">
 <td>10&ndash;19 units <span class="cmp-best-value-badge">Most Popular</span></td>
 <td>&euro;21.90</td>
-<td>&euro;6.00</td>
+<td>&euro;5.00</td>
 <td class="cmp-kit-total">&euro;26.90 each</td>
 </tr>
 <tr>
