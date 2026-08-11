@@ -1,19 +1,24 @@
 'use strict';
 
 /**
- * Dump the store platform's EMAIL NOTIFICATION templates (abandoned cart,
- * order confirmation, shipping…) into the repo, per store.
+ * Dump the store platform's EMAIL NOTIFICATION templates (abandoned-cart
+ * recovery, customer + admin notices) into the repo, per store.
  *
- * The OEMSaaS API doc lists the surface ("Get email notification list",
- * "Get email notification details", "Email notification of changes") but we
- * have never touched it and the doc index gives titles, not paths — so this
- * script PROBES a list of likely endpoint paths (GET only, zero risk), uses
- * whichever answers with the platform's code:0 envelope, then dumps the list
- * AND per-notification details verbatim into cms/email-notifications/<lang>/.
+ * Real API surface (vendor doc, Aug 2026):
+ *   GET {host}/eventnotices?email_event_type=<recovery|customer|admin>
+ *     -> data.list[]: { event_id, event_name, event_code (e.g.
+ *        "carts/recovery_1"), email_event_type, status (0 off / 1 on),
+ *        event_notice_id (0 = NOT CONFIGURED), coupon, delay_time,
+ *        email_cover }
+ *   GET {host}/eventnotices/{event_notice_id}
+ *     -> data: { id, event_id, delay_time, coupon, top_html_oss_bucket,
+ *        bottom_html_oss_bucket, email_title, status }
  *
- * Read-before-write doctrine (docs/oemsaas-api-notes.md): these dumps are the
- * specification for the later PUT that redesigns the abandoned-cart email.
- * Every probe result is logged so even a miss teaches us the API's shape.
+ * The template model is NOT free-form HTML: email_title + a TOP html block
+ * and a BOTTOM html block wrapped around the platform-rendered core (cart
+ * lines, buttons). Redesigning the abandoned-cart email therefore means
+ * writing those two blocks + title per store/phase, via
+ * PUT /eventnotices/... (read-modify-write; PUT replaces).
  *
  * Runs on the GitHub runner (sandbox cannot reach openapi.oemapps.com):
  *   OEMSAAS_TOKEN_EN=… node scripts/dump-email-notifications.js
@@ -32,21 +37,7 @@ const STORES = [
   ['it', process.env.OEMSAAS_TOKEN_IT],
 ].filter(([, t]) => t);
 
-// Candidate list endpoints, most-likely first (existing known endpoints are
-// lowercase plural nouns: /products, /collections, /pages).
-const CANDIDATES = [
-  '/emailnotifys',
-  '/emailnotify',
-  '/email_notifys',
-  '/email_notify',
-  '/emailNotify',
-  '/email-notifications',
-  '/emailnotifications',
-  '/notifys',
-  '/notify/email',
-  '/emailtemplates',
-  '/email_template',
-];
+const TYPES = ['recovery', 'customer', 'admin'];
 
 async function get(url, token) {
   try {
@@ -60,9 +51,8 @@ async function get(url, token) {
   }
 }
 
-function ok(r) {
-  return r.status === 200 && r.json && (r.json.code === 0 || r.json.code === 200);
-}
+const ok = r => r.status === 200 && r.json && r.json.code === 0;
+const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
 
 async function main() {
   if (!STORES.length) { console.error('no OEMSAAS_TOKEN_* set'); process.exit(1); }
@@ -70,51 +60,49 @@ async function main() {
 
   for (const [lang, token] of STORES) {
     console.log(`\n===== ${lang} =====`);
-    let base = null, listResp = null;
-
-    for (const cand of CANDIDATES) {
-      const r = await get(`${HOST}${cand}`, token);
-      const hit = ok(r);
-      console.log(`probe ${cand} -> http ${r.status} code ${r.json ? r.json.code : '-'} ${hit ? 'HIT' : ''} ${!hit ? String(r.text).slice(0, 80) : ''}`);
-      if (hit) { base = cand; listResp = r; break; }
-    }
-
-    if (!base) {
-      console.log(`${lang}: no candidate answered — paste the real path from the API doc into CANDIDATES`);
-      summary[lang] = { endpoint: null };
-      continue;
-    }
-
     const dir = path.join(OUT, lang);
     fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, '_list.json'), JSON.stringify(listResp.json, null, 2));
+    summary[lang] = {};
 
-    // Pull details for every entry the list exposes. Shape unknown — look for
-    // an array anywhere in data and an id-ish key on its items.
-    const data = listResp.json.data;
-    const rows = Array.isArray(data) ? data
-      : (data && (data.list || data.items || data.rows)) || [];
-    console.log(`${lang}: endpoint ${base}, ${rows.length} notifications`);
-    const got = [];
-    for (const row of rows) {
-      const id = row.id ?? row.notify_id ?? row.template_id;
-      if (id == null) continue;
-      const det = await get(`${HOST}${base}/${id}`, token);
-      const name = String(row.title || row.name || row.type || id)
-        .toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 60);
-      if (det.json) {
-        fs.writeFileSync(path.join(dir, `${name}-${id}.json`), JSON.stringify(det.json, null, 2));
-        got.push(`${name}-${id}`);
-      } else {
-        console.log(`  detail ${id} failed: http ${det.status} ${det.text.slice(0, 80)}`);
+    for (const type of TYPES) {
+      const r = await get(`${HOST}/eventnotices?email_event_type=${type}`, token);
+      if (!ok(r)) {
+        console.log(`${lang}/${type}: list failed http ${r.status} ${r.text.slice(0, 120)}`);
+        summary[lang][type] = { error: `http ${r.status}` };
+        continue;
       }
+      fs.writeFileSync(path.join(dir, `_list-${type}.json`), JSON.stringify(r.json, null, 2));
+      const rows = (r.json.data && r.json.data.list) || [];
+      console.log(`${lang}/${type}: ${rows.length} events`);
+      const events = [];
+      for (const row of rows) {
+        const ev = {
+          event_code: row.event_code, event_name: row.event_name,
+          status: row.status, event_notice_id: row.event_notice_id,
+          delay_time: row.delay_time, coupon: row.coupon,
+        };
+        // event_notice_id 0 = never configured — nothing to fetch
+        if (row.event_notice_id > 0) {
+          const det = await get(`${HOST}/eventnotices/${row.event_notice_id}`, token);
+          if (ok(det)) {
+            const f = `${slug(row.event_code || row.event_name)}-${row.event_notice_id}.json`;
+            fs.writeFileSync(path.join(dir, f), JSON.stringify(det.json, null, 2));
+            ev.file = f;
+          } else {
+            ev.detail_error = `http ${det.status} ${det.text.slice(0, 80)}`;
+            console.log(`  detail ${row.event_notice_id} failed: ${ev.detail_error}`);
+          }
+        }
+        events.push(ev);
+        console.log(`  ${row.status === 1 ? 'ON ' : 'off'} ${row.event_code} "${row.event_name}" notice_id=${row.event_notice_id} delay=${row.delay_time} coupon=${row.coupon || '-'}`);
+      }
+      summary[lang][type] = events;
     }
-    summary[lang] = { endpoint: base, count: rows.length, saved: got };
   }
 
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, 'index.json'), JSON.stringify(summary, null, 2));
-  console.log('\nsummary:', JSON.stringify(summary, null, 2));
+  console.log('\ndone');
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

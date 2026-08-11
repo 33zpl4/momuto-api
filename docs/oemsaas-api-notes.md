@@ -235,17 +235,26 @@ never used (titles from the doc index — paths were not given):
 - `PUT  Email notification of changes`
 - `PUT  Email notification status modification`
 
-This is how the platform's transactional emails (abandoned cart, its order
-confirmation, shipping notices…) are read and edited programmatically — the
-same class of override as the checkSumbit DiyFile. Because the doc gives
-titles without paths, `scripts/dump-email-notifications.js` PROBES likely
-endpoints (GET only) and dumps every template per store into
-`cms/email-notifications/<lang>/` via the "Dump email notification
-templates" workflow (auto-runs on merge; also workflow_dispatch). The dumps
-are the read-before-write baseline for any redesign: PUT replaces, so
-read-modify-write, exactly as with products. If no probe hits, open the API
-doc's email-notification page, copy the real path into the script's
-CANDIDATES list and re-run.
+Real paths (from the vendor doc page, Aug 2026):
+
+- `GET /eventnotices?email_event_type=<recovery|customer|admin>` — list.
+  Each row: `event_id`, `event_name` (e.g. "Shopping cart recall (Phase
+  1)"), `event_code` (`carts/recovery_1`), `status` (0 off / 1 on),
+  **`event_notice_id` (0 = never configured — nothing to fetch)**,
+  `coupon` (abandoned-cart coupon code), `delay_time`, `email_cover`.
+- `GET /eventnotices/{event_notice_id}` — details: `email_title`,
+  **`top_html_oss_bucket` + `bottom_html_oss_bucket`** (the custom HTML
+  blocks ABOVE and BELOW the platform-rendered core — cart lines, buttons),
+  `delay_time`, `coupon`, `status`.
+- `PUT Email notification of changes` / `PUT … status modification` —
+  read-modify-write like every other PUT on this API.
+
+So the abandoned-cart email is NOT free-form: a redesign = title + top
+block + bottom block per store/phase (recovery has phases with their own
+delays/coupons). `scripts/dump-email-notifications.js` dumps every event +
+configured template per store into `cms/email-notifications/<lang>/` via
+the "Dump email notification templates" workflow (auto-runs on merge; also
+workflow_dispatch) — the read-before-write baseline for the redesign.
 
 Motivation (Aug 2026): redesigning the abandoned-cart email — since the
 per-design €0 preview products ride in the platform cart, its abandoned-cart
