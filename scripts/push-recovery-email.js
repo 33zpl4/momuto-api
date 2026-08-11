@@ -78,6 +78,8 @@ async function main() {
       email_title: src.email_title,
       top_html_oss_bucket: src.top_html_oss_bucket,
       bottom_html_oss_bucket: src.bottom_html_oss_bucket,
+      // optional per-store delay override (e.g. FR aligned to ~30 min)
+      ...(src.delay_time ? { delay_time: src.delay_time } : {}),
     };
     const put = await call('PUT', `${HOST}/eventnotices/${live.id}`, token, body);
     if (!ok(put)) { console.error(`${lang}: PUT failed http ${put.status} ${put.text}`); failures++; continue; }

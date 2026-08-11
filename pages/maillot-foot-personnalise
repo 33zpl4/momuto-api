@@ -168,7 +168,7 @@ h1.title, .title, .page-title { display: none !important; }
 <tr><td>1 unité</td><td>38,90 €</td><td>17,90 €</td><td class="tot">56,80 €</td></tr>
 <tr><td>5 à 9 unités</td><td>26,90 €</td><td>11,90 €</td><td class="tot">38,80 € / pièce</td></tr>
 <tr class="best"><td>10 à 19 unités</td><td>21,90 €</td><td>5,00 €</td><td class="tot">26,90 € / pièce</td></tr>
-<tr><td>20 à 49 unités</td><td>18,90 €</td><td>6,00 €</td><td class="tot">24,90 € / pièce</td></tr>
+<tr><td>20 à 49 unités</td><td>18,90 €</td><td>5,00 €</td><td class="tot">23,90 € / pièce</td></tr>
 <tr><td>100+ unités</td><td>16,90 €</td><td>5,00 €</td><td class="tot">21,90 € / pièce</td></tr>
 </tbody>
 </table>

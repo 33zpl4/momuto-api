@@ -187,7 +187,7 @@ h1.title, .title, .page-title { display: none !important; }
 <tr><td>1 unidad</td><td>38,90 €</td><td>17,90 €</td><td class="tot">56,80 €</td></tr>
 <tr><td>5 a 9 uds.</td><td>26,90 €</td><td>11,90 €</td><td class="tot">38,80 € / ud.</td></tr>
 <tr class="best"><td>10 a 19 uds.</td><td>21,90 €</td><td>5,00 €</td><td class="tot">26,90 € / ud.</td></tr>
-<tr><td>20 a 49 uds.</td><td>18,90 €</td><td>6,00 €</td><td class="tot">24,90 € / ud.</td></tr>
+<tr><td>20 a 49 uds.</td><td>18,90 €</td><td>5,00 €</td><td class="tot">23,90 € / ud.</td></tr>
 <tr><td>100+ uds.</td><td>16,90 €</td><td>5,00 €</td><td class="tot">21,90 € / ud.</td></tr>
 </tbody>
 </table>

@@ -573,8 +573,8 @@ h1.title, .title, .page-title { display: none !important; }
 <tr>
 <td>20&ndash;49 units</td>
 <td>&euro;18.90</td>
-<td>&euro;6.00</td>
-<td class="cmp-kit-total">&euro;24.90 each</td>
+<td>&euro;5.00</td>
+<td class="cmp-kit-total">&euro;23.90 each</td>
 </tr>
 <tr>
 <td>50&ndash;99 units</td>
