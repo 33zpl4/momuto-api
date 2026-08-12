@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-27g · fixes the tint action; a tint can no longer lose an export';
+var VERSION = '2026-07-30a · full kit sheet from front + back + shorts';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -256,6 +256,33 @@ var CONFIG = {
       ]
     }
   ],
+
+  // ── Kit sheet ────────────────────────────────────────────────────────────
+  // Front, back and shorts composited onto one transparent canvas, built after
+  // the three views and only when a design produced all three IN THIS RUN — an
+  // old back left in outDir must not be pasted next to a new front.
+  //
+  // Each piece is TRIMMED to the garment before placing, so these numbers
+  // describe the garment rather than the frame around it. That matters because
+  // the frames are not comparable: the jerseys export at 1500 and the shorts at
+  // 1000, each with its own padding, so frame-relative placement would size the
+  // pieces by something invisible.
+  //
+  //   centre  where the garment's middle sits, as a fraction of the canvas
+  //   height  the garment's height, as a fraction of the canvas; width follows
+  //
+  // Taken off the reference sheet. Tune `height` to make a piece bigger or
+  // smaller, `centre` to move it; nothing else needs touching.
+  kit: {
+    enabled: true,
+    suffix: 'kit',
+    size: 1500,
+    place: [
+      { view: 'front',  centre: [0.295, 0.304], height: 0.508 },
+      { view: 'back',   centre: [0.705, 0.304], height: 0.508 },
+      { view: 'shorts', centre: [0.500, 0.770], height: 0.343 }
+    ]
+  },
 
   // Tried in order. Photoshop places SVG into a smart object when the slot was
   // authored from vector; if a replace throws on .svg, export PNG at ~2× the
@@ -836,6 +863,67 @@ function exportFlat(doc, size, outFile) {
   }
 }
 
+/**
+ * Composite the three views onto one transparent canvas.
+ *
+ * Runs after every template, from the files just exported, so it needs no access
+ * to the templates and is unaffected by how any of them were built.
+ *
+ * `produced` gates it: a piece has to have been exported in THIS run. Reading
+ * outDir alone would happily pair a new front with last week's back and give no
+ * sign it had done so.
+ */
+function buildKit(slug, produced, log) {
+  var spec = CONFIG.kit;
+
+  var parts = [];
+  for (var i = 0; i < spec.place.length; i++) {
+    var view = spec.place[i].view;
+    var file = new File(CONFIG.outDir + '/' + slug + '-' + view + '.' + CONFIG.format);
+    if (!produced[slug + '|' + view] || !file.exists) {
+      // Not a failure. Most days are jersey-only or front-only, and a kit sheet
+      // with a hole in it is worse than no kit sheet.
+      log.push('    – ' + slug + '-' + spec.suffix + ': no ' + view + ' this run, kit sheet skipped');
+      return false;
+    }
+    parts.push({ file: file, at: spec.place[i] });
+  }
+
+  var comp = app.documents.add(UnitValue(spec.size, 'px'), UnitValue(spec.size, 'px'), 72,
+                               slug + '-' + spec.suffix, NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
+  try {
+    for (var p = 0; p < parts.length; p++) {
+      var src = app.open(parts[p].file);
+      try {
+        // A fully opaque PNG opens as a Background layer, which cannot be trimmed
+        // against transparency or duplicated out. These exports have alpha so it
+        // should not arise — but it costs one line to not depend on that.
+        if (src.artLayers[0].isBackgroundLayer) src.artLayers[0].isBackgroundLayer = false;
+        try { src.trim(TrimType.TRANSPARENT); } catch (eTrim) {}
+        src.artLayers[0].duplicate(comp, ElementPlacement.PLACEATBEGINNING);
+      } finally {
+        src.close(SaveOptions.DONOTSAVECHANGES);
+      }
+
+      app.activeDocument = comp;
+      var lay = comp.artLayers[0];
+      var b = layerBox(lay);
+      if (b.h > 0) {
+        var scale = (parts[p].at.height * spec.size) / b.h * 100;
+        lay.resize(scale, scale, AnchorPosition.MIDDLECENTER);
+      }
+      var nb = layerBox(lay);
+      lay.translate(UnitValue(parts[p].at.centre[0] * spec.size - (nb.x + nb.w / 2), 'px'),
+                    UnitValue(parts[p].at.centre[1] * spec.size - (nb.y + nb.h / 2), 'px'));
+    }
+
+    exportFlat(comp, spec.size, new File(CONFIG.outDir + '/' + slug + '-' + spec.suffix + '.' + CONFIG.format));
+  } finally {
+    comp.close(SaveOptions.DONOTSAVECHANGES);
+  }
+  return true;
+}
+
 // Resolve and validate every slot in a template. Called on each open, because
 // layer references do not survive closing the document.
 function resolveSlots(doc, view, log, quiet) {
@@ -902,6 +990,7 @@ function main() {
   }
 
   var log = [], made = 0;
+  var produced = {};   // "<slug>|<view>" → exported in this run
 
   var orphans = unclaimedFiles(active, slugs);
   if (orphans.length) {
@@ -1117,6 +1206,7 @@ function main() {
             (blank.length ? '  · template default kept for: ' + blank.join(', ') : ''));
           if (overWarn) log.push('      ⚠ overlays need placeInside: true — skipped');
           if (tintWarn) log.push('      ⚠ sampling a colour needs placeInside: true — set tintColour to tint anyway');
+          produced[slugs[i] + '|' + view.suffix] = true;
           made++;
          } catch (perDesign) {
            log.push('    ✗ ' + slugs[i] + '-' + view.suffix + ': ' + perDesign.message);
@@ -1136,6 +1226,24 @@ function main() {
         // Leaves the template exactly as it was on disk — unless placeOnly, where
         // the whole point is to leave it open with the artwork in place.
         if (!CONFIG.placeOnly) doc.close(SaveOptions.DONOTSAVECHANGES);
+      }
+    }
+
+    // Every template is done, so the pieces exist. placeOnly never exports, so
+    // there is nothing to composite there.
+    if (CONFIG.kit && CONFIG.kit.enabled && !CONFIG.placeOnly) {
+      log.push('── ' + CONFIG.kit.suffix + ' (' + CONFIG.kit.size + '×' + CONFIG.kit.size + ')');
+      for (var k = 0; k < slugs.length; k++) {
+        // Isolated like the per-design work: a kit sheet is a bonus on top of
+        // three images that are already on disk and already usable.
+        try {
+          if (buildKit(slugs[k], produced, log)) {
+            log.push('    ✓ ' + slugs[k] + '-' + CONFIG.kit.suffix + '.' + CONFIG.format);
+            made++;
+          }
+        } catch (eKit) {
+          log.push('    ✗ ' + slugs[k] + '-' + CONFIG.kit.suffix + ': ' + eKit.message);
+        }
       }
     }
   } finally {

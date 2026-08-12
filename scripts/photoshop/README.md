@@ -98,6 +98,44 @@ absent, and the run says so.
 | shorts | `R LEG DESIGN` | `@2072,861` | `-shortsleft` → `-shorts` | ● |
 | shorts | `BELT DESIGN` | — | `-belt` | |
 
+### The kit sheet
+
+When a design produces **all three** views, a fourth image is composited from
+them: `<slug>-kit.png`, 1500×1500, transparent.
+
+It is built from the exported files after every template is done, so it needs no
+access to the templates and is unaffected by how any of them were built.
+
+```js
+kit: {
+  enabled: true,
+  suffix: 'kit',
+  size: 1500,
+  place: [
+    { view: 'front',  centre: [0.295, 0.304], height: 0.508 },
+    { view: 'back',   centre: [0.705, 0.304], height: 0.508 },
+    { view: 'shorts', centre: [0.500, 0.770], height: 0.343 }
+  ]
+}
+```
+
+Each piece is **trimmed to the garment** before placing, so `centre` and `height`
+describe the garment itself, not the frame around it. That is the part worth
+knowing: the frames are not comparable — jerseys export at 1500, shorts at 1000,
+each with its own padding — so placing by frame would size the pieces according
+to something invisible. After trimming, `height: 0.508` means the shirt is
+508/1000ths of the canvas tall, and width follows from its own aspect.
+
+To adjust: `height` makes a piece bigger or smaller, `centre` moves it. Nothing
+else needs touching, and the numbers mean what they look like.
+
+**Only pieces exported in the same run count.** Reading `outDir` alone would
+pair a new front with last week's back and give no sign it had done so. A design
+missing a view is reported and skipped — most days are jersey-only or front-only,
+and a kit sheet with a hole in it is worse than none.
+
+Set `enabled: false` to turn it off.
+
 ### Stitching takes the design's colour
 
 The shorts template's `STITCHING` is a solid fill, white. On any kit that is not
