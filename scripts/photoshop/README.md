@@ -111,23 +111,28 @@ kit: {
   enabled: true,
   suffix: 'kit',
   size: 1500,
-  place: [
-    { view: 'front',  centre: [0.295, 0.304], height: 0.508 },
-    { view: 'back',   centre: [0.705, 0.304], height: 0.508 },
-    { view: 'shorts', centre: [0.500, 0.770], height: 0.343 }
-  ]
+  gap: [0.25, 0.08],   // between the jerseys · between the row and the shorts
+  margin: 0.05         // breathing room around the group
 }
 ```
 
-Each piece is **trimmed to the garment** before placing, so `centre` and `height`
-describe the garment itself, not the frame around it. That is the part worth
-knowing: the frames are not comparable — jerseys export at 1500, shorts at 1000,
-each with its own padding — so placing by frame would size the pieces according
-to something invisible. After trimming, `height: 0.508` means the shirt is
-508/1000ths of the canvas tall, and width follows from its own aspect.
+**Nothing is rescaled.** The pieces go down at native pixel size and only the
+finished sheet is resized. The templates already render every garment at a
+consistent real-world scale — that is why the shorts come out smaller than the
+jerseys without anyone asking — so sizing the pieces here would discard that and
+then approximate it back by eye. The frames differ (1500 for the jerseys, 1000
+for the shorts), but the garments inside them are to scale, and trimming each to
+its garment is what exposes it. The shorts land at 0.67× the jersey width because
+that is what the templates say, not because anyone chose it.
 
-To adjust: `height` makes a piece bigger or smaller, `centre` moves it. Nothing
-else needs touching, and the numbers mean what they look like.
+So the only decisions left are spacing. `gap` is expressed as fractions of the
+front garment's own width and height, so it stays proportionate if a template is
+ever swapped; `margin` is the padding around the whole group.
+
+The sheet is then trimmed to the garments, **padded to a square by canvas**, and
+resized to `size` in one step. Squaring by canvas rather than by resize is what
+keeps the garments undistorted whatever shape the group turns out to be — with
+the current templates it is 2044×1942, very nearly square already.
 
 **Only pieces exported in the same run count.** Reading `outDir` alone would
 pair a new front with last week's back and give no sign it had done so. A design

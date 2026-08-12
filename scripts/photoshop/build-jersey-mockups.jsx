@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-30a · full kit sheet from front + back + shorts';
+var VERSION = '2026-07-30b · kit sheet keeps the templates’ own scale';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -262,26 +262,32 @@ var CONFIG = {
   // the three views and only when a design produced all three IN THIS RUN — an
   // old back left in outDir must not be pasted next to a new front.
   //
-  // Each piece is TRIMMED to the garment before placing, so these numbers
-  // describe the garment rather than the frame around it. That matters because
-  // the frames are not comparable: the jerseys export at 1500 and the shorts at
-  // 1000, each with its own padding, so frame-relative placement would size the
-  // pieces by something invisible.
+  // NOTHING IS RESCALED. The pieces go down at their native pixel size and only
+  // the finished sheet is resized.
   //
-  //   centre  where the garment's middle sits, as a fraction of the canvas
-  //   height  the garment's height, as a fraction of the canvas; width follows
+  // The templates already render every garment at a consistent real-world scale —
+  // that is why the shorts come out smaller than the jerseys without anyone
+  // asking. Sizing the pieces here would throw that away and then approximate it
+  // back by eye, which is how the shorts end up subtly too big or too small.
+  // The frames differ (1500 for the jerseys, 1000 for the shorts) but the
+  // garments inside them are to scale, and trimming to the garment is what
+  // exposes that.
   //
-  // Taken off the reference sheet. Tune `height` to make a piece bigger or
-  // smaller, `centre` to move it; nothing else needs touching.
+  // So the only layout decisions left are the spacing:
+  //
+  //   gap     [between the jerseys, between the row and the shorts], as
+  //           fractions of the front garment's own width and height
+  //   margin  breathing room around the group, as a fraction of the square
+  //
+  // The sheet is trimmed to the garments, padded to a square, then resized to
+  // `size` in one step — so the output is square with no distortion, whatever
+  // shape the group turns out to be.
   kit: {
     enabled: true,
     suffix: 'kit',
     size: 1500,
-    place: [
-      { view: 'front',  centre: [0.295, 0.304], height: 0.508 },
-      { view: 'back',   centre: [0.705, 0.304], height: 0.508 },
-      { view: 'shorts', centre: [0.500, 0.770], height: 0.343 }
-    ]
+    gap: [0.25, 0.08],
+    margin: 0.05
   },
 
   // Tried in order. Photoshop places SVG into a smart object when the slot was
@@ -873,49 +879,76 @@ function exportFlat(doc, size, outFile) {
  * outDir alone would happily pair a new front with last week's back and give no
  * sign it had done so.
  */
+function moveLayerTo(layer, x, y) {
+  var b = layerBox(layer);
+  layer.translate(UnitValue(x - b.x, 'px'), UnitValue(y - b.y, 'px'));
+}
+
 function buildKit(slug, produced, log) {
   var spec = CONFIG.kit;
+  var order = ['front', 'back', 'shorts'];
 
-  var parts = [];
-  for (var i = 0; i < spec.place.length; i++) {
-    var view = spec.place[i].view;
-    var file = new File(CONFIG.outDir + '/' + slug + '-' + view + '.' + CONFIG.format);
-    if (!produced[slug + '|' + view] || !file.exists) {
+  var files = {};
+  for (var i = 0; i < order.length; i++) {
+    var file = new File(CONFIG.outDir + '/' + slug + '-' + order[i] + '.' + CONFIG.format);
+    if (!produced[slug + '|' + order[i]] || !file.exists) {
       // Not a failure. Most days are jersey-only or front-only, and a kit sheet
       // with a hole in it is worse than no kit sheet.
-      log.push('    – ' + slug + '-' + spec.suffix + ': no ' + view + ' this run, kit sheet skipped');
+      log.push('    – ' + slug + '-' + spec.suffix + ': no ' + order[i] + ' this run, kit sheet skipped');
       return false;
     }
-    parts.push({ file: file, at: spec.place[i] });
+    files[order[i]] = file;
   }
 
-  var comp = app.documents.add(UnitValue(spec.size, 'px'), UnitValue(spec.size, 'px'), 72,
+  // Roomy enough that nothing lands outside it — trim only sees pixels within the
+  // canvas, so a layer pushed off the edge would be cropped rather than moved.
+  var WORK = 4000;
+  var comp = app.documents.add(UnitValue(WORK, 'px'), UnitValue(WORK, 'px'), 72,
                                slug + '-' + spec.suffix, NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
   try {
-    for (var p = 0; p < parts.length; p++) {
-      var src = app.open(parts[p].file);
+    var piece = {};
+    for (var p = 0; p < order.length; p++) {
+      var src = app.open(files[order[p]]);
       try {
         // A fully opaque PNG opens as a Background layer, which cannot be trimmed
         // against transparency or duplicated out. These exports have alpha so it
         // should not arise — but it costs one line to not depend on that.
         if (src.artLayers[0].isBackgroundLayer) src.artLayers[0].isBackgroundLayer = false;
+        // Trim to the garment. This is what makes the pieces comparable: the
+        // frames differ, the garments inside them are already to scale.
         try { src.trim(TrimType.TRANSPARENT); } catch (eTrim) {}
         src.artLayers[0].duplicate(comp, ElementPlacement.PLACEATBEGINNING);
       } finally {
         src.close(SaveOptions.DONOTSAVECHANGES);
       }
-
       app.activeDocument = comp;
       var lay = comp.artLayers[0];
-      var b = layerBox(lay);
-      if (b.h > 0) {
-        var scale = (parts[p].at.height * spec.size) / b.h * 100;
-        lay.resize(scale, scale, AnchorPosition.MIDDLECENTER);
-      }
-      var nb = layerBox(lay);
-      lay.translate(UnitValue(parts[p].at.centre[0] * spec.size - (nb.x + nb.w / 2), 'px'),
-                    UnitValue(parts[p].at.centre[1] * spec.size - (nb.y + nb.h / 2), 'px'));
+      piece[order[p]] = { layer: lay, box: layerBox(lay) };
     }
+
+    var f = piece.front.box, b = piece.back.box, s = piece.shorts.box;
+    var gx = Math.round(spec.gap[0] * f.w);
+    var gy = Math.round(spec.gap[1] * f.h);
+
+    var rowW = f.w + gx + b.w;
+    var rowH = Math.max(f.h, b.h);
+    var totalW = Math.max(rowW, s.w);
+    var totalH = rowH + gy + s.h;
+
+    var left = (WORK - totalW) / 2, top = (WORK - totalH) / 2;
+    var rowLeft = left + (totalW - rowW) / 2;
+
+    // Jerseys top-aligned so the shoulders line up, shorts centred beneath.
+    moveLayerTo(piece.front.layer, rowLeft, top);
+    moveLayerTo(piece.back.layer, rowLeft + f.w + gx, top);
+    moveLayerTo(piece.shorts.layer, left + (totalW - s.w) / 2, top + rowH + gy);
+
+    // Trim to what is actually there, then pad out to a square. Squaring by
+    // canvas rather than by resize is what keeps the garments undistorted
+    // whatever shape the group came out.
+    comp.trim(TrimType.TRANSPARENT);
+    var side = Math.round(Math.max(comp.width.as('px'), comp.height.as('px')) * (1 + 2 * (spec.margin || 0)));
+    comp.resizeCanvas(UnitValue(side, 'px'), UnitValue(side, 'px'), AnchorPosition.MIDDLECENTER);
 
     exportFlat(comp, spec.size, new File(CONFIG.outDir + '/' + slug + '-' + spec.suffix + '.' + CONFIG.format));
   } finally {
