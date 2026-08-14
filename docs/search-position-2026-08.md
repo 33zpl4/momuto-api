@@ -294,16 +294,16 @@ positioned for, and the upgraded *quand commander* post is timed for it.
    price-hunters click us). The comparison page carries it (290 clicks,
    pos 6.7). Action: keep the comparatif fresh and cross-link it from the
    high-impression FR blogs; pos 6.7 → top 3 is the single biggest FR win.
-2. **The concept ecosystem is real product demand, not just editorial.**
-   The Editions products rank: `momuto-x-asperion-maillot-concept-france`
-   — 881 impressions at position 6.6 (plus its EN mirror at 586, and a
-   Japan concept). "maillot concept france" (946 + 417 impr) finds an
-   actual buyable France concept — the Editions door with measured demand
-   and near-zero CTR (0.1–0.7%). Product-first action (owner/CMS): richer
-   product titles/OG images for the concept products, and Product schema
-   so the SERP shows price/availability. The blog (4.9k impr) and
-   collection (3.5k impr) already feed it; the product page is where the
-   click is lost.
+2. **The concept ecosystem shows demand — but the products are dated, so
+   do NOT push them (owner, 14 Aug).** The Editions products rank
+   (`momuto-x-asperion-maillot-concept-france`: 881 impressions at pos
+   6.6; EN mirror 586; a Japan concept too), proving "maillot concept
+   france" demand reaches buyable product. But these concepts are
+   2023–2024 work and visually below today's bar — amplifying traffic to
+   a weak product is negative marketing. Action: leave their rankings
+   alone, keep feeding the concept audience through editorial (the art
+   blog, 4.9k impr), and put an **Editions rework** on the backlog. When
+   the studio refreshes them, the demand is measured and waiting.
 3. **The créer/créateur cluster (9,493 impr, pos 9.7, 192 queries)** is
    the FR wall's target and the wall is freshly deployed — same play as
    EN: it must outrank the homepage for tool-intent vocabulary. Watch it

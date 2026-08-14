@@ -73,6 +73,9 @@ ranking, and the page is already built.
    after the surface is live and buyable.
 
 ### Standing backlog
+- **Editions rework** — the 2023–24 concept products (France, Japan…) have
+  measured demand reaching them but are visually below today's bar; refresh
+  before any ranking push.
 - Design pages per model (template exists) — the long-tail keyword estate.
 - Basketball, from zero, own category, US-first.
 - Rotation script — gates the seasonal −10% copy we already publish.
@@ -84,8 +87,13 @@ ranking, and the page is already built.
 ## The three rules that govern everything published
 
 0. **Product before content** (owner, 14 Aug). A good product markets
-   itself: the website, the main pages and the 3D tool come first; content
-   earns citations, the product earns customers.
+   itself. Concretely: **the website must sell visually** (it has improved
+   a lot; keep raising it) and **the 3D tool must be top** — if the tool
+   is the best available, everything else moves fast. Content earns
+   citations; the product earns customers. Never route traffic to a
+   surface that is not yet visually worth the click (see the Editions
+   note in the search doc — dated products don't get pushed, they get
+   reworked first).
 
 1. **Be exact about what we do, directional about how big we are.**
    Operational facts precise; business scale as trajectory only.
