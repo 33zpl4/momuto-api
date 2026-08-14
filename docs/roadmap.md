@@ -81,7 +81,11 @@ ranking, and the page is already built.
 - Comparison pages: the FR one is our best commercial page; replicate and
   refresh annually.
 
-## The two rules that govern everything published
+## The three rules that govern everything published
+
+0. **Product before content** (owner, 14 Aug). A good product markets
+   itself: the website, the main pages and the 3D tool come first; content
+   earns citations, the product earns customers.
 
 1. **Be exact about what we do, directional about how big we are.**
    Operational facts precise; business scale as trajectory only.

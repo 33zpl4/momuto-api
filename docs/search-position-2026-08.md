@@ -278,3 +278,42 @@ little else. Four findings, three fixed in-repo already:
 
 Owner actions for the season: ES nav link to the wall
 (`coleccion-ready-to-play`), more internal links to the Zentral page.
+
+---
+
+## Addendum — France, last 3 months (14 Aug export)
+
+France remains the best non-brand market: 561 brand vs 449 non-brand
+clicks. Monthly: 317 (May) → 537 (Jun) → 420 (Jul) → August pacing softer —
+the French summer lull; the rentrée wave (September) is the season to be
+positioned for, and the upgraded *quand commander* post is timed for it.
+
+1. **Fournisseur/grossiste is still the money cluster**: 292 clicks on
+   4,342 impressions at position 6.9, with exceptional CTRs (grossiste
+   9.5%, "fournisseur maillot de foot 5 €" 12.9% at pos 5.2 — even
+   price-hunters click us). The comparison page carries it (290 clicks,
+   pos 6.7). Action: keep the comparatif fresh and cross-link it from the
+   high-impression FR blogs; pos 6.7 → top 3 is the single biggest FR win.
+2. **The concept ecosystem is real product demand, not just editorial.**
+   The Editions products rank: `momuto-x-asperion-maillot-concept-france`
+   — 881 impressions at position 6.6 (plus its EN mirror at 586, and a
+   Japan concept). "maillot concept france" (946 + 417 impr) finds an
+   actual buyable France concept — the Editions door with measured demand
+   and near-zero CTR (0.1–0.7%). Product-first action (owner/CMS): richer
+   product titles/OG images for the concept products, and Product schema
+   so the SERP shows price/availability. The blog (4.9k impr) and
+   collection (3.5k impr) already feed it; the product page is where the
+   click is lost.
+3. **The créer/créateur cluster (9,493 impr, pos 9.7, 192 queries)** is
+   the FR wall's target and the wall is freshly deployed — same play as
+   EN: it must outrank the homepage for tool-intent vocabulary. Watch it
+   in the next export; internal links already in place per owner.
+4. **IA/générateur in France-only data is near zero** (16 impressions) —
+   the FR ChatGPT post's clicks likely come from wider francophonie
+   (Belgium, Canada, Africa). Fine — but it means the French AI-to-real
+   audience is still forming; the EN generator hub remains the priority.
+
+**Principle (owner, 14 Aug): product before content.** A good product
+markets itself — content earns citations, the product earns customers.
+Priority order on any surface conflict: the site's main pages, the wall,
+the 3D tool, the product pages — then editorial.
