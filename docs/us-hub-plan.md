@@ -236,3 +236,49 @@ clusters (`...amateur-grassroots-club`, `custom-futsal-5-a-side-jerseys`,
 `fund-team-kits-sponsors-fundraising`). The ES hub
 (`blogs/es/equipaciones-de-futbol-para-tu-equipo-guia-completa.json` + clusters)
 is the cleanest template for capsule/table/FAQ-JSON-LD shape.
+
+---
+
+## Data verdict — 14 August 2026 (12 months of US-only GSC)
+
+**The trajectory is unambiguous; the base is still small.** US monthly
+clicks: ~7/mo a year ago → 8 (Jan) → 32 (May) → 59 (Jun) → **151 (Jul)** →
+August tracking to roughly double July again. Impressions grew ~3.4x
+year-over-year. July — the World Cup month on US soil — is the best month
+ever recorded, and August is holding above it pro-rata: the post-WC soccer
+tailwind is real, not a one-week spike.
+
+**The bottleneck is vocabulary, not domain.** Non-brand US demand reaching
+us: "soccer" queries at **position 43.5** (185 queries), "uniform" queries
+at **position 58** (65 queries, one click in a year), while our niche
+strengths ("3d", "free") sit at position 14–20 and convert. The homepage
+absorbs 27.3k of 29.1k US impressions at position 33.7. The ONE page built
+in US vocabulary (`design-your-own-soccer-jersey`) is the #2 US page at
+position 18 — proof the lexicon works when a surface exists. The other US
+pages (`custom-soccer-jerseys`, `custom-youth-club-soccer-uniforms`) are
+near-invisible (~41 impressions) — likely orphaned; internal links first.
+
+**Basketball: literally zero.** 0 US basketball queries, 0 impressions, in
+12 months. There is no basketball demand arriving because no basketball
+surface exists — it is a creation play, not a capture play, and therefore
+must not be what a US launch bets on.
+
+### Decision
+
+1. **Do not launch the dedicated store yet.** The store (currency, tokens,
+   checkout, a fifth estate to sweep) does not fix position 43 — pages in
+   the right lexicon do, and they can live on www today. The IT lesson:
+   an under-tended store is negative equity.
+2. **Run the US vocabulary sprint on www now** (this doc's page family):
+   fix the orphaned soccer pages' internal linking, upgrade
+   `design-your-own-soccer-jersey` (it's already climbing), build the
+   uniform-lexicon page (65 queries, wide open), soccer-vocab wall entry
+   points.
+3. **Basketball ships as pages on www** (a hub + first studio designs when
+   ready — the tool already has the body), so measurement can start. It
+   earns its place in the US store by showing a pulse, not by decree.
+4. **Store trigger (revisit then):** the soccer cluster reaching ~top 12
+   AND US clicks sustaining several hundred/month, or demonstrable USD/
+   checkout friction in US orders. At the current doubling rate that
+   decision could arrive within a quarter — build the store then, with
+   momentum, not before it.
