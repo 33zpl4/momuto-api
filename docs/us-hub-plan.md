@@ -297,13 +297,18 @@ live.
    identically), navigation/menus/footer configured in admin.
 2. **`OEMSAAS_TOKEN_US`** added to GitHub repo secrets (and Vercel env if
    any API route needs it). Without this, nothing deploys.
-3. **Currency & price list in USD** — the single biggest copy decision.
-   Every fact token converts. Proposal to confirm (or correct):
-   single jersey **$44.90**, from **$24.90** at 10+, deposit **$15**,
-   fast lane **+$69** — set once, then it's the law everywhere (facts
-   table, llms.txt, every page). *Do not launch a US store priced in €.*
-4. **US Stripe payment link** for the deposit gate (like the IT one) in
-   USD, for `/pages/request-custom-kit-design`.
+3. **Currency & price list in USD** — DECIDED IN PART (owner, 14 Aug):
+   pricing rounds *up* slightly from conversion ("we pump slightly").
+   **From $25.90/jersey at 10+** (owner-set; €21.90 ≈ $25.33 → $25.90).
+   Derived by the same rule, awaiting owner confirmation: single jersey
+   **$45.90** (€38.90 ≈ $45.01), fast lane **+$69** (€59 ≈ $68.3),
+   deposit **$15** (kept flat — psychological threshold, credited anyway).
+   Set once, then it's the law everywhere. *Never € on the US store.*
+4. **US delivery numbers CONFIRMED (owner, 14 Aug):** 25–30 days door to
+   door and the fast lane's ~7 days both hold for US addresses.
+5. **US Stripe payment link** for the deposit gate (like the IT one) in
+   USD, for `/pages/request-custom-kit-design`. Owner is provisioning the
+   store now and will return with token + links.
 5. **Products published on the US store**: the Ready to Play product set
    (`the-fracture` … + full-kit variants) with USD prices. Either via CMS
    admin or the product-create API (`docs/cms-product-create-api.md`).

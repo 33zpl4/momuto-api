@@ -237,3 +237,44 @@ points, not as counts:
 - **D25 — Market mix**: the shape of where demand comes from, and the
   turning points — *the US went from nothing to second-largest once we
   changed one word*. That sentence is the US announcement's spine.
+
+---
+
+## Addendum — Spain, last 3 months (14 Aug export). High-season sprint.
+
+Aug–Oct is Spanish high season. Monthly clicks: 173 (May) → 246 (Jun) →
+272 (Jul), August pacing above July. Brand-heavy: 408 brand vs 123
+non-brand clicks — the ES store converts its brand well and captures
+little else. Four findings, three fixed in-repo already:
+
+1. **The Zentral cluster is the ES front door.** ~550 impressions across
+   *zentral sports opiniones / zentral camisetas / zentral equipaciones*
+   at positions 5.6–6.9, with `zentral-opiniones-alternativa` the top ES
+   commercial page (606 impr, pos 6.0). Comparison intent converts, same
+   as FR *fournisseur*. Action (owner/nav): link the Zentral page from
+   more surfaces and keep it fresh; a pos 6→3 push here is the cheapest
+   ES clicks available.
+2. **The creador/configurador de equipaciones cluster (~450 impr, pos
+   12–35) had a surface that wasn't claiming it.** The equipaciones hub
+   page exists, body mentions the words, but its title targeted
+   "personalizadas". FIXED: meta_title now leads "Creador de Equipaciones
+   de Fútbol — Configurador 3D"; keyword added. The new ES wall targets
+   the camiseta half of the vocabulary; hub takes equipaciones.
+3. **Numbers-drift bug, live during high season:**
+   `equipaciones-futbol-urgentes-entrega-20-dias` promised "entrega
+   garantizada en menos de 20 días" — contradicting the canonical 25–30
+   and promising what ops can't guarantee. FIXED: rewritten as the honest
+   fast-lane page (25–30 normal, vía rápida +59 € → typically 18–23,
+   "¿menos de 20 días? a veces — escríbenos con tu fecha"), modern format
+   with FAQ JSON-LD, routing urgent searchers to Ready to Play + vía
+   rápida. Urgent queries spike exactly now.
+4. **Madrid is high-volume, wrong-vocabulary.** The Madrid city page is
+   the #2 ES page by impressions (896) at position 45; queries include a
+   service vocabulary we never use: *marcaje de equipaciones* (shirt
+   printing/numbering), *tienda camisetas futbol madrid*. Action (next
+   pass): add a marcaje section to the Madrid entry in
+   `cms/city-pages/es/cities.json` and internal links to the city pages —
+   they are currently near-orphans.
+
+Owner actions for the season: ES nav link to the wall
+(`coleccion-ready-to-play`), more internal links to the Zentral page.
