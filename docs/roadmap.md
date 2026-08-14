@@ -66,8 +66,11 @@ ranking, and the page is already built.
 8. **"The Decade Colour Became Free"** — sublimation abolished per-colour
    pricing. Externally verifiable, needs one factory quote, makes the
    commercial argument without arguing it.
-9. **US surface** — vocabulary first (*soccer*, *uniform* page family), store
-   second, announcement third. **Never announce before the surface exists.**
+9. **US store — BUILD NOW (owner decision, 14 Aug, overruling the
+   trigger-based plan).** Full clone spec: `docs/us-hub-plan.md` §A–D —
+   owner provisions store/token/USD/Stripe/basketball designs; agent builds
+   the whole estate in-repo meanwhile. Announcement still ships last,
+   after the surface is live and buyable.
 
 ### Standing backlog
 - Design pages per model (template exists) — the long-tail keyword estate.
