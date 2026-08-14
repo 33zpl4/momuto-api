@@ -1,6 +1,15 @@
 # US English hub (`us.momuto.com`) — build plan & mirror strategy
 
-**Status:** NOT STARTED. This is a forward plan. A future agent can execute it end to end.
+**Status: BUILD IN PROGRESS — owner decision, 14 Aug 2026.** The data verdict
+at the bottom of this doc recommended waiting for a trigger; the owner
+overruled: *"we start building now because it'll take time."* Lead time is
+the argument — store provisioning, content cloning, basketball design
+production and indexing all have latency, and the US demand curve is
+doubling meanwhile. The old trigger conditions (soccer cluster ~top 12,
+sustained volume) are now **launch-readiness checks**, not start conditions.
+Basketball is included at launch by owner decision — as its own category,
+with the honest caveat recorded: zero measured US search demand yet, so its
+job at launch is to start the clock, not carry the launch.
 **Owner context:** MOMUTO custom football kit e-commerce. Four live locales today —
 EN `www.momuto.com`, FR `fr.momuto.com`, ES `es.momuto.com`, IT `it.momuto.com`.
 There is currently **one** English site (`www.momuto.com`) serving both
@@ -263,22 +272,115 @@ near-invisible (~41 impressions) — likely orphaned; internal links first.
 surface exists — it is a creation play, not a capture play, and therefore
 must not be what a US launch bets on.
 
-### Decision
+### Decision — OVERRULED by owner, 14 Aug 2026
 
-1. **Do not launch the dedicated store yet.** The store (currency, tokens,
-   checkout, a fifth estate to sweep) does not fix position 43 — pages in
-   the right lexicon do, and they can live on www today. The IT lesson:
-   an under-tended store is negative equity.
-2. **Run the US vocabulary sprint on www now** (this doc's page family):
-   fix the orphaned soccer pages' internal linking, upgrade
-   `design-your-own-soccer-jersey` (it's already climbing), build the
-   uniform-lexicon page (65 queries, wide open), soccer-vocab wall entry
-   points.
-3. **Basketball ships as pages on www** (a hub + first studio designs when
-   ready — the tool already has the body), so measurement can start. It
-   earns its place in the US store by showing a pulse, not by decree.
-4. **Store trigger (revisit then):** the soccer cluster reaching ~top 12
-   AND US clicks sustaining several hundred/month, or demonstrable USD/
-   checkout friction in US orders. At the current doubling rate that
-   decision could arrive within a quarter — build the store then, with
-   momentum, not before it.
+The analysis above recommended a www-first vocabulary sprint with the store
+on a trigger. **The owner overruled: build the dedicated US store now**,
+because everything on the critical path has lead time and the demand curve
+is doubling while we wait. The analysis stands as context (the vocabulary
+findings still dictate *what the US pages say*); the sequencing conclusion
+does not. The full clone specification follows.
+
+---
+
+# THE FULL CLONE — everything needed to stand up us.momuto.com
+
+The mirror plan above covers the blog hub (8 posts). A cloned *site* is
+much more. This section is the complete bill of materials, split by who can
+do it. Agent work can start immediately in the repo; owner work gates going
+live.
+
+## A. Owner must provision (agent cannot; blocking for launch, not for build)
+
+1. **US store in the CMS** (oemapps): new store bound to `us.momuto.com` —
+   DNS CNAME + SSL, theme installed (same theme as www so fragments render
+   identically), navigation/menus/footer configured in admin.
+2. **`OEMSAAS_TOKEN_US`** added to GitHub repo secrets (and Vercel env if
+   any API route needs it). Without this, nothing deploys.
+3. **Currency & price list in USD** — the single biggest copy decision.
+   Every fact token converts. Proposal to confirm (or correct):
+   single jersey **$44.90**, from **$24.90** at 10+, deposit **$15**,
+   fast lane **+$69** — set once, then it's the law everywhere (facts
+   table, llms.txt, every page). *Do not launch a US store priced in €.*
+4. **US Stripe payment link** for the deposit gate (like the IT one) in
+   USD, for `/pages/request-custom-kit-design`.
+5. **Products published on the US store**: the Ready to Play product set
+   (`the-fracture` … + full-kit variants) with USD prices. Either via CMS
+   admin or the product-create API (`docs/cms-product-create-api.md`).
+   Cards pointing at unpublished products 404 — the rtp-collection lesson.
+6. **US shipping confirmation**: does 25–30 days door-to-door hold for US
+   addresses, and does the fast lane's ~7 days hold? If US differs, say so
+   now — one set of numbers per store, no drift.
+7. **Basketball designs from the studio**: the tool has the body
+   (`mamuto3basket3`) but the catalog has zero basketball designs, renders
+   or finder images. Minimum for launch: 3–4 finished basketball designs
+   (renders + SVG templates + catalog entries in design-momuto), or the
+   basketball category launches as tool-only, which is weaker.
+8. **Google Search Console property** for `us.momuto.com` (+ analytics),
+   after DNS exists.
+9. **Legal pages**: US-appropriate terms/privacy/returns (the DE plan's
+   "legal pack" concept). Confirm returns language for US consumer law.
+
+## B. Agent builds in the repo (can start NOW, deploys once A.1–A.2 exist)
+
+1. **Static estate**: `static/us.momuto.com/robots.txt` (same AI-crawler
+   allowances + blocks as www) and a US `llms.txt` variant — soccer/uniform
+   lexicon, USD facts, US page links. The shared llms.txt is EUR/football;
+   the US store needs its own.
+2. **Pages estate in US lexicon** (fragments in `pages/`, deployed by a new
+   `us` entry in the page deploy scripts):
+   - **The wall** → handle `ready-to-play`, "Custom Soccer Jersey Designer"
+     framing, uniform/soccer vocabulary, USD prices, same 16 tiles + a
+     **basketball section** when designs land (own section on the wall AND
+     its own hub page — sport is an axis).
+   - **Request gate** → `request-custom-kit-design`, USD deposit, US Stripe
+     link, same guard pattern as the IT gate deploy.
+   - **AI page** → `ai-concept-to-real-kit` US variant ("AI soccer jersey
+     generator" lexicon).
+   - **Basketball hub** → `custom-basketball-jerseys` (+ uniforms variant):
+     the creation-play surface; tool deep link with the basketball body,
+     designs as they land.
+   - Size guide, about, contact, teams/gallery — clone with lexicon pass.
+   - **Comparison page** → US competitors (the EN
+     `best-custom-soccer-jersey-makers-2026` page is the seed — it may
+     MOVE to the US store as its natural home).
+3. **Blog estate**: the 8-post mirror per the map above, PLUS the Wave 1
+   pair in US lexicon (`when-to-order-team-uniforms-season-calendar`
+   already in the map; the essay with US seasons — fall/spring rec, no
+   "September" hard-coding).
+4. **Deploy plumbing**: `us` locale in `deploy-blog-post.js`, `pull-cms.js`,
+   both blog workflows, the page-deploy scripts that grow a `us` entry
+   (`deploy-ready-to-play-page.js`, `deploy-request-design-page.js`,
+   `deploy-concept-pages.js`), and `rebuild-sitemap.yml` (US store joins
+   the daily sitemap build). All guarded so a missing `OEMSAAS_TOKEN_US`
+   skips cleanly instead of failing the run.
+5. **hreflang**: per the section above — sitemap-level `xhtml:link`
+   annotations (en / en-us / x-default) for every mirrored pair, since
+   post bodies can't inject `<head>`. Wired into the sitemap rebuild.
+6. **Guardrails carry over**: naming grammar (Ready to Play, unnamed
+   seasonal promo, lowercase studio), deposit copy never refund-forward,
+   clubs in editorial only, one set of (USD) numbers.
+
+## C. Build order
+
+1. **Now (repo, unblocked):** B.1 static estate → B.2 wall + request gate +
+   basketball hub drafts → B.3 blog mirror → B.4 plumbing (guarded) →
+   B.5 hreflang prep. All of it sits ready on main, deploying nothing
+   until the token exists.
+2. **Owner in parallel:** A.1–A.4 (store, token, USD prices, Stripe) —
+   these gate first deploy. A.7 basketball designs — gates the basketball
+   section being more than a tool link.
+3. **First deploy** the day A.2 lands: static + wall + gate + blog mirror.
+4. **Launch-readiness check** (the old triggers, repurposed): pages
+   indexed, hreflang live, products buyable in USD, checkout tested with a
+   real card, GSC property collecting. Then the announcement piece — after
+   the surface exists, per the standing rule.
+
+## D. Open questions for the owner (answer before first deploy)
+
+1. USD price list — confirm or correct the proposal in A.3.
+2. Fast lane price in USD.
+3. Does 25–30 days hold for US delivery?
+4. Basketball at launch: how many designs can the studio commit, by when?
+5. Does the EN US-comparison page (`best-custom-soccer-jersey-makers-2026`)
+   move to the US store, stay on www, or exist on both with hreflang?
