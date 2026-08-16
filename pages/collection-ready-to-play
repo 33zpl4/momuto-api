@@ -156,8 +156,26 @@
 
   @media (max-width: 1020px) { .st-grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 760px) {
-    .st-grid { grid-template-columns: repeat(2, 1fr); }
-    .st-stats { grid-template-columns: repeat(2, 1fr); }
+    /* mobile-first pass (14.08.2026): most traffic is mobile and the kits
+       are the product — tighter chrome, bigger frames, featured lead tile */
+    .st-hero { padding: 3.6rem 16px 2.2rem; }
+    .st-wall { padding: 1.6rem 10px 3.5rem; }
+    .st-wall-head { margin-bottom: 1rem; }
+    .st-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    /* the first design leads full-width — featured tile */
+    .st-grid .st-card:first-child { grid-column: 1 / -1; }
+    .st-grid .st-card:first-child .st-card-imgwrap { aspect-ratio: 1/1; }
+    .st-grid .st-card:first-child .st-card-imgwrap img,
+    .st-grid .st-card:first-child:hover .st-card-imgwrap img { transform: none; }
+    /* square frames + slight zoom: the renders carry padding around the
+       jersey, so uncropped they read tiny at phone card widths */
+    .st-card-imgwrap { aspect-ratio: 1/1; }
+    .st-card-imgwrap img, .st-card:hover .st-card-imgwrap img { transform: scale(1.1); }
+    .st-card-meta { padding: 0.6rem 0.65rem 0.85rem; }
+    .st-card-name { font-size: 1.02rem; }
+    .st-card-style { margin-top: 0.25rem; font-size: 0.62rem; }
+    .st-card-open { margin-top: 0.45rem; font-size: 0.66rem; }
+    .st-stats { grid-template-columns: repeat(2, 1fr); gap: 2px; padding: 2.5rem 12px; }
   }
 </style>
 
