@@ -162,10 +162,17 @@
   @media (max-width: 1020px) { .st-grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 760px) {
     /* mobile-first pass (14.08.2026): most traffic is mobile and the kits
-       are the product — tighter chrome, bigger frames, featured lead tile */
-    .st-hero { padding: 3.6rem 16px 2.2rem; }
-    .st-wall { padding: 1.6rem 10px 3.5rem; }
-    .st-wall-head { margin-bottom: 1rem; }
+       are the product — tighter chrome, bigger frames, featured lead tile.
+       15.08: NO calc(50%-50vw) bleed on mobile — the live wrapper geometry
+       over-shifts it and clips the left edge (customer screenshot); the
+       body is painted dark so the bleed buys nothing here. Side gutters
+       come from the theme wrapper. */
+    .studio-page { margin-left: 0; margin-right: 0; }
+    .st-hero { padding: 3.6rem 6px 2.2rem; }
+    .st-wall { padding: 1.6rem 0 3.5rem; }
+    .st-wall-head { margin-bottom: 1rem; flex-wrap: wrap; row-gap: 4px; }
+    /* badge off the collar: bottom-left, slimmer */
+    .st-card-badge { top: auto; bottom: 8px; left: 8px; font-size: 0.58rem; padding: 3px 7px; }
     .st-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     /* the first design leads full-width — featured tile */
     .st-grid .st-card:first-child { grid-column: 1 / -1; }
@@ -180,7 +187,7 @@
     .st-card-name { font-size: 1.02rem; }
     .st-card-style { margin-top: 0.25rem; font-size: 0.62rem; }
     .st-card-open { margin-top: 0.45rem; font-size: 0.66rem; }
-    .st-stats { grid-template-columns: repeat(2, 1fr); gap: 2px; padding: 2.5rem 12px; }
+    .st-stats { grid-template-columns: repeat(2, 1fr); gap: 2px; padding: 2.5rem 0; }
   }
 </style>
 
