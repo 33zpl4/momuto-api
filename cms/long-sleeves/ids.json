@@ -1,0 +1,30 @@
+{
+  "en": {
+    "id": "10619367",
+    "handle": "long-sleeves",
+    "title": "Long sleeves",
+    "price": "3.00",
+    "verifiedAt": "2026-08-17T11:13:46.246Z"
+  },
+  "es": {
+    "id": "11070065",
+    "handle": "long-sleeves",
+    "title": "Manga larga",
+    "price": "3.00",
+    "verifiedAt": "2026-08-17T11:13:46.711Z"
+  },
+  "fr": {
+    "id": "10210832",
+    "handle": "long-sleeves",
+    "title": "Manches longues",
+    "price": "3.00",
+    "verifiedAt": "2026-08-17T11:13:47.076Z"
+  },
+  "it": {
+    "id": "16672932",
+    "handle": "long-sleeves",
+    "title": "Maniche lunghe",
+    "price": "3.00",
+    "verifiedAt": "2026-08-17T11:13:47.475Z"
+  }
+}
