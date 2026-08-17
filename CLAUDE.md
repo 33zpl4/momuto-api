@@ -74,3 +74,15 @@ Page fragments in `pages/<handle>` (file name = CMS handle) deploy via
 otherwise — see rule 3). Scripts carry sanity checks (fonts, single h1,
 JSON-LD parses, keyword arrays, meta lengths); replicate them locally with
 node before pushing.
+
+- **Deploy Static Files auto-runs — never ask the owner to click Run after
+  a merge that touched its paths.** Its `on.push` (NO branch filter — rule 3
+  applies: a BRANCH push touching these paths deploys live immediately)
+  watches `static/**`, `public/configurator/custom-content.js` and
+  `rtp-loader.js`. A push-triggered run has empty TARGET_FILE/TARGET_DOMAIN,
+  which the script treats as "ALL files, ALL stores" — so it ships every
+  file in its list (pricing.js, llms.txt, robots.txt…) even ones whose own
+  paths are not push-watched. Verified Aug 2026: one PR produced TWO full
+  deploys, branch push + merge push. Manual workflow_dispatch is only
+  needed when a listed file (e.g. `pricing.js`, `embed.js`) changes WITHOUT
+  any watched path in the same push.
