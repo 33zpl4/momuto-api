@@ -1,11 +1,18 @@
 name: Create Long-sleeves products
 
 # Creates the €3.00 "Long sleeves" surcharge product on each store (the
-# billing vehicle for the per-player long-sleeve option). Manual dispatch
-# only, dry run by default — no push trigger, so nothing fires on merge.
+# billing vehicle for the per-player long-sleeve option). A push to the
+# watched paths runs a DRY RUN only (inputs are empty on push events, and
+# --live is added solely when dry_run is the literal string "false") —
+# creating for real always takes a manual dispatch with dry_run=false.
 # Runs on the GitHub runner (the sandbox cannot reach openapi.oemapps.com).
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/create-long-sleeves-products.js'
+      - '.github/workflows/create-long-sleeves-products.yml'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -40,7 +47,7 @@ jobs:
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
         run: |
-          FLAGS="--lang ${{ inputs.lang }}"
+          FLAGS="--lang ${{ inputs.lang || 'all' }}"
           if [ "${{ inputs.dry_run }}" = "false" ]; then FLAGS="$FLAGS --live"; fi
           node scripts/create-long-sleeves-products.js $FLAGS
 
