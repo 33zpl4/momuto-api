@@ -109,7 +109,7 @@ Return ONLY this JSON (no markdown):
 }`;
 
   const response = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-sonnet-5',
     max_tokens: 256,
     messages: [{ role: 'user', content: prompt }],
   }));
@@ -154,7 +154,7 @@ META_DESC: <translated>
 META_KEYWORDS: <keyword1>, <keyword2>, ...`;
 
   const metaResponse = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-sonnet-5',
     max_tokens: 512,
     messages: [{ role: 'user', content: metaPrompt }],
   }));
@@ -190,7 +190,7 @@ Translate the following HTML page content from English to Italian.
 ${page.content || ''}`;
 
   const contentResponse = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-sonnet-5',
     max_tokens: 8000,
     messages: [{ role: 'user', content: contentPrompt }],
   }));

@@ -172,7 +172,7 @@ Generate a JSON object with these exact fields:
 Return ONLY the JSON object, no markdown, no code fences, no other text.`;
 
   const response = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-sonnet-5',
     max_tokens: 1000,
     messages: [{ role: 'user', content: prompt }]
   }));
@@ -199,7 +199,7 @@ ${langInstructions[lang] || langInstructions.en}
 Return ONLY the caption text, nothing else. No quotes, no punctuation at the end.`;
 
   const response = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-sonnet-5',
     max_tokens: 50,
     messages: [{ role: 'user', content: prompt }]
   }));

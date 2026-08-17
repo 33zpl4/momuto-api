@@ -168,7 +168,7 @@ Return ONLY this JSON (no markdown, no explanation):
 }`;
 
   const response = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-sonnet-5',
     max_tokens: 1024,
     messages: [{ role: 'user', content: prompt }],
   }));
@@ -225,7 +225,7 @@ Return this exact JSON structure:
 }`;
 
   const response = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-sonnet-5',
     max_tokens: 8000,
     messages: [{ role: 'user', content: prompt }],
   }));

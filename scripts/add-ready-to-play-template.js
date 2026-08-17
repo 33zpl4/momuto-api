@@ -162,7 +162,7 @@ Return ONLY a JSON object:
 }`;
 
   const msg = await client.messages.create({
-    model: 'claude-opus-4-6',
+    model: 'claude-sonnet-5',
     max_tokens: 400,
     messages: [{ role: 'user', content: prompt }]
   });

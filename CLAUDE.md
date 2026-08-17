@@ -59,7 +59,13 @@ Read the doc that owns a topic BEFORE editing that surface.
   `ls` the output directory before re-running anything.** Re-running would
   have burned another full research pass to reproduce files that existed.
 - Commit trailer convention: see the session's system rules; never put model
-  IDs in pushed artifacts.
+  IDs in pushed artifacts (commit messages, PR bodies — API `model:` params
+  in scripts are configuration, not attribution, and are fine).
+- **Model policy (owner ruling, Aug 2026)**: the orchestrating session plans;
+  execution runs on the cheaper tier. Anthropic API calls in repo
+  scripts/workflows use `claude-sonnet-5` (parse-invoice stays on Haiku —
+  already below Sonnet). Subagents/workflow-tool agents spawned from a
+  session run on Sonnet unless the owner says otherwise.
 
 ## Deploys
 

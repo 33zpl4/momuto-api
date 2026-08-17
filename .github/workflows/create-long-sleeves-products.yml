@@ -1,0 +1,59 @@
+name: Create Long-sleeves products
+
+# Creates the €3.00 "Long sleeves" surcharge product on each store (the
+# billing vehicle for the per-player long-sleeve option). Manual dispatch
+# only, dry run by default — no push trigger, so nothing fires on merge.
+# Runs on the GitHub runner (the sandbox cannot reach openapi.oemapps.com).
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Print payloads only, send nothing'
+        type: choice
+        options: ['true', 'false']
+        default: 'true'
+      lang:
+        description: 'Store to create on'
+        type: choice
+        options: ['all', 'en', 'es', 'fr', 'it']
+        default: 'all'
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Create products
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+        run: |
+          FLAGS="--lang ${{ inputs.lang }}"
+          if [ "${{ inputs.dry_run }}" = "false" ]; then FLAGS="$FLAGS --live"; fi
+          node scripts/create-long-sleeves-products.js $FLAGS
+
+      - name: Commit ids back
+        if: ${{ inputs.dry_run == 'false' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cms/long-sleeves
+          if git diff --cached --quiet; then
+            echo "nothing new"
+            exit 0
+          fi
+          git commit -m "Long-sleeves product ids [skip ci]"
+          git pull --rebase origin main
+          git push
