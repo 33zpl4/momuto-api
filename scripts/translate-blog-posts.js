@@ -125,7 +125,7 @@ META_TITLE: <translated>
 META_DESC: <translated>`;
 
   const metaResponse = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-4-6', max_tokens: 1024, messages: [{ role: 'user', content: metaPrompt }],
+    model: 'claude-sonnet-5', max_tokens: 1024, messages: [{ role: 'user', content: metaPrompt }],
   }));
 
   const metaLines = {};
@@ -152,7 +152,7 @@ Translate the following HTML blog post content from English to ${DEST.lang}.
 ${post.content || ''}`;
 
   const contentResponse = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-4-6', max_tokens: 8000, messages: [{ role: 'user', content: contentPrompt }],
+    model: 'claude-sonnet-5', max_tokens: 8000, messages: [{ role: 'user', content: contentPrompt }],
   }));
 
   const translatedContent = localizeLinks(
