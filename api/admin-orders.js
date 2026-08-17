@@ -16,6 +16,21 @@
  * (either works, so the value already in Vercel can be reused).
  *
  *   List:        GET  /api/admin-orders?action=list
+ *   Find:        GET  /api/admin-orders?action=find&q=<ref | platform order no | email>
+ *                Searches ALL stored orders (not just active) — the CMS admin
+ *                shows the PLATFORM order number (e.g. 2026081633552986), which
+ *                is stored as plantOrderNo, so this is how you locate an order
+ *                when a customer writes in. Returns full email/lifecycle state.
+ *   Resend:      POST /api/admin-orders   { "action":"resend-confirmation",
+ *                                           "order":"<ref | platform no | email>",
+ *                                           "force": false }
+ *                Manual override for "customer says no email arrived": re-sends
+ *                the branded confirmation NOW via Resend, even if it was already
+ *                marked sent (a resend of an identical email is harmless; spam
+ *                folders are the common culprit). Refuses multi-matches, and
+ *                refuses status test/backfill/excluded unless force:true —
+ *                those were withheld on purpose. Every send is logged on the
+ *                record under manualResends[].
  *   Exclude:     POST /api/admin-orders   { "action":"exclude",
  *                                           "orders":["iwq7a4uhzv","1bs1zottea", ...] }
  *                (order refs may be given raw or already "3d_"-prefixed)
@@ -26,12 +41,19 @@
  *
  * Exclude sets status:'excluded' + stopLifecycle:true and removes the id from
  * orders:active. The record stays in orders:all and order:<id> for history.
+ *
+ * scripts/resend-order-email.ps1 wraps find + resend-confirmation for the
+ * command line (prompts for the admin token, shows the diagnosis, confirms
+ * before sending).
  */
 
 const { kv } = require('@vercel/kv');
+const { emailConfirmation3D } = require('../lib/emails');
 
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 const SECRET      = process.env.D3_ORDER_SECRET;
+const RESEND_KEY  = process.env.RESEND_API_KEY;
+const FROM_EMAIL  = process.env.FROM_EMAIL_ORDERS || process.env.FROM_EMAIL || 'orders@momuto.com';
 
 function isAuthorised(req) {
   if (ADMIN_TOKEN && req.headers['x-admin-token'] === ADMIN_TOKEN) return true;
@@ -53,6 +75,61 @@ function toId(ref) {
   let s = String(ref || '').trim();
   if (s.startsWith('order:')) s = s.slice(6);
   return s.startsWith('3d_') ? s : `3d_${s}`;
+}
+
+// True when q names this order: the local ref/id, the PLATFORM order number
+// (plantOrderNo — what the CMS admin shows), or the customer email.
+function matchesQuery(id, o, q) {
+  const needle = String(q || '').trim().toLowerCase();
+  if (!needle) return false;
+  return id.toLowerCase() === needle
+    || id.toLowerCase() === `3d_${needle}`
+    || String((o && o.ref) || '').toLowerCase() === needle
+    || String((o && o.plantOrderNo) || '').toLowerCase() === needle
+    || String((o && o.email) || '').toLowerCase() === needle;
+}
+
+// Load every stored order (orders:all) in batches and return [id, order] pairs.
+async function loadAllOrders() {
+  const ids = (await kv.smembers('orders:all')) || [];
+  const pairs = [];
+  for (let i = 0; i < ids.length; i += 50) {
+    const batch = ids.slice(i, i + 50);
+    const loaded = await Promise.all(batch.map(id => kv.get(`order:${id}`)));
+    batch.forEach((id, j) => pairs.push([id, loaded[j]]));
+  }
+  return pairs;
+}
+
+function diagnose(id, o) {
+  if (!o) return { id, missing: true };
+  return {
+    id,
+    ref:          o.ref || null,
+    plantOrderNo: o.plantOrderNo || null,
+    email:        o.email || null,
+    name:         o.name || null,
+    team:         o.team || null,
+    total:        o.total || null,
+    currency:     o.currency || null,
+    lang:         o.lang || null,
+    status:       o.status || null,
+    stopLifecycle: !!o.stopLifecycle,
+    paidAt:       o.paidAt || null,
+    createdAt:    o.createdAt || null,
+    emailsSent:   o.emailsSent || [],
+    manualResends: o.manualResends || [],
+    designs:      Array.isArray(o.designs) ? o.designs.length : 0,
+  };
+}
+
+async function sendEmail(to, subject, html) {
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ from: `MOMUTO <${FROM_EMAIL}>`, to: [to], reply_to: 'info@momuto.com', subject, html }),
+  });
+  if (!r.ok) throw new Error(`Resend ${r.status}: ${await r.text()}`);
 }
 
 module.exports = async function handler(req, res) {
@@ -90,6 +167,75 @@ module.exports = async function handler(req, res) {
     }
     orders.sort((a, b) => String(a.paidAt || '').localeCompare(String(b.paidAt || '')));
     return res.status(200).json({ ok: true, count: orders.length, active: orders });
+  }
+
+  // ---- FIND (search ALL orders by ref / platform order no / email) ------
+  if (action === 'find') {
+    const q = req.query.q || body.q || body.order || '';
+    if (!String(q).trim()) return res.status(400).json({ error: 'q is required' });
+    const pairs = await loadAllOrders();
+    const found = pairs.filter(([id, o]) => matchesQuery(id, o, q))
+      .map(([id, o]) => diagnose(id, o));
+    return res.status(200).json({
+      ok: true, q, count: found.length, found,
+      hint: found.length ? undefined
+        : 'No stored order matches. The order never reached the email pipeline: ' +
+          'either the design-server webhook did not fire for it, or it was a ' +
+          'direct store purchase outside the 3D flow (no local order row). ' +
+          'Check the CMS admin for the customer email and the platform\'s own ' +
+          'confirmation-email setting.',
+    });
+  }
+
+  // ---- RESEND CONFIRMATION (manual override) ---------------------------
+  if (action === 'resend-confirmation') {
+    if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
+    if (!RESEND_KEY) return res.status(503).json({ error: 'RESEND_API_KEY not configured' });
+    const q = body.order || body.q || '';
+    if (!String(q).trim()) return res.status(400).json({ error: 'order is required (ref, platform order no, or email)' });
+
+    const pairs = await loadAllOrders();
+    const found = pairs.filter(([id, o]) => o && matchesQuery(id, o, q));
+    if (!found.length) {
+      return res.status(404).json({
+        error: 'No stored order matches — nothing to resend. The order never ' +
+          'reached the email pipeline (webhook miss or non-3D purchase); a ' +
+          'manual email from the inbox is the fallback.',
+        q,
+      });
+    }
+    if (found.length > 1) {
+      return res.status(409).json({
+        error: 'Query matches more than one order — resend by its exact ref instead.',
+        q, matches: found.map(([id, o]) => diagnose(id, o)),
+      });
+    }
+
+    const [id, order] = found[0];
+    // test/backfill/excluded records were withheld from customer mail on
+    // purpose — resending those needs an explicit force.
+    const withheld = order.stopLifecycle || (order.status && order.status !== 'active');
+    if (withheld && body.force !== true) {
+      return res.status(409).json({
+        error: `Order status is "${order.status}" (customer email was withheld on purpose). ` +
+          'Pass force:true to send anyway.',
+        order: diagnose(id, order),
+      });
+    }
+    if (!order.email) {
+      return res.status(422).json({ error: 'Order record has no email address', order: diagnose(id, order) });
+    }
+
+    const { subject, html } = emailConfirmation3D(order);
+    await sendEmail(order.email, subject, html);
+    // mark only after Resend accepted — same discipline as order-3d-paid
+    if (!(order.emailsSent || []).includes('confirmation')) {
+      order.emailsSent = [...(order.emailsSent || []), 'confirmation'];
+    }
+    order.manualResends = [...(order.manualResends || []), new Date().toISOString()];
+    await kv.set(`order:${id}`, order);
+    console.log(`[admin-orders] confirmation manually resent for ${id} -> ${order.email}`);
+    return res.status(200).json({ ok: true, resent: true, to: order.email, order: diagnose(id, order) });
   }
 
   // ---- EXCLUDE ALL (kill switch) ---------------------------------------
