@@ -5,9 +5,11 @@
    campaigns (published as the "MOMUTO KIT PRICING 2026" transparency table).
    RTP prices = base − 10%, rounded to €0.10 (matches the published RTP tiers).
 
-   Both storefront surfaces read this file:
+   These surfaces read this file:
      - embed.js          (RTP 2D widget)        -> unitPrice(kind, qty, {rtp:true})
      - custom-content.js (3D custom PDP estimator) -> unitPrice(kind, qty)   // base, no RTP off
+     - design-momuto templates/<lang>/cartItem.html (cart roster: unit prices,
+       sleeve resulting prices, subtotal) -> unitPrice / tiers / LS_SURCHARGE
 
    When prices change: edit HERE, then redeploy via Deploy Static Files. Do NOT
    copy these numbers into another file — that is the drift this file exists to end.
@@ -22,10 +24,14 @@
   var PRICING={
     jersey:[[1,38.90],[2,34.90],[5,26.90],[10,21.90],[20,18.90],[50,17.90],[100,16.90]],
     kit:   [[1,56.80],[2,50.80],[5,38.80],[10,26.90],[20,24.90],[50,23.40],[100,21.90]],
-    shorts:[[1,17.90],[2,15.90],[5,11.90],[10, 6.00],[20, 6.00],[50, 5.50],[100, 5.00]]
+    shorts:[[1,17.90],[2,15.90],[5,11.90],[10, 6.00],[20, 6.00],[50, 5.50],[100, 5.00]],
+    socks: [[1, 6.00]]           // flat — matches the store product; no published ladder
   };
   var RTP_OFF=0.10;              // RTP is 10% under the standard/custom tier
   var POPULAR_MIN=10;            // the "most popular" tier (10–19) — for UI nudges
+  var LS_SURCHARGE=3.00;         // long sleeves: flat +3.00 per jersey at EVERY tier
+                                 // (billed via the per-store "Long sleeves" product;
+                                 // surfaces show resulting prices, never a fee line)
 
   function normQty(qty){ return Math.max(1, parseInt(qty,10)||1); }
   // Standard (custom/3D) per-unit price at this quantity.
@@ -38,7 +44,7 @@
   function rtpPrice(kind,qty){ return Math.round(tierBase(kind,qty)*(1-RTP_OFF)*10)/10; }
 
   var api={
-    PRICING:PRICING, RTP_OFF:RTP_OFF, POPULAR_MIN:POPULAR_MIN,
+    PRICING:PRICING, RTP_OFF:RTP_OFF, POPULAR_MIN:POPULAR_MIN, LS_SURCHARGE:LS_SURCHARGE,
     tierBase:tierBase, rtpPrice:rtpPrice,
     // Effective per-unit price. opts.rtp=true -> RTP pricing; otherwise standard/custom.
     unitPrice:function(kind,qty,opts){ return (opts&&opts.rtp)?rtpPrice(kind,qty):tierBase(kind,qty); },
