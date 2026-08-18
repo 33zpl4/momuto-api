@@ -33,6 +33,40 @@ $found = @($data.found | ForEach-Object { $_ })
 if ($found.Count -eq 0) {
     Write-Host "`nNo stored order matches '$query'." -ForegroundColor Yellow
     Write-Host $data.hint -ForegroundColor Yellow
+
+    # Webhook-miss recovery: build the order from the CMS admin facts and send.
+    $make = Read-Host "`nCreate the order manually and send the confirmation now? (Y/n)"
+    if ($make -ne 'Y' -and $make -ne 'y') { exit 0 }
+
+    Write-Host "Copy these from the CMS order page:" -ForegroundColor Cyan
+    $orderNo = (Read-Host "  Local order ref (from the 0 EUR preview line title, e.g. kz1cgjw0oh)").Trim()
+    $email2  = (Read-Host "  Customer email").Trim()
+    $name2   = (Read-Host "  Customer name").Trim()
+    $lang2   = (Read-Host "  Store lang (en/es/fr/it) [en]").Trim(); if (-not $lang2) { $lang2 = 'en' }
+    $plant   = (Read-Host "  Platform order no (optional)").Trim()
+    $total2  = (Read-Host "  Order total, e.g. 62.80 (optional)").Trim()
+    $qty2    = (Read-Host "  Jersey quantity (optional)").Trim()
+    $paidAt2 = (Read-Host "  Paid date YYYY-MM-DD (optional; delivery window counts from it)").Trim()
+    $image2  = (Read-Host "  Design image URL (right-click the preview line's jersey image in CMS - optional)").Trim()
+
+    $ing = @{ action = 'ingest-and-send'; order_no = $orderNo; email = $email2; name = $name2; lang = $lang2 }
+    if ($plant)   { $ing.plant_order_no = $plant }
+    if ($total2)  { $ing.total = $total2 }
+    if ($qty2)    { $ing.qty = [int]$qty2 }
+    if ($paidAt2) { $ing.paid_at = $paidAt2 }
+    if ($image2)  { $ing.image = $image2 }
+
+    try {
+        $resp = Invoke-WebRequest -UseBasicParsing -Method Post -Uri $base -Headers $headers -Body ($ing | ConvertTo-Json)
+        $result = $resp.Content | ConvertFrom-Json
+        Write-Host "`nCREATED + SENT to $($result.to)" -ForegroundColor Green
+        Write-Host "Note: this order missed the design-server webhook - worth checking momuto-notify.log on the server." -ForegroundColor Yellow
+    } catch {
+        $detail = ''
+        try { $detail = (New-Object IO.StreamReader($_.Exception.Response.GetResponseStream())).ReadToEnd() } catch {}
+        Write-Host "`nINGEST FAILED: $($_.Exception.Message)`n$detail" -ForegroundColor Red
+        exit 1
+    }
     exit 0
 }
 

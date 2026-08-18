@@ -31,6 +31,21 @@
  *                refuses status test/backfill/excluded unless force:true —
  *                those were withheld on purpose. Every send is logged on the
  *                record under manualResends[].
+ *   Ingest:      POST /api/admin-orders   { "action":"ingest-and-send",
+ *                  "order_no":"kz1cgjw0oh", "email":"…", "name":"…",
+ *                  "lang":"en", "plant_order_no":"2026081633552986",
+ *                  "total":"62.80", "currency":"EUR", "qty":2,
+ *                  "paid_at":"2026-08-16", "image":"https://…" }
+ *                For orders the design-server webhook MISSED (no stored record
+ *                at all): builds the order from CMS-admin facts, sends the
+ *                branded confirmation now, and enrolls the normal day-4/day-10
+ *                lifecycle. order_no + email + name are required; image is the
+ *                customer's render URL (the €0 preview line's product image in
+ *                the CMS admin) and is optional — without it the email simply
+ *                has no kit picture. Refuses if a record already exists (use
+ *                resend-confirmation for those). Every webhook miss ingested
+ *                here is ALSO a bug to chase in the design server's
+ *                momuto-notify.log.
  *   Exclude:     POST /api/admin-orders   { "action":"exclude",
  *                                           "orders":["iwq7a4uhzv","1bs1zottea", ...] }
  *                (order refs may be given raw or already "3d_"-prefixed)
@@ -236,6 +251,67 @@ module.exports = async function handler(req, res) {
     await kv.set(`order:${id}`, order);
     console.log(`[admin-orders] confirmation manually resent for ${id} -> ${order.email}`);
     return res.status(200).json({ ok: true, resent: true, to: order.email, order: diagnose(id, order) });
+  }
+
+  // ---- INGEST AND SEND (webhook-miss recovery) --------------------------
+  if (action === 'ingest-and-send') {
+    if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
+    if (!RESEND_KEY) return res.status(503).json({ error: 'RESEND_API_KEY not configured' });
+
+    const orderNo = String(body.order_no || '').trim();
+    const email   = String(body.email || '').trim();
+    const name    = String(body.name || '').trim();
+    if (!orderNo || !email || !name) {
+      return res.status(400).json({ error: 'order_no, email and name are required' });
+    }
+
+    const id = toId(orderNo);
+    if (await kv.get(`order:${id}`)) {
+      return res.status(409).json({ error: `Order ${id} already exists — use resend-confirmation instead.` });
+    }
+
+    // paid_at: ISO date from the CMS admin; the delivery window in the email
+    // counts from it, so use the REAL payment date, not today.
+    const paidAt = body.paid_at
+      ? new Date(body.paid_at).toISOString()
+      : new Date().toISOString();
+    if (isNaN(Date.parse(paidAt))) return res.status(400).json({ error: 'paid_at is not a date' });
+
+    const designs = body.image ? [{ front: String(body.image), back: null, players: [] }] : [];
+    const order = {
+      id,
+      name,
+      email,
+      team:  name,
+      qty:   parseInt(body.qty, 10) || '—',
+      ref:   orderNo.replace(/^3d_/, ''),
+      plantOrderNo: body.plant_order_no ? String(body.plant_order_no) : null,
+      total: body.total || null,
+      currency: body.currency || 'EUR',
+      designs,
+      invoiceDate: paidAt.slice(0, 10),
+      notes: 'manual ingest via admin-orders (design-server webhook missed this order)',
+      lang:  ['en', 'es', 'fr', 'it'].includes(body.lang) ? body.lang : 'en',
+      paidAt,
+      platformPaidAt: body.paid_at ? paidAt : null,
+      emailsSent: [],
+      trackingNumber: null,
+      trackingUrl: null,
+      status: 'active',
+      createdAt: new Date().toISOString(),
+    };
+
+    await kv.set(`order:${id}`, order);
+    await kv.sadd('orders:all', id);
+    await kv.sadd('orders:active', id);
+
+    const { subject, html } = emailConfirmation3D(order);
+    await sendEmail(order.email, subject, html);
+    order.emailsSent = ['confirmation'];
+    order.manualResends = [new Date().toISOString()];
+    await kv.set(`order:${id}`, order);
+    console.log(`[admin-orders] manual ingest+send for ${id} -> ${order.email}`);
+    return res.status(200).json({ ok: true, ingested: true, sent: true, to: order.email, order: diagnose(id, order) });
   }
 
   // ---- EXCLUDE ALL (kill switch) ---------------------------------------
