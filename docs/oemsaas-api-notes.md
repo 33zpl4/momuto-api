@@ -262,6 +262,24 @@ email can show the customer THEIR OWN design.
 
 ---
 
+## Orders (read) — UNVERIFIED surface (Aug 2026)
+
+`scripts/poll-paid-orders.js` (hourly via the "Poll paid orders" workflow)
+reads `GET /orders?limit=` + `GET /orders/{id}` to send confirmation emails
+at payment time, because the platform's own webhooks arrive in sweeps DAYS
+late (see design-momuto server-patches/README.md §3b). Nothing about this
+surface has been probed against the live API yet — the script codes
+defensively (multiple field-name candidates, single-order re-fetch when the
+list omits a field, `--probe` mode that dumps the raw shape) and every
+assumption in it should be checked against a `--probe` run before trusting
+live output. Facts we DO have: `financial_status` 230 = paid (the constant
+WebhookAction keys on), and every 3D order carries a €0 preview line whose
+`inner_title` is `{"type":"3d-preview","order_no":"<local ref>"}` — the join
+key back to our pipeline. Update this section with the real shapes after the
+first probe.
+
+---
+
 ## Method, not just facts
 
 The findings above came from four habits worth reusing on any similar task:
