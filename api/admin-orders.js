@@ -277,7 +277,9 @@ module.exports = async function handler(req, res) {
       : new Date().toISOString();
     if (isNaN(Date.parse(paidAt))) return res.status(400).json({ error: 'paid_at is not a date' });
 
-    const designs = body.image ? [{ front: String(body.image), back: null, players: [] }] : [];
+    const designs = body.image
+      ? [{ front: String(body.image), back: body.image_back ? String(body.image_back) : null, players: [] }]
+      : [];
     const order = {
       id,
       name,

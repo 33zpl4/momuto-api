@@ -1,0 +1,65 @@
+name: Poll paid orders (confirmation emails)
+
+# Hourly: reads the store platform's orders API and hands any PAID 3D order
+# the design-server webhook hasn't delivered to the admin-orders ingest
+# machinery (confirmation email + lifecycle). Built because the platform
+# delivers paid webhooks in sweeps DAYS after payment (momuto-notify.log,
+# Aug 2026) — this gets "you paid, here's your order" out within the hour.
+#
+# TWO-STAGE ARMING — safe to merge immediately:
+#   1. secret MOMUTO_API_SECRET (same value as the Vercel D3_ORDER_SECRET):
+#      without it the script logs "not armed" and exits 0.
+#   2. repo VARIABLE POLL_LIVE=1: until it is set, scheduled runs execute as
+#      DRY RUNS (decisions logged, nothing sent). Set it only after reviewing
+#      a manual probe + dry run.
+#
+# Manual runs: probe (raw API shape dump, no writes; needs no secret), dry
+# run (default — full decisions, nothing sent), or live.
+
+on:
+  schedule:
+    - cron: '7 * * * *'   # hourly at :07 (off the :00 rush)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'What to run'
+        type: choice
+        options: ['dry-run', 'probe', 'live']
+        default: 'dry-run'
+      lang:
+        description: 'Store'
+        type: choice
+        options: ['all', 'en', 'es', 'fr']
+        default: 'all'
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Poll
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          MOMUTO_API_SECRET: ${{ secrets.MOMUTO_API_SECRET }}
+        run: |
+          MODE="${{ inputs.mode }}"
+          LANG_IN="${{ inputs.lang }}"
+          POLL_LIVE="${{ vars.POLL_LIVE }}"
+          FLAGS="--lang ${LANG_IN:-all}"
+          # scheduled runs go live only once the POLL_LIVE repo variable is 1;
+          # manual dispatch goes live only when explicitly asked to
+          if { [ -z "$MODE" ] && [ "$POLL_LIVE" = "1" ]; } || [ "$MODE" = "live" ]; then
+            FLAGS="$FLAGS --live"
+          fi
+          if [ "$MODE" = "probe" ]; then FLAGS="$FLAGS --probe"; fi
+          echo "running: $FLAGS"
+          node scripts/poll-paid-orders.js $FLAGS
