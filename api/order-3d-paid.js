@@ -44,8 +44,18 @@ const FROM_EMAIL  = process.env.FROM_EMAIL_ORDERS || process.env.FROM_EMAIL || '
 const SECRET      = process.env.D3_ORDER_SECRET;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@momuto.com';
 
-// Paid longer ago than this → treat as a nightly re-sync backfill, not a sale.
-const BACKFILL_DAYS = 3;
+// Paid longer ago than this → treat as a platform re-sync backfill, not a sale.
+//
+// 3 → 14 (Aug 2026): momuto-notify.log showed the platform delivers order
+// webhooks in SWEEPS days apart (5-6 orders inside a few minutes on Jul 19 /
+// Jul 28 / Aug 4 / Aug 17...), not at payment time. With a 3-day cutoff every
+// order since Aug 5 arrived as "backfill" and NO customer got a confirmation
+// (order kz1cgjw0oh / platform 2026081633552986 was the customer complaint
+// that surfaced it). 14 days lets late sweeps through — the email's delivery
+// window counts from the real payment date, so the copy stays accurate —
+// while still silencing genuinely ancient re-pushed orders (the original
+// activation-day flood this guard exists for).
+const BACKFILL_DAYS = 14;
 
 function readJSON(req) {
   return new Promise((resolve, reject) => {
