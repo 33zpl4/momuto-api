@@ -134,6 +134,11 @@ async function withRetry(fn, maxAttempts = 4) {
   }
 }
 
+// Sport the kit is for. Teams are football unless their config says otherwise.
+function sportOf(config) {
+  return config.sport || 'football';
+}
+
 async function generatePageContent(config, lang) {
   const langInstructions = {
     en: 'Write all text content in English.',
@@ -142,7 +147,7 @@ async function generatePageContent(config, lang) {
     it: 'Write all text content in Italian. Use "maglia" for jersey, "divisa" for kit.'
   };
 
-  const prompt = `You are creating a custom football kit design proposal page for MOMUTO (momuto.com), a custom football kit brand.
+  const prompt = `You are creating a custom ${sportOf(config)} kit design proposal page for MOMUTO (momuto.com), a custom sports kit brand.
 
 ${langInstructions[lang]}
 
@@ -190,7 +195,7 @@ async function generateGalleryDesc(config, lang) {
     it: 'Write the caption in Italian.'
   };
 
-  const prompt = `Given this football kit design description: "${config.design_description}"
+  const prompt = `Given this ${sportOf(config)} kit design description: "${config.design_description}"
 
 Write a SHORT gallery caption of exactly 4 to 6 words that captures the essence of the design.
 Examples of good captions: "Bold gradient with black sleeves", "Classic red and white stripes", "Navy fade with gold trim"
@@ -831,7 +836,7 @@ async function main() {
           title: pageTitle,
           content: html,
           meta_title: pageTitle,
-          meta_keywords: ['custom football kit', 'custom jersey', config.team_name, 'MOMUTO'],
+          meta_keywords: [`custom ${sportOf(config)} kit`, 'custom jersey', config.team_name, 'MOMUTO'],
           meta_descript: content.meta_description,
           og_image: config.og_image || config.image_url,
           handle: handle
