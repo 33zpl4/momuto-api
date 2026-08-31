@@ -1,0 +1,40 @@
+name: Create US Ready to Play Products
+
+# Clones the Ready to Play product set from the EN store to the US store
+# with owner-ruled USD prices (scripts/create-us-rtp-products.js).
+# Dispatch-only — product creation is never a push side effect.
+# No-ops cleanly (green run, warning) until OEMSAAS_TOKEN_US is provisioned.
+
+on:
+  workflow_dispatch:
+    inputs:
+      handle:
+        description: 'Single product handle to clone (blank = every product the US wall links)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run — preview payloads, write nothing'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Clone RTP products EN → US
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          TARGET_HANDLE: ${{ github.event.inputs.handle }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/create-us-rtp-products.js

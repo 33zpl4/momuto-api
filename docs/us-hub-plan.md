@@ -304,6 +304,14 @@ does not. The full clone specification follows.
 >   (`en-US`), page clusters for ready-to-play / request gate / AI page,
 >   and the 8 EN↔US `BLOG_CLUSTERS`. Pairs emit only when both sides exist
 >   live; x-default stays www.
+> - **Products**: `scripts/create-us-rtp-products.js` +
+>   `create-us-rtp-products.yml` (dispatch-only) clone the RTP product set
+>   EN → US: handles parsed from the US wall (7 products), EUR→USD via an
+>   explicit owner-ruled PRICE_MAP (unmapped price = loud failure, never a
+>   silent conversion), create-then-rewire `inner_title.productId`,
+>   idempotent (existing US handles skip). Collections are not cloned.
+>   So A.5 "publish products" is now: add the token, dispatch the workflow
+>   (dry-run first), attach the collection in admin if wanted.
 > Still owner-gated (§A): store+DNS, `OEMSAAS_TOKEN_US`, USD price confirm
 > (single $45.90 / fast lane +$69 / long-sleeve upcharge — NOT printed
 > anywhere yet), US Stripe link, RTP products published in USD (wall tiles
