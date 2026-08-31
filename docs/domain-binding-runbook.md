@@ -29,20 +29,24 @@ oemapps/OEMSaaS; `manage.momuto.com` resolves into the same estate).
      below. Note: if a domain is deleted from DCDN, re-add it after ~5 min
      (wizard's own warning).
    - `RECORD: the CDN node chosen and the exact IP step ③ showed for us —
-     expected 104.18.20.248 (what es/fr/it resolve to).`
+     us.momuto.com (31 Aug 2026) step ③ showed: A / host us /
+     104.18.20.248 — same IP es/fr/it resolve to.`
 3. DNS (Cloudflare, `momuto.com` zone → DNS → Records): add an **A record**
-   — NOT a CNAME — matching the existing store subdomains exactly:
-   name `us`, IPv4 = the step-③ value (es/fr/it all use `104.18.20.248`),
-   **Proxy status: Proxied (orange cloud)**, TTL Auto.
-   Reference rows in the live zone (31 Aug 2026): `es`/`fr`/`it` → A
-   `104.18.20.248` Proxied; `design`/`manage` → A `198.11.178.106` **DNS
-   only** (tool + admin hosts are deliberately unproxied — don't "fix" them).
-4. Wait for the binding to verify and `https://us.momuto.com` to serve the
-   store over SSL. Keep the store unlaunched (noindex/unpublished) until
-   the launch checklist passes — the IT lesson: a locale ships complete or
-   not at all (`docs/de-site-plan.md`). If verification stalls with the
-   proxy on, flip the record to DNS only until it verifies, then re-enable
-   Proxied to match the other stores.
+   — NOT a CNAME — name `us`, IPv4 = the step-③ value (`104.18.20.248`),
+   TTL Auto, **Proxy status: DNS only (grey cloud) for the binding** —
+   step ③ warns explicitly: *"do not check the Cloudflare cloud icon when
+   resolving (i.e., the proxy status is set to DNS only)"*. The live
+   `es`/`fr`/`it` rows are Proxied today, so the proxy was evidently
+   enabled AFTER binding — bind grey, and only consider flipping to
+   Proxied once the store serves correctly over SSL, matching the others.
+   (`design`/`manage` → A `198.11.178.106` DNS only by design — tool +
+   admin hosts; don't "fix" them.)
+4. Back in the wizard, click **Verify** (allow ~10 minutes for DNS to take
+   effect; re-verify on failure) until step ④ "Successfully". Then confirm
+   `https://us.momuto.com` serves the store over SSL. Keep the store
+   unlaunched (noindex/unpublished) until the launch checklist passes —
+   the IT lesson: a locale ships complete or not at all
+   (`docs/de-site-plan.md`).
 5. Generate the store's OpenAPI token and add it as `OEMSAAS_TOKEN_US` to
    GitHub → Settings → Secrets → Actions (+ Vercel env if an API route
    needs it).
