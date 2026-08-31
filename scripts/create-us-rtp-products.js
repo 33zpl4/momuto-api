@@ -48,6 +48,7 @@ const PRICE_MAP = {
   '24.20': '27.80',  // full kit −10% seasonal (30.90 −10%, rounded)
   '59.00': '69.00',  // fast lane
   '15.00': '15.00',  // deposit (kept flat)
+  '35.00': '40.90',  // RTP product jersey price on the live EN store (owner-confirmed, 31 Aug 2026)
 };
 
 function mapPrice(eur, ctx, missing) {
@@ -148,17 +149,48 @@ async function main() {
   const usProducts = await fetchAllProducts(tokenUS);
   const usByHandle = new Map(usProducts.map(p => [getHandle(p), p]));
 
+  // The EN source's 3D-customizer pointer, rewired to a US product id.
+  // Returns null when the source has no usable 3d inner_title.
+  function rewiredInner(src, usId) {
+    if (!src.inner_title) return null;
+    let inner;
+    try { inner = JSON.parse(src.inner_title); } catch { return null; }
+    if (!inner || inner.type !== '3d') return null;
+    inner.productId = String(usId);
+    return JSON.stringify(inner);
+  }
+
   const errors = [];
   for (const handle of wanted) {
     const src = enProducts.find(p => getHandle(p) === handle);
     if (!src) { console.warn(`  ⚠️  ${handle}: not found on EN store — skipping`); errors.push(handle); continue; }
-    if (usByHandle.has(handle)) { console.log(`  ·  ${handle}: already on US store (id ${usByHandle.get(handle).id}) — skipping`); continue; }
 
     const missing = new Set();
     const payload = clonePayload(src, missing);
     if (missing.size) {
       console.error(`  ❌ ${handle}: EUR price(s) with no owner-ruled USD mapping: ${[...missing].join('; ')} — add to PRICE_MAP after owner confirms`);
       errors.push(handle);
+      continue;
+    }
+
+    // Already on the US store → only repair a missing/mis-pointed 3D pointer.
+    const existing = usByHandle.get(handle);
+    if (existing) {
+      const want = rewiredInner(src, existing.id);
+      if (!want || existing.inner_title === want) {
+        console.log(`  ·  ${handle}: already on US store (id ${existing.id}) — up to date, skipping`);
+        continue;
+      }
+      if (DRY_RUN) { console.log(`  DRY_RUN — would repair inner_title on ${handle} (id ${existing.id})`); continue; }
+      try {
+        // PUT replaces the whole object (CLAUDE.md rule 1) — send the full
+        // clone payload back, never inner_title alone.
+        await api(tokenUS, 'PUT', `/products/${existing.id}`, { ...payload, inner_title: want });
+        console.log(`  🔧 ${handle}: inner_title repaired (productId ${existing.id})`);
+      } catch (e) {
+        console.error(`  ❌ ${handle}: ${e.message}`);
+        errors.push(handle);
+      }
       continue;
     }
 
@@ -173,18 +205,13 @@ async function main() {
       console.log(`  ✅ created ${handle} (id ${newId})`);
 
       // Rewire the 3D-customizer pointer to the NEW product's own id.
-      if (src.inner_title && newId) {
-        let inner;
-        try { inner = JSON.parse(src.inner_title); } catch { inner = null; }
-        if (inner && inner.type === '3d') {
-          inner.productId = String(newId);
-          await api(tokenUS, 'PUT', `/products/${newId}`, { inner_title: JSON.stringify(inner) });
-          console.log(`     ↪ inner_title rewired (productId ${newId})`);
-        } else if (src.inner_title.includes('3d-preview')) {
-          // per-order preview tag — never clone
-        } else if (inner === null) {
-          console.warn(`     ⚠️  inner_title on EN isn't JSON — left unset on US, check manually`);
-        }
+      // PUT replaces the whole object — resend the full payload with it.
+      const want = newId ? rewiredInner(src, newId) : null;
+      if (want) {
+        await api(tokenUS, 'PUT', `/products/${newId}`, { ...payload, inner_title: want });
+        console.log(`     ↪ inner_title rewired (productId ${newId})`);
+      } else if (src.inner_title && !src.inner_title.includes('3d-preview')) {
+        console.warn(`     ⚠️  inner_title on EN isn't a 3d JSON pointer — left unset on US, check manually`);
       }
     } catch (e) {
       console.error(`  ❌ ${handle}: ${e.message}`);
