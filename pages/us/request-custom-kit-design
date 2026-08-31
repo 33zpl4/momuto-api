@@ -639,7 +639,7 @@
   </ul>
   <div class="gate-email-row">
     <input type="email" class="gate-email-input" id="gateEmail" placeholder="Your email address" />
-    <a href="__STRIPE_LINK_US__" class="gate-pay-btn" id="gatePayBtn">Send My Concept &middot; &#36;15 &rarr;</a>
+    <a href="https://buy.stripe.com/8x2fZhe204q8ge32KV3wQ0M" class="gate-pay-btn" id="gatePayBtn">Send My Concept &middot; &#36;15 &rarr;</a>
   </div>
   <p class="gate-refund-guarantee">The <strong>&#36;15</strong> covers a designer&rsquo;s time on this concept and is credited in full to orders of 5 or more jerseys &mdash; free for a team order.</p>
   <p class="gate-refund-note">Secure payment via Stripe &bull; Credited to your order at 5+ jerseys</p>
@@ -786,7 +786,7 @@
   // Gate: require a valid email, capture it as a lead (best-effort), then go to Stripe
   var gateEmail = document.getElementById('gateEmail');
   var gatePayBtn = document.getElementById('gatePayBtn');
-  var baseStripeUrl = '__STRIPE_LINK_US__';
+  var baseStripeUrl = 'https://buy.stripe.com/8x2fZhe204q8ge32KV3wQ0M';
 
   if (gateEmail && gatePayBtn) {
     var validEmail = function (v) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((v || '').trim()); };
