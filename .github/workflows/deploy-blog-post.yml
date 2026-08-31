@@ -20,7 +20,7 @@ on:
         required: false
         default: 'en'
         type: choice
-        options: [en, fr, es, it]
+        options: [en, fr, es, it, us]
       dry_run:
         description: 'Dry run — preview only, no writes to CMS'
         required: false
@@ -49,6 +49,7 @@ jobs:
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
           DRY_RUN: 'false'
         run: |
           BEFORE='${{ github.event.before }}'
@@ -64,6 +65,7 @@ jobs:
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
           LOCALE: ${{ github.event.inputs.locale }}
           POST_HANDLE: ${{ github.event.inputs.post_handle }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
