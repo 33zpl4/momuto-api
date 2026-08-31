@@ -2,36 +2,51 @@
 
 **Why this doc exists (31 Aug 2026):** when preparing `us.momuto.com` we went
 looking for how `it.momuto.com` was bound and found NOTHING — the binding was
-done by hand in the oemapps admin + the DNS dashboard before this repo's
-playbook era, and never written down. Every plan doc since just says "store
-created, domain bound" (`docs/us-hub-plan.md` §A.1, `docs/de-site-plan.md`
-checklist). This doc closes that gap. The repo-side steps below are verified
-against the codebase; the CMS/DNS steps are **reconstructed** — whoever runs
-the next binding must fill in the `VERIFY:` blanks from what the admin
-actually shows, in this file, in the same session. Then the next locale
-(DE) inherits a real runbook.
+done by hand in the platform admin + Cloudflare before this repo's playbook
+era, and never written down. Every plan doc since just says "store created,
+domain bound" (`docs/us-hub-plan.md` §A.1, `docs/de-site-plan.md` checklist).
+This doc closes that gap. **Verified 31 Aug 2026 against the owner's live
+Cloudflare zone + the admin's domain wizard** (screenshots, during the
+us.momuto.com binding); one wizard value still to record on completion is
+marked `RECORD:`.
 
-## Part 1 — CMS store + domain (owner, in oemapps admin)
+## Part 1 — CMS store + domain (owner, in the store admin + Cloudflare)
 
-1. Create the new store in the oemapps/OEMSaaS admin (manage.momuto.com).
-   Install the SAME theme as www so `pages/*` fragments render identically.
-2. Bind the custom domain (`us.momuto.com`) in the store's domain settings.
-   The admin displays the DNS target to point at.
-   - `VERIFY: exact admin path (Settings → Domains?) — record it here.`
-   - `VERIFY: the CNAME target host the admin shows — record it here.`
-3. DNS (Cloudflare, momuto.com zone): add a **CNAME** record, name `us`,
-   target = the host from step 2.
-   - `VERIFY: proxy status. SaaS platforms that issue their own SSL usually
-     require DNS-only (grey cloud) at least until the cert is issued. Record
-     what the existing subdomain records (fr/es/it) use — match them.`
-4. Wait for the platform to issue SSL and for `https://us.momuto.com` to
-   serve the store. Keep the store unlaunched (noindex/unpublished) until
+The store platform admin is the ABCSHOPPY Enterprise Edition panel
+(`https://a96ru5pm.abcshoppy.com/admin/…` — the white-label behind
+oemapps/OEMSaaS; `manage.momuto.com` resolves into the same estate).
+
+1. Create the new store in the admin. Install the SAME theme as www so
+   `pages/*` fragments render identically.
+2. Bind the domain: **Online Store → Domains → Add** (`/admin/domains/create`).
+   The wizard has 4 steps: **① Enter a domain → ② Select a CDN node →
+   ③ Domain name resolution → ④ Successfully.**
+   - Step ①: enter `us.momuto.com` and CHECK **"Bind only specified
+     domain"** — unchecked, the platform also binds the apex + www
+     (`momuto.com` / `www.momuto.com`), which belong to the EN store.
+   - Step ②: pick the same CDN node the existing stores use.
+   - Step ③ shows the DNS value to create — that's the input to step 3
+     below. Note: if a domain is deleted from DCDN, re-add it after ~5 min
+     (wizard's own warning).
+   - `RECORD: the CDN node chosen and the exact IP step ③ showed for us —
+     expected 104.18.20.248 (what es/fr/it resolve to).`
+3. DNS (Cloudflare, `momuto.com` zone → DNS → Records): add an **A record**
+   — NOT a CNAME — matching the existing store subdomains exactly:
+   name `us`, IPv4 = the step-③ value (es/fr/it all use `104.18.20.248`),
+   **Proxy status: Proxied (orange cloud)**, TTL Auto.
+   Reference rows in the live zone (31 Aug 2026): `es`/`fr`/`it` → A
+   `104.18.20.248` Proxied; `design`/`manage` → A `198.11.178.106` **DNS
+   only** (tool + admin hosts are deliberately unproxied — don't "fix" them).
+4. Wait for the binding to verify and `https://us.momuto.com` to serve the
+   store over SSL. Keep the store unlaunched (noindex/unpublished) until
    the launch checklist passes — the IT lesson: a locale ships complete or
-   not at all (`docs/de-site-plan.md`).
+   not at all (`docs/de-site-plan.md`). If verification stalls with the
+   proxy on, flip the record to DNS only until it verifies, then re-enable
+   Proxied to match the other stores.
 5. Generate the store's OpenAPI token and add it as `OEMSAAS_TOKEN_US` to
    GitHub → Settings → Secrets → Actions (+ Vercel env if an API route
    needs it).
-   - `VERIFY: admin path for token generation — record it here.`
+   - `RECORD: admin path for token generation — record it here.`
 
 ## Part 2 — DIY files (owner, once per store; the API cannot create them)
 
