@@ -29,6 +29,7 @@ const TOKENS = {
   fr: process.env.OEMSAAS_TOKEN_FR,
   es: process.env.OEMSAAS_TOKEN_ES,
   it: process.env.OEMSAAS_TOKEN_IT,
+  us: process.env.OEMSAAS_TOKEN_US,
 };
 
 const ENDPOINT = { post: 'posts', page: 'pages', product: 'products' };

@@ -32,6 +32,14 @@ const DOMAINS = {
     label: 'it.momuto.com',
     baseUrl: 'https://it.momuto.com',
   },
+  // US store — inert until OEMSAAS_TOKEN_US is provisioned (token check below
+  // skips it), then joins the daily rebuild and the hreflang clusters.
+  us: {
+    host: 'https://openapi.oemapps.com',
+    token: process.env.OEMSAAS_TOKEN_US,
+    label: 'us.momuto.com',
+    baseUrl: 'https://us.momuto.com',
+  },
 };
 
 // Pages that deserve higher priority in the sitemap
@@ -73,11 +81,12 @@ const HIGH_PRIORITY_HANDLES = new Set([
 // against the handles fetched live from each CMS), so we never emit return-tag
 // errors by pointing at pages that don't exist yet.
 
-const LOCALES = ['en', 'es', 'fr', 'it'];
+const LOCALES = ['en', 'es', 'fr', 'it', 'us'];
 
 // ISO hreflang per locale. en is the international default; es/fr/it are
-// region-targeted (Spain / France / Italy). x-default falls back to en.
-const HREFLANG = { en: 'en', es: 'es-ES', fr: 'fr-FR', it: 'it-IT' };
+// region-targeted (Spain / France / Italy); us is US English. x-default
+// falls back to en (www stays the international default).
+const HREFLANG = { en: 'en', es: 'es-ES', fr: 'fr-FR', it: 'it-IT', us: 'en-US' };
 
 // Curated cross-locale clusters for CMS /pages/{handle}. Handles confirmed from
 // the per-locale deploy scripts (deploy-about-pages, deploy-request-design-page,
@@ -88,14 +97,36 @@ const STATIC_CLUSTERS = [
   { en: 'about-us',                            es: 'sobre-nosotros',                      fr: 'a-propos-de-nous',                           it: 'chi-siamo' },
   { en: 'request-custom-kit-design',           es: 'solicitud-de-diseno-personalizado',   fr: 'demande-de-design-professionnel-de-maillots', it: 'richiesta-design-personalizzato' },
   { en: 'momuto-vs-jersix-owayo-spized-comparison', es: 'zentral-opiniones-alternativa',  fr: 'comparatif-fournisseur-maillot-foot-2026',   it: 'confronto-fornitori-maglie-calcio-2026' },
-  { en: 'ready-to-play',                       es: 'coleccion-ready-to-play',             fr: 'collection-ready-to-play',                   it: 'collezione-ready-to-play' },
+  { en: 'ready-to-play',                       es: 'coleccion-ready-to-play',             fr: 'collection-ready-to-play',                   it: 'collezione-ready-to-play', us: 'ready-to-play' },
+];
+
+// US-store /pages handles that mirror a www page under the same (or a US)
+// handle. Kept separate from STATIC_CLUSTERS rows that already carry a `us`
+// key only where the row exists; en↔us pairs whose other locales differ:
+STATIC_CLUSTERS.push(
+  { en: 'request-custom-kit-design', us: 'request-custom-kit-design' },
+  { en: 'ai-concept-to-real-kit',    us: 'ai-concept-to-real-kit' },
+);
+
+// Curated cross-locale clusters for BLOG POSTS (/blogs/{handle}) — the US
+// mirror of the EN team-kits hub (docs/us-hub-plan.md). A pair is only
+// emitted when the post exists live on both stores.
+const BLOG_CLUSTERS = [
+  { en: 'custom-football-kits-for-your-team-complete-guide', us: 'custom-soccer-uniforms-for-your-team-complete-guide' },
+  { en: 'custom-football-kits-amateur-grassroots-club',      us: 'custom-soccer-uniforms-club-team' },
+  { en: 'custom-futsal-5-a-side-jerseys',                    us: 'custom-futsal-indoor-soccer-jerseys' },
+  { en: 'custom-jerseys-7-a-side-sunday-league',             us: 'custom-soccer-jerseys-adult-rec-league' },
+  { en: 'custom-football-kits-corporate-events',             us: 'custom-soccer-jerseys-corporate-events' },
+  { en: 'custom-jerseys-football-tournaments',               us: 'custom-soccer-jerseys-tournaments' },
+  { en: 'when-to-order-team-kits-season-calendar',           us: 'when-to-order-team-uniforms-season-calendar' },
+  { en: 'fund-team-kits-sponsors-fundraising',               us: 'fund-team-uniforms-sponsors-fundraising' },
 ];
 
 // Programmatic clusters — handles share a locale-agnostic slug.
 // Team pages: `{slug}-{suffix}` (suffix per locale, from generate-and-deploy.js).
-const TEAM_SUFFIX = { en: 'custom-kit-design', es: 'diseno-equipacion', fr: 'design-maillot', it: 'design-maglia' };
+const TEAM_SUFFIX = { en: 'custom-kit-design', es: 'diseno-equipacion', fr: 'design-maillot', it: 'design-maglia', us: 'custom-kit-design' };
 // Ready-to-Play templates: `{prefix}{slug}` (from ready-to-play/config.json).
-const RTP_PREFIX = { en: 'ready-to-play-', es: 'ready-to-play-', fr: 'maillot-', it: 'ready-to-play-' };
+const RTP_PREFIX = { en: 'ready-to-play-', es: 'ready-to-play-', fr: 'maillot-', it: 'ready-to-play-', us: 'ready-to-play-' };
 
 // Handles that belong to curated clusters — excluded from pattern detection so a
 // page like `request-custom-kit-design` is never mis-read as a team page (slug
@@ -104,12 +135,17 @@ const CLUSTERED_HANDLES = new Set(STATIC_CLUSTERS.flatMap(c => LOCALES.map(l => 
 
 /**
  * Builds a Map from a page URL (loc) → array of hreflang alternates (incl. x-default).
- * @param {Object} handleSets  { [locale]: Set<handle> } of handles that exist live per locale.
+ * @param {Object} handleSets  { [locale]: Set<handle> } of page handles that exist live per locale.
+ * @param {Object} postSets    { [locale]: Set<handle> } of blog-post handles that exist live per locale.
  */
-function buildAlternatesMap(handleSets) {
+function buildAlternatesMap(handleSets, postSets = {}) {
   const map = new Map();
   const pageLoc = (locale, handle) => `${DOMAINS[locale].baseUrl}/pages/${handle}`;
+  const postLoc = (locale, handle) => `${DOMAINS[locale].baseUrl}/blogs/${handle}`;
   const rootLoc = (locale, p) => `${DOMAINS[locale].baseUrl}${p}`;
+  // Locales actually fetched this run (token present) — a store we could not
+  // see must never be referenced as an alternate.
+  const liveLocales = LOCALES.filter(l => handleSets[l]);
 
   const register = (members) => {
     if (members.length < 2) return; // a single-locale cluster adds no SEO value
@@ -119,9 +155,18 @@ function buildAlternatesMap(handleSets) {
     for (const m of members) map.set(m.loc, withDefault);
   };
 
-  // Site-wide same-path clusters — these exist on every locale.
+  // Site-wide same-path clusters — these exist on every live locale.
   for (const p of ['/', '/collections', '/blogs']) {
-    register(LOCALES.map(locale => ({ locale, loc: rootLoc(locale, p) })));
+    register(liveLocales.map(locale => ({ locale, loc: rootLoc(locale, p) })));
+  }
+
+  // Curated blog-post clusters (EN ↔ US mirror) — include a locale only if
+  // the post exists live there.
+  for (const cluster of BLOG_CLUSTERS) {
+    const members = LOCALES
+      .filter(locale => cluster[locale] && postSets[locale]?.has(cluster[locale]))
+      .map(locale => ({ locale, loc: postLoc(locale, cluster[locale]) }));
+    register(members);
   }
 
   // Curated /pages clusters — include a locale only if the handle exists live there.
@@ -323,6 +368,7 @@ async function main() {
   // cross-locale hreflang clusters from handles that actually exist live.
   const fetched = {};
   const handleSets = {};
+  const postSets = {};
   for (const [locale, domain] of Object.entries(DOMAINS)) {
     if (!domain.token) {
       console.warn(`[${domain.label}] Skipping — token not set`);
@@ -337,9 +383,10 @@ async function main() {
     ]);
     fetched[locale] = { pages, posts, products, collections };
     handleSets[locale] = new Set(pages.map(getSlug).filter(Boolean));
+    postSets[locale] = new Set(posts.map(getSlug).filter(Boolean));
   }
 
-  const alternatesMap = buildAlternatesMap(handleSets);
+  const alternatesMap = buildAlternatesMap(handleSets, postSets);
   console.log(`\nBuilt hreflang clusters covering ${alternatesMap.size} URL(s).`);
 
   // Pass 2: build + push each locale's sitemap with alternates attached.

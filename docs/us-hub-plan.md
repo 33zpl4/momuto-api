@@ -285,6 +285,41 @@ does not. The full clone specification follows.
 
 # THE FULL CLONE — everything needed to stand up us.momuto.com
 
+> **BUILD STATUS (31 Aug 2026, branch `claude/us-site-basketball-front-4g0f94`):**
+> the §B repo estate is built and sitting ready. What landed:
+> - **B.1** `static/us.momuto.com/robots.txt` + `llms.txt` (USD / soccer lexicon).
+> - **B.2** `pages/us/{ready-to-play, request-custom-kit-design,
+>   ai-concept-to-real-kit, custom-basketball-jerseys}` — US lexicon, USD,
+>   wall carries a Basketball section (deep link `suitName=mamuto3basket3`,
+>   no configId — verify it opens the basketball body). The gate ships with
+>   `__STRIPE_LINK_US__`; its deployer refuses to ship until replaced.
+> - **B.3** the 8-post mirror in `blogs/us/` per the map below.
+> - **B.4** `us` locale in deploy-blog-post.js / pull-cms.js /
+>   deploy-static-files.js / rebuild-sitemap.js + workflow env/dispatch;
+>   pages deploy via NEW `scripts/deploy-us-pages.js` +
+>   `deploy-us-pages.yml` (upsert, sanity checks incl. €-ban and Stripe
+>   guard) instead of threading `us` through four per-page scripts.
+>   Everything no-ops green while `OEMSAAS_TOKEN_US` is missing.
+> - **B.5** hreflang via sitemap `xhtml:link`: `us` joined LOCALES
+>   (`en-US`), page clusters for ready-to-play / request gate / AI page,
+>   and the 8 EN↔US `BLOG_CLUSTERS`. Pairs emit only when both sides exist
+>   live; x-default stays www.
+> - **Products**: `scripts/create-us-rtp-products.js` +
+>   `create-us-rtp-products.yml` (dispatch-only) clone the RTP product set
+>   EN → US: handles parsed from the US wall (7 products), EUR→USD via an
+>   explicit owner-ruled PRICE_MAP (unmapped price = loud failure, never a
+>   silent conversion), create-then-rewire `inner_title.productId`,
+>   idempotent (existing US handles skip). Collections are not cloned.
+>   So A.5 "publish products" is now: add the token, dispatch the workflow
+>   (dry-run first), attach the collection in admin if wanted.
+> Still owner-gated (§A): store+DNS, `OEMSAAS_TOKEN_US`, USD price confirm
+> (single $45.90 / fast lane +$69 / long-sleeve upcharge — NOT printed
+> anywhere yet), US Stripe link, RTP products published in USD (wall tiles
+> 404 until then), basketball designs, GSC property, legal pages, and the
+> CMS stubs the content links to: `size-guide`,
+> `custom-soccer-uniform-materials-printing`, `privacy-policy`,
+> `customized-design-confirmed` (gate redirect), `contact`.
+
 The mirror plan above covers the blog hub (8 posts). A cloned *site* is
 much more. This section is the complete bill of materials, split by who can
 do it. Agent work can start immediately in the repo; owner work gates going

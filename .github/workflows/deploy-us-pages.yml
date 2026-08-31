@@ -1,0 +1,43 @@
+name: Deploy US Pages (us.momuto.com)
+
+# Deploys the US store's page estate from pages/us/<handle>.
+# No-ops cleanly (green run, warning) until OEMSAAS_TOKEN_US is provisioned.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pages/us/**'
+      - 'scripts/deploy-us-pages.js'
+      - '.github/workflows/deploy-us-pages.yml'
+  workflow_dispatch:
+    inputs:
+      handle:
+        description: 'Single page handle to deploy (blank = all)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run — preview only, no writes to CMS'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Deploy US pages
+        env:
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          TARGET_HANDLE: ${{ github.event.inputs.handle }}
+          DRY_RUN: ${{ github.event_name == 'push' && 'false' || github.event.inputs.dry_run }}
+        run: node scripts/deploy-us-pages.js

@@ -33,7 +33,7 @@ on:
         required: false
         default: 'fr'
         type: choice
-        options: [en, fr, es, it]
+        options: [en, fr, es, it, us]
 
 permissions:
   contents: write
@@ -67,6 +67,7 @@ jobs:
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
         run: |
           while read -r A B C; do
             [ -z "$A" ] && continue

@@ -35,6 +35,16 @@ const DOMAINS = {
     host: 'https://openapi.oemapps.com',
     staticDir: path.join('static', 'it.momuto.com'),
     files: ['robots.txt', 'llms.txt', 'blog.css', 'rtp-content.js']
+  },
+  // US store (us.momuto.com) — no-ops until OEMSAAS_TOKEN_US exists (missing
+  // token skips cleanly below). US llms.txt is its own file (USD / soccer
+  // lexicon), NOT the shared EUR/football one.
+  us: {
+    token: process.env.OEMSAAS_TOKEN_US,
+    label: 'us.momuto.com',
+    host: 'https://openapi.oemapps.com',
+    staticDir: path.join('static', 'us.momuto.com'),
+    files: ['robots.txt', 'llms.txt', 'blog.css', 'rtp-content.js']
   }
 };
 

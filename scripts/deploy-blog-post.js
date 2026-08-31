@@ -25,6 +25,7 @@ const DOMAIN_MAP = {
   fr: { token: process.env.OEMSAAS_TOKEN_FR, url: 'https://fr.momuto.com' },
   es: { token: process.env.OEMSAAS_TOKEN_ES, url: 'https://es.momuto.com' },
   it: { token: process.env.OEMSAAS_TOKEN_IT, url: 'https://it.momuto.com' },
+  us: { token: process.env.OEMSAAS_TOKEN_US, url: 'https://us.momuto.com' },
 };
 
 function blogDirFor(locale) {
@@ -76,7 +77,7 @@ async function createPost(token, data) {
 
 // blogs/<handle>.json → en ; blogs/<locale>/<handle>.json → that locale
 function parsePath(file) {
-  let m = file.match(/^blogs\/(en|fr|es|it)\/(.+)\.json$/);
+  let m = file.match(/^blogs\/(en|fr|es|it|us)\/(.+)\.json$/);
   if (m) return { locale: m[1], handle: m[2] };
   m = file.match(/^blogs\/([^/]+)\.json$/);
   if (m) return { locale: 'en', handle: m[1] };
