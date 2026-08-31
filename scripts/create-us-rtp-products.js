@@ -48,6 +48,7 @@ const PRICE_MAP = {
   '24.20': '27.80',  // full kit −10% seasonal (30.90 −10%, rounded)
   '59.00': '69.00',  // fast lane
   '15.00': '15.00',  // deposit (kept flat)
+  '35.00': '40.90',  // RTP product jersey price on the live EN store (owner-confirmed, 31 Aug 2026)
 };
 
 function mapPrice(eur, ctx, missing) {
