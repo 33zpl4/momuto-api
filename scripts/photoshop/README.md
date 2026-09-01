@@ -113,15 +113,29 @@ drags the slot's sponsor up with the panel — which gave one sleeve's sponsor
 `SPONSOR_RAISE` twice over while the other three got it once. A base offset moves
 the panel alone, so every sponsor now sits at exactly `SPONSOR_RAISE`.
 
-The artwork is scaled up by **twice** the shift before moving, so the strip the
-shift would vacate stays covered. Twice, not once, because scaling is centred:
-the extra is split evenly between both edges and only half travels in the
-direction of the shift. Uniform on both axes, so nothing distorts, and the
-overflow is cropped by the canvas. With no offset the bleed is zero and the fit
-is the exact edge-to-edge one it always was.
+**Mind the units.** `baseOffsetPct` is a fraction of the *artwork* canvas, and on
+the sleeves **one export pixel is about 6.3 canvas pixels**. Getting that
+backwards is what made the first attempt at this a sixth of what was asked for:
+"raise it 15 px", read off the exported image, was applied as 15 px of the SVG
+canvas — a 2.4 px move in the export. `SLEEVE_RAISE` is now `80 / 2494`, about
+12–13 px in the export.
 
-To tune from a render: measure the missing band in the exported 1500 px image and
-multiply by `2494 / <sleeve height in that image>` to get sleeve-canvas px.
+The exact conversion is `f × H × export/template`, where `H` is the slot's full
+transform height. `H` is not directly readable — layer bounds report the
+**masked** extent, not the transform — so 15 export px is somewhere between 66
+and 104 canvas px depending on how much of the sleeve the mask hides. 80 is the
+middle of that band. To tune: ~6.3 canvas px per export px, so "needs 4 px more"
+is `+25`. Overshooting shows as cream appearing below the band, which is easy to
+read, so err high rather than creep up.
+
+**The vacated strip is not covered by default.** A shift does leave a gap at the
+trailing edge, but the reason to shift at all is that the canvas edge lies
+*outside* the mask — which is the same reason the gap cannot show. Covering it
+costs a real upscale: scaling is centred, so covering a shift of `d` needs `2d`
+of extra height, which at the sleeve raise is a **6.4% enlargement** of the
+artwork. On a patterned kit that is a visible scale mismatch with the body at the
+shoulder seam — a certain artefact traded for a hypothetical one. `baseBleed:
+true` on the slot turns it on if a transparent sliver really does appear.
 
 **`mirrorX: 'shared'`** flips the base artwork on the picture-right slots — but
 only when the file came from the shared `-sleeves` fallback. A design that

@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-09-01a · all four sleeves raised alike; mirror only a shared file';
+var VERSION = '2026-09-01b · sleeve raise in the units it was asked in (~13px on export)';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -75,10 +75,21 @@ var SPONSOR_RAISE = 15 / 2494;
 //    once. As a base offset it moves the panel only, so every sponsor now sits at
 //    exactly SPONSOR_RAISE.
 //
-//    15 px in the sleeve's own 1348×2494 canvas — the space the SVGs are drawn
-//    in. To tune from a render: measure the missing band in the exported 1500 px
-//    image and multiply by 2494/<sleeve height in that image> to get canvas px.
-var SLEEVE_RAISE = 15 / 2494;
+//    80 px of the sleeve's own 1348×2494 canvas ≈ 12–13 px in the exported 1500
+//    image. The units matter and got this wrong once: "raise it 15 px" was read
+//    as 15 px of the SVG canvas, which is only 2.4 px in the export — about a
+//    sixth of what was asked for, and why one raise later it was still short.
+//
+//    The conversion is f × H × export/template, where H is the slot's full
+//    transform height. H is not directly readable (bounds report the MASKED
+//    extent), so 15 export px is somewhere between 66 and 104 canvas px
+//    depending on how much of the sleeve the mask hides. 80 is the middle of
+//    that band.
+//
+//    To tune from a render: this is roughly 6.3 canvas px per export px, so
+//    "needs 4 px more" is +25 here. Overshooting shows as cream appearing below
+//    the band — easy to read, so err high rather than creep up.
+var SLEEVE_RAISE = 80 / 2494;
 
 var SPONSOR = {
   frontRightArm: [-0.146135, 0.568293 - SPONSOR_RAISE, 0.660022, 0.272781],   // front template, picture-LEFT slot
@@ -181,9 +192,16 @@ var CONFIG = {
   // the slot's sponsor along with the panel. A base offset moves the panel alone
   // and leaves every overlay where its box put it.
   //
-  // The artwork is scaled up by exactly the size of the shift first, so the strip
-  // the shift would vacate stays covered. Uniform on both axes — nothing
-  // distorts, and the overflow is cropped by the canvas.
+  // Units: a fraction of the ARTWORK canvas, not of the export. On the sleeves
+  // one export pixel is about 6.3 canvas pixels, so a correction read off a
+  // render has to be multiplied up — getting that backwards made the first cuff
+  // raise a sixth of what was asked for. See SLEEVE_RAISE.
+  //
+  // The shift vacates a strip at the trailing edge, which is NOT covered by
+  // default: the reason to shift is that the canvas edge is outside the mask,
+  // which is the same reason the strip cannot show. `baseBleed: true` covers it
+  // anyway if that turns out to be wrong — at the cost of enlarging the artwork
+  // by twice the shift, which on a patterned kit mismatches the body's scale.
   //
   // `required: true` means the view cannot be exported without that artwork.
   // Everything else is OPTIONAL: if the file is absent the slot keeps the
@@ -486,12 +504,19 @@ function layerBox(pl) {
  * `offset` shifts the panel inside that canvas afterwards, as a fraction of the
  * canvas — the knob for bringing a cuff band up past the template's mask.
  *
- * A plain shift would uncover a strip at the trailing edge, so the artwork is
- * first scaled up by exactly the size of the shift. Uniform on both axes, so
- * nothing distorts, and the overflow is cropped by the canvas. With no offset
- * the bleed is zero and this is the exact edge-to-edge fit it always was.
+ * NO BLEED BY DEFAULT, and that is deliberate. A shift does vacate a strip at
+ * the trailing edge, but the reason to shift at all is that the canvas edge lies
+ * OUTSIDE the mask — which is the same reason the vacated strip cannot show.
+ * Covering it costs a real upscale of the artwork: the scaling is centred, so
+ * covering a shift of d needs 2d of extra height, and at the sleeve raise that
+ * is a ~6% enlargement. On a patterned kit that is a visible scale mismatch with
+ * the body at the shoulder seam — a certain artefact traded for a hypothetical
+ * one.
+ *
+ * `bleed: true` turns it on for the case where the premise is wrong and a
+ * transparent sliver really does appear.
  */
-function fitLayerToCanvas(pl, cw, ch, offset) {
+function fitLayerToCanvas(pl, cw, ch, offset, bleed) {
   var m = layerBox(pl);
   if (m.w <= 0 || m.h <= 0) return;
 
@@ -500,9 +525,9 @@ function fitLayerToCanvas(pl, cw, ch, offset) {
   // TWICE the shift, not once: scaling is centred, so the extra is split evenly
   // between the two edges and only half of it travels in the direction of the
   // shift. At 1× the trailing edge is left short by half the offset.
-  var bleed = 2 * Math.max(Math.abs(dx) / cw, Math.abs(dy) / ch);
+  var grow = bleed ? 2 * Math.max(Math.abs(dx) / cw, Math.abs(dy) / ch) : 0;
 
-  pl.resize(cw * (1 + bleed) / m.w * 100, ch * (1 + bleed) / m.h * 100, AnchorPosition.MIDDLECENTER);
+  pl.resize(cw * (1 + grow) / m.w * 100, ch * (1 + grow) / m.h * 100, AnchorPosition.MIDDLECENTER);
 
   var n = layerBox(pl);
   pl.translate(UnitValue((cw - n.w) / 2 - n.x + dx, 'px'),
@@ -684,7 +709,7 @@ function placeInsideSlot(doc, layer, stack, sample) {
         box = [p[0] * cw, p[1] * ch, p[2] * cw, p[3] * ch];
       }
       if (box) fitLayerInBox(pl, box, stack[f].fit);
-      else fitLayerToCanvas(pl, cw, ch, stack[f].offset);
+      else fitLayerToCanvas(pl, cw, ch, stack[f].offset, stack[f].bleed);
       if (stack[f].mirrorX) mirrorLayerX(pl);
     }
     // Read the colour here, while the artwork is rasterised and alone in the
@@ -1170,7 +1195,8 @@ function main() {
                 file: art,
                 box: null,
                 mirrorX: wantsMirror(slot, match),
-                offset: slot.baseOffsetPct || null
+                offset: slot.baseOffsetPct || null,
+                bleed: !!slot.baseBleed
               }];
               if (slot.mirrorX && !stack[0].mirrorX) {
                 mirrored.push(slot.addr + ' NOT flipped (' + match.kind + ' is side-specific)');
