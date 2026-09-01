@@ -156,47 +156,61 @@ async function main() {
       module_rule: { module_logical_operator: 'and', module_rules: [
         { field: 'total_price', comparison_operator: 'egt', value: THRESH } ] } });
 
+    const US_COUNTRY_ID = 229; // confirmed via GET /shippingzones/{id}: United States
     const { ok, json } = await api(token, 'GET', '/shippingzones?type=1');
     if (!ok) { console.error(JSON.stringify(json)); process.exit(1); }
-    for (const z of json.data.shippingzones || []) {
-      const det = await zoneDetails(token, z.id);
-      const sz = det.shippingzone || {};
-      const areas = Object.values(sz.areas || {}).map(a => ({ country_id: a.id, provinces: [] }));
-      let name = z.plan_name;
-      let plans = (z.shippingZonePlan || []).map(p => ({
-        id: p.id, store_id: p.store_id, shipping_zone_id: p.shipping_zone_id,
-        plan_name: p.plan_name, descript: p.descript || '', param: p.param,
-        created_at: p.created_at, updated_at: p.updated_at,
-      }));
+    const zones = json.data.shippingzones || [];
+    const usps = zones.find(z => z.plan_name === 'EMS via Royal Mail' || z.plan_name === 'USPS');
+    const world = zones.find(z => z.plan_name === 'FREE EMS Shipping');
+    if (!world) { console.error('worldwide zone "FREE EMS Shipping" not found — aborting'); process.exit(1); }
 
-      if (z.plan_name === 'FREE EMS Shipping') {
-        // the live checkout zone: retarget the converted $58.02/$4.53 to $59/$4.90
-        for (const p of plans) {
-          const paid = Number(p.param?.fee) > 0;
-          p.param = paid ? below() : above();
-          p.plan_name = 'Certified Courier | 25-30 Days Delivery';
-        }
-      } else if (z.plan_name === 'EMS via Royal Mail') {
-        // clone leftover: carrier becomes USPS, claims align to the one set of numbers
-        name = 'USPS';
-        for (const p of plans) {
-          p.plan_name = 'USPS | 25-30 Days Delivery';
-          p.descript = 'Estimated delivery: 25-30 days';
-        }
-        // rules left untouched deliberately — see the run log for its area(s)
-      } else {
-        console.log(`  · zone ${z.id} "${z.plan_name}" — no curated change, skipped`);
-        continue;
-      }
+    const mkPlan = (base, param) => ({
+      id: base.id ?? 0, store_id: base.store_id, shipping_zone_id: base.shipping_zone_id,
+      plan_name: base.plan_name, descript: base.descript || '', param,
+      created_at: base.created_at ?? 0, updated_at: base.updated_at ?? 0,
+    });
 
-      const payload = { name, type: z.type, areas,
+    // ORDER MATTERS: the US-only USPS zone must exist before the worldwide
+    // zone drops the US, or US checkout has no shipping method at all.
+    let uspsOk = false;
+    if (usps) {
+      const base = (usps.shippingZonePlan || [])[0];
+      const proto = { store_id: usps.store_id, shipping_zone_id: usps.id,
+        plan_name: 'USPS | 25-30 Days Delivery', descript: 'Estimated delivery: 25-30 days' };
+      const plans = [
+        mkPlan({ ...proto, id: base?.id, created_at: base?.created_at, updated_at: base?.updated_at }, below()),
+        mkPlan({ ...proto, id: (usps.shippingZonePlan || [])[1]?.id ?? 0 }, above()),
+      ];
+      const payload = { name: 'USPS', type: usps.type,
+        areas: [{ country_id: US_COUNTRY_ID, provinces: [] }],
         plan: plans.map((p, i) => ({ ...p, index: i })), product_ids: [] };
-      console.log(`\nPUT /shippingzones/${z.id} (${areas.length} area(s)):`);
+      console.log(`\nPUT /shippingzones/${usps.id} (USPS, US-only):`);
       console.log(JSON.stringify(payload, null, 2));
-      if (DRY_RUN) { console.log('DRY_RUN — not sent.'); continue; }
-      const res = await api(token, 'PUT', `/shippingzones/${z.id}`, payload);
+      if (DRY_RUN) { console.log('DRY_RUN — not sent.'); uspsOk = true; }
+      else {
+        const res = await api(token, 'PUT', `/shippingzones/${usps.id}`, payload);
+        if (res.ok) { uspsOk = true; console.log(`  ✅ zone ${usps.id} is now USPS (US, $${FEE} under $${THRESH}, free above)`); }
+        else console.error(`  ❌ USPS zone PUT failed — US stays in the worldwide zone. ${JSON.stringify(res.json).slice(0, 300)}`);
+      }
+    } else console.warn('no Royal Mail/USPS zone found — skipping the USPS conversion');
+
+    {
+      const det = await zoneDetails(token, world.id);
+      const sz = det.shippingzone || {};
+      let areas = Object.values(sz.areas || {}).map(a => ({ country_id: a.id, provinces: [] }));
+      if (uspsOk) areas = areas.filter(a => a.country_id !== US_COUNTRY_ID); // USPS owns the US now
+      const plans = (world.shippingZonePlan || []).map(p => {
+        const paid = Number(p.param?.fee) > 0;
+        return mkPlan({ ...p, plan_name: 'Certified Courier | 25-30 Days Delivery' }, paid ? below() : above());
+      });
+      const payload = { name: world.plan_name, type: world.type, areas,
+        plan: plans.map((p, i) => ({ ...p, index: i })), product_ids: [] };
+      console.log(`\nPUT /shippingzones/${world.id} (worldwide, ${areas.length} area(s)${uspsOk ? ', US excluded' : ', US KEPT — USPS zone not confirmed'}):`);
+      console.log(JSON.stringify({ ...payload, areas: `[${areas.length} areas elided]` }, null, 2));
+      if (DRY_RUN) { console.log('DRY_RUN — not sent.'); return; }
+      const res = await api(token, 'PUT', `/shippingzones/${world.id}`, payload);
       if (!res.ok) { console.error(`  ❌ ${JSON.stringify(res.json).slice(0, 300)}`); process.exit(1); }
-      console.log(`  ✅ zone ${z.id} updated`);
+      console.log(`  ✅ zone ${world.id} updated ($${FEE} under $${THRESH}, free above)`);
     }
     return;
   }
