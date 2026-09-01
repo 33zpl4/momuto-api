@@ -67,12 +67,18 @@ const US_MENU_CHILDREN = [
     item('AI concept to real jersey', 2, 6, '/pages/ai-concept-to-real-kit'),
   ]),
   item('Basketball', 1, 6, '/pages/custom-basketball-jerseys'),
-  item('Guides', 2, 0, '', [
+  // the Iconic Series collections were cloned to the US store (owner, 1 Sep 2026);
+  // custom URLs, not type-2 album ids — the US collection ids differ from EN's
+  item('Iconic Series', 2, 0, '', [
+    item('Drop 01', 0, 6, '/collections/iconic-football-series'),
+    item('Drop 02', 1, 6, '/collections/iconic-series-drop-02'),
+  ]),
+  item('Guides', 3, 0, '', [
     item('Custom soccer uniforms: the complete guide', 0, 6, '/blogs/custom-soccer-uniforms-for-your-team-complete-guide'),
     item('When to order: season calendar', 1, 6, '/blogs/when-to-order-team-uniforms-season-calendar'),
     item('All guides', 2, 14, '/blogs'),
   ]),
-  item('Support', 3, 0, '', [
+  item('Support', 4, 0, '', [
     // these three pages exist on the US store (confirmed via GET /navs, 1 Sep 2026)
     item('FAQ', 0, 6, '/pages/faq'),
     item('Printing & Materials', 1, 6, '/pages/printing'),
@@ -104,6 +110,93 @@ async function main() {
         if (ep === '/couriers' && ok) { console.log(`(${(json.data || []).length} couriers — list elided)`); continue; }
         console.log(JSON.stringify(json, null, 2));
       }
+    }
+    return;
+  }
+
+  // ── shipping (owner rulings 1 Sep 2026: threshold $59, fee $4.90 below it;
+  //    the cloned "EMS via Royal Mail" zone becomes USPS) ────────────────────
+  const THRESH = 59, FEE = 4.90;
+
+  async function zoneDetails(token, id) {
+    const { ok, json } = await api(token, 'GET', `/shippingzones/${id}`);
+    if (!ok) throw new Error(`GET /shippingzones/${id}: ${JSON.stringify(json).slice(0, 300)}`);
+    return json.data;
+  }
+
+  if (MODE === 'inspect-zones') {
+    const store = (process.env.TARGET_STORE || 'us').toLowerCase();
+    const token = TOKENS[store];
+    if (!token) { console.error(`No token for "${store}"`); process.exit(1); }
+    const { ok, json } = await api(token, 'GET', '/shippingzones?type=1');
+    if (!ok) { console.error(JSON.stringify(json)); process.exit(1); }
+    for (const z of json.data.shippingzones || []) {
+      const det = await zoneDetails(token, z.id);
+      const sz = det.shippingzone || {};
+      const areas = Object.values(sz.areas || {}).map(a => `${a.country_code_2}:${a.country_name}`);
+      console.log(`\n===== zone ${z.id} "${z.plan_name}" — ${areas.length} area(s) =====`);
+      console.log('areas:', JSON.stringify(areas));
+      console.log('plans (from list):', JSON.stringify(z.shippingZonePlan, null, 2));
+      console.log('details product_list length:', (det.product_list || sz.product_list || []).length);
+    }
+    return;
+  }
+
+  if (MODE === 'apply-shipping') {
+    const store = (process.env.TARGET_STORE || 'us').toLowerCase();
+    if (store !== 'us') { console.error('apply-shipping is curated for the us store only'); process.exit(1); }
+    const token = TOKENS[store];
+    if (!token) { console.error('No us token'); process.exit(1); }
+
+    const below = () => ({ rule: 'total_price', rule_min: 0, rule_max: THRESH, fee_method: 1, fee: FEE,
+      module_rule: { module_logical_operator: 'and', module_rules: [
+        { field: 'total_price', comparison_operator: 'egt', value: 0 },
+        { field: 'total_price', comparison_operator: 'elt', value: THRESH } ] } });
+    const above = () => ({ rule: 'total_price', rule_min: THRESH, fee_method: 1, fee: 0,
+      module_rule: { module_logical_operator: 'and', module_rules: [
+        { field: 'total_price', comparison_operator: 'egt', value: THRESH } ] } });
+
+    const { ok, json } = await api(token, 'GET', '/shippingzones?type=1');
+    if (!ok) { console.error(JSON.stringify(json)); process.exit(1); }
+    for (const z of json.data.shippingzones || []) {
+      const det = await zoneDetails(token, z.id);
+      const sz = det.shippingzone || {};
+      const areas = Object.values(sz.areas || {}).map(a => ({ country_id: a.id, provinces: [] }));
+      let name = z.plan_name;
+      let plans = (z.shippingZonePlan || []).map(p => ({
+        id: p.id, store_id: p.store_id, shipping_zone_id: p.shipping_zone_id,
+        plan_name: p.plan_name, descript: p.descript || '', param: p.param,
+        created_at: p.created_at, updated_at: p.updated_at,
+      }));
+
+      if (z.plan_name === 'FREE EMS Shipping') {
+        // the live checkout zone: retarget the converted $58.02/$4.53 to $59/$4.90
+        for (const p of plans) {
+          const paid = Number(p.param?.fee) > 0;
+          p.param = paid ? below() : above();
+          p.plan_name = 'Certified Courier | 25-30 Days Delivery';
+        }
+      } else if (z.plan_name === 'EMS via Royal Mail') {
+        // clone leftover: carrier becomes USPS, claims align to the one set of numbers
+        name = 'USPS';
+        for (const p of plans) {
+          p.plan_name = 'USPS | 25-30 Days Delivery';
+          p.descript = 'Estimated delivery: 25-30 days';
+        }
+        // rules left untouched deliberately — see the run log for its area(s)
+      } else {
+        console.log(`  · zone ${z.id} "${z.plan_name}" — no curated change, skipped`);
+        continue;
+      }
+
+      const payload = { name, type: z.type, areas,
+        plan: plans.map((p, i) => ({ ...p, index: i })), product_ids: [] };
+      console.log(`\nPUT /shippingzones/${z.id} (${areas.length} area(s)):`);
+      console.log(JSON.stringify(payload, null, 2));
+      if (DRY_RUN) { console.log('DRY_RUN — not sent.'); continue; }
+      const res = await api(token, 'PUT', `/shippingzones/${z.id}`, payload);
+      if (!res.ok) { console.error(`  ❌ ${JSON.stringify(res.json).slice(0, 300)}`); process.exit(1); }
+      console.log(`  ✅ zone ${z.id} updated`);
     }
     return;
   }
