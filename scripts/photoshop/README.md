@@ -87,16 +87,55 @@ absent, and the run says so.
 | front | `JERSEY DESIGN` | `@1723,736` | `-shoulderleft` → `-shoulders` | |
 | front | `JERSEY DESIGN` | `@3596,746` | `-shoulderright` → `-shoulders` | |
 | front | `SLEEVE DESIGN` | `@1242,995` | `-sleeveright` → `-sleeves` *(+ `-sleevesponsorright` → `-sleevesponsor`)* | |
-| front | `SLEEVE DESIGN` | `@3845,1040` | `-sleeveleft` → `-sleeves` *(+ `-sleevesponsorleft` → `-sleevesponsor`)* | |
+| front | `SLEEVE DESIGN` | `@3845,1040` | `-sleeveleft` → `-sleeves` *(+ `-sleevesponsorleft` → `-sleevesponsor`)* · mirrored if shared | |
 | front | `COLLAR TOP` | — | `-collartop` | |
 | front | `COLLAR BOTTOM` | — | `-collarbottom` | |
 | back | `JERSEY DESIGN` | — | `-back` | ● |
 | back | `LEFT SLEEVE DESIGN` | — | `-sleeveleft` → `-sleeves` *(+ `-sleevesponsorleft` → `-sleevesponsor`)* | |
-| back | `RIGHT SLEEVE DESIGN` | — | `-sleeveright` → `-sleeves` *(+ `-sleevesponsorright` → `-sleevesponsor`)* | |
+| back | `RIGHT SLEEVE DESIGN` | — | `-sleeveright` → `-sleeves` *(+ `-sleevesponsorright` → `-sleevesponsor`)* · mirrored if shared | |
 | back | `COLLAR DESIGN` | — | `-collarback` | |
 | shorts | `L LEG DESIGN` | `@954,965` | `-shortsright` → `-shorts` | ● |
 | shorts | `R LEG DESIGN` | `@2072,861` | `-shortsleft` → `-shorts` | ● |
 | shorts | `BELT DESIGN` | — | `-belt` | |
+
+### Sleeves: the raise, and when a shared file is flipped
+
+Two per-slot settings, both on all four sleeve slots.
+
+**`baseOffsetPct: [0, -SLEEVE_RAISE]`** lifts the sleeve artwork inside its own
+canvas so the cuff band at the bottom of the panel clears the template's mask.
+All four sleeves take the **same** value — that is the fix for the two sides not
+matching, since this correction previously existed on the front picture-left slot
+alone and the other three had never had it.
+
+It is deliberately not a `nudgePct`. That moves the whole smart object, so it
+drags the slot's sponsor up with the panel — which gave one sleeve's sponsor
+`SPONSOR_RAISE` twice over while the other three got it once. A base offset moves
+the panel alone, so every sponsor now sits at exactly `SPONSOR_RAISE`.
+
+The artwork is scaled up by **twice** the shift before moving, so the strip the
+shift would vacate stays covered. Twice, not once, because scaling is centred:
+the extra is split evenly between both edges and only half travels in the
+direction of the shift. Uniform on both axes, so nothing distorts, and the
+overflow is cropped by the canvas. With no offset the bleed is zero and the fit
+is the exact edge-to-edge one it always was.
+
+To tune from a render: measure the missing band in the exported 1500 px image and
+multiply by `2494 / <sleeve height in that image>` to get sleeve-canvas px.
+
+**`mirrorX: 'shared'`** flips the base artwork on the picture-right slots — but
+only when the file came from the shared `-sleeves` fallback. A design that
+supplies `-sleeveleft.svg` drew it for that arm already; flipping it would reverse
+artwork that was correct, and any text or badge baked into the panel would come
+out backwards. `mirrorX: true` still means "always" if a slot ever needs it.
+
+Overlays are never flipped, so sponsors stay readable. The run reports which way
+each slot went:
+
+```
+· SLEEVE DESIGN @ 3845,1040 flipped (sleeves)
+· RIGHT SLEEVE DESIGN NOT flipped (sleeveright is side-specific)
+```
 
 ### The kit sheet
 

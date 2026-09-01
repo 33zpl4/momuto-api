@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-07-30b · kit sheet keeps the templates’ own scale';
+var VERSION = '2026-09-01a · all four sleeves raised alike; mirror only a shared file';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -60,6 +60,25 @@ var VERSION = '2026-07-30b · kit sheet keeps the templates’ own scale';
 //    number. 15 px is in the sleeve's own 1348×2494 canvas — the space the SVGs
 //    are drawn in — which is about 8% of the mark's own height.
 var SPONSOR_RAISE = 15 / 2494;
+
+// ── How far to lift the sleeve ARTWORK inside its own canvas, so the cuff band
+//    at the bottom of the panel clears the template's mask.
+//
+//    Applies to all four sleeve slots equally, and that is the point. This
+//    correction previously existed on the front picture-left slot alone, which
+//    is why the two sides did not match: one sleeve's cuff had been brought into
+//    view and the other three had not.
+//
+//    It also used to be a `nudgePct`, which moves the whole smart object — mask
+//    unlinked — and therefore dragged the sleeve's SPONSOR up with it. That gave
+//    one sleeve's sponsor SPONSOR_RAISE twice over while the other three got it
+//    once. As a base offset it moves the panel only, so every sponsor now sits at
+//    exactly SPONSOR_RAISE.
+//
+//    15 px in the sleeve's own 1348×2494 canvas — the space the SVGs are drawn
+//    in. To tune from a render: measure the missing band in the exported 1500 px
+//    image and multiply by 2494/<sleeve height in that image> to get canvas px.
+var SLEEVE_RAISE = 15 / 2494;
 
 var SPONSOR = {
   frontRightArm: [-0.146135, 0.568293 - SPONSOR_RAISE, 0.660022, 0.272781],   // front template, picture-LEFT slot
@@ -140,6 +159,32 @@ var CONFIG = {
   //
   // ⚠ Requires placeInside — replaceContents can only put ONE file in a slot.
   //
+  // `mirrorX` flips ONLY the base artwork horizontally inside that slot.
+  // Overlays (especially sleeve sponsors) are NOT flipped, so text and logos stay
+  // readable. This lets one shared <slug>-sleeves.svg feed both sleeves while
+  // compensating for the opposite UV direction of the picture-right sleeve.
+  //
+  //   'shared'  flip only when the file came from the SHARED fallback
+  //   true      flip always
+  //
+  // Use 'shared'. With `file: ['sleeveleft', 'sleeves']`, a design that supplies
+  // -sleeveleft.svg drew it for that arm already, and flipping it would reverse
+  // artwork that was correct — any text or badge baked into the panel would come
+  // out backwards. Only the shared file, reused on the opposite arm, needs it.
+  // The run reports which way each slot went.
+  //
+  // `baseOffsetPct: [dx, dy]` shifts the BASE artwork inside its own canvas, as a
+  // fraction of that canvas. Positive dy is DOWN.
+  //
+  // This is what brings a sleeve's cuff band up past the template's mask. It is
+  // deliberately NOT `nudgePct`: that moves the whole smart object, so it drags
+  // the slot's sponsor along with the panel. A base offset moves the panel alone
+  // and leaves every overlay where its box put it.
+  //
+  // The artwork is scaled up by exactly the size of the shift first, so the strip
+  // the shift would vacate stays covered. Uniform on both axes — nothing
+  // distorts, and the overflow is cropped by the canvas.
+  //
   // `required: true` means the view cannot be exported without that artwork.
   // Everything else is OPTIONAL: if the file is absent the slot keeps the
   // template's own placeholder and the run reports it. That is what makes a
@@ -196,14 +241,13 @@ var CONFIG = {
         { layer: 'JERSEY DESIGN', at: [1723, 736],  file: ['shoulderleft',  'shoulders'], count: 1, expect: [1671, 679] },
         { layer: 'JERSEY DESIGN', at: [3596, 746],  file: ['shoulderright', 'shoulders'], count: 1, expect: [1671, 679] },
         // Front view mirrors the wearer: picture-left is the player's RIGHT arm.
-        // This sleeve sits fractionally low against the other one — its cuff
-        // reads below the picture-right cuff — so it comes up 15 px of its own
-        // canvas. A template quirk, not a property of any design: the two front
-        // sleeve slots start 45 px apart in y and differ in height.
+        // Both sleeves take the SAME raise, which is the fix for left and right
+        // not matching — only this first one used to have it.
         { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2494],
-          nudgePct: [0, -15 / 2494],
+          baseOffsetPct: [0, -SLEEVE_RAISE],
           over: [{ file: ['sleevesponsorright', 'sleevesponsor'], boxPct: SPONSOR.frontRightArm }] },
         { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2520],
+          baseOffsetPct: [0, -SLEEVE_RAISE], mirrorX: 'shared',
           over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], boxPct: SPONSOR.frontLeftArm }] },
         { layer: 'COLLAR TOP',    file: 'collartop',    count: 1, expect: [1500, 252] },
         { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1, expect: [2171, 355] }
@@ -221,8 +265,10 @@ var CONFIG = {
         // Back view does not mirror: the template's LEFT/RIGHT are picture-side,
         // and picture-left is the player's LEFT arm from behind.
         { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'], count: 1,
+          baseOffsetPct: [0, -SLEEVE_RAISE],
           over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], boxPct: SPONSOR.backLeftArm }] },
         { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'], count: 1,
+          baseOffsetPct: [0, -SLEEVE_RAISE], mirrorX: 'shared',
           over: [{ file: ['sleevesponsorright', 'sleevesponsor'], boxPct: SPONSOR.backRightArm }] },
         { layer: 'COLLAR DESIGN',       file: 'collarback',               count: 1 }
         // No shoulder slots on the back template — its SHOULDERS layer is a
@@ -433,14 +479,40 @@ function layerBox(pl) {
   };
 }
 
-// Fill the slot's canvas edge to edge. Right for a base design: it was authored
-// as the whole panel, so its canvas IS the panel.
-function fitLayerToCanvas(pl, cw, ch) {
+/**
+ * Fill the slot's canvas edge to edge. Right for a base design: it was authored
+ * as the whole panel, so its canvas IS the panel.
+ *
+ * `offset` shifts the panel inside that canvas afterwards, as a fraction of the
+ * canvas — the knob for bringing a cuff band up past the template's mask.
+ *
+ * A plain shift would uncover a strip at the trailing edge, so the artwork is
+ * first scaled up by exactly the size of the shift. Uniform on both axes, so
+ * nothing distorts, and the overflow is cropped by the canvas. With no offset
+ * the bleed is zero and this is the exact edge-to-edge fit it always was.
+ */
+function fitLayerToCanvas(pl, cw, ch, offset) {
   var m = layerBox(pl);
   if (m.w <= 0 || m.h <= 0) return;
-  pl.resize(cw / m.w * 100, ch / m.h * 100, AnchorPosition.MIDDLECENTER);
+
+  var dx = offset ? offset[0] * cw : 0;
+  var dy = offset ? offset[1] * ch : 0;
+  // TWICE the shift, not once: scaling is centred, so the extra is split evenly
+  // between the two edges and only half of it travels in the direction of the
+  // shift. At 1× the trailing edge is left short by half the offset.
+  var bleed = 2 * Math.max(Math.abs(dx) / cw, Math.abs(dy) / ch);
+
+  pl.resize(cw * (1 + bleed) / m.w * 100, ch * (1 + bleed) / m.h * 100, AnchorPosition.MIDDLECENTER);
+
   var n = layerBox(pl);
-  pl.translate(UnitValue(-n.x, 'px'), UnitValue(-n.y, 'px'));
+  pl.translate(UnitValue((cw - n.w) / 2 - n.x + dx, 'px'),
+               UnitValue((ch - n.h) / 2 - n.y + dy, 'px'));
+}
+
+// Mirror one placed artwork layer around its own centre. Used for base sleeve
+// artwork only; sponsor overlays are intentionally left untouched.
+function mirrorLayerX(pl) {
+  pl.resize(-100, 100, AnchorPosition.MIDDLECENTER);
 }
 
 /**
@@ -612,7 +684,8 @@ function placeInsideSlot(doc, layer, stack, sample) {
         box = [p[0] * cw, p[1] * ch, p[2] * cw, p[3] * ch];
       }
       if (box) fitLayerInBox(pl, box, stack[f].fit);
-      else fitLayerToCanvas(pl, cw, ch);
+      else fitLayerToCanvas(pl, cw, ch, stack[f].offset);
+      if (stack[f].mirrorX) mirrorLayerX(pl);
     }
     // Read the colour here, while the artwork is rasterised and alone in the
     // document — nothing else in the run sees the artwork as pixels.
@@ -662,15 +735,38 @@ function overSpec(entry) {
 // Kind names deliberately carry no internal hyphen ('collarback', not
 // 'collar-back'): slug discovery matches on a trailing '-<kind>', so a file
 // called <slug>-collar-back.svg would be read as a design named 'x-collar'.
-function artworkFor(slug, kinds) {
+/**
+ * Which artwork a slot gets, and WHICH KIND it came from.
+ *
+ * The kind matters for mirroring. `file: ['sleeveleft', 'sleeves']` means "the
+ * side-specific file if it exists, otherwise the shared one" — and only the
+ * shared one needs flipping. A side-specific file was drawn for that arm
+ * already, so mirroring it would reverse artwork that was correct, and any text
+ * or badge baked into the panel would come out backwards.
+ *
+ * `shared` is true when the match came from anything but the first kind, i.e.
+ * when a fallback was used.
+ */
+function artworkMatch(slug, kinds) {
   var list = (kinds instanceof Array) ? kinds : [kinds];
   for (var k = 0; k < list.length; k++) {
     for (var i = 0; i < CONFIG.extensions.length; i++) {
       var f = new File(CONFIG.artworkDir + '/' + slug + '-' + list[k] + '.' + CONFIG.extensions[i]);
-      if (f.exists) return f;
+      if (f.exists) return { file: f, kind: list[k], shared: k > 0 };
     }
   }
   return null;
+}
+
+function artworkFor(slug, kinds) {
+  var m = artworkMatch(slug, kinds);
+  return m ? m.file : null;
+}
+
+// true  → always flip.  'shared' → flip only a shared fallback file.
+function wantsMirror(slot, match) {
+  if (slot.mirrorX === true) return true;
+  return slot.mirrorX === 'shared' && !!match.shared;
 }
 
 /**
@@ -1064,12 +1160,23 @@ function main() {
          // disk, so it cannot inherit a half-finished state from this one.
          try {
           // Work out what this design can fill before touching anything.
-          var jobs = [], fills = {}, blank = [], lacks = null, overlaid = [], overWarn = false, nudged = [], tintWarn = false;
+          var jobs = [], fills = {}, blank = [], lacks = null, overlaid = [], overWarn = false, nudged = [], tintWarn = false, mirrored = [];
           for (var s = 0; s < view.slots.length; s++) {
             var slot = view.slots[s];
-            var art = artworkFor(slugs[i], slot.file);
+            var match = artworkMatch(slugs[i], slot.file);
+            var art = match ? match.file : null;
             if (art) {
-              var stack = [{ file: art, box: null }];
+              var stack = [{
+                file: art,
+                box: null,
+                mirrorX: wantsMirror(slot, match),
+                offset: slot.baseOffsetPct || null
+              }];
+              if (slot.mirrorX && !stack[0].mirrorX) {
+                mirrored.push(slot.addr + ' NOT flipped (' + match.kind + ' is side-specific)');
+              } else if (stack[0].mirrorX) {
+                mirrored.push(slot.addr + ' flipped (' + match.kind + ')');
+              }
               if (slot.over && CONFIG.placeInside) {
                 for (var ov = 0; ov < slot.over.length; ov++) {
                   var spec = overSpec(slot.over[ov]);
@@ -1234,6 +1341,7 @@ function main() {
           }
           log.push('    ✓ ' + slugs[i] + '-' + view.suffix + '.' + CONFIG.format + '  (' + swaps + ' slots)' +
             (overlaid.length ? '  · overlaid: ' + overlaid.join(', ') : '') +
+            (mirrored.length ? '  · ' + mirrored.join(', ') : '') +
             (nudged.length ? '  · nudged: ' + nudged.join(', ') : '') +
             (tintLog.length ? '  · tinted: ' + tintLog.join(', ') : '') +
             (blank.length ? '  · template default kept for: ' + blank.join(', ') : ''));
