@@ -51,7 +51,7 @@ var I18N={
   highlights:[
    ["Fabric","<b>Polyester-elastane</b> with stretch. Sublimation-printed — colours dyed in, so they never crack or peel.",false],
    ["What you get","A <b>ready-made design</b> as a <b>jersey</b> or <b>full kit</b> (jersey + shorts), customised in your colours — names &amp; numbers per player.",false],
-   ["Made &amp; shipped","<b>~25–30 days</b> after you approve your proof. Free shipping over €49.",false],
+   ["Made &amp; shipped","<b>~25–30 days</b> after you approve your proof. Free shipping over €50.",false],
    ["Checked by our designers","Upload the logo you have — even a screenshot. Our design team <b>cleans and prepares your crest &amp; sponsors for print</b>, checks placement, and sends a <b>final proof within 24h</b> to approve before we produce.",true]
   ],
   trust:{
@@ -70,7 +70,7 @@ var I18N={
     ["Choose your colours","Explore the ready-made design in your team colours in the live preview above — no waiting."],
     ["Make it yours in 3D","Open the 3D designer to add your crest &amp; sponsors and set your name &amp; number style, and preview your complete kit from every angle."],
     ["Build your squad","In the cart, add each player's size, name and number — the size guide is right there. One kit or the whole team, no minimum."],
-    ["We prepare, proof &amp; ship","Our designers clean and prepare your logos for print and send a final proof within 24h. Once you approve, we produce and deliver in ~25–30 days. Free shipping over €49."]
+    ["We prepare, proof &amp; ship","Our designers clean and prepare your logos for print and send a final proof within 24h. Once you approve, we produce and deliver in ~25–30 days. Free shipping over €50."]
    ]
   },
   faq:{
@@ -93,7 +93,7 @@ var I18N={
   highlights:[
    ["Tejido","<b>Poliéster-elastano</b> con elasticidad. Estampado por sublimación: los colores se tiñen en la tela, así que nunca se agrietan ni se despegan.",false],
    ["Qué incluye","Un <b>diseño ya creado</b> como <b>camiseta</b> o <b>kit completo</b> (camiseta + pantalón), personalizado con tus colores — nombres y dorsales por jugador.",false],
-   ["Producción y envío","<b>~25–30 días</b> tras aprobar tu prueba. Envío gratis a partir de 49 €.",false],
+   ["Producción y envío","<b>~25–30 días</b> tras aprobar tu prueba. Envío gratis a partir de 50 €.",false],
    ["Revisado por nuestros diseñadores","Sube el logo que tengas, aunque sea una captura de pantalla. Nuestro equipo <b>limpia y prepara tu escudo y patrocinadores para impresión</b>, revisa la colocación y te envía una <b>prueba final en 24 h</b> para aprobar antes de producir.",true]
   ],
   trust:{
@@ -112,7 +112,7 @@ var I18N={
     ["Elige tus colores","Explora el diseño ya creado con los colores de tu equipo en la vista previa de arriba — sin esperas."],
     ["Hazla tuya en 3D","Abre el diseñador 3D para añadir tu escudo y patrocinadores y definir el estilo de nombre y dorsal, y previsualiza tu kit completo desde todos los ángulos."],
     ["Forma tu equipo","En el carrito, añade la talla, el nombre y el dorsal de cada jugador — la guía de tallas está ahí mismo. Una camiseta o todo el equipo, sin mínimo."],
-    ["Preparamos, revisamos y enviamos","Nuestros diseñadores limpian y preparan tus logos para impresión y te envían una prueba final en 24 h. Una vez aprobada, producimos y entregamos en ~25–30 días. Envío gratis a partir de 49 €."]
+    ["Preparamos, revisamos y enviamos","Nuestros diseñadores limpian y preparan tus logos para impresión y te envían una prueba final en 24 h. Una vez aprobada, producimos y entregamos en ~25–30 días. Envío gratis a partir de 50 €."]
    ]
   },
   faq:{
@@ -135,7 +135,7 @@ var I18N={
   highlights:[
    ["Tissu","<b>Polyester-élasthanne</b> extensible. Imprimé par sublimation : les couleurs sont teintes dans le tissu, elles ne craquent ni ne se décollent jamais.",false],
    ["Ce que vous recevez","Un <b>design déjà créé</b> en <b>maillot</b> ou <b>kit complet</b> (maillot + short), personnalisé à vos couleurs — noms et numéros par joueur.",false],
-   ["Fabrication et envoi","<b>~25–30 jours</b> après validation de votre maquette. Livraison offerte dès 49 €.",false],
+   ["Fabrication et envoi","<b>~25–30 jours</b> après validation de votre maquette. Livraison offerte dès 50 €.",false],
    ["Vérifié par nos designers","Importez le logo que vous avez, même une capture d'écran. Notre équipe <b>nettoie et prépare votre écusson et vos sponsors pour l'impression</b>, vérifie le placement et vous envoie une <b>maquette finale sous 24h</b> à valider avant production.",true]
   ],
   trust:{
@@ -154,7 +154,7 @@ var I18N={
     ["Choisissez vos couleurs","Explorez le design déjà créé à vos couleurs dans l'aperçu ci-dessus — sans attente."],
     ["Personnalisez en 3D","Ouvrez le configurateur 3D pour ajouter votre écusson et vos sponsors et définir le style de nom et numéro, et prévisualisez votre kit complet sous tous les angles."],
     ["Composez votre équipe","Dans le panier, ajoutez la taille, le nom et le numéro de chaque joueur — le guide des tailles est juste là. Un maillot ou toute l'équipe, sans minimum."],
-    ["On prépare, on valide et on expédie","Nos designers nettoient et préparent vos logos pour l'impression et vous envoient une maquette finale sous 24h. Une fois validée, on produit et on livre en ~25–30 jours. Livraison offerte dès 49 €."]
+    ["On prépare, on valide et on expédie","Nos designers nettoient et préparent vos logos pour l'impression et vous envoient une maquette finale sous 24h. Une fois validée, on produit et on livre en ~25–30 jours. Livraison offerte dès 50 €."]
    ]
   },
   faq:{
@@ -177,7 +177,7 @@ var I18N={
   highlights:[
    ["Tessuto","<b>Poliestere-elastan</b> elasticizzato. Stampa a sublimazione: i colori sono tinti nel tessuto, non si crepano né si staccano mai.",false],
    ["Cosa ricevi","<b>Maglia</b>, o <b>kit completo</b> (maglia + pantaloncini). Nomi e numeri per ogni giocatore.",false],
-   ["Produzione e spedizione","<b>~25–30 giorni</b> dopo l'approvazione del tuo mockup. Spedizione gratuita sopra i 49 €.",false],
+   ["Produzione e spedizione","<b>~25–30 giorni</b> dopo l'approvazione del tuo mockup. Spedizione gratuita sopra i 50 €.",false],
    ["Acquisto protetto","Paghi oggi, ma <b>non stampiamo</b> finché non approvi un mockup finale, inviato <b>entro 24h</b>. Cambia ciò che vuoi, gratis.",true]
   ],
   trust:{
@@ -196,7 +196,7 @@ var I18N={
     ["Personalizzala","Scegli i colori, carica stemma e sponsor, aggiungi nomi e numeri — tutto nell'anteprima live qui sopra."],
     ["Ordina per la squadra","Aggiungi al carrello, inserisci taglia, nome e numero di ogni giocatore e completa l'ordine. Una maglia o tutta la squadra."],
     ["Approva il mockup","Entro 24h ti inviamo un mockup finale del tuo kit esatto. Cambia ciò che vuoi, gratis. Nulla va in stampa finché non approvi."],
-    ["Produciamo e spediamo","Dopo la tua approvazione, produciamo e consegniamo in ~25–30 giorni. Spedizione gratuita sopra i 49 €."]
+    ["Produciamo e spediamo","Dopo la tua approvazione, produciamo e consegniamo in ~25–30 giorni. Spedizione gratuita sopra i 50 €."]
    ]
   },
   faq:{
@@ -324,7 +324,7 @@ function render(mount){
      Hostname-keyed so cloned product pages (data-lang="en") need no edits. */
   if(lang==="en"&&/^us\./.test(location.hostname)){
     if(!I18N.us){
-      var __u=JSON.parse(JSON.stringify(I18N.en).replace(/ Free shipping over €49\./g,function(){return " Free shipping over $59.";}));
+      var __u=JSON.parse(JSON.stringify(I18N.en).replace(/ Free shipping over €50\./g,function(){return " Free shipping over $59.";}));
       __u.trust.lab="Worn on real fields";
       __u.trust.sub="Across the United States and Europe.";
       I18N.us=__u; CHAT.us=CHAT.en;
