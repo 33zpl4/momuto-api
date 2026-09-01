@@ -1,0 +1,74 @@
+<!-- ============================================================================
+     MOMUTO homepage block — curated blog highlights (3 hand-picked posts,
+     framed our way). Replaces the theme's generic blog embed.
+     ⚠ Before pasting: fill the 3 img src values with each post's cover image.
+     Paste-only (no auto-deploy), same convention as the other homepage blocks.
+     ============================================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  .bj-section { background:#0a0a0a; padding:4.5rem 1.5rem 5rem; width:100vw; position:relative; left:50%; margin-left:-50vw; box-sizing:border-box; }
+  .bj-inner { max-width:1100px; margin:0 auto; }
+  .bj-header { text-align:center; margin-bottom:2.5rem; }
+  .bj-eyebrow { font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin:0 0 0.75rem; }
+  .bj-heading { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:clamp(2.2rem,5vw,3.2rem); color:#fff; letter-spacing:0.04em; margin:0; line-height:1; }
+  .bj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+  @media (max-width:768px) { .bj-grid { grid-template-columns:1fr; gap:1.25rem; } }
+  .bj-card { min-width:0; text-decoration:none; display:flex; flex-direction:column; background:#111; border:1px solid rgba(255,255,255,0.06); transition:border-color 0.2s; }
+  .bj-card:hover { border-color:rgba(255,255,255,0.18); }
+  .bj-imgwrap { width:100%; aspect-ratio:16/10; overflow:hidden; background:#161616; }
+  .bj-imgwrap img { display:block; width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease; }
+  .bj-card:hover .bj-imgwrap img { transform:scale(1.04); }
+  .bj-split { display:flex; }
+  .bj-half { position:relative; width:50%; height:100%; overflow:hidden; }
+  .bj-half img { width:100%; height:100%; object-fit:cover; }
+  .bj-half + .bj-half { border-left:1px solid rgba(255,255,255,0.3); }
+  .bj-tag { position:absolute; left:8px; bottom:8px; font-family:'Outfit',sans-serif; font-size:0.55rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#fff; background:rgba(0,0,0,0.55); padding:3px 7px; }
+  .bj-title { font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:1.5rem; letter-spacing:0.05em; color:#fff; margin:1.2rem 1.4rem 0.5rem; line-height:1.05; }
+  .bj-hook { font-family:'Outfit',sans-serif; font-size:0.85rem; font-weight:300; color:rgba(255,255,255,0.55); line-height:1.6; margin:0 1.4rem 1rem; flex:1; }
+  .bj-read { font-family:'Outfit',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#fff; margin:0 1.4rem 1.4rem; }
+  .bj-ctas { display:flex; justify-content:center; margin-top:2.2rem; }
+  .bj-btn { display:inline-block; font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; padding:0.85rem 2rem; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.25); transition:border-color 0.2s; }
+  .bj-btn:hover { border-color:#fff; }
+</style>
+
+<section class="bj-section">
+  <div class="bj-inner">
+    <div class="bj-header">
+      <p class="bj-eyebrow">From the journal</p>
+      <h2 class="bj-heading">KITS, CONCEPTS & CRAFT</h2>
+    </div>
+    <div class="bj-grid">
+      <a class="bj-card" href="/blogs/ai-to-reality-kit-maker-guide">
+        <div class="bj-imgwrap bj-split">
+          <div class="bj-half"><img src="https://cdn.staticsoe.com/pics/0b5177b519804889ae2e329b9c8e8239ad19316d485d90a8c2f66c3bf01cf40f.jpg" alt="AI-generated football kit concept" loading="lazy" width="600" height="750"><span class="bj-tag">AI concept</span></div>
+          <div class="bj-half"><img src="https://cdn.staticsoe.com/pics/2f0ddfc2e032643727db21f9cf433df70176294aaab3edbb04746cc722ae0cc5.png" alt="The MOMUTO recreated, production-ready design" loading="lazy" width="600" height="750"><span class="bj-tag">MOMUTO recreation</span></div>
+        </div>
+        <h3 class="bj-title">FROM AI CONCEPT TO MOMUTO DESIGN</h3>
+        <p class="bj-hook">The full pipeline, honestly documented: your AI concept in, a MOMUTO-recreated, production-ready design out — and what AI gets wrong along the way.</p>
+        <span class="bj-read">Read the story →</span>
+      </a>
+      <a class="bj-card" href="/blogs/concept-football-kits-the-art-history-and-future-of-fan-created-jerseys">
+        <div class="bj-imgwrap">
+          <img src="https://cdn.staticsoe.com/uploads/47711/cart/resources/20230831/376d652e73548068a9a423dc89bffd85.jpg" alt="THE ART OF CONCEPT KITS — MOMUTO blog" loading="lazy" width="480" height="300">
+        </div>
+        <h3 class="bj-title">THE ART OF CONCEPT KITS</h3>
+        <p class="bj-hook">How fans went from Photoshop mockups to wearing their own designs on matchday.</p>
+        <span class="bj-read">Read the story →</span>
+      </a>
+      <a class="bj-card" href="/blogs/craft-your-perfect-custom-soccer-jersey-with-momuto-s-3d-configurator-guide">
+        <div class="bj-imgwrap">
+          <img src="https://cdn.staticsoe.com/pics/ed4389e2039d9728a1299a37ca95851a1a22cb911744252cfc07a849af0626b0.webp" alt="MASTER THE 3D KIT MAKER — MOMUTO blog" loading="lazy" width="480" height="300">
+        </div>
+        <h3 class="bj-title">MASTER THE 3D KIT MAKER</h3>
+        <p class="bj-hook">Every trick in the designer — colourways, crest placement, numbers — before you spend a cent.</p>
+        <span class="bj-read">Read the story →</span>
+      </a>
+    </div>
+    <div class="bj-ctas">
+      <a href="/blogs" class="bj-btn">READ MORE ON THE BLOG</a>
+    </div>
+  </div>
+</section>
