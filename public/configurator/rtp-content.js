@@ -319,12 +319,12 @@ function faqLd(items){
 function render(mount){
   var lang=(mount.getAttribute("data-lang")||"en").toLowerCase();
   /* US store (us.momuto.com): en content with US overrides — USD-only surface
-     (the "€49" free-shipping sentence is stripped; no USD threshold is set yet),
+     (free shipping threshold $59, owner-set 1 Sep 2026),
      US-first framing. Derived from en at runtime so the locales can't drift.
      Hostname-keyed so cloned product pages (data-lang="en") need no edits. */
   if(lang==="en"&&/^us\./.test(location.hostname)){
     if(!I18N.us){
-      var __u=JSON.parse(JSON.stringify(I18N.en).replace(/ Free shipping over €49\./g,""));
+      var __u=JSON.parse(JSON.stringify(I18N.en).replace(/ Free shipping over €49\./g,function(){return " Free shipping over $59.";}));
       __u.trust.lab="Worn on real fields";
       __u.trust.sub="Across the United States and Europe.";
       I18N.us=__u; CHAT.us=CHAT.en;
