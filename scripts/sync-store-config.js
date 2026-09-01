@@ -73,12 +73,7 @@ const US_MENU_CHILDREN = [
     item('Drop 01', 0, 6, '/collections/iconic-football-series'),
     item('Drop 02', 1, 6, '/collections/iconic-series-drop-02'),
   ]),
-  item('Guides', 3, 0, '', [
-    item('Custom soccer uniforms: the complete guide', 0, 6, '/blogs/custom-soccer-uniforms-for-your-team-complete-guide'),
-    item('When to order: season calendar', 1, 6, '/blogs/when-to-order-team-uniforms-season-calendar'),
-    item('All guides', 2, 14, '/blogs'),
-  ]),
-  item('Support', 4, 0, '', [
+  item('Support', 3, 0, '', [
     // these three pages exist on the US store (confirmed via GET /navs, 1 Sep 2026)
     item('FAQ', 0, 6, '/pages/faq'),
     item('Printing & Materials', 1, 6, '/pages/printing'),
@@ -125,19 +120,28 @@ async function main() {
   }
 
   if (MODE === 'inspect-zones') {
-    const store = (process.env.TARGET_STORE || 'us').toLowerCase();
-    const token = TOKENS[store];
-    if (!token) { console.error(`No token for "${store}"`); process.exit(1); }
-    const { ok, json } = await api(token, 'GET', '/shippingzones?type=1');
-    if (!ok) { console.error(JSON.stringify(json)); process.exit(1); }
-    for (const z of json.data.shippingzones || []) {
-      const det = await zoneDetails(token, z.id);
-      const sz = det.shippingzone || {};
-      const areas = Object.values(sz.areas || {}).map(a => `${a.country_code_2}:${a.country_name}`);
-      console.log(`\n===== zone ${z.id} "${z.plan_name}" — ${areas.length} area(s) =====`);
-      console.log('areas:', JSON.stringify(areas));
-      console.log('plans (from list):', JSON.stringify(z.shippingZonePlan, null, 2));
-      console.log('details product_list length:', (det.product_list || sz.product_list || []).length);
+    const only = (process.env.TARGET_STORE || '').toLowerCase();
+    for (const [store, token] of Object.entries(TOKENS)) {
+      if (only && store !== only) continue;
+      if (!token) { console.log(`[${store}] no token — skipped`); continue; }
+      for (const t of [1, 2]) {
+        const { ok, json } = await api(token, 'GET', `/shippingzones?type=${t}`);
+        if (!ok) { console.error(`[${store}] type=${t}: ${JSON.stringify(json).slice(0, 200)}`); continue; }
+        for (const z of json.data.shippingzones || []) {
+          const det = await zoneDetails(token, z.id);
+          const sz = det.shippingzone || {};
+          const areas = Object.values(sz.areas || {}).map(a => `${a.country_code_2}:${a.country_name}`);
+          const KEY = ['US', 'GB', 'FR', 'ES', 'IT', 'DE', 'IC', 'CA'];
+          const keyHits = areas.filter(a => KEY.includes(a.split(':')[0]));
+          console.log(`\n===== [${store}] zone ${z.id} "${z.plan_name}" (type ${t}) — ${areas.length} area(s) =====`);
+          console.log(areas.length <= 12 ? `areas: ${JSON.stringify(areas)}`
+            : `areas: [${areas.length} — elided] key countries present: ${JSON.stringify(keyHits)}`);
+          for (const p of z.shippingZonePlan || []) {
+            console.log(`  plan ${p.id} "${p.plan_name}" desc="${p.descript}" rule=${p.param?.rule} min=${p.param?.rule_min ?? ''} max=${p.param?.rule_max ?? ''} fee_method=${p.param?.fee_method} fee=${p.param?.fee} first_w=${p.param?.first_weight_fee ?? ''} status=${p.status}`);
+          }
+          console.log(`  bound products: ${(det.product_list || sz.product_list || []).length}`);
+        }
+      }
     }
     return;
   }
