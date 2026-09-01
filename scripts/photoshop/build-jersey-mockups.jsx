@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-09-01b · sleeve raise in the units it was asked in (~13px on export)';
+var VERSION = '2026-09-01c · sleeve raise settled at ~7px on export';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -75,21 +75,31 @@ var SPONSOR_RAISE = 15 / 2494;
 //    once. As a base offset it moves the panel only, so every sponsor now sits at
 //    exactly SPONSOR_RAISE.
 //
-//    80 px of the sleeve's own 1348×2494 canvas ≈ 12–13 px in the exported 1500
-//    image. The units matter and got this wrong once: "raise it 15 px" was read
-//    as 15 px of the SVG canvas, which is only 2.4 px in the export — about a
-//    sixth of what was asked for, and why one raise later it was still short.
+//    45 px of the sleeve's own 1348×2494 canvas ≈ 7 px in the exported 1500
+//    image. Units: roughly 6.3 canvas px per export px on these sleeves.
 //
-//    The conversion is f × H × export/template, where H is the slot's full
-//    transform height. H is not directly readable (bounds report the MASKED
-//    extent), so 15 export px is somewhere between 66 and 104 canvas px
-//    depending on how much of the sleeve the mask hides. 80 is the middle of
-//    that band.
+//    ⚠ THIS NUMBER IS A COMPROMISE, not a solution, because the shift trades one
+//    artefact for another. The band sits at the very bottom of the panel, so
+//    raising it moves the artwork's bottom edge up too and leaves a transparent
+//    strip at the hem — which DOES show, as a dark line against the background.
+//    The gap is the same size as the shift. There is no value that both clears
+//    the mask fully and hides completely; 45 is bisected between two measured
+//    failures:
 //
-//    To tune from a render: this is roughly 6.3 canvas px per export px, so
-//    "needs 4 px more" is +25 here. Overshooting shows as cream appearing below
-//    the band — easy to read, so err high rather than creep up.
-var SLEEVE_RAISE = 80 / 2494;
+//        2.4 px in the export  → band still clipped
+//       12.7 px in the export  → gap visible at the hem
+//
+//    Set slightly under the midpoint on purpose: a marginally clipped band still
+//    reads as a cuff, a dark line reads as a broken render.
+//
+//    ⚠ DO NOT reach for `baseBleed` to close the gap. It scales the artwork up so
+//    the bottom edge stays flush — which pins the bottom edge, and the band is
+//    ~90 px from it. Pinned, the band moves 6 px instead of 80. The bleed
+//    cancels precisely the correction it is protecting.
+//
+//    The real fix is upstream: draw the sleeve SVG with the band far enough off
+//    the bottom edge that no shift is needed. Then set this to 0.
+var SLEEVE_RAISE = 45 / 2494;
 
 var SPONSOR = {
   frontRightArm: [-0.146135, 0.568293 - SPONSOR_RAISE, 0.660022, 0.272781],   // front template, picture-LEFT slot
@@ -197,11 +207,12 @@ var CONFIG = {
   // render has to be multiplied up — getting that backwards made the first cuff
   // raise a sixth of what was asked for. See SLEEVE_RAISE.
   //
-  // The shift vacates a strip at the trailing edge, which is NOT covered by
-  // default: the reason to shift is that the canvas edge is outside the mask,
-  // which is the same reason the strip cannot show. `baseBleed: true` covers it
-  // anyway if that turns out to be wrong — at the cost of enlarging the artwork
-  // by twice the shift, which on a patterned kit mismatches the body's scale.
+  // The shift vacates a strip at the trailing edge and that strip DOES show —
+  // on the sleeves it reads as a dark line along the hem. `baseBleed: true`
+  // closes it by scaling the artwork so the edge stays flush, but that only
+  // helps a feature well away from the edge: pinning the edge pins everything
+  // near it. For the sleeve cuff, which sits ~90 px from the bottom of a 2494
+  // canvas, the bleed cuts an 80 px raise down to 6. See SLEEVE_RAISE.
   //
   // `required: true` means the view cannot be exported without that artwork.
   // Everything else is OPTIONAL: if the file is absent the slot keeps the
