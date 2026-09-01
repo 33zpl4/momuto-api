@@ -12,7 +12,7 @@ on:
         required: true
         default: 'inspect'
         type: choice
-        options: ['inspect', 'apply-nav', 'apply-seo']
+        options: ['inspect', 'inspect-zones', 'apply-nav', 'apply-seo', 'apply-shipping']
       store:
         description: 'apply only: target store'
         required: false
