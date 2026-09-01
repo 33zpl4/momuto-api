@@ -80,11 +80,18 @@ const US_MENU_CHILDREN = [
 
 async function main() {
   if (MODE === 'inspect') {
+    // Menus + logistics in one read-only sweep (endpoints from the vendor's
+    // Apizza docs, 1 Sep 2026 — recorded in docs/oemsaas-api-notes.md).
+    const READS = ['/navs', '/shippingzones?type=1', '/shippingzones?type=2', '/couriers'];
     for (const [store, token] of Object.entries(TOKENS)) {
       if (!token) { console.log(`[${store}] no token — skipped`); continue; }
-      const { ok, json } = await api(token, 'GET', '/navs');
-      console.log(`\n===== [${store}] GET /navs ${ok ? '' : '(ERROR)'} =====`);
-      console.log(JSON.stringify(json, null, 2));
+      for (const ep of READS) {
+        const { ok, json } = await api(token, 'GET', ep);
+        console.log(`\n===== [${store}] GET ${ep} ${ok ? '' : '(ERROR)'} =====`);
+        // couriers is a huge static list — count it instead of dumping it
+        if (ep === '/couriers' && ok) { console.log(`(${(json.data || []).length} couriers — list elided)`); continue; }
+        console.log(JSON.stringify(json, null, 2));
+      }
     }
     return;
   }
