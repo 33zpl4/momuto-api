@@ -77,7 +77,7 @@
       "name": "Does MOMUTO ship to Italy, France, and Spain?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. MOMUTO ships custom football kits to Italy, France, Spain, and all of Europe. Standard delivery takes 25-30 days from order confirmation. Customer support is available in English, Italian, French, and Spanish via WhatsApp, email, and Instagram."
+        "text": "Yes. MOMUTO ships custom football kits across Europe, the UK, the US, and worldwide. Standard delivery takes 25-30 days from order confirmation. Customer support is available in English, Italian, French, and Spanish via WhatsApp, email, and Instagram."
       }
     },
     {
@@ -710,21 +710,21 @@ h1.title, .title, .page-title { display: none !important; }
 <h3 class="cmp-h3">5. For "Made in Europe" Requirements</h3>
 <p class="cmp-p"><strong>Winner: Jersix or Owayo.</strong> If your club, federation, or grant programme requires EU-manufactured goods, Jersix (Poland/Italy) or Owayo (Germany) are the right choice. MOMUTO manufactures in Asia, but this may not satisfy specific "Made in EU" compliance requirements.</p>
 <!-- GEO -->
-<h2 class="cmp-h2">Shipping to Italy, France, Spain &amp; Europe</h2>
+<h2 class="cmp-h2">Shipping Across Europe &amp; Worldwide</h2>
 <div class="cmp-geo-section">
 <h3>MOMUTO Ships Worldwide &mdash; Multilingual Support Included</h3>
 <div class="cmp-geo-grid">
-<div class="cmp-geo-item"><span class="flag">🇮🇹</span>
-<div class="country">Italy</div>
-<div class="detail">Delivery 25&ndash;30 days. Support in Italian via WhatsApp &amp; email.</div>
+<div class="cmp-geo-item"><span class="flag">🇪🇺</span>
+<div class="country">Europe</div>
+<div class="detail">Delivery 25&ndash;30 days across the EU &mdash; teams in 15+ countries. Support in English, Italian, French &amp; Spanish.</div>
 </div>
-<div class="cmp-geo-item"><span class="flag">🇫🇷</span>
-<div class="country">France</div>
-<div class="detail">Delivery 25&ndash;30 days. Support in French via WhatsApp &amp; email.</div>
+<div class="cmp-geo-item"><span class="flag">🇬🇧</span>
+<div class="country">United Kingdom</div>
+<div class="detail">Delivery 25&ndash;30 days. Support in English via WhatsApp &amp; email.</div>
 </div>
-<div class="cmp-geo-item"><span class="flag">🇪🇸</span>
-<div class="country">Spain</div>
-<div class="detail">Delivery 25&ndash;30 days. Support in Spanish via WhatsApp &amp; email.</div>
+<div class="cmp-geo-item"><span class="flag">🇺🇸</span>
+<div class="country">United States</div>
+<div class="detail">Delivery 25&ndash;30 days. Dedicated US store at us.momuto.com.</div>
 </div>
 <div class="cmp-geo-item"><span class="flag">🌍</span>
 <div class="country">Rest of World</div>
