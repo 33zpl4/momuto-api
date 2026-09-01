@@ -36,6 +36,8 @@ Photoshop ▸ File ▸ Scripts ▸ Browse… ▸ inspect-template.jsx
 Read-only, saves nothing. Writes `<template>-layers.txt` next to the PSD listing
 every layer, which ones are smart objects, and their pixel bounds.
 
+**Authoring artwork directly as SVG** (canvases, calibration grid, raglan lessons): see `docs/admiral-mockup-authoring.md` and `scripts/photoshop/authoring/`.
+
 **Already done for the three current templates** — the dumps are kept in
 `templates/` as the reference `CONFIG` was written from. Re-run the inspector
 whenever a template changes; the builder asserts the slot counts and will stop
