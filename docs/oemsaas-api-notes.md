@@ -332,3 +332,6 @@ inspect-first — read a store's live JSON before the first write).
   {country_id, provinces:[]}], plan[], product_ids[]). **`PUT`** —
   "Logistics plan modification" (path per the Apizza doc).
 - **`GET /couriers`** — carrier list (id, name, code, homepage).
+- **`GET /seoplans`** / **`PUT /seoplans`** — HOMEPAGE SEO (meta_title,
+  meta_descript, meta_keywords — keywords is an ARRAY, same rule as pages).
+  The one homepage surface we previously couldn't reach from code.

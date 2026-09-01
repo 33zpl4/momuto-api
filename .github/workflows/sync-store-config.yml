@@ -1,4 +1,4 @@
-name: Store Navigation (inspect / apply)
+name: Store Config (nav / SEO / logistics)
 
 # GET/POST /navs — see scripts/sync-store-nav.js. Dispatch-only; navigation
 # is never a push side effect. Run inspect and READ THE OUTPUT before the
@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'inspect = print every store''s menus; apply = overwrite one menu'
+        description: 'inspect = read nav/SEO/shipping on every store; apply-nav / apply-seo write one store'
         required: true
         default: 'inspect'
         type: choice
-        options: ['inspect', 'apply']
+        options: ['inspect', 'apply-nav', 'apply-seo']
       store:
         description: 'apply only: target store'
         required: false
@@ -20,7 +20,7 @@ on:
         type: choice
         options: ['us', 'en', 'es', 'fr', 'it']
       nav_name:
-        description: 'apply only: EXACT nav_name of the menu to overwrite (from inspect)'
+        description: 'apply-nav only: EXACT nav_name of the menu to overwrite (from inspect)'
         required: false
         default: ''
       dry_run:
@@ -49,4 +49,4 @@ jobs:
           TARGET_STORE: ${{ github.event.inputs.store }}
           TARGET_NAV_NAME: ${{ github.event.inputs.nav_name }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
-        run: node scripts/sync-store-nav.js
+        run: node scripts/sync-store-config.js

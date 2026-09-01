@@ -78,11 +78,21 @@ const US_MENU_CHILDREN = [
   ]),
 ];
 
+// Curated homepage SEO per store (PUT /seoplans). meta_keywords is an array
+// (same CMS rule as pages). Only stores listed here can be applied.
+const HOMEPAGE_SEO = {
+  us: {
+    meta_title: 'Custom Soccer Jerseys & Uniforms — Free 3D Designer | MOMUTO',
+    meta_descript: 'Design custom soccer jerseys and team uniforms in a free 3D designer. No minimum order, from $25.90/jersey at 10+, delivered across the US in 25-30 days.',
+    meta_keywords: ['custom soccer jerseys', 'custom soccer uniforms', 'soccer jersey maker', '3d soccer jersey designer', 'custom basketball jerseys', 'MOMUTO'],
+  },
+};
+
 async function main() {
   if (MODE === 'inspect') {
     // Menus + logistics in one read-only sweep (endpoints from the vendor's
     // Apizza docs, 1 Sep 2026 — recorded in docs/oemsaas-api-notes.md).
-    const READS = ['/navs', '/shippingzones?type=1', '/shippingzones?type=2', '/couriers'];
+    const READS = ['/navs', '/seoplans', '/shippingzones?type=1', '/shippingzones?type=2', '/couriers'];
     for (const [store, token] of Object.entries(TOKENS)) {
       if (!token) { console.log(`[${store}] no token — skipped`); continue; }
       for (const ep of READS) {
@@ -96,7 +106,24 @@ async function main() {
     return;
   }
 
-  if (MODE !== 'apply') { console.error(`Unknown MODE "${MODE}"`); process.exit(1); }
+  if (MODE === 'apply-seo') {
+    const store = (process.env.TARGET_STORE || 'us').toLowerCase();
+    const token = TOKENS[store];
+    if (!token) { console.error(`No token for store "${store}"`); process.exit(1); }
+    const seo = HOMEPAGE_SEO[store];
+    if (!seo) { console.error(`No curated homepage SEO for "${store}" — add it to HOMEPAGE_SEO first`); process.exit(1); }
+    if (seo.meta_title.length > 65 || seo.meta_descript.length > 160) { console.error('meta length breach'); process.exit(1); }
+    const cur = await api(token, 'GET', '/seoplans');
+    console.log(`Current homepage SEO on ${store}: ${JSON.stringify(cur.json.data)}`);
+    console.log(`New: ${JSON.stringify(seo)}`);
+    if (DRY_RUN) { console.log('DRY_RUN — nothing written.'); return; }
+    const res = await api(token, 'PUT', '/seoplans', seo);
+    if (!res.ok) { console.error(`PUT /seoplans failed: ${JSON.stringify(res.json).slice(0, 300)}`); process.exit(1); }
+    console.log('✅ homepage SEO updated.');
+    return;
+  }
+
+  if (MODE !== 'apply-nav') { console.error(`Unknown MODE "${MODE}" — inspect | apply-nav | apply-seo`); process.exit(1); }
 
   const store = (process.env.TARGET_STORE || 'us').toLowerCase();
   const navName = process.env.TARGET_NAV_NAME || '';
