@@ -17,6 +17,12 @@ Read the doc that owns a topic BEFORE editing that surface.
 - `docs/editorial-strategy.md` — content/GEO strategy, canonical facts table,
   guardrails (clubs named in editorial ONLY; deposit copy never
   refund-forward outside the four gate pages).
+- `docs/us-launch-status.md` — what actually shipped for us.momuto.com,
+  the standing EUR→USD conversion table, and owner rulings (incl. **no
+  geo-redirect www→us**; hreflang steers, banner at most).
+- `docs/store-config-shipping.md` — live shipping zones for all 5 stores +
+  the `sync-store-config.js` tool (navs/SEO/shipping); read BEFORE any
+  zone, nav, or seoplan write. Zone overlap/permission gotchas live there.
 - `docs/design-page-template.md`, `docs/rtp-collection.md` (historical),
   `docs/it-site-recovery.md`, `docs/10x-plan.md`.
 
@@ -58,6 +64,10 @@ Read the doc that owns a topic BEFORE editing that surface.
   was already on disk; the error hit at their final-summary step. **Always
   `ls` the output directory before re-running anything.** Re-running would
   have burned another full research pass to reproduce files that existed.
+- **Pull CMS Content dispatched on a non-main branch**: the pull itself
+  works and LOGS the result, but the commit-back step can die
+  non-fast-forward (it rebases onto main). Read the run log for the
+  answer before re-running; the pulled file may not land in git.
 - Commit trailer convention: see the session's system rules; never put model
   IDs in pushed artifacts (commit messages, PR bodies — API `model:` params
   in scripts are configuration, not attribution, and are fine).
