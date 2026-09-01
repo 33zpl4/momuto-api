@@ -29,12 +29,13 @@ const TOKENS = {
   fr: process.env.OEMSAAS_TOKEN_FR,
   es: process.env.OEMSAAS_TOKEN_ES,
   it: process.env.OEMSAAS_TOKEN_IT,
+  us: process.env.OEMSAAS_TOKEN_US,
 };
-const LABEL = { en: 'momuto.com', fr: 'fr.momuto.com', es: 'es.momuto.com', it: 'it.momuto.com' };
+const LABEL = { en: 'momuto.com', fr: 'fr.momuto.com', es: 'es.momuto.com', it: 'it.momuto.com', us: 'us.momuto.com' };
 
 // cms/pages/<locale>/<handle>.json
 function parsePath(file) {
-  const m = file.match(/^cms\/pages\/(en|fr|es|it)\/(.+)\.json$/);
+  const m = file.match(/^cms\/pages\/(en|fr|es|it|us)\/(.+)\.json$/);
   return m ? { locale: m[1], handle: m[2] } : null;
 }
 
