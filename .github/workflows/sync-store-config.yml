@@ -1,0 +1,52 @@
+name: Store Config (nav / SEO / logistics)
+
+# GET/POST /navs — see scripts/sync-store-nav.js. Dispatch-only; navigation
+# is never a push side effect. Run inspect and READ THE OUTPUT before the
+# first apply on any store.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'inspect = read nav/SEO/shipping on every store; apply-nav / apply-seo write one store'
+        required: true
+        default: 'inspect'
+        type: choice
+        options: ['inspect', 'apply-nav', 'apply-seo']
+      store:
+        description: 'apply only: target store'
+        required: false
+        default: 'us'
+        type: choice
+        options: ['us', 'en', 'es', 'fr', 'it']
+      nav_name:
+        description: 'apply-nav only: EXACT nav_name of the menu to overwrite (from inspect)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'apply only: preview payload, post nothing'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  nav:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          MODE: ${{ github.event.inputs.mode }}
+          TARGET_STORE: ${{ github.event.inputs.store }}
+          TARGET_NAV_NAME: ${{ github.event.inputs.nav_name }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/sync-store-config.js

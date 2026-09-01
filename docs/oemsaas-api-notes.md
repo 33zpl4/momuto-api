@@ -305,3 +305,33 @@ The findings above came from four habits worth reusing on any similar task:
 - [cms-product-create-api.md](./cms-product-create-api.md) — the create payload, field by field
 - [iconic-series.md](./iconic-series.md) — the pipeline these findings came out of
 - `scripts/create-iconic-products.js` — `--inspect`, `--probe`, `--audit`, `--update`
+
+## Navigation + logistics endpoints (from the vendor's Apizza docs, 1 Sep 2026)
+
+Previously assumed admin-only; both are on the same OpenAPI host/token.
+Tooling: `scripts/sync-store-nav.js` (+ `sync-store-nav.yml`, dispatch-only,
+inspect-first — read a store's live JSON before the first write).
+
+- **`GET /navs`** — menus with children (3 levels). **`POST /navs`** —
+  update; a menu whose `nav_name` matches an existing one is OVERWRITTEN
+  ("duplicate menu names will be overwritten") → posting one menu upserts
+  it. `url_json.type`: 0 none · 1 homepage · 2 album details · 3 product
+  details · 4 blog details · 5 custom page · 6 custom URL · 7 product
+  album · 14 blog list · … (full map in the Apizza doc). Custom URL (6)
+  with root-relative paths works for everything and needs no source ids.
+- **`GET /shippingzones?type=`** (1 general, 2 custom) — logistics
+  solutions with `shippingZonePlan[]`; each plan's `param` keys a fee to a
+  rule: `rule` = total_price|total_quantity|total_weight, `rule_min`/
+  `rule_max` (blank max = ∞), `fee_method` 1 fixed fee (2 first+add'l
+  weight, 3 first+add'l items), `fee`. **A free-shipping threshold is two
+  plans on one zone: [0..T) → fee X, [T..∞) → fee 0.**
+- **`GET /shippingzones/{id}`** — details incl. `areas` (country objects;
+  US country_id = 229, default_currency USD) and bound products (empty
+  product_ids = all products).
+- **`POST /shippingzones`** — create solution (name, type, areas[
+  {country_id, provinces:[]}], plan[], product_ids[]). **`PUT`** —
+  "Logistics plan modification" (path per the Apizza doc).
+- **`GET /couriers`** — carrier list (id, name, code, homepage).
+- **`GET /seoplans`** / **`PUT /seoplans`** — HOMEPAGE SEO (meta_title,
+  meta_descript, meta_keywords — keywords is an ARRAY, same rule as pages).
+  The one homepage surface we previously couldn't reach from code.
