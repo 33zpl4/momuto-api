@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-09-01c · sleeve raise settled at ~7px on export';
+var VERSION = '2026-09-01d · back picture-left sleeve dropped ~2.4px';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -100,6 +100,12 @@ var SPONSOR_RAISE = 15 / 2494;
 //    The real fix is upstream: draw the sleeve SVG with the band far enough off
 //    the bottom edge that no shift is needed. Then set this to 0.
 var SLEEVE_RAISE = 45 / 2494;
+
+//    The back template's picture-LEFT sleeve reads a touch high at that raise —
+//    its hem shows the gap the other three do not. A property of that one slot's
+//    mask, not of any design, so it takes 15 canvas px less: about 2.4 px lower
+//    in the export. The other three stay on SLEEVE_RAISE.
+var BACK_LEFT_SLEEVE_RAISE = 30 / 2494;
 
 var SPONSOR = {
   frontRightArm: [-0.146135, 0.568293 - SPONSOR_RAISE, 0.660022, 0.272781],   // front template, picture-LEFT slot
@@ -293,8 +299,9 @@ var CONFIG = {
         { layer: 'JERSEY DESIGN',       file: 'back',                     count: 1, required: true },
         // Back view does not mirror: the template's LEFT/RIGHT are picture-side,
         // and picture-left is the player's LEFT arm from behind.
+        // The only slot that does not take the common raise — see the constant.
         { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'], count: 1,
-          baseOffsetPct: [0, -SLEEVE_RAISE],
+          baseOffsetPct: [0, -BACK_LEFT_SLEEVE_RAISE],
           over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], boxPct: SPONSOR.backLeftArm }] },
         { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'], count: 1,
           baseOffsetPct: [0, -SLEEVE_RAISE], mirrorX: 'shared',
