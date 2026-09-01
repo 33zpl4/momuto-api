@@ -236,14 +236,21 @@ async function main() {
       const all = await areasOf(world.id);
       const es = all.find(a => a.country_code_2 === 'ES');
       const ic = all.find(a => a.country_code_2 === 'IC');
-      // idempotency: never create a carrier zone that already exists
+      const worldPlans = () => twoPlans(world, 'Envío certificado (25-30 días)', 'Gratis desde 50€.', 'GRATIS 🎁', T_EU, F_EU);
+      // Type-1 zones may not overlap areas ("数据已存在"), so the countries must
+      // LEAVE the worldwide zone before their carrier zones can be created.
+      const carve = all.filter(a => a.country_code_2 !== 'ES' && a.country_code_2 !== 'IC');
+      const shrunk = await putZone(world, world.plan_name, worldPlans(), carve);
+      if (!shrunk) { console.error('worldwide shrink failed — carrier zones not attempted'); process.exit(1); }
       let ok1 = !!byName('CTT Express'), ok2 = !!byName('Correos');
       if (es && !ok1) ok1 = await postZone('CTT Express', [es.id], 'CTT Express (25-30 días)', 'Gratis desde 50€.', 'GRATIS 🎁', T_EU, F_EU);
       if (ic && !ok2) ok2 = await postZone('Correos', [ic.id], 'Correos (25-30 días)', 'Gratis desde 50€.', 'GRATIS 🎁', T_EU, F_EU);
-      // shrink the worldwide zone only for carriers that verifiably exist
-      const remaining = all.filter(a => !(ok1 && a.country_code_2 === 'ES') && !(ok2 && a.country_code_2 === 'IC'));
-      await putZone(world, world.plan_name,
-        twoPlans(world, 'Envío certificado (25-30 días)', 'Gratis desde 50€.', 'GRATIS 🎁', T_EU, F_EU), remaining);
+      // rollback: any country whose carrier zone failed goes back into the worldwide zone
+      const back = all.filter(a => !(ok1 && a.country_code_2 === 'ES') && !(ok2 && a.country_code_2 === 'IC'));
+      if (back.length !== carve.length) {
+        console.log('rolling uncovered countries back into the worldwide zone…');
+        await putZone(world, world.plan_name, worldPlans(), back);
+      }
     } else { console.error(`no curated shipping for "${store}"`); process.exit(1); }
     return;
   }
