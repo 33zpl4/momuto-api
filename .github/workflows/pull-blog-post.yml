@@ -24,7 +24,7 @@ on:
         required: false
         default: 'post'
         type: choice
-        options: [post, page, product]
+        options: [post, page, product, inventory, dump]
       handle:
         description: 'CMS url handle (or numeric id) to pull'
         required: true
@@ -72,7 +72,7 @@ jobs:
           while read -r A B C; do
             [ -z "$A" ] && continue
             case "$A" in
-              inventory)         T="inventory"; L="$B"; H="-" ;;
+              inventory|dump)    T="$A"; L="$B"; H="-" ;;
               post|page|product) T="$A"; L="$B"; H="$C" ;;
               *)                 T="post"; L="$A"; H="$B" ;;
             esac
@@ -93,5 +93,5 @@ jobs:
             exit 0
           fi
           git commit -m "Pull $(git diff --cached --name-only | wc -l | tr -d ' ') CMS object(s) from CMS [skip ci]"
-          git pull --rebase origin main
+          git pull --rebase origin "$GITHUB_REF_NAME"
           git push

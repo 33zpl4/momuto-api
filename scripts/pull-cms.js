@@ -122,7 +122,30 @@ async function main() {
     return;
   }
 
-  if (!ENDPOINT[type]) { console.error(`Unknown CMS_TYPE "${type}" — use post | page | product | inventory`); process.exit(1); }
+  // Dump mode: every page, post and product of one store as raw objects under
+  // cms/<type>s/<locale>/ — the input for an offline content audit (lexicon,
+  // claims, cross-store links) that the sandbox can't run against the live CMS.
+  if (type === 'dump') {
+    for (const t of ['page', 'post', 'product']) {
+      const items = await fetchAll(ENDPOINT[t], token);
+      let n = 0;
+      for (const item of items) {
+        const h = getHandle(item);
+        if (!h) continue;
+        // Posts go under cms/ too (raw) — never over the curated blogs/<locale>/ sources.
+        const file = t === 'post'
+          ? path.join(ROOT, 'cms', 'posts', locale, `${h}.json`)
+          : outPath(t, locale, h);
+        fs.mkdirSync(path.dirname(file), { recursive: true });
+        fs.writeFileSync(file, JSON.stringify(item, null, 2) + '\n');
+        n++;
+      }
+      console.log(`✅ Dumped ${n} ${t}(s) for ${locale} → cms/${t}s/${locale}/`);
+    }
+    return;
+  }
+
+  if (!ENDPOINT[type]) { console.error(`Unknown CMS_TYPE "${type}" — use post | page | product | inventory | dump`); process.exit(1); }
   if (!handle) { console.error('HANDLE required'); process.exit(1); }
 
   const items = await fetchAll(ENDPOINT[type], token);
