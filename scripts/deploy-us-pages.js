@@ -87,6 +87,23 @@ const PAGES = [
       'reversible basketball jerseys custom',
     ],
   },
+  {
+    handle: 'halloween-soccer-jerseys',
+    title: 'Custom Halloween Soccer Jerseys for Tournaments | MOMUTO',
+    meta_title: 'Custom Halloween Soccer Jerseys — Tournament Kits | MOMUTO',
+    meta_descript: 'Themed soccer jerseys for Halloween tournaments — Frankenstein, mummy and monster kits built from your reference. Tournament-legal, 25-30 days, no minimum.',
+    keywords: [
+      'halloween soccer jerseys',
+      'halloween soccer tournament jerseys',
+      'custom halloween jerseys',
+      'halloween soccer uniforms',
+      'spooky soccer jerseys',
+      'halloween soccer tournament',
+      'kick or treat tournament jerseys',
+      'themed soccer jerseys',
+      'MOMUTO',
+    ],
+  },
 ];
 
 function sanityCheck(p, content) {

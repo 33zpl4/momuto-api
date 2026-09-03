@@ -115,24 +115,43 @@ pages got keyword arrays, ≤160-char metas, "Explore 500+ Custom Soccer
 Jersey Designs" and a "Create Your Own Soccer Jersey Online — Free" CTA
 (largest un-anchored US query). Team pages (163) done mechanically.
 
-**Left deliberately untouched — owner rulings needed**:
-1. **Product prices on the US store are NOT the owner's USD pairs.** The
-   platform clone converted at an FX rate: 45.14 / 45.26 / 57.91 / 65.92 /
-   59.30 / 49.79 … (e.g. €38.90 → $45.14, ruling says $45.90). Only the 7
-   RTP jerseys we created ($40.90) follow the rule. 422 "Your custom design
-   — this is what we produce" order-mockup products sit at $0 (already
-   excluded from the sitemap; still status 1). Decide: reprice by rule via
-   a script (`/products/batchsave` takes partial updates), or delete the
-   per-order mockups from the US store.
-2. Unmapped € on pages: `momuto-vs-jersix-owayo-spized-comparison` carries
-   an old EN volume ladder (€34.90/26.90/18.90/17.90/16.90 + shorts) and
-   competitor EUR prices; `contact` says "€30 deposit may apply"; bachelor
-   page "€22 per head"; `faq`/legacy gate had €20.90 (mapped to $25.90 as
-   the same fact). Rule on the ladder before touching that page again.
-3. 36 products carry football/EUR in title/body — fixable through
-   batchsave (partial), not done yet.
+**Owner rulings received 3 Sep (all applied)**:
+1. **US price ladder (USD, .90 endings — replaces the FX-converted clone
+   prices).** Jersey: $45.90 (1) · $41.90 (2–4) · $30.90 (5–9) · **$25.90
+   (10–19)** · $21.90 (20–49) · $20.90 (50–99) · $19.90 (100+). Shorts:
+   $20.90 (1) · $18.90 (2–4) · $13.90 (5–9) · $5.00 (10+). Full kit = jersey
+   + shorts: $66.80 · $60.80 · $44.80 · **$30.90** · $26.90 · $25.90 · $24.90.
+   Products: `scripts/reprice-us-products.js` (+ `reprice-us-products.yml`,
+   dispatch-only, dry-run first) recovers the EUR behind each FX price
+   (÷1.1605) and maps it through `USD_OF_EUR`; unmapped EUR is reported,
+   never invented. Also fixes football/EUR in product copy via batchsave.
+   Other pairs used: Iconic tee €39→$45.90, €40→$46.90, tributes €49.90→
+   $58.90, editions €55.90→$65.90, €42.90→$50.90 (cmp €80→$94.90), concept
+   €34.90→$41.90, legacy team jerseys €20.90→$24.90, shorts €17.90→$20.90,
+   socks €6→$6.90, long sleeves +$3.00, RTP full kit →$59.90. Per-order
+   $0 mockup products and test junk are skipped.
+2. Comparison page ladder rewritten to the table above (JSON-LD + table);
+   `contact`: "$15 deposit applies to 100% custom requests, credited in
+   full to orders of 5+ jerseys" (the €30/"may apply" copy is gone);
+   bachelor page "€22 a head" → "$25.90 a head" (it was €21.90).
+3. The lexicon fixer's € regex once ate trailing punctuation ("$45.90,"
+   → "$45.90"); fixed, and the pass is regenerated from the dump by
+   `us-lexicon-fix.py --write` + `us-money-pages-tweaks.py` (idempotent —
+   rerun both after any fresh dump).
 4. `teams-clubs-momuto` + EN twin still say "100+ clubs" in body copy on
    www (EN is out of this pass's scope) — same stale claim exists there.
+
+**Halloween tournaments page (3 Sep)** — `pages/us/halloween-soccer-jerseys`
+(`deploy-us-pages.js`): two real US case studies (Frankenstein full kit for
+a U9 boys team → product `folsom-lake-surf-soccer-club-custom-full-kit`;
+Mo Money Mummy jersey → product `mo-money-mummy-custom-jersey` + its team
+page), tournament-legality checklist, count-back timeline, USD pricing,
+FAQ. Images are the products' CDN renders (the customers' reference boards
+are not hosted anywhere the API can reach — the owner can upload them to
+the admin media library and we swap the "What the team sent" cards to
+image+text). Target queries: halloween soccer jerseys / halloween soccer
+tournament jerseys / custom halloween jerseys / spooky soccer jerseys. Not
+in the nav yet (owner's call); `llms.txt` carries the page.
 
 ## Tooling gotchas hit this week (beyond CLAUDE.md's list)
 

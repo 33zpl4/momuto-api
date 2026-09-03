@@ -23,8 +23,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # ─── owner-ruled EUR → USD (never extend without the owner) ──────────────────
 PRICE_MAP = {
     '21.90': '25.90', '38.90': '45.90', '35': '40.90', '35.00': '40.90', '59': '69',
-    '59.00': '69', '19.70': '23.30', '15': '15', '15.00': '15', '50': '59', '50.00': '59',
+    '59.00': '69', '19.70': '23.30', '15': '15', '15.00': '15', '50': '59', '59': '69', '50': '59', '50.00': '59',
     '49': '59', '3.90': '4.90', '24.90': '28.90', '26.90': '30.90', '24.20': '27.80',
+    '34.90': '41.90', '18.90': '21.90', '17.90': '20.90', '16.90': '19.90', '15.90': '18.90', '11.90': '13.90',
+    '56.80': '66.80', '50.80': '60.80', '38.80': '44.80',  # comparison ladder, derived 3 Sep 2026
     '20.90': '25.90',  # stale pre-2026 EN price still on faq/legacy gate — same fact as 21.90
     '39': '46', '40': '47', '54.90': '64.90', '49.90': '58.90', '64.90': '76.90',
 }
@@ -152,13 +154,14 @@ def _fix_prose(s, handle):
     def eu(m):
         raw = m.group(0)
         num = re.sub(r'[^\d.,]', '', raw.replace('&euro;', '€')).replace(',', '.')
-        key = num[:-1] if num.endswith('.') else num
+        key = num if '.' in num else num + '.00'
+        if key not in PRICE_MAP and num in PRICE_MAP: key = num
         if key in PRICE_MAP:
             new = f'${PRICE_MAP[key]}'
             log('EUR→USD', handle, s, m, new); return new
         RESIDUAL['€ unmapped (owner must rule)'].append((handle, s[max(0, m.start() - 40):m.end() + 30]))
         return raw
-    s = re.sub(r'(?:€|&euro;)\s?\d[\d.,]*|\b\d[\d.,]*\s?(?:€|&euro;)', eu, s)
+    s = re.sub(r'(?:€|&euro;)\s?\d+(?:[.,]\d{1,2})?|\b\d+(?:[.,]\d{1,2})?\s?(?:€|&euro;)', eu, s)
     s = re.sub(r'\b(\d[\d.,]*)\s?(?:EUR|euros?)\b', lambda m: (log('EUR→USD', handle, s, m, f'${PRICE_MAP[m.group(1)]}') or f'${PRICE_MAP[m.group(1)]}') if m.group(1) in PRICE_MAP else (RESIDUAL['€ unmapped (owner must rule)'].append((handle, m.group(0))) or m.group(0)), s)
 
     # 7. stale claims
