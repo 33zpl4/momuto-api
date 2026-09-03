@@ -80,6 +80,60 @@ Never invent a pair — unmapped prices fail loudly by design.
    ("… Custom Kit Design Preview"). Acceptable as portfolio pages;
    a meta sweep is optional future work.
 
+## US-lexicon pass over the cloned estate (3 Sep 2026)
+
+**Why**: GSC (Jun–Sep 2026, momuto.com property): United States = 26k
+impressions, 537 clicks, position 19.4, CTR 2% — the weakest big market,
+because www ranks on the football/shirt query family while Americans
+search the "soccer" one (*soccer jersey maker* 637 imp @23, *custom soccer
+jersey maker* 561 @28, *3d soccer jersey designer* 549 @12, *create your
+own soccer jersey online free* 511 @6.5, *custom soccer jersey creator*
+429 @34, *custom soccer jerseys* 222 @25). The owner's wholesale clone of
+www onto us.momuto.com (758 objects: 202 pages, 43 posts, 513 products)
+carried the UK lexicon, EUR prices, stale claims and absolute www links.
+
+**Tooling (all in repo, re-runnable)**:
+- `Pull CMS Content` workflow, `cms_type=dump locale=us` → raw objects
+  under `cms/{pages,posts,products}/us/` (commit-back is branch-safe now).
+- `scripts/audit-us-lexicon.py` — per-object hit table + target-keyword
+  coverage; `--json` for machine output.
+- `scripts/us-lexicon-fix.py [--write]` — text nodes only (never URLs,
+  tags, `<style>`, JS); football→soccer with proper nouns protected
+  (`DMC FOOTBALL CLUB` stays), shirt→jersey (not t-shirt/polo), pitch→
+  field, boots→cleats, British→US spelling, EUR→USD **only via the
+  owner map** (unmapped € reported, untouched), JSON-LD currency, stale
+  claims, www links → relative. Cloned EN posts are emitted as
+  `blogs/us/<handle>.json`; the 8 EN twins of US-native posts are skipped
+  (unpublished via `cms/unpublish.json` "us").
+- Bulk deploys: `Deploy CMS Page` / `Deploy Blog Post` now take
+  `changed_since=<git ref>` (deploys every file changed since that ref).
+- Sitemap: any page/post handle live on BOTH en and us auto-pairs as an
+  hreflang cluster (curated clusters still win).
+
+**Result (3 Sep)**: 194 pages + 26 posts rewritten and deployed; money
+pages got keyword arrays, ≤160-char metas, "Explore 500+ Custom Soccer
+Jersey Designs" and a "Create Your Own Soccer Jersey Online — Free" CTA
+(largest un-anchored US query). Team pages (163) done mechanically.
+
+**Left deliberately untouched — owner rulings needed**:
+1. **Product prices on the US store are NOT the owner's USD pairs.** The
+   platform clone converted at an FX rate: 45.14 / 45.26 / 57.91 / 65.92 /
+   59.30 / 49.79 … (e.g. €38.90 → $45.14, ruling says $45.90). Only the 7
+   RTP jerseys we created ($40.90) follow the rule. 422 "Your custom design
+   — this is what we produce" order-mockup products sit at $0 (already
+   excluded from the sitemap; still status 1). Decide: reprice by rule via
+   a script (`/products/batchsave` takes partial updates), or delete the
+   per-order mockups from the US store.
+2. Unmapped € on pages: `momuto-vs-jersix-owayo-spized-comparison` carries
+   an old EN volume ladder (€34.90/26.90/18.90/17.90/16.90 + shorts) and
+   competitor EUR prices; `contact` says "€30 deposit may apply"; bachelor
+   page "€22 per head"; `faq`/legacy gate had €20.90 (mapped to $25.90 as
+   the same fact). Rule on the ladder before touching that page again.
+3. 36 products carry football/EUR in title/body — fixable through
+   batchsave (partial), not done yet.
+4. `teams-clubs-momuto` + EN twin still say "100+ clubs" in body copy on
+   www (EN is out of this pass's scope) — same stale claim exists there.
+
 ## Tooling gotchas hit this week (beyond CLAUDE.md's list)
 
 - **Pull CMS Content on a non-main branch**: its commit step runs

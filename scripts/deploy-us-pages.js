@@ -62,7 +62,7 @@ const PAGES = [
     handle: 'ai-concept-to-real-kit',
     title: 'AI Soccer Jersey Generator — Concept to Real Jersey | MOMUTO',
     meta_title: 'AI Soccer Jersey Generator to Real Custom Jersey | MOMUTO',
-    meta_descript: 'Made a soccer jersey concept with ChatGPT, Gemini or Midjourney? We turn AI jersey designs into real custom uniforms you can wear. $15 deposit, mockup in 24-48h.',
+    meta_descript: 'Made a soccer jersey concept with ChatGPT, Gemini or Midjourney? We turn AI jersey designs into real, wearable custom uniforms. $15 deposit, mockup in 24-48h.',
     keywords: [
       'ai soccer jersey generator',
       'ai jersey design',
