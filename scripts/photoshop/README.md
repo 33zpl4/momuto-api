@@ -117,25 +117,26 @@ the panel alone, so every sponsor now sits at exactly `SPONSOR_RAISE`.
 the sleeves **one export pixel is about 6.3 canvas pixels**. Getting that
 backwards is what made the first attempt at this a sixth of what was asked for:
 "raise it 15 px", read off the exported image, was applied as 15 px of the SVG
-canvas — a 2.4 px move in the export. `SLEEVE_RAISE` is now `80 / 2494`, about
-12–13 px in the export.
+canvas — a 2.4 px move in the export. Over-correcting to `80 / 2494` (12.7 px)
+then showed the gap described below, and `SLEEVE_RAISE` settled at `45 / 2494`,
+about 7 px, bisected between those two measured failures. The back
+picture-left sleeve reads a touch high at that and takes `30 / 2494` on its own
+constant, `BACK_LEFT_SLEEVE_RAISE`.
 
-The exact conversion is `f × H × export/template`, where `H` is the slot's full
-transform height. `H` is not directly readable — layer bounds report the
-**masked** extent, not the transform — so 15 export px is somewhere between 66
-and 104 canvas px depending on how much of the sleeve the mask hides. 80 is the
-middle of that band. To tune: ~6.3 canvas px per export px, so "needs 4 px more"
-is `+25`. Overshooting shows as cream appearing below the band, which is easy to
-read, so err high rather than creep up.
+To tune: ~6.3 canvas px per export px, so "needs 4 px more" is `+25`.
 
-**The vacated strip is not covered by default.** A shift does leave a gap at the
-trailing edge, but the reason to shift at all is that the canvas edge lies
-*outside* the mask — which is the same reason the gap cannot show. Covering it
-costs a real upscale: scaling is centred, so covering a shift of `d` needs `2d`
-of extra height, which at the sleeve raise is a **6.4% enlargement** of the
-artwork. On a patterned kit that is a visible scale mismatch with the body at the
-shoulder seam — a certain artefact traded for a hypothetical one. `baseBleed:
-true` on the slot turns it on if a transparent sliver really does appear.
+**The raise is a compromise, not a solution, and the reason is worth knowing.**
+The shift vacates a strip at the hem, and that strip **does** show — as a dark
+line against the background, the same size as the shift. The band sits at the
+very bottom of the panel, so raising it necessarily raises the artwork's bottom
+edge with it; there is no value that both clears the mask and hides completely.
+
+`baseBleed: true` is *not* the way out, and reaching for it is the obvious next
+move. It closes the gap by scaling the artwork up so the bottom edge stays
+flush — which **pins** the bottom edge, and the band is ~90 px from it. Pinned,
+an 80 px raise moves the band 6 px. It cancels precisely the correction it is
+protecting. The clean fix is upstream: draw the sleeve SVG with the band far
+enough off the bottom edge that no shift is needed, then set the raise to 0.
 
 **`mirrorX: 'shared'`** flips the base artwork on the picture-right slots — but
 only when the file came from the shared `-sleeves` fallback. A design that
@@ -442,13 +443,47 @@ back's different again. A fraction means the same place in all of them.
 measures the placed layer's bounds, so padding inside the file becomes padding
 inside the box and the mark lands small and off-centre.
 
-**The mark is sized by the box's HEIGHT**, with the width following the logo's
-own aspect; the box width only decides the centre. This is what the reference
-sleeves do — both front sponsors are exactly 180 tall despite aspects of 1.3078
-and 1.1313 — so a wide wordmark and a tall badge come out the same height, which
-is how sponsors are actually specified. (`fit: 'contain'` keeps a mark inside the
-box on both axes instead; right for a badge with a printable-area limit, wrong
-for a sponsor.)
+**The mark is sized by the box's HEIGHT, up to a maximum width.** Height first,
+with the width following the logo's own aspect — that is what the reference
+sleeves do, both front sponsors being exactly 180 tall despite aspects of 1.3078
+and 1.1313. But both references are compact, and a rule read off compact marks
+alone has no upper bound on width: a 2840×637 wordmark (aspect 4.46) sized to the
+standard height came out **3033 px wide on a 1348 px sleeve**, 2.25× the whole
+panel, with the first and last letters never reaching the canvas.
+
+So `SPONSOR_MAX_WIDTH` (0.67 of the canvas) caps it. A mark that would come out
+wider is scaled down to that width instead — a badge gets the standard height, a
+wordmark gets the standard width, and neither runs off the sleeve. The wordmark
+above lands at 903×203 px, readable end to end.
+
+Two things about the cap are deliberate:
+
+- **It is one number for all four sleeves.** A per-slot cap (each slot's own
+  measured box width, 0.57–0.66) would size the same logo differently on the two
+  arms — the common case of one `-sleevesponsor.svg` for both would come out 14%
+  smaller on the left arm than the right.
+- **0.67 is just above the widest reference (0.660)**, so no reference-sized mark
+  is touched: everything that rendered correctly before renders identically now.
+
+A capped mark is also pulled fully onto the canvas, `SPONSOR_EDGE_INSET` (0.03)
+in from the edge. The measured reference positions sit against the outer edge of
+the sleeve and run past it (front right arm: x from −0.146); that overhang is
+harmless on a silhouette and fatal on text, where it is the first two letters.
+**Only a capped mark is moved** — a reference-sized mark keeps the hand-placed
+position that was checked on a render, overhang included. That is a
+discontinuity between "fits" and "does not", accepted on purpose: a mark just
+under the cap keeps its verified place, a mark over it has no verified place and
+gets a safe one.
+
+The run says when the cap engaged, so a sponsor at the standard width rather than
+the standard height never passes as a mystery:
+
+```
+· overlaid: club-sleevesponsor.svg width-capped to 903×203px, moved 237px onto the canvas
+```
+
+(`fit: 'contain'` keeps a mark inside the box on both axes instead; right for a
+badge with a printable-area limit on both sides.)
 
 #### Where the four boxes came from
 

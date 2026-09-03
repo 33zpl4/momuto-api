@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-09-01d · back picture-left sleeve dropped ~2.4px';
+var VERSION = '2026-09-03a · sleeve sponsors capped at a maximum width';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -37,10 +37,14 @@ var VERSION = '2026-09-01d · back picture-left sleeve dropped ~2.4px';
 //    front-left and back-right carry an identical `pattern` transform, so they
 //    are the same physical arm.
 //
-//    HEIGHT IS WHAT SIZES A SPONSOR. The two front marks are both exactly 180
-//    tall with aspect ratios of 1.3078 and 1.1313, so the height is the standard
-//    and the width is whatever the logo happens to be. The box width is used
-//    only to centre. (That is `fit: 'height'`, the default for an overlay.)
+//    HEIGHT IS WHAT SIZES A SPONSOR — UP TO A MAXIMUM WIDTH. The two front marks
+//    are both exactly 180 tall with aspect ratios of 1.3078 and 1.1313, so the
+//    height is the standard and the width follows the logo. But those two are
+//    both compact, and a rule read off compact marks alone breaks on the first
+//    wordmark: a 2840×637 sponsor (aspect 4.46) sized to that height comes out
+//    3033 px wide on a 1348 px sleeve — 2.25× the whole panel. So the width is
+//    capped at SPONSOR_MAX_WIDTH below, and a mark that hits the cap is scaled
+//    down to it and pulled fully onto the canvas.
 //
 //    ⚠ The back heights do not agree: 165 on the right arm, 195 on the left —
 //    an 18% spread, where the front has none. Their MEAN is exactly 180, and the
@@ -114,6 +118,39 @@ var SPONSOR = {
   backRightArm:  [ 0.476647, 0.568293 - SPONSOR_RAISE, 0.605020, 0.250049]    // back template, RIGHT SLEEVE DESIGN
 };
 
+// ── The widest a sponsor may be, as a fraction of the sleeve canvas.
+//
+//    A mark is sized by height first. If that makes it wider than this, it is
+//    scaled down until it fits this width instead — so a compact badge gets the
+//    standard height and a wide wordmark gets the standard width, and neither
+//    ever runs off the sleeve.
+//
+//    0.67 is just above the widest reference sponsor (0.660, front right arm),
+//    chosen so that NO reference-sized mark is touched by the cap: everything
+//    that rendered correctly before renders identically now. It is ONE number
+//    for all four sleeves on purpose. A per-slot cap (say, each slot's own box
+//    width, 0.57–0.66) would size the same logo differently on the two arms —
+//    the common case of one -sleevesponsor.svg for both would come out 14%
+//    smaller on the left arm than the right.
+//
+//    The wordmark above lands at 903×203 px in the canvas — about a sixth of
+//    the panel's height instead of a quarter, and readable end to end.
+var SPONSOR_MAX_WIDTH = 0.67;
+
+//    A capped mark is also pulled fully ONTO the canvas, this far in from the
+//    edge. The measured reference positions sit against the outer edge of the
+//    sleeve and run past it (front right arm: x from -0.146); that overhang is
+//    harmless on a silhouette and fatal on text — it is the first two letters.
+//    Only a capped mark is moved: reference-sized marks keep the hand-placed
+//    position that was checked on a render, overhang included.
+var SPONSOR_EDGE_INSET = 0.03;
+
+// The overlay entry every sleeve slot uses, so the cap and inset are set in one
+// place and the four slots cannot drift apart.
+function sponsorOverlay(kinds, boxPct) {
+  return { file: kinds, boxPct: boxPct, maxWidthPct: SPONSOR_MAX_WIDTH, edgeInsetPct: SPONSOR_EDGE_INSET };
+}
+
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
 //    Windows paths use FORWARD slashes.
@@ -161,6 +198,12 @@ var CONFIG = {
   // box height and lets the width follow the logo's aspect; 'contain' keeps it
   // inside on both axes. Sponsors want 'height' — see SPONSOR at the top.
   //
+  // `maxWidthPct` caps the width, as a fraction of the slot canvas. A mark that
+  // would come out wider is scaled down to the cap instead — the only thing
+  // that stops a wide wordmark being sized like a badge and swallowing the
+  // sleeve. `edgeInsetPct` then keeps a capped mark this far inside the canvas
+  // edge. Sleeve slots get both via sponsorOverlay(); see SPONSOR_MAX_WIDTH.
+  //
   // This is how sleeve sponsors work. A sponsor cannot be mirrored, so it must
   // be its own layer rather than baked into a mirrored base. Because the slot
   // mapping already knows which picture-side is which arm, one file per arm is
@@ -174,8 +217,10 @@ var CONFIG = {
   // measures the placed layer's bounds, so padding inside the file becomes
   // padding inside the box and the mark comes out small and off-centre.
   //
-  // The box preserves aspect and centres, so a wide wordmark and a square badge
-  // both come out at the same height rather than both stretched to fit.
+  // The box preserves aspect and centres, so a square badge and a moderately
+  // wide logo come out at the same height rather than both stretched to fit;
+  // a genuinely wide wordmark hits the width cap and comes out at the standard
+  // width instead.
   //
   // The bare-kind form still works and means "authored at the full sleeve canvas
   // with the sponsor already in position" — fine if that is how the file was
@@ -280,10 +325,10 @@ var CONFIG = {
         // not matching — only this first one used to have it.
         { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2494],
           baseOffsetPct: [0, -SLEEVE_RAISE],
-          over: [{ file: ['sleevesponsorright', 'sleevesponsor'], boxPct: SPONSOR.frontRightArm }] },
+          over: [sponsorOverlay(['sleevesponsorright', 'sleevesponsor'], SPONSOR.frontRightArm)] },
         { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2520],
           baseOffsetPct: [0, -SLEEVE_RAISE], mirrorX: 'shared',
-          over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], boxPct: SPONSOR.frontLeftArm }] },
+          over: [sponsorOverlay(['sleevesponsorleft',  'sleevesponsor'], SPONSOR.frontLeftArm)] },
         { layer: 'COLLAR TOP',    file: 'collartop',    count: 1, expect: [1500, 252] },
         { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1, expect: [2171, 355] }
         // TAPE DESIGN is deliberately absent — it stays white, so leaving the
@@ -302,10 +347,10 @@ var CONFIG = {
         // The only slot that does not take the common raise — see the constant.
         { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'], count: 1,
           baseOffsetPct: [0, -BACK_LEFT_SLEEVE_RAISE],
-          over: [{ file: ['sleevesponsorleft',  'sleevesponsor'], boxPct: SPONSOR.backLeftArm }] },
+          over: [sponsorOverlay(['sleevesponsorleft',  'sleevesponsor'], SPONSOR.backLeftArm)] },
         { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'], count: 1,
           baseOffsetPct: [0, -SLEEVE_RAISE], mirrorX: 'shared',
-          over: [{ file: ['sleevesponsorright', 'sleevesponsor'], boxPct: SPONSOR.backRightArm }] },
+          over: [sponsorOverlay(['sleevesponsorright', 'sleevesponsor'], SPONSOR.backRightArm)] },
         { layer: 'COLLAR DESIGN',       file: 'collarback',               count: 1 }
         // No shoulder slots on the back template — its SHOULDERS layer is a
         // solid fill, not a smart object, so back shoulders take a flat colour.
@@ -565,24 +610,55 @@ function mirrorLayerX(pl) {
  * alone and lets the width fall out of the logo's own aspect. The box width is
  * then only used to find the centre.
  *
- * That is not an arbitrary choice — it is what the reference sleeves do. Both
- * front sponsors are exactly 180 tall despite aspect ratios of 1.3078 and
- * 1.1313, so height is the standardised dimension and width is whatever the
- * logo happens to be. A 'contain' fit would look identical on those two files
- * and then silently undersize the first sponsor whose aspect is wider than the
- * box, because width, not height, would become the binding constraint.
+ * That is what the reference sleeves do: both front sponsors are exactly 180
+ * tall despite aspect ratios of 1.3078 and 1.1313, so height is the standard.
+ * But both references are compact, and height alone has no upper bound on
+ * width — a 4.46-aspect wordmark sized to the standard height is 2.25× the
+ * whole sleeve. Hence `cap`:
+ *
+ *   cap.maxW   if the height-sized mark would be wider than this, scale it to
+ *              this width instead
+ *   cap.inset  a capped mark is then shifted so it sits fully inside the canvas,
+ *              this far from the edge
+ *
+ * Only a capped mark is shifted. An uncapped one keeps its box position exactly,
+ * even where that position runs past the canvas edge — the reference marks do,
+ * and they were checked on a render. So the cap changes nothing for any mark
+ * that fit before, and the shift is a discontinuity between "fits" and "does
+ * not" that is accepted deliberately: a mark just under the cap keeps its
+ * verified place; a mark over it has no verified place and gets a safe one.
  *
  * mode 'contain' keeps the mark inside the box on both axes. Right for a badge
- * that must not exceed a printable area; wrong for a sponsor strip.
+ * that must not exceed a printable area on either axis.
+ *
+ * Returns what happened, for the log.
  */
-function fitLayerInBox(pl, box, mode) {
+function fitLayerInBox(pl, box, mode, cw, cap) {
   var m = layerBox(pl);
-  if (m.w <= 0 || m.h <= 0) return;
+  if (m.w <= 0 || m.h <= 0) return null;
+
   var scale = (mode === 'contain') ? Math.min(box[2] / m.w, box[3] / m.h) : (box[3] / m.h);
+  var capped = false;
+  if (cap && cap.maxW > 0 && m.w * scale > cap.maxW) {
+    scale = cap.maxW / m.w;
+    capped = true;
+  }
   pl.resize(scale * 100, scale * 100, AnchorPosition.MIDDLECENTER);
+
   var n = layerBox(pl);
-  pl.translate(UnitValue(box[0] + (box[2] - n.w) / 2 - n.x, 'px'),
-               UnitValue(box[1] + (box[3] - n.h) / 2 - n.y, 'px'));
+  var tx = box[0] + (box[2] - n.w) / 2 - n.x;
+  var ty = box[1] + (box[3] - n.h) / 2 - n.y;
+
+  var shifted = 0;
+  if (capped) {
+    var left = n.x + tx, right = left + n.w;
+    if (left < cap.inset)            shifted = cap.inset - left;
+    else if (right > cw - cap.inset) shifted = (cw - cap.inset) - right;
+    tx += shifted;
+  }
+  pl.translate(UnitValue(tx, 'px'), UnitValue(ty, 'px'));
+
+  return { capped: capped, w: Math.round(n.w), h: Math.round(n.h), shifted: Math.round(shifted) };
 }
 
 /**
@@ -700,7 +776,7 @@ function setSolidFill(doc, layer, c) {
   return false;
 }
 
-function placeInsideSlot(doc, layer, stack, sample) {
+function placeInsideSlot(doc, layer, stack, sample, notes) {
   doc.activeLayer = layer;
   executeAction(stringIDToTypeID('placedLayerEditContents'), undefined, DialogModes.NO);
   var inner = app.activeDocument;
@@ -726,7 +802,18 @@ function placeInsideSlot(doc, layer, stack, sample) {
         var p = stack[f].boxPct;
         box = [p[0] * cw, p[1] * ch, p[2] * cw, p[3] * ch];
       }
-      if (box) fitLayerInBox(pl, box, stack[f].fit);
+      if (box) {
+        var cap = (stack[f].maxWidthPct != null)
+          ? { maxW: stack[f].maxWidthPct * cw, inset: (stack[f].edgeInsetPct || 0) * cw }
+          : null;
+        var fitted = fitLayerInBox(pl, box, stack[f].fit, cw, cap);
+        // Say so when the cap engaged — a sponsor that came out at the standard
+        // WIDTH rather than the standard height should not pass as a mystery.
+        if (fitted && fitted.capped && notes) {
+          notes.push(decodeURI(stack[f].file.name) + ' width-capped to ' + fitted.w + '×' + fitted.h + 'px' +
+                     (fitted.shifted ? ', moved ' + Math.abs(fitted.shifted) + 'px onto the canvas' : ''));
+        }
+      }
       else fitLayerToCanvas(pl, cw, ch, stack[f].offset, stack[f].bleed);
       if (stack[f].mirrorX) mirrorLayerX(pl);
     }
@@ -770,9 +857,16 @@ function replaceSmartObject(doc, layer, file) {
  */
 function overSpec(entry) {
   if (entry && !(entry instanceof Array) && entry.file) {
-    return { kinds: entry.file, box: entry.box || null, boxPct: entry.boxPct || null, fit: entry.fit || 'height' };
+    return {
+      kinds: entry.file,
+      box: entry.box || null,
+      boxPct: entry.boxPct || null,
+      fit: entry.fit || 'height',
+      maxWidthPct: (entry.maxWidthPct != null) ? entry.maxWidthPct : null,
+      edgeInsetPct: entry.edgeInsetPct || 0
+    };
   }
-  return { kinds: entry, box: null, boxPct: null, fit: 'height' };
+  return { kinds: entry, box: null, boxPct: null, fit: 'height', maxWidthPct: null, edgeInsetPct: 0 };
 }
 
 // Kind names deliberately carry no internal hyphen ('collarback', not
@@ -1226,7 +1320,8 @@ function main() {
                   var spec = overSpec(slot.over[ov]);
                   var extra = artworkFor(slugs[i], spec.kinds);
                   if (extra) {
-                    stack.push({ file: extra, box: spec.box, boxPct: spec.boxPct, fit: spec.fit });
+                    stack.push({ file: extra, box: spec.box, boxPct: spec.boxPct, fit: spec.fit,
+                                 maxWidthPct: spec.maxWidthPct, edgeInsetPct: spec.edgeInsetPct });
                     overlaid.push(decodeURI(extra.name) + ((spec.box || spec.boxPct) ? '' : ' (full canvas)'));
                   }
                 }
@@ -1290,7 +1385,7 @@ function main() {
                 // Not named `got` — that belongs to the canvas-measuring loop
                 // above, and `var` is function-scoped, so reusing it would put two
                 // unrelated meanings on one variable.
-                var sampled = placeInsideSlot(doc, slotJ.refs[r], jobs[j].stack, wantColour);
+                var sampled = placeInsideSlot(doc, slotJ.refs[r], jobs[j].stack, wantColour, overlaid);
                 if (slotJ.tint && slotJ.tint.length && !tints.length) {
                   var c = slotJ.tintColour ? parseHex(slotJ.tintColour) : sampled;
                   if (c) tints.push({ layers: slotJ.tint, colour: c, from: decodeURI(jobs[j].file.name) });
