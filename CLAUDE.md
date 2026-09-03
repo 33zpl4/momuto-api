@@ -68,6 +68,12 @@ Read the doc that owns a topic BEFORE editing that surface.
   works and LOGS the result, but the commit-back step can die
   non-fast-forward (it rebases onto main). Read the run log for the
   answer before re-running; the pulled file may not land in git.
+- **The CMS API throttles bursts of writes** (`code 1000 "Too many
+  requests"`, ~7–130 calls in). Bulk deploys must space writes (~600 ms)
+  and retry with backoff — `deploy-cms-page.js` / `deploy-blog-post.js`
+  do since 3 Sep 2026; copy `withRetry` into any new bulk script. A
+  throttled GET must throw, never read as "not found" (that turned
+  updates into POST-creates once).
 - Commit trailer convention: see the session's system rules; never put model
   IDs in pushed artifacts (commit messages, PR bodies — API `model:` params
   in scripts are configuration, not attribution, and are fine).
