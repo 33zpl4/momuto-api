@@ -156,5 +156,39 @@
       "handle": "zidane-vs-maradona-the-legacy-of-their-iconic-jerseys",
       "reason": "English post on the Italian store; published on www.momuto.com"
     }
+  ],
+  "us": [
+    {
+      "handle": "custom-football-kits-for-your-team-complete-guide",
+      "reason": "EN (UK-lexicon) twin cloned onto the US store; the US-native version is custom-soccer-uniforms-for-your-team-complete-guide"
+    },
+    {
+      "handle": "custom-football-kits-amateur-grassroots-club",
+      "reason": "EN (UK-lexicon) twin cloned onto the US store; the US-native version is custom-soccer-uniforms-club-team"
+    },
+    {
+      "handle": "custom-futsal-5-a-side-jerseys",
+      "reason": "EN (UK-lexicon) twin cloned onto the US store; the US-native version is custom-futsal-indoor-soccer-jerseys"
+    },
+    {
+      "handle": "custom-jerseys-7-a-side-sunday-league",
+      "reason": "EN (UK-lexicon) twin cloned onto the US store; the US-native version is custom-soccer-jerseys-adult-rec-league"
+    },
+    {
+      "handle": "custom-football-kits-corporate-events",
+      "reason": "EN (UK-lexicon) twin cloned onto the US store; the US-native version is custom-soccer-jerseys-corporate-events"
+    },
+    {
+      "handle": "custom-jerseys-football-tournaments",
+      "reason": "EN (UK-lexicon) twin cloned onto the US store; the US-native version is custom-soccer-jerseys-tournaments"
+    },
+    {
+      "handle": "when-to-order-team-kits-season-calendar",
+      "reason": "EN (UK-lexicon) twin cloned onto the US store; the US-native version is when-to-order-team-uniforms-season-calendar"
+    },
+    {
+      "handle": "fund-team-kits-sponsors-fundraising",
+      "reason": "EN (UK-lexicon) twin cloned onto the US store; the US-native version is fund-team-uniforms-sponsors-fundraising"
+    }
   ]
 }

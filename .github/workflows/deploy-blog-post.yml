@@ -12,6 +12,10 @@ on:
       - 'blogs/**/*.json'
   workflow_dispatch:
     inputs:
+      changed_since:
+        description: 'Bulk: deploy every file changed since this git ref (overrides the single handle)'
+        required: false
+        default: ''
       post_handle:
         description: 'URL handle of the post (must match a file in blogs/<locale>/)'
         required: true
@@ -69,4 +73,12 @@ jobs:
           LOCALE: ${{ github.event.inputs.locale }}
           POST_HANDLE: ${{ github.event.inputs.post_handle }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
-        run: node scripts/deploy-blog-post.js
+        run: |
+          SINCE='${{ github.event.inputs.changed_since }}'
+          if [ -n "$SINCE" ]; then
+            CHANGED="$(git diff --name-only "$SINCE" HEAD -- 'blogs/*.json' 'blogs/**/*.json' | tr '\n' ' ')"
+            echo "Changed since $SINCE: $CHANGED"
+            CHANGED_FILES="$CHANGED" node scripts/deploy-blog-post.js
+          else
+            node scripts/deploy-blog-post.js
+          fi

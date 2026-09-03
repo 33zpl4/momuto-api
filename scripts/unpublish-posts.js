@@ -38,6 +38,7 @@ const TOKENS = {
   fr: process.env.OEMSAAS_TOKEN_FR,
   es: process.env.OEMSAAS_TOKEN_ES,
   it: process.env.OEMSAAS_TOKEN_IT,
+  us: process.env.OEMSAAS_TOKEN_US,
 };
 
 const DOMAIN = {
@@ -45,6 +46,7 @@ const DOMAIN = {
   fr: 'https://fr.momuto.com',
   es: 'https://es.momuto.com',
   it: 'https://it.momuto.com',
+  us: 'https://us.momuto.com',
 };
 
 async function withRetry(fn, maxAttempts = 4) {

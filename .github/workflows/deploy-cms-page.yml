@@ -11,6 +11,10 @@ on:
       - 'cms/pages/**/*.json'
   workflow_dispatch:
     inputs:
+      changed_since:
+        description: 'Bulk: deploy every file changed since this git ref (overrides the single handle)'
+        required: false
+        default: ''
       page_handle:
         description: 'CMS page handle (must match cms/pages/<locale>/<handle>.json)'
         required: true
@@ -65,4 +69,12 @@ jobs:
           LOCALE: ${{ github.event.inputs.locale }}
           PAGE_HANDLE: ${{ github.event.inputs.page_handle }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
-        run: node scripts/deploy-cms-page.js
+        run: |
+          SINCE='${{ github.event.inputs.changed_since }}'
+          if [ -n "$SINCE" ]; then
+            CHANGED="$(git diff --name-only "$SINCE" HEAD -- 'cms/pages/**/*.json' | tr '\n' ' ')"
+            echo "Changed since $SINCE: $CHANGED"
+            CHANGED_FILES="$CHANGED" node scripts/deploy-cms-page.js
+          else
+            node scripts/deploy-cms-page.js
+          fi
