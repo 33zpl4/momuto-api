@@ -51,14 +51,17 @@ async function api(token, method, endpoint, body) {
 // ── The curated US main menu ─────────────────────────────────────────────────
 // setting_json defaults mirror what GET /navs returns for vanilla items.
 const S = { open: '', model: 1, seo: '', color: '', style: '', bold: '', decoration: '' };
-const item = (name, position, urlType, url, children = []) => ({
+const item = (name, position, urlType, url, children = [], sourceId = '') => ({
   nav_item_name: name,
   position,
-  url_json: { source_id: '', title: name, type: urlType, url },
+  url_json: { source_id: sourceId, title: name, type: urlType, url },
   setting_json: S,
   src: '',
   children,
 });
+// type 5 = CMS page bound by id (what the admin UI writes); keep the id so the
+// theme resolves it the same way as before.
+const page = (name, position, url, sourceId) => item(name, position, 5, url, [], sourceId);
 
 const US_MENU_CHILDREN = [
   item('Custom Jerseys', 0, 0, '', [
@@ -81,6 +84,49 @@ const US_MENU_CHILDREN = [
     item('FAQ', 0, 6, '/pages/faq'),
     item('Printing & Materials', 1, 6, '/pages/custom-football-kit-materials-printing'),
     item('Size guide', 2, 6, '/pages/size-guide'),
+  ]),
+];
+
+// ── The EN (www) menus — transcribed from GET /navs on 4 Sep 2026 and
+// changed only where noted. "HEADER" (id 675654) is an unbound draft with
+// empty URLs; the theme uses "Header Menu" (63790) and "Footer Menu" (63789).
+const EN_HEADER_CHILDREN = [
+  item('CUSTOM KITS', 0, 0, '', [
+    // NEW 4 Sep 2026 — the rebuilt Football Jersey Maker page (build-maker-pages.js)
+    item('Jersey Maker — free 3D tool', 0, 6, 'https://www.momuto.com/pages/custom-soccer-jersey-designer'),
+    item('Design Gallery', 1, 6, 'https://www.momuto.com/pages/custom-kit-gallery'),
+    page('Ready-to-Play', 2, '/pages/ready-to-play', 4429211),
+  ]),
+  item('ICONIC SERIES', 1, 0, '', [
+    item('Drop 01', 0, 2, '/collections/iconic-football-series', [], 129055),
+    item('Drop 02', 1, 2, '/collections/iconic-series-drop-02', [], 130456),
+  ]),
+  item('THE BRAND', 2, 6, 'https://www.momuto.com/pages/about'),
+  item('SUPPORT', 3, 0, '', [
+    page('FAQ', 0, '/pages/faq', 234940),
+    page('Printing & Materials', 1, '/pages/printing', 234946),
+    page('Size Guide', 2, '/pages/size-guide', 234941),
+    item('Contact', 3, 6, 'https://www.momuto.com/pages/contact'),
+  ]),
+];
+const EN_FOOTER_CHILDREN = [
+  item('HELP', 0, 0, '/', [
+    page('Contact Us', 0, '/pages/contact-us_ebf80444', 205232),
+    page('FAQ', 1, '/pages/faq', 206922),
+    page('Size Guide', 2, '/pages/size-guide', 222358),
+    item('MOMUTO vs The Rest', 3, 6, 'https://www.momuto.com/pages/momuto-vs-jersix-owayo-spized-comparison'),
+  ]),
+  item('SHOP', 1, 0, '/', [
+    item('Order Status', 0, 6, 'https://design.momuto.com/userInfo/order'),
+    // CHANGED 4 Sep 2026: the generated pages live on the clean handles
+    item('Shipping policy', 1, 6, 'https://www.momuto.com/pages/shipping-policy'),
+    item('Returns & Exchanges', 2, 6, 'https://www.momuto.com/pages/return-policy'),
+    page('Terms & Conditions', 3, '/pages/terms-of-service_736dfc8a', 234939),
+    page('Privacy Policy', 4, '/pages/privacy-policy_0d030312', 234932),
+  ]),
+  item('FOR YOU', 2, 0, '', [
+    page('Special Discounts', 0, '/pages/special-discounts', 222642),
+    page('Idea Submission', 1, '/pages/idea-submission', 222650),
   ]),
 ];
 
@@ -304,9 +350,13 @@ async function main() {
     process.exit(1);
   }
 
-  const MENUS = { us: US_MENU_CHILDREN };
-  const children = MENUS[store];
-  if (!children) { console.error(`No curated menu for store "${store}" — apply-nav would overwrite its header with another store's tree. Curate one in MENUS first.`); process.exit(1); }
+  // Curated trees keyed by store, then by the EXACT nav_name they may overwrite.
+  const MENUS = {
+    us: { 'Header Menu': US_MENU_CHILDREN },
+    en: { 'Header Menu': EN_HEADER_CHILDREN, 'Footer Menu': EN_FOOTER_CHILDREN },
+  };
+  const children = MENUS[store]?.[navName];
+  if (!children) { console.error(`No curated tree for store "${store}" menu "${navName}" — apply-nav would overwrite it with nothing sensible. Curate one in MENUS first.`); process.exit(1); }
 
   const payload = {
     navs: [{
