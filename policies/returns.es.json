@@ -1,0 +1,183 @@
+{
+  "locale": "es",
+  "handle": "cambios-devoluciones",
+  "base": "https://es.momuto.com",
+  "lang": "es",
+  "meta": {
+    "title": "Cambios y devoluciones — defectos, daños, maqueta distinta | MOMUTO",
+    "meta_title": "Cambios y Devoluciones: Defectos, Daños, Maqueta | MOMUTO",
+    "meta_descript": "Equipaciones hechas para ti: devoluciones por defecto de fabricación, daño en el transporte o prenda distinta de la maqueta aprobada. 7 días, reembolso en 14.",
+    "keywords": [
+      "devoluciones momuto",
+      "política devoluciones equipaciones personalizadas",
+      "reembolso momuto",
+      "cambios momuto",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Cambios y devoluciones",
+    "h1": "Si Algo Está <span class=\"acc\">Mal</span>, Lo Arreglamos",
+    "sub": "Cada equipación se imprime según la maqueta que apruebas, así que no hay cambio de talla ni devolución por arrepentimiento. Si una prenda llega defectuosa, dañada o distinta de lo aprobado, la reemplazamos o la reembolsamos — incluido el envío de devolución que hayas pagado."
+  },
+  "quick": [
+    [
+      "7 días",
+      "para avisar de un problema tras la entrega"
+    ],
+    [
+      "Fotos + RMA",
+      "ningún paquete vuelve sin número RMA"
+    ],
+    [
+      "14 días",
+      "reembolso tras la aprobación, al método de pago original"
+    ],
+    [
+      "Reembolso total",
+      "cancela en cualquier momento antes de que empiece la producción"
+    ]
+  ],
+  "covered": {
+    "title": "Qué cubre",
+    "lead": "Un producto hecho a medida no se puede revender, así que la política es estrecha pero firme: si el error es nuestro o del transportista, corre de nuestra cuenta.",
+    "cols": [
+      "Situación",
+      "Qué hacemos"
+    ],
+    "rows": [
+      [
+        "<b>Defecto de fabricación</b> <span class=\"sub\">costuras sueltas, fallos de estampado, material incorrecto</span>",
+        "Reemplazo o reembolso total, por la vía más rápida"
+      ],
+      [
+        "<b>Daño en el transporte</b> <span class=\"sub\">rasgado, manchado o mojado al llegar</span>",
+        "Reemplazo o reembolso total; guarda el embalaje para la reclamación al transportista"
+      ],
+      [
+        "<b>Distinta de la maqueta aprobada</b> <span class=\"sub\">color, nombre, número o posición del logo incorrectos</span>",
+        "Se reimprime según la maqueta, gratis — o se reembolsa"
+      ],
+      [
+        "<b>Faltan piezas</b> <span class=\"sub\">el conjunto de un jugador no viene en la caja</span>",
+        "Enviamos lo que falta sin coste"
+      ],
+      [
+        "<b>Talla equivocada en la plantilla</b>",
+        "No se devuelve — las tallas se imprimen tal como las introdujiste; consulta la <a href=\"/pages/guia-tallas\">guía de tallas</a> antes de pedir"
+      ],
+      [
+        "<b>Arrepentimiento con la producción ya iniciada</b>",
+        "No se devuelve — la equipación se fabricó para ti y no se puede revender"
+      ]
+    ],
+    "notes": [
+      "<b>La maqueta es el contrato.</b> No se imprime nada hasta que apruebas la maqueta final, así que lo que aprobaste es lo que te debemos.",
+      "<b>Garantía de por vida del estampado.</b> La sublimación se tiñe en el tejido — no se despega, ni se agrieta ni se destiñe con lavados normales. Si ocurre, es un defecto y lo reemplazamos.",
+      "<b>El envío de devolución se reembolsa</b> cuando se aprueba la devolución — nunca pagas por devolver un error nuestro.",
+      "<b>Sin gastos de reposición</b>, nunca."
+    ]
+  },
+  "process": {
+    "title": "Cómo funciona una reclamación",
+    "lead": "Cinco pasos, y la mayoría de reclamaciones no llegan al cuarto — una foto clara suele bastar para reimprimir o reembolsar sin que el paquete vuelva.",
+    "steps": [
+      [
+        "En 7 días",
+        "<strong>Escríbenos.</strong> Envía un correo a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> en los 7 días siguientes a la entrega con tu número de pedido, una breve descripción y fotos del problema (y del paquete si llegó dañado)."
+      ],
+      [
+        "1–2 días",
+        "<strong>Revisamos y emitimos un RMA.</strong> Comparamos las fotos con tu maqueta aprobada y te respondemos con un número de autorización de devolución (RMA) y los siguientes pasos. No envíes nada antes de tenerlo."
+      ],
+      [
+        "Si hace falta",
+        "<strong>Envíalo de vuelta.</strong> Algunos casos requieren inspeccionar la prenda en nuestra fábrica. Envíala sin usar, en su embalaje original con las etiquetas, con seguimiento y citando el RMA — te reembolsamos el envío al aprobar la devolución."
+      ],
+      [
+        "Al recibirlo",
+        "<strong>Inspección.</strong> Comprobamos la prenda devuelta contra la reclamación. Los cambios se envían solo tras completar la inspección; las reimpresiones por maqueta distinta empiezan de inmediato."
+      ],
+      [
+        "En 14 días",
+        "<strong>Reembolso o reemplazo.</strong> Los reembolsos aprobados van a tu método de pago original en 14 días desde la aprobación, por el importe completo más el envío de devolución. Los reemplazos vuelven a producción y se envían con seguimiento."
+      ]
+    ]
+  },
+  "cancel": {
+    "title": "Cancelaciones",
+    "lead": "Puedes cancelar con reembolso total en cualquier momento antes de que empiece la producción.",
+    "items": [
+      [
+        "Antes de aprobar la maqueta",
+        "<b>Reembolso total</b>, sin preguntas. Responde al correo de tu pedido o escribe a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+      ],
+      [
+        "Después de aprobar la maqueta",
+        "La producción empieza con la aprobación y el tejido se imprime con tu diseño en pocos días, así que el pedido <b>ya no se puede cancelar</b> ni modificar."
+      ],
+      [
+        "Depósitos de diseño",
+        "El depósito de diseño de las peticiones 100 % personalizadas se descuenta íntegro en pedidos de 5+ camisetas y es gratis en un pedido de equipo. No es una compra y no se reembolsa por sí solo."
+      ]
+    ]
+  },
+  "faq": {
+    "title": "Preguntas sobre devoluciones",
+    "items": [
+      [
+        "¿Puedo cambiar una camiseta por otra talla?",
+        "No — las prendas personalizadas se imprimen con el nombre, número y talla que introdujiste en la plantilla, así que cambiar la talla supondría reimprimir a nuestro coste. Usa la <a href=\"/pages/guia-tallas\">guía de tallas</a> antes de pedir; en caso de duda, elige una talla más. Si una prenda mide distinto de lo que indica la tabla publicada, es un defecto y la reemplazamos."
+      ],
+      [
+        "¿Tengo que devolver la prenda?",
+        "Muchas veces no. Para defectos visibles de estampado o costura bastan las fotos y reimprimimos o reembolsamos directamente. Solo pedimos la prenda cuando hace falta una inspección — y entonces te reembolsamos el envío al aprobar la reclamación."
+      ],
+      [
+        "¿Y si se me pasó el plazo de 7 días?",
+        "Escríbenos igualmente. El plazo vincula las reclamaciones a la entrega, pero un defecto real detectado en el primer uso sigue siendo un defecto. Miramos cada caso."
+      ],
+      [
+        "¿Cuánto tarda un reemplazo?",
+        "La reimpresión vuelve a producción (7–12 días) y se envía con seguimiento (10–15 días), así que cuenta con 25–30 días puerta a puerta — el mismo plazo que el pedido original. Dinos si hay un partido de por medio y le daremos prioridad."
+      ],
+      [
+        "¿Dónde llega el reembolso?",
+        "Al método de pago usado en la compra, en los 14 días siguientes a la aprobación. Si pasado ese plazo no aparece, consulta primero con tu banco — los tiempos de abono varían — y luego escribe a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> para que lo rastreemos."
+      ],
+      [
+        "¿Puedo devolver una camiseta Ready to Play que personalicé?",
+        "Aplican las mismas reglas: se imprimió según tu maqueta aprobada, así que las devoluciones son solo por defecto, daño o diferencia con la maqueta."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Cuando quieras",
+    "p": "Diséñala tú en 3D, gratis — o envíanos tu idea y un diseñador la construye. En ambos casos apruebas una maqueta antes de imprimir nada.",
+    "btn": "Diseñar en 3D — gratis",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=es&langguage=es",
+    "btn2": "Preguntar por WhatsApp",
+    "btn2_url": "https://wa.me/34614625408"
+  },
+  "more": {
+    "label": "Sigue explorando:",
+    "links": [
+      [
+        "/pages/preguntas-frecuentes",
+        "FAQ y precios"
+      ],
+      [
+        "/pages/envios-metodos-y-plazos",
+        "envíos y plazos"
+      ],
+      [
+        "/pages/guia-tallas",
+        "guía de tallas"
+      ],
+      [
+        "/pages/coleccion-ready-to-play",
+        "diseños Ready to Play"
+      ]
+    ]
+  }
+}

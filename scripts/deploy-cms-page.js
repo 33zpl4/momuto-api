@@ -39,6 +39,24 @@ function parsePath(file) {
   return m ? { locale: m[1], handle: m[2] } : null;
 }
 
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+// The CMS throttles bursts of writes ("Too many requests", code 1000) — a
+// 194-page bulk run on 3 Sep 2026 lost 58 PUTs that way. Space writes out
+// and back off on the throttle instead of failing the page.
+async function withRetry(fn, label, tries = 5) {
+  for (let i = 0; i < tries; i++) {
+    try { return await fn(); }
+    catch (e) {
+      const throttled = /Too many requests|"code":1000/.test(e.message);
+      if (!throttled || i === tries - 1) throw e;
+      const wait = 2000 * (i + 1);
+      console.log(`   ⏳ throttled on ${label} — retry ${i + 1}/${tries - 1} in ${wait / 1000}s`);
+      await sleep(wait);
+    }
+  }
+}
+
 async function updatePage(token, page) {
   const res = await fetch(`${HOST}/pages/${page.id}`, {
     method: 'PUT',
@@ -71,7 +89,8 @@ async function deployOne(locale, handle) {
   console.log(`• ${locale} ${handle} — "${page.title}" (${String(page.content || '').length} chars)`);
   if (DRY_RUN) { console.log('   DRY RUN — no write'); return; }
 
-  await updatePage(token, page);
+  await withRetry(() => updatePage(token, page), handle);
+  await sleep(600);
   console.log(`   ✅ https://${LABEL[locale]}/pages/${handle}`);
 }
 

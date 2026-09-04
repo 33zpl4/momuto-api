@@ -1,0 +1,42 @@
+name: Reprice US Products (USD ladder)
+
+# Moves the US store's cloned products from the platform's FX-converted
+# prices to the owner-ruled USD ladder and fixes football/EUR product copy.
+# Dispatch-only: prices are owner territory. Run dry_run=true first, read
+# the table, then dry_run=false (optionally one handle first with VERIFY).
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — print the price table, write nothing'
+        required: true
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+      handle:
+        description: 'Single product handle (blank = all)'
+        required: false
+        default: ''
+      verify:
+        description: 'Re-read products after saving and print variants/images/inner_title'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  reprice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Reprice
+        env:
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+          TARGET_HANDLE: ${{ github.event.inputs.handle }}
+          VERIFY: ${{ github.event.inputs.verify }}
+        run: node scripts/reprice-us-products.js

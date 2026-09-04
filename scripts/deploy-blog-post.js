@@ -41,7 +41,9 @@ async function fetchPosts(token) {
   while (true) {
     const res = await fetch(`${HOST}/posts?page=${page}&pagesize=${pagesize}`, { headers: { token } });
     const json = await res.json();
-    if (!res.ok || json.code !== 0) break;
+    // A failed listing must NEVER read as "no posts" — that turned updates
+    // into POST /posts (duplicates) under throttling on 3 Sep 2026.
+    if (!res.ok || json.code !== 0) throw new Error(`GET /posts failed: ${JSON.stringify(json)}`);
     const list = json.data?.list ?? (Array.isArray(json.data) ? json.data : []);
     if (!list.length) break;
     items.push(...list);
@@ -62,6 +64,27 @@ async function updatePost(token, id, data) {
   const json = await res.json();
   if (!res.ok || json.code !== 0) throw new Error(`PUT /posts/${id} failed: ${JSON.stringify(json)}`);
   return json;
+}
+
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+async function withRetry(fn, label, tries = 5) {
+  for (let i = 0; i < tries; i++) {
+    try { return await fn(); }
+    catch (e) {
+      const throttled = /Too many requests|"code":1000/.test(e.message);
+      if (!throttled || i === tries - 1) throw e;
+      const wait = 2000 * (i + 1);
+      console.log(`   ⏳ throttled on ${label} — retry ${i + 1}/${tries - 1} in ${wait / 1000}s`);
+      await sleep(wait);
+    }
+  }
+}
+// One listing per locale per run (was one per post — 26 posts × 43-post
+// listings is what tripped the CMS throttle).
+const POST_CACHE = {};
+async function postsFor(locale, token) {
+  if (!POST_CACHE[locale]) POST_CACHE[locale] = await withRetry(() => fetchPosts(token), `list ${locale}`);
+  return POST_CACHE[locale];
 }
 
 async function createPost(token, data) {
@@ -112,14 +135,16 @@ async function deployOne(locale, handle) {
     ...(data.status != null ? { status: data.status } : {}),
   };
 
-  const posts = await fetchPosts(domain.token);
+  const posts = await postsFor(locale, domain.token);
   const post = posts.find(p => getHandle(p) === handle);
   if (post) {
-    await updatePost(domain.token, post.id, payload);
+    await withRetry(() => updatePost(domain.token, post.id, payload), handle);
   } else {
-    await createPost(domain.token, payload);   // new post → create instead of failing
+    const created = await withRetry(() => createPost(domain.token, payload), handle);   // new post → create instead of failing
+    if (created?.data) posts.push({ ...payload, id: created.data.id });
     console.log(`   ✨ created`);
   }
+  await sleep(600);
   console.log(`   ✅ ${domain.url}/blogs/${handle}`);
 }
 

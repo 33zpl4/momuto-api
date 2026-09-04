@@ -177,6 +177,26 @@ function buildAlternatesMap(handleSets, postSets = {}) {
     register(members);
   }
 
+  // Same-handle EN ↔ US mirrors — the US store was cloned wholesale from www
+  // (Sep 2026), so any page or post whose handle exists on both stores and is
+  // not already clustered above is the same document in two lexicons.
+  if (handleSets.en && handleSets.us) {
+    for (const handle of handleSets.us) {
+      if (!handleSets.en.has(handle)) continue;
+      const loc = pageLoc('us', handle);
+      if (map.has(loc) || map.has(pageLoc('en', handle))) continue;
+      register([{ locale: 'en', loc: pageLoc('en', handle) }, { locale: 'us', loc }]);
+    }
+  }
+  if (postSets.en && postSets.us) {
+    for (const handle of postSets.us) {
+      if (!postSets.en.has(handle)) continue;
+      const loc = postLoc('us', handle);
+      if (map.has(loc) || map.has(postLoc('en', handle))) continue;
+      register([{ locale: 'en', loc: postLoc('en', handle) }, { locale: 'us', loc }]);
+    }
+  }
+
   // Pattern-detected clusters (team pages + RTP templates), grouped by shared slug.
   const teams = new Map();  // slug → { [locale]: handle }
   const rtp = new Map();

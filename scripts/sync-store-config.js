@@ -76,7 +76,7 @@ const US_MENU_CHILDREN = [
   item('Support', 3, 0, '', [
     // these three pages exist on the US store (confirmed via GET /navs, 1 Sep 2026)
     item('FAQ', 0, 6, '/pages/faq'),
-    item('Printing & Materials', 1, 6, '/pages/printing'),
+    item('Printing & Materials', 1, 6, '/pages/custom-football-kit-materials-printing'),
     item('Size guide', 2, 6, '/pages/size-guide'),
   ]),
 ];

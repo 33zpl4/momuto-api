@@ -1,0 +1,167 @@
+{
+  "locale": "it",
+  "handle": "politica-di-spedizione",
+  "base": "https://it.momuto.com",
+  "lang": "it",
+  "meta": {
+    "title": "Spedizione — 25–30 giorni, tracciata, dazi inclusi | MOMUTO",
+    "meta_title": "Spedizione: 25–30 Giorni, Tracciata, Dazi Prepagati | MOMUTO",
+    "meta_descript": "Percorso di un ordine MOMUTO: mockup in 24–48 h, 7–12 giorni di produzione, 10–15 giorni di spedizione tracciata — 25–30 giorni porta a porta. Gratis da 50 €.",
+    "keywords": [
+      "spedizione momuto",
+      "tempi consegna divise personalizzate",
+      "costi di spedizione divise",
+      "spedizione tracciata maglie calcio",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Spedizione e consegna",
+    "h1": "Dall'Ordine alla <span class=\"acc\">Tua Porta</span>",
+    "sub": "Cosa succede dopo il pagamento, quanto dura ogni passaggio, chi consegna dove e quanto costa. Più del 95 % degli ordini arriva entro la finestra di 25–30 giorni."
+  },
+  "quick": [
+    [
+      "25–30 giorni",
+      "porta a porta"
+    ],
+    [
+      "Gratis da 50 €",
+      "3,90 € sotto"
+    ],
+    [
+      "Tracciata",
+      "numero di tracciamento via email alla partenza"
+    ],
+    [
+      "Dazi prepagati",
+      "nessuna sorpresa alla consegna"
+    ]
+  ],
+  "timeline": {
+    "title": "La tempistica",
+    "lead": "Le divise sono fatte su ordinazione, quindi il cronometro ha quattro parti. L'unica che controlli tu è la velocità con cui approvi il mockup.",
+    "steps": [
+      [
+        "Giorno 0",
+        "<strong>Ordine confermato.</strong> Paghi al checkout e ricevi un'email di conferma. Se qualcosa nel tuo design richiede una decisione, ti scriviamo — tieni d'occhio la casella di posta."
+      ],
+      [
+        "Giorno 1–2",
+        "<strong>Mockup di produzione, 24–48 h.</strong> Un designer pulisce stemma e sponsor, imposta nomi e numeri e ti invia il file esatto che andrà in stampa. Cambia qualsiasi cosa, gratis. <b>Non si stampa nulla finché non approvi.</b>"
+      ],
+      [
+        "Giorno 3–14",
+        "<strong>Produzione, 7–12 giorni.</strong> Sublimazione integrale sul misto poliestere-elastan, tagliata e cucita sulla taglia di ogni giocatore."
+      ],
+      [
+        "Giorno 15–30",
+        "<strong>Spedizione, 10–15 giorni.</strong> Tracciata, con il corriere della tua zona (tabella sotto). Ricevi il numero di tracciamento via email appena il pacco parte."
+      ],
+      [
+        "Consegna",
+        "<strong>Alla tua porta.</strong> I dazi sono prepagati da noi. Problemi con il pacco? Scrivi a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> entro 7 giorni con le foto."
+      ]
+    ]
+  },
+  "zones": {
+    "title": "Dove spediamo e quanto costa",
+    "lead": "Una sola soglia: spedizione gratuita per ordini sopra i 50 €, 3,90 € sotto. Ogni zona è tracciata.",
+    "cols": [
+      "Destinazione",
+      "Corriere",
+      "Costo di spedizione",
+      "Porta a porta"
+    ],
+    "rows": [
+      [
+        "Italia",
+        "Corriere certificato",
+        "3,90 € · <b>gratis da 50 €</b>",
+        "25–30 giorni"
+      ],
+      [
+        "Regno Unito",
+        "Royal Mail",
+        "3,90 € · <b>gratis da 50 €</b>",
+        "25–30 giorni"
+      ],
+      [
+        "Resto d'Europa e del mondo",
+        "Corriere internazionale certificato",
+        "3,90 € · <b>gratis da 50 €</b>",
+        "25–30 giorni"
+      ],
+      [
+        "Stati Uniti",
+        "USPS <span class=\"sub\">ordina su <a href=\"https://us.momuto.com\">us.momuto.com</a> — prezzi in dollari</span>",
+        "4,90 $ · <b>gratis da 59 $</b>",
+        "25–30 giorni"
+      ]
+    ],
+    "notes": [
+      "<b>Corsia veloce: +59 € per ordine</b> — salta la coda di produzione e aggiunge priorità di spedizione; circa 7 giorni risparmiati.",
+      "<b>Pianifica con 7–9 settimane</b> per una stagione o un torneo e conferma l'ordine 4–5 settimane prima; le squadre impiegano 2–3 settimane a decidere, più della produzione.",
+      "<b>Il cronometro parte all'approvazione del mockup</b>, non al pagamento — approva in fretta, ricevi in fretta.",
+      "<b>Dazi prepagati.</b> Se un corriere ti addebita comunque qualcosa, invia la ricevuta a <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> e te la rimborsiamo."
+    ]
+  },
+  "faq": {
+    "title": "Domande sulla spedizione",
+    "items": [
+      [
+        "Posso tracciare il mio ordine?",
+        "Sì. Ogni ordine parte tracciato; il numero arriva via email appena il pacco lascia il magazzino e puoi seguirlo sulla pagina del corriere e nella sezione Stato dell'ordine del tuo account."
+      ],
+      [
+        "Consegnate nella mia zona?",
+        "In Italia consegna un corriere certificato; nel Regno Unito Royal Mail; nel resto del mondo un corriere internazionale certificato. I clienti in Spagna, Francia e Stati Uniti hanno corrieri e prezzi locali sul proprio store MOMUTO."
+      ],
+      [
+        "Pagherò dazi o tasse di importazione?",
+        "No — <b>i dazi sono prepagati da MOMUTO</b>. Nel raro caso in cui un corriere ti chieda comunque di pagare, invia la ricevuta a <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> e ti rimborsiamo l'importo."
+      ],
+      [
+        "Potete garantire una data di consegna?",
+        "Non possiamo garantire una data — la logistica globale ogni tanto slitta — ma più del 95 % degli ordini arriva entro 25–30 giorni, e la corsia veloce (+59 €) fa guadagnare circa una settimana. Dicci la tua scadenza prima di ordinare e ti diremo onestamente se è realistica."
+      ],
+      [
+        "Posso cambiare l'indirizzo di consegna?",
+        "Prima che il pacco parta, sì — scrivi a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> con il numero d'ordine e lo aggiorniamo. Una volta affidato al corriere, chiederemo il reindirizzamento dove il servizio lo consente, senza poterlo promettere."
+      ],
+      [
+        "Il pacco è arrivato danneggiato o manca qualcosa",
+        "Scrivi a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> entro 7 giorni dalla consegna con le foto del pacco e dei capi. Danni durante il trasporto e pezzi mancanti vengono sostituiti o rimborsati — vedi la <a href=\"/pages/politica-resi\">politica di resi e cambi</a>."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Quando vuoi",
+    "p": "Progettala tu in 3D, gratis — o mandaci la tua idea e un designer la costruisce. In entrambi i casi il mockup arriva entro 48 ore.",
+    "btn": "Progetta in 3D — gratis",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=it&langguage=it",
+    "btn2": "Chiedi su WhatsApp",
+    "btn2_url": "https://wa.me/34614625408"
+  },
+  "more": {
+    "label": "Continua a esplorare:",
+    "links": [
+      [
+        "/pages/faq",
+        "FAQ e prezzi"
+      ],
+      [
+        "/pages/politica-resi",
+        "resi e cambi"
+      ],
+      [
+        "/pages/guida-alle-taglie",
+        "guida alle taglie"
+      ],
+      [
+        "/pages/collezione-ready-to-play",
+        "design Ready to Play"
+      ]
+    ]
+  }
+}

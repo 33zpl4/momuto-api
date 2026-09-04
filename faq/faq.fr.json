@@ -1,0 +1,323 @@
+{
+  "locale": "fr",
+  "handle": "questions-frequentes",
+  "base": "https://fr.momuto.com",
+  "lang": "fr",
+  "sport": "football",
+  "meta": {
+    "title": "Questions fréquentes — Maillots de foot personnalisés | MOMUTO",
+    "meta_title": "FAQ : Prix, Délais et Tailles des Maillots | MOMUTO",
+    "meta_descript": "Toutes les réponses avant de commander : prix dès 21,90 €/maillot, acompte design de 15 €, livraison en 25–30 jours, tailles, impression, retours. Sans minimum.",
+    "keywords": [
+      "faq maillot de foot personnalisé",
+      "prix maillot de foot personnalisé",
+      "momuto questions",
+      "délai livraison maillots personnalisés",
+      "minimum de commande maillots",
+      "sublimation maillot foot",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Centre d'aide",
+    "h1": "Tout Savoir Avant de <span class=\"acc\">Commander</span>",
+    "sub": "Prix, délais, tailles, impression et ce qui se passe si quelque chose ne va pas — la version honnête. Encore une question ? Écrivez-nous sur WhatsApp, une personne vous répond."
+  },
+  "quick": [
+    [
+      "38,90 €",
+      "maillot seul · dès 21,90 € à partir de 10"
+    ],
+    [
+      "Sans minimum",
+      "un maillot ou tout le club"
+    ],
+    [
+      "24–48 h",
+      "maquette finale avant toute impression"
+    ],
+    [
+      "25–30 jours",
+      "porte à porte, suivi · +95 % dans les délais"
+    ]
+  ],
+  "pricing": {
+    "id": "pricing",
+    "title": "Tarifs",
+    "lead": "Une grille transparente, sans frais cachés. Noms, numéros et logos de sponsor sont imprimés sans supplément. Le prix unitaire baisse à mesure que la commande grandit.",
+    "cols": [
+      "Taille de commande",
+      "Maillot",
+      "Short",
+      "Kit complet (maillot + short)"
+    ],
+    "rows": [
+      [
+        "1 unité",
+        "38,90 €",
+        "17,90 €",
+        "56,80 €"
+      ],
+      [
+        "2–4 unités",
+        "34,90 €",
+        "15,90 €",
+        "50,80 €"
+      ],
+      [
+        "5–9 unités",
+        "26,90 €",
+        "11,90 €",
+        "38,80 €"
+      ],
+      [
+        "10–19 unités",
+        "21,90 €",
+        "6,00 €",
+        "26,90 €",
+        true
+      ],
+      [
+        "20–49 unités",
+        "18,90 €",
+        "6,00 €",
+        "24,90 €"
+      ],
+      [
+        "50–99 unités",
+        "17,90 €",
+        "5,50 €",
+        "23,40 €"
+      ],
+      [
+        "100+ unités",
+        "16,90 €",
+        "5,00 €",
+        "21,90 €"
+      ]
+    ],
+    "popular": "Le plus commandé",
+    "notes": [
+      "<b>Par unité et par ligne.</b> Les quantités se cumulent par produit : 12 maillots + 12 shorts entrent chacun dans la tranche 10–19.",
+      "<b>Sélection de saison Ready to Play : −10 %</b> sur les designs qui portent le badge — chaque saison, une sélection tournante de designs finis.",
+      "<b>Manches longues : +3,00 € par maillot</b> à toute quantité, au choix par joueur sur la liste d'équipe.",
+      "<b>Chaussettes : 6,00 €</b> la paire, prix fixe.",
+      "<b>Livraison gratuite dès 50 €.</b> En dessous, la livraison coûte 3,90 €.",
+      "<b>Voie rapide : +59 € par commande</b> — saute la file de production et ajoute une priorité d'expédition ; environ 7 jours gagnés.",
+      "<b>Acompte design sur mesure : 15 €</b> pour un design réalisé par notre équipe (sur mesure ou à partir d'un concept IA) — crédité intégralement sur les commandes de 5 maillots et plus, donc gratuit pour une équipe. Concevoir dans le designer 3D est toujours gratuit."
+    ]
+  },
+  "sections": [
+    {
+      "id": "ordering",
+      "title": "Commande et design",
+      "items": [
+        [
+          "Quelles sont les façons d'obtenir un design ?",
+          "Trois voies, qui aboutissent toutes au même designer 3D gratuit. <b>Ready to Play</b> : un mur de designs finis par le studio MOMUTO — ouvrez-en un, changez les couleurs, ajoutez votre écusson, les noms et numéros, commandez. <b>Concevez-le vous-même</b> : partez de n'importe quel design dans le designer 3D et créez le vôtre, gratuitement. <b>Envoyez-nous votre idée</b> : un croquis, une référence ou un rendu IA (ChatGPT, Midjourney…) et un designer MOMUTO le construit pour vous — <b>acompte de 15 €</b>, première maquette sous 24–48 heures, révisions incluses, crédité intégralement sur les commandes de 5 maillots et plus."
+        ],
+        [
+          "Est-ce que je paie avant de voir le design final ?",
+          "Vous payez à la commande, mais <b>rien n'est imprimé avant que vous validiez une maquette finale</b>. Sous 24–48 heures après la commande, nous envoyons la maquette de production de votre tenue exacte (écusson nettoyé, sponsor placé, noms et numéros posés). Modifiez ce que vous voulez, gratuitement. La production ne démarre qu'avec votre accord : vous ne recevez jamais une tenue que vous n'avez pas approuvée."
+        ],
+        [
+          "Il n'y a vraiment aucun minimum de commande ?",
+          "Aucun. Commandez un maillot ou cent. La seule chose qui change avec la quantité, c'est le prix unitaire (voir la grille ci-dessus). Un maillot personnalisé seul coûte 38,90 € ; à partir de 10, il passe à 21,90 €."
+        ],
+        [
+          "Comment commander pour toute une équipe ?",
+          "Ajoutez le design au panier et saisissez l'effectif : une ligne par joueur avec taille, nom et numéro. Mélanger les tailles — de l'enfant à l'adulte — dans le même design, c'est la norme. Si la liste n'est pas encore définitive, commandez ce que vous avez ; une seconde commande plus tard aura sa propre tranche de prix."
+        ],
+        [
+          "Puis-je encore modifier quelque chose après la commande ?",
+          "Oui, jusqu'à la validation de la maquette — couleurs, position de l'écusson, un nom mal orthographié, une taille. Après validation, la tenue part en production et les modifications ne sont plus possibles. Vous pouvez annuler avec remboursement intégral à tout moment avant le début de la production."
+        ],
+        [
+          "L'acompte de 15 € est-il remboursé ?",
+          "Il est <b>crédité intégralement</b> sur votre commande dès 5 maillots — pour une équipe, il ne coûte donc rien. Il couvre le temps du designer pour construire, vectoriser et réviser votre concept avant que vous ne vous engagiez."
+        ],
+        [
+          "Faites-vous d'autres sports que le football ?",
+          "Oui. Le même designer 3D et le même tissu servent désormais aux <b>maillots de basket</b>, et le studio a réalisé des tenues de futsal, padel, handball et e-sport. Demandez-nous si vous ne voyez pas votre sport."
+        ]
+      ]
+    },
+    {
+      "id": "delivery",
+      "title": "Production et livraison",
+      "items": [
+        [
+          "Combien de temps ça prend ?",
+          "<b>25–30 jours porte à porte</b> : 7–12 jours de production après validation de la maquette, puis 10–15 jours d'expédition suivie. Plus de 95 % des commandes arrivent dans ce délai. Vous avez une date ? Dites-le-nous avant de commander et nous confirmons si c'est réaliste."
+        ],
+        [
+          "Peut-on aller plus vite ?",
+          "La <b>voie rapide (+59 € par commande)</b> saute la file de production et ajoute une priorité d'expédition — environ 7 jours gagnés. Valider la maquette rapidement aide aussi : le compteur ne démarre qu'une fois le design approuvé."
+        ],
+        [
+          "Quand commander pour une saison ou un tournoi ?",
+          "Commencez <b>7–9 semaines</b> avant d'avoir besoin des tenues et confirmez la commande <b>4–5 semaines</b> avant. En pratique, les équipes mettent 2–3 semaines à décider (le vote du design, l'accord du sponsor, la collecte de l'argent) — plus que la production elle-même. Les tailles, elles, arrivent généralement en moins de 24 heures."
+        ],
+        [
+          "Qui livre, et puis-je suivre le colis ?",
+          "Chaque commande est suivie et vous recevez le numéro de suivi par e-mail dès l'expédition. En France, votre colis est livré par <b>Colis Privé</b> ; ailleurs, par un transporteur international certifié. Livraison gratuite dès 50 € (3,90 € en dessous)."
+        ],
+        [
+          "Vais-je payer des frais de douane ?",
+          "Non. <b>Les droits de douane sont prépayés par nous.</b> Dans le rare cas où un transporteur vous facturerait quand même, envoyez le reçu à <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> et nous vous remboursons."
+        ],
+        [
+          "Où sont fabriquées les tenues ?",
+          "Conçues en Europe, fabriquées dans notre usine partenaire en Asie, expédiées directement chez vous. C'est ainsi qu'une tenue entièrement sublimée, en mélange élasthanne, peut coûter 21,90 € en quantités d'équipe."
+        ]
+      ]
+    },
+    {
+      "id": "sizes",
+      "title": "Tailles et coupe",
+      "items": [
+        [
+          "Comment taillent les tenues ?",
+          "Une <b>coupe athlétique ajustée</b>. Si un joueur est entre deux tailles, ou préfère plus d'aisance, prenez la taille au-dessus. Toutes les mesures du <a href=\"/pages/guide-des-tailles\">guide des tailles</a> sont des mesures du corps (tour de poitrine, taille, poids), pas du vêtement."
+        ],
+        [
+          "Quelles tailles existent ?",
+          "Adultes <b>XS–3XL</b> ; enfants et juniors de <b>98/104 (3–4 ans) à 176 (15–16 ans)</b>. Les shorts suivent la même gamme. Mélanger les tailles dans une commande est la norme pour une équipe."
+        ],
+        [
+          "Puis-je mélanger enfants et adultes dans une commande ?",
+          "Oui — un design, toutes les tailles. Indiquez la taille de chaque joueur sur la liste au moment du paiement. Le design s'adapte automatiquement à chaque taille ; un designer vérifie le placement de l'écusson et du numéro sur chaque taille avant impression."
+        ],
+        [
+          "Et si une taille est mauvaise à la réception ?",
+          "Les tailles sont choisies par vous sur la liste, alors consultez le guide avant de commander — les articles personnalisés ne peuvent pas être échangés contre une autre taille ensuite. Si un vêtement est défectueux ou ne correspond pas à la maquette validée, nous le remplaçons (voir Retours)."
+        ]
+      ]
+    },
+    {
+      "id": "customization",
+      "title": "Personnalisation",
+      "items": [
+        [
+          "Les noms, numéros et sponsors sont-ils en supplément ?",
+          "Non. <b>Noms, numéros et logos de sponsor sont imprimés dans le tissu sans supplément</b>, dans la police et la couleur de votre choix. Un effectif de 20 noms différents coûte le même prix qu'un seul design."
+        ],
+        [
+          "Que devient mon logo ?",
+          "<b>Chaque écusson et logo de sponsor est nettoyé et vectorisé par un designer</b> avant production — que vous l'ayez chargé dans le designer 3D ou envoyé dans un brief. Une photo floue d'écusson prise au téléphone revient nette sur la maquette."
+        ],
+        [
+          "Puis-je avoir des manches longues, ou une tenue de gardien d'une autre couleur ?",
+          "Les manches longues se choisissent <b>par joueur</b> sur la liste (+3,00 € par maillot). Une version gardien dans d'autres couleurs est un second design dans la même commande — demandez-nous et nous la configurons pour qu'elle garde la tranche de prix de votre équipe."
+        ],
+        [
+          "Proposez-vous des écussons en silicone 3D ?",
+          "Oui, en <b>option « version joueur »</b> pour les grosses commandes de clubs : écussons en silicone 3D ou gommés, avec un vrai relief, comme sur les maillots professionnels. Demandez-nous les conditions et le prix."
+        ],
+        [
+          "Puis-je commander le maillot seul, ou le kit complet ?",
+          "Les deux. Maillot seul, ou kit complet (maillot + short assorti). Les chaussettes sont vendues séparément. Choisissez sur le produit ou précisez-le dans votre brief."
+        ],
+        [
+          "Pouvez-vous copier une marque ou le maillot d'un club professionnel ?",
+          "Non — nous n'imprimons ni logos sous licence, ni marques, ni copies de maillots pro. Nous créons des <b>designs originaux inspirés de votre idée</b>, et ils rendent toujours mieux : l'écusson est le vôtre."
+        ]
+      ]
+    },
+    {
+      "id": "fabric",
+      "title": "Tissu, impression et entretien",
+      "items": [
+        [
+          "Quel est le tissu ?",
+          "Un <b>mélange technique polyester-élasthanne</b> (micro-interlock 145–160 g/m²) extensible dans les quatre sens et respirant — le tissu que la plupart des marques réservent à leur gamme premium. Chez MOMUTO, c'est le standard sur toutes les tenues."
+        ],
+        [
+          "Comment le design est-il imprimé ?",
+          "<b>Sublimation intégrale</b> : l'encre est fusionnée dans les fibres à 200 °C, le design fait donc partie du tissu — sans poids, respirant, et il ne se décolle, ne craque ni ne se décolore jamais. Couleurs, dégradés et motifs illimités sans supplément. Nous garantissons l'impression pour toute la vie du vêtement."
+        ],
+        [
+          "Le rendu sera-t-il exactement comme l'aperçu 3D ?",
+          "Oui — et vous le verrez d'abord. Le designer 3D est un aperçu fidèle ; la maquette de production envoyée avant impression est le fichier exact qui part chez l'imprimeur. Rien n'est imprimé avant votre validation."
+        ],
+        [
+          "Comment l'entretenir ?",
+          "À froid ou à 30 °C, sur l'envers, sans javel, sans sèche-linge, sans repasser sur les impressions. Les couleurs sublimées n'exigent aucun soin particulier — elles ne peuvent pas se décoller — mais le tissu dure plus longtemps traité avec douceur."
+        ]
+      ]
+    },
+    {
+      "id": "returns",
+      "title": "Retours, garanties et échantillons",
+      "items": [
+        [
+          "Puis-je retourner une tenue personnalisée ?",
+          "Les tenues sont fabriquées pour vous, les retours concernent donc les <b>défauts de fabrication, les dommages pendant le transport ou une tenue différente de la maquette validée</b>. Contactez <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> dans les 7 jours suivant la livraison avec des photos ; nous émettons un RMA et remplaçons ou remboursons — y compris les frais de retour que vous auriez payés — sous 14 jours après approbation."
+        ],
+        [
+          "Qu'est-ce qui protège mon achat ?",
+          "Le verrou de la maquette : <b>rien n'est imprimé avant que vous validiez la maquette finale</b>, et chaque écusson est vérifié par un designer. Plus une garantie à vie sur l'impression elle-même — la sublimation ne peut ni se décoller ni craquer."
+        ],
+        [
+          "Puis-je annuler ?",
+          "Oui, avec remboursement intégral à tout moment <b>avant le début de la production</b> (c'est-à-dire avant la validation de la maquette). Une fois en production ou expédiée, la commande ne peut plus être annulée."
+        ],
+        [
+          "Puis-je commander un échantillon d'abord ?",
+          "Oui — sans minimum, <b>commandez un maillot au prix unitaire (38,90 €)</b> comme échantillon. La plupart des équipes n'en ont pas besoin : chaque design Ready to Play montre de vrais coloris en 3D, et vous validez une maquette de production avant toute impression."
+        ]
+      ]
+    },
+    {
+      "id": "about",
+      "title": "À propos de MOMUTO",
+      "items": [
+        [
+          "Qui est MOMUTO ?",
+          "Un studio de design européen qui fabrique des tenues 100 % personnalisées de qualité professionnelle depuis 2023 — <b>plus de 250 équipes dans plus de 15 pays</b>, noté 4,4/5 sur Trustpilot. Conçues en Europe, fabriquées en Asie, expédiées dans le monde entier."
+        ],
+        [
+          "Comment MOMUTO se compare-t-il à Owayo, Spized ou Jersix ?",
+          "Comme eux, nous avons un designer 3D en temps réel — mais le nôtre charge chaque design fini, jamais un gabarit vide. Contrairement à eux, nous incluons le mélange élasthanne de série, proposons un service de design sur mesure pour 15 € et n'avons aucun minimum de commande. <a href=\"/pages/comparatif-fournisseur-maillot-foot-2026\">Comparatif complet →</a>"
+        ],
+        [
+          "Comment joindre une personne ?",
+          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> est le plus rapide ; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> pour tout ce qui comporte des pièces jointes ; <a href=\"https://instagram.com/momutofc\">@momutofc</a> sur Instagram. Problème de commande : <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+        ]
+      ]
+    }
+  ],
+  "cta": {
+    "h2": "Encore une question ?",
+    "p": "Demandez sur WhatsApp — une vraie personne du studio vous répond, en français.",
+    "btn": "Écrivez-nous sur WhatsApp",
+    "btn_url": "https://wa.me/34614625408",
+    "btn2": "Concevoir en 3D — gratuit",
+    "btn2_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr"
+  },
+  "more": {
+    "label": "Continuer :",
+    "links": [
+      [
+        "/pages/collection-ready-to-play",
+        "designs Ready to Play"
+      ],
+      [
+        "/pages/demande-de-design-professionnel-de-maillots",
+        "demander un design sur mesure"
+      ],
+      [
+        "/pages/guide-des-tailles",
+        "guide des tailles"
+      ],
+      [
+        "/pages/impression-et-materiaux",
+        "impression et matériaux"
+      ],
+      [
+        "/pages/galerie-maillots-foot-sur-mesure",
+        "500+ designs d'équipes"
+      ]
+    ]
+  }
+}

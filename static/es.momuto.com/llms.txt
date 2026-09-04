@@ -29,13 +29,15 @@
 ## Cómo Funciona
 - [Configurador 3D](https://es.momuto.com/): Diseña tu equipación en tiempo real con más de 30 plantillas profesionales
 - [Solicitud de Diseño Gratuito](https://es.momuto.com/pages/request-custom-kit-design): Envía tu propuesta — recibe una maqueta personalizada profesional en 1-2 días, revisiones gratuitas incluidas
-- [Impresión & Materiales](https://www.momuto.com/pages/printing): Detalles técnicos sobre la impresión por sublimación y la composición del tejido
+- [Impresión & Materiales](https://es.momuto.com/pages/materiales-impresion): Detalles técnicos sobre la impresión por sublimación y la composición del tejido
 - [Guía de Tallas](https://www.momuto.com/pages/size-guide): Información completa sobre tallas para pedidos de equipo
 - [MOMUTO vs Competidores](https://es.momuto.com/pages/zentral-opiniones-alternativa): Cómo se compara MOMUTO con Zentral y otros proveedores
 
 ## Sobre MOMUTO
 - [Sobre MOMUTO](https://es.momuto.com/pages/sobre-nosotros): Historia de la marca, filosofía de fabricación y estándares de calidad
-- [Preguntas Frecuentes](https://es.momuto.com/pages/preguntas-frecuentes): Preguntas habituales sobre pedidos, personalización, precios y entrega
+- [Preguntas Frecuentes y Precios](https://es.momuto.com/pages/preguntas-frecuentes): Preguntas habituales sobre pedidos, personalización, la escalera de precios completa y entrega
+- [Envíos y Plazos](https://es.momuto.com/pages/envios-metodos-y-plazos): Calendario (maqueta 24-48 h, producción 7-12 días, envío 10-15 días), transportistas por destino, envío gratis desde 50 €, aranceles prepagados
+- [Cambios y Devoluciones](https://es.momuto.com/pages/cambios-devoluciones): Producto a medida — devoluciones por defecto de fabricación, daño en el transporte o prenda distinta de la maqueta aprobada; avisar en 7 días a customer@momuto.com, RMA, reembolso incl. envío de devolución en 14 días desde la aprobación; reembolso total si se cancela antes de empezar la producción
 
 ## Soporte
 - [Contacto](https://es.momuto.com/pages/contact): Atención al cliente por WhatsApp, Instagram o email

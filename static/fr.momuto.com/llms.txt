@@ -29,13 +29,15 @@
 ## Comment Ça Marche
 - [Configurateur 3D](https://fr.momuto.com/): Concevez votre tenue en temps réel avec plus de 30 modèles professionnels
 - [Demande de Design Gratuit](https://fr.momuto.com/pages/request-custom-kit-design): Soumettez votre brief — recevez une maquette personnalisée professionnelle en 1-2 jours, retouches gratuites incluses
-- [Impression & Matériaux](https://www.momuto.com/pages/printing): Détails techniques sur l'impression par sublimation et la composition des tissus
+- [Impression & Matériaux](https://fr.momuto.com/pages/impression-et-materiaux): Détails techniques sur l'impression par sublimation et la composition des tissus
 - [Guide des Tailles](https://www.momuto.com/pages/size-guide): Informations complètes sur les tailles pour les commandes d'équipe
 - [MOMUTO vs Concurrents](https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026): Comment MOMUTO se compare à Owayo, Jersix et Spized
 
 ## À Propos
 - [À Propos de MOMUTO](https://fr.momuto.com/pages/a-propos-de-nous): Histoire de la marque, philosophie de fabrication et standards de qualité
-- [FAQ](https://fr.momuto.com/pages/questions-frequentes): Questions fréquentes sur les commandes, la personnalisation, les prix et la livraison
+- [FAQ et Tarifs](https://fr.momuto.com/pages/questions-frequentes): Questions fréquentes sur les commandes, la personnalisation, la grille de prix complète et la livraison
+- [Livraison](https://fr.momuto.com/pages/politique-de-livraison): Calendrier (maquette 24-48 h, production 7-12 jours, expédition 10-15 jours), transporteurs par destination, livraison offerte dès 50 €, douane prépayée
+- [Retours et Échanges](https://fr.momuto.com/pages/retours-echanges): Article sur mesure — retours pour défaut de fabrication, dommage de transport ou pièce différente de la maquette validée ; signaler sous 7 jours à customer@momuto.com, RMA, remboursement frais de retour compris sous 14 jours après approbation ; remboursement intégral en cas d'annulation avant le début de la production
 
 ## Support
 - [Contact](https://fr.momuto.com/pages/contact): Service client par WhatsApp, Instagram ou email

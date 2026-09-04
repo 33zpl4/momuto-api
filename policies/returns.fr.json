@@ -1,0 +1,183 @@
+{
+  "locale": "fr",
+  "handle": "retours-echanges",
+  "base": "https://fr.momuto.com",
+  "lang": "fr",
+  "meta": {
+    "title": "Retours et échanges — défauts, dommages, maquette différente | MOMUTO",
+    "meta_title": "Retours et Échanges : Défauts, Dommages, Maquette | MOMUTO",
+    "meta_descript": "Tenues faites pour vous : retours pour défaut de fabrication, dommage de transport ou pièce différente de la maquette validée. 7 jours, remboursement sous 14.",
+    "keywords": [
+      "retours momuto",
+      "politique de retour maillots personnalisés",
+      "remboursement momuto",
+      "échange momuto",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Retours et échanges",
+    "h1": "Si Quelque Chose Ne Va Pas, <span class=\"acc\">On Répare</span>",
+    "sub": "Chaque tenue est imprimée selon la maquette que vous validez : pas d'échange de taille ni de retour pour changement d'avis. Si une pièce arrive défectueuse, abîmée ou différente de ce que vous avez validé, nous la remplaçons ou la remboursons — frais de retour compris."
+  },
+  "quick": [
+    [
+      "7 jours",
+      "pour signaler un problème après la livraison"
+    ],
+    [
+      "Photos + RMA",
+      "aucun colis ne repart sans numéro RMA"
+    ],
+    [
+      "14 jours",
+      "remboursement après approbation, sur le moyen de paiement d'origine"
+    ],
+    [
+      "Remboursement intégral",
+      "annulez à tout moment avant le début de la production"
+    ]
+  ],
+  "covered": {
+    "title": "Ce qui est couvert",
+    "lead": "Un article fabriqué sur mesure ne peut pas être revendu : la politique est donc étroite mais ferme. Si l'erreur vient de nous ou du transporteur, elle est pour nous.",
+    "cols": [
+      "Situation",
+      "Ce que nous faisons"
+    ],
+    "rows": [
+      [
+        "<b>Défaut de fabrication</b> <span class=\"sub\">coutures lâches, défauts d'impression, mauvaise matière</span>",
+        "Remplacement ou remboursement intégral, par la voie la plus rapide"
+      ],
+      [
+        "<b>Abîmé pendant le transport</b> <span class=\"sub\">déchiré, taché ou mouillé à l'arrivée</span>",
+        "Remplacement ou remboursement intégral ; gardez l'emballage pour la réclamation transporteur"
+      ],
+      [
+        "<b>Différent de la maquette validée</b> <span class=\"sub\">couleur, nom, numéro ou placement du logo incorrects</span>",
+        "Réimprimé selon la maquette, gratuitement — ou remboursé"
+      ],
+      [
+        "<b>Pièces manquantes</b> <span class=\"sub\">la tenue d'un joueur n'est pas dans le carton</span>",
+        "Les articles manquants sont envoyés sans frais"
+      ],
+      [
+        "<b>Mauvaise taille saisie sur l'effectif</b>",
+        "Non retournable — les tailles sont imprimées telles que saisies ; consultez le <a href=\"/pages/guide-des-tailles\">guide des tailles</a> avant de commander"
+      ],
+      [
+        "<b>Changement d'avis après le début de la production</b>",
+        "Non retournable — la tenue a été fabriquée pour vous et ne peut pas être revendue"
+      ]
+    ],
+    "notes": [
+      "<b>La maquette est le contrat.</b> Rien n'est imprimé avant que vous validiez la maquette finale : ce que vous avez validé est ce que nous vous devons.",
+      "<b>Garantie à vie sur l'impression.</b> La sublimation est teinte dans le tissu — elle ne se décolle pas, ne craque pas et ne délave pas en lavage normal. Si c'est le cas, c'est un défaut et nous remplaçons.",
+      "<b>Les frais de retour sont remboursés</b> quand un retour est approuvé — vous ne payez jamais pour renvoyer notre erreur.",
+      "<b>Aucuns frais de restockage</b>, jamais."
+    ]
+  },
+  "process": {
+    "title": "Comment se passe une réclamation",
+    "lead": "Cinq étapes, et la plupart des réclamations n'atteignent jamais la quatrième : une photo nette suffit généralement pour réimprimer ou rembourser sans que le colis revienne.",
+    "steps": [
+      [
+        "Sous 7 jours",
+        "<strong>Écrivez-nous.</strong> Envoyez un e-mail à <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> dans les 7 jours suivant la livraison avec votre numéro de commande, une courte description et des photos du problème (et du colis s'il est arrivé abîmé)."
+      ],
+      [
+        "1–2 jours",
+        "<strong>Nous examinons et émettons un RMA.</strong> Un membre de l'équipe compare les photos à votre maquette validée et vous répond avec un numéro d'autorisation de retour (RMA) et la marche à suivre. N'expédiez rien avant de l'avoir."
+      ],
+      [
+        "Si nécessaire",
+        "<strong>Renvoyez l'article.</strong> Certains cas exigent une inspection dans notre atelier. Expédiez-le non porté, dans son emballage d'origine avec les étiquettes, en suivi, en indiquant le RMA — nous remboursons l'affranchissement dès que le retour est approuvé."
+      ],
+      [
+        "À réception",
+        "<strong>Inspection.</strong> L'article retourné est vérifié par rapport à la réclamation. Les échanges partent seulement après l'inspection ; les réimpressions pour maquette différente démarrent immédiatement."
+      ],
+      [
+        "Sous 14 jours",
+        "<strong>Remboursement ou remplacement.</strong> Les remboursements approuvés sont versés sur votre moyen de paiement d'origine sous 14 jours après approbation, pour le montant total plus les frais de retour. Les remplacements repartent en production et sont expédiés en suivi."
+      ]
+    ]
+  },
+  "cancel": {
+    "title": "Annulations",
+    "lead": "Vous pouvez annuler avec remboursement intégral à tout moment avant le début de la production.",
+    "items": [
+      [
+        "Avant la validation de la maquette",
+        "<b>Remboursement intégral</b>, sans question. Répondez à l'e-mail de commande ou écrivez à <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+      ],
+      [
+        "Après la validation de la maquette",
+        "La production démarre à la validation et le tissu est imprimé à votre design en quelques jours : la commande <b>ne peut plus être annulée</b> ni modifiée."
+      ],
+      [
+        "Acomptes de design",
+        "L'acompte de design des demandes 100 % sur mesure est déduit intégralement des commandes de 5 maillots ou plus et il est offert pour une commande d'équipe. Ce n'est pas un achat et il n'est pas remboursé seul."
+      ]
+    ]
+  },
+  "faq": {
+    "title": "Questions sur les retours",
+    "items": [
+      [
+        "Puis-je échanger un maillot contre une autre taille ?",
+        "Non — les articles personnalisés sont imprimés avec le nom, le numéro et la taille saisis sur l'effectif ; un échange de taille reviendrait à réimprimer à nos frais. Utilisez le <a href=\"/pages/guide-des-tailles\">guide des tailles</a> avant de commander ; en cas de doute, prenez la taille au-dessus. Si un vêtement ne correspond pas au tableau publié, c'est un défaut et nous le remplaçons."
+      ],
+      [
+        "Dois-je renvoyer l'article ?",
+        "Souvent non. Pour les défauts visibles d'impression ou de couture, les photos suffisent et nous réimprimons ou remboursons directement. Nous demandons l'article seulement quand une inspection est nécessaire — et nous remboursons alors les frais de retour dès l'approbation."
+      ],
+      [
+        "Et si j'ai dépassé les 7 jours ?",
+        "Écrivez-nous quand même. Le délai rattache les réclamations à la livraison, mais un vrai défaut constaté au premier port reste un défaut. Nous examinons chaque cas."
+      ],
+      [
+        "Combien de temps prend un remplacement ?",
+        "Une réimpression repart en production (7–12 jours) et est expédiée en suivi (10–15 jours) : comptez 25–30 jours porte à porte, le même délai que la commande initiale. Dites-nous s'il y a un match en jeu et nous la passerons en priorité."
+      ],
+      [
+        "Où arrive mon remboursement ?",
+        "Sur le moyen de paiement utilisé à la commande, sous 14 jours après approbation. S'il n'apparaît pas passé ce délai, vérifiez d'abord auprès de votre banque — les délais de crédit varient — puis écrivez à <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> pour que nous le tracions."
+      ],
+      [
+        "Puis-je retourner un maillot Ready to Play que j'ai personnalisé ?",
+        "Les mêmes règles s'appliquent : il a été imprimé selon votre maquette validée, donc les retours concernent uniquement les défauts, les dommages ou un écart avec la maquette."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Quand vous voulez",
+    "p": "Concevez-la vous-même en 3D, gratuitement — ou envoyez-nous votre idée et un designer la construit. Dans les deux cas, vous validez une maquette avant toute impression.",
+    "btn": "Concevoir en 3D — gratuit",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr",
+    "btn2": "Demander sur WhatsApp",
+    "btn2_url": "https://wa.me/34614625408"
+  },
+  "more": {
+    "label": "Continuer :",
+    "links": [
+      [
+        "/pages/questions-frequentes",
+        "FAQ et tarifs"
+      ],
+      [
+        "/pages/politique-de-livraison",
+        "livraison"
+      ],
+      [
+        "/pages/guide-des-tailles",
+        "guide des tailles"
+      ],
+      [
+        "/pages/collection-ready-to-play",
+        "designs Ready to Play"
+      ]
+    ]
+  }
+}

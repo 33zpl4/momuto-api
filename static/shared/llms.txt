@@ -29,6 +29,7 @@
 ## Products
 - [Custom Soccer Jerseys & Uniforms](https://www.momuto.com/pages/custom-soccer-jerseys): US-focused hub for custom soccer jerseys and uniforms — free 3D designer, no minimum order, youth-to-adult sizing
 - [Custom Youth & Club Soccer Uniforms](https://www.momuto.com/pages/custom-youth-club-soccer-uniforms): Custom uniforms for US youth teams, academies, and clubs — one design across every age group, per-player names & numbers, no minimum
+- [Football Jersey Maker](https://www.momuto.com/pages/custom-soccer-jersey-designer): The free real-time 3D football jersey maker explained — templates, colours, crest and sponsor upload, names and numbers, order from the tool, EUR price ladder
 - [Design Your Own Soccer Jersey](https://www.momuto.com/pages/design-your-own-soccer-jersey): Free 3D soccer jersey designer, plus AI-concept-to-real-kit — upload a ChatGPT/Gemini/Midjourney design and we make it wearable
 - [Best Custom Soccer Jersey Makers 2026](https://www.momuto.com/pages/best-custom-soccer-jersey-makers-2026): Independent US comparison of MOMUTO vs Icarus FC, spized, and owayo on minimum order, turnaround, customization, and price
 - [Custom Football / Soccer Kits](https://www.momuto.com/pages/custom-kit-gallery): Fully bespoke jerseys and shorts for teams of any size
@@ -38,13 +39,15 @@
 ## How It Works
 - [3D Configurator](https://www.momuto.com/): Design your kit in real time with 30+ professional templates
 - [Custom Design Request (Bespoke)](https://www.momuto.com/pages/request-custom-kit-design): €15 deposit puts a designer on your concept — first mockup in 24-48h, revisions included, deposit credited in full to orders of 5+ jerseys
-- [Printing & Materials](https://www.momuto.com/pages/printing): Technical details on sublimation printing and fabric composition
+- [Printing & Materials](https://www.momuto.com/pages/custom-football-kit-materials-printing): Technical details on sublimation printing and fabric composition
 - [Size Guide](https://www.momuto.com/pages/size-guide): Comprehensive sizing information for team orders
 - [MOMUTO vs Competitors](https://www.momuto.com/pages/momuto-vs-jersix-owayo-spized-comparison): How MOMUTO compares to Jersix, Owayo, and Spized
 
 ## About
 - [About MOMUTO](https://www.momuto.com/pages/about-us): Brand story, manufacturing philosophy, and quality standards
-- [FAQ](https://www.momuto.com/pages/faq): Common questions about ordering, customization, pricing, and delivery
+- [FAQ & Prices](https://www.momuto.com/pages/faq): Common questions about ordering, customization, the full price ladder, and delivery
+- [Shipping & Delivery](https://www.momuto.com/pages/shipping-policy): Timeline (mockup 24-48h, production 7-12 days, shipping 10-15 days), carriers per destination, free shipping over €50, duties prepaid
+- [Returns & Exchanges](https://www.momuto.com/pages/return-policy): Custom goods — returns for manufacturing defects, transit damage or a kit that differs from the approved mockup; report within 7 days to customer@momuto.com, RMA, refund incl. return shipping within 14 days of approval; full refund on cancellation before production starts
 
 ## Support
 - [Contact](https://www.momuto.com/pages/contact): Customer service via WhatsApp, Instagram, or email

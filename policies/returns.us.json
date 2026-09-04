@@ -1,0 +1,183 @@
+{
+  "locale": "us",
+  "handle": "return-policy",
+  "base": "https://us.momuto.com",
+  "lang": "en",
+  "meta": {
+    "title": "Returns & exchanges — defects, damage, mockup mismatch | MOMUTO",
+    "meta_title": "Returns & Exchanges: Defects, Damage, Mockup Mismatch | MOMUTO",
+    "meta_descript": "Custom kits are made for you: returns cover manufacturing defects, transit damage and kits that differ from the approved mockup. 7-day window, 14-day refund.",
+    "keywords": [
+      "momuto returns",
+      "custom kit return policy",
+      "momuto refund",
+      "momuto exchange",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Returns & exchanges",
+    "h1": "If Something Is <span class=\"acc\">Wrong</span>, We Fix It",
+    "sub": "Every kit is printed to your approved mockup, so there is no size-swap or change-of-mind return. If a piece arrives defective, damaged or different from what you approved, we replace it or refund it — including the return shipping you paid."
+  },
+  "quick": [
+    [
+      "7 days",
+      "to report an issue after delivery"
+    ],
+    [
+      "Photos + RMA",
+      "no parcel goes back without an RMA number"
+    ],
+    [
+      "14 days",
+      "refund after approval, to the original payment"
+    ],
+    [
+      "Full refund",
+      "cancel any time before production starts"
+    ]
+  ],
+  "covered": {
+    "title": "What is covered",
+    "lead": "Custom-made goods can't be resold, so the policy is narrow but firm: if it's our mistake or the carrier's, it's on us.",
+    "cols": [
+      "Situation",
+      "What we do"
+    ],
+    "rows": [
+      [
+        "<b>Manufacturing defect</b> <span class=\"sub\">loose seams, print flaws, wrong material</span>",
+        "Replacement or full refund, our choice of the fastest route"
+      ],
+      [
+        "<b>Damaged in transit</b> <span class=\"sub\">torn, stained or wet on arrival</span>",
+        "Replacement or full refund; keep the packaging for the carrier claim"
+      ],
+      [
+        "<b>Differs from the approved mockup</b> <span class=\"sub\">wrong color, name, number, logo placement</span>",
+        "Reprinted to the mockup, free — or refunded"
+      ],
+      [
+        "<b>Missing pieces</b> <span class=\"sub\">one player's set not in the box</span>",
+        "Missing items sent at no cost"
+      ],
+      [
+        "<b>Wrong size chosen on the roster</b>",
+        "Not returnable — sizes are printed as you entered them; check the <a href=\"/pages/size-guide\">size guide</a> before ordering"
+      ],
+      [
+        "<b>Change of mind after production started</b>",
+        "Not returnable — the kit was made for you and can't be resold"
+      ]
+    ],
+    "notes": [
+      "<b>The mockup is the contract.</b> Nothing is printed until you approve the final mockup, so what you approved is what we owe you.",
+      "<b>Lifetime print guarantee.</b> Sublimation is dyed into the fabric — it can't peel, crack or fade under normal washing. If it does, that's a defect and we replace it.",
+      "<b>Return shipping is refunded</b> when a return is approved — you never pay to send back our mistake.",
+      "<b>No restocking fee</b>, ever."
+    ]
+  },
+  "process": {
+    "title": "How a claim works",
+    "lead": "Five steps, and most claims never reach step four — a clear photo is usually enough for us to reprint or refund without the parcel coming back.",
+    "steps": [
+      [
+        "Within 7 days",
+        "<strong>Write to us.</strong> Email <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> within 7 days of delivery with your order number, a short description and photos of the issue (and of the parcel if it arrived damaged)."
+      ],
+      [
+        "1–2 days",
+        "<strong>We review and issue an RMA.</strong> A team member checks the photos against your approved mockup and replies with a Return Merchandise Authorization number and next steps. Please don't ship anything back before you have it."
+      ],
+      [
+        "If needed",
+        "<strong>Send it back.</strong> Some cases need the item at our production facility for inspection. Ship it unused, in its original packaging with tags attached, tracked, quoting the RMA — we refund the postage once the return is approved."
+      ],
+      [
+        "On receipt",
+        "<strong>Inspection.</strong> The returned item is checked against the claim. Exchanges ship only after the inspection is complete; reprints for mockup mismatches start immediately."
+      ],
+      [
+        "Within 14 days",
+        "<strong>Refund or replacement.</strong> Approved refunds go to your original payment method within 14 days of approval, for the full amount paid plus any return shipping. Replacements re-enter production and ship tracked."
+      ]
+    ]
+  },
+  "cancel": {
+    "title": "Cancellations",
+    "lead": "You can cancel for a full refund at any point before production starts.",
+    "items": [
+      [
+        "Before you approve the mockup",
+        "<b>Full refund</b>, no questions. Reply to your order email or write to <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+      ],
+      [
+        "After mockup approval",
+        "Production starts on approval and the fabric is printed to your design within days, so the order <b>can no longer be cancelled</b> or changed."
+      ],
+      [
+        "Design deposits",
+        "The design deposit on 100% custom requests is credited in full to orders of 5+ jerseys and is free for a team order. It is not a purchase and is not refunded on its own."
+      ]
+    ]
+  },
+  "faq": {
+    "title": "Questions about returns",
+    "items": [
+      [
+        "Can I exchange a jersey for a different size?",
+        "No — custom items are printed with the name, number and size you entered on the roster, so a size swap would mean reprinting at our cost. Use the <a href=\"/pages/size-guide\">size guide</a> before ordering; if in doubt, size up. If a garment measures differently from the published chart, that is a defect and we replace it."
+      ],
+      [
+        "Do I need to send the item back?",
+        "Often not. For visible print or seam defects, photos are enough and we reprint or refund straight away. We ask for the item back only when an inspection is needed — and then we refund the return postage once the claim is approved."
+      ],
+      [
+        "What if I missed the 7-day window?",
+        "Write to us anyway. The window keeps claims tied to delivery, but a genuine defect found on first wear is still a defect. We look at every case."
+      ],
+      [
+        "How long does a replacement take?",
+        "A reprint re-enters production (7–12 days) and ships tracked (10–15 days), so plan on 25–30 days door to door — the same timeline as the original order. Tell us if there is a match deadline and we will prioritize it."
+      ],
+      [
+        "Where does my refund go?",
+        "To the payment method used at checkout, within 14 days of the claim being approved. If it hasn't appeared after that, check with your bank first — posting times vary — then email <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> and we will trace it."
+      ],
+      [
+        "Can I return a Ready to Play jersey I customized?",
+        "The same rules apply: it was printed to your approved mockup, so returns are for defects, damage or a mismatch with the mockup only."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Whenever you're ready",
+    "p": "Design it yourself in 3D, free — or send us your idea and a designer builds it. Either way you approve a mockup before anything prints.",
+    "btn": "Design in 3D — free",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en",
+    "btn2": "Ask on WhatsApp",
+    "btn2_url": "https://wa.me/34614625408"
+  },
+  "more": {
+    "label": "Keep exploring:",
+    "links": [
+      [
+        "/pages/faq",
+        "FAQ & prices"
+      ],
+      [
+        "/pages/shipping-policy",
+        "shipping & delivery"
+      ],
+      [
+        "/pages/size-guide",
+        "size guide"
+      ],
+      [
+        "/pages/ready-to-play",
+        "Ready to Play designs"
+      ]
+    ]
+  }
+}

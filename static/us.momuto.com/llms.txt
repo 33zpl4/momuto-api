@@ -9,7 +9,8 @@
 - Printing: Full dye-sublimation (ink fused into fabric, never peels/cracks/fades)
 - Minimum order: None (1 jersey or 100+)
 - Design options: (1) Ready to Play — a wall of finished designs by the MOMUTO studio; every design loads finished in the free real-time 3D designer (never a blank template), customize it or order it as it stands. (2) Professional design service (Bespoke) — a $15 deposit puts a designer on your concept, first mockup in 24-48h, revisions included; the deposit is credited in full to orders of 5+ jerseys, so it is free for a team order. (3) AI concept to real jersey — submit your AI-generated design (ChatGPT, Midjourney, etc.) and our expert designers adapt it into a production-ready, wearable uniform (same $15 deposit terms).
-- Pricing: From $25.90/jersey for orders of 10+. Single jersey $45.90. Designing in 3D is always free. Each season a curated selection of Ready to Play designs is discounted 10%.
+- Pricing (USD, jersey): $45.90 single, $41.90 each at 2-4, $30.90 at 5-9, $25.90 at 10-19, $21.90 at 20-49, $20.90 at 50-99, $19.90 at 100+. Shorts: $20.90 single, $5.00 each at 10+. Full kit (jersey + shorts): $66.80 single, $30.90 each at 10+. Designing in 3D is always free. Each season a curated selection of Ready to Play designs is discounted 10%.
+- Halloween tournaments: custom Halloween soccer jerseys for October tournaments (Frankenstein, mummy, and other themed kits) — order 5 weeks ahead; see https://us.momuto.com/pages/halloween-soccer-jerseys
 - Long sleeves: optional per player, chosen on the cart roster, for a small upcharge. Default is short sleeves.
 - Delivery: production 7-12 days + shipping 10-15 days — typically 25-30 days door to door in the US. More than 95% of orders arrive within this window.
 - Fast lane: +$69 skips the production queue and adds shipping priority — saves roughly 7 days.
@@ -32,11 +33,15 @@
 - [AI Concept to Real Jersey](https://us.momuto.com/pages/ai-concept-to-real-kit): Submit your AI-generated jersey design and we manufacture it for real
 
 ## How It Works
+- [Soccer Jersey Maker](https://us.momuto.com/pages/custom-soccer-jersey-designer): The free real-time 3D soccer jersey maker explained — templates, colors, crest and sponsor upload, names and numbers, order from the tool, USD price ladder
 - [3D Designer](https://design.momuto.com/3d-configurator/configurator.html): Design your uniform in real time — free, every template loads finished
 - [Size Guide](https://us.momuto.com/pages/size-guide): Comprehensive sizing information for team orders
 - Blog guides: [Custom Soccer Uniforms for Your Team — Complete Guide](https://us.momuto.com/blogs/custom-soccer-uniforms-for-your-team-complete-guide)
 
 ## Support
+- [FAQ & Prices](https://us.momuto.com/pages/faq): Common questions about ordering, customization, the full USD price ladder, and delivery
+- [Shipping & Delivery](https://us.momuto.com/pages/shipping-policy): Timeline (mockup 24-48h, production 7-12 days, shipping 10-15 days), USPS delivery, free shipping over $59, duties prepaid
+- [Returns & Exchanges](https://us.momuto.com/pages/return-policy): Custom goods — returns for manufacturing defects, transit damage or a kit that differs from the approved mockup; report within 7 days to customer@momuto.com, RMA, refund incl. return shipping within 14 days of approval; full refund on cancellation before production starts
 - [Contact](https://us.momuto.com/pages/contact): Customer service via WhatsApp, Instagram, or email
 - WhatsApp: https://wa.me/34614625408
 - Email: info@momuto.com

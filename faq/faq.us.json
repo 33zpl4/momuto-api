@@ -1,0 +1,327 @@
+{
+  "locale": "us",
+  "handle": "faq",
+  "base": "https://us.momuto.com",
+  "lang": "en-US",
+  "sport": "soccer",
+  "meta": {
+    "title": "FAQ — Custom Soccer Jerseys: Prices, Delivery, Sizes | MOMUTO",
+    "meta_title": "FAQ: Custom Soccer Jersey Prices, Delivery & Sizing | MOMUTO",
+    "meta_descript": "Custom soccer jersey answers before you order: prices from $25.90/jersey, $15 design deposit, 25–30 day US delivery, sizes, printing, returns. No minimum order.",
+    "keywords": [
+      "custom soccer jersey faq",
+      "custom soccer jersey prices",
+      "momuto faq",
+      "soccer jersey delivery time",
+      "custom soccer uniforms minimum order",
+      "sublimated soccer jerseys",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Help center",
+    "h1": "Everything Before You <span class=\"acc\">Order</span>",
+    "sub": "Prices, timelines, sizes, printing and what happens if something isn't right — the honest version. Still stuck? WhatsApp us and a human answers."
+  },
+  "quick": [
+    [
+      "$45.90",
+      "single jersey · from $25.90 at 10+"
+    ],
+    [
+      "No min.",
+      "one jersey or the whole team"
+    ],
+    [
+      "24–48h",
+      "final mockup before anything prints"
+    ],
+    [
+      "25–30 days",
+      "door to door in the US, tracked · 95%+ on time"
+    ]
+  ],
+  "pricing": {
+    "id": "pricing",
+    "title": "Prices",
+    "lead": "One transparent ladder, no hidden fees. Names, numbers and sponsor logos are printed in at no extra cost. The price per unit drops as your order grows.",
+    "cols": [
+      "Order size",
+      "Jersey",
+      "Shorts",
+      "Full kit (jersey + shorts)"
+    ],
+    "rows": [
+      [
+        "1 unit",
+        "$45.90",
+        "$20.90",
+        "$66.80"
+      ],
+      [
+        "2–4 units",
+        "$41.90",
+        "$18.90",
+        "$60.80"
+      ],
+      [
+        "5–9 units",
+        "$30.90",
+        "$13.90",
+        "$44.80"
+      ],
+      [
+        "10–19 units",
+        "$25.90",
+        "$5.00",
+        "$30.90",
+        true
+      ],
+      [
+        "20–49 units",
+        "$21.90",
+        "$5.00",
+        "$26.90"
+      ],
+      [
+        "50–99 units",
+        "$20.90",
+        "$5.00",
+        "$25.90"
+      ],
+      [
+        "100+ units",
+        "$19.90",
+        "$5.00",
+        "$24.90"
+      ]
+    ],
+    "popular": "Most popular",
+    "notes": [
+      "<b>Per unit, per line.</b> Quantities pool per product: 12 jerseys + 12 shorts each get the 10–19 tier.",
+      "<b>Ready to Play seasonal selection: −10%</b> on the designs wearing the badge — every season a rotating selection of finished designs.",
+      "<b>Long sleeves: +$3.00 per jersey</b> at any quantity, chosen per player on the roster.",
+      "<b>Socks: $6.90</b> per pair, flat.",
+      "<b>Free US shipping over $59.</b> Under that, shipping is $4.90.",
+      "<b>Fast lane: +$69 per order</b> skips the production queue and adds shipping priority — saves roughly 7 days.",
+      "<b>Custom design deposit: $15</b> for a designer-built (bespoke or AI-concept) design — credited in full to orders of 5+ jerseys, so free for a team order. Designing in the 3D designer is always free."
+    ]
+  },
+  "sections": [
+    {
+      "id": "ordering",
+      "title": "Ordering & design",
+      "items": [
+        [
+          "What are the ways to get a kit designed?",
+          "Three routes, and all of them end in the same free 3D designer. <b>Ready to Play</b>: a wall of finished designs by the MOMUTO studio — open one, recolor it, add your crest, names and numbers, order. <b>Design it yourself</b>: start from any design in the 3D designer and build your own, free. <b>Send us your idea</b>: a sketch, a reference or an AI render (ChatGPT, Midjourney…) and a MOMUTO designer builds it for you — a <b>$15 deposit</b>, first mockup in 24–48 hours, revisions included, credited in full to orders of 5+ jerseys."
+        ],
+        [
+          "Do I pay before I see the final design?",
+          "You pay when you order — but <b>nothing is printed until you approve a final mockup</b>. Within 24–48 hours of ordering we send a production mockup of your exact kit (crest cleaned, sponsor placed, names and numbers set). Change anything, free. Production only starts on your OK, so you never receive a kit you didn't approve."
+        ],
+        [
+          "Is there really no minimum order?",
+          "None. Order one jersey or a hundred. The only thing that changes with quantity is the price per unit (see the ladder above). A single custom jersey is $45.90; at 10+ it drops to $25.90."
+        ],
+        [
+          "How do I order for a whole team?",
+          "Add the design to your cart and enter the roster: one line per player with size, name and number. Mixed sizes — youth to adult — in the same design are normal. If the roster isn't final yet, order what you have; a second order later gets its own tier pricing."
+        ],
+        [
+          "Can I still change something after ordering?",
+          "Yes, right up until you approve the mockup — colors, crest position, a misspelled name, a size. After approval the kit goes into production and changes are no longer possible. You can cancel for a full refund at any point before production starts."
+        ],
+        [
+          "Is the $15 deposit refunded?",
+          "It is <b>credited in full</b> to your order when you order 5 or more jerseys — so for a team it costs nothing. It covers the designer's time to build, vectorize and revise your concept before you commit."
+        ],
+        [
+          "Do you make sports other than soccer?",
+          "Yes. The same 3D designer and fabric now carry <b>basketball jerseys</b> (see <a href=\"/pages/custom-basketball-jerseys\">custom basketball jerseys</a>), and the studio has built futsal, padel, handball and e-sports kits. Ask us if you don't see your sport."
+        ]
+      ]
+    },
+    {
+      "id": "delivery",
+      "title": "Production & delivery",
+      "items": [
+        [
+          "How long does it take?",
+          "<b>25–30 days door to door</b>, to the US: 7–12 days of production after your mockup approval, then 10–15 days of tracked shipping. More than 95% of orders arrive inside that window. Need a date? Tell us before ordering and we'll confirm it's realistic."
+        ],
+        [
+          "Can I get it faster?",
+          "The <b>fast lane (+$69 per order)</b> skips the production queue and adds shipping priority — roughly 7 days saved. Approving your mockup quickly helps too: the clock only starts once you've approved the design."
+        ],
+        [
+          "When should I order for a season or tournament?",
+          "Start <b>7–9 weeks</b> before you need the kits and confirm the order <b>4–5 weeks</b> out. In practice teams spend 2–3 weeks deciding (the design vote, the sponsor's approval, collecting the money) — longer than production itself. Size lists, on the other hand, usually arrive within 24 hours."
+        ],
+        [
+          "Who delivers, and can I track it?",
+          "Every order is tracked and you receive the tracking number by email as soon as it ships. In the US your parcel is delivered by <b>USPS</b>; elsewhere by a certified international courier. Free US shipping on orders over $59 ($4.90 below)."
+        ],
+        [
+          "Will I pay customs duties?",
+          "No. <b>Duties are prepaid by us.</b> In the rare case a carrier charges you anyway, send the receipt to <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> and we refund it."
+        ],
+        [
+          "Where are the kits made?",
+          "Designed in Europe, manufactured in our partner factory in Asia, shipped directly to you in the US. That is how a fully sublimated, elastane-blend jersey can cost $25.90 at team quantities."
+        ]
+      ]
+    },
+    {
+      "id": "sizes",
+      "title": "Sizes & fit",
+      "items": [
+        [
+          "How do the kits fit?",
+          "An <b>athletic slim fit</b>. If a player is between two sizes, or prefers a relaxed feel, size up. All numbers in the <a href=\"/pages/size-guide\">size guide</a> are body measurements (chest, height, weight), not garment measurements."
+        ],
+        [
+          "Which sizes exist?",
+          "Adults <b>XS–3XL</b>; kids and youth from <b>98/104 (3–4 yrs) to 176 (15–16 yrs)</b>. Shorts follow the same range. Mixed sizes in one order are the norm for a team."
+        ],
+        [
+          "Can I mix kids and adults in one order?",
+          "Yes — one design, every size. Enter each player's size on the roster at checkout. The design scales to each size automatically; a designer checks crest and number placement on every size before print."
+        ],
+        [
+          "What if a size is wrong when it arrives?",
+          "Sizes are chosen by you on the roster, so please check the guide before ordering — custom items can't be exchanged for a different size afterwards. If a garment is defective or doesn't match the approved mockup, we replace it (see Returns)."
+        ]
+      ]
+    },
+    {
+      "id": "customization",
+      "title": "Customization",
+      "items": [
+        [
+          "Are names, numbers and sponsors extra?",
+          "No. <b>Names, numbers and sponsor logos are printed into the fabric at no extra cost</b>, in the font and color you choose. A roster of 20 different names costs the same as one design."
+        ],
+        [
+          "What happens to my logo?",
+          "<b>Every crest and sponsor logo is cleaned and vectorized by a designer</b> before production — whatever you upload to the 3D designer or send in a brief. A blurry phone photo of a badge comes back sharp on the mockup."
+        ],
+        [
+          "Can I have long sleeves, or a goalkeeper kit in another color?",
+          "Long sleeves are chosen <b>per player</b> on the roster (+$3.00 per jersey). A goalkeeper version in different colors is a second design in the same order — ask us and we set it up so it keeps your team's tier pricing."
+        ],
+        [
+          "Do you offer 3D silicone badges?",
+          "Yes, as an optional <b>player-version upgrade</b> for larger club orders: 3D silicone or rubberized crests with real texture, like professional match kits. Ask us for eligibility and pricing."
+        ],
+        [
+          "Can I order jersey only, or the full kit?",
+          "Both. Jersey only, or full kit (jersey + matching shorts). Socks are available separately. Choose on the product or tell us in your brief."
+        ],
+        [
+          "Can you copy a brand or a professional club's kit?",
+          "No — we don't print licensed logos, brand marks or copies of pro kits. We build <b>original designs inspired by your idea</b>, and they always come out better anyway: the crest is yours."
+        ]
+      ]
+    },
+    {
+      "id": "fabric",
+      "title": "Fabric, printing & care",
+      "items": [
+        [
+          "What is the fabric?",
+          "A <b>polyester-elastane performance blend</b> (145–160 GSM micro-interlock) with four-way stretch and moisture wicking — the fabric most brands reserve for their premium tier. It's standard on every MOMUTO kit."
+        ],
+        [
+          "How is the design printed?",
+          "<b>Full dye-sublimation</b>: the ink is fused into the fibres at 200 °C, so the design is part of the fabric — weightless, breathable, and it never peels, cracks or fades. Unlimited colors, gradients and patterns cost nothing extra. We guarantee the print for the life of the garment."
+        ],
+        [
+          "Will it look exactly like the 3D preview?",
+          "Yes — and you'll see it first. The 3D designer is a faithful preview; the production mockup we send before printing is the exact file that goes to the printer. Nothing prints until you've approved it."
+        ],
+        [
+          "How do I wash it?",
+          "Cold or 30 °C, inside out, no bleach, no tumble dryer, no ironing over prints. Sublimated colors don't need special care — they can't peel — but the fabric lasts longer treated gently."
+        ]
+      ]
+    },
+    {
+      "id": "returns",
+      "title": "Returns, guarantees & samples",
+      "items": [
+        [
+          "Can I return a custom kit?",
+          "Custom kits are made for you, so returns are for <b>manufacturing defects, damage in transit, or a kit that differs from the approved mockup</b>. Contact <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> within 7 days of delivery with photos; we issue an RMA and replace or refund — including any return shipping you paid — within 14 days of approval."
+        ],
+        [
+          "What protects my purchase?",
+          "The mockup gate: <b>nothing is printed until you approve the final mockup</b>, and every crest is checked by a designer. Plus a lifetime guarantee on the print itself — sublimation can't peel or crack."
+        ],
+        [
+          "Can I cancel?",
+          "Yes, for a full refund at any point <b>before production starts</b> (i.e. before you approve the mockup). Once it's in production or shipped, it can't be cancelled."
+        ],
+        [
+          "Can I order a sample first?",
+          "Yes — with no minimum, <b>order one jersey at the single price ($45.90)</b> as your sample. Most teams don't need to: every Ready to Play design shows real colorways in 3D, and you approve a production mockup before anything prints."
+        ]
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About MOMUTO",
+      "items": [
+        [
+          "Who is MOMUTO?",
+          "A European design studio making 100% custom, professional-grade soccer uniforms since 2023 — <b>250+ teams in 15+ countries</b>, growing fast across the United States, rated 4.4/5 on Trustpilot. Designed in Europe, made in Asia, shipped to your door."
+        ],
+        [
+          "How does MOMUTO compare to Owayo, Spized or Jersix?",
+          "Like them we have a real-time 3D designer — but ours loads every design finished, never as a blank template. Unlike them we include the elastane blend as standard, run a designer-built bespoke service for $15, and have no minimum order. <a href=\"/pages/best-custom-soccer-jersey-makers-2026\">Full US comparison →</a>"
+        ],
+        [
+          "How do I reach a human?",
+          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> is fastest; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> for anything with attachments; <a href=\"https://instagram.com/momutofc\">@momutofc</a> on Instagram. Order issues: <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+        ]
+      ]
+    }
+  ],
+  "cta": {
+    "h2": "Still Have a Question?",
+    "p": "Ask on WhatsApp — a real person from the studio answers, in English, Spanish, French or Italian.",
+    "btn": "WhatsApp us",
+    "btn_url": "https://wa.me/34614625408",
+    "btn2": "Design in 3D — free",
+    "btn2_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en"
+  },
+  "more": {
+    "label": "Keep exploring:",
+    "links": [
+      [
+        "/pages/ready-to-play",
+        "Ready to Play designs"
+      ],
+      [
+        "/pages/request-custom-kit-design",
+        "request a custom design"
+      ],
+      [
+        "/pages/size-guide",
+        "size guide"
+      ],
+      [
+        "/pages/custom-football-kit-materials-printing",
+        "printing & materials"
+      ],
+      [
+        "/pages/custom-kit-gallery",
+        "500+ team designs"
+      ],
+      [
+        "/pages/halloween-soccer-jerseys",
+        "Halloween tournament jerseys"
+      ]
+    ]
+  }
+}

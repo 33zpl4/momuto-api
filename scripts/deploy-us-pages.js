@@ -62,7 +62,7 @@ const PAGES = [
     handle: 'ai-concept-to-real-kit',
     title: 'AI Soccer Jersey Generator — Concept to Real Jersey | MOMUTO',
     meta_title: 'AI Soccer Jersey Generator to Real Custom Jersey | MOMUTO',
-    meta_descript: 'Made a soccer jersey concept with ChatGPT, Gemini or Midjourney? We turn AI jersey designs into real custom uniforms you can wear. $15 deposit, mockup in 24-48h.',
+    meta_descript: 'Made a soccer jersey concept with ChatGPT, Gemini or Midjourney? We turn AI jersey designs into real, wearable custom uniforms. $15 deposit, mockup in 24-48h.',
     keywords: [
       'ai soccer jersey generator',
       'ai jersey design',
@@ -85,6 +85,23 @@ const PAGES = [
       'design basketball jersey online',
       'basketball uniform creator',
       'reversible basketball jerseys custom',
+    ],
+  },
+  {
+    handle: 'halloween-soccer-jerseys',
+    title: 'Custom Halloween Soccer Jerseys for Tournaments | MOMUTO',
+    meta_title: 'Custom Halloween Soccer Jerseys — Tournament Kits | MOMUTO',
+    meta_descript: 'Themed soccer jerseys for Halloween tournaments — Frankenstein, mummy and monster kits built from your reference. Tournament-legal, 25-30 days, no minimum.',
+    keywords: [
+      'halloween soccer jerseys',
+      'halloween soccer tournament jerseys',
+      'custom halloween jerseys',
+      'halloween soccer uniforms',
+      'spooky soccer jerseys',
+      'halloween soccer tournament',
+      'kick or treat tournament jerseys',
+      'themed soccer jerseys',
+      'MOMUTO',
     ],
   },
 ];
