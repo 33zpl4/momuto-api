@@ -89,3 +89,25 @@ download the log zip.
   URLs — ignore it; the theme binds "Header Menu" / "Footer Menu".
 - ES/FR/IT menus are not curated — `apply-nav` will refuse them until a
   tree is transcribed from `inspect-nav`.
+
+
+## The storefront footer is NOT the API "Footer Menu" (4 Sep 2026)
+
+The rendered footer ("Company Info / Service Center / Subscribe") is a theme
+setting with hand-typed links; `GET /navs` never returns it and `apply-nav`
+cannot touch it. That is where the capitalised `/pages/Shipping-policy` and
+the dead `/pages/Contact-Us` on US came from. Owner edits it in the theme
+editor. Correct targets per store (all lowercase, all verified to exist):
+
+| Store | Contact | Shipping | Returns | Privacy | Terms | About |
+|---|---|---|---|---|---|---|
+| www | `/pages/contact` | `/pages/shipping-policy` | `/pages/return-policy` | `/pages/privacy-policy` | `/pages/terms-and-conditions` | `/pages/about-us` |
+| us | `/pages/contact` | `/pages/shipping-policy` | `/pages/return-policy` | `/pages/privacy-policy` | `/pages/terms-and-conditions` | `/pages/about-us` |
+| es | `/pages/contacto` | `/pages/envios-metodos-y-plazos` | `/pages/cambios-devoluciones` | `/pages/politica-privacidad` | `/pages/terminos-y-condiciones` | `/pages/sobre-nosotros` |
+| fr | `/pages/contactez-nous` | `/pages/politique-de-livraison` | `/pages/retours-echanges` | `/pages/politique-de-confidentialite` | `/pages/conditions-generales` | `/pages/a-propos-de-nous` |
+| it | `/pages/contattaci` | `/pages/politica-di-spedizione` | `/pages/politica-resi` | `/pages/informativa-sulla-privacy` | `/pages/termini-e-condizioni` | `/pages/chi-siamo` |
+
+The platform serves `/pages/Shipping-policy` and `/pages/shipping-policy`
+as the same page (case-insensitive), so a capitalised footer link creates a
+duplicate URL for crawlers — keep every typed link lowercase. The US footer
+tagline still says "Define your football identity" (theme setting too).
