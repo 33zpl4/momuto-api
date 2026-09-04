@@ -1,0 +1,162 @@
+{
+  "locale": "us",
+  "handle": "shipping-policy_2cf047d2",
+  "base": "https://us.momuto.com",
+  "lang": "en-US",
+  "meta": {
+    "title": "Shipping & Delivery — 25–30 Days, Tracked, Duties Prepaid | MOMUTO",
+    "meta_title": "Shipping & Delivery: 25–30 Days, Tracked, Duties Prepaid | MOMUTO",
+    "meta_descript": "How a MOMUTO order ships to the US: mockup in 24–48h, 7–12 days production, 10–15 days tracked shipping — 25–30 days door to door. Free over $59.",
+    "keywords": [
+      "momuto shipping",
+      "custom soccer kit delivery time",
+      "momuto delivery",
+      "custom kit shipping cost",
+      "tracked delivery soccer kits",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Shipping & delivery",
+    "h1": "From Order to <span class=\"acc\">Your Door</span>",
+    "sub": "What happens after you pay, how long each step takes, who delivers where, and what it costs. More than 95% of orders arrive inside the 25–30 day window."
+  },
+  "quick": [
+    [
+      "25–30 days",
+      "door to door, anywhere in the US"
+    ],
+    [
+      "Free over $59",
+      "$4.90 below that"
+    ],
+    [
+      "Tracked",
+      "tracking number by email when it ships"
+    ],
+    [
+      "Duties prepaid",
+      "no customs surprises"
+    ]
+  ],
+  "timeline": {
+    "title": "The timeline",
+    "lead": "Custom kits are made to order, so the clock has four parts. The only one you control is how fast you approve the mockup.",
+    "steps": [
+      [
+        "Day 0",
+        "<strong>Order confirmed.</strong> You pay at checkout and get a confirmation email. If anything in your design needs a decision, we email you — keep an eye on your inbox."
+      ],
+      [
+        "Day 1–2",
+        "<strong>Production mockup, 24–48 h.</strong> A designer cleans your crest and sponsor, sets names and numbers, and sends the exact file that will print. Change anything, free. <b>Nothing prints until you approve it.</b>"
+      ],
+      [
+        "Day 3–14",
+        "<strong>Production, 7–12 days.</strong> Full dye-sublimation on the polyester-elastane blend, cut and sewn to each player's size."
+      ],
+      [
+        "Day 15–30",
+        "<strong>Shipping, 10–15 days.</strong> Tracked, by the carrier for your zone (table below). You receive the tracking number by email the moment it leaves."
+      ],
+      [
+        "Delivery",
+        "<strong>At your door.</strong> Duties are prepaid by us. Problem with the parcel? Write to <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> within 7 days with photos."
+      ]
+    ]
+  },
+  "zones": {
+    "title": "Where we ship, and what it costs",
+    "lead": "Free US shipping on orders over $59, $4.90 below. Every zone is tracked.",
+    "cols": [
+      "Destination",
+      "Carrier",
+      "Shipping cost",
+      "Door to door"
+    ],
+    "rows": [
+      [
+        "United States",
+        "USPS",
+        "$4.90 · <b>free over $59</b>",
+        "25–30 days"
+      ],
+      [
+        "Canada &amp; worldwide",
+        "Certified international courier",
+        "$4.90 · <b>free over $59</b>",
+        "25–30 days"
+      ],
+      [
+        "Europe &amp; the UK",
+        "Local carriers on the European stores <span class=\"sub\"><a href=\"https://www.momuto.com\">www</a> · <a href=\"https://es.momuto.com\">es</a> · <a href=\"https://fr.momuto.com\">fr</a> · <a href=\"https://it.momuto.com\">it</a>.momuto.com — euro prices</span>",
+        "&euro;3.90 · <b>free over &euro;50</b>",
+        "25–30 days"
+      ]
+    ],
+    "notes": [
+      "<b>Fast lane: +$69 per order</b> skips the production queue and adds shipping priority — roughly 7 days saved.",
+      "<b>Plan 7–9 weeks ahead</b> for a season or tournament and confirm the order 4–5 weeks out; teams spend 2–3 weeks deciding, longer than production itself.",
+      "<b>The clock starts at mockup approval</b>, not at payment — approve fast, receive fast.",
+      "<b>Customs duties are prepaid.</b> If a carrier charges you anyway, send the receipt to <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> and we refund it."
+    ]
+  },
+  "faq": {
+    "title": "Shipping questions",
+    "items": [
+      [
+        "Can I track my order?",
+        "Yes. Every order ships tracked; the tracking number arrives by email as soon as the parcel leaves, and you can follow it in the carrier's tracking page and in the Order Status section of your account."
+      ],
+      [
+        "Do you deliver to my state?",
+        "Yes — every US state, including Alaska and Hawaii, by USPS. We also ship worldwide with a certified international courier; customers in Europe get local carriers and euro prices on the European MOMUTO stores."
+      ],
+      [
+        "Will I pay customs or import duties?",
+        "No — <b>duties are prepaid by MOMUTO</b>. In the rare case a carrier still asks you to pay, send the receipt to <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> and we refund the amount."
+      ],
+      [
+        "Can you guarantee a delivery date?",
+        "We can't guarantee a date — global logistics occasionally slip — but more than 95% of orders arrive within 25–30 days, and the fast lane (+$69) buys roughly a week. Tell us your deadline before ordering and we'll say honestly whether it's realistic."
+      ],
+      [
+        "Can I change the delivery address?",
+        "Before the parcel ships, yes — email <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> with your order number and we update it. Once it's with the carrier we'll ask them to redirect where their service allows, but it can't be promised."
+      ],
+      [
+        "The parcel arrived damaged or something is missing",
+        "Write to <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> within 7 days of delivery with photos of the parcel and the items. Damage in transit and missing pieces are replaced or refunded — see the <a href=\"/pages/return-policy_b801b8e1\">returns &amp; exchanges policy</a>."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Ready When You Are",
+    "p": "Design it yourself in 3D, free — or send us your idea and a designer builds it. Either way, the mockup lands within 48 hours.",
+    "btn": "Design in 3D — free",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en",
+    "btn2": "Ask on WhatsApp",
+    "btn2_url": "https://wa.me/34614625408"
+  },
+  "more": {
+    "label": "Keep exploring:",
+    "links": [
+      [
+        "/pages/faq",
+        "FAQ & prices"
+      ],
+      [
+        "/pages/return-policy_b801b8e1",
+        "returns & exchanges"
+      ],
+      [
+        "/pages/size-guide",
+        "size guide"
+      ],
+      [
+        "/pages/ready-to-play",
+        "Ready to Play designs"
+      ]
+    ]
+  }
+}

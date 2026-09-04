@@ -1,0 +1,167 @@
+{
+  "locale": "es",
+  "handle": "envios-metodos-y-plazos",
+  "base": "https://es.momuto.com",
+  "lang": "es",
+  "meta": {
+    "title": "Envíos y plazos — 25–30 días, con seguimiento, aduanas incluidas | MOMUTO",
+    "meta_title": "Envíos y Plazos: 25–30 Días, Seguimiento, Aduanas | MOMUTO",
+    "meta_descript": "Cómo viaja un pedido MOMUTO: maqueta en 24–48 h, 7–12 días de producción, 10–15 días de envío con seguimiento — 25–30 días puerta a puerta. Gratis desde 50 €.",
+    "keywords": [
+      "envíos momuto",
+      "plazo entrega equipaciones personalizadas",
+      "gastos de envío equipaciones",
+      "envío con seguimiento camisetas fútbol",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Envíos y entrega",
+    "h1": "Del Pedido a <span class=\"acc\">Tu Puerta</span>",
+    "sub": "Qué pasa después de pagar, cuánto dura cada paso, quién entrega en cada zona y cuánto cuesta. Más del 95 % de los pedidos llegan dentro del plazo de 25–30 días."
+  },
+  "quick": [
+    [
+      "25–30 días",
+      "puerta a puerta"
+    ],
+    [
+      "Gratis desde 50 €",
+      "3,90 € por debajo"
+    ],
+    [
+      "Con seguimiento",
+      "número de seguimiento por email al salir"
+    ],
+    [
+      "Aduanas incluidas",
+      "sin sorpresas en la entrega"
+    ]
+  ],
+  "timeline": {
+    "title": "El calendario",
+    "lead": "Las equipaciones se fabrican bajo pedido, así que el reloj tiene cuatro partes. La única que controlas tú es lo rápido que apruebas la maqueta.",
+    "steps": [
+      [
+        "Día 0",
+        "<strong>Pedido confirmado.</strong> Pagas al finalizar la compra y recibes un email de confirmación. Si algo de tu diseño necesita una decisión, te escribimos — vigila la bandeja de entrada."
+      ],
+      [
+        "Día 1–2",
+        "<strong>Maqueta de producción, 24–48 h.</strong> Un diseñador limpia tu escudo y patrocinador, coloca nombres y dorsales y te envía el archivo exacto que se imprimirá. Cambia lo que quieras, gratis. <b>No se imprime nada hasta que lo apruebas.</b>"
+      ],
+      [
+        "Día 3–14",
+        "<strong>Producción, 7–12 días.</strong> Sublimación total sobre la mezcla de poliéster-elastano, cortada y cosida a la talla de cada jugador."
+      ],
+      [
+        "Día 15–30",
+        "<strong>Envío, 10–15 días.</strong> Con seguimiento, por el transportista de tu zona (tabla más abajo). Recibes el número de seguimiento por email en cuanto sale."
+      ],
+      [
+        "Entrega",
+        "<strong>En tu puerta.</strong> Los aranceles van prepagados por nosotros. ¿Problema con el paquete? Escribe a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> en 7 días con fotos."
+      ]
+    ]
+  },
+  "zones": {
+    "title": "Dónde enviamos y cuánto cuesta",
+    "lead": "Un solo umbral: envío gratis en pedidos superiores a 50 €, 3,90 € por debajo. Todas las zonas con seguimiento.",
+    "cols": [
+      "Destino",
+      "Transportista",
+      "Gastos de envío",
+      "Puerta a puerta"
+    ],
+    "rows": [
+      [
+        "España peninsular y Baleares",
+        "CTT Express",
+        "3,90 € · <b>gratis desde 50 €</b>",
+        "25–30 días"
+      ],
+      [
+        "Islas Canarias",
+        "Correos",
+        "3,90 € · <b>gratis desde 50 €</b>",
+        "25–30 días"
+      ],
+      [
+        "Resto de Europa y del mundo",
+        "Transportista internacional certificado",
+        "3,90 € · <b>gratis desde 50 €</b>",
+        "25–30 días"
+      ],
+      [
+        "Estados Unidos",
+        "USPS <span class=\"sub\">pide en <a href=\"https://us.momuto.com\">us.momuto.com</a> — precios en dólares</span>",
+        "4,90 $ · <b>gratis desde 59 $</b>",
+        "25–30 días"
+      ]
+    ],
+    "notes": [
+      "<b>Vía rápida: +59 € por pedido</b> — salta la cola de producción y añade prioridad de envío; unos 7 días de ahorro.",
+      "<b>Planifica con 7–9 semanas</b> para una temporada o torneo y confirma el pedido 4–5 semanas antes; los equipos tardan 2–3 semanas en decidir, más que la producción.",
+      "<b>El reloj empieza al aprobar la maqueta</b>, no al pagar — aprueba rápido, recibe rápido.",
+      "<b>Aranceles prepagados.</b> Si un transportista te cobra igualmente, envía el recibo a <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> y te lo reembolsamos."
+    ]
+  },
+  "faq": {
+    "title": "Preguntas sobre envíos",
+    "items": [
+      [
+        "¿Puedo hacer seguimiento de mi pedido?",
+        "Sí. Todos los pedidos van con seguimiento; el número llega por email en cuanto sale el paquete y puedes seguirlo en la web del transportista y en la sección Estado del pedido de tu cuenta."
+      ],
+      [
+        "¿Entregáis en mi zona?",
+        "En la Península y Baleares entrega CTT Express; en Canarias, Correos; al resto del mundo, un transportista internacional certificado. Los clientes de Francia, Italia y Estados Unidos tienen transportistas y precios locales en su propia tienda MOMUTO."
+      ],
+      [
+        "¿Pagaré aduanas o aranceles?",
+        "No — <b>los aranceles van prepagados por MOMUTO</b>. En el raro caso de que un transportista te pida pagar, envía el recibo a <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> y te reembolsamos el importe."
+      ],
+      [
+        "¿Podéis garantizar una fecha de entrega?",
+        "No podemos garantizar una fecha — la logística global falla de vez en cuando — pero más del 95 % de los pedidos llegan en 25–30 días, y la vía rápida (+59 €) ahorra aproximadamente una semana. Dinos tu fecha límite antes de pedir y te diremos con sinceridad si es realista."
+      ],
+      [
+        "¿Puedo cambiar la dirección de entrega?",
+        "Antes de que salga el paquete, sí — escribe a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> con tu número de pedido y la actualizamos. Una vez con el transportista, pediremos el redireccionamiento donde su servicio lo permita, pero no se puede prometer."
+      ],
+      [
+        "El paquete ha llegado dañado o falta algo",
+        "Escribe a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> en los 7 días siguientes a la entrega con fotos del paquete y de las prendas. Los daños en el transporte y las piezas que falten se reemplazan o reembolsan — ver la <a href=\"/pages/cambios-devoluciones\">política de cambios y devoluciones</a>."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Cuando quieras",
+    "p": "Diséñala tú en 3D, gratis — o envíanos tu idea y un diseñador la construye. En ambos casos, la maqueta llega en 48 horas.",
+    "btn": "Diseña en 3D — gratis",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=es&langguage=es",
+    "btn2": "Pregunta por WhatsApp",
+    "btn2_url": "https://wa.me/34614625408"
+  },
+  "more": {
+    "label": "Sigue explorando:",
+    "links": [
+      [
+        "/pages/preguntas-frecuentes",
+        "preguntas frecuentes y precios"
+      ],
+      [
+        "/pages/cambios-devoluciones",
+        "cambios y devoluciones"
+      ],
+      [
+        "/pages/guia-tallas",
+        "guía de tallas"
+      ],
+      [
+        "/pages/coleccion-ready-to-play",
+        "diseños Ready to Play"
+      ]
+    ]
+  }
+}
