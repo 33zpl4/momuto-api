@@ -23,8 +23,9 @@ Read the doc that owns a topic BEFORE editing that surface.
 - `docs/store-config-shipping.md` — live shipping zones for all 5 stores +
   the `sync-store-config.js` tool (navs/SEO/shipping); read BEFORE any
   zone, nav, or seoplan write. Zone overlap/permission gotchas live there.
-- **FAQ pages (all 5 stores)** are generated: content in `faq/faq.<locale>.json`,
-  `scripts/build-faq-pages.js` renders into the pulled `cms/pages/<locale>/<faq handle>.json`
+- **FAQ and shipping-policy pages (all 5 stores)** are generated: content in
+  `faq/faq.<locale>.json` / `policies/shipping.<locale>.json`,
+  `scripts/build-faq-pages.js` / `build-shipping-pages.js` render into the pulled `cms/pages/<locale>/<faq handle>.json`
   (deploy via Deploy CMS Page `changed_since`). Numbers there must match rule 6
   and the US ladder in `docs/us-launch-status.md`; never hand-edit the built JSON.
 - `docs/design-page-template.md`, `docs/rtp-collection.md` (historical),

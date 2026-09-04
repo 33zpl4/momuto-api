@@ -183,6 +183,10 @@ and FAQPage + WebPage JSON-LD for every question (GEO/LLM feed).
 Suggested nav: a "Pricing" item → `/pages/<faq handle>#pricing` (the
 "couldn't find prices" email). Also fixed: `/pages/printing` never
 existed — US nav + llms.txt now point at the per-store printing handles.
-Known stale sibling: the `shipping-policy` page still says "5–7 working
-days design review / ~20 days" — worth the same treatment.
+The shipping-policy pages got the same treatment on 4 Sep:
+`policies/shipping.<locale>.json` → `scripts/build-shipping-pages.js`
+(handles: en/us `shipping-policy_2cf047d2`, es `envios-metodos-y-plazos`,
+fr `politique-de-livraison`, it `politica-di-spedizione`) — timeline,
+per-store carriers/costs table, prepaid duties, six questions with
+FAQPage schema. Shared CSS for both generators: `scripts/lib/estate-css.js`.
 
