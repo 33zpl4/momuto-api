@@ -185,8 +185,29 @@ Suggested nav: a "Pricing" item → `/pages/<faq handle>#pricing` (the
 existed — US nav + llms.txt now point at the per-store printing handles.
 The shipping-policy pages got the same treatment on 4 Sep:
 `policies/shipping.<locale>.json` → `scripts/build-shipping-pages.js`
-(handles: en/us `shipping-policy_2cf047d2`, es `envios-metodos-y-plazos`,
+(handles: en/us `shipping-policy` — renamed from `shipping-policy_2cf047d2`
+by PUT on 4 Sep, owner adds the admin redirect; es `envios-metodos-y-plazos`,
 fr `politique-de-livraison`, it `politica-di-spedizione`) — timeline,
 per-store carriers/costs table, prepaid duties, six questions with
-FAQPage schema. Shared CSS for both generators: `scripts/lib/estate-css.js`.
+FAQPage schema. Shared CSS for all three generators: `scripts/lib/estate-css.js`.
+
+Returns & exchanges, same day: `policies/returns.<locale>.json` →
+`scripts/build-returns-pages.js`. EN and US each had TWO returns pages: the
+theme's generic `return-policy` ("14 days, unused, original packaging" —
+contradicted the custom-goods policy) and the real `return-policy_b801b8e1`
+("Returns & Exchanges", 2023 white/Jost). The generated page now lives on
+the clean handle `return-policy` (ids en 234880, us 6492170); ES
+`cambios-devoluciones` (299808), FR `retours-echanges` (261677), IT
+`politica-resi` (5086324). Facts: returns only for manufacturing defects,
+transit damage, or a kit that differs from the approved mockup; report to
+customer@momuto.com within 7 days with photos; RMA before anything ships
+back; refund incl. return shipping within 14 days of approval; no size
+exchanges; full refund on cancellation before production starts; lifetime
+print guarantee. Carries WebPage + MerchantReturnPolicy + FAQPage JSON-LD.
+**Owner to do**: admin redirects `/pages/return-policy_b801b8e1` →
+`/pages/return-policy` on EN and US (the API has no delete/unpublish for
+pages; the old object stays live until redirected), and IT still has a
+second generic `politica-di-reso` page worth redirecting to `politica-resi`.
+All links in `faq/`, `policies/` and `llms.txt` already point at the clean
+handles; every llms.txt now lists FAQ, shipping and returns under Support.
 

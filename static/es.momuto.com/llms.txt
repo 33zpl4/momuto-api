@@ -35,7 +35,9 @@
 
 ## Sobre MOMUTO
 - [Sobre MOMUTO](https://es.momuto.com/pages/sobre-nosotros): Historia de la marca, filosofía de fabricación y estándares de calidad
-- [Preguntas Frecuentes](https://es.momuto.com/pages/preguntas-frecuentes): Preguntas habituales sobre pedidos, personalización, precios y entrega
+- [Preguntas Frecuentes y Precios](https://es.momuto.com/pages/preguntas-frecuentes): Preguntas habituales sobre pedidos, personalización, la escalera de precios completa y entrega
+- [Envíos y Plazos](https://es.momuto.com/pages/envios-metodos-y-plazos): Calendario (maqueta 24-48 h, producción 7-12 días, envío 10-15 días), transportistas por destino, envío gratis desde 50 €, aranceles prepagados
+- [Cambios y Devoluciones](https://es.momuto.com/pages/cambios-devoluciones): Producto a medida — devoluciones por defecto de fabricación, daño en el transporte o prenda distinta de la maqueta aprobada; avisar en 7 días a customer@momuto.com, RMA, reembolso incl. envío de devolución en 14 días desde la aprobación; reembolso total si se cancela antes de empezar la producción
 
 ## Soporte
 - [Contacto](https://es.momuto.com/pages/contact): Atención al cliente por WhatsApp, Instagram o email

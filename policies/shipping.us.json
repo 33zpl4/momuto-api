@@ -126,7 +126,7 @@
       ],
       [
         "The parcel arrived damaged or something is missing",
-        "Write to <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> within 7 days of delivery with photos of the parcel and the items. Damage in transit and missing pieces are replaced or refunded — see the <a href=\"/pages/return-policy_b801b8e1\">returns &amp; exchanges policy</a>."
+        "Write to <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> within 7 days of delivery with photos of the parcel and the items. Damage in transit and missing pieces are replaced or refunded — see the <a href=\"/pages/return-policy\">returns &amp; exchanges policy</a>."
       ]
     ]
   },
@@ -146,7 +146,7 @@
         "FAQ & prices"
       ],
       [
-        "/pages/return-policy_b801b8e1",
+        "/pages/return-policy",
         "returns & exchanges"
       ],
       [

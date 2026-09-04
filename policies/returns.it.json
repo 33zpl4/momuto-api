@@ -1,0 +1,183 @@
+{
+  "locale": "it",
+  "handle": "politica-resi",
+  "base": "https://it.momuto.com",
+  "lang": "it",
+  "meta": {
+    "title": "Resi e cambi — difetti, danni, mockup diverso | MOMUTO",
+    "meta_title": "Resi e Cambi: Difetti, Danni, Mockup Diverso | MOMUTO",
+    "meta_descript": "Divise fatte per te: resi per difetti di fabbricazione, danni nel trasporto o capi diversi dal mockup approvato. 7 giorni per segnalare, rimborso entro 14.",
+    "keywords": [
+      "resi momuto",
+      "politica resi divise personalizzate",
+      "rimborso momuto",
+      "cambi momuto",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Resi e cambi",
+    "h1": "Se Qualcosa Non Va, <span class=\"acc\">Lo Sistemiamo</span>",
+    "sub": "Ogni divisa è stampata sul mockup che approvi, quindi non esistono cambio taglia o reso per ripensamento. Se un capo arriva difettoso, danneggiato o diverso da ciò che hai approvato, lo sostituiamo o lo rimborsiamo — incluse le spese di reso che hai pagato."
+  },
+  "quick": [
+    [
+      "7 giorni",
+      "per segnalare un problema dopo la consegna"
+    ],
+    [
+      "Foto + RMA",
+      "nessun pacco torna indietro senza numero RMA"
+    ],
+    [
+      "14 giorni",
+      "rimborso dopo l'approvazione, sul metodo di pagamento originale"
+    ],
+    [
+      "Rimborso completo",
+      "annulla in qualsiasi momento prima che inizi la produzione"
+    ]
+  ],
+  "covered": {
+    "title": "Cosa è coperto",
+    "lead": "Un prodotto su misura non si può rivendere, quindi la politica è stretta ma ferma: se l'errore è nostro o del corriere, è a carico nostro.",
+    "cols": [
+      "Situazione",
+      "Cosa facciamo"
+    ],
+    "rows": [
+      [
+        "<b>Difetto di fabbricazione</b> <span class=\"sub\">cuciture allentate, difetti di stampa, materiale sbagliato</span>",
+        "Sostituzione o rimborso completo, per la via più rapida"
+      ],
+      [
+        "<b>Danneggiato nel trasporto</b> <span class=\"sub\">strappato, macchiato o bagnato all'arrivo</span>",
+        "Sostituzione o rimborso completo; conserva l'imballaggio per il reclamo al corriere"
+      ],
+      [
+        "<b>Diverso dal mockup approvato</b> <span class=\"sub\">colore, nome, numero o posizione del logo sbagliati</span>",
+        "Ristampato sul mockup, gratis — o rimborsato"
+      ],
+      [
+        "<b>Pezzi mancanti</b> <span class=\"sub\">il set di un giocatore non è nella scatola</span>",
+        "Gli articoli mancanti vengono spediti senza costi"
+      ],
+      [
+        "<b>Taglia sbagliata nella rosa</b>",
+        "Non restituibile — le taglie si stampano come le hai inserite; controlla la <a href=\"/pages/guida-alle-taglie\">guida alle taglie</a> prima di ordinare"
+      ],
+      [
+        "<b>Ripensamento a produzione avviata</b>",
+        "Non restituibile — la divisa è stata fatta per te e non si può rivendere"
+      ]
+    ],
+    "notes": [
+      "<b>Il mockup è il contratto.</b> Non si stampa nulla finché non approvi il mockup finale, quindi ciò che hai approvato è ciò che ti dobbiamo.",
+      "<b>Garanzia a vita sulla stampa.</b> La sublimazione è tinta nel tessuto — non si stacca, non si crepa e non sbiadisce con lavaggi normali. Se succede, è un difetto e lo sostituiamo.",
+      "<b>Le spese di reso vengono rimborsate</b> quando il reso è approvato — non paghi mai per rispedire un nostro errore.",
+      "<b>Nessun costo di restocking</b>, mai."
+    ]
+  },
+  "process": {
+    "title": "Come funziona un reclamo",
+    "lead": "Cinque passaggi, e la maggior parte dei reclami non arriva al quarto — una foto chiara di solito basta per ristampare o rimborsare senza che il pacco torni indietro.",
+    "steps": [
+      [
+        "Entro 7 giorni",
+        "<strong>Scrivici.</strong> Invia un'email a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> entro 7 giorni dalla consegna con il numero d'ordine, una breve descrizione e le foto del problema (e del pacco, se è arrivato danneggiato)."
+      ],
+      [
+        "1–2 giorni",
+        "<strong>Valutiamo ed emettiamo un RMA.</strong> Un membro del team confronta le foto con il mockup approvato e ti risponde con un numero di autorizzazione al reso (RMA) e i passi successivi. Non spedire nulla prima di averlo."
+      ],
+      [
+        "Se serve",
+        "<strong>Rispediscilo.</strong> Alcuni casi richiedono un'ispezione nel nostro stabilimento. Spediscilo non usato, nell'imballaggio originale con le etichette, con tracciamento e indicando l'RMA — rimborsiamo la spedizione appena il reso è approvato."
+      ],
+      [
+        "Alla ricezione",
+        "<strong>Ispezione.</strong> Il capo restituito viene verificato rispetto al reclamo. I cambi partono solo dopo l'ispezione; le ristampe per mockup diverso iniziano subito."
+      ],
+      [
+        "Entro 14 giorni",
+        "<strong>Rimborso o sostituzione.</strong> I rimborsi approvati arrivano sul metodo di pagamento originale entro 14 giorni dall'approvazione, per l'intero importo più le spese di reso. Le sostituzioni rientrano in produzione e partono tracciate."
+      ]
+    ]
+  },
+  "cancel": {
+    "title": "Annullamenti",
+    "lead": "Puoi annullare con rimborso completo in qualsiasi momento prima che inizi la produzione.",
+    "items": [
+      [
+        "Prima di approvare il mockup",
+        "<b>Rimborso completo</b>, senza domande. Rispondi all'email dell'ordine o scrivi a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+      ],
+      [
+        "Dopo l'approvazione del mockup",
+        "La produzione parte con l'approvazione e il tessuto viene stampato con il tuo design in pochi giorni, quindi l'ordine <b>non può più essere annullato</b> né modificato."
+      ],
+      [
+        "Depositi di design",
+        "Il deposito di design delle richieste 100 % personalizzate viene scalato per intero dagli ordini di 5+ maglie ed è gratuito per un ordine di squadra. Non è un acquisto e non viene rimborsato da solo."
+      ]
+    ]
+  },
+  "faq": {
+    "title": "Domande sui resi",
+    "items": [
+      [
+        "Posso cambiare una maglia con un'altra taglia?",
+        "No — i capi personalizzati sono stampati con nome, numero e taglia che hai inserito nella rosa, quindi un cambio taglia significherebbe ristampare a nostre spese. Usa la <a href=\"/pages/guida-alle-taglie\">guida alle taglie</a> prima di ordinare; nel dubbio, prendi una taglia in più. Se un capo misura diversamente dalla tabella pubblicata, è un difetto e lo sostituiamo."
+      ],
+      [
+        "Devo rispedire il capo?",
+        "Spesso no. Per difetti visibili di stampa o cucitura bastano le foto e ristampiamo o rimborsiamo subito. Chiediamo il capo solo quando serve un'ispezione — e in quel caso rimborsiamo la spedizione appena il reclamo è approvato."
+      ],
+      [
+        "E se ho superato i 7 giorni?",
+        "Scrivici comunque. La finestra lega i reclami alla consegna, ma un vero difetto scoperto al primo utilizzo resta un difetto. Valutiamo ogni caso."
+      ],
+      [
+        "Quanto ci vuole per una sostituzione?",
+        "Una ristampa rientra in produzione (7–12 giorni) e parte tracciata (10–15 giorni), quindi conta 25–30 giorni porta a porta — lo stesso tempo dell'ordine originale. Dicci se c'è una partita in ballo e le daremo priorità."
+      ],
+      [
+        "Dove arriva il rimborso?",
+        "Sul metodo di pagamento usato al checkout, entro 14 giorni dall'approvazione del reclamo. Se dopo quel termine non è arrivato, verifica prima con la tua banca — i tempi di accredito variano — poi scrivi a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> e lo rintracciamo."
+      ],
+      [
+        "Posso restituire una maglia Ready to Play che ho personalizzato?",
+        "Valgono le stesse regole: è stata stampata sul tuo mockup approvato, quindi i resi riguardano solo difetti, danni o differenze rispetto al mockup."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Quando vuoi",
+    "p": "Progettala tu in 3D, gratis — o mandaci la tua idea e un designer la costruisce. In entrambi i casi approvi un mockup prima che si stampi qualsiasi cosa.",
+    "btn": "Progetta in 3D — gratis",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=it&langguage=it",
+    "btn2": "Chiedi su WhatsApp",
+    "btn2_url": "https://wa.me/34614625408"
+  },
+  "more": {
+    "label": "Continua a esplorare:",
+    "links": [
+      [
+        "/pages/faq",
+        "FAQ e prezzi"
+      ],
+      [
+        "/pages/politica-di-spedizione",
+        "spedizione"
+      ],
+      [
+        "/pages/guida-alle-taglie",
+        "guida alle taglie"
+      ],
+      [
+        "/pages/collezione-ready-to-play",
+        "design Ready to Play"
+      ]
+    ]
+  }
+}
