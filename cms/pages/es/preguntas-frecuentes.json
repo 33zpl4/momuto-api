@@ -1,0 +1,14 @@
+{
+  "id": 299811,
+  "title": "Preguntas Frecuentes",
+  "handle": "preguntas-frecuentes",
+  "meta_title": "Preguntas Frecuentes | MOMUTO España",
+  "meta_descript": "¿Tienes dudas sobre tus camisetas de fútbol personalizadas en MOMUTO? En nuestra página de Preguntas Frecuentes encontrarás las respuestas que necesitas. Te explicamos cómo elegir la talla correcta, cuánto tarda el envío, cómo agregar el nombre y número de cada jugador y mucho más. En MOMUTO te lo ponemos fácil para que saltes al campo con tu equipación soñada.",
+  "is_default": 0,
+  "from_id": 0,
+  "from_name": "",
+  "visit_count": 529,
+  "meta_keywords": [],
+  "content": "<style>\nbody {\n    font-family: 'Jost', sans-serif;\n    color: black;\n    text-align: justify;\n    overflow-wrap: anywhere; /* Replaced word-wrap with overflow-wrap */\n    word-break: normal; /* Added word-break property */\n}\n\n.container {\n    width: 80%;\n    margin: auto;\n}\n.faq-title, .title {\n    display: none;\n}\n\n.h1 {\n    font-weight: 700;\n    font-size: 35px;\n    line-height: 39px;\n    text-align: left;\n    margin: 1.5em auto;\n    text-transform: uppercase;\n    width: 80%;\n}\n\n.h2 {\n    font-weight: 500;\n    font-size: 26px;\n    line-height: 39px;\n    margin-bottom: 30px;\n}\n\n.p {\n    font-weight: 400;\n    font-size: 16px;\n    line-height: 24px;\n    margin-bottom: 2em;\n}\n\n.app_faqtool_wrap #app_faqtool_wrap .faq-title {\n    font-family: 'Jost', sans-serif;\n    font-size: 26px;\n    font-weight: 500;\n    line-height: 35px;\n    color: black;\n    text-align: left;\n    margin-bottom: 2em;\n}\n\n#app_faqtool_wrap .panel-head .questiontitle {\n    font-size: 16px;\n    line-height: 30px;\n    font-weight: 600;\n    color: #222222;\n    overflow-wrap: anywhere; /* Added overflow-wrap property */\n    word-break: normal; /* Added word-break property */\n}\n\n\n#app_faqtool_wrap .mo-editor-reset p {\n    font-size: 16px!important;\n    line-height: 24px!important;\n    font-weight: 400!important;\n    color: black;\n    margin-bottom: 2em;\n}\n</style>\n<h1 class=\"h1\">Preguntas Frecuentes</h1>\n<div class=\"container\">\n<h2 class=\"h2\">1. Pedidos y Env&iacute;os</h2>\n<div class=\"app_faqtool_wrap\" faqtool_id=\"542\"></div>\n<h2 class=\"h2\">2. Devoluciones y Garant&iacute;as</h2>\n<div class=\"app_faqtool_wrap\" faqtool_id=\"541\"></div>\n<h2 class=\"h2\">3. Precios</h2>\n<div class=\"app_faqtool_wrap\" faqtool_id=\"537\"></div>\n<h2 class=\"h2\">4. Tallas y Ajuste</h2>\n<div class=\"app_faqtool_wrap\" faqtool_id=\"538\"></div>\n<h2 class=\"h2\">5. Personalizaci&oacute;n</h2>\n<div class=\"app_faqtool_wrap\" faqtool_id=\"539\"></div>\n<h2 class=\"h2\">6. Muestras</h2>\n<div class=\"app_faqtool_wrap\" faqtool_id=\"540\"></div>\n<h2 class=\"h2\">7. Producto y Cuidado</h2>\n<div class=\"app_faqtool_wrap\" faqtool_id=\"536\"></div>\n</div>",
+  "detail_url": "https://es.momuto.com/pages/detail/299811"
+}
