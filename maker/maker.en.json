@@ -1,0 +1,245 @@
+{
+  "locale": "en",
+  "handle": "custom-soccer-jersey-designer",
+  "base": "https://www.momuto.com",
+  "lang": "en",
+  "currency": "EUR",
+  "meta": {
+    "title": "Football Jersey Maker — Free 3D Kit Designer, No Minimum | MOMUTO",
+    "meta_title": "Football Jersey Maker: Free 3D Kit Designer, No Minimum | MOMUTO",
+    "meta_descript": "Free football jersey maker: design custom shirts and kits in real-time 3D — colours, crest, sponsor, names, numbers — then order 1 or 100. From €21.90 at 10+.",
+    "keywords": [
+      "football jersey maker",
+      "football shirt maker",
+      "football kit maker",
+      "custom football jersey maker",
+      "jersey creator",
+      "football jersey creator",
+      "football kit designer",
+      "3d football kit designer",
+      "make your own football jersey",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Football jersey maker",
+    "h1": "Football Jersey <span class=\"acc\">Maker</span>",
+    "sub": "A free, real-time 3D football jersey maker: pick a template, set your colours, drop in your crest and sponsor, add every player's name and number, and order straight from the tool. One shirt or the whole club — no minimum, no account needed.",
+    "btn": "Open the football jersey maker — free",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en",
+    "btn2": "See Ready to Play designs",
+    "btn2_url": "/pages/ready-to-play"
+  },
+  "quick": [
+    [
+      "Free",
+      "design in 3D, pay only when you order"
+    ],
+    [
+      "30+",
+      "templates, every one loads finished"
+    ],
+    [
+      "No minimum",
+      "1 jersey or 100+, same tool"
+    ],
+    [
+      "25–30 days",
+      "door to door, tracked, duties prepaid"
+    ]
+  ],
+  "features": {
+    "title": "What the maker does",
+    "lead": "Everything a custom football shirt creator should do, in the browser, without a designer on your side.",
+    "items": [
+      [
+        "Real-time 3D",
+        "Rotate the shirt as you build it. What you see is the sublimation file we print — no surprises at the mockup stage."
+      ],
+      [
+        "Colours without limits",
+        "Every panel, trim and stripe takes any colour. Gradients, patterns and fades cost nothing extra — it's all one print."
+      ],
+      [
+        "Crest &amp; sponsor upload",
+        "Upload your club crest and sponsor logos in the tool. A designer cleans and print-preps every logo before production."
+      ],
+      [
+        "Names &amp; numbers",
+        "Add the full roster with per-player names, numbers and sizes on the cart. Included in the price."
+      ],
+      [
+        "Finished templates",
+        "Every template opens as a finished design in an intentional colorway — start from something good, not a blank shape."
+      ],
+      [
+        "Order from the tool",
+        "No quote, no email chain. Set quantities, check the price ladder and check out. A production mockup follows in 24–48 h."
+      ]
+    ]
+  },
+  "synonyms": {
+    "title": "Maker, creator, designer, kit builder — one tool",
+    "body": "Teams search for a football shirt maker, a football kit designer, a jersey creator or a kit builder. They mean the same thing: a tool that turns an idea into a real, wearable football jersey. MOMUTO's version is <b>the 3D designer</b> — free to use, real-time, and wired straight to production, so the design you approve is the design that ships. If you would rather not build it yourself, the same team that runs the tool will <a href=\"/pages/request-custom-kit-design\">design it for you</a>: first mockup in 24–48 hours."
+  },
+  "ways": {
+    "title": "Three ways to start",
+    "items": [
+      [
+        "Ready to Play",
+        "Pick a finished design by the MOMUTO studio and open it in the maker. Change the colours and crest, or order it as it stands.",
+        "/pages/ready-to-play",
+        "Browse the designs"
+      ],
+      [
+        "From scratch in 3D",
+        "Open a template, set every colour yourself, upload your artwork and place the sponsor. The most control, still free.",
+        "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en",
+        "Open the 3D designer"
+      ],
+      [
+        "Send your idea",
+        "A sketch, a brief, a photo of last season's kit or an AI-generated concept. A designer builds it in the tool for you; €15 design deposit, credited in full to orders of 5+ jerseys — free for a team order.",
+        "/pages/request-custom-kit-design",
+        "Request a design"
+      ]
+    ]
+  },
+  "pricing": {
+    "title": "What a custom football jersey costs",
+    "lead": "One ladder, no setup fees, names and numbers included. Shorts and full kits follow the same steps.",
+    "cols": [
+      "Quantity",
+      "Jersey",
+      "Jersey + shorts"
+    ],
+    "rows": [
+      [
+        "1",
+        "€38.90",
+        "€56.80"
+      ],
+      [
+        "2–4",
+        "€34.90 each",
+        "€50.80"
+      ],
+      [
+        "5–9",
+        "€26.90 each",
+        "€38.80"
+      ],
+      [
+        "10–19",
+        "€21.90 each",
+        "€26.90"
+      ],
+      [
+        "20–49",
+        "€18.90 each",
+        "€24.90"
+      ],
+      [
+        "50–99",
+        "€17.90 each",
+        "€23.40"
+      ],
+      [
+        "100+",
+        "€16.90 each",
+        "€21.90"
+      ]
+    ],
+    "pop": 3,
+    "notes": [
+      "Long sleeves +€3 per jersey, chosen per player.",
+      "Free shipping over €50; €3.90 below. Duties prepaid.",
+      "Fast lane +€59 per order skips the production queue — about 7 days saved."
+    ],
+    "more": "/pages/faq#pricing",
+    "more_label": "Full price list and FAQ"
+  },
+  "steps": {
+    "title": "How it works",
+    "items": [
+      [
+        "Design",
+        "Build the jersey in the maker, or send us your idea."
+      ],
+      [
+        "Approve",
+        "A production mockup arrives in 24–48 h. Nothing prints until you approve it."
+      ],
+      [
+        "Produce",
+        "7–12 days of full dye-sublimation, cut and sewn to each player's size."
+      ],
+      [
+        "Deliver",
+        "10–15 days tracked shipping — Royal Mail in the UK, certified couriers elsewhere. 25–30 days door to door."
+      ]
+    ]
+  },
+  "faq": {
+    "title": "Football jersey maker FAQ",
+    "items": [
+      [
+        "Is the football jersey maker really free?",
+        "Yes. Designing in the 3D tool is free and needs no account. You pay only when you place an order, and the price is the ladder above — no setup, art or screen fees."
+      ],
+      [
+        "Can I make a single football shirt?",
+        "Yes. There is no minimum order. A single jersey is €38.90; the per-jersey price falls to €21.90 at 10 and €16.90 at 100."
+      ],
+      [
+        "Can I upload my own crest and sponsor?",
+        "Yes. Upload PNG, JPG, SVG or PDF artwork in the maker. A designer cleans every crest and sponsor before production and sends you the file for approval."
+      ],
+      [
+        "Does the maker handle names and numbers?",
+        "Yes. Add the squad on the cart with each player's name, number and size. Names and numbers are included in the price; long sleeves are +€3 per player."
+      ],
+      [
+        "What if I don't like the result?",
+        "You approve a production mockup before anything prints, with unlimited revisions. If a shirt arrives defective or different from the approved mockup, we reprint or refund it — see the <a href=\"/pages/return-policy\">returns policy</a>."
+      ],
+      [
+        "Can I use an AI-generated kit design?",
+        "Yes. Send a ChatGPT, Midjourney or Gemini concept through the <a href=\"/pages/ai-concept-to-real-kit\">AI concept page</a> and a designer rebuilds it as a print-ready football jersey."
+      ],
+      [
+        "How long does a custom football kit take?",
+        "Mockup in 24–48 hours, 7–12 days production, 10–15 days shipping: plan on 25–30 days door to door. The fast lane (+€59) saves about a week."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Make your shirt",
+    "p": "Open the free football jersey maker and have a finished design in ten minutes — or send us your idea and let a designer build it.",
+    "btn": "Open the 3D designer — free",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en",
+    "btn2": "Ask on WhatsApp",
+    "btn2_url": "https://wa.me/34614625408"
+  },
+  "more": {
+    "label": "Keep exploring:",
+    "links": [
+      [
+        "/pages/custom-soccer-jerseys",
+        "custom football kits"
+      ],
+      [
+        "/pages/design-your-own-soccer-jersey",
+        "design your own jersey"
+      ],
+      [
+        "/pages/custom-football-kit-materials-printing",
+        "printing &amp; materials"
+      ],
+      [
+        "/pages/momuto-vs-jersix-owayo-spized-comparison",
+        "how MOMUTO compares"
+      ]
+    ]
+  }
+}

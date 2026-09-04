@@ -211,3 +211,35 @@ second generic `politica-di-reso` page worth redirecting to `politica-resi`.
 All links in `faq/`, `policies/` and `llms.txt` already point at the clean
 handles; every llms.txt now lists FAQ, shipping and returns under Support.
 
+
+
+## Maker-cluster pages (4 Sep 2026, from the 3-month GSC export)
+
+The volume is in the maker/creator/designer cluster, not in "custom X
+jersey": *jersey maker* 12k impr @7.4, *jersey design maker* 5.4k @7.6,
+*football jersey maker* 4.9k @6.5, *football shirt maker* 5k @6.8, *custom
+jersey maker* 2.9k @11.7, *jersey creator* 2k @11. The US soccer twin sat
+at pos 20–35 (*soccer jersey maker* 682 @22.7, *custom soccer jersey maker*
+562 @27.9, *custom soccer jersey creator* 433 @33.9, *soccer kit designer*
+265 @26.6). Country split: US 26.5k impr, 2.1% CTR, avg pos 19 (France
+8.8, UK 22 on 16k impr). No page on either store carried "Jersey Maker" in
+its title, and `custom-soccer-jersey-designer` (both stores) was a broken
+2023 template scaffold ("Discover MOMUTO", `path-to-your-css-file.css`).
+
+Fix: `maker/maker.<locale>.json` → `scripts/build-maker-pages.js` renders
+the same handle as **Soccer Jersey Maker** (US, id 6492202, USD ladder) and
+**Football Jersey Maker** (EN, id 347868, EUR ladder, shirt/kit wording),
+with WebPage + WebApplication (free, price 0) + Product AggregateOffer +
+FAQPage JSON-LD. Cross-linked from design-your-own (both stores), the US
+hub, and llms.txt. US homepage fragments (`pages/homepage/*.us.html`) still
+said "Custom football kit maker" in the H1 plus football/colour alt texts —
+sources fixed; **the owner pastes theme sections, so the live US homepage
+needs the hero/trust/blog/how-it-works/rtp/iconic sections re-pasted**.
+
+Not ours: the *custom football uniform builder/designer/maker* queries
+(100–160 impr each, pos 24–36) are American football — ignore.
+Next levers, in order: (1) a "Jersey Maker" nav item on US and EN pointing
+at this page; (2) hreflang has only days of history — expect US impressions
+to migrate from www to us.momuto.com over 4–8 weeks, watch the US property
+separately; (3) UK CTR 0.5% at pos 22 — the EN maker page and the
+football-worded twin of design-your-own are the UK fix, not more US copy.

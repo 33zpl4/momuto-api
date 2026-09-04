@@ -25,8 +25,9 @@ Read the doc that owns a topic BEFORE editing that surface.
   zone, nav, or seoplan write. Zone overlap/permission gotchas live there.
 - **FAQ, shipping-policy and returns pages (all 5 stores)** are generated:
   content in `faq/faq.<locale>.json` / `policies/shipping.<locale>.json` /
-  `policies/returns.<locale>.json`; `scripts/build-faq-pages.js` /
-  `build-shipping-pages.js` / `build-returns-pages.js` render into the pulled
+  `policies/returns.<locale>.json` / `maker/maker.<locale>.json` (jersey-maker
+  landing, US+EN); `scripts/build-faq-pages.js` / `build-shipping-pages.js` /
+  `build-returns-pages.js` / `build-maker-pages.js` render into the pulled
   `cms/pages/<locale>/<handle>.json`
   (deploy via Deploy CMS Page `changed_since`). Numbers there must match rule 6
   and the US ladder in `docs/us-launch-status.md`; never hand-edit the built JSON.
