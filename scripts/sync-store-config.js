@@ -63,8 +63,11 @@ const item = (name, position, urlType, url, children = []) => ({
 const US_MENU_CHILDREN = [
   item('Custom Jerseys', 0, 0, '', [
     item('Ready to Play — 3D designer', 0, 6, '/pages/ready-to-play'),
-    item('Custom design request ($15)', 1, 6, '/pages/request-custom-kit-design'),
-    item('AI concept to real jersey', 2, 6, '/pages/ai-concept-to-real-kit'),
+    // GSC 4 Sep 2026: the maker/creator cluster carries the volume — the
+    // handle is the rebuilt "Soccer Jersey Maker" page (build-maker-pages.js)
+    item('Jersey Maker — free 3D tool', 1, 6, '/pages/custom-soccer-jersey-designer'),
+    item('Custom design request ($15)', 2, 6, '/pages/request-custom-kit-design'),
+    item('AI concept to real jersey', 3, 6, '/pages/ai-concept-to-real-kit'),
   ]),
   item('Basketball', 1, 6, '/pages/custom-basketball-jerseys'),
   // the Iconic Series collections were cloned to the US store (owner, 1 Sep 2026);
@@ -289,16 +292,20 @@ async function main() {
     process.exit(1);
   }
 
+  const MENUS = { us: US_MENU_CHILDREN };
+  const children = MENUS[store];
+  if (!children) { console.error(`No curated menu for store "${store}" — apply-nav would overwrite its header with another store's tree. Curate one in MENUS first.`); process.exit(1); }
+
   const payload = {
     navs: [{
       nav_name: navName,                    // same name → vendor-documented overwrite
       type: existing.type ?? 0,
       nav_admin_id: existing.nav_admin_id ?? 0,
-      children: US_MENU_CHILDREN,
+      children,
     }],
   };
 
-  console.log(`Overwriting menu "${navName}" on ${store} with ${US_MENU_CHILDREN.length} top-level item(s):`);
+  console.log(`Overwriting menu "${navName}" on ${store} with ${children.length} top-level item(s):`);
   console.log(JSON.stringify(payload, null, 2));
   if (DRY_RUN) { console.log('\nDRY_RUN — nothing posted.'); return; }
 
