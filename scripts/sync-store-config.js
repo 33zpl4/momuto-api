@@ -130,6 +130,29 @@ const EN_FOOTER_CHILDREN = [
   ]),
 ];
 
+// US footer — the cloned footer carried EN page ids (source_id 205232…) and
+// theme-suffixed handles that do not exist on the US store. Custom URLs to
+// the US handles (verified in cms/pages/us/, 4 Sep 2026).
+const US_FOOTER_CHILDREN = [
+  item('HELP', 0, 0, '/', [
+    item('Contact Us', 0, 6, '/pages/contact'),
+    item('FAQ', 1, 6, '/pages/faq'),
+    item('Size Guide', 2, 6, '/pages/size-guide'),
+    item('MOMUTO vs The Rest', 3, 6, '/pages/momuto-vs-jersix-owayo-spized-comparison'),
+  ]),
+  item('SHOP', 1, 0, '/', [
+    item('Order Status', 0, 6, 'https://design.momuto.com/userInfo/order'),
+    item('Shipping policy', 1, 6, '/pages/shipping-policy'),
+    item('Returns & Exchanges', 2, 6, '/pages/return-policy'),
+    item('Terms & Conditions', 3, 6, '/pages/terms-and-conditions'),
+    item('Privacy Policy', 4, 6, '/pages/privacy-policy'),
+  ]),
+  item('FOR YOU', 2, 0, '', [
+    item('Special Discounts', 0, 6, '/pages/special-discounts'),
+    item('Idea Submission', 1, 6, '/pages/idea-submission'),
+  ]),
+];
+
 // Curated homepage SEO per store (PUT /seoplans). meta_keywords is an array
 // (same CMS rule as pages). Only stores listed here can be applied.
 const HOMEPAGE_SEO = {
@@ -352,7 +375,7 @@ async function main() {
 
   // Curated trees keyed by store, then by the EXACT nav_name they may overwrite.
   const MENUS = {
-    us: { 'Header Menu': US_MENU_CHILDREN },
+    us: { 'Header Menu': US_MENU_CHILDREN, 'Footer Menu': US_FOOTER_CHILDREN },
     en: { 'Header Menu': EN_HEADER_CHILDREN, 'Footer Menu': EN_FOOTER_CHILDREN },
   };
   const children = MENUS[store]?.[navName];
