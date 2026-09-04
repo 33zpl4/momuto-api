@@ -238,8 +238,8 @@ needs the hero/trust/blog/how-it-works/rtp/iconic sections re-pasted**.
 
 Not ours: the *custom football uniform builder/designer/maker* queries
 (100–160 impr each, pos 24–36) are American football — ignore.
-Next levers, in order: (1) a "Jersey Maker" nav item on US and EN pointing
-at this page; (2) hreflang has only days of history — expect US impressions
+Done the same day: "Jersey Maker — free 3D tool" is in the US and EN
+header menus (see docs/store-config-shipping.md). Next levers: (2) hreflang has only days of history — expect US impressions
 to migrate from www to us.momuto.com over 4–8 weeks, watch the US property
 separately; (3) UK CTR 0.5% at pos 22 — the EN maker page and the
 football-worded twin of design-your-own are the UK fix, not more US copy.

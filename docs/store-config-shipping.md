@@ -61,3 +61,31 @@ narrow zone's coverage before (or atomically with) removing that country
 from the wide zone — except where overlap forbids creation first, in which
 case shrink-then-create WITH rollback (see above). The script logs ✅/❌
 per write; a green job with a ❌ line is still a failure — read the log.
+
+
+## Menus as of 4 Sep 2026 (curated in `sync-store-config.js`, `MENUS`)
+
+`apply-nav` now refuses any store+menu pair without a curated tree in
+`MENUS` (it used to push the US header onto whatever store you named).
+`inspect-nav` prints one store's menus compactly — the full `inspect` log
+overflows the 3000-line tail the API hands back, and the sandbox cannot
+download the log zip.
+
+- **US "Header Menu"** (809770): Custom Jerseys → Ready to Play, **Jersey
+  Maker — free 3D tool** (`/pages/custom-soccer-jersey-designer`, added
+  4 Sep from the GSC maker-cluster finding), Custom design request ($15), AI
+  concept; Basketball; Iconic Series (Drop 01/02); Support (FAQ, Printing &
+  Materials, Size guide).
+- **US "Footer Menu"** (807575): was a clone carrying EN page ids and
+  handles that do not exist on US (`contact-us_ebf80444`,
+  `terms-of-service_736dfc8a`, `privacy-policy_0d030312`); now custom URLs
+  to US handles incl. `/pages/shipping-policy` and `/pages/return-policy`.
+- **EN "Header Menu"** (63790): CUSTOM KITS → **Jersey Maker — free 3D
+  tool**, Design Gallery, Ready-to-Play; ICONIC SERIES; THE BRAND; SUPPORT
+  (FAQ, Printing & Materials `/pages/printing` id 234946, Size Guide, Contact).
+- **EN "Footer Menu"** (63789): unchanged except Shipping policy →
+  `/pages/shipping-policy` and Returns & Exchanges → `/pages/return-policy`.
+- Both stores also carry an unbound draft menu named "HEADER" with empty
+  URLs — ignore it; the theme binds "Header Menu" / "Footer Menu".
+- ES/FR/IT menus are not curated — `apply-nav` will refuse them until a
+  tree is transcribed from `inspect-nav`.
