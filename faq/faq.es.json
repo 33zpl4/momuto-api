@@ -1,0 +1,323 @@
+{
+  "locale": "es",
+  "handle": "preguntas-frecuentes",
+  "base": "https://es.momuto.com",
+  "lang": "es",
+  "sport": "fútbol",
+  "meta": {
+    "title": "Preguntas frecuentes — Equipaciones de fútbol personalizadas | MOMUTO",
+    "meta_title": "FAQ: Precios, Plazos y Tallas de Equipaciones | MOMUTO",
+    "meta_descript": "Todas las respuestas antes de pedir: precios desde 21,90 €/camiseta, depósito de diseño de 15 €, entrega en 25–30 días, tallas, estampado y devoluciones.",
+    "keywords": [
+      "preguntas frecuentes equipaciones personalizadas",
+      "precio camisetas de fútbol personalizadas",
+      "momuto preguntas",
+      "plazo entrega equipaciones",
+      "pedido mínimo equipaciones",
+      "sublimación camisetas fútbol",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Centro de ayuda",
+    "h1": "Todo Antes de <span class=\"acc\">Pedir</span>",
+    "sub": "Precios, plazos, tallas, estampado y qué pasa si algo no está bien — la versión honesta. ¿Sigues con dudas? Escríbenos por WhatsApp y te responde una persona."
+  },
+  "quick": [
+    [
+      "38,90 €",
+      "camiseta suelta · desde 21,90 € a partir de 10"
+    ],
+    [
+      "Sin mínimo",
+      "una camiseta o todo el club"
+    ],
+    [
+      "24–48 h",
+      "maqueta final antes de imprimir nada"
+    ],
+    [
+      "25–30 días",
+      "puerta a puerta, con seguimiento · +95 % a tiempo"
+    ]
+  ],
+  "pricing": {
+    "id": "pricing",
+    "title": "Precios",
+    "lead": "Una escala transparente, sin costes ocultos. Nombres, dorsales y logos de patrocinador se estampan sin coste extra. El precio por unidad baja cuanto mayor es el pedido.",
+    "cols": [
+      "Tamaño del pedido",
+      "Camiseta",
+      "Pantalón",
+      "Kit completo (camiseta + pantalón)"
+    ],
+    "rows": [
+      [
+        "1 unidad",
+        "38,90 €",
+        "17,90 €",
+        "56,80 €"
+      ],
+      [
+        "2–4 unidades",
+        "34,90 €",
+        "15,90 €",
+        "50,80 €"
+      ],
+      [
+        "5–9 unidades",
+        "26,90 €",
+        "11,90 €",
+        "38,80 €"
+      ],
+      [
+        "10–19 unidades",
+        "21,90 €",
+        "6,00 €",
+        "26,90 €",
+        true
+      ],
+      [
+        "20–49 unidades",
+        "18,90 €",
+        "6,00 €",
+        "24,90 €"
+      ],
+      [
+        "50–99 unidades",
+        "17,90 €",
+        "5,50 €",
+        "23,40 €"
+      ],
+      [
+        "100+ unidades",
+        "16,90 €",
+        "5,00 €",
+        "21,90 €"
+      ]
+    ],
+    "popular": "El más pedido",
+    "notes": [
+      "<b>Por unidad y por línea.</b> Las cantidades se suman por producto: 12 camisetas + 12 pantalones entran cada uno en el tramo 10–19.",
+      "<b>Selección de temporada Ready to Play: −10 %</b> en los diseños que llevan la insignia — cada temporada, una selección rotativa de diseños terminados.",
+      "<b>Manga larga: +3,00 € por camiseta</b> en cualquier cantidad, elegida por jugador en la lista del equipo.",
+      "<b>Medias: 6,00 €</b> el par, precio fijo.",
+      "<b>Envío gratis a partir de 50 €.</b> Por debajo, el envío cuesta 3,90 €.",
+      "<b>Vía rápida: +59 € por pedido</b> — salta la cola de producción y añade prioridad de envío; ahorra unos 7 días.",
+      "<b>Depósito de diseño a medida: 15 €</b> para un diseño creado por nuestro equipo (a medida o desde un concepto de IA) — se descuenta íntegramente en pedidos de 5+ camisetas, así que sale gratis para un equipo. Diseñar en el diseñador 3D es siempre gratis."
+    ]
+  },
+  "sections": [
+    {
+      "id": "ordering",
+      "title": "Pedido y diseño",
+      "items": [
+        [
+          "¿De qué formas puedo conseguir un diseño?",
+          "Tres vías, y todas acaban en el mismo diseñador 3D gratuito. <b>Ready to Play</b>: un muro de diseños terminados por el estudio MOMUTO — abre uno, cambia los colores, añade tu escudo, nombres y dorsales, y pide. <b>Diséñalo tú</b>: parte de cualquier diseño en el diseñador 3D y crea el tuyo, gratis. <b>Envíanos tu idea</b>: un boceto, una referencia o una imagen de IA (ChatGPT, Midjourney…) y un diseñador de MOMUTO la construye por ti — <b>depósito de 15 €</b>, primera maqueta en 24–48 horas, revisiones incluidas, descontado íntegramente en pedidos de 5+ camisetas."
+        ],
+        [
+          "¿Pago antes de ver el diseño final?",
+          "Pagas al hacer el pedido, pero <b>no se imprime nada hasta que apruebas una maqueta final</b>. En 24–48 horas desde el pedido te enviamos la maqueta de producción de tu equipación exacta (escudo limpio, patrocinador colocado, nombres y dorsales). Cambia lo que quieras, gratis. La producción solo empieza con tu OK, así que nunca recibes una equipación que no hayas aprobado."
+        ],
+        [
+          "¿De verdad no hay pedido mínimo?",
+          "Ninguno. Pide una camiseta o cien. Lo único que cambia con la cantidad es el precio por unidad (ver la escala de arriba). Una camiseta personalizada suelta cuesta 38,90 €; a partir de 10 baja a 21,90 €."
+        ],
+        [
+          "¿Cómo pido para todo el equipo?",
+          "Añade el diseño al carrito e introduce la lista del equipo: una línea por jugador con talla, nombre y dorsal. Mezclar tallas — de infantil a adulto — en el mismo diseño es lo normal. Si la lista aún no está cerrada, pide lo que tengas; un segundo pedido más adelante tiene su propio tramo de precio."
+        ],
+        [
+          "¿Puedo cambiar algo después de pedir?",
+          "Sí, hasta que apruebes la maqueta: colores, posición del escudo, un nombre mal escrito, una talla. Tras la aprobación la equipación entra en producción y ya no se puede cambiar. Puedes cancelar con reembolso total en cualquier momento antes de que empiece la producción."
+        ],
+        [
+          "¿Se devuelve el depósito de 15 €?",
+          "Se <b>descuenta íntegramente</b> de tu pedido cuando pides 5 o más camisetas — para un equipo no cuesta nada. Cubre el tiempo del diseñador para construir, vectorizar y revisar tu concepto antes de que te comprometas."
+        ],
+        [
+          "¿Hacéis otros deportes además de fútbol?",
+          "Sí. El mismo diseñador 3D y el mismo tejido sirven ya para <b>camisetas de baloncesto</b>, y el estudio ha creado equipaciones de fútbol sala, pádel, balonmano y e-sports. Pregúntanos si no ves tu deporte."
+        ]
+      ]
+    },
+    {
+      "id": "delivery",
+      "title": "Producción y envío",
+      "items": [
+        [
+          "¿Cuánto tarda?",
+          "<b>25–30 días puerta a puerta</b>: 7–12 días de producción tras aprobar la maqueta y 10–15 días de envío con seguimiento. Más del 95 % de los pedidos llegan dentro de ese plazo. ¿Tienes una fecha? Dínoslo antes de pedir y te confirmamos si es realista."
+        ],
+        [
+          "¿Puedo recibirla antes?",
+          "La <b>vía rápida (+59 € por pedido)</b> salta la cola de producción y añade prioridad de envío — unos 7 días de ahorro. Aprobar la maqueta rápido también ayuda: el reloj solo empieza cuando das el visto bueno al diseño."
+        ],
+        [
+          "¿Cuándo debo pedir para una temporada o un torneo?",
+          "Empieza <b>7–9 semanas</b> antes de necesitar las equipaciones y confirma el pedido <b>4–5 semanas</b> antes. En la práctica los equipos tardan 2–3 semanas en decidir (la votación del diseño, el visto bueno del patrocinador, recaudar el dinero) — más que la producción en sí. Las tallas, en cambio, suelen llegar en menos de 24 horas."
+        ],
+        [
+          "¿Quién entrega y puedo hacer el seguimiento?",
+          "Todos los pedidos van con seguimiento y recibes el número por email en cuanto sale. En la Península entrega <b>CTT Express</b>; en Canarias, <b>Correos</b>; fuera de España, un transportista internacional certificado. Envío gratis a partir de 50 € (3,90 € por debajo)."
+        ],
+        [
+          "¿Pagaré aduanas?",
+          "No. <b>Los aranceles van prepagados por nosotros.</b> En el raro caso de que un transportista te cobre igualmente, envía el recibo a <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> y te lo reembolsamos."
+        ],
+        [
+          "¿Dónde se fabrican las equipaciones?",
+          "Diseñadas en Europa, fabricadas en nuestra fábrica asociada en Asia y enviadas directamente a ti. Así una equipación totalmente sublimada con elastano puede costar 21,90 € en cantidades de equipo."
+        ]
+      ]
+    },
+    {
+      "id": "sizes",
+      "title": "Tallas y ajuste",
+      "items": [
+        [
+          "¿Cómo ajustan las equipaciones?",
+          "Corte <b>atlético entallado</b>. Si un jugador está entre dos tallas, o prefiere una sensación más holgada, sube una talla. Todas las cifras de la <a href=\"/pages/guia-tallas\">guía de tallas</a> son medidas corporales (pecho, altura, peso), no de la prenda."
+        ],
+        [
+          "¿Qué tallas hay?",
+          "Adultos <b>XS–3XL</b>; niños y juveniles desde <b>98/104 (3–4 años) hasta 176 (15–16 años)</b>. Los pantalones siguen el mismo rango. Mezclar tallas en un pedido es lo habitual en un equipo."
+        ],
+        [
+          "¿Puedo mezclar niños y adultos en un pedido?",
+          "Sí — un diseño, todas las tallas. Indica la talla de cada jugador en la lista al finalizar la compra. El diseño se escala automáticamente a cada talla; un diseñador revisa la posición del escudo y del dorsal en todas las tallas antes de imprimir."
+        ],
+        [
+          "¿Y si una talla no es la correcta al llegar?",
+          "Las tallas las eliges tú en la lista, así que consulta la guía antes de pedir — los artículos personalizados no se pueden cambiar de talla después. Si una prenda tiene un defecto o no coincide con la maqueta aprobada, la reemplazamos (ver Devoluciones)."
+        ]
+      ]
+    },
+    {
+      "id": "customization",
+      "title": "Personalización",
+      "items": [
+        [
+          "¿Nombres, dorsales y patrocinadores cuestan extra?",
+          "No. <b>Nombres, dorsales y logos de patrocinador se estampan en el tejido sin coste extra</b>, con la tipografía y el color que elijas. Una plantilla de 20 nombres distintos cuesta lo mismo que un solo diseño."
+        ],
+        [
+          "¿Qué pasa con mi escudo?",
+          "<b>Todos los escudos y logos de patrocinador los limpia y vectoriza un diseñador</b> antes de producir — tanto si los subes al diseñador 3D como si los envías en un brief. Una foto borrosa del escudo hecha con el móvil vuelve nítida en la maqueta."
+        ],
+        [
+          "¿Puedo pedir manga larga, o una equipación de portero de otro color?",
+          "La manga larga se elige <b>por jugador</b> en la lista (+3,00 € por camiseta). Una versión de portero en otros colores es un segundo diseño dentro del mismo pedido — pídenoslo y lo preparamos para que mantenga el tramo de precio de tu equipo."
+        ],
+        [
+          "¿Ofrecéis escudos de silicona 3D?",
+          "Sí, como <b>mejora «versión jugador»</b> opcional para pedidos grandes de clubes: escudos de silicona 3D o engomados con textura real, como en las equipaciones profesionales. Pregúntanos por condiciones y precio."
+        ],
+        [
+          "¿Puedo pedir solo la camiseta o el kit completo?",
+          "Ambos. Solo camiseta, o kit completo (camiseta + pantalón a juego). Las medias se venden aparte. Elígelo en el producto o dínoslo en tu brief."
+        ],
+        [
+          "¿Podéis copiar una marca o la equipación de un club profesional?",
+          "No — no estampamos logos con licencia, marcas ni copias de equipaciones profesionales. Creamos <b>diseños originales inspirados en tu idea</b>, y siempre quedan mejor: el escudo es tuyo."
+        ]
+      ]
+    },
+    {
+      "id": "fabric",
+      "title": "Tejido, estampado y cuidado",
+      "items": [
+        [
+          "¿Qué tejido es?",
+          "Una <b>mezcla técnica de poliéster-elastano</b> (micro-interlock de 145–160 g/m²) con elasticidad en cuatro direcciones y transpirabilidad — el tejido que la mayoría de marcas reserva para su gama premium. En MOMUTO es el estándar de todas las equipaciones."
+        ],
+        [
+          "¿Cómo se estampa el diseño?",
+          "<b>Sublimación total</b>: la tinta se funde en las fibras a 200 °C, así que el diseño forma parte del tejido — sin peso, transpirable, y nunca se despega, agrieta ni destiñe. Colores, degradados y patrones ilimitados sin coste extra. Garantizamos el estampado durante toda la vida de la prenda."
+        ],
+        [
+          "¿Quedará exactamente como la vista previa 3D?",
+          "Sí, y la verás antes. El diseñador 3D es una vista previa fiel; la maqueta de producción que enviamos antes de imprimir es el archivo exacto que va a la impresora. No se imprime nada hasta que la apruebas."
+        ],
+        [
+          "¿Cómo se lava?",
+          "En frío o a 30 °C, del revés, sin lejía, sin secadora y sin planchar sobre el estampado. Los colores sublimados no necesitan cuidados especiales — no pueden despegarse — pero el tejido dura más si se trata con cuidado."
+        ]
+      ]
+    },
+    {
+      "id": "returns",
+      "title": "Devoluciones, garantías y muestras",
+      "items": [
+        [
+          "¿Puedo devolver una equipación personalizada?",
+          "Las equipaciones se fabrican para ti, así que las devoluciones son por <b>defecto de fabricación, daño en el transporte o una equipación distinta de la maqueta aprobada</b>. Escribe a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> en los 7 días siguientes a la entrega con fotos; emitimos un RMA y reemplazamos o reembolsamos — incluido el envío de devolución que hayas pagado — en 14 días desde la aprobación."
+        ],
+        [
+          "¿Qué protege mi compra?",
+          "La puerta de la maqueta: <b>no se imprime nada hasta que apruebas la maqueta final</b>, y un diseñador revisa cada escudo. Además, garantía de por vida sobre el estampado — la sublimación no puede despegarse ni agrietarse."
+        ],
+        [
+          "¿Puedo cancelar?",
+          "Sí, con reembolso total en cualquier momento <b>antes de que empiece la producción</b> (es decir, antes de aprobar la maqueta). Una vez en producción o enviado, no se puede cancelar."
+        ],
+        [
+          "¿Puedo pedir una muestra primero?",
+          "Sí — sin mínimo, <b>pide una camiseta al precio de unidad (38,90 €)</b> como muestra. La mayoría de equipos no lo necesita: cada diseño Ready to Play muestra combinaciones de color reales en 3D, y apruebas una maqueta de producción antes de imprimir nada."
+        ]
+      ]
+    },
+    {
+      "id": "about",
+      "title": "Sobre MOMUTO",
+      "items": [
+        [
+          "¿Quién es MOMUTO?",
+          "Un estudio de diseño europeo que fabrica equipaciones 100 % personalizadas de calidad profesional desde 2023 — <b>más de 250 equipos en más de 15 países</b>, con 4,4/5 en Trustpilot. Diseñadas en Europa, fabricadas en Asia, enviadas a todo el mundo."
+        ],
+        [
+          "¿Cómo se compara MOMUTO con Owayo, Spized o Jersix?",
+          "Como ellos, tenemos un diseñador 3D en tiempo real — pero el nuestro carga cada diseño terminado, nunca como una plantilla en blanco. A diferencia de ellos, incluimos la mezcla con elastano de serie, ofrecemos un servicio de diseño a medida por 15 € y no tenemos pedido mínimo."
+        ],
+        [
+          "¿Cómo hablo con una persona?",
+          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> es lo más rápido; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> para cualquier cosa con archivos adjuntos; <a href=\"https://instagram.com/momutofc\">@momutofc</a> en Instagram. Incidencias de pedido: <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+        ]
+      ]
+    }
+  ],
+  "cta": {
+    "h2": "¿Te queda alguna duda?",
+    "p": "Pregunta por WhatsApp — te responde una persona real del estudio, en español.",
+    "btn": "Escríbenos por WhatsApp",
+    "btn_url": "https://wa.me/34614625408",
+    "btn2": "Diseña en 3D — gratis",
+    "btn2_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=es&langguage=es"
+  },
+  "more": {
+    "label": "Sigue explorando:",
+    "links": [
+      [
+        "/pages/coleccion-ready-to-play",
+        "diseños Ready to Play"
+      ],
+      [
+        "/pages/solicitud-de-diseno-personalizado",
+        "solicita un diseño a medida"
+      ],
+      [
+        "/pages/guia-tallas",
+        "guía de tallas"
+      ],
+      [
+        "/pages/materiales-impresion",
+        "impresión y materiales"
+      ],
+      [
+        "/pages/galeria-equipaciones-personalizadas",
+        "500+ diseños de equipos"
+      ]
+    ]
+  }
+}

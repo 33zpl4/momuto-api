@@ -1,0 +1,323 @@
+{
+  "locale": "it",
+  "handle": "faq",
+  "base": "https://it.momuto.com",
+  "lang": "it",
+  "sport": "calcio",
+  "meta": {
+    "title": "Domande frequenti — Divise da calcio personalizzate | MOMUTO",
+    "meta_title": "FAQ: Prezzi, Tempi e Taglie delle Divise | MOMUTO",
+    "meta_descript": "Tutte le risposte prima di ordinare: prezzi da 21,90 €/maglia, acconto design di 15 €, consegna in 25–30 giorni, taglie, stampa, resi. Nessun ordine minimo.",
+    "keywords": [
+      "faq divise calcio personalizzate",
+      "prezzo maglie da calcio personalizzate",
+      "momuto domande",
+      "tempi consegna divise personalizzate",
+      "ordine minimo divise",
+      "sublimazione maglie calcio",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Centro assistenza",
+    "h1": "Tutto Prima di <span class=\"acc\">Ordinare</span>",
+    "sub": "Prezzi, tempi, taglie, stampa e cosa succede se qualcosa non va — la versione onesta. Hai ancora dubbi? Scrivici su WhatsApp e ti risponde una persona."
+  },
+  "quick": [
+    [
+      "38,90 €",
+      "maglia singola · da 21,90 € da 10 in su"
+    ],
+    [
+      "Nessun minimo",
+      "una maglia o tutto il club"
+    ],
+    [
+      "24–48 h",
+      "mockup finale prima di stampare qualsiasi cosa"
+    ],
+    [
+      "25–30 giorni",
+      "porta a porta, tracciato · +95 % puntuale"
+    ]
+  ],
+  "pricing": {
+    "id": "pricing",
+    "title": "Prezzi",
+    "lead": "Una scala trasparente, senza costi nascosti. Nomi, numeri e loghi sponsor sono stampati senza sovrapprezzo. Il prezzo unitario scende man mano che l'ordine cresce.",
+    "cols": [
+      "Quantità",
+      "Maglia",
+      "Pantaloncini",
+      "Kit completo (maglia + pantaloncini)"
+    ],
+    "rows": [
+      [
+        "1 pezzo",
+        "38,90 €",
+        "17,90 €",
+        "56,80 €"
+      ],
+      [
+        "2–4 pezzi",
+        "34,90 €",
+        "15,90 €",
+        "50,80 €"
+      ],
+      [
+        "5–9 pezzi",
+        "26,90 €",
+        "11,90 €",
+        "38,80 €"
+      ],
+      [
+        "10–19 pezzi",
+        "21,90 €",
+        "6,00 €",
+        "26,90 €",
+        true
+      ],
+      [
+        "20–49 pezzi",
+        "18,90 €",
+        "6,00 €",
+        "24,90 €"
+      ],
+      [
+        "50–99 pezzi",
+        "17,90 €",
+        "5,50 €",
+        "23,40 €"
+      ],
+      [
+        "100+ pezzi",
+        "16,90 €",
+        "5,00 €",
+        "21,90 €"
+      ]
+    ],
+    "popular": "Il più ordinato",
+    "notes": [
+      "<b>Per pezzo, per riga.</b> Le quantità si sommano per prodotto: 12 maglie + 12 pantaloncini rientrano ciascuno nella fascia 10–19.",
+      "<b>Selezione stagionale Ready to Play: −10 %</b> sui design che portano il badge — ogni stagione, una selezione a rotazione di design finiti.",
+      "<b>Maniche lunghe: +3,00 € per maglia</b> a qualsiasi quantità, scelte per giocatore nella lista squadra.",
+      "<b>Calzettoni: 6,00 €</b> al paio, prezzo fisso.",
+      "<b>Spedizione gratuita da 50 €.</b> Sotto questa soglia la spedizione costa 3,90 €.",
+      "<b>Corsia veloce: +59 € per ordine</b> — salta la coda di produzione e aggiunge priorità di spedizione; circa 7 giorni risparmiati.",
+      "<b>Acconto design su misura: 15 €</b> per un design realizzato dal nostro team (su misura o da un concept IA) — accreditato per intero sugli ordini di 5+ maglie, quindi gratis per una squadra. Progettare nel designer 3D è sempre gratuito."
+    ]
+  },
+  "sections": [
+    {
+      "id": "ordering",
+      "title": "Ordine e design",
+      "items": [
+        [
+          "In quali modi posso ottenere un design?",
+          "Tre strade, e tutte finiscono nello stesso designer 3D gratuito. <b>Ready to Play</b>: una parete di design finiti dallo studio MOMUTO — aprine uno, cambia i colori, aggiungi stemma, nomi e numeri, ordina. <b>Progettalo tu</b>: parti da qualsiasi design nel designer 3D e crea il tuo, gratis. <b>Mandaci la tua idea</b>: uno schizzo, un riferimento o un render IA (ChatGPT, Midjourney…) e un designer MOMUTO lo costruisce per te — <b>acconto di 15 €</b>, primo mockup entro 24–48 ore, revisioni incluse, accreditato per intero sugli ordini di 5+ maglie."
+        ],
+        [
+          "Pago prima di vedere il design finale?",
+          "Paghi al momento dell'ordine, ma <b>non stampiamo nulla finché non approvi un mockup finale</b>. Entro 24–48 ore dall'ordine ti inviamo il mockup di produzione della tua divisa esatta (stemma pulito, sponsor posizionato, nomi e numeri impostati). Cambia qualsiasi cosa, gratis. La produzione parte solo con il tuo OK: non ricevi mai una divisa che non hai approvato."
+        ],
+        [
+          "Davvero non c'è un ordine minimo?",
+          "Nessuno. Ordina una maglia o cento. L'unica cosa che cambia con la quantità è il prezzo unitario (vedi la scala sopra). Una maglia personalizzata singola costa 38,90 €; da 10 in su scende a 21,90 €."
+        ],
+        [
+          "Come ordino per tutta la squadra?",
+          "Aggiungi il design al carrello e inserisci la rosa: una riga per giocatore con taglia, nome e numero. Taglie miste — dal bambino all'adulto — nello stesso design sono la normalità. Se la lista non è ancora definitiva, ordina quello che hai; un secondo ordine più avanti avrà la propria fascia di prezzo."
+        ],
+        [
+          "Posso ancora cambiare qualcosa dopo l'ordine?",
+          "Sì, fino all'approvazione del mockup — colori, posizione dello stemma, un nome scritto male, una taglia. Dopo l'approvazione la divisa entra in produzione e non si può più modificare. Puoi annullare con rimborso completo in qualsiasi momento prima che inizi la produzione."
+        ],
+        [
+          "L'acconto di 15 € viene rimborsato?",
+          "Viene <b>accreditato per intero</b> sul tuo ordine quando ordini 5 o più maglie — per una squadra non costa nulla. Copre il tempo del designer per costruire, vettorializzare e rivedere il tuo concept prima che ti impegni."
+        ],
+        [
+          "Fate altri sport oltre al calcio?",
+          "Sì. Lo stesso designer 3D e lo stesso tessuto servono ora anche per le <b>canotte da basket</b>, e lo studio ha realizzato divise da calcio a 5, padel, pallamano ed e-sport. Chiedici se non vedi il tuo sport."
+        ]
+      ]
+    },
+    {
+      "id": "delivery",
+      "title": "Produzione e consegna",
+      "items": [
+        [
+          "Quanto tempo ci vuole?",
+          "<b>25–30 giorni porta a porta</b>: 7–12 giorni di produzione dopo l'approvazione del mockup, poi 10–15 giorni di spedizione tracciata. Più del 95 % degli ordini arriva entro questa finestra. Hai una data? Diccelo prima di ordinare e ti confermiamo se è realistica."
+        ],
+        [
+          "Posso riceverla prima?",
+          "La <b>corsia veloce (+59 € per ordine)</b> salta la coda di produzione e aggiunge priorità di spedizione — circa 7 giorni risparmiati. Anche approvare il mockup in fretta aiuta: il cronometro parte solo quando dai l'ok al design."
+        ],
+        [
+          "Quando devo ordinare per una stagione o un torneo?",
+          "Inizia <b>7–9 settimane</b> prima di quando ti servono le divise e conferma l'ordine <b>4–5 settimane</b> prima. In pratica le squadre impiegano 2–3 settimane per decidere (il voto sul design, l'ok dello sponsor, la raccolta dei soldi) — più della produzione stessa. Le taglie, invece, arrivano di solito entro 24 ore."
+        ],
+        [
+          "Chi consegna, e posso tracciare il pacco?",
+          "Ogni ordine è tracciato e ricevi il numero di tracciamento via email appena parte. In Italia il pacco è consegnato da un <b>corriere certificato</b> (25–30 giorni porta a porta); nel Regno Unito da Royal Mail. Spedizione gratuita sopra i 50 € (3,90 € sotto)."
+        ],
+        [
+          "Pagherò dazi doganali?",
+          "No. <b>I dazi sono prepagati da noi.</b> Nel raro caso in cui un corriere ti addebiti comunque qualcosa, invia la ricevuta a <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> e te la rimborsiamo."
+        ],
+        [
+          "Dove vengono prodotte le divise?",
+          "Progettate in Europa, prodotte nella nostra fabbrica partner in Asia, spedite direttamente a te. È così che una divisa interamente sublimata, in misto elastan, può costare 21,90 € nelle quantità da squadra."
+        ]
+      ]
+    },
+    {
+      "id": "sizes",
+      "title": "Taglie e vestibilità",
+      "items": [
+        [
+          "Come vestono le divise?",
+          "<b>Vestibilità atletica aderente</b>. Se un giocatore è tra due taglie, o preferisce una sensazione più comoda, scegli la taglia superiore. Tutti i numeri nella <a href=\"/pages/guida-alle-taglie\">guida alle taglie</a> sono misure del corpo (torace, altezza, peso), non del capo."
+        ],
+        [
+          "Quali taglie esistono?",
+          "Adulti <b>XS–3XL</b>; bambini e ragazzi da <b>98/104 (3–4 anni) a 176 (15–16 anni)</b>. I pantaloncini seguono la stessa gamma. Taglie miste in un unico ordine sono la norma per una squadra."
+        ],
+        [
+          "Posso mischiare bambini e adulti in un ordine?",
+          "Sì — un design, tutte le taglie. Inserisci la taglia di ogni giocatore nella lista al checkout. Il design si adatta automaticamente a ogni taglia; un designer controlla la posizione di stemma e numero su ogni taglia prima della stampa."
+        ],
+        [
+          "E se una taglia è sbagliata quando arriva?",
+          "Le taglie le scegli tu nella lista, quindi consulta la guida prima di ordinare — gli articoli personalizzati non possono essere cambiati con un'altra taglia dopo. Se un capo è difettoso o non corrisponde al mockup approvato, lo sostituiamo (vedi Resi)."
+        ]
+      ]
+    },
+    {
+      "id": "customization",
+      "title": "Personalizzazione",
+      "items": [
+        [
+          "Nomi, numeri e sponsor costano extra?",
+          "No. <b>Nomi, numeri e loghi sponsor sono stampati nel tessuto senza sovrapprezzo</b>, nel font e nel colore che scegli. Una rosa con 20 nomi diversi costa quanto un solo design."
+        ],
+        [
+          "Cosa succede al mio logo?",
+          "<b>Ogni stemma e logo sponsor viene pulito e vettorializzato da un designer</b> prima della produzione — sia che lo carichi nel designer 3D, sia che lo invii in un brief. Una foto sfocata dello stemma fatta col telefono torna nitida sul mockup."
+        ],
+        [
+          "Posso avere le maniche lunghe, o una divisa da portiere di un altro colore?",
+          "Le maniche lunghe si scelgono <b>per giocatore</b> nella lista (+3,00 € per maglia). Una versione portiere in altri colori è un secondo design nello stesso ordine — chiedicelo e lo impostiamo in modo che mantenga la fascia di prezzo della tua squadra."
+        ],
+        [
+          "Offrite stemmi in silicone 3D?",
+          "Sì, come <b>upgrade «versione giocatore»</b> opzionale per gli ordini più grandi dei club: stemmi in silicone 3D o gommati con una vera texture, come sulle divise professionali. Chiedici condizioni e prezzo."
+        ],
+        [
+          "Posso ordinare solo la maglia, o il kit completo?",
+          "Entrambi. Solo maglia, o kit completo (maglia + pantaloncini abbinati). I calzettoni si vendono a parte. Scegli sul prodotto o indicalo nel tuo brief."
+        ],
+        [
+          "Potete copiare un marchio o la divisa di un club professionistico?",
+          "No — non stampiamo loghi su licenza, marchi o copie di divise professionistiche. Creiamo <b>design originali ispirati alla tua idea</b>, e vengono sempre meglio: lo stemma è il tuo."
+        ]
+      ]
+    },
+    {
+      "id": "fabric",
+      "title": "Tessuto, stampa e cura",
+      "items": [
+        [
+          "Qual è il tessuto?",
+          "Un <b>misto tecnico poliestere-elastan</b> (micro-interlock 145–160 g/m²) elastico in quattro direzioni e traspirante — il tessuto che la maggior parte dei marchi riserva alla gamma premium. In MOMUTO è lo standard su ogni divisa."
+        ],
+        [
+          "Come viene stampato il design?",
+          "<b>Sublimazione integrale</b>: l'inchiostro viene fuso nelle fibre a 200 °C, quindi il design è parte del tessuto — senza peso, traspirante, e non si stacca, non si crepa e non sbiadisce mai. Colori, sfumature e pattern illimitati senza costi extra. Garantiamo la stampa per tutta la vita del capo."
+        ],
+        [
+          "Verrà esattamente come l'anteprima 3D?",
+          "Sì — e lo vedrai prima tu. Il designer 3D è un'anteprima fedele; il mockup di produzione che inviamo prima di stampare è il file esatto che va in stampa. Nulla viene stampato finché non lo approvi."
+        ],
+        [
+          "Come si lava?",
+          "A freddo o a 30 °C, al rovescio, senza candeggina, senza asciugatrice e senza stirare sulle stampe. I colori sublimati non richiedono cure particolari — non possono staccarsi — ma il tessuto dura di più se trattato con delicatezza."
+        ]
+      ]
+    },
+    {
+      "id": "returns",
+      "title": "Resi, garanzie e campioni",
+      "items": [
+        [
+          "Posso restituire una divisa personalizzata?",
+          "Le divise sono fatte per te, quindi i resi riguardano <b>difetti di fabbricazione, danni durante il trasporto o una divisa diversa dal mockup approvato</b>. Scrivi a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> entro 7 giorni dalla consegna con le foto; emettiamo un RMA e sostituiamo o rimborsiamo — incluse le spese di reso che hai pagato — entro 14 giorni dall'approvazione."
+        ],
+        [
+          "Cosa protegge il mio acquisto?",
+          "Il cancello del mockup: <b>non stampiamo nulla finché non approvi il mockup finale</b>, e ogni stemma è controllato da un designer. In più, garanzia a vita sulla stampa stessa — la sublimazione non può staccarsi né creparsi."
+        ],
+        [
+          "Posso annullare?",
+          "Sì, con rimborso completo in qualsiasi momento <b>prima che inizi la produzione</b> (cioè prima di approvare il mockup). Una volta in produzione o spedito, l'ordine non può essere annullato."
+        ],
+        [
+          "Posso ordinare prima un campione?",
+          "Sì — senza minimo, <b>ordina una maglia al prezzo singolo (38,90 €)</b> come campione. La maggior parte delle squadre non ne ha bisogno: ogni design Ready to Play mostra combinazioni di colori reali in 3D, e approvi un mockup di produzione prima che si stampi qualsiasi cosa."
+        ]
+      ]
+    },
+    {
+      "id": "about",
+      "title": "Su MOMUTO",
+      "items": [
+        [
+          "Chi è MOMUTO?",
+          "Uno studio di design europeo che produce divise 100 % personalizzate di qualità professionale dal 2023 — <b>oltre 250 squadre in più di 15 paesi</b>, valutato 4,4/5 su Trustpilot. Progettate in Europa, prodotte in Asia, spedite in tutto il mondo."
+        ],
+        [
+          "Come si confronta MOMUTO con Owayo, Spized o Jersix?",
+          "Come loro abbiamo un designer 3D in tempo reale — ma il nostro carica ogni design già finito, mai come un template vuoto. A differenza loro, includiamo il misto elastan di serie, offriamo un servizio di design su misura a 15 € e non abbiamo ordine minimo. <a href=\"/pages/confronto-fornitori-maglie-calcio-2026\">Confronto completo →</a>"
+        ],
+        [
+          "Come parlo con una persona?",
+          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> è il modo più veloce; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> per qualsiasi cosa con allegati; <a href=\"https://instagram.com/momutofc\">@momutofc</a> su Instagram. Problemi con un ordine: <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+        ]
+      ]
+    }
+  ],
+  "cta": {
+    "h2": "Hai ancora una domanda?",
+    "p": "Chiedi su WhatsApp — ti risponde una persona vera dello studio, in italiano.",
+    "btn": "Scrivici su WhatsApp",
+    "btn_url": "https://wa.me/34614625408",
+    "btn2": "Progetta in 3D — gratis",
+    "btn2_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=it&langguage=it"
+  },
+  "more": {
+    "label": "Continua a esplorare:",
+    "links": [
+      [
+        "/pages/collezione-ready-to-play",
+        "design Ready to Play"
+      ],
+      [
+        "/pages/richiesta-design-personalizzato",
+        "richiedi un design su misura"
+      ],
+      [
+        "/pages/guida-alle-taglie",
+        "guida alle taglie"
+      ],
+      [
+        "/pages/materiali-stampa-divise-calcio-personalizzate",
+        "materiali e stampa"
+      ],
+      [
+        "/pages/galleria-maglie-personalizzate",
+        "500+ design di squadre"
+      ]
+    ]
+  }
+}
