@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'inspect = read nav/SEO/shipping on every store; apply-nav / apply-seo write one store'
+        description: 'inspect = read nav/SEO/shipping on every store; inspect-nav = menus of one store; apply-nav / apply-seo write one store'
         required: true
         default: 'inspect'
         type: choice
-        options: ['inspect', 'inspect-zones', 'apply-nav', 'apply-seo', 'apply-shipping']
+        options: ['inspect', 'inspect-nav', 'inspect-zones', 'apply-nav', 'apply-seo', 'apply-shipping']
       store:
         description: 'apply only: target store'
         required: false

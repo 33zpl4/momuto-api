@@ -95,6 +95,18 @@ const HOMEPAGE_SEO = {
 };
 
 async function main() {
+  if (MODE === 'inspect-nav') {
+    // Menus only, one store — the full inspect log is too long to read from
+    // the API tail (the EN navs section fell off a 3000-line tail, 4 Sep 2026).
+    const store = (process.env.TARGET_STORE || 'us').toLowerCase();
+    const token = TOKENS[store];
+    if (!token) { console.error(`No token for store "${store}"`); process.exit(1); }
+    const { ok, json } = await api(token, 'GET', '/navs');
+    console.log(`===== [${store}] GET /navs ${ok ? '' : '(ERROR)'} =====`);
+    console.log(JSON.stringify(json));
+    return;
+  }
+
   if (MODE === 'inspect') {
     // Menus + logistics in one read-only sweep (endpoints from the vendor's
     // Apizza docs, 1 Sep 2026 — recorded in docs/oemsaas-api-notes.md).
