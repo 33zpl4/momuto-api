@@ -167,3 +167,22 @@ in the nav yet (owner's call); `llms.txt` carries the page.
 - Deploy CMS Page's push trigger fires on MAIN pushes of
   `cms/pages/**/*.json` — merging a branch that edited those files
   re-deploys them automatically (idempotent, but know it happens).
+
+## FAQ rebuild — all five stores (4 Sep 2026)
+
+The old FAQ pages rendered their answers from the platform's `faqtool`
+widget (admin-only, not in the API; IT even pointed at the EN widget ids)
+in a 2023 white/Jost layout with stale numbers and no prices. Replaced by
+a generated page per store: `faq/faq.<locale>.json` (34 questions, 7
+sections, per-store numbers and carriers) → `scripts/build-faq-pages.js`
+→ the pulled `cms/pages/<locale>/<handle>.json` → Deploy CMS Page. Handles:
+en `faq`, es `preguntas-frecuentes`, fr `questions-frequentes`, it `faq`,
+us `faq`. The page carries a real `#pricing` ladder table (EUR from
+`pricing.js`; USD ladder on US), sticky section nav, accordion answers,
+and FAQPage + WebPage JSON-LD for every question (GEO/LLM feed).
+Suggested nav: a "Pricing" item → `/pages/<faq handle>#pricing` (the
+"couldn't find prices" email). Also fixed: `/pages/printing` never
+existed — US nav + llms.txt now point at the per-store printing handles.
+Known stale sibling: the `shipping-policy` page still says "5–7 working
+days design review / ~20 days" — worth the same treatment.
+
