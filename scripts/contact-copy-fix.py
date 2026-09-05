@@ -71,9 +71,14 @@ PROMISE_FIX = """
     font-size: 1rem !important; line-height: 1.7 !important;
   }
   .mo-editor-reset .cnt-hero .cnt-hero-promise strong, .cnt-hero .cnt-hero-promise strong { display: inline !important; color: #fff !important; font-weight: 600 !important; }
+  .mo-editor-reset .cnt-cta-sub, .cnt-cta-sub {
+    display: block !important; max-width: 420px !important; margin: 0 auto 2.5rem !important;
+    margin-inline: auto !important; text-align: center !important; color: #a1a1aa !important;
+  }
+  .mo-editor-reset .cnt-cta-sub strong, .cnt-cta-sub strong { display: inline !important; color: #fff !important; font-weight: 600 !important; }
 """
 def fix_promise_css(content):
-    if 'PROMISE_FIX' in content or '.cnt-hero .cnt-hero-promise strong' in content: return content
+    content = re.sub(r'/\* PROMISE_FIX \*/.*?(?=</style>)', '', content, count=1, flags=re.S)
     return content.replace('</style>', '/* PROMISE_FIX */' + PROMISE_FIX + '</style>', 1)
 
 def fix_meta(page):
@@ -121,7 +126,9 @@ FR_HTML = [
     (r'Votre maquette design gratuite est pr&ecirc;te en <strong>1&ndash;2 jours</strong> apr&egrave;s r&eacute;ception de votre brief, r&eacute;visions incluses\.', "Votre maquette design est pr&ecirc;te en <strong>1&ndash;2 jours</strong> apr&egrave;s r&eacute;ception de votre brief, r&eacute;visions incluses (acompte de 15&nbsp;&euro;, int&eacute;gralement d&eacute;duit des commandes de 5 maillots et plus)."),
     (r'Le service design est-il vraiment gratuit \?</summary>', 'Combien co&ucirc;te le service design ?</summary>'),
     (r'Oui, enti&egrave;rement gratuit\. Choisissez.*?votre commande\.', "Les voies en autonomie sont gratuites : le designer 3D en temps r&eacute;el avec plus de 30 templates et les mod&egrave;les Ready to Play du studio &agrave; -10 %. Vous pr&eacute;f&eacute;rez qu'un designer professionnel la construise ? Maquette en 1&ndash;2 jours, r&eacute;visions incluses &mdash; acompte de 15&nbsp;&euro;, int&eacute;gralement d&eacute;duit des commandes de 5 maillots et plus : pour une &eacute;quipe, le design ne co&ucirc;te rien."),
-    (r"Gratuit pour les commandes de 10 maillots et plus\.(?:</strong>)? Un acompte de 30&nbsp;&euro; peut s'appliquer pour les designs tr&egrave;s complexes, int&eacute;gralement d&eacute;duit de votre commande\.", "Un acompte de 15&nbsp;&euro; s'applique aux demandes 100 % sur mesure, int&eacute;gralement d&eacute;duit des commandes de 5 maillots et plus &mdash; offert pour une commande d'&eacute;quipe."),
+    # repair of the 5 Sep deploy that shipped the unclosed <strong> (orphan "Details" on the live page)
+    (r"<strong>Un acompte de 15&nbsp;&euro; s'applique aux demandes 100 % sur mesure", "<strong>Un acompte de 15&nbsp;&euro;</strong> s'applique aux demandes 100 % sur mesure"),
+    (r"Gratuit pour les commandes de 10 maillots et plus\.(?:</strong>)? Un acompte de 30&nbsp;&euro; peut s'appliquer pour les designs tr&egrave;s complexes, int&eacute;gralement d&eacute;duit de votre commande\.", "Un acompte de 15&nbsp;&euro;</strong> s'applique aux demandes 100 % sur mesure, int&eacute;gralement d&eacute;duit des commandes de 5 maillots et plus &mdash; offert pour une commande d'&eacute;quipe."),
     (r'en 1&ndash;2 jours, gratuitement</strong>, r&eacute;visions incluses', 'en 1&ndash;2 jours</strong> avec r&eacute;visions incluses &mdash; acompte de 15&nbsp;&euro;, int&eacute;gralement d&eacute;duit des commandes de 5 maillots et plus'),
 ]
 FR_LD = [
