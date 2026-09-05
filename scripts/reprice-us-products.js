@@ -10,7 +10,7 @@
  * to recover the EUR it came from; that EUR is looked up in USD_OF_EUR. A
  * EUR with no ruling is reported and left alone — never invented.
  *
- * Write path: POST /products/batchsave (partial update — only id + the
+ * Write path: PUT /products/{id} read-modify-write (batchsave drops variants — only id + the
  * fields we send; see docs/oemsaas-api-notes.md). Variants are sent as
  * { id, price, compare_at_price } only.
  *
@@ -128,20 +128,34 @@ async function main() {
   if (unmapped.size) { console.log('\n⚠️  NOT changed — no owner ruling for:'); for (const u of unmapped) console.log('   ', u); }
   if (DRY_RUN) { console.log('\nDRY RUN — nothing written'); return; }
 
-  // batchsave in chunks, paced
-  for (let i = 0; i < batch.length; i += 20) {
-    const chunk = batch.slice(i, i + 20);
-    await api(token, 'POST', '/products/batchsave', { products: chunk });
-    console.log(`✅ batchsave ${i + 1}–${i + chunk.length}`);
-    await sleep(1500);
-  }
-  if (process.env.VERIFY === 'true' || ONLY) {
-    const after = await fetchAllProducts(token);
-    for (const e of batch) {
-      const p = after.find(x => x.id === e.id);
-      console.log(`   verify ${p?.handle}: variants=${(p?.variants || []).length} prices=${(p?.variants || []).map(v => v.price).join('/')} images=${(p?.images || []).length} inner_title=${p?.inner_title ? 'kept' : 'EMPTY'} title="${p?.title}"`);
+  // Write path: PUT /products/{id} read-modify-write. batchsave silently drops
+  // `variants` (docs/oemsaas-api-notes.md — code 0, price unchanged; confirmed
+  // live 5 Sep 2026 on pasta-la-vista), so prices can only move through a full
+  // PUT of the GET'd product. Guards: refuse to PUT without title or variants.
+  let failed = 0;
+  for (const e of batch) {
+    const live = (await api(token, 'GET', `/products/${e.id}`)).data;
+    if (!live?.title) { console.error(`❌ ${e.id}: GET returned no title — refusing to PUT blind`); failed++; continue; }
+    if (!live.variants?.length) { console.error(`❌ ${live.handle}: no variants on GET — refusing to PUT (would drop sizes)`); failed++; continue; }
+    const want = new Map((e.variants || []).map(v => [v.id, v]));
+    const variants = live.variants.map(v => want.has(v.id) ? { ...v, price: want.get(v.id).price, compare_at_price: want.get(v.id).compare_at_price } : v);
+    const body = { ...live, variants };
+    // text fixes recomputed on the FULL object (the list endpoint omits body_html)
+    for (const k of ['title', 'subtitle', 'mini_detail', 'body_html', 'meta_title', 'meta_descript']) {
+      const fixed = fixText(live[k], `${live.handle}.${k}`);
+      if (fixed !== live[k]) body[k] = fixed;
     }
+    await api(token, 'PUT', `/products/${e.id}`, body);
+    await sleep(600);
+    // read back — an acknowledgement is not evidence
+    const after = (await api(token, 'GET', `/products/${e.id}`)).data;
+    const bad = (e.variants || []).filter(v => { const a = (after.variants || []).find(x => x.id === v.id); return !a || Number(a.price) !== Number(v.price); });
+    const ok = !bad.length && (after.variants || []).length === live.variants.length && !!after.title;
+    console.log(`${ok ? '✅' : '❌'} ${live.handle}: prices=${(after.variants || []).map(v => v.price).join('/')} variants=${(after.variants || []).length}/${live.variants.length} images=${(after.images || []).length}/${(live.images || []).length} title="${after.title}"`);
+    if (!ok) failed++;
+    await sleep(600);
   }
+  if (failed) { console.error(`\n❌ ${failed} product(s) did not verify`); process.exit(1); }
   console.log('\n✅ Done.');
 }
 
