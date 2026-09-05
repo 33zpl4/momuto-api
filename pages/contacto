@@ -8,7 +8,7 @@
       "name": "¿Cuál es el pedido mínimo en MOMUTO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MOMUTO no tiene pedido mínimo. Una camiseta individual empieza desde 38,90 €. Para pedidos de equipo de 10 unidades o más, el kit completo (camiseta + pantalón) baja a 26,90 € por jugador, con diseño profesional gratuito incluido. Gestionamos equipos de fútbol 7, clubes completos, orgs de e-sport y pedidos individuales."
+        "text": "MOMUTO no tiene pedido mínimo. Una camiseta individual empieza desde 38,90 €. Para pedidos de equipo de 10 unidades o más, el kit completo (camiseta + pantalón) baja a 26,90 € por jugador, diseñada gratis en el diseñador 3D o a partir de un modelo Ready to Play con un 10 % de descuento. Gestionamos equipos de fútbol 7, clubes completos, orgs de e-sport y pedidos individuales."
       }
     },
     {
@@ -16,15 +16,15 @@
       "name": "¿Cuál es el plazo de entrega en España?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MOMUTO entrega en España en 25–30 días — 7–15 días de producción más 10–15 días de envío directo desde fábrica. El diseño gratuito está listo en 1–2 días tras recibir tu brief, revisiones incluidas. Realizamos envíos a Península, Baleares y Canarias con seguimiento en tiempo real."
+        "text": "MOMUTO entrega en España en 25–30 días — 7–12 días de producción más 10–15 días de envío directo desde fábrica. La maqueta de diseño está lista en 1–2 días tras recibir tu brief, revisiones incluidas (depósito de 15 €, abonado íntegramente en pedidos de 5+ camisetas). Realizamos envíos a Península, Baleares y Canarias con seguimiento en tiempo real."
       }
     },
     {
       "@type": "Question",
-      "name": "¿El servicio de diseño es realmente gratuito?",
+      "name": "¿Cuánto cuesta el servicio de diseño?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí, completamente gratuito. Elige entre un configurador 3D en tiempo real con más de 30 plantillas, o envíanos tu idea y un diseñador profesional creará tu maqueta personalizada en 1–2 días con revisiones ilimitadas. Solo pagas cuando apruebas el diseño y realizas tu pedido."
+        "text": "Las vías en autoservicio son gratis: el diseñador 3D en tiempo real con más de 30 plantillas y los modelos Ready to Play del estudio con un 10 % de descuento. El servicio de diseño a medida — un diseñador MOMUTO construye tu maqueta en 1–2 días, revisiones incluidas — lleva un depósito de 15 €, abonado íntegramente en pedidos de 5+ camisetas."
       }
     },
     {
@@ -40,7 +40,7 @@
       "name": "No tengo logo ni diseño — ¿podéis ayudarme?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Por supuesto. Danos tus colores, el nombre de tu equipo, una referencia de ambiente — incluso un boceto o una descripción — y un diseñador profesional construirá tu identidad visual completa en 1–2 días, gratis, con revisiones incluidas. No necesitas ningún conocimiento de diseño."
+        "text": "Por supuesto. Danos tus colores, el nombre de tu equipo, una referencia de ambiente — incluso un boceto o una descripción — y un diseñador profesional construirá tu identidad visual completa en 1–2 días con revisiones incluidas — depósito de 15 €, abonado íntegramente en pedidos de 5+ camisetas. No necesitas ningún conocimiento de diseño."
       }
     }
   ]
@@ -384,7 +384,7 @@
 <div class="cnt-hero-eyebrow">Soporte &amp; Solicitudes de Dise&ntilde;o</div>
 <h1 class="cnt-hero-title">Cont&aacute;ctanos</h1>
 <p class="cnt-hero-sub">Dise&ntilde;o de Equipaciones &middot; Pedidos &middot; Colaboraciones</p>
-<p class="cnt-hero-promise">Env&iacute;anos tu idea &mdash; boceto, concepto IA o simplemente un brief. <strong>Maqueta de dise&ntilde;o en 1&ndash;2 d&iacute;as, gratis.</strong></p>
+<p class="cnt-hero-promise">Env&iacute;anos tu idea &mdash; boceto, concepto IA o simplemente un brief. <strong>Maqueta de dise&ntilde;o en 24&ndash;48 h. Gratis en el dise&ntilde;ador 3D; dep&oacute;sito de 15&nbsp;&euro; si la construye un dise&ntilde;ador, abonado &iacute;ntegramente en pedidos de 5+ camisetas.</strong></p>
 </div>
 </section>
 <!-- ===== CONTACT METHODS ===== -->
@@ -422,15 +422,15 @@
 <div class="cnt-faq-grid">
 <details class="cnt-faq-item">
 <summary class="cnt-faq-q">&iquest;Cu&aacute;l es el pedido m&iacute;nimo?</summary>
-<div class="cnt-faq-a">Sin m&iacute;nimo. Una camiseta individual empieza desde <strong>38,90 &euro;</strong>. Para pedidos de equipo de 10 unidades o m&aacute;s, el kit completo (camiseta + pantal&oacute;n) baja a <strong>26,90 &euro; por jugador</strong> &mdash; con dise&ntilde;o profesional gratuito incluido. Gestionamos equipos de f&uacute;tbol 7, clubes completos, orgs de e-sport y pedidos individuales.</div>
+<div class="cnt-faq-a">Sin m&iacute;nimo. Una camiseta individual empieza desde <strong>38,90 &euro;</strong>. Para pedidos de equipo de 10 unidades o m&aacute;s, el kit completo (camiseta + pantal&oacute;n) baja a <strong>26,90 &euro; por jugador</strong> &mdash; dise&ntilde;ada gratis en el dise&ntilde;ador 3D o a partir de un modelo Ready to Play con un 10 % de descuento. Gestionamos equipos de f&uacute;tbol 7, clubes completos, orgs de e-sport y pedidos individuales.</div>
 </details>
 <details class="cnt-faq-item">
 <summary class="cnt-faq-q">&iquest;Cu&aacute;les son los plazos de entrega?</summary>
-<div class="cnt-faq-a">Las equipaciones personalizadas se entregan en <strong>25&ndash;30 d&iacute;as</strong> &mdash; 7&ndash;15 d&iacute;as de producci&oacute;n m&aacute;s 10&ndash;15 d&iacute;as de env&iacute;o directo desde f&aacute;brica. Tu maqueta de dise&ntilde;o gratuita est&aacute; lista en <strong>1&ndash;2 d&iacute;as</strong> tras tu brief, revisiones incluidas. Enviamos a Pen&iacute;nsula, Baleares y Canarias con seguimiento en tiempo real.</div>
+<div class="cnt-faq-a">Las equipaciones personalizadas se entregan en <strong>25&ndash;30 d&iacute;as</strong> &mdash; 7&ndash;12 d&iacute;as de producci&oacute;n m&aacute;s 10&ndash;15 d&iacute;as de env&iacute;o directo desde f&aacute;brica. Tu maqueta de dise&ntilde;o est&aacute; lista en <strong>1&ndash;2 d&iacute;as</strong> tras tu brief, revisiones incluidas (dep&oacute;sito de 15&nbsp;&euro;, abonado &iacute;ntegramente en pedidos de 5+ camisetas). Enviamos a Pen&iacute;nsula, Baleares y Canarias con seguimiento en tiempo real.</div>
 </details>
 <details class="cnt-faq-item">
-<summary class="cnt-faq-q">&iquest;El servicio de dise&ntilde;o es realmente gratuito?</summary>
-<div class="cnt-faq-a">S&iacute;, completamente gratuito. Elige entre un <strong>configurador 3D en tiempo real</strong> con m&aacute;s de 30 plantillas, o env&iacute;anos tu idea y un <strong>dise&ntilde;ador humano profesional</strong> crear&aacute; tu maqueta personalizada en 1&ndash;2 d&iacute;as con revisiones ilimitadas. Solo pagas cuando apruebas el dise&ntilde;o y realizas tu pedido.</div>
+<summary class="cnt-faq-q">&iquest;Cu&aacute;nto cuesta el servicio de dise&ntilde;o?</summary>
+<div class="cnt-faq-a">Las v&iacute;as en autoservicio son gratis: el dise&ntilde;ador 3D en tiempo real con m&aacute;s de 30 plantillas y los modelos Ready to Play del estudio con un 10 % de descuento. &iquest;Prefieres que lo construya un dise&ntilde;ador profesional? Maqueta en 1&ndash;2 d&iacute;as con revisiones incluidas &mdash; dep&oacute;sito de 15&nbsp;&euro;, abonado &iacute;ntegramente en pedidos de 5+ camisetas, as&iacute; que a un equipo el dise&ntilde;o no le cuesta nada.</div>
 </details>
 <details class="cnt-faq-item">
 <summary class="cnt-faq-q">&iquest;Pod&eacute;is trabajar con un dise&ntilde;o generado por IA?</summary>
@@ -438,7 +438,7 @@
 </details>
 <details class="cnt-faq-item">
 <summary class="cnt-faq-q">No tengo logo ni dise&ntilde;o &mdash; &iquest;pod&eacute;is ayudarme?</summary>
-<div class="cnt-faq-a">Por supuesto. Danos tus colores, el nombre de tu equipo, una referencia de ambiente &mdash; incluso un boceto o una descripci&oacute;n &mdash; y un <strong>dise&ntilde;ador profesional construir&aacute; tu identidad visual completa en 1&ndash;2 d&iacute;as, gratis</strong>, revisiones incluidas. No necesitas ning&uacute;n conocimiento de dise&ntilde;o.</div>
+<div class="cnt-faq-a">Por supuesto. Danos tus colores, el nombre de tu equipo, una referencia de ambiente &mdash; incluso un boceto o una descripci&oacute;n &mdash; y un <strong>dise&ntilde;ador profesional construir&aacute; tu identidad visual completa en 1&ndash;2 d&iacute;as</strong> con revisiones incluidas &mdash; dep&oacute;sito de 15&nbsp;&euro;, abonado &iacute;ntegramente en pedidos de 5+ camisetas. No necesitas ning&uacute;n conocimiento de dise&ntilde;o.</div>
 </details>
 </div>
 </div>
@@ -447,6 +447,6 @@
 <section class="cnt-footer-cta">
 <div class="cnt-container">
 <h2 class="cnt-cta-title">Empieza tu Equipaci&oacute;n</h2>
-<p class="cnt-cta-sub">Env&iacute;anos tu idea hoy. <strong>Maqueta en 1&ndash;2 d&iacute;as, gratis.</strong> Sin compromiso hasta que apruebes el dise&ntilde;o.</p>
+<p class="cnt-cta-sub">Env&iacute;anos tu idea hoy. <strong>Maqueta en 24&ndash;48 h.</strong> Sin compromiso hasta que apruebes el dise&ntilde;o.</p>
 <a href="https://es.momuto.com/pages/solicitud-de-diseno-personalizado" class="cnt-cta-btn">Empezar mi Dise&ntilde;o</a></div>
 </section>

@@ -18,7 +18,7 @@
   "hero": {
     "label": "Cambios y devoluciones",
     "h1": "Si Algo Está <span class=\"acc\">Mal</span>, Lo Arreglamos",
-    "sub": "Cada equipación se imprime según la maqueta que apruebas, así que no hay cambio de talla ni devolución por arrepentimiento. Si una prenda llega defectuosa, dañada o distinta de lo aprobado, la reemplazamos o la reembolsamos — incluido el envío de devolución que hayas pagado."
+    "sub": "Los productos personalizados se fabrican bajo pedido, así que no se pueden devolver ni cancelar una vez iniciada la producción — salvo que el error sea nuestro. Si una prenda llega defectuosa, dañada o distinta de la maqueta que aprobaste, la reemplazamos o la reembolsamos, incluido el envío de devolución que hayas pagado."
   },
   "quick": [
     [
@@ -74,6 +74,7 @@
     "notes": [
       "<b>La maqueta es el contrato.</b> No se imprime nada hasta que apruebas la maqueta final, así que lo que aprobaste es lo que te debemos.",
       "<b>Garantía de por vida del estampado.</b> La sublimación se tiñe en el tejido — no se despega, ni se agrieta ni se destiñe con lavados normales. Si ocurre, es un defecto y lo reemplazamos.",
+      "<b>Colores de pantalla frente a tejido.</b> Cada pantalla muestra el color de forma distinta, así que una ligera variación de tono entre tu monitor y la camiseta impresa es normal y no es un defecto. La minimizamos con pruebas de color calibradas antes de producir; si un color exacto importa (el color corporativo de un patrocinador), envíanos la referencia Pantone o hex y ajustamos a ella.",
       "<b>El envío de devolución se reembolsa</b> cuando se aprueba la devolución — nunca pagas por devolver un error nuestro.",
       "<b>Sin gastos de reposición</b>, nunca."
     ]
@@ -84,7 +85,7 @@
     "steps": [
       [
         "En 7 días",
-        "<strong>Escríbenos.</strong> Envía un correo a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> en los 7 días siguientes a la entrega con tu número de pedido, una breve descripción y fotos del problema (y del paquete si llegó dañado)."
+        "<strong>Escríbenos.</strong> Envía un correo a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> en los 7 días siguientes a la entrega con tu número de pedido, una breve descripción y fotos del problema (y del paquete si llegó dañado)."
       ],
       [
         "1–2 días",
@@ -110,7 +111,7 @@
     "items": [
       [
         "Antes de aprobar la maqueta",
-        "<b>Reembolso total</b>, sin preguntas. Responde al correo de tu pedido o escribe a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+        "<b>Reembolso total</b>, sin preguntas. Responde al correo de tu pedido o escribe a <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
       ],
       [
         "Después de aprobar la maqueta",
@@ -130,6 +131,10 @@
         "No — las prendas personalizadas se imprimen con el nombre, número y talla que introdujiste en la plantilla, así que cambiar la talla supondría reimprimir a nuestro coste. Usa la <a href=\"/pages/guia-tallas\">guía de tallas</a> antes de pedir; en caso de duda, elige una talla más. Si una prenda mide distinto de lo que indica la tabla publicada, es un defecto y la reemplazamos."
       ],
       [
+        "¿Los colores coincidirán con lo que veo en pantalla?",
+        "Mucho, pero no al 100 %. Las pantallas emiten luz y el tejido la refleja, así que una ligera diferencia de tono es normal en toda camiseta personalizada y no se considera defecto. Hacemos pruebas de color antes de producir para que sea mínima. Para un color crítico, danos el código Pantone o hex y ajustamos la impresión a la referencia, no a la pantalla."
+      ],
+      [
         "¿Tengo que devolver la prenda?",
         "Muchas veces no. Para defectos visibles de estampado o costura bastan las fotos y reimprimimos o reembolsamos directamente. Solo pedimos la prenda cuando hace falta una inspección — y entonces te reembolsamos el envío al aprobar la reclamación."
       ],
@@ -143,7 +148,7 @@
       ],
       [
         "¿Dónde llega el reembolso?",
-        "Al método de pago usado en la compra, en los 14 días siguientes a la aprobación. Si pasado ese plazo no aparece, consulta primero con tu banco — los tiempos de abono varían — y luego escribe a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> para que lo rastreemos."
+        "Al método de pago usado en la compra, en los 14 días siguientes a la aprobación. Si pasado ese plazo no aparece, consulta primero con tu banco — los tiempos de abono varían — y luego escribe a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> para que lo rastreemos."
       ],
       [
         "¿Puedo devolver una camiseta Ready to Play que personalicé?",

@@ -200,7 +200,7 @@ the clean handle `return-policy` (ids en 234880, us 6492170); ES
 `cambios-devoluciones` (299808), FR `retours-echanges` (261677), IT
 `politica-resi` (5086324). Facts: returns only for manufacturing defects,
 transit damage, or a kit that differs from the approved mockup; report to
-customer@momuto.com within 7 days with photos; RMA before anything ships
+info@momuto.com within 7 days with photos; RMA before anything ships
 back; refund incl. return shipping within 14 days of approval; no size
 exchanges; full refund on cancellation before production starts; lifetime
 print guarantee. Carries WebPage + MerchantReturnPolicy + FAQPage JSON-LD.
@@ -238,8 +238,21 @@ needs the hero/trust/blog/how-it-works/rtp/iconic sections re-pasted**.
 
 Not ours: the *custom football uniform builder/designer/maker* queries
 (100–160 impr each, pos 24–36) are American football — ignore.
-Next levers, in order: (1) a "Jersey Maker" nav item on US and EN pointing
-at this page; (2) hreflang has only days of history — expect US impressions
+Done the same day: "Jersey Maker — free 3D tool" is in the US and EN
+header menus (see docs/store-config-shipping.md). Next levers: (2) hreflang has only days of history — expect US impressions
 to migrate from www to us.momuto.com over 4–8 weeks, watch the US property
 separately; (3) UK CTR 0.5% at pos 22 — the EN maker page and the
 football-worded twin of design-your-own are the UK fix, not more US copy.
+
+
+## Returns/FAQ copy rulings (5 Sep 2026)
+
+Owner review of es `cambios-devoluciones`: (1) **the only customer email is
+info@momuto.com** — customer@/orders@ removed from FAQ, shipping, returns,
+contact pages and every llms.txt; (2) returns pages now open with the plain
+statement "custom products are made to order, so they can't be returned or
+cancelled once production starts — unless the error is ours"; (3) a
+screen-vs-fabric colour note (slight tone variation is normal, not a defect;
+minimised with calibrated colour tests; Pantone/hex reference for critical
+colours) sits in the returns notes and as a question on both the returns and
+FAQ pages, all five stores.

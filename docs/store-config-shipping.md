@@ -61,3 +61,53 @@ narrow zone's coverage before (or atomically with) removing that country
 from the wide zone — except where overlap forbids creation first, in which
 case shrink-then-create WITH rollback (see above). The script logs ✅/❌
 per write; a green job with a ❌ line is still a failure — read the log.
+
+
+## Menus as of 4 Sep 2026 (curated in `sync-store-config.js`, `MENUS`)
+
+`apply-nav` now refuses any store+menu pair without a curated tree in
+`MENUS` (it used to push the US header onto whatever store you named).
+`inspect-nav` prints one store's menus compactly — the full `inspect` log
+overflows the 3000-line tail the API hands back, and the sandbox cannot
+download the log zip.
+
+- **US "Header Menu"** (809770): Custom Jerseys → Ready to Play, **Jersey
+  Maker — free 3D tool** (`/pages/custom-soccer-jersey-designer`, added
+  4 Sep from the GSC maker-cluster finding), Custom design request ($15), AI
+  concept; Basketball; Iconic Series (Drop 01/02); Support (FAQ, Printing &
+  Materials, Size guide).
+- **US "Footer Menu"** (807575): was a clone carrying EN page ids and
+  handles that do not exist on US (`contact-us_ebf80444`,
+  `terms-of-service_736dfc8a`, `privacy-policy_0d030312`); now custom URLs
+  to US handles incl. `/pages/shipping-policy` and `/pages/return-policy`.
+- **EN "Header Menu"** (63790): CUSTOM KITS → **Jersey Maker — free 3D
+  tool**, Design Gallery, Ready-to-Play; ICONIC SERIES; THE BRAND; SUPPORT
+  (FAQ, Printing & Materials `/pages/printing` id 234946, Size Guide, Contact).
+- **EN "Footer Menu"** (63789): unchanged except Shipping policy →
+  `/pages/shipping-policy` and Returns & Exchanges → `/pages/return-policy`.
+- Both stores also carry an unbound draft menu named "HEADER" with empty
+  URLs — ignore it; the theme binds "Header Menu" / "Footer Menu".
+- ES/FR/IT menus are not curated — `apply-nav` will refuse them until a
+  tree is transcribed from `inspect-nav`.
+
+
+## The storefront footer is NOT the API "Footer Menu" (4 Sep 2026)
+
+The rendered footer ("Company Info / Service Center / Subscribe") is a theme
+setting with hand-typed links; `GET /navs` never returns it and `apply-nav`
+cannot touch it. That is where the capitalised `/pages/Shipping-policy` and
+the dead `/pages/Contact-Us` on US came from. Owner edits it in the theme
+editor. Correct targets per store (all lowercase, all verified to exist):
+
+| Store | Contact | Shipping | Returns | Privacy | Terms | About |
+|---|---|---|---|---|---|---|
+| www | `/pages/contact` | `/pages/shipping-policy` | `/pages/return-policy` | `/pages/privacy-policy` | `/pages/terms-and-conditions` | `/pages/about-us` |
+| us | `/pages/contact` | `/pages/shipping-policy` | `/pages/return-policy` | `/pages/privacy-policy` | `/pages/terms-and-conditions` | `/pages/about-us` |
+| es | `/pages/contacto` | `/pages/envios-metodos-y-plazos` | `/pages/cambios-devoluciones` | `/pages/politica-privacidad` | `/pages/terminos-y-condiciones` | `/pages/sobre-nosotros` |
+| fr | `/pages/contactez-nous` | `/pages/politique-de-livraison` | `/pages/retours-echanges` | `/pages/politique-de-confidentialite` | `/pages/conditions-generales` | `/pages/a-propos-de-nous` |
+| it | `/pages/contattaci` | `/pages/politica-di-spedizione` | `/pages/politica-resi` | `/pages/informativa-sulla-privacy` | `/pages/termini-e-condizioni` | `/pages/chi-siamo` |
+
+The platform serves `/pages/Shipping-policy` and `/pages/shipping-policy`
+as the same page (case-insensitive), so a capitalised footer link creates a
+duplicate URL for crawlers — keep every typed link lowercase. The US footer
+tagline still says "Define your football identity" (theme setting too).

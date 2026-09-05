@@ -158,7 +158,7 @@ function sanity(d, html) {
   const prose = html.replace(/href="[^"]*"/g, '').replace(/"item": "[^"]*"|"url": "[^"]*"/g, '');
   if (d.locale === 'us' && /€|&euro;|\bEUR\b|\bfootball\b|colour|prioritise|Authorisation|customised/i.test(prose)) throw new Error('us: contains €/EUR/football/British spelling');
   if (!html.includes('design.momuto.com/3d-configurator/configurator.html')) throw new Error(`${d.locale}: missing 3D designer deep link`);
-  if (!/customer@momuto\.com/.test(html)) throw new Error(`${d.locale}: missing customer@momuto.com`);
+  if (!/info@momuto\.com/.test(html)) throw new Error(`${d.locale}: missing info@momuto.com`);
   // The policy facts every locale must carry.
   if (!/\b7\b/.test(strip(html)) || !/\b14\b/.test(strip(html))) throw new Error(`${d.locale}: 7-day / 14-day facts missing`);
   if (/14 days after the receipt|unused and in the same condition|within a certain amount of days/.test(html)) throw new Error(`${d.locale}: stale generic-theme copy`);

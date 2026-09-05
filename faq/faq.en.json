@@ -164,7 +164,7 @@
         ],
         [
           "Will I pay customs duties?",
-          "No. <b>Duties are prepaid by us.</b> In the rare case a carrier charges you anyway, send the receipt to <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> and we refund it."
+          "No. <b>Duties are prepaid by us.</b> In the rare case a carrier charges you anyway, send the receipt to <a href=\"mailto:info@momuto.com\">info@momuto.com</a> and we refund it."
         ],
         [
           "Where are the kits made?",
@@ -252,7 +252,11 @@
       "items": [
         [
           "Can I return a custom kit?",
-          "Custom kits are made for you, so returns are for <b>manufacturing defects, damage in transit, or a kit that differs from the approved mockup</b>. Contact <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> within 7 days of delivery with photos; we issue an RMA and replace or refund — including any return shipping you paid — within 14 days of approval."
+          "Custom kits are made for you, so returns are for <b>manufacturing defects, damage in transit, or a kit that differs from the approved mockup</b>. Contact <a href=\"mailto:info@momuto.com\">info@momuto.com</a> within 7 days of delivery with photos; we issue an RMA and replace or refund — including any return shipping you paid — within 14 days of approval."
+        ],
+        [
+          "Will the colours match what I see on screen?",
+          "Closely, but not perfectly. Screens emit light and fabric reflects it, so a slight tone difference is normal on every custom jersey and isn't covered as a defect. We run colour tests before production to keep it minimal. For a critical colour, give us the Pantone or hex code and we match the print to the reference, not the screen."
         ],
         [
           "What protects my purchase?",
@@ -282,7 +286,7 @@
         ],
         [
           "How do I reach a human?",
-          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> is fastest; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> for anything with attachments; <a href=\"https://instagram.com/momutofc\">@momutofc</a> on Instagram. Order issues: <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> is fastest; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> for anything with attachments; <a href=\"https://instagram.com/momutofc\">@momutofc</a> on Instagram. Order issues: <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
         ]
       ]
     }

@@ -51,20 +51,26 @@ async function api(token, method, endpoint, body) {
 // ── The curated US main menu ─────────────────────────────────────────────────
 // setting_json defaults mirror what GET /navs returns for vanilla items.
 const S = { open: '', model: 1, seo: '', color: '', style: '', bold: '', decoration: '' };
-const item = (name, position, urlType, url, children = []) => ({
+const item = (name, position, urlType, url, children = [], sourceId = '') => ({
   nav_item_name: name,
   position,
-  url_json: { source_id: '', title: name, type: urlType, url },
+  url_json: { source_id: sourceId, title: name, type: urlType, url },
   setting_json: S,
   src: '',
   children,
 });
+// type 5 = CMS page bound by id (what the admin UI writes); keep the id so the
+// theme resolves it the same way as before.
+const page = (name, position, url, sourceId) => item(name, position, 5, url, [], sourceId);
 
 const US_MENU_CHILDREN = [
   item('Custom Jerseys', 0, 0, '', [
     item('Ready to Play — 3D designer', 0, 6, '/pages/ready-to-play'),
-    item('Custom design request ($15)', 1, 6, '/pages/request-custom-kit-design'),
-    item('AI concept to real jersey', 2, 6, '/pages/ai-concept-to-real-kit'),
+    // GSC 4 Sep 2026: the maker/creator cluster carries the volume — the
+    // handle is the rebuilt "Soccer Jersey Maker" page (build-maker-pages.js)
+    item('Jersey Maker — free 3D tool', 1, 6, '/pages/custom-soccer-jersey-designer'),
+    item('Custom design request ($15)', 2, 6, '/pages/request-custom-kit-design'),
+    item('AI concept to real jersey', 3, 6, '/pages/ai-concept-to-real-kit'),
   ]),
   item('Basketball', 1, 6, '/pages/custom-basketball-jerseys'),
   // the Iconic Series collections were cloned to the US store (owner, 1 Sep 2026);
@@ -81,6 +87,72 @@ const US_MENU_CHILDREN = [
   ]),
 ];
 
+// ── The EN (www) menus — transcribed from GET /navs on 4 Sep 2026 and
+// changed only where noted. "HEADER" (id 675654) is an unbound draft with
+// empty URLs; the theme uses "Header Menu" (63790) and "Footer Menu" (63789).
+const EN_HEADER_CHILDREN = [
+  item('CUSTOM KITS', 0, 0, '', [
+    // NEW 4 Sep 2026 — the rebuilt Football Jersey Maker page (build-maker-pages.js)
+    item('Jersey Maker — free 3D tool', 0, 6, 'https://www.momuto.com/pages/custom-soccer-jersey-designer'),
+    item('Design Gallery', 1, 6, 'https://www.momuto.com/pages/custom-kit-gallery'),
+    page('Ready-to-Play', 2, '/pages/ready-to-play', 4429211),
+  ]),
+  item('ICONIC SERIES', 1, 0, '', [
+    item('Drop 01', 0, 2, '/collections/iconic-football-series', [], 129055),
+    item('Drop 02', 1, 2, '/collections/iconic-series-drop-02', [], 130456),
+  ]),
+  item('THE BRAND', 2, 6, 'https://www.momuto.com/pages/about'),
+  item('SUPPORT', 3, 0, '', [
+    page('FAQ', 0, '/pages/faq', 234940),
+    page('Printing & Materials', 1, '/pages/printing', 234946),
+    page('Size Guide', 2, '/pages/size-guide', 234941),
+    item('Contact', 3, 6, 'https://www.momuto.com/pages/contact'),
+  ]),
+];
+const EN_FOOTER_CHILDREN = [
+  item('HELP', 0, 0, '/', [
+    page('Contact Us', 0, '/pages/contact-us_ebf80444', 205232),
+    page('FAQ', 1, '/pages/faq', 206922),
+    page('Size Guide', 2, '/pages/size-guide', 222358),
+    item('MOMUTO vs The Rest', 3, 6, 'https://www.momuto.com/pages/momuto-vs-jersix-owayo-spized-comparison'),
+  ]),
+  item('SHOP', 1, 0, '/', [
+    item('Order Status', 0, 6, 'https://design.momuto.com/userInfo/order'),
+    // CHANGED 4 Sep 2026: the generated pages live on the clean handles
+    item('Shipping policy', 1, 6, 'https://www.momuto.com/pages/shipping-policy'),
+    item('Returns & Exchanges', 2, 6, 'https://www.momuto.com/pages/return-policy'),
+    page('Terms & Conditions', 3, '/pages/terms-of-service_736dfc8a', 234939),
+    page('Privacy Policy', 4, '/pages/privacy-policy_0d030312', 234932),
+  ]),
+  item('FOR YOU', 2, 0, '', [
+    page('Special Discounts', 0, '/pages/special-discounts', 222642),
+    page('Idea Submission', 1, '/pages/idea-submission', 222650),
+  ]),
+];
+
+// US footer — the cloned footer carried EN page ids (source_id 205232…) and
+// theme-suffixed handles that do not exist on the US store. Custom URLs to
+// the US handles (verified in cms/pages/us/, 4 Sep 2026).
+const US_FOOTER_CHILDREN = [
+  item('HELP', 0, 0, '/', [
+    item('Contact Us', 0, 6, '/pages/contact'),
+    item('FAQ', 1, 6, '/pages/faq'),
+    item('Size Guide', 2, 6, '/pages/size-guide'),
+    item('MOMUTO vs The Rest', 3, 6, '/pages/momuto-vs-jersix-owayo-spized-comparison'),
+  ]),
+  item('SHOP', 1, 0, '/', [
+    item('Order Status', 0, 6, 'https://design.momuto.com/userInfo/order'),
+    item('Shipping policy', 1, 6, '/pages/shipping-policy'),
+    item('Returns & Exchanges', 2, 6, '/pages/return-policy'),
+    item('Terms & Conditions', 3, 6, '/pages/terms-and-conditions'),
+    item('Privacy Policy', 4, 6, '/pages/privacy-policy'),
+  ]),
+  item('FOR YOU', 2, 0, '', [
+    item('Special Discounts', 0, 6, '/pages/special-discounts'),
+    item('Idea Submission', 1, 6, '/pages/idea-submission'),
+  ]),
+];
+
 // Curated homepage SEO per store (PUT /seoplans). meta_keywords is an array
 // (same CMS rule as pages). Only stores listed here can be applied.
 const HOMEPAGE_SEO = {
@@ -92,6 +164,18 @@ const HOMEPAGE_SEO = {
 };
 
 async function main() {
+  if (MODE === 'inspect-nav') {
+    // Menus only, one store — the full inspect log is too long to read from
+    // the API tail (the EN navs section fell off a 3000-line tail, 4 Sep 2026).
+    const store = (process.env.TARGET_STORE || 'us').toLowerCase();
+    const token = TOKENS[store];
+    if (!token) { console.error(`No token for store "${store}"`); process.exit(1); }
+    const { ok, json } = await api(token, 'GET', '/navs');
+    console.log(`===== [${store}] GET /navs ${ok ? '' : '(ERROR)'} =====`);
+    console.log(JSON.stringify(json));
+    return;
+  }
+
   if (MODE === 'inspect') {
     // Menus + logistics in one read-only sweep (endpoints from the vendor's
     // Apizza docs, 1 Sep 2026 — recorded in docs/oemsaas-api-notes.md).
@@ -289,16 +373,24 @@ async function main() {
     process.exit(1);
   }
 
+  // Curated trees keyed by store, then by the EXACT nav_name they may overwrite.
+  const MENUS = {
+    us: { 'Header Menu': US_MENU_CHILDREN, 'Footer Menu': US_FOOTER_CHILDREN },
+    en: { 'Header Menu': EN_HEADER_CHILDREN, 'Footer Menu': EN_FOOTER_CHILDREN },
+  };
+  const children = MENUS[store]?.[navName];
+  if (!children) { console.error(`No curated tree for store "${store}" menu "${navName}" — apply-nav would overwrite it with nothing sensible. Curate one in MENUS first.`); process.exit(1); }
+
   const payload = {
     navs: [{
       nav_name: navName,                    // same name → vendor-documented overwrite
       type: existing.type ?? 0,
       nav_admin_id: existing.nav_admin_id ?? 0,
-      children: US_MENU_CHILDREN,
+      children,
     }],
   };
 
-  console.log(`Overwriting menu "${navName}" on ${store} with ${US_MENU_CHILDREN.length} top-level item(s):`);
+  console.log(`Overwriting menu "${navName}" on ${store} with ${children.length} top-level item(s):`);
   console.log(JSON.stringify(payload, null, 2));
   if (DRY_RUN) { console.log('\nDRY_RUN — nothing posted.'); return; }
 

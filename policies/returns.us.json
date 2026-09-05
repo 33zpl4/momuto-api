@@ -18,7 +18,7 @@
   "hero": {
     "label": "Returns & exchanges",
     "h1": "If Something Is <span class=\"acc\">Wrong</span>, We Fix It",
-    "sub": "Every kit is printed to your approved mockup, so there is no size-swap or change-of-mind return. If a piece arrives defective, damaged or different from what you approved, we replace it or refund it — including the return shipping you paid."
+    "sub": "Custom products are made to order, so they can't be returned or cancelled once production starts — unless the error is ours. If a piece arrives defective, damaged or different from the mockup you approved, we replace it or refund it, including the return shipping you paid."
   },
   "quick": [
     [
@@ -74,6 +74,7 @@
     "notes": [
       "<b>The mockup is the contract.</b> Nothing is printed until you approve the final mockup, so what you approved is what we owe you.",
       "<b>Lifetime print guarantee.</b> Sublimation is dyed into the fabric — it can't peel, crack or fade under normal washing. If it does, that's a defect and we replace it.",
+      "<b>Screen colors vs fabric.</b> Every screen shows color differently, so a slight tone variation between your monitor and the printed jersey is normal and not a defect. We minimize it with calibrated color tests before production; if an exact match matters (a sponsor's brand color), send us the Pantone or hex reference and we match to that.",
       "<b>Return shipping is refunded</b> when a return is approved — you never pay to send back our mistake.",
       "<b>No restocking fee</b>, ever."
     ]
@@ -84,7 +85,7 @@
     "steps": [
       [
         "Within 7 days",
-        "<strong>Write to us.</strong> Email <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> within 7 days of delivery with your order number, a short description and photos of the issue (and of the parcel if it arrived damaged)."
+        "<strong>Write to us.</strong> Email <a href=\"mailto:info@momuto.com\">info@momuto.com</a> within 7 days of delivery with your order number, a short description and photos of the issue (and of the parcel if it arrived damaged)."
       ],
       [
         "1–2 days",
@@ -110,7 +111,7 @@
     "items": [
       [
         "Before you approve the mockup",
-        "<b>Full refund</b>, no questions. Reply to your order email or write to <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+        "<b>Full refund</b>, no questions. Reply to your order email or write to <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
       ],
       [
         "After mockup approval",
@@ -130,6 +131,10 @@
         "No — custom items are printed with the name, number and size you entered on the roster, so a size swap would mean reprinting at our cost. Use the <a href=\"/pages/size-guide\">size guide</a> before ordering; if in doubt, size up. If a garment measures differently from the published chart, that is a defect and we replace it."
       ],
       [
+        "Will the colors match what I see on screen?",
+        "Closely, but not perfectly. Screens emit light and fabric reflects it, so a slight tone difference is normal on every custom jersey and isn't covered as a defect. We run color tests before production to keep it minimal. For a critical color, give us the Pantone or hex code and we match the print to the reference, not the screen."
+      ],
+      [
         "Do I need to send the item back?",
         "Often not. For visible print or seam defects, photos are enough and we reprint or refund straight away. We ask for the item back only when an inspection is needed — and then we refund the return postage once the claim is approved."
       ],
@@ -143,7 +148,7 @@
       ],
       [
         "Where does my refund go?",
-        "To the payment method used at checkout, within 14 days of the claim being approved. If it hasn't appeared after that, check with your bank first — posting times vary — then email <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> and we will trace it."
+        "To the payment method used at checkout, within 14 days of the claim being approved. If it hasn't appeared after that, check with your bank first — posting times vary — then email <a href=\"mailto:info@momuto.com\">info@momuto.com</a> and we will trace it."
       ],
       [
         "Can I return a Ready to Play jersey I customized?",
