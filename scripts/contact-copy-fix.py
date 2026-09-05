@@ -128,6 +128,9 @@ if frf.exists():
             for pat, rep in FR_LD: q['acceptedAnswer']['text'] = re.sub(pat, rep, q['acceptedAnswer']['text'])
     c = c[:m.start(2)] + '\n' + json.dumps(ld, ensure_ascii=False, indent=2) + '\n' + c[m.end(2):]
     c = apply(c, FR_HTML, 'fr')
+    # centring: FR predates the qualified hero-promise rule (docs/cms-page-gotchas.md, .mo-editor-reset)
+    en_rule = re.search(r'\.cnt-hero \.cnt-hero-promise \{[^}]*\}', (ROOT / 'pages/contact').read_text()).group(0)
+    c = re.sub(r'(?<![\w.-])\.cnt-hero-promise \{[^}]*\}', en_rule, c)
     page['content'] = c; fix_meta(page); frf.write_text(json.dumps(page, ensure_ascii=False, indent=2) + '\n')
     print(f'✅ fr: contactez-nous (id {page["id"]})')
     t = re.sub(r'<[^>]+>', ' ', c)
