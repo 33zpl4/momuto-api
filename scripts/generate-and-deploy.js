@@ -113,6 +113,37 @@ const DOMAINS = {
     specsLabels: { quality: 'Qualità', custom: 'Personalizzato', delivery: 'Consegna' },
     deliveryText: '25-30 GG',
     titleTemplate: (team) => `Design Maglia ${team} | MOMUTO`
+  },
+  // US store. Shares the EN handle scheme (the US gallery lives at the EN
+  // handle /pages/custom-kit-gallery), but the copy uses US soccer lexicon.
+  // lang is 'en-US' so schema.org inLanguage is right; REF_I18N has no en-US
+  // key and falls back to its English strings, which is what we want.
+  us: {
+    host: 'https://openapi.oemapps.com',
+    token: process.env.OEMSAAS_TOKEN_US,
+    lang: 'en-US',
+    label: 'us.momuto.com',
+    baseUrl: 'https://us.momuto.com',
+    handleSuffix: 'custom-kit-design',
+    galleryUrl: 'https://us.momuto.com/pages/custom-kit-gallery',
+    galleryHandle: 'custom-kit-gallery',
+    // The US store has no supplier-comparison page; point at the closest
+    // existing US page rather than linking off-domain or at a 404.
+    comparisonUrl: 'https://us.momuto.com/pages/ai-concept-to-real-kit',
+    galleryLabel: 'View Gallery',
+    comparisonLabel: 'How It Works',
+    orderUrl: 'https://us.momuto.com/pages/request-custom-kit-design',
+    kitLabels: { home: 'HOME', away: 'AWAY' },
+    features: [
+      { name: 'Moisture Control', desc: 'Wicks sweat. Stays dry.' },
+      { name: 'Stretch Fabric', desc: 'Moves with you. Never restricts.' },
+      { name: 'Built to Last', desc: 'Pro-grade durability.' }
+    ],
+    performanceTitle: 'Performance Fabric. Precision Fit.',
+    performanceSubtitle: 'Built for the game',
+    specsLabels: { quality: 'Quality', custom: 'Custom', delivery: 'Delivery' },
+    deliveryText: '25-30 DAYS',
+    titleTemplate: (team) => `${team} Custom Soccer Uniform Design | MOMUTO`
   }
 };
 
@@ -144,7 +175,8 @@ async function generatePageContent(config, lang) {
     en: 'Write all text content in English.',
     es: 'Write all text content in Spanish (Spain). Use "equipación" for kit, "camiseta" for jersey.',
     fr: 'Write all text content in French. Use "maillot" for jersey, "tenue" for kit.',
-    it: 'Write all text content in Italian. Use "maglia" for jersey, "divisa" for kit.'
+    it: 'Write all text content in Italian. Use "maglia" for jersey, "divisa" for kit.',
+    us: 'Write all text content in US English, using American soccer vocabulary: "soccer" not "football", "uniform" or "jersey" not "kit", "field" not "pitch", "cleats" not "boots".'
   };
 
   const prompt = `You are creating a custom ${sportOf(config)} kit design proposal page for MOMUTO (momuto.com), a custom sports kit brand.
@@ -192,7 +224,8 @@ async function generateGalleryDesc(config, lang) {
     en: 'Write the caption in English.',
     es: 'Write the caption in Spanish.',
     fr: 'Write the caption in French.',
-    it: 'Write the caption in Italian.'
+    it: 'Write the caption in Italian.',
+    us: 'Write the caption in US English (American soccer vocabulary).'
   };
 
   const prompt = `Given this ${sportOf(config)} kit design description: "${config.design_description}"
