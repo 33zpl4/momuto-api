@@ -152,7 +152,7 @@ async function main() {
     const bad = (e.variants || []).filter(v => { const a = (after.variants || []).find(x => x.id === v.id); return !a || Number(a.price) !== Number(v.price); });
     const ok = !bad.length && (after.variants || []).length === live.variants.length && !!after.title;
     console.log(`${ok ? '✅' : '❌'} ${live.handle}: prices=${(after.variants || []).map(v => v.price).join('/')} variants=${(after.variants || []).length}/${live.variants.length} images=${(after.images || []).length}/${(live.images || []).length} title="${after.title}"`);
-    if (!ok) failed++;
+    if (!ok) { failed++; console.error(`   mismatch detail: want=${JSON.stringify(e.variants)} after=${JSON.stringify((after.variants || []).map(v => ({ id: v.id, t: typeof v.id, price: v.price, cmp: v.compare_at_price })))}`); }
     await sleep(600);
   }
   if (failed) { console.error(`\n❌ ${failed} product(s) did not verify`); process.exit(1); }
