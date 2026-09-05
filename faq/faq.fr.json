@@ -164,7 +164,7 @@
         ],
         [
           "Vais-je payer des frais de douane ?",
-          "Non. <b>Les droits de douane sont prépayés par nous.</b> Dans le rare cas où un transporteur vous facturerait quand même, envoyez le reçu à <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> et nous vous remboursons."
+          "Non. <b>Les droits de douane sont prépayés par nous.</b> Dans le rare cas où un transporteur vous facturerait quand même, envoyez le reçu à <a href=\"mailto:info@momuto.com\">info@momuto.com</a> et nous vous remboursons."
         ],
         [
           "Où sont fabriquées les tenues ?",
@@ -252,7 +252,11 @@
       "items": [
         [
           "Puis-je retourner une tenue personnalisée ?",
-          "Les tenues sont fabriquées pour vous, les retours concernent donc les <b>défauts de fabrication, les dommages pendant le transport ou une tenue différente de la maquette validée</b>. Contactez <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> dans les 7 jours suivant la livraison avec des photos ; nous émettons un RMA et remplaçons ou remboursons — y compris les frais de retour que vous auriez payés — sous 14 jours après approbation."
+          "Les tenues sont fabriquées pour vous, les retours concernent donc les <b>défauts de fabrication, les dommages pendant le transport ou une tenue différente de la maquette validée</b>. Contactez <a href=\"mailto:info@momuto.com\">info@momuto.com</a> dans les 7 jours suivant la livraison avec des photos ; nous émettons un RMA et remplaçons ou remboursons — y compris les frais de retour que vous auriez payés — sous 14 jours après approbation."
+        ],
+        [
+          "Les couleurs seront-elles identiques à celles de mon écran ?",
+          "Très proches, mais pas identiques. Un écran émet de la lumière, un tissu la reflète : une légère différence de teinte est normale sur tout maillot personnalisé et n'est pas considérée comme un défaut. Nous faisons des tests couleur avant production pour la limiter. Pour une couleur critique, donnez-nous le code Pantone ou hex et nous calons l'impression sur la référence, pas sur l'écran."
         ],
         [
           "Qu'est-ce qui protège mon achat ?",
@@ -282,7 +286,7 @@
         ],
         [
           "Comment joindre une personne ?",
-          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> est le plus rapide ; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> pour tout ce qui comporte des pièces jointes ; <a href=\"https://instagram.com/momutofc\">@momutofc</a> sur Instagram. Problème de commande : <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> est le plus rapide ; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> pour tout ce qui comporte des pièces jointes ; <a href=\"https://instagram.com/momutofc\">@momutofc</a> sur Instagram. Problème de commande : <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
         ]
       ]
     }

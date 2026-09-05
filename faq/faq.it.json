@@ -164,7 +164,7 @@
         ],
         [
           "Pagherò dazi doganali?",
-          "No. <b>I dazi sono prepagati da noi.</b> Nel raro caso in cui un corriere ti addebiti comunque qualcosa, invia la ricevuta a <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> e te la rimborsiamo."
+          "No. <b>I dazi sono prepagati da noi.</b> Nel raro caso in cui un corriere ti addebiti comunque qualcosa, invia la ricevuta a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> e te la rimborsiamo."
         ],
         [
           "Dove vengono prodotte le divise?",
@@ -252,7 +252,11 @@
       "items": [
         [
           "Posso restituire una divisa personalizzata?",
-          "Le divise sono fatte per te, quindi i resi riguardano <b>difetti di fabbricazione, danni durante il trasporto o una divisa diversa dal mockup approvato</b>. Scrivi a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> entro 7 giorni dalla consegna con le foto; emettiamo un RMA e sostituiamo o rimborsiamo — incluse le spese di reso che hai pagato — entro 14 giorni dall'approvazione."
+          "Le divise sono fatte per te, quindi i resi riguardano <b>difetti di fabbricazione, danni durante il trasporto o una divisa diversa dal mockup approvato</b>. Scrivi a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> entro 7 giorni dalla consegna con le foto; emettiamo un RMA e sostituiamo o rimborsiamo — incluse le spese di reso che hai pagato — entro 14 giorni dall'approvazione."
+        ],
+        [
+          "I colori saranno uguali a quelli che vedo sullo schermo?",
+          "Molto vicini, ma non identici. Lo schermo emette luce, il tessuto la riflette: una leggera differenza di tono è normale su ogni maglia personalizzata e non è considerata un difetto. Facciamo test colore prima della produzione per ridurla al minimo. Per un colore critico, dacci il codice Pantone o hex e allineiamo la stampa al riferimento, non allo schermo."
         ],
         [
           "Cosa protegge il mio acquisto?",
@@ -282,7 +286,7 @@
         ],
         [
           "Come parlo con una persona?",
-          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> è il modo più veloce; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> per qualsiasi cosa con allegati; <a href=\"https://instagram.com/momutofc\">@momutofc</a> su Instagram. Problemi con un ordine: <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> è il modo più veloce; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> per qualsiasi cosa con allegati; <a href=\"https://instagram.com/momutofc\">@momutofc</a> su Instagram. Problemi con un ordine: <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
         ]
       ]
     }

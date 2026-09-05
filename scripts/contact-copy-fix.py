@@ -60,6 +60,22 @@ def fix_ld(locale, content):
         for pat, rep in LD_PAIRS.get(locale, []): q['acceptedAnswer']['text'] = re.sub(pat, rep, q['acceptedAnswer']['text'])
     return content[:m.start(2)] + '\n' + json.dumps(ld, ensure_ascii=False, indent=2) + '\n' + content[m.end(2):]
 
+# FR's theme build has a stronger .mo-editor-reset (it also sets p color and
+# max-width), so the lead sentence rendered invisible and the block lost its
+# 480px column (owner screenshot, 5 Sep 2026). Qualified + !important companion
+# rule, per docs/cms-page-gotchas.md §3, on every store so they render alike.
+PROMISE_FIX = """
+  .mo-editor-reset .cnt-hero .cnt-hero-promise, .cnt-hero .cnt-hero-promise {
+    display: block !important; max-width: 480px !important; margin: 0 auto !important;
+    margin-inline: auto !important; text-align: center !important; color: #a1a1aa !important;
+    font-size: 1rem !important; line-height: 1.7 !important;
+  }
+  .mo-editor-reset .cnt-hero .cnt-hero-promise strong, .cnt-hero .cnt-hero-promise strong { display: inline !important; color: #fff !important; font-weight: 600 !important; }
+"""
+def fix_promise_css(content):
+    if 'PROMISE_FIX' in content or '.cnt-hero .cnt-hero-promise strong' in content: return content
+    return content.replace('</style>', '/* PROMISE_FIX */' + PROMISE_FIX + '</style>', 1)
+
 def fix_meta(page):
     page['meta_descript'] = re.sub(r'3-4 weeks', '25-30 days', page.get('meta_descript') or '')
     page['meta_descript'] = re.sub(r'3-4 semanas', '25-30 días', page['meta_descript'])
@@ -71,7 +87,7 @@ def write_cms(locale, handle, content, extra=None):
     f = ROOT / 'cms' / 'pages' / locale / f'{handle}.json'
     if not f.exists(): print(f'⚠️  {locale}: {f.name} not pulled — fragment fixed only'); return
     page = json.loads(f.read_text())
-    page['content'] = content; fix_meta(page)
+    page['content'] = fix_promise_css(content); fix_meta(page)
     if extra: page.update(extra)
     f.write_text(json.dumps(page, ensure_ascii=False, indent=2) + '\n')
     print(f'✅ {locale}: {handle} (id {page["id"]})')
@@ -131,7 +147,7 @@ if frf.exists():
     # centring: FR predates the qualified hero-promise rule (docs/cms-page-gotchas.md, .mo-editor-reset)
     en_rule = re.search(r'\.cnt-hero \.cnt-hero-promise \{[^}]*\}', (ROOT / 'pages/contact').read_text()).group(0)
     c = re.sub(r'(?<![\w.-])\.cnt-hero-promise \{[^}]*\}', en_rule, c)
-    page['content'] = c; fix_meta(page); frf.write_text(json.dumps(page, ensure_ascii=False, indent=2) + '\n')
+    page['content'] = fix_promise_css(c); fix_meta(page); frf.write_text(json.dumps(page, ensure_ascii=False, indent=2) + '\n')
     print(f'✅ fr: contactez-nous (id {page["id"]})')
     t = re.sub(r'<[^>]+>', ' ', c)
     print('-- fr:'); [print('   ', h.replace('\n', ' ')) for h in re.findall(r'.{50}gratuit\w*.{50}', t, re.I)]

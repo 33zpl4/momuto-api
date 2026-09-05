@@ -63,6 +63,15 @@ Applies to every element that relies on `margin: auto` + `max-width` for
 centering. Elements centered by `text-align: center` on a full-width block are
 NOT affected.
 
+**FR store addendum (5 Sep 2026):** fr.momuto.com runs a different theme
+build whose reset ALSO overrides `p` `color` and `max-width` inside
+`.mo-editor-reset`. On the contact page the lead sentence rendered invisible
+(dark on dark) and the 480px column went full-width, while the identical
+fragment was fine on www. The tie-on-specificity trick is not enough there —
+use the qualified companion **with `!important`** on every property the block
+depends on (see `PROMISE_FIX` in `scripts/contact-copy-fix.py`). Ship the
+same rule to all five stores so they render identically.
+
 ## 4. Theme `ul li` beats your list styling
 
 Theme rules for `ul`/`li` inside page content (`display: list-item`,

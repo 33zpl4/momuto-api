@@ -56,6 +56,9 @@ Read the doc that owns a topic BEFORE editing that surface.
    selection −10%. A surface with different numbers is a bug.
 7. `static/shared/llms.txt` is the machine-readable fact feed for LLMs —
    update it in the same commit as any fact change.
+8. **One customer email: info@momuto.com** (owner ruling 5 Sep 2026).
+   customer@ / orders@ never appear in customer-facing copy; `api/*.js`
+   FROM_EMAIL defaults are transactional senders and are exempt.
 
 ## Agent-ops gotchas (tooling walls already hit)
 

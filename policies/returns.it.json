@@ -18,7 +18,7 @@
   "hero": {
     "label": "Resi e cambi",
     "h1": "Se Qualcosa Non Va, <span class=\"acc\">Lo Sistemiamo</span>",
-    "sub": "Ogni divisa è stampata sul mockup che approvi, quindi non esistono cambio taglia o reso per ripensamento. Se un capo arriva difettoso, danneggiato o diverso da ciò che hai approvato, lo sostituiamo o lo rimborsiamo — incluse le spese di reso che hai pagato."
+    "sub": "I prodotti personalizzati sono fatti su ordinazione: non possono essere restituiti né annullati una volta avviata la produzione — a meno che l'errore sia nostro. Se un capo arriva difettoso, danneggiato o diverso dal mockup che hai approvato, lo sostituiamo o lo rimborsiamo, incluse le spese di reso che hai pagato."
   },
   "quick": [
     [
@@ -74,6 +74,7 @@
     "notes": [
       "<b>Il mockup è il contratto.</b> Non si stampa nulla finché non approvi il mockup finale, quindi ciò che hai approvato è ciò che ti dobbiamo.",
       "<b>Garanzia a vita sulla stampa.</b> La sublimazione è tinta nel tessuto — non si stacca, non si crepa e non sbiadisce con lavaggi normali. Se succede, è un difetto e lo sostituiamo.",
+      "<b>Colori a schermo e colori del tessuto.</b> Ogni schermo mostra il colore in modo diverso: una leggera variazione di tono tra il tuo monitor e la maglia stampata è normale e non è un difetto. La riduciamo al minimo con test colore calibrati prima della produzione; se un colore esatto conta (il colore di uno sponsor), inviaci il riferimento Pantone o hex e ci allineiamo a quello.",
       "<b>Le spese di reso vengono rimborsate</b> quando il reso è approvato — non paghi mai per rispedire un nostro errore.",
       "<b>Nessun costo di restocking</b>, mai."
     ]
@@ -84,7 +85,7 @@
     "steps": [
       [
         "Entro 7 giorni",
-        "<strong>Scrivici.</strong> Invia un'email a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> entro 7 giorni dalla consegna con il numero d'ordine, una breve descrizione e le foto del problema (e del pacco, se è arrivato danneggiato)."
+        "<strong>Scrivici.</strong> Invia un'email a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> entro 7 giorni dalla consegna con il numero d'ordine, una breve descrizione e le foto del problema (e del pacco, se è arrivato danneggiato)."
       ],
       [
         "1–2 giorni",
@@ -110,7 +111,7 @@
     "items": [
       [
         "Prima di approvare il mockup",
-        "<b>Rimborso completo</b>, senza domande. Rispondi all'email dell'ordine o scrivi a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+        "<b>Rimborso completo</b>, senza domande. Rispondi all'email dell'ordine o scrivi a <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
       ],
       [
         "Dopo l'approvazione del mockup",
@@ -130,6 +131,10 @@
         "No — i capi personalizzati sono stampati con nome, numero e taglia che hai inserito nella rosa, quindi un cambio taglia significherebbe ristampare a nostre spese. Usa la <a href=\"/pages/guida-alle-taglie\">guida alle taglie</a> prima di ordinare; nel dubbio, prendi una taglia in più. Se un capo misura diversamente dalla tabella pubblicata, è un difetto e lo sostituiamo."
       ],
       [
+        "I colori saranno uguali a quelli che vedo sullo schermo?",
+        "Molto vicini, ma non identici. Lo schermo emette luce, il tessuto la riflette: una leggera differenza di tono è normale su ogni maglia personalizzata e non è considerata un difetto. Facciamo test colore prima della produzione per ridurla al minimo. Per un colore critico, dacci il codice Pantone o hex e allineiamo la stampa al riferimento, non allo schermo."
+      ],
+      [
         "Devo rispedire il capo?",
         "Spesso no. Per difetti visibili di stampa o cucitura bastano le foto e ristampiamo o rimborsiamo subito. Chiediamo il capo solo quando serve un'ispezione — e in quel caso rimborsiamo la spedizione appena il reclamo è approvato."
       ],
@@ -143,7 +148,7 @@
       ],
       [
         "Dove arriva il rimborso?",
-        "Sul metodo di pagamento usato al checkout, entro 14 giorni dall'approvazione del reclamo. Se dopo quel termine non è arrivato, verifica prima con la tua banca — i tempi di accredito variano — poi scrivi a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> e lo rintracciamo."
+        "Sul metodo di pagamento usato al checkout, entro 14 giorni dall'approvazione del reclamo. Se dopo quel termine non è arrivato, verifica prima con la tua banca — i tempi di accredito variano — poi scrivi a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> e lo rintracciamo."
       ],
       [
         "Posso restituire una maglia Ready to Play che ho personalizzato?",

@@ -18,7 +18,7 @@
   "hero": {
     "label": "Retours et échanges",
     "h1": "Si Quelque Chose Ne Va Pas, <span class=\"acc\">On Répare</span>",
-    "sub": "Chaque tenue est imprimée selon la maquette que vous validez : pas d'échange de taille ni de retour pour changement d'avis. Si une pièce arrive défectueuse, abîmée ou différente de ce que vous avez validé, nous la remplaçons ou la remboursons — frais de retour compris."
+    "sub": "Les produits personnalisés sont fabriqués à la commande : ils ne peuvent être ni retournés ni annulés une fois la production lancée — sauf si l'erreur vient de nous. Si une pièce arrive défectueuse, abîmée ou différente de la maquette que vous avez validée, nous la remplaçons ou la remboursons, frais de retour compris."
   },
   "quick": [
     [
@@ -74,6 +74,7 @@
     "notes": [
       "<b>La maquette est le contrat.</b> Rien n'est imprimé avant que vous validiez la maquette finale : ce que vous avez validé est ce que nous vous devons.",
       "<b>Garantie à vie sur l'impression.</b> La sublimation est teinte dans le tissu — elle ne se décolle pas, ne craque pas et ne délave pas en lavage normal. Si c'est le cas, c'est un défaut et nous remplaçons.",
+      "<b>Couleurs à l'écran et couleurs du tissu.</b> Chaque écran affiche la couleur différemment : une légère variation de teinte entre votre moniteur et le maillot imprimé est normale et ne constitue pas un défaut. Nous la réduisons au minimum par des tests couleur calibrés avant production ; si une teinte exacte compte (la couleur d'un sponsor), envoyez-nous la référence Pantone ou hex et nous nous y alignons.",
       "<b>Les frais de retour sont remboursés</b> quand un retour est approuvé — vous ne payez jamais pour renvoyer notre erreur.",
       "<b>Aucuns frais de restockage</b>, jamais."
     ]
@@ -84,7 +85,7 @@
     "steps": [
       [
         "Sous 7 jours",
-        "<strong>Écrivez-nous.</strong> Envoyez un e-mail à <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> dans les 7 jours suivant la livraison avec votre numéro de commande, une courte description et des photos du problème (et du colis s'il est arrivé abîmé)."
+        "<strong>Écrivez-nous.</strong> Envoyez un e-mail à <a href=\"mailto:info@momuto.com\">info@momuto.com</a> dans les 7 jours suivant la livraison avec votre numéro de commande, une courte description et des photos du problème (et du colis s'il est arrivé abîmé)."
       ],
       [
         "1–2 jours",
@@ -110,7 +111,7 @@
     "items": [
       [
         "Avant la validation de la maquette",
-        "<b>Remboursement intégral</b>, sans question. Répondez à l'e-mail de commande ou écrivez à <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+        "<b>Remboursement intégral</b>, sans question. Répondez à l'e-mail de commande ou écrivez à <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
       ],
       [
         "Après la validation de la maquette",
@@ -130,6 +131,10 @@
         "Non — les articles personnalisés sont imprimés avec le nom, le numéro et la taille saisis sur l'effectif ; un échange de taille reviendrait à réimprimer à nos frais. Utilisez le <a href=\"/pages/guide-des-tailles\">guide des tailles</a> avant de commander ; en cas de doute, prenez la taille au-dessus. Si un vêtement ne correspond pas au tableau publié, c'est un défaut et nous le remplaçons."
       ],
       [
+        "Les couleurs seront-elles identiques à celles de mon écran ?",
+        "Très proches, mais pas identiques. Un écran émet de la lumière, un tissu la reflète : une légère différence de teinte est normale sur tout maillot personnalisé et n'est pas considérée comme un défaut. Nous faisons des tests couleur avant production pour la limiter. Pour une couleur critique, donnez-nous le code Pantone ou hex et nous calons l'impression sur la référence, pas sur l'écran."
+      ],
+      [
         "Dois-je renvoyer l'article ?",
         "Souvent non. Pour les défauts visibles d'impression ou de couture, les photos suffisent et nous réimprimons ou remboursons directement. Nous demandons l'article seulement quand une inspection est nécessaire — et nous remboursons alors les frais de retour dès l'approbation."
       ],
@@ -143,7 +148,7 @@
       ],
       [
         "Où arrive mon remboursement ?",
-        "Sur le moyen de paiement utilisé à la commande, sous 14 jours après approbation. S'il n'apparaît pas passé ce délai, vérifiez d'abord auprès de votre banque — les délais de crédit varient — puis écrivez à <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> pour que nous le tracions."
+        "Sur le moyen de paiement utilisé à la commande, sous 14 jours après approbation. S'il n'apparaît pas passé ce délai, vérifiez d'abord auprès de votre banque — les délais de crédit varient — puis écrivez à <a href=\"mailto:info@momuto.com\">info@momuto.com</a> pour que nous le tracions."
       ],
       [
         "Puis-je retourner un maillot Ready to Play que j'ai personnalisé ?",

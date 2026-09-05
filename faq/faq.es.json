@@ -164,7 +164,7 @@
         ],
         [
           "¿Pagaré aduanas?",
-          "No. <b>Los aranceles van prepagados por nosotros.</b> En el raro caso de que un transportista te cobre igualmente, envía el recibo a <a href=\"mailto:orders@momuto.com\">orders@momuto.com</a> y te lo reembolsamos."
+          "No. <b>Los aranceles van prepagados por nosotros.</b> En el raro caso de que un transportista te cobre igualmente, envía el recibo a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> y te lo reembolsamos."
         ],
         [
           "¿Dónde se fabrican las equipaciones?",
@@ -252,7 +252,11 @@
       "items": [
         [
           "¿Puedo devolver una equipación personalizada?",
-          "Las equipaciones se fabrican para ti, así que las devoluciones son por <b>defecto de fabricación, daño en el transporte o una equipación distinta de la maqueta aprobada</b>. Escribe a <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a> en los 7 días siguientes a la entrega con fotos; emitimos un RMA y reemplazamos o reembolsamos — incluido el envío de devolución que hayas pagado — en 14 días desde la aprobación."
+          "Las equipaciones se fabrican para ti, así que las devoluciones son por <b>defecto de fabricación, daño en el transporte o una equipación distinta de la maqueta aprobada</b>. Escribe a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> en los 7 días siguientes a la entrega con fotos; emitimos un RMA y reemplazamos o reembolsamos — incluido el envío de devolución que hayas pagado — en 14 días desde la aprobación."
+        ],
+        [
+          "¿Los colores coincidirán con lo que veo en pantalla?",
+          "Mucho, pero no al 100 %. Las pantallas emiten luz y el tejido la refleja, así que una ligera diferencia de tono es normal en toda camiseta personalizada y no se considera defecto. Hacemos pruebas de color antes de producir para que sea mínima. Para un color crítico, danos el código Pantone o hex y ajustamos la impresión a la referencia, no a la pantalla."
         ],
         [
           "¿Qué protege mi compra?",
@@ -282,7 +286,7 @@
         ],
         [
           "¿Cómo hablo con una persona?",
-          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> es lo más rápido; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> para cualquier cosa con archivos adjuntos; <a href=\"https://instagram.com/momutofc\">@momutofc</a> en Instagram. Incidencias de pedido: <a href=\"mailto:customer@momuto.com\">customer@momuto.com</a>."
+          "<a href=\"https://wa.me/34614625408\">WhatsApp</a> es lo más rápido; <a href=\"mailto:info@momuto.com\">info@momuto.com</a> para cualquier cosa con archivos adjuntos; <a href=\"https://instagram.com/momutofc\">@momutofc</a> en Instagram. Incidencias de pedido: <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
         ]
       ]
     }
