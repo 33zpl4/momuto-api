@@ -118,9 +118,11 @@ async function main() {
       if (fixed !== p[k]) entry[k] = fixed;
     }
     if (Object.keys(entry).length === 1) continue;
+    // batchsave rejects any product without a title (500 "title不能为空", 5 Sep 2026) — always send it
+    if (!entry.title) entry.title = p.title;
     batch.push(entry);
     const pr = (entry.variants || []).map(v => `${v.id}: ${p.variants.find(x => x.id === v.id)?.price}→${v.price}${Number(v.compare_at_price) ? ` (cmp→${v.compare_at_price})` : ''}`).join(', ');
-    console.log(`• ${p.handle}  ${pr}${Object.keys(entry).filter(k => !['id', 'variants'].includes(k)).length ? '  text:' + Object.keys(entry).filter(k => !['id', 'variants'].includes(k)).join(',') : ''}`);
+    console.log(`• ${p.handle}  ${pr}${Object.keys(entry).filter(k => !['id', 'variants'].includes(k) && !(k === 'title' && entry.title === p.title)).length ? '  text:' + Object.keys(entry).filter(k => !['id', 'variants'].includes(k) && !(k === 'title' && entry.title === p.title)).join(',') : ''}`);
   }
   console.log(`\n${batch.length} product(s) to update`);
   if (unmapped.size) { console.log('\n⚠️  NOT changed — no owner ruling for:'); for (const u of unmapped) console.log('   ', u); }
