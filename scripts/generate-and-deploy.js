@@ -913,7 +913,8 @@ async function main() {
     process.exit(1);
   }
 
-  console.log('\n✅ All three domains updated successfully.');
+  const storeCount = Object.keys(DOMAINS).length;
+  console.log(`\n✅ All ${storeCount} stores updated successfully.`);
 }
 
 main().catch(err => {
