@@ -256,3 +256,17 @@ screen-vs-fabric colour note (slight tone variation is normal, not a defect;
 minimised with calibrated colour tests; Pantone/hex reference for critical
 colours) sits in the returns notes and as a question on both the returns and
 FAQ pages, all five stores.
+
+
+## US reprice — DONE (5 Sep 2026, run 33950470273)
+
+All 88 priced US products now sit on the USD .90 ladder (jersey $45.90,
+Ready to Play $40.90, RTP full kit $59.90, custom full kit $66.80, concept
+jerseys $41.90, Iconic $45.90–65.90, shorts $20.90, socks $6.90, long
+sleeves $3.00); the 422 $0 per-order mockups were untouched. Every product
+was read back after its write: prices, variant count, sizes, images and
+title all verified. Two lessons went into `docs/oemsaas-api-notes.md`:
+`batchsave` cannot change prices (code 0, nothing happens) and
+`PUT /products/{id}` regenerates every variant id — accepted for the US
+store (owner, 5 Sep). Anything bound to the old US variant ids (cart lines,
+per-variant promos, feeds) is orphaned; nothing in this repo referenced them.
