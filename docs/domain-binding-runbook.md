@@ -91,6 +91,16 @@ IT was never a first-class checkout:
 4. Test the full RTP → 3D → cart → checkout flow end-to-end on the new
    store BEFORE content launch.
 
+**Done for us.momuto.com in code (Sep 2026):** steps 1–3 are in git
+(`checkSumbit-us.momuto.com.html`, `GoodInfoAction::momutoStore()`,
+`STORE3D.us`); the design server now keys the checkout store off
+`fromUrlHost`, not the language, so a store that shares a language (US ↔ EN)
+no longer needs its own `lang`. Two things the earlier stores never needed:
+the cart/widget currency + ladder come from `pricing.js` `{store:'us'}`, and
+the store's **quantity-discount campaigns must exist on the new store** or
+every tier bills at the single price. Step 4 (live test) is still open —
+checklist in design-momuto `server-patches/README.md` "US store wiring".
+
 ## Part 5 — after binding
 
 GSC property + analytics for the new subdomain; Stripe payment link in the

@@ -64,11 +64,22 @@ Never invent a pair — unmapped prices fail loudly by design.
 
 ## Still open
 
-1. **Checkout wiring** (`docs/domain-binding-runbook.md` Part 4): US base
-   jersey/shorts/socks product ids in a `checkSumbit.html` DiyFile,
-   `GoodInfoAction` PHP routing on the design server, `us` in
-   `embed.js` STORE3D/CONFIG3D. Until done, the 3D→cart→checkout flow is
-   NOT first-class — this also gates any push of US visitors to the store.
+1. **Checkout wiring** (`docs/domain-binding-runbook.md` Part 4) — **code
+   done 9 Sep 2026, NOT yet deployed/tested.** In git: `STORE3D.us` +
+   USD ladder/`$` in `public/configurator/embed.js`; `pricing.js` v3 with
+   `PRICING_US` / `RTP_US` and `{store:'us'}`; design-momuto
+   `checkSumbit-us.momuto.com.html` (16913785 / 16913798 / 16913789),
+   `GoodInfoAction` store routing (`momutoStore()`, US RTP + long-sleeve
+   ids, `token_us` previews), `CartDetailAction` + `templates/en/cartItem.html`
+   rendering `$` on the US ladder. Manual steps and their order live in
+   design-momuto `server-patches/README.md` "US store wiring": paste the
+   DiyFile, add `token_us` on the design server, deploy the PHP patches,
+   dispatch Deploy Static Files (embed.js + pricing.js are not push-watched),
+   **verify the US store carries the quantity-discount campaigns** (the
+   USD ladder is a store promotion — without it every tier bills $45.90),
+   then the end-to-end test order. Until that run is green the flow is
+   still NOT first-class and still gates any push of US visitors to the
+   store.
 2. Owner manual: paste `pages/homepage/*.us.html` blocks (7 files, USD);
    US announcement banner text "$59" (www banner "€50"); GSC property for
    us.momuto.com + sitemap submit; test the $15 Stripe flow end-to-end;
