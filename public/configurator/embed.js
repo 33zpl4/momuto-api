@@ -33,10 +33,19 @@ var FONTS=[["vanguard","Vanguard","fonts/font-1.svg"],["contour","Contour","font
 // Ready-to-Play pricing: base table (€/unit) by min order size; RTP applies a 10% discount
 var PRICING={ jersey:[[1,38.90],[2,34.90],[5,26.90],[10,21.90],[20,18.90],[50,17.90],[100,16.90]],
               kit:   [[1,56.80],[2,50.80],[5,38.80],[10,26.90],[20,24.90],[50,23.40],[100,21.90]] };
+// us.momuto.com bills in USD on the owner's ladder (docs/us-launch-status.md;
+// canonical copy in pricing.js PRICING_US / RTP_US — keep the two in sync).
+// RTP on US is anchored on the live product prices ($40.90 jersey / $59.90 kit).
+var PRICING_US={ jersey:[[1,45.90],[2,41.90],[5,30.90],[10,25.90],[20,21.90],[50,20.90],[100,19.90]],
+                 kit:   [[1,66.80],[2,60.80],[5,44.80],[10,30.90],[20,26.90],[50,25.90],[100,24.90]] };
+var RTP_US={ jersey:[[1,40.90],[2,37.70],[5,27.80],[10,23.30],[20,19.70],[50,18.80],[100,17.90]],
+             kit:   [[1,59.90],[2,54.70],[5,40.30],[10,27.80],[20,24.20],[50,23.30],[100,22.40]] };
+var CURRENCY_SYMBOL={ us:"$" };   // every other store: €
 var RTP_OFF=0.10;
-function tierBase(kind,qty){ var t=PRICING[kind]||PRICING.jersey, p=t[0][1];
-  for(var i=0;i<t.length;i++){ if(qty>=t[i][0]) p=t[i][1]; } return p; }  // standard (pre-RTP) price for this quantity tier
-function unitPrice(kind,qty){ return Math.round(tierBase(kind,qty)*(1-RTP_OFF)*10)/10; }  // round to .10 to match published RTP prices
+function pickTier(t,qty){ var p=t[0][1]; for(var i=0;i<t.length;i++){ if(qty>=t[i][0]) p=t[i][1]; } return p; }
+function tierBase(kind,qty,store){ var P=(store==="us")?PRICING_US:PRICING; return pickTier(P[kind]||P.jersey,qty); }  // standard (pre-RTP) price for this quantity tier
+function unitPrice(kind,qty,store){ if(store==="us") return pickTier(RTP_US[kind]||RTP_US.jersey,qty);
+  return Math.round(tierBase(kind,qty)*(1-RTP_OFF)*10)/10; }  // round to .10 to match published RTP prices
 var lum3=function(r,g,b){return 0.299*r+0.587*g+0.114*b;};
 var hx=function(h){h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];};
 var load=function(src){return new Promise(function(r){var i=new Image();i.crossOrigin="anonymous";i.onload=function(){r(i);};i.src=src;});};
@@ -65,10 +74,13 @@ var CONFIG3D={
   "the-prism":"84bealsh",
   "the-mosaic":"xwmywt2u"
 };
-// goodsInfoSave derives store + language from fromUrlHost (en/fr/es only — the
-// design server routes checkout to those three storefronts; no IT mapping yet,
+// goodsInfoSave derives store + language from fromUrlHost (en/fr/es/us — the
+// design server routes checkout to those four storefronts; no IT mapping yet,
 // so IT pages fall back to showing no button rather than an EN checkout).
-var STORE3D={ en:"https://www.momuto.com", fr:"https://fr.momuto.com", es:"https://es.momuto.com" };
+// "us" keeps the English UI on the design server (lang=en) but its cart and
+// checkout land on us.momuto.com in USD (GoodInfoAction keys the store off
+// fromUrlHost, not the language — design-momuto server-patches/README.md §2).
+var STORE3D={ en:"https://www.momuto.com", fr:"https://fr.momuto.com", es:"https://es.momuto.com", us:"https://us.momuto.com" };
 // The STORE product title, carried into the design server so the /cart page can
 // name the line ("Manchester Fiti — Kit Personalizado") instead of showing a bare
 // cart id, and can tell a full kit from a jersey by the title's fixed marker
@@ -655,12 +667,12 @@ function run(root, opts){
     // order estimate: kit type + quantity -> RTP price + free flag/armband promo
     function updateEstimate(){
       var q=Math.max(1, parseInt(state.qty,10)||1);
-      var euro=function(n){return "€"+n.toFixed(2);};
+      var store=CART.lang, euro=function(n){return (CURRENCY_SYMBOL[store]||"€")+n.toFixed(2);};
       // per-option prices on the kit cards
-      root.getElementById("kpJersey").innerHTML="<s>"+euro(tierBase("jersey",q))+"</s>"+euro(unitPrice("jersey",q));
-      root.getElementById("kpKit").innerHTML="<s>"+euro(tierBase("kit",q))+"</s>"+euro(unitPrice("kit",q));
+      root.getElementById("kpJersey").innerHTML="<s>"+euro(tierBase("jersey",q,store))+"</s>"+euro(unitPrice("jersey",q,store));
+      root.getElementById("kpKit").innerHTML="<s>"+euro(tierBase("kit",q,store))+"</s>"+euro(unitPrice("kit",q,store));
       // live price block for the selected kit
-      var unit=unitPrice(state.kit,q), orig=tierBase(state.kit,q), total=unit*q, label=state.kit==="kit"?T.perKit:T.perJersey;
+      var unit=unitPrice(state.kit,q,store), orig=tierBase(state.kit,q,store), total=unit*q, label=state.kit==="kit"?T.perKit:T.perJersey;
       root.getElementById("est").innerHTML=
         '<div class="pr-row"><div class="pr-main"><span class="pr-cur">'+euro(unit)+'</span><span class="pr-orig">'+euro(orig)+'</span><span class="pr-per">/ '+label+'</span></div><span class="pr-badge">'+T.badge+'</span></div>'
         +'<div class="pr-detail">'+q+' '+T.units+' · '+T.estimated+' <b>'+euro(total)+'</b> · '+T.finalPrice+'</div>';
