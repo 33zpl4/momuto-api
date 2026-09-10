@@ -305,6 +305,9 @@ The findings above came from four habits worth reusing on any similar task:
 - [cms-product-create-api.md](./cms-product-create-api.md) — the create payload, field by field
 - [iconic-series.md](./iconic-series.md) — the pipeline these findings came out of
 - `scripts/create-iconic-products.js` — `--inspect`, `--probe`, `--audit`, `--update`
+- `scripts/set-product-3d-pointer.js` + `cms/product-3d-pointers/<store>.json` —
+  the read-modify-write above, packaged: repoints a product's `inner_title.mudel`
+  (3D button) with handle/variants guards and a read-back check
 
 ## Navigation + logistics endpoints (from the vendor's Apizza docs, 1 Sep 2026)
 
