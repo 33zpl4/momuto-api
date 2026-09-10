@@ -22,9 +22,15 @@ config lives in `docs/store-config-shipping.md`.
   from €35.00), ids 16910217–16910223, inner_title 3D pointers rewired —
   `scripts/create-us-rtp-products.js`. Basketball product 16913848
   (`maillot-momuto-basket-pro`): 3D pointer set to
-  `configId=avy6d4xt&suitName=basketball` via `cms/product-3d-pointers/us.json`
-  + `set-product-3d-pointer.yml` (push-triggered; GET → guard → full PUT →
-  read-back). Edit that file to repoint any product's 3D button.
+  `configId=avy6d4xt&suitName=basketball` and price **$45.90** (same ladder
+  as MOMUTO Pro Jersey, owner ruling 10 Sep 2026; was $50.90) via
+  `cms/product-3d-pointers/us.json` + `set-product-3d-pointer.yml`
+  (push-triggered; GET → guard → full PUT → read-back; entries take any of
+  `mudel` / `price` / `title`). Its catalogue photo should be the basketball
+  order-line tile (design-momuto `3d-configurator/asset/shop/
+  custom-design-basketjersey-en.png`, uploaded in the admin like the
+  football tiles) and the quantity-discount campaign must include it —
+  promotions have no API surface: admin → Promotions → Rebate.
 - **Nav**: curated "Header Menu" via `sync-store-config.js apply-nav` —
   Custom Jerseys ▾ (Ready to Play / Custom design request ($15) / AI
   concept), Basketball, Iconic Series ▾ (Drop 01/02), Support ▾

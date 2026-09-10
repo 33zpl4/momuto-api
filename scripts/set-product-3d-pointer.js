@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 /**
- * set-product-3d-pointer.js — repoint a product's 3D-customizer link
- * (the `mudel` inside its `inner_title` JSON) from a per-store list.
+ * set-product-3d-pointer.js — patch a product from a per-store list: its
+ * 3D-customizer link (the `mudel` inside its `inner_title` JSON), and
+ * optionally its `price` (every variant) and `title`.
  *
  * Source of truth: cms/product-3d-pointers/<store>.json
  *   [{ "id": 16913848, "handle": "maillot-momuto-basket-pro",
- *      "mudel": "configId=avy6d4xt&suitName=basketball", "note": "…" }]
+ *      "mudel": "configId=avy6d4xt&suitName=basketball",
+ *      "price": "45.90", "title": "…", "note": "…" }]
+ * Any subset of mudel / price / title per entry; the rest is left untouched.
  *
  * For each entry: GET /products/{id} (the single endpoint — the list omits
  * fields), refuse to touch anything that does not look like the product we
@@ -68,21 +71,36 @@ function wantedInner(live, mudel) {
 
 async function processEntry(token, entry) {
   const label = `${entry.handle || entry.id} (id ${entry.id})`;
-  if (!entry.id || !entry.mudel) throw new Error(`${label}: entry needs id + mudel`);
+  if (!entry.id || !(entry.mudel || entry.price || entry.title)) throw new Error(`${label}: entry needs id + at least one of mudel / price / title`);
   const live = await fetchProduct(token, entry.id);
   // Guard on the read-back before sending anything (docs/oemsaas-api-notes.md).
   if (!live || !live.title) throw new Error(`${label}: refusing to PUT blind — GET returned no product/title`);
   if (!Array.isArray(live.variants) || !live.variants.length) throw new Error(`${label}: refusing to PUT — would drop the variants`);
   if (entry.handle && live.handle !== entry.handle) throw new Error(`${label}: live handle is "${live.handle}" — wrong product, not touching it`);
-  const { current, next } = wantedInner(live, entry.mudel);
-  if (current === entry.mudel) { console.log(`  ·  ${label}: already "${entry.mudel}" — up to date`); return 'skip'; }
-  console.log(`  ${label}: "${current}" → "${entry.mudel}"`);
-  if (DRY_RUN) { console.log(`  DRY_RUN — would PUT /products/${entry.id} (full object, inner_title only changed)`); return 'dry'; }
-  await withRetry(() => api(token, 'PUT', `/products/${entry.id}`, { ...live, inner_title: next }), `PUT ${entry.id}`);
+  const changes = [], payload = { ...live };
+  if (entry.mudel) {
+    const { current, next } = wantedInner(live, entry.mudel);
+    if (current !== entry.mudel) { changes.push(`mudel "${current}" → "${entry.mudel}"`); payload.inner_title = next; }
+  }
+  if (entry.price != null) {
+    const want = Number(entry.price).toFixed(2);
+    if (!/^\d+\.\d{2}$/.test(want) || want === 'NaN') throw new Error(`${label}: bad price ${entry.price}`);
+    const cur = live.variants.map(v => Number(v.price).toFixed(2));
+    if (cur.some(c => c !== want)) { changes.push(`price ${[...new Set(cur)].join('/')} → ${want}`); payload.variants = live.variants.map(v => ({ ...v, price: want })); }
+  }
+  if (entry.title && entry.title !== live.title) { changes.push(`title "${live.title}" → "${entry.title}"`); payload.title = entry.title; }
+  if (!changes.length) { console.log(`  ·  ${label}: up to date`); return 'skip'; }
+  console.log(`  ${label}: ${changes.join('; ')}`);
+  if (DRY_RUN) { console.log(`  DRY_RUN — would PUT /products/${entry.id} (full object, only the fields above changed)`); return 'dry'; }
+  await withRetry(() => api(token, 'PUT', `/products/${entry.id}`, payload), `PUT ${entry.id}`);
   await sleep(600);
   const back = await fetchProduct(token, entry.id);
-  const got = (() => { try { return JSON.parse(back.inner_title).mudel; } catch { return null; } })();
-  if (got !== entry.mudel) throw new Error(`${label}: read-back mudel is "${got}" — PUT not effective`);
+  if (entry.mudel) {
+    const got = (() => { try { return JSON.parse(back.inner_title).mudel; } catch { return null; } })();
+    if (got !== entry.mudel) throw new Error(`${label}: read-back mudel is "${got}" — PUT not effective`);
+  }
+  if (entry.price != null && back.variants.some(v => Number(v.price).toFixed(2) !== Number(entry.price).toFixed(2))) throw new Error(`${label}: read-back price ${back.variants.map(v => v.price).join('/')} — PUT not effective`);
+  if (entry.title && back.title !== entry.title) throw new Error(`${label}: read-back title "${back.title}" — PUT not effective`);
   if (!Array.isArray(back.variants) || back.variants.length !== live.variants.length) throw new Error(`${label}: read-back variant count changed (${live.variants.length} → ${back.variants && back.variants.length})`);
   console.log(`  ✅ ${label}: verified — ${back.detail_url || ''}`);
   return 'ok';
