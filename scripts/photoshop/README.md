@@ -485,6 +485,46 @@ the standard height never passes as a mystery:
 (`fit: 'contain'` keeps a mark inside the box on both axes instead; right for a
 badge with a printable-area limit on both sides.)
 
+#### Squarish marks take an optical discount
+
+A 1.08-aspect paw at the standard height read about 15% too big. Yet by every
+geometric measure it is *smaller* than both references — at 180 tall it is 195
+wide against the 1.31 reference's 235: less area, shorter diagonal. Sizing by
+width, area or diagonal would all make it **larger**. The 15% is not in the
+geometry; it is perception. A compact solid shape carries more visual weight
+than a wide one of the same height, for the same reason a round **O** overshoots
+the cap height to look equal to an **H**. No box rule can produce the correction,
+so the rule is optical.
+
+Height is reduced linearly from no discount at aspect `SPONSOR_OPTICAL_FROM`
+(1.3) to `SPONSOR_OPTICAL_MAX` (20%) at aspect 1.0, and held there for portrait
+marks:
+
+| mark | aspect | discount |
+|---|---|---|
+| reference (front right arm) | 1.31 | 0% — unchanged |
+| reference (front left arm) | 1.13 | 11% — smaller than it shipped by hand |
+| the paw | 1.08 | 15% — what was asked for |
+| anything square or portrait | ≤ 1.0 | 20% |
+
+The 1.13 reference moving is deliberate: it is nearly the same shape as the paw,
+and a rule that shrinks one but not the other would be a rule about which file
+happened to be measured first. Width-capped wordmarks are untouched — they sit
+at aspect 3+, far above the threshold. The discount runs *before* the width cap,
+so a discounted mark is judged against the cap at its reduced width.
+
+The run reports it alongside the cap:
+
+```
+· overlaid: club-sleevesponsor.svg → 580×537px: 15% smaller (optical, aspect 1.08)
+```
+
+If a specific mark still reads wrong, the two constants are the knobs: `_FROM`
+moves the aspect where the discount begins, `_MAX` sets how much a square mark
+loses. What this rule cannot see is ink density — a solid square and an outlined
+square of the same box get the same discount. That would need reading the mark's
+transparency coverage, which is possible but not built.
+
 #### Where the four boxes came from
 
 `SPONSOR` at the top of the builder is filled in, measured from

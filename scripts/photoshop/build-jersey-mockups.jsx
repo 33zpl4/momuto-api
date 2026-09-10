@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-09-03a · sleeve sponsors capped at a maximum width';
+var VERSION = '2026-09-10a · squarish sponsors take an optical discount';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -145,10 +145,44 @@ var SPONSOR_MAX_WIDTH = 0.67;
 //    position that was checked on a render, overhang included.
 var SPONSOR_EDGE_INSET = 0.03;
 
-// The overlay entry every sleeve slot uses, so the cap and inset are set in one
-// place and the four slots cannot drift apart.
+// ── Optical compensation for squarish marks.
+//
+//    A 1.08-aspect paw at the standard height read ~15% too big. Yet by every
+//    geometric measure it is SMALLER than both references — at 180 tall it is
+//    195 wide against the 1.31 reference's 235: less area, shorter diagonal.
+//    Sizing by width, area or diagonal would all make it LARGER. The 15% is not
+//    in the geometry. It is perception: a compact solid shape carries more
+//    visual weight than a wide one of the same height, for the same reason a
+//    round O overshoots the cap height to look equal to an H. So no box rule can
+//    produce the correction, and this is an optical one instead.
+//
+//    Height is reduced linearly from no discount at aspect SPONSOR_OPTICAL_FROM
+//    to SPONSOR_OPTICAL_MAX at aspect 1.0 (square), and held there for portrait
+//    marks. With 1.3 and 0.20:
+//
+//        aspect 1.31  reference   →   0%   unchanged
+//        aspect 1.13  reference   →  11%   smaller than it shipped by hand
+//        aspect 1.08  the paw     →  15%   what was asked for
+//        aspect ≤ 1.0             →  20%
+//
+//    The 1.13 reference moving is deliberate. It is nearly the same shape as
+//    the paw, and a rule that shrinks one but not the other would be a rule
+//    about which file happened to be measured first.
+//
+//    Width-capped wordmarks are untouched: they sit at aspect 3+, far above
+//    SPONSOR_OPTICAL_FROM. The discount runs BEFORE the width cap, so a
+//    discounted mark is judged against the cap at its reduced width.
+var SPONSOR_OPTICAL_FROM = 1.3;
+var SPONSOR_OPTICAL_MAX  = 0.20;
+
+// The overlay entry every sleeve slot uses, so the cap, inset and optical rule
+// are set in one place and the four slots cannot drift apart.
 function sponsorOverlay(kinds, boxPct) {
-  return { file: kinds, boxPct: boxPct, maxWidthPct: SPONSOR_MAX_WIDTH, edgeInsetPct: SPONSOR_EDGE_INSET };
+  return {
+    file: kinds, boxPct: boxPct,
+    maxWidthPct: SPONSOR_MAX_WIDTH, edgeInsetPct: SPONSOR_EDGE_INSET,
+    opticalFrom: SPONSOR_OPTICAL_FROM, opticalMax: SPONSOR_OPTICAL_MAX
+  };
 }
 
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
@@ -202,7 +236,9 @@ var CONFIG = {
   // would come out wider is scaled down to the cap instead — the only thing
   // that stops a wide wordmark being sized like a badge and swallowing the
   // sleeve. `edgeInsetPct` then keeps a capped mark this far inside the canvas
-  // edge. Sleeve slots get both via sponsorOverlay(); see SPONSOR_MAX_WIDTH.
+  // edge. `opticalFrom` / `opticalMax` shrink a squarish mark, which reads
+  // heavier than a wide one at the same height. Sleeve slots get all of these
+  // via sponsorOverlay(); see SPONSOR_MAX_WIDTH and SPONSOR_OPTICAL_FROM.
   //
   // This is how sleeve sponsors work. A sponsor cannot be mirrored, so it must
   // be its own layer rather than baked into a mirrored base. Because the slot
@@ -614,33 +650,50 @@ function mirrorLayerX(pl) {
  * tall despite aspect ratios of 1.3078 and 1.1313, so height is the standard.
  * But both references are compact, and height alone has no upper bound on
  * width — a 4.46-aspect wordmark sized to the standard height is 2.25× the
- * whole sleeve. Hence `cap`:
+ * whole sleeve. And a squarish solid mark at the standard height reads too
+ * BIG even though every box measure says it is smaller — that one is optical.
+ * Hence `rules`, applied in this order:
  *
- *   cap.maxW   if the height-sized mark would be wider than this, scale it to
- *              this width instead
- *   cap.inset  a capped mark is then shifted so it sits fully inside the canvas,
- *              this far from the edge
+ *   optical  in 'height' mode, reduce the height as the mark's aspect nears
+ *            square: no discount at rules.opticalFrom, rules.opticalMax at 1.0,
+ *            held for portrait. Perceptual, not geometric — see the SPONSOR_
+ *            OPTICAL constants for why no geometric rule can do this.
+ *   maxW     if the mark would still be wider than this, scale it to this width
+ *   inset    a capped mark is then shifted fully inside the canvas, this far
+ *            from the edge
  *
  * Only a capped mark is shifted. An uncapped one keeps its box position exactly,
  * even where that position runs past the canvas edge — the reference marks do,
- * and they were checked on a render. So the cap changes nothing for any mark
- * that fit before, and the shift is a discontinuity between "fits" and "does
- * not" that is accepted deliberately: a mark just under the cap keeps its
- * verified place; a mark over it has no verified place and gets a safe one.
+ * and they were checked on a render. The shift is a discontinuity between
+ * "fits" and "does not" that is accepted deliberately: a mark just under the
+ * cap keeps its verified place; a mark over it has no verified place and gets a
+ * safe one.
  *
- * mode 'contain' keeps the mark inside the box on both axes. Right for a badge
- * that must not exceed a printable area on either axis.
+ * mode 'contain' keeps the mark inside the box on both axes and takes no
+ * optical discount. Right for a badge that must not exceed a printable area.
  *
  * Returns what happened, for the log.
  */
-function fitLayerInBox(pl, box, mode, cw, cap) {
+function fitLayerInBox(pl, box, mode, cw, rules) {
   var m = layerBox(pl);
   if (m.w <= 0 || m.h <= 0) return null;
+  rules = rules || {};
 
+  var aspect = m.w / m.h;
   var scale = (mode === 'contain') ? Math.min(box[2] / m.w, box[3] / m.h) : (box[3] / m.h);
+
+  var optical = 0;
+  if (mode !== 'contain' && rules.opticalMax > 0 && rules.opticalFrom > 1) {
+    var t = (rules.opticalFrom - aspect) / (rules.opticalFrom - 1);
+    if (t > 1) t = 1;
+    if (t < 0) t = 0;
+    optical = rules.opticalMax * t;
+    scale *= (1 - optical);
+  }
+
   var capped = false;
-  if (cap && cap.maxW > 0 && m.w * scale > cap.maxW) {
-    scale = cap.maxW / m.w;
+  if (rules.maxW > 0 && m.w * scale > rules.maxW) {
+    scale = rules.maxW / m.w;
     capped = true;
   }
   pl.resize(scale * 100, scale * 100, AnchorPosition.MIDDLECENTER);
@@ -652,13 +705,17 @@ function fitLayerInBox(pl, box, mode, cw, cap) {
   var shifted = 0;
   if (capped) {
     var left = n.x + tx, right = left + n.w;
-    if (left < cap.inset)            shifted = cap.inset - left;
-    else if (right > cw - cap.inset) shifted = (cw - cap.inset) - right;
+    if (left < rules.inset)            shifted = rules.inset - left;
+    else if (right > cw - rules.inset) shifted = (cw - rules.inset) - right;
     tx += shifted;
   }
   pl.translate(UnitValue(tx, 'px'), UnitValue(ty, 'px'));
 
-  return { capped: capped, w: Math.round(n.w), h: Math.round(n.h), shifted: Math.round(shifted) };
+  return {
+    capped: capped, shifted: Math.round(shifted),
+    optical: Math.round(optical * 100), aspect: aspect.toFixed(2),
+    w: Math.round(n.w), h: Math.round(n.h)
+  };
 }
 
 /**
@@ -803,15 +860,21 @@ function placeInsideSlot(doc, layer, stack, sample, notes) {
         box = [p[0] * cw, p[1] * ch, p[2] * cw, p[3] * ch];
       }
       if (box) {
-        var cap = (stack[f].maxWidthPct != null)
-          ? { maxW: stack[f].maxWidthPct * cw, inset: (stack[f].edgeInsetPct || 0) * cw }
-          : null;
-        var fitted = fitLayerInBox(pl, box, stack[f].fit, cw, cap);
-        // Say so when the cap engaged — a sponsor that came out at the standard
-        // WIDTH rather than the standard height should not pass as a mystery.
-        if (fitted && fitted.capped && notes) {
-          notes.push(decodeURI(stack[f].file.name) + ' width-capped to ' + fitted.w + '×' + fitted.h + 'px' +
-                     (fitted.shifted ? ', moved ' + Math.abs(fitted.shifted) + 'px onto the canvas' : ''));
+        var rules = {
+          maxW:        (stack[f].maxWidthPct != null) ? stack[f].maxWidthPct * cw : 0,
+          inset:       (stack[f].edgeInsetPct || 0) * cw,
+          opticalFrom: stack[f].opticalFrom || 0,
+          opticalMax:  stack[f].opticalMax || 0
+        };
+        var fitted = fitLayerInBox(pl, box, stack[f].fit, cw, rules);
+        // Say so whenever a rule changed the size — a sponsor that came out
+        // smaller than the standard height, or at the standard WIDTH instead,
+        // should not pass as a mystery.
+        if (fitted && notes && (fitted.capped || fitted.optical >= 1)) {
+          var why = [];
+          if (fitted.optical >= 1) why.push(fitted.optical + '% smaller (optical, aspect ' + fitted.aspect + ')');
+          if (fitted.capped) why.push('width-capped' + (fitted.shifted ? ', moved ' + Math.abs(fitted.shifted) + 'px onto the canvas' : ''));
+          notes.push(decodeURI(stack[f].file.name) + ' → ' + fitted.w + '×' + fitted.h + 'px: ' + why.join('; '));
         }
       }
       else fitLayerToCanvas(pl, cw, ch, stack[f].offset, stack[f].bleed);
@@ -863,10 +926,12 @@ function overSpec(entry) {
       boxPct: entry.boxPct || null,
       fit: entry.fit || 'height',
       maxWidthPct: (entry.maxWidthPct != null) ? entry.maxWidthPct : null,
-      edgeInsetPct: entry.edgeInsetPct || 0
+      edgeInsetPct: entry.edgeInsetPct || 0,
+      opticalFrom: entry.opticalFrom || 0,
+      opticalMax: entry.opticalMax || 0
     };
   }
-  return { kinds: entry, box: null, boxPct: null, fit: 'height', maxWidthPct: null, edgeInsetPct: 0 };
+  return { kinds: entry, box: null, boxPct: null, fit: 'height', maxWidthPct: null, edgeInsetPct: 0, opticalFrom: 0, opticalMax: 0 };
 }
 
 // Kind names deliberately carry no internal hyphen ('collarback', not
@@ -1321,7 +1386,8 @@ function main() {
                   var extra = artworkFor(slugs[i], spec.kinds);
                   if (extra) {
                     stack.push({ file: extra, box: spec.box, boxPct: spec.boxPct, fit: spec.fit,
-                                 maxWidthPct: spec.maxWidthPct, edgeInsetPct: spec.edgeInsetPct });
+                                 maxWidthPct: spec.maxWidthPct, edgeInsetPct: spec.edgeInsetPct,
+                                 opticalFrom: spec.opticalFrom, opticalMax: spec.opticalMax });
                     overlaid.push(decodeURI(extra.name) + ((spec.box || spec.boxPct) ? '' : ' (full canvas)'));
                   }
                 }
