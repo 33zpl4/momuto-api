@@ -1,0 +1,61 @@
+name: Set Product 3D Pointer
+
+# Repoints a product's 3D-customizer link (inner_title.mudel) from
+# cms/product-3d-pointers/<store>.json — scripts/set-product-3d-pointer.js.
+# GET the single product, guard, PUT the full object back, read back and verify.
+#
+# Click-free like the other deploys: edit the pointer file and merge → the
+# changed store's entries are applied live (the integration token cannot
+# trigger workflow_dispatch). Dispatch is kept for dry runs / re-runs.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'cms/product-3d-pointers/*.json'
+  workflow_dispatch:
+    inputs:
+      store:
+        description: 'Store (blank = every pointer file)'
+        required: false
+        default: 'us'
+        type: choice
+        options: ['', 'en', 'es', 'fr', 'it', 'us']
+      dry_run:
+        description: 'Dry run — read + report, write nothing'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  set-pointer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Changed pointer files (push)
+        if: github.event_name == 'push'
+        id: changed
+        run: |
+          FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'cms/product-3d-pointers/*.json' | tr '\n' ' ')
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          echo "changed: $FILES"
+
+      - name: Set product 3D pointers
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          TARGET_STORE: ${{ github.event.inputs.store }}
+          CHANGED_FILES: ${{ steps.changed.outputs.files }}
+          DRY_RUN: ${{ github.event_name == 'push' && 'false' || github.event.inputs.dry_run }}
+        run: node scripts/set-product-3d-pointer.js
