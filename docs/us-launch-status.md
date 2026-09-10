@@ -13,8 +13,9 @@ config lives in `docs/store-config-shipping.md`.
 - **Pages** (`pages/us/*`, deployed via `deploy-us-pages.yml`):
   ready-to-play, request-custom-kit-design (live Stripe link
   `buy.stripe.com/8x2fZhe204q8ge32KV3wQ0M`, $15 deposit),
-  ai-concept-to-real-kit, custom-basketball-jerseys (tool-only launch,
-  `suitName=mamuto3basket3`).
+  ai-concept-to-real-kit, custom-basketball-jerseys (tool-only launch; 3D link
+  `configId=avy6d4xt&suitName=basketball` — the curated collection, NOT the
+  vendor stock `mamuto3basket3`; owner ruling 10 Sep 2026).
 - **Blog**: 8 posts in `blogs/us/*.json`, US lexicon (soccer, USD), live.
   Store URLs are `/blogs/<handle>` — NO `/us/` segment (store-per-domain).
 - **Products**: 7 RTP products cloned from EN at **$40.90** (owner-ruled
