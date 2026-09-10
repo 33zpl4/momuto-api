@@ -1,0 +1,64 @@
+name: Create Basketball Shorts product
+
+# Creates "MOMUTO Pro Basketball Shorts" ($20.90, US store) — the billable
+# order line for basketball shorts, sibling of MOMUTO Shorts Pro
+# (scripts/create-basketball-shorts-product.js). Click-free like the product
+# patches: a push to the watched paths on main creates for real — the script
+# is idempotent by handle (an existing product is verified, never duplicated)
+# and reads back every create. Dispatch is kept for dry runs / re-runs.
+# Runs on the GitHub runner (the sandbox cannot reach openapi.oemapps.com).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/create-basketball-shorts-product.js'
+      - '.github/workflows/create-basketball-shorts-product.yml'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Print payloads only, send nothing'
+        type: choice
+        options: ['true', 'false']
+        default: 'true'
+      lang:
+        description: 'Store to create on'
+        type: choice
+        options: ['all', 'us']
+        default: 'all'
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Create product
+        env:
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+        run: |
+          FLAGS="--lang ${{ inputs.lang || 'all' }}"
+          if [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.dry_run }}" = "false" ]; then FLAGS="$FLAGS --live"; fi
+          node scripts/create-basketball-shorts-product.js $FLAGS
+
+      - name: Commit ids back
+        if: ${{ github.event_name == 'push' || inputs.dry_run == 'false' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cms/basketball-shorts
+          if git diff --cached --quiet; then
+            echo "nothing new"
+            exit 0
+          fi
+          git commit -m "Basketball shorts product ids [skip ci]"
+          git pull --rebase origin main
+          git push

@@ -31,6 +31,15 @@ config lives in `docs/store-config-shipping.md`.
   custom-design-basketjersey-en.png`, uploaded in the admin like the
   football tiles) and the quantity-discount campaign must include it —
   promotions have no API surface: admin → Promotions → Rebate.
+  **Basketball shorts**: `MOMUTO Pro Basketball Shorts` ($20.90, sibling of
+  MOMUTO Shorts Pro, collection "customized", no 3D pointer yet — the tool
+  has no basketball-shorts model) is created by
+  `scripts/create-basketball-shorts-product.js` +
+  `create-basketball-shorts-product.yml` (live on merge, idempotent by
+  handle; id lands in `cms/basketball-shorts/ids.json`). Swap its photo for
+  `custom-design-basketshorts-en.png` in the admin and add it to the
+  basketball campaign; wire the id into the US cart hand-off when the shorts
+  model ships.
 - **Nav**: curated "Header Menu" via `sync-store-config.js apply-nav` —
   Custom Jerseys ▾ (Ready to Play / Custom design request ($15) / AI
   concept), Basketball, Iconic Series ▾ (Drop 01/02), Support ▾
