@@ -298,16 +298,44 @@ async function main() {
         await putZone(world, world.plan_name,
           twoPlans(world, 'Certified Courier | 25-30 Days Delivery', '', '', 59, 4.9), wAreas);
       }
-    } else if (store === 'en' || store === 'it') {
-      const wName = store === 'en' ? 'Certified Courier | 25-30 Days Delivery' : 'Corriere certificato | Consegna in 25-30 giorni';
-      const dB = store === 'en' ? 'Estimated delivery: 25-30 days' : 'Consegna stimata: 25-30 giorni';
-      const dA = store === 'en' ? 'FREE - Estimated delivery: 25-30 days' : 'GRATIS - Consegna stimata: 25-30 giorni';
+    } else if (store === 'en') {
       const gb = byName('EMS via Royal Mail', 'Royal Mail');
       if (gb) await putZone(gb, 'Royal Mail',
         twoPlans(gb, 'Royal Mail | 25-30 Days Delivery', 'Estimated delivery: 25-30 days', 'FREE - Estimated delivery: 25-30 days', T_EU, F_EU),
         await areasOf(gb.id));
       const world = byName('FREE EMS Shipping');
-      if (world) await putZone(world, world.plan_name, twoPlans(world, wName, dB, dA, T_EU, F_EU), await areasOf(world.id));
+      if (world) await putZone(world, world.plan_name,
+        twoPlans(world, 'Certified Courier | 25-30 Days Delivery', 'Estimated delivery: 25-30 days', 'FREE - Estimated delivery: 25-30 days', T_EU, F_EU),
+        await areasOf(world.id));
+    } else if (store === 'it') {
+      // Owner ruling 11 Sep 2026: Italy ships with Poste Italiane, and the cloned
+      // English "Royal Mail | 25-30 Days Delivery" plan has no place on it.momuto.com.
+      // The GB-only Royal Mail zone (161797) is repurposed as the Italy zone; GB
+      // joins the worldwide certified-courier zone. Type-1 zones may not overlap
+      // ("数据已存在"), so IT leaves the worldwide zone BEFORE it enters the new one,
+      // and GB enters worldwide only AFTER it has left the repurposed zone.
+      const wName = 'Corriere internazionale certificato | Consegna in 25-30 giorni';
+      const dB = 'Consegna stimata: 25-30 giorni', dA = 'GRATIS - Consegna stimata: 25-30 giorni';
+      const gb = byName('EMS via Royal Mail', 'Royal Mail', 'Poste Italiane');
+      const world = byName('FREE EMS Shipping');
+      if (!gb || !world) { console.error(`IT: zones not found (gb=${!!gb}, world=${!!world}) — run inspect-zones`); process.exit(1); }
+      const wAll = await areasOf(world.id), gAll = await areasOf(gb.id);
+      const it = wAll.find(a => a.country_code_2 === 'IT') || gAll.find(a => a.country_code_2 === 'IT');
+      if (!it) { console.error('IT: Italy not found in either zone'); process.exit(1); }
+      const worldPlans = () => twoPlans(world, wName, dB, dA, T_EU, F_EU);
+      const worldNoIT = wAll.filter(a => a.country_code_2 !== 'IT');
+      // 1) Italy leaves the worldwide zone (uncovered for a few seconds — rollback below)
+      if (!await putZone(world, world.plan_name, worldPlans(), worldNoIT)) { console.error('worldwide shrink failed — nothing else attempted'); process.exit(1); }
+      // 2) the ex-Royal-Mail zone becomes Poste Italiane, Italy only
+      const okIT = await putZone(gb, 'Poste Italiane',
+        twoPlans(gb, 'Poste Italiane | Consegna in 25-30 giorni', dB, dA, T_EU, F_EU), [it]);
+      if (!okIT) {
+        console.log('Poste Italiane PUT failed — rolling Italy back into the worldwide zone…');
+        await putZone(world, world.plan_name, worldPlans(), wAll); process.exit(1);
+      }
+      // 3) GB (and anything else the old zone held) joins the worldwide zone
+      const movers = gAll.filter(a => a.country_code_2 !== 'IT' && !worldNoIT.some(w => w.country_code_2 === a.country_code_2));
+      await putZone(world, world.plan_name, worldPlans(), [...worldNoIT, ...movers]);
     } else if (store === 'fr') {
       const world = byName('LIVRAISON GRATUITE');
       if (!world) { console.error('zone "LIVRAISON GRATUITE" introuvable'); process.exit(1); }

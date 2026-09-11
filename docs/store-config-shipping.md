@@ -22,8 +22,8 @@ rule 6) — a zone that disagrees is a bug.
 | ES | CTT Express (186334) | ES mainland (201) | "CTT Express (25-30 días)", "Gratis desde 50€." |
 | ES | Correos (186335) | Islas Canarias (253) | "Correos (25-30 días)" |
 | ES | worldwide (20559) | 251 areas (ES+IC removed) | €3.90 < €50, free ≥ €50 |
-| IT | Royal Mail (161797) | GB | aligned to €3.90/€50 |
-| IT | worldwide (161796) | 252 areas | was free-on-everything → now €3.90/€50 — "Corriere certificato \| Consegna in 25-30 giorni" |
+| IT | Poste Italiane (161797, ex Royal Mail) | IT | €3.90 < €50, free ≥ €50 — "Poste Italiane \| Consegna in 25-30 giorni" (owner ruling 11 Sep 2026) |
+| IT | worldwide (161796) | rest of world incl. GB | €3.90/€50 — "Corriere internazionale certificato \| Consegna in 25-30 giorni" |
 | US | USPS (186277) | US only (229) | $4.90 < $59, free ≥ $59 |
 | US | worldwide (186276) | excludes US | $4.90 < $59, free ≥ $59 |
 
