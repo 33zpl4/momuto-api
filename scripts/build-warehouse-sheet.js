@@ -19,7 +19,7 @@
  *      front/back renders as its images.
  *   3. Roster (name / number / size / sleeve / qty per jersey) lives on the
  *      design server only. Read, in order: --roster file; the design server
- *      itself (GET /Order/getGoods, secret DESIGN_ORDER_TOKEN); momuto-api
+ *      itself (GET /Order/getGoods — unauthenticated on the server); momuto-api
  *      `admin-orders?action=detail` (needs MOMUTO_API_SECRET, the record the
  *      design-server webhook stored); else the sheet carries a red
  *      "名单未获取" row and the jersey count from the platform lines, so the
@@ -186,39 +186,26 @@ function normaliseRoster(players) {
     return { number: String(p.number ?? ''), name: String(p.name ?? ''), size, sleeve, shorts, qty: parseInt(p.qty, 10) || 1 };
   });
 }
-// Design server, direct: GET /Order/getGoods?order_no=<ref>&oem_no=<platform no>
-// (the routed endpoint the store side already calls). Auth is a token constant
-// in OrderAction.php on the server → repo secret DESIGN_ORDER_TOKEN; the header
-// name is not in this repo, so several conventions are tried and the one that
-// answers is logged.
+// Design server, direct: GET /Order/getGoods?order_no=<ref> — the routed
+// endpoint the store side calls at checkout (OrderAction::getGoods, read
+// 11 Sep 2026). It carries NO auth check (its Token constant is unused), so
+// nothing is sent. oem_no is deliberately OMITTED: when present the endpoint
+// WRITES plant_order_no onto our order, and a read-only tool must not write.
+// Response: { code: 200, data: [{ urlThumbnailFront, urlThumbnailBack,
+//             info: [{number,name,size,qty,...}], suit_name, defind_type }] }
 const DESIGN_HOST = 'https://design.momuto.com';
-async function rosterFromDesignServer(ref3d, platformNo) {
-  const tok = process.env.DESIGN_ORDER_TOKEN; if (!tok || !ref3d) return null;
-  const q = `order_no=${encodeURIComponent(ref3d)}&oem_no=${encodeURIComponent(platformNo || '')}`;
-  const attempts = [
-    ['header token', `${DESIGN_HOST}/Order/getGoods?${q}`, { token: tok }],
-    ['header Authorization Bearer', `${DESIGN_HOST}/Order/getGoods?${q}`, { Authorization: `Bearer ${tok}` }],
-    ['header Token', `${DESIGN_HOST}/Order/getGoods?${q}`, { Token: tok }],
-    ['query token', `${DESIGN_HOST}/Order/getGoods?${q}&token=${encodeURIComponent(tok)}`, {}],
-  ];
-  for (const [how, url, headers] of attempts) {
-    try {
-      const r = await fetch(url, { headers });
-      const text = await r.text();
-      let j; try { j = JSON.parse(text); } catch { console.error(`  design-server getGoods (${how}): HTTP ${r.status} non-JSON ${text.slice(0, 120)}`); continue; }
-      const d = j.data || j.result || j;
-      const list = Array.isArray(d) ? d : (d.goods || d.list || d.designs || (d.goods_info ? [d] : null));
-      if (!r.ok || !list) { console.error(`  design-server getGoods (${how}): ${r.status} ${text.slice(0, 160)}`); continue; }
-      const designs = list.map(g => {
-        let players = field(g, ['goods_info', 'players', 'roster']) || [];
-        if (typeof players === 'string') { try { players = JSON.parse(players); } catch { players = []; } }
-        return { suit: field(g, ['suit_name', 'suit']) || '', front: abs(field(g, ['front', 'urlThumbnailFront', 'thumbnail_front', 'img'])), back: abs(field(g, ['back', 'urlThumbnailBack', 'thumbnail_back'])), players: normaliseRoster(players) };
-      });
-      console.log(`  design-server getGoods answered via ${how}`);
-      return designs.some(x => x.players.length) ? designs : null;
-    } catch (e) { console.error(`  design-server getGoods (${how}): ${e.message}`); }
-  }
-  return null;
+async function rosterFromDesignServer(ref3d) {
+  if (!ref3d) return null;
+  const r = await fetch(`${DESIGN_HOST}/Order/getGoods?order_no=${encodeURIComponent(ref3d)}`);
+  const text = await r.text();
+  let j; try { j = JSON.parse(text); } catch { console.error(`  design-server getGoods: HTTP ${r.status} non-JSON ${text.slice(0, 120)}`); return null; }
+  if (j.code !== 200 || !Array.isArray(j.data)) { console.error(`  design-server getGoods: code ${j.code} ${j.message || text.slice(0, 120)}`); return null; }
+  const designs = j.data.map(g => {
+    let players = field(g, ['info', 'goods_info', 'players']) || [];
+    if (typeof players === 'string') { try { players = JSON.parse(players); } catch { players = []; } }
+    return { suit: field(g, ['suit_name', 'suit']) || '', front: abs(field(g, ['urlThumbnailFront', 'front'])), back: abs(field(g, ['urlThumbnailBack', 'back'])), players: normaliseRoster(players) };
+  });
+  return designs.some(x => x.players.length) ? designs : null;
 }
 const abs = (u) => !u ? null : (/^https?:/i.test(u) ? u : `${DESIGN_HOST}${u.startsWith('/') ? '' : '/'}${u}`);
 
@@ -369,7 +356,7 @@ async function processOrder(lang, raw, token) {
     designs = (Array.isArray(j) ? j : j.designs || [j]).map(d => ({ suit: d.suit || '', front: d.front || null, back: d.back || null, players: normaliseRoster(d.players || d) }));
     console.log(`  roster: --roster file (${designs.length} design(s))`);
   } else {
-    designs = await rosterFromDesignServer(order.ref3d, order.order_number).catch(e => { console.error(`  roster: ${e.message}`); return null; });
+    designs = await rosterFromDesignServer(order.ref3d).catch(e => { console.error(`  roster: ${e.message}`); return null; });
     if (designs) console.log(`  roster: design server (${designs.reduce((n, d) => n + d.players.length, 0)} rows)`);
     else {
       designs = await rosterFromMomutoApi(order.ref3d).catch(e => { console.error(`  roster: ${e.message}`); return null; });
