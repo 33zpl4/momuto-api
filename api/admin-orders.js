@@ -17,6 +17,8 @@
  *
  *   List:        GET  /api/admin-orders?action=list
  *   Find:        GET  /api/admin-orders?action=find&q=<ref | platform order no | email>
+ *   Detail:      GET  /api/admin-orders?action=detail&q=<same>  → full record incl.
+ *                designs[{front,back,players[]}] (scripts/build-warehouse-sheet.js)
  *                Searches ALL stored orders (not just active) — the CMS admin
  *                shows the PLATFORM order number (e.g. 2026081633552986), which
  *                is stored as plantOrderNo, so this is how you locate an order
@@ -200,6 +202,16 @@ module.exports = async function handler(req, res) {
           'Check the CMS admin for the customer email and the platform\'s own ' +
           'confirmation-email setting.',
     });
+  }
+
+  // ---- DETAIL (full stored record: designs + roster, for the warehouse sheet)
+  if (action === 'detail') {
+    const q = req.query.q || body.q || body.order || '';
+    if (!String(q).trim()) return res.status(400).json({ error: 'q is required' });
+    const pairs = await loadAllOrders();
+    const hit = pairs.find(([id, o]) => matchesQuery(id, o, q));
+    if (!hit) return res.status(404).json({ ok: false, q, error: 'no stored order matches' });
+    return res.status(200).json({ ok: true, id: hit[0], order: hit[1] });
   }
 
   // ---- RESEND CONFIRMATION (manual override) ---------------------------

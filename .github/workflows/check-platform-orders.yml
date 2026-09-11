@@ -1,9 +1,12 @@
-name: Check platform orders (payment truth)
+name: Check platform orders (payment truth + warehouse sheets)
 
 # manage.momuto.com's payment column lags the store platform by days (webhook
 # sweeps). This asks the platform directly. Read-only.
 #   order  → one order number, any store
 #   recent → paid / unpaid / cancelled digest for the last N days
+#   sheet  → build + email the warehouse production sheet (生产单) for one
+#            order; sheet-recent → for every order paid in the last N hours
+#            (scripts/build-warehouse-sheet.js; also run daily after the digest)
 # Daily digest at 05:00 China time (21:00 UTC); the result is in the run's
 # Summary tab and, once the RESEND_API_KEY repo secret exists (Settings →
 # Secrets and variables → Actions; same key the Vercel api/* functions use),
@@ -19,7 +22,7 @@ on:
       mode:
         description: 'order = one order number · recent = digest of the last N days · probe = dump raw API shape'
         type: choice
-        options: ['order', 'recent', 'probe']
+        options: ['order', 'recent', 'probe', 'sheet', 'sheet-recent']
         default: 'recent'
       order_number:
         description: 'order: the platform order number (plant_order_no)'
@@ -29,6 +32,14 @@ on:
         description: 'recent: how many days back'
         required: false
         default: '30'
+      hours:
+        description: 'sheet-recent: orders paid in the last N hours'
+        required: false
+        default: '24'
+      emails:
+        description: 'sheet: recipients override, comma-separated (default: WAREHOUSE_EMAILS variable)'
+        required: false
+        default: ''
       lang:
         description: 'Store'
         type: choice
@@ -43,6 +54,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Install sheet builder deps
+        run: npm install --no-audit --no-fund --no-save exceljs@4.4.0
       - name: Check
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
@@ -51,10 +64,24 @@ jobs:
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          MOMUTO_API_SECRET: ${{ secrets.MOMUTO_API_SECRET }}
+          WAREHOUSE_EMAILS: ${{ inputs.emails || vars.WAREHOUSE_EMAILS }}
         run: |
           MODE="${{ inputs.mode }}"; LANG_IN="${{ inputs.lang }}"
           case "${MODE:-recent}" in
             order)  node scripts/check-platform-orders.js --order "${{ inputs.order_number }}" --lang "${LANG_IN:-all}" ;;
             probe)  node scripts/check-platform-orders.js --probe --lang "${LANG_IN:-all}" ;;
-            *)      node scripts/check-platform-orders.js --recent "${{ inputs.days || '30' }}" --lang "${LANG_IN:-all}" ;;
+            sheet)  node scripts/build-warehouse-sheet.js --order "${{ inputs.order_number }}" --lang "${LANG_IN:-all}" ;;
+            sheet-recent) node scripts/build-warehouse-sheet.js --paid-since "${{ inputs.hours || '24' }}" --lang "${LANG_IN:-all}" ;;
+            *)      node scripts/check-platform-orders.js --recent "${{ inputs.days || '30' }}" --lang "${LANG_IN:-all}"
+                    # scheduled daily run: sheets for everything paid since yesterday's run
+                    if [ -z "$MODE" ]; then node scripts/build-warehouse-sheet.js --paid-since 25 --lang all; fi ;;
           esac
+      - name: Keep the sheets as a run artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: warehouse-sheets
+          path: sheets/*.xlsx
+          if-no-files-found: ignore
+          retention-days: 90

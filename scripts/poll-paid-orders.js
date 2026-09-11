@@ -272,16 +272,6 @@ async function run() {
     }
   }
 
-  if (args.probe) {
-    // TEMPORARY (11 Sep 2026, branch only): check-platform-orders.yml is not on
-    // main yet and workflow_dispatch needs the file there, so the probe run
-    // doubles as the first real read. Remove once the branch is merged.
-    const { execFileSync } = require('child_process');
-    for (const a of [['--order', '2026091033559596', '--lang', 'all'], ['--recent', '30', '--lang', 'all']]) {
-      try { execFileSync(process.execPath, ['scripts/check-platform-orders.js', ...a], { stdio: 'inherit', env: process.env }); }
-      catch (e) { console.error('check-platform-orders failed:', e.message); }
-    }
-  }
   if (!args.probe) {
     console.log('\n=== SUMMARY ===');
     console.log(JSON.stringify(report, null, 2));
