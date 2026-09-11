@@ -153,6 +153,50 @@ const US_FOOTER_CHILDREN = [
   ]),
 ];
 
+// ── FR menus — transcribed from GET /navs on 11 Sep 2026, changed only where noted.
+const FR_HEADER_CHILDREN = [
+  item('MAILLOTS PERSONNALISÉS', 0, 0, '', [
+    // NEW 11 Sep 2026 — GSC fr: the "créer son maillot" tool cluster (build-maker-pages.js, fr)
+    item('Créer son maillot en 3D — gratuit', 0, 6, 'https://fr.momuto.com/pages/creer-son-maillot-de-foot'),
+    // NEW — the hub was live but unlinked from the header (ranked 36-51 for "maillot de foot personnalisé")
+    item('Maillot de foot personnalisé', 1, 6, 'https://fr.momuto.com/pages/maillot-foot-personnalise'),
+    item('Galerie de Designs', 2, 6, 'https://fr.momuto.com/pages/galerie-maillots-foot-sur-mesure'),
+    page('Ready-to-Play', 3, '/pages/collection-ready-to-play', 4473337),
+  ]),
+  item('ICONIC SERIES', 1, 0, '', [
+    item('Drop 01', 0, 2, '/collections/iconic-football-series', [], 144943),
+    item('Drop 02', 1, 2, '/collections/iconic-series-drop-02', [], 145074),
+  ]),
+  page('LA MARQUE', 2, '/pages/a-propos-de-nous', 261687),
+  item('AIDE', 3, 0, '', [
+    item('FAQ', 0, 6, 'https://fr.momuto.com/pages/questions-frequentes'),
+    item('Impression & Matériaux', 1, 6, 'https://fr.momuto.com/pages/impression-et-materiaux'),
+    item('Guide des Tailles', 2, 6, 'https://fr.momuto.com/pages/guide-des-tailles'),
+    item('Contact', 3, 6, 'https://fr.momuto.com/pages/contactez-nous'),
+  ]),
+];
+const FR_FOOTER_CHILDREN = [
+  item('AIDE', 0, 0, '/', [
+    item('FAQ', 0, 6, 'https://fr.momuto.com/pages/questions-frequentes'),
+    item('Guide des Tailles', 1, 6, 'https://fr.momuto.com/pages/guide-des-tailles'),
+    item('Contact', 2, 6, 'https://fr.momuto.com/pages/contactez-nous'),
+    item('Impression & Matériaux', 3, 6, 'https://fr.momuto.com/pages/impression-et-materiaux'),
+  ]),
+  item('BOUTIQUE', 1, 0, '/', [
+    item('Statut de la Commande', 0, 6, 'https://design.momuto.com/userInfo/order'),
+    page('Politique de Livraison', 1, '/pages/politique-de-livraison', 261678),
+    page('Retour & Échange', 2, '/pages/retours-echanges', 261677),
+    page('Conditions Générales', 3, '/pages/conditions-generales', 261679),
+    page('Politique de Confidentialité', 4, '/pages/politique-de-confidentialite', 261674),
+  ]),
+  item('POUR VOUS', 2, 0, '', [
+    page('Réductions Spéciales', 0, '/pages/reductions-speciales', 261683),
+    page("Soumission d'Idées", 1, '/pages/idea-submission', 222650),
+    // FIXED 11 Sep 2026: pointed at https://www.momuto.fr/… (wrong domain)
+    item('Comparatif Fournisseurs 2026', 2, 6, 'https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026'),
+  ]),
+];
+
 // Curated homepage SEO per store (PUT /seoplans). meta_keywords is an array
 // (same CMS rule as pages). Only stores listed here can be applied.
 const HOMEPAGE_SEO = {
@@ -405,6 +449,7 @@ async function main() {
   const MENUS = {
     us: { 'Header Menu': US_MENU_CHILDREN, 'Footer Menu': US_FOOTER_CHILDREN },
     en: { 'Header Menu': EN_HEADER_CHILDREN, 'Footer Menu': EN_FOOTER_CHILDREN },
+    fr: { 'Header Menu': FR_HEADER_CHILDREN, 'Footer Menu': FR_FOOTER_CHILDREN },
   };
   const children = MENUS[store]?.[navName];
   if (!children) { console.error(`No curated tree for store "${store}" menu "${navName}" — apply-nav would overwrite it with nothing sensible. Curate one in MENUS first.`); process.exit(1); }
