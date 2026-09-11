@@ -41,13 +41,24 @@ direct design-server read is the primary source now; the momuto-api record is
 the fallback. `api/order-3d-paid.js` backfills the roster into a record the
 poller created without one.
 
+## Confirmation-email poller (owner ruling 11 Sep 2026)
+
+`poll-paid-orders.js` skips anything paid before 2026-09-11 15:30 UTC
+(`POLL_NOT_BEFORE`): customers from the silent-webhook fortnight are not
+emailed retroactively. Going live = repo variable `POLL_LIVE=1`.
+
 ## Security note (owner, 11 Sep 2026)
 
 `OrderAction::getGoods` on design.momuto.com has no auth check and answers
 any `order_no` with the customer's roster (names, numbers) and renders; with
 `oem_no` it also overwrites `plant_order_no`. Refs are 10 random chars, so it
-is not enumerable, but it should get a token check (`server-patches/`) when
-the server is next touched. This tool only reads.
+is not enumerable, but a shared-secret check is NOT possible without breaking the store: the
+customer's browser calls it from the checkout scripts
+(`store-script-*-checkout-*.html`), so any token would be public. The
+workable hardening is scoping by the caller's own `uuid` (store pages send
+it) plus a server-side secret for the runner — but `uuid` resets on re-login
+(see order-pipeline.md), so that needs a test order before deploy. Left as
+a follow-up; this tool only reads.
 
 ## Known gaps
 
