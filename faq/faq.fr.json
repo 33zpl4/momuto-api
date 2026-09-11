@@ -160,7 +160,7 @@
         ],
         [
           "Qui livre, et puis-je suivre le colis ?",
-          "Chaque commande est suivie et vous recevez le numéro de suivi par e-mail dès l'expédition. En France, votre colis est livré par <b>Colis Privé</b> ; ailleurs, par un transporteur international certifié. Livraison gratuite dès 50 € (3,90 € en dessous)."
+          "Chaque commande est suivie et vous recevez le numéro de suivi par e-mail dès l'expédition. En France, votre colis est livré par <b>Colis Privé (Belgique et Suisse : transporteur international certifié, mêmes tarifs)</b> ; ailleurs, par un transporteur international certifié. Livraison gratuite dès 50 € (3,90 € en dessous)."
         ],
         [
           "Vais-je payer des frais de douane ?",
@@ -302,6 +302,10 @@
   "more": {
     "label": "Continuer :",
     "links": [
+      [
+        "/pages/creer-son-maillot-de-foot",
+        "créer son maillot en 3D"
+      ],
       [
         "/pages/collection-ready-to-play",
         "designs Ready to Play"

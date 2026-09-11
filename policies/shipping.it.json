@@ -76,13 +76,7 @@
     "rows": [
       [
         "Italia",
-        "Corriere certificato",
-        "3,90 € · <b>gratis da 50 €</b>",
-        "25–30 giorni"
-      ],
-      [
-        "Regno Unito",
-        "Royal Mail",
+        "Poste Italiane",
         "3,90 € · <b>gratis da 50 €</b>",
         "25–30 giorni"
       ],
@@ -115,7 +109,7 @@
       ],
       [
         "Consegnate nella mia zona?",
-        "In Italia consegna un corriere certificato; nel Regno Unito Royal Mail; nel resto del mondo un corriere internazionale certificato. I clienti in Spagna, Francia e Stati Uniti hanno corrieri e prezzi locali sul proprio store MOMUTO."
+        "In Italia consegna Poste Italiane; nel resto d'Europa e del mondo un corriere internazionale certificato. I clienti in Spagna, Francia e Stati Uniti hanno corrieri e prezzi locali sul proprio store MOMUTO."
       ],
       [
         "Pagherò dazi o tasse di importazione?",

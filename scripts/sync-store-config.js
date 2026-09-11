@@ -153,6 +153,50 @@ const US_FOOTER_CHILDREN = [
   ]),
 ];
 
+// ── FR menus — transcribed from GET /navs on 11 Sep 2026, changed only where noted.
+const FR_HEADER_CHILDREN = [
+  item('MAILLOTS PERSONNALISÉS', 0, 0, '', [
+    // NEW 11 Sep 2026 — GSC fr: the "créer son maillot" tool cluster (build-maker-pages.js, fr)
+    item('Créer son maillot en 3D — gratuit', 0, 6, 'https://fr.momuto.com/pages/creer-son-maillot-de-foot'),
+    // NEW — the hub was live but unlinked from the header (ranked 36-51 for "maillot de foot personnalisé")
+    item('Maillot de foot personnalisé', 1, 6, 'https://fr.momuto.com/pages/maillot-foot-personnalise'),
+    item('Galerie de Designs', 2, 6, 'https://fr.momuto.com/pages/galerie-maillots-foot-sur-mesure'),
+    page('Ready-to-Play', 3, '/pages/collection-ready-to-play', 4473337),
+  ]),
+  item('ICONIC SERIES', 1, 0, '', [
+    item('Drop 01', 0, 2, '/collections/iconic-football-series', [], 144943),
+    item('Drop 02', 1, 2, '/collections/iconic-series-drop-02', [], 145074),
+  ]),
+  page('LA MARQUE', 2, '/pages/a-propos-de-nous', 261687),
+  item('AIDE', 3, 0, '', [
+    item('FAQ', 0, 6, 'https://fr.momuto.com/pages/questions-frequentes'),
+    item('Impression & Matériaux', 1, 6, 'https://fr.momuto.com/pages/impression-et-materiaux'),
+    item('Guide des Tailles', 2, 6, 'https://fr.momuto.com/pages/guide-des-tailles'),
+    item('Contact', 3, 6, 'https://fr.momuto.com/pages/contactez-nous'),
+  ]),
+];
+const FR_FOOTER_CHILDREN = [
+  item('AIDE', 0, 0, '/', [
+    item('FAQ', 0, 6, 'https://fr.momuto.com/pages/questions-frequentes'),
+    item('Guide des Tailles', 1, 6, 'https://fr.momuto.com/pages/guide-des-tailles'),
+    item('Contact', 2, 6, 'https://fr.momuto.com/pages/contactez-nous'),
+    item('Impression & Matériaux', 3, 6, 'https://fr.momuto.com/pages/impression-et-materiaux'),
+  ]),
+  item('BOUTIQUE', 1, 0, '/', [
+    item('Statut de la Commande', 0, 6, 'https://design.momuto.com/userInfo/order'),
+    page('Politique de Livraison', 1, '/pages/politique-de-livraison', 261678),
+    page('Retour & Échange', 2, '/pages/retours-echanges', 261677),
+    page('Conditions Générales', 3, '/pages/conditions-generales', 261679),
+    page('Politique de Confidentialité', 4, '/pages/politique-de-confidentialite', 261674),
+  ]),
+  item('POUR VOUS', 2, 0, '', [
+    page('Réductions Spéciales', 0, '/pages/reductions-speciales', 261683),
+    page("Soumission d'Idées", 1, '/pages/idea-submission', 222650),
+    // FIXED 11 Sep 2026: pointed at https://www.momuto.fr/… (wrong domain)
+    item('Comparatif Fournisseurs 2026', 2, 6, 'https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026'),
+  ]),
+];
+
 // Curated homepage SEO per store (PUT /seoplans). meta_keywords is an array
 // (same CMS rule as pages). Only stores listed here can be applied.
 const HOMEPAGE_SEO = {
@@ -298,16 +342,44 @@ async function main() {
         await putZone(world, world.plan_name,
           twoPlans(world, 'Certified Courier | 25-30 Days Delivery', '', '', 59, 4.9), wAreas);
       }
-    } else if (store === 'en' || store === 'it') {
-      const wName = store === 'en' ? 'Certified Courier | 25-30 Days Delivery' : 'Corriere certificato | Consegna in 25-30 giorni';
-      const dB = store === 'en' ? 'Estimated delivery: 25-30 days' : 'Consegna stimata: 25-30 giorni';
-      const dA = store === 'en' ? 'FREE - Estimated delivery: 25-30 days' : 'GRATIS - Consegna stimata: 25-30 giorni';
+    } else if (store === 'en') {
       const gb = byName('EMS via Royal Mail', 'Royal Mail');
       if (gb) await putZone(gb, 'Royal Mail',
         twoPlans(gb, 'Royal Mail | 25-30 Days Delivery', 'Estimated delivery: 25-30 days', 'FREE - Estimated delivery: 25-30 days', T_EU, F_EU),
         await areasOf(gb.id));
       const world = byName('FREE EMS Shipping');
-      if (world) await putZone(world, world.plan_name, twoPlans(world, wName, dB, dA, T_EU, F_EU), await areasOf(world.id));
+      if (world) await putZone(world, world.plan_name,
+        twoPlans(world, 'Certified Courier | 25-30 Days Delivery', 'Estimated delivery: 25-30 days', 'FREE - Estimated delivery: 25-30 days', T_EU, F_EU),
+        await areasOf(world.id));
+    } else if (store === 'it') {
+      // Owner ruling 11 Sep 2026: Italy ships with Poste Italiane, and the cloned
+      // English "Royal Mail | 25-30 Days Delivery" plan has no place on it.momuto.com.
+      // The GB-only Royal Mail zone (161797) is repurposed as the Italy zone; GB
+      // joins the worldwide certified-courier zone. Type-1 zones may not overlap
+      // ("数据已存在"), so IT leaves the worldwide zone BEFORE it enters the new one,
+      // and GB enters worldwide only AFTER it has left the repurposed zone.
+      const wName = 'Corriere internazionale certificato | Consegna in 25-30 giorni';
+      const dB = 'Consegna stimata: 25-30 giorni', dA = 'GRATIS - Consegna stimata: 25-30 giorni';
+      const gb = byName('EMS via Royal Mail', 'Royal Mail', 'Poste Italiane');
+      const world = byName('FREE EMS Shipping');
+      if (!gb || !world) { console.error(`IT: zones not found (gb=${!!gb}, world=${!!world}) — run inspect-zones`); process.exit(1); }
+      const wAll = await areasOf(world.id), gAll = await areasOf(gb.id);
+      const it = wAll.find(a => a.country_code_2 === 'IT') || gAll.find(a => a.country_code_2 === 'IT');
+      if (!it) { console.error('IT: Italy not found in either zone'); process.exit(1); }
+      const worldPlans = () => twoPlans(world, wName, dB, dA, T_EU, F_EU);
+      const worldNoIT = wAll.filter(a => a.country_code_2 !== 'IT');
+      // 1) Italy leaves the worldwide zone (uncovered for a few seconds — rollback below)
+      if (!await putZone(world, world.plan_name, worldPlans(), worldNoIT)) { console.error('worldwide shrink failed — nothing else attempted'); process.exit(1); }
+      // 2) the ex-Royal-Mail zone becomes Poste Italiane, Italy only
+      const okIT = await putZone(gb, 'Poste Italiane',
+        twoPlans(gb, 'Poste Italiane | Consegna in 25-30 giorni', dB, dA, T_EU, F_EU), [it]);
+      if (!okIT) {
+        console.log('Poste Italiane PUT failed — rolling Italy back into the worldwide zone…');
+        await putZone(world, world.plan_name, worldPlans(), wAll); process.exit(1);
+      }
+      // 3) GB (and anything else the old zone held) joins the worldwide zone
+      const movers = gAll.filter(a => a.country_code_2 !== 'IT' && !worldNoIT.some(w => w.country_code_2 === a.country_code_2));
+      await putZone(world, world.plan_name, worldPlans(), [...worldNoIT, ...movers]);
     } else if (store === 'fr') {
       const world = byName('LIVRAISON GRATUITE');
       if (!world) { console.error('zone "LIVRAISON GRATUITE" introuvable'); process.exit(1); }
@@ -377,6 +449,7 @@ async function main() {
   const MENUS = {
     us: { 'Header Menu': US_MENU_CHILDREN, 'Footer Menu': US_FOOTER_CHILDREN },
     en: { 'Header Menu': EN_HEADER_CHILDREN, 'Footer Menu': EN_FOOTER_CHILDREN },
+    fr: { 'Header Menu': FR_HEADER_CHILDREN, 'Footer Menu': FR_FOOTER_CHILDREN },
   };
   const children = MENUS[store]?.[navName];
   if (!children) { console.error(`No curated tree for store "${store}" menu "${navName}" — apply-nav would overwrite it with nothing sensible. Curate one in MENUS first.`); process.exit(1); }

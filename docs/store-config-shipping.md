@@ -22,8 +22,8 @@ rule 6) — a zone that disagrees is a bug.
 | ES | CTT Express (186334) | ES mainland (201) | "CTT Express (25-30 días)", "Gratis desde 50€." |
 | ES | Correos (186335) | Islas Canarias (253) | "Correos (25-30 días)" |
 | ES | worldwide (20559) | 251 areas (ES+IC removed) | €3.90 < €50, free ≥ €50 |
-| IT | Royal Mail (161797) | GB | aligned to €3.90/€50 |
-| IT | worldwide (161796) | 252 areas | was free-on-everything → now €3.90/€50 — "Corriere certificato \| Consegna in 25-30 giorni" |
+| IT | Poste Italiane (161797, ex Royal Mail) | IT | €3.90 < €50, free ≥ €50 — "Poste Italiane \| Consegna in 25-30 giorni" (owner ruling 11 Sep 2026) |
+| IT | worldwide (161796) | rest of world incl. GB | €3.90/€50 — "Corriere internazionale certificato \| Consegna in 25-30 giorni" |
 | US | USPS (186277) | US only (229) | $4.90 < $59, free ≥ $59 |
 | US | worldwide (186276) | excludes US | $4.90 < $59, free ≥ $59 |
 
@@ -87,8 +87,14 @@ download the log zip.
   `/pages/shipping-policy` and Returns & Exchanges → `/pages/return-policy`.
 - Both stores also carry an unbound draft menu named "HEADER" with empty
   URLs — ignore it; the theme binds "Header Menu" / "Footer Menu".
-- ES/FR/IT menus are not curated — `apply-nav` will refuse them until a
-  tree is transcribed from `inspect-nav`.
+- **FR "Header Menu"** (70586): MAILLOTS PERSONNALISÉS → **Créer son maillot en
+  3D — gratuit** (`/pages/creer-son-maillot-de-foot`, new 11 Sep 2026),
+  **Maillot de foot personnalisé** (the hub, previously unlinked), Galerie de
+  Designs, Ready-to-Play; ICONIC SERIES; LA MARQUE; AIDE.
+- **FR "Footer Menu"** (70585): unchanged except "Comparatif Fournisseurs
+  2026", which pointed at `https://www.momuto.fr/…` (wrong domain).
+- ES/IT menus are not curated — `apply-nav` will refuse them until a tree is
+  transcribed from `inspect-nav`.
 
 
 ## The storefront footer is NOT the API "Footer Menu" (4 Sep 2026)

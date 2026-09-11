@@ -81,6 +81,12 @@
         "25–30 jours"
       ],
       [
+        "Belgique et Suisse",
+        "Transporteur international certifié",
+        "3,90 € · <b>offerte dès 50 €</b>",
+        "25–30 jours"
+      ],
+      [
         "Reste de l'Europe et monde",
         "Transporteur international certifié",
         "3,90 € · <b>offerte dès 50 €</b>",
@@ -109,7 +115,7 @@
       ],
       [
         "Livrez-vous chez moi ?",
-        "En France, votre colis est livré par Colis Privé ; partout ailleurs, par un transporteur international certifié. Les clients en Espagne, en Italie et aux États-Unis ont des transporteurs et des prix locaux sur leur propre boutique MOMUTO."
+        "En France, votre colis est livré par Colis Privé ; en Belgique, en Suisse et partout ailleurs, par un transporteur international certifié, aux mêmes tarifs. Les clients en Espagne, en Italie et aux États-Unis ont des transporteurs et des prix locaux sur leur propre boutique MOMUTO."
       ],
       [
         "Vais-je payer des frais de douane ?",
@@ -140,6 +146,10 @@
   "more": {
     "label": "Continuer :",
     "links": [
+      [
+        "/pages/creer-son-maillot-de-foot",
+        "créer son maillot en 3D"
+      ],
       [
         "/pages/questions-frequentes",
         "FAQ et tarifs"

@@ -1,0 +1,243 @@
+{
+  "locale": "fr",
+  "handle": "creer-son-maillot-de-foot",
+  "base": "https://fr.momuto.com",
+  "lang": "fr",
+  "currency": "EUR",
+  "meta": {
+    "title": "Créer son maillot de foot en 3D — gratuit, sans minimum | MOMUTO",
+    "meta_title": "Créer son Maillot de Foot en 3D : Gratuit, Sans Minimum | MOMUTO",
+    "meta_descript": "Créez votre maillot de foot en 3D gratuitement : couleurs, écusson, sponsor, noms et numéros en temps réel, puis commandez 1 ou 100 maillots. Dès 21,90 € à 10+.",
+    "keywords": [
+      "créer son maillot de foot",
+      "création maillot foot 3d",
+      "logiciel création maillot foot gratuit",
+      "configurateur maillot 3d",
+      "créer un maillot de foot",
+      "créateur de maillot de foot",
+      "maillot 3d",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Créateur de maillot de foot",
+    "h1": "Créer son Maillot de Foot <span class=\"acc\">en 3D</span>",
+    "sub": "Un créateur de maillot de foot gratuit et en temps réel : choisissez un modèle, réglez vos couleurs, déposez votre écusson et votre sponsor, ajoutez le nom et le numéro de chaque joueur, puis commandez directement depuis l'outil. Un maillot ou tout le club — sans minimum, sans compte.",
+    "btn": "Ouvrir le créateur 3D — gratuit",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr",
+    "btn2": "Voir les designs Ready to Play",
+    "btn2_url": "/pages/collection-ready-to-play"
+  },
+  "quick": [
+    [
+      "Gratuit",
+      "créez en 3D, payez seulement à la commande"
+    ],
+    [
+      "30+",
+      "modèles, chacun s'ouvre déjà fini"
+    ],
+    [
+      "Sans minimum",
+      "1 maillot ou 100+, le même outil"
+    ],
+    [
+      "25–30 jours",
+      "porte à porte, suivi, douane prépayée"
+    ]
+  ],
+  "features": {
+    "title": "Ce que fait le créateur",
+    "lead": "Tout ce qu'un logiciel de création de maillot de foot devrait faire, dans le navigateur, sans designer de votre côté.",
+    "items": [
+      [
+        "3D en temps réel",
+        "Faites tourner le maillot pendant que vous le créez. Ce que vous voyez est le fichier de sublimation que nous imprimons — aucune surprise à la maquette."
+      ],
+      [
+        "Couleurs sans limite",
+        "Chaque panneau, liseré et bande prend n'importe quelle couleur. Dégradés, motifs et fondus ne coûtent rien de plus — c'est une seule impression."
+      ],
+      [
+        "Écusson &amp; sponsor",
+        "Déposez l'écusson du club et les logos des sponsors dans l'outil. Un designer nettoie et prépare chaque logo pour l'impression avant la production."
+      ],
+      [
+        "Noms &amp; numéros",
+        "Ajoutez tout l'effectif au panier avec le nom, le numéro et la taille de chaque joueur. Inclus dans le prix."
+      ],
+      [
+        "Modèles déjà finis",
+        "Chaque modèle s'ouvre comme un design abouti dans un coloris pensé — partez de quelque chose de bien, pas d'une forme vide."
+      ],
+      [
+        "Commande depuis l'outil",
+        "Pas de devis, pas d'échange d'e-mails. Réglez les quantités, vérifiez la grille de prix et validez. Une maquette de production suit sous 24–48 h."
+      ]
+    ]
+  },
+  "synonyms": {
+    "title": "Créateur, configurateur, logiciel de création — un seul outil",
+    "body": "Les équipes cherchent un créateur de maillot de foot, un configurateur 3D, un logiciel de création de maillot gratuit ou simplement « créer son maillot ». C'est la même chose : un outil qui transforme une idée en vrai maillot de foot portable. Chez MOMUTO, c'est <b>le designer 3D</b> — gratuit, en temps réel et relié directement à la production, donc le design que vous validez est celui qui part. Si vous préférez ne pas le construire vous-même, la même équipe qui fait tourner l'outil peut <a href=\"/pages/demande-de-design-professionnel-de-maillots\">le créer pour vous</a> : première maquette sous 24–48 heures."
+  },
+  "ways": {
+    "title": "Trois façons de commencer",
+    "items": [
+      [
+        "Ready to Play",
+        "Choisissez un design fini du studio MOMUTO et ouvrez-le dans le créateur. Changez les couleurs et l'écusson, ou commandez-le tel quel.",
+        "/pages/collection-ready-to-play",
+        "Voir les designs"
+      ],
+      [
+        "De zéro en 3D",
+        "Ouvrez un modèle, réglez chaque couleur vous-même, déposez votre écusson et placez le sponsor. Le contrôle total, toujours gratuit.",
+        "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr",
+        "Ouvrir le designer 3D"
+      ],
+      [
+        "Envoyez votre idée",
+        "Un croquis, un brief, une photo du maillot de la saison dernière ou un concept généré par IA. Un designer le construit dans l'outil pour vous ; acompte de 15 €, intégralement déduit des commandes de 5 maillots et plus — offert pour une commande d'équipe.",
+        "/pages/demande-de-design-professionnel-de-maillots",
+        "Demander un design"
+      ]
+    ]
+  },
+  "pricing": {
+    "title": "Combien coûte un maillot de foot personnalisé",
+    "lead": "Une seule grille, aucuns frais de mise en place, noms et numéros inclus. Shorts et tenues complètes suivent les mêmes paliers.",
+    "cols": [
+      "Quantité",
+      "Maillot",
+      "Maillot + short"
+    ],
+    "rows": [
+      [
+        "1",
+        "38,90 €",
+        "56,80 €"
+      ],
+      [
+        "2–4",
+        "34,90 € pièce",
+        "50,80 €"
+      ],
+      [
+        "5–9",
+        "26,90 € pièce",
+        "38,80 €"
+      ],
+      [
+        "10–19",
+        "21,90 € pièce",
+        "26,90 €"
+      ],
+      [
+        "20–49",
+        "18,90 € pièce",
+        "24,90 €"
+      ],
+      [
+        "50–99",
+        "17,90 € pièce",
+        "23,40 €"
+      ],
+      [
+        "100+",
+        "16,90 € pièce",
+        "21,90 €"
+      ]
+    ],
+    "pop": 3,
+    "notes": [
+      "Manches longues +3 € par maillot, au choix par joueur.",
+      "Livraison offerte dès 50 € ; 3,90 € en dessous. Douane prépayée. Mêmes tarifs pour la Belgique et la Suisse.",
+      "Voie rapide +59 € par commande pour sauter la file de production — environ 7 jours gagnés."
+    ],
+    "more": "/pages/questions-frequentes#pricing",
+    "more_label": "Grille complète et FAQ"
+  },
+  "steps": {
+    "title": "Comment ça marche",
+    "items": [
+      [
+        "Créez",
+        "Construisez le maillot dans le créateur, ou envoyez-nous votre idée."
+      ],
+      [
+        "Validez",
+        "Une maquette de production arrive sous 24–48 h. Rien n'est imprimé avant votre validation."
+      ],
+      [
+        "Production",
+        "7–12 jours de sublimation intégrale, coupée et cousue à la taille de chaque joueur."
+      ],
+      [
+        "Livraison",
+        "10–15 jours d'expédition suivie avec Colis Privé en France. 25–30 jours porte à porte."
+      ]
+    ]
+  },
+  "faq": {
+    "title": "Questions sur le créateur de maillot",
+    "items": [
+      [
+        "Le créateur de maillot de foot est-il vraiment gratuit ?",
+        "Oui. Créer dans l'outil 3D est gratuit et ne demande aucun compte. Vous payez uniquement à la commande, au prix de la grille ci-dessus — aucuns frais de mise en place, de dessin ou d'écran."
+      ],
+      [
+        "Puis-je créer un seul maillot ?",
+        "Oui. Il n'y a pas de minimum. Un maillot seul coûte 38,90 € ; le prix unitaire descend à 21,90 € à partir de 10 et à 16,90 € à partir de 100."
+      ],
+      [
+        "Puis-je déposer mon propre écusson et mon sponsor ?",
+        "Oui. Déposez un fichier PNG, JPG, SVG ou PDF dans le créateur. Un designer nettoie chaque écusson et sponsor avant la production et vous envoie le fichier à valider."
+      ],
+      [
+        "Le créateur gère-t-il les noms et les numéros ?",
+        "Oui. Ajoutez l'effectif au panier avec le nom, le numéro et la taille de chaque joueur. Noms et numéros sont inclus dans le prix ; les manches longues sont à +3 € par joueur."
+      ],
+      [
+        "Et si le résultat ne me plaît pas ?",
+        "Vous validez une maquette de production avant toute impression, avec révisions illimitées. Si un maillot arrive défectueux ou différent de la maquette validée, nous le réimprimons ou le remboursons — voir la <a href=\"/pages/retours-echanges\">politique de retours</a>."
+      ],
+      [
+        "Puis-je utiliser un design généré par IA ?",
+        "Oui. Envoyez un concept ChatGPT, Midjourney ou Gemini via la <a href=\"/pages/maillot-ia-concept-reel\">page concept IA</a> et un designer le reconstruit en maillot de foot prêt à imprimer."
+      ],
+      [
+        "Combien de temps prend un maillot personnalisé ?",
+        "Maquette sous 24–48 heures, 7–12 jours de production, 10–15 jours d'expédition : comptez 25–30 jours porte à porte. La voie rapide (+59 €) fait gagner environ une semaine."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Créez votre maillot",
+    "p": "Ouvrez le créateur de maillot de foot gratuit et ayez un design fini en dix minutes — ou envoyez-nous votre idée et laissez un designer le construire.",
+    "btn": "Ouvrir le designer 3D — gratuit",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr",
+    "btn2": "Demander sur WhatsApp",
+    "btn2_url": "https://wa.me/34614625408"
+  },
+  "more": {
+    "label": "Continuer :",
+    "links": [
+      [
+        "/pages/maillot-foot-personnalise",
+        "maillot de foot personnalisé"
+      ],
+      [
+        "/pages/collection-ready-to-play",
+        "designs Ready to Play"
+      ],
+      [
+        "/pages/impression-et-materiaux",
+        "impression &amp; matériaux"
+      ],
+      [
+        "/pages/comparatif-fournisseur-maillot-foot-2026",
+        "comparatif des fournisseurs"
+      ]
+    ]
+  }
+}

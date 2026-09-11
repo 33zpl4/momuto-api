@@ -10,7 +10,7 @@
  * to recover the EUR it came from; that EUR is looked up in USD_OF_EUR. A
  * EUR with no ruling is reported and left alone — never invented.
  *
- * Write path: POST /products/batchsave (partial update — only id + the
+ * Write path: PUT /products/{id} read-modify-write (batchsave drops variants — only id + the
  * fields we send; see docs/oemsaas-api-notes.md). Variants are sent as
  * { id, price, compare_at_price } only.
  *
@@ -118,28 +118,50 @@ async function main() {
       if (fixed !== p[k]) entry[k] = fixed;
     }
     if (Object.keys(entry).length === 1) continue;
+    // batchsave rejects any product without a title (500 "title不能为空", 5 Sep 2026) — always send it
+    if (!entry.title) entry.title = p.title;
     batch.push(entry);
     const pr = (entry.variants || []).map(v => `${v.id}: ${p.variants.find(x => x.id === v.id)?.price}→${v.price}${Number(v.compare_at_price) ? ` (cmp→${v.compare_at_price})` : ''}`).join(', ');
-    console.log(`• ${p.handle}  ${pr}${Object.keys(entry).filter(k => !['id', 'variants'].includes(k)).length ? '  text:' + Object.keys(entry).filter(k => !['id', 'variants'].includes(k)).join(',') : ''}`);
+    console.log(`• ${p.handle}  ${pr}${Object.keys(entry).filter(k => !['id', 'variants'].includes(k) && !(k === 'title' && entry.title === p.title)).length ? '  text:' + Object.keys(entry).filter(k => !['id', 'variants'].includes(k) && !(k === 'title' && entry.title === p.title)).join(',') : ''}`);
   }
   console.log(`\n${batch.length} product(s) to update`);
   if (unmapped.size) { console.log('\n⚠️  NOT changed — no owner ruling for:'); for (const u of unmapped) console.log('   ', u); }
   if (DRY_RUN) { console.log('\nDRY RUN — nothing written'); return; }
 
-  // batchsave in chunks, paced
-  for (let i = 0; i < batch.length; i += 20) {
-    const chunk = batch.slice(i, i + 20);
-    await api(token, 'POST', '/products/batchsave', { products: chunk });
-    console.log(`✅ batchsave ${i + 1}–${i + chunk.length}`);
-    await sleep(1500);
-  }
-  if (process.env.VERIFY === 'true' || ONLY) {
-    const after = await fetchAllProducts(token);
-    for (const e of batch) {
-      const p = after.find(x => x.id === e.id);
-      console.log(`   verify ${p?.handle}: variants=${(p?.variants || []).length} prices=${(p?.variants || []).map(v => v.price).join('/')} images=${(p?.images || []).length} inner_title=${p?.inner_title ? 'kept' : 'EMPTY'} title="${p?.title}"`);
+  // Write path: PUT /products/{id} read-modify-write. batchsave silently drops
+  // `variants` (docs/oemsaas-api-notes.md — code 0, price unchanged; confirmed
+  // live 5 Sep 2026 on pasta-la-vista), so prices can only move through a full
+  // PUT of the GET'd product. Guards: refuse to PUT without title or variants.
+  let failed = 0;
+  for (const e of batch) {
+    const live = (await api(token, 'GET', `/products/${e.id}`)).data;
+    if (!live?.title) { console.error(`❌ ${e.id}: GET returned no title — refusing to PUT blind`); failed++; continue; }
+    if (!live.variants?.length) { console.error(`❌ ${live.handle}: no variants on GET — refusing to PUT (would drop sizes)`); failed++; continue; }
+    const want = new Map((e.variants || []).map(v => [v.id, v]));
+    const variants = live.variants.map(v => want.has(v.id) ? { ...v, price: want.get(v.id).price, compare_at_price: want.get(v.id).compare_at_price } : v);
+    const body = { ...live, variants };
+    // text fixes recomputed on the FULL object (the list endpoint omits body_html)
+    for (const k of ['title', 'subtitle', 'mini_detail', 'body_html', 'meta_title', 'meta_descript']) {
+      const fixed = fixText(live[k], `${live.handle}.${k}`);
+      if (fixed !== live[k]) body[k] = fixed;
     }
+    await api(token, 'PUT', `/products/${e.id}`, body);
+    await sleep(600);
+    // read back — an acknowledgement is not evidence
+    const after = (await api(token, 'GET', `/products/${e.id}`)).data;
+    // PUT re-creates the variants under NEW ids (confirmed 5 Sep 2026: 167967568 → 170067570),
+    // so match by position/size, not id. Count and sizes must survive; prices must land.
+    const wantById = new Map((e.variants || []).map(v => [v.id, v.price]));
+    const expected = live.variants.map(v => ({ size: v.option1_value_title || v.title || '', price: wantById.get(v.id) ?? String(v.price) }));
+    const got = (after.variants || []).map(v => ({ size: v.option1_value_title || v.title || '', price: String(v.price) }));
+    const bad = expected.filter((x, i) => !got[i] || got[i].size !== x.size || Number(got[i].price) !== Number(x.price));
+    const idsChanged = live.variants.some((v, i) => (after.variants || [])[i]?.id !== v.id);
+    const ok = !bad.length && got.length === expected.length && !!after.title && (after.images || []).length === (live.images || []).length;
+    console.log(`${ok ? '✅' : '❌'} ${live.handle}: prices=${(after.variants || []).map(v => v.price).join('/')} variants=${(after.variants || []).length}/${live.variants.length} images=${(after.images || []).length}/${(live.images || []).length} title="${after.title}"${idsChanged ? '  (variant ids regenerated by PUT)' : ''}`);
+    if (!ok) { failed++; console.error(`   mismatch detail: expected=${JSON.stringify(expected)} got=${JSON.stringify(got)} after=${JSON.stringify((after.variants || []).map(v => ({ id: v.id, t: typeof v.id, price: v.price, cmp: v.compare_at_price })))}`); }
+    await sleep(600);
   }
+  if (failed) { console.error(`\n❌ ${failed} product(s) did not verify`); process.exit(1); }
   console.log('\n✅ Done.');
 }
 

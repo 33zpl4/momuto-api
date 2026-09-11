@@ -97,6 +97,15 @@ await send(`${HOST}/products/${id}`, 'PUT', token, { ...live, images: ours });
 Guard on the read-back before sending. If the GET failed, the correct action is
 to stop, not to send a payload assembled from what you happen to have.
 
+**PUT regenerates variant ids.** Confirmed 5 Sep 2026 on the US store
+(`reprice-us-products.js`): a PUT that sends the GET'd `variants` back with a
+new `price` keeps count, sizes, SKUs, images and title, but every variant
+comes back under a NEW id (167967568 → 170067570). Anything bound to a
+variant id (a cart line, a per-variant promotion, a feed) is orphaned. Verify
+by position/size after a PUT, never by id. `batchsave` cannot change prices at
+all (code 0, price unchanged — confirmed the same day), so a price change
+means accepting the id churn.
+
 ⚠️ `scripts/cleanup-preview-products.js` sends `{ id, status: 0 }` to this
 endpoint. Given the validation above, that call is very likely failing — it
 logs a warning and continues, so nobody would notice products staying visible.
