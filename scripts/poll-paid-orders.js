@@ -31,7 +31,7 @@
  * WebhookAction keys on.
  *
  * Env (GitHub Actions):
- *   OEMSAAS_TOKEN_EN / _ES / _FR  — store API tokens (IT has no checkout)
+ *   OEMSAAS_TOKEN_EN / _ES / _FR / _IT / _US — store API tokens
  *   MOMUTO_API_SECRET             — the Vercel D3_ORDER_SECRET value; used as
  *                                   x-webhook-secret against admin-orders.
  *                                   MISSING = the poller reports "not armed"
@@ -51,6 +51,8 @@ const STORES = {
   en: { tokenEnv: 'OEMSAAS_TOKEN_EN' },
   es: { tokenEnv: 'OEMSAAS_TOKEN_ES' },
   fr: { tokenEnv: 'OEMSAAS_TOKEN_FR' },
+  it: { tokenEnv: 'OEMSAAS_TOKEN_IT' },
+  us: { tokenEnv: 'OEMSAAS_TOKEN_US' },
 };
 
 const SECRET = process.env.MOMUTO_API_SECRET;

@@ -137,7 +137,7 @@ function table(rows) {
 
 async function emailDigest(subject, md) {
   const key = process.env.RESEND_API_KEY; if (!key) return false;
-  const to = process.env.ADMIN_EMAIL || 'info@momuto.com';
+  const to = (process.env.ADMIN_EMAILS || 'info@momuto.com,ilovebillxie@hotmail.com').split(',').map(x => x.trim()).filter(Boolean);
   const html = `<pre style="font:13px/1.5 monospace;white-space:pre-wrap">${md.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>`;
   const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ from: process.env.FROM_EMAIL || 'MOMUTO <orders@momuto.com>', to, subject, html }) });

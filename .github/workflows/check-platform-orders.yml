@@ -4,12 +4,16 @@ name: Check platform orders (payment truth)
 # sweeps). This asks the platform directly. Read-only.
 #   order  → one order number, any store
 #   recent → paid / unpaid / cancelled digest for the last N days
-# Daily digest at 06:15 UTC; the result is in the run's Summary tab (and by
-# email if RESEND_API_KEY is set as a repo secret).
+# Daily digest at 05:00 China time (21:00 UTC); the result is in the run's
+# Summary tab and, once the RESEND_API_KEY repo secret exists (Settings →
+# Secrets and variables → Actions; same key the Vercel api/* functions use),
+# emailed to info@momuto.com + ilovebillxie@hotmail.com. No LLM is involved:
+# the digest is plain API reads + a markdown table, so it costs nothing beyond
+# the runner minute.
 
 on:
   schedule:
-    - cron: '15 6 * * *'
+    - cron: '0 21 * * *'   # 05:00 Asia/Shanghai
   workflow_dispatch:
     inputs:
       mode:
