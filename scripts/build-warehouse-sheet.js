@@ -187,8 +187,19 @@ function normaliseRoster(players) {
 }
 async function rosterFromMomutoApi(ref3d) {
   const secret = process.env.MOMUTO_API_SECRET; if (!secret || !ref3d) return null;
-  const r = await fetch(`${MOMUTO_API}?action=detail&q=${encodeURIComponent(ref3d)}`, { headers: { 'x-webhook-secret': secret } });
-  if (!r.ok) { console.error(`  momuto-api detail ${r.status}`); return null; }
+  const hdr = { headers: { 'x-webhook-secret': secret } };
+  const r = await fetch(`${MOMUTO_API}?action=detail&q=${encodeURIComponent(ref3d)}`, hdr);
+  if (!r.ok) {
+    console.error(`  momuto-api detail ${r.status}: ${(await r.text()).slice(0, 200)}`);
+    // diagnostics: how many records does the API hold at all? (404 = this ref never reached it)
+    try {
+      const l = await (await fetch(`${MOMUTO_API}?action=list`, hdr)).json();
+      const f = await (await fetch(`${MOMUTO_API}?action=find&q=${encodeURIComponent(ref3d)}`, hdr)).json();
+      console.error(`  momuto-api holds ${l.count ?? '?'} active orders; find(${ref3d}) → ${f.count ?? '?'} match(es)` +
+        (Array.isArray(l.active) && l.active.length ? `; newest active paidAt ${l.active[l.active.length - 1].paidAt} (${l.active[l.active.length - 1].ref})` : ''));
+    } catch (e) { console.error(`  momuto-api diagnostics failed: ${e.message}`); }
+    return null;
+  }
   const j = await r.json();
   const o = j && j.order; if (!o || !Array.isArray(o.designs)) return null;
   const designs = o.designs.map(d => ({ suit: d.suit || '', front: d.front || null, back: d.back || null, players: normaliseRoster(d.players) }));
