@@ -87,8 +87,14 @@ download the log zip.
   `/pages/shipping-policy` and Returns & Exchanges → `/pages/return-policy`.
 - Both stores also carry an unbound draft menu named "HEADER" with empty
   URLs — ignore it; the theme binds "Header Menu" / "Footer Menu".
-- ES/FR/IT menus are not curated — `apply-nav` will refuse them until a
-  tree is transcribed from `inspect-nav`.
+- **FR "Header Menu"** (70586): MAILLOTS PERSONNALISÉS → **Créer son maillot en
+  3D — gratuit** (`/pages/creer-son-maillot-de-foot`, new 11 Sep 2026),
+  **Maillot de foot personnalisé** (the hub, previously unlinked), Galerie de
+  Designs, Ready-to-Play; ICONIC SERIES; LA MARQUE; AIDE.
+- **FR "Footer Menu"** (70585): unchanged except "Comparatif Fournisseurs
+  2026", which pointed at `https://www.momuto.fr/…` (wrong domain).
+- ES/IT menus are not curated — `apply-nav` will refuse them until a tree is
+  transcribed from `inspect-nav`.
 
 
 ## The storefront footer is NOT the API "Footer Menu" (4 Sep 2026)

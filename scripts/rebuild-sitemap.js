@@ -50,6 +50,7 @@ const HIGH_PRIORITY_HANDLES = new Set([
   'design-your-own-soccer-jersey',
   'best-custom-soccer-jersey-makers-2026',
   'maillot-foot-personnalise',
+  'creer-son-maillot-de-foot',
   'equipaciones-futbol-personalizadas',
   'equipaciones-para-clubes-academias',
   'request-custom-kit-design',
