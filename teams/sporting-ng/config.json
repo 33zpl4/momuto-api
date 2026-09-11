@@ -1,0 +1,10 @@
+{
+  "team_name": "Sporting NG",
+  "design_name": "Tonal Star Red",
+  "design_description": "A clean red-and-white kit built around a subtle tonal star pattern. The main body is deep red, covered front and back with evenly distributed darker-red five-point stars, giving the shirt identity without making the pattern overpowering. The construction is deliberately simple: solid white sleeves and a white crew-neck collar create a strong block contrast against the red torso. There are no complex side panels or additional graphics, so the repeated stars remain the main design feature. The back maintains exactly the same tonal pattern, with a large white player name and oversized white number, lightly detailed in red for cohesion. The white sleeves also provide clean space for secondary branding. Overall, it is a minimal two-colour design, red and white, with the tone-on-tone stars adding depth. Very straightforward, recognizable and easy to reproduce consistently across the full team.",
+  "primary_color": "#C8102E",
+  "secondary_color": "#FFFFFF",
+  "accent_color": "#FFFFFF",
+  "image_url": "https://cdn.statics-cdn-abc.com/pics/2dfe0dd682384a41159acf311adaf201ac1c9cf05dc82113b81859587163f200.png",
+  "back_image_url": "https://cdn.statics-cdn-abc.com/pics/cecdd3a701b9aaf43aaf38580fae79e1d22baa4cdeaf61bcfa16e4bb0ad5e70f.png"
+}
