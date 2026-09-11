@@ -58,13 +58,24 @@ function toMillis(v) { if (!v) return 0; const n = parseInt(v, 10); if (n > 1e12
 const iso = (ms) => ms ? new Date(ms).toISOString().replace('T', ' ').slice(0, 16) : '';
 const mask = (e) => e ? String(e).replace(/^(.{2}).*(@.*)$/, '$1***$2') : '';
 
+// Verified against a live --probe (11 Sep 2026): the list is data.list[];
+// unpaid orders carry pay_at 0 and status 100; a paid one carried pay_at set
+// and status 110; cancelled = status 190 / cancelled_at > 0 (WebhookAction).
+// financial_status 230 is the webhook's paid constant; pay_at is the belt.
 function classify(o) {
   const fs = field(o, ['financial_status', 'financialStatus']);
   const st = field(o, ['status', 'order_status']);
-  if (parseInt(st, 10) === 190) return 'cancelled';
-  if (parseInt(fs, 10) === 230 || String(fs).toLowerCase() === 'paid') return 'paid';
+  if (parseInt(st, 10) === 190 || toMillis(field(o, ['cancelled_at'])) > 0) return 'cancelled';
+  if (parseInt(fs, 10) === 230 || String(fs).toLowerCase() === 'paid' || toMillis(field(o, ['first_pay_at', 'pay_at'])) > 0) return 'paid';
   if (fs === null && st === null) return 'unknown';
   return 'unpaid';
+}
+// the €0 preview line carries our local (manage.momuto.com) order_no
+function ref3d(o) {
+  for (const it of (field(o, ['products', 'line_items', 'items']) || [])) {
+    try { const j = JSON.parse(field(it, ['inner_title']) || ''); if (j && j.type === '3d-preview' && j.order_no) return String(j.order_no); } catch {}
+  }
+  return '';
 }
 function summarize(o, lang) {
   return {
@@ -74,12 +85,14 @@ function summarize(o, lang) {
     state: classify(o),
     financial_status: field(o, ['financial_status', 'financialStatus']),
     status: field(o, ['status', 'order_status']),
-    total: field(o, ['total_price', 'total', 'pay_price']),
+    total: field(o, ['total_price', 'current_total_price', 'pay_price', 'current_subtotal_price', 'total']),
     currency: field(o, ['currency', 'currency_code']) || '',
     email: mask(field(o, ['email', 'customer_email']) || field(o.customer || {}, ['email'])),
     created: iso(toMillis(field(o, ['created_at', 'create_time', 'createdAt']))),
     paid: iso(toMillis(field(o, ['first_pay_at', 'pay_at', 'paid_at', 'payAt']))),
-    items: (field(o, ['line_items', 'lineItems', 'items', 'order_items', 'goods']) || []).length,
+    items: (field(o, ['products', 'line_items', 'lineItems', 'items', 'order_items', 'goods']) || []).length,
+    ref3d: ref3d(o),
+    domain: field(o, ['domain']) || '',
   };
 }
 
@@ -90,6 +103,9 @@ async function fetchRecent(token, days) {
     const list = asList(data);
     if (!list) throw new Error(`unrecognised orders payload — keys ${data && typeof data === 'object' ? Object.keys(data).join(',') : typeof data}`);
     if (!list.length) break;
+    const firstId = field(list[0], ['id']);
+    if (page > 1 && firstId && firstId === fetchRecent.lastFirst) break;   // `page` not honoured → same page again
+    fetchRecent.lastFirst = firstId;
     let older = 0;
     for (const o of list) { const c = toMillis(field(o, ['created_at', 'create_time', 'createdAt'])); if (c && c < cutoff) { older++; continue; } out.push(o); }
     if (older === list.length || list.length < PAGE) break;
@@ -114,7 +130,7 @@ async function findOrder(token, no) {
 }
 
 function table(rows) {
-  const cols = ['store', 'order_number', 'state', 'financial_status', 'status', 'total', 'currency', 'created', 'paid', 'email', 'items'];
+  const cols = ['store', 'order_number', 'ref3d', 'state', 'status', 'total', 'currency', 'created', 'paid', 'email', 'items'];
   const md = [`| ${cols.join(' | ')} |`, `| ${cols.map(() => '---').join(' | ')} |`, ...rows.map(r => `| ${cols.map(c => String(r[c] ?? '')).join(' | ')} |`)];
   return md.join('\n');
 }
