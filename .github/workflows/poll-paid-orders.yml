@@ -9,6 +9,7 @@ name: Poll paid orders (confirmation emails)
 # TWO-STAGE ARMING — safe to merge immediately:
 #   1. secret MOMUTO_API_SECRET (same value as the Vercel D3_ORDER_SECRET):
 #      without it the script logs "not armed" and exits 0.
+#   (orders paid before 2026-09-11 15:30 UTC are never emailed — POLL_NOT_BEFORE in the script)
 #   2. repo VARIABLE POLL_LIVE=1: until it is set, scheduled runs execute as
 #      DRY RUNS (decisions logged, nothing sent). Set it only after reviewing
 #      a manual probe + dry run.

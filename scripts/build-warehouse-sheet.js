@@ -18,7 +18,8 @@
  *      design — order <ref>" line's product carries the customer's own
  *      front/back renders as its images.
  *   3. Roster (name / number / size / sleeve / qty per jersey) lives on the
- *      design server only. Read, in order: --roster file; momuto-api
+ *      design server only. Read, in order: --roster file; the design server
+ *      itself (GET /Order/getGoods — unauthenticated on the server); momuto-api
  *      `admin-orders?action=detail` (needs MOMUTO_API_SECRET, the record the
  *      design-server webhook stored); else the sheet carries a red
  *      "名单未获取" row and the jersey count from the platform lines, so the
@@ -185,10 +186,47 @@ function normaliseRoster(players) {
     return { number: String(p.number ?? ''), name: String(p.name ?? ''), size, sleeve, shorts, qty: parseInt(p.qty, 10) || 1 };
   });
 }
+// Design server, direct: GET /Order/getGoods?order_no=<ref> — the routed
+// endpoint the store side calls at checkout (OrderAction::getGoods, read
+// 11 Sep 2026). It carries NO auth check (its Token constant is unused), so
+// nothing is sent. oem_no is deliberately OMITTED: when present the endpoint
+// WRITES plant_order_no onto our order, and a read-only tool must not write.
+// Response: { code: 200, data: [{ urlThumbnailFront, urlThumbnailBack,
+//             info: [{number,name,size,qty,...}], suit_name, defind_type }] }
+const DESIGN_HOST = 'https://design.momuto.com';
+async function rosterFromDesignServer(ref3d) {
+  if (!ref3d) return null;
+  // oem_no / uuid are sent EMPTY: absent keys make PHP prepend a warning to
+  // the JSON (display_errors is on), and an empty oem_no skips the write.
+  const r = await fetch(`${DESIGN_HOST}/Order/getGoods?order_no=${encodeURIComponent(ref3d)}&oem_no=&uuid=`);
+  let text = await r.text();
+  const brace = text.indexOf('{'); if (brace > 0) text = text.slice(brace);   // tolerate stray PHP notices
+  let j; try { j = JSON.parse(text); } catch { console.error(`  design-server getGoods: HTTP ${r.status} non-JSON ${text.slice(0, 120)}`); return null; }
+  if (j.code !== 200 || !Array.isArray(j.data)) { console.error(`  design-server getGoods: code ${j.code} ${j.message || text.slice(0, 120)}`); return null; }
+  const designs = j.data.map(g => {
+    let players = field(g, ['info', 'goods_info', 'players']) || [];
+    if (typeof players === 'string') { try { players = JSON.parse(players); } catch { players = []; } }
+    return { suit: field(g, ['suit_name', 'suit']) || '', front: abs(field(g, ['urlThumbnailFront', 'front'])), back: abs(field(g, ['urlThumbnailBack', 'back'])), players: normaliseRoster(players) };
+  });
+  return designs.some(x => x.players.length) ? designs : null;
+}
+const abs = (u) => !u ? null : (/^https?:/i.test(u) ? u : `${DESIGN_HOST}${u.startsWith('/') ? '' : '/'}${u}`);
+
 async function rosterFromMomutoApi(ref3d) {
   const secret = process.env.MOMUTO_API_SECRET; if (!secret || !ref3d) return null;
-  const r = await fetch(`${MOMUTO_API}?action=detail&q=${encodeURIComponent(ref3d)}`, { headers: { 'x-webhook-secret': secret } });
-  if (!r.ok) { console.error(`  momuto-api detail ${r.status}`); return null; }
+  const hdr = { headers: { 'x-webhook-secret': secret } };
+  const r = await fetch(`${MOMUTO_API}?action=detail&q=${encodeURIComponent(ref3d)}`, hdr);
+  if (!r.ok) {
+    console.error(`  momuto-api detail ${r.status}: ${(await r.text()).slice(0, 200)}`);
+    // diagnostics: how many records does the API hold at all? (404 = this ref never reached it)
+    try {
+      const l = await (await fetch(`${MOMUTO_API}?action=list`, hdr)).json();
+      const f = await (await fetch(`${MOMUTO_API}?action=find&q=${encodeURIComponent(ref3d)}`, hdr)).json();
+      console.error(`  momuto-api holds ${l.count ?? '?'} active orders; find(${ref3d}) → ${f.count ?? '?'} match(es)` +
+        (Array.isArray(l.active) && l.active.length ? `; newest active paidAt ${l.active[l.active.length - 1].paidAt} (${l.active[l.active.length - 1].ref})` : ''));
+    } catch (e) { console.error(`  momuto-api diagnostics failed: ${e.message}`); }
+    return null;
+  }
   const j = await r.json();
   const o = j && j.order; if (!o || !Array.isArray(o.designs)) return null;
   const designs = o.designs.map(d => ({ suit: d.suit || '', front: d.front || null, back: d.back || null, players: normaliseRoster(d.players) }));
@@ -321,8 +359,12 @@ async function processOrder(lang, raw, token) {
     designs = (Array.isArray(j) ? j : j.designs || [j]).map(d => ({ suit: d.suit || '', front: d.front || null, back: d.back || null, players: normaliseRoster(d.players || d) }));
     console.log(`  roster: --roster file (${designs.length} design(s))`);
   } else {
-    designs = await rosterFromMomutoApi(order.ref3d).catch(e => { console.error(`  roster: ${e.message}`); return null; });
-    if (designs) console.log(`  roster: momuto-api record (${designs.reduce((n, d) => n + d.players.length, 0)} rows)`);
+    designs = await rosterFromDesignServer(order.ref3d).catch(e => { console.error(`  roster: ${e.message}`); return null; });
+    if (designs) console.log(`  roster: design server (${designs.reduce((n, d) => n + d.players.length, 0)} rows)`);
+    else {
+      designs = await rosterFromMomutoApi(order.ref3d).catch(e => { console.error(`  roster: ${e.message}`); return null; });
+      if (designs) console.log(`  roster: momuto-api record (${designs.reduce((n, d) => n + d.players.length, 0)} rows)`);
+    }
   }
   const previewRenders = await renders(token, order.previewIds);
   if (!designs) {

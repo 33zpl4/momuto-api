@@ -118,6 +118,21 @@ module.exports = async function handler(req, res) {
   if (existing && existing.paidAt &&
       ((existing.emailsSent || []).includes('confirmation') ||
        existing.stopLifecycle || existing.status !== 'active')) {
+    // Roster backfill: the hourly poller ingests from the platform alone and
+    // stores designs WITHOUT players (it cannot see the design-server roster).
+    // When the real webhook arrives later, keep the dedup (no second email)
+    // but merge the roster + renders in, so the warehouse sheet and the admin
+    // record are complete.
+    const incomingPlayers = (designs || []).flatMap(d => d.players || []).filter(Boolean);
+    const storedPlayers = (existing.designs || []).flatMap(d => d.players || []).filter(Boolean);
+    if (incomingPlayers.length && !storedPlayers.length) {
+      existing.designs = designs;
+      existing.qty = incomingPlayers.reduce((n, p) => n + (parseInt(p.qty, 10) || 1), 0) || existing.qty;
+      existing.rosterBackfilledAt = new Date().toISOString();
+      await kv.set(`order:${id}`, existing);
+      console.log(`[order-3d-paid] ${id} dedup — roster backfilled (${incomingPlayers.length} rows)`);
+      return res.status(200).json({ ok: true, dedup: true, rosterBackfilled: true });
+    }
     console.log(`[order-3d-paid] ${id} already processed — dedup`);
     return res.status(200).json({ ok: true, dedup: true });
   }

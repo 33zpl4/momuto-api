@@ -45,6 +45,11 @@ const HOST = 'https://openapi.oemapps.com';
 const API  = 'https://momuto-api.vercel.app/api/admin-orders';
 
 const POLL_WINDOW_DAYS = 14;   // ignore anything paid earlier (matches BACKFILL_DAYS)
+// Owner ruling (11 Sep 2026): orders paid before the poller went live are NOT
+// emailed retroactively — the design-server webhook path had been silent since
+// 28 Aug and those customers are considered handled. Anything paid before this
+// instant is skipped (counted in notPaidOrOld). Override: env POLL_NOT_BEFORE.
+const POLL_NOT_BEFORE_MS = Date.parse(process.env.POLL_NOT_BEFORE || '2026-09-11T15:30:00Z');
 const LIST_LIMIT = 50;
 
 const STORES = {
@@ -202,7 +207,7 @@ async function run() {
           paidMs = toMillis(field(o, ['first_pay_at', 'pay_at', 'paid_at', 'payAt']));
         }
         if (paid === null) { report.unknownStatus.push(`${lang}:${platNo}`); continue; }
-        if (!paid || !paidMs || (Date.now() - paidMs) > POLL_WINDOW_DAYS * 86400000) {
+        if (!paid || !paidMs || (Date.now() - paidMs) > POLL_WINDOW_DAYS * 86400000 || paidMs < POLL_NOT_BEFORE_MS) {
           report.notPaidOrOld++; continue;
         }
 
