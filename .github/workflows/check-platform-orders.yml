@@ -36,6 +36,10 @@ on:
         description: 'sheet-recent: orders paid in the last N hours'
         required: false
         default: '24'
+      emails:
+        description: 'sheet: recipients override, comma-separated (default: WAREHOUSE_EMAILS variable)'
+        required: false
+        default: ''
       lang:
         description: 'Store'
         type: choice
@@ -61,7 +65,7 @@ jobs:
           OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           MOMUTO_API_SECRET: ${{ secrets.MOMUTO_API_SECRET }}
-          WAREHOUSE_EMAILS: ${{ vars.WAREHOUSE_EMAILS }}
+          WAREHOUSE_EMAILS: ${{ inputs.emails || vars.WAREHOUSE_EMAILS }}
         run: |
           MODE="${{ inputs.mode }}"; LANG_IN="${{ inputs.lang }}"
           case "${MODE:-recent}" in
