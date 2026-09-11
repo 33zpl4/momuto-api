@@ -78,16 +78,21 @@ function parseArgs(argv) {
   return a;
 }
 
-async function platform(pathname, token) {
-  const res = await fetch(`${HOST}${pathname}`, { headers: { token } });
-  const text = await res.text();
-  let json;
-  try { json = JSON.parse(text); }
-  catch { throw new Error(`HTTP ${res.status} non-JSON: ${text.slice(0, 200)}`); }
-  if (json.code !== 0 && json.code !== 200) {
-    throw new Error(`API code ${json.code}: ${json.msg}`);
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+// The platform throttles bursts (code 1000 "Too many requests" — CLAUDE.md
+// gotcha): retry with backoff, and callers space single-order re-reads.
+async function platform(pathname, token, tries = 4) {
+  for (let i = 0; i < tries; i++) {
+    const res = await fetch(`${HOST}${pathname}`, { headers: { token } });
+    const text = await res.text();
+    let json;
+    try { json = JSON.parse(text); }
+    catch { throw new Error(`HTTP ${res.status} non-JSON: ${text.slice(0, 200)}`); }
+    if (json.code === 0 || json.code === 200) return json.data;
+    const throttled = json.code === 1000 || /Too many/i.test(json.msg || '');
+    if (!throttled || i === tries - 1) throw new Error(`API code ${json.code}: ${json.msg}`);
+    await sleep(1500 * (i + 1));
   }
-  return json.data;
 }
 
 // The list payload shape is unverified — accept a bare array or the common
@@ -125,7 +130,8 @@ function isPaid(o) {
 }
 
 function itemsOf(o) {
-  return field(o, ['line_items', 'lineItems', 'items', 'order_items', 'goods']) || [];
+  // 'products' is the verified list-payload key (11 Sep 2026 probe)
+  return field(o, ['products', 'line_items', 'lineItems', 'items', 'order_items', 'goods']) || [];
 }
 
 // Extract the local 3D order ref from the €0 preview line.
@@ -201,7 +207,18 @@ async function run() {
         let paidMs = toMillis(field(o, ['first_pay_at', 'pay_at', 'paid_at', 'payAt']));
         // The list endpoint omitting fields is a DOCUMENTED trap — re-read the
         // single order whenever the list copy can't answer.
+        // Cheap pre-filter on the list copy: an order the list already shows
+        // as unpaid (status 100 + pay_at 0), or paid outside the window /
+        // before go-live, never needs the single-order re-read (50 re-reads
+        // per store tripped the throttle on 11 Sep 2026).
+        const listStatus = parseInt(field(o, ['status']), 10);
+        const listPayAt = toMillis(field(o, ['pay_at', 'first_pay_at']));
+        if ((listStatus === 100 && !listPayAt) || listStatus === 190
+            || (listPayAt && (listPayAt < POLL_NOT_BEFORE_MS || (Date.now() - listPayAt) > POLL_WINDOW_DAYS * 86400000))) {
+          report.notPaidOrOld++; continue;
+        }
         if ((paid === null || (paid && !paidMs) || !itemsOf(o).length) && field(o, ['id'])) {
+          await sleep(600);
           o = await platform(`/orders/${field(o, ['id'])}`, token) || o;
           paid = isPaid(o);
           paidMs = toMillis(field(o, ['first_pay_at', 'pay_at', 'paid_at', 'payAt']));
