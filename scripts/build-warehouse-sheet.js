@@ -196,8 +196,11 @@ function normaliseRoster(players) {
 const DESIGN_HOST = 'https://design.momuto.com';
 async function rosterFromDesignServer(ref3d) {
   if (!ref3d) return null;
-  const r = await fetch(`${DESIGN_HOST}/Order/getGoods?order_no=${encodeURIComponent(ref3d)}`);
-  const text = await r.text();
+  // oem_no / uuid are sent EMPTY: absent keys make PHP prepend a warning to
+  // the JSON (display_errors is on), and an empty oem_no skips the write.
+  const r = await fetch(`${DESIGN_HOST}/Order/getGoods?order_no=${encodeURIComponent(ref3d)}&oem_no=&uuid=`);
+  let text = await r.text();
+  const brace = text.indexOf('{'); if (brace > 0) text = text.slice(brace);   // tolerate stray PHP notices
   let j; try { j = JSON.parse(text); } catch { console.error(`  design-server getGoods: HTTP ${r.status} non-JSON ${text.slice(0, 120)}`); return null; }
   if (j.code !== 200 || !Array.isArray(j.data)) { console.error(`  design-server getGoods: code ${j.code} ${j.message || text.slice(0, 120)}`); return null; }
   const designs = j.data.map(g => {
