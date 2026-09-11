@@ -65,6 +65,7 @@ jobs:
           OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           MOMUTO_API_SECRET: ${{ secrets.MOMUTO_API_SECRET }}
+          DESIGN_ORDER_TOKEN: ${{ secrets.DESIGN_ORDER_TOKEN }}
           WAREHOUSE_EMAILS: ${{ inputs.emails || vars.WAREHOUSE_EMAILS }}
         run: |
           MODE="${{ inputs.mode }}"; LANG_IN="${{ inputs.lang }}"

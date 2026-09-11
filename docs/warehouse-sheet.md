@@ -13,7 +13,7 @@ sources the factory copied from.
 | --- | --- |
 | 订单ID, 姓名, 地址, 国家, 电话, 邮编, 邮箱, 留言, 支付方式, 货运方式/运费, 总金额, 下单/付款时间 | store platform `GET /orders/ordernumber/<no>` (5 tokens) |
 | 正面/背面 renders | the €0 "Your custom design — order <ref>" line → `GET /products/<id>` images |
-| 名单 (号码/名字/尺码/袖长/数量/短裤尺码) | design server only. Read via momuto-api `admin-orders?action=detail` (the record the design-server webhook stored; needs `MOMUTO_API_SECRET`). `--roster file.json` overrides. Neither → the sheet carries a red 名单未获取 row plus the platform jersey count. |
+| 名单 (号码/名字/尺码/袖长/数量/短裤尺码) | design server only. Read, in order: `--roster file.json`; the design server directly (`GET /Order/getGoods`, repo secret `DESIGN_ORDER_TOKEN` = the token constant in `OrderAction.php` on the server); momuto-api `admin-orders?action=detail` (the record the design-server webhook stored; `MOMUTO_API_SECRET`). None → red 名单未获取 row plus the platform jersey count. |
 
 Cross-checks printed in red on the sheet and in the email subject (⚠ 需核对):
 roster qty ≠ platform qty; roster long sleeves ≠ platform "Long sleeves"
@@ -30,6 +30,16 @@ add-on qty; platform `is_test`.
   or `sheet-recent` + hours.
 - Requires `RESEND_API_KEY` to email; without it the xlsx is still in the
   artifact.
+
+## Finding, 11 Sep 2026
+
+momuto-api's stored records stop at 28 Aug 09:16 (5t6lf7enmq): the
+design-server → momuto-api webhook path delivered NOTHING for two weeks while
+the platform recorded ~35 paid orders. Roster via that path is therefore
+unreliable by construction (webhook sweeps) and was also silently down. The
+direct design-server read is the primary source now; the momuto-api record is
+the fallback. `api/order-3d-paid.js` backfills the roster into a record the
+poller created without one.
 
 ## Known gaps
 
