@@ -1,0 +1,56 @@
+name: Check platform orders (payment truth)
+
+# manage.momuto.com's payment column lags the store platform by days (webhook
+# sweeps). This asks the platform directly. Read-only.
+#   order  → one order number, any store
+#   recent → paid / unpaid / cancelled digest for the last N days
+# Daily digest at 06:15 UTC; the result is in the run's Summary tab (and by
+# email if RESEND_API_KEY is set as a repo secret).
+
+on:
+  schedule:
+    - cron: '15 6 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'order = one order number · recent = digest of the last N days · probe = dump raw API shape'
+        type: choice
+        options: ['order', 'recent', 'probe']
+        default: 'recent'
+      order_number:
+        description: 'order: the platform order number (plant_order_no)'
+        required: false
+        default: ''
+      days:
+        description: 'recent: how many days back'
+        required: false
+        default: '30'
+      lang:
+        description: 'Store'
+        type: choice
+        options: ['all', 'en', 'es', 'fr', 'it', 'us']
+        default: 'all'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: |
+          MODE="${{ inputs.mode }}"; LANG_IN="${{ inputs.lang }}"
+          case "${MODE:-recent}" in
+            order)  node scripts/check-platform-orders.js --order "${{ inputs.order_number }}" --lang "${LANG_IN:-all}" ;;
+            probe)  node scripts/check-platform-orders.js --probe --lang "${LANG_IN:-all}" ;;
+            *)      node scripts/check-platform-orders.js --recent "${{ inputs.days || '30' }}" --lang "${LANG_IN:-all}" ;;
+          esac
