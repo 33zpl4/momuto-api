@@ -150,10 +150,22 @@ async function getExisting(handle, token) {
   return Array.isArray(pages) ? (pages.find(pg => pg.handle === handle) || null) : null;
 }
 
+function injectShared(template) {
+  const css = fs.readFileSync(path.join(ROOT, 'shared', 'design-request.css'), 'utf8');
+  const js  = fs.readFileSync(path.join(ROOT, 'shared', 'design-request.js'), 'utf8');
+  return template
+    .replace('<!-- inject:design-request.css -->', `<style>\n${css}\n</style>`)
+    .replace('<!-- inject:design-request.js -->',  `<script>\n${js}\n</script>`);
+}
+
 async function upsert(p, token) {
   const file = path.join(ROOT, 'pages', 'us', p.handle);
   if (!fs.existsSync(file)) { console.log(`  [${p.handle}] no fragment at pages/us/${p.handle} — skipped`); return; }
-  const content = fs.readFileSync(file, 'utf8');
+  // Same injection as deploy-request-design-page.js: the request gate's page CSS and
+  // multi-step form JS live in shared/design-request.{css,js} behind two placeholder
+  // comments. Without this the US gate shipped unstyled (owner, 11 Sep 2026).
+  const content = injectShared(fs.readFileSync(file, 'utf8'));
+  if (/<!-- inject:[a-z-]+\.(css|js) -->/.test(content)) throw new Error(`${p.handle}: unresolved inject marker`);
   sanityCheck(p, content);
 
   const existing = await getExisting(p.handle, token);
