@@ -21,7 +21,7 @@ const path = require('path');
 const CSS = require('./lib/estate-css.js');
 
 const ROOT = path.resolve(__dirname, '..');
-const LOCALES = (process.argv[2] || 'us,en').split(',').map(s => s.trim()).filter(Boolean);
+const LOCALES = (process.argv[2] || 'us,en,fr').split(',').map(s => s.trim()).filter(Boolean);
 
 const esc = (s) => String(s).replace(/&(?![a-z#0-9]+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const strip = (h) => String(h).replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&mdash;/g, '—').replace(/&ndash;/g, '–').replace(/\s+/g, ' ').trim();
@@ -178,8 +178,9 @@ function sanity(d, html) {
   if (d.locale === 'us' && /€|&euro;|\bEUR\b|\bfootball\b|colour|\bshirt/i.test(prose)) throw new Error('us: contains €/EUR/football/shirt/British spelling');
   if (!html.includes('design.momuto.com/3d-configurator/configurator.html')) throw new Error(`${d.locale}: missing 3D designer deep link`);
   const h1 = strip(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1]).toLowerCase();
-  if (!/jersey maker/.test(h1)) throw new Error(`${d.locale}: h1 must carry "jersey maker"`);
-  if (!/jersey maker/i.test(d.meta.meta_title)) throw new Error(`${d.locale}: meta_title must carry "jersey maker"`);
+  const must = { fr: /maillot de foot/ }[d.locale] || /jersey maker/;
+  if (!must.test(h1)) throw new Error(`${d.locale}: h1 must carry ${must}`);
+  if (!must.test(d.meta.meta_title.toLowerCase())) throw new Error(`${d.locale}: meta_title must carry ${must}`);
   if (/path-to-your|Discover MOMUTO|Shop Now/.test(html)) throw new Error(`${d.locale}: template scaffold leaked`);
   if (/\b30 ?(€|\$)|(€|\$) ?30(?![.,]\d)\b/.test(strip(html))) throw new Error(`${d.locale}: stale €30 deposit`);
 }
@@ -193,7 +194,7 @@ for (const locale of LOCALES) {
   const cmsFile = path.join(ROOT, 'cms', 'pages', locale, `${d.handle}.json`);
   if (!fs.existsSync(cmsFile)) { console.warn(`⚠️  ${locale}: no pulled page at cms/pages/${locale}/${d.handle}.json — preview only (pull it first)`); continue; }
   const page = JSON.parse(fs.readFileSync(cmsFile, 'utf8'));
-  Object.assign(page, { content: html, title: d.meta.title, meta_title: d.meta.meta_title, meta_descript: d.meta.meta_descript, meta_keywords: d.meta.keywords });
+  Object.assign(page, { content: html, title: d.meta.title, meta_title: d.meta.meta_title, meta_descript: d.meta.meta_descript, meta_keywords: d.meta.keywords, handle: d.handle });
   fs.writeFileSync(cmsFile, JSON.stringify(page, null, 2) + '\n');
-  console.log(`✅ ${locale}: ${html.length} chars → cms/pages/${locale}/${d.handle}.json (id ${page.id})`);
+  console.log(`✅ ${locale}: ${html.length} chars → cms/pages/${locale}/${d.handle}.json (${page.id ? 'id ' + page.id : 'NEW — deployer will create it'})`);
 }

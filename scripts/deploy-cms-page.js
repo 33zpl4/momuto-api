@@ -75,6 +75,22 @@ async function updatePage(token, page) {
   return json;
 }
 
+async function findByHandle(token, handle) {
+  const res = await fetch(`${HOST}/pages?handle=${encodeURIComponent(handle)}`, { headers: { token } });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || json.code !== 0) throw new Error(`GET /pages?handle=${handle} failed: ${JSON.stringify(json).slice(0, 200)}`);
+  const list = json.data?.list || json.data || [];
+  return Array.isArray(list) ? (list.find(p => p.handle === handle) || null) : null;
+}
+async function createPage(token, page) {
+  const body = { is_default: 0, title: page.title, content: page.content, meta_title: page.meta_title,
+    meta_keywords: Array.isArray(page.meta_keywords) ? page.meta_keywords : [], meta_descript: page.meta_descript, handle: page.handle };
+  const res = await fetch(`${HOST}/pages`, { method: 'POST', headers: { 'Content-Type': 'application/json', token }, body: JSON.stringify(body) });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || json.code !== 0) throw new Error(`POST /pages ${page.handle} failed: ${JSON.stringify(json).slice(0, 300)}`);
+  return json.data?.id ?? json.data?.page?.id ?? '?';
+}
+
 async function deployOne(locale, handle) {
   const token = TOKENS[locale];
   if (!token) { console.warn(`⚠️  ${handle}: no ${locale} token — skipping`); return; }
@@ -83,7 +99,19 @@ async function deployOne(locale, handle) {
   if (!fs.existsSync(file)) { console.warn(`⚠️  ${handle}: no file ${file} — skipping`); return; }
 
   const page = JSON.parse(fs.readFileSync(file, 'utf8'));
-  if (!page.id) throw new Error(`${handle}: pulled page has no id — re-pull it first`);
+  if (!page.id) {
+    // New page (generator stub without an id): look it up by handle, else POST it.
+    // Never PUT blind; never create twice.
+    const found = await withRetry(() => findByHandle(token, handle), handle);
+    if (found) { page.id = found.id; console.log(`• ${locale} ${handle}: exists as id ${found.id} — updating`); }
+    else {
+      console.log(`• ${locale} ${handle} — NEW "${page.title}" (${String(page.content || '').length} chars)`);
+      if (DRY_RUN) { console.log('   DRY RUN — no create'); return; }
+      const created = await withRetry(() => createPage(token, page), handle);
+      console.log(`   ✅ created id ${created} → https://${LABEL[locale]}/pages/${handle} (pull it to capture the id)`);
+      await sleep(600); return;
+    }
+  }
   if (page.handle && page.handle !== handle) throw new Error(`${handle}: file handle "${page.handle}" ≠ path handle`);
 
   console.log(`• ${locale} ${handle} — "${page.title}" (${String(page.content || '').length} chars)`);
