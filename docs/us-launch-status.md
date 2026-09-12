@@ -329,3 +329,12 @@ must be added to those three lists** — the CMS page cannot work around it.
 The multi-step "next" scroll uses the shared `scrollFormTop()` (double
 scroll after reflow) injected into the US page since run 34574824964; no
 change needed there.
+
+## 12 Sep 2026 — US product pages now show the price estimator
+
+`custom-content.js` had the estimator hard-disabled on us.momuto.com
+("pricing.js is EUR-only") from before the USD ladder existed. Now
+hostname-keyed like the rest of the file: on us.* it calls pricing.js with
+`{store:'us'}` (PRICING_US, `$`), strings from `EST.us` ($59 threshold).
+Other stores unchanged. Ships via Deploy Static Files on push (no branch
+filter — rule 3).
