@@ -35,6 +35,7 @@ const ALLOWED_ORIGINS = [
   'https://es.momuto.com',
   'https://fr.momuto.com',
   'https://it.momuto.com',
+  'https://us.momuto.com',   // US store (Sep 2026) — missing here = {"error":"Forbidden"} on every US submit
 ];
 
 function isAllowedOrigin(req) {
