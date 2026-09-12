@@ -317,3 +317,15 @@ the header → linked from the header and the new page; (3) **Belgium** (1.7k
 impr @32) and Switzerland named on the shipping page and FAQ, same tariffs;
 (4) FR llms.txt lists the maker and hub. Not touched: the comparison page
 (already #1 asset, pos 7.2, has the "maillot à 5 €" section).
+
+## 12 Sep 2026 — US design-request form returned {"error":"Forbidden"}
+
+Customer screenshot: submitting the brief on us.momuto.com landed on
+momuto-api.vercel.app with `{"error":"Forbidden"}`. Cause: the three Vercel
+endpoints (`api/submit.js`, `api/lead.js`, `api/rtp-design.js`) check the
+request origin/referer against a hard-coded allowlist that stopped at
+it.momuto.com. Added us.momuto.com to all three. **Every new store domain
+must be added to those three lists** — the CMS page cannot work around it.
+The multi-step "next" scroll uses the shared `scrollFormTop()` (double
+scroll after reflow) injected into the US page since run 34574824964; no
+change needed there.
