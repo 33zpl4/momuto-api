@@ -393,3 +393,22 @@ live image list — use it to confirm rather than assuming the write landed.
 
 After a create, record the returned id as `"product_id"` in the product JSON so
 `--update` can target it later.
+
+## US store (us.momuto.com) — added 13 Sep 2026
+
+`us` is a **store, not a language** in this pipeline: `config.copy_fallback.us =
+"en"` makes every localised lookup (strings, page copy, blurbs, collection copy)
+read the EN text, while `price_by_locale.us = "$45.90"`, `collection_id.us`
+(558100) / `drops.drop-02.collection.collection_id.us` (558101) and
+`product_id.us` on all ten products are US-specific. `shared/product-details.us.html`
+is the EN file with the $59 free-shipping line. Build output lands as
+`build/<drop>/<slug>.us.html`; `data-lang="us"` on the marker falls back to the
+EN size guide in `iconic-content.js`.
+
+Why the US pages looked like stock theme pages: the ten US products were
+cloned with `body_html` empty, so the `[data-iconic-page]` marker never
+rendered and `iconic-content.js` bailed at its guard (the script has no domain
+check). Fix = `update: true` for `us` on both drops (`skip_images: true` —
+the gallery is already right and `PUT /products/{id}` regenerates variant
+ids). The US theme's product template must also carry the script tag —
+owner-side, see shared/CMS-TEMPLATE.md.

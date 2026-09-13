@@ -34,9 +34,13 @@ const DIR = path.join(ROOT, 'iconic-series');
 const config = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8'));
 
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+// us is a STORE, not a language: copy comes from en (config.copy_fallback),
+// price from config.price_by_locale, ids/collections are its own.
+const L = (lang) => (config.copy_fallback && config.copy_fallback[lang]) || lang;
+const priceFor = (lang) => (config.price_by_locale && config.price_by_locale[lang]) || config.price;
 
 function parseArgs(argv) {
-  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null, audit: null, writeIds: false, collectionSeo: null, collectionPage: false };
+  const a = { slug: null, drop: null, lang: 'en', dryRun: false, publish: false, update: false, verbose: false, inspect: null, probe: false, delete: null, collections: null, audit: null, writeIds: false, collectionSeo: null, collectionPage: false, skipImages: false };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
     if (k === '--audit') a.audit = argv[++i];
@@ -54,6 +58,7 @@ function parseArgs(argv) {
     else if (k === '--publish') a.publish = true;
     else if (k === '--update') a.update = true;
     else if (k === '--verbose') a.verbose = true;
+    else if (k === '--skip-images') a.skipImages = true;   // update without the gallery PUT (PUT regenerates variant ids)
     else { console.error(`Unknown argument: ${k}`); process.exit(1); }
   }
   return a;
@@ -165,7 +170,7 @@ function collectionsFor(drop, lang) {
 }
 
 function buildBody(item, lang, { publish }) {
-  const copy = item.page?.[lang];
+  const copy = item.page?.[L(lang)];
   if (!copy?.moment_body) throw new Error(`no ${lang} copy — nothing to publish`);
 
   const bodyPath = path.join(DIR, 'build', item.drop, `${item.slug}.${lang}.html`);
@@ -176,8 +181,8 @@ function buildBody(item, lang, { publish }) {
 
   if (!item.image) throw new Error('no product image set (iconic-series/<drop>/<slug>.json "image")');
 
-  const price = Number(String(config.price).replace(/[^\d.]/g, '')).toFixed(2);
-  const alt = `${item.display_title} — ${config.strings[lang].series_name} ${item.number}`;
+  const price = Number(String(priceFor(lang)).replace(/[^\d.]/g, '')).toFixed(2);
+  const alt = `${item.display_title} — ${config.strings[L(lang)].series_name} ${item.number}`;
 
   // Back view first: the framed artwork is the product, and it's what the
   // collection grid already leads with.
@@ -185,7 +190,7 @@ function buildBody(item, lang, { publish }) {
   if (item.image_front) images.push({ src: item.image_front, alt: `${alt}, front` });
 
   const dropCfg = config.drops[item.drop];
-  const strings = config.strings[lang];
+  const strings = config.strings[L(lang)];
 
   // mini_detail is the short block above the buy button. Shape copied verbatim
   // from im-01-the-volley: ref + title, price as an h2, then the spec line.
@@ -194,7 +199,7 @@ function buildBody(item, lang, { publish }) {
   const enDash = item.number.replace(/-/g, '–');
   const hyphen = item.number.replace(/[–—]/g, '-');
   const miniDetail = `<p><strong>${enDash} // ${item.display_title}</strong></p>` +
-    `<h2>${config.price}</h2><p>${strings.spec_line}</p>`;
+    `<h2>${priceFor(lang)}</h2><p>${strings.spec_line}</p>`;
 
   return {
     title: item.display_title,
@@ -207,7 +212,7 @@ function buildBody(item, lang, { publish }) {
     images,
     body_html: bodyHtml,
     status: publish ? 1 : 0,
-    subtitle: dropCfg.subtitle[lang] || dropCfg.subtitle.en,
+    subtitle: dropCfg.subtitle[L(lang)] || dropCfg.subtitle.en,
     mini_detail: miniDetail,
     meta_title: copy.meta_title || `${item.display_title} – ${strings.series_name} ${hyphen} | MOMUTO`,
     meta_descript: copy.meta_description,
@@ -816,8 +821,12 @@ async function main() {
         // `images` — the gallery stayed on the old mockups after a clean run.
         // PUT /products/{id} takes them, but replaces rather than merges, so
         // putImages reads the live product back and changes only the gallery.
-        const img = await putImages(item, body, args.lang, token);
-        console.log(`  images → PUT`, JSON.stringify(img).slice(0, 120));
+        if (args.skipImages) {
+          console.log('  images → skipped (--skip-images: PUT /products/{id} regenerates variant ids; gallery already right)');
+        } else {
+          const img = await putImages(item, body, args.lang, token);
+          console.log(`  images → PUT`, JSON.stringify(img).slice(0, 120));
+        }
       } else {
         const data = await send(`${HOST}/products`, 'POST', token, body);
         console.log(`✓ created ${item.slug} → id ${data.id} · /products/${body.handle} · status ${body.status}`);
