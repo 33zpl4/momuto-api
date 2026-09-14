@@ -32,7 +32,7 @@ var PALETTE=[
 var FONTS=[["vanguard","Vanguard","fonts/font-1.svg"],["contour","Contour","fonts/font-2.svg"],["industry","Industry","fonts/font-3.svg"]];
 // Ready-to-Play pricing: base table (€/unit) by min order size; RTP applies a 10% discount
 var PRICING={ jersey:[[1,38.90],[2,34.90],[5,26.90],[10,21.90],[20,18.90],[50,17.90],[100,16.90]],
-              kit:   [[1,56.80],[2,50.80],[5,38.80],[10,26.90],[20,24.90],[50,23.40],[100,21.90]] };
+              kit:   [[1,56.80],[2,50.80],[5,38.80],[10,26.90],[20,23.90],[50,22.90],[100,21.90]] };
 // us.momuto.com bills in USD on the owner's ladder (docs/us-launch-status.md;
 // canonical copy in pricing.js PRICING_US / RTP_US — keep the two in sync).
 // RTP on US is anchored on the live product prices ($40.90 jersey / $59.90 kit).
