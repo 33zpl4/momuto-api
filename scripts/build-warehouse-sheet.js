@@ -182,7 +182,9 @@ function normaliseRoster(players) {
     const parts = raw.split(' · ').map(s => s.trim());
     const size = parts[0] || '';
     let sleeve = p.sleeve || (parts.some(s => /^long$/i.test(s)) ? 'long' : 'short');
-    const shorts = p.shortSize || (parts.find(s => /^SHORTS /i.test(s)) || '').replace(/^SHORTS /i, '');
+    let shorts = p.shortSize || (parts.find(s => /^SHORTS /i.test(s)) || '').replace(/^SHORTS /i, '');
+    // jersey-only kit player (design server: noShorts flag / '· JERSEY ONLY' size suffix)
+    if (p.noShorts === true || parts.some(s => /^JERSEY ONLY$/i.test(s))) shorts = '无短裤';
     return { number: String(p.number ?? ''), name: String(p.name ?? ''), size, sleeve, shorts, qty: parseInt(p.qty, 10) || 1 };
   });
 }
