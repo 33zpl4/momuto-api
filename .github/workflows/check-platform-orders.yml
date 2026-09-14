@@ -80,6 +80,8 @@ jobs:
               set +e
               U="${{ inputs.url }}"
               curl -sL -A "Mozilla/5.0 momuto-audit" "$U" -o page.html -w "HTTP %{http_code} · %{size_download} bytes · final %{url_effective}\n"
+              echo "== body head (first 4000 bytes — lets a JSON endpoint be read from the runner)"; head -c 4000 page.html; echo
+              echo "== marker counts in the page (store plumbing): storeKey / PRICING_US / MOMUTO_PRICING / pricing.js"; for m in storeKey PRICING_US MOMUTO_PRICING 'pricing.js?v='; do printf '%s: ' "$m"; grep -o -F "$m" page.html | wc -l; done
               echo "== http:// references in the page HTML"; grep -o 'http://[^"'"'"' <>)]*' page.html | sort | uniq -c | sort -rn | head -40
               echo "== form actions"; grep -oE '<form[^>]*>' page.html | head -20
               echo "== css url() references (non-https)"; grep -oE 'url\((&quot;|["'"'"'])?[^)"'"'"']+' page.html | grep -v 'https://\|data:' | sort -u | head -20

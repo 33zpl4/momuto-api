@@ -102,8 +102,8 @@
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": 4.4,
-    "reviewCount": 17,
+    "ratingValue": "4.5",
+    "reviewCount": "44",
     "bestRating": 5
   },
   "offers": {
@@ -461,7 +461,7 @@ h1.title, .title, .page-title { display: none !important; }
 <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="sj-btn">Design in 3D — Free</a>
 <a href="/pages/request-custom-kit-design" class="sj-btn secondary">Request a Free Design</a>
 </div>
-<p class="sj-trust">Rated 4.4/5 on <a href="https://www.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> &mdash; trusted by clubs, academies and leagues worldwide.</p>
+<p class="sj-trust">Rated 4.5/5 on <a href="https://www.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> &mdash; trusted by clubs, academies and leagues worldwide.</p>
 </div>
 <div class="sj-container">
 <!-- BLUF -->

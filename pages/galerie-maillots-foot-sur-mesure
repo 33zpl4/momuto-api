@@ -702,7 +702,7 @@ galleryGrid.appendChild(card);
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.5",
-    "reviewCount": "30",
+    "reviewCount": "44",
     "bestRating": "5",
     "worstRating": "1"
   },
