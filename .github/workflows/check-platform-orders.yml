@@ -22,7 +22,7 @@ on:
       mode:
         description: 'order = one order number · recent = digest of the last N days · probe = dump raw API shape'
         type: choice
-        options: ['order', 'recent', 'probe', 'sheet', 'sheet-recent']
+        options: ['order', 'recent', 'probe', 'sheet', 'sheet-recent', 'page-audit']
         default: 'recent'
       order_number:
         description: 'order: the platform order number (plant_order_no)'
@@ -36,6 +36,10 @@ on:
         description: 'sheet-recent: orders paid in the last N hours'
         required: false
         default: '24'
+      url:
+        description: 'page-audit: full URL to fetch and scan for mixed content (http:// resources)'
+        required: false
+        default: 'https://us.momuto.com/'
       emails:
         description: 'sheet: recipients override, comma-separated (default: WAREHOUSE_EMAILS variable)'
         required: false
@@ -69,6 +73,26 @@ jobs:
         run: |
           MODE="${{ inputs.mode }}"; LANG_IN="${{ inputs.lang }}"
           case "${MODE:-recent}" in
+            page-audit)
+              # Mixed-content hunt: which http:// resources does the page (and its
+              # first-level scripts/styles) reference? The sandbox cannot fetch
+              # momuto.com; the runner can. set +e: grep "no match" is a finding, not a failure.
+              set +e
+              U="${{ inputs.url }}"
+              curl -sL -A "Mozilla/5.0 momuto-audit" "$U" -o page.html -w "HTTP %{http_code} · %{size_download} bytes · final %{url_effective}\n"
+              echo "== http:// references in the page HTML"; grep -o 'http://[^"'"'"' <>)]*' page.html | sort | uniq -c | sort -rn | head -40
+              echo "== form actions"; grep -oE '<form[^>]*>' page.html | head -20
+              echo "== css url() references (non-https)"; grep -oE 'url\((&quot;|["'"'"'])?[^)"'"'"']+' page.html | grep -v 'https://\|data:' | sort -u | head -20
+              echo "== external hosts (src/href)"; grep -oE '<(script|link|iframe|img|video|source)[^>]+(src|href)="[^"]+"' page.html | grep -oE '(src|href)="[^"]+"' | grep -oE '(https?:)?//[^/"]+' | sort | uniq -c | sort -rn | head -40
+              echo "== vercel references (with context)"; grep -oE '.{0,160}vercel\.app.{0,160}' page.html | head -10
+              echo "== first-level JS/CSS fetched and scanned for http:// (and their HTTP status)"
+              grep -oE '<(script|link)[^>]+(src|href)="[^"]+"' page.html | grep -oE '(src|href)="[^"]+"' | sed -E 's/^(src|href)="//; s/"$//' | sed -E "s#^//#https://#" | grep -E '^https?://' | grep -vE 'fonts\.g|googletagmanager' | sort -u | while read -r a; do
+                code=$(curl -sL -o asset.tmp -w "%{http_code}" -A "Mozilla/5.0 momuto-audit" "$a")
+                hits=$(grep -o 'http://[^"'"'"' <>)]*' asset.tmp | grep -v 'w3.org\|schema.org\|localhost\|example' | sort -u | head -6 | tr '\n' ' ')
+                echo "$code $a ${hits:+→ $hits}"
+              done
+              echo "(done)"
+              set -e ;;
             order)  node scripts/check-platform-orders.js --order "${{ inputs.order_number }}" --lang "${LANG_IN:-all}" ;;
             probe)  node scripts/check-platform-orders.js --probe --lang "${LANG_IN:-all}" ;;
             sheet)  node scripts/build-warehouse-sheet.js --order "${{ inputs.order_number }}" --lang "${LANG_IN:-all}" ;;

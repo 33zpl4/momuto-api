@@ -23,8 +23,8 @@
   // [minQty, effectivePerUnitPrice] — the tier the qty falls into wins (last match).
   var PRICING={
     jersey:[[1,38.90],[2,34.90],[5,26.90],[10,21.90],[20,18.90],[50,17.90],[100,16.90]],
-    kit:   [[1,56.80],[2,50.80],[5,38.80],[10,26.90],[20,24.90],[50,23.40],[100,21.90]],
-    shorts:[[1,17.90],[2,15.90],[5,11.90],[10, 6.00],[20, 6.00],[50, 5.50],[100, 5.00]],
+    kit:   [[1,56.80],[2,50.80],[5,38.80],[10,26.90],[20,23.90],[50,22.90],[100,21.90]],   // = jersey + shorts at every tier (owner ruling 14 Sep 2026)
+    shorts:[[1,17.90],[2,15.90],[5,11.90],[10, 5.00],[20, 5.00],[50, 5.00],[100, 5.00]],   // €5 flat from 10 (14 Sep 2026; was 6.00/6.00/5.50)
     socks: [[1, 6.00]]           // flat — matches the store product; no published ladder
   };
   // us.momuto.com — the USD ladder (owner ruling 3 Sep 2026, .90 endings; see

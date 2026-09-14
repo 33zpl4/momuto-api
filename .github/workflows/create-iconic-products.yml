@@ -61,7 +61,7 @@ on:
         required: true
         default: 'en'
         type: choice
-        options: ['en', 'es', 'fr', 'it']
+        options: ['en', 'es', 'fr', 'it', 'us']
       dry_run:
         description: 'Dry run — print the payload, send nothing'
         required: true
@@ -74,6 +74,11 @@ on:
         type: boolean
       update:
         description: 'Update existing products (needs product_id) instead of creating'
+        required: false
+        default: false
+        type: boolean
+      skip_images:
+        description: 'With update: do NOT re-PUT the gallery (PUT /products/{id} regenerates variant ids). Use when images are already right.'
         required: false
         default: false
         type: boolean
@@ -110,6 +115,7 @@ jobs:
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
           ICONIC_SIZE_SHAPE: ${{ inputs.size_shape }}
         run: |
           ARGS="--lang ${{ inputs.lang }}"
@@ -151,5 +157,6 @@ jobs:
           [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
           [ "${{ inputs.publish }}" = "true" ] && ARGS="$ARGS --publish"
           [ "${{ inputs.update }}" = "true" ] && ARGS="$ARGS --update"
+          [ "${{ inputs.skip_images }}" = "true" ] && ARGS="$ARGS --skip-images"
           echo "create-iconic-products.js $ARGS"
           node scripts/create-iconic-products.js $ARGS

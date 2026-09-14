@@ -52,6 +52,10 @@ var EST={
  en:{title:"Price estimate", team:"Team size", jersey:"jersey", kit:"kit", units:"units",
      est:"est.", total:"total", popular:"Most chosen",
      note:"Sizes &amp; final quantities on the next step.", ship:"Free shipping over €50."},
+ // us.momuto.com: en strings, USD ladder (pricing.js PRICING_US), $59 threshold
+ us:{title:"Price estimate", team:"Team size", jersey:"jersey", kit:"kit", units:"units",
+     est:"est.", total:"total", popular:"Most chosen",
+     note:"Sizes &amp; final quantities on the next step.", ship:"Free shipping over $59."},
  es:{title:"Precio estimado", team:"Tamaño del equipo", jersey:"camiseta", kit:"kit", units:"unidades",
      est:"aprox.", total:"total", popular:"El más elegido",
      note:"Tallas y cantidades finales en el siguiente paso.", ship:"Envío gratis desde 50 €."},
@@ -384,11 +388,13 @@ function detectKind(mount){
   var txt=((el&&el.textContent)||document.title||"").toLowerCase();
   return /\bkit\b|ensemble|completo|full kit|maillot \+ short/.test(txt) ? "kit" : "jersey";
 }
-function estimator(lang, kind){
+function estimator(lang, kind, opts){
   var P=window.MOMUTO_PRICING; if(!P) return null;
   var t=EST[lang]||EST.en;
   kind=(kind==="kit")?"kit":"jersey";
-  var euro=function(n){return "€"+n.toFixed(2);};
+  // opts.store:'us' -> pricing.js USD ladder + "$"; anything else -> EUR (fmt falls
+  // back to "€" on an older cached pricing.js without fmt).
+  var euro=function(n){return (P.fmt?P.fmt(n,opts):"€"+n.toFixed(2));};
   var kindLabel=(kind==="kit")?t.kit:t.jersey;
   var wrap=document.createElement("div");
   wrap.className="mest";
@@ -403,7 +409,7 @@ function estimator(lang, kind){
   var input=wrap.querySelector("input"), out=wrap.querySelector(".mest-out");
   function draw(){
     var q=Math.max(1, parseInt(input.value,10)||1);
-    var unit=P.unitPrice(kind,q), one=P.unitPrice(kind,1), total=P.total(kind,q);
+    var unit=P.unitPrice(kind,q,opts), one=P.unitPrice(kind,1,opts), total=P.total(kind,q,opts);
     var strike=(unit<one)?'<s>'+euro(one)+'</s> ':'';
     var pop=(q>=P.POPULAR_MIN && q<20)?'<span class="mest-pop">'+t.popular+'</span>':'';
     out.innerHTML='<div class="mest-price">'+strike+'<b>'+euro(unit)+'</b> <span class="per">/ '+kindLabel+'</span>'+pop+'</div>'
@@ -436,11 +442,14 @@ function waitFor(sel, cb, tries){
 }
 function mountEstimator(mount){
   if(document.getElementById("mo-est")) return;
-  if(/^us\./.test(location.hostname)) return; // pricing.js is EUR-only — no estimator on the US store until a USD table exists
+  // us.momuto.com: USD ladder from pricing.js (PRICING_US, live since the Sep 2026
+  // reprice) — same estimator, store-keyed. Hostname-keyed like render().
+  var isUS=/^us\./.test(location.hostname);
   waitFor("#goto3d", function(btn){
     if(document.getElementById("mo-est")) return;
     withPricing(function(){
-      var est=estimator((mount.getAttribute("data-lang")||"en").toLowerCase(), detectKind(mount));
+      var lang=(mount.getAttribute("data-lang")||"en").toLowerCase();
+      var est=isUS?estimator("us", detectKind(mount), {store:"us"}):estimator(lang, detectKind(mount));
       if(!est) return;
       est.id="mo-est";
       btn.parentNode.insertBefore(est, btn);

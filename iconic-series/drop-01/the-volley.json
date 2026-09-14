@@ -34,5 +34,8 @@
       "meta_description": "Certi gol si segnano. Altri si scolpiscono. IM-01 della Iconic Series cattura il tiro al volo più iconico del calcio, in formato schizzo d'archivio. T-shirt in cotone premium 220 g/m²."
     }
   },
-  "image_front": "https://cdn.staticsoe.com/pics/a9b76c07663ec0331fd5ca37ef680779faf6c8db6abc7fe566f3fb1955401d45.webp"
+  "image_front": "https://cdn.staticsoe.com/pics/a9b76c07663ec0331fd5ca37ef680779faf6c8db6abc7fe566f3fb1955401d45.webp",
+  "product_id": {
+    "us": "16913571"
+  }
 }

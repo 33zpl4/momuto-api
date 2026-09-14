@@ -9,7 +9,8 @@
     "en",
     "es",
     "fr",
-    "it"
+    "it",
+    "us"
   ],
   "drops": {
     "drop-01": {
@@ -157,7 +158,8 @@
           "en": 130456,
           "es": 443756,
           "fr": 145074,
-          "it": 396378
+          "it": 396378,
+          "us": 558101
         },
         "meta": {
           "en": {
@@ -332,7 +334,8 @@
     "en": 129055,
     "es": 440551,
     "fr": 144943,
-    "it": 281102
+    "it": 281102,
+    "us": 558100
   },
   "product_defaults": {
     "free_shipping": 1,
@@ -340,5 +343,12 @@
     "inventory_tracking": 0,
     "inventory_policy": 1
   },
-  "_comment_collections": "Collection ids are PER STORE. collection_id = the SERIES collection (every product joins it); drops.<drop>.collection.collection_id = that drop's own. Find them with: create-iconic-products.js --collections iconic --lang <store>"
+  "_comment_collections": "Collection ids are PER STORE. collection_id = the SERIES collection (every product joins it); drops.<drop>.collection.collection_id = that drop's own. Find them with: create-iconic-products.js --collections iconic --lang <store>",
+  "_comment_us": "us = the US store (us.momuto.com): a STORE, not a language. Copy falls back to en (copy_fallback); only price_by_locale + collection ids are US-specific. product-details.us.html exists for the $59 shipping line.",
+  "copy_fallback": {
+    "us": "en"
+  },
+  "price_by_locale": {
+    "us": "$45.90"
+  }
 }

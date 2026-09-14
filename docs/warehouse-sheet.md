@@ -72,3 +72,11 @@ a follow-up; this tool only reads.
   fill: yellow 仓库备注 cell.
 - LibreOffice is unavailable in the sandbox, so the layout was verified by
   cell dump only; the first live run is the visual check.
+
+## Jersey-only kit players (14 Sep 2026)
+
+A kit player can be ordered without shorts (design-momuto component billing,
+README §8). The roster row carries `noShorts: true` and the size ends in
+`· JERSEY ONLY`; the sheet prints **无短裤** in the 短裤尺码 column so the factory
+does not cut shorts for that player. Shorts count on the platform order =
+kit players minus jersey-only players.

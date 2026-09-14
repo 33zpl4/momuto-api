@@ -32,6 +32,11 @@ const MOCKUP_ARTWORK = path.join(ROOT, 'mockups', 'artwork', 'iconic-series');
 
 const config = JSON.parse(fs.readFileSync(path.join(DIR, 'config.json'), 'utf8'));
 
+// A store that is not a language (us → en copy): every localised lookup goes
+// through L(); price and the collection ids stay per store.
+const L = (lang) => (config.copy_fallback && config.copy_fallback[lang]) || lang;
+const priceFor = (lang) => (config.price_by_locale && config.price_by_locale[lang]) || config.price;
+
 function parseArgs(argv) {
   const args = { drop: null, lang: null };
   for (let i = 2; i < argv.length; i++) {
@@ -126,7 +131,7 @@ function renderHomepage(drop, all, lang) {
       `            <p class="iconic-ref">${escapeHtml(p.number)}</p>`,
       `            <p class="iconic-name">${name}</p>`,
       '          </div>',
-      `          <span class="iconic-price">${escapeHtml(config.price)}</span>`,
+      `          <span class="iconic-price">${escapeHtml(priceFor(lang))}</span>`,
       '        </div>',
       '      </a>',
     ].join('\n');
@@ -194,7 +199,7 @@ function buildSeriesCards(all, current, lang) {
       `          <div class="series-card-image">${img}</div>`,
       `          <div class="series-card-ref">${escapeHtml(p.number)}</div>`,
       `          <div class="series-card-name">${name}</div>`,
-      `          <div class="series-card-price">${escapeHtml(config.price)}</div>`,
+      `          <div class="series-card-price">${escapeHtml(priceFor(lang))}</div>`,
       `        </a>`,
     ].join('\n');
   }).join('\n');
@@ -203,15 +208,16 @@ function buildSeriesCards(all, current, lang) {
 }
 
 function renderPage(item, all, lang) {
-  const strings = config.strings[lang];
+  const strings = config.strings[L(lang)];
   if (!strings) throw new Error(`no strings for locale "${lang}" in config.json`);
-  const copy = item.page?.[lang];
+  const copy = item.page?.[L(lang)];
   if (!copy || !copy.moment_body) {
     throw new Error(`${item.drop}/${item.slug}: no ${lang} copy yet (moment_body is empty)`);
   }
 
   const dropCfg = config.drops[item.drop];
-  const detailsPath = path.join(DIR, 'shared', `product-details.${lang}.html`);
+  const detailsPath = [lang, L(lang)].map(l => path.join(DIR, 'shared', `product-details.${l}.html`)).find(fs.existsSync)
+    || path.join(DIR, 'shared', `product-details.${lang}.html`);
   if (!fs.existsSync(detailsPath)) {
     throw new Error(`missing shared/product-details.${lang}.html`);
   }
@@ -225,7 +231,7 @@ function renderPage(item, all, lang) {
 
   const bannerSubtitle = strings.banner_subtitle
     .replace('{{NUMBER}}', escapeHtml(item.number))
-    .replace('{{DROP_BLURB}}', config.drop_blurbs[lang][item.drop]);
+    .replace('{{DROP_BLURB}}', config.drop_blurbs[L(lang)][item.drop]);
 
   const cards = buildSeriesCards(all, item, lang);
 
@@ -276,9 +282,9 @@ function renderCollection(drop, items, lang) {
   const dropCfg = config.drops[drop];
   const coll = dropCfg.collection;
   if (!coll) throw new Error(`no collection config for ${drop}`);
-  const copy = coll.copy[lang];
+  const copy = coll.copy[L(lang)];
   if (!copy) throw new Error(`no ${lang} collection copy for ${drop}`);
-  const strings = config.strings[lang];
+  const strings = config.strings[L(lang)];
 
   const mine = items.filter(p => p.drop === drop);
   const missing = [];
@@ -299,7 +305,7 @@ function renderCollection(drop, items, lang) {
       `          <div class="card-ref">${escapeHtml(p.number)}</div>`,
       `          <div class="card-name"><a href="/products/${p.handle}" class="card-name-link">${name}</a></div>`,
       `        </div>`,
-      `        <div class="card-price">${escapeHtml(config.price)}</div>`,
+      `        <div class="card-price">${escapeHtml(priceFor(lang))}</div>`,
       `      </div>`,
       `    </div>`,
     ].join('\n');

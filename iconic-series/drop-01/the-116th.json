@@ -35,5 +35,8 @@
     }
   },
   "image_front": "https://cdn.staticsoe.com/pics/b7a508a7a76222f10cd65518f93fecaa2a92ee234ed41f73a83af52f374383bf.webp",
-  "archive_status": "signature"
+  "archive_status": "signature",
+  "product_id": {
+    "us": "16913608"
+  }
 }
