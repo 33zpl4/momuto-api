@@ -1,0 +1,37 @@
+{
+  "en": {
+    "id": "10622437",
+    "handle": "polo-collar",
+    "title": "Polo collar",
+    "price": "3.00",
+    "verifiedAt": "2026-09-15T14:57:39.191Z"
+  },
+  "es": {
+    "id": "11072429",
+    "handle": "polo-collar",
+    "title": "Cuello polo",
+    "price": "3.00",
+    "verifiedAt": "2026-09-15T14:57:40.927Z"
+  },
+  "fr": {
+    "id": "10210939",
+    "handle": "polo-collar",
+    "title": "Col polo",
+    "price": "3.00",
+    "verifiedAt": "2026-09-15T14:57:42.160Z"
+  },
+  "it": {
+    "id": "17251848",
+    "handle": "polo-collar",
+    "title": "Colletto polo",
+    "price": "3.00",
+    "verifiedAt": "2026-09-15T14:57:42.991Z"
+  },
+  "us": {
+    "id": "17223797",
+    "handle": "polo-collar",
+    "title": "Polo collar",
+    "price": "3.00",
+    "verifiedAt": "2026-09-15T14:57:45.743Z"
+  }
+}
