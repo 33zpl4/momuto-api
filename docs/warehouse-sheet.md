@@ -80,3 +80,13 @@ README §8). The roster row carries `noShorts: true` and the size ends in
 `· JERSEY ONLY`; the sheet prints **无短裤** in the 短裤尺码 column so the factory
 does not cut shorts for that player. Shorts count on the platform order =
 kit players minus jersey-only players.
+
+## Polo-collar designs (15 Sep 2026)
+
+A polo collar is a property of the design (not a per-player choice): the store
+product title carries a marker (`Polo Collar` / `Cuello Polo` / `Col Polo` /
+`Colletto Polo`, README §10 in design-momuto) and checkout bills one unit of
+the per-store "Polo collar" add-on product per jersey. The roster row carries
+`collar: true` and the size ends in `· POLO`; the sheet prints **POLO领** in
+the 领型 column, adds `（POLO领 N 件）` to 总数量, and warns when the roster
+count differs from the platform's "Polo collar" line.

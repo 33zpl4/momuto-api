@@ -57,7 +57,9 @@ Read the doc that owns a topic BEFORE editing that surface.
    to door, mockup 24–48 h, €38.90 single, from €21.90 at 10+, seasonal
    selection −10%. Shorts €5.00 flat from 10 (17.90/15.90/11.90 below);
    kit = jersey + shorts at every tier (26.90 / 23.90 / 22.90 / 21.90 from
-   10+; owner ruling 14 Sep 2026). A surface with different numbers is a bug.
+   10+; owner ruling 14 Sep 2026). Long sleeves +€3.00 per jersey (per
+   player) and polo collar +€3.00 per jersey (per design, title marker;
+   15 Sep 2026), both flat at every tier. A surface with different numbers is a bug.
 7. `static/shared/llms.txt` is the machine-readable fact feed for LLMs —
    update it in the same commit as any fact change.
 8. **One customer email: info@momuto.com** (owner ruling 5 Sep 2026).
