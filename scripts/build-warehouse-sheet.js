@@ -107,7 +107,7 @@ async function paidSince(token, hours) {
 // ("Long sleeves"), and the jersey lines themselves.
 function parseLines(o) {
   const lines = field(o, ['products', 'line_items', 'items']) || [];
-  const out = { ref3d: null, previewIds: [], jerseys: 0, longSleeves: 0, items: [] };
+  const out = { ref3d: null, previewIds: [], jerseys: 0, longSleeves: 0, collars: 0, items: [] };
   for (const it of lines) {
     const title = String(field(it, ['product_title', 'title', 'name']) || '');
     const vt = String(field(it, ['variant_title']) || '');
@@ -117,6 +117,8 @@ function parseLines(o) {
     if (inner && inner.type === '3d-preview') { out.ref3d = out.ref3d || inner.order_no; out.previewIds.push(field(it, ['product_id'])); continue; }
     if (/^your custom design|— order [a-z0-9]{10}$/i.test(title)) { out.previewIds.push(field(it, ['product_id'])); continue; }
     if (/long sleeve|manga larga|manches longues|maniche lunghe/i.test(title + ' ' + vt)) { out.longSleeves += qty; continue; }
+    // "Polo collar" add-on product (one unit per jersey of a polo-collar design, 15 Sep 2026)
+    if (/polo collar|cuello polo|col polo|colletto polo/i.test(title + ' ' + vt)) { out.collars += qty; continue; }
     if (/deposit|acompte|dep[oó]sito|acconto/i.test(title)) { out.items.push({ title, qty, kind: 'deposit' }); continue; }
     out.jerseys += qty;
     out.items.push({ title: vt && vt !== title ? `${title} / ${vt}` : title, qty, kind: 'jersey', price: field(it, ['price']) });
@@ -175,7 +177,7 @@ async function renders(token, previewIds) {
   return out;
 }
 
-// roster: [{ number, name, size, qty, sleeve?, shortSize? }]
+// roster: [{ number, name, size, qty, sleeve?, shortSize?, collar? }]
 function normaliseRoster(players) {
   return (players || []).map(p => {
     const raw = String(p.size || '');
@@ -185,7 +187,9 @@ function normaliseRoster(players) {
     let shorts = p.shortSize || (parts.find(s => /^SHORTS /i.test(s)) || '').replace(/^SHORTS /i, '');
     // jersey-only kit player (design server: noShorts flag / '· JERSEY ONLY' size suffix)
     if (p.noShorts === true || parts.some(s => /^JERSEY ONLY$/i.test(s))) shorts = '无短裤';
-    return { number: String(p.number ?? ''), name: String(p.name ?? ''), size, sleeve, shorts, qty: parseInt(p.qty, 10) || 1 };
+    // polo-collar design (design server: collar flag / '· POLO' size suffix, 15 Sep 2026)
+    const collar = p.collar === true || parts.some(s => /^POLO$/i.test(s));
+    return { number: String(p.number ?? ''), name: String(p.name ?? ''), size, sleeve, shorts, collar, qty: parseInt(p.qty, 10) || 1 };
   });
 }
 // Design server, direct: GET /Order/getGoods?order_no=<ref> — the routed
@@ -271,7 +275,7 @@ async function buildSheet(order, designs, warnings) {
     ['下单时间', order.created], ['付款时间', order.paid || '未付款'],
     ['姓名', order.name], ['地址', order.address], ['国家', [order.country, order.country_code].filter(Boolean).join(' / ')],
     ['电话', order.phone], ['邮编', order.zip], ['邮箱', order.email], ['留言', order.note || '（无）'],
-    ['总数量', jerseyQty != null ? `${jerseyQty} 件` + (order.longSleeves ? `（其中长袖 ${order.longSleeves} 件）` : '') : ''],
+    ['总数量', jerseyQty != null ? `${jerseyQty} 件` + (order.longSleeves ? `（其中长袖 ${order.longSleeves} 件）` : '') + (order.collars ? `（POLO领 ${order.collars} 件）` : '') : ''],
     ['货运方式', order.shipping_plan ? `${order.shipping_plan}（运费 ${order.shipping_price} ${order.currency}）` : `运费 ${order.shipping_price} ${order.currency}`],
     ['支付方式', PAY_ZH(order.payment)], ['总金额', `${order.total} ${order.currency}`],
   ];
@@ -309,15 +313,15 @@ async function buildSheet(order, designs, warnings) {
     if (links) { const c = ws.getCell(r, 1); c.value = links; c.font = { name: 'Arial', size: 8, color: { argb: 'FF808080' } }; c.alignment = { wrapText: true }; ws.mergeCells(r, 1, r, 6); ws.getRow(r).height = 26; r += 1; }
     r += 1;
 
-    const head = ['序号', '袖长', '尺码', '号码', '名字', '数量', '短裤尺码'];
+    const head = ['序号', '袖长', '尺码', '号码', '名字', '数量', '短裤尺码', '领型'];
     head.forEach((t, i) => { const c = ws.getCell(r, i + 1); c.value = t; c.font = { name: '宋体', size: 11, bold: true }; c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD9E1F2' } }; c.border = { top: { style: 'thin' }, bottom: { style: 'thin' }, left: { style: 'thin' }, right: { style: 'thin' } }; c.alignment = { horizontal: 'center' }; });
     r += 1;
     if (!d.players.length) {
       const c = ws.getCell(r, 1); c.value = `名单未获取 — 请在 manage.momuto.com 订单 ${order.ref3d || order.order_number} 核对号码/名字/尺码` + (jerseyQty ? `（平台数量 ${jerseyQty} 件${order.longSleeves ? `，长袖 ${order.longSleeves} 件` : ''}）` : '');
-      c.font = { name: '宋体', size: 11, bold: true, color: { argb: 'FFC00000' } }; ws.mergeCells(r, 1, r, 7); r += 1;
+      c.font = { name: '宋体', size: 11, bold: true, color: { argb: 'FFC00000' } }; ws.mergeCells(r, 1, r, 8); r += 1;
     }
     d.players.forEach((p, i) => {
-      const vals = [i + 1, SLEEVE_ZH[p.sleeve] || p.sleeve, p.size, p.number, p.name, p.qty, p.shorts || ''];
+      const vals = [i + 1, SLEEVE_ZH[p.sleeve] || p.sleeve, p.size, p.number, p.name, p.qty, p.shorts || '', p.collar ? 'POLO领' : ''];
       vals.forEach((v, j) => { const c = ws.getCell(r, j + 1); c.value = v; c.font = { name: 'Arial', size: 11, bold: j === 3 || j === 4 }; c.border = { top: { style: 'thin' }, bottom: { style: 'thin' }, left: { style: 'thin' }, right: { style: 'thin' } }; c.alignment = { horizontal: 'center' }; if (j === 3) c.numFmt = '@'; });
       r += 1;
     });
@@ -337,7 +341,7 @@ async function emailSheet(order, filePath, warnings) {
   const key = process.env.RESEND_API_KEY; if (!key || args.dry) return false;
   const to = (process.env.WAREHOUSE_EMAILS || 'info@momuto.com,ilovebillxie@hotmail.com').split(',').map(s => s.trim()).filter(Boolean);
   const qty = order.jerseys ? `${order.jerseys} 件` : '';
-  const subject = `生产单 ${order.order_number} · ${order.country || order.store}${qty ? ' · ' + qty : ''}${order.longSleeves ? ' · 含长袖' : ''}${warnings.length ? ' · ⚠ 需核对' : ''}`;
+  const subject = `生产单 ${order.order_number} · ${order.country || order.store}${qty ? ' · ' + qty : ''}${order.longSleeves ? ' · 含长袖' : ''}${order.collars ? ' · 含POLO领' : ''}${warnings.length ? ' · ⚠ 需核对' : ''}`;
   const html = `<p>订单 <strong>${order.order_number}</strong>（3D ${order.ref3d || '-'}）· ${order.name} · ${order.country} · ${order.total} ${order.currency}</p>` +
     `<p>生产单见附件。${warnings.length ? '<br><strong style="color:#c00">⚠ ' + warnings.join('<br>⚠ ') + '</strong>' : ''}</p>` +
     `<p style="color:#888;font-size:12px">MOMUTO 自动生成 · 平台订单 + 3D设计服务器 · 如有疑问回复 info@momuto.com</p>`;
@@ -379,6 +383,8 @@ async function processOrder(lang, raw, token) {
   if (rosterQty && order.jerseys && rosterQty !== order.jerseys) warnings.push(`名单数量 ${rosterQty} 与平台数量 ${order.jerseys} 不一致，请核对`);
   const rosterLong = designs.reduce((n, d) => n + d.players.filter(p => p.sleeve === 'long').reduce((m, p) => m + p.qty, 0), 0);
   if (rosterQty && rosterLong !== order.longSleeves) warnings.push(`长袖数量：名单 ${rosterLong} 件，平台加购 ${order.longSleeves} 件，请核对`);
+  const rosterCollar = designs.reduce((n, d) => n + d.players.filter(p => p.collar).reduce((m, p) => m + p.qty, 0), 0);
+  if (rosterQty && rosterCollar !== (order.collars || 0)) warnings.push(`POLO领数量：名单 ${rosterCollar} 件，平台加购 ${order.collars || 0} 件，请核对`);
 
   const wb = await buildSheet(order, designs, warnings);
   fs.mkdirSync(OUT_DIR, { recursive: true });

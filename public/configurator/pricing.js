@@ -51,6 +51,11 @@
   var LS_SURCHARGE=3.00;         // long sleeves: flat +3.00 per jersey at EVERY tier
                                  // (billed via the per-store "Long sleeves" product;
                                  // surfaces show resulting prices, never a fee line)
+  var COLLAR_SURCHARGE=3.00;     // polo collar: flat +3.00 per jersey at EVERY tier
+                                 // (a DESIGN property, not a per-player choice — flagged
+                                 // by a "Polo Collar"/"Cuello Polo"/"Col Polo"/"Colletto
+                                 // Polo" marker in the store product title; billed via the
+                                 // per-store "Polo collar" product; owner ruling 15 Sep 2026)
 
   function normQty(qty){ return Math.max(1, parseInt(qty,10)||1); }
   // store key: 'us' -> USD ladder; anything else -> the EUR ladder.
@@ -72,7 +77,7 @@
 
   var api={
     PRICING:PRICING, PRICING_US:PRICING_US, RTP_US:RTP_US, CURRENCY:CURRENCY,
-    RTP_OFF:RTP_OFF, POPULAR_MIN:POPULAR_MIN, LS_SURCHARGE:LS_SURCHARGE,
+    RTP_OFF:RTP_OFF, POPULAR_MIN:POPULAR_MIN, LS_SURCHARGE:LS_SURCHARGE, COLLAR_SURCHARGE:COLLAR_SURCHARGE,
     tierBase:tierBase, rtpPrice:rtpPrice, currency:currency, fmt:fmt,
     // Effective per-unit price. opts.rtp=true -> RTP pricing; otherwise standard/custom.
     // opts.store:'us' -> the USD ladder (LS_SURCHARGE is 3.00 in both currencies).
