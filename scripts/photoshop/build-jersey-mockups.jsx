@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-09-10a · squarish sponsors take an optical discount';
+var VERSION = '2026-09-15a · sleeve patches: a second kind, sized by longer side';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -185,6 +185,46 @@ function sponsorOverlay(kinds, boxPct) {
   };
 }
 
+// ── Sleeve PATCHES are not sponsors, and the sponsor rules get them wrong.
+//
+//    A league patch — 57×80 mm, a black rectangle with a logo inside — came out
+//    too small. It is portrait (aspect 0.715), so the optical rule gave it the
+//    full 20% discount. That rule exists because a solid *shape* reads heavier
+//    than its box. A patch has no shape beyond its box: it IS the rectangle. In
+//    the O/H analogy it is the H, and discounting it is exactly backwards.
+//
+//    The rule that generalises: a LOGO is standardised by its height (the cap
+//    height of a wordmark, the height of a badge); a PATCH is standardised by
+//    its LONGER SIDE, because that is how patches are physically made — a 6×8,
+//    an 8×6 and a round one are all "an 8 cm patch". So a patch is contain-
+//    fitted into a SQUARE of side PATCH_SIZE, takes no optical discount, and is
+//    always kept fully on the canvas: a clipped silhouette edge passes, a
+//    clipped rectangle edge does not.
+//
+//    Sized by name, not detected. A filled rectangle cannot be told from a
+//    solid logo without reading the mark's transparency coverage, which is a
+//    Photoshop-action surface this script does not touch. So the intent is
+//    declared in the filename: <slug>-sleevepatch[left|right].svg, same arm
+//    convention as sponsors. It sits at the sponsor's position on the sleeve.
+//
+//    PATCH_SIZE is the longer side as a fraction of the sleeve canvas WIDTH.
+//    0.62 puts the league patch at 597×836 px — 44% of the canvas width, about
+//    1.5× what the sponsor rule produced — and a round patch at 836×836. For
+//    scale, the sponsor standard is 680 tall with a 903 max width.
+var PATCH_SIZE = 0.62;
+
+function centreOf(boxPct) {
+  return [boxPct[0] + boxPct[2] / 2, boxPct[1] + boxPct[3] / 2];
+}
+
+function patchOverlay(kinds, sponsorBoxPct) {
+  return {
+    file: kinds,
+    centrePct: centreOf(sponsorBoxPct), sizePct: PATCH_SIZE,
+    fit: 'contain', keepOnCanvas: true, edgeInsetPct: SPONSOR_EDGE_INSET
+  };
+}
+
 // ── SET THESE THREE ONCE. They persist in this file; you never touch them again.
 //    Only the contents of artworkDir changes from design to design.
 //    Windows paths use FORWARD slashes.
@@ -239,6 +279,12 @@ var CONFIG = {
   // edge. `opticalFrom` / `opticalMax` shrink a squarish mark, which reads
   // heavier than a wide one at the same height. Sleeve slots get all of these
   // via sponsorOverlay(); see SPONSOR_MAX_WIDTH and SPONSOR_OPTICAL_FROM.
+  //
+  // A PATCH is the other kind of sleeve mark and uses a different box:
+  // `centrePct` + `sizePct` place a SQUARE of that side (fraction of canvas
+  // width) at that centre, contain-fitted, no optical discount, and
+  // `keepOnCanvas: true` holds it fully inside. patchOverlay() builds it;
+  // see PATCH_SIZE for why a patch is sized by its longer side, not its height.
   //
   // This is how sleeve sponsors work. A sponsor cannot be mirrored, so it must
   // be its own layer rather than baked into a mirrored base. Because the slot
@@ -361,10 +407,12 @@ var CONFIG = {
         // not matching — only this first one used to have it.
         { layer: 'SLEEVE DESIGN', at: [1242, 995],  file: ['sleeveright',   'sleeves'],   count: 1, expect: [1348, 2494],
           baseOffsetPct: [0, -SLEEVE_RAISE],
-          over: [sponsorOverlay(['sleevesponsorright', 'sleevesponsor'], SPONSOR.frontRightArm)] },
+          over: [sponsorOverlay(['sleevesponsorright', 'sleevesponsor'], SPONSOR.frontRightArm),
+                 patchOverlay(  ['sleevepatchright',   'sleevepatch'],   SPONSOR.frontRightArm)] },
         { layer: 'SLEEVE DESIGN', at: [3845, 1040], file: ['sleeveleft',    'sleeves'],   count: 1, expect: [1348, 2520],
           baseOffsetPct: [0, -SLEEVE_RAISE], mirrorX: 'shared',
-          over: [sponsorOverlay(['sleevesponsorleft',  'sleevesponsor'], SPONSOR.frontLeftArm)] },
+          over: [sponsorOverlay(['sleevesponsorleft',  'sleevesponsor'], SPONSOR.frontLeftArm),
+                 patchOverlay(  ['sleevepatchleft',    'sleevepatch'],   SPONSOR.frontLeftArm)] },
         { layer: 'COLLAR TOP',    file: 'collartop',    count: 1, expect: [1500, 252] },
         { layer: 'COLLAR BOTTOM', file: 'collarbottom', count: 1, expect: [2171, 355] }
         // TAPE DESIGN is deliberately absent — it stays white, so leaving the
@@ -383,10 +431,12 @@ var CONFIG = {
         // The only slot that does not take the common raise — see the constant.
         { layer: 'LEFT SLEEVE DESIGN',  file: ['sleeveleft',  'sleeves'], count: 1,
           baseOffsetPct: [0, -BACK_LEFT_SLEEVE_RAISE],
-          over: [sponsorOverlay(['sleevesponsorleft',  'sleevesponsor'], SPONSOR.backLeftArm)] },
+          over: [sponsorOverlay(['sleevesponsorleft',  'sleevesponsor'], SPONSOR.backLeftArm),
+                 patchOverlay(  ['sleevepatchleft',    'sleevepatch'],   SPONSOR.backLeftArm)] },
         { layer: 'RIGHT SLEEVE DESIGN', file: ['sleeveright', 'sleeves'], count: 1,
           baseOffsetPct: [0, -SLEEVE_RAISE], mirrorX: 'shared',
-          over: [sponsorOverlay(['sleevesponsorright', 'sleevesponsor'], SPONSOR.backRightArm)] },
+          over: [sponsorOverlay(['sleevesponsorright', 'sleevesponsor'], SPONSOR.backRightArm),
+                 patchOverlay(  ['sleevepatchright',   'sleevepatch'],   SPONSOR.backRightArm)] },
         { layer: 'COLLAR DESIGN',       file: 'collarback',               count: 1 }
         // No shoulder slots on the back template — its SHOULDERS layer is a
         // solid fill, not a smart object, so back shoulders take a flat colour.
@@ -674,7 +724,7 @@ function mirrorLayerX(pl) {
  *
  * Returns what happened, for the log.
  */
-function fitLayerInBox(pl, box, mode, cw, rules) {
+function fitLayerInBox(pl, box, mode, cw, ch, rules) {
   var m = layerBox(pl);
   if (m.w <= 0 || m.h <= 0) return null;
   rules = rules || {};
@@ -702,17 +752,24 @@ function fitLayerInBox(pl, box, mode, cw, rules) {
   var tx = box[0] + (box[2] - n.w) / 2 - n.x;
   var ty = box[1] + (box[3] - n.h) / 2 - n.y;
 
+  // Kept on the canvas when the width cap engaged, or always for a mark that
+  // asks (a patch: a clipped rectangle edge is glaring). Both axes — a patch is
+  // tall enough to reach the hem if the centre sits low.
   var shifted = 0;
-  if (capped) {
-    var left = n.x + tx, right = left + n.w;
-    if (left < rules.inset)            shifted = rules.inset - left;
-    else if (right > cw - rules.inset) shifted = (cw - rules.inset) - right;
-    tx += shifted;
+  if (capped || rules.keepOnCanvas) {
+    var left = n.x + tx, right = left + n.w, dx = 0;
+    if (left < rules.inset)            dx = rules.inset - left;
+    else if (right > cw - rules.inset) dx = (cw - rules.inset) - right;
+    var top = n.y + ty, bottom = top + n.h, dy = 0;
+    if (top < rules.inset)             dy = rules.inset - top;
+    else if (bottom > ch - rules.inset) dy = (ch - rules.inset) - bottom;
+    tx += dx; ty += dy;
+    shifted = Math.round(Math.sqrt(dx * dx + dy * dy));
   }
   pl.translate(UnitValue(tx, 'px'), UnitValue(ty, 'px'));
 
   return {
-    capped: capped, shifted: Math.round(shifted),
+    capped: capped, shifted: shifted,
     optical: Math.round(optical * 100), aspect: aspect.toFixed(2),
     w: Math.round(n.w), h: Math.round(n.h)
   };
@@ -859,21 +916,33 @@ function placeInsideSlot(doc, layer, stack, sample, notes) {
         var p = stack[f].boxPct;
         box = [p[0] * cw, p[1] * ch, p[2] * cw, p[3] * ch];
       }
+      // A patch: a SQUARE of side sizePct×canvas-width, centred on centrePct.
+      // Square in pixels, not in fractions — the canvas is 1348×2494, so equal
+      // fractions would be a box nearly twice as tall as it is wide.
+      var isPatch = false;
+      if (!box && stack[f].sizePct && stack[f].centrePct) {
+        var side = stack[f].sizePct * cw;
+        box = [stack[f].centrePct[0] * cw - side / 2, stack[f].centrePct[1] * ch - side / 2, side, side];
+        isPatch = true;
+      }
       if (box) {
         var rules = {
-          maxW:        (stack[f].maxWidthPct != null) ? stack[f].maxWidthPct * cw : 0,
-          inset:       (stack[f].edgeInsetPct || 0) * cw,
-          opticalFrom: stack[f].opticalFrom || 0,
-          opticalMax:  stack[f].opticalMax || 0
+          maxW:         (stack[f].maxWidthPct != null) ? stack[f].maxWidthPct * cw : 0,
+          inset:        (stack[f].edgeInsetPct || 0) * cw,
+          opticalFrom:  stack[f].opticalFrom || 0,
+          opticalMax:   stack[f].opticalMax || 0,
+          keepOnCanvas: !!stack[f].keepOnCanvas
         };
-        var fitted = fitLayerInBox(pl, box, stack[f].fit, cw, rules);
-        // Say so whenever a rule changed the size — a sponsor that came out
+        var fitted = fitLayerInBox(pl, box, stack[f].fit, cw, ch, rules);
+        // Say so whenever a rule decided the size — a sponsor that came out
         // smaller than the standard height, or at the standard WIDTH instead,
-        // should not pass as a mystery.
-        if (fitted && notes && (fitted.capped || fitted.optical >= 1)) {
+        // or a patch sized by its long side, should not pass as a mystery.
+        if (fitted && notes && (isPatch || fitted.capped || fitted.optical >= 1)) {
           var why = [];
+          if (isPatch) why.push('patch, longer side ' + Math.round(Math.max(fitted.w, fitted.h)) + 'px');
           if (fitted.optical >= 1) why.push(fitted.optical + '% smaller (optical, aspect ' + fitted.aspect + ')');
-          if (fitted.capped) why.push('width-capped' + (fitted.shifted ? ', moved ' + Math.abs(fitted.shifted) + 'px onto the canvas' : ''));
+          if (fitted.capped) why.push('width-capped');
+          if (fitted.shifted) why.push('moved ' + fitted.shifted + 'px onto the canvas');
           notes.push(decodeURI(stack[f].file.name) + ' → ' + fitted.w + '×' + fitted.h + 'px: ' + why.join('; '));
         }
       }
@@ -928,10 +997,14 @@ function overSpec(entry) {
       maxWidthPct: (entry.maxWidthPct != null) ? entry.maxWidthPct : null,
       edgeInsetPct: entry.edgeInsetPct || 0,
       opticalFrom: entry.opticalFrom || 0,
-      opticalMax: entry.opticalMax || 0
+      opticalMax: entry.opticalMax || 0,
+      centrePct: entry.centrePct || null,
+      sizePct: entry.sizePct || 0,
+      keepOnCanvas: !!entry.keepOnCanvas
     };
   }
-  return { kinds: entry, box: null, boxPct: null, fit: 'height', maxWidthPct: null, edgeInsetPct: 0, opticalFrom: 0, opticalMax: 0 };
+  return { kinds: entry, box: null, boxPct: null, fit: 'height', maxWidthPct: null, edgeInsetPct: 0,
+           opticalFrom: 0, opticalMax: 0, centrePct: null, sizePct: 0, keepOnCanvas: false };
 }
 
 // Kind names deliberately carry no internal hyphen ('collarback', not
@@ -1387,7 +1460,8 @@ function main() {
                   if (extra) {
                     stack.push({ file: extra, box: spec.box, boxPct: spec.boxPct, fit: spec.fit,
                                  maxWidthPct: spec.maxWidthPct, edgeInsetPct: spec.edgeInsetPct,
-                                 opticalFrom: spec.opticalFrom, opticalMax: spec.opticalMax });
+                                 opticalFrom: spec.opticalFrom, opticalMax: spec.opticalMax,
+                                 centrePct: spec.centrePct, sizePct: spec.sizePct, keepOnCanvas: spec.keepOnCanvas });
                     overlaid.push(decodeURI(extra.name) + ((spec.box || spec.boxPct) ? '' : ' (full canvas)'));
                   }
                 }

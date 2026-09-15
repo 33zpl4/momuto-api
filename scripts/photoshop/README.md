@@ -525,6 +525,55 @@ loses. What this rule cannot see is ink density — a solid square and an outlin
 square of the same box get the same discount. That would need reading the mark's
 transparency coverage, which is possible but not built.
 
+### Sleeve patches — a second kind of mark
+
+A league patch (57×80 mm, a black rectangle with a logo inside) came out too
+small under the sponsor rules — and the optical discount is the reason. The
+patch is portrait (aspect 0.715), so it took the full 20% off. That discount
+exists because a solid *shape* reads heavier than its box; a patch has no shape
+beyond its box, it **is** the rectangle. In the O/H analogy it is the H, and
+discounting it is exactly backwards.
+
+The rule that generalises: **a logo is standardised by its height; a patch is
+standardised by its longer side.** That is how patches are physically made — a
+6×8, an 8×6 and a round one are all "an 8 cm patch". So a patch is contain-fitted
+into a **square** of side `PATCH_SIZE`, takes no optical discount, and is always
+kept fully on the canvas: a clipped silhouette edge passes, a clipped rectangle
+edge does not.
+
+```
+<slug>-sleevepatchleft.svg     the player's LEFT arm, both views
+<slug>-sleevepatchright.svg    the player's RIGHT arm, both views
+<slug>-sleevepatch.svg         same patch on both arms
+```
+
+Same arm convention as sponsors, and it sits at the sponsor's position on the
+sleeve. Crop it tight, like a sponsor.
+
+**Declared by name, not detected.** A filled rectangle cannot be told from a solid
+logo without reading the mark's transparency coverage, which is a Photoshop
+action surface this script does not touch. The filename is the declaration of
+intent — which is also the honest answer to "does the logic extrapolate": the
+*sizing* rule is general to every patch, the *classification* is yours.
+
+`PATCH_SIZE` is the longer side as a fraction of the sleeve canvas **width**.
+At 0.62 the league patch lands at 597×836 px, 44% of the canvas width, about
+1.5× what the sponsor rule produced; a round patch would be 836×836. For scale,
+the sponsor standard is 680 tall with a 903 max width. One number to tune.
+
+Verified across all four sleeves: the patch is pulled onto the canvas on every
+one (the sponsor centres sit against the outer edge, so a mark this wide always
+overhangs), and its bottom clears the cuff band by a wide margin. The run
+reports it:
+
+```
+· overlaid: club-sleevepatch.svg → 597×836px: patch, longer side 836px; moved 237px onto the canvas
+```
+
+A sleeve can carry a sponsor **and** a patch — both files simply exist — but
+they share a centre and will overlap. One mark per arm is the working
+assumption; the log shows both if both were placed.
+
 #### Where the four boxes came from
 
 `SPONSOR` at the top of the builder is filled in, measured from
