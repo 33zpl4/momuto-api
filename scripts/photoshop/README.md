@@ -730,29 +730,40 @@ Set it back to `false` for normal runs.
 
 ```
 node scripts/compress-mockups.js "C:/Users/you/momuto/mockups-out"
-node scripts/compress-mockups.js <dir> --max 300        # tighter cap
+node scripts/compress-mockups.js <dir> --max 300           # tighter cap
+node scripts/compress-mockups.js <dir> --dither 0.5        # smaller, same colours
+node scripts/compress-mockups.js <dir> --min-colours 128   # allow colour loss down to 128
 ```
 
 Writes `<name>.min.png` alongside each input.
 
 This replaces tinypng.com. TinyPNG's trick is **palette quantisation** — reduce
 to N colours and a PNG shrinks hard, which is exactly why it works so well on
-flat vector kit artwork. `sharp` does the same locally, so the upload-check-
-reupload loop becomes a binary search for the highest colour count still under
-the cap. Quality is maximised subject to the cap rather than driven down to a
-target, so a design that compresses well keeps all 256 colours.
+flat vector kit artwork. `sharp` does the same locally.
 
-Measured on a 1500×1500 export:
+**Quality has a floor, and the cap does not override it.** `--min-colours` is
+the fewest colours a file may be reduced to. Its default is **256 — a PNG
+palette's maximum — so by default nothing is quantised below full palette at
+all.** An earlier version searched down as far as 2 colours to get under the
+cap, and on a mockup that means posterised shading a customer can see; that is
+why the floor exists. A file that will not fit under the cap at the floor is
+shipped **at the floor** and reported, never crushed further:
 
-| input | result |
-|---|---|
-| flat vector kit design (93 KB) | **22 KB**, 256 colours — no loss |
-| photographic garment mockup (1000 KB) | **202 KB**, 128 colours |
+```
+⚠ club-front.min.png   5274 →  672 KB  (1500×1500, 256 colours)  over the cap by 347 KB — kept at the floor
+```
 
-The second is the worst case and it still lands well under 325 KB. If something
-reports **OVER CAP at 2 colours**, that isn't a compression problem — it means a
-photographic layer, noise or a gradient snuck into the export and defeated
-quantisation.
+The cap is therefore a target, not a gate — the run exits 0 either way.
+
+With the floor at 256 the only lever that keeps every colour is `--dither`.
+1.0 (default) is full Floyd–Steinberg: it is what keeps the template's shadows
+smooth at 256 colours, and it also adds noise the encoder cannot compress.
+Lowering it shrinks the file but can band gradients, so it is opt-in. Expect
+it to help most on flat artwork and least on heavy shading — on a deliberately
+noisy 1500² test it saved only 4% — so judge the result by eye. Lowering
+`--min-colours` is the other route, and it trades colours for size directly:
+below 256 the script binary-searches for the most colours that fit, and never
+goes under the floor you set.
 
 ## Safety
 
