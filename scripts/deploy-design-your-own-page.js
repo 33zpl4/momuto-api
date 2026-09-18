@@ -25,9 +25,13 @@ const DOMAIN = {
   label: 'momuto.com',
   handle: 'design-your-own-soccer-jersey',
   file: path.join(ROOT, 'pages', 'design-your-own-soccer-jersey'),
-  title: 'Design Your Own Soccer Jersey — Free 3D Maker',
-  meta_title: 'Design Your Own Soccer Jersey — Free 3D Maker',
-  meta_descript: 'Design your own soccer jersey free in 3D, or turn your AI concept (ChatGPT, Gemini) into a real, wearable kit. No minimum order, full sublimation.',
+  // 18 Sep 2026 (GSC US, 28d): 'soccer jersey maker' 458 impr @12.9, 'jersey maker' 190,
+  // 'soccer jersey designer/creator' ~150 each — all landing on the homepage at pos 18.
+  // This page is the maker; say so in the title. H1 keeps the top converter
+  // ('create your own soccer jersey online free', pos 3.6, 17% CTR).
+  title: 'Soccer Jersey Maker — Create Your Own Soccer Jersey Online Free',
+  meta_title: 'Soccer Jersey Maker — Create Your Own Soccer Jersey Online Free',
+  meta_descript: 'Free 3D soccer jersey maker: create your own soccer jersey online, or turn your AI concept (ChatGPT, Gemini) into a real, wearable kit. No minimum order.',
   meta_keywords: [
     'design your own soccer jersey',
     'create your own soccer jersey online free',
