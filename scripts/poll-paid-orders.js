@@ -38,11 +38,29 @@
  *                                   and exits 0, so the scheduled workflow is
  *                                   safe to merge before the secret exists.
  *
+ *   DESIGN_PAY_URL                — optional override of the design-server
+ *                                   pay endpoint (default below).
+ *
+ * DESIGN-SERVER PAY SYNC (18 Sep 2026). manage.momuto.com reads
+ * orders.pay_status on the design server, which only the platform's
+ * "Order Update" webhook (financial_status 230) or the legacy
+ * POST /pay/callback ever set to paid. Neither fires at payment time any
+ * more: the webhook arrives in sweeps days/weeks later (see the Aug finding
+ * above), the callback not at all — so paid orders sat as 待支付 in manage for
+ * days (2026091733562960 paid 17 Sep 10:00, still unpaid in manage 33 h later).
+ * The poller already knows the payment truth every hour, so for every paid
+ * order in the window it POSTs the existing form-encoded
+ * /pay/callback {order_no, payStatus:'success', type:'oem'} (+ plant_order_no,
+ * which the patched PayAction stamps when missing). Idempotent; runs BEFORE
+ * the alreadyKnown short-circuit so orders whose email already went out are
+ * still marked paid.
+ *
  * Runs on the GitHub runner; the sandbox cannot reach openapi.oemapps.com.
  */
 
 const HOST = 'https://openapi.oemapps.com';
 const API  = 'https://momuto-api.vercel.app/api/admin-orders';
+const DESIGN_PAY_URL = process.env.DESIGN_PAY_URL || 'https://design.momuto.com/pay/callback';
 
 const POLL_WINDOW_DAYS = 14;   // ignore anything paid earlier (matches BACKFILL_DAYS)
 // Owner ruling (11 Sep 2026): orders paid before the poller went live are NOT
@@ -158,10 +176,38 @@ async function vercel(method, pathQ, body) {
   return { status: res.status, json };
 }
 
+// Mark the design-server order PAID (orders.pay_status = 2 — what
+// manage.momuto.com shows). Form-encoded: the /pay/callback route has no JSON
+// middleware and reads $_POST. A non-200 / non-success answer is an error
+// (the run goes red) — a silent miss here is exactly the bug this closes.
+async function syncDesignPaid(lang, ref, platNo, live, report) {
+  if (!live) { report.designSynced.push(`${lang}:${ref} (dry)`); return; }
+  const body = new URLSearchParams({
+    order_no: ref, payStatus: 'success', type: 'oem',
+    plant_order_no: platNo, source: 'momuto-api-poller',
+  });
+  try {
+    await sleep(300);
+    const res = await fetch(DESIGN_PAY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString(),
+    });
+    const text = await res.text();
+    if (res.status === 200 && /"code"\s*:\s*200/.test(text)) {
+      report.designSynced.push(`${lang}:${ref}`);
+    } else {
+      report.errors.push(`${lang}:${ref}: design pay sync HTTP ${res.status} ${text.slice(0, 120)}`);
+    }
+  } catch (e) {
+    report.errors.push(`${lang}:${ref}: design pay sync ${e.message}`);
+  }
+}
+
 async function run() {
   const args = parseArgs(process.argv);
   const langs = args.lang === 'all' ? Object.keys(STORES) : [args.lang];
-  const report = { ingested: [], alreadyKnown: [], noPreviewLine: [], notPaidOrOld: 0, unknownStatus: [], errors: [] };
+  const report = { ingested: [], designSynced: [], alreadyKnown: [], noPreviewLine: [], notPaidOrOld: 0, unknownStatus: [], errors: [] };
 
   if (!args.probe && !SECRET) {
     console.log('MOMUTO_API_SECRET not set — poller not armed yet, nothing to do.');
@@ -235,6 +281,10 @@ async function run() {
           if (r) { ref = r; previewProductId = field(item, ['product_id', 'productId']); break; }
         }
         if (!ref) { report.noPreviewLine.push(`${lang}:${platNo}`); continue; }
+
+        // design server / manage.momuto.com: mark paid (see header) — every
+        // run, BEFORE the email dedupe, so already-emailed orders get fixed too.
+        await syncDesignPaid(lang, ref, platNo, args.live, report);
 
         // already in the pipeline?
         const found = await vercel('GET', `?action=find&q=${encodeURIComponent(ref)}`);
