@@ -439,7 +439,7 @@ function estimator(lang, kind, opts){
 function withPricing(cb){
   if(window.MOMUTO_PRICING) return cb();
   var s=document.createElement("script");
-  s.src="https://www.momuto.com/pricing.js?v=1"; s.defer=true;
+  s.src="https://www.momuto.com/pricing.js?v=4"; s.defer=true;
   s.onload=function(){ if(window.MOMUTO_PRICING) cb(); };
   s.onerror=function(){ try{console.warn("[momuto] pricing.js failed to load — price estimate hidden");}catch(e){} };
   document.head.appendChild(s);

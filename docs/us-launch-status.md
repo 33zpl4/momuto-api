@@ -159,7 +159,9 @@ Jersey Designs" and a "Create Your Own Soccer Jersey Online — Free" CTA
    Other pairs used: Iconic tee €39→$45.90, €40→$46.90, tributes €49.90→
    $58.90, editions €55.90→$65.90, €42.90→$50.90 (cmp €80→$94.90), concept
    €34.90→$41.90, legacy team jerseys €20.90→$24.90, shorts €17.90→$20.90,
-   socks €6→$6.90, long sleeves +$3.00, RTP full kit →$59.90. Per-order
+   socks €6→$6.90 (superseded 19 Sep 2026: socks are €3.90 → **$4.90**, the
+   same pair as the US shipping fee; product 16913789 repriced via
+   `set-product-price.yml`), long sleeves +$3.00, RTP full kit →$59.90. Per-order
    $0 mockup products and test junk are skipped.
 2. Comparison page ladder rewritten to the table above (JSON-LD + table);
    `contact`: "$15 deposit applies to 100% custom requests, credited in

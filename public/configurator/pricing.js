@@ -16,7 +16,7 @@
 
    Loads as a browser global (window.MOMUTO_PRICING) and as a CommonJS module.
    Reference it the same way custom-content.js is referenced (EN-hosted, shared
-   across all stores):  <script src="https://www.momuto.com/pricing.js?v=1"></script>
+   across all stores):  <script src="https://www.momuto.com/pricing.js?v=4"></script>
    ============================================================================ */
 (function(root){
   "use strict";
@@ -25,7 +25,7 @@
     jersey:[[1,38.90],[2,34.90],[5,26.90],[10,21.90],[20,18.90],[50,17.90],[100,16.90]],
     kit:   [[1,56.80],[2,50.80],[5,38.80],[10,26.90],[20,23.90],[50,22.90],[100,21.90]],   // = jersey + shorts at every tier (owner ruling 14 Sep 2026)
     shorts:[[1,17.90],[2,15.90],[5,11.90],[10, 5.00],[20, 5.00],[50, 5.00],[100, 5.00]],   // €5 flat from 10 (14 Sep 2026; was 6.00/6.00/5.50)
-    socks: [[1, 6.00]]           // flat — matches the store product; no published ladder
+    socks: [[1, 3.90]]           // flat at every qty (owner ruling 19 Sep 2026; was 6.00). Optional per player; not custom-printed
   };
   // us.momuto.com — the USD ladder (owner ruling 3 Sep 2026, .90 endings; see
   // momuto-api docs/us-launch-status.md). NOT an FX conversion of the EUR
@@ -35,7 +35,7 @@
     jersey:[[1,45.90],[2,41.90],[5,30.90],[10,25.90],[20,21.90],[50,20.90],[100,19.90]],
     kit:   [[1,66.80],[2,60.80],[5,44.80],[10,30.90],[20,26.90],[50,25.90],[100,24.90]],
     shorts:[[1,20.90],[2,18.90],[5,13.90],[10, 5.00],[20, 5.00],[50, 5.00],[100, 5.00]],
-    socks: [[1, 6.90]]
+    socks: [[1, 4.90]]           // €3.90 → $4.90 (same pair as the US shipping fee)
   };
   // US Ready to Play is anchored on the live US product prices ($40.90 jersey,
   // $59.90 kit — owner-ruled from €35 / €59 via the EUR→USD map), then −10% of

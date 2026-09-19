@@ -1,0 +1,50 @@
+name: Set product price (one product, one store)
+
+# Read or set the price of ONE platform product. Dispatch-only; dry run by
+# default (prints the live product and the intended change, writes nothing).
+# Built for the socks ruling (19 Sep 2026): €3.90 on the EUR stores, $4.90 on
+# us.momuto.com — product ids are in design-momuto server-patches/checkSumbit-*.html
+# (mamuto3socks1): en 4174485 · es 3800023 · fr 4163094 · us 16913789.
+
+on:
+  workflow_dispatch:
+    inputs:
+      store:
+        description: 'Store'
+        required: true
+        type: choice
+        options: ['en', 'es', 'fr', 'it', 'us']
+      product_id:
+        description: 'Platform product id'
+        required: true
+      price:
+        description: 'New price for every variant (e.g. 4.90). Blank = read only.'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run — show the product and the intended change, write nothing'
+        required: true
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  price:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Read / set
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          STORE: ${{ inputs.store }}
+          PRODUCT_ID: ${{ inputs.product_id }}
+          PRICE: ${{ inputs.price }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: node scripts/set-product-price.js
