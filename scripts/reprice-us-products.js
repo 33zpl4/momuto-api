@@ -38,6 +38,7 @@ const USD_OF_EUR = {
   '80.00': '94.90', '20.90': '24.90', '19.90': '23.90', '10.00': '11.90', '3.00': '3.00',
   '51.10': '59.90',   // Ready to Play full kit (RTP −10%)
   '50.00': '59.00',   // free-shipping threshold in product blurbs
+  '3.90': '4.90',     // socks per pair (owner ruling 19 Sep 2026) — same pair as the €3.90 shipping fee
 };
 // Junk/test products the clone brought along — never touched.
 const SKIP = new Set(['test', '测试商品', 'whole-body-product']);

@@ -52,6 +52,37 @@ oemapps/OEMSaaS; `manage.momuto.com` resolves into the same estate).
    needs it).
    - `RECORD: admin path for token generation — record it here.`
 
+## Incident 20 Sep 2026 — www.momuto.com + momuto.com unreachable (DNS)
+
+**Symptom:** after the CMS subscription lapsed and was renewed, every store
+worked except the EN one: `https://www.momuto.com` and `https://momuto.com`
+hung (no HTTP answer at all, TCP/TLS never completed); es/fr/it/us fine.
+The admin's Domains page showed both EN domains Activated, HTTPS
+Activated, CDN node "Cloudflare" — the platform side was NOT the problem.
+**Cause:** Cloudflare DNS. The EN records were the only ones not shaped
+like the working stores:
+
+| host | was | working shape (es/fr/it/us) |
+|---|---|---|
+| `www` | **CNAME** `us01.oemsaas.shop.cdn.cloudflare.net`, DNS only → resolved to 47.251.52.40 (Alibaba node, dead) | A `104.18.20.248`, Proxied |
+| `@` | A `104.16.198.133`, DNS only (old node) | A `104.18.20.248`, Proxied |
+
+The platform's own CNAME target (`us01.oemsaas.shop.cdn.cloudflare.net`)
+pointed at a node that no longer served the domain — their stale record,
+not ours; so **never re-add that CNAME**. Fix (owner, Cloudflare): both
+rows → A `104.18.20.248`, Proxied, same as es. Verified from a runner
+~3 min later: www 200 with the EN store page, apex → www 200.
+**Rules learned:** (1) "CDN node: Cloudflare" in the admin means
+`104.18.20.248` for every store — mirror the `es` row. (2) The admin's
+globe icon on a domain row is *Domain redirection*, not DNS resolution —
+Cancel it; confirming would close the main domain. (3) The platform
+auto-unbinds a domain after 21 days of resolution errors with zero traffic
+— a broken record is a clock. (4) The "start DNS-only" advice above is for
+FIRST binding (verification); a domain already Activated goes straight to
+Proxied. (5) Diagnose from a runner (`check-platform-orders.yml` →
+`page-audit` with the URL) and `python3 -c 'socket.getaddrinfo'` in the
+sandbox for DNS — the sandbox cannot fetch momuto.com but CAN resolve it.
+
 ## Part 2 — DIY files (owner, once per store; the API cannot create them)
 
 The DiyFile API is PUT-only (`scripts/deploy-static-files.js`): each file
