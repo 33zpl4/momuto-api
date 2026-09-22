@@ -12,11 +12,17 @@
 //
 // Afterwards, instead of tinypng.com:
 //   node compress-mockups.js <outDir>
+//
+// ⚠ EXTENDSCRIPT GOTCHA — never start a comment with "@". The preprocessor
+//   reads "// @anything" as a directive (the same mechanism as //@include and
+//   //@target) and fails with "Syntax error" ON THE COMMENT LINE. Node's
+//   --check cannot catch it, since Node has no preprocessor. Before shipping:
+//     grep -nE '^\s*//\s*@' build-jersey-mockups.jsx     → must print nothing
 // ============================================================================
 
 #target photoshop
 
-var VERSION = '2026-09-22b · @NN in a filename sizes that mark per design';
+var VERSION = '2026-09-22c · fixes a comment ExtendScript read as a directive';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -956,7 +962,7 @@ function placeInsideSlot(doc, layer, stack, sample, notes) {
           box = [stack[f].centrePct[0] * cw - side / 2, stack[f].centrePct[1] * ch - side / 2, side, side];
           isPatch = true;
         }
-        // @NN in the filename: scale the BOX about its centre, then fit as
+        // A "@NN" suffix in the filename: scale the BOX about its centre, then fit as
         // normal. Scaling the box rather than the result keeps every other rule
         // intact — a patch's long side and a sponsor's height both follow the
         // box, the width cap stays absolute, the position stays put.
