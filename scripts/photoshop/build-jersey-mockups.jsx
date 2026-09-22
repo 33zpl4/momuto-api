@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-09-15a · sleeve patches: a second kind, sized by longer side';
+var VERSION = '2026-09-22a · a bad overlay file is named and skipped, never fatal';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -905,49 +905,75 @@ function placeInsideSlot(doc, layer, stack, sample, notes) {
     // overlay with a `box` is fitted into that box instead.
     var cw = inner.width.as('px'), ch = inner.height.as('px');
     for (var f = 0; f < stack.length; f++) {
-      var d = new ActionDescriptor();
-      d.putPath(charIDToTypeID('null'), stack[f].file);
-      d.putEnumerated(charIDToTypeID('FTcs'), charIDToTypeID('QCSt'), charIDToTypeID('Qcsa'));
-      executeAction(charIDToTypeID('Plc '), d, DialogModes.NO);
+      var isBase = (f === 0);
+      var name = decodeURI(stack[f].file.name);
 
-      var pl = inner.activeLayer;
-      var box = stack[f].box;
-      if (!box && stack[f].boxPct) {
-        var p = stack[f].boxPct;
-        box = [p[0] * cw, p[1] * ch, p[2] * cw, p[3] * ch];
+      // Check the bytes before Photoshop does, so a bad file is named and
+      // described rather than reported as "General Photoshop error".
+      var problem = artworkProblem(stack[f].file);
+      if (problem) {
+        if (isBase) throw new Error(name + ' ' + problem);
+        if (notes) notes.push('⚠ ' + name + ' ' + problem + ' — overlay skipped');
+        continue;
       }
-      // A patch: a SQUARE of side sizePct×canvas-width, centred on centrePct.
-      // Square in pixels, not in fractions — the canvas is 1348×2494, so equal
-      // fractions would be a box nearly twice as tall as it is wide.
-      var isPatch = false;
-      if (!box && stack[f].sizePct && stack[f].centrePct) {
-        var side = stack[f].sizePct * cw;
-        box = [stack[f].centrePct[0] * cw - side / 2, stack[f].centrePct[1] * ch - side / 2, side, side];
-        isPatch = true;
-      }
-      if (box) {
-        var rules = {
-          maxW:         (stack[f].maxWidthPct != null) ? stack[f].maxWidthPct * cw : 0,
-          inset:        (stack[f].edgeInsetPct || 0) * cw,
-          opticalFrom:  stack[f].opticalFrom || 0,
-          opticalMax:   stack[f].opticalMax || 0,
-          keepOnCanvas: !!stack[f].keepOnCanvas
-        };
-        var fitted = fitLayerInBox(pl, box, stack[f].fit, cw, ch, rules);
-        // Say so whenever a rule decided the size — a sponsor that came out
-        // smaller than the standard height, or at the standard WIDTH instead,
-        // or a patch sized by its long side, should not pass as a mystery.
-        if (fitted && notes && (isPatch || fitted.capped || fitted.optical >= 1)) {
-          var why = [];
-          if (isPatch) why.push('patch, longer side ' + Math.round(Math.max(fitted.w, fitted.h)) + 'px');
-          if (fitted.optical >= 1) why.push(fitted.optical + '% smaller (optical, aspect ' + fitted.aspect + ')');
-          if (fitted.capped) why.push('width-capped');
-          if (fitted.shifted) why.push('moved ' + fitted.shifted + 'px onto the canvas');
-          notes.push(decodeURI(stack[f].file.name) + ' → ' + fitted.w + '×' + fitted.h + 'px: ' + why.join('; '));
+
+      // Each layer in its own try. The base IS the slot — without it there is
+      // nothing to save, so its failure still propagates. An overlay is extra,
+      // and this outer try closes the .psb WITHOUT saving on any throw: before
+      // this, one unplaceable sponsor discarded the base panel beneath it and
+      // took the whole view down. Now it is skipped, said so, and the base
+      // still saves.
+      var pl = null;
+      try {
+        var d = new ActionDescriptor();
+        d.putPath(charIDToTypeID('null'), stack[f].file);
+        d.putEnumerated(charIDToTypeID('FTcs'), charIDToTypeID('QCSt'), charIDToTypeID('Qcsa'));
+        executeAction(charIDToTypeID('Plc '), d, DialogModes.NO);
+
+        pl = inner.activeLayer;
+        var box = stack[f].box;
+        if (!box && stack[f].boxPct) {
+          var p = stack[f].boxPct;
+          box = [p[0] * cw, p[1] * ch, p[2] * cw, p[3] * ch];
         }
+        // A patch: a SQUARE of side sizePct×canvas-width, centred on centrePct.
+        // Square in pixels, not in fractions — the canvas is 1348×2494, so equal
+        // fractions would be a box nearly twice as tall as it is wide.
+        var isPatch = false;
+        if (!box && stack[f].sizePct && stack[f].centrePct) {
+          var side = stack[f].sizePct * cw;
+          box = [stack[f].centrePct[0] * cw - side / 2, stack[f].centrePct[1] * ch - side / 2, side, side];
+          isPatch = true;
+        }
+        if (box) {
+          var rules = {
+            maxW:         (stack[f].maxWidthPct != null) ? stack[f].maxWidthPct * cw : 0,
+            inset:        (stack[f].edgeInsetPct || 0) * cw,
+            opticalFrom:  stack[f].opticalFrom || 0,
+            opticalMax:   stack[f].opticalMax || 0,
+            keepOnCanvas: !!stack[f].keepOnCanvas
+          };
+          var fitted = fitLayerInBox(pl, box, stack[f].fit, cw, ch, rules);
+          // Say so whenever a rule decided the size — a sponsor that came out
+          // smaller than the standard height, or at the standard WIDTH instead,
+          // or a patch sized by its long side, should not pass as a mystery.
+          if (fitted && notes && (isPatch || fitted.capped || fitted.optical >= 1)) {
+            var why = [];
+            if (isPatch) why.push('patch, longer side ' + Math.round(Math.max(fitted.w, fitted.h)) + 'px');
+            if (fitted.optical >= 1) why.push(fitted.optical + '% smaller (optical, aspect ' + fitted.aspect + ')');
+            if (fitted.capped) why.push('width-capped');
+            if (fitted.shifted) why.push('moved ' + fitted.shifted + 'px onto the canvas');
+            notes.push(name + ' → ' + fitted.w + '×' + fitted.h + 'px: ' + why.join('; '));
+          }
+        }
+        else fitLayerToCanvas(pl, cw, ch, stack[f].offset, stack[f].bleed);
+        if (stack[f].mirrorX) mirrorLayerX(pl);
+      } catch (ePlace) {
+        if (isBase) throw ePlace;
+        // Placed but failed to fit: do not leave it lying unscaled in the slot.
+        if (pl) { try { pl.remove(); } catch (eRm) {} }
+        if (notes) notes.push('⚠ ' + name + ' could not be placed (' + ePlace.message + ') — overlay skipped');
       }
-      else fitLayerToCanvas(pl, cw, ch, stack[f].offset, stack[f].bleed);
-      if (stack[f].mirrorX) mirrorLayerX(pl);
     }
     // Read the colour here, while the artwork is rasterised and alone in the
     // document — nothing else in the run sees the artwork as pixels.
@@ -1055,6 +1081,51 @@ function wantsMirror(slot, match) {
  * (text on a path, a font it cannot resolve), and an unmeasured file gets no
  * scale compensation.
  */
+/**
+ * What a file actually IS, from its first bytes — as opposed to what its
+ * extension claims.
+ *
+ * Exists because Photoshop's own reaction to a bad file is "General Photoshop
+ * error occurred. This functionality may not be available in this version of
+ * Photoshop. — Not a PNG file": it reads like a version problem, and it does
+ * not say which file. A sponsor exported as an empty .png took both jersey
+ * views down that way. Reading 64 bytes up front turns that into a line that
+ * names the file and says it is empty, or an SVG wearing a .png extension.
+ */
+function sniffArtwork(file) {
+  var head = '';
+  try {
+    file.encoding = 'BINARY';
+    if (!file.open('r')) return 'unreadable';
+    head = file.read(64);
+    file.close();
+  } catch (eRead) { try { file.close(); } catch (eClose) {} return 'unreadable'; }
+  if (!head.length) return 'empty';
+  if (head.charCodeAt(0) === 0x89 && head.substr(1, 3) === 'PNG') return 'png';
+  if (head.substr(0, 4) === '8BPS') return 'psd';
+  if (head.substr(0, 4) === 'II*\u0000' || head.substr(0, 4) === 'MM\u0000*') return 'tif';
+  var t = head.replace(/^\xEF\xBB\xBF/, '').replace(/^\s+/, '');   // BOM, whitespace
+  if (/^(<\?xml|<svg|<!DOCTYPE\s+svg|<!--)/i.test(t)) return 'svg';
+  return 'unknown';
+}
+
+function extensionKind(file) {
+  var m = String(file.name).match(/\.([a-z0-9]+)$/i);
+  var ext = m ? m[1].toLowerCase() : '';
+  return ext === 'tiff' ? 'tif' : ext;
+}
+
+// null when the file is what it says it is; otherwise a sentence for the log.
+function artworkProblem(file) {
+  var ext = extensionKind(file), got = sniffArtwork(file);
+  if (got === ext) return null;
+  if (got === 'unreadable') return 'cannot be read';
+  if (got === 'empty') return 'is EMPTY (0 bytes) — the export wrote nothing';
+  if (got === 'unknown') return 'is not a valid ' + ext.toUpperCase() + ' — its contents are unrecognised';
+  return 'is not a ' + ext.toUpperCase() + ' but a' + (got === 'svg' ? 'n SVG' : ' ' + got.toUpperCase()) +
+         ' with the wrong extension — rename it .' + got;
+}
+
 function pngCanvas(file) {
   try {
     file.encoding = 'BINARY';

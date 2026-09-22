@@ -574,6 +574,32 @@ A sleeve can carry a sponsor **and** a patch — both files simply exist — but
 they share a centre and will overlap. One mark per arm is the working
 assumption; the log shows both if both were placed.
 
+### A bad artwork file is named, and an overlay cannot sink a view
+
+Photoshop's reaction to a file it cannot read is *"General Photoshop error
+occurred. This functionality may not be available in this version of Photoshop.
+— Not a PNG file"* — which reads like a version problem and names no file. A
+sponsor exported as an empty `.png` produced exactly that, and worse: the
+overlay is placed inside the same save as the base panel, so its failure
+discarded the base and took **both jersey views** down over one sleeve logo.
+
+Two things now happen instead. The first 64 bytes of every artwork file are
+checked against its extension before Photoshop sees it, so the log says which
+file and what is wrong:
+
+```
+⚠ cdm-sleevesponsorleft.png is EMPTY (0 bytes) — the export wrote nothing — overlay skipped
+⚠ club-sleevepatch.png is not a PNG but an SVG with the wrong extension — rename it .svg — overlay skipped
+```
+
+And an overlay that cannot be placed — for that reason or any other — is
+skipped with a warning while the base and every other overlay still save. Only
+the **base** artwork remains fatal to its view, because without it there is
+nothing to save.
+
+Tell-tale in Explorer: a file that shows a blank document icon where its
+neighbours show previews is the one Windows cannot read either.
+
 #### Where the four boxes came from
 
 `SPONSOR` at the top of the builder is filled in, measured from
