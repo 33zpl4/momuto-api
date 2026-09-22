@@ -600,6 +600,39 @@ nothing to save.
 Tell-tale in Explorer: a file that shows a blank document icon where its
 neighbours show previews is the one Windows cannot read either.
 
+### Sizing one mark for one design: `@NN` in the filename
+
+`PATCH_SIZE` is a default, not a rule, and it cannot be one. The long-side rule
+says what "the same size" *means* across shapes; it cannot say what size a given
+league's patch *is*, because that is the league's decision. A wide text patch at
+the default came out 62% of the sleeve and needed to be a third smaller — not an
+error, just that patch's size.
+
+So the per-design knob lives where the per-design decision already is: the
+filename.
+
+```
+<slug>-sleevepatch@65.svg        this patch at 65% of the standard
+<slug>-sleevesponsorleft@80.svg  this sponsor at 80%
+```
+
+Any overlay kind takes it; base panels do not (they fill their slot, there is
+nothing to scale). The number is a percentage of the mark's standard size,
+10–300. It scales the *box* the mark is fitted into, so every other rule still
+applies unchanged — a patch is still sized by its long side, a sponsor by its
+height, the width cap stays absolute, the position stays put.
+
+An explicit size is an instruction, so a `@NN` file wins over a plain one of the
+same kind; if both exist the run says which it used. A number outside 10–300 is
+ignored with a warning. The run reports the factor:
+
+```
+· overlaid: cdm-sleevepatch@65.svg → 388×544px: @65 → 65% of standard; patch, longer side 544px
+```
+
+If a league's patch is always the same size, that is still the right place for
+it — the file is produced per team anyway, and no script ever needs editing.
+
 #### Where the four boxes came from
 
 `SPONSOR` at the top of the builder is filled in, measured from

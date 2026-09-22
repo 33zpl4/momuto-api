@@ -16,7 +16,7 @@
 
 #target photoshop
 
-var VERSION = '2026-09-22a · a bad overlay file is named and skipped, never fatal';
+var VERSION = '2026-09-22b · @NN in a filename sizes that mark per design';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -211,6 +211,17 @@ function sponsorOverlay(kinds, boxPct) {
 //    0.62 puts the league patch at 597×836 px — 44% of the canvas width, about
 //    1.5× what the sponsor rule produced — and a round patch at 836×836. For
 //    scale, the sponsor standard is 680 tall with a 903 max width.
+//
+//    THIS IS A DEFAULT, NOT A RULE, and it cannot be one. The long-side rule
+//    says what "the same size" means across shapes; it cannot say what size a
+//    given league's patch is, because that is the league's decision. A wide
+//    text patch at the default came out 62% of the sleeve and needed to be a
+//    third smaller — not an error, just that patch's size. So the per-design
+//    knob lives in the FILENAME, where the per-design decision already is:
+//
+//        <slug>-sleevepatch@65.svg     this patch at 65% of PATCH_SIZE
+//
+//    Same for sponsors (<slug>-sleevesponsor@80.svg). No script edit per team.
 var PATCH_SIZE = 0.62;
 
 function centreOf(boxPct) {
@@ -945,6 +956,16 @@ function placeInsideSlot(doc, layer, stack, sample, notes) {
           box = [stack[f].centrePct[0] * cw - side / 2, stack[f].centrePct[1] * ch - side / 2, side, side];
           isPatch = true;
         }
+        // @NN in the filename: scale the BOX about its centre, then fit as
+        // normal. Scaling the box rather than the result keeps every other rule
+        // intact — a patch's long side and a sponsor's height both follow the
+        // box, the width cap stays absolute, the position stays put.
+        var sc = stack[f].scale || 1;
+        if (box && sc !== 1) {
+          var bcx = box[0] + box[2] / 2, bcy = box[1] + box[3] / 2;
+          box[2] *= sc; box[3] *= sc;
+          box[0] = bcx - box[2] / 2; box[1] = bcy - box[3] / 2;
+        }
         if (box) {
           var rules = {
             maxW:         (stack[f].maxWidthPct != null) ? stack[f].maxWidthPct * cw : 0,
@@ -957,8 +978,9 @@ function placeInsideSlot(doc, layer, stack, sample, notes) {
           // Say so whenever a rule decided the size — a sponsor that came out
           // smaller than the standard height, or at the standard WIDTH instead,
           // or a patch sized by its long side, should not pass as a mystery.
-          if (fitted && notes && (isPatch || fitted.capped || fitted.optical >= 1)) {
+          if (fitted && notes && (isPatch || sc !== 1 || fitted.capped || fitted.optical >= 1)) {
             var why = [];
+            if (sc !== 1) why.push('@' + Math.round(sc * 100) + ' → ' + Math.round(sc * 100) + '% of standard');
             if (isPatch) why.push('patch, longer side ' + Math.round(Math.max(fitted.w, fitted.h)) + 'px');
             if (fitted.optical >= 1) why.push(fitted.optical + '% smaller (optical, aspect ' + fitted.aspect + ')');
             if (fitted.capped) why.push('width-capped');
@@ -1050,10 +1072,28 @@ function overSpec(entry) {
  */
 function artworkMatch(slug, kinds) {
   var list = (kinds instanceof Array) ? kinds : [kinds];
+  var dir = new Folder(CONFIG.artworkDir);
   for (var k = 0; k < list.length; k++) {
     for (var i = 0; i < CONFIG.extensions.length; i++) {
-      var f = new File(CONFIG.artworkDir + '/' + slug + '-' + list[k] + '.' + CONFIG.extensions[i]);
-      if (f.exists) return { file: f, kind: list[k], shared: k > 0 };
+      var stem = slug + '-' + list[k];
+      var plain = new File(CONFIG.artworkDir + '/' + stem + '.' + CONFIG.extensions[i]);
+
+      // <slug>-<kind>@NN.<ext>: this file at NN% of its standard size. The
+      // per-design override for marks whose right size is a decision, not a
+      // rule — a league patch at 65, a sponsor a team wants discreet at 80.
+      // An explicit size is an instruction, so it wins over the plain file.
+      var sized = dir.getFiles(stem + '@*.' + CONFIG.extensions[i]);
+      if (sized && sized.length) {
+        var name = decodeURI(sized[0].name);
+        var m = name.match(/@(\d+)\.[a-z0-9]+$/i);
+        var pct = m ? parseInt(m[1], 10) : NaN;
+        var ok = pct >= 10 && pct <= 300;
+        var note = null;
+        if (!ok) note = name + ': "@' + (m ? m[1] : '?') + '" is not a size between 10 and 300 — ignored, placed at 100';
+        else if (plain.exists) note = 'both ' + stem + '.' + CONFIG.extensions[i] + ' and ' + name + ' exist — using ' + name;
+        return { file: sized[0], kind: list[k], shared: k > 0, scale: ok ? pct / 100 : 1, note: note };
+      }
+      if (plain.exists) return { file: plain, kind: list[k], shared: k > 0, scale: 1, note: null };
     }
   }
   return null;
@@ -1261,7 +1301,10 @@ function unclaimedFiles(active, slugs) {
     var stem = name.replace(extRx, '');
     for (var s = 0; s < slugs.length; s++) {
       if (stem.length > slugs[s].length + 1 && stem.substring(0, slugs[s].length + 1) === slugs[s] + '-') {
-        var kind = stem.substring(slugs[s].length + 1).toLowerCase();
+        // "@65" is a size, not part of the kind — strip it before deciding
+        // whether the kind is one a slot wants, or every sized file would be
+        // reported as a typo of itself.
+        var kind = stem.substring(slugs[s].length + 1).replace(/@\d+$/, '').toLowerCase();
         if (!kinds[kind]) {
           var did = nearestKind(kind, kinds);
           out.push(name + '  → no slot wants "' + kind + '"' +
@@ -1527,13 +1570,16 @@ function main() {
               if (slot.over && CONFIG.placeInside) {
                 for (var ov = 0; ov < slot.over.length; ov++) {
                   var spec = overSpec(slot.over[ov]);
-                  var extra = artworkFor(slugs[i], spec.kinds);
+                  var extraMatch = artworkMatch(slugs[i], spec.kinds);
+                  var extra = extraMatch ? extraMatch.file : null;
                   if (extra) {
                     stack.push({ file: extra, box: spec.box, boxPct: spec.boxPct, fit: spec.fit,
                                  maxWidthPct: spec.maxWidthPct, edgeInsetPct: spec.edgeInsetPct,
                                  opticalFrom: spec.opticalFrom, opticalMax: spec.opticalMax,
-                                 centrePct: spec.centrePct, sizePct: spec.sizePct, keepOnCanvas: spec.keepOnCanvas });
-                    overlaid.push(decodeURI(extra.name) + ((spec.box || spec.boxPct) ? '' : ' (full canvas)'));
+                                 centrePct: spec.centrePct, sizePct: spec.sizePct, keepOnCanvas: spec.keepOnCanvas,
+                                 scale: extraMatch.scale });
+                    overlaid.push(decodeURI(extra.name) + ((spec.box || spec.boxPct || spec.sizePct) ? '' : ' (full canvas)'));
+                    if (extraMatch.note) overlaid.push('⚠ ' + extraMatch.note);
                   }
                 }
               } else if (slot.over && slot.over.length) {
