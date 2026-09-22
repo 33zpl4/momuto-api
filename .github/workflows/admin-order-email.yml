@@ -1,0 +1,116 @@
+name: Order email (manual ingest / resend)
+
+# Sends a MOMUTO confirmation email for an order the pipeline never saw
+# (custom order paid via a Stripe payment link, a webhook the design server
+# missed…) or re-sends one that exists. Wraps /api/admin-orders on Vercel
+# with the shared secret — the sandbox cannot reach it, runners can.
+#   ingest-and-send: creates the KV record (enrols the day-4/day-10/tracking
+#                    lifecycle) and sends the confirmation. order_no must be
+#                    NEW (409 if it exists — then use resend-confirmation).
+#   resend-confirmation: re-sends for an existing order_no.
+# Dispatch-only. Built 22 Sep 2026 for a custom re-order (kz1cgjw0oh-2).
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'What to do'
+        required: true
+        type: choice
+        options: ['ingest-and-send', 'resend-confirmation', 'find']
+        default: 'find'
+      order_no:
+        description: 'Our order ref (3D order_no, or a new unique ref for a custom order)'
+        required: true
+      email:
+        description: 'Customer email (ingest only)'
+        required: false
+        default: ''
+      name:
+        description: 'Customer / team name (ingest only)'
+        required: false
+        default: ''
+      lang:
+        description: 'Email language'
+        required: false
+        type: choice
+        options: ['en', 'es', 'fr', 'it']
+        default: 'en'
+      qty:
+        description: 'Units (ingest only)'
+        required: false
+        default: ''
+      total:
+        description: 'Amount paid, e.g. 188.30 (ingest only)'
+        required: false
+        default: ''
+      currency:
+        description: 'Currency code (ingest only)'
+        required: false
+        default: 'EUR'
+      paid_at:
+        description: 'Payment date, ISO (ingest only; delivery window counts from it)'
+        required: false
+        default: ''
+      plant_order_no:
+        description: 'Platform order number, if any (ingest only)'
+        required: false
+        default: ''
+      image:
+        description: 'Front render URL (ingest only, optional)'
+        required: false
+        default: ''
+      image_back:
+        description: 'Back render URL (ingest only, optional)'
+        required: false
+        default: ''
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call admin-orders
+        env:
+          SECRET: ${{ secrets.MOMUTO_API_SECRET }}
+          ACTION: ${{ inputs.action }}
+          ORDER_NO: ${{ inputs.order_no }}
+          EMAIL: ${{ inputs.email }}
+          NAME: ${{ inputs.name }}
+          LANG_IN: ${{ inputs.lang }}
+          QTY: ${{ inputs.qty }}
+          TOTAL: ${{ inputs.total }}
+          CURRENCY: ${{ inputs.currency }}
+          PAID_AT: ${{ inputs.paid_at }}
+          PLANT: ${{ inputs.plant_order_no }}
+          IMAGE: ${{ inputs.image }}
+          IMAGE_BACK: ${{ inputs.image_back }}
+        run: |
+          set -e
+          [ -n "$SECRET" ] || { echo "::error::MOMUTO_API_SECRET missing"; exit 1; }
+          API="https://momuto-api.vercel.app/api/admin-orders"
+          if [ "$ACTION" = "find" ]; then
+            curl -sS -H "x-webhook-secret: $SECRET" "$API?action=find&q=$(printf %s "$ORDER_NO" | jq -sRr @uri)" | jq .
+            exit 0
+          fi
+          if [ "$ACTION" = "ingest-and-send" ]; then
+            [ -n "$EMAIL" ] && [ -n "$NAME" ] || { echo "::error::email and name are required for ingest"; exit 1; }
+          fi
+          BODY=$(jq -n --arg a "$ACTION" --arg o "$ORDER_NO" --arg e "$EMAIL" --arg n "$NAME" --arg l "$LANG_IN" \
+                       --arg q "$QTY" --arg t "$TOTAL" --arg c "$CURRENCY" --arg p "$PAID_AT" --arg pl "$PLANT" \
+                       --arg i "$IMAGE" --arg ib "$IMAGE_BACK" '
+            {action:$a, order_no:$o}
+            + (if $e != "" then {email:$e} else {} end)
+            + (if $n != "" then {name:$n} else {} end)
+            + {lang:$l}
+            + (if $q != "" then {qty:($q|tonumber)} else {} end)
+            + (if $t != "" then {total:$t} else {} end)
+            + (if $c != "" then {currency:$c} else {} end)
+            + (if $p != "" then {paid_at:$p} else {} end)
+            + (if $pl != "" then {plant_order_no:$pl} else {} end)
+            + (if $i != "" then {image:$i} else {} end)
+            + (if $ib != "" then {image_back:$ib} else {} end)')
+          echo "payload: $(echo "$BODY" | jq -c 'del(.email) + {email: (if .email then (.email|sub("^(?<a>.).*@"; "\(.a)***@")) else null end)}')"
+          RES=$(curl -sS -w '\n%{http_code}' -X POST -H "Content-Type: application/json" -H "x-webhook-secret: $SECRET" --data "$BODY" "$API")
+          CODE=$(echo "$RES" | tail -1); OUT=$(echo "$RES" | sed '$d')
+          echo "HTTP $CODE"; echo "$OUT" | jq . || echo "$OUT"
+          [ "$CODE" = "200" ] || { echo "::error::admin-orders answered $CODE"; exit 1; }
