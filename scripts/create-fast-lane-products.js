@@ -1,0 +1,227 @@
+'use strict';
+
+/**
+ * Create the "Fast lane" per-order surcharge product on each store (EN/ES/FR/IT/US).
+ *
+ *   node scripts/create-fast-lane-products.js                 # dry run (default)
+ *   node scripts/create-fast-lane-products.js --live          # create for real
+ *   node scripts/create-fast-lane-products.js --live --lang fr
+ *
+ * FAST LANE (owner ruling 23 Sep 2026): €59 per ORDER (US $69) buys priority
+ * production and priority shipping — the order jumps the factory queue and,
+ * where the €59 covers it (China Post → EMS, never DHL), a faster carrier;
+ * saves roughly 7 days (delivery window 18–23 instead of 25–30). It is an
+ * ORDER attribute chosen in the design-server cart (one toggle above the
+ * subtotal), billed as qty 1 of this product through the same `oem` dict as
+ * long sleeves / polo collar. Cloned from create-collar-products.js.
+ *
+ * Deliberately:
+ *   - spec_mode 1, single variant, no sizes — quantity carries the count
+ *   - status 1 (must be purchasable to be billable) but in NO collection,
+ *     so it is never browsable from the storefront nav
+ *   - no promos/collections attached — the seasonal −10% must not touch it
+ *   - idempotent: reads the store catalogue first and skips handles that
+ *     already exist (POST /products happily duplicates — see
+ *     docs/oemsaas-api-notes.md), recording the existing id instead
+ *   - read-back verification after every create: code 0 is an ack, not
+ *     evidence (same doc, "The one rule")
+ *   - ids land in cms/long-sleeves/ids.json (committed back by the
+ *     workflow) — the server-side cart patch reads its per-store id there
+ *
+ * Runs on the GitHub runner; the sandbox cannot reach openapi.oemapps.com.
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const HOST = 'https://openapi.oemapps.com';
+const ROOT = path.join(__dirname, '..');
+const IDS_FILE = path.join(ROOT, 'cms', 'fast-lane', 'ids.json');
+
+const PRICE_EUR = '59.00';
+const PRICE_USD = '69.00';   // owner pair €59 → $69 (fees are round, not .90)
+const HANDLE = 'fast-lane';
+
+// Neutral jersey asset already on the store CDN. images[].src is required by
+// POST /products; swap for a dedicated sleeve visual later via manage (the
+// product page is never browsed — the cart line shows title + price).
+const IMAGE_SRC = process.env.FAST_LANE_IMAGE_SRC
+  || 'https://cdn.staticsoe.com/pics/2cb10a0b0e8d3a67c7e768edce1a31d321097b8e26180eea525f683bf4df933b.jpg';
+
+const STORES = {
+  en: {
+    tokenEnv: 'OEMSAAS_TOKEN_EN', price: PRICE_EUR,
+    title: 'Fast lane',
+    subtitle: 'Priority production and priority shipping — one per order',
+    mini_detail: 'Fast lane: your order jumps the production queue and ships with priority. Saves roughly 7 days. One per order — added from your cart.',
+  },
+  es: {
+    tokenEnv: 'OEMSAAS_TOKEN_ES', price: PRICE_EUR,
+    title: 'Vía rápida',
+    subtitle: 'Producción y envío prioritarios — una por pedido',
+    mini_detail: 'Vía rápida: tu pedido se salta la cola de producción y viaja con envío prioritario. Ahorra unos 7 días. Una por pedido — se añade desde el carrito.',
+  },
+  fr: {
+    tokenEnv: 'OEMSAAS_TOKEN_FR', price: PRICE_EUR,
+    title: 'Voie rapide',
+    subtitle: 'Production et expédition prioritaires — une par commande',
+    mini_detail: 'Voie rapide : votre commande passe devant la file de production et part en expédition prioritaire. Environ 7 jours gagnés. Une par commande — ajoutée depuis le panier.',
+  },
+  it: {
+    tokenEnv: 'OEMSAAS_TOKEN_IT', price: PRICE_EUR,
+    title: 'Corsia veloce',
+    subtitle: 'Produzione e spedizione prioritarie — una per ordine',
+    mini_detail: 'Corsia veloce: il tuo ordine salta la coda di produzione e viaggia con spedizione prioritaria. Circa 7 giorni in meno. Una per ordine — aggiunta dal carrello.',
+  },
+  us: {
+    tokenEnv: 'OEMSAAS_TOKEN_US', price: PRICE_USD,
+    title: 'Fast lane',
+    subtitle: 'Priority production and priority shipping — one per order',
+    mini_detail: 'Fast lane: your order jumps the production queue and ships with priority. Saves roughly 7 days. One per order — added from your cart.',
+    // MOMUTO Shorts Pro's tile, already on the US CDN (images[].src must be a store CDN path)
+    image_src: 'https://cdn.statics-cdn-abc.com/pics/56643e1d7c881e2208d1449056e34f5f5bd2e83025faaecc3f76c635db3f2b2e.jpg',
+  },
+};
+
+function parseArgs(argv) {
+  const a = { live: false, lang: 'all' };
+  for (let i = 2; i < argv.length; i++) {
+    const k = argv[i];
+    if (k === '--live') a.live = true;
+    else if (k === '--dry-run') a.live = false;
+    else if (k === '--lang') a.lang = argv[++i];
+    else { console.error(`Unknown argument: ${k}`); process.exit(1); }
+  }
+  if (a.lang !== 'all' && !STORES[a.lang]) {
+    console.error(`Unknown lang "${a.lang}" — use all|${Object.keys(STORES).join('|')}`);
+    process.exit(1);
+  }
+  return a;
+}
+
+function decodeMsg(msg) {
+  const field = /([a-z_0-9.]+)\s*(不能为空|不能為空|格式|错误|無效|无效)/i.exec(msg || '');
+  return field ? `  (field: "${field[1]}" — 不能为空 = cannot be empty)` : '';
+}
+
+async function api(pathname, method, token, body) {
+  const res = await fetch(`${HOST}${pathname}`, {
+    method,
+    headers: { 'Content-Type': 'application/json', token },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const text = await res.text();
+  let json;
+  try { json = JSON.parse(text); }
+  catch { throw new Error(`HTTP ${res.status} — non-JSON: ${text.slice(0, 300)}`); }
+  if (json.code !== 0) {
+    throw new Error(`API code ${json.code}: ${json.msg}${decodeMsg(json.msg)}`);
+  }
+  return json.data;
+}
+
+// POST /products is not idempotent — a duplicate handle creates a second
+// product with a suffixed URL. Read the catalogue first and match by handle.
+async function findByHandle(token, handle) {
+  let since = '';
+  for (;;) {
+    const page = await api(`/products?limit=100${since ? `&since_id=${since}` : ''}`, 'GET', token);
+    const list = Array.isArray(page) ? page : (page && page.products) || [];
+    if (!list.length) return null;
+    const hit = list.find(p => p.handle === handle);
+    if (hit) return hit;
+    if (list.length < 100) return null;
+    since = list[list.length - 1].id;
+  }
+}
+
+function buildBody(store) {
+  return {
+    title: store.title,
+    handle: HANDLE,
+    spec_mode: 1,
+    variants: [{ price: store.price }],
+    images: [{ src: store.image_src || IMAGE_SRC, alt: store.title }],
+    status: 1,
+    subtitle: store.subtitle,
+    mini_detail: store.mini_detail,
+    meta_title: store.title,
+    meta_descript: store.mini_detail,
+    product_detail: 0,
+  };
+}
+
+function loadIds() {
+  try { return JSON.parse(fs.readFileSync(IDS_FILE, 'utf8')); }
+  catch { return {}; }
+}
+
+function saveIds(ids) {
+  fs.mkdirSync(path.dirname(IDS_FILE), { recursive: true });
+  fs.writeFileSync(IDS_FILE, JSON.stringify(ids, null, 2) + '\n');
+}
+
+async function run() {
+  const args = parseArgs(process.argv);
+  const langs = args.lang === 'all' ? Object.keys(STORES) : [args.lang];
+  const ids = loadIds();
+  let failed = false;
+
+  for (const lang of langs) {
+    const store = STORES[lang];
+    const token = process.env[store.tokenEnv];
+    const body = buildBody(store);
+    console.log(`\n=== ${lang.toUpperCase()} — "${store.title}" @ ${lang === 'us' ? '$' : '€'}${store.price} ===`);
+
+    if (!args.live) {
+      console.log('[dry run] would POST /products with:');
+      console.log(JSON.stringify(body, null, 2));
+      continue;
+    }
+    if (!token) { console.error(`MISSING ${store.tokenEnv} — skipping ${lang}`); failed = true; continue; }
+
+    try {
+      const existing = await findByHandle(token, HANDLE);
+      let id;
+      if (existing) {
+        id = existing.id;
+        console.log(`already exists: id ${id} ("${existing.title}") — not creating a duplicate`);
+      } else {
+        const created = await api('/products', 'POST', token, body);
+        id = created && created.id;
+        if (!id) throw new Error(`create returned no id: ${JSON.stringify(created).slice(0, 300)}`);
+        console.log(`created: id ${id}`);
+      }
+
+      // Read back — the ack is not evidence.
+      const live = await api(`/products/${id}`, 'GET', token);
+      const price = live && live.variants && live.variants[0] && live.variants[0].price;
+      const ok = live && live.title === store.title && Number(price).toFixed(2) === store.price && live.status === 1;
+      console.log(`read-back: title="${live && live.title}" price=${price} status=${live && live.status} → ${ok ? 'VERIFIED' : 'MISMATCH'}`);
+      if (!ok && !existing) { failed = true; continue; }
+      if (!ok && existing) {
+        // A pre-existing product with this handle but different shape is a
+        // decision for the owner, not something to overwrite blind.
+        console.error(`existing product ${id} does not match the expected shape — fix it in manage or delete it, then re-run`);
+        failed = true;
+        continue;
+      }
+
+      ids[lang] = { id: String(id), handle: HANDLE, title: store.title, price: store.price, verifiedAt: new Date().toISOString() };
+    } catch (e) {
+      console.error(`${lang} FAILED: ${e.message}`);
+      failed = true;
+    }
+  }
+
+  if (args.live) {
+    saveIds(ids);
+    console.log(`\nids written to ${path.relative(ROOT, IDS_FILE)}:`);
+    console.log(JSON.stringify(ids, null, 2));
+  } else {
+    console.log('\n[dry run] no requests sent, no ids written. Re-run with --live to create.');
+  }
+  if (failed) process.exit(1);
+}
+
+run().catch(e => { console.error(e); process.exit(1); });

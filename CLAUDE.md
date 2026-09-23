@@ -61,7 +61,9 @@ Read the doc that owns a topic BEFORE editing that surface.
    player) and polo collar +€3.00 per jersey (per design, title marker;
    15 Sep 2026), both flat at every tier. Socks €3.90 per pair flat ($4.90 US;
    19 Sep 2026) — optional per player, NOT custom-printed (plain matching
-   sock, most colours). A surface with different numbers is a bug.
+   sock, most colours). Fast lane €59 / $69 per ORDER (23 Sep 2026): priority
+   production + priority shipping, saves ~7 days (window 18–23 d instead of
+   25–30; never promises a specific carrier). A surface with different numbers is a bug.
 7. `static/shared/llms.txt` is the machine-readable fact feed for LLMs —
    update it in the same commit as any fact change.
 8. **One customer email: info@momuto.com** (owner ruling 5 Sep 2026).

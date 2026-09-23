@@ -51,7 +51,10 @@
   var LS_SURCHARGE=3.00;         // long sleeves: flat +3.00 per jersey at EVERY tier
                                  // (billed via the per-store "Long sleeves" product;
                                  // surfaces show resulting prices, never a fee line)
-  var COLLAR_SURCHARGE=3.00;     // polo collar: flat +3.00 per jersey at EVERY tier
+  var COLLAR_SURCHARGE=3.00;
+  // Fast lane (owner ruling 23 Sep 2026): per ORDER, priority production +
+  // priority shipping, ~7 days saved (window 18–23 instead of 25–30). €59 / $69.
+  var FAST_LANE={eur:59.00,usd:69.00,daysSaved:7};     // polo collar: flat +3.00 per jersey at EVERY tier
                                  // (a DESIGN property, not a per-player choice — flagged
                                  // by a "Polo Collar"/"Cuello Polo"/"Col Polo"/"Colletto
                                  // Polo" marker in the store product title; billed via the
@@ -78,6 +81,7 @@
   var api={
     PRICING:PRICING, PRICING_US:PRICING_US, RTP_US:RTP_US, CURRENCY:CURRENCY,
     RTP_OFF:RTP_OFF, POPULAR_MIN:POPULAR_MIN, LS_SURCHARGE:LS_SURCHARGE, COLLAR_SURCHARGE:COLLAR_SURCHARGE,
+    FAST_LANE:FAST_LANE,
     tierBase:tierBase, rtpPrice:rtpPrice, currency:currency, fmt:fmt,
     // Effective per-unit price. opts.rtp=true -> RTP pricing; otherwise standard/custom.
     // opts.store:'us' -> the USD ladder (LS_SURCHARGE is 3.00 in both currencies).

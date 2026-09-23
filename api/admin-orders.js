@@ -300,6 +300,7 @@ module.exports = async function handler(req, res) {
       qty:   parseInt(body.qty, 10) || '—',
       ref:   orderNo.replace(/^3d_/, ''),
       plantOrderNo: body.plant_order_no ? String(body.plant_order_no) : null,
+      fastLane: body.fast_lane === true || body.fast_lane === 1 || body.fast_lane === '1',
       total: body.total || null,
       currency: body.currency || 'EUR',
       designs,

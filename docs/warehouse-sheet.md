@@ -90,3 +90,12 @@ the per-store "Polo collar" add-on product per jersey. The roster row carries
 `collar: true` and the size ends in `· POLO`; the sheet prints **POLO领** in
 the 领型 column, adds `（POLO领 N 件）` to 总数量, and warns when the roster
 count differs from the platform's "Polo collar" line.
+
+## Fast-lane orders (23 Sep 2026)
+
+The per-order "Fast lane" product (titles: Fast lane / Vía rápida / Voie
+rapide / Corsia veloce; €59 / $69) is detected by title in `parseLines`
+(`fastLane: true`, not counted as a jersey). The sheet's first header row and
+the email subject carry `⚡ 加急 FAST LANE — 优先生产 + 优先发货` so the
+factory prioritises the batch. The same flag reaches the customer emails as an
+18–23 day window (design-server webhook `fast_lane` / poller title match).

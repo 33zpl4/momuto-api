@@ -92,7 +92,7 @@ module.exports = async function handler(req, res) {
 
   const body = await readJSON(req);
   const { order_no, plant_order_no, email, name, lang, total, currency, designs,
-          pay_at, first_pay_at, is_test } = body;
+          pay_at, first_pay_at, is_test, fast_lane } = body;
 
   if (!order_no || !email) {
     return res.status(400).json({ error: 'order_no and email are required' });
@@ -140,6 +140,10 @@ module.exports = async function handler(req, res) {
 
   const players = (designs || []).flatMap(d => d.players || []).filter(Boolean);
   const qty = players.reduce((n, p) => n + (parseInt(p.qty, 10) || 1), 0) || '—';
+  // Fast lane (23 Sep 2026): order-level flag from the design server (explicit
+  // fast_lane, or the fastLane stamp GoodInfoAction puts on every roster item).
+  // Drives the 18–23 day window in every lifecycle email (lib/emails.js).
+  const fastLane = fast_lane === 1 || fast_lane === '1' || fast_lane === true || players.some(p => p && p.fastLane);
 
   // On a retry keep the stored record (original clocks, any admin edits) and
   // only re-attempt the send; otherwise build the order fresh.
@@ -154,6 +158,7 @@ module.exports = async function handler(req, res) {
     total: total || null,
     currency: currency || 'EUR',
     designs: designs || [],
+    fastLane,
     invoiceDate: new Date().toISOString().slice(0, 10),
     notes: '3d-tool order (auto via design-server webhook)',
     lang:  ['en', 'es', 'fr', 'it'].includes(lang) ? lang : 'en',
