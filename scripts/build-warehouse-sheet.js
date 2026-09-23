@@ -107,7 +107,7 @@ async function paidSince(token, hours) {
 // ("Long sleeves"), and the jersey lines themselves.
 function parseLines(o) {
   const lines = field(o, ['products', 'line_items', 'items']) || [];
-  const out = { ref3d: null, previewIds: [], jerseys: 0, longSleeves: 0, collars: 0, items: [] };
+  const out = { ref3d: null, previewIds: [], jerseys: 0, longSleeves: 0, collars: 0, fastLane: false, items: [] };
   for (const it of lines) {
     const title = String(field(it, ['product_title', 'title', 'name']) || '');
     const vt = String(field(it, ['variant_title']) || '');
@@ -119,6 +119,8 @@ function parseLines(o) {
     if (/long sleeve|manga larga|manches longues|maniche lunghe/i.test(title + ' ' + vt)) { out.longSleeves += qty; continue; }
     // "Polo collar" add-on product (one unit per jersey of a polo-collar design, 15 Sep 2026)
     if (/polo collar|cuello polo|col polo|colletto polo/i.test(title + ' ' + vt)) { out.collars += qty; continue; }
+    // "Fast lane" per-order product (priority production + priority shipping, 23 Sep 2026)
+    if (/fast lane|v[ií]a r[aá]pida|voie rapide|corsia veloce/i.test(title + ' ' + vt)) { out.fastLane = true; continue; }
     if (/deposit|acompte|dep[oó]sito|acconto/i.test(title)) { out.items.push({ title, qty, kind: 'deposit' }); continue; }
     out.jerseys += qty;
     out.items.push({ title: vt && vt !== title ? `${title} / ${vt}` : title, qty, kind: 'jersey', price: field(it, ['price']) });
@@ -269,6 +271,7 @@ async function buildSheet(order, designs, warnings) {
 
   const jerseyQty = designs.reduce((n, d) => n + d.players.reduce((m, p) => m + p.qty, 0), 0) || order.jerseys || null;
   const rows = [
+    ...(order.fastLane ? [['⚡ 加急 FAST LANE', '优先生产 + 优先发货（客户已付加急费）— 请优先排产']] : []),
     ['订单ID', order.order_number],
     ['3D设计编号', order.ref3d || '（非3D订单）'],
     ['店铺', `${STORE_ZH[order.store] || order.store} · ${order.domain}`],
@@ -341,8 +344,9 @@ async function emailSheet(order, filePath, warnings) {
   const key = process.env.RESEND_API_KEY; if (!key || args.dry) return false;
   const to = (process.env.WAREHOUSE_EMAILS || 'info@momuto.com,ilovebillxie@hotmail.com').split(',').map(s => s.trim()).filter(Boolean);
   const qty = order.jerseys ? `${order.jerseys} 件` : '';
-  const subject = `生产单 ${order.order_number} · ${order.country || order.store}${qty ? ' · ' + qty : ''}${order.longSleeves ? ' · 含长袖' : ''}${order.collars ? ' · 含POLO领' : ''}${warnings.length ? ' · ⚠ 需核对' : ''}`;
-  const html = `<p>订单 <strong>${order.order_number}</strong>（3D ${order.ref3d || '-'}）· ${order.name} · ${order.country} · ${order.total} ${order.currency}</p>` +
+  const subject = `${order.fastLane ? '⚡ 加急 FAST LANE · ' : ''}生产单 ${order.order_number} · ${order.country || order.store}${qty ? ' · ' + qty : ''}${order.longSleeves ? ' · 含长袖' : ''}${order.collars ? ' · 含POLO领' : ''}${warnings.length ? ' · ⚠ 需核对' : ''}`;
+  const html = (order.fastLane ? '<p style="color:#c8352e;font-weight:700">⚡ 加急 FAST LANE — 优先生产 + 优先发货</p>' : '') +
+    `<p>订单 <strong>${order.order_number}</strong>（3D ${order.ref3d || '-'}）· ${order.name} · ${order.country} · ${order.total} ${order.currency}</p>` +
     `<p>生产单见附件。${warnings.length ? '<br><strong style="color:#c00">⚠ ' + warnings.join('<br>⚠ ') + '</strong>' : ''}</p>` +
     `<p style="color:#888;font-size:12px">MOMUTO 自动生成 · 平台订单 + 3D设计服务器 · 如有疑问回复 info@momuto.com</p>`;
   const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },

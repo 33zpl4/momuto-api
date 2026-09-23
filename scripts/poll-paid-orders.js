@@ -147,6 +147,8 @@ function isPaid(o) {
   return parseInt(fs, 10) === 230 || String(fs).toLowerCase() === 'paid';
 }
 
+// "Fast lane" product titles, one per store (scripts/create-fast-lane-products.js STORES)
+const FAST_LANE_TITLE_RE = /fast lane|v[ií]a r[aá]pida|voie rapide|corsia veloce/i;
 function itemsOf(o) {
   // 'products' is the verified list-payload key (11 Sep 2026 probe)
   return field(o, ['products', 'line_items', 'lineItems', 'items', 'order_items', 'goods']) || [];
@@ -317,10 +319,15 @@ async function run() {
           .filter(it => !previewRef(it) && parseFloat(field(it, ['price', 'unit_price']) || 0) > 0)
           .reduce((n, it) => n + (parseInt(field(it, ['quantity', 'qty']), 10) || 0), 0) || undefined;
 
+        // Fast lane (23 Sep 2026): the per-order "Fast lane" product line
+        // (momuto-api Create Fast-lane products; one title per store) → 18–23 day
+        // window in the emails instead of 25–30.
+        const fastLane = itemsOf(o).some(it => FAST_LANE_TITLE_RE.test(String(field(it, ['title', 'name']) || '')));
         const payload = {
           action: 'ingest-and-send',
           order_no: ref, email, name, lang,
           plant_order_no: platNo, total, currency, qty,
+          fast_lane: fastLane,
           paid_at: new Date(paidMs).toISOString(),
           image, image_back: imageBack,
         };

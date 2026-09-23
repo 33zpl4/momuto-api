@@ -64,6 +64,11 @@ on:
         description: 'Back render URL (ingest only, optional)'
         required: false
         default: ''
+      fast_lane:
+        description: 'Order paid the fast lane (ingest only; emails quote 18–23 days instead of 25–30)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   send:
@@ -84,6 +89,7 @@ jobs:
           PLANT: ${{ inputs.plant_order_no }}
           IMAGE: ${{ inputs.image }}
           IMAGE_BACK: ${{ inputs.image_back }}
+          FAST_LANE: ${{ inputs.fast_lane }}
         run: |
           set -e
           [ -n "$SECRET" ] || { echo "::error::MOMUTO_API_SECRET missing"; exit 1; }
@@ -97,7 +103,7 @@ jobs:
           fi
           BODY=$(jq -n --arg a "$ACTION" --arg o "$ORDER_NO" --arg e "$EMAIL" --arg n "$NAME" --arg l "$LANG_IN" \
                        --arg q "$QTY" --arg t "$TOTAL" --arg c "$CURRENCY" --arg p "$PAID_AT" --arg pl "$PLANT" \
-                       --arg i "$IMAGE" --arg ib "$IMAGE_BACK" '
+                       --arg i "$IMAGE" --arg ib "$IMAGE_BACK" --arg fl "$FAST_LANE" '
             {action:$a, order_no:$o}
             + (if $e != "" then {email:$e} else {} end)
             + (if $n != "" then {name:$n} else {} end)
@@ -108,7 +114,8 @@ jobs:
             + (if $p != "" then {paid_at:$p} else {} end)
             + (if $pl != "" then {plant_order_no:$pl} else {} end)
             + (if $i != "" then {image:$i} else {} end)
-            + (if $ib != "" then {image_back:$ib} else {} end)')
+            + (if $ib != "" then {image_back:$ib} else {} end)
+            + (if $fl == "true" then {fast_lane:true} else {} end)')
           echo "payload: $(echo "$BODY" | jq -c 'del(.email) + {email: (if .email then (.email|sub("^(?<a>.).*@"; "\(.a)***@")) else null end)}')"
           RES=$(curl -sS -w '\n%{http_code}' -X POST -H "Content-Type: application/json" -H "x-webhook-secret: $SECRET" --data "$BODY" "$API")
           CODE=$(echo "$RES" | tail -1); OUT=$(echo "$RES" | sed '$d')
