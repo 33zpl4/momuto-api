@@ -56,9 +56,10 @@ touching the deploy script, remember it needs **three** things, not one:
    `generatePageContent` has **no fallback** — a missing key puts the literal
    string `undefined` into the prompt instead of failing loudly.
 
-Teams catalogued before the US store was wired up exist on four stores only.
-Backfilling one is a redeploy: touch its config (or re-commit it unchanged) and
-push, one team per commit.
+Teams catalogued before this wiring are **not** missing their US pages — the US
+store was duplicated from the EN store, so their pages came across with it. See
+§11. Because the US handle suffix matches EN, a later redeploy updates the
+cloned page in place instead of creating a second one.
 
 ---
 
@@ -334,28 +335,36 @@ Verification notes learned the hard way:
 
 ## 11. Known backlog (as of 2026-09-24)
 
-Two one-off migrations are outstanding. Neither is urgent, both are the same
-mechanical loop — **one config per commit, push, wait for green** — and neither
-has been authorised yet, so ask before starting a batch.
+One one-off migration is outstanding. It is not urgent, it is the same
+mechanical loop — **one config per commit, push, wait for green** — and it has
+not been authorised, so ask before starting a batch.
 
-1. **US backfill.** ~128 of 153 team configs were last deployed before
-   `us.momuto.com` was wired in (`3a8eb50`, 2026-09-05), so those teams have
-   pages on four stores only. A redeploy of each creates its US page.
-2. **Accent contrast refresh.** ~49 configs carry a raw accent under 4.5:1 on
+1. **Accent contrast refresh.** ~49 configs carry a raw accent under 4.5:1 on
    the page background and were last deployed before the fix (`fe573ee`,
    2026-09-10), so their live chrome is still the old low-contrast version.
    A redeploy is the fix; the config needs no edit.
 
-The two overlap heavily — one redeploy pass resolves both for any given team.
-
-Recompute the current figures rather than trusting these numbers:
+Recompute the current figure rather than trusting that number:
 
 ```sh
 # teams last touched before a given commit = teams not yet redeployed since it
 for f in teams/*/config.json; do
   echo "$(git log -1 --format=%ci -- "$f") $f"
-done | sort | awk -v cut="$(git log -1 --format=%ci 3a8eb50)" '$0 < cut' | wc -l
+done | sort | awk -v cut="$(git log -1 --format=%ci fe573ee)" '$0 < cut' | wc -l
 ```
+
+### There is no US backfill to do
+
+Teams catalogued before `us.momuto.com` was wired into this pipeline
+(`3a8eb50`, 2026-09-05) still have their US pages: **the US store was
+duplicated from the EN store**, so everything that existed on `momuto.com` at
+that point came across with it, gallery included. Do not launch a redeploy pass
+to "create the missing US pages" — they are not missing.
+
+This also works because the US handle suffix is identical to EN
+(`<slug>-custom-kit-design`): when such a team is redeployed for any other
+reason, the run finds the cloned page and logs `✓ Updated` rather than creating
+a duplicate.
 
 **Serialise redeploys — never run two in parallel.** `updateGallery` is an
 unguarded read-modify-write against a single gallery page per store;
