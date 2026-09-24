@@ -113,6 +113,37 @@ const DOMAINS = {
     specsLabels: { quality: 'Qualità', custom: 'Personalizzato', delivery: 'Consegna' },
     deliveryText: '25-30 GG',
     titleTemplate: (team) => `Design Maglia ${team} | MOMUTO`
+  },
+  // US store. Shares the EN handle scheme (the US gallery lives at the EN
+  // handle /pages/custom-kit-gallery), but the copy uses US soccer lexicon.
+  // lang is 'en-US' so schema.org inLanguage is right; REF_I18N has no en-US
+  // key and falls back to its English strings, which is what we want.
+  us: {
+    host: 'https://openapi.oemapps.com',
+    token: process.env.OEMSAAS_TOKEN_US,
+    lang: 'en-US',
+    label: 'us.momuto.com',
+    baseUrl: 'https://us.momuto.com',
+    handleSuffix: 'custom-kit-design',
+    galleryUrl: 'https://us.momuto.com/pages/custom-kit-gallery',
+    galleryHandle: 'custom-kit-gallery',
+    // The US store has no supplier-comparison page; point at the closest
+    // existing US page rather than linking off-domain or at a 404.
+    comparisonUrl: 'https://us.momuto.com/pages/ai-concept-to-real-kit',
+    galleryLabel: 'View Gallery',
+    comparisonLabel: 'How It Works',
+    orderUrl: 'https://us.momuto.com/pages/request-custom-kit-design',
+    kitLabels: { home: 'HOME', away: 'AWAY' },
+    features: [
+      { name: 'Moisture Control', desc: 'Wicks sweat. Stays dry.' },
+      { name: 'Stretch Fabric', desc: 'Moves with you. Never restricts.' },
+      { name: 'Built to Last', desc: 'Pro-grade durability.' }
+    ],
+    performanceTitle: 'Performance Fabric. Precision Fit.',
+    performanceSubtitle: 'Built for the game',
+    specsLabels: { quality: 'Quality', custom: 'Custom', delivery: 'Delivery' },
+    deliveryText: '25-30 DAYS',
+    titleTemplate: (team) => `${team} Custom Soccer Uniform Design | MOMUTO`
   }
 };
 
@@ -134,15 +165,21 @@ async function withRetry(fn, maxAttempts = 4) {
   }
 }
 
+// Sport the kit is for. Teams are football unless their config says otherwise.
+function sportOf(config) {
+  return config.sport || 'football';
+}
+
 async function generatePageContent(config, lang) {
   const langInstructions = {
     en: 'Write all text content in English.',
     es: 'Write all text content in Spanish (Spain). Use "equipación" for kit, "camiseta" for jersey.',
     fr: 'Write all text content in French. Use "maillot" for jersey, "tenue" for kit.',
-    it: 'Write all text content in Italian. Use "maglia" for jersey, "divisa" for kit.'
+    it: 'Write all text content in Italian. Use "maglia" for jersey, "divisa" for kit.',
+    us: 'Write all text content in US English, using American soccer vocabulary: "soccer" not "football", "uniform" or "jersey" not "kit", "field" not "pitch", "cleats" not "boots".'
   };
 
-  const prompt = `You are creating a custom football kit design proposal page for MOMUTO (momuto.com), a custom football kit brand.
+  const prompt = `You are creating a custom ${sportOf(config)} kit design proposal page for MOMUTO (momuto.com), a custom sports kit brand.
 
 ${langInstructions[lang]}
 
@@ -187,10 +224,11 @@ async function generateGalleryDesc(config, lang) {
     en: 'Write the caption in English.',
     es: 'Write the caption in Spanish.',
     fr: 'Write the caption in French.',
-    it: 'Write the caption in Italian.'
+    it: 'Write the caption in Italian.',
+    us: 'Write the caption in US English (American soccer vocabulary).'
   };
 
-  const prompt = `Given this football kit design description: "${config.design_description}"
+  const prompt = `Given this ${sportOf(config)} kit design description: "${config.design_description}"
 
 Write a SHORT gallery caption of exactly 4 to 6 words that captures the essence of the design.
 Examples of good captions: "Bold gradient with black sleeves", "Classic red and white stripes", "Navy fade with gold trim"
@@ -207,8 +245,62 @@ Return ONLY the caption text, nothing else. No quotes, no punctuation at the end
   return response.content[0].text.trim().replace(/^["']|["']$/g, '').replace(/\.$/, '');
 }
 
+// --- UI contrast -----------------------------------------------------------
+// The page sits on --bg-dark (#050505) but accent_color is taken from the
+// jersey, and plenty of kits are black, midnight navy or deep burgundy. Painting
+// chrome directly in that accent made the active FRONT/BACK toggle, selected
+// reaction, spec values and trust-link hover render near-invisible — a black
+// accent is 1.05:1 against the page. Chrome therefore uses --accent-ui: the same
+// hue lifted until it clears 4.5:1, with --accent-ink as readable text on top.
+// --accent keeps the true jersey value for anything that needs to be faithful.
+const srgb = c => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+
+function toRgb(hex) {
+  const h = String(hex).replace('#', '').trim();
+  const full = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
+  const n = parseInt(full, 16);
+  // Malformed hex falls back to the default accent rather than rendering NaN.
+  return (full.length === 6 && Number.isFinite(n))
+    ? [(n >> 16) & 255, (n >> 8) & 255, n & 255]
+    : [230, 57, 70];
+}
+
+const luminance = ([r, g, b]) =>
+  0.2126 * srgb(r / 255) + 0.7152 * srgb(g / 255) + 0.0722 * srgb(b / 255);
+
+function contrast(a, b) {
+  const [hi, lo] = a > b ? [a, b] : [b, a];
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+const toHex = rgb =>
+  '#' + rgb.map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
+
+// Lift a colour toward white until it reads at `min` contrast against `bg`.
+// Hue is preserved; only very dark accents move at all.
+function accentForUi(hex, bg = '#050505', min = 4.5) {
+  const bgLum = luminance(toRgb(bg));
+  const base = toRgb(hex);
+  if (contrast(luminance(base), bgLum) >= min) return toHex(base);
+  for (let t = 0.05; t <= 1; t += 0.05) {
+    const lifted = base.map(c => c + (255 - c) * t);
+    if (contrast(luminance(lifted), bgLum) >= min) return toHex(lifted);
+  }
+  return '#ffffff';
+}
+
+// Black or white text, whichever is more readable on a filled accent swatch.
+function inkOn(hex) {
+  const l = luminance(toRgb(hex));
+  return contrast(l, luminance(toRgb('#ffffff'))) >= contrast(l, luminance(toRgb('#050505')))
+    ? '#ffffff'
+    : '#050505';
+}
+
 function buildPageHTML(config, content, domain) {
   const accentColor = config.accent_color || config.primary_color || '#e63946';
+  const accentUi = accentForUi(accentColor);
+  const accentInk = inkOn(accentUi);
   const hasHomeAway = !!(config.away_image_url);
   const hasBack = !!config.back_image_url;
   const hasRef = !!config.reference_image_url;
@@ -246,8 +338,8 @@ function buildPageHTML(config, content, domain) {
 .ref-side { position: relative; background: #0d0d0d; }
 .ref-side img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 4/5; }
 .ref-lab { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 10px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(0,0,0,0.78); color: var(--text-muted); }
-.ref-lab.after { color: #fff; background: var(--accent); }
-.ref-type { text-align: center; margin-top: 0.9rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.ref-lab.after { color: var(--accent-ink); background: var(--accent-ui); }
+.ref-type { text-align: center; margin-top: 0.9rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-ui); }
 .ref-more { text-align: center; margin-top: 1.2rem; }
 .ref-more a { color: var(--text-muted); font-size: 0.82rem; }` : '';
 
@@ -270,7 +362,7 @@ function buildPageHTML(config, content, domain) {
 .toolbar-divider { width: 1px; background: rgba(255,255,255,0.12); align-self: stretch; flex-shrink: 0; }
 .kit-btn { background: transparent; border: none; color: var(--text-muted); padding: 11px 20px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.18s ease; border-right: 1px solid rgba(255,255,255,0.08); white-space: nowrap; }
 .kit-btn:last-child { border-right: none; }
-.kit-btn.active { background: var(--accent); color: var(--bg-dark); }
+.kit-btn.active { background: var(--accent-ui); color: var(--accent-ink); }
 .view-btn { background: transparent; border: none; color: var(--text-muted); padding: 11px 18px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.18s ease; border-right: 1px solid rgba(255,255,255,0.08); white-space: nowrap; }
 .view-btn:last-child { border-right: none; }
 .view-btn.active { background: rgba(255,255,255,0.12); color: var(--text-white); }` : '';
@@ -279,7 +371,7 @@ function buildPageHTML(config, content, domain) {
   const toggleCSS = (!hasHomeAway && hasBack) ? `
 .view-toggle { display: flex; gap: 10px; margin-bottom: 1.5rem; }
 .view-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 10px 20px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s ease; }
-.view-btn.active { background: var(--accent); color: var(--bg-dark); border-color: var(--accent); }
+.view-btn.active { background: var(--accent-ui); color: var(--accent-ink); border-color: var(--accent-ui); }
 .jersey-carousel { position: relative; width: 100%; height: auto; overflow: hidden; }
 .jersey-view { display: none; width: 100%; }
 .jersey-view.active { display: block; }` : '';
@@ -492,6 +584,8 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;900&display=swap');
 :root {
   --accent: ${accentColor};
+  --accent-ui: ${accentUi};
+  --accent-ink: ${accentInk};
   --bg-dark: #050505;
   --text-white: #ffffff;
   --text-muted: #a1a1aa;
@@ -510,15 +604,15 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 .reaction-container { width: 100%; max-width: 450px; margin: 0 auto 3rem; display: flex; gap: 10px; padding: 0 1rem; }
 .reaction-btn { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 12px 5px; border-radius: 4px; font-family: 'Jost', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .reaction-btn:hover { background: rgba(255,255,255,0.1); }
-.reaction-btn.selected { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.reaction-btn.selected { background: var(--accent-ui); color: var(--accent-ink); border-color: var(--accent-ui); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 .emoji-icon { font-size: 1.2rem; }
 .specs-container { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; max-width: 800px; margin: 0 auto 3rem; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
 .spec-item { padding: 1.5rem 0.5rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
 .spec-item:last-child { border-right: none; }
-.spec-val { font-weight: 800; display: block; font-size: 1rem; margin-bottom: 4px; color: var(--accent); }
+.spec-val { font-weight: 800; display: block; font-size: 1rem; margin-bottom: 4px; color: var(--accent-ui); }
 .spec-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
 .story-container { max-width: 600px; margin: 0 auto 4rem; padding: 0 1.5rem; }
-.story-content { border-left: 3px solid var(--accent); padding-left: 1.5rem; }
+.story-content { border-left: 3px solid var(--accent-ui); padding-left: 1.5rem; }
 .story-heading { font-weight: 800; text-transform: uppercase; margin-bottom: 1rem; color: white; }
 .story-p { color: #ccc; line-height: 1.6; font-size: 0.95rem; }
 .performance-section { max-width: 700px; margin: 0 auto 4rem; padding: 0 1.5rem; }
@@ -526,14 +620,14 @@ body { font-family: 'Jost', sans-serif; background-color: var(--bg-dark); color:
 .performance-subtitle { color: var(--text-muted); font-size: 0.9rem; text-align: center; margin-bottom: 3rem; }
 .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
 .feature-item { text-align: center; }
-.feature-icon { width: 50px; height: 50px; margin: 0 auto 1rem; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.feature-icon-svg { width: 24px; height: 24px; stroke: var(--bg-dark); fill: none; stroke-width: 2; }
+.feature-icon { width: 50px; height: 50px; margin: 0 auto 1rem; background: var(--accent-ui); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.feature-icon-svg { width: 24px; height: 24px; stroke: var(--accent-ink); fill: none; stroke-width: 2; }
 .feature-name { font-weight: 700; margin-bottom: 0.5rem; font-size: 0.9rem; }
 .feature-desc { font-size: 0.85rem; color: var(--text-muted); }
 .trust-section { background: #111; padding: 4rem 1.5rem; text-align: center; }
 .trust-links { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
 .trust-link { color: white; text-decoration: none; border: 1px solid #333; padding: 12px 25px; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; transition: 0.3s; }
-.trust-link:hover { border-color: var(--accent); background: var(--accent); }
+.trust-link:hover { border-color: var(--accent-ui); background: var(--accent-ui); color: var(--accent-ink); }
 .sticky-share { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); padding: 15px; z-index: 100; border-top: 1px solid #222; display: flex; justify-content: center; }
 .btn-whatsapp { background: #25D366; color: white; width: 100%; max-width: 400px; padding: 14px; border: none; font-family: 'Jost', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; cursor: pointer; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); }
 .lightbox-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 9999; touch-action: none; }
@@ -831,7 +925,7 @@ async function main() {
           title: pageTitle,
           content: html,
           meta_title: pageTitle,
-          meta_keywords: ['custom football kit', 'custom jersey', config.team_name, 'MOMUTO'],
+          meta_keywords: [`custom ${sportOf(config)} kit`, 'custom jersey', config.team_name, 'MOMUTO'],
           meta_descript: content.meta_description,
           og_image: config.og_image || config.image_url,
           handle: handle
@@ -875,7 +969,8 @@ async function main() {
     process.exit(1);
   }
 
-  console.log('\n✅ All three domains updated successfully.');
+  const storeCount = Object.keys(DOMAINS).length;
+  console.log(`\n✅ All ${storeCount} stores updated successfully.`);
 }
 
 main().catch(err => {

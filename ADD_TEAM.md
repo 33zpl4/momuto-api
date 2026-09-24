@@ -16,7 +16,7 @@ an agent with only repo access + git can complete the task without guessing.
 - **Trigger:** `.github/workflows/create-team-page.yml` runs on every **push**
   that touches `teams/*/config.json` (any branch, no branch filter).
 - It runs `scripts/generate-and-deploy.js`, which:
-  - Generates EN / ES / FR / IT page copy with Claude,
+  - Generates EN / ES / FR / IT / US page copy with Claude,
   - Deploys one kit-proposal page per domain via the OEMSaaS API,
   - Updates each domain's sitemap,
   - **If** the commit message contains `add-to-gallery`, injects/updates the
@@ -31,11 +31,35 @@ an agent with only repo access + git can complete the task without guessing.
   only ever added to / updated in place. Removing a card is a **manual** CMS
   edit (see §8).
 
-Live URLs after a successful run:
+Live URLs after a successful run (**five** stores):
 - `momuto.com/pages/<slug>-custom-kit-design`
 - `es.momuto.com/pages/<slug>-diseno-equipacion`
 - `fr.momuto.com/pages/<slug>-design-maillot`
 - `it.momuto.com/pages/<slug>-design-maglia`
+- `us.momuto.com/pages/<slug>-custom-kit-design`
+
+A successful run ends with `✅ All 5 stores updated successfully.` If the log
+says a different number, a store is missing from `DOMAINS` — investigate before
+reporting the deploy as done.
+
+### The US store
+
+`us.momuto.com` is the fifth locale, added after the original four. When
+touching the deploy script, remember it needs **three** things, not one:
+
+1. A `us` entry in the `DOMAINS` map in `scripts/generate-and-deploy.js`
+   (`lang: 'en-US'`, `handleSuffix: 'custom-kit-design'`, gallery handle
+   `custom-kit-gallery`, and `token: process.env.OEMSAAS_TOKEN_US`).
+2. `OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}` in the deploy step's
+   `env:` block in `.github/workflows/create-team-page.yml`.
+3. A `us` key in **both** `langInstructions` maps in the script. The one in
+   `generatePageContent` has **no fallback** — a missing key puts the literal
+   string `undefined` into the prompt instead of failing loudly.
+
+Teams catalogued before this wiring are **not** missing their US pages — the US
+store was duplicated from the EN store, so their pages came across with it. See
+§11. Because the US handle suffix matches EN, a later redeploy updates the
+cloned page in place instead of creating a second one.
 
 ---
 
@@ -91,6 +115,9 @@ Field reference:
 | `accent_color` | ✅ | Hex. **MUST equal `secondary_color`.** Drives the FRONT/BACK toggle + reaction button `.active` color. |
 | `image_url` | ✅ | Front jersey image (the CDN URL the user provides). |
 | `back_image_url` | ⬜ optional | Back jersey image. If present, the page renders a FRONT/BACK toggle. **Omit the key entirely** when there's no back image yet — do not put an empty string or null. |
+| `sport` | ⬜ optional | The sport this kit is for, lowercase (`padel`, `netball`, …). **Omit it for football** — the script defaults to football via `sportOf(config)`. It feeds the page copy, the `meta_keywords`, and the AI gallery caption, so a padel kit stops being advertised as a football kit. Set it whenever the user says the sport, or when the description plainly states one. |
+| `away_image_url` / `away_back_image_url` | ⬜ optional | A second kit on the same page. Add both when the team has home **and** away artwork; the page gains a HOME/AWAY switch alongside the FRONT/BACK toggle. |
+| `updated_at` | ⬜ optional | `YYYY-MM-DD`. Set it when re-shooting an existing team's images so the change is visible in the repo history. |
 
 Formatting:
 - Straight ASCII quotes in JSON. If the description contains curly quotes `“ ” ‘ ’`
@@ -121,6 +148,36 @@ jersey has both a bold streak color *and* a structural trim color (e.g. purple
 streaks + black collar), use the **more prominent / more brand-defining** one as
 `secondary`, and mention the other in the description. When unsure between two
 candidates, tell the user which you picked and offer to swap.
+
+### The accent must survive being used as UI chrome
+
+`accent_color` is not only a jersey fact — the page paints the FRONT/BACK
+toggle, the `.active` reaction button and other chrome with it, on a
+near-black `--bg-dark: #050505` background.
+
+A near-black accent (a matte-black kit, a charcoal trim) therefore used to
+produce **black text on a black button** — a real bug seen live, at a contrast
+ratio of about 1.05:1, i.e. invisible.
+
+The script now defends against this itself: `accentForUi()` derives
+`--accent-ui` by lifting the accent's lightness — hue preserved — only until it
+clears **4.5:1** against the background, and `inkOn()` picks `--accent-ink` for
+text drawn on top. An accent that already passes is returned byte-identical, so
+this changes nothing for most teams. The jersey swatches keep the raw
+`--accent`; only the chrome uses the derived value.
+
+Two consequences when writing a config:
+
+- **Don't "fix" a dark accent by hand** — record the jersey's real colour and
+  let the derivation handle the UI.
+- **Prefer a genuinely contrasting colour when the description offers a
+  choice.** For a red kit whose only trim is black, white detailing (numbers,
+  checkerboard) is the better `secondary`/`accent` than black, which would be
+  lifted to a washed grey. Say which you chose and why, and offer the swap.
+
+Teams catalogued before this fix still carry low-contrast accents. They only
+pick up the derived chrome on their next deploy, so a redeploy is what fixes an
+old team — same one-config-per-commit loop.
 
 Reference palette (values already used in this repo — reuse only if they truly
 match the image):
@@ -241,9 +298,81 @@ push:
 - `status: completed` + `conclusion: success` means pages (and, if requested,
   gallery) are live. Runs typically finish in ~1 minute.
 
+Verification notes learned the hard way:
+
+- **The sandbox cannot reach `momuto.com`, `us.momuto.com` or the image CDNs**
+  (`cdn.staticsoe.com`, `cdn.statics-cdn-abc.com`) — egress policy blocks them.
+  So colours are always read from the user's *description*, never sampled from
+  the artwork, and a deploy is never reported as working without a green run.
+  Say so plainly rather than implying the live page was checked.
+- **Read the job log, not just the green tick.** The log distinguishes
+  `✓ Created` (new page) from `✓ Updated` (existing handle reused) — the proof
+  that an image update didn't duplicate a page. For gallery work it
+  distinguishes `✓ Found designs array, injecting entry` (new card) from
+  `Team already in … gallery — updating desc` → `✓ Updated desc + image`.
+- **A "no gallery" request is verified by absence**: no
+  `Generating … gallery description` and no `✓ Gallery updated` lines anywhere
+  in the log. Such runs are also noticeably shorter.
+- **`actions_list` takes `perPage`, camelCase.** `per_page` is silently
+  ignored and returns 100 runs — huge responses for no reason.
+- **The runs listing can return stale data.** A `list_workflow_runs` filtered
+  by branch once reported a month-old run as newest, with a wrong total; an
+  immediate re-query returned the truth. If a run number looks impossibly old,
+  query again before concluding anything.
+- **Re-running a failed job via the API returns 403** — the token lacks that
+  permission. Recover by pushing a redeploy commit instead. Both the page
+  upsert and the gallery injection are idempotent, so re-deploying a team that
+  partially succeeded does not duplicate anything.
+
+### Failure modes seen in practice
+
+| Symptom in the log | Cause | Recovery |
+|---|---|---|
+| `400 invalid_request_error: "Your credit balance is too low"` on every store, run dies in ~15s | Anthropic API credits exhausted | Nothing was written (the failure precedes every CMS call). **Do not retry** — tell the user to top up, then redeploy. |
+| One store's gallery step gets HTML instead of JSON | Transient API-management page from the CMS | Pages are live; only that store's card is missing. Push a redeploy commit with `add-to-gallery`. |
+
 ---
 
-## 11. Quick checklist
+## 11. Known backlog (as of 2026-09-24)
+
+One one-off migration is outstanding. It is not urgent, it is the same
+mechanical loop — **one config per commit, push, wait for green** — and it has
+not been authorised, so ask before starting a batch.
+
+1. **Accent contrast refresh.** ~49 configs carry a raw accent under 4.5:1 on
+   the page background and were last deployed before the fix (`fe573ee`,
+   2026-09-10), so their live chrome is still the old low-contrast version.
+   A redeploy is the fix; the config needs no edit.
+
+Recompute the current figure rather than trusting that number:
+
+```sh
+# teams last touched before a given commit = teams not yet redeployed since it
+for f in teams/*/config.json; do
+  echo "$(git log -1 --format=%ci -- "$f") $f"
+done | sort | awk -v cut="$(git log -1 --format=%ci fe573ee)" '$0 < cut' | wc -l
+```
+
+### There is no US backfill to do
+
+Teams catalogued before `us.momuto.com` was wired into this pipeline
+(`3a8eb50`, 2026-09-05) still have their US pages: **the US store was
+duplicated from the EN store**, so everything that existed on `momuto.com` at
+that point came across with it, gallery included. Do not launch a redeploy pass
+to "create the missing US pages" — they are not missing.
+
+This also works because the US handle suffix is identical to EN
+(`<slug>-custom-kit-design`): when such a team is redeployed for any other
+reason, the run finds the cloned page and logs `✓ Updated` rather than creating
+a duplicate.
+
+**Serialise redeploys — never run two in parallel.** `updateGallery` is an
+unguarded read-modify-write against a single gallery page per store;
+overlapping runs can silently drop each other's cards.
+
+---
+
+## 12. Quick checklist
 
 - [ ] Slug is lowercase, hyphenated, ASCII-only.
 - [ ] `team_name` keeps the user's original casing/accents.
@@ -251,7 +380,12 @@ push:
 - [ ] `secondary_color` = main contrast color, and `accent_color` **equals** it.
 - [ ] Colors are real values from the jersey, not copied from another team.
 - [ ] `back_image_url` present only if a real back image exists (else omit key).
+- [ ] `sport` set if the kit is **not** football; omitted if it is.
+- [ ] Accent is a colour that still reads as UI chrome (§4), and the choice was
+      explained to the user.
 - [ ] One team per commit.
 - [ ] `add-to-gallery` in the message **iff** the user wants it in the gallery.
 - [ ] Pushed to the working branch.
+- [ ] Run log checked: green, `✅ All 5 stores updated successfully.`, and the
+      `Created` / `Updated` / gallery lines match what was intended.
 ```

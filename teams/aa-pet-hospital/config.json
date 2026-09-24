@@ -1,0 +1,12 @@
+{
+  "team_name": "A&A Pet Hospital",
+  "design_name": "Neon Paw Trail",
+  "design_description": "The concept presents two strongly contrasting kits built from different graphic languages. The away design uses a clean white base with dynamic diagonal brush strokes sweeping across the shirt in deep burgundy and warm gold. The strokes vary in width and finish, giving the jersey movement without covering the entire surface. Burgundy-and-gold edging on the V-neck and cuffs creates a more structured frame around the expressive graphic. Gold side panels continue vertically into the shorts, making the full kit feel cohesive. The back is deliberately much cleaner, allowing the large burgundy number with gold outline to dominate. The home design takes the opposite approach: an almost entirely black base with electric green accents on the V-neck, cuffs and side panels. Instead of large brush graphics, the body uses a very subtle dark tonal texture, with a trail of oversized paw prints emerging diagonally from the lower section. The low contrast keeps this graphic almost hidden until viewed closely, giving the shirt more depth without losing the aggressive black appearance. Both kits use the same underlying principle: strong secondary colours concentrated around the trims and side structure, while the main body carries a distinctive graphic treatment. One is bright and expressive through burgundy/gold brushwork; the other is dark and technical through tonal graphics and neon-green detailing.",
+  "primary_color": "#0D0D0D",
+  "secondary_color": "#39FF14",
+  "accent_color": "#39FF14",
+  "image_url": "https://cdn.statics-cdn-abc.com/pics/f7cc815b0385b63870ca42dc085eb5553698e1f5514d37488b02730a42c989fb.png",
+  "back_image_url": "https://cdn.statics-cdn-abc.com/pics/35f89b8c46a274f0a8178ece285f1476a0326fb5eb437ed97a42122f70d30305.png",
+  "away_image_url": "https://cdn.statics-cdn-abc.com/pics/7e98f1c779de70ae2e0ec83fef88bc54e0bb0ea6ac1860a0c8dc60c1e6658547.png",
+  "away_back_image_url": "https://cdn.statics-cdn-abc.com/pics/7dab6603e883538990118f8ab3773e17abd9399173183354eb5e5e45a23e331f.png"
+}

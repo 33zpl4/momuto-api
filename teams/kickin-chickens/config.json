@@ -1,0 +1,10 @@
+{
+  "team_name": "Kickin Chickens",
+  "design_name": "Navy Red Fade",
+  "design_description": "A navy-to-red gradient jersey, transitioning smoothly from deep navy across the shoulders and upper chest into a strong red through the lower body. The fade is gradual rather than a hard split, so the two colours blend through the mid-torso and the shirt reads as one continuous piece rather than two panels joined together. The construction is deliberately minimal: a solid navy crew collar, red sleeve ends finished with a single clean white stripe, and no additional body graphics competing with the colour transition. The crest is finished with two gold stars, echoed at the upper back. The back maintains the same gradient, with a large white number placed over the transition for strong contrast and excellent readability from distance. The player name sits cleanly in the darker upper area where the navy is at its deepest. Overall it is a clean, modern design where the two-tone fade is the main visual feature, supported by restrained white and gold detailing. The absence of pattern keeps the focus entirely on the colour movement, making the kit simple to reproduce consistently while still feeling distinctive on the pitch.",
+  "primary_color": "#14213D",
+  "secondary_color": "#C8102E",
+  "accent_color": "#C8102E",
+  "image_url": "https://cdn.statics-cdn-abc.com/pics/9c0aef8c4981e65df7f2158b683fb23b124416a015cd18dfa50daff3761117d7.png",
+  "back_image_url": "https://cdn.statics-cdn-abc.com/pics/6448651b5e154d07454cb57c860e1848c6e84f2260990bfaa3a1d31670f18623.png"
+}
