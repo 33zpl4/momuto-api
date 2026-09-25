@@ -38,6 +38,14 @@
     },
     {
       "@type": "Question",
+      "name": "La he hecho con un generador de camisetas con IA. ¿La podéis fabricar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Los generadores de camisetas con IA venden la imagen (un mockup en 4K, una prueba virtual), no la camiseta. Nos envías lo que exportaste y nuestros diseñadores lo convierten en archivos de producción: vectores por pieza, escalado por tallas y color ajustado a la sublimación. Si parte de una plantilla de selección o club, sustituimos el escudo oficial por el tuyo."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "¿Por qué mi camiseta hecha con IA lleva una corona?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -234,6 +242,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2 style="text-align:center;margin-bottom:2rem">Preguntas Que Nos Hacen</h2>
 <details><summary>&iquest;Se puede fabricar de verdad una camiseta dise&ntilde;ada con IA?</summary><p>S&iacute; &mdash; pero no directamente. Los dise&ntilde;os de IA son im&aacute;genes, no archivos de producci&oacute;n: degradados sin calibrar, patrones que ignoran las costuras, formas sin vectorizar. Nuestros dise&ntilde;adores reconstruyen el concepto como archivo listo para producir preservando tu visi&oacute;n, y lo fabricamos. Primera propuesta en 24&ndash;48h.</p></details>
 <details><summary>&iquest;Qu&eacute; herramientas de IA puedo usar?</summary><p>Cualquiera. ChatGPT, Midjourney, Gemini, DALL&middot;E, generadores especializados &mdash; y tambi&eacute;n bocetos, archivos de Photoshop y fotos de camisetas antiguas. Si puedes ense&ntilde;arlo, podemos reconstruirlo.</p></details>
+<details><summary>La he hecho con un generador de camisetas con IA. ¿La podéis fabricar?</summary><p>Sí. Los generadores de camisetas con IA venden la imagen (un mockup en 4K, una prueba virtual), no la camiseta. Nos envías lo que exportaste y nuestros diseñadores lo convierten en archivos de producción: vectores por pieza, escalado por tallas y color ajustado a la sublimación. Si parte de una plantilla de selección o club, sustituimos el escudo oficial por el tuyo.</p></details>
 <details><summary>&#191;Por qu&#233; mi camiseta hecha con IA lleva una corona?</summary><p>Es una de las costumbres de la IA que m&#225;s vemos: ChatGPT a&#241;ade una corona a los conceptos de camiseta muy a menudo &mdash; en el pecho, la manga, el cuello, el pantal&#243;n &mdash; aunque nadie la haya pedido. Parte del trabajo de nuestros dise&#241;adores es se&#241;alar estas man&#237;as. Os preguntamos si la corona significa algo para vuestro equipo; si no, la cambiamos por algo realmente vuestro &mdash; el escudo, un lugar del barrio, un apodo, una broma interna. Un concepto tiene que parecerse a vuestro equipo, no a la herramienta que lo dibuj&#243;.</p></details>
 <details><summary>Mi concepto de IA lleva medias estampadas y etiquetas de marca. &#191;Pod&#233;is hacerlas?</summary><p>Las etiquetas, s&#237;. Las etiquetas del cuello y del bajo son un detalle favorito de la IA, y normalmente las recreamos en sublimaci&#243;n, impresas en la tela en vez de cosidas, y os contamos exactamente c&#243;mo quedar&#225;n. Las medias, no: nuestras medias son medias lisas de equipo a juego, en la mayor&#237;a de colores (3,90 &#8364; el par, opcionales por jugador), no personalizadas. Los equipos nos mandan medias totalmente estampadas a menudo, as&#237; que lo avisamos antes de fabricar nada, nunca despu&#233;s.</p></details>
 <details><summary>&iquest;Puedo pedir una sola camiseta?</summary><p>S&iacute; &mdash; sin pedido m&iacute;nimo. Camisetas sueltas para regalos, piezas de portfolio y coleccionistas. El dep&oacute;sito de dise&ntilde;o de 15&nbsp;&euro; se abona &iacute;ntegramente en pedidos de 5 o m&aacute;s camisetas.</p></details>

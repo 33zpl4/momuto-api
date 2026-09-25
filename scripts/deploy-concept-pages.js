@@ -66,7 +66,7 @@ const PAGES = [
   {
     handle: 'maillot-evg-personnalise', locale: 'fr',
     meta_title: 'Maillot de Foot Personnalisé EVG & EVJF | MOMUTO',
-    meta_descript: 'Un maillot de foot personnalisé pour tout le groupe d\'EVG — surnoms et numéros sur chaque dos. Créez-le gratuitement en 3D ou envoyez un concept IA. Dès 20,90 €/maillot à partir de 10.',
+    meta_descript: 'Un maillot de foot personnalisé pour tout le groupe d\'EVG — surnoms et numéros sur chaque dos. Créez-le gratuitement en 3D ou envoyez un concept IA. Dès 21,90 €/maillot à partir de 10.',
     keywords: 'maillot evg personnalisé, maillot enterrement de vie de garçon, tee shirt evg foot, maillot evjf, maillot personnalisé groupe evg',
   },
   {

@@ -38,6 +38,14 @@
     },
     {
       "@type": "Question",
+      "name": "I made it in an AI jersey generator. Can you produce it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. AI jersey generators sell the image (a 4K mockup, a try-on picture), not the jersey. Send us your export and our designers turn it into production files: vector artwork per panel, grading across sizes and colours tuned for sublimation. If it started from a national-team or club preset, we swap the official crest for your own."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Why does my AI kit concept have a crown on it?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -234,6 +242,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2 style="text-align:center;margin-bottom:2rem">Questions Teams Ask Us</h2>
 <details><summary>Can an AI-generated kit design actually be manufactured?</summary><p>Yes &mdash; but not directly. AI renders are images, not production files: gradients aren't colour-managed, patterns don't wrap around seams, shapes aren't vectorized. Our designers rebuild the concept as a production-ready file while preserving your vision, then we manufacture it. First mockup in 24&ndash;48h.</p></details>
 <details><summary>Which AI tools can I use?</summary><p>Any. ChatGPT, Midjourney, Gemini, DALL&middot;E, niche kit generators &mdash; plus sketches, Photoshop files and photos of old jerseys. If you can show it, we can rebuild it.</p></details>
+<details><summary>I made it in an AI jersey generator. Can you produce it?</summary><p>Yes. AI jersey generators sell the image (a 4K mockup, a try-on picture), not the jersey. Send us your export and our designers turn it into production files: vector artwork per panel, grading across sizes and colours tuned for sublimation. If it started from a national-team or club preset, we swap the official crest for your own.</p></details>
 <details><summary>Why does my AI kit concept have a crown on it?</summary><p>It's one of the AI habits we see most: ChatGPT adds a crown to kit concepts very often &mdash; on the chest, the sleeve, the neck, the shorts &mdash; even when nobody asked for one. Part of our designers' job is to point these quirks out. We ask whether the crown actually means something to your team; if it doesn't, we replace it with something that is truly yours &mdash; your crest, a local landmark, a nickname, an inside joke. A concept should look like your team, not like the tool that drew it.</p></details>
 <details><summary>My AI concept shows printed socks and brand labels. Can you make those?</summary><p>The labels, yes. Neck and hem tags are a favourite AI detail, and we generally recreate them in sublimation, printed into the fabric rather than sewn on, and tell you exactly how they'll look. The socks, no: our socks are plain matching team socks in most colours (&#8364;3.90 a pair, optional per player), not custom-printed. Teams send us fully printed socks all the time, so we flag it before anything is made, never after.</p></details>
 <details><summary>Can I order just one jersey?</summary><p>Yes &mdash; no minimum order. Single jerseys for gifts, portfolio pieces and collectors are common. The &euro;15 design deposit is credited in full on orders of 5 or more jerseys.</p></details>
