@@ -14,6 +14,7 @@ only the order and the blockers.
 | Which articles, ranked, with sources? | `docs/editorial-research/00-synthesis.md` — **the shelf** (15 articles), flagships, gems, gaps, GEO notes |
 | Where did the evidence come from? | `docs/editorial-research/01–12-*.md` — 12 sourced dossiers |
 | What is search telling us right now? | `docs/search-position-2026-08.md` |
+| Which SEO work is still open, ranked? | `docs/seo-opportunities-2026-09.md` — audit of plans vs shipped (25 Sep 2026) |
 | What do I (owner) need to supply? | Synthesis §4 — **the first-party shopping list** |
 | How do pages get built and deployed? | `docs/design-page-template.md`, `docs/cms-page-gotchas.md`, `CLAUDE.md` |
 

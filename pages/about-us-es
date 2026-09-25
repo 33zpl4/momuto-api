@@ -8,11 +8,15 @@
   "url": "https://es.momuto.com/pages/sobre-nosotros",
   "mainEntity": {
     "@type": "Organization",
+    "@id": "https://www.momuto.com/#organization",
     "name": "MOMUTO",
     "url": "https://www.momuto.com",
     "foundingDate": "2023",
     "description": "Fabricante de equipaciones de fútbol personalizadas especializado en impresión por sublimación total para equipos amateurs. Diseño europeo, producción global, cero intermediarios.",
-    "brand": { "@type": "Brand", "name": "MOMUTO" },
+    "brand": {
+      "@type": "Brand",
+      "name": "MOMUTO"
+    },
     "areaServed": "Worldwide",
     "knowsAbout": [
       "Equipaciones de fútbol personalizadas",
@@ -30,10 +34,40 @@
         "@type": "UnitPriceSpecification",
         "price": "21.90",
         "priceCurrency": "EUR",
-        "referenceQuantity": { "@type": "QuantitativeValue", "value": "10", "unitCode": "C62" },
+        "referenceQuantity": {
+          "@type": "QuantitativeValue",
+          "value": "10",
+          "unitCode": "C62"
+        },
         "description": "Desde 21,90 € por camiseta en pedidos de 10+ unidades. 38,90 € para una camiseta individual. Entrega en 25-30 días en todo el mundo."
       }
-    }
+    },
+    "email": "info@momuto.com",
+    "founder": {
+      "@type": "Person",
+      "name": "Alberto",
+      "jobTitle": "Fundador"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "info@momuto.com",
+      "telephone": "+34614625408",
+      "availableLanguage": [
+        "English",
+        "Spanish",
+        "French",
+        "Italian"
+      ]
+    },
+    "sameAs": [
+      "https://www.instagram.com/momutofc/",
+      "https://www.trustpilot.com/review/momuto.com",
+      "https://es.momuto.com",
+      "https://fr.momuto.com",
+      "https://it.momuto.com",
+      "https://us.momuto.com"
+    ]
   }
 }
 </script>

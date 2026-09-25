@@ -8,11 +8,15 @@
   "url": "https://www.momuto.com/pages/about-us",
   "mainEntity": {
     "@type": "Organization",
+    "@id": "https://www.momuto.com/#organization",
     "name": "MOMUTO",
     "url": "https://www.momuto.com",
     "foundingDate": "2023",
     "description": "Custom football kit manufacturer specialising in full dye-sublimation printing for amateur football teams. European design, global production, zero middlemen.",
-    "brand": { "@type": "Brand", "name": "MOMUTO" },
+    "brand": {
+      "@type": "Brand",
+      "name": "MOMUTO"
+    },
     "areaServed": "Worldwide",
     "knowsAbout": [
       "Custom football kits",
@@ -30,10 +34,40 @@
         "@type": "UnitPriceSpecification",
         "price": "21.90",
         "priceCurrency": "EUR",
-        "referenceQuantity": { "@type": "QuantitativeValue", "value": "10", "unitCode": "C62" },
+        "referenceQuantity": {
+          "@type": "QuantitativeValue",
+          "value": "10",
+          "unitCode": "C62"
+        },
         "description": "From €21.90 per jersey for orders of 10+ units. €38.90 for a single jersey. Delivered in 25-30 days worldwide."
       }
-    }
+    },
+    "email": "info@momuto.com",
+    "founder": {
+      "@type": "Person",
+      "name": "Alberto",
+      "jobTitle": "Founder"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "info@momuto.com",
+      "telephone": "+34614625408",
+      "availableLanguage": [
+        "English",
+        "Spanish",
+        "French",
+        "Italian"
+      ]
+    },
+    "sameAs": [
+      "https://www.instagram.com/momutofc/",
+      "https://www.trustpilot.com/review/momuto.com",
+      "https://es.momuto.com",
+      "https://fr.momuto.com",
+      "https://it.momuto.com",
+      "https://us.momuto.com"
+    ]
   }
 }
 </script>

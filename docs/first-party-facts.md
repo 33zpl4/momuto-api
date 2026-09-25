@@ -44,6 +44,16 @@ more than", never as fake precision.
   players do not always want to spend it. This is the honest limit of
   self-serve, and the reason curation matters.
 
+- **How a concept becomes a kit (owner, 25 Sep 2026)**: in-house
+  AI-driven flows help with parts of the recreation (rebuilding patterns
+  and artwork from a render); a professional designer is always involved
+  and makes the design calls. The positioning in the owner's words:
+  *we do design, we have taste, we have tech.* The "100% custom / make my
+  concept real" service is a success. Customers are happy and it is
+  becoming what MOMUTO is known for. Publish it as capability + process,
+  never as a count; the AI-brief share stays "most" until D17 is measured
+  with a window.
+
 ## The Ready to Play origin story (editorial gold — clubs namable in blog only)
 
 Watching the bespoke/AI briefs revealed patterns: **when Barcelona,
