@@ -259,14 +259,38 @@ hub FAQ + `llms.txt`.
 
 ## Owner-side checks carried over (status unknown from the repo)
 
-- Chinese test product on the EN store: **deleted by the owner 25 Sep 2026**; `probe-cjk-products.yml` (read-only) lists any CJK-titled product on all five stores to verify.
-- `/account/login` (indexed at pos 2.7): GSC Removals, 25 Sep 2026. A GSC
-  removal is always **temporary (~6 months)**. Use "Remove all URLs with this
-  prefix" on `https://www.momuto.com/account/`, and repeat per store property
-  (es/fr/it/us are separate hosts). robots.txt blocks `/account/`, so Google
-  can't recrawl the page to see a noindex; the page is a platform template
-  (no head access). **Re-check the GSC Pages report ~March 2027** and renew
-  the removal if `/account/*` reappears.
+Done 25 Sep 2026 (verified from runner logs, main @ 2eab207):
+
+- **Chinese test products deleted on all stores.** The owner deleted EN, then
+  IT 12035293 and US 16913823. `probe-cjk-products.yml` run 36113020234
+  found 0 CJK-titled or CJK-handled products on all five stores
+  (709 / 246 / 178 / 41 / 530 products checked). The old
+  `/products/测试商品` URL still answers HTTP 200, which is probably the
+  theme's soft-404 template (the product is gone from the API). The sitemap
+  no longer lists it, and robots already blocks CJK paths. If GSC keeps
+  showing it indexed, request a removal for that URL too.
+- **GSC `/account/` prefix removals submitted for all five hosts**
+  (www, es, fr, it, us). A GSC removal is always **temporary (~6 months)**.
+  robots.txt blocks `/account/`, so Google can't recrawl the page to see a
+  noindex; the page is a platform template (no head access). **Re-check the
+  GSC Pages report ~March 2027** and renew the removals if `/account/*`
+  reappears.
+- **The sitemap lists the full product catalogue** (#283 + #284, live run
+  36112986255). Before this, the API call returned 10 products per store.
+
+  | store | products listed | in sitemap | skipped (preview / unpublished / add-on+test) | URLs | with hreflang (24 Sep) |
+  |---|---|---|---|---|---|
+  | www | 709 | 101 | 603 / 1 / 4 | 378 | 266 (264) |
+  | es | 246 | 130 | 110 / 3 / 3 | 435 | 222 (195) |
+  | fr | 178 | 72 | 98 / 5 / 3 | 342 | 222 (195) |
+  | it | 41 | 37 | 0 / 1 / 3 | 313 | 168 (144) |
+  | us | 530 | 97 | 428 / 1 / 4 | 384 | 261 (260) |
+
+  The hreflang clusters now cover 1,139 URLs, up from 1,058. Preview
+  products (the 3D designer's per-design drafts) stay out on purpose.
+
+Still open:
+
 - Review snippets fell 762 → 390 impressions (July): validate product
   review markup in the Rich Results test.
 - Desktop position slipping while mobile improves (July): run a Core Web
@@ -283,3 +307,6 @@ hub FAQ + `llms.txt`.
   should drop out of the same SERP.
 - GSC → Indexing → *Alternate page with proper canonical* / hreflang
   errors: should fall, not rise, after the nightly sitemap run.
+- GSC → Sitemaps: discovered URLs per host should step up by roughly the
+  product counts above (≈ +90 www/us, +120 es, +60 fr, +27 it), and
+  product pages should move from *Discovered – not indexed* to indexed.
