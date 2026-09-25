@@ -259,9 +259,14 @@ hub FAQ + `llms.txt`.
 
 ## Owner-side checks carried over (status unknown from the repo)
 
-- The Chinese test product on the EN store: delete it (robots only hides it).
-- `/account/login` was indexed at pos 2.7. robots now blocks crawling, which
-  also stops Google seeing a noindex, so use a GSC Removals request.
+- Chinese test product on the EN store: **deleted by the owner 25 Sep 2026**; `probe-cjk-products.yml` (read-only) lists any CJK-titled product on all five stores to verify.
+- `/account/login` (indexed at pos 2.7): GSC Removals, 25 Sep 2026. A GSC
+  removal is always **temporary (~6 months)**. Use "Remove all URLs with this
+  prefix" on `https://www.momuto.com/account/`, and repeat per store property
+  (es/fr/it/us are separate hosts). robots.txt blocks `/account/`, so Google
+  can't recrawl the page to see a noindex; the page is a platform template
+  (no head access). **Re-check the GSC Pages report ~March 2027** and renew
+  the removal if `/account/*` reappears.
 - Review snippets fell 762 → 390 impressions (July): validate product
   review markup in the Rich Results test.
 - Desktop position slipping while mobile improves (July): run a Core Web
