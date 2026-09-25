@@ -103,6 +103,9 @@ corrected to canonical facts: 25–30 days with >95% on time, the fast lane
 deposit credited from 5 jerseys. Titles now say 2026, and each post links
 to its store's canonical comparison **page**, since the post competes with
 that page for the same queries. Deploys on merge (`deploy-blog-post.yml`).
+Also: the IT post's FAQPage/Product JSON-LD was in English and is now Italian.
+The fast lane is named the same way everywhere: *vía rápida* / *voie rapide* /
+*corsia veloce* (llms.txt and posts). Use these terms for any new copy.
 
 ### 4. Madrid city page: the "marcaje" vocabulary (Aug addendum, never shipped)
 
