@@ -1,6 +1,6 @@
 name: Create Basketball Shorts product
 
-# Creates "MOMUTO Pro Basketball Shorts" ($20.90, US store) — the billable
+# Creates the basketball shorts product (US $20.90; EN/ES/FR €17.90) — the billable
 # order line for basketball shorts, sibling of MOMUTO Shorts Pro
 # (scripts/create-basketball-shorts-product.js). Click-free like the product
 # patches: a push to the watched paths on main creates for real — the script
@@ -24,7 +24,7 @@ on:
       lang:
         description: 'Store to create on'
         type: choice
-        options: ['all', 'us']
+        options: ['all', 'us', 'en', 'es', 'fr']
         default: 'all'
 
 jobs:
@@ -44,6 +44,9 @@ jobs:
       - name: Create product
         env:
           OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
         run: |
           FLAGS="--lang ${{ inputs.lang || 'all' }}"
           if [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.dry_run }}" = "false" ]; then FLAGS="$FLAGS --live"; fi
