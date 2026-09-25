@@ -1,0 +1,33 @@
+name: Probe CJK test products (read-only)
+
+# Verifies the Chinese test product is gone from every store (owner deleted it
+# on EN, 25 Sep 2026; cursor pagination since the 1st run saw only 10 per store). Lists products via the CMS API and requests the public
+# URL. Reads only. Runs on push of this file from any branch, or by hand.
+
+on:
+  push:
+    paths:
+      - '.github/workflows/probe-cjk-products.yml'
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: List products with CJK titles/handles
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+        run: node scripts/probe-cjk-products.js
+      - name: Public URLs
+        run: |
+          for u in "https://www.momuto.com/products/%E6%B5%8B%E8%AF%95%E5%95%86%E5%93%81" "https://www.momuto.com/comments/%E6%B5%8B%E8%AF%95%E5%95%86%E5%93%81"; do
+            curl -s -m 20 -o /dev/null -w "%{http_code} $u\n" "$u"
+          done

@@ -59,6 +59,10 @@ Read the doc that owns a topic BEFORE editing that surface.
    before pushing files it watches — there is no staging.
 4. **Never name real clubs/brands/players on product surfaces** ("Real
    Madrid rule"). Editorial (blog) is the only surface that may.
+   Scope (owner, 25 Sep 2026): the rule protects product pages, product and
+   design names, and anything that could read as a replica or licensed kit.
+   Citing a well-known kit as the style reference teams bring us (e.g.
+   France's Versailles-inspired kit) is fine in fact feeds like llms.txt.
 5. **Deposit copy**: "€15 deposit, credited in full to orders of 5+ jerseys
    — free for a team order." Never refund-forward in marketing/GEO surfaces
    (incl. `static/shared/llms.txt` — it drifted once).
