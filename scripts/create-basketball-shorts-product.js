@@ -96,6 +96,12 @@ async function fromTemplate(token, store) {
   return { ...store, image_src: img, collection_ids: cols };
 }
 
+// The order-line tile system (design-momuto scripts/order-line-tiles): the
+// basketball-shorts tile per language, served by the 3D tool's host. Tried
+// first; if the platform refuses a non-CDN src, the create falls back to the
+// store's own shorts photo (the template) and the tile is swapped in admin.
+const TILE = lang => `https://design.momuto.com/3d-configurator/asset/shop/custom-design-basketshorts-${lang === 'us' ? 'en' : lang}.png`;
+
 function parseArgs(argv) {
   const a = { live: false, lang: 'all' };
   for (let i = 2; i < argv.length; i++) {
@@ -193,7 +199,7 @@ async function run() {
       if (!args.live) {
         console.log(existing ? `[dry run] already exists: id ${existing.id} ("${existing.title}") — would verify, not create`
                              : '[dry run] would POST /products with:');
-        if (!existing) console.log(JSON.stringify(body, null, 2));
+        if (!existing) console.log(JSON.stringify({ ...body, images: [{ src: TILE(lang), alt: store.title }] }, null, 2), `\n(fallback image if the tile is refused: ${store.image_src})`);
         continue;
       }
       let id;
@@ -201,7 +207,16 @@ async function run() {
         id = existing.id;
         console.log(`already exists: id ${id} ("${existing.title}") — not creating a duplicate`);
       } else {
-        const created = await api('/products', 'POST', token, body);
+        let created;
+        const tileBody = { ...body, images: [{ src: TILE(lang), alt: store.title }] };
+        try {
+          created = await api('/products', 'POST', token, tileBody);
+          console.log(`created with the order-line tile ${TILE(lang)}`);
+        } catch (e) {
+          if (!/image|src|图片/i.test(e.message)) throw e;
+          console.log(`tile refused (${e.message}) — creating with the store's shorts photo; swap to ${TILE(lang)} in admin`);
+          created = await api('/products', 'POST', token, body);
+        }
         id = created && created.id;
         if (!id) throw new Error(`create returned no id: ${JSON.stringify(created).slice(0, 300)}`);
         console.log(`created: id ${id}`);
@@ -210,7 +225,7 @@ async function run() {
       const live = await api(`/products/${id}`, 'GET', token);
       const price = live && live.variants && live.variants[0] && live.variants[0].price;
       const ok = live && live.title === store.title && Number(price).toFixed(2) === store.price && live.status === 1;
-      console.log(`read-back: title="${live && live.title}" price=${price} status=${live && live.status} → ${ok ? 'VERIFIED' : 'MISMATCH'}`);
+      console.log(`read-back: title="${live && live.title}" price=${price} status=${live && live.status} image=${live && live.images && live.images[0] && live.images[0].src} → ${ok ? 'VERIFIED' : 'MISMATCH'}`);
       if (!ok) {
         console.error(existing
           ? `existing product ${id} does not match the expected shape — fix it in manage or delete it, then re-run`
