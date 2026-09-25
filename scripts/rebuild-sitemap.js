@@ -404,7 +404,10 @@ async function rebuildDomain(domain, fetched, alternatesMap) {
   // products, €0 per-order mockups and CJK test junk.
   const PREVIEW_TITLE = /^(Your custom design|Votre design personnalisé|Tu diseño personalizado|Il tuo design personalizzato)\b/;
   const CJK = /[\u3400-\u9fff\uf900-\ufaff]/;
-  const skipped = { preview: 0, unpublished: 0, zeroPrice: 0, cjk: 0 };
+  // Checkout add-ons and test products: live on the store, but thin pages
+  // nobody should land on from search (seen in the 25 Sep 2026 dry run).
+  const EXCLUDE_HANDLES = new Set(['test', 'long-sleeves', 'polo-collar', 'fast-lane']);
+  const skipped = { preview: 0, unpublished: 0, zeroPrice: 0, cjk: 0, excluded: 0 };
   let includedProducts = 0;
   for (const p of products) {
     const slug = getSlug(p);
@@ -416,6 +419,7 @@ async function rebuildDomain(domain, fetched, alternatesMap) {
     const price = p.price !== undefined ? Number(p.price) : (p.variants && p.variants[0] && p.variants[0].price !== undefined ? Number(p.variants[0].price) : NaN);
     if (price === 0) { skipped.zeroPrice++; continue; }
     if (CJK.test(`${title} ${slug}`)) { skipped.cjk++; continue; }
+    if (EXCLUDE_HANDLES.has(slug)) { skipped.excluded++; continue; }
     includedProducts++;
     entries.push({ loc: `${domain.baseUrl}/products/${slug}`, lastmod: getLastmod(p, today), changefreq: 'monthly', priority: '0.8' });
   }
