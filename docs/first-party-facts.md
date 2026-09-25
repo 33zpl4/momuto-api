@@ -60,9 +60,12 @@ more than", never as fake precision.
   ChatGPT quirk. Do you want us to remove it and put something truly
   yours?" Seen in real briefs, e.g. Muddy Monkeys and Deptford Legacies
   (Sep 2026). Customers are never named in the crown copy: it is published
-  as a general observation only. Also visible in those two boards, but NOT
-  yet owner-confirmed as a pattern: invented neck-tape labels, and fully
-  printed socks (ours are plain matching socks, not custom-printed).
+  as a general observation only.
+- **Labels and socks in AI concepts (owner, 25 Sep 2026)**: concepts
+  routinely include neck/hem labels (tags) and fully printed socks.
+  **Labels**: we generally recreate them in sublimation and tell the team.
+  **Socks**: teams send printed socks all the time, but ours are plain
+  matching team socks, not customizable. We inform the team up front.
 - **Halloween tournaments (US), real cases**: Frankenstein full kit (U9
   boys, California, from a concept board), Mo Money Mummy (AI concept),
   Candy Drip / Deptford Legacies (youth, AI concept board "Candy Rush

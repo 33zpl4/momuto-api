@@ -46,6 +46,14 @@
     },
     {
       "@type": "Question",
+      "name": "Il mio concept IA ha calzettoni stampati ed etichette di marca. Potete farli?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le etichette, sì. Le etichette al collo e sull'orlo sono un dettaglio amato dall'IA: di solito le ricreiamo in sublimazione, stampate nel tessuto invece che cucite, e vi diciamo esattamente come verranno. I calzettoni, no: i nostri sono calzettoni da squadra in tinta unita abbinati, nella maggior parte dei colori (3,90 € al paio, opzionali per giocatore), non personalizzati. Le squadre ci mandano spesso calzettoni completamente stampati, quindi lo segnaliamo prima di produrre qualsiasi cosa, mai dopo."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Devo ordinare per tutta la squadra o posso far fabbricare una sola maglia?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -227,6 +235,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <details><summary>Una maglia disegnata con l'IA si pu&ograve; davvero fabbricare?</summary><p>S&igrave; &mdash; ma non direttamente. I render IA sono immagini, non file di produzione: gradienti non calibrati, pattern che ignorano le cuciture, forme non vettorializzate. I nostri designer ricostruiscono il concept come file pronto per la produzione preservando la tua visione, e lo fabbrichiamo. Primo bozzetto in 24&ndash;48h.</p></details>
 <details><summary>Quali strumenti IA posso usare?</summary><p>Qualsiasi. ChatGPT, Midjourney, Gemini, DALL&middot;E, generatori specializzati &mdash; ma anche schizzi, file Photoshop e foto di vecchie maglie. Se puoi mostrarlo, possiamo ricostruirlo.</p></details>
 <details><summary>Perch&#233; la mia maglia creata con l'IA ha una corona?</summary><p>&#200; una delle abitudini dell'IA che vediamo di pi&#249;: ChatGPT aggiunge molto spesso una corona ai concept di maglia &mdash; sul petto, sulla manica, sul collo, sui pantaloncini &mdash; anche quando nessuno l'ha chiesta. Parte del lavoro dei nostri designer &#232; segnalare queste manie. Vi chiediamo se la corona significa qualcosa per la vostra squadra; se no, la sostituiamo con qualcosa di davvero vostro &mdash; lo stemma, un luogo della vostra citt&#224;, un soprannome, una battuta di spogliatoio. Un concept deve somigliare alla vostra squadra, non allo strumento che l'ha disegnato.</p></details>
+<details><summary>Il mio concept IA ha calzettoni stampati ed etichette di marca. Potete farli?</summary><p>Le etichette, s&#236;. Le etichette al collo e sull'orlo sono un dettaglio amato dall'IA: di solito le ricreiamo in sublimazione, stampate nel tessuto invece che cucite, e vi diciamo esattamente come verranno. I calzettoni, no: i nostri sono calzettoni da squadra in tinta unita abbinati, nella maggior parte dei colori (3,90 &#8364; al paio, opzionali per giocatore), non personalizzati. Le squadre ci mandano spesso calzettoni completamente stampati, quindi lo segnaliamo prima di produrre qualsiasi cosa, mai dopo.</p></details>
 <details><summary>Posso ordinare una sola maglia?</summary><p>S&igrave; &mdash; nessun ordine minimo. Maglie singole per regali, pezzi da portfolio e collezionisti. Il deposito design di 15&nbsp;&euro; &egrave; interamente accreditato sugli ordini di 5 o pi&ugrave; maglie.</p></details>
 <details><summary>Di chi &egrave; il design finale?</summary><p>Tuo. Lo costruiamo dal tuo concept, per la tua squadra, e non lo rivendiamo mai. I progetti completati possono comparire come casi prima/dopo nella nostra galleria &mdash; dicci se preferisci non comparire.</p></details>
 <details><summary>Quanto costa?</summary><p>15&nbsp;&euro; per mettere un designer sul tuo concept &mdash; interamente accreditati a partire da 5 maglie. Maglie da 20,90&nbsp;&euro;/unit&agrave; da 10 in su (38,90&nbsp;&euro; il singolo pezzo).</p></details>

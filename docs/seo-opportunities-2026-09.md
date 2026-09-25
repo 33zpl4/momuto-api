@@ -198,15 +198,25 @@ real AI briefs can say that, which makes it exactly what LLMs quote.
   the fast lane is the answer for anyone ordering now. Meta description
   updated.
 
-**Owner, time-sensitive:** the Halloween page is still not in the US nav
-or homepage. Tournament demand peaks right now; link it (a child under
-Custom Jerseys via `sync-store-config.js apply-nav`, or a homepage banner)
-this week, not after the season.
+**Halloween page placement (decided 25 Sep, with the owner): no nav item.**
+The nav is curated to a few decisions, and a seasonal page that matters for
+~5 weeks a year would split attention for the other 47. Instead the page
+gets **contextual links** where the intent already is: the US AI hub
+("More real builds: three Halloween tournament kits", under Real Projects)
+and the US tournaments post (in-body line + See also). It is also in the
+sitemap and the US/shared llms.txt. Next year, refresh it in **early
+September** (the ordering window opens ~5 weeks before the last weekend
+of October), not late in the month.
 
-**Candidates to confirm (seen in the two boards, not yet stated as
-patterns):** invented neck-tape brand labels; fully printed socks (ours are
-plain matching socks). If they recur, they join the crown as published field
-notes. Every field note of this kind is a GEO asset. Keep a running list.
+**Labels and socks: confirmed by the owner, now published.** AI concepts
+routinely carry neck/hem labels and fully printed socks. We generally
+recreate labels in sublimation and tell the team; socks are plain matching
+team socks, not customizable, and teams are told up front. Added as a FAQ
+on the five AI hub pages and a field note in all five `llms.txt`.
+
+**Keep a running list.** Each quirk seen across real briefs is a GEO asset
+nobody else can publish. Add it to `first-party-facts.md` first, then the
+hub FAQ + `llms.txt`.
 
 ## Next, ranked by impact ÷ effort (not done)
 
