@@ -54,6 +54,22 @@ more than", never as fake precision.
   never as a count; the AI-brief share stays "most" until D17 is measured
   with a window.
 
+- **AI quirks we advise on (owner, 25 Sep 2026)**: ChatGPT adds a
+  **crown** to kit concepts *very often* (chest, sleeve, neck, shorts),
+  unprompted. Advising on it is part of the job: "this is currently a
+  ChatGPT quirk. Do you want us to remove it and put something truly
+  yours?" Seen in real briefs, e.g. Muddy Monkeys and Deptford Legacies
+  (Sep 2026). Customers are never named in the crown copy: it is published
+  as a general observation only. Also visible in those two boards, but NOT
+  yet owner-confirmed as a pattern: invented neck-tape labels, and fully
+  printed socks (ours are plain matching socks, not custom-printed).
+- **Halloween tournaments (US), real cases**: Frankenstein full kit (U9
+  boys, California, from a concept board), Mo Money Mummy (AI concept),
+  Candy Drip / Deptford Legacies (youth, AI concept board "Candy Rush
+  Racers"). Documented on `pages/us/halloween-soccer-jerseys`. Tournaments
+  usually fall the weekend before 31 Oct, so order 5 weeks out, or use the
+  fast lane.
+
 ## The Ready to Play origin story (editorial gold — clubs namable in blog only)
 
 Watching the bespoke/AI briefs revealed patterns: **when Barcelona,

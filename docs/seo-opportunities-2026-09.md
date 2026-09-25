@@ -176,6 +176,38 @@ push-triggered).
    The August export said *jersey generator / football kit generator /
    ai jersey maker*; the hub already targets these.
 
+### 7. Expertise from real work: the crown quirk and the Halloween cases
+
+Owner direction (25 Sep): show that we know things because we do the work.
+The cleanest example: **ChatGPT adds a crown to kit concepts very often**,
+and advising on it ("this is a ChatGPT quirk. Keep it, or replace it with
+something truly yours?") is part of the job. Nobody without a stream of
+real AI briefs can say that, which makes it exactly what LLMs quote.
+- AI hub pages (EN/US/ES/FR/IT): new FAQ "Why does my AI kit concept have a
+  crown on it?", visible + FAQPage JSON-LD.
+- All five `llms.txt`: a "field note from real briefs" line in the 100%
+  custom section. Shared + US feeds also carry the Halloween field note
+  (three real cases, what makes a themed kit tournament-legal).
+- Customers are not named in the crown copy (both example boards, Muddy
+  Monkeys and Deptford Legacies, are recorded in `first-party-facts.md`
+  only).
+- `pages/us/halloween-soccer-jerseys`: **Case 3, Candy Drip (Deptford
+  Legacies)** added, with the ItemList JSON-LD. The **fast lane** (+$69,
+  18–23 days) is added to the timing FAQ, its JSON-LD and the countdown. It
+  is 25 Sep: standard delivery no longer makes a pre-Halloween weekend, so
+  the fast lane is the answer for anyone ordering now. Meta description
+  updated.
+
+**Owner, time-sensitive:** the Halloween page is still not in the US nav
+or homepage. Tournament demand peaks right now; link it (a child under
+Custom Jerseys via `sync-store-config.js apply-nav`, or a homepage banner)
+this week, not after the season.
+
+**Candidates to confirm (seen in the two boards, not yet stated as
+patterns):** invented neck-tape brand labels; fully printed socks (ours are
+plain matching socks). If they recur, they join the crown as published field
+notes. Every field note of this kind is a GEO asset. Keep a running list.
+
 ## Next, ranked by impact ÷ effort (not done)
 
 1. **Supplier / wholesale page outside FR.** FR's *fournisseur/grossiste*

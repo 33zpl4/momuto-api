@@ -23,27 +23,50 @@
     {
       "@type": "Question",
       "name": "Una maglia da calcio generata con l'IA si può davvero fabbricare?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sì — ma non direttamente. I render IA di ChatGPT, Midjourney o Gemini sono immagini, non file di produzione: i gradienti non sono calibrati, i pattern non seguono le cuciture, le forme non sono vettorializzate. I designer MOMUTO ricostruiscono il concept come file pronto per la sublimazione preservando la tua visione, e lo fabbrichiamo su tessuto performance poliestere-elastan. Primo bozzetto in 24-48h; deposito di 15 €, interamente accreditato sugli ordini di 5 o più maglie." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì — ma non direttamente. I render IA di ChatGPT, Midjourney o Gemini sono immagini, non file di produzione: i gradienti non sono calibrati, i pattern non seguono le cuciture, le forme non sono vettorializzate. I designer MOMUTO ricostruiscono il concept come file pronto per la sublimazione preservando la tua visione, e lo fabbrichiamo su tessuto performance poliestere-elastan. Primo bozzetto in 24-48h; deposito di 15 €, interamente accreditato sugli ordini di 5 o più maglie."
+      }
     },
     {
       "@type": "Question",
       "name": "Quali strumenti IA posso usare per creare il concept della mia maglia?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Qualsiasi. Le squadre ci inviano concept da ChatGPT, Midjourney, Gemini, DALL·E e generatori di maglie specializzati — ma anche schizzi a mano, mockup Photoshop e foto di vecchie maglie. Se puoi mostrarlo, i nostri designer possono ricostruirlo per il tessuto vero." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Qualsiasi. Le squadre ci inviano concept da ChatGPT, Midjourney, Gemini, DALL·E e generatori di maglie specializzati — ma anche schizzi a mano, mockup Photoshop e foto di vecchie maglie. Se puoi mostrarlo, i nostri designer possono ricostruirlo per il tessuto vero."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Perché la mia maglia creata con l'IA ha una corona?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "È una delle abitudini dell'IA che vediamo di più: ChatGPT aggiunge molto spesso una corona ai concept di maglia — sul petto, sulla manica, sul collo, sui pantaloncini — anche quando nessuno l'ha chiesta. Parte del lavoro dei nostri designer è segnalare queste manie. Vi chiediamo se la corona significa qualcosa per la vostra squadra; se no, la sostituiamo con qualcosa di davvero vostro — lo stemma, un luogo della vostra città, un soprannome, una battuta di spogliatoio. Un concept deve somigliare alla vostra squadra, non allo strumento che l'ha disegnato."
+      }
     },
     {
       "@type": "Question",
       "name": "Devo ordinare per tutta la squadra o posso far fabbricare una sola maglia?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Nessun ordine minimo. La maggior parte delle nostre ricreazioni è per club e squadre amatoriali, ma fabbrichiamo anche maglie singole — appassionati e designer che danno vita a un pezzo da portfolio, regali a sorpresa con nome e numero, maglie per addii al celibato. Il deposito design di 15 € è interamente accreditato sugli ordini di 5 o più maglie." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nessun ordine minimo. La maggior parte delle nostre ricreazioni è per club e squadre amatoriali, ma fabbrichiamo anche maglie singole — appassionati e designer che danno vita a un pezzo da portfolio, regali a sorpresa con nome e numero, maglie per addii al celibato. Il deposito design di 15 € è interamente accreditato sugli ordini di 5 o più maglie."
+      }
     },
     {
       "@type": "Question",
       "name": "Di chi è il design finale?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Tuo. La ricreazione è costruita dal tuo concept, per la tua squadra, e non rivendiamo mai il tuo design. I progetti completati possono comparire come casi prima/dopo nella nostra galleria — dicci se preferisci non comparire e non lo faremo." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tuo. La ricreazione è costruita dal tuo concept, per la tua squadra, e non rivendiamo mai il tuo design. I progetti completati possono comparire come casi prima/dopo nella nostra galleria — dicci se preferisci non comparire e non lo faremo."
+      }
     },
     {
       "@type": "Question",
       "name": "Quanto costa trasformare un concept IA in una maglia vera?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Il lavoro di design parte con un deposito di 15 € che mette un designer sul tuo concept — illustrazione, vettorializzazione e revisioni finché non è giusto. Il deposito è interamente accreditato su qualsiasi ordine di 5 o più maglie: per un vero ordine di squadra, il design di fatto non costa nulla. Le maglie vanno da 20,90 €/unità da 10 in su fino a 38,90 € per il singolo pezzo." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il lavoro di design parte con un deposito di 15 € che mette un designer sul tuo concept — illustrazione, vettorializzazione e revisioni finché non è giusto. Il deposito è interamente accreditato su qualsiasi ordine di 5 o più maglie: per un vero ordine di squadra, il design di fatto non costa nulla. Le maglie vanno da 20,90 €/unità da 10 in su fino a 38,90 € per il singolo pezzo."
+      }
     }
   ]
 }
@@ -203,6 +226,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2 style="text-align:center;margin-bottom:2rem">Le Domande Che Ci Fanno</h2>
 <details><summary>Una maglia disegnata con l'IA si pu&ograve; davvero fabbricare?</summary><p>S&igrave; &mdash; ma non direttamente. I render IA sono immagini, non file di produzione: gradienti non calibrati, pattern che ignorano le cuciture, forme non vettorializzate. I nostri designer ricostruiscono il concept come file pronto per la produzione preservando la tua visione, e lo fabbrichiamo. Primo bozzetto in 24&ndash;48h.</p></details>
 <details><summary>Quali strumenti IA posso usare?</summary><p>Qualsiasi. ChatGPT, Midjourney, Gemini, DALL&middot;E, generatori specializzati &mdash; ma anche schizzi, file Photoshop e foto di vecchie maglie. Se puoi mostrarlo, possiamo ricostruirlo.</p></details>
+<details><summary>Perch&#233; la mia maglia creata con l'IA ha una corona?</summary><p>&#200; una delle abitudini dell'IA che vediamo di pi&#249;: ChatGPT aggiunge molto spesso una corona ai concept di maglia &mdash; sul petto, sulla manica, sul collo, sui pantaloncini &mdash; anche quando nessuno l'ha chiesta. Parte del lavoro dei nostri designer &#232; segnalare queste manie. Vi chiediamo se la corona significa qualcosa per la vostra squadra; se no, la sostituiamo con qualcosa di davvero vostro &mdash; lo stemma, un luogo della vostra citt&#224;, un soprannome, una battuta di spogliatoio. Un concept deve somigliare alla vostra squadra, non allo strumento che l'ha disegnato.</p></details>
 <details><summary>Posso ordinare una sola maglia?</summary><p>S&igrave; &mdash; nessun ordine minimo. Maglie singole per regali, pezzi da portfolio e collezionisti. Il deposito design di 15&nbsp;&euro; &egrave; interamente accreditato sugli ordini di 5 o pi&ugrave; maglie.</p></details>
 <details><summary>Di chi &egrave; il design finale?</summary><p>Tuo. Lo costruiamo dal tuo concept, per la tua squadra, e non lo rivendiamo mai. I progetti completati possono comparire come casi prima/dopo nella nostra galleria &mdash; dicci se preferisci non comparire.</p></details>
 <details><summary>Quanto costa?</summary><p>15&nbsp;&euro; per mettere un designer sul tuo concept &mdash; interamente accreditati a partire da 5 maglie. Maglie da 20,90&nbsp;&euro;/unit&agrave; da 10 in su (38,90&nbsp;&euro; il singolo pezzo).</p></details>
