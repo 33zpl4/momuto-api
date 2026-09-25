@@ -78,9 +78,8 @@ more than", never as fake precision.
   **30%** want something classic and premium, but still rich in detail and
   meaning: the coordinates of their town, emblems or monuments of their
   region. The reference they cite is premium heritage kits such as France's
-  Versailles-inspired kit: meaningful but elegant. *(Name the Versailles
-  kit in editorial only; product/GEO surfaces say "heritage-led
-  national-team kits".)* Published as "roughly 7 in 10 / 3 in 10".
+  Versailles-inspired kit: meaningful but elegant. *(Owner, 25 Sep 2026: naming it
+  as the style reference teams cite is fine, including llms.txt.)* Published as "roughly 7 in 10 / 3 in 10".
 - **Still to measure (D17)**: the share of bespoke briefs that arrive as
   AI-generated images. Published as "most" until measured with a window.
 
