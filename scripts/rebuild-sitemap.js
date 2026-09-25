@@ -254,6 +254,32 @@ function buildAlternatesMap(handleSets, postSets = {}) {
   return map;
 }
 
+// Products do NOT page with page/pagesize: the endpoint ignores both and
+// always returns its first 10 (docs/oemsaas-api-notes.md: cursor-paginated,
+// limit + since_id). Until 25 Sep 2026 every sitemap listed only 10
+// products per store. Throttled GET must throw, never read as "empty".
+async function fetchProducts(domain) {
+  const items = [];
+  let since = '';
+  for (let i = 0; i < 100; i++) {
+    const url = `${domain.host}/products?limit=100${since ? `&since_id=${since}` : ''}`;
+    const response = await fetch(url, { headers: { token: domain.token } });
+    const result = await response.json();
+    if (!response.ok || result.code !== 0) {
+      throw new Error(`products (since_id=${since || '-'}) on ${domain.label}: ${JSON.stringify(result).slice(0, 200)}`);
+    }
+    const d = result.data;
+    const list = (d && (d.products || d.list)) || (Array.isArray(d) ? d : []);
+    if (!Array.isArray(list) || list.length === 0) break;
+    items.push(...list);
+    const last = list[list.length - 1];
+    if (!last || !last.id || String(last.id) === since) break;
+    since = String(last.id);
+    await new Promise(r => setTimeout(r, 300));
+  }
+  return items;
+}
+
 async function fetchAll(domain, endpoint) {
   let page = 1;
   const pagesize = 50;
@@ -373,16 +399,27 @@ async function rebuildDomain(domain, fetched, alternatesMap) {
   // shows the customer's actual design) must NEVER reach the sitemap: they are
   // unpolished customer designs and thin near-duplicate pages. Tagged via
   // inner_title at creation; title-prefix match is the fallback net.
-  let skippedPreviews = 0;
+  // Since 25 Sep 2026 the full catalogue is fetched (see fetchProducts), so
+  // it also filters what only ever existed past the first 10: unpublished
+  // products, €0 per-order mockups and CJK test junk.
   const PREVIEW_TITLE = /^(Your custom design|Votre design personnalisé|Tu diseño personalizado|Il tuo design personalizzato)\b/;
+  const CJK = /[\u3400-\u9fff\uf900-\ufaff]/;
+  const skipped = { preview: 0, unpublished: 0, zeroPrice: 0, cjk: 0 };
+  let includedProducts = 0;
   for (const p of products) {
     const slug = getSlug(p);
     if (!slug) continue;
     const inner = String(p.inner_title || '');
-    if (inner.includes('3d-preview') || PREVIEW_TITLE.test(String(p.title || ''))) { skippedPreviews++; continue; }
+    const title = String(p.title || '');
+    if (inner.includes('3d-preview') || PREVIEW_TITLE.test(title)) { skipped.preview++; continue; }
+    if (p.status !== undefined && String(p.status) !== '1') { skipped.unpublished++; continue; }
+    const price = p.price !== undefined ? Number(p.price) : (p.variants && p.variants[0] && p.variants[0].price !== undefined ? Number(p.variants[0].price) : NaN);
+    if (price === 0) { skipped.zeroPrice++; continue; }
+    if (CJK.test(`${title} ${slug}`)) { skipped.cjk++; continue; }
+    includedProducts++;
     entries.push({ loc: `${domain.baseUrl}/products/${slug}`, lastmod: getLastmod(p, today), changefreq: 'monthly', priority: '0.8' });
   }
-  if (skippedPreviews) console.log(`  (excluded ${skippedPreviews} 3d-preview order products from sitemap)`);
+  console.log(`  products: ${products.length} listed, ${includedProducts} in sitemap; skipped ${JSON.stringify(skipped)}`);
 
   // Blog index + posts → /blogs/[handle]
   entries.push({ loc: `${domain.baseUrl}/blogs`, lastmod: today, changefreq: 'weekly', priority: '0.7' });
@@ -403,8 +440,16 @@ async function rebuildDomain(domain, fetched, alternatesMap) {
   console.log(`  Built sitemap with ${entries.length} URLs (${clustered} with hreflang)`);
 
   if (DRY_RUN) {
-    console.log(`\n--- DRY RUN: sitemap.xml for ${domain.label} ---`);
-    console.log(xml);
+    // Compact by default: the full XML of five stores is ~500 KB of log and
+    // buries the summary lines. DRY_RUN_FULL=1 prints the XML as before.
+    if (process.env.DRY_RUN_FULL === '1') {
+      console.log(`\n--- DRY RUN: sitemap.xml for ${domain.label} ---`);
+      console.log(xml);
+    } else {
+      const productLocs = entries.filter(e => e.loc.includes('/products/')).map(e => e.loc.replace(domain.baseUrl, ''));
+      console.log(`  DRY RUN: ${productLocs.length} product URLs would be listed:`);
+      for (const l of productLocs) console.log(`    ${l}`);
+    }
     return;
   }
 
@@ -431,7 +476,7 @@ async function main() {
     const [pages, posts, products, collections] = await Promise.all([
       fetchAll(domain, 'pages'),
       fetchAll(domain, 'posts'),
-      fetchAll(domain, 'products'),
+      fetchProducts(domain),
       fetchAll(domain, 'collections'),
     ]);
     fetched[locale] = { pages, posts, products, collections };

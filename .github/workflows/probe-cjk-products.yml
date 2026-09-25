@@ -1,7 +1,7 @@
 name: Probe CJK test products (read-only)
 
 # Verifies the Chinese test product is gone from every store (owner deleted it
-# on EN, 25 Sep 2026). Lists products via the CMS API and requests the public
+# on EN, 25 Sep 2026; cursor pagination since the 1st run saw only 10 per store). Lists products via the CMS API and requests the public
 # URL. Reads only. Runs on push of this file from any branch, or by hand.
 
 on:

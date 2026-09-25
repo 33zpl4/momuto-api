@@ -8,15 +8,20 @@ const CJK = /[㐀-鿿豈-﫿]/;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function listAll(token) {
+  // cursor pagination (limit + since_id); page/pagesize are ignored by /products
   const out = [];
-  for (let page = 1; page < 200; page++) {
-    const res = await fetch(`${HOST}/products?page=${page}&pagesize=50`, { headers: { token } });
+  let since = '';
+  for (let i = 0; i < 100; i++) {
+    const res = await fetch(`${HOST}/products?limit=100${since ? `&since_id=${since}` : ''}`, { headers: { token } });
     const json = await res.json();
-    if (!res.ok || json.code !== 0) throw new Error(`page ${page}: ${JSON.stringify(json).slice(0, 200)}`);
-    const list = (json.data && (json.data.list || json.data)) || [];
-    if (!Array.isArray(list) || !list.length) break;
+    if (!res.ok || json.code !== 0) throw new Error(`since_id=${since || '-'}: ${JSON.stringify(json).slice(0, 200)}`);
+    const d = json.data;
+    const list = (d && (d.products || d.list)) || (Array.isArray(d) ? d : []);
+    if (!list.length) break;
     out.push(...list);
-    if (list.length < 50) break;
+    const last = String(list[list.length - 1].id);
+    if (last === since) break;
+    since = last;
     await sleep(400);
   }
   return out;
