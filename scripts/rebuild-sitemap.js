@@ -93,6 +93,7 @@ const HREFLANG = { en: 'en', es: 'es-ES', fr: 'fr-FR', it: 'it-IT', us: 'en-US' 
 // the per-locale deploy scripts (deploy-about-pages, deploy-request-design-page,
 // deploy-kit-gallery-pages, deploy-comparison-pages, ready-to-play/config.json).
 const STATIC_CLUSTERS = [
+  { en: 'custom-football-kit-materials-printing', es: 'materiales-impresion',          fr: 'impression-et-materiaux',                    it: 'materiali-stampa-divise-calcio-personalizzate' },
   { en: 'custom-kit-gallery',                  es: 'galeria-equipaciones-personalizadas', fr: 'galerie-maillots-foot-sur-mesure',           it: 'galleria-maglie-personalizzate' },
   { en: 'teams-clubs-momuto',                  es: 'equipos-momuto',                      fr: 'equipes-clubs-momuto',                       it: 'squadre-club-momuto' },
   { en: 'about-us',                            es: 'sobre-nosotros',                      fr: 'a-propos-de-nous',                           it: 'chi-siamo' },
