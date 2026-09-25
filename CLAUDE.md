@@ -31,6 +31,15 @@ Read the doc that owns a topic BEFORE editing that surface.
   `cms/pages/<locale>/<handle>.json`
   (deploy via Deploy CMS Page `changed_since`). Numbers there must match rule 6
   and the US ladder in `docs/us-launch-status.md`; never hand-edit the built JSON.
+- `docs/seo-opportunities-2026-09.md` — SEO audit of every plan vs what
+  shipped (25 Sep 2026): what was fixed, the ranked backlog of what's next,
+  owner-side checks. Start here before picking SEO work.
+- **hreflang lives only in the sitemap** (`scripts/rebuild-sitemap.js`,
+  nightly). Any new page or post that exists in ≥2 locales under DIFFERENT
+  handles must get a row in `STATIC_CLUSTERS` / `BLOG_CLUSTERS` in the same
+  commit, or Google gets no locale signal for it. Same-handle en↔us pairs
+  are automatic. One URL may appear in one cluster only (the script now logs
+  and skips a duplicate).
 - `docs/warehouse-sheet.md` — factory 生产单 generator (`build-warehouse-sheet.js`,
   runs daily inside `check-platform-orders.yml`); sources + known roster gap.
 - `docs/design-page-template.md`, `docs/rtp-collection.md` (historical),

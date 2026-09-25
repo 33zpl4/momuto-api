@@ -7,8 +7,8 @@
       "name": "Madrid",
       "en_ciudad": "en Madrid",
       "region": "Comunidad de Madrid",
-      "meta_title": "Camisetas de Fútbol Personalizadas Madrid | Sin Mínimo | MOMUTO",
-      "meta_descript": "Diseño de camisetas de fútbol personalizadas para equipos de Madrid: ligas municipales, empresa y peñas. Diséñala en 3D, sin pedido mínimo.",
+      "meta_title": "Camisetas de Fútbol Personalizadas Madrid con Marcaje | MOMUTO",
+      "meta_descript": "Camisetas de fútbol personalizadas para equipos de Madrid, con marcaje incluido: nombre, dorsal y escudo sin coste extra. Diséñala en 3D, sin pedido mínimo.",
       "keywords": [
         "camisetas futbol personalizadas madrid",
         "diseño camisetas madrid",
@@ -16,7 +16,10 @@
         "camisetas equipo futbol madrid",
         "equipaciones personalizadas madrid",
         "camisetas futbol 7 madrid",
-        "diseño de camisetas de fútbol madrid"
+        "diseño de camisetas de fútbol madrid",
+        "marcaje equipaciones futbol madrid",
+        "marcaje camisetas futbol madrid",
+        "tienda camisetas futbol personalizadas madrid"
       ],
       "intro": [
         "Madrid vive el fútbol amateur como pocas ciudades: cientos de equipos compiten cada fin de semana en las <strong>ligas municipales de los polideportivos</strong>, en las categorías de la <strong>Real Federación de Fútbol de Madrid (RFFM)</strong> y en las ligas de empresa que llenan los campos entre semana. Del fútbol 7 nocturno en la Casa de Campo a los equipos de barrio de Vallecas, Carabanchel o Tetuán, cada equipo necesita una camiseta propia — y esperarla dos meses o pagar mínimos absurdos no tiene sentido.",
@@ -27,6 +30,11 @@
           "icon": "fa-city",
           "title": "Ligas municipales y RFFM",
           "text": "Equipaciones para equipos federados y de ligas de los polideportivos madrileños, con dorsal, nombre y escudo incluidos."
+        },
+        {
+          "icon": "fa-hashtag",
+          "title": "Marcaje incluido",
+          "text": "Nombre, dorsal, escudo y patrocinadores van sublimados en la tela, no pegados encima: sin coste de marcaje por jugador, sin vinilos que se despeguen y sin llevar las camisetas a una tienda para marcarlas."
         },
         {
           "icon": "fa-briefcase",
@@ -53,6 +61,14 @@
         {
           "q": "¿Servís a ligas municipales y equipos de empresa de Madrid?",
           "a": "Sí, es nuestro caso más habitual: equipos de ligas municipales, ligas de empresa y peñas. No hay pedido mínimo, así que da igual si sois 8 de fútbol sala o un club con tres categorías."
+        },
+        {
+          "q": "¿Hacéis el marcaje de las equipaciones (nombres y dorsales)?",
+          "a": "Sí, y está incluido en el precio. Cada jugador lleva su nombre y dorsal, más el escudo y los patrocinadores, impresos por sublimación en la propia tela — no es un vinilo añadido después, así que no se cuartea ni se despega. Lo introducís en la lista del equipo al pedir y un diseñador revisa la colocación en todas las tallas."
+        },
+        {
+          "q": "¿Tenéis tienda física en Madrid?",
+          "a": "No: MOMUTO trabaja online, sin tienda física. Diseñáis en el configurador 3D gratuito (o nos enviáis vuestra idea), aprobáis la maqueta y recibís las equipaciones ya marcadas en casa o en el club, en cualquier punto de la Comunidad de Madrid. Si tenéis prisa, la vía rápida (+59 € por pedido) deja la entrega en normalmente 18-23 días."
         }
       ],
       "siblings": [

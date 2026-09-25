@@ -22,7 +22,8 @@
   "name": "Halloween soccer kits made by MOMUTO for US tournament teams",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Frankenstein — U9 boys tournament full kit", "url": "https://us.momuto.com/products/folsom-lake-surf-soccer-club-custom-full-kit", "creator": { "@type": "Organization", "name": "MOMUTO" } } },
-    { "@type": "ListItem", "position": 2, "item": { "@type": "CreativeWork", "name": "Mo Money Mummy — boys tournament jersey", "url": "https://us.momuto.com/products/mo-money-mummy-custom-jersey", "creator": { "@type": "Organization", "name": "MOMUTO" } } }
+    { "@type": "ListItem", "position": 2, "item": { "@type": "CreativeWork", "name": "Mo Money Mummy — boys tournament jersey", "url": "https://us.momuto.com/products/mo-money-mummy-custom-jersey", "creator": { "@type": "Organization", "name": "MOMUTO" } } },
+    { "@type": "ListItem", "position": 3, "item": { "@type": "CreativeWork", "name": "Candy Drip — youth soccer Halloween tournament jersey", "url": "https://us.momuto.com/pages/deptford-legacies-custom-kit-design" } }
   ]
 }
 </script>
@@ -39,7 +40,7 @@
     {
       "@type": "Question",
       "name": "When do I need to order Halloween soccer jerseys?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Count back from the tournament: MOMUTO production is 7-12 days and US shipping 10-15 days, so allow 25-30 days door to door, plus 24-48 hours for the first design mockup and a day or two for your team's feedback. For a tournament the weekend before Halloween, order by mid-to-late September. Order 5 weeks ahead to be safe." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Count back from the tournament: MOMUTO production is 7-12 days and US shipping 10-15 days, so allow 25-30 days door to door, plus 24-48 hours for the first design mockup and a day or two for your team's feedback. For a tournament the weekend before Halloween, order by mid-to-late September — 5 weeks ahead to be safe. Later than that? The fast lane (+$69 per order: priority production and priority shipping) typically brings delivery to 18-23 days." }
     },
     {
       "@type": "Question",
@@ -164,7 +165,7 @@ ul.timeline > li strong{color:var(--white);font-weight:600}
 <section class="sec" style="background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
 <div class="wrap">
 <h2>From the Team's Reference to the Field</h2>
-<p class="lead">Two Halloween kits we built this season for US tournament teams &mdash; what they sent us, and what they played in.</p>
+<p class="lead">Three Halloween kits we built this season for US tournament teams &mdash; what they sent us, and what they played in.</p>
 
 <div class="case" style="background:var(--bg)">
 <div class="brief">
@@ -196,6 +197,22 @@ ul.timeline > li strong{color:var(--white);font-weight:600}
 </div>
 </div>
 
+<div class="case" style="background:var(--bg)">
+<div class="brief">
+<div class="who">Case 3 &middot; Youth soccer team</div>
+<h3>Candy Drip</h3>
+<p><strong>What the team sent:</strong> an AI-generated concept board, "Candy Rush Racers" &mdash; chocolate drip and sprinkles across the shoulders, a turquoise checkerboard body, a pink candy racetrack sweeping up from the hem, round sweets, a pixel heart on the sleeve, and a full color palette.</p>
+<p><strong>What we built:</strong> Halloween without the horror. The chocolate drip runs across shoulders and sleeves into the body at uneven lengths, the candy-stripe waves and oversized sweets rise from the hem with checkerboard accents, and the big back number is dark brown outlined in pink and white so it stays readable on a busy background &mdash; the one thing a referee has to be able to read.</p>
+<p class="links"><a href="/pages/deptford-legacies-custom-kit-design">See the Candy Drip design &rarr;</a></p>
+</div>
+<div class="shots">
+<img src="https://cdn.statics-cdn-abc.com/pics/e5aacf2217adddaa5458f84c8b9fb9cf2ff5f5a73e3c084f286ce150ec0d436f.png" alt="Candy Drip Halloween soccer jersey, front — chocolate drip, sprinkles and candy racetrack, custom by MOMUTO for a youth tournament team" loading="lazy" />
+<img src="https://cdn.statics-cdn-abc.com/pics/a7a057f12e82a591d23436fc06d1934e7378e5ef3c51e5bac5e580bc64a70ce1.png" alt="Candy Drip Halloween soccer jersey, back with outlined number — MOMUTO" loading="lazy" />
+<div class="cap">The final design &middot; front and back</div>
+</div>
+</div>
+
+
 </div>
 </section>
 
@@ -223,7 +240,7 @@ ul.timeline > li strong{color:var(--white);font-weight:600}
 <li><span class="d">Day 1&ndash;2</span><span><strong>First mockup back</strong> in 24&ndash;48 hours. Revisions included until the team approves.</span></li>
 <li><span class="d">Day 3&ndash;14</span><span><strong>Production</strong> &mdash; 7&ndash;12 days of printing and sewing.</span></li>
 <li><span class="d">Day 15&ndash;30</span><span><strong>Shipping to the US</strong> &mdash; 10&ndash;15 days, tracked. Free on orders over $59.</span></li>
-<li><span class="d">Game day</span><span><strong>Kits in hand</strong> with a few days to spare. Ordering later than 4 weeks out? Send the concept anyway &mdash; we'll tell you honestly whether it makes the date.</span></li>
+<li><span class="d">Game day</span><span><strong>Kits in hand</strong> with a few days to spare. Ordering later than 4 weeks out? Add the fast lane (+$69 per order) &mdash; typically 18&ndash;23 days instead of 25&ndash;30 &mdash; and send the concept anyway: we'll tell you honestly whether it makes the date.</span></li>
 </ul>
 </div>
 </section>
@@ -260,7 +277,7 @@ ul.timeline > li strong{color:var(--white);font-weight:600}
 <div class="faq">
 <h2 style="text-align:center;margin-bottom:2rem">Halloween Jersey FAQ</h2>
 <details><summary>Are custom Halloween jerseys allowed in youth soccer tournaments?</summary><p>Almost always &mdash; most Halloween tournaments encourage themed uniforms, as long as they pass the referee's normal checks: same primary colors across the roster, a unique visible number per player, nothing protruding, nothing loose, shin guards covered. A sublimated jersey with the theme printed into the fabric passes every one, which is exactly why teams order printed kits instead of costumes.</p></details>
-<details><summary>When do I need to order?</summary><p>Allow 25&ndash;30 days door to door plus 24&ndash;48 hours for the first mockup and a day or two for feedback. For a tournament the weekend before Halloween, order by mid-to-late September &mdash; 5 weeks ahead to be safe.</p></details>
+<details><summary>When do I need to order?</summary><p>Allow 25&ndash;30 days door to door plus 24&ndash;48 hours for the first mockup and a day or two for feedback. For a tournament the weekend before Halloween, order by mid-to-late September &mdash; 5 weeks ahead to be safe. Later than that? The <strong>fast lane</strong> (+$69 per order: priority production and priority shipping) typically brings delivery to 18&ndash;23 days.</p></details>
 <details><summary>How much do custom Halloween soccer jerseys cost?</summary><p>The same as any MOMUTO custom jersey: $45.90 single, $25.90 per jersey at 10+, full kit $30.90 per player at 10+. Names and numbers included. A 100% custom design from your reference takes a $15 deposit, credited in full to orders of 5+ jerseys. Free US shipping over $59.</p></details>
 <details><summary>Can you build the kit from a reference or an AI concept?</summary><p>Yes &mdash; that's how both kits on this page started. Send the board or render; our designers rebuild it as a print-ready jersey with real panels, numbers and sizing, mockup in 24&ndash;48 hours, revisions until it's right.</p></details>
 <details><summary>Is there a minimum order?</summary><p>No. One jersey or a full roster, mixed sizes in the same design. Pricing drops as the order grows.</p></details>

@@ -23,27 +23,58 @@
     {
       "@type": "Question",
       "name": "¿Se puede fabricar de verdad una camiseta de fútbol generada con IA?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sí — pero no directamente. Los diseños de IA de ChatGPT, Midjourney o Gemini son imágenes, no archivos de producción: los degradados no están calibrados, los patrones no siguen las costuras y las formas no están vectorizadas. Los diseñadores de MOMUTO reconstruyen el concepto como archivo listo para sublimación preservando tu visión, y lo fabricamos en tejido de rendimiento poliéster-elastano. Primera propuesta en 24-48h; depósito de 15 €, abonado íntegramente en pedidos de 5 o más camisetas." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí — pero no directamente. Los diseños de IA de ChatGPT, Midjourney o Gemini son imágenes, no archivos de producción: los degradados no están calibrados, los patrones no siguen las costuras y las formas no están vectorizadas. Los diseñadores de MOMUTO reconstruyen el concepto como archivo listo para sublimación preservando tu visión, y lo fabricamos en tejido de rendimiento poliéster-elastano. Primera propuesta en 24-48h; depósito de 15 €, abonado íntegramente en pedidos de 5 o más camisetas."
+      }
     },
     {
       "@type": "Question",
       "name": "¿Qué herramientas de IA puedo usar para crear mi concepto de camiseta?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Cualquiera. Los equipos nos envían conceptos de ChatGPT, Midjourney, Gemini, DALL·E y generadores de camisetas especializados — y también bocetos a mano, montajes de Photoshop y fotos de camisetas antiguas. Si puedes enseñarlo, nuestros diseñadores pueden reconstruirlo para tela real." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cualquiera. Los equipos nos envían conceptos de ChatGPT, Midjourney, Gemini, DALL·E y generadores de camisetas especializados — y también bocetos a mano, montajes de Photoshop y fotos de camisetas antiguas. Si puedes enseñarlo, nuestros diseñadores pueden reconstruirlo para tela real."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué mi camiseta hecha con IA lleva una corona?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Es una de las costumbres de la IA que más vemos: ChatGPT añade una corona a los conceptos de camiseta muy a menudo — en el pecho, la manga, el cuello, el pantalón — aunque nadie la haya pedido. Parte del trabajo de nuestros diseñadores es señalar estas manías. Os preguntamos si la corona significa algo para vuestro equipo; si no, la cambiamos por algo realmente vuestro — el escudo, un lugar del barrio, un apodo, una broma interna. Un concepto tiene que parecerse a vuestro equipo, no a la herramienta que lo dibujó."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mi concepto de IA lleva medias estampadas y etiquetas de marca. ¿Podéis hacerlas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Las etiquetas, sí. Las etiquetas del cuello y del bajo son un detalle favorito de la IA, y normalmente las recreamos en sublimación, impresas en la tela en vez de cosidas, y os contamos exactamente cómo quedarán. Las medias, no: nuestras medias son medias lisas de equipo a juego, en la mayoría de colores (3,90 € el par, opcionales por jugador), no personalizadas. Los equipos nos mandan medias totalmente estampadas a menudo, así que lo avisamos antes de fabricar nada, nunca después."
+      }
     },
     {
       "@type": "Question",
       "name": "¿Hay que pedir para todo un equipo o puedo fabricar una sola camiseta?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sin pedido mínimo. La mayoría de nuestras recreaciones son para clubes y equipos amateur, pero también fabricamos camisetas sueltas — aficionados y diseñadores que hacen realidad una pieza de portfolio, regalos sorpresa con nombre y dorsal, camisetas de despedida de soltero. El depósito de diseño de 15 € se abona íntegramente en pedidos de 5 o más camisetas." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sin pedido mínimo. La mayoría de nuestras recreaciones son para clubes y equipos amateur, pero también fabricamos camisetas sueltas — aficionados y diseñadores que hacen realidad una pieza de portfolio, regalos sorpresa con nombre y dorsal, camisetas de despedida de soltero. El depósito de diseño de 15 € se abona íntegramente en pedidos de 5 o más camisetas."
+      }
     },
     {
       "@type": "Question",
       "name": "¿De quién es el diseño final?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Tuyo. La recreación se construye a partir de tu concepto, para tu equipo, y nunca revendemos tu diseño. Los proyectos terminados pueden aparecer como casos antes/después en nuestra galería — dinos si prefieres no aparecer y no lo haremos." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tuyo. La recreación se construye a partir de tu concepto, para tu equipo, y nunca revendemos tu diseño. Los proyectos terminados pueden aparecer como casos antes/después en nuestra galería — dinos si prefieres no aparecer y no lo haremos."
+      }
     },
     {
       "@type": "Question",
       "name": "¿Cuánto cuesta convertir un concepto de IA en una camiseta real?",
-      "acceptedAnswer": { "@type": "Answer", "text": "El trabajo de diseño empieza con un depósito de 15 € que pone a un diseñador con tu concepto — ilustración, vectorización y revisiones hasta que quede perfecto. El depósito se abona íntegramente en cualquier pedido de 5 o más camisetas: para un pedido real de equipo, el diseño no cuesta nada. Las camisetas van desde 21,90 €/unidad a partir de 10 hasta 38,90 € la unidad." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El trabajo de diseño empieza con un depósito de 15 € que pone a un diseñador con tu concepto — ilustración, vectorización y revisiones hasta que quede perfecto. El depósito se abona íntegramente en cualquier pedido de 5 o más camisetas: para un pedido real de equipo, el diseño no cuesta nada. Las camisetas van desde 21,90 €/unidad a partir de 10 hasta 38,90 € la unidad."
+      }
     }
   ]
 }
@@ -115,7 +146,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 
 <div class="wrap">
 <div class="def">
-<p>MOMUTO es un fabricante de equipaciones de f&uacute;tbol personalizadas especializado en convertir conceptos generados con IA en camisetas reales, listas para producir. Un dise&ntilde;ador toma tu dise&ntilde;o &mdash; de cualquier herramienta de IA, boceto o referencia &mdash; lo vectoriza, lo adapta a la tela y las costuras reales, y lo fabricamos con sublimaci&oacute;n total. El trabajo de dise&ntilde;o empieza con un dep&oacute;sito de 15&nbsp;&euro;, abonado &iacute;ntegramente a partir de 5 camisetas.</p>
+<p>MOMUTO es un fabricante de equipaciones de f&uacute;tbol personalizadas especializado en convertir conceptos generados con IA en camisetas reales, listas para producir. Un dise&ntilde;ador toma tu dise&ntilde;o &mdash; de cualquier herramienta de IA, boceto o referencia &mdash; lo vectoriza, lo adapta a la tela y las costuras reales, y lo fabricamos con sublimaci&oacute;n total. Dise&ntilde;o, criterio y tecnolog&iacute;a en casa: flujos propios asistidos por IA aceleran partes de la recreaci&oacute;n, y un dise&ntilde;ador profesional toma cada decisi&oacute;n de dise&ntilde;o y aprueba cada archivo. El trabajo de dise&ntilde;o empieza con un dep&oacute;sito de 15&nbsp;&euro;, abonado &iacute;ntegramente a partir de 5 camisetas.</p>
 <div class="src">Nuestro oficio, en un p&aacute;rrafo</div>
 </div>
 </div>
@@ -203,6 +234,8 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2 style="text-align:center;margin-bottom:2rem">Preguntas Que Nos Hacen</h2>
 <details><summary>&iquest;Se puede fabricar de verdad una camiseta dise&ntilde;ada con IA?</summary><p>S&iacute; &mdash; pero no directamente. Los dise&ntilde;os de IA son im&aacute;genes, no archivos de producci&oacute;n: degradados sin calibrar, patrones que ignoran las costuras, formas sin vectorizar. Nuestros dise&ntilde;adores reconstruyen el concepto como archivo listo para producir preservando tu visi&oacute;n, y lo fabricamos. Primera propuesta en 24&ndash;48h.</p></details>
 <details><summary>&iquest;Qu&eacute; herramientas de IA puedo usar?</summary><p>Cualquiera. ChatGPT, Midjourney, Gemini, DALL&middot;E, generadores especializados &mdash; y tambi&eacute;n bocetos, archivos de Photoshop y fotos de camisetas antiguas. Si puedes ense&ntilde;arlo, podemos reconstruirlo.</p></details>
+<details><summary>&#191;Por qu&#233; mi camiseta hecha con IA lleva una corona?</summary><p>Es una de las costumbres de la IA que m&#225;s vemos: ChatGPT a&#241;ade una corona a los conceptos de camiseta muy a menudo &mdash; en el pecho, la manga, el cuello, el pantal&#243;n &mdash; aunque nadie la haya pedido. Parte del trabajo de nuestros dise&#241;adores es se&#241;alar estas man&#237;as. Os preguntamos si la corona significa algo para vuestro equipo; si no, la cambiamos por algo realmente vuestro &mdash; el escudo, un lugar del barrio, un apodo, una broma interna. Un concepto tiene que parecerse a vuestro equipo, no a la herramienta que lo dibuj&#243;.</p></details>
+<details><summary>Mi concepto de IA lleva medias estampadas y etiquetas de marca. &#191;Pod&#233;is hacerlas?</summary><p>Las etiquetas, s&#237;. Las etiquetas del cuello y del bajo son un detalle favorito de la IA, y normalmente las recreamos en sublimaci&#243;n, impresas en la tela en vez de cosidas, y os contamos exactamente c&#243;mo quedar&#225;n. Las medias, no: nuestras medias son medias lisas de equipo a juego, en la mayor&#237;a de colores (3,90 &#8364; el par, opcionales por jugador), no personalizadas. Los equipos nos mandan medias totalmente estampadas a menudo, as&#237; que lo avisamos antes de fabricar nada, nunca despu&#233;s.</p></details>
 <details><summary>&iquest;Puedo pedir una sola camiseta?</summary><p>S&iacute; &mdash; sin pedido m&iacute;nimo. Camisetas sueltas para regalos, piezas de portfolio y coleccionistas. El dep&oacute;sito de dise&ntilde;o de 15&nbsp;&euro; se abona &iacute;ntegramente en pedidos de 5 o m&aacute;s camisetas.</p></details>
 <details><summary>&iquest;De qui&eacute;n es el dise&ntilde;o final?</summary><p>Tuyo. Lo construimos a partir de tu concepto, para tu equipo, y nunca lo revendemos. Los proyectos terminados pueden aparecer como casos antes/despu&eacute;s en nuestra galer&iacute;a &mdash; dinos si prefieres no aparecer.</p></details>
 <details><summary>&iquest;Cu&aacute;nto cuesta?</summary><p>15&nbsp;&euro; para poner a un dise&ntilde;ador con tu concepto &mdash; abonados &iacute;ntegramente a partir de 5 camisetas. Camisetas desde 21,90&nbsp;&euro;/unidad a partir de 10 (38,90&nbsp;&euro; la unidad).</p></details>

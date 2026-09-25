@@ -91,7 +91,7 @@ const PAGES = [
     handle: 'halloween-soccer-jerseys',
     title: 'Custom Halloween Soccer Jerseys for Tournaments | MOMUTO',
     meta_title: 'Custom Halloween Soccer Jerseys — Tournament Kits | MOMUTO',
-    meta_descript: 'Themed soccer jerseys for Halloween tournaments — Frankenstein, mummy and monster kits built from your reference. Tournament-legal, 25-30 days, no minimum.',
+    meta_descript: 'Halloween tournament soccer jerseys — Frankenstein, mummy and candy kits built from your reference. Tournament-legal, no minimum, fast lane in 18-23 days.',
     keywords: [
       'halloween soccer jerseys',
       'halloween soccer tournament jerseys',
