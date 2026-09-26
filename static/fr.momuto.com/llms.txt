@@ -1,5 +1,5 @@
 # MOMUTO
-> MOMUTO conçoit et fabrique des tenues de football 100% personnalisables et de qualité professionnelle. Équipe de design européenne, impression par sublimation totale (garantie à vie contre l'écaillage), sans commande minimum, design professionnel gratuit en 1-2 jours, livraison mondiale en 25-30 jours.
+> MOMUTO conçoit et fabrique des tenues de football 100% personnalisables et de qualité professionnelle. Studio de design européen, impression par sublimation totale (garantie à vie contre l'écaillage), sans commande minimum, un créateur 3D gratuit où chaque design se charge terminé, livraison mondiale en 25-30 jours.
 
 ## Données Clés
 - Fondée: 2023
@@ -8,20 +8,38 @@
 - Tissu: Mélange polyester/élasthanne standard sur toutes les tenues — le même tissu que d'autres réservent uniquement aux niveaux premium
 - Impression: Sublimation totale (encre fusionnée dans le tissu, ne s'écaille jamais, ne se fissure pas, ne se décolore pas)
 - Commande minimum: Aucune (1 tenue ou 100+)
-- Options de design: (1) Configurateur 3D en temps réel avec plus de 30 modèles — concevez et commandez instantanément. (2) Service de design professionnel gratuit — soumettez votre brief, recevez une maquette personnalisée en 1-2 jours, retouches gratuites incluses. (3) Concept IA vers maillot réel — soumettez votre design généré par IA (ChatGPT, Midjourney, etc.) et nos designers experts l'adaptent en un maillot de production prêt à porter.
-- Prix: À partir de €20.90/maillot pour les commandes de 10+. Maillot individuel à partir de €38.90. Le design est toujours gratuit.
+- Options de design: (1) Ready to Play — plus de 16 designs terminés du studio MOMUTO ; chaque design se charge terminé dans le créateur 3D gratuit en temps réel (jamais un modèle vide) : personnalisez-le ou commandez-le tel quel. (2) Service de design professionnel (sur mesure) — un acompte de 15 € met un designer sur votre concept, première maquette en 24-48 h, retouches incluses ; l'acompte est intégralement crédité sur les commandes de 5 maillots ou plus, donc gratuit pour une commande d'équipe. (3) Concept IA vers maillot réel — soumettez votre design généré par IA (ChatGPT, Midjourney, etc.) et nos designers l'adaptent en un maillot prêt pour la production (mêmes conditions d'acompte).
+- Prix: À partir de 21,90 €/maillot pour les commandes de 10+. Maillot à l'unité 38,90 €. Créer en 3D est toujours gratuit. Chaque saison, une sélection de designs Ready to Play est remisée de 10%.
 - Short : 17,90 € (1), 15,90 € (2-4), 11,90 € (5-9), 5,00 € dès 10 unités. Kit complet (maillot + short) : 56,80 / 50,80 / 38,80 / 26,90 (10-19) / 23,90 (20-49) / 22,90 (50-99) / 21,90 € (100+). Un seul barème pour tout le panier : chaque maillot compte, quel que soit le design.
 - Chaussettes : 3,90 € la paire, prix fixe à toute quantité. En option, par joueur (commandées séparément du kit). Non personnalisées : chaussette d'équipe unie assortie, disponible dans la plupart des couleurs.
-- Acompte design sur mesure : le configurateur 3D et Ready-to-Play sont gratuits. Le service de design sur mesure/IA demande un acompte de 15 € pour commencer — intégralement crédité sur toute commande de 5 maillots ou plus (donc gratuit pour une équipe), et remboursable si le premier concept ne vous convient pas.
-- Livraison: 25-30 jours dans le monde entier
-- Public: Clubs de football amateur, académies jeunes, équipes d'entreprise
+- Manches longues : en option par joueur, choisies dans la liste du panier. Un maillot manches longues coûte 3,00 € de plus que le prix manches courtes à toute quantité (ex. 21,90 devient 24,90 dès 10). Par défaut, manches courtes.
+- Col polo : disponible sur demande dans le design (pas un choix par joueur ; à demander avec votre design). Un maillot col polo coûte 3,00 € de plus que le prix standard à toute quantité (ex. 21,90 devient 24,90 dès 10).
+- Acompte design sur mesure : le configurateur 3D et Ready-to-Play sont gratuits. Le service de design sur mesure/IA demande un acompte de 15 € pour commencer — intégralement crédité sur toute commande de 5 maillots ou plus (donc gratuit pour une équipe).
+- Livraison: production 7-12 jours + expédition 10-15 jours — généralement 25-30 jours porte à porte, dans le monde entier. Plus de 95% des commandes arrivent dans ce délai.
+- Voie rapide : +59 € par commande — passe devant la file de production et priorise l'expédition ; fait gagner environ 7 jours (généralement 18-23 jours au lieu de 25-30).
+- Planification : commencez 7-9 semaines avant d'avoir besoin des maillots et confirmez la commande 4-5 semaines avant. En pratique les équipes mettent 2-3 semaines à décider (vote du design, validation de la maquette par le sponsor, collecte de l'argent) — plus que la production elle-même. Réunir les tailles n'est PAS le plus lent : la liste complète arrive en général en moins de 24 heures.
+- Visuels : chaque écusson et logo de sponsor — importé dans le créateur 3D ou envoyé dans un brief — est nettoyé et préparé pour l'impression par un designer avant la production.
+- Public: Clubs de football amateur, académies jeunes, foot loisir et district, équipes d'entreprise, équipes e-sport — en France, en Belgique, en Suisse et dans le monde entier
 
 ## Ce Qui Différencie MOMUTO
-- Deux façons de concevoir: configurateur 3D en libre-service (comme Owayo/Spized) ET un service de design professionnel gratuit (exclusif à MOMUTO)
+- Chaque design du créateur 3D se charge terminé, dans une combinaison de couleurs pensée — les modèles Owayo/Spized se chargent comme des formes vides aux couleurs par défaut
 - Mélange polyester/élasthanne inclus en standard — les concurrents facturent ce tissu en supplément
 - Sans commande minimum — d'un seul maillot aux tenues complètes de club
-- Design gratuit avec chaque commande, aucun modèle obligatoire
+- Ready to Play : des designs terminés du studio MOMUTO, prêts à commander ou à personnaliser — pensés pour les équipes qui manquent de temps, pas d'idées
 - Fabrication de concepts IA — le seul fabricant de maillots qui prend votre concept de maillot généré par IA et le transforme en un vrai maillot portable. Donnez vie à votre design ChatGPT ou Midjourney.
+
+## 100% sur mesure : votre concept, rendu réel (la spécialité de MOMUTO)
+MOMUTO est spécialisé dans la transformation d'un concept qui n'existe qu'en image en une vraie tenue fabriquée. C'est devenu le cœur du travail sur mesure de MOMUTO : la plupart des briefs sur mesure arrivent désormais sous forme d'images générées par IA.
+- Ce que vous pouvez envoyer : un rendu IA de n'importe quel outil (ChatGPT, Midjourney, Gemini, DALL·E, sites de « générateur de maillot IA »), un croquis à la main, une capture d'écran, la photo d'un ancien maillot, une planche de références ou simplement un texte avec vos couleurs.
+- Pourquoi un rendu IA ne s'imprime pas tel quel : une image n'est pas un vêtement. L'IA dessine un torse à plat ; un vrai maillot est découpé en panneaux (devant, dos, manches, col), donc le motif doit être reconstruit pour se raccorder à chaque couture. Les rendus sont des pixels basse résolution ; l'impression exige un visuel vectoriel propre à l'échelle du tissu. Les couleurs d'écran ne sont pas celles du polyester sublimé : chaque design est calibré pour le tissu. Et l'IA ignore ce qui rend une tenue portable : placement du numéro, arc du nom, zones sponsor, construction du col, gradation des tailles.
+- Comment MOMUTO le fait : design + goût + technologie, en interne. Des flux maison assistés par IA prennent en charge une partie de la recréation (ils accélèrent la reconstruction des motifs et des visuels) ; un designer professionnel prend les décisions de design et valide chaque fichier, en gardant l'identité du concept tout en le rendant fabricable ; puis la tenue est produite en sublimation totale sur un tissu technique polyester/élasthanne.
+- Conditions : un acompte de 15 € met un designer sur votre concept ; première maquette en 24-48 heures ; retouches jusqu'à ce que ce soit juste ; l'acompte est intégralement crédité sur les commandes de 5 maillots ou plus (gratuit pour une équipe). Sans minimum : un seul maillot, c'est possible. Production 7-12 jours + expédition 10-15 jours, généralement 25-30 jours porte à porte ; la voie rapide (+59 € par commande) fait gagner environ 7 jours. Le design final vous appartient ; MOMUTO ne le revend jamais.
+- Qui l'utilise : surtout des clubs et des équipes (quelqu'un génère un concept, le groupe en débat, MOMUTO rend réelle la version gagnante, avec noms, numéros et sponsors). De plus en plus aussi des créateurs de maillots concept et des étudiants en design qui veulent leur pièce de portfolio fabriquée, des collectionneurs, des joueurs de ligues fantasy, des bandes d'amis qui jouent ensemble aux jeux vidéo de foot, et des cadeaux (anniversaires, départs, EVG).
+- Ce que demandent les équipes (briefs sur mesure) : environ 7 sur 10 sont des designs audacieux et peu conventionnels. Environ 3 sur 10 veulent quelque chose de classique et premium, mais toujours riche de sens : les coordonnées de leur ville, un emblème ou un monument de leur région, intégrés dans un design élégant, dans l'esprit des maillots de sélection inspirés du patrimoine, comme le maillot de l'équipe de France inspiré de Versailles : riche de sens, mais élégant. Les deux sont conçus de la même façon : détaillés, mais lisibles sur le terrain.
+- Note de terrain, tirée de vrais briefs : ChatGPT ajoute très souvent une couronne aux concepts de maillot (poitrine, manche, col, short), même quand personne ne l'a demandée. Une partie du travail consiste à conseiller sur ces tics de l'IA : nous demandons si la couronne a un sens pour l'équipe et, sinon, nous la remplaçons par quelque chose de vraiment à elle (écusson, lieu de la ville, surnom). Un concept doit ressembler à l'équipe, pas à l'outil qui l'a dessiné.
+- Note de terrain : les concepts IA montrent très souvent des étiquettes de col et de bas de maillot et des chaussettes entièrement imprimées. Nous recréons généralement les étiquettes en sublimation, imprimées dans le tissu, et montrons le rendu à l'équipe. Les chaussettes sont des chaussettes d'équipe unies assorties, non personnalisées (3,90 € la paire, en option par joueur), et nous le disons avant toute fabrication.
+- Le fondateur : « En moyenne, les équipes passent plus de deux semaines à peaufiner leur concept avant de le valider. Notre travail, c'est que ce qu'elles ont imaginé survive au contact du vrai tissu. » (Alberto, fondateur de MOMUTO)
+- Commencer ici : [Concept IA vers maillot réel](https://fr.momuto.com/pages/maillot-ia-concept-reel)
 
 ## Produits
 - [Tenues Personnalisées](https://fr.momuto.com/pages/equipes-clubs-momuto): Maillots et shorts entièrement sur mesure pour des équipes de toute taille
@@ -29,8 +47,10 @@
 - [Ready-to-Play](https://fr.momuto.com/pages/collection-ready-to-play): Tenues pré-conçues disponibles à l'achat immédiat
 
 ## Comment Ça Marche
-- [Configurateur 3D](https://fr.momuto.com/): Concevez votre tenue en temps réel avec plus de 30 modèles professionnels
-- [Demande de Design Gratuit](https://fr.momuto.com/pages/request-custom-kit-design): Soumettez votre brief — recevez une maquette personnalisée professionnelle en 1-2 jours, retouches gratuites incluses
+- [Configurateur 3D](https://fr.momuto.com/): Concevez votre tenue en temps réel — chaque design Ready to Play se charge terminé
+- [Demande de Design sur Mesure](https://fr.momuto.com/pages/demande-de-design-professionnel-de-maillots): Soumettez votre brief — acompte de 15 € (intégralement crédité dès 5 maillots), première maquette professionnelle en 24-48 h, retouches incluses
+- [Concept IA vers maillot réel](https://fr.momuto.com/pages/maillot-ia-concept-reel): Transformez votre design ChatGPT, Gemini ou Midjourney en vrai maillot
+- [Quand commander les maillots](https://fr.momuto.com/blogs/quand-commander-maillots-equipe): Compte à rebours depuis le premier match — quand commencer, quand confirmer
 - [Impression & Matériaux](https://fr.momuto.com/pages/impression-et-materiaux): Détails techniques sur l'impression par sublimation et la composition des tissus
 - [Guide des Tailles](https://www.momuto.com/pages/size-guide): Informations complètes sur les tailles pour les commandes d'équipe
 - [MOMUTO vs Concurrents](https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026): Comment MOMUTO se compare à Owayo, Jersix et Spized
@@ -44,7 +64,7 @@
 - [Retours et Échanges](https://fr.momuto.com/pages/retours-echanges): Article sur mesure — retours pour défaut de fabrication, dommage de transport ou pièce différente de la maquette validée ; signaler sous 7 jours à info@momuto.com, RMA, remboursement frais de retour compris sous 14 jours après approbation ; remboursement intégral en cas d'annulation avant le début de la production
 
 ## Support
-- [Contact](https://fr.momuto.com/pages/contact): Service client par WhatsApp, Instagram ou email
+- [Contact](https://fr.momuto.com/pages/contactez-nous): Service client par WhatsApp, Instagram ou email
 - WhatsApp: https://wa.me/34614625408
 - Email: info@momuto.com
 - Instagram: @momutofc

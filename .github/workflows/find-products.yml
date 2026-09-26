@@ -1,0 +1,34 @@
+name: Find products (read-only)
+
+# Lists products whose title/handle matches a regex on all five stores, with
+# id, status, price and first sku (scripts/find-products.js). Reads only.
+# Runs on push of this file from any branch (default: basketball words), or by
+# hand with any regex.
+
+on:
+  push:
+    paths:
+      - '.github/workflows/find-products.yml'
+  workflow_dispatch:
+    inputs:
+      match:
+        description: 'Case-insensitive regex on title/handle'
+        default: 'basket|baloncesto|pallacanestro'
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Find
+        env:
+          MATCH: ${{ github.event.inputs.match }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+        run: node scripts/find-products.js

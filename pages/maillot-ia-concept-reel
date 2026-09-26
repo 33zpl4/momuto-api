@@ -23,27 +23,58 @@
     {
       "@type": "Question",
       "name": "Un maillot de foot généré par IA peut-il vraiment être fabriqué ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Oui — mais pas directement. Les rendus IA de ChatGPT, Midjourney ou Gemini sont des images, pas des fichiers de production : les dégradés ne sont pas calibrés, les motifs ne suivent pas les coutures, les formes ne sont pas vectorisées. Les designers MOMUTO reconstruisent le concept en fichier prêt pour la sublimation en préservant votre vision, puis nous le fabriquons sur un tissu performance polyester-élasthanne. Première maquette en 24-48h ; acompte de 15 €, intégralement crédité sur les commandes de 5 maillots ou plus." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui — mais pas directement. Les rendus IA de ChatGPT, Midjourney ou Gemini sont des images, pas des fichiers de production : les dégradés ne sont pas calibrés, les motifs ne suivent pas les coutures, les formes ne sont pas vectorisées. Les designers MOMUTO reconstruisent le concept en fichier prêt pour la sublimation en préservant votre vision, puis nous le fabriquons sur un tissu performance polyester-élasthanne. Première maquette en 24-48h ; acompte de 15 €, intégralement crédité sur les commandes de 5 maillots ou plus."
+      }
     },
     {
       "@type": "Question",
       "name": "Quels outils IA puis-je utiliser pour créer mon concept de maillot ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Tous. Les équipes nous envoient des concepts issus de ChatGPT, Midjourney, Gemini, DALL·E et de générateurs de maillots spécialisés — mais aussi des croquis à la main, des maquettes Photoshop et des photos d'anciens maillots. Si vous pouvez le montrer, nos designers peuvent le reconstruire pour du vrai tissu." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tous. Les équipes nous envoient des concepts issus de ChatGPT, Midjourney, Gemini, DALL·E et de générateurs de maillots spécialisés — mais aussi des croquis à la main, des maquettes Photoshop et des photos d'anciens maillots. Si vous pouvez le montrer, nos designers peuvent le reconstruire pour du vrai tissu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi mon maillot créé par IA a-t-il une couronne ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "C'est l'une des habitudes de l'IA que nous voyons le plus : ChatGPT ajoute très souvent une couronne aux concepts de maillot — sur la poitrine, la manche, le col, le short — même quand personne ne l'a demandée. Une partie du travail de nos designers consiste à signaler ces tics. Nous vous demandons si la couronne a un sens pour votre équipe ; sinon, nous la remplaçons par quelque chose de vraiment à vous — votre écusson, un lieu de votre ville, un surnom, une blague d'équipe. Un concept doit ressembler à votre équipe, pas à l'outil qui l'a dessiné."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mon concept IA montre des chaussettes imprimées et des étiquettes de marque. Pouvez-vous les faire ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les étiquettes, oui. Les étiquettes de col et de bas de maillot sont un détail favori de l'IA ; nous les recréons généralement en sublimation, imprimées dans le tissu plutôt que cousues, et nous vous montrons exactement le rendu. Les chaussettes, non : nos chaussettes sont des chaussettes d'équipe unies assorties, dans la plupart des couleurs (3,90 € la paire, en option par joueur), pas personnalisées. Les équipes nous envoient souvent des chaussettes entièrement imprimées : nous le signalons avant de fabriquer quoi que ce soit, jamais après."
+      }
     },
     {
       "@type": "Question",
       "name": "Faut-il commander pour toute une équipe, ou puis-je faire fabriquer un seul maillot ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Pas de commande minimale. La plupart de nos recréations sont pour des clubs et équipes amateurs, mais nous fabriquons aussi des maillots à l'unité — passionnés et designers qui concrétisent une pièce de portfolio, cadeaux surprises avec nom et numéro, maillots d'EVG. L'acompte design de 15 € est intégralement crédité sur les commandes de 5 maillots ou plus." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pas de commande minimale. La plupart de nos recréations sont pour des clubs et équipes amateurs, mais nous fabriquons aussi des maillots à l'unité — passionnés et designers qui concrétisent une pièce de portfolio, cadeaux surprises avec nom et numéro, maillots d'EVG. L'acompte design de 15 € est intégralement crédité sur les commandes de 5 maillots ou plus."
+      }
     },
     {
       "@type": "Question",
       "name": "Qui possède le design final ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Vous. La recréation est construite à partir de votre concept, pour votre équipe, et nous ne revendons jamais votre design. Les projets terminés peuvent apparaître en études de cas avant/après dans notre galerie — dites-nous si vous préférez ne pas y figurer, et nous ne le ferons pas." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vous. La recréation est construite à partir de votre concept, pour votre équipe, et nous ne revendons jamais votre design. Les projets terminés peuvent apparaître en études de cas avant/après dans notre galerie — dites-nous si vous préférez ne pas y figurer, et nous ne le ferons pas."
+      }
     },
     {
       "@type": "Question",
       "name": "Combien coûte la transformation d'un concept IA en vrai maillot ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Le travail de design démarre avec un acompte de 15 € qui met un designer sur votre concept — illustration, vectorisation et révisions jusqu'à ce que ce soit juste. L'acompte est intégralement crédité sur toute commande de 5 maillots ou plus : pour une vraie commande d'équipe, le design ne coûte donc rien. Les maillots vont de 20,90 €/unité à partir de 10 jusqu'à 38,90 € à l'unité." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le travail de design démarre avec un acompte de 15 € qui met un designer sur votre concept — illustration, vectorisation et révisions jusqu'à ce que ce soit juste. L'acompte est intégralement crédité sur toute commande de 5 maillots ou plus : pour une vraie commande d'équipe, le design ne coûte donc rien. Les maillots vont de 20,90 €/unité à partir de 10 jusqu'à 38,90 € à l'unité."
+      }
     }
   ]
 }
@@ -115,7 +146,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 
 <div class="wrap">
 <div class="def">
-<p>MOMUTO est un fournisseur de maillots de football personnalis&eacute;s, sp&eacute;cialis&eacute; dans la transformation de concepts g&eacute;n&eacute;r&eacute;s par IA en vrais maillots pr&ecirc;ts &agrave; produire. Un designer prend votre rendu &mdash; issu de n'importe quel outil IA, croquis ou r&eacute;f&eacute;rence &mdash; le vectorise, l'adapte au tissu et aux coutures r&eacute;elles, puis nous le fabriquons en sublimation totale. Le travail de design d&eacute;marre &agrave; 15&nbsp;&euro; d'acompte, int&eacute;gralement cr&eacute;dit&eacute; d&egrave;s 5 maillots command&eacute;s.</p>
+<p>MOMUTO est un fournisseur de maillots de football personnalis&eacute;s, sp&eacute;cialis&eacute; dans la transformation de concepts g&eacute;n&eacute;r&eacute;s par IA en vrais maillots pr&ecirc;ts &agrave; produire. Un designer prend votre rendu &mdash; issu de n'importe quel outil IA, croquis ou r&eacute;f&eacute;rence &mdash; le vectorise, l'adapte au tissu et aux coutures r&eacute;elles, puis nous le fabriquons en sublimation totale. Design, go&ucirc;t et technologie en interne&nbsp;: des flux maison assist&eacute;s par IA acc&eacute;l&egrave;rent une partie de la recr&eacute;ation, et un designer professionnel prend chaque d&eacute;cision de design et valide chaque fichier. Le travail de design d&eacute;marre &agrave; 15&nbsp;&euro; d'acompte, int&eacute;gralement cr&eacute;dit&eacute; d&egrave;s 5 maillots command&eacute;s.</p>
 <div class="src">Notre m&eacute;tier, en un paragraphe</div>
 </div>
 </div>
@@ -203,6 +234,8 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2 style="text-align:center;margin-bottom:2rem">Les Questions qu'on Nous Pose</h2>
 <details><summary>Un design de maillot g&eacute;n&eacute;r&eacute; par IA peut-il vraiment &ecirc;tre fabriqu&eacute; ?</summary><p>Oui &mdash; mais pas directement. Les rendus IA sont des images, pas des fichiers de production : d&eacute;grad&eacute;s non calibr&eacute;s, motifs qui ignorent les coutures, formes non vectoris&eacute;es. Nos designers reconstruisent le concept en fichier pr&ecirc;t &agrave; produire en pr&eacute;servant votre vision, puis nous le fabriquons. Premi&egrave;re maquette en 24&ndash;48h.</p></details>
 <details><summary>Quels outils IA puis-je utiliser ?</summary><p>Tous. ChatGPT, Midjourney, Gemini, DALL&middot;E, g&eacute;n&eacute;rateurs sp&eacute;cialis&eacute;s &mdash; mais aussi croquis, fichiers Photoshop et photos d'anciens maillots. Si vous pouvez le montrer, nous pouvons le reconstruire.</p></details>
+<details><summary>Pourquoi mon maillot cr&#233;&#233; par IA a-t-il une couronne ?</summary><p>C'est l'une des habitudes de l'IA que nous voyons le plus : ChatGPT ajoute tr&#232;s souvent une couronne aux concepts de maillot &mdash; sur la poitrine, la manche, le col, le short &mdash; m&#234;me quand personne ne l'a demand&#233;e. Une partie du travail de nos designers consiste &#224; signaler ces tics. Nous vous demandons si la couronne a un sens pour votre &#233;quipe ; sinon, nous la rempla&#231;ons par quelque chose de vraiment &#224; vous &mdash; votre &#233;cusson, un lieu de votre ville, un surnom, une blague d'&#233;quipe. Un concept doit ressembler &#224; votre &#233;quipe, pas &#224; l'outil qui l'a dessin&#233;.</p></details>
+<details><summary>Mon concept IA montre des chaussettes imprim&#233;es et des &#233;tiquettes de marque. Pouvez-vous les faire ?</summary><p>Les &#233;tiquettes, oui. Les &#233;tiquettes de col et de bas de maillot sont un d&#233;tail favori de l'IA ; nous les recr&#233;ons g&#233;n&#233;ralement en sublimation, imprim&#233;es dans le tissu plut&#244;t que cousues, et nous vous montrons exactement le rendu. Les chaussettes, non : nos chaussettes sont des chaussettes d'&#233;quipe unies assorties, dans la plupart des couleurs (3,90 &#8364; la paire, en option par joueur), pas personnalis&#233;es. Les &#233;quipes nous envoient souvent des chaussettes enti&#232;rement imprim&#233;es : nous le signalons avant de fabriquer quoi que ce soit, jamais apr&#232;s.</p></details>
 <details><summary>Puis-je commander un seul maillot ?</summary><p>Oui &mdash; pas de commande minimale. Maillots &agrave; l'unit&eacute; pour cadeaux, pi&egrave;ces de portfolio et collectionneurs. L'acompte design de 15&nbsp;&euro; est int&eacute;gralement cr&eacute;dit&eacute; sur les commandes de 5 maillots ou plus.</p></details>
 <details><summary>Qui poss&egrave;de le design final ?</summary><p>Vous. Nous le construisons &agrave; partir de votre concept, pour votre &eacute;quipe, et nous ne le revendons jamais. Les projets termin&eacute;s peuvent appara&icirc;tre en &eacute;tudes de cas avant/apr&egrave;s dans notre galerie &mdash; dites-nous si vous pr&eacute;f&eacute;rez ne pas y figurer.</p></details>
 <details><summary>Combien &ccedil;a co&ucirc;te ?</summary><p>15&nbsp;&euro; pour mettre un designer sur votre concept &mdash; int&eacute;gralement cr&eacute;dit&eacute;s d&egrave;s 5 maillots &mdash; pour une commande d&rsquo;&eacute;quipe, le design ne co&ucirc;te rien. Maillots &agrave; partir de 20,90&nbsp;&euro;/unit&eacute; d&egrave;s 10 (38,90&nbsp;&euro; &agrave; l'unit&eacute;).</p></details>

@@ -44,6 +44,45 @@ more than", never as fake precision.
   players do not always want to spend it. This is the honest limit of
   self-serve, and the reason curation matters.
 
+- **How a concept becomes a kit (owner, 25 Sep 2026)**: in-house
+  AI-driven flows help with parts of the recreation (rebuilding patterns
+  and artwork from a render); a professional designer is always involved
+  and makes the design calls. The positioning in the owner's words:
+  *we do design, we have taste, we have tech.* The "100% custom / make my
+  concept real" service is a success. Customers are happy and it is
+  becoming what MOMUTO is known for. Publish it as capability + process,
+  never as a count; the AI-brief share stays "most" until D17 is measured
+  with a window.
+
+- **AI quirks we advise on (owner, 25 Sep 2026)**: ChatGPT adds a
+  **crown** to kit concepts *very often* (chest, sleeve, neck, shorts),
+  unprompted. Advising on it is part of the job: "this is currently a
+  ChatGPT quirk. Do you want us to remove it and put something truly
+  yours?" Seen in real briefs, e.g. Muddy Monkeys and Deptford Legacies
+  (Sep 2026). Customers are never named in the crown copy: it is published
+  as a general observation only.
+- **Labels and socks in AI concepts (owner, 25 Sep 2026)**: concepts
+  routinely include neck/hem labels (tags) and fully printed socks.
+  **Labels**: we generally recreate them in sublimation and tell the team.
+  **Socks**: teams send printed socks all the time, but ours are plain
+  matching team socks, not customizable. We inform the team up front.
+- **Halloween tournaments (US), real cases**: Frankenstein full kit (U9
+  boys, California, from a concept board), Mo Money Mummy (AI concept),
+  Candy Drip / Deptford Legacies (youth, AI concept board "Candy Rush
+  Racers"). Documented on `pages/us/halloween-soccer-jerseys`. Tournaments
+  usually fall the weekend before 31 Oct, so order 5 weeks out, or use the
+  fast lane.
+
+- **Bespoke brief styles (owner, 25 Sep 2026)**: close to **70%** of
+  bespoke briefs are bold / unconventional ("relatively funky"). About
+  **30%** want something classic and premium, but still rich in detail and
+  meaning: the coordinates of their town, emblems or monuments of their
+  region. The reference they cite is premium heritage kits such as France's
+  Versailles-inspired kit: meaningful but elegant. *(Owner, 25 Sep 2026: naming it
+  as the style reference teams cite is fine, including llms.txt.)* Published as "roughly 7 in 10 / 3 in 10".
+- **Still to measure (D17)**: the share of bespoke briefs that arrive as
+  AI-generated images. Published as "most" until measured with a window.
+
 ## The Ready to Play origin story (editorial gold — clubs namable in blog only)
 
 Watching the bespoke/AI briefs revealed patterns: **when Barcelona,
@@ -71,7 +110,7 @@ club releases.
 
 ## Voices (quotable by name)
 
-- **Alberto — founder.**
+- **Alberto Ayala — founder** (full name approved for structured data 25 Sep 2026; no LinkedIn link for now).
 - **Dmitry — designer.**
 - Factory/production lead: not yet named; quotes pending.
 

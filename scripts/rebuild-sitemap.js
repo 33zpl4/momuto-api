@@ -96,31 +96,50 @@ const STATIC_CLUSTERS = [
   { en: 'custom-kit-gallery',                  es: 'galeria-equipaciones-personalizadas', fr: 'galerie-maillots-foot-sur-mesure',           it: 'galleria-maglie-personalizzate' },
   { en: 'teams-clubs-momuto',                  es: 'equipos-momuto',                      fr: 'equipes-clubs-momuto',                       it: 'squadre-club-momuto' },
   { en: 'about-us',                            es: 'sobre-nosotros',                      fr: 'a-propos-de-nous',                           it: 'chi-siamo' },
-  { en: 'request-custom-kit-design',           es: 'solicitud-de-diseno-personalizado',   fr: 'demande-de-design-professionnel-de-maillots', it: 'richiesta-design-personalizzato' },
+  { en: 'request-custom-kit-design',           es: 'solicitud-de-diseno-personalizado',   fr: 'demande-de-design-professionnel-de-maillots', it: 'richiesta-design-personalizzato', us: 'request-custom-kit-design' },
   { en: 'momuto-vs-jersix-owayo-spized-comparison', es: 'zentral-opiniones-alternativa',  fr: 'comparatif-fournisseur-maillot-foot-2026',   it: 'confronto-fornitori-maglie-calcio-2026' },
   { en: 'ready-to-play',                       es: 'coleccion-ready-to-play',             fr: 'collection-ready-to-play',                   it: 'collezione-ready-to-play', us: 'ready-to-play' },
+  // Added 25 Sep 2026 (docs/seo-opportunities-2026-09.md §1): the translated
+  // pages that had no cross-locale annotation at all. Generated pages first
+  // (faq/, policies/, maker/ — handles from those JSON sources).
+  { en: 'faq',                                 es: 'preguntas-frecuentes',                fr: 'questions-frequentes',                       it: 'faq',                     us: 'faq' },
+  { en: 'shipping-policy',                     es: 'envios-metodos-y-plazos',             fr: 'politique-de-livraison',                     it: 'politica-di-spedizione',  us: 'shipping-policy' },
+  { en: 'return-policy',                       es: 'cambios-devoluciones',                fr: 'retours-echanges',                           it: 'politica-resi',           us: 'return-policy' },
+  { en: 'contact',                             es: 'contacto',                            fr: 'contactez-nous',                             it: 'contattaci',              us: 'contact' },
+  { en: 'custom-soccer-jersey-designer',                                                  fr: 'creer-son-maillot-de-foot',                                                 us: 'custom-soccer-jersey-designer' },
+  { en: 'ai-concept-to-real-kit',              es: 'camiseta-ia-concepto-real',           fr: 'maillot-ia-concept-reel',                    it: 'maglia-ia-concetto-reale', us: 'ai-concept-to-real-kit' },
+  { en: 'bachelor-party-football-shirts',      es: 'camisetas-despedida-de-soltero',      fr: 'maillot-evg-personnalise',                                                  us: 'bachelor-party-football-shirts' },
+  // Custom-kit hubs (www soccer hub ↔ ES equipaciones hub ↔ FR personnalisé hub).
+  { en: 'custom-soccer-jerseys',               es: 'equipaciones-futbol-personalizadas',  fr: 'maillot-foot-personnalise',                                                 us: 'custom-soccer-jerseys' },
+  { en: 'custom-youth-club-soccer-uniforms',   es: 'equipaciones-para-clubes-academias',                                                                                   us: 'custom-youth-club-soccer-uniforms' },
 ];
 
-// US-store /pages handles that mirror a www page under the same (or a US)
-// handle. Kept separate from STATIC_CLUSTERS rows that already carry a `us`
-// key only where the row exists; en↔us pairs whose other locales differ:
-STATIC_CLUSTERS.push(
-  { en: 'request-custom-kit-design', us: 'request-custom-kit-design' },
-  { en: 'ai-concept-to-real-kit',    us: 'ai-concept-to-real-kit' },
-);
-
-// Curated cross-locale clusters for BLOG POSTS (/blogs/{handle}) — the US
-// mirror of the EN team-kits hub (docs/us-hub-plan.md). A pair is only
-// emitted when the post exists live on both stores.
+// Curated cross-locale clusters for BLOG POSTS (/blogs/{handle}). The en/us
+// rows started as the US mirror of the EN team-kits hub (docs/us-hub-plan.md);
+// es/fr/it translations were added 25 Sep 2026. A locale is only emitted when
+// the post exists live on that store. Market-specific comparison posts are
+// deliberately NOT clustered — they review different competitor sets, so they
+// are not translations of each other.
 const BLOG_CLUSTERS = [
-  { en: 'custom-football-kits-for-your-team-complete-guide', us: 'custom-soccer-uniforms-for-your-team-complete-guide' },
-  { en: 'custom-football-kits-amateur-grassroots-club',      us: 'custom-soccer-uniforms-club-team' },
-  { en: 'custom-futsal-5-a-side-jerseys',                    us: 'custom-futsal-indoor-soccer-jerseys' },
-  { en: 'custom-jerseys-7-a-side-sunday-league',             us: 'custom-soccer-jerseys-adult-rec-league' },
-  { en: 'custom-football-kits-corporate-events',             us: 'custom-soccer-jerseys-corporate-events' },
-  { en: 'custom-jerseys-football-tournaments',               us: 'custom-soccer-jerseys-tournaments' },
-  { en: 'when-to-order-team-kits-season-calendar',           us: 'when-to-order-team-uniforms-season-calendar' },
-  { en: 'fund-team-kits-sponsors-fundraising',               us: 'fund-team-uniforms-sponsors-fundraising' },
+  { en: 'custom-football-kits-for-your-team-complete-guide', us: 'custom-soccer-uniforms-for-your-team-complete-guide', es: 'equipaciones-de-futbol-para-tu-equipo-guia-completa', fr: 'maillots-de-foot-pour-club-guide-complet', it: 'maglie-da-calcio-per-la-tua-squadra-guida-completa' },
+  { en: 'custom-football-kits-amateur-grassroots-club',      us: 'custom-soccer-uniforms-club-team',            es: 'equipaciones-futbol-club-amateur',        fr: 'maillots-foot-club-amateur',        it: 'maglie-calcio-squadra-dilettantistica' },
+  { en: 'custom-futsal-5-a-side-jerseys',                    us: 'custom-futsal-indoor-soccer-jerseys',         es: 'camisetas-futbol-sala-personalizadas',    fr: 'maillots-five-futsal-personnalises', it: 'maglie-calcetto-futsal-personalizzate' },
+  { en: 'custom-jerseys-7-a-side-sunday-league',             us: 'custom-soccer-jerseys-adult-rec-league',      es: 'equipaciones-futbol-7-ligas-locales',     fr: 'maillots-foot-loisir-district',     it: 'maglie-calcio-a-7-leghe-locali' },
+  { en: 'custom-football-kits-corporate-events',             us: 'custom-soccer-jerseys-corporate-events',      es: 'equipaciones-futbol-empresas',            fr: 'maillots-foot-entreprise',          it: 'maglie-calcio-aziende' },
+  { en: 'custom-jerseys-football-tournaments',               us: 'custom-soccer-jerseys-tournaments',           es: 'camisetas-futbol-torneos',                fr: 'maillots-foot-tournoi',             it: 'maglie-calcio-tornei' },
+  { en: 'when-to-order-team-kits-season-calendar',           us: 'when-to-order-team-uniforms-season-calendar', es: 'cuando-encargar-equipaciones-equipo',     fr: 'quand-commander-maillots-equipe',   it: 'quando-ordinare-maglie-squadra' },
+  { en: 'fund-team-kits-sponsors-fundraising',               us: 'fund-team-uniforms-sponsors-fundraising',     es: 'financiar-equipaciones-club-patrocinadores', fr: 'financer-maillots-club-sponsors-cagnotte', it: 'finanziare-maglie-squadra-sponsor' },
+  // Wave 1 thesis piece — same handle on en/us.
+  { en: 'the-slowest-part-of-making-a-football-kit',         us: 'the-slowest-part-of-making-a-football-kit',   es: 'lo-mas-lento-de-hacer-una-camiseta-de-futbol', fr: 'la-partie-la-plus-lente-d-un-maillot-de-foot', it: 'la-parte-piu-lenta-di-una-maglia-da-calcio' },
+  // Evergreen translations of the same article.
+  { en: 'how-to-create-the-perfect-football-kit-colour-guide', us: 'how-to-create-the-perfect-football-kit-colour-guide', es: 'como-crear-la-camiseta-de-futbol-ideal-guia-de-colores', fr: 'comment-creer-le-maillot-de-football-ideal-guide-des-couleurs', it: 'guida-colori-kit-calcio-personalizzato' },
+  { en: 'concept-football-kits-the-art-history-and-future-of-fan-created-jerseys', us: 'concept-football-kits-the-art-history-and-future-of-fan-created-jerseys', es: 'el-arte-de-los-conceptos-de-camisetas-como-los-aficionados-reinventan-el-futbol', fr: 'l-art-des-concepts-de-maillots-comment-les-fans-reinventent-le-football', it: 'maglie-calcio-concept-arte-storia-futuro' },
+  { en: 'ai-to-reality-kit-maker-guide',                     us: 'ai-to-reality-kit-maker-guide',               es: 'diseno-camisetas-chatgpt-ia-realidad',    fr: 'creer-maillot-foot-ia-chatgpt-gemini', it: 'creare-kit-calcio-con-intelligenza-artificiale' },
+  { en: 'why-create-a-football-kit-for-your-club-with-the-momuto-3d-configurator', us: 'why-create-a-football-kit-for-your-club-with-the-momuto-3d-configurator', es: 'por-que-crear-una-camiseta-de-futbol-para-club-con-el-configurador-3d-momuto', fr: 'pourquoi-creer-un-maillot-de-foot-pour-club-avec-le-configurateur-3d-momuto', it: 'divisa-calcio-personalizzata-club-configuratore-3d' },
+  { en: 'craft-your-perfect-custom-soccer-jersey-with-momuto-s-3d-configurator-guide', es: 'crea-tu-camiseta-de-futbol-unica-con-el-configurador-3d-momuto', fr: 'creez-votre-maillot-de-football-unique-avec-le-configurateur-3d-momuto', it: 'crea-maglia-calcio-personalizzata-configuratore-3d' },
+  { en: 'why-personalize-your-football-kit-and-how-to-do-it', us: 'why-personalize-your-football-kit-and-how-to-do-it', es: 'por-que-personalizar-tu-camiseta-de-futbol-y-como-hacerlo', fr: 'pourquoi-customiser-votre-maillot-de-foot-et-comment-le-faire', it: 'perche-personalizzare-il-kit-da-calcio-e-come-farlo' },
+  { en: 'why-you-should-choose-customizable-football-team-kits', us: 'why-you-should-choose-customizable-football-team-kits', es: 'flexibilidad-equipamientos-de-futbol-personalizables', fr: 'l-incroyable-flexibilite-des-kits-d-equipe-de-foot-personnalisables', it: 'divise-da-calcio-personalizzate-perche-scegliere-momuto' },
+  { en: 'high-quality-soccer-kits',                          us: 'high-quality-soccer-kits',                    es: 'camisetas-futbol-premium-materiales-tecnicas', fr: 'qualite-maillot-football',        it: 'kit-calcio-alta-qualita-tessuti-tecniche' },
 ];
 
 // Programmatic clusters — handles share a locale-agnostic slug.
@@ -151,6 +170,14 @@ function buildAlternatesMap(handleSets, postSets = {}) {
   const register = (members) => {
     if (members.length < 2) return; // a single-locale cluster adds no SEO value
     const alts = members.map(m => ({ hreflang: HREFLANG[m.locale], href: m.loc }));
+    // A URL in two clusters would get two conflicting alternate sets (the
+    // second silently overwriting the first → return-tag errors). Keep the
+    // first cluster, drop the later one, and say so in the run log.
+    const dup = members.find(m => map.has(m.loc));
+    if (dup) {
+      console.warn(`  ⚠️  hreflang: ${dup.loc} already clustered — skipping cluster [${members.map(m => m.locale).join(',')}]`);
+      return;
+    }
     const fallback = (members.find(m => m.locale === 'en') || members[0]).loc;
     const withDefault = [...alts, { hreflang: 'x-default', href: fallback }];
     for (const m of members) map.set(m.loc, withDefault);
@@ -178,27 +205,12 @@ function buildAlternatesMap(handleSets, postSets = {}) {
     register(members);
   }
 
-  // Same-handle EN ↔ US mirrors — the US store was cloned wholesale from www
-  // (Sep 2026), so any page or post whose handle exists on both stores and is
-  // not already clustered above is the same document in two lexicons.
-  if (handleSets.en && handleSets.us) {
-    for (const handle of handleSets.us) {
-      if (!handleSets.en.has(handle)) continue;
-      const loc = pageLoc('us', handle);
-      if (map.has(loc) || map.has(pageLoc('en', handle))) continue;
-      register([{ locale: 'en', loc: pageLoc('en', handle) }, { locale: 'us', loc }]);
-    }
-  }
-  if (postSets.en && postSets.us) {
-    for (const handle of postSets.us) {
-      if (!postSets.en.has(handle)) continue;
-      const loc = postLoc('us', handle);
-      if (map.has(loc) || map.has(postLoc('en', handle))) continue;
-      register([{ locale: 'en', loc: postLoc('en', handle) }, { locale: 'us', loc }]);
-    }
-  }
-
   // Pattern-detected clusters (team pages + RTP templates), grouped by shared slug.
+  // These run BEFORE the same-handle EN ↔ US pass: team and RTP pages carry the
+  // same handle on en and us, so that pass would claim the en/us URLs first and
+  // the guard in register() would then drop the whole 5-locale cluster (it did,
+  // in the 25 Sep 2026 dry run: it.momuto.com fell from 144 to 31 URLs with
+  // hreflang).
   const teams = new Map();  // slug → { [locale]: handle }
   const rtp = new Map();
   for (const locale of LOCALES) {
@@ -219,7 +231,53 @@ function buildAlternatesMap(handleSets, postSets = {}) {
     register(Object.entries(byLocale).map(([locale, handle]) => ({ locale, loc: pageLoc(locale, handle) })));
   }
 
+  // Same-handle EN ↔ US mirrors — the US store was cloned wholesale from www
+  // (Sep 2026), so any page or post whose handle exists on both stores and is
+  // not already clustered above is the same document in two lexicons.
+  if (handleSets.en && handleSets.us) {
+    for (const handle of handleSets.us) {
+      if (!handleSets.en.has(handle)) continue;
+      const loc = pageLoc('us', handle);
+      if (map.has(loc) || map.has(pageLoc('en', handle))) continue;
+      register([{ locale: 'en', loc: pageLoc('en', handle) }, { locale: 'us', loc }]);
+    }
+  }
+  if (postSets.en && postSets.us) {
+    for (const handle of postSets.us) {
+      if (!postSets.en.has(handle)) continue;
+      const loc = postLoc('us', handle);
+      if (map.has(loc) || map.has(postLoc('en', handle))) continue;
+      register([{ locale: 'en', loc: postLoc('en', handle) }, { locale: 'us', loc }]);
+    }
+  }
+
   return map;
+}
+
+// Products do NOT page with page/pagesize: the endpoint ignores both and
+// always returns its first 10 (docs/oemsaas-api-notes.md: cursor-paginated,
+// limit + since_id). Until 25 Sep 2026 every sitemap listed only 10
+// products per store. Throttled GET must throw, never read as "empty".
+async function fetchProducts(domain) {
+  const items = [];
+  let since = '';
+  for (let i = 0; i < 100; i++) {
+    const url = `${domain.host}/products?limit=100${since ? `&since_id=${since}` : ''}`;
+    const response = await fetch(url, { headers: { token: domain.token } });
+    const result = await response.json();
+    if (!response.ok || result.code !== 0) {
+      throw new Error(`products (since_id=${since || '-'}) on ${domain.label}: ${JSON.stringify(result).slice(0, 200)}`);
+    }
+    const d = result.data;
+    const list = (d && (d.products || d.list)) || (Array.isArray(d) ? d : []);
+    if (!Array.isArray(list) || list.length === 0) break;
+    items.push(...list);
+    const last = list[list.length - 1];
+    if (!last || !last.id || String(last.id) === since) break;
+    since = String(last.id);
+    await new Promise(r => setTimeout(r, 300));
+  }
+  return items;
 }
 
 async function fetchAll(domain, endpoint) {
@@ -341,16 +399,31 @@ async function rebuildDomain(domain, fetched, alternatesMap) {
   // shows the customer's actual design) must NEVER reach the sitemap: they are
   // unpolished customer designs and thin near-duplicate pages. Tagged via
   // inner_title at creation; title-prefix match is the fallback net.
-  let skippedPreviews = 0;
+  // Since 25 Sep 2026 the full catalogue is fetched (see fetchProducts), so
+  // it also filters what only ever existed past the first 10: unpublished
+  // products, €0 per-order mockups and CJK test junk.
   const PREVIEW_TITLE = /^(Your custom design|Votre design personnalisé|Tu diseño personalizado|Il tuo design personalizzato)\b/;
+  const CJK = /[\u3400-\u9fff\uf900-\ufaff]/;
+  // Checkout add-ons and test products: live on the store, but thin pages
+  // nobody should land on from search (seen in the 25 Sep 2026 dry run).
+  const EXCLUDE_HANDLES = new Set(['test', 'long-sleeves', 'polo-collar', 'fast-lane']);
+  const skipped = { preview: 0, unpublished: 0, zeroPrice: 0, cjk: 0, excluded: 0 };
+  let includedProducts = 0;
   for (const p of products) {
     const slug = getSlug(p);
     if (!slug) continue;
     const inner = String(p.inner_title || '');
-    if (inner.includes('3d-preview') || PREVIEW_TITLE.test(String(p.title || ''))) { skippedPreviews++; continue; }
+    const title = String(p.title || '');
+    if (inner.includes('3d-preview') || PREVIEW_TITLE.test(title)) { skipped.preview++; continue; }
+    if (p.status !== undefined && String(p.status) !== '1') { skipped.unpublished++; continue; }
+    const price = p.price !== undefined ? Number(p.price) : (p.variants && p.variants[0] && p.variants[0].price !== undefined ? Number(p.variants[0].price) : NaN);
+    if (price === 0) { skipped.zeroPrice++; continue; }
+    if (CJK.test(`${title} ${slug}`)) { skipped.cjk++; continue; }
+    if (EXCLUDE_HANDLES.has(slug)) { skipped.excluded++; continue; }
+    includedProducts++;
     entries.push({ loc: `${domain.baseUrl}/products/${slug}`, lastmod: getLastmod(p, today), changefreq: 'monthly', priority: '0.8' });
   }
-  if (skippedPreviews) console.log(`  (excluded ${skippedPreviews} 3d-preview order products from sitemap)`);
+  console.log(`  products: ${products.length} listed, ${includedProducts} in sitemap; skipped ${JSON.stringify(skipped)}`);
 
   // Blog index + posts → /blogs/[handle]
   entries.push({ loc: `${domain.baseUrl}/blogs`, lastmod: today, changefreq: 'weekly', priority: '0.7' });
@@ -371,8 +444,16 @@ async function rebuildDomain(domain, fetched, alternatesMap) {
   console.log(`  Built sitemap with ${entries.length} URLs (${clustered} with hreflang)`);
 
   if (DRY_RUN) {
-    console.log(`\n--- DRY RUN: sitemap.xml for ${domain.label} ---`);
-    console.log(xml);
+    // Compact by default: the full XML of five stores is ~500 KB of log and
+    // buries the summary lines. DRY_RUN_FULL=1 prints the XML as before.
+    if (process.env.DRY_RUN_FULL === '1') {
+      console.log(`\n--- DRY RUN: sitemap.xml for ${domain.label} ---`);
+      console.log(xml);
+    } else {
+      const productLocs = entries.filter(e => e.loc.includes('/products/')).map(e => e.loc.replace(domain.baseUrl, ''));
+      console.log(`  DRY RUN: ${productLocs.length} product URLs would be listed:`);
+      for (const l of productLocs) console.log(`    ${l}`);
+    }
     return;
   }
 
@@ -399,7 +480,7 @@ async function main() {
     const [pages, posts, products, collections] = await Promise.all([
       fetchAll(domain, 'pages'),
       fetchAll(domain, 'posts'),
-      fetchAll(domain, 'products'),
+      fetchProducts(domain),
       fetchAll(domain, 'collections'),
     ]);
     fetched[locale] = { pages, posts, products, collections };

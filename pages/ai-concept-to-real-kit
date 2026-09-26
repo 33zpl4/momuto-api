@@ -23,27 +23,58 @@
     {
       "@type": "Question",
       "name": "Can an AI-generated football kit design actually be manufactured?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes — but not directly. AI renders from ChatGPT, Midjourney or Gemini are images, not production files: gradients aren't colour-managed, patterns don't wrap around seams, and shapes aren't vectorized. MOMUTO's designers rebuild the concept as a production-ready dye-sublimation file while preserving the original vision, then manufacture it on a polyester-elastane performance fabric. First mockup in 24-48h; €15 deposit, credited in full to orders of 5 or more jerseys." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — but not directly. AI renders from ChatGPT, Midjourney or Gemini are images, not production files: gradients aren't colour-managed, patterns don't wrap around seams, and shapes aren't vectorized. MOMUTO's designers rebuild the concept as a production-ready dye-sublimation file while preserving the original vision, then manufacture it on a polyester-elastane performance fabric. First mockup in 24-48h; €15 deposit, credited in full to orders of 5 or more jerseys."
+      }
     },
     {
       "@type": "Question",
       "name": "Which AI tools can I use to create my jersey concept?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Any of them. Teams send us concepts from ChatGPT, Midjourney, Gemini, DALL·E and niche kit-generator tools — as well as hand-drawn sketches, Photoshop mockups and photos of old jerseys. If you can show it, our designers can rebuild it for real fabric." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Any of them. Teams send us concepts from ChatGPT, Midjourney, Gemini, DALL·E and niche kit-generator tools — as well as hand-drawn sketches, Photoshop mockups and photos of old jerseys. If you can show it, our designers can rebuild it for real fabric."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my AI kit concept have a crown on it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's one of the AI habits we see most: ChatGPT adds a crown to kit concepts very often — on the chest, the sleeve, the neck, the shorts — even when nobody asked for one. Part of our designers' job is to point these quirks out. We ask whether the crown actually means something to your team; if it doesn't, we replace it with something that is truly yours — your crest, a local landmark, a nickname, an inside joke. A concept should look like your team, not like the tool that drew it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My AI concept shows printed socks and brand labels. Can you make those?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The labels, yes. Neck and hem tags are a favourite AI detail, and we generally recreate them in sublimation, printed into the fabric rather than sewn on, and tell you exactly how they'll look. The socks, no: our socks are plain matching team socks in most colours (€3.90 a pair, optional per player), not custom-printed. Teams send us fully printed socks all the time, so we flag it before anything is made, never after."
+      }
     },
     {
       "@type": "Question",
       "name": "Do I need to order for a whole team, or can I get a single jersey made?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No minimum order. Most of our recreations are for clubs and amateur teams, but we also make single jerseys — hobbyists and kit designers bringing a portfolio piece to life, surprise gifts with a name and number, and stag or hen party shirts. The €15 design deposit is credited in full on orders of 5 or more jerseys." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No minimum order. Most of our recreations are for clubs and amateur teams, but we also make single jerseys — hobbyists and kit designers bringing a portfolio piece to life, surprise gifts with a name and number, and stag or hen party shirts. The €15 design deposit is credited in full on orders of 5 or more jerseys."
+      }
     },
     {
       "@type": "Question",
       "name": "Who owns the final design?",
-      "acceptedAnswer": { "@type": "Answer", "text": "You do. The recreation is built from your concept for your team, and we don't resell your design to anyone else. Finished projects may be featured as before/after case studies in our gallery — just tell us if you'd rather not be featured, and we won't." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You do. The recreation is built from your concept for your team, and we don't resell your design to anyone else. Finished projects may be featured as before/after case studies in our gallery — just tell us if you'd rather not be featured, and we won't."
+      }
     },
     {
       "@type": "Question",
       "name": "What does it cost to turn an AI concept into a real kit?",
-      "acceptedAnswer": { "@type": "Answer", "text": "The design work starts with a €15 deposit that puts a designer on your concept — illustration, vectorization and revisions until it's right. The deposit is credited in full to any order of 5 or more jerseys, so for a real team order the design work effectively costs nothing. Jerseys themselves run from €21.90/unit at 10+ down from €38.90 for a single." }
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The design work starts with a €15 deposit that puts a designer on your concept — illustration, vectorization and revisions until it's right. The deposit is credited in full to any order of 5 or more jerseys, so for a real team order the design work effectively costs nothing. Jerseys themselves run from €21.90/unit at 10+ down from €38.90 for a single."
+      }
     }
   ]
 }
@@ -115,7 +146,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 
 <div class="wrap">
 <div class="def">
-<p>MOMUTO is a custom football kit manufacturer that specialises in turning AI-generated jersey concepts into real, production-ready kits. A designer takes your render &mdash; from any AI tool, sketch or reference &mdash; vectorizes it, adapts it to real fabric and seams, and manufactures it with full dye-sublimation printing. The design work starts at a &euro;15 deposit, credited in full to orders of 5 or more jerseys.</p>
+<p>MOMUTO is a custom football kit manufacturer that specialises in turning AI-generated jersey concepts into real, production-ready kits. A designer takes your render &mdash; from any AI tool, sketch or reference &mdash; vectorizes it, adapts it to real fabric and seams, and manufactures it with full dye-sublimation printing. Design, taste and technology under one roof: in-house AI-assisted flows speed up parts of the recreation, and a professional designer makes every design decision and signs off every file. The design work starts at a &euro;15 deposit, credited in full to orders of 5 or more jerseys.</p>
 <div class="src">What we do, in one paragraph</div>
 </div>
 </div>
@@ -203,6 +234,8 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2 style="text-align:center;margin-bottom:2rem">Questions Teams Ask Us</h2>
 <details><summary>Can an AI-generated kit design actually be manufactured?</summary><p>Yes &mdash; but not directly. AI renders are images, not production files: gradients aren't colour-managed, patterns don't wrap around seams, shapes aren't vectorized. Our designers rebuild the concept as a production-ready file while preserving your vision, then we manufacture it. First mockup in 24&ndash;48h.</p></details>
 <details><summary>Which AI tools can I use?</summary><p>Any. ChatGPT, Midjourney, Gemini, DALL&middot;E, niche kit generators &mdash; plus sketches, Photoshop files and photos of old jerseys. If you can show it, we can rebuild it.</p></details>
+<details><summary>Why does my AI kit concept have a crown on it?</summary><p>It's one of the AI habits we see most: ChatGPT adds a crown to kit concepts very often &mdash; on the chest, the sleeve, the neck, the shorts &mdash; even when nobody asked for one. Part of our designers' job is to point these quirks out. We ask whether the crown actually means something to your team; if it doesn't, we replace it with something that is truly yours &mdash; your crest, a local landmark, a nickname, an inside joke. A concept should look like your team, not like the tool that drew it.</p></details>
+<details><summary>My AI concept shows printed socks and brand labels. Can you make those?</summary><p>The labels, yes. Neck and hem tags are a favourite AI detail, and we generally recreate them in sublimation, printed into the fabric rather than sewn on, and tell you exactly how they'll look. The socks, no: our socks are plain matching team socks in most colours (&#8364;3.90 a pair, optional per player), not custom-printed. Teams send us fully printed socks all the time, so we flag it before anything is made, never after.</p></details>
 <details><summary>Can I order just one jersey?</summary><p>Yes &mdash; no minimum order. Single jerseys for gifts, portfolio pieces and collectors are common. The &euro;15 design deposit is credited in full on orders of 5 or more jerseys.</p></details>
 <details><summary>Who owns the final design?</summary><p>You do. We build it from your concept for your team and never resell it. Finished projects may appear as before/after case studies in our gallery &mdash; tell us if you'd rather not be featured, and we won't.</p></details>
 <details><summary>What does it cost?</summary><p>&euro;15 to put a designer on your concept &mdash; credited in full to orders of 5+ jerseys. Jerseys from &euro;21.90/unit at 10+ (&euro;38.90 single).</p></details>
