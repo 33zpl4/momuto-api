@@ -11,6 +11,98 @@ an agent with only repo access + git can complete the task without guessing.
 
 ---
 
+## 0. Delegation rule + Haiku runbook (read this first)
+
+**Owner ruling (26 Sep 2026): adding a team, updating a team's images, and
+adding/refreshing a team in the gallery are ALWAYS delegated to a Haiku
+subagent** (`Agent` tool, `model: "haiku"`). The orchestrating session does not
+do this work itself; it passes the user's message through and relays the
+subagent's report. This document is the subagent's complete instructions —
+if something here is ambiguous, fix the doc, not the prompt.
+
+### 0.1 What the orchestrator sends the Haiku agent
+
+```
+Read ADD_TEAM.md in the repo at <repo path> and follow §0.3 exactly.
+Working branch: <branch>. Task (user's words, verbatim):
+<paste the user's message: team name, front/back URLs, description,
+ gallery yes/no>
+Report back in the §0.4 format.
+```
+
+Nothing else is needed. Do not paraphrase the user's description.
+
+### 0.2 Decide the task type from the user's message
+
+| User says | Task | Commit subject |
+|---|---|---|
+| new team + "push to gallery" / "add to gallery" | ADD + gallery | `Add <TEAM> team config and add-to-gallery` |
+| new team + "do not push to gallery" (or says nothing about the gallery) | ADD only | `Add <TEAM> team config` |
+| existing team, new images, "also in gallery" / team is already in the gallery | UPDATE + gallery | `Update <TEAM> front and back images and add-to-gallery` |
+| existing team, new images, no gallery | UPDATE only | `Update <TEAM> front and back images` |
+
+If the gallery intent is unclear for a NEW team, do **not** add it to the
+gallery; say so in the report. An existing team's folder is found with
+`ls teams | grep -i <word>`.
+
+### 0.3 Steps (do them in order, one team per commit)
+
+1. `cd` into the repo, `git fetch origin`, `git checkout <branch>`,
+   `git merge --no-edit origin/main` (keeps the branch current; the CMS bot
+   pushes to main often). Do not rebase or force-push.
+2. **ADD:** create `teams/<slug>/config.json` (slug rules §2, fields §3).
+   **UPDATE:** edit only `image_url` / `back_image_url` in the existing
+   config and set `"updated_at": "YYYY-MM-DD"` (today). Leave every other field.
+   Edit the JSON with a script (python `json.load`/`json.dump(indent=2,
+   ensure_ascii=False)`) or a heredoc — never hand-splice quotes.
+3. Description (ADD only): the user's text, one paragraph, with markdown
+   `**bold**` markers removed and curly apostrophes `’` replaced by `'`.
+   Do not rewrite it.
+4. Colours (ADD only), from the description — the sandbox CANNOT open the
+   image URLs (`curl` returns `CONNECT tunnel failed, response 403`; don't
+   retry). `primary` = base colour. `secondary` = `accent` = the strongest
+   contrast colour (§4). If the kit has both a dark trim and white details,
+   prefer white. Uppercase 6-digit hex.
+5. Validate: `node -e "JSON.parse(require('fs').readFileSync('teams/<slug>/config.json'))"`.
+6. `git add teams/<slug>/config.json` (that file ONLY), commit with the §0.2
+   subject + the attribution trailer from the session's system rules, then
+   `git push -u origin <branch>`. The push itself triggers the deploy
+   (`create-team-page.yml`, no branch filter).
+7. Wait ~100 s (run `sleep 100` as a background Bash command and wait for
+   its notification — foreground `sleep` is blocked), then check the run:
+   GitHub MCP `actions_list` method `list_workflow_runs`, resource_id
+   `create-team-page.yml`, `perPage: 1`. Its `display_title` must equal your
+   commit subject. If `status` isn't `completed`, wait another 60 s.
+8. Read the log (`get_job_logs` with the job id from `list_workflow_jobs`,
+   `return_content: true`, `tail_lines: 60`) and check §10:
+   - ends with `✅ All 5 stores updated successfully.`
+   - ADD: `✓ Created on` ×5. UPDATE: `✓ Updated on` for existing stores.
+   - gallery requested: `✓ Gallery updated on` ×5. Not requested: no
+     gallery lines at all.
+   - `⚠️ Could not fetch sitemap … 404` is a known, harmless warning.
+9. On failure, match the log against the failure table in §10 and follow its
+   recovery. If nothing matches, stop and report the error line verbatim —
+   do not edit scripts or workflows (that is the orchestrator's job).
+
+**Re-deploying without a new commit** (e.g. after credits were topped up):
+GitHub MCP `actions_run_trigger`, method `run_workflow`, workflow_id
+`deploy-team-manual.yml`, ref `<branch>`, inputs
+`{"team_slug": "<slug>", "update_gallery": "true"}` (or `"false"`). Then
+check that run the same way (list runs for `deploy-team-manual.yml`).
+Re-running a failed job via the API returns 403; dispatching is fine.
+
+### 0.4 Report format (what Haiku returns)
+
+```
+Team: <name>  slug: <slug>  task: ADD|UPDATE  gallery: yes|no
+Commit: <sha> "<subject>"   Run: <html_url>  result: success|failure
+Colours: primary <hex>, accent <hex> — <one-line reason>   (ADD only)
+Log check: <Created/Updated counts, gallery lines present/absent>
+Problems: <none | verbatim error line + which §10 row it matches>
+```
+
+---
+
 ## 1. What the automation does (and doesn't)
 
 - **Trigger:** `.github/workflows/create-team-page.yml` runs on every **push**
@@ -329,6 +421,8 @@ Verification notes learned the hard way:
 | Symptom in the log | Cause | Recovery |
 |---|---|---|
 | `400 invalid_request_error: "Your credit balance is too low"` on every store, run dies in ~15s | Anthropic API credits exhausted | Nothing was written (the failure precedes every CMS call). **Do not retry** — tell the user to top up, then redeploy. |
+| `Cannot read properties of undefined (reading 'trim')` on every store | Model returned a thinking block first (fixed 24 Sep 2026: `responseText()` in `generate-and-deploy.js`) | If it comes back, the fix was lost — report to the orchestrator; don't patch it yourself. |
+| `401 Token-Error` on one store only (manual workflow) | That workflow's `env:` is missing the store's `OEMSAAS_TOKEN_*` (US was fixed 24 Sep 2026) | Report; the orchestrator adds the secret line to the workflow. |
 | One store's gallery step gets HTML instead of JSON | Transient API-management page from the CMS | Pages are live; only that store's card is missing. Push a redeploy commit with `add-to-gallery`. |
 
 ---

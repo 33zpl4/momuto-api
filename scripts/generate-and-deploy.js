@@ -211,12 +211,21 @@ Return ONLY the JSON object, no markdown, no code fences, no other text.`;
   const response = await withRetry(() => client.messages.create({
     model: 'claude-sonnet-5',
     max_tokens: 1000,
+    thinking: { type: 'disabled' },
     messages: [{ role: 'user', content: prompt }]
   }));
 
-  const text = response.content[0].text.trim();
+  const text = responseText(response);
   const clean = text.replace(/^```json\n?/, '').replace(/^```\n?/, '').replace(/\n?```$/, '');
   return JSON.parse(clean);
+}
+
+// claude-sonnet-5 thinks by default, so content[0] can be a thinking block
+// rather than the answer. Read the text block and fail loudly if there is none.
+function responseText(response) {
+  const block = response.content.find(b => b.type === 'text');
+  if (!block) throw new Error(`No text in model response (stop_reason: ${response.stop_reason})`);
+  return block.text.trim();
 }
 
 async function generateGalleryDesc(config, lang) {
@@ -239,10 +248,11 @@ Return ONLY the caption text, nothing else. No quotes, no punctuation at the end
   const response = await withRetry(() => client.messages.create({
     model: 'claude-sonnet-5',
     max_tokens: 50,
+    thinking: { type: 'disabled' },
     messages: [{ role: 'user', content: prompt }]
   }));
 
-  return response.content[0].text.trim().replace(/^["']|["']$/g, '').replace(/\.$/, '');
+  return responseText(response).replace(/^["']|["']$/g, '').replace(/\.$/, '');
 }
 
 // --- UI contrast -----------------------------------------------------------

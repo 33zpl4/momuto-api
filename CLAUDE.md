@@ -45,6 +45,17 @@ Read the doc that owns a topic BEFORE editing that surface.
 - `docs/design-page-template.md`, `docs/rtp-collection.md` (historical),
   `docs/it-site-recovery.md`, `docs/10x-plan.md`.
 
+## Team kits + gallery: ALWAYS delegate to Haiku
+
+Adding a team, updating a team's images, and adding/refreshing a team in the
+gallery are **always** delegated to a subagent on Haiku (`Agent` tool,
+`model: "haiku"`) — owner ruling 26 Sep 2026, overrides the Sonnet default
+below. `ADD_TEAM.md` §0 is the subagent's full runbook, including the exact
+prompt to send (§0.1); pass the user's message verbatim and relay the §0.4
+report. When a run fails for a reason outside the runbook, the orchestrator
+fixes scripts/workflows and documents the new failure mode in `ADD_TEAM.md`
+§10 so the next Haiku agent can handle it.
+
 ## Hard rules that have burned us
 
 1. **CMS API**: PUT replaces the whole object — send every field back.
