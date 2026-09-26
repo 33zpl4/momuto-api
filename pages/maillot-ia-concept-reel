@@ -38,6 +38,14 @@
     },
     {
       "@type": "Question",
+      "name": "Je l’ai créé avec un générateur de maillots IA. Pouvez-vous le fabriquer ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Les générateurs de maillots IA vendent l’image (une maquette 4K, un essayage virtuel), pas le maillot. Envoyez-nous votre export : nos designers en font des fichiers de production, avec vectoriel par pièce, gradation par taille et couleurs calibrées pour la sublimation. S’il part d’un modèle de sélection ou de club, nous remplaçons l’écusson officiel par le vôtre."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Pourquoi mon maillot créé par IA a-t-il une couronne ?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -234,6 +242,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:400;text-transform:uppercase;letter-s
 <h2 style="text-align:center;margin-bottom:2rem">Les Questions qu'on Nous Pose</h2>
 <details><summary>Un design de maillot g&eacute;n&eacute;r&eacute; par IA peut-il vraiment &ecirc;tre fabriqu&eacute; ?</summary><p>Oui &mdash; mais pas directement. Les rendus IA sont des images, pas des fichiers de production : d&eacute;grad&eacute;s non calibr&eacute;s, motifs qui ignorent les coutures, formes non vectoris&eacute;es. Nos designers reconstruisent le concept en fichier pr&ecirc;t &agrave; produire en pr&eacute;servant votre vision, puis nous le fabriquons. Premi&egrave;re maquette en 24&ndash;48h.</p></details>
 <details><summary>Quels outils IA puis-je utiliser ?</summary><p>Tous. ChatGPT, Midjourney, Gemini, DALL&middot;E, g&eacute;n&eacute;rateurs sp&eacute;cialis&eacute;s &mdash; mais aussi croquis, fichiers Photoshop et photos d'anciens maillots. Si vous pouvez le montrer, nous pouvons le reconstruire.</p></details>
+<details><summary>Je l&rsquo;ai créé avec un générateur de maillots IA. Pouvez-vous le fabriquer ?</summary><p>Oui. Les générateurs de maillots IA vendent l&rsquo;image (une maquette 4K, un essayage virtuel), pas le maillot. Envoyez-nous votre export : nos designers en font des fichiers de production, avec vectoriel par pièce, gradation par taille et couleurs calibrées pour la sublimation. S&rsquo;il part d&rsquo;un modèle de sélection ou de club, nous remplaçons l&rsquo;écusson officiel par le vôtre.</p></details>
 <details><summary>Pourquoi mon maillot cr&#233;&#233; par IA a-t-il une couronne ?</summary><p>C'est l'une des habitudes de l'IA que nous voyons le plus : ChatGPT ajoute tr&#232;s souvent une couronne aux concepts de maillot &mdash; sur la poitrine, la manche, le col, le short &mdash; m&#234;me quand personne ne l'a demand&#233;e. Une partie du travail de nos designers consiste &#224; signaler ces tics. Nous vous demandons si la couronne a un sens pour votre &#233;quipe ; sinon, nous la rempla&#231;ons par quelque chose de vraiment &#224; vous &mdash; votre &#233;cusson, un lieu de votre ville, un surnom, une blague d'&#233;quipe. Un concept doit ressembler &#224; votre &#233;quipe, pas &#224; l'outil qui l'a dessin&#233;.</p></details>
 <details><summary>Mon concept IA montre des chaussettes imprim&#233;es et des &#233;tiquettes de marque. Pouvez-vous les faire ?</summary><p>Les &#233;tiquettes, oui. Les &#233;tiquettes de col et de bas de maillot sont un d&#233;tail favori de l'IA ; nous les recr&#233;ons g&#233;n&#233;ralement en sublimation, imprim&#233;es dans le tissu plut&#244;t que cousues, et nous vous montrons exactement le rendu. Les chaussettes, non : nos chaussettes sont des chaussettes d'&#233;quipe unies assorties, dans la plupart des couleurs (3,90 &#8364; la paire, en option par joueur), pas personnalis&#233;es. Les &#233;quipes nous envoient souvent des chaussettes enti&#232;rement imprim&#233;es : nous le signalons avant de fabriquer quoi que ce soit, jamais apr&#232;s.</p></details>
 <details><summary>Puis-je commander un seul maillot ?</summary><p>Oui &mdash; pas de commande minimale. Maillots &agrave; l'unit&eacute; pour cadeaux, pi&egrave;ces de portfolio et collectionneurs. L'acompte design de 15&nbsp;&euro; est int&eacute;gralement cr&eacute;dit&eacute; sur les commandes de 5 maillots ou plus.</p></details>
