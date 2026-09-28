@@ -66,7 +66,10 @@ gallery; say so in the report. An existing team's folder is found with
 5. Validate: `node -e "JSON.parse(require('fs').readFileSync('teams/<slug>/config.json'))"`.
 6. `git add teams/<slug>/config.json` (that file ONLY), commit with the §0.2
    subject + the attribution trailer from the session's system rules, then
-   `git push -u origin <branch>`. The push itself triggers the deploy
+   `git push -u origin <branch>` — exactly this form. It is pre-approved in
+   `.claude/settings.json` (owner ruling 28 Sep 2026: agents push `claude/*`
+   branches for team work without asking). Do NOT stop to ask for approval;
+   if the push is still refused, report the refusal verbatim. The push itself triggers the deploy
    (`create-team-page.yml`, no branch filter).
 7. Wait ~100 s (run `sleep 100` as a background Bash command and wait for
    its notification — foreground `sleep` is blocked), then check the run:
