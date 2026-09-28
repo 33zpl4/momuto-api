@@ -1,0 +1,76 @@
+{
+  "at": "2026-09-28T22:09:22.343Z",
+  "tileBase": "https://design.momuto.com/3d-configurator/asset/shop/",
+  "entries": [
+    {
+      "store": "en",
+      "kind": "fastlane",
+      "id": "10622488",
+      "title": "Fast lane",
+      "images_before": [
+        {
+          "image_id": 32479825,
+          "src": "https://cdn.staticsoe.com/pics/e6a6400ba0869f396fd91765445a4749a768437f8a621e48c43a2853cd953896.jpg",
+          "position": 0,
+          "alt": "Fast lane"
+        }
+      ]
+    },
+    {
+      "store": "es",
+      "kind": "fastlane",
+      "id": "11081200",
+      "title": "Vía rápida",
+      "images_before": [
+        {
+          "image_id": 38799670,
+          "src": "https://cdn.staticsoe.com/pics/779cf7e3e57a420eb29367e2781a9643b2d73438513260e5aa589cf3e782b3dd.jpg",
+          "position": 0,
+          "alt": "Vía rápida"
+        }
+      ]
+    },
+    {
+      "store": "fr",
+      "kind": "fastlane",
+      "id": "10211084",
+      "title": "Voie rapide",
+      "images_before": [
+        {
+          "image_id": 34270451,
+          "src": "https://cdn.staticsoe.com/pics/2cb10a0b0e8d3a67c7e768edce1a31d321097b8e26180eea525f683bf4df933b.jpg",
+          "position": 0,
+          "alt": "Voie rapide"
+        }
+      ]
+    },
+    {
+      "store": "it",
+      "kind": "fastlane",
+      "id": "17432801",
+      "title": "Corsia veloce",
+      "images_before": [
+        {
+          "image_id": 67608156,
+          "src": "https://cdn.statics-cdn-abc.com/pics/6005bb82dccaf4b45e3555c5750c2d15d0e983085d5b90931f42083c26db0d3e.jpg",
+          "position": 0,
+          "alt": "Corsia veloce"
+        }
+      ]
+    },
+    {
+      "store": "us",
+      "kind": "fastlane",
+      "id": "17370625",
+      "title": "Fast lane",
+      "images_before": [
+        {
+          "image_id": 78066578,
+          "src": "https://cdn.statics-cdn-abc.com/pics/56643e1d7c881e2208d1449056e34f5f5bd2e83025faaecc3f76c635db3f2b2e.jpg",
+          "position": 0,
+          "alt": "Fast lane"
+        }
+      ]
+    }
+  ]
+}
