@@ -55,6 +55,9 @@ prompt to send (§0.1); pass the user's message verbatim and relay the §0.4
 report. When a run fails for a reason outside the runbook, the orchestrator
 fixes scripts/workflows and documents the new failure mode in `ADD_TEAM.md`
 §10 so the next Haiku agent can handle it.
+Pushing `claude/*` branches is pre-approved in `.claude/settings.json`
+(owner ruling 28 Sep 2026) — no per-team push approval; the Haiku agent
+pushes and verifies the run itself.
 
 ## Hard rules that have burned us
 
