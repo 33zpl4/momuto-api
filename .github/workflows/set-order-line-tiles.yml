@@ -1,0 +1,76 @@
+name: Set order-line tile images
+
+# Replaces the catalog image of the generic billable / option products (jersey, shorts,
+# socks, long sleeves, polo collar, fast lane; opt-in: basketball) with the v2 order-line
+# tiles from design-momuto (3d-configurator/asset/shop/order-tile-*.png, served from
+# design.momuto.com after that repo's main deploys). Dispatch-only. DRY RUN BY DEFAULT: it
+# prints, per store and product, what it would change and writes nothing.
+#
+# Order of operations:
+#   1. merge the design-momuto tiles PR (its Deploy SFTP run must finish) — until then every
+#      product is skipped with "tile not reachable"
+#   2. run this with dry_run=true, read the plan
+#   3. run with dry_run=false; it PUTs (read-modify-write), reads every product back
+#      (title, status, variants, prices, image) and reports whether variant ids were
+#      regenerated; the previous image lists are committed as
+#      cms/order-line-tiles/rollback-<timestamp>.json
+#   4. undo: run with dry_run=false and rollback_file=cms/order-line-tiles/rollback-….json
+# Run on `main` (the commit-back rebases onto the branch it ran on).
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — print the plan, write nothing'
+        required: true
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+      kinds:
+        description: 'Kinds (comma list). Opt-in extras: basketjersey,basketshorts'
+        required: false
+        default: 'jersey,shorts,socks,longsleeves,polocollar,fastlane'
+      langs:
+        description: 'Stores (comma list)'
+        required: false
+        default: 'en,es,fr,it,us'
+      rollback_file:
+        description: 'Restore from a rollback file instead (e.g. cms/order-line-tiles/rollback-2026-09-29T08-00-00.json)'
+        required: false
+        default: ''
+
+jobs:
+  tiles:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Set tile images
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          KINDS: ${{ inputs.kinds }}
+          LANGS: ${{ inputs.langs }}
+          ROLLBACK_FILE: ${{ inputs.rollback_file }}
+        run: node scripts/set-order-line-tiles.js
+      - name: Commit the rollback file
+        if: ${{ always() && inputs.dry_run == 'false' && inputs.rollback_file == '' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cms/order-line-tiles/rollback-*.json
+          if git diff --cached --quiet; then
+            echo "nothing new"
+            exit 0
+          fi
+          git commit -m "Order-line tile rollout: rollback file [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
