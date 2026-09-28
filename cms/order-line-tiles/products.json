@@ -1,0 +1,20 @@
+{
+  "_comment": "Which platform product gets which order-line tile (design-momuto scripts/order-line-tiles, v2). Option products (longsleeves, polocollar, fastlane) also read cms/long-sleeves|polo-collar|fast-lane/ids.json at run time and warn on a mismatch; ids here fill the gaps (US long sleeves). Generic garment ids come from design-momuto server-patches/checkSumbit-*.html (goodsInfo) and cms/products/us. Basketball ids: cms/product-3d-pointers + cms/basketball-shorts/ids.json.",
+  "tileBase": "https://design.momuto.com/3d-configurator/asset/shop/",
+  "tileLang": { "en": "en", "es": "es", "fr": "fr", "it": "it", "us": "en" },
+  "products": {
+    "jersey":       { "en": "4174483",  "es": "3800026",  "fr": "4163096",  "us": "16913785" },
+    "shorts":       { "en": "4174486",  "es": "3800028",  "fr": "4163097",  "us": "16913798" },
+    "socks":        { "en": "4174485",  "es": "3800023",  "fr": "4163094",  "us": "16913789" },
+    "longsleeves":  { "en": "10619367", "es": "11070065", "fr": "10210832", "it": "16672932", "us": "16913602" },
+    "polocollar":   { "en": "10622437", "es": "11072429", "fr": "10210939", "it": "17251848", "us": "17223797" },
+    "fastlane":     { "en": "10622488", "es": "11081200", "fr": "10211084", "it": "17432801", "us": "17370625" },
+    "basketjersey": { "en": "8209895",  "es": "7721139",  "fr": "8807460",  "us": "16913848" },
+    "basketshorts": { "en": "10622503", "es": "11081205", "fr": "10211092", "us": "17081345" }
+  },
+  "optionIdFiles": {
+    "longsleeves": "cms/long-sleeves/ids.json",
+    "polocollar": "cms/polo-collar/ids.json",
+    "fastlane": "cms/fast-lane/ids.json"
+  }
+}
