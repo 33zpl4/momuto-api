@@ -88,4 +88,11 @@ t('buyer email: a fixed-price kit order lists jerseys and shorts', () => {
   const html = emailConfirmation3D({ lang: 'es', name: 'x', team: 'x', ref: 'r', qty: c.jerseys, extras: { shorts: c.shorts }, total: '269', currency: 'EUR', designs: [] }).html;
   assert(/Camisetas<\/td><td[^>]*>10</.test(html) && /Pantalones<\/td><td[^>]*>10</.test(html));
 });
+
+t('"Promo" fixed-price titles: kit stays a kit, jersey stays a jersey', () => {
+  assert.strictEqual(classifyLine({ title: 'Kit Completo Pecados Capitales · Promo' }), 'kit');
+  assert.strictEqual(classifyLine({ title: 'Camiseta Pecados Capitales · Promo' }), 'jersey');
+  const c = countLines([preview, L(1, 'Kit Completo Pecados Capitales · Promo', 4, '26.90'), L(2, 'Camiseta Pecados Capitales · Promo', 2, '21.90')], isPreview);
+  assert.strictEqual(c.jerseys, 6); assert.strictEqual(c.shorts, 4);
+});
 console.log(`\n${pass} passed`);
