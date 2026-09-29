@@ -9,14 +9,15 @@ const preview = { product_id: 99, title: 'Your custom design — order c4zw4sv0p
 const isPreview = (it) => { try { return JSON.parse(it.inner_title || '{}').type === '3d-preview'; } catch { return false; } };
 const L = (product_id, title, quantity, price = '10', variant_title = '') => ({ product_id, title, quantity, price, variant_title });
 
-// The Egarenca shape (es store): 22 jerseys over three lines + 18 shorts = 40 lines' worth of units
+// Order 2026092833610482 (es store), from the manage roster: 21 players over 3 designs (14+4+3),
+// 2 of them 'JERSEY ONLY' -> 21 jerseys + 19 shorts = the '40' the old code printed as jerseys
 const egarenca = [preview,
-  L(3800026, 'Camiseta MOMUTO Pro', 16, '21.90', 'M'), L(3800026, 'Camiseta MOMUTO Pro', 3, '21.90', 'L'), L(3800026, 'Camiseta MOMUTO Pro', 3, '21.90', 'S'),
-  L(3800028, 'Pantalones MOMUTO', 18, '5.00', 'M')];
+  L(3800026, 'Camiseta MOMUTO Pro', 14, '21.90', 'M'), L(3800026, 'Camiseta MOMUTO Pro', 4, '21.90', 'L'), L(3800026, 'Camiseta MOMUTO Pro', 3, '21.90', 'XL'),
+  L(3800028, 'Pantalones MOMUTO', 19, '5.00', 'M')];
 
-t('Egarenca: 22 jerseys, 18 shorts — not 40 jerseys', () => {
+t('Egarenca: 21 jerseys, 19 shorts — not 40 jerseys', () => {
   const c = countLines(egarenca, isPreview);
-  assert.strictEqual(c.jerseys, 22); assert.strictEqual(c.shorts, 18); assert.strictEqual(c.socks, 0);
+  assert.strictEqual(c.jerseys, 21); assert.strictEqual(c.shorts, 19); assert.strictEqual(c.socks, 0);
 });
 
 t('every kind, every store title, by title only (no product id)', () => {
@@ -55,9 +56,10 @@ t('buyer email: jersey count + own rows, never 40', () => {
   const c = countLines(egarenca, isPreview);
   const base = { lang: 'es', name: 'Club', team: 'Club', ref: 'c4zw4sv0pk', qty: c.jerseys, extras: { shorts: c.shorts }, total: '491.92', currency: 'EUR', paidAt: '2026-09-28', plantOrderNo: '2026092833610482', designs: [] };
   const html = emailConfirmation3D(base).html;
-  assert(/Camisetas<\/td><td[^>]*>22</.test(html), 'jersey row 22');
-  assert(/Pantalones<\/td><td[^>]*>18</.test(html), 'shorts row 18');
+  assert(/Camisetas<\/td><td[^>]*>21</.test(html), 'jersey row 21');
+  assert(/Pantalones<\/td><td[^>]*>19</.test(html), 'shorts row 19');
   assert(!/>40</.test(html), 'no 40');
+  assert.strictEqual(c.jerseys, 21, 'equals the roster (21), so the sheet no longer warns');
   const old = emailConfirmation3D({ ...base, qty: 40, extras: undefined }).html;   // records stored before the fix still render
   assert(/Camisetas<\/td><td[^>]*>40</.test(old));
 });
