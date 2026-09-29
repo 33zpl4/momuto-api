@@ -32,11 +32,14 @@
  *                folders are the common culprit). Refuses multi-matches, and
  *                refuses status test/backfill/excluded unless force:true —
  *                those were withheld on purpose. Every send is logged on the
- *                record under manualResends[].
+ *                record under manualResends[]. Optional "qty" (jerseys) and
+ *                "extras" {shorts,socks,longSleeves,collars} correct the stored
+ *                counts first — used to fix the wrong "40" of 28 Sep 2026.
  *   Ingest:      POST /api/admin-orders   { "action":"ingest-and-send",
  *                  "order_no":"kz1cgjw0oh", "email":"…", "name":"…",
  *                  "lang":"en", "plant_order_no":"2026081633552986",
  *                  "total":"62.80", "currency":"EUR", "qty":2,
+ *                  "extras":{"shorts":2,"socks":0,"longSleeves":0,"collars":0},   (optional; qty = JERSEYS only)
  *                  "paid_at":"2026-08-16", "image":"https://…" }
  *                For orders the design-server webhook MISSED (no stored record
  *                at all): builds the order from CMS-admin facts, sends the
@@ -138,6 +141,16 @@ function diagnose(id, o) {
     manualResends: o.manualResends || [],
     designs:      Array.isArray(o.designs) ? o.designs.length : 0,
   };
+}
+
+// Non-jersey units shown under the jersey count in the confirmation (shorts, socks, long sleeves, polo collars)
+function cleanExtras(x) {
+  const out = {};
+  for (const k of ['shorts', 'socks', 'longSleeves', 'collars']) {
+    const n = parseInt(x && x[k], 10);
+    if (n > 0 && n < 10000) out[k] = n;
+  }
+  return out;
 }
 
 async function sendEmail(to, subject, html) {
@@ -253,6 +266,11 @@ module.exports = async function handler(req, res) {
       return res.status(422).json({ error: 'Order record has no email address', order: diagnose(id, order) });
     }
 
+    // Correct the counts on the record before sending (28 Sep 2026: a poller bug stored the
+    // total of ALL lines as the jersey count). Persisted with the resend below.
+    if (body.qty != null && parseInt(body.qty, 10) > 0) order.qty = parseInt(body.qty, 10);
+    if (body.extras && typeof body.extras === 'object') order.extras = cleanExtras(body.extras);
+
     const { subject, html } = emailConfirmation3D(order);
     await sendEmail(order.email, subject, html);
     // mark only after Resend accepted — same discipline as order-3d-paid
@@ -298,6 +316,7 @@ module.exports = async function handler(req, res) {
       email,
       team:  name,
       qty:   parseInt(body.qty, 10) || '—',
+      extras: cleanExtras(body.extras),
       ref:   orderNo.replace(/^3d_/, ''),
       plantOrderNo: body.plant_order_no ? String(body.plant_order_no) : null,
       fastLane: body.fast_lane === true || body.fast_lane === 1 || body.fast_lane === '1',

@@ -42,11 +42,25 @@ const PRICE_EUR = '59.00';
 const PRICE_USD = '69.00';   // owner pair €59 → $69 (fees are round, not .90)
 const HANDLE = 'fast-lane';
 
-// Neutral jersey asset already on the store CDN. images[].src is required by
-// POST /products; swap for a dedicated sleeve visual later via manage (the
-// product page is never browsed — the cart line shows title + price).
-const IMAGE_SRC = process.env.FAST_LANE_IMAGE_SRC
+// images[].src is required by POST /products. Since 28 Sep 2026 a NEW product gets the
+// fast-lane order-line tile (design-momuto scripts/order-line-tiles, hosted on
+// design.momuto.com after that repo's main deploys; the platform re-hosts it on its CDN).
+// The old neutral jersey asset stays as the fallback used if the tile is not reachable
+// yet — it read as "a design" in the cart (the reason for the tile). Existing products are
+// re-imaged with scripts/set-order-line-tiles.js (workflow "Set order-line tile images").
+const TILE_LANG = { en: 'en', es: 'es', fr: 'fr', it: 'it', us: 'en' };
+const TILE_BASE = 'https://design.momuto.com/3d-configurator/asset/shop/order-tile-fastlane-';
+const FALLBACK_IMAGE_SRC = process.env.FAST_LANE_IMAGE_SRC
   || 'https://cdn.staticsoe.com/pics/2cb10a0b0e8d3a67c7e768edce1a31d321097b8e26180eea525f683bf4df933b.jpg';
+async function imageSrcFor(lang) {
+  const tile = `${TILE_BASE}${TILE_LANG[lang] || 'en'}.png`;
+  try {
+    const r = await fetch(tile);
+    if (r.ok && /image\/png/i.test(r.headers.get('content-type') || '')) return tile;
+  } catch { /* fall through */ }
+  console.log(`⚠️  tile not reachable (${tile}) — using the neutral fallback image`);
+  return FALLBACK_IMAGE_SRC;
+}
 
 const STORES = {
   en: {
@@ -135,13 +149,13 @@ async function findByHandle(token, handle) {
   }
 }
 
-function buildBody(store) {
+function buildBody(store, imageSrc) {
   return {
     title: store.title,
     handle: HANDLE,
     spec_mode: 1,
     variants: [{ price: store.price }],
-    images: [{ src: store.image_src || IMAGE_SRC, alt: store.title }],
+    images: [{ src: store.image_src || imageSrc, alt: store.title }],
     status: 1,
     subtitle: store.subtitle,
     mini_detail: store.mini_detail,
@@ -170,7 +184,7 @@ async function run() {
   for (const lang of langs) {
     const store = STORES[lang];
     const token = process.env[store.tokenEnv];
-    const body = buildBody(store);
+    const body = buildBody(store, await imageSrcFor(lang));
     console.log(`\n=== ${lang.toUpperCase()} — "${store.title}" @ ${lang === 'us' ? '$' : '€'}${store.price} ===`);
 
     if (!args.live) {

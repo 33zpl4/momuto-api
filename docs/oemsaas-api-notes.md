@@ -347,3 +347,24 @@ inspect-first — read a store's live JSON before the first write).
 - **`GET /seoplans`** / **`PUT /seoplans`** — HOMEPAGE SEO (meta_title,
   meta_descript, meta_keywords — keywords is an ARRAY, same rule as pages).
   The one homepage surface we previously couldn't reach from code.
+
+### Setting a product's images (order-line tiles, 28 Sep 2026)
+
+There is no image-only endpoint and `batchsave` drops `images` (above), so an image change is the full
+read-modify-write `PUT /products/{id}` with `images` replaced — `scripts/set-order-line-tiles.js` (workflow "Set
+order-line tile images", dry-run by default, rollback file of the previous image lists).
+
+- **Verified** (basketball shorts, 25 Sep): `POST /products` accepts an EXTERNAL image URL
+  (`https://design.momuto.com/…png`) and the platform re-hosts it on its own CDN — the read-back shows a CDN URL,
+  not ours. The tiles rely on this.
+- **Not yet verified until the first live run of the script**: that an images-only `PUT` behaves the same, and whether
+  it regenerates variant ids (a PUT with a new price did, 5 Sep). The script reads every product back and prints
+  `variant ids unchanged|regenerated` per product — read that column before rolling out to the discount-enrolled
+  generic jersey/shorts products (quantity-discount promotions live on the platform; whether they bind to variant ids is
+  unknown). The safe order is the surcharge products first (long sleeves, polo, fast lane: no promos), then the
+  garments. Checkout adds lines by product id (`sku_code = <id>-0-0-0-0-0-0`), never by a stored variant id.
+- The read-back asserts title, status, variant count/sizes/prices and exactly one changed image; a platform that acks
+  `code 0` and ignores the images is reported as `MISMATCH image unchanged` and exits 1.
+- Tested against a mock of the API (`node scripts/test-set-order-line-tiles.js`, 12 scenarios incl. throttled GET,
+  no variants, ignored images, rollback). The real platform behaviour above is the part a mock cannot prove.
+

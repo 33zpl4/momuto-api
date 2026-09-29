@@ -58,6 +58,7 @@
  * Runs on the GitHub runner; the sandbox cannot reach openapi.oemapps.com.
  */
 
+const { countLines } = require('../lib/order-lines');
 const HOST = 'https://openapi.oemapps.com';
 const API  = 'https://momuto-api.vercel.app/api/admin-orders';
 const DESIGN_PAY_URL = process.env.DESIGN_PAY_URL || 'https://design.momuto.com/pay/callback';
@@ -315,9 +316,15 @@ async function run() {
           } catch (e) { console.warn(`${ref}: preview product read failed (${e.message}) — sending without images`); }
         }
 
-        const qty = itemsOf(o)
-          .filter(it => !previewRef(it) && parseFloat(field(it, ['price', 'unit_price']) || 0) > 0)
-          .reduce((n, it) => n + (parseInt(field(it, ['quantity', 'qty']), 10) || 0), 0) || undefined;
+        // Count JERSEYS only (28 Sep 2026: this used to sum every positive-price line — jerseys +
+        // shorts + socks + add-ons + fast lane — and the email labelled the total "Jerseys": a
+        // 22-jersey order read "40"). The other kinds travel separately so the email can list them.
+        const counts = countLines(
+          itemsOf(o).filter(it => parseFloat(field(it, ['price', 'unit_price']) || 0) > 0),
+          previewRef);
+        const qty = counts.jerseys || undefined;
+        const extras = {};
+        for (const k of ['shorts', 'socks', 'longSleeves', 'collars']) if (counts[k]) extras[k] = counts[k];
 
         // Fast lane (23 Sep 2026): the per-order "Fast lane" product line
         // (momuto-api Create Fast-lane products; one title per store) → 18–23 day
@@ -326,7 +333,7 @@ async function run() {
         const payload = {
           action: 'ingest-and-send',
           order_no: ref, email, name, lang,
-          plant_order_no: platNo, total, currency, qty,
+          plant_order_no: platNo, total, currency, qty, extras,
           fast_lane: fastLane,
           paid_at: new Date(paidMs).toISOString(),
           image, image_back: imageBack,

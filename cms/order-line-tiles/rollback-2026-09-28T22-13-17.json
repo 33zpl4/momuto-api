@@ -1,0 +1,146 @@
+{
+  "at": "2026-09-28T22:13:17.766Z",
+  "tileBase": "https://design.momuto.com/3d-configurator/asset/shop/",
+  "entries": [
+    {
+      "store": "en",
+      "kind": "longsleeves",
+      "id": "10619367",
+      "title": "Long sleeves",
+      "images_before": [
+        {
+          "image_id": 32479943,
+          "src": "https://cdn.staticsoe.com/pics/b2593f2d45cbdb6957efa07a6fe8862712b97a7dd0f74d7573a20c233b846ad6.png",
+          "position": 0,
+          "alt": ""
+        }
+      ]
+    },
+    {
+      "store": "es",
+      "kind": "longsleeves",
+      "id": "11070065",
+      "title": "Manga larga",
+      "images_before": [
+        {
+          "image_id": 38799736,
+          "src": "https://cdn.staticsoe.com/pics/2698c1502ff1e3abb40e7c1344cf4545a79a15ead6f4457961feb4e2a6989f24.png",
+          "position": 0,
+          "alt": ""
+        }
+      ]
+    },
+    {
+      "store": "fr",
+      "kind": "longsleeves",
+      "id": "10210832",
+      "title": "Manches longues",
+      "images_before": [
+        {
+          "image_id": 34285772,
+          "src": "https://cdn.staticsoe.com/pics/c8ec6c245cd35c43f11b8358e9458d1adb78d32d2d1382b0fbbcd839f93964e0.png",
+          "position": 0,
+          "alt": ""
+        }
+      ]
+    },
+    {
+      "store": "it",
+      "kind": "longsleeves",
+      "id": "16672932",
+      "title": "Maniche lunghe",
+      "images_before": [
+        {
+          "image_id": 67608156,
+          "src": "https://cdn.statics-cdn-abc.com/pics/6005bb82dccaf4b45e3555c5750c2d15d0e983085d5b90931f42083c26db0d3e.jpg",
+          "position": 0,
+          "alt": "Maniche lunghe"
+        }
+      ]
+    },
+    {
+      "store": "us",
+      "kind": "longsleeves",
+      "id": "16913602",
+      "title": "Long sleeves",
+      "images_before": [
+        {
+          "image_id": 78066214,
+          "src": "https://cdn.statics-cdn-abc.com/pics/7b8bc5cf773d4ce7620c5637e067b1019f39e45e12eecbd3a7869f72da75ee89.jpg",
+          "position": 0,
+          "alt": ""
+        }
+      ]
+    },
+    {
+      "store": "en",
+      "kind": "polocollar",
+      "id": "10622437",
+      "title": "Polo collar",
+      "images_before": [
+        {
+          "image_id": 32479825,
+          "src": "https://cdn.staticsoe.com/pics/e6a6400ba0869f396fd91765445a4749a768437f8a621e48c43a2853cd953896.jpg",
+          "position": 0,
+          "alt": "Polo collar"
+        }
+      ]
+    },
+    {
+      "store": "es",
+      "kind": "polocollar",
+      "id": "11072429",
+      "title": "Cuello polo",
+      "images_before": [
+        {
+          "image_id": 38811584,
+          "src": "https://cdn.staticsoe.com/pics/89dab3a6b0d511b7578861c79bb673a214559f3999495f6bda75eb1016b70856.png",
+          "position": 0,
+          "alt": ""
+        }
+      ]
+    },
+    {
+      "store": "fr",
+      "kind": "polocollar",
+      "id": "10210939",
+      "title": "Col polo",
+      "images_before": [
+        {
+          "image_id": 34286274,
+          "src": "https://cdn.staticsoe.com/pics/b87f9eaa1048b83b55eb548ba9e373bd897161439016277174e0fba73bea1c3d.png",
+          "position": 0,
+          "alt": ""
+        }
+      ]
+    },
+    {
+      "store": "it",
+      "kind": "polocollar",
+      "id": "17251848",
+      "title": "Colletto polo",
+      "images_before": [
+        {
+          "image_id": 69371208,
+          "src": "https://cdn.statics-cdn-abc.com/pics/781704678db583e0908ec7c164c2654b341fe44d1c1393188c755b40b2ed89bb.png",
+          "position": 0,
+          "alt": ""
+        }
+      ]
+    },
+    {
+      "store": "us",
+      "kind": "polocollar",
+      "id": "17223797",
+      "title": "Polo collar",
+      "images_before": [
+        {
+          "image_id": 79329164,
+          "src": "https://cdn.statics-cdn-abc.com/pics/4bf4bade6ea8c08240b7782afeb7ee84cdeac2e410ecd1864b4273406638266d.png",
+          "position": 0,
+          "alt": ""
+        }
+      ]
+    }
+  ]
+}
