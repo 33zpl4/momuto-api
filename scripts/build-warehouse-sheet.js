@@ -124,8 +124,10 @@ function parseLines(o) {
     if (kind === 'collar') { out.collars += qty; continue; }          // "Polo collar" add-on, one unit per jersey (15 Sep 2026)
     if (kind === 'fastLane') { out.fastLane = true; continue; }       // per-order product, priority production + shipping (23 Sep 2026)
     if (kind === 'deposit') { out.items.push({ title, qty, kind: 'deposit' }); continue; }
-    if (kind === 'shorts') out.shorts += qty; else if (kind === 'socks') out.socks += qty; else out.jerseys += qty;
-    out.items.push({ title: vt && vt !== title ? `${title} / ${vt}` : title, qty, kind: kind === 'shorts' || kind === 'socks' ? kind : 'jersey', price: field(it, ['price']) });
+    if (kind === 'shorts') out.shorts += qty; else if (kind === 'socks') out.socks += qty;
+    else if (kind === 'kit') { out.jerseys += qty; out.shorts += qty; }     // fixed-price kit line = jersey + shorts per unit
+    else out.jerseys += qty;
+    out.items.push({ title: vt && vt !== title ? `${title} / ${vt}` : title, qty, kind: kind === 'shorts' || kind === 'socks' || kind === 'kit' ? kind : 'jersey', price: field(it, ['price']) });
   }
   return out;
 }
