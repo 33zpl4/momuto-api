@@ -33,6 +33,7 @@
 const fs = require('fs');
 const path = require('path');
 const ExcelJS = require('exceljs');
+const { classifyLine } = require('../lib/order-lines');
 
 const HOST = 'https://openapi.oemapps.com';
 const MOMUTO_API = 'https://momuto-api.vercel.app/api/admin-orders';
@@ -107,7 +108,7 @@ async function paidSince(token, hours) {
 // ("Long sleeves"), and the jersey lines themselves.
 function parseLines(o) {
   const lines = field(o, ['products', 'line_items', 'items']) || [];
-  const out = { ref3d: null, previewIds: [], jerseys: 0, longSleeves: 0, collars: 0, fastLane: false, items: [] };
+  const out = { ref3d: null, previewIds: [], jerseys: 0, shorts: 0, socks: 0, longSleeves: 0, collars: 0, fastLane: false, items: [] };
   for (const it of lines) {
     const title = String(field(it, ['product_title', 'title', 'name']) || '');
     const vt = String(field(it, ['variant_title']) || '');
@@ -116,14 +117,15 @@ function parseLines(o) {
     if (typeof inner === 'string' && inner.startsWith('{')) { try { inner = JSON.parse(inner); } catch { inner = null; } }
     if (inner && inner.type === '3d-preview') { out.ref3d = out.ref3d || inner.order_no; out.previewIds.push(field(it, ['product_id'])); continue; }
     if (/^your custom design|— order [a-z0-9]{10}$/i.test(title)) { out.previewIds.push(field(it, ['product_id'])); continue; }
-    if (/long sleeve|manga larga|manches longues|maniche lunghe/i.test(title + ' ' + vt)) { out.longSleeves += qty; continue; }
-    // "Polo collar" add-on product (one unit per jersey of a polo-collar design, 15 Sep 2026)
-    if (/polo collar|cuello polo|col polo|colletto polo/i.test(title + ' ' + vt)) { out.collars += qty; continue; }
-    // "Fast lane" per-order product (priority production + priority shipping, 23 Sep 2026)
-    if (/fast lane|v[ií]a r[aá]pida|voie rapide|corsia veloce/i.test(title + ' ' + vt)) { out.fastLane = true; continue; }
-    if (/deposit|acompte|dep[oó]sito|acconto/i.test(title)) { out.items.push({ title, qty, kind: 'deposit' }); continue; }
-    out.jerseys += qty;
-    out.items.push({ title: vt && vt !== title ? `${title} / ${vt}` : title, qty, kind: 'jersey', price: field(it, ['price']) });
+    // Classification is shared with the buyer-email poller (lib/order-lines.js): shorts and socks
+    // are NOT jerseys — counting them as such made every kit order warn "名单数量 21 与平台数量 40".
+    const kind = classifyLine(it);
+    if (kind === 'longSleeves') { out.longSleeves += qty; continue; }
+    if (kind === 'collar') { out.collars += qty; continue; }          // "Polo collar" add-on, one unit per jersey (15 Sep 2026)
+    if (kind === 'fastLane') { out.fastLane = true; continue; }       // per-order product, priority production + shipping (23 Sep 2026)
+    if (kind === 'deposit') { out.items.push({ title, qty, kind: 'deposit' }); continue; }
+    if (kind === 'shorts') out.shorts += qty; else if (kind === 'socks') out.socks += qty; else out.jerseys += qty;
+    out.items.push({ title: vt && vt !== title ? `${title} / ${vt}` : title, qty, kind: kind === 'shorts' || kind === 'socks' ? kind : 'jersey', price: field(it, ['price']) });
   }
   return out;
 }
@@ -343,7 +345,7 @@ async function buildSheet(order, designs, warnings) {
 async function emailSheet(order, filePath, warnings) {
   const key = process.env.RESEND_API_KEY; if (!key || args.dry) return false;
   const to = (process.env.WAREHOUSE_EMAILS || 'info@momuto.com,ilovebillxie@hotmail.com').split(',').map(s => s.trim()).filter(Boolean);
-  const qty = order.jerseys ? `${order.jerseys} 件` : '';
+  const qty = order.jerseys ? `${order.jerseys} 件${order.shorts ? ` · 短裤 ${order.shorts}` : ''}${order.socks ? ` · 袜 ${order.socks}` : ''}` : '';
   const subject = `${order.fastLane ? '⚡ 加急 FAST LANE · ' : ''}生产单 ${order.order_number} · ${order.country || order.store}${qty ? ' · ' + qty : ''}${order.longSleeves ? ' · 含长袖' : ''}${order.collars ? ' · 含POLO领' : ''}${warnings.length ? ' · ⚠ 需核对' : ''}`;
   const html = (order.fastLane ? '<p style="color:#c8352e;font-weight:700">⚡ 加急 FAST LANE — 优先生产 + 优先发货</p>' : '') +
     `<p>订单 <strong>${order.order_number}</strong>（3D ${order.ref3d || '-'}）· ${order.name} · ${order.country} · ${order.total} ${order.currency}</p>` +
