@@ -53,3 +53,13 @@ shorts total (`extras.shorts`) only when that answer is unique, otherwise no sho
 Live rendering inside each store theme (sandbox cannot reach the stores). Tested here with a mock
 API in Chromium at 390 px wide. After deploy, open one real link per store and check: title hidden,
 full-bleed background, `<script>` allowed by the CMS, images load.
+
+## "Not found" for an order that exists on the platform
+The page reads OUR order record (Vercel KV), not the platform's. An order the design-server webhook / poller
+never delivered (e.g. paid before the poller existed) has no record, so the page answers "not found" for the
+right ref + email. Check with workflow "Order email (manual ingest / resend)" → action `find`. To add it
+WITHOUT emailing the buyer: same workflow, action `ingest-and-send` with **silent = true** (email required,
+name optional, `paid_at` = real payment date, `plant_order_no` = store order no). Do not use the non-silent
+ingest on an old order: it sends the confirmation and enrols the lifecycle, so day-4/day-10 mails would go out at once.
+Add `tracking_number` / `tracking_url` / `shipped_at` for an order that already shipped (status becomes `shipped`, still no email)
+and `extras` as JSON, e.g. `{"shorts":0,"longSleeves":1}` (qty = jerseys only).
