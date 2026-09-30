@@ -11,14 +11,18 @@ sees, via `design-momuto/scripts/measure-sites.js` and `find-jost.js` (GitHub Ac
   (>=1200px), nav font rules, hide `a.account_icon.login`, and the **mobile menu overlap fix**
   (`.mobile_nav .panel-menu-ul.only-warp-menu` + `[style*="left: -"]` translateX + `only-ul-left100`).
   Keep all of it; only the font rules change.
-- Version to paste (nav font rules: Jost -> Outfit; desktop 15px/400/22px = what renders today):
+- Version to paste (30 Sep 2026, owner ruling: menu **14px / 0.5px**, Outfit). The `html body` prefix is what makes it
+  beat the theme's own nav rule (which is later in the cascade and has the same strength, so the earlier plain
+  `.page-header … .nav a` rule lost — the live check showed Jost 15px winning):
 
 ```css
-.page-header .header_box_wrap .header_box .nav a {
-    font-size: 15px;
+html body .page-header .header_box_wrap .header_box .nav ul.tree-wrap li .nav-li-a a,
+html body .page-header .header_box_wrap .header_box .nav a {
+    font-size: 14px !important;
     font-family: 'Outfit', sans-serif !important;
     font-weight: 400 !important;
-    line-height: 22px;
+    line-height: 22px !important;
+    letter-spacing: 0.5px !important;
 }
 .mobile_nav a, .mobile_nav .panel-menu-item {   /* two rules in the live script, identical values */
     font-size: 14px;
@@ -27,8 +31,10 @@ sees, via `design-momuto/scripts/measure-sites.js` and `find-jost.js` (GitHub Ac
     line-height: 24px;
 }
 ```
-  (The full script, unchanged apart from these three font rules, was pasted in the 30 Sep 2026 session;
-  the CMS copy is the source of truth — do not treat this file as a mirror.)
+  (The full script, unchanged apart from these font rules, lives in the CMS — do not treat this file as a mirror.
+  How to verify: `design-momuto` workflow "Measure sites" → `scripts/find-jost.js` prints the computed nav font and every
+  rule that sets it; expect Outfit 14px 0.5px. DevTools tip: the font hover card on a Styles line shows the DECLARED
+  value, not the winner — read Computed → Rendered Fonts.)
 
 ## Jost audit (measured live, 30 Sep 2026)
 Stores (es/us/www/fr) still download and render Jost (`fonts.gstatic.com/s/jost/v6/...woff2`);
