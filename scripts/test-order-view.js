@@ -11,7 +11,7 @@ const origLoad = Module._load;
 Module._load = function (req, ...a) { return req === '@vercel/kv' ? { kv: kvMock } : origLoad.call(this, req, ...a); };
 
 const V = require('../lib/order-view');
-const handler = require('../api/order-view');
+const handler = require('../lib/order-view-handler');
 const { emailConfirmation3D, emailDay4, emailDay10, emailTracking, emailDelivered, emailConfirmation } = require('../lib/emails');
 let pass = 0; const t = async (name, fn) => { try { await fn(); pass++; console.log('PASS ' + name); } catch (e) { console.log('FAIL ' + name + '\n   ' + e.stack); process.exitCode = 1; } };
 
@@ -105,6 +105,13 @@ const call = async (body, headers = {}) => { let out = { code: 0, body: null, he
       assert.strictEqual((p.content.match(/<h1\b/g) || []).length, 1);
     }
     assert(fs.readFileSync('scripts/rebuild-sitemap.js', 'utf8').includes('ORDER_VIEW_HANDLES.has(slug)'));
+  });
+  await t('deploy: api/ stays at 12 functions; /api/order-view rewrites onto lead.js', () => {
+    const fs = require('fs');
+    assert(fs.readdirSync('api').filter(f => f.endsWith('.js')).length <= 12);
+    const vj = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
+    assert(vj.rewrites.some(r => r.source === '/api/order-view' && r.destination === '/api/lead?type=order-view'));
+    assert(/orderView\(req, res\)/.test(fs.readFileSync('api/lead.js', 'utf8')));
   });
   console.log(`\n${pass} passed`);
 })();

@@ -38,6 +38,10 @@
     {
       "source": "/api/checkout-beacon",
       "destination": "/api/lead?type=checkout-beacon"
+    },
+    {
+      "source": "/api/order-view",
+      "destination": "/api/lead?type=order-view"
     }
   ],
   "crons": [

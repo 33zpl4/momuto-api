@@ -12,7 +12,7 @@ tracking, design renders and roster. Owner ruling: option A, one page per store.
 | it | `/pages/il-mio-ordine` |
 
 ## Pieces
-- `api/order-view.js` — `POST {ref, k?, email?}` → whitelist JSON. CORS only for `*.momuto.com`,
+- `lib/order-view-handler.js` (served at `/api/order-view` via a vercel.json rewrite onto `api/lead.js`, like checkout-beacon: Hobby allows 12 functions and `api/` already holds 12 — a 13th file fails the deploy) — `POST {ref, k?, email?}` → whitelist JSON. CORS only for `*.momuto.com`,
   `no-store`, `X-Robots-Tag: noindex`.
 - `lib/order-view.js` — link token, `viewUrl(order)`, roster normaliser, timeline, whitelist.
 - `lib/emails.js` — "See your order" button in confirmation3D, day4, day10, tracking, delivered;
