@@ -40,6 +40,8 @@ Read the doc that owns a topic BEFORE editing that surface.
   commit, or Google gets no locale signal for it. Same-handle en↔us pairs
   are automatic. One URL may appear in one cluster only (the script now logs
   and skips a duplicate).
+- `docs/store-theme-css.md` — the live store custom-CSS script (CMS name `PC端你也喜欢产品调准css`),
+  the Jost audit and measured header/footer numbers; read BEFORE touching nav fonts or header styling.
 - `docs/warehouse-sheet.md` — factory 生产单 generator (`build-warehouse-sheet.js`,
   runs daily inside `check-platform-orders.yml`); sources + known roster gap.
 - `docs/design-page-template.md`, `docs/rtp-collection.md` (historical),
