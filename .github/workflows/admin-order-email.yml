@@ -64,6 +64,22 @@ on:
         description: 'Back render URL (ingest only, optional)'
         required: false
         default: ''
+      tracking_number:
+        description: 'silent ingest only: carrier tracking number of an order that already shipped (status becomes shipped, no email)'
+        required: false
+        default: ''
+      tracking_url:
+        description: 'silent ingest only: https tracking link'
+        required: false
+        default: ''
+      shipped_at:
+        description: 'silent ingest only: ship date, ISO'
+        required: false
+        default: ''
+      extras:
+        description: 'ingest only: JSON like {"shorts":0,"longSleeves":1} (qty stays jerseys only)'
+        required: false
+        default: ''
       silent:
         description: 'ingest only: store the record for the My order page, send NO email, no lifecycle (for old orders the pipeline missed)'
         required: false
@@ -96,6 +112,10 @@ jobs:
           IMAGE_BACK: ${{ inputs.image_back }}
           FAST_LANE: ${{ inputs.fast_lane }}
           SILENT: ${{ inputs.silent }}
+          TRACK_NO: ${{ inputs.tracking_number }}
+          TRACK_URL: ${{ inputs.tracking_url }}
+          SHIPPED_AT: ${{ inputs.shipped_at }}
+          EXTRAS: ${{ inputs.extras }}
         run: |
           set -e
           [ -n "$SECRET" ] || { echo "::error::MOMUTO_API_SECRET missing"; exit 1; }
@@ -109,7 +129,7 @@ jobs:
           fi
           BODY=$(jq -n --arg a "$ACTION" --arg o "$ORDER_NO" --arg e "$EMAIL" --arg n "$NAME" --arg l "$LANG_IN" \
                        --arg q "$QTY" --arg t "$TOTAL" --arg c "$CURRENCY" --arg p "$PAID_AT" --arg pl "$PLANT" \
-                       --arg i "$IMAGE" --arg ib "$IMAGE_BACK" --arg fl "$FAST_LANE" --arg si "$SILENT" '
+                       --arg i "$IMAGE" --arg ib "$IMAGE_BACK" --arg fl "$FAST_LANE" --arg si "$SILENT" --arg tn "$TRACK_NO" --arg tu "$TRACK_URL" --arg sa "$SHIPPED_AT" --arg ex "$EXTRAS" '
             {action:$a, order_no:$o}
             + (if $e != "" then {email:$e} else {} end)
             + (if $n != "" then {name:$n} else {} end)
@@ -122,7 +142,11 @@ jobs:
             + (if $i != "" then {image:$i} else {} end)
             + (if $ib != "" then {image_back:$ib} else {} end)
             + (if $fl == "true" then {fast_lane:true} else {} end)
-  + (if $si == "true" then {silent:true} else {} end)')
+            + (if $si == "true" then {silent:true} else {} end)
+            + (if $tn != "" then {tracking_number:$tn} else {} end)
+            + (if $tu != "" then {tracking_url:$tu} else {} end)
+            + (if $sa != "" then {shipped_at:$sa} else {} end)
+            + (if $ex != "" then {extras:($ex|fromjson)} else {} end)')
           echo "payload: $(echo "$BODY" | jq -c 'del(.email) + {email: (if .email then (.email|sub("^(?<a>.).*@"; "\(.a)***@")) else null end)}')"
           RES=$(curl -sS -w '\n%{http_code}' -X POST -H "Content-Type: application/json" -H "x-webhook-secret: $SECRET" --data "$BODY" "$API")
           CODE=$(echo "$RES" | tail -1); OUT=$(echo "$RES" | sed '$d')

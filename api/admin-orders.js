@@ -341,6 +341,13 @@ module.exports = async function handler(req, res) {
       trackingUrl: null,
       status: silent ? 'backfill' : 'active',
       ...(silent ? { stopLifecycle: true } : {}),
+      // silent ingest of an order that ALREADY shipped: keep the tracking so the page shows it (no email is sent)
+      ...(silent && body.tracking_number ? {
+        trackingNumber: String(body.tracking_number).slice(0, 60),
+        trackingUrl: /^https:\/\//i.test(body.tracking_url || '') ? String(body.tracking_url) : null,
+        shippedAt: body.shipped_at && !isNaN(Date.parse(body.shipped_at)) ? new Date(body.shipped_at).toISOString() : null,
+        status: 'shipped',
+      } : {}),
       createdAt: new Date().toISOString(),
     };
 

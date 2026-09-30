@@ -19,6 +19,13 @@ let pass = 0; const t = async (n, f) => { try { await f(); pass++; console.log('
     assert.strictEqual(o.status, 'backfill'); assert.strictEqual(o.stopLifecycle, true); assert.deepStrictEqual(o.emailsSent, []);
     assert(!(sets.get('orders:active') || new Set()).has('3d_3f4wddo3vw')); assert((sets.get('orders:all')).has('3d_3f4wddo3vw'));
   });
+  await t('silent ingest of an already-shipped order keeps tracking, status shipped, still no email', async () => {
+    const r = await call(admin, { method: 'POST', body: { action: 'ingest-and-send', silent: true, order_no: 'shipd00001', email: 'a@b.com', name: 'Tania Gaspar', qty: 1, extras: { shorts: 0, longSleeves: 1 }, paid_at: '2026-09-10', tracking_number: '4200', tracking_url: 'https://tools.usps.com/x?y=4200', shipped_at: '2026-09-25' } });
+    assert.strictEqual(r.c, 200, JSON.stringify(r.b)); const o = st.get('order:3d_shipd00001');
+    assert.strictEqual(o.status, 'shipped'); assert.strictEqual(o.trackingNumber, '4200'); assert.strictEqual(o.shippedAt.slice(0, 10), '2026-09-25'); assert.strictEqual(o.stopLifecycle, true);
+    const v = await call(view, { method: 'POST', body: { ref: 'shipd00001', email: 'a@b.com' } });
+    assert.strictEqual(v.b.order.status.current, 'shipped'); assert.strictEqual(v.b.order.tracking.number, '4200'); assert.strictEqual(v.b.order.firstName, 'Tania'); assert.strictEqual(v.b.order.totals.longSleeves, 0);
+  });
   await t('non-silent ingest still needs name + RESEND key', async () => {
     const r = await call(admin, { method: 'POST', body: { action: 'ingest-and-send', order_no: 'zzzz0000aa', email: 'a@b.com', name: 'X' } });
     assert.strictEqual(r.c, 503);

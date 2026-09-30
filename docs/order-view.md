@@ -61,3 +61,5 @@ right ref + email. Check with workflow "Order email (manual ingest / resend)" â†
 WITHOUT emailing the buyer: same workflow, action `ingest-and-send` with **silent = true** (email required,
 name optional, `paid_at` = real payment date, `plant_order_no` = store order no). Do not use the non-silent
 ingest on an old order: it sends the confirmation and enrols the lifecycle, so day-4/day-10 mails would go out at once.
+Add `tracking_number` / `tracking_url` / `shipped_at` for an order that already shipped (status becomes `shipped`, still no email)
+and `extras` as JSON, e.g. `{"shorts":0,"longSleeves":1}` (qty = jerseys only).
