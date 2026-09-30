@@ -110,6 +110,9 @@ forming and will move.
   pages only. (`llms.txt` drifted on this once — carried "fully refundable
   if the first concept isn't right" plus a stale €20.90 price until 5 Aug.
   The fact feed is a marketing surface; sweep it with every fact change.)
+  **Approved positioning (owner, 30 Sep 2026): "free design for teams"** — always paired with the
+  condition (deposit credited in full on 5+ jerseys), never a bare "free design", never "refund".
+  The 3D designer is free outright.
 - **One set of numbers, everywhere.** Canonical facts (also in
   `static/shared/llms.txt`, the machine-readable source of truth):
   production 7–12 days; shipping 10–15 days; 25–30 days door to door;
