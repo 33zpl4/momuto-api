@@ -6,7 +6,7 @@ process.env.ORDER_VIEW_SECRET = 'test-secret';
 
 // mock @vercel/kv
 const store = new Map(); const counters = new Map();
-const kvMock = { get: async k => store.get(k) ?? null, set: async (k, v) => { store.set(k, v); }, incr: async k => { const n = (counters.get(k) || 0) + 1; counters.set(k, n); return n; }, expire: async () => {} };
+const kvMock = { get: async k => (counters.has(k) ? counters.get(k) : (store.get(k) ?? null)), set: async (k, v) => { store.set(k, v); }, incr: async k => { const n = (counters.get(k) || 0) + 1; counters.set(k, n); return n; }, expire: async () => {} };
 const origLoad = Module._load;
 Module._load = function (req, ...a) { return req === '@vercel/kv' ? { kv: kvMock } : origLoad.call(this, req, ...a); };
 
@@ -83,9 +83,14 @@ const call = async (body, headers = {}) => { let out = { code: 0, body: null, he
     assert.strictEqual((await call({ ref: 'test0002', k: V.viewToken('test0002') }, { ip: '4.4.4.4' })).code, 404);
     assert.strictEqual((await call({ ref: '../x', k: 'a' }, { ip: '4.4.4.4' })).code, 404);
   });
-  await t('API: email guesses rate-limited per ref (8/h)', async () => {
+  await t('API: only WRONG email guesses are limited (8/h per ref); correct email keeps working', async () => {
     let last; for (let i = 0; i < 10; i++) last = await call({ ref: 'abc12345', email: `g${i}@x.com` }, { ip: '5.5.5.' + i });
     assert.strictEqual(last.code, 429);
+    assert.strictEqual((await call({ ref: 'zzz12345', email: 'a@b.com' }, { ip: '7.7.7.7' })).code, 404);
+  });
+  await t('API: successful lookups never use up the budget', async () => {
+    store.set('order:3d_okok0001', { ...base, id: '3d_okok0001', ref: 'okok0001' });
+    for (let i = 0; i < 12; i++) assert.strictEqual((await call({ ref: 'okok0001', email: 'emilio@club.es' }, { ip: '9.9.9.' + i })).code, 200);
   });
   await t('API: roster fetched from design server when the record has none', async () => {
     store.set('order:3d_nop00001', { ...base, id: '3d_nop00001', ref: 'nop00001', designs: [{ front: null, back: null, players: [] }], extras: {} });
