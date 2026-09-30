@@ -369,6 +369,9 @@ async function pushSitemap(domain, xml) {
   return true;
 }
 
+// customer order pages: noindex utility pages, never in the sitemap (docs/order-view.md)
+const ORDER_VIEW_HANDLES = new Set(require('../lib/order-view').PAGE_HANDLES);
+
 async function rebuildDomain(domain, fetched, alternatesMap) {
   const { pages, posts, products, collections } = fetched;
   console.log(`\n[${domain.label}] pages: ${pages.length}, posts: ${posts.length}, products: ${products.length}, collections: ${collections.length}`);
@@ -383,6 +386,7 @@ async function rebuildDomain(domain, fetched, alternatesMap) {
   for (const p of pages) {
     const slug = getSlug(p);
     if (!slug) continue;
+    if (ORDER_VIEW_HANDLES.has(slug)) continue;   // noindex customer order page (docs/order-view.md)
     const priority = HIGH_PRIORITY_HANDLES.has(slug) ? '0.8' : '0.7';
     entries.push({ loc: `${domain.baseUrl}/pages/${slug}`, lastmod: getLastmod(p, today), changefreq: 'monthly', priority });
   }

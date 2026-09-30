@@ -70,4 +70,29 @@ t('buyer email: other languages label the rows', () => {
     assert(html.includes(`>${u}<`) && html.includes(`>${s}<`), lang);
   }
 });
+
+t('fixed-price kit line: one line = a jersey AND a shorts per unit (Pecados Capitales at its own price)', () => {
+  assert.strictEqual(classifyLine({ title: 'Kit Completo Pecados Capitales' }), 'kit');
+  const c = countLines([preview, L(11111111, 'Kit Completo Pecados Capitales', 3, '26.90'), L(22222222, 'Camiseta Pecados Capitales', 1, '21.90'),
+    L(11070065, 'Manga larga', 1, '3.00')], isPreview);
+  assert.strictEqual(c.jerseys, 4); assert.strictEqual(c.shorts, 3); assert.strictEqual(c.kits, 3); assert.strictEqual(c.longSleeves, 1);
+});
+
+t('"kit" never steals shorts / socks / add-ons', () => {
+  for (const [title, kind] of [['Kit shorts', 'shorts'], ['Kit socks', 'socks'], ['Fast lane kit', 'fastLane'], ['Manchester Fiti — Kit Personalizado', 'kit']])
+    assert.strictEqual(classifyLine({ title }), kind, title);
+});
+
+t('buyer email: a fixed-price kit order lists jerseys and shorts', () => {
+  const c = countLines([preview, L(11111111, 'Kit Completo Pecados Capitales', 10, '26.90')], isPreview);
+  const html = emailConfirmation3D({ lang: 'es', name: 'x', team: 'x', ref: 'r', qty: c.jerseys, extras: { shorts: c.shorts }, total: '269', currency: 'EUR', designs: [] }).html;
+  assert(/Camisetas<\/td><td[^>]*>10</.test(html) && /Pantalones<\/td><td[^>]*>10</.test(html));
+});
+
+t('"Promo" fixed-price titles: kit stays a kit, jersey stays a jersey', () => {
+  assert.strictEqual(classifyLine({ title: 'Kit Completo Pecados Capitales · Promo' }), 'kit');
+  assert.strictEqual(classifyLine({ title: 'Camiseta Pecados Capitales · Promo' }), 'jersey');
+  const c = countLines([preview, L(1, 'Kit Completo Pecados Capitales · Promo', 4, '26.90'), L(2, 'Camiseta Pecados Capitales · Promo', 2, '21.90')], isPreview);
+  assert.strictEqual(c.jerseys, 6); assert.strictEqual(c.shorts, 4);
+});
 console.log(`\n${pass} passed`);
