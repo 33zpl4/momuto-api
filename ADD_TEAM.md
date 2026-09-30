@@ -426,6 +426,7 @@ Verification notes learned the hard way:
 | `400 invalid_request_error: "Your credit balance is too low"` on every store, run dies in ~15s | Anthropic API credits exhausted | Nothing was written (the failure precedes every CMS call). **Do not retry** — tell the user to top up, then redeploy. |
 | `Cannot read properties of undefined (reading 'trim')` on every store | Model returned a thinking block first (fixed 24 Sep 2026: `responseText()` in `generate-and-deploy.js`) | If it comes back, the fix was lost — report to the orchestrator; don't patch it yourself. |
 | `401 Token-Error` on one store only (manual workflow) | That workflow's `env:` is missing the store's `OEMSAAS_TOKEN_*` (US was fixed 24 Sep 2026) | Report; the orchestrator adds the secret line to the workflow. |
+| `❌ Error processing <store>: fetch failed` on ONE store, others ✓ (seen on it.momuto.com, 30 Sep 2026, ~10 s timeout) | Transient network timeout to that store's CMS | Other stores are live. Redeploy yourself: dispatch `deploy-team-manual.yml` (§0.3 "Re-deploying") with the same slug and gallery flag. Safe — existing pages log `✓ Updated`, the missing one `✓ Created`. Report it as recovered. |
 | One store's gallery step gets HTML instead of JSON | Transient API-management page from the CMS | Pages are live; only that store's card is missing. Push a redeploy commit with `add-to-gallery`. |
 
 ---
