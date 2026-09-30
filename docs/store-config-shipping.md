@@ -93,7 +93,11 @@ download the log zip.
   Designs, Ready-to-Play; ICONIC SERIES; LA MARQUE; AIDE.
 - **FR "Footer Menu"** (70585): unchanged except "Comparatif Fournisseurs
   2026", which pointed at `https://www.momuto.fr/…` (wrong domain).
-- ES/IT menus are not curated — `apply-nav` will refuse them until a tree is
+- **ES "Header Menu"** (80484, curated 30 Sep 2026): EQUIPACIONES → Galería de Diseños, Ready-to-Play, **Solicitar diseño a medida (15 €)**
+  (`/pages/solicitud-de-diseno-personalizado`, new); ICONIC SERIES; LA MARCA; SOPORTE (FAQ, Impresión y Tejidos, Guía de Tallas,
+  Contacto). ES "Footer Menu" (80483) is not curated. Note: SOPORTE → FAQ still points at `/pages/faq` (id 234940), while the
+  ES footer uses `/pages/preguntas-frecuentes` — check which is the live ES FAQ before touching it.
+- IT menus are not curated — `apply-nav` will refuse them until a tree is
   transcribed from `inspect-nav`.
 
 
