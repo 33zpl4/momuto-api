@@ -30,18 +30,19 @@ sees, via `design-momuto/scripts/measure-sites.js` and `find-jost.js` (GitHub Ac
   (The full script, unchanged apart from these three font rules, was pasted in the 30 Sep 2026 session;
   the CMS copy is the source of truth — do not treat this file as a mirror.)
 
-## Jost audit (measured live, 30 Sep 2026)
-Stores (es/us/www/fr) still download and render Jost (`fonts.gstatic.com/s/jost/v6/...woff2`);
-the design site uses Outfit only. Where Jost is declared, all in the platform theme:
-1. Theme typography: `--title_font_family: Jost`, `--general_font_family: Jost`.
-2. Two `@font-face 'Jost'` blocks (400).
-3. The custom-CSS script above (3 rules).
-4. A further nav rule in the theme's own output (seen in DevTools at `(index):6787`):
-   `font-family:'Jost' !important; font-size:15px !important; font-weight:400; line-height:22px`,
-   which currently WINS over the script and also supplies `letter-spacing:1px; text-transform:uppercase`.
-
-Moving the stores to Outfit means changing all four. Check with the workflow afterwards (font
-requests must no longer list jost).
+## Jost audit (measured live, 30 Sep 2026, after the `PC端你也喜欢产品调准css` font rules went to Outfit)
+Stores (es/us/www/fr) still download and render Jost (`fonts.gstatic.com/s/jost/v6/...woff2`; nav
+computes to `Jost 15px w400`); the design site uses Outfit only. Remaining declarations, all in the
+platform theme / custom code (the script above is clean now):
+1. **Nav rule (the one that wins)** in another custom-CSS block, commented `/* Navigation - consistent sizing */`:
+   `.page-header .header_box_wrap .header_box .nav ul.tree-wrap li .nav-li-a a, .page-header .header_box_wrap .header_box .nav a { font-family:'Jost' !important; font-weight:400 !important; line-height:22px !important; font-size:15px !important; ... }`
+2. **Section titles rule** in the same block, commented `/* Section titles - reduced size */`:
+   `.block_collection_product_tab_title a, .block_title.notCenter > h2, .block_title > div > a, div.block_title.notCenter > h2 { font-family:'Jost' !important; font-weight:400 !important; line-height:34px !important; font-size:28px !important }`
+3. Theme typography: `--title_font_family: Jost`, `--general_font_family: Jost`.
+4. Two `@font-face 'Jost'` blocks (400).
+Moving the stores to Outfit = change 1–4, then re-run the workflow: nav must read Outfit and font
+requests must no longer list `jost`. (`configurator-styles.css` on the design site only mentions Jost
+in comments about overriding it — harmless.)
 
 ## Measured store header/footer (1920px viewport)
 Top bar 41px `#E2214B`, 14px text; header row 71px (total 112px); logo 92px; nav 15px / weight 400 /
