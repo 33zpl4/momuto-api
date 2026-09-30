@@ -71,9 +71,16 @@ const call = async (body, headers = {}) => { let out = { code: 0, body: null, he
     const bad = [await call({ ref: 'abc12345', email: 'no@x.com' }, { ip: '3.3.3.3' }), await call({ ref: 'abc12345', k: 'f'.repeat(32) }, { ip: '3.3.3.3' }), await call({ ref: 'zzzzzzzz', email: 'a@b.c' }, { ip: '3.3.3.3' }), await call({ ref: 'abc12345' }, { ip: '3.3.3.3' })];
     for (const b of bad) { assert.strictEqual(b.code, 404); assert.deepStrictEqual(b.body, { ok: false, error: 'not_found' }); }
   });
+  await t('API: a backfill order (paid, late-ingested) is visible', async () => {
+    store.set('order:3d_bf000001', { ...base, id: '3d_bf000001', ref: 'bf000001', status: 'backfill', stopLifecycle: true, emailsSent: [] });
+    const r = await call({ ref: 'bf000001', email: 'emilio@club.es' }, { ip: '8.8.8.8' });
+    assert.strictEqual(r.code, 200); assert.strictEqual(r.body.order.ref, 'bf000001');
+  });
   await t('API: excluded/test orders hidden; bad ref shape rejected', async () => {
     store.set('order:3d_test0001', { ...base, id: '3d_test0001', ref: 'test0001', status: 'excluded' });
+    store.set('order:3d_test0002', { ...base, id: '3d_test0002', ref: 'test0002', status: 'test' });
     assert.strictEqual((await call({ ref: 'test0001', k: V.viewToken('test0001') }, { ip: '4.4.4.4' })).code, 404);
+    assert.strictEqual((await call({ ref: 'test0002', k: V.viewToken('test0002') }, { ip: '4.4.4.4' })).code, 404);
     assert.strictEqual((await call({ ref: '../x', k: 'a' }, { ip: '4.4.4.4' })).code, 404);
   });
   await t('API: email guesses rate-limited per ref (8/h)', async () => {

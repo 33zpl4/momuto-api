@@ -28,7 +28,9 @@ tracking, design renders and roster. Owner ruling: option A, one page per store.
    page then falls back to 2.
 2. **Ref + email** form. Case-insensitive email match.
 Every refusal is the same 404 (no probing). Limits: 30 requests/h per IP, 8 email attempts/h per ref.
-Only `active | shipped | delivered` orders are visible (never test/backfill/excluded).
+Only `active | shipped | delivered | backfill` orders are visible (never test/excluded). `backfill` = a real
+paid order ingested >14 days after payment (no lifecycle emails were sent; added 30 Sep 2026 after buyer 3f4wddo3vw
+could not open a 10 Sep order).
 
 ## What is shown / never shown
 Shown: our `ref` (primary), store order no. (secondary), first name, timeline, window
