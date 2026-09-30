@@ -175,6 +175,27 @@ const FR_HEADER_CHILDREN = [
     item('Contact', 3, 6, 'https://fr.momuto.com/pages/contactez-nous'),
   ]),
 ];
+// ── ES "Header Menu" (id 80484) — transcribed from inspect-nav 30 Sep 2026, plus ONE new link ─────────────────
+// New: "Solicitar diseño a medida (15 €)" under EQUIPACIONES -> /pages/solicitud-de-diseno-personalizado
+// (mirrors the US item "Custom design request ($15)"). Everything else is what the store already had.
+const ES_HEADER_CHILDREN = [
+  item('EQUIPACIONES', 0, 0, '', [
+    item('Galería de Diseños', 0, 6, 'https://es.momuto.com/pages/galeria-equipaciones-personalizadas'),
+    page('Ready-to-Play', 1, '/pages/coleccion-ready-to-play', 4429045),
+    item('Solicitar diseño a medida (15 €)', 2, 6, 'https://es.momuto.com/pages/solicitud-de-diseno-personalizado'),
+  ]),
+  item('ICONIC SERIES', 1, 0, '', [
+    item('Drop 01', 0, 2, '/collections/iconic-football-series', [], 440551),
+    item('Drop 02', 1, 2, '/collections/iconic-series-drop-02', [], 443756),
+  ]),
+  page('LA MARCA', 2, '/pages/sobre-nosotros', 299818),
+  item('SOPORTE', 3, 0, '', [
+    page('Preguntas Frecuentes', 0, '/pages/faq', 234940),
+    item('Impresión y Tejidos', 1, 6, 'https://es.momuto.com/pages/materiales-impresion'),
+    item('Guía de Tallas', 2, 6, 'https://es.momuto.com/pages/guia-tallas'),
+    item('Contacto', 3, 6, 'https://es.momuto.com/pages/contacto'),
+  ]),
+];
 const FR_FOOTER_CHILDREN = [
   item('AIDE', 0, 0, '/', [
     item('FAQ', 0, 6, 'https://fr.momuto.com/pages/questions-frequentes'),
@@ -450,6 +471,7 @@ async function main() {
     us: { 'Header Menu': US_MENU_CHILDREN, 'Footer Menu': US_FOOTER_CHILDREN },
     en: { 'Header Menu': EN_HEADER_CHILDREN, 'Footer Menu': EN_FOOTER_CHILDREN },
     fr: { 'Header Menu': FR_HEADER_CHILDREN, 'Footer Menu': FR_FOOTER_CHILDREN },
+    es: { 'Header Menu': ES_HEADER_CHILDREN },
   };
   const children = MENUS[store]?.[navName];
   if (!children) { console.error(`No curated tree for store "${store}" menu "${navName}" — apply-nav would overwrite it with nothing sensible. Curate one in MENUS first.`); process.exit(1); }
