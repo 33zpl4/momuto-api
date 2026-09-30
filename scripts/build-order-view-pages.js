@@ -32,6 +32,7 @@ const T = {
     helpSub: r => `Order ${r}`, formH: 'Find your order', formP: 'Enter your order reference and the email you used at checkout.',
     fRef: 'Order reference', fEmail: 'Email', fBtn: 'Show my order', notFound: 'We could not find that order. Check the reference and email.',
     rate: 'Too many attempts. Try again in an hour.', err: 'Something went wrong. Try again in a moment.', loading: 'Loading…', locale: 'en-GB',
+    reuseH: 'Reuse this design', reuseP: 'Want the same kit again, or a variation? Your saved designs live in the 3D designer (sign in there).', reuseB: 'Open my designs',
   },
   es: {
     title: 'Mi pedido', meta_title: 'Mi pedido | MOMUTO', meta_descript: 'Sigue tu pedido de MOMUTO: estado, plazo de entrega, seguimiento y tu plantilla.',
@@ -46,6 +47,7 @@ const T = {
     helpSub: r => `Pedido ${r}`, formH: 'Busca tu pedido', formP: 'Introduce la referencia del pedido y el email que usaste al pagar.',
     fRef: 'Referencia del pedido', fEmail: 'Email', fBtn: 'Ver mi pedido', notFound: 'No encontramos ese pedido. Revisa la referencia y el email.',
     rate: 'Demasiados intentos. Prueba de nuevo dentro de una hora.', err: 'Algo ha fallado. Inténtalo de nuevo en un momento.', loading: 'Cargando…', locale: 'es-ES',
+    reuseH: 'Reutiliza este diseño', reuseP: '¿Quieres repetir la equipación o una variante? Tus diseños guardados están en el diseñador 3D (inicia sesión allí).', reuseB: 'Abrir mis diseños',
   },
   fr: {
     title: 'Ma commande', meta_title: 'Ma commande | MOMUTO', meta_descript: 'Suivez votre commande MOMUTO : statut, délai de livraison, suivi et votre liste de joueurs.',
@@ -60,6 +62,7 @@ const T = {
     helpSub: r => `Commande ${r}`, formH: 'Retrouvez votre commande', formP: 'Saisissez la référence de commande et l\'email utilisé au paiement.',
     fRef: 'Référence de commande', fEmail: 'Email', fBtn: 'Voir ma commande', notFound: 'Commande introuvable. Vérifiez la référence et l\'email.',
     rate: 'Trop de tentatives. Réessayez dans une heure.', err: 'Une erreur est survenue. Réessayez dans un instant.', loading: 'Chargement…', locale: 'fr-FR',
+    reuseH: 'Réutiliser ce design', reuseP: "Envie du même maillot, ou d'une variante ? Vos designs enregistrés sont dans le configurateur 3D (connexion requise).", reuseB: 'Ouvrir mes designs',
   },
   it: {
     title: 'Il mio ordine', meta_title: 'Il mio ordine | MOMUTO', meta_descript: 'Segui il tuo ordine MOMUTO: stato, data di consegna, tracking e la tua lista giocatori.',
@@ -74,6 +77,7 @@ const T = {
     helpSub: r => `Ordine ${r}`, formH: 'Trova il tuo ordine', formP: 'Inserisci il riferimento dell\'ordine e l\'email usata al pagamento.',
     fRef: 'Riferimento ordine', fEmail: 'Email', fBtn: 'Vedi il mio ordine', notFound: 'Ordine non trovato. Controlla riferimento ed email.',
     rate: 'Troppi tentativi. Riprova tra un\'ora.', err: 'Qualcosa è andato storto. Riprova tra un momento.', loading: 'Caricamento…', locale: 'it-IT',
+    reuseH: 'Riutilizza questo design', reuseP: 'Vuoi lo stesso kit o una variante? I tuoi design salvati sono nel designer 3D (accedi lì).', reuseB: 'Apri i miei design',
   },
 };
 T.us = { ...T.en, locale: 'en-US' };
@@ -100,7 +104,7 @@ const EXTRA_CSS = `
 .ov a.go{display:inline-block;margin-top:.8rem;color:var(--white);border-bottom:1px solid var(--red);text-decoration:none;font-size:.9rem}
 .ov .imgs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .ov .imgs figure{margin:0;flex:1 1 140px;max-width:240px;text-align:center;font-size:.72rem;color:var(--muted)}
-.ov .imgs img{width:100%;height:auto;background:#fff;border:1px solid var(--border);display:block;margin-bottom:4px}
+.ov .imgs img{width:100%;height:auto;aspect-ratio:5/6;object-fit:contain;background:#fff;border:1px solid var(--border);display:block;margin-bottom:4px}
 .ov .tw{overflow-x:auto;border:1px solid var(--border)}
 .ov table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:0}
 .ov th{font-family:var(--fd);font-weight:400;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 8px;font-size:.8rem;border-bottom:1px solid var(--border)}
@@ -147,7 +151,7 @@ function render(o){
   root.appendChild(c);
   var imgs=[];o.designs.forEach(function(d){[[d.front,T.front],[d.back,T.back]].forEach(function(x){if(x[0]&&/^https:\\/\\//.test(x[0]))imgs.push(x);});});
   if(imgs.length){var dc=el('div','card');dc.appendChild(el('h2',0,T.design));var w2=el('div','imgs');
-    imgs.forEach(function(x){var fg=el('figure'),im=document.createElement('img');im.src=x[0];im.alt=x[1];im.loading='lazy';fg.appendChild(im);fg.appendChild(el('figcaption',0,x[1]));w2.appendChild(fg);});
+    imgs.forEach(function(x,i){var fg=el('figure'),im=document.createElement('img');im.alt=x[1];im.decoding='async';im.width=240;im.height=288;if(i===0){im.fetchPriority='high';}else{im.loading='lazy';}im.src=x[0];fg.appendChild(im);fg.appendChild(el('figcaption',0,x[1]));w2.appendChild(fg);});
     dc.appendChild(w2);root.appendChild(dc);}
   var rc=el('div','card');rc.appendChild(el('h2',0,T.roster));
   var rows=[];o.designs.forEach(function(d){d.players.forEach(function(p){rows.push(p);});});
@@ -167,6 +171,8 @@ function render(o){
       tr.appendChild(el('td',0,v));});tb.appendChild(tr);});
     wrap.appendChild(tb);rc.appendChild(wrap);rc.appendChild(el('p','tot',T.totals(o.totals)));}
   root.appendChild(rc);
+  var uc=el('div','card');uc.appendChild(el('h2',0,T.reuseH));uc.appendChild(el('p','muted',T.reuseP));
+  var ua=el('a','btn2',T.reuseB);ua.href='https://design.momuto.com/userInfo/designs';ua.style.marginLeft='0';ua.style.marginTop='12px';uc.appendChild(ua);root.appendChild(uc);
   var hc=el('div','card');hc.appendChild(el('h2',0,T.helpH));hc.appendChild(el('p','muted',T.helpP));
   var m=el('a','btn2',T.helpBtn);m.style.marginLeft='0';m.style.marginTop='12px';
   m.href='mailto:'+o.helpEmail+'?subject='+encodeURIComponent(T.helpSub(o.ref));hc.appendChild(m);root.appendChild(hc);
@@ -184,6 +190,7 @@ if(ref&&k)load({ref:ref,k:k});else form('');
 function render(locale) {
   const t = T[locale];
   return `<meta name="robots" content="noindex,nofollow" />
+<link rel="preconnect" href="https://design.momuto.com" crossorigin="" /><link rel="preconnect" href="https://momuto-api.vercel.app" crossorigin="" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" /><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
 <style>${CSS}${EXTRA_CSS}</style>
 <div class="faqpage">

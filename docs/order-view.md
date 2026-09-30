@@ -51,3 +51,18 @@ shorts total (`extras.shorts`) only when that answer is unique, otherwise no sho
 Live rendering inside each store theme (sandbox cannot reach the stores). Tested here with a mock
 API in Chromium at 390 px wide. After deploy, open one real link per store and check: title hidden,
 full-bleed background, `<script>` allowed by the CMS, images load.
+
+## Two places, one rule (owner question, 30 Sep 2026)
+| Place | Question it answers | Login |
+|---|---|---|
+| Store page "My order" (`/pages/mi-pedido`…) | **Where is my order?** status, window, tracking, roster | none — email link or ref + email |
+| `design.momuto.com/userInfo/*` | **What have I designed?** saved designs, edit, duplicate, reorder | design-tool account |
+
+Order status lives ONLY on the store page. Designs live ONLY in the design account. The order page
+links to "Reuse this design" (design account); the design account's Orders tab duplicates order
+status and should link to the store page instead (open item: design-momuto `templates/*/userinfo/order*.twig`).
+
+## Image weight
+Renders are the design server's own thumbnails, loaded straight from it. The page preconnects,
+loads the front image at high priority and the rest lazily, and reserves the space (no layout jump).
+It cannot shrink the files themselves: that needs a resize step on the design server (open item).
