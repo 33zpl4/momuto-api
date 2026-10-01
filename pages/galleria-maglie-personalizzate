@@ -29,8 +29,8 @@
   },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.5",
-    "reviewCount": "44",
+    "ratingValue": "4.6",
+    "reviewCount": "49",
     "bestRating": "5",
     "worstRating": "1"
   },

@@ -26,7 +26,7 @@ const DOMAIN = {
   file: path.join(ROOT, 'pages', 'custom-youth-club-soccer-uniforms'),
   title: 'Custom Youth & Club Soccer Uniforms — No Minimum',
   meta_title: 'Custom Youth & Club Soccer Uniforms — No Minimum',
-  meta_descript: 'Outfit your youth or club soccer team in custom uniforms. No minimum order, youth-to-adult sizing, per-player names & numbers, full sublimation, free design.',
+  meta_descript: 'Outfit your youth or club soccer team in custom uniforms. No minimum, youth-to-adult sizing, names & numbers, full sublimation, free design for teams.',
   meta_keywords: [
     'custom youth soccer uniforms',
     'youth soccer jerseys',

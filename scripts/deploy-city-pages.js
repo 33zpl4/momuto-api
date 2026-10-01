@@ -93,7 +93,7 @@ ${CSS}
 <h1>Camisetas de Fútbol <span class="hl">Personalizadas</span> ${c.en_ciudad}</h1>
 <p class="sj-lede">Equipaciones a medida para los equipos de ${c.name}: elegid un modelo Ready-to-Play y ponedlo a vuestros colores en 3D, diseñad desde cero en el configurador, o encargádselo a nuestros diseñadores. Sin pedido mínimo y con entrega puerta a puerta ${c.en_ciudad}.</p>
 <div class="sj-cta-row"><a href="${RTP_PATH}" class="sj-btn">Ver modelos Ready-to-Play</a> <a href="${D3_URL}" class="sj-btn secondary">Diseñar en 3D</a></div>
-<p class="sj-trust">Valorado 4,5/5 en <a href="https://es.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confianza de más de 150 clubes.</p>
+<p class="sj-trust">Valorado 4,6/5 en <a href="https://es.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confianza de más de 150 clubes.</p>
 </div>
 <div class="sj-container">
 <div class="sj-bluf">

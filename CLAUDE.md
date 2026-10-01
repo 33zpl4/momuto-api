@@ -82,6 +82,12 @@ pushes and verifies the run itself.
 5. **Deposit copy**: "€15 deposit, credited in full to orders of 5+ jerseys
    — free for a team order." Never refund-forward in marketing/GEO surfaces
    (incl. `static/shared/llms.txt` — it drifted once).
+   **"Free design for teams" is the approved positioning (owner, 30 Sep 2026)** —
+   search data shows free-intent queries are a top winner and US teams treat $15 as a
+   non-issue. Always say WHO and WHEN in the same breath: "free design for teams"
+   plus the deposit line ("€15 / $15 deposit, credited in full on orders of 5+
+   jerseys"). Never a bare "free design" / "design is always free", never "refund"
+   (it is a credit). The 3D designer itself is free (no deposit, no account).
 6. **One set of numbers**: production 7–12 d, shipping 10–15 d, 25–30 door
    to door, mockup 24–48 h, €38.90 single, from €21.90 at 10+, seasonal
    selection −10%. Shorts €5.00 flat from 10 (17.90/15.90/11.90 below);

@@ -40,7 +40,7 @@
     {
       "@type": "Question",
       "name": "Le service de design est-il vraiment gratuit ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Oui. MOMUTO propose deux façons gratuites de créer : un configurateur 3D en temps réel avec plus de 30 modèles, et un service de design professionnel où notre équipe réalise une maquette sur mesure en 1-2 jours, révisions gratuites incluses. Vous ne payez qu'à la commande." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Le configurateur 3D, avec plus de 30 modèles, est gratuit et sans compte. Le design professionnel est gratuit pour les équipes : il démarre avec un acompte de 15 €, crédité en totalité sur les commandes de 5 maillots ou plus — donc offert pour une commande d'équipe. Votre designer réalise une maquette sur mesure en 1-2 jours, révisions incluses. En dessous de 5 maillots, les 15 € restent les frais de design." }
     },
     {
       "@type": "Question",
@@ -50,7 +50,7 @@
     {
       "@type": "Question",
       "name": "Combien coûte un maillot de foot personnalisé ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "À partir de 38,90 € pour un maillot seul, et dès 21,90 € par maillot à partir de 10 unités (kit complet maillot + short à partir de 26,90 € par joueur à 10 unités). Le design est toujours gratuit." }
+      "acceptedAnswer": { "@type": "Answer", "text": "À partir de 38,90 € pour un maillot seul, et dès 21,90 € par maillot à partir de 10 unités (kit complet maillot + short à partir de 26,90 € par joueur à 10 unités). Le configurateur 3D est gratuit." }
     }
   ]
 }
@@ -131,15 +131,16 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="sj-badge">Maillot de foot personnalisé</div>
 <h1>Votre <span class="hl">Maillot de Foot</span> sur Mesure</h1>
 <p class="sj-lede">Créez le maillot de votre équipe dans notre configurateur 3D gratuit, ou confiez-nous votre idée et recevez une maquette professionnelle en 1 à 2 jours. Sans minimum de commande, sublimation intégrale, tailles enfant et adulte.</p>
-<div class="sj-cta-row"><a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr" class="sj-btn">Créer en 3D — gratuit</a> <a href="/pages/demande-de-design-professionnel-de-maillots" class="sj-btn secondary">Demander un design gratuit</a></div>
-<p class="sj-trust">Noté 4,5/5 sur <a href="https://fr.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confiance de 250+ clubs dans le monde.</p>
+<div class="sj-cta-row"><a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr" class="sj-btn">Créer en 3D — gratuit</a> <a href="/pages/demande-de-design-professionnel-de-maillots" class="sj-btn secondary">Design gratuit pour équipes</a></div>
+<p class="sj-note">Design gratuit pour les équipes : acompte de 15 €, crédité en totalité dès 5 maillots.</p>
+<p class="sj-trust">Noté 4,6/5 sur <a href="https://fr.trustpilot.com/review/momuto.com" rel="nofollow">Trustpilot</a> — la confiance de 250+ clubs dans le monde.</p>
 </div>
 <div class="sj-container">
 <div class="sj-bluf">
-<p>MOMUTO conçoit des <strong>maillots de foot personnalisés sur mesure</strong> pour les clubs, les équipes amateurs, les académies et les groupes d'amis. Choisissez un modèle dans le <strong>configurateur 3D gratuit</strong> et commandez en quelques minutes, ou envoyez-nous votre brief et notre équipe crée votre maillot — <strong>le design est toujours gratuit</strong>. Chaque maillot est imprimé en <strong>sublimation intégrale</strong> sur un tissu polyester-élasthanne, <strong>sans minimum de commande</strong> (1 maillot comme 100), avec <strong>noms et numéros de chaque joueur inclus</strong> et livraison en <strong>25 à 30 jours</strong>.</p>
+<p>MOMUTO conçoit des <strong>maillots de foot personnalisés sur mesure</strong> pour les clubs, les équipes amateurs, les académies et les groupes d'amis. Choisissez un modèle dans le <strong>configurateur 3D gratuit</strong> et commandez en quelques minutes, ou envoyez-nous votre brief et notre équipe crée votre maillot — <strong>design gratuit pour les équipes</strong> (acompte de 15 €, crédité en totalité dès 5 maillots). Chaque maillot est imprimé en <strong>sublimation intégrale</strong> sur un tissu polyester-élasthanne, <strong>sans minimum de commande</strong> (1 maillot comme 100), avec <strong>noms et numéros de chaque joueur inclus</strong> et livraison en <strong>25 à 30 jours</strong>.</p>
 <div class="sj-facts">
 <div class="sj-fact"><div class="k">Sans min.</div><div class="l">Commandez 1 maillot ou une équipe entière — aucun minimum</div></div>
-<div class="sj-fact"><div class="k">1 à 2 jours</div><div class="l">Maquette de design professionnelle gratuite, révisions incluses</div></div>
+<div class="sj-fact"><div class="k">1 à 2 jours</div><div class="l">Maquette de design professionnelle, révisions incluses</div></div>
 <div class="sj-fact"><div class="k">25-30 jours</div><div class="l">Livraison dans le monde entier, directement d'usine</div></div>
 <div class="sj-fact"><div class="k">Sublimation</div><div class="l">Couleurs illimitées, ne craque pas, ne se décolle pas</div></div>
 </div>
@@ -153,13 +154,13 @@ h1.title, .title, .page-title { display: none !important; }
 <a class="sj-inline" href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr">Ouvrir le configurateur 3D →</a>
 </div>
 <div class="sj-way"><i class="fas fa-wand-magic-sparkles"></i>
-<h3>2. Le design professionnel gratuit</h3>
-<p>Pas designer ? Envoyez un brief, une référence, un croquis ou même une image générée par IA. Un designer professionnel crée votre maquette en 1 à 2 jours, avec révisions gratuites jusqu'à validation.</p>
-<a class="sj-inline" href="/pages/demande-de-design-professionnel-de-maillots">Demander un design gratuit →</a>
+<h3>2. Le design professionnel — gratuit pour les équipes</h3>
+<p>Pas designer ? Envoyez un brief, une référence, un croquis ou même une image générée par IA. Un designer professionnel crée votre maquette en 1 à 2 jours, avec révisions incluses jusqu'à validation. Design gratuit pour les équipes : acompte de 15 €, crédité en totalité sur les commandes de 5 maillots ou plus — donc offert pour une commande d'équipe.</p>
+<a class="sj-inline" href="/pages/demande-de-design-professionnel-de-maillots">Design gratuit pour équipes →</a>
 </div>
 </div>
 <!-- PRIX -->
-<h2 class="sj-h2">Tarifs — le design est toujours gratuit</h2>
+<h2 class="sj-h2">Tarifs — le configurateur 3D est gratuit</h2>
 <p class="sj-p">Prix dégressifs selon la quantité, sans minimum de commande et sans frais cachés.</p>
 <div class="sj-table-wrap">
 <table class="sj-price">
@@ -173,7 +174,7 @@ h1.title, .title, .page-title { display: none !important; }
 </tbody>
 </table>
 </div>
-<p class="sj-note">Tissu polyester-élasthanne de série. Maquette professionnelle gratuite livrée en 1-2 jours, révisions incluses.</p>
+<p class="sj-note">Tissu polyester-élasthanne de série. Maquette professionnelle livrée en 1-2 jours, révisions incluses. Design gratuit pour les équipes : acompte de 15 €, crédité en totalité dès 5 maillots.</p>
 <!-- USAGES -->
 <h2 class="sj-h2">Pour chaque type d'équipe</h2>
 <div class="sj-uc-grid">
@@ -186,8 +187,8 @@ h1.title, .title, .page-title { display: none !important; }
 <h2 class="sj-h2">Questions fréquentes</h2>
 <div class="sj-faq">
 <details><summary>Y a-t-il un minimum de commande ?</summary><p>Non. MOMUTO n'impose aucun minimum — commandez un seul maillot ou une équipe complète. Le prix par maillot baisse avec la quantité, sans surcoût lié à une quantité minimale.</p></details>
-<details><summary>Combien de temps prend la livraison ?</summary><p>Les maillots personnalisés sont livrés en 25-30 jours dans le monde entier. Votre maquette gratuite est prête en 1-2 jours, et la production ne démarre qu'après votre validation.</p></details>
-<details><summary>Le design est-il vraiment gratuit ?</summary><p>Oui. Deux options gratuites : le configurateur 3D avec plus de 30 modèles, et un service de design professionnel qui réalise votre maquette sur mesure en 1-2 jours. Vous ne payez qu'à la commande.</p></details>
+<details><summary>Combien de temps prend la livraison ?</summary><p>Les maillots personnalisés sont livrés en 25-30 jours dans le monde entier. Votre maquette est prête en 1-2 jours, et la production ne démarre qu'après votre validation.</p></details>
+<details><summary>Le design est-il vraiment gratuit ?</summary><p>Le configurateur 3D, avec plus de 30 modèles, est gratuit et sans compte. Le design professionnel est gratuit pour les équipes : il démarre avec un acompte de 15 €, crédité en totalité sur les commandes de 5 maillots ou plus — donc offert pour une commande d'équipe. Maquette sur mesure en 1-2 jours, révisions incluses. En dessous de 5 maillots, les 15 € restent les frais de design.</p></details>
 <details><summary>Puis-je ajouter mon blason et mes sponsors ?</summary><p>Oui. Téléversez votre blason et vos logos : la sublimation intégrale les imprime dans le tissu, en couleurs illimitées, sans limite de taille et sans craquèlement.</p></details>
 <details><summary>Chaque joueur peut-il avoir un nom et un numéro différents ?</summary><p>Oui, sans frais supplémentaires. La personnalisation fait partie de l'impression, ce n'est pas une option payante.</p></details>
 </div>
@@ -195,8 +196,8 @@ h1.title, .title, .page-title { display: none !important; }
 </div>
 <div class="sj-cta-block">
 <h2>Lancez votre maillot</h2>
-<p>Créez-le en 3D, ou laissez notre équipe le concevoir — gratuitement, sans engagement jusqu'à la commande.</p>
-<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr" class="sj-btn">Créer en 3D</a> <a href="/pages/demande-de-design-professionnel-de-maillots" class="sj-btn secondary">Demander un design gratuit</a>
+<p>Créez-le en 3D (c'est gratuit), ou laissez notre équipe le concevoir — design gratuit pour les équipes dès 5 maillots (acompte de 15 €, crédité en totalité). Maquette en 1-2 jours, production seulement après votre validation.</p>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=fr&amp;langguage=fr" class="sj-btn">Créer en 3D</a> <a href="/pages/demande-de-design-professionnel-de-maillots" class="sj-btn secondary">Design gratuit pour équipes</a>
 <p class="sj-note">Sans minimum · Sublimation intégrale · Tailles enfant à adulte · Livraison 25-30 jours</p>
 </div>
 </div>

@@ -29,7 +29,7 @@ const DOMAIN = {
   file: path.join(ROOT, 'pages', 'custom-soccer-jerseys'),
   title: 'Custom Soccer Jerseys & Uniforms — Design Your Team’s Kit',
   meta_title: 'Custom Soccer Jerseys & Uniforms — No Minimum',
-  meta_descript: 'Design custom soccer jerseys online with our free 3D tool. No minimums, full sublimation, every size from youth to adult. Free pro design in 1–2 days.',
+  meta_descript: 'Design custom soccer jerseys online with our free 3D tool. No minimums, full sublimation, every size from youth to adult. Free design for teams.',
   meta_keywords: [
     'custom soccer jerseys',
     'custom soccer jersey maker',

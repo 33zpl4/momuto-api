@@ -35,6 +35,10 @@
  *                record under manualResends[]. Optional "qty" (jerseys) and
  *                "extras" {shorts,socks,longSleeves,collars} correct the stored
  *                counts first — used to fix the wrong "40" of 28 Sep 2026.
+ *   Silent ingest: same body plus "silent":true (name optional) — stores the record as status
+ *                'backfill' + stopLifecycle, sends NO email, does not enrol day-4/day-10. For old
+ *                orders the pipeline missed, so the customer's "My order" page can open them
+ *                (docs/order-view.md; first used for 3f4wddo3vw, 30 Sep 2026).
  *   Ingest:      POST /api/admin-orders   { "action":"ingest-and-send",
  *                  "order_no":"kz1cgjw0oh", "email":"…", "name":"…",
  *                  "lang":"en", "plant_order_no":"2026081633552986",
@@ -286,13 +290,17 @@ module.exports = async function handler(req, res) {
   // ---- INGEST AND SEND (webhook-miss recovery) --------------------------
   if (action === 'ingest-and-send') {
     if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
-    if (!RESEND_KEY) return res.status(503).json({ error: 'RESEND_API_KEY not configured' });
+    // silent (30 Sep 2026): store the record so the customer's "My order" page works, but send NOTHING and
+    // never enrol the lifecycle. For orders the pipeline missed that are already old (day-4/day-10 mails
+    // would fire at once). Stored as status 'backfill' + stopLifecycle, exactly like a late webhook order.
+    const silent  = body.silent === true || body.silent === 'true' || body.silent === 1 || body.silent === '1';
+    if (!silent && !RESEND_KEY) return res.status(503).json({ error: 'RESEND_API_KEY not configured' });
 
     const orderNo = String(body.order_no || '').trim();
     const email   = String(body.email || '').trim();
     const name    = String(body.name || '').trim();
-    if (!orderNo || !email || !name) {
-      return res.status(400).json({ error: 'order_no, email and name are required' });
+    if (!orderNo || !email || (!name && !silent)) {
+      return res.status(400).json({ error: silent ? 'order_no and email are required' : 'order_no, email and name are required' });
     }
 
     const id = toId(orderNo);
@@ -331,12 +339,24 @@ module.exports = async function handler(req, res) {
       emailsSent: [],
       trackingNumber: null,
       trackingUrl: null,
-      status: 'active',
+      status: silent ? 'backfill' : 'active',
+      ...(silent ? { stopLifecycle: true } : {}),
+      // silent ingest of an order that ALREADY shipped: keep the tracking so the page shows it (no email is sent)
+      ...(silent && body.tracking_number ? {
+        trackingNumber: String(body.tracking_number).slice(0, 60),
+        trackingUrl: /^https:\/\//i.test(body.tracking_url || '') ? String(body.tracking_url) : null,
+        shippedAt: body.shipped_at && !isNaN(Date.parse(body.shipped_at)) ? new Date(body.shipped_at).toISOString() : null,
+        status: 'shipped',
+      } : {}),
       createdAt: new Date().toISOString(),
     };
 
     await kv.set(`order:${id}`, order);
     await kv.sadd('orders:all', id);
+    if (silent) {
+      console.log(`[admin-orders] SILENT ingest for ${id} (no email, no lifecycle)`);
+      return res.status(200).json({ ok: true, ingested: true, sent: false, silent: true, order: diagnose(id, order) });
+    }
     await kv.sadd('orders:active', id);
 
     const { subject, html } = emailConfirmation3D(order);
