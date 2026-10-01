@@ -37,7 +37,7 @@
       "name": "How much do custom football kits cost in 2026?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MOMUTO custom jersey pricing: 1 jersey €38.90, 2-4 jerseys €34.90 each, 5-9 jerseys €26.90 each, 10-19 jerseys €21.90 each, 20-49 jerseys €18.90 each, 50-99 jerseys €17.90 each, 100+ jerseys €16.90 each. Shorts are priced separately: €17.90 (1 unit), €15.90 (2-4), €11.90 (5-9), €5.00 (10-19), €5.00 (20-49), €5.00 (50-99), €5.00 (100+). Professional design is always free."
+        "text": "MOMUTO custom jersey pricing: 1 jersey €38.90, 2-4 jerseys €34.90 each, 5-9 jerseys €26.90 each, 10-19 jerseys €21.90 each, 20-49 jerseys €18.90 each, 50-99 jerseys €17.90 each, 100+ jerseys €16.90 each. Shorts are priced separately: €17.90 (1 unit), €15.90 (2-4), €11.90 (5-9), €5.00 (10-19), €5.00 (20-49), €5.00 (50-99), €5.00 (100+). Professional design is free for teams (€15 deposit, credited on 5+ jerseys)."
       }
     },
     {
@@ -533,7 +533,7 @@ h1.title, .title, .page-title { display: none !important; }
 </div>
 <!-- PRICING TABLE -->
 <h2 class="cmp-h2">MOMUTO Kit Pricing 2026</h2>
-<p class="cmp-p">Full transparency on what custom kits actually cost at MOMUTO. Design is always free. No hidden fees.</p>
+<p class="cmp-p">Full transparency on what custom kits actually cost at MOMUTO. Design is free for teams (€15 deposit, credited in full on orders of 5+ jerseys). No hidden fees.</p>
 <div class="cmp-table-wrap">
 <div class="table-scroll-wrapper" style="overflow-x: auto;">
 <table class="cmp-pricing-table">
@@ -592,7 +592,7 @@ h1.title, .title, .page-title { display: none !important; }
 </table>
 </div>
 </div>
-<p class="cmp-note">Free shipping on orders over &euro;49. Professional design mockup always free, delivered in 1-2 days with free revisions.</p>
+<p class="cmp-note">Free shipping on orders over &euro;49. Professional design mockup delivered in 1-2 days with revisions included; free for teams (€15 deposit, credited on 5+ jerseys).</p>
 <!-- COMPARISON TABLE -->
 <h2 class="cmp-h2">Full Comparison Table (2026)</h2>
 <div class="cmp-table-wrap">
@@ -645,7 +645,7 @@ h1.title, .title, .page-title { display: none !important; }
 </tr>
 <tr>
 <td>Design Service</td>
-<td>Free Pro Designer + 3D Tool</td>
+<td>Free Design for Teams + 3D Tool</td>
 <td>Included (often)</td>
 <td>DIY 3D Tool only</td>
 <td>DIY 3D Tool only</td>
@@ -741,7 +741,7 @@ h1.title, .title, .page-title { display: none !important; }
 <li>You need reliable delivery in under 5 weeks.</li>
 <li>You want a full kit (jersey + shorts) for &euro;26.90 per player at squad scale.</li>
 <li>You want premium polyester + elastane fabric at a standard price.</li>
-<li>You need a pro designer to handle the artwork (free, with revisions).</li>
+<li>You need a pro designer to handle the artwork (free for teams, with revisions).</li>
 <li>You want optional 3D silicon badges &mdash; not available at competitors.</li>
 </ul>
 <p class="cmp-p"><strong>Choose Jersix if:</strong></p>
@@ -760,7 +760,7 @@ h1.title, .title, .page-title { display: none !important; }
 <!-- CTA -->
 <div class="cmp-cta-block">
 <h3>Ready to design your kit?</h3>
-<p>Free design mockup in 1&ndash;2 days. No commitment until you order.</p>
+<p>Design mockup in 1&ndash;2 days, free for teams. Production starts only after you approve.</p>
 <a href="/pages/request-custom-kit-design" class="cmp-cta-btn">Request a Custom Design</a> <a href="/pages/custom-kit-gallery" class="cmp-cta-btn secondary">View Kit Gallery</a></div>
 </div>
 </div>

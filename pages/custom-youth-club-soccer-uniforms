@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Custom Youth & Club Soccer Uniforms | MOMUTO",
-  "description": "Outfit your youth or club soccer team in custom uniforms. No minimum order, youth-to-adult sizing in one design, per-player names & numbers, full sublimation, free design.",
+  "description": "Outfit your youth or club soccer team in custom uniforms. No minimum order, youth-to-adult sizing in one design, per-player names & numbers, full sublimation, free design for teams.",
   "url": "https://www.momuto.com/pages/custom-youth-club-soccer-uniforms",
   "datePublished": "2026-06-18",
   "dateModified": "2026-06-18",
@@ -64,7 +64,7 @@
       "name": "Can a whole club order matching uniforms across different age groups?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Clubs and academies regularly order one unified design across multiple teams and age groups in both youth and adult sizes. Your free design mockup can be shared with coaches and parents for approval before anything is produced."
+        "text": "Yes. Clubs and academies regularly order one unified design across multiple teams and age groups in both youth and adult sizes. Your design mockup can be shared with coaches and parents for approval before anything is produced."
       }
     },
     {
@@ -72,7 +72,7 @@
       "name": "How long does delivery take for a team order?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Custom soccer uniforms are delivered in 25-30 days worldwide (production plus shipping direct from the factory). Your free design mockup is ready in 1-2 days, and production does not start until you approve it, so plan team orders a few weeks before the season."
+        "text": "Custom soccer uniforms are delivered in 25-30 days worldwide (production plus shipping direct from the factory). Your design mockup is ready in 1-2 days, and production does not start until you approve it, so plan team orders a few weeks before the season."
       }
     },
     {
@@ -561,7 +561,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="sj-container">
 <!-- BLUF -->
 <div class="sj-bluf">
-<p>MOMUTO makes <strong>custom youth and club soccer uniforms</strong> for the people who order for a whole team — coaches, club directors, and team parents. Build one design and run it across <strong>every age group in youth and adult sizing</strong>, with a <strong>different name and number for each player</strong> at no extra cost. There's <strong>no minimum order</strong>, so a small squad pays the same per-jersey logic as a full club, and <strong>design is always free</strong> — a real designer sends your mockup in 1&ndash;2 days for the club to approve before anything is made.</p>
+<p>MOMUTO makes <strong>custom youth and club soccer uniforms</strong> for the people who order for a whole team — coaches, club directors, and team parents. Build one design and run it across <strong>every age group in youth and adult sizing</strong>, with a <strong>different name and number for each player</strong> at no extra cost. There's <strong>no minimum order</strong>, so a small squad pays the same per-jersey logic as a full club, and <strong>design is free for teams</strong> (€15 deposit, credited in full on orders of 5+ jerseys) — a real designer sends your mockup in 1&ndash;2 days for the club to approve before anything is made.</p>
 <div class="sj-facts">
 <div class="sj-fact"><div class="k">No min.</div><div class="l">Outfit 7 players or 70 &mdash; no minimum-quantity surcharge</div></div>
 <div class="sj-fact"><div class="k">Youth&ndash;adult</div><div class="l">One design across every age group in your club</div></div>
@@ -579,7 +579,7 @@ h1.title, .title, .page-title { display: none !important; }
 </div>
 <div class="sj-step"><span class="num">2</span>
 <h3>Share &amp; approve</h3>
-<p>Get your mockup in 1&ndash;2 days. Share it with coaches and parents and request free revisions until the club is happy.</p>
+<p>Get your mockup in 1&ndash;2 days. Share it with coaches and parents and request revisions until the club is happy.</p>
 </div>
 <div class="sj-step"><span class="num">3</span>
 <h3>Collect sizes &amp; names</h3>
@@ -633,11 +633,11 @@ h1.title, .title, .page-title { display: none !important; }
 </details>
 <details>
 <summary>Can a whole club order matching uniforms across different age groups?</summary>
-<p>Yes. Clubs and academies regularly order one unified design across multiple teams and age groups in both youth and adult sizes. Your free design mockup can be shared with coaches and parents for approval before anything is produced.</p>
+<p>Yes. Clubs and academies regularly order one unified design across multiple teams and age groups in both youth and adult sizes. Your design mockup can be shared with coaches and parents for approval before anything is produced.</p>
 </details>
 <details>
 <summary>How long does delivery take for a team order?</summary>
-<p>Custom soccer uniforms are delivered in 25&ndash;30 days worldwide (production plus shipping direct from the factory). Your free design mockup is ready in 1&ndash;2 days, and production doesn't start until you approve it, so plan team orders a few weeks before the season.</p>
+<p>Custom soccer uniforms are delivered in 25&ndash;30 days worldwide (production plus shipping direct from the factory). Your design mockup is ready in 1&ndash;2 days, and production doesn't start until you approve it, so plan team orders a few weeks before the season.</p>
 </details>
 <details>
 <summary>Can I add our club crest and a sponsor logo?</summary>
