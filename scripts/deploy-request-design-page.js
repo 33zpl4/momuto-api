@@ -41,10 +41,10 @@ const DOMAINS = {
     handle: 'demande-de-design-professionnel-de-maillots',
     file: path.join(ROOT, 'pages', 'demande-de-design-professionnel-de-maillots'),
     // Commercial-intent meta (was 10 clicks / 1669 impr, ranking only as a brand sitelink).
-    title: 'Design de Maillot de Foot Personnalisé Gratuit | MOMUTO',
-    meta_title: 'Design de Maillot de Foot Personnalisé Gratuit',
-    meta_descript: 'Recevez gratuitement la maquette de votre maillot de foot personnalisé en 1-2 jours. Révisions gratuites, sans engagement et sans minimum de commande.',
-    meta_keywords: ['design maillot de foot', 'maillot de foot personnalisé', 'maquette maillot gratuite', 'création maillot foot', 'MOMUTO']
+    title: 'Design de Maillot de Foot Gratuit pour Équipes | MOMUTO',
+    meta_title: 'Design de Maillot de Foot Gratuit pour Équipes',
+    meta_descript: 'Maquette de votre maillot de foot personnalisé en 1-2 jours. Design gratuit pour les équipes : acompte de 15 €, crédité dès 5 maillots. Sans minimum.',
+    meta_keywords: ['design maillot de foot', 'maillot de foot personnalisé', 'design maillot gratuit équipe', 'création maillot foot', 'MOMUTO']
   },
   it: {
     host: 'https://openapi.oemapps.com',

@@ -37,7 +37,7 @@
       "name": "¿Cuánto cuesta una equipación de fútbol personalizada?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Precios MOMUTO: 1 camiseta a 38,90 €; 2-4 a 34,90 €/u; 5-9 a 26,90 €/u; 10-19 a 21,90 €/u; 20-49 a 18,90 €/u; 50-99 a 17,90 €/u; 100+ a 16,90 €/u. El pantalón va aparte: 17,90 € (1 ud), 15,90 € (2-4), 11,90 € (5-9), 6,00 € (10+). Para un equipo de 10, el kit completo (camiseta + pantalón) sale a 26,90 € por jugador. El servicio de diseño es siempre gratis."
+        "text": "Precios MOMUTO: 1 camiseta a 38,90 €; 2-4 a 34,90 €/u; 5-9 a 26,90 €/u; 10-19 a 21,90 €/u; 20-49 a 18,90 €/u; 50-99 a 17,90 €/u; 100+ a 16,90 €/u. El pantalón va aparte: 17,90 € (1 ud), 15,90 € (2-4), 11,90 € (5-9), 6,00 € (10+). Para un equipo de 10, el kit completo (camiseta + pantalón) sale a 26,90 € por jugador. El diseño es gratis para equipos (depósito de 15 €, acreditado íntegramente en pedidos de 5+ camisetas); el configurador 3D es gratis sin más."
       }
     },
     {
@@ -53,7 +53,7 @@
       "name": "¿El servicio de diseño es gratis en MOMUTO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí. MOMUTO ofrece tres vías de diseño gratuitas: un configurador 3D en tiempo real con más de 30 plantillas, un servicio de diseño profesional con diseñador humano (boceto en 1-2 días y retoques ilimitados) y la adaptación de tus conceptos de IA (ChatGPT, Gemini, Midjourney) a una equipación lista para producción, un servicio único en el mercado. No se paga nada por adelantado."
+        "text": "Sí, con matices. MOMUTO ofrece tres vías de diseño: un configurador 3D en tiempo real con más de 30 plantillas, un servicio de diseño profesional con diseñador humano (boceto en 1-2 días y retoques ilimitados) y la adaptación de tus conceptos de IA (ChatGPT, Gemini, Midjourney) a una equipación lista para producción, un servicio único en el mercado. El configurador 3D es gratis y sin cuenta; el servicio de diseñador es gratis para equipos (depósito de 15 €, acreditado íntegramente en pedidos de 5+ camisetas)."
       }
     },
     {
@@ -80,7 +80,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Equipación de Fútbol Personalizada — Camiseta + Pantalón",
-  "description": "Equipación de fútbol totalmente personalizada con impresión por sublimación total. Tejido poliéster-elastano de alto rendimiento, servicio de diseño profesional gratuito, sin pedido mínimo. Entrega en 25-30 días.",
+  "description": "Equipación de fútbol totalmente personalizada con impresión por sublimación total. Tejido poliéster-elastano de alto rendimiento, diseño profesional gratis para equipos, sin pedido mínimo. Entrega en 25-30 días.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
   "offers": {
     "@type": "AggregateOffer",
@@ -719,7 +719,7 @@ h1.title, .title, .page-title { display: none !important; }
 <li>Necesitas una entrega fiable en menos de 5 semanas.</li>
 <li>Quieres un kit completo (camiseta + pantal&oacute;n) a 26,90 &euro; por jugador para tu equipo.</li>
 <li>Quieres pedir pocas unidades &mdash; o solo una &mdash; sin recargos ni pedido m&iacute;nimo.</li>
-<li>Prefieres un dise&ntilde;ador profesional que prepare el boceto gratis, con retoques ilimitados.</li>
+<li>Prefieres un dise&ntilde;ador profesional que prepare el boceto (gratis para equipos), con retoques ilimitados.</li>
 <li>Has creado un concepto con IA y quieres convertirlo en una equipaci&oacute;n real.</li>
 <li>Buscas tejido poli&eacute;ster + elastano sin pagar un extra.</li>
 </ul>
