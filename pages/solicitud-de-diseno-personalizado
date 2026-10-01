@@ -29,8 +29,8 @@
   },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.5",
-    "reviewCount": "44",
+    "ratingValue": "4.6",
+    "reviewCount": "49",
     "bestRating": "5",
     "worstRating": "1"
   },
@@ -449,7 +449,7 @@
 <ul class="hiw-steps">
 <li><span class="hiw-num">1</span><div><strong>Elige tu v&iacute;a</strong><p>Explora la <a href="https://es.momuto.com/pages/coleccion-ready-to-play" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">colecci&oacute;n Lista para Jugar</a> con dise&ntilde;os probados al 10% de descuento. O env&iacute;a un brief para un dise&ntilde;o totalmente personalizado. O <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=es&amp;langguage=es" style="color:var(--accent-red);font-weight:700;text-decoration:underline;">cr&eacute;alo t&uacute; mismo en 3D</a>.</p></div></li>
 <li><span class="hiw-num">2</span><div><strong>Recibe tu maqueta en 24&ndash;48h</strong><p>Nuestros dise&ntilde;adores crean una maqueta de equipaci&oacute;n de f&uacute;tbol totalmente personalizada. Solo 15&euro; para empezar, acreditados en pedidos de 5+ camisetas.</p></div></li>
-<li><span class="hiw-num">3</span><div><strong>Solicita revisiones si es necesario</strong><p>Todas las revisiones son gratuitas. Ajustamos hasta que est&eacute;s satisfecho.</p></div></li>
+<li><span class="hiw-num">3</span><div><strong>Solicita revisiones si es necesario</strong><p>Las revisiones están incluidas. Ajustamos hasta que est&eacute;s satisfecho.</p></div></li>
 <li><span class="hiw-num">4</span><div><strong>Confirma tallas y detalles del pedido</strong><p>Env&iacute;a el desglose de tallas y preparamos la producci&oacute;n.</p></div></li>
 <li><span class="hiw-num">5</span><div><strong>Producimos y enviamos tu equipaci&oacute;n</strong><p>7&ndash;12 d&iacute;as de producci&oacute;n + 10&ndash;15 d&iacute;as de env&iacute;o. Tu equipaci&oacute;n llega en 20&ndash;25 d&iacute;as en todo el mundo.</p></div></li>
 </ul>

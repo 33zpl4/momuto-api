@@ -58,7 +58,7 @@ const DOMAINS = {
     // (was 1 click / 722 impressions, ranking only under the "momuto" brand SERP).
     title: 'Galerie de Maillots de Foot Personnalisés sur Mesure',
     meta_title: 'Galerie de Maillots de Foot Personnalisés sur Mesure',
-    meta_descript: 'Découvrez nos maillots de foot personnalisés sur mesure créés pour des clubs du monde entier. Sans minimum de commande, sublimation intégrale, design gratuit.',
+    meta_descript: 'Maillots de foot personnalisés créés pour des clubs du monde entier. Sans minimum, sublimation intégrale, design gratuit pour équipes.',
     meta_keywords: ['maillot de foot personnalisé', 'maillot foot sur mesure', 'galerie maillots personnalisés', 'maillot club personnalisé', 'MOMUTO']
   },
   it: {

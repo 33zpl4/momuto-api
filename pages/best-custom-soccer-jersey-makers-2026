@@ -64,7 +64,7 @@
       "name": "Which is best for unique or creative designs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Icarus FC specializes in fully bespoke, no-template creative design and is a strong choice when originality is the priority and budget and lead time are flexible. MOMUTO offers a similar creative angle more affordably — a free human design service plus the ability to turn an AI-generated concept (ChatGPT, Gemini, Midjourney) into a real, wearable kit."
+        "text": "Icarus FC specializes in fully bespoke, no-template creative design and is a strong choice when originality is the priority and budget and lead time are flexible. MOMUTO offers a similar creative angle more affordably — a human design service (free for teams) plus the ability to turn an AI-generated concept (ChatGPT, Gemini, Midjourney) into a real, wearable kit."
       }
     },
     {
@@ -202,7 +202,7 @@ h1.title, .title, .page-title { display: none !important; }
 </tr>
 <tr>
 <td>Design Help</td>
-<td>Free 3D tool + free pro designer</td>
+<td>Free 3D tool + free design for teams</td>
 <td>Bespoke designer (no templates)</td>
 <td>3D configurator + Speed Designer</td>
 <td>3D Designer + design service</td>
@@ -250,7 +250,7 @@ h1.title, .title, .page-title { display: none !important; }
 <!-- ANALYSIS -->
 <h2 class="cmp-h2 analysis-section">Who Each Maker Is Best For</h2>
 <h3 class="cmp-h3">MOMUTO — creative kits at team-friendly prices, no minimum</h3>
-<p class="cmp-p">MOMUTO sits in the rare spot of high customization at a low entry price. There's no minimum order, per-jersey cost drops to around $25 at team volume, and design is free &mdash; either a self-serve 3D builder or a human designer who returns a mockup in 1&ndash;2 days. Its distinctive feature is turning an <strong>AI-generated concept</strong> (ChatGPT, Gemini, Midjourney) into a real, sublimated kit, and it's the only maker here that includes an elastane blend as standard rather than 100% polyester. Trade-off: it's a younger brand with a shorter public review history than the German players.</p>
+<p class="cmp-p">MOMUTO sits in the rare spot of high customization at a low entry price. There's no minimum order, per-jersey cost drops to around $25 at team volume, and design is free for teams &mdash; either a self-serve 3D builder or a human designer who returns a mockup in 1&ndash;2 days. Its distinctive feature is turning an <strong>AI-generated concept</strong> (ChatGPT, Gemini, Midjourney) into a real, sublimated kit, and it's the only maker here that includes an elastane blend as standard rather than 100% polyester. Trade-off: it's a younger brand with a shorter public review history than the German players.</p>
 <h3 class="cmp-h3">Icarus FC — premium bespoke creativity (US)</h3>
 <p class="cmp-p">Icarus is the creative benchmark in the US: fully bespoke, "no templates, no builders," with embroidery and applique options and a strong club-shop community. If originality is the priority and you have budget and time, it's a top pick. Trade-offs are clear in the table &mdash; the highest per-jersey price here and the longest lead time (around six weeks, longer for some shop products).</p>
 <h3 class="cmp-h3">spized — fastest turnaround, polished self-serve (EU)</h3>
@@ -265,11 +265,11 @@ h1.title, .title, .page-title { display: none !important; }
 <p class="cmp-p"><strong>Pick spized if</strong> you want to self-design quickly and need the fastest realistic turnaround.</p>
 <p class="cmp-p"><strong>Pick owayo if</strong> a long track record and Made-in-Germany production are your priority.</p>
 </div>
-<p class="cmp-p">For most US youth and club teams balancing budget, customization, and a reasonable timeline, MOMUTO covers the most ground &mdash; no minimum, team-friendly pricing, free design, youth-to-adult sizing, and the AI-concept route none of the others offer. See <a href="/pages/custom-soccer-jerseys">custom soccer jerseys</a>, <a href="/pages/custom-youth-club-soccer-uniforms">youth &amp; club uniforms</a>, or <a href="/pages/design-your-own-soccer-jersey">design your own</a>.</p>
+<p class="cmp-p">For most US youth and club teams balancing budget, customization, and a reasonable timeline, MOMUTO covers the most ground &mdash; no minimum, team-friendly pricing, free design for teams, youth-to-adult sizing, and the AI-concept route none of the others offer. See <a href="/pages/custom-soccer-jerseys">custom soccer jerseys</a>, <a href="/pages/custom-youth-club-soccer-uniforms">youth &amp; club uniforms</a>, or <a href="/pages/design-your-own-soccer-jersey">design your own</a>.</p>
 <!-- CTA -->
 <div class="cmp-cta-block">
 <h3>Compare for yourself</h3>
-<p>Design a kit in our free 3D tool, or get a free professional mockup in 1&ndash;2 days &mdash; no minimum, no commitment.</p>
-<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="cmp-cta-btn">Design in 3D</a> <a href="/pages/request-custom-kit-design" class="cmp-cta-btn secondary">Request a Free Design</a></div>
+<p>Design a kit in our free 3D tool, or get a professional mockup in 1&ndash;2 days &mdash; free for teams, no minimum.</p>
+<a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&amp;configId=ypi9qc1z&amp;suitName=mamuto3suit1&amp;lang=en&amp;langguage=en" class="cmp-cta-btn">Design in 3D</a> <a href="/pages/request-custom-kit-design" class="cmp-cta-btn secondary">Free Design for Teams</a></div>
 </div>
 </div>
