@@ -139,6 +139,7 @@ function diagnose(id, o) {
     lang:         o.lang || null,
     status:       o.status || null,
     stopLifecycle: !!o.stopLifecycle,
+    fastLane:     !!o.fastLane,
     paidAt:       o.paidAt || null,
     createdAt:    o.createdAt || null,
     emailsSent:   o.emailsSent || [],
@@ -395,6 +396,21 @@ module.exports = async function handler(req, res) {
       });
     }
     return res.status(200).json({ ok: true, action, count: results.length, results });
+  }
+
+  // ---- SET-FAST-LANE (2 Oct 2026) --------------------------------------
+  // Repairs a stored order the pipeline recorded without the fast-lane flag (poller bug): later lifecycle
+  // emails (day-4 / day-10 / tracking) then quote the 18-23 day window. Sends nothing by itself.
+  if (action === 'set-fast-lane') {
+    if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
+    const ref = String(body.order_no || '').trim();
+    if (!ref) return res.status(400).json({ error: 'order_no is required' });
+    const id = toId(ref);
+    const o = await kv.get(`order:${id}`);
+    if (!o) return res.status(404).json({ ok: false, error: `Order ${id} not found` });
+    const on = body.fast_lane === true || body.fast_lane === 1 || body.fast_lane === '1';
+    await kv.set(`order:${id}`, { ...o, fastLane: on, fastLaneSetAt: new Date().toISOString() });
+    return res.status(200).json({ ok: true, id, fastLane: on, was: !!o.fastLane });
   }
 
   // ---- EXCLUDE / REACTIVATE --------------------------------------------

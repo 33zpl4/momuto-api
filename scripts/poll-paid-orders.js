@@ -329,7 +329,11 @@ async function run() {
         // Fast lane (23 Sep 2026): the per-order "Fast lane" product line
         // (momuto-api Create Fast-lane products; one title per store) → 18–23 day
         // window in the emails instead of 25–30.
-        const fastLane = itemsOf(o).some(it => FAST_LANE_TITLE_RE.test(String(field(it, ['title', 'name']) || '')));
+        // 2 Oct 2026: the platform's line key is `product_title` (not title/name), so the old title-only test never
+        // matched and EVERY poller-ingested fast-lane order was emailed the 25-30 day window. countLines (the shared
+        // classifier, product_title first) already knows the line; the regex stays as a belt on the right key too.
+        const fastLane = counts.fastLane
+          || itemsOf(o).some(it => FAST_LANE_TITLE_RE.test(String(field(it, ['product_title', 'title', 'name']) || '')));
         const payload = {
           action: 'ingest-and-send',
           order_no: ref, email, name, lang,

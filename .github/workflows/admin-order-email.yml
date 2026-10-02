@@ -17,7 +17,7 @@ on:
         description: 'What to do'
         required: true
         type: choice
-        options: ['ingest-and-send', 'resend-confirmation', 'find']
+        options: ['ingest-and-send', 'resend-confirmation', 'find', 'set-fast-lane']
         default: 'find'
       order_no:
         description: 'Our order ref (3D order_no, or a new unique ref for a custom order)'
@@ -86,7 +86,7 @@ on:
         type: boolean
         default: false
       fast_lane:
-        description: 'Order paid the fast lane (ingest only; emails quote 18–23 days instead of 25–30)'
+        description: 'Order paid the fast lane (ingest, or set-fast-lane: ticked = ON, unticked = OFF; emails quote 18–23 days instead of 25–30)'
         required: false
         type: boolean
         default: false

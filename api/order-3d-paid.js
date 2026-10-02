@@ -99,6 +99,10 @@ module.exports = async function handler(req, res) {
   }
 
   const id = `3d_${order_no}`;
+  // Fast lane (23 Sep 2026): order-level flag from the design server (explicit fast_lane, or the fastLane stamp
+  // GoodInfoAction puts on every roster item). Drives the 18–23 day window in every lifecycle email (lib/emails.js).
+  const fastLane = fast_lane === 1 || fast_lane === '1' || fast_lane === true ||
+    (designs || []).flatMap(d => d.players || []).some(p => p && p.fastLane);
 
   // Platform clocks: first_pay_at is the earliest payment moment; fall back to
   // pay_at. 0 / missing means the design server predates the timestamp patch —
@@ -118,6 +122,14 @@ module.exports = async function handler(req, res) {
   if (existing && existing.paidAt &&
       ((existing.emailsSent || []).includes('confirmation') ||
        existing.stopLifecycle || existing.status !== 'active')) {
+    // Fast lane merge (2 Oct 2026): the poller ingests first and used to miss the fast-lane line; the late webhook
+    // knows the truth. Set the flag on the stored record so day-4 / day-10 / tracking quote the right window.
+    if (fastLane && !existing.fastLane) {
+      existing.fastLane = true;
+      existing.fastLaneSetAt = new Date().toISOString();
+      await kv.set(`order:${id}`, existing);
+      console.log(`[order-3d-paid] ${id} dedup — fast lane flag merged`);
+    }
     // Roster backfill: the hourly poller ingests from the platform alone and
     // stores designs WITHOUT players (it cannot see the design-server roster).
     // When the real webhook arrives later, keep the dedup (no second email)
@@ -140,10 +152,6 @@ module.exports = async function handler(req, res) {
 
   const players = (designs || []).flatMap(d => d.players || []).filter(Boolean);
   const qty = players.reduce((n, p) => n + (parseInt(p.qty, 10) || 1), 0) || '—';
-  // Fast lane (23 Sep 2026): order-level flag from the design server (explicit
-  // fast_lane, or the fastLane stamp GoodInfoAction puts on every roster item).
-  // Drives the 18–23 day window in every lifecycle email (lib/emails.js).
-  const fastLane = fast_lane === 1 || fast_lane === '1' || fast_lane === true || players.some(p => p && p.fastLane);
 
   // On a retry keep the stored record (original clocks, any admin edits) and
   // only re-attempt the send; otherwise build the order fresh.
