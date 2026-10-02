@@ -91,7 +91,18 @@ async function createPage(token, page) {
   return json.data?.id ?? json.data?.page?.id ?? '?';
 }
 
+// Gallery pages are owned by the team pipeline (scripts/generate-and-deploy.js injects
+// one card per deploy). A repo snapshot is always stale, so pushing it wipes every card
+// added since the pull — that took the US gallery from 150+ cards back to a 3 Sep state
+// on 1 Oct 2026. Refuse unless explicitly forced.
+const GALLERY_HANDLES = new Set(['custom-kit-gallery', 'galeria-equipaciones-personalizadas',
+  'galerie-maillots-foot-sur-mesure', 'galleria-maglie-personalizzate']);
+
 async function deployOne(locale, handle) {
+  if (GALLERY_HANDLES.has(handle) && process.env.ALLOW_GALLERY_DEPLOY !== 'true') {
+    console.warn(`⛔ ${locale} ${handle}: gallery pages are pipeline-owned — NOT deploying a repo snapshot (it would erase cards). Set ALLOW_GALLERY_DEPLOY=true to override.`);
+    return;
+  }
   const token = TOKENS[locale];
   if (!token) { console.warn(`⚠️  ${handle}: no ${locale} token — skipping`); return; }
 
