@@ -427,7 +427,24 @@ Verification notes learned the hard way:
 | `Cannot read properties of undefined (reading 'trim')` on every store | Model returned a thinking block first (fixed 24 Sep 2026: `responseText()` in `generate-and-deploy.js`) | If it comes back, the fix was lost — report to the orchestrator; don't patch it yourself. |
 | `401 Token-Error` on one store only (manual workflow) | That workflow's `env:` is missing the store's `OEMSAAS_TOKEN_*` (US was fixed 24 Sep 2026) | Report; the orchestrator adds the secret line to the workflow. |
 | `❌ Error processing <store>: fetch failed` on ONE store, others ✓ (seen on it.momuto.com, 30 Sep 2026, ~10 s timeout) | Transient network timeout to that store's CMS | Other stores are live. Redeploy yourself: dispatch `deploy-team-manual.yml` (§0.3 "Re-deploying") with the same slug and gallery flag. Safe — existing pages log `✓ Updated`, the missing one `✓ Created`. Report it as recovered. |
+| A store's gallery is MISSING many teams the log said were added (US lost 29 on 1 Oct 2026) | Something overwrote the live gallery with an older copy — it was `Deploy CMS Page` pushing a stale `cms/pages/us/custom-kit-gallery.json` snapshot. Galleries are pipeline-owned; the pipeline only ever adds the team it is deploying | Do NOT redeploy teams one by one. Run the repair (below). Never edit or deploy `cms/pages/*/custom-kit-gallery.json`; `deploy-cms-page.js` now refuses gallery handles. |
 | One store's gallery step gets HTML instead of JSON | Transient API-management page from the CMS | Pages are live; only that store's card is missing. Push a redeploy commit with `add-to-gallery`. |
+
+### Repairing the US gallery (cards missing vs EN)
+
+EN is the source of truth for which teams are in the gallery. To compare and restore
+the US gallery, dispatch `update-gallery.yml` (GitHub MCP `actions_run_trigger`,
+`run_workflow`, ref = your branch) with input `sync_us_gallery`:
+
+1. `{"sync_us_gallery": "dry-run"}` — reads both galleries, writes nothing. Log shows
+   `EN gallery: N cards | US gallery: M cards`, `Missing on US: K` and the team list.
+2. If the list is what you expect, `{"sync_us_gallery": "live"}`. It adds only missing
+   cards (in EN order, only if the US team page exists), never edits or removes one, and
+   proves the write by reading back: `✅ Verified: US gallery now lists N cards`.
+3. A second dry-run must say `Nothing to do`.
+
+Never run it at the same time as a team deploy (gallery writes are read-modify-write).
+Script: `scripts/sync-us-gallery.js`. ES/FR/IT galleries are not covered by it.
 
 ---
 
