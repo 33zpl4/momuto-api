@@ -124,6 +124,9 @@ pushes and verifies the run itself.
   works and LOGS the result, but the commit-back step can die
   non-fast-forward (it rebases onto main). Read the run log for the
   answer before re-running; the pulled file may not land in git.
+- **Gallery pages are pipeline-owned — never edit or deploy `cms/pages/*/custom-kit-gallery.json`.**
+  Deploy CMS Page pushed a stale US snapshot on 1 Oct 2026 and erased 29 team cards; the guard in
+  `deploy-cms-page.js` now refuses gallery handles. Repair + details: `ADD_TEAM.md` §10.
 - **The CMS API throttles bursts of writes** (`code 1000 "Too many
   requests"`, ~7–130 calls in). Bulk deploys must space writes (~600 ms)
   and retry with backoff — `deploy-cms-page.js` / `deploy-blog-post.js`

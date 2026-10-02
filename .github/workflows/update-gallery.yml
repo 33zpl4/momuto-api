@@ -4,9 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       team_slug:
-        description: 'Team slug (folder name under teams/)'
-        required: true
+        description: 'Team slug (folder name under teams/). Ignored when sync_us_gallery is not "none".'
+        required: false
+        default: ''
         type: string
+      sync_us_gallery:
+        description: 'Repair mode: re-add EN gallery cards missing from the US gallery (scripts/sync-us-gallery.js)'
+        required: false
+        default: 'none'
+        type: choice
+        options: [none, dry-run, live]
 
 jobs:
   update-gallery:
@@ -23,7 +30,16 @@ jobs:
       - name: Install dependencies
         run: npm install @anthropic-ai/sdk
 
+      - name: Sync US gallery from EN (repair)
+        if: inputs.sync_us_gallery != 'none'
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          DRY_RUN: ${{ inputs.sync_us_gallery == 'live' && 'false' || 'true' }}
+        run: node scripts/sync-us-gallery.js
+
       - name: Update gallery on all domains
+        if: inputs.sync_us_gallery == 'none'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
