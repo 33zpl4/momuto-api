@@ -139,6 +139,7 @@ function diagnose(id, o) {
     lang:         o.lang || null,
     status:       o.status || null,
     stopLifecycle: !!o.stopLifecycle,
+    fastLane:     !!o.fastLane,
     paidAt:       o.paidAt || null,
     createdAt:    o.createdAt || null,
     emailsSent:   o.emailsSent || [],

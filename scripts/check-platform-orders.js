@@ -92,6 +92,8 @@ function summarize(o, lang) {
     paid: iso(toMillis(field(o, ['first_pay_at', 'pay_at', 'paid_at', 'payAt']))),
     items: (field(o, ['products', 'line_items', 'lineItems', 'items', 'order_items', 'goods']) || []).length,
     ref3d: ref3d(o),
+    fast: (() => { try { return require('../lib/order-lines').countLines(
+      (field(o, ['products', 'line_items', 'items']) || []).filter(it => parseFloat(field(it, ['price', 'unit_price']) || 0) > 0)).fastLane ? 'FAST' : ''; } catch { return '?'; } })(),
     domain: field(o, ['domain']) || '',
   };
 }
@@ -130,7 +132,7 @@ async function findOrder(token, no) {
 }
 
 function table(rows) {
-  const cols = ['store', 'order_number', 'ref3d', 'state', 'status', 'total', 'currency', 'created', 'paid', 'email', 'items'];
+  const cols = ['store', 'order_number', 'ref3d', 'state', 'status', 'total', 'currency', 'created', 'paid', 'email', 'items', 'fast'];
   const md = [`| ${cols.join(' | ')} |`, `| ${cols.map(() => '---').join(' | ')} |`, ...rows.map(r => `| ${cols.map(c => String(r[c] ?? '')).join(' | ')} |`)];
   return md.join('\n');
 }
