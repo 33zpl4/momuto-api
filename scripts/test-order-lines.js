@@ -45,7 +45,7 @@ t('product id beats the title (a renamed shorts product still counts as shorts)'
 t('full order: jerseys + shorts + socks + long sleeves + collar + fast lane + deposit', () => {
   const c = countLines([preview, L(3800026, 'Camiseta MOMUTO Pro', 10), L(3800028, 'Pantalones MOMUTO', 10), L(3800023, 'Medias técnicas', 4),
     L(11070065, 'Manga larga', 3), L(11072429, 'Cuello polo', 10), L(11081200, 'Vía rápida', 1), L(1, 'Depósito', 1, '15')], isPreview);
-  assert.deepStrictEqual(c, { jerseys: 10, shorts: 10, socks: 4, longSleeves: 3, collars: 10, fastLane: true, deposits: 1 });
+  assert.deepStrictEqual(c, { jerseys: 10, shorts: 10, socks: 4, longSleeves: 3, collars: 10, fastLane: true, deposits: 1, kits: 0 });
 });
 
 t('fast lane is found on the platform\'s real line key (product_title) — poller regression, 2 Oct 2026', () => {
