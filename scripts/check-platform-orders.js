@@ -178,12 +178,19 @@ async function emailDigest(subject, md) {
       console.log(`\nOrder ${args.order} on ${LABEL[found.lang]} (via ${found.via})`);
       console.log(JSON.stringify(row, null, 2));
       // line items (title / qty / price — no customer data): shows e.g. whether the Fast lane line was billed
-      const lines = (field(o, ['products', 'line_items', 'lineItems', 'items', 'order_items', 'goods']) || []).map(it => ({
-        title: String(field(it, ['title', 'name']) || '').slice(0, 90),
+      const rawLines = field(o, ['products', 'line_items', 'lineItems', 'items', 'order_items', 'goods']) || [];
+      const lines = rawLines.map(it => ({
+        title: String(field(it, ['product_title', 'title', 'name']) || '').slice(0, 90),
         qty: field(it, ['quantity', 'qty', 'num']),
         price: field(it, ['price', 'unit_price']),
       }));
       console.log('lines:'); lines.forEach(l => console.log(`  ${l.qty} x ${l.title} @ ${l.price}`));
+      if (rawLines[0]) console.log('line keys: ' + Object.keys(rawLines[0]).join(','));
+      try {   // what the emails will believe (shared classifier, same call the poller makes)
+        const { countLines } = require('../lib/order-lines');
+        const isPrev = (it) => { try { return JSON.parse(field(it, ['inner_title']) || '{}').type === '3d-preview'; } catch { return false; } };
+        console.log('countLines: ' + JSON.stringify(countLines(rawLines.filter(it => parseFloat(field(it, ['price', 'unit_price']) || 0) > 0), isPrev)));
+      } catch (e) { console.log('countLines failed: ' + e.message); }
       summary.push(`## Order ${args.order} — ${LABEL[found.lang]}\n\n**${row.state.toUpperCase()}**\n\n${table([row])}`);
     }
   }

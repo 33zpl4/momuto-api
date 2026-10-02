@@ -48,6 +48,13 @@ t('full order: jerseys + shorts + socks + long sleeves + collar + fast lane + de
   assert.deepStrictEqual(c, { jerseys: 10, shorts: 10, socks: 4, longSleeves: 3, collars: 10, fastLane: true, deposits: 1 });
 });
 
+t('fast lane is found on the platform\'s real line key (product_title) — poller regression, 2 Oct 2026', () => {
+  // FR order 2026092834569842: the 59.00 line carried product_title only (no title / name)
+  const c = countLines([preview, { product_title: 'Voie rapide', quantity: 1, price: '59.00' }, { product_title: 'Maillot MOMUTO', quantity: 11, price: '38.90' }], isPreview);
+  assert.strictEqual(c.fastLane, true);
+  assert.strictEqual(c.jerseys, 11);
+});
+
 t('unknown product stays a jersey (custom kit / RTP items)', () => {
   assert.strictEqual(countLines([L(555, 'Maillot Pornic FC', 2)], isPreview).jerseys, 2);
 });
