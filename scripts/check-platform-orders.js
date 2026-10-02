@@ -177,6 +177,13 @@ async function emailDigest(subject, md) {
       const row = summarize(o, found.lang);
       console.log(`\nOrder ${args.order} on ${LABEL[found.lang]} (via ${found.via})`);
       console.log(JSON.stringify(row, null, 2));
+      // line items (title / qty / price — no customer data): shows e.g. whether the Fast lane line was billed
+      const lines = (field(o, ['products', 'line_items', 'lineItems', 'items', 'order_items', 'goods']) || []).map(it => ({
+        title: String(field(it, ['title', 'name']) || '').slice(0, 90),
+        qty: field(it, ['quantity', 'qty', 'num']),
+        price: field(it, ['price', 'unit_price']),
+      }));
+      console.log('lines:'); lines.forEach(l => console.log(`  ${l.qty} x ${l.title} @ ${l.price}`));
       summary.push(`## Order ${args.order} — ${LABEL[found.lang]}\n\n**${row.state.toUpperCase()}**\n\n${table([row])}`);
     }
   }
