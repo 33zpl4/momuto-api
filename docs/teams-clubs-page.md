@@ -8,8 +8,8 @@ ImageObject JSON-LD, a bridge to the kit gallery, a send-us-a-photo block and th
 
 | File | What it is |
 |---|---|
-| `teams/photos.json` | one row per photo, **newest first** — the only thing that changes when a photo comes in |
-| `teams/copy.json` | wording, meta (title ≤65, description ≤160), keywords and the numbers, per locale |
+| `teams-page/photos.json` | one row per photo, **newest first** — the only thing that changes when a photo comes in |
+| `teams-page/copy.json` | wording, meta (title ≤65, description ≤160), keywords and the numbers, per locale |
 | `scripts/build-teams-pages.js` | renders the five pages; `--check` runs the sanity checks and writes nothing |
 | `cms/pages/<locale>/<handle>.json` | the pulled CMS objects; the builder replaces `content` + title/meta and keeps every other field |
 
@@ -36,7 +36,7 @@ order, delivery 25–30 days (CLAUDE.md rule 6).
 
 Run from any other branch the workflow is always a dry run. Re-running with the same URL is a no-op.
 Filters are generated: "All", one per country present, and one per region once it has 3 photos
-(`REGION_MIN` in the builder). A new country must exist in `teams/copy.json` → `countries`.
+(`REGION_MIN` in the builder). A new country must exist in `teams-page/copy.json` → `countries`.
 
 ## What changed in the rebuild (and why)
 

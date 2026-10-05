@@ -1,6 +1,6 @@
 'use strict';
 /**
- * add-team-photo.js — adds one team photo to teams/photos.json (newest first).
+ * add-team-photo.js — adds one team photo to teams-page/photos.json (newest first).
  * The five "Teams that trust MOMUTO" pages are then rebuilt from that file by scripts/build-teams-pages.js.
  *
  * Env: TEAM_NAME, IMAGE_URL, COUNTRY (ISO-2, e.g. ES), LEAGUE, PLACE_EN (required)
@@ -10,8 +10,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const FILE = path.join(__dirname, '..', 'teams', 'photos.json');
-const copy = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'teams', 'copy.json'), 'utf8'));
+const FILE = path.join(__dirname, '..', 'teams-page', 'photos.json');
+const copy = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'teams-page', 'copy.json'), 'utf8'));
 const env = k => String(process.env[k] || '').trim();
 const fail = m => { console.error('❌ ' + m); process.exit(1); };
 
@@ -23,7 +23,7 @@ const DRY = env('DRY_RUN').toLowerCase() === 'true';
 
 if (!team || !image || !country || !league || !place.en) fail('Need TEAM_NAME, IMAGE_URL, COUNTRY, LEAGUE and PLACE_EN');
 if (!/^https:\/\/\S+$/.test(image)) fail('IMAGE_URL must be an https URL');
-if (!copy.countries[country]) fail(`Unknown country "${country}" — add it to teams/copy.json "countries" (known: ${Object.keys(copy.countries).join(', ')})`);
+if (!copy.countries[country]) fail(`Unknown country "${country}" — add it to teams-page/copy.json "countries" (known: ${Object.keys(copy.countries).join(', ')})`);
 
 (async () => {
   const photos = JSON.parse(fs.readFileSync(FILE, 'utf8'));

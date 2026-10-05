@@ -2,8 +2,8 @@
 /**
  * "Teams that trust MOMUTO" — real teams wearing our kits, all five stores, one source.
  *
- *   teams/photos.json  one row per team photo, newest first (the ONLY thing added when a photo comes in)
- *   teams/copy.json    wording, meta and numbers per locale
+ *   teams-page/photos.json  one row per team photo, newest first (the ONLY thing added when a photo comes in)
+ *   teams-page/copy.json    wording, meta and numbers per locale
  *   -> cms/pages/<locale>/<handle>.json  (the pulled CMS objects; `content` + meta are replaced, every other
  *      field of the pulled object is kept, so a PUT never drops og_image & co — CLAUDE.md rule 1)
  *
@@ -18,8 +18,8 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const CHECK_ONLY = process.argv.includes('--check');
-const photos = JSON.parse(fs.readFileSync(path.join(ROOT, 'teams', 'photos.json'), 'utf8'));
-const copy = JSON.parse(fs.readFileSync(path.join(ROOT, 'teams', 'copy.json'), 'utf8'));
+const photos = JSON.parse(fs.readFileSync(path.join(ROOT, 'teams-page', 'photos.json'), 'utf8'));
+const copy = JSON.parse(fs.readFileSync(path.join(ROOT, 'teams-page', 'copy.json'), 'utf8'));
 const LOCALES = ['en', 'us', 'es', 'fr', 'it'];
 const REGION_MIN = 3;   // a region gets its own filter button once it has this many photos
 
