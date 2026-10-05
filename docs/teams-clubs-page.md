@@ -1,34 +1,57 @@
 # "Teams that trust MOMUTO" — real teams in our jerseys (all 5 stores)
 
-Social-proof photo wall: one card per real team (photo, team, place · league), filter buttons by region,
-ImageObject JSON-LD, a screen-reader summary. **Not** the custom-kit gallery (that is the team-kit
-pipeline, `ADD_TEAM.md`).
+Social-proof photo wall: one tile per real team (photo, team, place · league), filter buttons, a lightbox,
+ImageObject JSON-LD, a bridge to the kit gallery, a send-us-a-photo block and the closing CTA.
+**Not** the custom-kit gallery (that is the team-kit pipeline, `ADD_TEAM.md`).
 
-| Store | Handle | Source in this repo |
-|---|---|---|
-| EN www | `teams-clubs-momuto` | `pages/teams-clubs-momuto` |
-| US | `teams-clubs-momuto` | `cms/pages/us/teams-clubs-momuto.json` (`content` field) |
-| ES | `equipos-momuto` | `pages/equipos-momuto` |
-| FR | `equipes-clubs-momuto` | `pages/equipes-clubs-momuto` |
-| IT | `squadre-club-momuto` | `pages/squadre-club-momuto` |
+## One source, five pages (rebuilt 5 Oct 2026)
 
-## Adding a team (the easy way)
+| File | What it is |
+|---|---|
+| `teams/photos.json` | one row per photo, **newest first** — the only thing that changes when a photo comes in |
+| `teams/copy.json` | wording, meta (title ≤65, description ≤160), keywords and the numbers, per locale |
+| `scripts/build-teams-pages.js` | renders the five pages; `--check` runs the sanity checks and writes nothing |
+| `cms/pages/<locale>/<handle>.json` | the pulled CMS objects; the builder replaces `content` + title/meta and keeps every other field |
 
-Actions → **Add Team Photo to Gallery** → Run workflow:
+| Store | Handle |
+|---|---|
+| EN www | `teams-clubs-momuto` |
+| US | `teams-clubs-momuto` |
+| ES | `equipos-momuto` |
+| FR | `equipes-clubs-momuto` |
+| IT | `squadre-club-momuto` |
 
-- `team_name`, `image_url` (a public URL of the photo, e.g. the platform CDN `cdn.staticsoe.com/pics/…`),
-  `location` (region filter key; `internacional` if none fits), `city`, `league`.
-- Optional: `location_label_en/es/fr/it` (default: derived from `city`; the US page uses the EN label).
-- **Tick `dry_run` first**: it prints what would be added and changes nothing.
+Never hand-edit the built `content` (it is regenerated); edit `photos.json` / `copy.json` / the builder.
+Numbers on the page: 250+ teams, 15+ countries, 4.6/5 from 49 Trustpilot reviews (owner, 30 Sep 2026), no minimum
+order, delivery 25–30 days (CLAUDE.md rule 6).
 
-A live run inserts the card at the top of all five pages, bumps `numberOfItems` and adds the JSON-LD item,
-extends the screen-reader summary, deploys EN/ES/FR/IT directly and the US page through
-`scripts/deploy-cms-page.js` (commits made with `GITHUB_TOKEN` do not trigger other workflows), then commits
-the sources to `main`. Re-running with the same `image_url` is a no-op per page.
+## Adding a team
 
-## Known loose ends (2 Oct 2026 audit)
+1. Upload the photo in the store's media library (CMS) and copy its https URL (a webp/jpg under ~700 KB loads fastest).
+2. Actions → **Add Team Photo to Gallery** → Run workflow **from main**: team name, URL, country, league, place
+   (English; ES/FR/IT optional), region (optional). **Leave `dry_run` ticked first**: it checks the URL is a
+   reachable image, shows the row and runs every page check without changing anything.
+3. Run again with `dry_run` unticked: the row is added, all five pages are rebuilt, deployed through
+   `scripts/deploy-cms-page.js` (full-object PUT) and committed to `main`.
 
-- ES and FR carry 17 cards, EN/IT/US 18: one team is missing on ES/FR. Adding it by hand once fixes the drift.
-- The summary line on every page says prices run "from 20.90 EUR": rule 6 says from €21.90 at 10+.
-- Both deployers (this workflow's, and Deploy Gallery Pages) PUT only content/title/meta/handle, not the full
-  page object (CLAUDE.md rule 1); the US page goes through the full-object deployer.
+Run from any other branch the workflow is always a dry run. Re-running with the same URL is a no-op.
+Filters are generated: "All", one per country present, and one per region once it has 3 photos
+(`REGION_MIN` in the builder). A new country must exist in `teams/copy.json` → `countries`.
+
+## What changed in the rebuild (and why)
+
+- The old pages were four hand-edited fragments + the US object that had drifted apart (different structure per
+  locale, a duplicate card, hidden keyword-stuffed summary text, a team missing from some locales).
+- Removed the "Our Designs" carousel (old white-background mockups, huge cards): replaced by one line + button to
+  the kit gallery of each store.
+- Stale claims fixed: "3-week delivery" → 25–30 days; "98% satisfaction" (no source) → Trustpilot 4.6/5;
+  "15 countries" → 15+; meta said "100+ clubs" on EN/FR/IT and "250+" only on US; keywords were empty on EN/ES/FR/IT.
+- Estate type scale (Bebas Neue headings / Outfit body, same sizes as the FAQ/shipping/uniforms pages), the four
+  theme gotchas from `docs/cms-page-gotchas.md`, tile captions always visible (the old overlay needed hover, so
+  phones never saw team names), keyboard-reachable tiles and a lightbox with arrow keys.
+
+## Retired
+
+`pages/teams-clubs-momuto`, `pages/equipos-momuto`, `pages/equipes-clubs-momuto`, `pages/squadre-club-momuto` and the
+Deploy Gallery Pages workflow (partial-field PUT). Deploys now go through Deploy CMS Page on push to `main` like every
+other pulled page.
