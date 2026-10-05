@@ -1,5 +1,10 @@
 name: Add Team Photo to Gallery
 
+# Adds a real team's photo to the "Teams that trust MOMUTO" page on ALL FIVE stores
+# (EN teams-clubs-momuto, US twin, ES equipos-momuto, FR equipes-clubs-momuto, IT squadre-club-momuto),
+# deploys it and commits the page sources. Run it with dry_run ticked first to see what would change.
+# NOT the custom-kit-gallery (that one is the team-kit pipeline, see ADD_TEAM.md).
+
 on:
   workflow_dispatch:
     inputs:
@@ -12,15 +17,10 @@ on:
         required: true
         type: string
       location:
-        description: 'Region filter (canarias, madrid, españa, aragon, internacional)'
+        description: 'Region filter key (canarias, madrid, españa, aragon, internacional, or a new key — a key with no filter button still shows under "All")'
         required: true
-        type: choice
-        options:
-          - canarias
-          - madrid
-          - españa
-          - aragon
-          - internacional
+        type: string
+        default: 'internacional'
       city:
         description: 'City filter key (e.g. las-palmas, tenerife, madrid, zaragoza, francia)'
         required: true
@@ -45,6 +45,11 @@ on:
         description: 'Location display name in Italian (e.g. "Las Palmas"). Leave empty to auto-derive from city.'
         required: false
         type: string
+      dry_run:
+        description: 'Dry run: show what would be added, change nothing'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -75,6 +80,7 @@ jobs:
           LOCATION_LABEL_ES: ${{ inputs.location_label_es }}
           LOCATION_LABEL_FR: ${{ inputs.location_label_fr }}
           LOCATION_LABEL_IT: ${{ inputs.location_label_it }}
+          DRY_RUN: ${{ inputs.dry_run }}
         run: node scripts/add-team-photo.js
 
       - name: Deploy updated pages to CMS
@@ -151,13 +157,23 @@ jobs:
           deploy_page "$OEMSAAS_TOKEN_FR" "equipes-clubs-momuto" "pages/equipes-clubs-momuto"
           deploy_page "$OEMSAAS_TOKEN_IT" "squadre-club-momuto" "pages/squadre-club-momuto"
 
+      - name: Deploy the US page (full-object deployer)
+        # commits made with GITHUB_TOKEN do not trigger other workflows, so the US page is shipped here
+        if: contains(steps.add-photo.outputs.modified, 'cms/pages/us/teams-clubs-momuto.json')
+        env:
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          LOCALE: us
+          PAGE_HANDLE: teams-clubs-momuto
+          DRY_RUN: 'false'
+        run: node scripts/deploy-cms-page.js
+
       - name: Commit updated pages to repo
         if: steps.add-photo.outputs.modified != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MODIFIED: ${{ steps.add-photo.outputs.modified }}
         run: |
-          for FILE in pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto pages/squadre-club-momuto; do
+          for FILE in pages/teams-clubs-momuto cms/pages/us/teams-clubs-momuto.json pages/equipos-momuto pages/equipes-clubs-momuto pages/squadre-club-momuto; do
             # Only commit files that were actually modified
             if [[ ",$MODIFIED," != *",$FILE,"* ]]; then
               echo "⏭ ${FILE} not modified — skipping commit"

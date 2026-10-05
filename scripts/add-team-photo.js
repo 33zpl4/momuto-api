@@ -1,8 +1,11 @@
 /**
  * add-team-photo.js
  *
- * Adds a new team action photo to all three language gallery pages
- * (teams-clubs-momuto, equipos-momuto, equipes-clubs-momuto).
+ * Adds a new team action photo to the "Teams that trust MOMUTO" page of ALL FIVE stores
+ * (teams-clubs-momuto EN + US twin, equipos-momuto ES, equipes-clubs-momuto FR, squadre-club-momuto IT).
+ * EN/ES/FR/IT live as page fragments in pages/; the US page is the pulled CMS object
+ * cms/pages/us/teams-clubs-momuto.json (its `content` field), shipped by Deploy CMS Page on commit.
+ * DRY_RUN=true: report what would change, write nothing.
  *
  * Required env vars:
  *   TEAM_NAME      - Team name (e.g. "Atletico Guanche")
@@ -52,6 +55,17 @@ const PAGES = {
     jsonLdDesc: (team, loc, league) =>
       `${team} football team from ${loc} wearing their custom-designed MOMUTO jerseys during a ${league} match`,
   },
+  us: {
+    file: 'cms/pages/us/teams-clubs-momuto.json',
+    json: true,   // content lives in the object's `content` field
+    altTemplate: (team, loc, league) =>
+      `${team} team wearing their custom MOMUTO football jerseys in ${loc}, ${league}`,
+    metaTemplate: (team, loc, league) =>
+      `${team} - Custom MOMUTO jerseys - ${loc}, ${league}`,
+    jsonLdName: (team) => `${team} wearing custom MOMUTO jerseys`,
+    jsonLdDesc: (team, loc, league) =>
+      `${team} football team from ${loc} wearing their custom-designed MOMUTO jerseys during a ${league} match`,
+  },
   es: {
     file: 'pages/equipos-momuto',
     altTemplate: (team, loc, league) =>
@@ -91,6 +105,8 @@ const locationLabels = {
   fr: process.env.LOCATION_LABEL_FR || CITY.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
   it: process.env.LOCATION_LABEL_IT || CITY.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
 };
+locationLabels.us = locationLabels.en;
+const DRY_RUN = String(process.env.DRY_RUN || '').toLowerCase() === 'true';
 
 function buildPhotoEntry(lang) {
   const page = PAGES[lang];
@@ -123,7 +139,9 @@ function addPhotoToPage(lang) {
     process.exit(1);
   }
 
-  let content = fs.readFileSync(filePath, 'utf8');
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const obj = page.json ? JSON.parse(raw) : null;
+  let content = page.json ? obj.content : raw;
 
   // Check for duplicate — skip if this team's photo URL is already in the page
   if (content.includes(IMAGE_URL)) {
@@ -170,7 +188,7 @@ function addPhotoToPage(lang) {
     const summary = summaryMatch[1];
     if (!summary.includes(TEAM_NAME)) {
       // Add team name before the closing period of the team list
-      const teamListPattern = /(\. (?:All jerseys|Todas las camisetas|Tous les maillots))/;
+      const teamListPattern = /(\. (?:All jerseys|Todas las camisetas|Tous les maillots|Tutte le maglie))/;
       if (teamListPattern.test(summary)) {
         const updatedSummary = summary.replace(
           teamListPattern,
@@ -181,14 +199,19 @@ function addPhotoToPage(lang) {
     }
   }
 
-  fs.writeFileSync(filePath, content, 'utf8');
+  if (DRY_RUN) {
+    console.log(`[dry run] would add ${TEAM_NAME} to ${page.file} (${lang})`);
+    return true;
+  }
+  if (page.json) { obj.content = content; fs.writeFileSync(filePath, JSON.stringify(obj, null, 2) + '\n', 'utf8'); }
+  else fs.writeFileSync(filePath, content, 'utf8');
   console.log(`✓ Added ${TEAM_NAME} photo to ${page.file}`);
   return true;
 }
 
-// Process all three languages, track which were modified
+// Process every store, track which were modified
 const modified = [];
-for (const lang of ['en', 'es', 'fr']) {
+for (const lang of ['en', 'us', 'es', 'fr', 'it']) {
   if (addPhotoToPage(lang)) {
     modified.push(PAGES[lang].file);
   }
@@ -197,7 +220,7 @@ for (const lang of ['en', 'es', 'fr']) {
 // Write modified files list for the workflow to consume
 const outputFile = process.env.GITHUB_OUTPUT;
 if (outputFile) {
-  fs.appendFileSync(outputFile, `modified=${modified.join(',')}\n`);
+  fs.appendFileSync(outputFile, `modified=${DRY_RUN ? '' : modified.join(',')}\n`);
 }
 
 if (modified.length > 0) {
