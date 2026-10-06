@@ -1,0 +1,28 @@
+name: Patch ES team pages comparison link
+
+# Repoints the "¿Por qué Momuto?" link on every ES team design page from the
+# Zentral page to the 5-brand roundup. Dry run by default.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — list only, no writes'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Patch
+        env:
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: node scripts/patch-team-comparison-link.js
