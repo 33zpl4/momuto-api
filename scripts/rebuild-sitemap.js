@@ -59,6 +59,7 @@ const HIGH_PRIORITY_HANDLES = new Set([
   'ready-to-play',
   'momuto-vs-jersix-owayo-spized-comparison',
   'zentral-opiniones-alternativa',
+  'mejores-webs-equipaciones-futbol-personalizadas-2026',
   'comparatif-fournisseur-maillot-foot-2026',
   'galeria-equipaciones-personalizadas',
   'galerie-maillots-foot-sur-mesure',

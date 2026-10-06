@@ -48,7 +48,7 @@ const DOMAINS = {
     handleSuffix: 'diseno-equipacion',
     galleryUrl: 'https://es.momuto.com/pages/galeria-equipaciones-personalizadas',
     galleryHandle: 'galeria-equipaciones-personalizadas',
-    comparisonUrl: 'https://es.momuto.com/pages/zentral-opiniones-alternativa',
+    comparisonUrl: 'https://es.momuto.com/pages/mejores-webs-equipaciones-futbol-personalizadas-2026',
     galleryLabel: 'Ver Galería',
     comparisonLabel: '¿Por qué Momuto?',
     orderUrl: 'https://es.momuto.com/pages/request-custom-kit-design',
