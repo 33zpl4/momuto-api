@@ -1,5 +1,16 @@
 name: Add Team Photo to Gallery
 
+# Adds a real team's photo to the "Teams that trust MOMUTO" page on ALL FIVE stores
+# (EN teams-clubs-momuto, US twin, ES equipos-momuto, FR equipes-clubs-momuto, IT squadre-club-momuto).
+# One row goes into teams-page/photos.json, scripts/build-teams-pages.js rebuilds the five page objects from it,
+# the pages are deployed through scripts/deploy-cms-page.js (full-object PUT) and the sources are committed.
+#
+#   1. Upload the photo in the store's media library (CMS) and copy its https URL.
+#   2. Run this workflow with dry_run ticked first, then again without.
+#
+# Live steps (deploy + commit) run ONLY from main; from any other branch the run is a dry run.
+# NOT the custom-kit gallery (that one is the team-kit pipeline, see ADD_TEAM.md). Docs: docs/teams-clubs-page.md
+
 on:
   workflow_dispatch:
     inputs:
@@ -8,43 +19,44 @@ on:
         required: true
         type: string
       image_url:
-        description: 'Full CDN URL to the team photo'
+        description: 'https URL of the team photo (upload it in the CMS media library, copy the link)'
         required: true
         type: string
-      location:
-        description: 'Region filter (canarias, madrid, españa, aragon, internacional)'
+      country:
+        description: 'Country of the team (filter button + structured data)'
         required: true
         type: choice
-        options:
-          - canarias
-          - madrid
-          - españa
-          - aragon
-          - internacional
-      city:
-        description: 'City filter key (e.g. las-palmas, tenerife, madrid, zaragoza, francia)'
-        required: true
-        type: string
+        default: ES
+        options: [ES, FR, IT, DE, GB, US, DK, PT, BE, NL, SE, CH]
       league:
-        description: 'League name (e.g. "Superliga LPGC")'
+        description: 'League or competition (e.g. "Superliga LPGC")'
         required: true
         type: string
-      location_label_en:
-        description: 'Location display name in English (e.g. "Las Palmas"). Leave empty to auto-derive from city.'
+      place_en:
+        description: 'City / area, English (e.g. "Las Palmas"). Used for any language you leave empty.'
+        required: true
+        type: string
+      place_es:
+        description: 'City / area, Spanish (optional)'
         required: false
         type: string
-      location_label_es:
-        description: 'Location display name in Spanish (e.g. "Las Palmas"). Leave empty to auto-derive from city.'
+      place_fr:
+        description: 'City / area, French (optional)'
         required: false
         type: string
-      location_label_fr:
-        description: 'Location display name in French (e.g. "Las Palmas"). Leave empty to auto-derive from city.'
+      place_it:
+        description: 'City / area, Italian (optional)'
         required: false
         type: string
-      location_label_it:
-        description: 'Location display name in Italian (e.g. "Las Palmas"). Leave empty to auto-derive from city.'
+      region:
+        description: 'Optional sub-filter key (canarias, madrid, aragon, vizcaya, or a new one). A region gets its own filter button once it has 3 photos.'
         required: false
         type: string
+      dry_run:
+        description: 'Dry run: check the photo URL and show what would be added, change nothing'
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -52,123 +64,60 @@ permissions:
 jobs:
   add-photo:
     runs-on: ubuntu-latest
+    env:
+      LIVE: ${{ !inputs.dry_run && github.ref == 'refs/heads/main' }}
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Add team photo to all gallery pages
-        id: add-photo
+      - name: Say it plainly when a live run is downgraded
+        if: ${{ !inputs.dry_run && github.ref != 'refs/heads/main' }}
+        run: echo "::notice::Not on main — this run is a dry run (nothing is deployed or committed). Run the workflow from main to publish."
+
+      - name: Add the photo to teams-page/photos.json
         env:
           TEAM_NAME: ${{ inputs.team_name }}
           IMAGE_URL: ${{ inputs.image_url }}
-          LOCATION: ${{ inputs.location }}
-          CITY: ${{ inputs.city }}
+          COUNTRY: ${{ inputs.country }}
           LEAGUE: ${{ inputs.league }}
-          LOCATION_LABEL_EN: ${{ inputs.location_label_en }}
-          LOCATION_LABEL_ES: ${{ inputs.location_label_es }}
-          LOCATION_LABEL_FR: ${{ inputs.location_label_fr }}
-          LOCATION_LABEL_IT: ${{ inputs.location_label_it }}
+          PLACE_EN: ${{ inputs.place_en }}
+          PLACE_ES: ${{ inputs.place_es }}
+          PLACE_FR: ${{ inputs.place_fr }}
+          PLACE_IT: ${{ inputs.place_it }}
+          REGION: ${{ inputs.region }}
+          DRY_RUN: ${{ env.LIVE != 'true' }}
         run: node scripts/add-team-photo.js
 
-      - name: Deploy updated pages to CMS
-        if: steps.add-photo.outputs.modified != ''
+      - name: Rebuild the five pages (checks only on a dry run)
+        run: |
+          if [ "$LIVE" = "true" ]; then node scripts/build-teams-pages.js; else node scripts/build-teams-pages.js --check; fi
+
+      - name: Deploy the five pages to the CMS
+        if: ${{ env.LIVE == 'true' }}
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
-          MODIFIED: ${{ steps.add-photo.outputs.modified }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          DRY_RUN: 'false'
+          CHANGED_FILES: cms/pages/en/teams-clubs-momuto.json cms/pages/us/teams-clubs-momuto.json cms/pages/es/equipos-momuto.json cms/pages/fr/equipes-clubs-momuto.json cms/pages/it/squadre-club-momuto.json
         run: |
-          deploy_page() {
-            local TOKEN="$1"
-            local HANDLE="$2"
-            local FILE="$3"
-            local HOST="https://openapi.oemapps.com"
+          if git diff --quiet -- teams-page/photos.json; then echo "Photo was already listed — nothing to deploy."; exit 0; fi
+          node scripts/deploy-cms-page.js
 
-            # Only deploy if this file was actually modified
-            if [[ ",$MODIFIED," != *",$FILE,"* ]]; then
-              echo "⏭ ${FILE} not modified — skipping deploy"
-              return
-            fi
-
-            RESPONSE=$(curl -s -H "token: ${TOKEN}" "${HOST}/pages?handle=${HANDLE}")
-            PAGE_DATA=$(echo "$RESPONSE" | node -e "
-              const data = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));
-              const pages = data.data?.list || data.data || [];
-              const page = Array.isArray(pages) ? pages.find(p => p.handle === '${HANDLE}') : null;
-              if (page) console.log(JSON.stringify({ id: page.id, title: page.title || '', meta_title: page.meta_title || '', meta_keywords: page.meta_keywords || '', meta_descript: page.meta_descript || '', handle: page.handle || '' }));
-            ")
-
-            if [ -z "$PAGE_DATA" ]; then
-              echo "Warning: Page ${HANDLE} not found — skipping"
-              return
-            fi
-
-            PAGE_ID=$(echo "$PAGE_DATA" | node -e "console.log(JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).id)")
-
-            # Save page metadata to temp file for safe JSON handling
-            echo "$PAGE_DATA" > /tmp/page_meta.json
-
-            # Build JSON payload preserving existing page metadata
-            node -e "
-              const fs = require('fs');
-              const content = fs.readFileSync('${FILE}', 'utf8');
-              const existing = JSON.parse(fs.readFileSync('/tmp/page_meta.json', 'utf8'));
-              const payload = {
-                content,
-                title: existing.title,
-                meta_title: existing.meta_title,
-                meta_keywords: existing.meta_keywords,
-                meta_descript: existing.meta_descript,
-                handle: existing.handle
-              };
-              fs.writeFileSync('/tmp/payload.json', JSON.stringify(payload));
-            "
-
-            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
-              -X PUT \
-              -H "Content-Type: application/json" \
-              -H "token: ${TOKEN}" \
-              "${HOST}/pages/${PAGE_ID}" \
-              -d @/tmp/payload.json)
-
-            if [ "$HTTP_CODE" = "200" ]; then
-              echo "✓ Deployed ${HANDLE} to CMS"
-            else
-              echo "Warning: Failed to update ${HANDLE} — HTTP ${HTTP_CODE}"
-            fi
-          }
-
-          deploy_page "$OEMSAAS_TOKEN_EN" "teams-clubs-momuto" "pages/teams-clubs-momuto"
-          deploy_page "$OEMSAAS_TOKEN_ES" "equipos-momuto" "pages/equipos-momuto"
-          deploy_page "$OEMSAAS_TOKEN_FR" "equipes-clubs-momuto" "pages/equipes-clubs-momuto"
-          deploy_page "$OEMSAAS_TOKEN_IT" "squadre-club-momuto" "pages/squadre-club-momuto"
-
-      - name: Commit updated pages to repo
-        if: steps.add-photo.outputs.modified != ''
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MODIFIED: ${{ steps.add-photo.outputs.modified }}
+      - name: Commit the sources to main
+        if: ${{ env.LIVE == 'true' }}
         run: |
-          for FILE in pages/teams-clubs-momuto pages/equipos-momuto pages/equipes-clubs-momuto pages/squadre-club-momuto; do
-            # Only commit files that were actually modified
-            if [[ ",$MODIFIED," != *",$FILE,"* ]]; then
-              echo "⏭ ${FILE} not modified — skipping commit"
-              continue
-            fi
-            CONTENT=$(base64 -w 0 "$FILE")
-            SHA=$(gh api "repos/${{ github.repository }}/contents/${FILE}" --jq '.sha')
-            gh api --method PUT "repos/${{ github.repository }}/contents/${FILE}" \
-              -f message="Add ${{ inputs.team_name }} photo to ${FILE}" \
-              -f content="$CONTENT" \
-              -f sha="$SHA" \
-              -f branch="main"
-            echo "✓ Committed ${FILE}"
-          done
+          if git diff --quiet -- teams-page/photos.json; then echo "Nothing to commit."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add teams-page/photos.json cms/pages/en/teams-clubs-momuto.json cms/pages/us/teams-clubs-momuto.json cms/pages/es/equipos-momuto.json cms/pages/fr/equipes-clubs-momuto.json cms/pages/it/squadre-club-momuto.json
+          git commit -m "Teams page: add ${{ inputs.team_name }} (all five stores) [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main

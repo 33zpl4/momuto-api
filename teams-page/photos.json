@@ -1,0 +1,223 @@
+[
+ {
+  "team": "STAPS de Metz",
+  "image": "https://cdn.staticsoe.com/pics/728feeea4a4df6468d54225a54169686ea889acfd5ca56686c73787d9954f456.webp",
+  "country": "FR",
+  "region": "",
+  "place": {
+   "en": "France",
+   "es": "Francia",
+   "fr": "France",
+   "it": "Francia"
+  },
+  "league": "FFSU"
+ },
+ {
+  "team": "Al-Carajo",
+  "image": "https://cdn.staticsoe.com/pics/1ab6bb594575da8b31fed6b65fe8bf3837bc24e8498b1ef31fe3a0de4d00fdcd.jpg",
+  "country": "ES",
+  "region": "madrid",
+  "place": {
+   "en": "Madrid",
+   "es": "Madrid",
+   "fr": "Madrid",
+   "it": "Madrid"
+  },
+  "league": "ETSII"
+ },
+ {
+  "team": "Drinkteam FC",
+  "image": "https://cdn.staticsoe.com/pics/e097d61ca5fe85f0031a2a7aa3e5b8b88f982031cdbe827c911c2a813b59bd44.jpg",
+  "country": "ES",
+  "region": "canarias",
+  "place": {
+   "en": "Las Palmas",
+   "es": "Las Palmas",
+   "fr": "Las Palmas",
+   "it": "Las Palmas"
+  },
+  "league": "Superliga LPGC"
+ },
+ {
+  "team": "Mallorga FC",
+  "image": "https://cdn.staticsoe.com/pics/497d0188ede93f2a61fd5a2cbc1f336007a71b03f8fde2d83b8ba71d6709f435.webp",
+  "country": "ES",
+  "region": "madrid",
+  "place": {
+   "en": "Madrid",
+   "es": "Madrid",
+   "fr": "Madrid",
+   "it": "Madrid"
+  },
+  "league": "ETSII"
+ },
+ {
+  "team": "Batán Scorpion",
+  "image": "https://cdn.staticsoe.com/pics/2d4dbad060830cb72dd1dfa01bbadfa5f7f8e5fac20590b04e667d2ea96300f4.jpg",
+  "country": "ES",
+  "region": "canarias",
+  "place": {
+   "en": "Las Palmas",
+   "es": "Las Palmas",
+   "fr": "Las Palmas",
+   "it": "Las Palmas"
+  },
+  "league": "Superliga LPGC"
+ },
+ {
+  "team": "Atlético Guanche",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/2b9ec9a1ce27ace175d313491e048486.jpg",
+  "country": "ES",
+  "region": "canarias",
+  "place": {
+   "en": "Las Palmas",
+   "es": "Las Palmas",
+   "fr": "Las Palmas",
+   "it": "Las Palmas"
+  },
+  "league": "Superliga LPGC"
+ },
+ {
+  "team": "Ronperla FC",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/0130edf913d1139398fe83cc44648300.jpg",
+  "country": "ES",
+  "region": "canarias",
+  "place": {
+   "en": "Tenerife",
+   "es": "Tenerife",
+   "fr": "Tenerife",
+   "it": "Tenerife"
+  },
+  "league": "Liga La Amistad"
+ },
+ {
+  "team": "Olympique Mehunois",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/af86db47dca89f91edb11d4ae2d4929f.jpg",
+  "country": "FR",
+  "region": "",
+  "place": {
+   "en": "France",
+   "es": "Francia",
+   "fr": "France",
+   "it": "Francia"
+  },
+  "league": "Départemental 2"
+ },
+ {
+  "team": "Astra Rhei",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/d9088919fcf1cfa3c9ce49a5e6fd45ed.jpg",
+  "country": "ES",
+  "region": "vizcaya",
+  "place": {
+   "en": "Biscay",
+   "es": "Vizcaya",
+   "fr": "Biscaye",
+   "it": "Biscaglia"
+  },
+  "league": "FutbolSiete"
+ },
+ {
+  "team": "Mango CF",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/dd28e60057b6b0b9917d329a19e3b9da.jpg",
+  "country": "ES",
+  "region": "madrid",
+  "place": {
+   "en": "Madrid",
+   "es": "Madrid",
+   "fr": "Madrid",
+   "it": "Madrid"
+  },
+  "league": "MadridFutbol7"
+ },
+ {
+  "team": "Elche Koslovaco",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/66d7951f787950758d0e61bb08d85767.jpg",
+  "country": "ES",
+  "region": "canarias",
+  "place": {
+   "en": "Las Palmas",
+   "es": "Las Palmas",
+   "fr": "Las Palmas",
+   "it": "Las Palmas"
+  },
+  "league": "Superliga LPGC"
+ },
+ {
+  "team": "Celtanquetas FC",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251121/b4aee24cc1fca4085bfb118f7b9fbfdc.jpg",
+  "country": "ES",
+  "region": "madrid",
+  "place": {
+   "en": "Madrid",
+   "es": "Madrid",
+   "fr": "Madrid",
+   "it": "Madrid"
+  },
+  "league": "ETSII"
+ },
+ {
+  "team": "Los Bloques",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/6ae16bbf2bc37fffbe519aff5b4e1dad.jpg",
+  "country": "ES",
+  "region": "canarias",
+  "place": {
+   "en": "Las Palmas",
+   "es": "Las Palmas",
+   "fr": "Las Palmas",
+   "it": "Las Palmas"
+  },
+  "league": "Superliga LPGC"
+ },
+ {
+  "team": "Aston Birra",
+  "image": "https://cdn.staticsoe.com/uploads/47711/cart/resources/20251227/ac9a2cd94a42728a6d966f708f6757d7.webp",
+  "country": "ES",
+  "region": "canarias",
+  "place": {
+   "en": "Las Palmas",
+   "es": "Las Palmas",
+   "fr": "Las Palmas",
+   "it": "Las Palmas"
+  },
+  "league": "Superliga LPGC"
+ },
+ {
+  "team": "Naranja Mecánica FC",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/7ff8ff86e2e70bfea0465eac372339aa.webp",
+  "country": "ES",
+  "region": "aragon",
+  "place": {
+   "en": "Zaragoza",
+   "es": "Zaragoza",
+   "fr": "Saragosse",
+   "it": "Saragozza"
+  },
+  "league": "MLA Sport"
+ },
+ {
+  "team": "Ca’Pedro FC",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251202/1caa5acc0fa18799c6020392714a16a6.jpg",
+  "country": "ES",
+  "region": "canarias",
+  "place": {
+   "en": "Las Palmas",
+   "es": "Las Palmas",
+   "fr": "Las Palmas",
+   "it": "Las Palmas"
+  },
+  "league": "Superliga LPGC"
+ },
+ {
+  "team": "Atlético Agonías",
+  "image": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20251222/8a2cfaf3c62ec04618b6bfe1a9610f58.jpg",
+  "country": "ES",
+  "region": "madrid",
+  "place": {
+   "en": "Madrid",
+   "es": "Madrid",
+   "fr": "Madrid",
+   "it": "Madrid"
+  },
+  "league": "Fútbol7"
+ }
+]
