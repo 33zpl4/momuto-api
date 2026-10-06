@@ -38,6 +38,10 @@ async function listAll(token) {
     for (const p of hits) {
       const v = (p.variants || p.skus || [])[0] || {};
       console.log(`   id=${p.id} status=${p.status} price=${p.price ?? v.price ?? '?'} sku=${v.sku_code || v.sku || '?'} handle=${p.handle} title=${p.title}`);
+      if (process.env.SHOW_IMAGES) {
+        const imgs = (p.images || []).map(i => (typeof i === 'string' ? i : i.src || i.url || JSON.stringify(i)));
+        console.log(`      inner_title=${p.inner_title || '-'} images(${imgs.length})=${imgs.join(' | ') || 'NONE'}`);
+      }
     }
   }
 })().catch(e => { console.error(e); process.exit(1); });
