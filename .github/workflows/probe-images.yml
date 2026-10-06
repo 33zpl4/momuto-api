@@ -1,14 +1,19 @@
 name: Probe images (read-only)
 
 # GETs the given image URLs and prints status/type/size/dimensions/hash
-# (scripts/probe-images.js). Reads only.
+# (scripts/probe-images.js). Reads only. Runs on push of this file with the
+# URLs below, or by hand with any URLs.
 
 on:
+  push:
+    paths:
+      - '.github/workflows/probe-images.yml'
   workflow_dispatch:
     inputs:
       urls:
         description: 'Image URLs, space or comma separated'
-        required: true
+        required: false
+        default: ''
 
 jobs:
   probe:
@@ -20,5 +25,6 @@ jobs:
           node-version: '20'
       - name: Probe
         env:
-          URLS: ${{ github.event.inputs.urls }}
-        run: node scripts/probe-images.js
+          INPUT_URLS: ${{ github.event.inputs.urls }}
+        run: |
+          URLS="${INPUT_URLS:-https://cdn.staticsoe.com/pics/baefe6fe4f930da88820f82ee05d00c5e69005f6037d103477fc75d3eff58749.jpg https://cdn.staticsoe.com/pics/5ee0b8cbcf6a6926945eb1ec9ef51b6840add76631293b12f8a23276c7b8cdb8.jpg https://cdn.staticsoe.com/pics/c9d4393652655561d509416d09ed71393a8407c79ad28372e4af9a244a2f72d6.jpg https://cdn.staticsoe.com/pics/2a2a1fbf8f1c662f75d45210ad50cdd0b7c5007e63fccc0c1be71094514b46d1.jpg https://cdn.staticsoe.com/pics/c7e81b72abdde699ed1feba712bf7c64a95bfaf3ce06148a019fd8206734d4cb.jpg https://cdn.staticsoe.com/pics/0274ad55992d979d3eec8ae524774e50c590d4c149b831ac8d0c8c0ecaaa8934.jpg}" node scripts/probe-images.js
