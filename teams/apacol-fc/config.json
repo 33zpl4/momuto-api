@@ -1,10 +1,11 @@
 {
   "team_name": "APACOL FC",
-  "design_name": "Royal Vertical",
-  "design_description": "A navy jersey with a refined royal-inspired colour palette, combining deep blue with gold, red and orange detailing. The front is defined by a central vertical stripe composition, with a broad red stripe framed by thin gold/orange lines running from the collar to the hem. Matching accent stripes run along the shoulders and side panels, while the handwritten-style APACOL FC wordmark gives the centre a more elegant, distinctive character. The back is deliberately cleaner, keeping the navy base with gold name and number, while red/gold details appear at the collar, cuffs and sides. Overall, it's a classic, premium-looking design with strong vertical symmetry and subtle Spanish-inspired colours.",
+  "design_name": "Crowned Lion",
+  "design_description": "A refined navy and gold design with a premium, regal feel. The deep navy base is kept clean, while gold trim around the collar, cuffs and shoulders creates a sharp classic finish. The front features a large tone-on-tone crowned lion graphic emerging subtly from the lower body, adding character without overpowering the kit. Gold name, number and matching striped shorts complete the cohesive look.",
   "primary_color": "#001F3F",
-  "secondary_color": "#C8102E",
-  "accent_color": "#C8102E",
-  "image_url": "https://cdn.staticsoe.com/pics/d7b212c7901ebe23fc8b38974a8076b5c406470f99c5d071c37b31366d89e2c5.png",
-  "back_image_url": "https://cdn.staticsoe.com/pics/a914fe5a6430239fb8dbef33699c08b592ea27728f354d01934a61e89d23a5fe.png"
+  "secondary_color": "#C9A84C",
+  "accent_color": "#C9A84C",
+  "image_url": "https://cdn.staticsoe.com/pics/eb0c8ae80a1cbaa6e92e6feb25b91ba5c16671d3d2273c48a4af4a603b466087.png",
+  "back_image_url": "https://cdn.staticsoe.com/pics/aaf9fa906e90f60f1a8fa2c210f73c8f10ce60b9d02d4f35f6aaa24863b4596e.png",
+  "updated_at": "2026-10-07"
 }
