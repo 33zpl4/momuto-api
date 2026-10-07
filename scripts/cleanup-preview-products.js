@@ -31,6 +31,7 @@ const DOMAINS = [
   { locale: 'en', label: 'momuto.com',    token: process.env.OEMSAAS_TOKEN_EN },
   { locale: 'fr', label: 'fr.momuto.com', token: process.env.OEMSAAS_TOKEN_FR },
   { locale: 'es', label: 'es.momuto.com', token: process.env.OEMSAAS_TOKEN_ES },
+  { locale: 'it', label: 'it.momuto.com', token: process.env.OEMSAAS_TOKEN_IT },
 ];
 
 const PREVIEW_TITLE = /^(Your custom design|Votre design personnalisé|Tu diseño personalizado|Il tuo design personalizzato)\b/;
