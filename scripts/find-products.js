@@ -29,7 +29,9 @@ async function listAll(token) {
 
 (async () => {
   console.log(`MATCH = ${MATCH}`);
+  const ONLY = (process.env.ONLY_STORES || '').split(',').filter(Boolean);
   for (const [store, env] of Object.entries(STORES)) {
+    if (ONLY.length && !ONLY.includes(store)) continue;
     const token = process.env[env];
     if (!token) { console.log(`[${store}] no token — skipped`); continue; }
     const items = await listAll(token);

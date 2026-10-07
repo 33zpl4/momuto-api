@@ -137,12 +137,17 @@ are the pattern to copy. Milano, Roma, Napoli, Torino, Bologna, Firenze,
 Palermo, Genova. Do this last — city pages on a store that reads as
 one-third French will not rank either.
 
-## Standing blocker, unrelated to search
+## Standing blocker, unrelated to search — code DONE 7 Oct 2026, store steps open
 
-IT has no `checkSumbit.html` DiyFile and `GoodInfoAction` does not route to the
-IT store (see `design-momuto/server-patches/README`). Until both ship, the
-RTP → 3D → cart flow does not work on Italian. None of steps 1–7 depend on it,
-but traffic arriving before it is fixed cannot convert through that path.
+The design server now routes `it.momuto.com` (GoodInfoAction / CartDetailAction /
+AddToEcartAction, `templates/it/`, `3d_it.js`, `checkSumbit-it.momuto.com.html` — all in
+`design-momuto`, runbook in `server-patches/README.md` "IT store wiring"). What still blocks
+Italian checkout is on the STORE: the IT catalogue has only the jersey (12035794) and
+basketball jersey (12035296) as billable generics — "MOMUTO Shorts Pro", "MOMUTO Socks",
+basketball shorts, the 7 Ready-to-Play jerseys and 7 kits do not exist there (only vendor
+starters "pants basic" 12035289 / "socks basic" 12035806), the quantity-discount campaigns
+must be attached, and the DiyFile / `token_it` / script-manager entry must be installed.
+Until then kit and shorts orders abort at the handoff on purpose.
 
 ## What to measure, and when
 
