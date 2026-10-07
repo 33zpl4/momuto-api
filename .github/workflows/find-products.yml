@@ -14,6 +14,12 @@ on:
       match:
         description: 'Case-insensitive regex on title/handle'
         default: 'basket|baloncesto|pallacanestro'
+      only_stores:
+        description: 'Comma list of stores (en,es,fr,it,us); empty = all'
+        default: ''
+      show_images:
+        description: 'Also print inner_title and image URLs (any non-empty value)'
+        default: ''
 
 jobs:
   find:
@@ -26,6 +32,8 @@ jobs:
       - name: Find
         env:
           MATCH: ${{ github.event.inputs.match }}
+          ONLY_STORES: ${{ github.event.inputs.only_stores }}
+          SHOW_IMAGES: ${{ github.event.inputs.show_images }}
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}

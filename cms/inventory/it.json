@@ -211,6 +211,11 @@
       "status": 1
     },
     {
+      "handle": "la-parte-piu-lenta-di-una-maglia-da-calcio",
+      "title": "La parte più lenta di una maglia da calcio non è la produzione",
+      "status": 1
+    },
+    {
       "handle": "le-guide-ultime-pour-choisir-votre-maillot-de-crossfit-style-confort-performance",
       "title": "Le Guide Ultime pour Choisir Votre Maillot de CrossFit : Style, Confort, Performance",
       "status": 0
@@ -322,7 +327,7 @@
     },
     {
       "handle": "quando-ordinare-maglie-squadra",
-      "title": "Quando ordinare le maglie della tua squadra (calendario 2026)",
+      "title": "Quando ordinare le maglie della squadra (conto alla rovescia dalla prima partita)",
       "status": 1
     },
     {
@@ -368,6 +373,11 @@
   ],
   "pages": [
     {
+      "handle": "aa-pet-hospital-design-maglia",
+      "title": "Design Maglia A&A Pet Hospital | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "adsl-design-maglia",
       "title": "Design Maglia ADSL | MOMUTO",
       "status": null
@@ -383,8 +393,28 @@
       "status": null
     },
     {
+      "handle": "apacol-fc-design-maglia",
+      "title": "Design Maglia APACOL FC | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "aris-karperou-design-maglia",
       "title": "Design Maglia ARIS KARPEROU | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "arsc-blaze-design-maglia",
+      "title": "Design Maglia ARSC Blaze | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "as-bellicourt-design-maglia",
+      "title": "Design Maglia AS BELLICOURT | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "as-xenoms-design-maglia",
+      "title": "Design Maglia AS Xenoms | MOMUTO",
       "status": null
     },
     {
@@ -393,8 +423,18 @@
       "status": null
     },
     {
+      "handle": "atletico-jitos-design-maglia",
+      "title": "Design Maglia ATLÉTICO JITOS | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "atletico-resacon-design-maglia",
       "title": "Design Maglia ATLÉTICO RESACÓN | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "aufa-design-maglia",
+      "title": "Design Maglia AUFA | MOMUTO",
       "status": null
     },
     {
@@ -403,8 +443,18 @@
       "status": null
     },
     {
+      "handle": "aztec-fc-design-maglia",
+      "title": "Design Maglia AZTEC FC | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "bellavia-calcio-design-maglia",
       "title": "Design Maglia BELLAVIA CALCIO | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "best-baller-design-maglia",
+      "title": "Design Maglia Best Baller | MOMUTO",
       "status": null
     },
     {
@@ -420,6 +470,26 @@
     {
       "handle": "bouygues-batiment-nord-est-design-maglia",
       "title": "Design Maglia BOUYGUES BATIMENT NORD-EST | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "box-fc-design-maglia",
+      "title": "Design Maglia BOX FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "breaking-balls-design-maglia",
+      "title": "Design Maglia BREAKING BALLS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "bro-beans-design-maglia",
+      "title": "Design Maglia Bro Beans | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "caesaraugusta-fc-design-maglia",
+      "title": "Design Maglia Caesaraugusta FC | MOMUTO",
       "status": null
     },
     {
@@ -453,13 +523,28 @@
       "status": null
     },
     {
+      "handle": "channelview-athletic-design-maglia",
+      "title": "Design Maglia CHANNELVIEW ATHLETIC | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "chi-siamo",
       "title": "MOMUTO | Maglie da Calcio Personalizzate per Squadre Amateur",
       "status": null
     },
     {
+      "handle": "chicos-toxicos-design-maglia",
+      "title": "Design Maglia CHICOS TOXICOS | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "chimie-lille-anteprima-design-kit-personalizzato",
       "title": "CHIMIE LILLE Anteprima Design Kit Personalizzato | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "churchill-design-maglia",
+      "title": "Design Maglia CHURCHILL | MOMUTO",
       "status": null
     },
     {
@@ -469,7 +554,7 @@
     },
     {
       "handle": "collezione-ready-to-play",
-      "title": "Collezione Ready-to-Play",
+      "title": "Ready to Play — Designer 3D di Maglie da Calcio | MOMUTO",
       "status": null
     },
     {
@@ -483,6 +568,16 @@
       "status": null
     },
     {
+      "handle": "corazon-de-futbol-design-maglia",
+      "title": "Design Maglia CORAZÓN DE FÚTBOL | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "crystal-blue-design-maglia",
+      "title": "Design Maglia CRYSTAL BLUE | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "deportivo-jcpe-anteprima-kit-personalizzato",
       "title": "Anteprima Kit Personalizzato DEPORTIVO JCPE | MOMUTO",
       "status": null
@@ -490,6 +585,11 @@
     {
       "handle": "deportivo-jcpe-design-maglia",
       "title": "Design Maglia DEPORTIVO JCPE | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "deptford-legacies-design-maglia",
+      "title": "Design Maglia Deptford Legacies | MOMUTO",
       "status": null
     },
     {
@@ -503,6 +603,16 @@
       "status": null
     },
     {
+      "handle": "digestia-design-maglia",
+      "title": "Design Maglia DIGESTIA | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "dlfc-purples-design-maglia",
+      "title": "Design Maglia DLFC Purples | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "dmc-football-club-anteprima-design-kit-personalizzato",
       "title": "DMC FOOTBALL CLUB Anteprima Design Kit Personalizzato | MOMUTO",
       "status": null
@@ -513,13 +623,18 @@
       "status": null
     },
     {
+      "handle": "drink-team-design-maglia",
+      "title": "Design Maglia DRINK TEAM | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "embu-east-police-fc-kit-personalizzato-anteprima",
       "title": "Anteprima Kit Personalizzato EMBU EAST POLICE FC | MOMUTO",
       "status": null
     },
     {
       "handle": "faq",
-      "title": "FAQ",
+      "title": "Domande frequenti — Divise da calcio personalizzate | MOMUTO",
       "status": null
     },
     {
@@ -528,8 +643,18 @@
       "status": null
     },
     {
+      "handle": "fc-braecelona-design-maglia",
+      "title": "Design Maglia FC Braecelona | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "fc-fidem-design-maglia",
       "title": "Design Maglia FC FIDEM | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "fc-grinta-design-maglia",
+      "title": "Design Maglia FC GRINTA | MOMUTO",
       "status": null
     },
     {
@@ -545,6 +670,11 @@
     {
       "handle": "fc-rivieres-plates-design-maglia",
       "title": "Design Maglia FC Rivières Plates | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "fc-sega-design-maglia",
+      "title": "Design Maglia FC SEGA | MOMUTO",
       "status": null
     },
     {
@@ -593,6 +723,11 @@
       "status": null
     },
     {
+      "handle": "goal-diggers-design-maglia",
+      "title": "Design Maglia Goal Diggers | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "gosling-fc-anteprima-kit-personalizzato",
       "title": "Anteprima Kit Personalizzato GOSLING FC | MOMUTO",
       "status": null
@@ -623,6 +758,11 @@
       "status": null
     },
     {
+      "handle": "il-mio-ordine",
+      "title": "Il mio ordine",
+      "status": null
+    },
+    {
       "handle": "impacto-fc-design-maglia",
       "title": "Design Maglia IMPACTO FC | MOMUTO",
       "status": null
@@ -638,8 +778,23 @@
       "status": null
     },
     {
+      "handle": "inter-egara-design-maglia",
+      "title": "Design Maglia INTER EGARA | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "invia-la-tua-idea",
       "title": "Invia la Tua Idea",
+      "status": null
+    },
+    {
+      "handle": "jb-football-design-maglia",
+      "title": "Design Maglia JB Football | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "js-neuvy-design-maglia",
+      "title": "Design Maglia JS NEUVY | MOMUTO",
       "status": null
     },
     {
@@ -658,6 +813,11 @@
       "status": null
     },
     {
+      "handle": "kickin-chickens-design-maglia",
+      "title": "Design Maglia Kickin Chickens | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "kings-design-maglia",
       "title": "Design Maglia KINGS | MOMUTO",
       "status": null
@@ -665,6 +825,11 @@
     {
       "handle": "komparsoi-fc-design-maglia",
       "title": "Design Maglia KOMPARSOI FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "la-19eme-de-gentinnes-design-maglia",
+      "title": "Design Maglia La 19éme de Gentinnes | MOMUTO",
       "status": null
     },
     {
@@ -680,6 +845,21 @@
     {
       "handle": "lambrusco-a-secchiate-design-kit-personalizzato",
       "title": "Lambrusco a SECCHIAte Design Kit Personalizzato | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "larosa-fc-design-maglia",
+      "title": "Design Maglia Larosa FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "las-vegas-design-maglia",
+      "title": "Design Maglia L'AS Vegas | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "legion-design-maglia",
+      "title": "Design Maglia Legion | MOMUTO",
       "status": null
     },
     {
@@ -713,6 +893,16 @@
       "status": null
     },
     {
+      "handle": "los-bloques-design-maglia",
+      "title": "Design Maglia LOS BLOQUES | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "los-bro-beans-design-maglia",
+      "title": "Design Maglia LOS BRO BEANS | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "los-fletos-design-maglia",
       "title": "Design Maglia LOS FLETOS | MOMUTO",
       "status": null
@@ -725,6 +915,11 @@
     {
       "handle": "los-primos-design-maglia",
       "title": "Design Maglia LOS PRIMOS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "los-salchipapas-design-maglia",
+      "title": "Design Maglia Los Salchipapas | MOMUTO",
       "status": null
     },
     {
@@ -763,13 +958,43 @@
       "status": null
     },
     {
+      "handle": "mec-power-crew-design-maglia",
+      "title": "Design Maglia MEC Power Crew | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "melde-fc-design-maglia",
+      "title": "Design Maglia MELDE FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "miami-motion-design-maglia",
+      "title": "Design Maglia Miami Motion | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "mito-design-maglia",
+      "title": "Design Maglia MITO | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "mmg-fc-design-maglia",
       "title": "Design Maglia MMG FC | MOMUTO",
       "status": null
     },
     {
+      "handle": "mo-money-mummy-design-maglia",
+      "title": "Design Maglia MO MONEY MUMMY | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "most-hated-design-maglia",
       "title": "Design Maglia MOST HATED | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "muddy-monkeys-design-maglia",
+      "title": "Design Maglia Muddy Monkeys | MOMUTO",
       "status": null
     },
     {
@@ -798,6 +1023,11 @@
       "status": null
     },
     {
+      "handle": "novaleatrallon-design-maglia",
+      "title": "Design Maglia Novaleatrallón | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "nvrs-kit-personalizzato-design",
       "title": "Anteprima Kit Personalizzato NVRS | MOMUTO",
       "status": null
@@ -818,8 +1048,28 @@
       "status": null
     },
     {
+      "handle": "paris-santefisi-design-maglia",
+      "title": "Design Maglia Paris Sant'Efisi | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "parmelee-fc-design-maglia",
+      "title": "Design Maglia Parmelee FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "passyunk-athletic-club-design-maglia",
+      "title": "Design Maglia Passyunk Athletic Club | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "pasta-la-vista-design-maglia",
       "title": "Design Maglia Pasta La Vista | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "payicos-fc-design-maglia",
+      "title": "Design Maglia PAYICOS FC | MOMUTO",
       "status": null
     },
     {
@@ -838,18 +1088,23 @@
       "status": null
     },
     {
+      "handle": "pine-state-united-design-maglia",
+      "title": "Design Maglia Pine State United | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "politica-di-reso",
       "title": "Politica di reso",
       "status": null
     },
     {
       "handle": "politica-di-spedizione",
-      "title": "Politica di spedizione",
+      "title": "Spedizione — 25–30 giorni, tracciata, dazi inclusi | MOMUTO",
       "status": null
     },
     {
       "handle": "politica-resi",
-      "title": "Resi e Cambi",
+      "title": "Resi e cambi — difetti, danni, mockup diverso | MOMUTO",
       "status": null
     },
     {
@@ -870,6 +1125,16 @@
     {
       "handle": "quinta-esencia-fc-design-maglia",
       "title": "Design Maglia QUINTA ESENCIA FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "radiator-springs-design-maglia",
+      "title": "Design Maglia Radiator Springs | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "ratopia-fc-design-maglia",
+      "title": "Design Maglia Ratopia FC | MOMUTO",
       "status": null
     },
     {
@@ -943,8 +1208,28 @@
       "status": null
     },
     {
+      "handle": "salcali-sucuklu-tostspor-design-maglia",
+      "title": "Design Maglia Salçalı Sucuklu Tostspor | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "sandfields-rangers-design-maglia",
       "title": "Design Maglia SANDFIELDS RANGERS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "sc-cuenca-design-maglia",
+      "title": "Design Maglia SC CUENCA | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "sc-tigueurs-design-maglia",
+      "title": "Design Maglia SC TIGUEURS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "schalke-temeto-design-maglia",
+      "title": "Design Maglia Schalke Temeto | MOMUTO",
       "status": null
     },
     {
@@ -973,8 +1258,23 @@
       "status": null
     },
     {
+      "handle": "south-tahoe-fc-design-maglia",
+      "title": "Design Maglia South Tahoe FC | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "soviet-rockets-design-maglia",
       "title": "Design Maglia SOVIET ROCKETS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "sp-chantegrive-design-maglia",
+      "title": "Design Maglia SP Chantegrive | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "sporting-ng-design-maglia",
+      "title": "Design Maglia Sporting NG | MOMUTO",
       "status": null
     },
     {
@@ -1003,6 +1303,21 @@
       "status": null
     },
     {
+      "handle": "swing-first-design-maglia",
+      "title": "Design Maglia Swing First | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "team-bergen-design-maglia",
+      "title": "Design Maglia Team Bergen | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "team-star-design-maglia",
+      "title": "Design Maglia Team Star | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "teranyina-fc-design-maglia",
       "title": "Design Maglia TERANYINA FC | MOMUTO",
       "status": null
@@ -1010,6 +1325,21 @@
     {
       "handle": "termini-e-condizioni",
       "title": "Termini e Condizioni",
+      "status": null
+    },
+    {
+      "handle": "the-sleepers-design-maglia",
+      "title": "Design Maglia The Sleepers | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "tijuana-aztecs-design-maglia",
+      "title": "Design Maglia TIJUANA AZTECS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "tiki-tajine-fc-design-maglia",
+      "title": "Design Maglia Tiki-Tajine FC | MOMUTO",
       "status": null
     },
     {
@@ -1023,13 +1353,28 @@
       "status": null
     },
     {
+      "handle": "udgf-design-maglia",
+      "title": "Design Maglia UDGF | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "ulvkalla-united-kit-personalizzato-design",
       "title": "Anteprima Design Kit Personalizzato ULVKÄLLA UNITED | MOMUTO",
       "status": null
     },
     {
+      "handle": "unio-egarenca-design-maglia",
+      "title": "Design Maglia UNIÓ EGARENCA | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "uopini-anteprima-kit-personalizzato",
       "title": "Anteprima Kit Personalizzato Uopini | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "venecia-07-design-maglia",
+      "title": "Design Maglia VENECIA 07 | MOMUTO",
       "status": null
     },
     {
@@ -1043,8 +1388,18 @@
       "status": null
     },
     {
+      "handle": "wolves-design-maglia",
+      "title": "Design Maglia Wolves | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "wrexham-italy-fans-design-maglia",
       "title": "Design Maglia Wrexham Italy Fans | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "yappers-fc-design-maglia",
+      "title": "Design Maglia YAPPERS FC | MOMUTO",
       "status": null
     },
     {

@@ -74,13 +74,14 @@ var CONFIG3D={
   "the-prism":"84bealsh",
   "the-mosaic":"xwmywt2u"
 };
-// goodsInfoSave derives store + language from fromUrlHost (en/fr/es/us — the
-// design server routes checkout to those four storefronts; no IT mapping yet,
-// so IT pages fall back to showing no button rather than an EN checkout).
+// goodsInfoSave derives store + language from fromUrlHost (en/fr/es/it/us — the
+// design server routes checkout to those five storefronts; IT added 7 Oct 2026,
+// design-momuto server-patches/README.md "IT store wiring". IT pages still need
+// a data-lang="it" mount + Italian I18N + IT RTP products before the button shows).
 // "us" keeps the English UI on the design server (lang=en) but its cart and
 // checkout land on us.momuto.com in USD (GoodInfoAction keys the store off
 // fromUrlHost, not the language — design-momuto server-patches/README.md §2).
-var STORE3D={ en:"https://www.momuto.com", fr:"https://fr.momuto.com", es:"https://es.momuto.com", us:"https://us.momuto.com" };
+var STORE3D={ en:"https://www.momuto.com", fr:"https://fr.momuto.com", es:"https://es.momuto.com", it:"https://it.momuto.com", us:"https://us.momuto.com" };
 // The STORE product title, carried into the design server so the /cart page can
 // name the line ("Manchester Fiti — Kit Personalizado") instead of showing a bare
 // cart id, and can tell a full kit from a jersey by the title's fixed marker

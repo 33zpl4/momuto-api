@@ -19,3 +19,7 @@ page it design-personalizzato-confermato
 # Verify the city-page deploy of 17 July actually landed all 10 - the last ES
 # inventory predates it (4 July) and six cities show zero GSC impressions.
 inventory es
+page en size-guide
+page es guia-tallas
+page fr guide-des-tailles
+page it guida-alle-taglie
