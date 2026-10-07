@@ -62,7 +62,7 @@
     },
     {
       "handle": "comparativa-equipaciones-futbol-personalizadas-espana",
-      "title": "MOMUTO vs Competencia: Comparativa definitiva de equipacoines personalizadas en España",
+      "title": "MOMUTO vs Competencia: Comparativa definitiva de equipaciones personalizadas en España",
       "status": 1
     },
     {
@@ -77,7 +77,7 @@
     },
     {
       "handle": "cuando-encargar-equipaciones-equipo",
-      "title": "Cuándo encargar las equipaciones de tu equipo (calendario 2026)",
+      "title": "Cuándo encargar las equipaciones del equipo (cuenta atrás desde el primer partido)",
       "status": 1
     },
     {
@@ -127,7 +127,7 @@
     },
     {
       "handle": "equipaciones-futbol-urgentes-entrega-20-dias",
-      "title": "Camisetas de fútbol en menos de 20 días: Cuando cada momento cuenta",
+      "title": "Equipaciones de fútbol urgentes: la vía rápida, con números honestos",
       "status": 1
     },
     {
@@ -153,6 +153,11 @@
     {
       "handle": "la-guia-definitiva-para-elegir-tu-camiseta-de-crossfit-estilo-comodidad-rendimiento",
       "title": "La Guía Definitiva para Elegir tu Camiseta de CrossFit: Estilo, Comodidad, Rendimiento",
+      "status": 1
+    },
+    {
+      "handle": "lo-mas-lento-de-hacer-una-camiseta-de-futbol",
+      "title": "Lo más lento de hacer una camiseta de fútbol no es fabricarla",
       "status": 1
     },
     {
@@ -193,6 +198,11 @@
   ],
   "pages": [
     {
+      "handle": "aa-pet-hospital-diseno-equipacion",
+      "title": "Diseño Equipación A&A Pet Hospital | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "adsl-diseno-equipacion",
       "title": "Diseño Equipación ADSL | MOMUTO",
       "status": null
@@ -213,6 +223,11 @@
       "status": null
     },
     {
+      "handle": "apacol-fc-diseno-equipacion",
+      "title": "Diseño Equipación APACOL FC | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "argentina",
       "title": "MOMUTO Argentina",
       "status": null
@@ -223,13 +238,33 @@
       "status": null
     },
     {
+      "handle": "arsc-blaze-diseno-equipacion",
+      "title": "Diseño Equipación ARSC Blaze | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "as-bellicourt-diseno-equipacion",
+      "title": "Diseño Equipación AS BELLICOURT | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "as-vsm-diseno-equipacion",
       "title": "Diseño Equipación AS VSM | MOMUTO",
       "status": null
     },
     {
+      "handle": "as-xenoms-diseno-equipacion",
+      "title": "Diseño Equipación AS Xenoms | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "atletico-guanche-diseno-equipacion",
       "title": "Diseño Equipación ATLÉTICO GUANCHE | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "atletico-jitos-diseno-equipacion",
+      "title": "Diseño Equipación ATLÉTICO JITOS | MOMUTO",
       "status": null
     },
     {
@@ -243,13 +278,28 @@
       "status": null
     },
     {
+      "handle": "aufa-diseno-equipacion",
+      "title": "Diseño Equipación AUFA | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "autoservicio-martin-ruiz-diseno-equipacion",
       "title": "Diseño Equipación Autoservicio Martín Ruiz | MOMUTO",
       "status": null
     },
     {
+      "handle": "aztec-fc-diseno-equipacion",
+      "title": "Diseño Equipación AZTEC FC | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "bellavia-calcio-diseno-equipacion",
       "title": "Diseño Equipación BELLAVIA CALCIO | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "best-baller-diseno-equipacion",
+      "title": "Diseño Equipación Best Baller | MOMUTO",
       "status": null
     },
     {
@@ -263,8 +313,28 @@
       "status": null
     },
     {
+      "handle": "box-fc-diseno-equipacion",
+      "title": "Diseño Equipación BOX FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "breaking-balls-diseno-equipacion",
+      "title": "Diseño Equipación BREAKING BALLS | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "brexit-fc-diseno-equipacion",
       "title": "Diseño Equipación BREXIT FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "bro-beans-diseno-equipacion",
+      "title": "Diseño Equipación Bro Beans | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "caesaraugusta-fc-diseno-equipacion",
+      "title": "Diseño Equipación Caesaraugusta FC | MOMUTO",
       "status": null
     },
     {
@@ -274,7 +344,7 @@
     },
     {
       "handle": "cambios-devoluciones",
-      "title": "Cambios y Devoluciones",
+      "title": "Cambios y devoluciones — defectos, daños, maqueta distinta | MOMUTO",
       "status": null
     },
     {
@@ -314,7 +384,7 @@
     },
     {
       "handle": "camisetas-futbol-personalizadas-madrid",
-      "title": "Camisetas de Fútbol Personalizadas Madrid | Sin Mínimo | MOMUTO",
+      "title": "Camisetas de Fútbol Personalizadas Madrid con Marcaje | MOMUTO",
       "status": null
     },
     {
@@ -373,8 +443,23 @@
       "status": null
     },
     {
+      "handle": "channelview-athletic-diseno-equipacion",
+      "title": "Diseño Equipación CHANNELVIEW ATHLETIC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "chicos-toxicos-diseno-equipacion",
+      "title": "Diseño Equipación CHICOS TOXICOS | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "chimie-lille-diseno-equipacion",
       "title": "Diseño Equipación CHIMIE LILLE | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "churchill-diseno-equipacion",
+      "title": "Diseño Equipación CHURCHILL | MOMUTO",
       "status": null
     },
     {
@@ -389,7 +474,7 @@
     },
     {
       "handle": "coleccion-ready-to-play",
-      "title": "Colección Ready-to-Play | Equipaciones Personalizadas en 24h | MOMUTO",
+      "title": "Ready to Play — Diseñador 3D de Camisetas | MOMUTO",
       "status": null
     },
     {
@@ -408,8 +493,18 @@
       "status": null
     },
     {
+      "handle": "corazon-de-futbol-diseno-equipacion",
+      "title": "Diseño Equipación CORAZÓN DE FÚTBOL | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "corintios-diseno-equipacion",
       "title": "Diseño Equipación CORINTIOS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "crystal-blue-diseno-equipacion",
+      "title": "Diseño Equipación CRYSTAL BLUE | MOMUTO",
       "status": null
     },
     {
@@ -420,6 +515,11 @@
     {
       "handle": "deportivo-jcpe-diseno-equipacion",
       "title": "Diseño Equipación DEPORTIVO JCPE | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "deptford-legacies-diseno-equipacion",
+      "title": "Diseño Equipación Deptford Legacies | MOMUTO",
       "status": null
     },
     {
@@ -438,6 +538,16 @@
       "status": null
     },
     {
+      "handle": "digestia-diseno-equipacion",
+      "title": "Diseño Equipación DIGESTIA | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "dlfc-purples-diseno-equipacion",
+      "title": "Diseño Equipación DLFC Purples | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "dmc-football-club-diseno-equipacion",
       "title": "Diseño Equipación DMC FOOTBALL CLUB | MOMUTO",
       "status": null
@@ -453,13 +563,18 @@
       "status": null
     },
     {
+      "handle": "drink-team-diseno-equipacion",
+      "title": "Diseño Equipación DRINK TEAM | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "embu-east-police-fc-diseno-equipacion",
       "title": "Diseño Equipación EMBU EAST POLICE FC | MOMUTO",
       "status": null
     },
     {
       "handle": "envios-metodos-y-plazos",
-      "title": "Envíos: Métodos y Plazos",
+      "title": "Envíos y plazos — 25–30 días, con seguimiento, aduanas incluidas | MOMUTO",
       "status": null
     },
     {
@@ -508,8 +623,18 @@
       "status": null
     },
     {
+      "handle": "fc-braecelona-diseno-equipacion",
+      "title": "Diseño Equipación FC Braecelona | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "fc-fidem-diseno-equipacion",
       "title": "Diseño Equipación FC FIDEM | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "fc-grinta-diseno-equipacion",
+      "title": "Diseño Equipación FC GRINTA | MOMUTO",
       "status": null
     },
     {
@@ -530,6 +655,11 @@
     {
       "handle": "fc-rivieres-plates-diseno-equipacion",
       "title": "Diseño Equipación FC Rivières Plates | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "fc-sega-diseno-equipacion",
+      "title": "Diseño Equipación FC SEGA | MOMUTO",
       "status": null
     },
     {
@@ -588,6 +718,11 @@
       "status": null
     },
     {
+      "handle": "goal-diggers-diseno-equipacion",
+      "title": "Diseño Equipación Goal Diggers | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "grid-diseno-equipacion",
       "title": "Diseño Equipación GRID | MOMUTO",
       "status": null
@@ -623,8 +758,23 @@
       "status": null
     },
     {
+      "handle": "inter-egara-diseno-equipacion",
+      "title": "Diseño Equipación INTER EGARA | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "j-seguridad-mf-diseno-equipacion",
       "title": "Diseño Equipación J SEGURIDAD & M&F | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "jb-football-diseno-equipacion",
+      "title": "Diseño Equipación JB Football | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "js-neuvy-diseno-equipacion",
+      "title": "Diseño Equipación JS NEUVY | MOMUTO",
       "status": null
     },
     {
@@ -640,6 +790,11 @@
     {
       "handle": "kerz-diseno-equipacion",
       "title": "Diseño Equipación KERZ | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "kickin-chickens-diseno-equipacion",
+      "title": "Diseño Equipación Kickin Chickens | MOMUTO",
       "status": null
     },
     {
@@ -665,6 +820,11 @@
     {
       "handle": "kung-fu-panda7-diseno-equipacion",
       "title": "Diseño Equipación KUNG FU PAND'A7 | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "la-19eme-de-gentinnes-diseno-equipacion",
+      "title": "Diseño Equipación La 19éme de Gentinnes | MOMUTO",
       "status": null
     },
     {
@@ -695,6 +855,21 @@
     {
       "handle": "lario-fc-diseno-equipacion",
       "title": "Diseño Equipación LARIO FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "larosa-fc-diseno-equipacion",
+      "title": "Diseño Equipación Larosa FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "las-vegas-diseno-equipacion",
+      "title": "Diseño Equipación L'AS Vegas | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "legion-diseno-equipacion",
+      "title": "Diseño Equipación Legion | MOMUTO",
       "status": null
     },
     {
@@ -738,6 +913,16 @@
       "status": null
     },
     {
+      "handle": "los-bloques-diseno-equipacion",
+      "title": "Diseño Equipación LOS BLOQUES | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "los-bro-beans-diseno-equipacion",
+      "title": "Diseño Equipación LOS BRO BEANS | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "los-chulos-diseno-equipacion",
       "title": "Diseño Equipación ELS CHULOS | MOMUTO",
       "status": null
@@ -755,6 +940,11 @@
     {
       "handle": "los-primos-diseno-equipacion",
       "title": "Diseño Equipación LOS PRIMOS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "los-salchipapas-diseno-equipacion",
+      "title": "Diseño Equipación Los Salchipapas | MOMUTO",
       "status": null
     },
     {
@@ -803,8 +993,33 @@
       "status": null
     },
     {
+      "handle": "mec-power-crew-diseno-equipacion",
+      "title": "Diseño Equipación MEC Power Crew | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "mejores-webs-equipaciones-futbol-personalizadas-2026",
       "title": "Mejores Webs para Crear Equipaciones de Fútbol Personalizadas (2026) | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "melde-fc-diseno-equipacion",
+      "title": "Diseño Equipación MELDE FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "mi-pedido",
+      "title": "Mi pedido",
+      "status": null
+    },
+    {
+      "handle": "miami-motion-diseno-equipacion",
+      "title": "Diseño Equipación Miami Motion | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "mito-diseno-equipacion",
+      "title": "Diseño Equipación MITO | MOMUTO",
       "status": null
     },
     {
@@ -813,8 +1028,18 @@
       "status": null
     },
     {
+      "handle": "mo-money-mummy-diseno-equipacion",
+      "title": "Diseño Equipación MO MONEY MUMMY | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "most-hated-diseno-equipacion",
       "title": "Diseño Equipación MOST HATED | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "muddy-monkeys-diseno-equipacion",
+      "title": "Diseño Equipación Muddy Monkeys | MOMUTO",
       "status": null
     },
     {
@@ -853,6 +1078,11 @@
       "status": null
     },
     {
+      "handle": "novaleatrallon-diseno-equipacion",
+      "title": "Diseño Equipación Novaleatrallón | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "nvrs-diseno-equipacion",
       "title": "Diseño Equipación NVRS | MOMUTO",
       "status": null
@@ -873,8 +1103,28 @@
       "status": null
     },
     {
+      "handle": "paris-santefisi-diseno-equipacion",
+      "title": "Diseño Equipación Paris Sant'Efisi | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "parmelee-fc-diseno-equipacion",
+      "title": "Diseño Equipación Parmelee FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "passyunk-athletic-club-diseno-equipacion",
+      "title": "Diseño Equipación Passyunk Athletic Club | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "pasta-la-vista-diseno-equipacion",
       "title": "Diseño Equipación Pasta La Vista | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "payicos-fc-diseno-equipacion",
+      "title": "Diseño Equipación PAYICOS FC | MOMUTO",
       "status": null
     },
     {
@@ -885,6 +1135,11 @@
     {
       "handle": "pecados-capitales-diseno-equipacion",
       "title": "Diseño Equipación PECADOS CAPITALES | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "pine-state-united-diseno-equipacion",
+      "title": "Diseño Equipación Pine State United | MOMUTO",
       "status": null
     },
     {
@@ -899,7 +1154,7 @@
     },
     {
       "handle": "preguntas-frecuentes",
-      "title": "Preguntas Frecuentes",
+      "title": "Preguntas frecuentes — Equipaciones de fútbol personalizadas | MOMUTO",
       "status": null
     },
     {
@@ -930,6 +1185,16 @@
     {
       "handle": "quinta-esencia-fc-diseno-equipacion",
       "title": "Diseño Equipación QUINTA ESENCIA FC | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "radiator-springs-diseno-equipacion",
+      "title": "Diseño Equipación Radiator Springs | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "ratopia-fc-diseno-equipacion",
+      "title": "Diseño Equipación Ratopia FC | MOMUTO",
       "status": null
     },
     {
@@ -1013,8 +1278,28 @@
       "status": null
     },
     {
+      "handle": "salcali-sucuklu-tostspor-diseno-equipacion",
+      "title": "Diseño Equipación Salçalı Sucuklu Tostspor | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "sandfields-rangers-diseno-equipacion",
       "title": "Diseño Equipación SANDFIELDS RANGERS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "sc-cuenca-diseno-equipacion",
+      "title": "Diseño Equipación SC CUENCA | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "sc-tigueurs-diseno-equipacion",
+      "title": "Diseño Equipación SC TIGUEURS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "schalke-temeto-diseno-equipacion",
+      "title": "Diseño Equipación Schalke Temeto | MOMUTO",
       "status": null
     },
     {
@@ -1068,8 +1353,23 @@
       "status": null
     },
     {
+      "handle": "south-tahoe-fc-diseno-equipacion",
+      "title": "Diseño Equipación South Tahoe FC | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "soviet-rockets-diseno-equipacion",
       "title": "Diseño Equipación SOVIET ROCKETS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "sp-chantegrive-diseno-equipacion",
+      "title": "Diseño Equipación SP Chantegrive | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "sporting-ng-diseno-equipacion",
+      "title": "Diseño Equipación Sporting NG | MOMUTO",
       "status": null
     },
     {
@@ -1108,6 +1408,21 @@
       "status": null
     },
     {
+      "handle": "swing-first-diseno-equipacion",
+      "title": "Diseño Equipación Swing First | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "team-bergen-diseno-equipacion",
+      "title": "Diseño Equipación Team Bergen | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "team-star-diseno-equipacion",
+      "title": "Diseño Equipación Team Star | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "tendido-18-diseno-equipacion",
       "title": "Diseño Equipación TENDIDO 18 | MOMUTO",
       "status": null
@@ -1120,6 +1435,21 @@
     {
       "handle": "terminos-y-condiciones",
       "title": "Términos y Condiciones",
+      "status": null
+    },
+    {
+      "handle": "the-sleepers-diseno-equipacion",
+      "title": "Diseño Equipación The Sleepers | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "tijuana-aztecs-diseno-equipacion",
+      "title": "Diseño Equipación TIJUANA AZTECS | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "tiki-tajine-fc-diseno-equipacion",
+      "title": "Diseño Equipación Tiki-Tajine FC | MOMUTO",
       "status": null
     },
     {
@@ -1138,6 +1468,11 @@
       "status": null
     },
     {
+      "handle": "udgf-diseno-equipacion",
+      "title": "Diseño Equipación UDGF | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "ulvkalla-united-diseno-equipacion",
       "title": "Diseño Equipación ULVKÄLLA UNITED | MOMUTO",
       "status": null
@@ -1148,8 +1483,18 @@
       "status": null
     },
     {
+      "handle": "unio-egarenca-diseno-equipacion",
+      "title": "Diseño Equipación UNIÓ EGARENCA | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "union-zaragoza-diseno-equipacion",
       "title": "Diseño Equipación UNIÓN ZARAGOZA | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "venecia-07-diseno-equipacion",
+      "title": "Diseño Equipación VENECIA 07 | MOMUTO",
       "status": null
     },
     {
@@ -1163,8 +1508,18 @@
       "status": null
     },
     {
+      "handle": "wolves-diseno-equipacion",
+      "title": "Diseño Equipación Wolves | MOMUTO",
+      "status": null
+    },
+    {
       "handle": "wrexham-italy-fans-diseno-equipacion",
       "title": "Diseño Equipación Wrexham Italy Fans | MOMUTO",
+      "status": null
+    },
+    {
+      "handle": "yappers-fc-diseno-equipacion",
+      "title": "Diseño Equipación YAPPERS FC | MOMUTO",
       "status": null
     },
     {
