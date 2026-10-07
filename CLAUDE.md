@@ -31,6 +31,10 @@ Read the doc that owns a topic BEFORE editing that surface.
   `cms/pages/<locale>/<handle>.json`
   (deploy via Deploy CMS Page `changed_since`). Numbers there must match rule 6
   and the US ladder in `docs/us-launch-status.md`; never hand-edit the built JSON.
+- **Size-guide pages EN/ES/FR/IT** are generated too: edit the fragment `size-guide/<locale>`, run
+  `node scripts/build-size-guide-pages.js` (writes `cms/pages/<locale>/<handle>.json`, deploy via Deploy CMS Page);
+  US is edited directly in `cms/pages/us/size-guide.json`. Sizes must match the cart dropdowns in
+  `design-momuto/templates/*/cartItem.html` (no 176 — factory maps it to adult S).
 - `docs/seo-opportunities-2026-09.md` — SEO audit of every plan vs what
   shipped (25 Sep 2026): what was fixed, the ranked backlog of what's next,
   owner-side checks. Start here before picking SEO work.
