@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 9297280,
+    "event_id": 6,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "Order was canceled at your request and your payment has been voided .",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "Your order {order_number} has been canceled",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "9BD312EF-8B8E-D154-5FE3-96DC16C0038B"
+}

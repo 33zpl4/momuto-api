@@ -4,14 +4,14 @@
   "data": {
     "id": 310071,
     "event_id": 22,
-    "delay_time": 1000,
+    "delay_time": 1799,
     "coupon": "",
-    "top_html_oss_bucket": "<div>Buenas noticias: tu equipación está guardada. Tanto si fue una sesión de diseño en serio como un primer vistazo para ver qué es posible, puedes retomarla justo donde la dejaste.</div>\n<div></div>\n<div>Y cuando decidas, no la terminarás solo: antes de producir, un diseñador de MOMUTO revisa cada pedido y limpia cada escudo y logo para que imprima perfecto. Así han conseguido su equipación cientos de equipos de todo el mundo. Estás en buenas manos.</div>\n<div></div>\n<div>Sobre el precio: depende de la cantidad — a partir de 10 equipaciones, la camiseta sale a 21,90 €. ¿Quieres la lista completa por cantidades? <a href=\"https://es.momuto.com/pages/equipaciones-futbol-personalizadas\" target=\"_blank\" rel=\"noopener\">Aquí la tienes.</a></div>",
+    "top_html_oss_bucket": "<div>Tu equipación está guardada: puedes retomarla justo donde la dejaste, tanto si fue una sesión de diseño en serio como un primer vistazo para ver qué es posible.</div>\n<div></div>\n<div>Antes de producir, un diseñador de MOMUTO revisa cada pedido y limpia cada escudo y logo para que imprima perfecto. Tenemos 4,6/5 en <a href=\"https://www.trustpilot.com/review/momuto.com\" target=\"_blank\" rel=\"noopener\">Trustpilot</a>, la confianza de cientos de equipos de todo el mundo y somos una de las marcas de equipaciones de fútbol personalizadas que más crecen en Europa.</div>\n<div></div>\n<div>Precio: una camiseta cuesta 38,90 € y, a partir de 10 camisetas, 21,90 € cada una, sin pedido mínimo y con entrega en 25–30 días. <a href=\"https://es.momuto.com/pages/preguntas-frecuentes\" target=\"_blank\" rel=\"noopener\">Lista completa por cantidades.</a></div>",
     "bottom_html_oss_bucket": "¿Dudas, preguntas, algún detalle? Responde a este correo — te contesta una persona de verdad.",
     "email_title": "Tu equipación está guardada — y en buenas manos",
     "status": 1,
     "logo": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20240919/52561_de5c7510b0d9d60b5bb78e99124dc6de.png",
     "param": ""
   },
-  "trace_id": "707390A0-8595-E9AA-43B9-3A6031C4CEBB"
+  "trace_id": "1D289B70-5122-8C04-FF6E-1F610F792152"
 }

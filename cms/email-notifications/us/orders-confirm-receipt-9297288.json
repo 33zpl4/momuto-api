@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 9297288,
+    "event_id": 42,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "Your order has been delivered. Thank you for your purchase.",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "A shipment from order {order_number} has been delivered",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "8A10B6CD-1578-FE7A-AED2-B0C365D928AD"
+}

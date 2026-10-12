@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 9297285,
+    "event_id": 22,
+    "delay_time": 1799,
+    "coupon": "",
+    "top_html_oss_bucket": "<div>Your kit is saved — pick it up right where you left off, whether it was a serious design session or a quick look at what's possible.</div>\n<div></div>\n<div>Before production, a MOMUTO designer reviews every order and cleans up every crest and logo so it prints perfectly. We're rated 4.6/5 on <a href=\"https://www.trustpilot.com/review/momuto.com\" target=\"_blank\" rel=\"noopener\">Trustpilot</a>, trusted by hundreds of teams around the world, and one of the fastest-growing custom soccer kit brands in Europe.</div>\n<div></div>\n<div>Price: one jersey is $45.90 and from 10 jerseys it's $25.90 each, with no minimum order and delivery in 25–30 days. <a href=\"https://us.momuto.com/pages/faq\" target=\"_blank\" rel=\"noopener\">Full list by quantity.</a></div>",
+    "bottom_html_oss_bucket": "Questions, doubts, a detail to check? Reply to this email — a real person answers.",
+    "email_title": "Your kit is saved — and in good hands",
+    "status": 1,
+    "logo": "https://cdn.statics-cdn-abc.com/pics/8ac5413dcad67ba95b8162f57b9ebb0accafa13a587208fd99d7d74d80822915.jpg",
+    "param": ""
+  },
+  "trace_id": "34004588-C4DB-0769-3DE9-5FC37F5DA0C3"
+}
