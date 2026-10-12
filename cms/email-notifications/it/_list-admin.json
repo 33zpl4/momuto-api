@@ -62,9 +62,24 @@
         "email_cover": "https://cdn.statics-cdn-abc.com/statics/cart/emails/repeated_payment.png",
         "event_tip": "",
         "param": ""
+      },
+      {
+        "event_id": 72,
+        "event_name": "线下付款订单通知（管理员）",
+        "event_code": "orders/offlinepay_for_admin",
+        "email_event_type": "admin",
+        "email_event_status": 0,
+        "event_descript": "线下付款订单创单通知管理员",
+        "status": 0,
+        "event_notice_id": 9057963,
+        "coupon": "",
+        "delay_time": 0,
+        "email_cover": "https://cdn.statics-cdn-abc.com/statics/cart/emails/offlinepay_for_admin.png",
+        "event_tip": "",
+        "param": ""
       }
     ],
-    "totalCount": 4
+    "totalCount": 5
   },
-  "trace_id": "A2688297-2D7F-E0DA-1CA5-4585A5F4703C"
+  "trace_id": "9ABB0D61-0B46-5AD4-236E-D7038BBEE32A"
 }

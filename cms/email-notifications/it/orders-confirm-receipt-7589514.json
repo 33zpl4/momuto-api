@@ -8,10 +8,10 @@
     "coupon": "",
     "top_html_oss_bucket": "Your order has been delivered. Thank you for your purchase.",
     "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
-    "email_title": "Order Delivered",
+    "email_title": "A shipment from order {order_number} has been delivered",
     "status": 0,
     "logo": "",
     "param": ""
   },
-  "trace_id": "A225FC61-EDF9-B8BD-68CD-1175D2AC841B"
+  "trace_id": "45294A06-8CCB-75FD-77DB-9DE14462429C"
 }

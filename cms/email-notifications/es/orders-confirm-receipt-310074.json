@@ -8,10 +8,10 @@
     "coupon": "",
     "top_html_oss_bucket": "Your order has been delivered. Thank you for your purchase.",
     "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
-    "email_title": "Order Delivered",
+    "email_title": "A shipment from order {order_number} has been delivered",
     "status": 1,
     "logo": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20240919/52561_b7fcec9bed2665514be411702aaa20b9.png",
     "param": ""
   },
-  "trace_id": "7D07F52C-CB64-5853-0919-7D76496CA9A9"
+  "trace_id": "C7D51704-C58E-22AF-1361-B97EF863A966"
 }

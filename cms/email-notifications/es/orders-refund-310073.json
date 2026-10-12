@@ -8,10 +8,10 @@
     "coupon": "",
     "top_html_oss_bucket": "You order has been refunded.",
     "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
-    "email_title": "Order Refunded",
+    "email_title": "Your order {order_number} has been refunded",
     "status": 1,
     "logo": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20240919/52561_bb8471d0d4a7fb8ac672a5d4f28d149c.png",
     "param": ""
   },
-  "trace_id": "E89E0508-90CA-80D3-2C9E-3706993B698A"
+  "trace_id": "9D3E9A27-D7C5-444E-DAB1-3299B716A614"
 }

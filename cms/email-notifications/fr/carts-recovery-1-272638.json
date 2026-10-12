@@ -4,14 +4,14 @@
   "data": {
     "id": 272638,
     "event_id": 22,
-    "delay_time": 300,
+    "delay_time": 1799,
     "coupon": "",
-    "top_html_oss_bucket": "You added items to your shopping cart and haven't completed your purchase.\nYou can complete it now while they're still available.",
-    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
-    "email_title": "Complete Your Purchase",
-    "status": 0,
+    "top_html_oss_bucket": "<div>Bonne nouvelle : votre maillot est enregistré. Séance de design sérieuse ou simple premier aperçu, vous pouvez le reprendre exactement où vous l'avez laissé.</div>\n<div></div>\n<div>Et le moment venu, vous ne le finirez pas seul : avant production, un designer MOMUTO relit chaque commande et nettoie chaque écusson et logo pour une impression parfaite. C'est ainsi que des centaines d'équipes dans le monde ont déjà reçu leur maillot. Vous êtes entre de bonnes mains.</div>\n<div></div>\n<div>Côté prix : tout dépend de la quantité — à partir de 10 tenues, le maillot est à 21,90 €. Envie de la liste complète par quantité ? <a href=\"https://fr.momuto.com/pages/comparatif-fournisseur-maillot-foot-2026\" target=\"_blank\" rel=\"noopener\">Elle est ici.</a></div>",
+    "bottom_html_oss_bucket": "Une question, un doute, un détail ? Répondez à cet e-mail — une vraie personne vous répond.",
+    "email_title": "Votre maillot est enregistré — entre de bonnes mains",
+    "status": 1,
     "logo": "",
     "param": ""
   },
-  "trace_id": "FFB9D4FF-CB2A-5910-7956-3008F74BC84A"
+  "trace_id": "14628155-EDBF-F195-A022-2BA7C39E3E35"
 }

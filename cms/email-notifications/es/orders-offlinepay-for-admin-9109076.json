@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "id": 9109076,
+    "event_id": 72,
+    "delay_time": 0,
+    "coupon": "",
+    "top_html_oss_bucket": "生成一笔线下付款订单，请尽快与客户联系，完成付款。",
+    "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
+    "email_title": "线下付款订单{order_number}通知",
+    "status": 0,
+    "logo": "",
+    "param": ""
+  },
+  "trace_id": "B9B5703F-521F-411B-49EF-F5F7D8CDD342"
+}

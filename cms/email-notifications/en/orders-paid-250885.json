@@ -8,10 +8,10 @@
     "coupon": "",
     "top_html_oss_bucket": "<div>Hello,</div>\n<div></div>\n<div>Great news! Your payment has been successfully processed, and we've received your order. Our team is already on it, gearing up to get your gear ready as quickly as possible.</div>\n<div></div>\n<div>We&rsquo;ll let you know as soon as your order is on its way. Thanks for choosing MOMUTO!</div>\n<div></div>\n<div>Best,</div>\n<div>Team MOMUTO</div>\n<div></div>",
     "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at&nbsp;<a href=\"mailto:info@momuto.com\" target=\"_blank\" rel=\"noopener\">info@momuto.com</a>",
-    "email_title": "Thank you for your purchase!",
+    "email_title": "Your payment for {order_number} has been received",
     "status": 1,
     "logo": "",
     "param": ""
   },
-  "trace_id": "42A581B2-A40F-8EBF-95CB-962D515B5C6C"
+  "trace_id": "9170881C-F11E-863D-2E71-5D6DB578D496"
 }
