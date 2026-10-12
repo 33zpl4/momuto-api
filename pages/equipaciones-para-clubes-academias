@@ -68,7 +68,7 @@
   "name": "Equipación de Fútbol Personalizada para Clubes",
   "description": "Equipación de fútbol personalizada para clubes y academias: sublimación total, escudos y sponsors, tallas de niño a adulto, reposiciones y sin pedido mínimo.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
-  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "49", "bestRating": 5 },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "51", "bestRating": 5 },
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "EUR",

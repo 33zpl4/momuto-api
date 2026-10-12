@@ -1,6 +1,6 @@
 {
-  "_note": "Copy for the 'Teams that trust MOMUTO' pages. Numbers follow CLAUDE.md rule 6 (25-30 days, no minimum) and the owner's Trustpilot figure (4.6 / 49 reviews, 30 Sep 2026). Photos live in photos.json; build with scripts/build-teams-pages.js.",
-  "stats": { "teams": "250+", "countries": "15+", "rating": "4.6/5", "reviews": 49 },
+  "_note": "Copy for the 'Teams that trust MOMUTO' pages. Numbers follow CLAUDE.md rule 6 (25-30 days, no minimum) and the owner's Trustpilot figure (4.6 / 51 reviews, 12 Oct 2026). Photos live in photos.json; build with scripts/build-teams-pages.js.",
+  "stats": { "teams": "250+", "countries": "15+", "rating": "4.6/5", "reviews": 51 },
   "countries": {
     "ES": { "en": "Spain", "es": "España", "fr": "Espagne", "it": "Spagna" },
     "FR": { "en": "France", "es": "Francia", "fr": "France", "it": "Francia" },
