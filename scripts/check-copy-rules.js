@@ -27,9 +27,12 @@ const DEPOSIT = /(€\s?15|15\s?€|\$\s?15|deposit|acompte|dep[oó]sito|anticip
 
 const RULES = [
   { id: 'deposit-refund', why: 'Rule 5: the deposit is a credit, never refund-forward (refund promise lives on the four gate pages only)',
-    where: ALL_COPY, test: line => REFUND.test(line) && DEPOSIT.test(line) },
-  { id: 'bare-free-design', why: 'Rule 5: "free design" only as "free design for teams" + the deposit condition',
-    where: ALL_COPY, regex: /free (custom )?design(?! for teams)/i },
+    where: ALL_COPY, test: line => REFUND.test(line) && DEPOSIT.test(line),
+    allow: ['pages/request-custom-kit-design', 'pages/solicitud-de-diseno-personalizado', 'pages/demande-de-design-professionnel-de-maillots', 'pages/richiesta-design-personalizzato'] },   // the four request/gate pages may carry the refund promise
+  { id: 'bare-free-design', why: 'Rule 5: "free design" only as "free design for teams" + the deposit condition (EN/ES/FR/IT)',
+    where: ALL_COPY, regex: /free (custom |professional )?design(?! for teams)|design (is )?always free|dise[ñn]o (siempre )?gratis(?! para (los )?equipos)|dise[ñn]o gratuito(?! para (los )?equipos)|design (toujours )?gratuite?s?\b(?! pour (les )?[ée]quipes)|design (sempre )?gratuit[oa](?! per (i )?(team|squadre)| per le squadre)|progettazione gratuita|design sempre gratis/i },
+  { id: 'stale-price', why: 'Rule 6: from €21.90 (not €20.90) at 10+',
+    where: ALL_COPY, regex: /from (€|\$)?20[.,]90|[àa] partir de 20,90|desde 20,90|da 20,90/i },
   { id: 'customer-email', why: 'Rule 8: one customer email, info@momuto.com',
     where: ALL_COPY, regex: /\b(customer|orders|leads)@momuto\.com\b/i },
   { id: 'studio-as-place', why: 'Naming grammar: "studio" is lowercase authorship, never a place',
@@ -61,10 +64,11 @@ function scan() {
   for (const rule of RULES) {
     for (const base of rule.where) for (const f of walk(base)) {
       if (!TEXTY.test(path.basename(f)) || f.includes('/node_modules/')) continue;
+      if (rule.allow && rule.allow.includes(f)) continue;
       const key = rule.id + '|' + f; if (seen.has(key)) continue; seen.add(key);
       let text; try { text = fs.readFileSync(path.join(ROOT, f), 'utf8'); } catch { continue; }
       // JSON/HTML content is one long line: scan sentence-sized windows so a hit shows context, not a whole page
-      const chunks = text.split(/(?<=[.!?])\s+|\n|<\/(?:p|li|div|h\d)>/);
+      const chunks = text.split(/(?<=[.!?])\s+|\n|\\n|<\/(?:p|li|div|h\d)>/);
       chunks.forEach(ch => {
         const hit = rule.test ? rule.test(ch) : rule.regex.test(ch);
         if (hit && !(rule.ignore && rule.ignore.test(ch))) {
@@ -79,6 +83,7 @@ function scan() {
 
 const found = scan();
 const args = process.argv.slice(2);
+if (args.includes('--json')) { console.log(JSON.stringify(found, null, 1)); process.exit(0); }
 if (args.includes('--update-baseline')) {
   fs.writeFileSync(BASELINE, JSON.stringify(found.map(v => v.id).sort(), null, 1) + '\n');
   console.log(`baseline written: ${found.length} violations accepted`);
@@ -91,7 +96,7 @@ const byRule = {};
 show.forEach(v => { (byRule[v.rule] = byRule[v.rule] || []).push(v); });
 for (const [r, vs] of Object.entries(byRule)) {
   console.log(`\n✗ ${r} — ${RULES.find(x => x.id === r).why}`);
-  vs.slice(0, 25).forEach(v => console.log(`   ${v.file}: ${v.snippet}`));
+  vs.slice(0, 200).forEach(v => console.log(`   ${v.file}: ${v.snippet}`));
   if (vs.length > 25) console.log(`   … and ${vs.length - 25} more`);
 }
 const gone = [...base].filter(id => !found.some(v => v.id === id)).length;

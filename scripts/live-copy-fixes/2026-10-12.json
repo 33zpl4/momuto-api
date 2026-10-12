@@ -1,0 +1,34 @@
+[
+  {
+    "store": "us",
+    "handle": "custom-kit-design-studio",
+    "why": "naming grammar: 'Design Studio' is not a place; the route is Custom Design",
+    "replace": [
+      ["MOMUTO Custom Kit Design Studio", "MOMUTO Custom Kit Design"],
+      ["Custom Kit Design Studio", "Custom Kit Design"],
+      ["the <strong>Design Studio</strong>", "<strong>Custom Design</strong>"],
+      ["Why is there a $15 deposit for the Design Studio?", "Why is there a $15 deposit for Custom Design?"],
+      ["included in the Design Studio service?", "included in the Custom Design service?"],
+      ["exactly what the Design Studio is built for", "exactly what Custom Design is built for"],
+      ["Design Studio", "Custom Design"]
+    ]
+  },
+  {
+    "store": "us",
+    "handle": "custom-kit-design-studio-paid-true",
+    "why": "naming grammar: page title",
+    "replace": [["Custom Kit Design Studio", "Custom Kit Design"]]
+  },
+  {
+    "store": "us",
+    "handle": "return-policy_b801b8e1",
+    "why": "rule 8: one customer email",
+    "replace": [["customer@momuto.com", "info@momuto.com"]]
+  },
+  {
+    "store": "fr",
+    "handle": "galerie-maillots-foot-sur-mesure",
+    "why": "rule 6: from 21,90 at 10+ (gallery is pipeline-owned: live patch, never a repo copy)",
+    "replace": [["À partir de 20,90 € par maillot", "À partir de 21,90 € par maillot"]]
+  }
+]
