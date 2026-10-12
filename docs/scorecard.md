@@ -1,6 +1,6 @@
 # Weekly scorecard
 
-Built 12 Oct 2026. One loop, every Monday: **measure → read the right baseline → change one thing → measure again.**
+Built 12 Oct 2026. One loop, every Thursday (Search Console data lags ~3 days; Thursday is the first day the whole previous week is in): **measure → read the right baseline → change one thing → measure again.**
 Output: `metrics/WEEKLY.md` (latest), `metrics/weekly.json` (history, in git), and the run summary of **Weekly scorecard**.
 
 ## What it records
@@ -12,7 +12,7 @@ Output: `metrics/WEEKLY.md` (latest), `metrics/weekly.json` (history, in git), a
 | Search | Google Search Console API | clicks, impressions, CTR, average position — total and per store host; top queries; **backfills 16 months on the first run**, so year-over-year exists from day one |
 | Health | repo | copy-rules baseline (should shrink), failed workflow runs in the last 7 days |
 
-The funnel counters start counting the week the beacons ship; earlier weeks show "—".
+Partial Search Console weeks are never stored (they would read as a false drop). The funnel counters start counting the week the beacons ship; earlier weeks show "—".
 
 ## Reading it without fooling yourself (seasonality)
 - A week is never judged alone. Each metric shows **vs last week**, **vs the 4-week average**, and **the same ISO week last year**.

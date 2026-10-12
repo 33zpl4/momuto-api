@@ -1,12 +1,12 @@
 name: Weekly scorecard
 
-# Every Monday: collects the funnel (anonymous session counters), paid orders, leads, delivery speed, Search Console and repo health,
+# Every Thursday (Search Console lags ~3 days, so the previous week is only complete by Thursday): collects the funnel (anonymous session counters), paid orders, leads, delivery speed, Search Console and repo health,
 # appends them to metrics/weekly.json (history in git) and writes metrics/WEEKLY.md + the run summary. Reads only.
 # Needs: MOMUTO_API_SECRET (already used by admin-order-email); optional GSC_SERVICE_ACCOUNT (see docs/scorecard.md).
 
 on:
   schedule:
-    - cron: '17 6 * * 1'
+    - cron: '17 6 * * 4'
   workflow_dispatch:
 
 permissions:
