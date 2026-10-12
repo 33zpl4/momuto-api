@@ -1,0 +1,27 @@
+# Verification map — how to prove each surface works
+
+One page per rule of thumb: **done = the surface-specific proof below, not "the push succeeded"**. Written 12 Oct 2026 from the
+failures and fixes of the 1–12 Oct sessions. Extend it whenever a new surface gets a harness or a new way to fail.
+
+| Surface | Prove it BEFORE live | Prove it LIVE | Known traps |
+|---|---|---|---|
+| CMS page fragment (`pages/*`, `cms/pages/*`) | node sanity checks in `scripts/deploy-*.js` (fonts, one h1, JSON-LD parses, keyword arrays, meta lengths); `node scripts/check-copy-rules.js` | green **Deploy CMS Page** run on the merge commit; owner screenshot for visuals (sandbox cannot reach the stores) | PUT replaces the whole object; never deploy a repo copy of a pipeline-owned page |
+| Gallery pages (`custom-kit-gallery`, `galeria-*`…) | read the LIVE page, change one thing, write the same object back (`scripts/patch-gallery-review-count.js` is the template: dry run lists the 5 stores, then live) | the run log lists each store `✅ written`; designs untouched | a stale repo copy erased 29 US cards (1 Oct) |
+| Blog post (`blogs/**`) | `node scripts/deploy-blog-post.js` with `DRY_RUN=true`; copy-rules linter; HTML balance check | green **Deploy Blog Post** run (auto on merge to main) | hreflang cluster row needed if handles differ across locales |
+| Abandoned-cart email (`cms/email-notifications/src`) | **dry run** of `push-recovery-email.yml` (prints OLD title/blocks per store) | live run prints `VERIFIED — new template live` per store; delay is NOT read back, check the next template dump | US store has its own notice id; the platform rejects delay 1800 (use 1799) |
+| Transactional emails (`lib/emails.js`) | render each language in node and grep the output (see the deposit-nudge check in the 12 Oct commit) | next cron/webhook run; Resend dashboard | refund wording is gate-pages-only |
+| Cart / checkout templates (design-momuto `templates/*/cartItem.html`) | `scripts/local-harness/build-cart-preview.js <lang>` + a Playwright driver (`drive-cart-*.js`); Alpine comes from `npm pack alpinejs@3.14.1` into `local-harness/node_modules` | green **Deploy to SFTP**; server cache ~1 h | the harness mocks `/v1/items`; a real PUT/redirect only exists live |
+| 3D tool chunks (`3d-configurator/*.js`) | parse check of the outer script AND every `eval("…")` block (the `validate.js` used in the October sessions; belongs in design-momuto `scripts/`), then `scripts/local-harness/applocal.js "configId=local&suitName=…&skipWizard=1"` | green **Deploy to SFTP**; hard reload in a private window | edit the LIVE chunk (check which hash `configurator.html` → entry map points to); `skipWizard=1` or the welcome modal blocks every click |
+| Share / result views | none yet — **gap**: needs a saved-design payload for `/v1/listSuit` to render `share.html` locally | owner opens a real share link in a private window | `selected_index_` is 0 there, never −1 (the 3 Oct laces fix missed it) |
+| Shipping zones / navs / SEO (`sync-store-config.js`) | `inspect-zones`, then `dry_run` | the run's `apply` log + a test checkout | type-1 zones cannot overlap |
+| Copy rules (CLAUDE.md "hard rules") | `node scripts/check-copy-rules.js` (also a PR check) | — | baseline in `scripts/copy-rules.baseline.json` only ever shrinks |
+
+## The write-script pattern (copy it for any new CMS/API writer)
+
+1. **Dry run is the default** (`DRY_RUN !== 'false'`). It prints what would change per store, including the OLD value.
+2. **Read, change one thing, write the whole object back** (all fields, `meta_keywords` as an array, `og_image` kept).
+3. **Space writes and retry on code 1000**; a failed GET must throw, never read as "not found".
+4. **Read back and compare** what you changed; print `VERIFIED` or fail the run.
+5. A `workflow_dispatch` input for dry run, so a person or an agent can run the same thing from a branch before merging.
+
+Templates in the repo: `scripts/push-recovery-email.js`, `scripts/patch-gallery-review-count.js`, `scripts/sync-store-config.js`.

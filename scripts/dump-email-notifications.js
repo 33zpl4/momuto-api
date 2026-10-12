@@ -35,6 +35,7 @@ const STORES = [
   ['es', process.env.OEMSAAS_TOKEN_ES],
   ['fr', process.env.OEMSAAS_TOKEN_FR],
   ['it', process.env.OEMSAAS_TOKEN_IT],
+  ['us', process.env.OEMSAAS_TOKEN_US],
 ].filter(([, t]) => t);
 
 const TYPES = ['recovery', 'customer', 'admin'];
