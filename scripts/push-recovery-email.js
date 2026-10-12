@@ -29,6 +29,7 @@ const STORES = [
   ['es', process.env.OEMSAAS_TOKEN_ES],
   ['fr', process.env.OEMSAAS_TOKEN_FR],
   ['it', process.env.OEMSAAS_TOKEN_IT],
+  ['us', process.env.OEMSAAS_TOKEN_US],
 ].filter(([, t]) => t);
 
 async function call(method, url, token, body) {
@@ -69,6 +70,8 @@ async function main() {
     const live = det.json.data;
     console.log(`${lang}: notice ${live.id} | status ${live.status} | delay ${live.delay_time}s`);
     console.log(`  OLD title: ${live.email_title}`);
+    console.log(`  OLD top: ${String(live.top_html_oss_bucket || '').replace(/\s+/g, ' ').slice(0, 1500)}`);
+    console.log(`  OLD bottom: ${String(live.bottom_html_oss_bucket || '').replace(/\s+/g, ' ').slice(0, 600)}`);
     console.log(`  NEW title: ${src.email_title}`);
 
     if (DRY) { console.log('  dry run — no write'); continue; }
