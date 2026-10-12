@@ -1,0 +1,16 @@
+{
+  "_readme": "Owner-editable seasonality + our own changes. The scorecard prints the notes that apply to a week and never flags a drop that the season explains. expect: high | normal | low (what the owner expects of ORDERING demand that week). Add a row whenever something moves the numbers on purpose.",
+  "seasons": [
+    { "from": "07-01", "to": "09-20", "expect": "high",   "note": "Pre-season ordering: tournaments and leagues start in September, teams order ahead (August is typically the best month)." },
+    { "from": "09-21", "to": "10-31", "expect": "normal", "note": "Season underway: fewer first orders, more re-orders and late joiners. Lower than August is normal." },
+    { "from": "11-01", "to": "12-15", "expect": "low",    "note": "Mid-season lull before winter-break orders." },
+    { "from": "12-16", "to": "01-10", "expect": "low",    "note": "Holidays." },
+    { "from": "01-11", "to": "03-15", "expect": "normal", "note": "Spring-season and tournament planning." },
+    { "from": "03-16", "to": "06-30", "expect": "normal", "note": "Summer tournaments and end-of-season orders for next year." }
+  ],
+  "annotations": [
+    { "date": "2026-10-03", "note": "Share/result views: full-kit layout (laces) shipped" },
+    { "date": "2026-10-09", "note": "Cart page asks about a jersey with a name but no number; checkout flushes pending saves" },
+    { "date": "2026-10-12", "note": "Abandoned-cart email rewritten in 5 stores (trust-led); US wired; colour guide post + 13 new swatches; copy-rules linter" }
+  ]
+}
