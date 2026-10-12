@@ -69,6 +69,7 @@ async function gscQuery(token, site, body) {
   return j.rows || [];
 }
 const iso = d => d.toISOString().slice(0, 10);
+function weekEnd(wk) { const [y, w] = wk.split('-W').map(Number); const jan4 = new Date(Date.UTC(y, 0, 4)); const mon = new Date(jan4.getTime() - ((jan4.getUTCDay() || 7) - 1) * 86400000 + (w - 1) * 7 * 86400000); return iso(new Date(mon.getTime() + 6 * 86400000)); }
 async function collectGsc() {
   if (!process.env.GSC_SERVICE_ACCOUNT) { notes.push('Search Console: GSC_SERVICE_ACCOUNT not set — skipped (see docs/scorecard.md)'); return; }
   const sa = JSON.parse(process.env.GSC_SERVICE_ACCOUNT);
@@ -86,6 +87,8 @@ async function collectGsc() {
       a.clicks += r.clicks; a.impressions += r.impressions; a.posW += r.position * r.impressions;
     });
     Object.entries(agg).forEach(([wk, a]) => {
+      // Search Console data lags ~3 days: a week whose Sunday is after the last data day is PARTIAL and would read as a false drop.
+      if (weekEnd(wk) > iso(end)) { if (hist[wk]) delete hist[wk].gsc; return; }
       const h = hist[wk] = hist[wk] || {}; h.gsc = h.gsc || {};
       h.gsc[key] = { clicks: a.clicks, impressions: a.impressions, ctr: a.impressions ? +(a.clicks / a.impressions).toFixed(4) : 0, position: a.impressions ? +(a.posW / a.impressions).toFixed(2) : null };
     });
