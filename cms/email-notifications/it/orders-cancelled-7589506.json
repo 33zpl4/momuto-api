@@ -8,10 +8,10 @@
     "coupon": "",
     "top_html_oss_bucket": "Order was canceled at your request and your payment has been voided .",
     "bottom_html_oss_bucket": "If you have any questions, reply to this email contact us at {support_email}.",
-    "email_title": "Your order has been canceled",
+    "email_title": "Your order {order_number} has been canceled",
     "status": 0,
     "logo": "",
     "param": ""
   },
-  "trace_id": "09975F46-508F-35D3-C239-9CE1B531C153"
+  "trace_id": "46BF4611-031B-A065-EEE4-1BAB55A42A61"
 }

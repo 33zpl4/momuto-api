@@ -15,6 +15,7 @@
 const { kv } = require('@vercel/kv');
 const checkoutBeacon = require('../lib/checkout-beacon');
 const orderView = require('../lib/order-view-handler');
+const eventBeacon = require('../lib/event-beacon');
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
 const TEAM_EMAIL = process.env.TEAM_EMAIL || 'info@momuto.com';
@@ -93,6 +94,11 @@ module.exports = async function handler(req, res) {
   // /api/order-view: same reason, same trick (docs/order-view.md).
   if ((req.query && req.query.type === 'order-view') || /order-view/.test(req.url || '')) {
     return orderView(req, res);
+  }
+
+  // /api/event (anonymous funnel counters, weekly scorecard): same rewrite trick.
+  if ((req.query && req.query.type === 'event') || /\/api\/event/.test(req.url || '')) {
+    return eventBeacon(req, res);
   }
 
   const origin = originOf(req);

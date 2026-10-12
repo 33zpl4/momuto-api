@@ -4,14 +4,14 @@
   "data": {
     "id": 310071,
     "event_id": 22,
-    "delay_time": 1000,
+    "delay_time": 1799,
     "coupon": "",
-    "top_html_oss_bucket": "<div>Gracias por visitar MOMUTO y comenzar tu compra.</div>\n<div>Hemos notado que no has completado tu pedido,&nbsp; &iquest;ha habido alg&uacute;n problema?</div>\n<div></div>\n<div>En MOMUTO, ofrecemos camisetas de f&uacute;tbol personalizables y camisetas concepto de alta calidad, dise&ntilde;adas para verdaderos aficionados como t&uacute;. No querr&aacute;s perderte nuestras ediciones limitadas y &uacute;nicas.</div>\n<div></div>\n<div>&iquest;Por qu&eacute; completar tu compra ahora?</div>\n<div></div>\n<div><strong>Ediciones limitadas</strong>: Nuestras camisetas son &uacute;nicas y se agotan r&aacute;pidamente.</div>\n<div><strong>Alta calidad</strong>: Dise&ntilde;adas con los mejores materiales para garantizar comodidad y durabilidad.</div>\n<div><strong>Dise&ntilde;os exclusivos</strong>: Celebra tus equipos y jugadores favoritos con estilo.</div>\n<div></div>\n<div>&iexcl;Gracias por elegir MOMUTO y esperamos que disfrutes de tu compra!</div>\n<div></div>\n<div>Equipo MOMUTO</div>\n<div></div>",
-    "bottom_html_oss_bucket": "<div>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos en <a href=\"mailto:info@momuto.com\" target=\"_blank\" rel=\"noopener\">info@momuto.com</a></div>",
-    "email_title": "¡No olvides completar tu compra en MOMUTO!",
+    "top_html_oss_bucket": "<div>Tu equipación está guardada: puedes retomarla justo donde la dejaste, tanto si fue una sesión de diseño en serio como un primer vistazo para ver qué es posible.</div>\n<div></div>\n<div>Antes de producir, un diseñador de MOMUTO revisa cada pedido y limpia cada escudo y logo para que imprima perfecto. Tenemos 4,6/5 en <a href=\"https://www.trustpilot.com/review/momuto.com\" target=\"_blank\" rel=\"noopener\">Trustpilot</a>, la confianza de cientos de equipos de todo el mundo y somos una de las marcas de equipaciones de fútbol personalizadas que más crecen en Europa.</div>\n<div></div>\n<div>Precio: una camiseta cuesta 38,90 € y, a partir de 10 camisetas, 21,90 € cada una, sin pedido mínimo y con entrega en 25–30 días. <a href=\"https://es.momuto.com/pages/preguntas-frecuentes\" target=\"_blank\" rel=\"noopener\">Lista completa por cantidades.</a></div>",
+    "bottom_html_oss_bucket": "¿Dudas, preguntas, algún detalle? Responde a este correo — te contesta una persona de verdad.",
+    "email_title": "Tu equipación está guardada — y en buenas manos",
     "status": 1,
     "logo": "https://cdn.staticsoe.com/uploads/52561/cart/resources/20240919/52561_de5c7510b0d9d60b5bb78e99124dc6de.png",
     "param": ""
   },
-  "trace_id": "BB1E5D27-5B93-6ADC-C055-40BA3FF83DA0"
+  "trace_id": "1D289B70-5122-8C04-FF6E-1F610F792152"
 }

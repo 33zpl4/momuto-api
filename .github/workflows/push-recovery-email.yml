@@ -39,5 +39,6 @@ jobs:
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
           DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
         run: node scripts/push-recovery-email.js

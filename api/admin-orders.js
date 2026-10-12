@@ -204,6 +204,65 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true, count: orders.length, active: orders });
   }
 
+  // ---- METRICS (weekly scorecard; read-only) ----------------------------
+  // GET /api/admin-orders?action=metrics&weeks=30 → per ISO week: paid 3D orders, units, revenue by currency, fast lane,
+  // orders by language, days paid→shipped / paid→delivered, leads by type, checkout hand-offs, and the anonymous funnel
+  // counters from /api/event (distinct sessions, HyperLogLog). Test / backfill / excluded orders are not counted.
+  if (action === 'metrics') {
+    const { isoWeek, lastWeeks } = require('../lib/iso-week');
+    const { EVENTS } = require('../lib/event-beacon');
+    const n = Math.min(Math.max(parseInt(req.query.weeks || body.weeks || 30, 10) || 30, 1), 80);
+    const weeks = lastWeeks(n);
+    const out = {};
+    weeks.forEach(w => { out[w] = { orders: 0, units: 0, revenue: {}, fastLane: 0, byLang: {}, shipDays: [], deliverDays: [], leads: {}, checkoutHandoff: { ok: 0, other: 0 }, events: {} }; });
+    const mgetAll = async (keys) => {
+      const res = [];
+      for (let i = 0; i < keys.length; i += 100) res.push(...(await kv.mget(...keys.slice(i, i + 100))));
+      return res;
+    };
+    const days = (a, b) => { const x = (new Date(b) - new Date(a)) / 86400000; return isFinite(x) && x >= 0 ? Math.round(x * 10) / 10 : null; };
+
+    const orderIds = (await kv.smembers('orders:all')) || [];
+    const orders = await mgetAll(orderIds.map(id => `order:${id}`));
+    orders.forEach(o => {
+      if (!o || !o.paidAt || ['test', 'backfill', 'excluded'].includes(o.status)) return;
+      const w = out[isoWeek(new Date(o.paidAt))]; if (!w) return;
+      w.orders++; w.units += parseInt(o.qty, 10) || 0;
+      const t = parseFloat(o.total); if (isFinite(t)) w.revenue[o.currency || 'EUR'] = Math.round(((w.revenue[o.currency || 'EUR'] || 0) + t) * 100) / 100;
+      if (o.fastLane) w.fastLane++;
+      w.byLang[o.lang || 'en'] = (w.byLang[o.lang || 'en'] || 0) + 1;
+      if (o.shippedAt) { const d = days(o.paidAt, o.shippedAt); if (d != null) w.shipDays.push(d); }
+      if (o.deliveredAt) { const d = days(o.paidAt, o.deliveredAt); if (d != null) w.deliverDays.push(d); }
+    });
+
+    const leadIds = (await kv.smembers('leads:all')) || [];
+    const leads = await mgetAll(leadIds.map(id => `lead:${id}`));
+    leads.forEach(l => {
+      if (!l || !l.receivedAt) return;
+      const w = out[isoWeek(new Date(l.receivedAt))]; if (!w) return;
+      const k = l.paid ? 'deposit_paid' : (l.type || 'lead');
+      w.leads[k] = (w.leads[k] || 0) + 1;
+    });
+
+    const beaconIds = (await kv.smembers('checkout_beacons:all')) || [];
+    const beacons = await mgetAll(beaconIds.map(id => `beacon:${id}`));
+    beacons.forEach(b => {
+      if (!b || !b.receivedAt) return;
+      const w = out[isoWeek(new Date(b.receivedAt))]; if (!w) return;
+      w.checkoutHandoff[b.status === 'ok' ? 'ok' : 'other']++;
+    });
+
+    for (const wk of weeks) {
+      await Promise.all(EVENTS.map(async ev => {
+        try {
+          const [users, hits] = await Promise.all([kv.pfcount(`ev:${wk}:${ev}`), kv.get(`evn:${wk}:${ev}`)]);
+          out[wk].events[ev] = { users: users || 0, hits: parseInt(hits, 10) || 0 };
+        } catch (_) { out[wk].events[ev] = { users: 0, hits: 0 }; }
+      }));
+    }
+    return res.status(200).json({ ok: true, generatedAt: new Date().toISOString(), weeks: out });
+  }
+
   // ---- FIND (search ALL orders by ref / platform order no / email) ------
   if (action === 'find') {
     const q = req.query.q || body.q || body.order || '';

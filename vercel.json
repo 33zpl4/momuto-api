@@ -42,6 +42,10 @@
     {
       "source": "/api/order-view",
       "destination": "/api/lead?type=order-view"
+    },
+    {
+      "source": "/api/event",
+      "destination": "/api/lead?type=event"
     }
   ],
   "crons": [

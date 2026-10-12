@@ -360,8 +360,22 @@ async function main() {
         [{ id: 229 }]); // United States
       if (world) {
         const wAreas = (await areasOf(world.id)).filter(a => !(uspsOk && a.country_code_2 === 'US'));
+        // 5 Oct 2026: the US zones were cloned from EN, where GB has its OWN Royal Mail zone and is therefore absent
+        // from the worldwide zone — so a UK shopper on us.momuto.com had no shipping method and could not check out.
+        // Add every country the English store ships to that the US store does not cover (never removes anything).
+        // Country ids are platform-wide (US = 229 on both).
+        const have = new Set([...wAreas.map(a => a.country_code_2), 'US']);
+        const missing = [];
+        if (TOKENS.en) {
+          const enZones = await api(TOKENS.en, 'GET', '/shippingzones?type=1');
+          for (const z of (enZones.json && enZones.json.data && enZones.json.data.shippingzones) || []) {
+            const sz = (await zoneDetails(TOKENS.en, z.id)).shippingzone || {};
+            for (const a of Object.values(sz.areas || {})) if (a.country_code_2 && !have.has(a.country_code_2)) { have.add(a.country_code_2); missing.push(a); }
+          }
+        } else console.log('no EN token — cannot compare coverage');
+        console.log(`US worldwide zone lacks ${missing.length} country/ies that EN ships to: ${missing.map(a => `${a.country_code_2}:${a.country_name}`).join(', ') || '(none)'}`);
         await putZone(world, world.plan_name,
-          twoPlans(world, 'Certified Courier | 25-30 Days Delivery', '', '', 59, 4.9), wAreas);
+          twoPlans(world, 'Certified Courier | 25-30 Days Delivery', '', '', 59, 4.9), [...wAreas, ...missing]);
       }
     } else if (store === 'en') {
       const gb = byName('EMS via Royal Mail', 'Royal Mail');

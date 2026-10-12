@@ -1,0 +1,1290 @@
+[
+ {
+  "file": "blogs/concept-football-kits-the-art-history-and-future-of-fan-created-jerseys.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/custom-football-kits-amateur-grassroots-club.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/custom-football-kits-corporate-events.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/custom-football-kits-for-your-team-complete-guide.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/custom-futsal-5-a-side-jerseys.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/custom-jerseys-7-a-side-sunday-league.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/custom-jerseys-football-tournaments.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/es/camisetas-futbol-sala-personalizadas.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/es/camisetas-futbol-torneos.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/es/crea-tu-camiseta-de-futbol-unica-con-el-configurador-3d-momuto.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/es/equipaciones-de-futbol-para-tu-equipo-guia-completa.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/es/equipaciones-futbol-7-ligas-locales.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/es/equipaciones-futbol-club-amateur.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/es/equipaciones-futbol-empresas.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/es/equipaciones-para-penas.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/es/financiar-equipaciones-club-patrocinadores.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/es/por-que-crear-una-camiseta-de-futbol-para-club-con-el-configurador-3d-momuto.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/fr/creez-votre-maillot-de-football-unique-avec-le-configurateur-3d-momuto.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/fr/financer-maillots-club-sponsors-cagnotte.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/fr/maillots-de-foot-pour-club-guide-complet.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/fr/maillots-five-futsal-personnalises.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/fr/maillots-foot-club-amateur.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/fr/maillots-foot-entreprise.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/fr/maillots-foot-loisir-district.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/fr/maillots-foot-tournoi.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/fr/pourquoi-creer-un-maillot-de-foot-pour-club-avec-le-configurateur-3d-momuto.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/fund-team-kits-sponsors-fundraising.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/it/creare-divisa-calcio-club-configuratore-3d-momuto.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/it/divisa-calcio-personalizzata-club-configuratore-3d.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/it/finanziare-maglie-squadra-sponsor.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/it/maglie-calcetto-futsal-personalizzate.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/it/maglie-calcio-a-7-leghe-locali.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/it/maglie-calcio-aziende.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/it/maglie-calcio-squadra-dilettantistica.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/it/maglie-calcio-tornei.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/it/maglie-da-calcio-per-la-tua-squadra-guida-completa.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/us/concept-football-kits-the-art-history-and-future-of-fan-created-jerseys.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/us/custom-futsal-indoor-soccer-jerseys.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/us/custom-soccer-jerseys-adult-rec-league.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/us/custom-soccer-jerseys-corporate-events.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/us/custom-soccer-jerseys-tournaments.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/us/custom-soccer-uniforms-club-team.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/us/custom-soccer-uniforms-for-your-team-complete-guide.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/us/fund-team-uniforms-sponsors-fundraising.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "blogs/us/when-to-order-team-uniforms-season-calendar.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/us/why-create-a-football-kit-for-your-club-with-the-momuto-3d-configurator.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "blogs/why-create-a-football-kit-for-your-club-with-the-momuto-3d-configurator.json",
+  "group": "blog post",
+  "deploy": "auto on merge (Deploy Blog Post)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/en/custom-soccer-jersey-designer.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "cms/pages/en/faq.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/en/return-policy.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/en/shipping-policy.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/en/teams-clubs-momuto.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/es/cambios-devoluciones.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/es/envios-metodos-y-plazos.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/es/equipos-momuto.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/es/preguntas-frecuentes.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/fr/creer-son-maillot-de-foot.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "cms/pages/fr/equipes-clubs-momuto.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/fr/politique-de-livraison.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/fr/questions-frequentes.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/fr/retours-echanges.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/it/faq.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/it/politica-di-spedizione.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/it/politica-resi.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/it/squadre-club-momuto.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/us/about-us.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=<literal user id>",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/us/best-custom-soccer-jersey-makers-2026.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/us/custom-basketball-jerseys.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=- suit=mamuto3basket3 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/pages/us/custom-kit-design-studio.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "cms/pages/us/custom-soccer-jersey-designer.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "cms/pages/us/custom-soccer-jerseys.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "cms/pages/us/custom-youth-club-soccer-uniforms.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/pages/us/design-your-own-soccer-jersey.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "cms/pages/us/faq.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/us/ready-to-play.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=- suit=mamuto3basket3 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/us/ready-to-play.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 12
+ },
+ {
+  "file": "cms/pages/us/request-custom-kit-design.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "cms/pages/us/return-policy.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/us/shipping-policy.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/us/teams-clubs-momuto.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/posts/us/concept-football-kits-the-art-history-and-future-of-fan-created-jerseys.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/posts/us/custom-football-kits-amateur-grassroots-club.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-football-kits-corporate-events.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-football-kits-for-your-team-complete-guide.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-futsal-5-a-side-jerseys.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-futsal-indoor-soccer-jerseys.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-jerseys-7-a-side-sunday-league.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-jerseys-football-tournaments.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-soccer-jerseys-adult-rec-league.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-soccer-jerseys-corporate-events.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-soccer-jerseys-tournaments.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-soccer-uniforms-club-team.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/custom-soccer-uniforms-for-your-team-complete-guide.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/fund-team-kits-sponsors-fundraising.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/fund-team-uniforms-sponsors-fundraising.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/posts/us/when-to-order-team-uniforms-season-calendar.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/posts/us/why-create-a-football-kit-for-your-club-with-the-momuto-3d-configurator.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "docs/search-analysis-2026-07.md",
+  "group": "doc",
+  "deploy": "-",
+  "variant": "configId=- suit=- userId=<literal user id>",
+  "count": 1
+ },
+ {
+  "file": "docs/us-hub-plan.md",
+  "group": "doc",
+  "deploy": "-",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "faq/faq.en.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "faq/faq.es.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "faq/faq.fr.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "faq/faq.it.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "faq/faq.us.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "maker/maker.en.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "maker/maker.fr.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "maker/maker.us.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "policies/returns.en.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "policies/returns.es.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "policies/returns.fr.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "policies/returns.it.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "policies/returns.us.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "policies/shipping.en.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "policies/shipping.es.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "policies/shipping.fr.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "policies/shipping.it.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "policies/shipping.us.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "scripts/build-teams-pages.js",
+  "group": "generator script",
+  "deploy": "it emits the links above",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "scripts/deploy-city-pages.js",
+  "group": "generator script",
+  "deploy": "it emits the links above",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/homepage/hero.en.html",
+  "group": "homepage block",
+  "deploy": "MANUAL — the owner pastes theme sections; the repo copy is the source",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/homepage/hero.es.html",
+  "group": "homepage block",
+  "deploy": "MANUAL — the owner pastes theme sections; the repo copy is the source",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/homepage/hero.fr.html",
+  "group": "homepage block",
+  "deploy": "MANUAL — the owner pastes theme sections; the repo copy is the source",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/homepage/hero.it.html",
+  "group": "homepage block",
+  "deploy": "MANUAL — the owner pastes theme sections; the repo copy is the source",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/homepage/hero.us.html",
+  "group": "homepage block",
+  "deploy": "MANUAL — the owner pastes theme sections; the repo copy is the source",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/homepage/how-it-works.en.html",
+  "group": "homepage block",
+  "deploy": "MANUAL — the owner pastes theme sections; the repo copy is the source",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/homepage/how-it-works.es.html",
+  "group": "homepage block",
+  "deploy": "MANUAL — the owner pastes theme sections; the repo copy is the source",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/homepage/how-it-works.fr.html",
+  "group": "homepage block",
+  "deploy": "MANUAL — the owner pastes theme sections; the repo copy is the source",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/homepage/how-it-works.it.html",
+  "group": "homepage block",
+  "deploy": "MANUAL — the owner pastes theme sections; the repo copy is the source",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/homepage/how-it-works.us.html",
+  "group": "homepage block",
+  "deploy": "MANUAL — the owner pastes theme sections; the repo copy is the source",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/about-us-en",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=<literal user id>",
+  "count": 1
+ },
+ {
+  "file": "pages/about-us-es",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=<literal user id>",
+  "count": 1
+ },
+ {
+  "file": "pages/about-us-fr",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=<literal user id>",
+  "count": 1
+ },
+ {
+  "file": "pages/about-us-it",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=<literal user id>",
+  "count": 1
+ },
+ {
+  "file": "pages/best-custom-soccer-jersey-makers-2026",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/coleccion-ready-to-play",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 12
+ },
+ {
+  "file": "pages/collection-ready-to-play",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 12
+ },
+ {
+  "file": "pages/collezione-ready-to-play",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 12
+ },
+ {
+  "file": "pages/comparison-es",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/comparison-fr",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/custom-soccer-jerseys",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/custom-youth-club-soccer-uniforms",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "pages/demande-de-design-professionnel-de-maillots",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/design-your-own-soccer-jersey",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/equipaciones-futbol-personalizadas",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "pages/equipaciones-para-clubes-academias",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "pages/faq/en.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/faq/es.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/faq/fr.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/faq/it.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/faq/us.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/maillot-foot-personnalise",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/maker/en.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/maker/fr.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/maker/us.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/ready-to-play",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 12
+ },
+ {
+  "file": "pages/request-custom-kit-design",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/returns/en.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/returns/es.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/returns/fr.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/returns/it.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/returns/us.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/richiesta-design-personalizzato",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 4
+ },
+ {
+  "file": "pages/roundup-es",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/shipping/en.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/shipping/es.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/shipping/fr.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/shipping/it.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/shipping/us.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/solicitud-de-diseno-personalizado",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 4
+ },
+ {
+  "file": "pages/us/ai-concept-to-real-kit",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/us/custom-basketball-jerseys",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=avy6d4xt suit=basketball userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "pages/us/custom-soccer-uniforms",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/us/halloween-soccer-jerseys",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "pages/us/ready-to-play",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=avy6d4xt suit=basketball userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/us/ready-to-play",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 12
+ },
+ {
+  "file": "pages/us/request-custom-kit-design",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "cms/unpublished/it/pourquoi-creer-un-maillot-de-foot-pour-club-avec-le-configurateur-3d-momuto.json",
+  "group": "unpublished copy",
+  "deploy": "not live",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/unpublished/us/custom-football-kits-amateur-grassroots-club.json",
+  "group": "unpublished copy",
+  "deploy": "not live",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/unpublished/us/custom-football-kits-corporate-events.json",
+  "group": "unpublished copy",
+  "deploy": "not live",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/unpublished/us/custom-football-kits-for-your-team-complete-guide.json",
+  "group": "unpublished copy",
+  "deploy": "not live",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/unpublished/us/custom-futsal-5-a-side-jerseys.json",
+  "group": "unpublished copy",
+  "deploy": "not live",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/unpublished/us/custom-jerseys-7-a-side-sunday-league.json",
+  "group": "unpublished copy",
+  "deploy": "not live",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/unpublished/us/custom-jerseys-football-tournaments.json",
+  "group": "unpublished copy",
+  "deploy": "not live",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ },
+ {
+  "file": "cms/unpublished/us/fund-team-kits-sponsors-fundraising.json",
+  "group": "unpublished copy",
+  "deploy": "not live",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 2
+ }
+]

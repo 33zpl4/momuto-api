@@ -155,6 +155,15 @@
         "delay_time": 0,
         "coupon": "",
         "file": "orders-invitation-evaluation-8109469.json"
+      },
+      {
+        "event_code": "orders/offlinepay",
+        "event_name": "线下付款订单通知",
+        "status": 0,
+        "event_notice_id": 8884741,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-offlinepay-8884741.json"
       }
     ],
     "admin": [
@@ -193,6 +202,15 @@
         "delay_time": 0,
         "coupon": "",
         "file": "orders-repeated-payment-2508978.json"
+      },
+      {
+        "event_code": "orders/offlinepay_for_admin",
+        "event_name": "线下付款订单通知（管理员）",
+        "status": 0,
+        "event_notice_id": 9081346,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-offlinepay-for-admin-9081346.json"
       }
     ]
   },
@@ -203,7 +221,7 @@
         "event_name": "购物车召回（阶段一）",
         "status": 1,
         "event_notice_id": 310071,
-        "delay_time": 1000,
+        "delay_time": 1799,
         "coupon": "",
         "file": "carts-recovery-1-310071.json"
       },
@@ -352,6 +370,15 @@
         "delay_time": 0,
         "coupon": "",
         "file": "orders-invitation-evaluation-8135367.json"
+      },
+      {
+        "event_code": "orders/offlinepay",
+        "event_name": "线下付款订单通知",
+        "status": 0,
+        "event_notice_id": 8912471,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-offlinepay-8912471.json"
       }
     ],
     "admin": [
@@ -390,6 +417,15 @@
         "delay_time": 0,
         "coupon": "",
         "file": "orders-repeated-payment-2519533.json"
+      },
+      {
+        "event_code": "orders/offlinepay_for_admin",
+        "event_name": "线下付款订单通知（管理员）",
+        "status": 0,
+        "event_notice_id": 9109076,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-offlinepay-for-admin-9109076.json"
       }
     ]
   },
@@ -398,9 +434,9 @@
       {
         "event_code": "carts/recovery_1",
         "event_name": "购物车召回（阶段一）",
-        "status": 0,
+        "status": 1,
         "event_notice_id": 272638,
-        "delay_time": 300,
+        "delay_time": 1799,
         "coupon": "",
         "file": "carts-recovery-1-272638.json"
       },
@@ -549,6 +585,15 @@
         "delay_time": 0,
         "coupon": "",
         "file": "orders-invitation-evaluation-8228046.json"
+      },
+      {
+        "event_code": "orders/offlinepay",
+        "event_name": "线下付款订单通知",
+        "status": 0,
+        "event_notice_id": 9011897,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-offlinepay-9011897.json"
       }
     ],
     "admin": [
@@ -587,6 +632,15 @@
         "delay_time": 0,
         "coupon": "",
         "file": "orders-repeated-payment-2557863.json"
+      },
+      {
+        "event_code": "orders/offlinepay_for_admin",
+        "event_name": "线下付款订单通知（管理员）",
+        "status": 0,
+        "event_notice_id": 9208502,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-offlinepay-for-admin-9208502.json"
       }
     ]
   },
@@ -746,6 +800,15 @@
         "delay_time": 0,
         "coupon": "",
         "file": "orders-invitation-evaluation-8087733.json"
+      },
+      {
+        "event_code": "orders/offlinepay",
+        "event_name": "线下付款订单通知",
+        "status": 0,
+        "event_notice_id": 8861358,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-offlinepay-8861358.json"
       }
     ],
     "admin": [
@@ -784,6 +847,230 @@
         "delay_time": 0,
         "coupon": "",
         "file": "orders-repeated-payment-7589523.json"
+      },
+      {
+        "event_code": "orders/offlinepay_for_admin",
+        "event_name": "线下付款订单通知（管理员）",
+        "status": 0,
+        "event_notice_id": 9057963,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-offlinepay-for-admin-9057963.json"
+      }
+    ]
+  },
+  "us": {
+    "recovery": [
+      {
+        "event_code": "carts/recovery_1",
+        "event_name": "购物车召回（阶段一）",
+        "status": 1,
+        "event_notice_id": 9297285,
+        "delay_time": 1799,
+        "coupon": "",
+        "file": "carts-recovery-1-9297285.json"
+      },
+      {
+        "event_code": "carts/recovery_2",
+        "event_name": "购物车召回（阶段二）",
+        "status": 0,
+        "event_notice_id": 9297284,
+        "delay_time": 1800,
+        "coupon": "",
+        "file": "carts-recovery-2-9297284.json"
+      },
+      {
+        "event_code": "carts/recovery_3",
+        "event_name": "购物车召回（阶段三）",
+        "status": 0,
+        "event_notice_id": 9297283,
+        "delay_time": 86400,
+        "coupon": "",
+        "file": "carts-recovery-3-9297283.json"
+      }
+    ],
+    "customer": [
+      {
+        "event_code": "customers/reg_invite",
+        "event_name": "顾客注册邀请",
+        "status": 0,
+        "event_notice_id": 9297296,
+        "delay_time": 3600,
+        "coupon": "",
+        "file": "customers-reg-invite-9297296.json"
+      },
+      {
+        "event_code": "customers/sign_up",
+        "event_name": "顾客注册",
+        "status": 1,
+        "event_notice_id": 9297278,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "customers-sign-up-9297278.json"
+      },
+      {
+        "event_code": "orders/paid",
+        "event_name": "订单支付",
+        "status": 1,
+        "event_notice_id": 9297279,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-paid-9297279.json"
+      },
+      {
+        "event_code": "orders/cancelled",
+        "event_name": "订单取消",
+        "status": 0,
+        "event_notice_id": 9297280,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-cancelled-9297280.json"
+      },
+      {
+        "event_code": "orders/fulfilled",
+        "event_name": "订单发货",
+        "status": 1,
+        "event_notice_id": 9297281,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-fulfilled-9297281.json"
+      },
+      {
+        "event_code": "customers/password_reset",
+        "event_name": "顾客密码重置",
+        "status": 1,
+        "event_notice_id": 9297282,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "customers-password-reset-9297282.json"
+      },
+      {
+        "event_code": "orders/refund",
+        "event_name": "订单退款",
+        "status": 0,
+        "event_notice_id": 9297287,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-refund-9297287.json"
+      },
+      {
+        "event_code": "orders/confirm_receipt",
+        "event_name": "确认收货",
+        "status": 0,
+        "event_notice_id": 9297288,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-confirm-receipt-9297288.json"
+      },
+      {
+        "event_code": "orders/paymentfail",
+        "event_name": "订单支付失败",
+        "status": 0,
+        "event_notice_id": 9297290,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-paymentfail-9297290.json"
+      },
+      {
+        "event_code": "customers/add_points",
+        "event_name": "积分增加提醒",
+        "status": 0,
+        "event_notice_id": 9297265,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "customers-add-points-9297265.json"
+      },
+      {
+        "event_code": "customers/decline_points",
+        "event_name": "积分减少提醒",
+        "status": 0,
+        "event_notice_id": 9297266,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "customers-decline-points-9297266.json"
+      },
+      {
+        "event_code": "customers/expire_points",
+        "event_name": "积分即将过期",
+        "status": 0,
+        "event_notice_id": 9297267,
+        "delay_time": 604800,
+        "coupon": "",
+        "file": "customers-expire-points-9297267.json"
+      },
+      {
+        "event_code": "customers/register_email_verify",
+        "event_name": "注册邮箱验证",
+        "status": 0,
+        "event_notice_id": 9297268,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "customers-register-email-verify-9297268.json"
+      },
+      {
+        "event_code": "orders/invitation_evaluation",
+        "event_name": "邀请评价",
+        "status": 0,
+        "event_notice_id": 9297275,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-invitation-evaluation-9297275.json"
+      },
+      {
+        "event_code": "orders/offlinepay",
+        "event_name": "线下付款订单通知",
+        "status": 0,
+        "event_notice_id": 9297276,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-offlinepay-9297276.json"
+      }
+    ],
+    "admin": [
+      {
+        "event_code": "orders/paid_for_admin",
+        "event_name": "订单支付（管理员）",
+        "status": 0,
+        "event_notice_id": 9297286,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-paid-for-admin-9297286.json"
+      },
+      {
+        "event_code": "orders/payfail_for_admin",
+        "event_name": "订单支付失败（管理员）",
+        "status": 0,
+        "event_notice_id": 9297289,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-payfail-for-admin-9297289.json"
+      },
+      {
+        "event_code": "orders/recovery_for_admin",
+        "event_name": "弃单通知（管理员）",
+        "status": 0,
+        "event_notice_id": 9297291,
+        "delay_time": 300,
+        "coupon": "",
+        "file": "orders-recovery-for-admin-9297291.json"
+      },
+      {
+        "event_code": "orders/repeated_payment",
+        "event_name": "潜在重复支付(管理员)",
+        "status": 0,
+        "event_notice_id": 9297297,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-repeated-payment-9297297.json"
+      },
+      {
+        "event_code": "orders/offlinepay_for_admin",
+        "event_name": "线下付款订单通知（管理员）",
+        "status": 0,
+        "event_notice_id": 9297277,
+        "delay_time": 0,
+        "coupon": "",
+        "file": "orders-offlinepay-for-admin-9297277.json"
       }
     ]
   }

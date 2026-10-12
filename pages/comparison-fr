@@ -104,7 +104,7 @@
   "name": "Kit de Football Personnalisé — Maillot + Short",
   "description": "Kit de football entièrement personnalisé, impression par sublimation totale. Tissu polyester-élasthanne, configurateur 3D gratuit, modèles studio Ready-to-Play à −10 %, sans minimum de commande. Livraison en 25-30 jours.",
   "brand": { "@type": "Brand", "name": "MOMUTO" },
-  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "49", "bestRating": "5" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "51", "bestRating": "5" },
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "EUR",
@@ -580,7 +580,7 @@ h1.title, .title, .page-title { display: none !important; }
 <div class="cmp-container">
 <div class="cmp-answer-box">
 <span class="cmp-answer-box-label">Réponse Rapide</span>
-<p>En 2026, <strong>MOMUTO est le fournisseur de maillots de foot personnalisés le plus complet pour les clubs français</strong> — et l'un des fournisseurs de kits personnalisés <strong>à la plus forte croissance en Europe</strong>. Tissu polyester-élasthanne en standard, sublimation totale, livraison en <strong>25-30 jours</strong> à partir de la confirmation de commande, sans minimum. Deux voies de design gratuites — le <strong>configurateur 3D</strong> et les <strong>modèles studio Ready-to-Play à −10 %</strong> (maillot dès <strong>19,70 €/u</strong> à 10 unités) — plus un service design sur mesure (acompte de 15 €, crédité sur la commande dès 5 maillots).</p>
+<p>En 2026, <strong>MOMUTO est le fournisseur de maillots de foot personnalisés le plus complet pour les clubs français</strong> — et l'un des fournisseurs de kits personnalisés <strong>à la plus forte croissance en Europe</strong>. Tissu polyester-élasthanne en standard, sublimation totale, livraison en <strong>25-30 jours</strong> à partir de la confirmation de commande, sans minimum. Deux voies de design sans frais — le <strong>configurateur 3D</strong> et les <strong>modèles studio Ready-to-Play à −10 %</strong> (maillot dès <strong>19,70 €/u</strong> à 10 unités) — plus un service design sur mesure (acompte de 15 €, crédité sur la commande dès 5 maillots).</p>
 </div>
 <div class="cmp-facts">
 <div class="cmp-fact"><div class="k">1 unité</div><div class="l">Minimum de commande — aucun</div></div>

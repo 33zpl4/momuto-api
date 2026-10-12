@@ -10,10 +10,10 @@
         "email_event_type": "recovery",
         "email_event_status": 0,
         "event_descript": "",
-        "status": 0,
+        "status": 1,
         "event_notice_id": 272638,
         "coupon": "",
-        "delay_time": 300,
+        "delay_time": 1799,
         "email_cover": "https://cdn.staticsoe.com/statics/cart/emails/carts_recovery_1.png",
         "event_tip": "",
         "param": ""
@@ -51,5 +51,5 @@
     ],
     "totalCount": 3
   },
-  "trace_id": "17322034-E9B9-6803-FD65-86EBFA700195"
+  "trace_id": "A0EC12DA-2015-2F1B-01DE-2FBB8F6828D9"
 }

@@ -13,7 +13,7 @@
         "status": 1,
         "event_notice_id": 310071,
         "coupon": "",
-        "delay_time": 1000,
+        "delay_time": 1799,
         "email_cover": "https://cdn.staticsoe.com/statics/cart/emails/carts_recovery_1.png",
         "event_tip": "",
         "param": ""
@@ -51,5 +51,5 @@
     ],
     "totalCount": 3
   },
-  "trace_id": "42B96AE1-D08D-9C69-978B-03FBE21539C5"
+  "trace_id": "F890D234-56F0-8059-9330-5C5A97417E39"
 }

@@ -215,9 +215,24 @@
           "trigger_timing": "1",
           "trigger_time_hour": "168"
         }
+      },
+      {
+        "event_id": 71,
+        "event_name": "线下付款订单通知",
+        "event_code": "orders/offlinepay",
+        "email_event_type": "customer",
+        "email_event_status": 0,
+        "event_descript": "线下付款订单创单通知买家",
+        "status": 0,
+        "event_notice_id": 9011897,
+        "coupon": "",
+        "delay_time": 0,
+        "email_cover": "https://cdn.staticsoe.com/statics/cart/emails/offlinepay.png",
+        "event_tip": "",
+        "param": ""
       }
     ],
-    "totalCount": 14
+    "totalCount": 15
   },
-  "trace_id": "077F74CF-6C65-FAD2-C128-D1D3FAF3E601"
+  "trace_id": "66E3CE04-5187-0470-6966-2F50145B9B17"
 }
