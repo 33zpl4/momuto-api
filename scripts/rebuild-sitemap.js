@@ -141,6 +141,7 @@ const BLOG_CLUSTERS = [
   { en: 'craft-your-perfect-custom-soccer-jersey-with-momuto-s-3d-configurator-guide', es: 'crea-tu-camiseta-de-futbol-unica-con-el-configurador-3d-momuto', fr: 'creez-votre-maillot-de-football-unique-avec-le-configurateur-3d-momuto', it: 'crea-maglia-calcio-personalizzata-configuratore-3d' },
   { en: 'why-personalize-your-football-kit-and-how-to-do-it', us: 'why-personalize-your-football-kit-and-how-to-do-it', es: 'por-que-personalizar-tu-camiseta-de-futbol-y-como-hacerlo', fr: 'pourquoi-customiser-votre-maillot-de-foot-et-comment-le-faire', it: 'perche-personalizzare-il-kit-da-calcio-e-come-farlo' },
   { en: 'why-you-should-choose-customizable-football-team-kits', us: 'why-you-should-choose-customizable-football-team-kits', es: 'flexibilidad-equipamientos-de-futbol-personalizables', fr: 'l-incroyable-flexibilite-des-kits-d-equipe-de-foot-personnalisables', it: 'divise-da-calcio-personalizzate-perche-scegliere-momuto' },
+  { en: 'what-are-football-jerseys-made-of-fabric-types', us: 'what-are-football-jerseys-made-of-fabric-types', es: 'de-que-estan-hechas-las-camisetas-de-futbol', fr: 'matieres-maillots-football-comparatif-tissus', it: 'di-cosa-sono-fatte-le-maglie-da-calcio' },
   { en: 'high-quality-soccer-kits',                          us: 'high-quality-soccer-kits',                    es: 'camisetas-futbol-premium-materiales-tecnicas', fr: 'qualite-maillot-football',        it: 'kit-calcio-alta-qualita-tessuti-tecniche' },
 ];
 
