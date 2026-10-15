@@ -133,7 +133,10 @@ async function deployOne(locale, handle) {
     handle,
     // round-trip publish state when the file declares it (0 = draft/unpublished)
     ...(data.status != null ? { status: data.status } : {}),
+    // CMS posts created through the API show 1969-12-31 unless a date is sent (15 Oct 2026). Optional YYYY-MM-DD, read back below.
+    ...(data.published_at ? { published_at: data.published_at } : {}),
   };
+  if (data.published_at && !/^\d{4}-\d{2}-\d{2}$/.test(data.published_at)) throw new Error(`${handle}: published_at must be YYYY-MM-DD`);
 
   const posts = await postsFor(locale, domain.token);
   const post = posts.find(p => getHandle(p) === handle);
@@ -145,6 +148,13 @@ async function deployOne(locale, handle) {
     console.log(`   ✨ created`);
   }
   await sleep(600);
+  if (data.published_at) {
+    // The platform acks code 0 and silently ignores fields it does not accept: read the post back.
+    const fresh = await withRetry(() => fetchPosts(domain.token), `read-back ${locale}`);
+    const got = (fresh.find(p => getHandle(p) === handle) || {}).published_at;
+    if (String(got).slice(0, 10) !== data.published_at) throw new Error(`${handle}: MISMATCH published_at (sent ${data.published_at}, live ${got})`);
+    console.log(`   VERIFIED published_at ${got}`);
+  }
   console.log(`   ✅ ${domain.url}/blogs/${handle}`);
 }
 
