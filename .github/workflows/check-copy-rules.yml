@@ -16,6 +16,9 @@ on:
       - 'blogs/**'
       - 'static/shared/**'
       - 'lib/emails.js'
+      - 'lib/wa-*'
+      - 'test/wa-*'
+      - 'scripts/build-wa-bot-answers.js'
       - 'scripts/audit-3d-links.js'
       - 'docs/3d-tool-links.*'
       - 'scripts/check-copy-rules.js'
@@ -33,3 +36,7 @@ jobs:
         run: node scripts/check-copy-rules.js
       - name: Check the 3D launch-link inventory is current
         run: node scripts/audit-3d-links.js --check
+      - name: WhatsApp bot answers are built from the FAQ (one set of numbers)
+        run: node scripts/build-wa-bot-answers.js --check
+      - name: WhatsApp bot tests (hours, keywords, handoff, webhook)
+        run: node --test test/wa-bot.test.js test/wa-webhook.test.js

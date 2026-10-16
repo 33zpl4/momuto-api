@@ -46,6 +46,10 @@
     {
       "source": "/api/event",
       "destination": "/api/lead?type=event"
+    },
+    {
+      "source": "/api/wa-webhook",
+      "destination": "/api/stripe-webhook?type=wa-webhook"
     }
   ],
   "crons": [
