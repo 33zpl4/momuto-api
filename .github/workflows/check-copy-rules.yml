@@ -39,4 +39,4 @@ jobs:
       - name: WhatsApp bot answers are built from the FAQ (one set of numbers)
         run: node scripts/build-wa-bot-answers.js --check
       - name: WhatsApp bot tests (hours, keywords, handoff, webhook)
-        run: node --test test/wa-bot.test.js test/wa-webhook.test.js
+        run: node --test test/wa-bot.test.js test/wa-webhook.test.js test/wa-twilio.test.js

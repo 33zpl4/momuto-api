@@ -41,3 +41,11 @@ Why: 3 "what does it cost" chats in <24 h, all people exploring the tool (a desi
 
 ### Not verified (sandbox cannot reach Meta or the stores)
 Coexistence availability and the echo field name/shape (`smb_message_echoes`), Graph version, list-message rendering on phones, the `fromUrlHost`/referrer US detection in the tool, that a Business-app reply really mutes the bot, translations of the new UI strings (es/fr/it) by a native reader.
+
+## Twilio test channel (16 Oct 2026)
+Why: the Meta app ("momuto support", Business type) cannot add the WhatsApp product, so the Cloud API route is stuck (support case open). The bot core is provider-independent, so a second thin channel lets us test it end to end on the **Twilio WhatsApp sandbox** (free, shared number, testers join with a code).
+- `lib/wa-twilio.js` + `lib/wa-render-text.js`; same URL `/api/wa-webhook`, told apart by the `X-Twilio-Signature` header (Meta requests carry `X-Hub-Signature-256`). The reply goes back as TwiML in the HTTP response, so there are no outbound calls and the only secret is `TWILIO_AUTH_TOKEN`.
+- Menus are **numbered text** (Twilio has no buttons/lists in a session): 0 = topic list, 1–10 = the rows, 10 = talk to a person. A bare number typed back is read as that row (works on any channel).
+- Env: `TWILIO_AUTH_TOKEN` (required), `TWILIO_LIVE=true` to reply (unset = dry run, logs `[wa/twilio] DRY RUN would reply`), `TWILIO_WEBHOOK_URL` (default `https://momuto-api.vercel.app/api/wa-webhook`, must equal the URL in the Twilio console character for character), `WA_ALLOW_RESET=true` so a tester can send `/reset` to clear their own state (a handoff mutes the bot for 12 h).
+- Limits: sandbox is for testing only (production needs a registered sender = a Meta-approved WhatsApp Business account, possibly business verification; ask Twilio). No Business-app echo, so nothing mutes the bot when a human answers; the owner sees chats only in the Twilio console. Twilio caps a WhatsApp body at 1600 characters (answers are chunked at 1500).
+- Verified offline: Twilio's documented signature example, numbered menus, duplicate `MessageSid`, handoff mute, dry run, XML escaping, chunking. NOT verified: a real round trip through Twilio.
