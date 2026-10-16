@@ -22,12 +22,29 @@ const PICKS = {
   fabric: [['fabric', 0, /fabric/i]],
   printing: [['fabric', 1, /printed/i], ['customization', 0, /extra/i], ['customization', 1, /logo/i]],
   sizes: [['sizes', 1, /sizes exist/i], ['sizes', 0, /fit/i]],
-  design: [['ordering', 0, /ways to get/i], ['ordering', 1, /before I see/i]],
   returns: [['returns', 0, /return a custom/i], ['returns', 3, /cancel/i]],
 };
 // pricing notes shown by the "extras" topic (index into pricing.notes) and the one shown under the ladder
-const EXTRAS_NOTES = [2, 3, 4, 6, 7];
+const EXTRAS_NOTES = [2, 3, 4, 6];   // the deposit line (7) now lives in the design answer
 const LADDER_NOTE = 5;
+const DEPOSIT_NOTE = 7;   // "Custom design deposit: €15 … credited in full to orders of 5+ jerseys" (the only numbers in the design answer)
+
+// "I have a design in mind" (owner, 16 Oct): 1) build it yourself in the 3D designer, you may end up liking it more,
+// 2) if it cannot be done exactly there, the 100% custom design service, deposit line from the FAQ, link to that page.
+// Framing text carries NO numbers; wording is the owner's to approve (proposal, 16 Oct). Page = the per-store custom design page.
+const CUSTOM_PAGE = { en: 'request-custom-kit-design', us: 'request-custom-kit-design', es: 'solicitud-de-diseno-personalizado', fr: 'demande-de-design-professionnel-de-maillots', it: 'richiesta-design-personalizzato' };
+const CUSTOM_INTRO = {
+  en: ["Already know the jersey you want? Build it your way in the 3D designer: colours, patterns, crest, names and numbers. You might even end up with something you like more than the one in your head.",
+    "Can't get it exactly right there? Our 100% custom design service has a MOMUTO designer build it for you from your sketch, a reference or an AI render.", 'Start here:'],
+  us: ["Already know the jersey you want? Build it your way in the 3D designer: colors, patterns, crest, names and numbers. You might even end up with something you like more than the one in your head.",
+    "Can't get it exactly right there? Our 100% custom design service has a MOMUTO designer build it for you from your sketch, a reference or an AI render.", 'Start here:'],
+  es: ['¿Ya sabes qué camiseta quieres? Constrúyela a tu manera en el diseñador 3D: colores, patrones, escudo, nombres y números. Puede que acabes con algo que te guste más que lo que tenías en la cabeza.',
+    '¿No consigues clavarlo ahí? Con nuestro servicio de diseño 100% a medida, un diseñador de MOMUTO lo crea por ti a partir de tu boceto, una referencia o un render de IA.', 'Empieza aquí:'],
+  fr: ["Vous savez déjà quel maillot vous voulez ? Créez-le à votre façon dans le designer 3D : couleurs, motifs, écusson, noms et numéros. Vous pourriez même obtenir mieux que ce que vous aviez en tête.",
+    "Vous n'arrivez pas à le reproduire exactement ? Avec notre service de design 100 % sur mesure, un designer MOMUTO le crée pour vous à partir de votre croquis, d'une référence ou d'un rendu IA.", 'Commencez ici :'],
+  it: ["Sai già quale maglia vuoi? Costruiscila a modo tuo nel designer 3D: colori, motivi, stemma, nomi e numeri. Potresti ottenere qualcosa che ti piace più di quello che avevi in mente.",
+    "Non riesci a ottenerla esattamente? Con il nostro servizio di design 100% su misura, un designer MOMUTO la crea per te partendo dal tuo schizzo, da un riferimento o da un render IA.", 'Inizia qui:'],
+};
 
 function text(html, base) {
   return String(html)
@@ -59,6 +76,10 @@ function build() {
     if (p.rows.length !== 7 || p.cols.length !== 4) throw new Error(`${loc}: pricing table shape changed`);
     const ladder = p.rows.map(r => `${r[0]}: ${r[1]} · ${r[3]}`).join('\n');
     A.prices = `*${p.title}* (${p.cols[1]} · ${p.cols[3]})\n${ladder}\n\n${text(p.lead.split('.').slice(1, 2).join('.') + '.', base).trim()}\n${text(p.notes[LADDER_NOTE], base)}`;
+    if (!CUSTOM_INTRO[loc] || !CUSTOM_PAGE[loc]) throw new Error(`${loc}: no custom-design copy`);
+    if (!/15/.test(p.notes[DEPOSIT_NOTE]) || !/acompte|acconto|deposit|dep[oó]sito|anticipo|caparra/i.test(p.notes[DEPOSIT_NOTE])) throw new Error(`${loc}: pricing.notes[${DEPOSIT_NOTE}] is no longer the deposit line`);
+    const [i1, i2, go] = CUSTOM_INTRO[loc];
+    A.design = `${i1}\n\n${i2}\n\n${text(p.notes[DEPOSIT_NOTE], base)}\n\n${go} ${base}/pages/${CUSTOM_PAGE[loc]}`;
     A.extras = EXTRAS_NOTES.map(i => text(p.notes[i], base)).join('\n\n');
     out[loc] = A;
   }

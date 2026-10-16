@@ -97,3 +97,16 @@ test('every topic answers in every language, from the FAQ numbers', () => {
   assert.match(answers.en.delivery, /25–30/); assert.match(answers.en.delivery, /7–12/); assert.match(answers.en.fabric, /92% polyester, 8% elastane/);
   assert.match(answers.us.extras, /\$69/); assert.match(answers.en.extras, /€59/);
 });
+
+test('"I have a design in mind": build it in the 3D designer first, then the custom design page of THAT store with the deposit line', () => {
+  const link = { en: 'https://www.momuto.com/pages/request-custom-kit-design', us: 'https://us.momuto.com/pages/request-custom-kit-design',
+    es: 'https://es.momuto.com/pages/solicitud-de-diseno-personalizado', fr: 'https://fr.momuto.com/pages/demande-de-design-professionnel-de-maillots', it: 'https://it.momuto.com/pages/richiesta-design-personalizzato' };
+  for (const lang of Object.keys(link)) {
+    const a = answers[lang].design;
+    assert.ok(a.endsWith(link[lang]), lang); assert.match(a, /15/); assert.match(a, /5\+|5 maillots/); assert.doesNotMatch(a, /refund|rembours|reembols|rimbors/i);
+    assert.ok(a.indexOf('3D') < a.indexOf('100'), `${lang}: the 3D designer comes before the custom service`);
+  }
+  assert.match(answers.us.design, /\$15/); assert.match(answers.en.design, /€15/);
+  for (const t of ['can you make this exact jersey', 'quiero una camiseta a medida', 'je veux un maillot sur mesure', 'vorrei una maglia su misura', 'i have a sketch'])
+    assert.equal(say(t).event, 'answer:design', t);
+});
