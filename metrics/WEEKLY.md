@@ -1,6 +1,6 @@
 # Weekly scorecard — 2026-W41
 
-_Generated 2026-10-12T06:51Z. Season: **NORMAL — Season underway: fewer first orders, more re-orders and late joiners. Lower than August is normal.**_
+_Generated 2026-10-15T11:35Z. Season: **NORMAL — Season underway: fewer first orders, more re-orders and late joiners. Lower than August is normal.**_
 
 _Changes around this week:_ 2026-10-03: Share/result views: full-kit layout (laces) shipped · 2026-10-09: Cart page asks about a jersey with a name but no number; checkout flushes pending saves · 2026-10-12: Abandoned-cart email rewritten in 5 stores (trust-led); US wired; colour guide post + 13 new swatches; copy-rules linter
 
@@ -26,34 +26,34 @@ _Changes around this week:_ 2026-10-03: Share/result views: full-kit layout (lac
 ### Leads (custom design gate)
 | metric | this week | vs last week | vs 4-wk avg | same week last year |
 |---|---:|---:|---:|---:|
+| lead | 7 | +17% | -26% | — |
 | deposit intent | 13 | -7% | -28% | — |
 | deposit paid | 8 | -20% | -49% | — |
-| lead | 7 | +17% | -26% | — |
 
 ### Search Console
 | metric | this week | vs last week | vs 4-wk avg | same week last year |
 |---|---:|---:|---:|---:|
-| all: clicks | 685 | -35% | -31% | — |
-| all: impressions | 12,861 | -29% | -27% | — |
-| all: avg position | 9.43 | +1% | -2% | — |
-| all: CTR | 5.33% | -9% | -6% | — |
-| www: clicks | 464 | -34% | -31% | — |
-| www: impressions | 10,919 | -30% | -28% | — |
-| es: clicks | 148 | -24% | -21% | — |
-| es: impressions | 2,851 | -23% | -18% | — |
-| fr: clicks | 74 | -58% | -47% | — |
-| fr: impressions | 1,598 | -41% | -38% | — |
+| all: clicks | 899 | -15% | -9% | — |
+| all: impressions | 17,433 | -4% | 0% | — |
+| all: avg position | 9.24 | -1% | -4% | — |
+| all: CTR | 5.16% | -11% | -9% | — |
+| www: clicks | 620 | -11% | -8% | — |
+| www: impressions | 14,934 | -4% | -2% | — |
+| es: clicks | 177 | -10% | -6% | — |
+| es: impressions | 3,507 | -6% | +1% | — |
+| fr: clicks | 105 | -40% | -25% | — |
+| fr: impressions | 2,210 | -18% | -15% | — |
 | it: clicks | 2 | 0% | 0% | — |
-| it: impressions | 42 | -41% | -29% | — |
-| us: clicks | 2 | -33% | -47% | — |
-| us: impressions | 136 | -33% | -14% | — |
+| it: impressions | 53 | -25% | -11% | — |
+| us: clicks | 3 | 0% | -20% | — |
+| us: impressions | 207 | +1% | +30% | — |
 | design: clicks | 3 | — | +20% | — |
-| design: impressions | 47 | -40% | -41% | — |
+| design: impressions | 57 | -27% | -29% | — |
 
-**Top queries** (week to 2026-10-09): momuto (290 clk, pos 1) · soccer jersey maker (15 clk, pos 7.3) · soccer jersey creator (10 clk, pos 5.1) · creador de camisetas de fútbol (9 clk, pos 2.9) · create your own soccer jersey online free (9 clk, pos 1.1) · football jersey maker (8 clk, pos 9.7) · jersey maker (8 clk, pos 8.5) · make your own soccer jersey (8 clk, pos 4.2) · crear camisetas de futbol (7 clk, pos 4.6) · custom football jersey (7 clk, pos 8.5)
+**Top queries** (week to 2026-10-12): momuto (248 clk, pos 1) · soccer jersey maker (17 clk, pos 7.2) · soccer jersey creator (10 clk, pos 4.7) · creador de camisetas de fútbol (9 clk, pos 2.5) · make your own soccer jersey (9 clk, pos 3.8) · create your own soccer jersey online free (8 clk, pos 6.3) · design jersey online free (8 clk, pos 6.5) · football jersey maker (7 clk, pos 7.5) · jersey maker (7 clk, pos 8.4) · jersey maker soccer (7 clk, pos 3.7)
 
 ### Health
 - copy-rules baseline: **11** known violations (should only shrink)
-- failed workflow runs, last 7 days: none
+- failed workflow runs, last 7 days: Pull CMS Content ×1, Translate Blog Posts (FR / ES / IT) ×1
 
 _How to read this: docs/scorecard.md. A drop is only a problem when it persists for 3 weeks, is not explained by the season, and year-over-year does not say the same._

@@ -1,77 +1,77 @@
 {
  "_topQueries": {
-  "asOf": "2026-10-09",
+  "asOf": "2026-10-12",
   "rows": [
    {
     "query": "momuto",
-    "clicks": 290,
-    "impressions": 450,
+    "clicks": 248,
+    "impressions": 369,
     "position": 1
    },
    {
     "query": "soccer jersey maker",
-    "clicks": 15,
-    "impressions": 159,
-    "position": 7.3
+    "clicks": 17,
+    "impressions": 168,
+    "position": 7.2
    },
    {
     "query": "soccer jersey creator",
     "clicks": 10,
-    "impressions": 60,
-    "position": 5.1
+    "impressions": 68,
+    "position": 4.7
    },
    {
     "query": "creador de camisetas de fútbol",
     "clicks": 9,
-    "impressions": 34,
-    "position": 2.9
-   },
-   {
-    "query": "create your own soccer jersey online free",
-    "clicks": 9,
-    "impressions": 50,
-    "position": 1.1
-   },
-   {
-    "query": "football jersey maker",
-    "clicks": 8,
-    "impressions": 195,
-    "position": 9.7
-   },
-   {
-    "query": "jersey maker",
-    "clicks": 8,
-    "impressions": 464,
-    "position": 8.5
+    "impressions": 36,
+    "position": 2.5
    },
    {
     "query": "make your own soccer jersey",
+    "clicks": 9,
+    "impressions": 99,
+    "position": 3.8
+   },
+   {
+    "query": "create your own soccer jersey online free",
     "clicks": 8,
-    "impressions": 81,
-    "position": 4.2
+    "impressions": 46,
+    "position": 6.3
    },
    {
-    "query": "crear camisetas de futbol",
-    "clicks": 7,
-    "impressions": 58,
-    "position": 4.6
+    "query": "design jersey online free",
+    "clicks": 8,
+    "impressions": 131,
+    "position": 6.5
    },
    {
-    "query": "custom football jersey",
+    "query": "football jersey maker",
     "clicks": 7,
-    "impressions": 289,
-    "position": 8.5
-   },
-   {
-    "query": "jersey design maker",
-    "clicks": 7,
-    "impressions": 214,
+    "impressions": 194,
     "position": 7.5
+   },
+   {
+    "query": "jersey maker",
+    "clicks": 7,
+    "impressions": 457,
+    "position": 8.4
+   },
+   {
+    "query": "jersey maker soccer",
+    "clicks": 7,
+    "impressions": 60,
+    "position": 3.7
+   },
+   {
+    "query": "momuto design",
+    "clicks": 7,
+    "impressions": 7,
+    "position": 1
    },
    {
     "query": "momuto jersey",
     "clicks": 7,
-    "impressions": 9,
+    "impressions": 8,
     "position": 1
    }
   ]
@@ -79,16 +79,16 @@
  "2025-W25": {
   "gsc": {
    "all": {
-    "clicks": 18,
-    "impressions": 733,
-    "ctr": 0.0246,
-    "position": 26.1
+    "clicks": 4,
+    "impressions": 196,
+    "ctr": 0.0204,
+    "position": 27.7
    },
    "www": {
-    "clicks": 19,
-    "impressions": 833,
-    "ctr": 0.0228,
-    "position": 24.28
+    "clicks": 4,
+    "impressions": 232,
+    "ctr": 0.0172,
+    "position": 25.03
    },
    "es": {
     "clicks": 0,
@@ -2215,8 +2215,8 @@
    "deliverDaysMedian": null
   },
   "leads": {
-   "deposit_intent": 4,
    "lead": 41,
+   "deposit_intent": 4,
    "deposit_paid": 1
   },
   "checkoutHandoff": {
@@ -2301,9 +2301,9 @@
    "deliverDaysMedian": null
   },
   "leads": {
+   "deposit_intent": 9,
    "deposit_paid": 5,
-   "lead": 9,
-   "deposit_intent": 9
+   "lead": 9
   },
   "checkoutHandoff": {
    "ok": 0,
@@ -2387,8 +2387,8 @@
    "deliverDaysMedian": null
   },
   "leads": {
-   "deposit_paid": 3,
    "deposit_intent": 12,
+   "deposit_paid": 3,
    "lead": 4
   },
   "checkoutHandoff": {
@@ -2477,8 +2477,8 @@
    "deliverDaysMedian": null
   },
   "leads": {
-   "lead": 10,
    "deposit_intent": 13,
+   "lead": 10,
    "deposit_paid": 6
   },
   "checkoutHandoff": {
@@ -2569,9 +2569,9 @@
    "deliverDaysMedian": null
   },
   "leads": {
-   "lead": 9,
    "deposit_intent": 10,
-   "deposit_paid": 10
+   "deposit_paid": 10,
+   "lead": 9
   },
   "checkoutHandoff": {
    "ok": 15,
@@ -2649,8 +2649,8 @@
    "count": 12,
    "units": 38,
    "revenue": {
-    "EUR": 377.62,
-    "USD": 684.65
+    "USD": 684.65,
+    "EUR": 377.62
    },
    "fastLane": 0,
    "byLang": {
@@ -2742,10 +2742,10 @@
    "units": 138,
    "revenue": {
     "EUR": 1876.93,
-    "CLP": 45171,
     "GBP": 33.38,
     "USD": 49.23,
-    "SEK": 1652.81
+    "SEK": 1652.81,
+    "CLP": 45171
    },
    "fastLane": 0,
    "byLang": {
@@ -2756,8 +2756,8 @@
    "deliverDaysMedian": null
   },
   "leads": {
-   "deposit_paid": 5,
    "deposit_intent": 8,
+   "deposit_paid": 5,
    "lead": 2
   },
   "checkoutHandoff": {
@@ -2841,17 +2841,17 @@
    },
    "fastLane": 0,
    "byLang": {
-    "fr": 1,
     "en": 7,
-    "es": 2
+    "es": 2,
+    "fr": 1
    },
    "shipDaysMedian": null,
    "deliverDaysMedian": null
   },
   "leads": {
    "deposit_paid": 17,
-   "deposit_intent": 22,
-   "lead": 9
+   "lead": 9,
+   "deposit_intent": 22
   },
   "checkoutHandoff": {
    "ok": 116,
@@ -2929,9 +2929,9 @@
    "count": 11,
    "units": 140,
    "revenue": {
-    "EUR": 1526.22,
     "USD": 874.82,
-    "CZK": 9410.21
+    "CZK": 9410.21,
+    "EUR": 1526.22
    },
    "fastLane": 0,
    "byLang": {
@@ -3023,21 +3023,21 @@
    "count": 7,
    "units": 112,
    "revenue": {
-    "USD": 1451.7,
-    "EUR": 1202.8
+    "EUR": 1202.8,
+    "USD": 1451.7
    },
    "fastLane": 0,
    "byLang": {
-    "en": 3,
-    "es": 4
+    "es": 4,
+    "en": 3
    },
    "shipDaysMedian": null,
    "deliverDaysMedian": null
   },
   "leads": {
-   "lead": 8,
+   "deposit_paid": 12,
    "deposit_intent": 14,
-   "deposit_paid": 12
+   "lead": 8
   },
   "checkoutHandoff": {
    "ok": 51,
@@ -3220,8 +3220,8 @@
   },
   "leads": {
    "deposit_paid": 16,
-   "deposit_intent": 10,
-   "lead": 11
+   "lead": 11,
+   "deposit_intent": 10
   },
   "checkoutHandoff": {
    "ok": 49,
@@ -3299,9 +3299,9 @@
    "count": 17,
    "units": 403,
    "revenue": {
+    "GBP": 281.82,
     "EUR": 3999.52,
-    "USD": 1258.95,
-    "GBP": 281.82
+    "USD": 1258.95
    },
    "fastLane": 0,
    "byLang": {
@@ -3314,8 +3314,8 @@
   },
   "leads": {
    "deposit_intent": 26,
-   "lead": 12,
-   "deposit_paid": 16
+   "deposit_paid": 16,
+   "lead": 12
   },
   "checkoutHandoff": {
    "ok": 50,
@@ -3394,22 +3394,22 @@
    "units": 196,
    "revenue": {
     "EUR": 2244.66,
-    "SEK": 483.51,
     "USD": 1010.3,
-    "AUD": 314.98
+    "AUD": 314.98,
+    "SEK": 483.51
    },
    "fastLane": 0,
    "byLang": {
     "en": 15,
-    "fr": 1,
-    "es": 2
+    "es": 2,
+    "fr": 1
    },
    "shipDaysMedian": null,
    "deliverDaysMedian": null
   },
   "leads": {
-   "deposit_intent": 22,
    "deposit_paid": 21,
+   "deposit_intent": 22,
    "lead": 9
   },
   "checkoutHandoff": {
@@ -3488,8 +3488,8 @@
    "count": 19,
    "units": 154,
    "revenue": {
-    "USD": 601.79,
-    "EUR": 2702.74
+    "EUR": 2702.74,
+    "USD": 601.79
    },
    "fastLane": 1,
    "byLang": {
@@ -3501,8 +3501,8 @@
    "deliverDaysMedian": null
   },
   "leads": {
-   "lead": 6,
    "deposit_intent": 14,
+   "lead": 6,
    "deposit_paid": 10
   },
   "checkoutHandoff": {
@@ -3581,8 +3581,8 @@
    "count": 18,
    "units": 148,
    "revenue": {
-    "USD": 1182.68,
     "EUR": 2719.27,
+    "USD": 1182.68,
     "GBP": 38.87
    },
    "fastLane": 1,
@@ -3595,9 +3595,9 @@
    "deliverDaysMedian": null
   },
   "leads": {
+   "lead": 7,
    "deposit_intent": 13,
-   "deposit_paid": 8,
-   "lead": 7
+   "deposit_paid": 8
   },
   "checkoutHandoff": {
    "ok": 58,
@@ -3627,88 +3627,106 @@
   },
   "gsc": {
    "all": {
-    "clicks": 685,
-    "impressions": 12861,
-    "ctr": 0.0533,
-    "position": 9.43
+    "clicks": 899,
+    "impressions": 17433,
+    "ctr": 0.0516,
+    "position": 9.24
    },
    "www": {
-    "clicks": 464,
-    "impressions": 10919,
-    "ctr": 0.0425,
-    "position": 8.27
+    "clicks": 620,
+    "impressions": 14934,
+    "ctr": 0.0415,
+    "position": 8.15
    },
    "es": {
-    "clicks": 148,
-    "impressions": 2851,
-    "ctr": 0.0519,
-    "position": 7.47
+    "clicks": 177,
+    "impressions": 3507,
+    "ctr": 0.0505,
+    "position": 7.36
    },
    "fr": {
-    "clicks": 74,
-    "impressions": 1598,
-    "ctr": 0.0463,
-    "position": 10
+    "clicks": 105,
+    "impressions": 2210,
+    "ctr": 0.0475,
+    "position": 9.63
    },
    "it": {
     "clicks": 2,
-    "impressions": 42,
-    "ctr": 0.0476,
-    "position": 9.17
+    "impressions": 53,
+    "ctr": 0.0377,
+    "position": 9.72
    },
    "us": {
-    "clicks": 2,
-    "impressions": 136,
-    "ctr": 0.0147,
-    "position": 27.76
+    "clicks": 3,
+    "impressions": 207,
+    "ctr": 0.0145,
+    "position": 28.24
    },
    "design": {
     "clicks": 3,
-    "impressions": 47,
-    "ctr": 0.0638,
-    "position": 2.15
+    "impressions": 57,
+    "ctr": 0.0526,
+    "position": 2.07
    }
   },
   "repo": {
    "copyRuleBaseline": 11,
-   "failedRuns7d": {}
+   "failedRuns7d": {
+    "Pull CMS Content": 1,
+    "Translate Blog Posts (FR / ES / IT)": 1
+   }
   }
  },
  "2026-W42": {
   "orders": {
-   "count": 0,
-   "units": 0,
-   "revenue": {},
-   "fastLane": 0,
-   "byLang": {},
+   "count": 6,
+   "units": 71,
+   "revenue": {
+    "USD": 470,
+    "EUR": 1262.34
+   },
+   "fastLane": 1,
+   "byLang": {
+    "en": 3,
+    "fr": 2,
+    "es": 1
+   },
    "shipDaysMedian": null,
    "deliverDaysMedian": null
   },
-  "leads": {},
+  "leads": {
+   "deposit_paid": 3,
+   "lead": 3,
+   "deposit_intent": 5
+  },
   "checkoutHandoff": {
-   "ok": 0,
+   "ok": 26,
    "other": 0
   },
   "events": {
    "tool_open": {
-    "users": 0,
-    "hits": 0
+    "users": 889,
+    "hits": 888
    },
    "design_saved": {
     "users": 0,
     "hits": 0
    },
    "cart_added": {
-    "users": 0,
-    "hits": 0
+    "users": 46,
+    "hits": 46
    },
    "cart_viewed": {
-    "users": 0,
-    "hits": 0
+    "users": 103,
+    "hits": 103
    },
    "checkout_clicked": {
-    "users": 0,
-    "hits": 0
+    "users": 18,
+    "hits": 18
+   },
+   "wa_chat_click": {
+    "users": 1,
+    "hits": 1
    }
   }
  }

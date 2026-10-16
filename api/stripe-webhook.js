@@ -83,6 +83,9 @@ async function notifyCustomer(email, locale) {
 }
 
 module.exports = async function handler(req, res) {
+  // /api/wa-webhook is rewritten onto this function (vercel.json): api/ is at the 12-function Hobby cap and this one
+  // already receives the raw body. Meta's WhatsApp webhook: lib/wa-webhook-handler.js, docs/live-chat-whatsapp.md.
+  if ((req.query && req.query.type === 'wa-webhook') || /wa-webhook/.test(req.url || '')) return require('../lib/wa-webhook-handler')(req, res);
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   if (!SECRET) { console.error('[stripe-webhook] STRIPE_WEBHOOK_SECRET not set'); return res.status(500).json({ error: 'Not configured' }); }
 

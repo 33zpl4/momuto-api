@@ -90,6 +90,9 @@ function localizeLinks(html) {
     .replace(/lang=en&langguage=en/g, `lang=${TARGET}&langguage=${TARGET}`);
 }
 
+// A response can start with a non-text block (thinking) on newer models: join the text blocks instead of content[0].
+const textOf = (r) => (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+
 async function translatePost(post) {
   const handle = getHandle(post);
   const preamble = `You are translating content for MOMUTO (${DEST.label}), a ${DEST.lang}-language custom football kit website.
@@ -125,11 +128,11 @@ META_TITLE: <translated>
 META_DESC: <translated>`;
 
   const metaResponse = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-5', max_tokens: 1024, messages: [{ role: 'user', content: metaPrompt }],
+    model: 'claude-sonnet-5', max_tokens: 4096, messages: [{ role: 'user', content: metaPrompt }],
   }));
 
   const metaLines = {};
-  const metaRaw = metaResponse.content[0].text.trim();
+  const metaRaw = textOf(metaResponse).trim();
   for (const line of metaRaw.split('\n')) {
     const colon = line.indexOf(':'); if (colon === -1) continue;
     metaLines[line.slice(0, colon).trim().toUpperCase()] = line.slice(colon + 1).trim();
@@ -152,11 +155,12 @@ Translate the following HTML blog post content from English to ${DEST.lang}.
 ${post.content || ''}`;
 
   const contentResponse = await withRetry(() => client.messages.create({
-    model: 'claude-sonnet-5', max_tokens: 8000, messages: [{ role: 'user', content: contentPrompt }],
+    model: 'claude-sonnet-5', max_tokens: 16000, messages: [{ role: 'user', content: contentPrompt }],
   }));
 
+  if (contentResponse.stop_reason === 'max_tokens') throw new Error('Translation truncated (max_tokens) for ' + handle);
   const translatedContent = localizeLinks(
-    contentResponse.content[0].text.trim().replace(/<style[\s\S]*?<\/style>/gi, '').trim()
+    textOf(contentResponse).trim().replace(/<style[\s\S]*?<\/style>/gi, '').trim()
   );
 
   return { title: meta.title, handle: meta.handle, summary: meta.summary,

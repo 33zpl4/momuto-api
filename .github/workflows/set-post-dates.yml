@@ -1,0 +1,36 @@
+name: Set post dates (posts showing 1969-12-31)
+
+# Gives every published post that still shows 1969-12-31 a nominal published_at 14-35 days back (owner ruling,
+# 15 Oct 2026). Dry run by default: read the log, then run again with dry_run=false. Read-back per post.
+on:
+  workflow_dispatch:
+    inputs:
+      locales:
+        description: 'Locales, comma separated'
+        required: false
+        default: 'en,us,es,fr,it'
+      dry_run:
+        description: 'Dry run — list what would change, write nothing'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  set-dates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Set post dates
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          LOCALES: ${{ github.event.inputs.locales }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/set-post-dates.js

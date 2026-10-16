@@ -88,3 +88,17 @@ ranking, and the page is already built.
    Operational facts precise; business scale as trajectory only.
 2. **Ready to Play is the conclusion, never the premise.** Series 5 (the
    commercial pillar) waits until the authority base exists.
+
+## Open items — 16 Oct 2026 (end of the 12-16 Oct sessions)
+
+Everything shipped in those sessions is merged and documented where it lives; this list is what is still open.
+- **Run "Set post dates"** (workflow on main since PR #331): dry run, read the list, then `dry_run=false`. Posts showing 1969-12-31 get nominal dates 14-35 days back (`docs/blog-pipeline.md`).
+- **Check the live fabric post in all five languages** (URLs in `docs/blog-pipeline.md`): photos load from design.momuto.com, phone layout, cover.
+- **~35 posts exceed the meta limits** (<= 65 / <= 160); only the five fabric-related ones were trimmed.
+- **WhatsApp assistant** (built 16 Oct, dry-run, needs the Meta setup in `docs/live-chat-whatsapp.md`).
+- **WhatsApp chat** (`docs/live-chat-whatsapp.md`): set the away message in the WhatsApp Business app; watch the "WhatsApp chat clicked" row in the weekly scorecard.
+- **Design-server Save handler:** a read-only probe was refused by the permission layer and not routed around. Still open: a saved-design email (opt-in/consent decision; one email per address per 30 days via the existing cron-nudge).
+- **Homepage blocks** (`pages/homepage/*`, Pro Design rename) are pasted into the theme by the owner; a repo change there is not live until pasted.
+- **Unsourced claim:** "fastest-growing" in copy needs a source or removal (owner's call).
+- **3D tool open items** (phone checks, contrast ring look, shorts number height, Cascade/Legacy centring): design-momuto `docs/3d-configurator-handbook.md`, "Open items (16 Oct 2026)".
+- **Photos:** more real team photos can go into other posts (recipe in design-momuto handbook, "Blog / marketing photos hosted here").
