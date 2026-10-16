@@ -124,6 +124,11 @@ came from.
 
 ---
 
+### Posts: `published_at` and the list endpoint (15 Oct 2026)
+
+- A post created with `POST /posts` and no date gets `published_at: 1969-12-31` and the store prints that. `published_at` (`YYYY-MM-DD`) IS accepted on `POST`/`PUT`; verified by read-back on all five stores.
+- `PUT /posts/{id}` replaces the whole post: send title, content, meta, author, handle, status, `src`, `image_alt`, `meta_keywords` (array) and the date together. `GET /posts` (list) returned `content` in practice (unpublish-posts relies on it), but `scripts/set-post-dates.js` re-reads each post with a single GET and refuses to write an empty body, per the rule above.
+
 ## Product payload — the shapes that work
 
 ### Size variants (`spec_mode: 2`)

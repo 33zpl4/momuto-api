@@ -59,6 +59,15 @@ function dateFor(handle) {
   return d.toISOString().slice(0, 10);
 }
 
+async function getOne(token, id, fallback) {
+  return withRetry(async () => {
+    const res = await fetch(`${HOST}/posts/${id}`, { headers: { token } });
+    const body = await res.json();
+    if (!res.ok || body.code !== 0) throw new Error(`GET /posts/${id}: ${JSON.stringify(body).slice(0, 200)}`);
+    return { ...fallback, ...(body.data || {}) };
+  }, `get ${id}`);
+}
+
 function payloadFor(post, handle, published_at) {
   let kw = post.meta_keywords;
   if (typeof kw === 'string') { try { kw = JSON.parse(kw); } catch (_) { kw = []; } }   // meta_keywords MUST be an array
@@ -86,11 +95,14 @@ async function runLocale(locale) {
   const todo = posts.filter(p => getHandle(p) && isEpoch(p.published_at) && Number(p.status ?? 1) === 1);
   console.log(`${posts.length} posts, ${todo.length} with no real date (published ones only)`);
   let bad = 0; const written = [];
-  for (const p of todo) {
-    const handle = getHandle(p), date = dateFor(handle);
-    console.log(`  → ${handle}: ${p.published_at || '(none)'} → ${date}${DRY_RUN ? '   DRY RUN' : ''}`);
+  for (const listed of todo) {
+    const handle = getHandle(listed), date = dateFor(handle);
+    console.log(`  → ${handle}: ${listed.published_at || '(none)'} → ${date}${DRY_RUN ? '   DRY RUN' : ''}`);
     if (DRY_RUN) continue;
     try {
+      // PUT replaces the whole post: re-read the single post (the list can economise fields) and refuse to write if the body is missing.
+      const p = await getOne(token, listed.id, listed);
+      if (!p.content) { console.error(`     ❌ ${handle}: no content on the single GET — NOT written`); bad++; continue; }
       await withRetry(async () => {
         const res = await fetch(`${HOST}/posts/${p.id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json', token }, body: JSON.stringify(payloadFor(p, handle, date)) });
         const body = await res.json();
