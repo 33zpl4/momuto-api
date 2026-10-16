@@ -35,6 +35,8 @@ Read the doc that owns a topic BEFORE editing that surface.
   `node scripts/build-size-guide-pages.js` (writes `cms/pages/<locale>/<handle>.json`, deploy via Deploy CMS Page);
   US is edited directly in `cms/pages/us/size-guide.json`. Sizes must match the cart dropdowns in
   `design-momuto/templates/*/cartItem.html` (no 176 — factory maps it to adult S).
+- `docs/blog-pipeline.md` — blog files, schema, deploy, translation workflow + its failure modes, post dates (the 1969-12-31 gotcha), image hosting. Read BEFORE touching `blogs/**`.
+- `docs/live-chat-whatsapp.md` — the WhatsApp chat button (tool + cart), what a message with a design ref means and how to open that design.
 - `docs/seo-opportunities-2026-09.md` — SEO audit of every plan vs what
   shipped (25 Sep 2026): what was fixed, the ranked backlog of what's next,
   owner-side checks. Start here before picking SEO work.
@@ -103,6 +105,7 @@ pushes and verifies the run itself.
    sock, most colours). Fast lane €59 / $69 per ORDER (23 Sep 2026): priority
    production + priority shipping, saves ~7 days (window 18–23 d instead of
    25–30; never promises a specific carrier). A surface with different numbers is a bug.
+   Fabric: **92% polyester / 8% elastane**, 145–160 GSM micro-interlock, four-way stretch (owner, 15 Oct 2026).
 7. `static/shared/llms.txt` is the machine-readable fact feed for LLMs —
    update it in the same commit as any fact change.
 8. **One customer email: info@momuto.com** (owner ruling 5 Sep 2026).
@@ -131,6 +134,9 @@ pushes and verifies the run itself.
 - **Gallery pages are pipeline-owned — never edit or deploy `cms/pages/*/custom-kit-gallery.json`.**
   Deploy CMS Page pushed a stale US snapshot on 1 Oct 2026 and erased 29 team cards; the guard in
   `deploy-cms-page.js` now refuses gallery handles. Repair + details: `ADD_TEAM.md` §10.
+- **Translate Blog Posts / Pull CMS Content (15 Oct 2026):** the translate script crashed when the model reply began with a non-text block (fixed, see `docs/blog-pipeline.md`); the translated handle changes on every run, so dry-run handles are not the live ones; dispatch Pull CMS Content one locale at a time (three at once raced on the commit-back).
+- **Posts created through the API show 1969-12-31** unless `published_at` is sent (`docs/blog-pipeline.md`). A `PUT` without it can reset a real date; `deploy-blog-post.js` now preserves the live one.
+- **A branch push that touches `static/**` deploys llms.txt etc. live to all stores** (Deploy Static Files has no branch filter); blog and CMS-page deploys only run on merge to main.
 - **The CMS API throttles bursts of writes** (`code 1000 "Too many
   requests"`, ~7–130 calls in). Bulk deploys must space writes (~600 ms)
   and retry with backoff — `deploy-cms-page.js` / `deploy-blog-post.js`

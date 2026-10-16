@@ -119,6 +119,7 @@ forming and will move.
   first Bespoke mockup 24–48h; €38.90 single jersey; from €21.90/jersey at
   10+; seasonal selection −10%; deposit €15 credited from 5 jerseys; no
   minimum order. An article that states a different number is a bug.
+  Fabric (owner, 15 Oct 2026): 92% polyester / 8% elastane, 145–160 GSM micro-interlock, four-way stretch.
 
 ## GEO mechanics (how LLM citation actually happens)
 
