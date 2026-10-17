@@ -105,7 +105,8 @@
       "<b>Socks: €3.90</b> per pair, flat at any quantity. Optional, per player. Not custom-printed — a plain matching team sock, available in most colours.",
       "<b>Free shipping over €50.</b> Under that, shipping is €3.90.",
       "<b>Fast lane: +€59 per order</b> skips the production queue and adds shipping priority — saves roughly 7 days.",
-      "<b>Custom design deposit: €15</b> for a designer-built (bespoke or AI-concept) design — credited in full to orders of 5+ jerseys, so free for a team order. Designing in the 3D designer is always free."
+      "<b>Custom design deposit: €15</b> for a designer-built (bespoke or AI-concept) design — credited in full to orders of 5+ jerseys, so free for a team order. Designing in the 3D designer is always free.",
+      "<b>Free team flag + captain armband</b> with orders of 10 or more kits (jersey + shorts). Not included with jersey-only orders."
     ]
   },
   "sections": [
@@ -140,6 +141,10 @@
         [
           "Do you make sports other than football?",
           "Yes. The same 3D designer and fabric now carry <b>basketball jerseys</b>, and the studio has built futsal, padel, handball and e-sports kits. Ask us if you don't see your sport."
+        ],
+        [
+          "Do big orders come with anything extra?",
+          "Yes: orders of <b>10 or more kits</b> (jersey + shorts) include a <b>free team flag and captain armband</b>. It is for kits, not for jersey-only orders."
         ]
       ]
     },

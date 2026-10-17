@@ -51,20 +51,25 @@ var CHAT={
 var EST={
  en:{title:"Price estimate", team:"Team size", jersey:"jersey", kit:"kit", collar:"polo collar", units:"units",
      est:"est.", total:"total", popular:"Most chosen",
-     note:"Sizes &amp; final quantities on the next step.", ship:"Free shipping over €50."},
+     note:"Sizes &amp; final quantities on the next step.", ship:"Free shipping over €50.",
+     gift:"Includes a free team flag + captain armband", giftFrom:"Free team flag + captain armband from 10 kits"},
  // us.momuto.com: en strings, USD ladder (pricing.js PRICING_US), $59 threshold
  us:{title:"Price estimate", team:"Team size", jersey:"jersey", kit:"kit", collar:"polo collar", units:"units",
      est:"est.", total:"total", popular:"Most chosen",
-     note:"Sizes &amp; final quantities on the next step.", ship:"Free shipping over $59."},
+     note:"Sizes &amp; final quantities on the next step.", ship:"Free shipping over $59.",
+     gift:"Includes a free team flag + captain armband", giftFrom:"Free team flag + captain armband from 10 kits"},
  es:{title:"Precio estimado", team:"Tamaño del equipo", jersey:"camiseta", kit:"kit", collar:"cuello polo", units:"unidades",
      est:"aprox.", total:"total", popular:"El más elegido",
-     note:"Tallas y cantidades finales en el siguiente paso.", ship:"Envío gratis desde 50 €."},
+     note:"Tallas y cantidades finales en el siguiente paso.", ship:"Envío gratis desde 50 €.",
+     gift:"Incluye bandera del equipo + brazalete de capitán de regalo", giftFrom:"Bandera del equipo + brazalete de capitán de regalo desde 10 kits"},
  fr:{title:"Prix estimé", team:"Taille de l'équipe", jersey:"maillot", kit:"kit", collar:"col polo", units:"unités",
      est:"estimé", total:"total", popular:"Le plus choisi",
-     note:"Tailles et quantités finales à l'étape suivante.", ship:"Livraison offerte dès 50 €."},
+     note:"Tailles et quantités finales à l'étape suivante.", ship:"Livraison offerte dès 50 €.",
+     gift:"Drapeau de l'équipe + brassard de capitaine offerts", giftFrom:"Drapeau de l'équipe + brassard de capitaine offerts dès 10 kits"},
  it:{title:"Prezzo stimato", team:"Dimensione squadra", jersey:"maglia", kit:"kit", collar:"colletto polo", units:"unità",
      est:"stima", total:"totale", popular:"Il più scelto",
-     note:"Taglie e quantità finali al passaggio successivo.", ship:"Spedizione gratis oltre 50 €."}
+     note:"Taglie e quantità finali al passaggio successivo.", ship:"Spedizione gratis oltre 50 €.",
+     gift:"Bandiera della squadra + fascia da capitano in regalo", giftFrom:"Bandiera della squadra + fascia da capitano in regalo da 10 kit"}
 };
 var I18N={
  en:{
@@ -321,6 +326,7 @@ body.momuto-custom-page .control-product_detail-quantity_box{display:none!import
 .mest-pop{display:inline-block;background:#E2214B;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:8px;vertical-align:2px;}
 .mest-sum{font-size:13px;color:#a1a1aa;margin-top:4px;}
 .mest-sum b{color:#fff;}
+.mest-gift{font-size:12px;color:#fff;margin-top:6px;padding-left:8px;border-left:3px solid #E2214B;}
 .mest-note{font-size:12px;color:#71717a;margin-top:10px;line-height:1.5;}
 .mest-note .ship{color:#a1a1aa;}
 `;
@@ -425,7 +431,9 @@ function estimator(lang, kind, opts){
     var strike=(unit<one)?'<s>'+euro(one)+'</s> ':'';
     var pop=(q>=P.POPULAR_MIN && q<20)?'<span class="mest-pop">'+t.popular+'</span>':'';
     out.innerHTML='<div class="mest-price">'+strike+'<b>'+euro(unit)+'</b> <span class="per">/ '+kindLabel+'</span>'+pop+'</div>'
-      +'<div class="mest-sum">'+q+' '+t.units+' · '+t.est+' <b>'+euro(total)+'</b> '+t.total+'</div>';
+      +'<div class="mest-sum">'+q+' '+t.units+' · '+t.est+' <b>'+euro(total)+'</b> '+t.total+'</div>'
+      // free team flag + captain armband: 10+ KITS only (pricing.js GIFT_MIN_KITS; older cached pricing.js without it: no line)
+      +((kind==="kit"&&P.GIFT_MIN_KITS&&t.gift)?'<div class="mest-gift">'+(q>=P.GIFT_MIN_KITS?t.gift:t.giftFrom)+'</div>':'');
   }
   wrap.querySelectorAll("button[data-d]").forEach(function(b){
     b.onclick=function(){ input.value=Math.max(1,(parseInt(input.value,10)||1)+parseInt(b.getAttribute("data-d"),10)); draw(); };
@@ -439,7 +447,7 @@ function estimator(lang, kind, opts){
 function withPricing(cb){
   if(window.MOMUTO_PRICING) return cb();
   var s=document.createElement("script");
-  s.src="https://www.momuto.com/pricing.js?v=4"; s.defer=true;
+  s.src="https://www.momuto.com/pricing.js?v=5"; s.defer=true;
   s.onload=function(){ if(window.MOMUTO_PRICING) cb(); };
   s.onerror=function(){ try{console.warn("[momuto] pricing.js failed to load — price estimate hidden");}catch(e){} };
   document.head.appendChild(s);
