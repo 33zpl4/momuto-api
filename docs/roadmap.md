@@ -95,7 +95,7 @@ Everything shipped in those sessions is merged and documented where it lives; th
 - **Run "Set post dates"** (workflow on main since PR #331): dry run, read the list, then `dry_run=false`. Posts showing 1969-12-31 get nominal dates 14-35 days back (`docs/blog-pipeline.md`).
 - **Check the live fabric post in all five languages** (URLs in `docs/blog-pipeline.md`): photos load from design.momuto.com, phone layout, cover.
 - **~35 posts exceed the meta limits** (<= 65 / <= 160); only the five fabric-related ones were trimmed.
-- **WhatsApp assistant** (built 16 Oct, dry-run, needs the Meta setup in `docs/live-chat-whatsapp.md`).
+- **WhatsApp assistant** (built 16 Oct, dry-run, needs the Meta setup in `docs/live-chat-whatsapp.md`; Meta app cannot add the WhatsApp product, support case open; Twilio sandbox channel built and PAUSED 17 Oct, resume steps in the same doc).
 - **WhatsApp chat** (`docs/live-chat-whatsapp.md`): set the away message in the WhatsApp Business app; watch the "WhatsApp chat clicked" row in the weekly scorecard.
 - **Design-server Save handler:** a read-only probe was refused by the permission layer and not routed around. Still open: a saved-design email (opt-in/consent decision; one email per address per 30 days via the existing cron-nudge).
 - **Homepage blocks** (`pages/homepage/*`, Pro Design rename) are pasted into the theme by the owner; a repo change there is not live until pasted.
