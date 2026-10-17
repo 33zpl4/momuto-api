@@ -23,3 +23,10 @@ test('every surface states the same rule: FAQ note + FAQ question (5 locales), l
     assert.match(t, /^- Gift: orders of 10 or more full kits \(jersey \+ shorts\) include a free team flag and captain armband\. Jersey-only orders do not receive the gift\.$/m, f);
   }
 });
+
+test('Ready to Play widget (embed.js) states the gift as "10+ kits" in all 4 languages, never "pieces", and only in kit mode', () => {
+  const src = fs.readFileSync('public/configurator/embed.js', 'utf8');
+  assert.equal((src.match(/10\+ kits?/g) || []).length, 8);   // flag + armband x en/fr/es/it
+  assert.doesNotMatch(src, /10\+ (pieces|pi[èe]ces|piezas|pezzi)/);
+  assert.match(src, /getElementById\("promo"\)\.style\.display=\(state\.kit==="kit"\)\?"block":"none"/);
+});
