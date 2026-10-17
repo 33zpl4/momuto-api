@@ -28,6 +28,11 @@ const PICKS = {
 // pricing notes shown by the "extras" topic (index into pricing.notes) and the one shown under the ladder
 const EXTRAS_NOTES = [2, 3, 4, 6];   // the deposit line (7) now lives in the design answer
 const LADDER_NOTE = 5;
+const GIFT_FROM = 10;     // owner, 17 Oct: a free team flag + captain armband from 10 KITS (jersey + shorts) up; 10 jerseys do not qualify. ONE place to change the threshold.
+const GIFT_LINE = {      // customer-facing copy: a proposal for the owner to approve. KITS ONLY (jersey + shorts); jersey-only orders do not get it (owner, 17 Oct)
+  en: 'From 10 kits (jersey + shorts): a free team flag + captain armband.', us: 'From 10 kits (jersey + shorts): a free team flag + captain armband.',
+  es: 'A partir de 10 kits (camiseta + pantalón): bandera del equipo + brazalete de capitán de regalo.', fr: "Dès 10 kits (maillot + short) : drapeau de l'équipe + brassard de capitaine offerts.", it: "Da 10 kit (maglia + pantaloncini): bandiera della squadra + fascia da capitano in regalo.",
+};
 const DEPOSIT_NOTE = 7;   // "Custom design deposit: €15 … credited in full to orders of 5+ jerseys" (the only numbers in the design answer)
 
 // "I have a design in mind" (owner, 16 Oct): 1) build it yourself in the 3D designer, you may end up liking it more,
@@ -47,6 +52,24 @@ const CUSTOM_INTRO = {
     "Non riesci a ottenerla esattamente? Con il nostro servizio di design 100% su misura, un designer MOMUTO la crea per te partendo dal tuo schizzo, da un riferimento o da un render IA.", 'Inizia qui:'],
 };
 
+const CURRENCY = { en: ['EUR', 'en-GB'], us: ['USD', 'en-US'], es: ['EUR', 'es-ES'], fr: ['EUR', 'fr-FR'], it: ['EUR', 'it-IT'] };
+const num = str => { const m = /(\d+(?:[.,]\d+)?)/.exec(String(str).replace(/\s/g, '')); if (!m) throw new Error('no number in ' + str); return parseFloat(m[1].replace(',', '.')); };
+/** The price ladder as numbers for the on-page calculator, parsed from the FAQ rows (so it can never differ from the FAQ). */
+function calcData(loc, p) {
+  const tiers = p.rows.map(r => {
+    const m = /^(\d+)(?:\s*[–-]\s*(\d+)|\s*\+)?/.exec(r[0]); if (!m) throw new Error(`${loc}: cannot read tier "${r[0]}"`);
+    const jersey = num(r[1]), shorts = num(r[2]), kit = num(r[3]);
+    if (Math.abs(jersey + shorts - kit) > 0.005) throw new Error(`${loc}: ${r[0]}: jersey + shorts != kit`);
+    return [+m[1], m[2] ? +m[2] : (/\+/.test(r[0]) ? null : +m[1]), jersey, kit];
+  });
+  tiers.forEach((t, i) => { if (i && t[0] !== tiers[i - 1][1] + 1) throw new Error(`${loc}: tiers are not contiguous at ${t[0]}`); });
+  const nums = String(p.notes[LADDER_NOTE]).replace(/<[^>]+>/g, '').match(/\d+(?:[.,]\d+)?/g) || [];
+  if (nums.length < 2) throw new Error(`${loc}: shipping note no longer has a threshold and a fee`);
+  const kitLabel = /^(.*?)\s*\((.*)\)\s*$/.exec(p.cols[3]) || [null, p.cols[3], ''];
+  return { currency: CURRENCY[loc][0], locale: CURRENCY[loc][1], tiers, freeFrom: parseFloat(nums[0].replace(',', '.')), shipFee: parseFloat(nums[1].replace(',', '.')), giftFrom: GIFT_FROM,
+    jersey: p.cols[1], kit: kitLabel[1], kitHint: kitLabel[2] };
+}
+
 function text(html, base) {
   return String(html)
     .replace(/<a [^>]*href="mailto:([^"]+)"[^>]*>[^<]*<\/a>/gi, '$1')
@@ -58,6 +81,7 @@ function text(html, base) {
 }
 const ITEM_Q = it => it[0], ITEM_A = it => it[1];
 
+const CALC = {};
 function build() {
   const out = {};
   for (const loc of LOCALES) {
@@ -76,13 +100,14 @@ function build() {
     const p = d.pricing;
     if (p.rows.length !== 7 || p.cols.length !== 4) throw new Error(`${loc}: pricing table shape changed`);
     const ladder = p.rows.map(r => `${r[0]}: ${r[1]} · ${r[3]}`).join('\n');
-    A.prices = `*${p.title}* (${p.cols[1]} · ${p.cols[3]})\n${ladder}\n\n${text(p.lead.split('.').slice(1, 2).join('.') + '.', base).trim()}\n${text(p.notes[LADDER_NOTE], base)}`;
+    A.prices = `*${p.title}* (${p.cols[1]} · ${p.cols[3]})\n${ladder}\n\n${text(p.lead.split('.').slice(1, 2).join('.') + '.', base).trim()}\n${text(p.notes[LADDER_NOTE], base)}\n${GIFT_LINE[loc]}`;
     if (!CUSTOM_INTRO[loc] || !CUSTOM_PAGE[loc]) throw new Error(`${loc}: no custom-design copy`);
     if (!/15/.test(p.notes[DEPOSIT_NOTE]) || !/acompte|acconto|deposit|dep[oó]sito|anticipo|caparra/i.test(p.notes[DEPOSIT_NOTE])) throw new Error(`${loc}: pricing.notes[${DEPOSIT_NOTE}] is no longer the deposit line`);
     const [i1, i2, go] = CUSTOM_INTRO[loc];
     A.design = `${i1}\n\n${i2}\n\n${text(p.notes[DEPOSIT_NOTE], base)}\n\n${go} ${base}/pages/${CUSTOM_PAGE[loc]}`;
     A.extras = EXTRAS_NOTES.map(i => text(p.notes[i], base)).join('\n\n');
     out[loc] = A;
+    CALC[loc] = calcData(loc, p);
   }
   return JSON.stringify(out, null, 2) + '\n';
 }
@@ -90,33 +115,45 @@ function build() {
 const json = build();
 
 /** public/wa-faq.json: what the on-page assistant (wa-chat.js on the 3D designer + cart) shows. Same answers as the WhatsApp bot,
- *  plus the topic titles, the keyword lists and the widget's own strings, so there is ONE place for facts and wording. */
+ *  plus the topic titles, the price calculator's numbers (parsed from the FAQ) and the widget's own strings, so there is ONE place
+ *  for facts and wording. No free-text matching: the panel is topic buttons only (owner, 17 Oct). */
 function buildWidget(answersJson) {
-  const { UI, ROW_ORDER, KEYWORDS } = require('../lib/wa-bot');
+  const { UI, ROW_ORDER } = require('../lib/wa-bot');
   const ans = JSON.parse(answersJson);
-  const W = {   // widget-only strings (no prices). {t} = topic or typed text, {l} = a time label
-    en: { title: 'How can we help?', pick: 'Pick a topic or ask your own question:', ask: 'Type your question…', send: 'Send', back: 'All topics', close: 'Close',
-      other: 'Other questions? Talk to a person', human: 'Talk to a person on WhatsApp', still: 'Still need help? Chat with us on WhatsApp', noMatch: "I couldn't find an answer to that. A person can help you on WhatsApp.",
-      waAbout: 'Hi MOMUTO, I have a question about {t}.', waFree: 'Hi MOMUTO, {t}', today: 'today', tomorrow: 'tomorrow', at: 'at', madrid: 'Madrid time' },
-    es: { title: '¿En qué podemos ayudarte?', pick: 'Elige un tema o escribe tu pregunta:', ask: 'Escribe tu pregunta…', send: 'Enviar', back: 'Todos los temas', close: 'Cerrar',
-      other: '¿Otras dudas? Habla con una persona', human: 'Hablar con una persona por WhatsApp', still: '¿Sigues con dudas? Escríbenos por WhatsApp', noMatch: 'No he encontrado respuesta a eso. Una persona puede ayudarte por WhatsApp.',
-      waAbout: 'Hola MOMUTO, tengo una pregunta sobre {t}.', waFree: 'Hola MOMUTO, {t}', today: 'hoy', tomorrow: 'mañana', at: 'a las', madrid: 'hora de Madrid' },
-    fr: { title: 'Comment pouvons-nous vous aider ?', pick: 'Choisissez un sujet ou posez votre question :', ask: 'Écrivez votre question…', send: 'Envoyer', back: 'Tous les sujets', close: 'Fermer',
-      other: "Autres questions ? Parlez à quelqu'un", human: 'Parler à quelqu\'un sur WhatsApp', still: 'Besoin d\'aide ? Écrivez-nous sur WhatsApp', noMatch: "Je n'ai pas trouvé de réponse. Une personne peut vous aider sur WhatsApp.",
-      waAbout: "Bonjour MOMUTO, j'ai une question sur {t}.", waFree: 'Bonjour MOMUTO, {t}', today: "aujourd'hui", tomorrow: 'demain', at: 'à', madrid: 'heure de Madrid' },
-    it: { title: 'Come possiamo aiutarti?', pick: 'Scegli un argomento o scrivi la tua domanda:', ask: 'Scrivi la tua domanda…', send: 'Invia', back: 'Tutti gli argomenti', close: 'Chiudi',
-      other: 'Altre domande? Parla con una persona', human: 'Parla con una persona su WhatsApp', still: 'Hai ancora dubbi? Scrivici su WhatsApp', noMatch: 'Non ho trovato una risposta. Una persona può aiutarti su WhatsApp.',
-      waAbout: 'Ciao MOMUTO, ho una domanda su {t}.', waFree: 'Ciao MOMUTO, {t}', today: 'oggi', tomorrow: 'domani', at: 'alle', madrid: 'ora di Madrid' },
+  const W = {   // widget-only strings (no prices). {t} = a topic, {l} = a time label, {n} = a count, {p} = a price
+    en: { title: 'How can we help?', pick: 'Pick a topic:', back: 'All topics', close: 'Close',
+      other: 'Other questions? Talk to a person', human: 'Talk to a person on WhatsApp', still: 'Still need help? Chat with us on WhatsApp',
+      waAbout: 'Hi MOMUTO, I have a question about {t}.', today: 'today', tomorrow: 'tomorrow', at: 'at', madrid: 'Madrid time',
+      cQty: 'Quantity', cMinus: 'Fewer', cPlus: 'More', cUnit: 'Price per unit', cSub: 'Subtotal', cShip: 'Shipping', cFree: 'Free', cTotal: 'Total',
+      cGift: 'A free team flag + captain armband are included', cGiftMore: 'Add {n} more kits and get a free team flag + captain armband', cGiftKit: 'Order 10 kits (jersey + shorts) and get a free team flag + captain armband', cNext: 'Add {n} more: {p} each',
+      cNote: 'Names, numbers and logos are included. Long sleeves, polo collar, socks and the fast lane are extra (see Extras & options).', cLadder: 'See the full price ladder' },
+    es: { title: '¿En qué podemos ayudarte?', pick: 'Elige un tema:', back: 'Todos los temas', close: 'Cerrar',
+      other: '¿Otras dudas? Habla con una persona', human: 'Hablar con una persona por WhatsApp', still: '¿Sigues con dudas? Escríbenos por WhatsApp',
+      waAbout: 'Hola MOMUTO, tengo una pregunta sobre {t}.', today: 'hoy', tomorrow: 'mañana', at: 'a las', madrid: 'hora de Madrid',
+      cQty: 'Cantidad', cMinus: 'Menos', cPlus: 'Más', cUnit: 'Precio por unidad', cSub: 'Subtotal', cShip: 'Envío', cFree: 'Gratis', cTotal: 'Total',
+      cGift: 'Incluye bandera del equipo + brazalete de capitán de regalo', cGiftMore: 'Añade {n} kits más y llévate bandera del equipo + brazalete de capitán de regalo', cGiftKit: 'Con 10 kits (camiseta + pantalón), bandera del equipo + brazalete de capitán de regalo', cNext: 'Añade {n} más: {p} la unidad',
+      cNote: 'Nombres, números y logos incluidos. Mangas largas, cuello polo, calcetines y vía rápida son extras (ver Extras y opciones).', cLadder: 'Ver la tabla completa de precios' },
+    fr: { title: 'Comment pouvons-nous vous aider ?', pick: 'Choisissez un sujet :', back: 'Tous les sujets', close: 'Fermer',
+      other: "Autres questions ? Parlez à quelqu'un", human: "Parler à quelqu'un sur WhatsApp", still: "Besoin d'aide ? Écrivez-nous sur WhatsApp",
+      waAbout: "Bonjour MOMUTO, j'ai une question sur {t}.", today: "aujourd'hui", tomorrow: 'demain', at: 'à', madrid: 'heure de Madrid',
+      cQty: 'Quantité', cMinus: 'Moins', cPlus: 'Plus', cUnit: 'Prix unitaire', cSub: 'Sous-total', cShip: 'Livraison', cFree: 'Offerte', cTotal: 'Total',
+      cGift: "Drapeau de l'équipe + brassard de capitaine offerts", cGiftMore: "Ajoutez {n} kits de plus et recevez drapeau de l'équipe + brassard de capitaine offerts", cGiftKit: "Dès 10 kits (maillot + short) : drapeau de l'équipe + brassard de capitaine offerts", cNext: 'Ajoutez-en {n} : {p} pièce',
+      cNote: 'Noms, numéros et logos inclus. Manches longues, col polo, chaussettes et voie rapide en supplément (voir Options et extras).', cLadder: 'Voir la grille complète des prix' },
+    it: { title: 'Come possiamo aiutarti?', pick: 'Scegli un argomento:', back: 'Tutti gli argomenti', close: 'Chiudi',
+      other: 'Altre domande? Parla con una persona', human: 'Parla con una persona su WhatsApp', still: 'Hai ancora dubbi? Scrivici su WhatsApp',
+      waAbout: 'Ciao MOMUTO, ho una domanda su {t}.', today: 'oggi', tomorrow: 'domani', at: 'alle', madrid: 'ora di Madrid',
+      cQty: 'Quantità', cMinus: 'Meno', cPlus: 'Più', cUnit: 'Prezzo unitario', cSub: 'Subtotale', cShip: 'Spedizione', cFree: 'Gratuita', cTotal: 'Totale',
+      cGift: 'Bandiera della squadra + fascia da capitano in regalo', cGiftMore: 'Aggiungi altri {n} kit e ricevi bandiera della squadra + fascia da capitano in regalo', cGiftKit: 'Da 10 kit (maglia + pantaloncini): bandiera della squadra + fascia da capitano in regalo', cNext: 'Aggiungine {n}: {p} l\'uno',
+      cNote: 'Nomi, numeri e loghi inclusi. Maniche lunghe, colletto polo, calzettoni e corsia veloce sono extra (vedi Extra e opzioni).', cLadder: 'Vedi il listino completo' },
   };
   W.us = { ...W.en };
   const locales = {};
   for (const loc of LOCALES) {
     const u = UI[loc], hoursWeek = { en: 'Mon–Fri 8:00–20:00, Sat 8:00–12:00', us: 'Mon–Fri 8:00–20:00, Sat 8:00–12:00', es: 'lun–vie 8:00–20:00, sáb 8:00–12:00', fr: 'lun–ven 8h00–20h00, sam 8h00–12h00', it: 'lun–ven 8:00–20:00, sab 8:00–12:00' }[loc];
     const topics = ROW_ORDER.filter(t => t !== 'human').map(t => ({ id: t, title: u.rows[t], answer: ans[loc][t] || null }));   // hours: answer null = computed live by the widget
-    locales[loc] = { ui: { ...W[loc], hoursTitle: u.hoursTitle, hoursWeek, online: u.online, offline: u.offline('{l}') }, topics };
+    locales[loc] = { ui: { ...W[loc], hoursTitle: u.hoursTitle, hoursWeek, online: u.online, offline: u.offline('{l}') }, topics, calc: CALC[loc] };
   }
-  const keywords = {}; for (const [t, list] of KEYWORDS) keywords[t] = list;   // all languages merged, same for every locale
-  return JSON.stringify({ v: 1, keywords, locales }) + '\n';
+  return JSON.stringify({ v: 2, locales }) + '\n';
 }
 const widgetJson = buildWidget(json);
 if (process.argv.includes('--check')) {
