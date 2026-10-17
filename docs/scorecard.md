@@ -28,7 +28,7 @@ Partial Search Console weeks are never stored (they would read as a false drop).
 4. Run **Weekly scorecard** once by hand; the first run fills 16 months of history.
 
 ## Beacons (what is sent, from where)
-`tool_open`, `design_saved`, `cart_added` (3D designer), `cart_viewed`, `checkout_clicked` (cart page), `wa_chat_click` (the WhatsApp button on tool + cart; help-seeking signal, outside the funnel): `{event, sid, store}` via `navigator.sendBeacon` to
+`tool_open`, `design_saved`, `cart_added` (3D designer), `cart_viewed`, `checkout_clicked` (cart page), `wa_chat_click` (a click on a WhatsApp link of the on-page assistant, tool + cart; 17 Oct: also `faq_open`, `faq_topic`, `faq_nomatch` = panel opened, answer read, typed question not understood; help-seeking signal, outside the funnel): `{event, sid, store}` via `navigator.sendBeacon` to
 `/api/event`. `sid` is a random id kept in `sessionStorage` for the visit. It is stored only as a HyperLogLog and a raw counter per ISO week, so it can be
 counted but never read back. Decide with your privacy adviser whether this needs a notice in the cookie/privacy text (it sets no cookie and holds no personal data).
 

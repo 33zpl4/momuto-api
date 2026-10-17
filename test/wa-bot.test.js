@@ -110,3 +110,8 @@ test('"I have a design in mind": build it in the 3D designer first, then the cus
   for (const t of ['can you make this exact jersey', 'quiero una camiseta a medida', 'je veux un maillot sur mesure', 'vorrei una maglia su misura', 'i have a sketch'])
     assert.equal(say(t).event, 'answer:design', t);
 });
+
+test('a bare number is a tap on that menu row (text-only channels): 0 = menu, 1 = prices, 7 = design, 10 = person, 11 = not a menu number', () => {
+  assert.equal(say('1').event, 'answer:prices'); assert.equal(say('7').event, 'answer:design'); assert.equal(say('0').event, 'menu');
+  assert.match(say('10').event, /^handoff/); assert.notEqual(say('11').event, 'menu');
+});

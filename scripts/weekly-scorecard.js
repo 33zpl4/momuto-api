@@ -166,7 +166,9 @@ function report() {
     row('**added to cart**', wk, 'events.cart_added.users'), row('cart page viewed', wk, 'events.cart_viewed.users'),
     row('CHECKOUT clicked', wk, 'events.checkout_clicked.users'), row('checkout hand-off OK', wk, 'checkoutHandoff.ok'),
     row('**paid 3D orders**', wk, 'orders.count'),
-    row('WhatsApp chat clicked (help-seeking)', wk, 'events.wa_chat_click.users')]);
+    row('WhatsApp chat clicked (help-seeking)', wk, 'events.wa_chat_click.users'),
+    row('assistant panel opened', wk, 'events.faq_open.users'), row('assistant answer read', wk, 'events.faq_topic.users'),
+    row('assistant: question not understood', wk, 'events.faq_nomatch.users')]);
   const f = hist[wk] && hist[wk].events;
   if (f && f.cart_added && f.cart_added.users && hist[wk].orders) md += `\nCart → paid: **${Math.round(100 * hist[wk].orders.count / f.cart_added.users)}%** of sessions that reached the cart (orders and sessions are not 1:1; read the trend, not the level).\n`;
   md += sec('Orders', [row('units (jerseys)', wk, 'orders.units'), row('revenue EUR', wk, 'orders.revenue.EUR'), row('revenue USD', wk, 'orders.revenue.USD'),

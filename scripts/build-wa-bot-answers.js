@@ -14,6 +14,7 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const OUT = path.join(ROOT, 'lib', 'wa-bot-answers.json');
+const OUT_WIDGET = path.join(ROOT, 'public', 'wa-faq.json');   // fetched by the on-page assistant (design-momuto wa-chat.js)
 const LOCALES = ['en', 'us', 'es', 'fr', 'it'];
 
 // topic -> [section id, item index, expected opening of the question (EN/US only, shape guard)]
@@ -87,11 +88,44 @@ function build() {
 }
 
 const json = build();
+
+/** public/wa-faq.json: what the on-page assistant (wa-chat.js on the 3D designer + cart) shows. Same answers as the WhatsApp bot,
+ *  plus the topic titles, the keyword lists and the widget's own strings, so there is ONE place for facts and wording. */
+function buildWidget(answersJson) {
+  const { UI, ROW_ORDER, KEYWORDS } = require('../lib/wa-bot');
+  const ans = JSON.parse(answersJson);
+  const W = {   // widget-only strings (no prices). {t} = topic or typed text, {l} = a time label
+    en: { title: 'How can we help?', pick: 'Pick a topic or ask your own question:', ask: 'Type your question…', send: 'Send', back: 'All topics', close: 'Close',
+      other: 'Other questions? Talk to a person', human: 'Talk to a person on WhatsApp', still: 'Still need help? Chat with us on WhatsApp', noMatch: "I couldn't find an answer to that. A person can help you on WhatsApp.",
+      waAbout: 'Hi MOMUTO, I have a question about {t}.', waFree: 'Hi MOMUTO, {t}', today: 'today', tomorrow: 'tomorrow', at: 'at', madrid: 'Madrid time' },
+    es: { title: '¿En qué podemos ayudarte?', pick: 'Elige un tema o escribe tu pregunta:', ask: 'Escribe tu pregunta…', send: 'Enviar', back: 'Todos los temas', close: 'Cerrar',
+      other: '¿Otras dudas? Habla con una persona', human: 'Hablar con una persona por WhatsApp', still: '¿Sigues con dudas? Escríbenos por WhatsApp', noMatch: 'No he encontrado respuesta a eso. Una persona puede ayudarte por WhatsApp.',
+      waAbout: 'Hola MOMUTO, tengo una pregunta sobre {t}.', waFree: 'Hola MOMUTO, {t}', today: 'hoy', tomorrow: 'mañana', at: 'a las', madrid: 'hora de Madrid' },
+    fr: { title: 'Comment pouvons-nous vous aider ?', pick: 'Choisissez un sujet ou posez votre question :', ask: 'Écrivez votre question…', send: 'Envoyer', back: 'Tous les sujets', close: 'Fermer',
+      other: "Autres questions ? Parlez à quelqu'un", human: 'Parler à quelqu\'un sur WhatsApp', still: 'Besoin d\'aide ? Écrivez-nous sur WhatsApp', noMatch: "Je n'ai pas trouvé de réponse. Une personne peut vous aider sur WhatsApp.",
+      waAbout: "Bonjour MOMUTO, j'ai une question sur {t}.", waFree: 'Bonjour MOMUTO, {t}', today: "aujourd'hui", tomorrow: 'demain', at: 'à', madrid: 'heure de Madrid' },
+    it: { title: 'Come possiamo aiutarti?', pick: 'Scegli un argomento o scrivi la tua domanda:', ask: 'Scrivi la tua domanda…', send: 'Invia', back: 'Tutti gli argomenti', close: 'Chiudi',
+      other: 'Altre domande? Parla con una persona', human: 'Parla con una persona su WhatsApp', still: 'Hai ancora dubbi? Scrivici su WhatsApp', noMatch: 'Non ho trovato una risposta. Una persona può aiutarti su WhatsApp.',
+      waAbout: 'Ciao MOMUTO, ho una domanda su {t}.', waFree: 'Ciao MOMUTO, {t}', today: 'oggi', tomorrow: 'domani', at: 'alle', madrid: 'ora di Madrid' },
+  };
+  W.us = { ...W.en };
+  const locales = {};
+  for (const loc of LOCALES) {
+    const u = UI[loc], hoursWeek = { en: 'Mon–Fri 8:00–20:00, Sat 8:00–12:00', us: 'Mon–Fri 8:00–20:00, Sat 8:00–12:00', es: 'lun–vie 8:00–20:00, sáb 8:00–12:00', fr: 'lun–ven 8h00–20h00, sam 8h00–12h00', it: 'lun–ven 8:00–20:00, sab 8:00–12:00' }[loc];
+    const topics = ROW_ORDER.filter(t => t !== 'human').map(t => ({ id: t, title: u.rows[t], answer: ans[loc][t] || null }));   // hours: answer null = computed live by the widget
+    locales[loc] = { ui: { ...W[loc], hoursTitle: u.hoursTitle, hoursWeek, online: u.online, offline: u.offline('{l}') }, topics };
+  }
+  const keywords = {}; for (const [t, list] of KEYWORDS) keywords[t] = list;   // all languages merged, same for every locale
+  return JSON.stringify({ v: 1, keywords, locales }) + '\n';
+}
+const widgetJson = buildWidget(json);
 if (process.argv.includes('--check')) {
   const cur = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';
-  if (cur !== json) { console.error('lib/wa-bot-answers.json is stale: run node scripts/build-wa-bot-answers.js'); process.exit(1); }
+  const curW = fs.existsSync(OUT_WIDGET) ? fs.readFileSync(OUT_WIDGET, 'utf8') : '';
+  if (cur !== json || curW !== widgetJson) { console.error('lib/wa-bot-answers.json or public/wa-faq.json is stale: run node scripts/build-wa-bot-answers.js'); process.exit(1); }
   console.log('wa-bot-answers: up to date');
 } else {
   fs.writeFileSync(OUT, json);
+  fs.writeFileSync(OUT_WIDGET, widgetJson);
   console.log(`wrote ${path.relative(ROOT, OUT)} (${LOCALES.length} locales, ${json.length} bytes)`);
 }
