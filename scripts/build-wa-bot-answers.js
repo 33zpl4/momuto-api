@@ -28,10 +28,10 @@ const PICKS = {
 // pricing notes shown by the "extras" topic (index into pricing.notes) and the one shown under the ladder
 const EXTRAS_NOTES = [2, 3, 4, 6];   // the deposit line (7) now lives in the design answer
 const LADDER_NOTE = 5;
-const GIFT_FROM = 10;     // owner, 17 Oct: a free team flag + captain armband from 10 kits (jersey + shorts) up. ONE place to change the threshold.
-const GIFT_LINE = {      // customer-facing copy: a proposal for the owner to approve (not yet on the FAQ pages or llms.txt: see docs/live-chat-whatsapp.md)
-  en: 'From 10 kits: a free team flag + captain armband.', us: 'From 10 kits: a free team flag + captain armband.',
-  es: 'A partir de 10 kits: bandera del equipo + brazalete de capitán de regalo.', fr: "Dès 10 kits : drapeau de l'équipe + brassard de capitaine offerts.", it: "Da 10 kit: bandiera della squadra + fascia da capitano in regalo.",
+const GIFT_FROM = 10;     // owner, 17 Oct: a free team flag + captain armband from 10 KITS (jersey + shorts) up; 10 jerseys do not qualify. ONE place to change the threshold.
+const GIFT_LINE = {      // customer-facing copy: a proposal for the owner to approve. KITS ONLY (jersey + shorts); jersey-only orders do not get it (owner, 17 Oct)
+  en: 'From 10 kits (jersey + shorts): a free team flag + captain armband.', us: 'From 10 kits (jersey + shorts): a free team flag + captain armband.',
+  es: 'A partir de 10 kits (camiseta + pantalón): bandera del equipo + brazalete de capitán de regalo.', fr: "Dès 10 kits (maillot + short) : drapeau de l'équipe + brassard de capitaine offerts.", it: "Da 10 kit (maglia + pantaloncini): bandiera della squadra + fascia da capitano in regalo.",
 };
 const DEPOSIT_NOTE = 7;   // "Custom design deposit: €15 … credited in full to orders of 5+ jerseys" (the only numbers in the design answer)
 
@@ -125,25 +125,25 @@ function buildWidget(answersJson) {
       other: 'Other questions? Talk to a person', human: 'Talk to a person on WhatsApp', still: 'Still need help? Chat with us on WhatsApp',
       waAbout: 'Hi MOMUTO, I have a question about {t}.', today: 'today', tomorrow: 'tomorrow', at: 'at', madrid: 'Madrid time',
       cQty: 'Quantity', cMinus: 'Fewer', cPlus: 'More', cUnit: 'Price per unit', cSub: 'Subtotal', cShip: 'Shipping', cFree: 'Free', cTotal: 'Total',
-      cGift: 'A free team flag + captain armband are included', cGiftMore: 'Add {n} more and get a free team flag + captain armband', cNext: 'Add {n} more: {p} each',
+      cGift: 'A free team flag + captain armband are included', cGiftMore: 'Add {n} more kits and get a free team flag + captain armband', cGiftKit: 'Order 10 kits (jersey + shorts) and get a free team flag + captain armband', cNext: 'Add {n} more: {p} each',
       cNote: 'Names, numbers and logos are included. Long sleeves, polo collar, socks and the fast lane are extra (see Extras & options).', cLadder: 'See the full price ladder' },
     es: { title: '¿En qué podemos ayudarte?', pick: 'Elige un tema:', back: 'Todos los temas', close: 'Cerrar',
       other: '¿Otras dudas? Habla con una persona', human: 'Hablar con una persona por WhatsApp', still: '¿Sigues con dudas? Escríbenos por WhatsApp',
       waAbout: 'Hola MOMUTO, tengo una pregunta sobre {t}.', today: 'hoy', tomorrow: 'mañana', at: 'a las', madrid: 'hora de Madrid',
       cQty: 'Cantidad', cMinus: 'Menos', cPlus: 'Más', cUnit: 'Precio por unidad', cSub: 'Subtotal', cShip: 'Envío', cFree: 'Gratis', cTotal: 'Total',
-      cGift: 'Incluye bandera del equipo + brazalete de capitán de regalo', cGiftMore: 'Añade {n} más y llévate bandera del equipo + brazalete de capitán de regalo', cNext: 'Añade {n} más: {p} la unidad',
+      cGift: 'Incluye bandera del equipo + brazalete de capitán de regalo', cGiftMore: 'Añade {n} kits más y llévate bandera del equipo + brazalete de capitán de regalo', cGiftKit: 'Con 10 kits (camiseta + pantalón), bandera del equipo + brazalete de capitán de regalo', cNext: 'Añade {n} más: {p} la unidad',
       cNote: 'Nombres, números y logos incluidos. Mangas largas, cuello polo, calcetines y vía rápida son extras (ver Extras y opciones).', cLadder: 'Ver la tabla completa de precios' },
     fr: { title: 'Comment pouvons-nous vous aider ?', pick: 'Choisissez un sujet :', back: 'Tous les sujets', close: 'Fermer',
       other: "Autres questions ? Parlez à quelqu'un", human: "Parler à quelqu'un sur WhatsApp", still: "Besoin d'aide ? Écrivez-nous sur WhatsApp",
       waAbout: "Bonjour MOMUTO, j'ai une question sur {t}.", today: "aujourd'hui", tomorrow: 'demain', at: 'à', madrid: 'heure de Madrid',
       cQty: 'Quantité', cMinus: 'Moins', cPlus: 'Plus', cUnit: 'Prix unitaire', cSub: 'Sous-total', cShip: 'Livraison', cFree: 'Offerte', cTotal: 'Total',
-      cGift: "Drapeau de l'équipe + brassard de capitaine offerts", cGiftMore: "Ajoutez-en {n} de plus et recevez drapeau de l'équipe + brassard de capitaine offerts", cNext: 'Ajoutez-en {n} : {p} pièce',
+      cGift: "Drapeau de l'équipe + brassard de capitaine offerts", cGiftMore: "Ajoutez {n} kits de plus et recevez drapeau de l'équipe + brassard de capitaine offerts", cGiftKit: "Dès 10 kits (maillot + short) : drapeau de l'équipe + brassard de capitaine offerts", cNext: 'Ajoutez-en {n} : {p} pièce',
       cNote: 'Noms, numéros et logos inclus. Manches longues, col polo, chaussettes et voie rapide en supplément (voir Options et extras).', cLadder: 'Voir la grille complète des prix' },
     it: { title: 'Come possiamo aiutarti?', pick: 'Scegli un argomento:', back: 'Tutti gli argomenti', close: 'Chiudi',
       other: 'Altre domande? Parla con una persona', human: 'Parla con una persona su WhatsApp', still: 'Hai ancora dubbi? Scrivici su WhatsApp',
       waAbout: 'Ciao MOMUTO, ho una domanda su {t}.', today: 'oggi', tomorrow: 'domani', at: 'alle', madrid: 'ora di Madrid',
       cQty: 'Quantità', cMinus: 'Meno', cPlus: 'Più', cUnit: 'Prezzo unitario', cSub: 'Subtotale', cShip: 'Spedizione', cFree: 'Gratuita', cTotal: 'Totale',
-      cGift: 'Bandiera della squadra + fascia da capitano in regalo', cGiftMore: 'Aggiungine {n} e ricevi bandiera della squadra + fascia da capitano in regalo', cNext: 'Aggiungine {n}: {p} l\'uno',
+      cGift: 'Bandiera della squadra + fascia da capitano in regalo', cGiftMore: 'Aggiungi altri {n} kit e ricevi bandiera della squadra + fascia da capitano in regalo', cGiftKit: 'Da 10 kit (maglia + pantaloncini): bandiera della squadra + fascia da capitano in regalo', cNext: 'Aggiungine {n}: {p} l\'uno',
       cNote: 'Nomi, numeri e loghi inclusi. Maniche lunghe, colletto polo, calzettoni e corsia veloce sono extra (vedi Extra e opzioni).', cLadder: 'Vedi il listino completo' },
   };
   W.us = { ...W.en };

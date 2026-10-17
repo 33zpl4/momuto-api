@@ -7,7 +7,7 @@ const answers = require('../lib/wa-bot-answers.json');
 
 const LOCALES = ['en', 'us', 'es', 'fr', 'it'];
 const UI_KEYS = ['title', 'pick', 'back', 'close', 'other', 'human', 'still', 'waAbout', 'today', 'tomorrow', 'at', 'madrid', 'hoursTitle', 'hoursWeek', 'online', 'offline',
-  'cQty', 'cMinus', 'cPlus', 'cUnit', 'cSub', 'cShip', 'cFree', 'cTotal', 'cGift', 'cGiftMore', 'cNext', 'cNote', 'cLadder'];
+  'cQty', 'cMinus', 'cPlus', 'cUnit', 'cSub', 'cShip', 'cFree', 'cTotal', 'cGift', 'cGiftMore', 'cGiftKit', 'cNext', 'cNote', 'cLadder'];
 test('every locale has the 9 topics, all UI strings and the same ids', () => {
   for (const loc of LOCALES) {
     const d = j.locales[loc];
@@ -28,5 +28,5 @@ test('price calculator data = the FAQ ladder, per locale', () => {
     assert.ok(c.jersey && c.kit);
   }
 });
-test('the flag + captain armband (10 kits) is on every prices answer', () => { for (const loc of LOCALES) assert.match(answers[loc].prices, /10 (kit|kits)|10 kit/i, loc); });
+test('the flag + captain armband is for 10 KITS (jersey + shorts) on every prices answer, never for jerseys alone', () => { for (const loc of LOCALES) { assert.match(answers[loc].prices, /10 kits? \(/i, loc); assert.match(j.locales[loc].ui.cGiftKit, /10 kits? \(/i, loc); } });
 test('the widget JSON stays small (loaded on first panel open)', () => assert.ok(JSON.stringify(j).length < 45000));
