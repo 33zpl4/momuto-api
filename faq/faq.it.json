@@ -105,7 +105,8 @@
       "<b>Calzettoni: 3,90 €</b> al paio, prezzo fisso a qualsiasi quantità. Opzionali, per giocatore. Non personalizzabili: calzettone da squadra in tinta unita abbinato, disponibile nella maggior parte dei colori.",
       "<b>Spedizione gratuita da 50 €.</b> Sotto questa soglia la spedizione costa 3,90 €.",
       "<b>Corsia veloce: +59 € per ordine</b> — salta la coda di produzione e aggiunge priorità di spedizione; circa 7 giorni risparmiati.",
-      "<b>Acconto design su misura: 15 €</b> per un design realizzato dal nostro team (su misura o da un concept IA) — accreditato per intero sugli ordini di 5+ maglie, quindi gratis per una squadra. Progettare nel designer 3D è sempre gratuito."
+      "<b>Acconto design su misura: 15 €</b> per un design realizzato dal nostro team (su misura o da un concept IA) — accreditato per intero sugli ordini di 5+ maglie, quindi gratis per una squadra. Progettare nel designer 3D è sempre gratuito.",
+      "<b>Bandiera della squadra + fascia da capitano in regalo</b> per ordini da 10 kit (maglia + pantaloncini). Non inclusi negli ordini di sole maglie."
     ]
   },
   "sections": [
@@ -140,6 +141,10 @@
         [
           "Fate altri sport oltre al calcio?",
           "Sì. Lo stesso designer 3D e lo stesso tessuto servono ora anche per le <b>canotte da basket</b>, e lo studio ha realizzato divise da calcio a 5, padel, pallamano ed e-sport. Chiedici se non vedi il tuo sport."
+        ],
+        [
+          "Gli ordini grandi includono qualcosa in più?",
+          "Sì: gli ordini da <b>10 kit o più</b> (maglia + pantaloncini) includono <b>bandiera della squadra e fascia da capitano in regalo</b>. Vale per i kit, non per gli ordini di sole maglie."
         ]
       ]
     },

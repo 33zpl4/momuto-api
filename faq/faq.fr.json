@@ -105,7 +105,8 @@
       "<b>Chaussettes : 3,90 €</b> la paire, prix fixe à toute quantité. En option, par joueur. Non personnalisées : chaussette d'équipe unie assortie, disponible dans la plupart des couleurs.",
       "<b>Livraison gratuite dès 50 €.</b> En dessous, la livraison coûte 3,90 €.",
       "<b>Voie rapide : +59 € par commande</b> — saute la file de production et ajoute une priorité d'expédition ; environ 7 jours gagnés.",
-      "<b>Acompte design sur mesure : 15 €</b> pour un design réalisé par notre équipe (sur mesure ou à partir d'un concept IA) — crédité intégralement sur les commandes de 5 maillots et plus, donc gratuit pour une équipe. Concevoir dans le designer 3D est toujours gratuit."
+      "<b>Acompte design sur mesure : 15 €</b> pour un design réalisé par notre équipe (sur mesure ou à partir d'un concept IA) — crédité intégralement sur les commandes de 5 maillots et plus, donc gratuit pour une équipe. Concevoir dans le designer 3D est toujours gratuit.",
+      "<b>Drapeau de l'équipe + brassard de capitaine offerts</b> dès 10 kits (maillot + short) commandés. Non inclus pour les commandes de maillots seuls."
     ]
   },
   "sections": [
@@ -140,6 +141,10 @@
         [
           "Faites-vous d'autres sports que le football ?",
           "Oui. Le même designer 3D et le même tissu servent désormais aux <b>maillots de basket</b>, et le studio a réalisé des tenues de futsal, padel, handball et e-sport. Demandez-nous si vous ne voyez pas votre sport."
+        ],
+        [
+          "Les grosses commandes incluent-elles quelque chose en plus ?",
+          "Oui : les commandes de <b>10 kits ou plus</b> (maillot + short) incluent un <b>drapeau de l'équipe et un brassard de capitaine offerts</b>. C'est pour les kits, pas pour les commandes de maillots seuls."
         ]
       ]
     },
