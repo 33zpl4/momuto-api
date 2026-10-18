@@ -24,7 +24,7 @@ const T = {
     h1: 'MY <span class="acc">ORDER</span>', sub: 'Status, delivery window, tracking and your roster, in one place.',
     hi: n => n ? `Hi ${n}, here is your order.` : 'Here is your order.', ref: 'Order reference', store: 'Store order',
     steps: ['Paid', 'In production', 'Shipped', 'Delivered'], window: 'Estimated delivery', windowFast: 'Estimated delivery · Fast lane',
-    track: 'Track your parcel', tracking: 'Tracking number', design: 'Your design', front: 'Front', back: 'Back',
+    track: 'Track your parcel', tracking: 'Tracking number', design: 'Your design', cardH: 'Share your new kit', cardB: 'Make a post image', front: 'Front', back: 'Back',
     roster: 'Roster', cols: { number: 'No.', name: 'Name', size: 'Jersey', shorts: 'Shorts', sleeve: 'Sleeve', qty: 'Qty' },
     long: 'Long', short: 'Short', none: 'Jersey only', polo: 'Polo collar', same: 'Same size',
     pending: 'Your roster is being loaded. Check back shortly.', totals: (t) => `${t.jerseys} jerseys` + (t.shorts != null ? ` · ${t.shorts} shorts` : ''),
@@ -38,7 +38,7 @@ const T = {
     h1: 'MI <span class="acc">PEDIDO</span>', sub: 'Estado, plazo de entrega, seguimiento y tu plantilla, en un solo sitio.',
     hi: n => n ? `Hola ${n}, este es tu pedido.` : 'Este es tu pedido.', ref: 'Referencia del pedido', store: 'Pedido de la tienda',
     steps: ['Pagado', 'En producción', 'Enviado', 'Entregado'], window: 'Entrega estimada', windowFast: 'Entrega estimada · Fast lane',
-    track: 'Seguir el paquete', tracking: 'Número de seguimiento', design: 'Tu diseño', front: 'Delante', back: 'Detrás',
+    track: 'Seguir el paquete', tracking: 'Número de seguimiento', design: 'Tu diseño', cardH: 'Comparte tu nueva equipación', cardB: 'Crear imagen para publicar', front: 'Delante', back: 'Detrás',
     roster: 'Plantilla', cols: { number: 'Dorsal', name: 'Nombre', size: 'Camiseta', shorts: 'Pantalón', sleeve: 'Manga', qty: 'Cant.' },
     long: 'Larga', short: 'Corta', none: 'Solo camiseta', polo: 'Cuello polo', same: 'Misma talla',
     pending: 'Estamos cargando tu plantilla. Vuelve a mirar en un momento.', totals: (t) => `${t.jerseys} camisetas` + (t.shorts != null ? ` · ${t.shorts} pantalones` : ''),
@@ -52,7 +52,7 @@ const T = {
     h1: 'MA <span class="acc">COMMANDE</span>', sub: 'Statut, délai de livraison, suivi et votre liste de joueurs, au même endroit.',
     hi: n => n ? `Bonjour ${n}, voici votre commande.` : 'Voici votre commande.', ref: 'Référence de commande', store: 'Commande boutique',
     steps: ['Payée', 'En production', 'Expédiée', 'Livrée'], window: 'Livraison estimée', windowFast: 'Livraison estimée · Fast lane',
-    track: 'Suivre le colis', tracking: 'Numéro de suivi', design: 'Votre design', front: 'Face', back: 'Dos',
+    track: 'Suivre le colis', tracking: 'Numéro de suivi', design: 'Votre design', cardH: 'Partagez votre nouvelle tenue', cardB: 'Créer une image à publier', front: 'Face', back: 'Dos',
     roster: 'Liste des joueurs', cols: { number: 'N°', name: 'Nom', size: 'Maillot', shorts: 'Short', sleeve: 'Manches', qty: 'Qté' },
     long: 'Longues', short: 'Courtes', none: 'Maillot seul', polo: 'Col polo', same: 'Même taille',
     pending: 'Votre liste est en cours de chargement. Revenez dans un instant.', totals: (t) => `${t.jerseys} maillots` + (t.shorts != null ? ` · ${t.shorts} shorts` : ''),
@@ -66,7 +66,7 @@ const T = {
     h1: 'IL MIO <span class="acc">ORDINE</span>', sub: 'Stato, data di consegna, tracking e la tua lista giocatori, in un unico posto.',
     hi: n => n ? `Ciao ${n}, ecco il tuo ordine.` : 'Ecco il tuo ordine.', ref: 'Riferimento ordine', store: 'Ordine negozio',
     steps: ['Pagato', 'In produzione', 'Spedito', 'Consegnato'], window: 'Consegna stimata', windowFast: 'Consegna stimata · Fast lane',
-    track: 'Traccia il pacco', tracking: 'Numero di tracking', design: 'Il tuo design', front: 'Fronte', back: 'Retro',
+    track: 'Traccia il pacco', tracking: 'Numero di tracking', design: 'Il tuo design', cardH: 'Condividi la tua nuova divisa', cardB: "Crea un'immagine da pubblicare", front: 'Fronte', back: 'Retro',
     roster: 'Lista giocatori', cols: { number: 'N.', name: 'Nome', size: 'Maglia', shorts: 'Pantaloncini', sleeve: 'Maniche', qty: 'Qtà' },
     long: 'Lunghe', short: 'Corte', none: 'Solo maglia', polo: 'Colletto polo', same: 'Stessa taglia',
     pending: 'Stiamo caricando la tua lista. Riprova tra un momento.', totals: (t) => `${t.jerseys} maglie` + (t.shorts != null ? ` · ${t.shorts} pantaloncini` : ''),
@@ -149,6 +149,8 @@ function render(o){
   if(imgs.length){var dc=el('div','card');dc.appendChild(el('h2',0,T.design));var w2=el('div','imgs');
     imgs.forEach(function(x){var fg=el('figure'),im=document.createElement('img');im.src=x[0];im.alt=x[1];im.loading='lazy';fg.appendChild(im);fg.appendChild(el('figcaption',0,x[1]));w2.appendChild(fg);});
     dc.appendChild(w2);root.appendChild(dc);}
+  var cu=null;o.designs.forEach(function(d){if(!cu&&d.cardUrl&&/^https:\\/\\/design\\.momuto\\.com\\//.test(d.cardUrl))cu=d.cardUrl;});
+  if(cu){var kc=el('div','card');kc.appendChild(el('h2',0,T.cardH));var ka=el('a','go',T.cardB+' →');ka.href=cu;ka.target='_blank';ka.rel='noopener';kc.appendChild(ka);root.appendChild(kc);}
   var rc=el('div','card');rc.appendChild(el('h2',0,T.roster));
   var rows=[];o.designs.forEach(function(d){d.players.forEach(function(p){rows.push(p);});});
   if(!rows.length){rc.appendChild(el('p','muted',T.pending));}
