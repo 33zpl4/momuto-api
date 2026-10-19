@@ -33,7 +33,8 @@ const pageFacts = () => {
   const where = (el) => (el.closest('header') ? 'header' : el.closest('footer') ? 'footer' : el.closest('nav') ? 'nav' : 'other');
   const links = [...document.querySelectorAll('a[href]')].filter(a => LINK_RE.test(a.getAttribute('href') + ' ' + (a.textContent || '') + ' ' + (a.getAttribute('aria-label') || '') + ' ' + a.className))
     .map(a => ({ text: (a.textContent || a.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ').slice(0, 40), href: a.getAttribute('href').slice(0, 100), where: where(a), visible: vis(a), cls: String(a.className).slice(0, 60) }));
-  return { title: document.title, h1: [...document.querySelectorAll('h1')].map(h => h.textContent.trim().slice(0, 80)), links };
+  const icons = [...document.querySelectorAll('header a[href], .page-header a[href]')].filter(a => vis(a) && /login|account|user|person|profile/i.test(a.getAttribute('href') + a.className + (a.getAttribute('aria-label') || '') + a.innerHTML.slice(0, 300))).map(a => a.outerHTML.replace(/\s+/g, ' ').slice(0, 220)).slice(0, 4);
+  return { icons, title: document.title, h1: [...document.querySelectorAll('h1')].map(h => h.textContent.trim().slice(0, 80)), links };
 };
 const formFacts = () => ({
   labels: [...document.querySelectorAll('label, input[placeholder], button, [type=submit]')].filter(e => e.getBoundingClientRect().width > 0)
@@ -92,6 +93,7 @@ async function main() {
       }
     } catch (e) { res.error = String(e.message || e).split('\n')[0].slice(0, 200); }
     fs.writeFileSync(path.join(OUT, `${tag}.json`), JSON.stringify(res, null, 1));
+    if (vpName === 'phone' || key === 'es') console.log(`DETAIL ${tag} ` + JSON.stringify({ icons: res.home && res.home.icons, loginPage: res.account && res.account[0] && { title: res.account[0].title, h1: res.account[0].h1, labels: res.account[0].form && res.account[0].form.labels }, orderPage: res.orderPage && { status: res.orderPage.status, title: res.orderPage.title, h1: res.orderPage.h1, labels: res.orderPage.form && res.orderPage.form.labels } }));
     const hdr = (res.home && res.home.links || []).filter(l => l.where === 'header');
     summary.push(`${tag.padEnd(14)} home ${res.homeStatus} | header account-ish links: ${hdr.map(l => (l.visible ? '' : '(hidden)') + l.text + '→' + l.href).join(' ; ') || 'none'} | `
       + (res.account || []).map(a => `${a.path} ${a.status}→${a.finalUrl.replace(host, '')}`).join(' , ') + ` | order page ${res.orderPage ? res.orderPage.status : '?'}${res.login ? ' | login ' + (res.login.error ? 'ERR ' + res.login.error : (res.login.stillOnLogin ? 'FAILED (still on login)' : 'ok')) : ''}`);
