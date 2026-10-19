@@ -73,5 +73,7 @@ picture card ready (`?card=1`, design-momuto `static/share-card.js`): `configId`
   on the order page between the design renders and the roster (`cardUrl` is in the `/api/order-view` JSON per design). Older orders and non-3D orders show neither.
 - **Privacy:** the link carries the buyer's design-server uuid (the tool's anonymous session id, the same `u` a share link has). It reaches the buyer by email and the
   token-/email-gated page JSON only; `publicOrder` still exposes no email, address or amounts.
+- **3D-links inventory:** the real links are built at runtime by `cardUrl()` (ids come from each order), so `scripts/audit-3d-links.js` cannot see them; the one row it records for them
+  (`configId=c4f9a2b7 … share=u8k2p9x1`, `scripts/test-order-view.js`) is the test fixture of that shape. If the launch parameters ever change, change `cardUrl()` as well as the inventory.
 - **Counters:** the tool beacons `card_open` / `card_made` / `card_share` / `card_download` (scorecard rows "share image: …"); opened-from-email vs from-the-page is not separated.
 - Tests: `node scripts/test-order-view.js` (17). **Not verified:** a live email/page link opening a real design (needs the webhook deployed and one paid order), phones' share sheet.
