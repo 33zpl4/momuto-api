@@ -16,6 +16,10 @@ const VIEWPORTS = [['desktop', { width: 1440, height: 900 }], ['phone', { width:
 const ONLY = (process.env.PROBE_STORES || 'all').toLowerCase().split(',').map(s => s.trim());
 const ADD_RE = /add to (cart|bag)|añadir al (carrito|cesta)|agregar al carrito|ajouter au panier|aggiungi al carrello/i;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+// PROBE_CSS=<file> (or 'none'): stylesheet injected into every page of the session, BEFORE the page scripts run, so the pop-up that appears on click is skinned too
+const CSS = process.env.PROBE_CSS && fs.existsSync(process.env.PROBE_CSS) ? fs.readFileSync(process.env.PROBE_CSS, 'utf8') : '';
+const SUF = CSS ? '-css' : '';
+const slim = h => String(h).replace(/<svg[\s\S]*?<\/svg>/gi, '<svg/>').replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '').replace(/\s(data-[\w-]+|srcset|sizes|loading)="[^"]*"/g, '').replace(/\s+/g, ' ');
 
 // runs in the page: facts about an element subtree
 const facts = (root) => {
@@ -54,9 +58,10 @@ const findOverlay = () => {
   for (const [key, base] of STORES) {
     if (!(ONLY.includes('all') || ONLY.includes(key))) continue;
     for (const [vp, size] of VIEWPORTS) {
-      const tag = `${key}-${vp}`, rep = { store: key, viewport: vp };
+      const tag = `${key}-${vp}${SUF}`, rep = { store: key, viewport: vp };
       const ctx = await browser.newContext({ viewport: size, isMobile: vp === 'phone', locale: 'en-US' });
       const page = await ctx.newPage();
+      if (CSS) await page.addInitScript(css => { const add = () => { const st = document.createElement('style'); st.id = 'mo-probe-css'; st.textContent = css; (document.head || document.documentElement).appendChild(st); }; if (document.head) add(); else document.addEventListener('DOMContentLoaded', add); }, CSS);
       try {
         await page.goto(base + '/', { waitUntil: 'domcontentloaded', timeout: 60000 }); await sleep(2500);
         const prod = await page.evaluate(() => { const a = [...document.querySelectorAll('a[href*="/products/"]')].map(a => a.getAttribute('href')).filter(h => /\/products\//.test(h) && !/fast.?lane/i.test(h)); return a[0] || null; });
@@ -75,13 +80,16 @@ const findOverlay = () => {
           const ov = await page.evaluateHandle(findOverlay); const el = ov.asElement();
           if (el) { rep.popup = await el.evaluate(facts).catch(e => ({ error: e.message })); rep.popupBox = await el.evaluate(e => { const r = e.getBoundingClientRect(), c = getComputedStyle(e); return { x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height), bg: c.backgroundColor, radius: c.borderRadius, shadow: c.boxShadow.slice(0, 80), z: c.zIndex, pos: c.position, tag: e.tagName.toLowerCase() + '.' + String(e.className).slice(0, 80) }; }); }
           rep.popupFound = !!el;
+          if (el) fs.writeFileSync(path.join(OUT, `${tag}-popup.html`), slim(await el.evaluate(e => (e.closest('[class*=popup], [class*=modal], [class*=drawer]') || e).outerHTML)).slice(0, 30000));
           await page.screenshot({ path: path.join(OUT, `${tag}-popup.png`) });
         } else { rep.error = 'no add-to-cart button found on the product page'; }
         await page.goto(base + '/cart', { waitUntil: 'domcontentloaded', timeout: 60000 }); await sleep(3500);
         rep.cartUrl = page.url();
-        rep.cart = await page.evaluate(facts, await page.evaluateHandle(() => document.querySelector('main, #MainContent, .page-content, [class*=cart]') || document.body));
+        rep.cart = await page.evaluate(facts, await page.evaluateHandle(() => document.body));
         rep.cartLayout = await page.evaluate(() => ({ hScroll: document.documentElement.scrollWidth > innerWidth + 1, scrollW: document.documentElement.scrollWidth, innerW: innerWidth, bodyBg: getComputedStyle(document.body).backgroundColor, bodyFont: getComputedStyle(document.body).fontFamily.slice(0, 60), title: document.title, h1: [...document.querySelectorAll('h1')].map(h => h.innerText.trim().slice(0, 60)) }));
         await page.screenshot({ path: path.join(OUT, `${tag}-cart.png`), fullPage: true });
+        fs.writeFileSync(path.join(OUT, `${tag}-cart.html`), slim(await page.evaluate(() => { const m = document.querySelector('#MainContent, main, [id*=cart]') ; return (document.querySelector('[class*=cart-page], [class*=cart_page], #cart, [id*=cart_]') || m || document.body).outerHTML; })).slice(0, 40000));
+        rep.cartStyles = await page.evaluate(() => { const q = s => document.querySelector(s), cs = e => e && ({ tag: e.tagName + '.' + String(e.className).slice(0, 60), bg: getComputedStyle(e).backgroundColor, color: getComputedStyle(e).color, font: getComputedStyle(e).fontFamily.slice(0, 40), size: getComputedStyle(e).fontSize }); return { bar: cs(q('[class*=announcement], [class*=top-bar], [class*=topbar]')), header: cs(q('header')), footer: cs(q('footer')) }; });
       } catch (e) { rep.error = (rep.error ? rep.error + ' | ' : '') + e.message.slice(0, 200); }
       fs.writeFileSync(path.join(OUT, `${tag}.json`), JSON.stringify(rep, null, 1));
       summary.push(`${tag}: product ${rep.productUrl || '-'} | add btn ${rep.addButton ? '"' + rep.addButton.text + '"' : 'NO'} | popup ${rep.popupFound ? 'YES ' + (rep.popupBox ? rep.popupBox.w + 'x' + rep.popupBox.h : '') : 'no'} | cart ${rep.cartUrl || '-'} hScroll=${rep.cartLayout && rep.cartLayout.hScroll} fonts=${JSON.stringify(rep.cart && rep.cart.fonts)}${rep.error ? ' | ERROR ' + rep.error : ''}`);

@@ -14,9 +14,12 @@ on:
       mode:
         description: "'probe' or 'cleanup' (deletes the screenshots branch)"
         default: 'probe'
+      css:
+        description: "stylesheet injected into every page before it loads (default none = what is LIVE); e.g. docs/cart-brand/cart-brand.css"
+        default: 'none'
   push:
     branches: [claude/keen-darwin-52lbrf]
-    paths: ['.github/workflows/probe-cart-ui.yml', 'scripts/probe-cart-ui.js']
+    paths: ['.github/workflows/probe-cart-ui.yml', 'scripts/probe-cart-ui.js', 'docs/cart-brand/cart-brand.css']
 
 jobs:
   probe:
@@ -36,7 +39,8 @@ jobs:
       - run: node scripts/probe-cart-ui.js
         if: github.event.inputs.mode != 'cleanup'
         env:
-          PROBE_STORES: ${{ github.event.inputs.stores || 'all' }}
+          PROBE_STORES: ${{ github.event.inputs.stores || (contains(github.event.head_commit.message, '[stores:us]') && 'us' || 'all') }}
+          PROBE_CSS: ${{ github.event.inputs.css || (contains(github.event.head_commit.message, '[css]') && 'docs/cart-brand/cart-brand.css' || 'none') }}
       - uses: actions/upload-artifact@v4
         if: always() && github.event.inputs.mode != 'cleanup'
         with:
