@@ -25,7 +25,10 @@ const STORES = [
   ['it', 'https://it.momuto.com', ORDER_PAGES.it.handle],
 ];
 const VIEWPORTS = [['desktop', { width: 1440, height: 900 }], ['phone', { width: 390, height: 844 }]];
-const ACCOUNT_PATHS = ['/account/login', '/account', '/account/orders'];
+const ACCOUNT_PATHS = ['/account/login', '/account/register', '/account', '/account/orders'];
+const ONLY = (process.env.PROBE_STORES || 'all').toLowerCase().split(',').map(x => x.trim());
+const ORDER_PATH = process.env.PROBE_ORDER || '';
+const mask = (t) => String(t).replace(/([\w.+-])[\w.+-]*@([\w-]+\.[\w.]+)/g, '$1***@$2');
 const LINK_RE = /account|login|sign.?in|orders?\b|tracking|track|my-order|mi-pedido|mon-commande|il-mio-ordine|pedido|commande|ordine|cuenta|compte|conto/i;
 
 const pageFacts = () => {
@@ -41,12 +44,24 @@ const formFacts = () => ({
     .map(e => (e.textContent || e.getAttribute('placeholder') || e.value || '').trim().replace(/\s+/g, ' ').slice(0, 50)).filter(Boolean).slice(0, 24),
   inputs: [...document.querySelectorAll('input')].filter(i => i.getBoundingClientRect().width > 0).map(i => i.type).slice(0, 10),
 });
+const styleFacts = () => {
+  const cs = (el) => { if (!el) return null; const c = getComputedStyle(el), r = el.getBoundingClientRect(); return { sel: el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).slice(0, 3).join('.') : ''), font: c.fontFamily.split(',')[0].replace(/["']/g, ''), size: c.fontSize, weight: c.fontWeight, color: c.color, bg: c.backgroundColor, radius: c.borderRadius, tt: c.textTransform, ls: c.letterSpacing, w: Math.round(r.width), h: Math.round(r.height) }; };
+  const vis = (e) => e && e.getBoundingClientRect().width > 0;
+  const q = (sel) => [...document.querySelectorAll(sel)].find(vis);
+  return { body: cs(document.body), h1: cs(q('h1')), h2: cs(q('h2')), h3: cs(q('h3')), label: cs(q('label')), input: cs(q('input:not([type=hidden]):not([type=checkbox])')), primary: cs(q('button[type=submit], input[type=submit], .btn-primary, button.button, a.button')), link: cs(q('main a, #MainContent a, .page-content a, form a')), table: cs(q('table')) };
+};
+const outline = () => {
+  const root = document.querySelector('main') || document.querySelector('#MainContent') || document.querySelector('.page-content') || document.body;
+  const out = [], walk = (el, d) => { if (d > 3 || out.length > 70) return; [...el.children].forEach(c => { if (['SCRIPT', 'STYLE', 'SVG', 'PATH', 'NOSCRIPT'].includes(c.tagName.toUpperCase())) return; const r = c.getBoundingClientRect(); if (r.width < 1) return; out.push('  '.repeat(d) + c.tagName.toLowerCase() + (c.id ? '#' + c.id : '') + (typeof c.className === 'string' && c.className.trim() ? '.' + c.className.trim().split(/\s+/).slice(0, 3).join('.') : '') + (c.children.length ? '' : ' "' + (c.textContent || '').trim().slice(0, 30) + '"')); walk(c, d + 1); }); };
+  walk(root, 0); return out;
+};
 const textLines = () => document.body.innerText.split('\n').map(s => s.trim()).filter(Boolean).slice(0, 140);
 
 async function main() {
   const browser = await chromium.launch();
   const summary = [];
   for (const [key, host, handle] of STORES) for (const [vpName, vp] of VIEWPORTS) {
+    if (ONLY[0] !== 'all' && !ONLY.includes(key)) continue;
     const tag = `${key}-${vpName}`, res = { store: key, host, viewport: vpName };
     const ctx = await browser.newContext({ viewport: vp, isMobile: vpName === 'phone', hasTouch: vpName === 'phone' });
     const p = await ctx.newPage();
@@ -61,6 +76,7 @@ async function main() {
         const status = await go(host + ap);
         const f = await p.evaluate(pageFacts).catch(() => ({})), form = await p.evaluate(formFacts).catch(() => ({}));
         res.account.push({ path: ap, status, finalUrl: p.url().slice(0, 120), title: f.title, h1: f.h1, form });
+        if (key === ONLY[0] || ONLY[0] === 'all') { console.log(`STYLE ${tag} ${ap} ` + JSON.stringify(await p.evaluate(styleFacts).catch(() => null))); if (vpName === 'desktop') console.log(`OUTLINE ${tag} ${ap}\n` + (await p.evaluate(outline).catch(() => [])).join('\n')); }
         await p.screenshot({ path: path.join(OUT, `${tag}-${ap.replace(/\W+/g, '_')}.png`) });
       }
       const ostatus = await go(`${host}/pages/${handle}`);
@@ -74,17 +90,21 @@ async function main() {
         res.login = { attempted: true };
         await go(host + '/account/login');
         try {
-          await p.fill('input[type=email], input[name*=mail i], input[name*=user i]', email, { timeout: 8000 });
+          await p.fill('input[type=email], input[name*=mail i], input[name*=user i], input[type=text]:visible', email, { timeout: 8000 });
           await p.fill('input[type=password]', pass, { timeout: 8000 });
           await Promise.all([p.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {}), p.click('button[type=submit], input[type=submit], button:has-text("Log"), button:has-text("Sign"), button:has-text("Iniciar"), button:has-text("Connexion"), button:has-text("Accedi")', { timeout: 8000 })]);
           await p.waitForTimeout(2500);
           res.login.landed = p.url().slice(0, 120); res.login.stillOnLogin = /login/i.test(p.url());
           res.loggedIn = [];
-          for (const ap of ['/account', '/account/orders']) {
+          for (const ap of ['/account', '/account/orders'].concat(ORDER_PATH ? [ORDER_PATH] : [])) {
             await go(host + ap);
             await p.waitForTimeout(1500);
-            res.loggedIn.push({ path: ap, finalUrl: p.url().slice(0, 120), lines: await p.evaluate(textLines) });
+            const lines = (await p.evaluate(textLines)).map(mask);
+            res.loggedIn.push({ path: ap, finalUrl: p.url().slice(0, 120), lines });
             await p.screenshot({ path: path.join(OUT, `${tag}-in-${ap.replace(/\W+/g, '_')}.png`), fullPage: true });
+            console.log(`LOGGEDIN ${tag} ${ap} -> ${p.url().replace(host, '')}\n` + lines.slice(0, 90).map(l => '   | ' + l).join('\n'));
+            console.log(`STYLE ${tag} in${ap} ` + JSON.stringify(await p.evaluate(styleFacts).catch(() => null)));
+            if (vpName === 'desktop') console.log(`OUTLINE ${tag} in${ap}\n` + (await p.evaluate(outline).catch(() => [])).join('\n'));
           }
           // first order detail, if the list links to one (still read-only)
           const href = await p.evaluate(() => { const a = [...document.querySelectorAll('a[href]')].find(x => /orders?\/[^/?#]+|order_detail|order-detail/i.test(x.getAttribute('href'))); return a && a.href; });
