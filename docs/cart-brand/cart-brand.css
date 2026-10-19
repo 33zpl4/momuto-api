@@ -55,6 +55,9 @@ html body:has(.layer-add-cart-success) .mo-popup-content { background: var(--mo-
 html body:has(.layer-add-cart-success) .layer-add-cart-success { background: transparent !important; color: var(--mo-text); }
 html body:has(.layer-add-cart-success) .layer-add-cart-success .cart-header { background: var(--mo-card2) !important; border-bottom: 1px solid var(--mo-line); color: #fff !important; }
 html body:has(.layer-add-cart-success) .layer-add-cart-success .cart-header span { color: #fff !important; font-weight: 600; }
+/* the tick: white disc, black tick (the theme ships a mint-green disc with a white tick) */
+html body:has(.layer-add-cart-success) .layer-add-cart-success .cart-header > svg:not(.cart-header-claer) path:nth-of-type(1) { fill: #fff !important; }
+html body:has(.layer-add-cart-success) .layer-add-cart-success .cart-header > svg:not(.cart-header-claer) path:nth-of-type(2) { fill: var(--mo-bg) !important; }
 html body:has(.layer-add-cart-success) .layer-add-cart-success .cart-header-claer path { fill: var(--mo-muted) !important; }
 html body:has(.layer-add-cart-success) .layer-add-cart-success .cart-header-claer:hover path { fill: #fff !important; }
 html body:has(.layer-add-cart-success) .layer-add-cart-success :is(.cart-product-warp, .cart-operate, .cart-price) { border-color: var(--mo-line) !important; box-shadow: none !important; }

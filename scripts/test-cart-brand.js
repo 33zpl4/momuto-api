@@ -38,6 +38,7 @@ const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); c ? pass++ : fa
         summaryBg: (cs('.cart_order_summary_wrapper') || {}).backgroundColor, popBg: (cs('.mo-popup-content') || {}).backgroundColor, hdrBg: (cs('.cart-header') || {}).backgroundColor,
         names: [...document.querySelectorAll('.product_info_name, .cart-product-name span')].map(e => getComputedStyle(e).color),
         fontLink: !!document.getElementById('mo-cart-fonts'), btnText: ((document.querySelector('.checkout.main_btn, .cart-buyNow span') || {}).textContent || '').trim(),
+        tick: [...document.querySelectorAll('.cart-header > svg:not(.cart-header-claer) path')].map(p => getComputedStyle(p).fill),
         skin: getComputedStyle(document.documentElement).getPropertyValue('--mo-cart-skin').trim() };
     });
     await ctx.close(); return { ...r, fontRequests: font.length };
@@ -51,6 +52,7 @@ const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); c ? pass++ : fa
   ok(cart.summaryBg === 'rgb(20, 20, 22)' && cart.names.every(c => c === 'rgb(255, 255, 255)'), 'cart page: summary card dark, product name white');
   ok(cart.fontLink && cart.fontRequests >= 1, 'cart page: font link added and requested (blocked in the test)');
   const pop = await visit('/pop', { popup: true });
+  ok(pop.tick && pop.tick[0] === 'rgb(255, 255, 255)' && pop.tick[1] === 'rgb(11, 11, 12)', 'pop-up: white disc, black tick ' + JSON.stringify(pop.tick));
   ok(pop.popBg === 'rgb(20, 20, 22)' && pop.hdrBg === 'rgb(26, 26, 29)' && pop.btnBg === 'rgb(200, 53, 46)', `pop-up: dark card ${pop.popBg}, header ${pop.hdrBg}, Checkout ${pop.btnBg}`);
   ok(pop.fontRequests === 0 && !pop.fontLink, 'pop-up on a product page: no font request');
   ok(pop.bodyBg === 'rgb(255, 255, 255)', 'pop-up on a product page: the page itself keeps its own background');
