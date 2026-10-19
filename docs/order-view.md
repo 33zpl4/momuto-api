@@ -77,3 +77,5 @@ picture card ready (`?card=1`, design-momuto `static/share-card.js`): `configId`
   (`configId=c4f9a2b7 … share=u8k2p9x1`, `scripts/test-order-view.js`) is the test fixture of that shape. If the launch parameters ever change, change `cardUrl()` as well as the inventory.
 - **Counters:** the tool beacons `card_open` / `card_made` / `card_share` / `card_download` (scorecard rows "share image: …"); opened-from-email vs from-the-page is not separated.
 - Tests: `node scripts/test-order-view.js` (17). **Not verified:** a live email/page link opening a real design (needs the webhook deployed and one paid order), phones' share sheet.
+
+See also `docs/store-account-area.md`: this page is one of THREE order surfaces (the platform's store account and the design server's `/userInfo` are the others); tracking is entered in the platform and in our admin separately.

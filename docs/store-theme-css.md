@@ -50,3 +50,6 @@ Bar text: EN `FREE SHIPPING OVER +50€`, US `FREE SHIPPING OVER $59`, ES `ENVÍ
 FR `LIVRAISON GRATUITE À PARTIR DE 50 €`. The design site (`design-momuto/templates/*/layout`)
 was matched to these numbers (PR branch `claude/blissful-cerf-d71g6b-header`); its font goes through
 one variable `--mo-font`.
+
+## Account pages skin (19 Oct 2026)
+The platform's login / register / account / orders / order-detail pages have their own brand skin and a tracking panel, kept in `docs/account-brand/` (CSS + JS, scoped with `:has()` to the account containers) and pasted into this same custom-code script. It is NOT deployed from the repo. Details, tests and open items: `docs/store-account-area.md`, `docs/account-brand/README.md`.

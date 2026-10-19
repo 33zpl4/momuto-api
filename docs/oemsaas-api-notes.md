@@ -348,7 +348,7 @@ inspect-first — read a store's live JSON before the first write).
 - **`POST /shippingzones`** — create solution (name, type, areas[
   {country_id, provinces:[]}], plan[], product_ids[]). **`PUT`** —
   "Logistics plan modification" (path per the Apizza doc).
-- **`GET /couriers`** — carrier list (id, name, code, homepage).
+- **`GET /couriers`** — carrier list (id, `courier_name`, `courier_code`, `courier_homepage`; 3,459 entries on the US token, 19 Oct 2026). **USPS = id 4629, code 21051.** `MODE=inspect-couriers` (workflow *Store Config*, optional `courier_query` regex) searches it read-only. The admin's Ship dialog offers a carrier under "Common logistics" once pinned; the store account page then prints `<carrier> : <number>` and the carrier's homepage (`docs/store-account-area.md`).
 - **`GET /seoplans`** / **`PUT /seoplans`** — HOMEPAGE SEO (meta_title,
   meta_descript, meta_keywords — keywords is an ARRAY, same rule as pages).
   The one homepage surface we previously couldn't reach from code.
