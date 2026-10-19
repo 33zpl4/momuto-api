@@ -10,25 +10,20 @@ on:
   workflow_dispatch:
     inputs:
       stores:
-        description: 'comma list of stores (www,us,es,fr,it) or all'
+        description: 'comma list of stores (www,us,es,fr,it) or all; logged-in pages need that store''s test-account secrets'
         default: 'us'
       publish_shots:
         description: "'true' = publish the US screenshots to the throwaway branch probe-account-shots (contains the TEST account's pages); anything else deletes that branch"
         default: 'false'
       css:
-        description: 'stylesheet to inject into every page (docs/account-brand/account-brand.css by default)'
+        description: "stylesheet to inject into every page (default docs/account-brand/account-brand.css). Type 'none' to inject nothing = check what is LIVE on the stores (summary shows 'account skin: v1' or 'NOT PASTED')"
         default: 'docs/account-brand/account-brand.css'
       js:
-        description: 'script to inject after the stylesheet'
+        description: "script to inject after the stylesheet (type 'none' for nothing)"
         default: 'docs/account-brand/account-brand.js'
       order_path:
         description: 'logged-in order detail path to open (test account)'
         default: '/account/orders/231549-2026026'
-  # A new workflow file cannot be dispatched until it is on main, so the first runs fire on a push to this branch touching these two files
-  # (same pattern as design-momuto measure-sites.yml). Read-only. Remove this block once the file is on main.
-  push:
-    branches: [claude/keen-darwin-52lbrf]
-    paths: ['.github/workflows/probe-store-account.yml', 'scripts/probe-store-account.js', 'docs/account-brand/account-brand.css', 'docs/account-brand/account-brand.js']
 
 jobs:
   probe:
@@ -43,9 +38,9 @@ jobs:
       - run: npm i --no-save playwright && npx playwright install --with-deps chromium
       - run: node scripts/probe-store-account.js
         env:
-          PROBE_STORES: ${{ github.event.inputs.stores || 'us' }}
-          PROBE_CSS: ${{ github.event.inputs.css || 'docs/account-brand/account-brand.css' }}
-          PROBE_JS: ${{ github.event.inputs.js || 'docs/account-brand/account-brand.js' }}
+          PROBE_STORES: ${{ github.event.inputs.stores || (contains(github.event.head_commit.message, '[live-check]') && 'all' || 'us') }}
+          PROBE_CSS: ${{ github.event.inputs.css || (contains(github.event.head_commit.message, '[live-check]') && 'none' || 'docs/account-brand/account-brand.css') }}
+          PROBE_JS: ${{ github.event.inputs.js || (contains(github.event.head_commit.message, '[live-check]') && 'none' || 'docs/account-brand/account-brand.js') }}
           PROBE_ORDER: ${{ github.event.inputs.order_path || '/account/orders/231549-2026026' }}
           STORE_WWW_EMAIL: ${{ secrets.STORE_WWW_EMAIL }}
           STORE_WWW_PASSWORD: ${{ secrets.STORE_WWW_PASSWORD }}

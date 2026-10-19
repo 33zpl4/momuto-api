@@ -1,16 +1,16 @@
 /* MOMUTO — store account area (login, register, My Account, My Orders, Order Detail). Brand skin for the platform's own account pages.
  *
- * SOURCE OF TRUTH is this file; the live copy is pasted into the stores' custom code (the script that already holds the nav CSS,
- * CMS name `PC端你也喜欢产品调准css`; docs/store-theme-css.md). It lives under docs/ on purpose: anything under static/ auto-deploys live.
+ * SOURCE OF TRUTH is this file (with account-brand.js). The paste-in file is GENERATED: `node scripts/build-account-brand-entry.js` writes
+ * docs/account-brand/account-brand-entry.html (this CSS + the JS in one box). It is pasted as ONE NEW script-manager entry, "MOMUTO account skin v1",
+ * in each of the 5 stores (NOT into the nav script `PC端你也喜欢产品调准css`). It lives under docs/ on purpose: anything under static/ auto-deploys live.
  * Every rule is scoped with :has() to the five account containers, so no other store page can change. Header, footer and the
  * announcement bar are untouched. Selectors measured on the live US store, 19 Oct 2026 (scripts/probe-store-account.js).
- * Regenerate/edit by hand: there is no build step. Do not add a selector without the :has(...) prefix.
+ * Edit by hand, then run the build script (it fails on any selector without the :has(...) prefix). Bump the version (name + --mo-account-skin) on every paste.
  *
- * Fonts: if you paste this inside an existing <style> block, move the @import line to the very top of that block (an @import must come
- * first), or load the same URL with a <link> in the head. NOT tested: Safari/iOS, the "Registered successfully" popup. */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap');
+ * Fonts: NO @import here on purpose (it would request Google Fonts on every page of the store). account-brand.js adds the font <link> on /account/* only.
+ * NOT tested: Safari/iOS, the "Registered successfully" popup. */
 
-:root { --mo-bg:#0b0b0c; --mo-card:#141416; --mo-card2:#1a1a1d; --mo-line:#2a2a2e; --mo-line2:#3a3a40; --mo-text:#e8e8ec;
+:root { --mo-account-skin: v1; --mo-bg:#0b0b0c; --mo-card:#141416; --mo-card2:#1a1a1d; --mo-line:#2a2a2e; --mo-line2:#3a3a40; --mo-text:#e8e8ec;
         --mo-muted:#a1a1aa; --mo-red:#c8352e; --mo-red-h:#a52a24; --mo-red-text:#ef6a62; }
 
 html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) {

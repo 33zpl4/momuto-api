@@ -16,6 +16,8 @@ on:
       - 'blogs/**'
       - 'static/shared/**'
       - 'lib/emails.js'
+      - 'docs/account-brand/**'
+      - 'scripts/build-account-brand-entry.js'
       - 'lib/wa-*'
       - 'public/wa-faq.json'
       - 'public/configurator/pricing.js'
@@ -39,6 +41,8 @@ jobs:
         run: node scripts/check-copy-rules.js
       - name: Check the 3D launch-link inventory is current
         run: node scripts/audit-3d-links.js --check
+      - name: Account skin paste-in file is current and every CSS rule is scoped
+        run: node scripts/build-account-brand-entry.js --check
       - name: WhatsApp bot answers are built from the FAQ (one set of numbers)
         run: node scripts/build-wa-bot-answers.js --check
       - name: WhatsApp bot tests (hours, keywords, handoff, webhook)

@@ -1,4 +1,5 @@
-/* MOMUTO — store order page: put the TRACKING NUMBER on top (companion of account-brand.css; same paste location, see README.md).
+/* MOMUTO — account pages: fonts + the TRACKING NUMBER on top of the order page. Runs ONLY on /account/* (path gate below).
+ * Order page: put the TRACKING NUMBER on top (companion of account-brand.css; both ship together in account-brand-entry.html, see README.md).
  *
  * On /account/orders/<id> the platform prints "Tracking / USPS : <number> / http://www.usps.com/" far down the page, below the addresses,
  * and the only link is the carrier's HOMEPAGE. This script (only on #account_orderDetail, only when that block exists):
@@ -11,8 +12,21 @@
  * Tested: Chromium desktop + 390 px on the live US store with a fake USPS number. NOT tested: Safari/iOS, ES/FR/IT stores, a carrier
  * other than USPS, the real carrier pages opening with a real number. */
 (function () {
+  // PATH GATE (owner, 19 Oct 2026). This entry is pasted into the store, so it is loaded on EVERY page; nothing below may do anything
+  // anywhere but the account pages: no font request, no observer, no DOM work. The CSS cannot test a URL; its :has() scope is the CSS-side gate.
+  var PATH = location.pathname;
+  if (!/^\/account(\/|$)/.test(PATH)) return;
   if (window.__moTrack_) return;
   window.__moTrack_ = true;
+  fonts();                                                          // Bebas Neue + Outfit, on /account/* only (the CSS has no @import any more)
+  if (!/^\/account\/orders\/[^\/]+\/?$/.test(PATH)) return;          // the tracking panel is for one order's page only
+  function fonts() {
+    if (document.getElementById('mo-account-fonts')) return;
+    var l = document.createElement('link');
+    l.id = 'mo-account-fonts'; l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap';
+    document.head.appendChild(l);
+  }
   var T = {
     en: { track: 'Track package', copy: 'Copy number', copied: 'Copied ✓', site: 'Carrier site' },
     es: { track: 'Seguir el paquete', copy: 'Copiar número', copied: 'Copiado ✓', site: 'Web del transportista' },

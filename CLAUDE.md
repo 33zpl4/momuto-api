@@ -35,6 +35,7 @@ Read the doc that owns a topic BEFORE editing that surface.
   `node scripts/build-size-guide-pages.js` (writes `cms/pages/<locale>/<handle>.json`, deploy via Deploy CMS Page);
   US is edited directly in `cms/pages/us/size-guide.json`. Sizes must match the cart dropdowns in
   `design-momuto/templates/*/cartItem.html` (no 176 — factory maps it to adult S).
+- `docs/shipped-email.md` — our branded "order shipped" email (Resend) driven by the platform order API (`poll-shipped-orders`, admin-orders `ship`), arming steps, what is not verified. Read BEFORE touching shipped/tracking emails.
 - `docs/blog-pipeline.md` — blog files, schema, deploy, translation workflow + its failure modes, post dates (the 1969-12-31 gotcha), image hosting. Read BEFORE touching `blogs/**`.
 - `docs/live-chat-whatsapp.md` — the WhatsApp chat button (tool + cart), what a message with a design ref means and how to open that design.
 - `docs/seo-opportunities-2026-09.md` — SEO audit of every plan vs what
@@ -49,7 +50,7 @@ Read the doc that owns a topic BEFORE editing that surface.
 - `docs/store-theme-css.md` — the live store custom-CSS script (CMS name `PC端你也喜欢产品调准css`),
   the Jost audit and measured header/footer numbers; read BEFORE touching nav fonts or header styling.
 - `docs/store-account-area.md` — the platform's customer account (login, orders, order detail, tracking) on the 5 stores: the three order surfaces, what is verified,
-  the brand skin + tracking panel in `docs/account-brand/` (paste-in files, NOT deployed from the repo), the `probe-store-account` workflow, open decisions. Read BEFORE touching the account area, the header account icon or the footer "Order Status".
+  the brand skin + tracking panel in `docs/account-brand/` (sources + generated paste-in `account-brand-entry.html`, one new script-manager entry per store, NOT deployed from the repo), the `probe-store-account` workflow, open decisions. Read BEFORE touching the account area, the header account icon or the footer "Order Status".
 - `docs/warehouse-sheet.md` — factory 生产单 generator (`build-warehouse-sheet.js`,
   runs daily inside `check-platform-orders.yml`); sources + known roster gap.
 - `docs/design-page-template.md`, `docs/rtp-collection.md` (historical),
