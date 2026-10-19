@@ -32,7 +32,7 @@ html body:has(#customer_login,#customer_register,#account_default,#account_order
   width: 48px; height: 3px; background: var(--mo-red) !important; border: 0 !important; margin: 18px auto 0 !important;
 }
 html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-card-content {
-  max-width: 480px; margin: 0 auto; padding: 36px 32px 32px; background: var(--mo-card); border: 1px solid var(--mo-line);
+  max-width: 480px; margin: 56px auto; padding: 36px 32px 32px; background: var(--mo-card); border: 1px solid var(--mo-line);
 }
 html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-form-item {
   color: var(--mo-text);
@@ -168,11 +168,16 @@ html body:has(#customer_login,#customer_register,#account_default,#account_order
 html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-table-title {
   font-family: 'Outfit', Arial, sans-serif !important; font-size: 24px !important; font-weight: 600; color: #fff !important;
 }
-html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-table-body {
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-table-body,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-table-body-info,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-table-body-product,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-product-item,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-card-info,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-product-header {
   background: var(--mo-card) !important;
 }
 html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-product-header {
-  color: var(--mo-muted) !important; font-family: 'Outfit', Arial, sans-serif !important; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid var(--mo-line) !important; background: transparent !important;
+  color: var(--mo-muted) !important; font-family: 'Outfit', Arial, sans-serif !important; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid var(--mo-line) !important;
 }
 html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-product-item {
   color: var(--mo-text) !important; border-bottom: 1px solid var(--mo-line) !important; font-family: 'Outfit', Arial, sans-serif;
@@ -193,10 +198,41 @@ html body:has(#customer_login,#customer_register,#account_default,#account_order
 html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .pay-cell-total .pay-cell-value {
   color: var(--mo-red-text) !important; font-size: 20px;
 }
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-card-content a,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-form a {
+  color: var(--mo-muted) !important; font-family: 'Outfit', Arial, sans-serif !important; text-underline-offset: 3px;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-card-content a:hover,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-form a:hover {
+  color: #fff !important;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .filter-input,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .filter-select {
+  background: #0f0f11 !important; border: 1px solid var(--mo-line2) !important; border-radius: 0 !important;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .filter-input input,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .filter-select select {
+  border: 0 !important; background: transparent !important; box-shadow: none !important;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .filter-input:focus-within {
+  border-color: var(--mo-red) !important;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .btn-search,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .btn-search img,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .btn-search svg {
+  filter: invert(1) brightness(1.6);
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .back-box a img,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .back-box a svg,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .back-box a i,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .back-box a::before,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .back-box a::after {
+  filter: invert(1) brightness(1.4);
+}
 
 @media (max-width: 768px) {
   html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-card-content {
-    padding: 24px 18px 22px; border-left: 0; border-right: 0;
+    margin: 32px auto; padding: 24px 18px 22px; border-left: 0; border-right: 0;
   }
   html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) h1.title,
   html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) h1.header-title {
