@@ -114,6 +114,10 @@ pushes and verifies the run itself.
 
 ## Agent-ops gotchas (tooling walls already hit)
 
+- **"Not secure" / `ERR_CERT_AUTHORITY_INVALID` on the stores, reported from Spain (17 Oct 2026):** it was the Spanish ISP block of
+  Cloudflare IPs during LaLiga match windows, not a site fault (outside check clean, no mixed content, Cloudflare Full strict).
+  Read `docs/incident-2026-10-17-not-secure-spain.md` BEFORE hunting; check `whynopadlock.com` first.
+
 - **Workflow-tool subagents can hit a permission-handler bug** that strips
   EVERY tool parameter (`updatedInput ... required parameter missing`),
   including structured output — 12/12 agents failed after a full run

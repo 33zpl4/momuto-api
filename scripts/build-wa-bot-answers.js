@@ -28,7 +28,7 @@ const PICKS = {
 // pricing notes shown by the "extras" topic (index into pricing.notes) and the one shown under the ladder
 const EXTRAS_NOTES = [2, 3, 4, 6];   // the deposit line (7) now lives in the design answer
 const LADDER_NOTE = 5;
-const GIFT_FROM = 10;     // owner, 17 Oct: a free team flag + captain armband from 10 KITS (jersey + shorts) up; 10 jerseys do not qualify. ONE place to change the threshold.
+const GIFT_FROM = require('../public/configurator/pricing.js').GIFT_MIN_KITS;   // owner, 17 Oct: a free team flag + captain armband from 10 KITS (jersey + shorts); 10 jerseys do not qualify. ONE place to change it: pricing.js.
 const GIFT_LINE = {      // customer-facing copy: a proposal for the owner to approve. KITS ONLY (jersey + shorts); jersey-only orders do not get it (owner, 17 Oct)
   en: 'From 10 kits (jersey + shorts): a free team flag + captain armband.', us: 'From 10 kits (jersey + shorts): a free team flag + captain armband.',
   es: 'A partir de 10 kits (camiseta + pantalón): bandera del equipo + brazalete de capitán de regalo.', fr: "Dès 10 kits (maillot + short) : drapeau de l'équipe + brassard de capitaine offerts.", it: "Da 10 kit (maglia + pantaloncini): bandiera della squadra + fascia da capitano in regalo.",
