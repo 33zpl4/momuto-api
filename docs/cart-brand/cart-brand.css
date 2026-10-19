@@ -34,7 +34,7 @@ html body:has(#cart_list) .cart_qty { border: 1px solid var(--mo-line2) !importa
 html body:has(#cart_list) .cart_qty_txt { background: transparent !important; color: #fff !important; }
 html body:has(#cart_list) :is(.cart_qty_minus, .cart_qty_plus) svg path { fill: var(--mo-text) !important; }
 html body:has(#cart_list) .cart_order_summary { margin-top: 28px !important; }
-html body:has(#cart_list) .cart_order_summary_wrapper { background: var(--mo-card); border: 1px solid var(--mo-line); padding: 22px 22px 24px !important; box-sizing: border-box !important; width: 100%; max-width: 100%; }
+html body:has(#cart_list) .cart_order_summary_wrapper { background: var(--mo-card); border: 1px solid var(--mo-line); padding: 22px 22px 24px !important; box-sizing: border-box !important; max-width: 100%; }
 html body:has(#cart_list) :is(.cart_order_price, .order_discount, .order_discount_form, .cart_order_summary_wrapper > :first-child) { margin-top: 0 !important; padding-top: 0 !important; }
 html body:has(#cart_list) .cart_order_price li, html body:has(#cart_list) .cart_order_price li span { color: var(--mo-text) !important; }
 html body:has(#cart_list) .cart_order_price li { border-color: var(--mo-line) !important; }
