@@ -1,7 +1,7 @@
 name: Probe order shipping shape (read-only)
 
 # Prints where the platform API exposes fulfillment + tracking on ONE shipped order (masked), to design a "poll shipped orders" job.
-# Fires on a push to this branch touching its two files (a new workflow cannot be dispatched until it is on main). Remove the push block before merging.
+# Run it from the Actions tab (workflow_dispatch).
 
 on:
   workflow_dispatch:
@@ -10,9 +10,6 @@ on:
         default: 'us'
       order_no:
         default: '231549-2026026'
-  push:
-    branches: [claude/keen-darwin-52lbrf]
-    paths: ['.github/workflows/probe-order-shipping.yml', 'scripts/probe-order-shipping.js']
 
 jobs:
   probe:

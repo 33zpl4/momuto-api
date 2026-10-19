@@ -24,12 +24,6 @@ on:
       order_path:
         description: 'logged-in order detail path to open (test account)'
         default: '/account/orders/231549-2026026'
-  # A push whose commit message contains [live-check] runs on ALL stores with nothing injected = what is LIVE (summary: 'account skin: v1' / 'NOT PASTED').
-  # A new workflow file cannot be dispatched until it is on main, so the first runs fire on a push to this branch touching these two files
-  # (same pattern as design-momuto measure-sites.yml). Read-only. Remove this block once the file is on main.
-  push:
-    branches: [claude/keen-darwin-52lbrf]
-    paths: ['.github/workflows/probe-store-account.yml', 'scripts/probe-store-account.js', 'docs/account-brand/account-brand.css', 'docs/account-brand/account-brand.js']
 
 jobs:
   probe:
