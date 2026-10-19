@@ -24,11 +24,21 @@ https link), then **My order** (token page, no login) and a line pointing to the
 same email"; guest checkout does NOT create a login, the buyer registers with the order's email and the order appears). Previews: `docs/email-previews/*.html`
 (regenerate: `node scripts/test-shipped-email.js --write-previews`).
 
-## Arming (two stages, like the paid poller)
-- Scheduled runs are DRY RUNS until repo variable `SHIP_LIVE=1`. A dry run asks the endpoint to render each email (subject, whether My order link exists) and sends nothing.
+## Status: LIVE on all 5 stores (19 Oct 2026)
+- First live send verified by the owner (US test order, USPS): the email arrived with the carrier link, tracking number and delivery window.
+- `poll-shipped-orders` runs hourly (:37) on all 5 stores and sends. **Kill switch:** repo variable `SHIP_LIVE=0` turns scheduled runs back into dry runs
+  (manual `dry-run` / `live` dispatch always works). Shipments made before `SHIP_NOT_BEFORE` (go-live, 19 Oct 06:30 UTC) are never emailed.
+- The platform's own "order shipped" email (`orders/fulfilled`) is switched OFF in all 5 stores with (**state: pending until the run below shows VERIFIED; update this line with the run id**) the **Set platform email notification** workflow
+  (`scripts/set-email-notification-status.js`: dry run by default, read-modify-write, `VERIFIED` read-back; rollback = same run with status 1).
+  Run it with event `orders/fulfilled`, status `0`, dry_run `false`; the log must show `VERIFIED` for en, es, fr, it, us.
+  A buyer whose order ships between the poller going live and that switch-off can get both emails once.
+- **Still ON in the platform (not replaced by us), deliberately:** `customers/sign_up` (welcome on registering), `customers/password_reset`, `orders/paid`
+  (our confirmation exists only for 3D-designer orders; the platform paid email covers every order, so it can overlap for 3D orders — open decision),
+  and on ES/FR `orders/cancelled`, `orders/refund`, `orders/confirm_receipt`. Current on/off per store: `cms/email-notifications/index.json` (refreshed by the dump workflow).
+
+## How it was armed (history)
+- (Before go-live) scheduled runs were dry runs until `SHIP_LIVE=1`; the default is now live (see Status). A dry run asks the endpoint to render each email (subject, whether My order link exists) and sends nothing.
 - Needs the same secret as the paid poller (`MOMUTO_API_SECRET`). The endpoint change deploys to Vercel on merge to main; the workflow can only dry-run usefully after that.
-- `SHIP_NOT_BEFORE` (default 2026-10-19T00:00Z): shipments made earlier are never emailed.
-- **Only after the first live send is confirmed**, switch off the platform's `orders/fulfilled` email in each store's CMS notification settings (otherwise buyers get two).
 
 ## Not verified
 Live send (needs merge + dry-run read + `SHIP_LIVE`), how the list row signals "shipped" (the pre-filter uses `delivery_at` / `fulfillment_status 320`; the dry run log shows

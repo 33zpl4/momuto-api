@@ -1,0 +1,40 @@
+name: Set platform email notification on/off
+
+# Switches ONE platform email (e.g. orders/fulfilled) on or off in the chosen stores. Dry run by default. Read-modify-write, verified by read-back.
+# Used 19 Oct 2026 to turn off the platform "order shipped" email once our Resend one took over (docs/shipped-email.md).
+
+on:
+  workflow_dispatch:
+    inputs:
+      event:
+        description: 'event_code, e.g. orders/fulfilled'
+        default: 'orders/fulfilled'
+      status:
+        description: '0 = off, 1 = on'
+        default: '0'
+      stores:
+        description: 'comma list of en,es,fr,it,us'
+        default: 'en,es,fr,it,us'
+      dry_run:
+        description: "'false' to write; anything else = dry run"
+        default: 'true'
+
+jobs:
+  set:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/set-email-notification-status.js
+        env:
+          EVENT: ${{ inputs.event }}
+          STATUS: ${{ inputs.status }}
+          STORES: ${{ inputs.stores }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}

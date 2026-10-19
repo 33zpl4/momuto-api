@@ -40,3 +40,6 @@ Tracking lives in two unconnected places: the **platform** (Ship dialog: carrier
 
 ## 5. Test data
 US store, test customer (credentials only in repo secrets), order `231549-2026026` ("The Volley", shipped to Spain, coupon, total $5.36). The tracking number on it is a REAL package number: do not put it in a commit, PR or doc.
+
+## Emails (19 Oct 2026)
+The shipped email is ours (Resend), not the platform's: it carries the carrier + tracking number + link, a My order link (no login) and a line pointing to `/account/orders/<no>`. Guest checkout creates a platform *customer record* (`customer_id` on the order) but not a login: the buyer registers with the order's email and the order appears. See `docs/shipped-email.md`.
