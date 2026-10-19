@@ -114,6 +114,15 @@ async function main() {
             emit(tag, 'loggedin', ap + ' -> ' + p.url().replace(host, ''), lines.slice(0, 120).map(l => '   | ' + l).join('\n'));
             emit(tag, 'style', 'in' + ap, JSON.stringify(await p.evaluate(styleFacts).catch(() => null), null, 1));
             if (vpName === 'desktop') { emit(tag, 'outline', 'in' + ap, (await p.evaluate(outline, 6).catch(() => [])).join('\n')); emit(tag, 'html', 'in' + ap, (await p.evaluate(mainHtml).catch(() => '')).replace(/[\w.+-]+@[\w-]+\.[\w.]+/g, 'x@x')); }
+            // follow the injected "Track package" button to the carrier (read-only; what a buyer's click does): does the carrier page open and show the number?
+            if (ap === ORDER_PATH && vpName === 'desktop' && JS) {
+              const href = await p.evaluate(() => { const a = document.querySelector('.mo-track a.mo-track-btn'); return a && !a.classList.contains('mo-track-2') ? a.href : ''; }).catch(() => '');
+              if (href) {
+                const cp = await ctx.newPage(); let info = { href: href.replace(/(tLabels=|tracknum=|AWB=|trknbr=)[^&]+/, '$1<number>') };
+                try { const r = await cp.goto(href, { waitUntil: 'domcontentloaded', timeout: 30000 }); await cp.waitForTimeout(5000); info.status = r && r.status(); info.finalUrl = cp.url().replace(/(tLabels=|tracknum=|AWB=|trknbr=)[^&]+/, '$1<number>'); info.title = await cp.title(); info.lines = (await cp.evaluate(() => document.body.innerText.split('\n').map(x => x.trim()).filter(Boolean).slice(0, 40))).map(l => l.replace(/[A-Z]{2}\d{9}[A-Z]{2}|\d{20,}/g, '<number>')); await cp.screenshot({ path: path.join(OUT, `${tag}-carrier.png`) }); } catch (e) { info.error = String(e.message || e).split('\n')[0].slice(0, 160); }
+                await cp.close(); emit(tag, 'carrier', 'usps-track', JSON.stringify(info, null, 1));
+              } else emit(tag, 'carrier', 'usps-track', 'no Track package button found');
+            }
           }
           // first order detail, if the list links to one (still read-only)
           const href = await p.evaluate(() => { const a = [...document.querySelectorAll('a[href]')].find(x => /orders?\/[^/?#]+|order_detail|order-detail/i.test(x.getAttribute('href'))); return a && a.href; });
