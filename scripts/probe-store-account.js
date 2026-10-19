@@ -92,7 +92,9 @@ async function main() {
         try {
           await p.fill('input[type=email], input[name*=mail i], input[name*=user i], input[type=text]:visible', email, { timeout: 8000 });
           await p.fill('input[type=password]', pass, { timeout: 8000 });
-          await p.press('input[type=password]', 'Enter');   // the platform's sign-in control is not a type=submit button
+          // the platform's sign-in control is a script-driven div (div#confirm.main_btn.form_btn), not a button / form submit
+          await p.click('#confirm, .main_btn.form_btn', { timeout: 8000 });
+          await p.waitForURL(u => !/\/account\/login/.test(String(u)), { timeout: 15000 }).catch(() => {});
           await p.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
           await p.waitForTimeout(2500);
           res.login.landed = p.url().slice(0, 120); res.login.stillOnLogin = /login/i.test(p.url());
