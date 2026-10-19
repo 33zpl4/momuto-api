@@ -49,7 +49,7 @@ Read the doc that owns a topic BEFORE editing that surface.
 - `docs/store-theme-css.md` — the live store custom-CSS script (CMS name `PC端你也喜欢产品调准css`),
   the Jost audit and measured header/footer numbers; read BEFORE touching nav fonts or header styling.
 - `docs/store-account-area.md` — the platform's customer account (login, orders, order detail, tracking) on the 5 stores: the three order surfaces, what is verified,
-  the brand skin + tracking panel in `docs/account-brand/` (paste-in files, NOT deployed from the repo), the `probe-store-account` workflow, open decisions. Read BEFORE touching the account area, the header account icon or the footer "Order Status".
+  the brand skin + tracking panel in `docs/account-brand/` (sources + generated paste-in `account-brand-entry.html`, one new script-manager entry per store, NOT deployed from the repo), the `probe-store-account` workflow, open decisions. Read BEFORE touching the account area, the header account icon or the footer "Order Status".
 - `docs/warehouse-sheet.md` — factory 生产单 generator (`build-warehouse-sheet.js`,
   runs daily inside `check-platform-orders.yml`); sources + known roster gap.
 - `docs/design-page-template.md`, `docs/rtp-collection.md` (historical),

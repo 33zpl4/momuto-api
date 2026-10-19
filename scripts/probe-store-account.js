@@ -28,7 +28,7 @@ const VIEWPORTS = [['desktop', { width: 1440, height: 900 }], ['phone', { width:
 const ACCOUNT_PATHS = ['/account/login', '/account/register', '/account', '/account/orders'];
 const ONLY = (process.env.PROBE_STORES || 'all').toLowerCase().split(',').map(x => x.trim());
 const ORDER_PATH = process.env.PROBE_ORDER || '';
-// PROBE_CSS=<file>: inject that stylesheet into every page after load (page.addStyleTag), to see a proposed skin on the LIVE pages before anything is pasted into the store. Output files get a -css suffix.
+// PROBE_CSS=<file> (or 'none'): inject that stylesheet into every page after load (page.addStyleTag), to see a proposed skin on the LIVE pages before anything is pasted into the store. Output files get a -css suffix.
 const CSS = process.env.PROBE_CSS && fs.existsSync(process.env.PROBE_CSS) ? fs.readFileSync(process.env.PROBE_CSS, 'utf8') : '';
 const JS = process.env.PROBE_JS && fs.existsSync(process.env.PROBE_JS) ? fs.readFileSync(process.env.PROBE_JS, 'utf8') : '';   // PROBE_JS=<file>: also inject that script after the CSS
 const SUF = CSS ? '-css' : '';
@@ -76,6 +76,9 @@ async function main() {
     try {
       res.homeStatus = await go(host + '/');
       res.home = await p.evaluate(pageFacts);
+      // is the pasted entry live on this store? (--mo-account-skin is declared on :root by account-brand.css; meaningless when PROBE_CSS injects it)
+      res.skin = (await p.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--mo-account-skin').trim()).catch(() => '')) || '';
+      res.injected = !!CSS;
       await p.screenshot({ path: path.join(OUT, `${tag}-home.png`) });
       res.account = [];
       for (const ap of ACCOUNT_PATHS) {
@@ -134,7 +137,7 @@ async function main() {
     if (vpName === 'phone' || key === 'es') console.log(`DETAIL ${tag} ` + JSON.stringify({ icons: res.home && res.home.icons, loginPage: res.account && res.account[0] && { title: res.account[0].title, h1: res.account[0].h1, labels: res.account[0].form && res.account[0].form.labels }, orderPage: res.orderPage && { status: res.orderPage.status, title: res.orderPage.title, h1: res.orderPage.h1, labels: res.orderPage.form && res.orderPage.form.labels } }));
     const hdr = (res.home && res.home.links || []).filter(l => l.where === 'header');
     summary.push(`${tag.padEnd(14)} home ${res.homeStatus} | header account-ish links: ${hdr.map(l => (l.visible ? '' : '(hidden)') + l.text + '→' + l.href).join(' ; ') || 'none'} | `
-      + (res.account || []).map(a => `${a.path} ${a.status}→${a.finalUrl.replace(host, '')}`).join(' , ') + ` | order page ${res.orderPage ? res.orderPage.status : '?'}${res.login ? ' | login ' + (res.login.error ? 'ERR ' + res.login.error : (res.login.stillOnLogin ? 'FAILED (still on login)' : 'ok')) : ''}`);
+      + (res.account || []).map(a => `${a.path} ${a.status}→${a.finalUrl.replace(host, '')}`).join(' , ') + ` | account skin: ${res.injected ? '(injected by the probe, not a live check)' : (res.skin || 'NOT PASTED')}` + ` | order page ${res.orderPage ? res.orderPage.status : '?'}${res.login ? ' | login ' + (res.login.error ? 'ERR ' + res.login.error : (res.login.stillOnLogin ? 'FAILED (still on login)' : 'ok')) : ''}`);
     await ctx.close();
   }
   await browser.close();

@@ -1,4 +1,4 @@
-/* MOMUTO — store order page: put the TRACKING NUMBER on top (companion of account-brand.css; same paste location, see README.md).
+/* MOMUTO — store order page: put the TRACKING NUMBER on top (companion of account-brand.css; both ship together in account-brand-entry.html, see README.md).
  *
  * On /account/orders/<id> the platform prints "Tracking / USPS : <number> / http://www.usps.com/" far down the page, below the addresses,
  * and the only link is the carrier's HOMEPAGE. This script (only on #account_orderDetail, only when that block exists):
