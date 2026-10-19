@@ -50,9 +50,9 @@ const styleFacts = () => {
   const q = (sel) => [...document.querySelectorAll(sel)].find(vis);
   return { body: cs(document.body), h1: cs(q('h1')), h2: cs(q('h2')), h3: cs(q('h3')), label: cs(q('label')), input: cs(q('input:not([type=hidden]):not([type=checkbox])')), primary: cs(q('button[type=submit], input[type=submit], .btn-primary, button.button, a.button')), link: cs(q('main a, #MainContent a, .page-content a, form a')), table: cs(q('table')) };
 };
-const outline = () => {
+const outline = (maxDepth) => {
   const root = document.querySelector('main') || document.querySelector('#MainContent') || document.querySelector('.page-content') || document.body;
-  const out = [], walk = (el, d) => { if (d > 3 || out.length > 70) return; [...el.children].forEach(c => { if (['SCRIPT', 'STYLE', 'SVG', 'PATH', 'NOSCRIPT'].includes(c.tagName.toUpperCase())) return; const r = c.getBoundingClientRect(); if (r.width < 1) return; out.push('  '.repeat(d) + c.tagName.toLowerCase() + (c.id ? '#' + c.id : '') + (typeof c.className === 'string' && c.className.trim() ? '.' + c.className.trim().split(/\s+/).slice(0, 3).join('.') : '') + (c.children.length ? '' : ' "' + (c.textContent || '').trim().slice(0, 30) + '"')); walk(c, d + 1); }); };
+  const out = [], walk = (el, d) => { if (d > (maxDepth || 3) || out.length > 110) return; [...el.children].forEach(c => { if (['SCRIPT', 'STYLE', 'SVG', 'PATH', 'NOSCRIPT'].includes(c.tagName.toUpperCase())) return; const r = c.getBoundingClientRect(); if (r.width < 1) return; out.push('  '.repeat(d) + c.tagName.toLowerCase() + (c.id ? '#' + c.id : '') + (typeof c.className === 'string' && c.className.trim() ? '.' + c.className.trim().split(/\s+/).slice(0, 3).join('.') : '') + (c.children.length ? '' : ' "' + (c.textContent || '').trim().slice(0, 30) + '"')); walk(c, d + 1); }); };
   walk(root, 0); return out;
 };
 const textLines = () => document.body.innerText.split('\n').map(s => s.trim()).filter(Boolean).slice(0, 140);
@@ -92,7 +92,8 @@ async function main() {
         try {
           await p.fill('input[type=email], input[name*=mail i], input[name*=user i], input[type=text]:visible', email, { timeout: 8000 });
           await p.fill('input[type=password]', pass, { timeout: 8000 });
-          await Promise.all([p.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {}), p.click('button[type=submit], input[type=submit], button:has-text("Log"), button:has-text("Sign"), button:has-text("Iniciar"), button:has-text("Connexion"), button:has-text("Accedi")', { timeout: 8000 })]);
+          await p.press('input[type=password]', 'Enter');   // the platform's sign-in control is not a type=submit button
+          await p.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
           await p.waitForTimeout(2500);
           res.login.landed = p.url().slice(0, 120); res.login.stillOnLogin = /login/i.test(p.url());
           res.loggedIn = [];
@@ -104,7 +105,7 @@ async function main() {
             await p.screenshot({ path: path.join(OUT, `${tag}-in-${ap.replace(/\W+/g, '_')}.png`), fullPage: true });
             console.log(`LOGGEDIN ${tag} ${ap} -> ${p.url().replace(host, '')}\n` + lines.slice(0, 90).map(l => '   | ' + l).join('\n'));
             console.log(`STYLE ${tag} in${ap} ` + JSON.stringify(await p.evaluate(styleFacts).catch(() => null)));
-            if (vpName === 'desktop') console.log(`OUTLINE ${tag} in${ap}\n` + (await p.evaluate(outline).catch(() => [])).join('\n'));
+            if (vpName === 'desktop') console.log(`OUTLINE ${tag} in${ap}\n` + (await p.evaluate(outline, 5).catch(() => [])).join('\n'));
           }
           // first order detail, if the list links to one (still read-only)
           const href = await p.evaluate(() => { const a = [...document.querySelectorAll('a[href]')].find(x => /orders?\/[^/?#]+|order_detail|order-detail/i.test(x.getAttribute('href'))); return a && a.href; });
