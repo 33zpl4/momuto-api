@@ -1,0 +1,38 @@
+name: Probe store account area (read-only)
+
+# Looks at what a buyer sees and can reach in the stores' account area (www, us, es, fr, it): header/footer links, the account URLs,
+# our own order page (/pages/my-order ...), and, only if test-account secrets exist, the logged-in account + orders pages.
+# READ-ONLY: it submits nothing except a test login. Screenshots + JSON go to the run's artifact (private to the repo).
+# Optional repo secrets (a TEST customer per store; never a real buyer): STORE_WWW_EMAIL / STORE_WWW_PASSWORD, and the same for US, ES, FR, IT.
+# See scripts/probe-store-account.js and docs/verification-map.md.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: node scripts/probe-store-account.js
+        env:
+          STORE_WWW_EMAIL: ${{ secrets.STORE_WWW_EMAIL }}
+          STORE_WWW_PASSWORD: ${{ secrets.STORE_WWW_PASSWORD }}
+          STORE_US_EMAIL: ${{ secrets.STORE_US_EMAIL }}
+          STORE_US_PASSWORD: ${{ secrets.STORE_US_PASSWORD }}
+          STORE_ES_EMAIL: ${{ secrets.STORE_ES_EMAIL }}
+          STORE_ES_PASSWORD: ${{ secrets.STORE_ES_PASSWORD }}
+          STORE_FR_EMAIL: ${{ secrets.STORE_FR_EMAIL }}
+          STORE_FR_PASSWORD: ${{ secrets.STORE_FR_PASSWORD }}
+          STORE_IT_EMAIL: ${{ secrets.STORE_IT_EMAIL }}
+          STORE_IT_PASSWORD: ${{ secrets.STORE_IT_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: store-account-probe
+          path: probe-account-out/
+          retention-days: 7
