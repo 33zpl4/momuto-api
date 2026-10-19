@@ -17,6 +17,19 @@ To go live, paste into the stores' custom code, the script that already holds th
 2. the **JS** inside a `<script>` tag.
 Keep this folder as the source of truth and re-paste after any edit. Ask for a change by editing the file here, not the live script.
 
+## Paste checklist (owner)
+1. Open `docs/account-brand/preview-snippet.js` on GitHub, copy it, paste it into the browser console (F12) on a store account page (e.g. `us.momuto.com/account/orders/<order>`): you see the skin in your tab only. Reload = gone.
+2. Happy with it? Platform admin → the stores' custom code → script `PC端你也喜欢产品调准css` (all stores):
+   - add the contents of **`account-brand.css`** inside the `<style>` (with the `@import` line first);
+   - add the contents of **`account-brand.js`** inside a `<script>` tag.
+3. Open one account page per store (`/account/login`, `/account/orders/<id>`) logged out and logged in, on a phone too. To undo: delete the two blocks you added.
+4. Re-run the probe (below) with no injection to confirm the live pages now look like the injected ones.
+
+## Running the probe
+Workflow *Probe store account area (read-only)*; until the file is on `main` it runs on every push to `claude/keen-darwin-52lbrf` that touches the script, the workflow or this folder (**remove the `push:` block in the workflow when merging**).
+Inputs (after merge): `stores` (default `us`), `order_path` (default the test order), `css` / `js` (what to inject; empty file = none), `publish_shots` (default `false`).
+Test customers come from repo secrets `STORE_<WWW|US|ES|FR|IT>_EMAIL` / `_PASSWORD` (only US is set). Screenshots are published to the throwaway branch `probe-account-shots` ONLY with `publish_shots=true`; every other run deletes that branch, because the screenshots show the test account's name, email, address and a real package number.
+
 ## How it was tested
 `scripts/probe-store-account.js` (workflow *Probe store account area*, read-only, runs on a GitHub runner because the sandbox cannot reach the stores)
 logs in as the US test customer, injects `PROBE_CSS` / `PROBE_JS` into every page and screenshots desktop + 390 px. Verified on the live US store: login,
