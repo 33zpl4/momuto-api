@@ -12,6 +12,9 @@ on:
       stores:
         description: 'comma list of stores (www,us,es,fr,it) or all'
         default: 'us'
+      publish_shots:
+        description: "'true' = publish the US screenshots to the throwaway branch probe-account-shots (contains the TEST account's pages); anything else deletes that branch"
+        default: 'false'
       css:
         description: 'stylesheet to inject into every page (docs/account-brand/account-brand.css by default)'
         default: 'docs/account-brand/account-brand.css'
@@ -60,11 +63,14 @@ jobs:
           name: store-account-probe
           path: probe-account-out/
           retention-days: 7
-      - name: Publish the US screenshots to a throwaway branch (test account; delete the branch after reading)
-        if: always()
+      - name: "Publish the US screenshots to a throwaway branch (test account, only when publish_shots is true)"
+        if: always() && (github.event.inputs.publish_shots == 'true')
         run: |
           mkdir -p /tmp/shots && cp probe-account-out/us-*.png probe-account-out/us-*.txt /tmp/shots/ 2>/dev/null || true
           cd /tmp/shots && ls * >/dev/null 2>&1 || { echo "no screenshots"; exit 0; }
           git init -q && git config user.name "probe" && git config user.email "probe@users.noreply.github.com"
           git add . && git commit -q -m "probe screenshots ${{ github.sha }}"
           git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:refs/heads/probe-account-shots
+      - name: "Delete the throwaway screenshots branch (the test account's screenshots must not linger)"
+        if: always() && (github.event.inputs.publish_shots != 'true')
+        run: git push -q "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" --delete probe-account-shots || echo "branch already gone"
