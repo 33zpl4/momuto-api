@@ -115,6 +115,7 @@ async function main() {
             res.loggedIn.push({ path: ap, finalUrl: p.url().slice(0, 120), lines });
             await p.screenshot({ path: path.join(OUT, `${tag}-in-${ap.replace(/\W+/g, '_')}.png`), fullPage: true });
             emit(tag, 'loggedin', ap + ' -> ' + p.url().replace(host, ''), lines.slice(0, 120).map(l => '   | ' + l).join('\n'));
+            if (ap === ORDER_PATH) emit(tag, 'panel', 'live', JSON.stringify(await p.evaluate(() => ({ trackingPanel: !!document.querySelector('.mo-track'), originalTrackingBlockHidden: (() => { const t = document.querySelector('.tracking-warp'); return t ? getComputedStyle(t).display === 'none' : null; })(), fontLink: !!document.getElementById('mo-account-fonts'), skinVar: getComputedStyle(document.documentElement).getPropertyValue('--mo-account-skin').trim() })).catch(() => null)));
             emit(tag, 'style', 'in' + ap, JSON.stringify(await p.evaluate(styleFacts).catch(() => null), null, 1));
             if (vpName === 'desktop') { emit(tag, 'outline', 'in' + ap, (await p.evaluate(outline, 6).catch(() => [])).join('\n')); emit(tag, 'html', 'in' + ap, (await p.evaluate(mainHtml).catch(() => '')).replace(/[\w.+-]+@[\w-]+\.[\w.]+/g, 'x@x')); }
             // follow the injected "Track package" button to the carrier (read-only; what a buyer's click does): does the carrier page open and show the number?
