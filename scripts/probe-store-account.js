@@ -28,6 +28,7 @@ const VIEWPORTS = [['desktop', { width: 1440, height: 900 }], ['phone', { width:
 const ACCOUNT_PATHS = ['/account/login', '/account/register', '/account', '/account/orders'];
 const ONLY = (process.env.PROBE_STORES || 'all').toLowerCase().split(',').map(x => x.trim());
 const ORDER_PATH = process.env.PROBE_ORDER || '';
+const emit = (tag, kind, label, text) => { console.log(`${kind.toUpperCase()} ${tag} ${label}` + (String(text).length < 4000 ? '\n' + text : ' (' + String(text).length + ' chars, see file)')); try { fs.writeFileSync(path.join(OUT, `${tag}-${kind}-${String(label).replace(/\W+/g, '_')}.txt`), String(text)); } catch (e) {} };
 const mask = (t) => String(t).replace(/([\w.+-])[\w.+-]*@([\w-]+\.[\w.]+)/g, '$1***@$2');
 const LINK_RE = /account|login|sign.?in|orders?\b|tracking|track|my-order|mi-pedido|mon-commande|il-mio-ordine|pedido|commande|ordine|cuenta|compte|conto/i;
 
@@ -55,6 +56,7 @@ const outline = (maxDepth) => {
   const out = [], walk = (el, d) => { if (d > (maxDepth || 3) || out.length > 110) return; [...el.children].forEach(c => { if (['SCRIPT', 'STYLE', 'SVG', 'PATH', 'NOSCRIPT'].includes(c.tagName.toUpperCase())) return; const r = c.getBoundingClientRect(); if (r.width < 1) return; out.push('  '.repeat(d) + c.tagName.toLowerCase() + (c.id ? '#' + c.id : '') + (typeof c.className === 'string' && c.className.trim() ? '.' + c.className.trim().split(/\s+/).slice(0, 3).join('.') : '') + (c.children.length ? '' : ' "' + (c.textContent || '').trim().slice(0, 30) + '"')); walk(c, d + 1); }); };
   walk(root, 0); return out;
 };
+const mainHtml = () => { const el = document.querySelector('.container_wrapper') || document.querySelector('main') || document.body; const c = el.cloneNode(true); c.querySelectorAll('script,style,svg,noscript,link,iframe').forEach(n => n.remove()); return c.outerHTML.replace(/\s+/g, ' ').replace(/ (data-[\w-]+|style|srcset|sizes|loading)="[^"]*"/g, '').slice(0, 24000); };
 const textLines = () => document.body.innerText.split('\n').map(s => s.trim()).filter(Boolean).slice(0, 140);
 
 async function main() {
@@ -76,7 +78,7 @@ async function main() {
         const status = await go(host + ap);
         const f = await p.evaluate(pageFacts).catch(() => ({})), form = await p.evaluate(formFacts).catch(() => ({}));
         res.account.push({ path: ap, status, finalUrl: p.url().slice(0, 120), title: f.title, h1: f.h1, form });
-        if (key === ONLY[0] || ONLY[0] === 'all') { console.log(`STYLE ${tag} ${ap} ` + JSON.stringify(await p.evaluate(styleFacts).catch(() => null))); if (vpName === 'desktop') console.log(`OUTLINE ${tag} ${ap}\n` + (await p.evaluate(outline, 6).catch(() => [])).join('\n')); }
+        if (key === ONLY[0] || ONLY[0] === 'all') { emit(tag, 'style', ap, JSON.stringify(await p.evaluate(styleFacts).catch(() => null), null, 1)); if (vpName === 'desktop') { emit(tag, 'outline', ap, (await p.evaluate(outline, 6).catch(() => [])).join('\n')); emit(tag, 'html', ap, await p.evaluate(mainHtml).catch(() => '')); } }
         await p.screenshot({ path: path.join(OUT, `${tag}-${ap.replace(/\W+/g, '_')}.png`) });
       }
       const ostatus = await go(`${host}/pages/${handle}`);
@@ -105,9 +107,9 @@ async function main() {
             const lines = (await p.evaluate(textLines)).map(mask);
             res.loggedIn.push({ path: ap, finalUrl: p.url().slice(0, 120), lines });
             await p.screenshot({ path: path.join(OUT, `${tag}-in-${ap.replace(/\W+/g, '_')}.png`), fullPage: true });
-            console.log(`LOGGEDIN ${tag} ${ap} -> ${p.url().replace(host, '')}\n` + lines.slice(0, 90).map(l => '   | ' + l).join('\n'));
-            console.log(`STYLE ${tag} in${ap} ` + JSON.stringify(await p.evaluate(styleFacts).catch(() => null)));
-            if (vpName === 'desktop') console.log(`OUTLINE ${tag} in${ap}\n` + (await p.evaluate(outline, 5).catch(() => [])).join('\n'));
+            emit(tag, 'loggedin', ap + ' -> ' + p.url().replace(host, ''), lines.slice(0, 120).map(l => '   | ' + l).join('\n'));
+            emit(tag, 'style', 'in' + ap, JSON.stringify(await p.evaluate(styleFacts).catch(() => null), null, 1));
+            if (vpName === 'desktop') { emit(tag, 'outline', 'in' + ap, (await p.evaluate(outline, 6).catch(() => [])).join('\n')); emit(tag, 'html', 'in' + ap, (await p.evaluate(mainHtml).catch(() => '')).replace(/[\w.+-]+@[\w-]+\.[\w.]+/g, 'x@x')); }
           }
           // first order detail, if the list links to one (still read-only)
           const href = await p.evaluate(() => { const a = [...document.querySelectorAll('a[href]')].find(x => /orders?\/[^/?#]+|order_detail|order-detail/i.test(x.getAttribute('href'))); return a && a.href; });
