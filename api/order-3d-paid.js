@@ -32,7 +32,7 @@
  *
  * Payload (see server-patches/WebhookAction.php):
  *   { order_no, plant_order_no, email, name, lang, total, currency,
- *     designs: [{ suit, front, back, players: [{number,name,size,qty}] }],
+ *     designs: [{ suit, configId, front, back, players: [{number,name,size,qty}] }], uuid,
  *     pay_at, first_pay_at, platform_created_at, is_test }
  */
 
@@ -92,7 +92,7 @@ module.exports = async function handler(req, res) {
 
   const body = await readJSON(req);
   const { order_no, plant_order_no, email, name, lang, total, currency, designs,
-          pay_at, first_pay_at, is_test, fast_lane } = body;
+          pay_at, first_pay_at, is_test, fast_lane, uuid } = body;
 
   if (!order_no || !email) {
     return res.status(400).json({ error: 'order_no and email are required' });
@@ -166,6 +166,8 @@ module.exports = async function handler(req, res) {
     total: total || null,
     currency: currency || 'EUR',
     designs: designs || [],
+    // the buyer's design-server uuid: with each design's configId it builds the "Share image" link (lib/order-view.js cardUrl)
+    uuid: /^[A-Za-z0-9_-]{1,64}$/.test(String(uuid || '')) ? String(uuid) : null,
     fastLane,
     invoiceDate: new Date().toISOString().slice(0, 10),
     notes: '3d-tool order (auto via design-server webhook)',
