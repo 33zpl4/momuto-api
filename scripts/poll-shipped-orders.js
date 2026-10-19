@@ -12,7 +12,7 @@
  *   node scripts/poll-shipped-orders.js [--lang all|en|us|es|fr|it] [--live]     (default = DRY RUN: asks the endpoint to render, sends nothing)
  *
  * Env: OEMSAAS_TOKEN_EN/_ES/_FR/_IT/_US; MOMUTO_API_SECRET (= Vercel D3_ORDER_SECRET; missing = "not armed", exit 0).
- *      SHIP_NOT_BEFORE (ISO): shipments created before this instant are never emailed (default: go-live below).
+ *      SHIP_NOT_BEFORE (ISO): shipments created before this instant are never emailed (default = go-live, 19 Oct 2026 06:30 UTC: earlier shipments already got the platform email).
  * Runs on the GitHub runner; the sandbox cannot reach openapi.oemapps.com. Docs: docs/shipped-email.md.
  */
 const { describeFulfillment } = require('../lib/carriers');
@@ -20,7 +20,7 @@ const { describeFulfillment } = require('../lib/carriers');
 const HOST = 'https://openapi.oemapps.com';
 const API = 'https://momuto-api.vercel.app/api/admin-orders';
 const SECRET = process.env.MOMUTO_API_SECRET;
-const NOT_BEFORE_MS = Date.parse(process.env.SHIP_NOT_BEFORE || '2026-10-19T00:00:00Z');
+const NOT_BEFORE_MS = Date.parse(process.env.SHIP_NOT_BEFORE || '2026-10-19T06:30:00Z');
 const WINDOW_DAYS = 60;
 const LIST_LIMIT = 50;
 const STORES = { en: 'OEMSAAS_TOKEN_EN', es: 'OEMSAAS_TOKEN_ES', fr: 'OEMSAAS_TOKEN_FR', it: 'OEMSAAS_TOKEN_IT', us: 'OEMSAAS_TOKEN_US' };
