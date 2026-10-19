@@ -76,7 +76,7 @@ async function main() {
         const status = await go(host + ap);
         const f = await p.evaluate(pageFacts).catch(() => ({})), form = await p.evaluate(formFacts).catch(() => ({}));
         res.account.push({ path: ap, status, finalUrl: p.url().slice(0, 120), title: f.title, h1: f.h1, form });
-        if (key === ONLY[0] || ONLY[0] === 'all') { console.log(`STYLE ${tag} ${ap} ` + JSON.stringify(await p.evaluate(styleFacts).catch(() => null))); if (vpName === 'desktop') console.log(`OUTLINE ${tag} ${ap}\n` + (await p.evaluate(outline).catch(() => [])).join('\n')); }
+        if (key === ONLY[0] || ONLY[0] === 'all') { console.log(`STYLE ${tag} ${ap} ` + JSON.stringify(await p.evaluate(styleFacts).catch(() => null))); if (vpName === 'desktop') console.log(`OUTLINE ${tag} ${ap}\n` + (await p.evaluate(outline, 6).catch(() => [])).join('\n')); }
         await p.screenshot({ path: path.join(OUT, `${tag}-${ap.replace(/\W+/g, '_')}.png`) });
       }
       const ostatus = await go(`${host}/pages/${handle}`);
