@@ -3,7 +3,7 @@ name: Probe cart pop-up + cart page (read-only)
 # Anonymous browser on a GitHub runner: opens a public product on each store, clicks add-to-cart, records the pop-up that appears and the /cart page
 # (computed styles, fonts, tap targets, overflow, screenshots). Submits nothing but that one click. See scripts/probe-cart-ui.js, docs/store-cart-ui.md.
 # 'publish_shots' = true pushes the screenshots (public pages only, no account) to the throwaway branch probe-cart-shots so they can be read from the sandbox;
-# a run with mode 'cleanup' deletes that branch. A branch push touching the two probe files also runs it (a new workflow cannot be dispatched before it is on main).
+# a run with mode 'cleanup' deletes that branch.
 
 on:
   workflow_dispatch:
@@ -17,9 +17,6 @@ on:
       css:
         description: "stylesheet injected into every page before it loads (default none = what is LIVE); e.g. docs/cart-brand/cart-brand.css"
         default: 'none'
-  push:
-    branches: [claude/keen-darwin-52lbrf]
-    paths: ['.github/workflows/probe-cart-ui.yml', 'scripts/probe-cart-ui.js', 'docs/cart-brand/cart-brand.css']
 
 jobs:
   probe:
@@ -39,8 +36,8 @@ jobs:
       - run: node scripts/probe-cart-ui.js
         if: github.event.inputs.mode != 'cleanup'
         env:
-          PROBE_STORES: ${{ github.event.inputs.stores || (contains(github.event.head_commit.message, '[stores:us]') && 'us' || 'all') }}
-          PROBE_CSS: ${{ github.event.inputs.css || (contains(github.event.head_commit.message, '[css]') && 'docs/cart-brand/cart-brand.css' || 'none') }}
+          PROBE_STORES: ${{ github.event.inputs.stores || 'all' }}
+          PROBE_CSS: ${{ github.event.inputs.css || 'none' }}
       - uses: actions/upload-artifact@v4
         if: always() && github.event.inputs.mode != 'cleanup'
         with:
