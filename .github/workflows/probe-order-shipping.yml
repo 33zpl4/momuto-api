@@ -1,0 +1,33 @@
+name: Probe order shipping shape (read-only)
+
+# Prints where the platform API exposes fulfillment + tracking on ONE shipped order (masked), to design a "poll shipped orders" job.
+# Fires on a push to this branch touching its two files (a new workflow cannot be dispatched until it is on main). Remove the push block before merging.
+
+on:
+  workflow_dispatch:
+    inputs:
+      lang:
+        default: 'us'
+      order_no:
+        default: '231549-2026026'
+  push:
+    branches: [claude/keen-darwin-52lbrf]
+    paths: ['.github/workflows/probe-order-shipping.yml', 'scripts/probe-order-shipping.js']
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/probe-order-shipping.js
+        env:
+          PROBE_LANG: ${{ github.event.inputs.lang || 'us' }}
+          ORDER_NO: ${{ github.event.inputs.order_no || '231549-2026026' }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
