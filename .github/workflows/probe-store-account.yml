@@ -8,6 +8,11 @@ name: Probe store account area (read-only)
 
 on:
   workflow_dispatch:
+  # A new workflow file cannot be dispatched until it is on main, so the first runs fire on a push to this branch touching these two files
+  # (same pattern as design-momuto measure-sites.yml). Read-only. Remove this block once the file is on main.
+  push:
+    branches: [claude/keen-darwin-52lbrf]
+    paths: ['.github/workflows/probe-store-account.yml', 'scripts/probe-store-account.js']
 
 jobs:
   probe:
