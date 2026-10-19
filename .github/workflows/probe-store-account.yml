@@ -15,6 +15,9 @@ on:
       css:
         description: 'stylesheet to inject into every page (docs/account-brand/account-brand.css by default)'
         default: 'docs/account-brand/account-brand.css'
+      js:
+        description: 'script to inject after the stylesheet'
+        default: 'docs/account-brand/account-brand.js'
       order_path:
         description: 'logged-in order detail path to open (test account)'
         default: '/account/orders/231549-2026026'
@@ -22,7 +25,7 @@ on:
   # (same pattern as design-momuto measure-sites.yml). Read-only. Remove this block once the file is on main.
   push:
     branches: [claude/keen-darwin-52lbrf]
-    paths: ['.github/workflows/probe-store-account.yml', 'scripts/probe-store-account.js', 'docs/account-brand/account-brand.css']
+    paths: ['.github/workflows/probe-store-account.yml', 'scripts/probe-store-account.js', 'docs/account-brand/account-brand.css', 'docs/account-brand/account-brand.js']
 
 jobs:
   probe:
@@ -39,6 +42,7 @@ jobs:
         env:
           PROBE_STORES: ${{ github.event.inputs.stores || 'us' }}
           PROBE_CSS: ${{ github.event.inputs.css || 'docs/account-brand/account-brand.css' }}
+          PROBE_JS: ${{ github.event.inputs.js || 'docs/account-brand/account-brand.js' }}
           PROBE_ORDER: ${{ github.event.inputs.order_path || '/account/orders/231549-2026026' }}
           STORE_WWW_EMAIL: ${{ secrets.STORE_WWW_EMAIL }}
           STORE_WWW_PASSWORD: ${{ secrets.STORE_WWW_PASSWORD }}

@@ -229,6 +229,58 @@ html body:has(#customer_login,#customer_register,#account_default,#account_order
 html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .back-box a::after {
   filter: invert(1) brightness(1.4);
 }
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-table-body {
+  display: flex; flex-direction: column;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .tracking-warp {
+  order: -1; background: var(--mo-card2) !important; border-bottom: 1px solid var(--mo-line) !important; padding: 0 !important;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .tracking-header {
+  color: var(--mo-muted) !important; font-family: 'Outfit', Arial, sans-serif !important; font-size: 12px !important; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 18px 20px 6px !important; background: transparent !important; border: 0 !important;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .tracking-item {
+  background: transparent !important; padding: 0 20px 18px !important;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .tracking-item-title {
+  color: #fff !important; font-family: 'Outfit', Arial, sans-serif !important; font-size: 20px !important; font-weight: 600; letter-spacing: .03em;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .tracking-item-des,
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .tracking-item-des a {
+  color: var(--mo-muted) !important; font-family: 'Outfit', Arial, sans-serif !important; font-size: 14px !important;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-done .tracking-warp {
+  display: none !important;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track {
+  max-width: 720px; margin: 28px auto 24px; padding: 22px 26px; background: var(--mo-card2); border: 1px solid var(--mo-line2); border-left: 4px solid var(--mo-red); text-align: left;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-label {
+  color: var(--mo-muted); font-family: 'Outfit', Arial, sans-serif; font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-row + .mo-track-row {
+  margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--mo-line);
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-carrier {
+  font-family: 'Bebas Neue', Impact, sans-serif; font-size: 30px; line-height: 1; letter-spacing: .04em; color: var(--mo-red-text); margin-bottom: 6px;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-num {
+  font-family: 'Outfit', Arial, sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .06em; color: #fff; word-break: break-all; margin-bottom: 16px;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-actions {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-btn {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; cursor: pointer; text-decoration: none !important; border-radius: 0; font-family: 'Outfit', Arial, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; background: var(--mo-red); color: #fff !important; border: 1px solid var(--mo-red);
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-btn:hover {
+  background: var(--mo-red-h); border-color: var(--mo-red-h);
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-btn.mo-track-2 {
+  background: transparent; color: var(--mo-text) !important; border-color: var(--mo-line2);
+}
+html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-btn.mo-track-2:hover {
+  border-color: #fff; background: var(--mo-card);
+}
 
 @media (max-width: 768px) {
   html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-card-content {
@@ -243,5 +295,14 @@ html body:has(#customer_login,#customer_register,#account_default,#account_order
   }
   html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .order-table-title {
     font-size: 20px !important;
+  }
+  html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track {
+    margin: 20px 14px; padding: 18px 16px;
+  }
+  html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-num {
+    font-size: 22px;
+  }
+  html body:has(#customer_login,#customer_register,#account_default,#account_orders,#account_orderDetail) .mo-track-btn {
+    flex: 1 1 100%;
   }
 }

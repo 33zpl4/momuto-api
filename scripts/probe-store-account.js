@@ -30,6 +30,7 @@ const ONLY = (process.env.PROBE_STORES || 'all').toLowerCase().split(',').map(x 
 const ORDER_PATH = process.env.PROBE_ORDER || '';
 // PROBE_CSS=<file>: inject that stylesheet into every page after load (page.addStyleTag), to see a proposed skin on the LIVE pages before anything is pasted into the store. Output files get a -css suffix.
 const CSS = process.env.PROBE_CSS && fs.existsSync(process.env.PROBE_CSS) ? fs.readFileSync(process.env.PROBE_CSS, 'utf8') : '';
+const JS = process.env.PROBE_JS && fs.existsSync(process.env.PROBE_JS) ? fs.readFileSync(process.env.PROBE_JS, 'utf8') : '';   // PROBE_JS=<file>: also inject that script after the CSS
 const SUF = CSS ? '-css' : '';
 const emit = (tag, kind, label, text) => { console.log(`${kind.toUpperCase()} ${tag} ${label}` + (String(text).length < 4000 ? '\n' + text : ' (' + String(text).length + ' chars, see file)')); try { fs.writeFileSync(path.join(OUT, `${tag}-${kind}-${String(label).replace(/\W+/g, '_')}.txt`), String(text)); } catch (e) {} };
 const mask = (t) => String(t).replace(/([\w.+-])[\w.+-]*@([\w-]+\.[\w.]+)/g, '$1***@$2');
@@ -71,7 +72,7 @@ async function main() {
     const ctx = await browser.newContext({ viewport: vp, isMobile: vpName === 'phone', hasTouch: vpName === 'phone' });
     const p = await ctx.newPage();
     await p.addInitScript(`window.LINK_RE = ${LINK_RE.toString()};`);
-    const go = async (url) => { try { const r = await p.goto(url, { waitUntil: 'networkidle', timeout: 45000 }); if (CSS) { await p.addStyleTag({ content: CSS }).catch(() => {}); await p.waitForTimeout(900); } return r ? r.status() : 0; } catch (e) { try { await p.waitForTimeout(1500); return -1; } catch (_) { return -2; } } };
+    const go = async (url) => { try { const r = await p.goto(url, { waitUntil: 'networkidle', timeout: 45000 }); if (CSS) { await p.addStyleTag({ content: CSS }).catch(() => {}); if (JS) await p.addScriptTag({ content: JS }).catch(() => {}); await p.waitForTimeout(900); } return r ? r.status() : 0; } catch (e) { try { await p.waitForTimeout(1500); return -1; } catch (_) { return -2; } } };
     try {
       res.homeStatus = await go(host + '/');
       res.home = await p.evaluate(pageFacts);
