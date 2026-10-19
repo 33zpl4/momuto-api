@@ -1,0 +1,54 @@
+name: Probe cart pop-up + cart page (read-only)
+
+# Anonymous browser on a GitHub runner: opens a public product on each store, clicks add-to-cart, records the pop-up that appears and the /cart page
+# (computed styles, fonts, tap targets, overflow, screenshots). Submits nothing but that one click. See scripts/probe-cart-ui.js, docs/store-cart-ui.md.
+# 'publish_shots' = true pushes the screenshots (public pages only, no account) to the throwaway branch probe-cart-shots so they can be read from the sandbox;
+# a run with mode 'cleanup' deletes that branch.
+
+on:
+  workflow_dispatch:
+    inputs:
+      stores:
+        description: 'comma list (www,us,es,fr,it) or all'
+        default: 'all'
+      mode:
+        description: "'probe' or 'cleanup' (deletes the screenshots branch)"
+        default: 'probe'
+      css:
+        description: "stylesheet injected into every page before it loads (default none = what is LIVE); e.g. docs/cart-brand/cart-brand.css"
+        default: 'none'
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Cleanup
+        if: github.event.inputs.mode == 'cleanup'
+        run: git push -q "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" --delete probe-cart-shots || echo "branch already gone"
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+        if: github.event.inputs.mode != 'cleanup'
+      - run: node scripts/probe-cart-ui.js
+        if: github.event.inputs.mode != 'cleanup'
+        env:
+          PROBE_STORES: ${{ github.event.inputs.stores || 'all' }}
+          PROBE_CSS: ${{ github.event.inputs.css || 'none' }}
+      - uses: actions/upload-artifact@v4
+        if: always() && github.event.inputs.mode != 'cleanup'
+        with:
+          name: cart-ui-probe
+          path: probe-cart-out/
+          retention-days: 7
+      - name: "Publish screenshots + JSON to the throwaway branch (public pages only)"
+        if: always() && github.event.inputs.mode != 'cleanup'
+        run: |
+          mkdir -p /tmp/shots && cp probe-cart-out/* /tmp/shots/ 2>/dev/null || true
+          cd /tmp/shots && ls * >/dev/null 2>&1 || { echo "no output"; exit 0; }
+          git init -q && git config user.name "probe" && git config user.email "probe@users.noreply.github.com"
+          git add . && git commit -q -m "cart probe ${{ github.sha }}"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:refs/heads/probe-cart-shots
