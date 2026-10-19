@@ -12,8 +12,13 @@ store platform, not by us: white page, Jost, thin outlines, an orange-red button
 | **File to paste** | [`docs/account-brand/account-brand-entry.html`](account-brand-entry.html) — the whole file (a `<style>` block and a `<script>` block). Generated; do not edit it. |
 | **Entry name** | `MOMUTO account skin v1` (bump the number on every re-paste) |
 | **Where** | each store's platform script manager (Online Store → custom code), as a **NEW entry**: www, us, es, fr, it (5 pastes of the same content). **Not** inside the nav script `PC端你也喜欢产品调准css`: that one runs on every page, is not mirrored in this repo, and a mistake in a pasted block could break the nav. |
-| **If the manager can limit an entry to certain pages** | limit it to the account pages (`/account/*`); otherwise it loads everywhere (32 KB, harmless: every rule is scoped to the account pages). |
+| **Cost on pages that are not account pages** | measured in Chromium (`scripts/test-account-brand.js`): nothing runs, no font request, no observer, no restyle. It still adds the entry's **33 KB (about 6 KB gzipped)** to every page, if the platform inlines the entry into each page (not verified). If the manager can limit an entry to certain pages, limit it to `/account/*`. For zero cost elsewhere see "Option B" below. |
 | **Undo** | disable or delete that entry. Nothing else was touched. |
+
+## Option B — zero cost on every other page (not built; needs the owner's OK)
+Paste a ~0.6 KB loader instead of the 33 KB entry: on `/account/*` it adds the stylesheet and script `<link>`/`<script src>`; on every other page it does nothing and downloads nothing.
+The two files would be hosted on each store's own domain by the existing static deploy (`scripts/deploy-static-files.js`, like `blog.css` / `pricing.js`), cached by the browser, versioned with `?v=`.
+Pros: fastest everywhere; later CSS/JS changes ship from the repo with no re-paste (only a loader change needs the 5 pastes). Cons: it is a **live write to the 5 stores** (a push touching `static/**` auto-deploys to all stores on ANY branch; harmless while nothing references the files, but not a docs-only change), and the account pages may flash unstyled until the stylesheet arrives.
 
 ## Sources and the generated file
 | file | what |

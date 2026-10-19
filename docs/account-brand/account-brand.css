@@ -7,8 +7,8 @@
  * announcement bar are untouched. Selectors measured on the live US store, 19 Oct 2026 (scripts/probe-store-account.js).
  * Edit by hand, then run the build script (it fails on any selector without the :has(...) prefix). Bump the version (name + --mo-account-skin) on every paste.
  *
- * Fonts: the @import line must stay the first rule of the style block (the generated entry does this). NOT tested: Safari/iOS, the "Registered successfully" popup. */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap');
+ * Fonts: NO @import here on purpose (it would request Google Fonts on every page of the store). account-brand.js adds the font <link> on /account/* only.
+ * NOT tested: Safari/iOS, the "Registered successfully" popup. */
 
 :root { --mo-account-skin: v1; --mo-bg:#0b0b0c; --mo-card:#141416; --mo-card2:#1a1a1d; --mo-line:#2a2a2e; --mo-line2:#3a3a40; --mo-text:#e8e8ec;
         --mo-muted:#a1a1aa; --mo-red:#c8352e; --mo-red-h:#a52a24; --mo-red-text:#ef6a62; }
