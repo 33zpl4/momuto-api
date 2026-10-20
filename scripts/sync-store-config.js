@@ -14,6 +14,7 @@
  * for every target and never depends on internal ids.
  *
  * Modes (MODE env):
+ *   inspect-couriers  — read-only: search the platform's courier list (GET /couriers) for COURIER_Q (default USPS) on TARGET_STORE.
  *   inspect (default) — GET /navs for every store with a token and print
  *                       the full JSON. ALWAYS run this before the first
  *                       apply on a store: the payload we post is shaped
@@ -238,6 +239,23 @@ async function main() {
     const { ok, json } = await api(token, 'GET', '/navs');
     console.log(`===== [${store}] GET /navs ${ok ? '' : '(ERROR)'} =====`);
     console.log(JSON.stringify(json));
+    return;
+  }
+
+  if (MODE === 'inspect-couriers') {
+    // Read-only: is a carrier (default USPS) in the platform's courier list, i.e. selectable when an order is marked shipped?
+    // COURIER_Q is a case-insensitive regex tested against name + code + homepage (default 'usps|united states postal').
+    const store = (process.env.TARGET_STORE || 'us').toLowerCase();
+    const token = TOKENS[store];
+    if (!token) { console.error(`No token for store "${store}"`); process.exit(1); }
+    const q = new RegExp(process.env.COURIER_Q || 'usps|united states postal', 'i');
+    const { ok, json } = await api(token, 'GET', '/couriers');
+    const list = ok && Array.isArray(json.data) ? json.data : (ok && Array.isArray(json) ? json : []);
+    console.log(`===== [${store}] GET /couriers ${ok ? '' : '(ERROR)'} — ${list.length} couriers; shape of entry 0: ${JSON.stringify(list[0] || null)} =====`);
+    const hits = list.filter(c => q.test([c.name, c.code, c.homepage, c.courier_name, c.courier_code].filter(Boolean).join(' ')));
+    console.log(`matches for /${q.source}/i: ${hits.length}`);
+    hits.slice(0, 40).forEach(c => console.log(JSON.stringify(c)));
+    if (!ok) console.log(JSON.stringify(json).slice(0, 400));
     return;
   }
 

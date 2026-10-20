@@ -104,6 +104,36 @@ const call = async (body, headers = {}) => { let out = { code: 0, body: null, he
     assert(/Ver mi pedido/.test(emailDay4(base).html) && /See your order/.test(emailDay4({ ...base, lang: 'en' }).html));
     assert(!/mi-pedido/.test(emailConfirmation({ ...base, id: 'x', lang: 'es' }).html));
   });
+  const withCard = { ...base, uuid: 'u8k2p9x1', designs: [{ ...base.designs[0], suit: 'mamuto3suit1', configId: 'c4f9a2b7' }] };
+  await t('card link: share-load primitive + card=1, lang, us host, null without configId/suit/uuid or on hostile ids', () => {
+    assert.strictEqual(V.cardUrl(withCard, withCard.designs[0]),
+      'https://design.momuto.com/3d-configurator/configurator.html?configId=c4f9a2b7&suitName=mamuto3suit1&useGetShare=true&u=u8k2p9x1&lang=es&card=1');
+    assert.match(V.cardUrl({ ...withCard, lang: 'en', currency: 'USD' }, withCard.designs[0]), /&lang=en&card=1&fromUrlHost=https%3A%2F%2Fus\.momuto\.com$/);
+    assert.strictEqual(V.cardUrl(base, base.designs[0]), null);                                   // an order from before the webhook patch
+    assert.strictEqual(V.cardUrl({ ...withCard, uuid: null }, withCard.designs[0]), null);
+    assert.strictEqual(V.cardUrl(withCard, { ...withCard.designs[0], suit: '' }), null);          // never guess a suit
+    for (const bad of ['a b', 'a&card=0', '../x', 'x'.repeat(65), '<s>']) {
+      assert.strictEqual(V.cardUrl(withCard, { ...withCard.designs[0], configId: bad }), null);
+      assert.strictEqual(V.cardUrl({ ...withCard, uuid: bad }, withCard.designs[0]), null);
+    }
+  });
+  await t('card link: in the public order JSON only when buildable; the stored uuid itself is never a field', () => {
+    const pub = V.publicOrder(withCard, withCard.designs), old = V.publicOrder(base, base.designs);
+    assert.match(pub.designs[0].cardUrl, /^https:\/\/design\.momuto\.com\/3d-configurator\/configurator\.html\?configId=c4f9a2b7/);
+    assert.strictEqual(old.designs[0].cardUrl, null);
+    assert(!('uuid' in pub) && !('email' in pub));
+  });
+  await t('emails: card block in confirmation + day-4 only with a card link, localised, & escaped; none for old orders', () => {
+    for (const [lang, h] of [['es', 'Comparte tu nueva equipación'], ['en', 'Share your new kit'], ['fr', 'Partagez votre nouvelle tenue'], ['it', 'Condividi la tua nuova divisa']]) {
+      for (const fn of [emailConfirmation3D, emailDay4]) {
+        const html = fn({ ...withCard, lang }).html;
+        assert(html.includes(h), lang + ' ' + fn.name);
+        assert(html.includes('configId=c4f9a2b7&amp;suitName=mamuto3suit1&amp;useGetShare=true&amp;u=u8k2p9x1') && html.includes('card=1'));
+      }
+    }
+    for (const fn of [emailConfirmation3D, emailDay4, emailDay10, emailTracking, emailDelivered]) assert(!/useGetShare/.test(fn(base).html), 'old order: no block');
+    assert(!/useGetShare/.test(emailDay10(withCard).html) && !/useGetShare/.test(emailDelivered(withCard).html));   // only confirmation + day 4
+  });
   await t('pages: 5 stubs exist, noindex, one h1, only info@momuto.com, kept out of sitemap', () => {
     const fs = require('fs');
     for (const [l, h] of [['en', 'my-order'], ['us', 'my-order'], ['es', 'mi-pedido'], ['fr', 'mon-commande'], ['it', 'il-mio-ordine']]) {
@@ -112,6 +142,7 @@ const call = async (body, headers = {}) => { let out = { code: 0, body: null, he
       assert.strictEqual((p.content.match(/<h1\b/g) || []).length, 1);
     }
     assert(fs.readFileSync('scripts/rebuild-sitemap.js', 'utf8').includes('ORDER_VIEW_HANDLES.has(slug)'));
+    for (const [l, h] of [['en', 'my-order'], ['es', 'mi-pedido'], ['fr', 'mon-commande'], ['it', 'il-mio-ordine']]) assert(JSON.parse(fs.readFileSync(`cms/pages/${l}/${h}.json`, 'utf8')).content.includes('cardH'), l + ': card button string');
   });
   await t('deploy: api/ stays at 12 functions; /api/order-view rewrites onto lead.js', () => {
     const fs = require('fs');

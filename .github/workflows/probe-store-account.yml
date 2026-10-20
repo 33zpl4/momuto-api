@@ -1,0 +1,71 @@
+name: Probe store account area (read-only)
+
+# Looks at what a buyer sees and can reach in the stores' account area (www, us, es, fr, it): header/footer links, the account URLs,
+# our own order page (/pages/my-order ...), and, only if test-account secrets exist, the logged-in account + orders pages.
+# READ-ONLY: it submits nothing except a test login. Screenshots + JSON go to the run's artifact (private to the repo).
+# Optional repo secrets (a TEST customer per store; never a real buyer): STORE_WWW_EMAIL / STORE_WWW_PASSWORD, and the same for US, ES, FR, IT.
+# See scripts/probe-store-account.js and docs/verification-map.md.
+
+on:
+  workflow_dispatch:
+    inputs:
+      stores:
+        description: 'comma list of stores (www,us,es,fr,it) or all; logged-in pages need that store''s test-account secrets'
+        default: 'us'
+      publish_shots:
+        description: "'true' = publish the US screenshots to the throwaway branch probe-account-shots (contains the TEST account's pages); anything else deletes that branch"
+        default: 'false'
+      css:
+        description: "stylesheet to inject into every page (default docs/account-brand/account-brand.css). Type 'none' to inject nothing = check what is LIVE on the stores (summary shows 'account skin: v1' or 'NOT PASTED')"
+        default: 'docs/account-brand/account-brand.css'
+      js:
+        description: "script to inject after the stylesheet (type 'none' for nothing)"
+        default: 'docs/account-brand/account-brand.js'
+      order_path:
+        description: 'logged-in order detail path to open (test account)'
+        default: '/account/orders/231549-2026026'
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # only to publish the US screenshots to the throwaway branch probe-account-shots (below)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: node scripts/probe-store-account.js
+        env:
+          PROBE_STORES: ${{ github.event.inputs.stores || (contains(github.event.head_commit.message, '[live-check]') && 'all' || 'us') }}
+          PROBE_CSS: ${{ github.event.inputs.css || (contains(github.event.head_commit.message, '[live-check]') && 'none' || 'docs/account-brand/account-brand.css') }}
+          PROBE_JS: ${{ github.event.inputs.js || (contains(github.event.head_commit.message, '[live-check]') && 'none' || 'docs/account-brand/account-brand.js') }}
+          PROBE_ORDER: ${{ github.event.inputs.order_path || '/account/orders/231549-2026026' }}
+          STORE_WWW_EMAIL: ${{ secrets.STORE_WWW_EMAIL }}
+          STORE_WWW_PASSWORD: ${{ secrets.STORE_WWW_PASSWORD }}
+          STORE_US_EMAIL: ${{ secrets.STORE_US_EMAIL }}
+          STORE_US_PASSWORD: ${{ secrets.STORE_US_PASSWORD }}
+          STORE_ES_EMAIL: ${{ secrets.STORE_ES_EMAIL }}
+          STORE_ES_PASSWORD: ${{ secrets.STORE_ES_PASSWORD }}
+          STORE_FR_EMAIL: ${{ secrets.STORE_FR_EMAIL }}
+          STORE_FR_PASSWORD: ${{ secrets.STORE_FR_PASSWORD }}
+          STORE_IT_EMAIL: ${{ secrets.STORE_IT_EMAIL }}
+          STORE_IT_PASSWORD: ${{ secrets.STORE_IT_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: store-account-probe
+          path: probe-account-out/
+          retention-days: 7
+      - name: "Publish the US screenshots to a throwaway branch (test account, only when publish_shots is true)"
+        if: always() && (github.event.inputs.publish_shots == 'true')
+        run: |
+          mkdir -p /tmp/shots && cp probe-account-out/us-*.png probe-account-out/us-*.txt /tmp/shots/ 2>/dev/null || true
+          cd /tmp/shots && ls * >/dev/null 2>&1 || { echo "no screenshots"; exit 0; }
+          git init -q && git config user.name "probe" && git config user.email "probe@users.noreply.github.com"
+          git add . && git commit -q -m "probe screenshots ${{ github.sha }}"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:refs/heads/probe-account-shots
+      - name: "Delete the throwaway screenshots branch (the test account's screenshots must not linger)"
+        if: always() && (github.event.inputs.publish_shots != 'true')
+        run: git push -q "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" --delete probe-account-shots || echo "branch already gone"

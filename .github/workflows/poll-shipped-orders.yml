@@ -1,0 +1,47 @@
+name: Poll shipped orders (shipped emails)
+
+# Hourly: reads each store's orders API and, for any order the CMS has marked shipped (tracking number on the fulfillment),
+# asks admin-orders `ship` to send OUR branded "order shipped" email once (deduped server side). See scripts/poll-shipped-orders.js, docs/shipped-email.md.
+# LIVE since 19 Oct 2026 (first live send verified by the owner on the US test order). Scheduled runs send; kill switch: set the repo VARIABLE SHIP_LIVE=0 and
+# scheduled runs go back to dry runs. Needs the same MOMUTO_API_SECRET as the paid poller. Manual runs: dry-run (default) or live.
+# The platform's own "order shipped" email (orders/fulfilled) is switched off with the Set platform email notification workflow.
+
+on:
+  schedule:
+    - cron: '37 * * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'What to run'
+        type: choice
+        options: ['dry-run', 'live']
+        default: 'dry-run'
+      lang:
+        description: 'Store'
+        type: choice
+        options: ['all', 'en', 'es', 'fr', 'it', 'us']
+        default: 'all'
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Poll
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          MOMUTO_API_SECRET: ${{ secrets.MOMUTO_API_SECRET }}
+        run: |
+          MODE="${{ inputs.mode }}"
+          LANG_IN="${{ inputs.lang }}"
+          FLAGS="--lang ${LANG_IN:-all}"
+          if { [ -z "$MODE" ] && [ "${{ vars.SHIP_LIVE }}" != "0" ]; } || [ "$MODE" = "live" ]; then FLAGS="$FLAGS --live"; fi
+          echo "running: $FLAGS"
+          node scripts/poll-shipped-orders.js $FLAGS

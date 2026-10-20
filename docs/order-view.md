@@ -63,3 +63,19 @@ name optional, `paid_at` = real payment date, `plant_order_no` = store order no)
 ingest on an old order: it sends the confirmation and enrols the lifecycle, so day-4/day-10 mails would go out at once.
 Add `tracking_number` / `tracking_url` / `shipped_at` for an order that already shipped (status becomes `shipped`, still no email)
 and `extras` as JSON, e.g. `{"shorts":0,"longSleeves":1}` (qty = jerseys only).
+
+## "Share your new kit" button (18 Oct 2026)
+Orders paid after the webhook patch carry each design's `configId` + `suit` and the buyer's `uuid` (design-momuto `server-patches/README.md` §18; stored on
+the order as `designs[].configId` and `uuid`). `lib/order-view.js` `cardUrl(order, design)` turns them into the 3D designer link that opens the design with the
+picture card ready (`?card=1`, design-momuto `static/share-card.js`): `configId` + `useGetShare=true` + `u` is the copy-on-open primitive of the share page's
+"Edit this kit in 3D", so the original is never overwritten. Ids must match `[A-Za-z0-9_-]{1,64}`; no suit or uuid means no link (never a guess).
+- **Where:** a block in the confirmation and day-4 emails (`cardBlock` in `lib/emails.js`, EN/ES/FR/IT, outline button under the renders) and a "Share your new kit" card
+  on the order page between the design renders and the roster (`cardUrl` is in the `/api/order-view` JSON per design). Older orders and non-3D orders show neither.
+- **Privacy:** the link carries the buyer's design-server uuid (the tool's anonymous session id, the same `u` a share link has). It reaches the buyer by email and the
+  token-/email-gated page JSON only; `publicOrder` still exposes no email, address or amounts.
+- **3D-links inventory:** the real links are built at runtime by `cardUrl()` (ids come from each order), so `scripts/audit-3d-links.js` cannot see them; the one row it records for them
+  (`configId=c4f9a2b7 … share=u8k2p9x1`, `scripts/test-order-view.js`) is the test fixture of that shape. If the launch parameters ever change, change `cardUrl()` as well as the inventory.
+- **Counters:** the tool beacons `card_open` / `card_made` / `card_share` / `card_download` (scorecard rows "share image: …"); opened-from-email vs from-the-page is not separated.
+- Tests: `node scripts/test-order-view.js` (17). **Not verified:** a live email/page link opening a real design (needs the webhook deployed and one paid order), phones' share sheet.
+
+See also `docs/store-account-area.md`: this page is one of THREE order surfaces (the platform's store account and the design server's `/userInfo` are the others); tracking is entered in the platform and in our admin separately.

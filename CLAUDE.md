@@ -35,6 +35,8 @@ Read the doc that owns a topic BEFORE editing that surface.
   `node scripts/build-size-guide-pages.js` (writes `cms/pages/<locale>/<handle>.json`, deploy via Deploy CMS Page);
   US is edited directly in `cms/pages/us/size-guide.json`. Sizes must match the cart dropdowns in
   `design-momuto/templates/*/cartItem.html` (no 176 — factory maps it to adult S).
+- `docs/shipped-email.md` — our branded "order shipped" email (Resend) driven by the platform order API (`poll-shipped-orders`, admin-orders `ship`), arming steps, what is not verified. Read BEFORE touching shipped/tracking emails.
+- `docs/store-cart-ui.md` — the store `/cart` page + "Added to cart" pop-up: what the theme ships, the brand skin in `docs/cart-brand/` (one pasted script-manager entry per store, NOT deployed from the repo), probe `probe-cart-ui`. Read BEFORE touching cart/pop-up styling.
 - `docs/blog-pipeline.md` — blog files, schema, deploy, translation workflow + its failure modes, post dates (the 1969-12-31 gotcha), image hosting. Read BEFORE touching `blogs/**`.
 - `docs/live-chat-whatsapp.md` — the WhatsApp chat button (tool + cart), what a message with a design ref means and how to open that design.
 - `docs/seo-opportunities-2026-09.md` — SEO audit of every plan vs what
@@ -48,6 +50,8 @@ Read the doc that owns a topic BEFORE editing that surface.
   and skips a duplicate).
 - `docs/store-theme-css.md` — the live store custom-CSS script (CMS name `PC端你也喜欢产品调准css`),
   the Jost audit and measured header/footer numbers; read BEFORE touching nav fonts or header styling.
+- `docs/store-account-area.md` — the platform's customer account (login, orders, order detail, tracking) on the 5 stores: the three order surfaces, what is verified,
+  the brand skin + tracking panel in `docs/account-brand/` (sources + generated paste-in `account-brand-entry.html`, one new script-manager entry per store, NOT deployed from the repo), the `probe-store-account` workflow, open decisions. Read BEFORE touching the account area, the header account icon or the footer "Order Status".
 - `docs/warehouse-sheet.md` — factory 生产单 generator (`build-warehouse-sheet.js`,
   runs daily inside `check-platform-orders.yml`); sources + known roster gap.
 - `docs/design-page-template.md`, `docs/rtp-collection.md` (historical),
@@ -113,6 +117,10 @@ pushes and verifies the run itself.
    FROM_EMAIL defaults are transactional senders and are exempt.
 
 ## Agent-ops gotchas (tooling walls already hit)
+
+- **"Not secure" / `ERR_CERT_AUTHORITY_INVALID` on the stores, reported from Spain (17 Oct 2026):** it was the Spanish ISP block of
+  Cloudflare IPs during LaLiga match windows, not a site fault (outside check clean, no mixed content, Cloudflare Full strict).
+  Read `docs/incident-2026-10-17-not-secure-spain.md` BEFORE hunting; check `whynopadlock.com` first.
 
 - **Workflow-tool subagents can hit a permission-handler bug** that strips
   EVERY tool parameter (`updatedInput ... required parameter missing`),

@@ -19,7 +19,7 @@ const BASELINE = path.join(__dirname, 'copy-rules.baseline.json');
 
 // customer-facing surfaces. blogs/ is editorial (may name clubs); api/ and lib/ FROM defaults are exempt for emails.
 const PRODUCT = ['pages', 'cms/pages', 'faq', 'policies', 'maker', 'size-guide', 'cms/email-notifications/src', 'static/shared'];
-const ALL_COPY = [...PRODUCT, 'blogs', 'lib/emails.js', 'lib/wa-bot.js', 'lib/wa-bot-answers.json'];
+const ALL_COPY = [...PRODUCT, 'blogs', 'lib/emails.js', 'lib/wa-bot.js', 'lib/wa-bot-answers.json', 'public/wa-faq.json'];
 
 // a refund PROMISE (not an FAQ question about whether the credit is refundable)
 const REFUND = /we(?:'|’|&rsquo;)ll refund|we will refund|we refund|refund your|full refund|fully refundable|(?:on )?vous rembourse|te devolvemos|te reembolsamos|ti rimborsiamo|rimborsiamo i|remboursons/i;

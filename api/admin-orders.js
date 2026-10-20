@@ -72,7 +72,7 @@
  */
 
 const { kv } = require('@vercel/kv');
-const { emailConfirmation3D } = require('../lib/emails');
+const { emailConfirmation3D, emailTracking } = require('../lib/emails');
 
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 const SECRET      = process.env.D3_ORDER_SECRET;
@@ -426,6 +426,56 @@ module.exports = async function handler(req, res) {
     await kv.set(`order:${id}`, order);
     console.log(`[admin-orders] manual ingest+send for ${id} -> ${order.email}`);
     return res.status(200).json({ ok: true, ingested: true, sent: true, to: order.email, order: diagnose(id, order) });
+  }
+
+  // ---- SHIP: the "order shipped" email, once per order (19 Oct 2026) --------
+  // Called by scripts/poll-shipped-orders.js when the store platform shows a tracking number on an order.
+  // 3D orders (order_no = local ref) get their record updated (status shipped = lifecycle mails stop, My order page
+  // shows tracking); other store orders get the email only. Dedupe: a record that already has the 'tracking' mail,
+  // or the KV key shipmail:<platform no>. body.dry = true renders and answers, writes and sends nothing.
+  //   { "action":"ship", "order_no":"<ref|omit>", "plant_order_no":"231549-2026026", "email":"..", "name":"..", "lang":"en|us|es|fr|it",
+  //     "tracking_number":"..", "tracking_url":"https://..", "carrier":"USPS", "shipped_at":"<ISO>", "dry":true }
+  if (action === 'ship') {
+    if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
+    const dry = body.dry === true || body.dry === 'true' || body.dry === 1 || body.dry === '1';
+    if (!dry && !RESEND_KEY) return res.status(503).json({ error: 'RESEND_API_KEY not configured' });
+    const trackingNumber = String(body.tracking_number || '').trim().slice(0, 60);
+    const plantNo = body.plant_order_no ? String(body.plant_order_no).trim() : '';
+    const refIn = body.order_no ? String(body.order_no).trim() : '';
+    if (!trackingNumber || !(plantNo || refIn)) return res.status(400).json({ error: 'tracking_number and plant_order_no (or order_no) are required' });
+
+    const id = refIn ? toId(refIn) : null;
+    const existing = id ? await kv.get(`order:${id}`) : null;
+    const dedupeKey = `shipmail:${plantNo || refIn}`;
+    if ((existing && (existing.emailsSent || []).includes('tracking')) || await kv.get(dedupeKey)) {
+      return res.status(200).json({ ok: true, already: true, sent: false });
+    }
+    const email = String((existing && existing.email) || body.email || '').trim();
+    if (!email) return res.status(400).json({ error: 'no customer email on the record or in the request' });
+    const rawLang = String(body.lang || (existing && existing.lang) || 'en');
+    const shippedAt = body.shipped_at && !isNaN(Date.parse(body.shipped_at)) ? new Date(body.shipped_at).toISOString() : new Date().toISOString();
+    const trackingUrl = /^https:\/\//i.test(body.tracking_url || '') ? String(body.tracking_url) : null;
+    const base = existing || {
+      id: null, ref: null, name: String(body.name || '').trim() || 'Coach', team: null, email,
+      currency: rawLang === 'us' ? 'USD' : (body.currency || 'EUR'),
+    };
+    const mail = {
+      ...base, email, lang: ['en', 'es', 'fr', 'it'].includes(rawLang) ? rawLang : 'en',
+      plantOrderNo: (existing && existing.plantOrderNo) || plantNo || null,
+      trackingNumber, trackingUrl, carrier: body.carrier ? String(body.carrier).slice(0, 40) : null, shippedAt,
+    };
+    const { subject, html } = emailTracking(mail);
+    if (dry) return res.status(200).json({ ok: true, dry: true, sent: false, to: email, subject, record: !!existing, viewLink: !!require('../lib/order-view').viewUrl(mail) });
+
+    await sendEmail(email, subject, html);
+    await kv.set(dedupeKey, shippedAt);
+    if (existing) {
+      await kv.set(`order:${id}`, { ...mail, status: 'shipped', emailsSent: [...(existing.emailsSent || []), 'tracking'] });
+      await kv.srem('orders:active', id);
+      await kv.sadd('orders:shipped', id);
+    }
+    console.log(`[admin-orders] shipped email for ${plantNo || refIn} -> ${email}${existing ? ' (record updated)' : ' (store order, no 3D record)'}`);
+    return res.status(200).json({ ok: true, sent: true, to: email, record: !!existing });
   }
 
   // ---- EXCLUDE ALL (kill switch) ---------------------------------------

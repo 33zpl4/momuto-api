@@ -60,6 +60,11 @@
                                  // Polo" marker in the store product title; billed via the
                                  // per-store "Polo collar" product; owner ruling 15 Sep 2026)
 
+  // Gift (owner ruling 17 Oct 2026): a free team flag + captain armband with 10 or more KITS (jersey + shorts).
+  // Jersey-only orders do NOT qualify. Surfaces: FAQ pages, llms.txt, the PDP estimator (custom-content.js) and the
+  // WhatsApp assistant (momuto-api scripts/build-wa-bot-answers.js reads this constant). Change it HERE.
+  var GIFT_MIN_KITS=10;
+
   function normQty(qty){ return Math.max(1, parseInt(qty,10)||1); }
   // store key: 'us' -> USD ladder; anything else -> the EUR ladder.
   function storeKey(opts){ return (opts&&String(opts.store||"").toLowerCase()==="us")?"us":"eur"; }
@@ -81,7 +86,9 @@
   var api={
     PRICING:PRICING, PRICING_US:PRICING_US, RTP_US:RTP_US, CURRENCY:CURRENCY,
     RTP_OFF:RTP_OFF, POPULAR_MIN:POPULAR_MIN, LS_SURCHARGE:LS_SURCHARGE, COLLAR_SURCHARGE:COLLAR_SURCHARGE,
-    FAST_LANE:FAST_LANE,
+    FAST_LANE:FAST_LANE, GIFT_MIN_KITS:GIFT_MIN_KITS,
+    // true when this kind + quantity earns the free team flag + captain armband (kits only, 10+).
+    giftEligible:function(kind,qty){ return kind==="kit" && normQty(qty)>=GIFT_MIN_KITS; },
     tierBase:tierBase, rtpPrice:rtpPrice, currency:currency, fmt:fmt,
     // Effective per-unit price. opts.rtp=true -> RTP pricing; otherwise standard/custom.
     // opts.store:'us' -> the USD ladder (LS_SURCHARGE is 3.00 in both currencies).

@@ -12,7 +12,7 @@ on:
         required: true
         default: 'inspect'
         type: choice
-        options: ['inspect', 'inspect-nav', 'inspect-zones', 'apply-nav', 'apply-seo', 'apply-shipping']
+        options: ['inspect', 'inspect-nav', 'inspect-zones', 'inspect-couriers', 'apply-nav', 'apply-seo', 'apply-shipping']
       store:
         description: 'apply only: target store'
         required: false
@@ -23,6 +23,10 @@ on:
         description: 'apply-nav only: EXACT nav_name of the menu to overwrite (from inspect)'
         required: false
         default: ''
+      courier_query:
+        description: 'inspect-couriers only: regex for the carrier name/code (default USPS)'
+        required: false
+        default: 'usps|united states postal'
       dry_run:
         description: 'apply only: preview payload, post nothing'
         required: false
@@ -48,5 +52,6 @@ jobs:
           MODE: ${{ github.event.inputs.mode }}
           TARGET_STORE: ${{ github.event.inputs.store }}
           TARGET_NAV_NAME: ${{ github.event.inputs.nav_name }}
+          COURIER_Q: ${{ github.event.inputs.courier_query }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: node scripts/sync-store-config.js
