@@ -38,6 +38,7 @@
 
 const { kv } = require('@vercel/kv');
 const { emailConfirmation3D } = require('../lib/emails');
+const { rosterUnits } = require('../lib/design-kind');
 
 const RESEND_KEY  = process.env.RESEND_API_KEY;
 const FROM_EMAIL  = process.env.FROM_EMAIL_ORDERS || process.env.FROM_EMAIL || 'orders@momuto.com';
@@ -139,7 +140,8 @@ module.exports = async function handler(req, res) {
     const storedPlayers = (existing.designs || []).flatMap(d => d.players || []).filter(Boolean);
     if (incomingPlayers.length && !storedPlayers.length) {
       existing.designs = designs;
-      existing.qty = incomingPlayers.reduce((n, p) => n + (parseInt(p.qty, 10) || 1), 0) || existing.qty;
+      // jerseys only (a shorts design's rows are not jerseys, 21 Oct 2026), and never over the billed count the poller stored
+      if (!existing.qty || existing.qty === '—') existing.qty = rosterUnits(designs).jerseys || existing.qty;
       existing.rosterBackfilledAt = new Date().toISOString();
       await kv.set(`order:${id}`, existing);
       console.log(`[order-3d-paid] ${id} dedup — roster backfilled (${incomingPlayers.length} rows)`);
@@ -151,7 +153,8 @@ module.exports = async function handler(req, res) {
   const isRetry = !!(existing && existing.paidAt);
 
   const players = (designs || []).flatMap(d => d.players || []).filter(Boolean);
-  const qty = players.reduce((n, p) => n + (parseInt(p.qty, 10) || 1), 0) || '—';
+  const units = rosterUnits(designs);
+  const qty = units.jerseys || '—';   // jerseys only: the rows of a shorts-only design are shorts (21 Oct 2026, order oofxswi4sj)
 
   // On a retry keep the stored record (original clocks, any admin edits) and
   // only re-attempt the send; otherwise build the order fresh.
