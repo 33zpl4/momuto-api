@@ -79,3 +79,14 @@ picture card ready (`?card=1`, design-momuto `static/share-card.js`): `configId`
 - Tests: `node scripts/test-order-view.js` (17). **Not verified:** a live email/page link opening a real design (needs the webhook deployed and one paid order), phones' share sheet.
 
 See also `docs/store-account-area.md`: this page is one of THREE order surfaces (the platform's store account and the design server's `/userInfo` are the others); tracking is entered in the platform and in our admin separately.
+
+## Totals when an order has several designs (21 Oct 2026, order oofxswi4sj)
+A customer saw "25 camisetas · 12 pantalones" for 13 jerseys + 12 shorts. The confirmation email was right (13 / 12, from the billed
+lines); the "My order" page it links to was not: the order held TWO designs (the platform bills "Tu diseño personalizado 1 de 2 / 2 de 2"):
+a jersey design and a separate shorts design, each with its own roster, and `publicOrder` summed every roster row as a jersey.
+Same mistake in two more places: the warehouse sheet (`名单数量 25 与平台数量 13` warning) and the roster backfill in
+`api/order-3d-paid.js` (it would have overwritten the poller's billed qty with 25). Fix: `lib/design-kind.js` (`designKind(suit)`,
+`rosterUnits(designs)`): a `*shorts*` suit's rows are shorts, a `*socks*` suit's rows are socks, everything else (incl. kit suits) is
+jerseys; the backfill never overwrites an existing billed qty. `getGoods` rows now keep `suit_name` as `suit`. Rule: **never sum roster rows
+across designs without looking at the design kind.** Older records whose rows carry no suit still count as jerseys (old behaviour).
+Tests: `node scripts/test-order-view.js` (two-design case).

@@ -31,6 +31,7 @@
  */
 
 const fs = require('fs');
+const { rosterUnits, designKind } = require('../lib/design-kind');
 const path = require('path');
 const ExcelJS = require('exceljs');
 const { classifyLine } = require('../lib/order-lines');
@@ -273,7 +274,7 @@ async function buildSheet(order, designs, warnings) {
   const meta = ws.getCell(r, 1); meta.value = `自动生成 ${new Date().toISOString().replace('T', ' ').slice(0, 16)} UTC · 数据来源：店铺平台订单 + 3D设计服务器`; meta.font = { name: 'Arial', size: 9, color: { argb: 'FF808080' } };
   ws.mergeCells(r, 1, r, 6); r += 2;
 
-  const jerseyQty = designs.reduce((n, d) => n + d.players.reduce((m, p) => m + p.qty, 0), 0) || order.jerseys || null;
+  const jerseyQty = rosterUnits(designs).jerseys || order.jerseys || null;
   const rows = [
     ...(order.fastLane ? [['⚡ 加急 FAST LANE', '优先生产 + 优先发货（客户已付加急费）— 请优先排产']] : []),
     ['订单ID', order.order_number],
@@ -387,7 +388,7 @@ async function processOrder(lang, raw, token) {
   } else {
     designs.forEach((d, i) => { const p = previewRenders[i]; if (p) { d.front = d.front || p.front; d.back = d.back || p.back; } });
   }
-  const rosterQty = designs.reduce((n, d) => n + d.players.reduce((m, p) => m + p.qty, 0), 0);
+  const rosterQty = rosterUnits(designs).jerseys;   // jersey designs only: a shorts design's rows are shorts (21 Oct 2026)
   if (rosterQty && order.jerseys && rosterQty !== order.jerseys) warnings.push(`名单数量 ${rosterQty} 与平台数量 ${order.jerseys} 不一致，请核对`);
   const rosterLong = designs.reduce((n, d) => n + d.players.filter(p => p.sleeve === 'long').reduce((m, p) => m + p.qty, 0), 0);
   if (rosterQty && rosterLong !== order.longSleeves) warnings.push(`长袖数量：名单 ${rosterLong} 件，平台加购 ${order.longSleeves} 件，请核对`);
