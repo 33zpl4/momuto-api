@@ -8,7 +8,7 @@ name: Create promo jersey-only products
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'claude/clever-mendel-fni5rb']   # TEMP dry-run trigger, removed before merge
     paths:
       - 'scripts/create-promo-jersey-only-products.js'
       - '.github/workflows/create-promo-jersey-only-products.yml'
