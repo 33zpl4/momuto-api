@@ -43,3 +43,13 @@ same email"; guest checkout does NOT create a login, the buyer registers with th
 ## Not verified
 Live send (needs merge + dry-run read + `SHIP_LIVE`), how the list row signals "shipped" (the pre-filter uses `delivery_at` / `fulfillment_status 320`; the dry run log shows
 whether orders are being found), partial shipments (only the first fulfillment is emailed), email-client rendering (previews are Chromium only), courier ids other than USPS.
+
+## One delivery estimate everywhere (22 Oct 2026)
+A buyer asked "¿cuál es la buena?": the confirmation email and the My order page said 23–28 Oct (payment + 25–30 d), the shipped email said
+31 Oct – 5 Nov (ship date + 10–15 d). The order had shipped late (paid 28 Sep, shipped 21 Oct), the page never switched after shipping, and
+nothing told the buyer the new date replaced the old one. Fix: `lib/delivery.js` (`deliveryEstimate`) is the only derivation, used by every
+email (`lib/emails.js` `orderWindow`, `emailTracking`) and by the page (`lib/order-view.js` `deliveryWindowISO`): payment + 25–30 d (fast lane
+18–23) until the order has a ship date, ship date + 10–15 d after. The shipped email and the page also show the first quote ("This replaces the
+estimate in your confirmation email (…)" / "Updated from the day it shipped. First estimate: …"). The page copy is generated (`scripts/build-order-view-pages.js`,
+Deploy CMS Page on merge). Open: a fast-lane order keeps 10–15 d after shipping (no owner figure for priority shipping alone).
+Rule: **never compute a delivery date inline; call `deliveryEstimate`.** Tests: `node scripts/test-order-view.js` (delivery + consistency cases).

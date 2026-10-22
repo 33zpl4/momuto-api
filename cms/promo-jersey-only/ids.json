@@ -1,0 +1,74 @@
+{
+  "en": {
+    "26.90": {
+      "id": "11017210",
+      "handle": "jersey-only-promo-21-90",
+      "title": "Jersey, promo rate 21.90",
+      "price": "21.90",
+      "kitPrice": "26.90",
+      "verifiedAt": "2026-10-22T10:45:06.466Z"
+    },
+    "23.90": {
+      "id": "11017211",
+      "handle": "jersey-only-promo-18-90",
+      "title": "Jersey, promo rate 18.90",
+      "price": "18.90",
+      "kitPrice": "23.90",
+      "verifiedAt": "2026-10-22T10:45:09.036Z"
+    }
+  },
+  "es": {
+    "26.90": {
+      "id": "11082852",
+      "handle": "jersey-only-promo-21-90",
+      "title": "Camiseta, tarifa promo 21,90",
+      "price": "21.90",
+      "kitPrice": "26.90",
+      "verifiedAt": "2026-10-22T10:45:10.695Z"
+    },
+    "23.90": {
+      "id": "11082853",
+      "handle": "jersey-only-promo-18-90",
+      "title": "Camiseta, tarifa promo 18,90",
+      "price": "18.90",
+      "kitPrice": "23.90",
+      "verifiedAt": "2026-10-22T10:45:12.151Z"
+    }
+  },
+  "fr": {
+    "26.90": {
+      "id": "10211196",
+      "handle": "jersey-only-promo-21-90",
+      "title": "Maillot, tarif promo 21,90",
+      "price": "21.90",
+      "kitPrice": "26.90",
+      "verifiedAt": "2026-10-22T10:45:13.244Z"
+    },
+    "23.90": {
+      "id": "10211197",
+      "handle": "jersey-only-promo-18-90",
+      "title": "Maillot, tarif promo 18,90",
+      "price": "18.90",
+      "kitPrice": "23.90",
+      "verifiedAt": "2026-10-22T10:45:14.318Z"
+    }
+  },
+  "us": {
+    "30.90": {
+      "id": "18549356",
+      "handle": "jersey-only-promo-25-90",
+      "title": "Jersey, promo rate 25.90",
+      "price": "25.90",
+      "kitPrice": "30.90",
+      "verifiedAt": "2026-10-22T10:45:15.872Z"
+    },
+    "26.90": {
+      "id": "18549357",
+      "handle": "jersey-only-promo-21-90",
+      "title": "Jersey, promo rate 21.90",
+      "price": "21.90",
+      "kitPrice": "26.90",
+      "verifiedAt": "2026-10-22T10:45:17.280Z"
+    }
+  }
+}

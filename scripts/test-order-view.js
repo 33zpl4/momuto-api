@@ -98,7 +98,7 @@ const call = async (body, headers = {}) => { let out = { code: 0, body: null, he
     assert.strictEqual(r2.code, 200); assert(r2.body.order.rosterPending);
   });
   await t('emails: the link is in all five 3D lifecycle emails, and absent for non-3D', () => {
-    const re = /es\.momuto\.com\/pages\/mi-pedido\?ref=abc12345&k=/;
+    const re = /es\.momuto\.com\/pages\/mi-pedido\?ref=abc12345&(amp;)?k=/;   // the shipped email escapes & in hrefs
     for (const f of [emailConfirmation3D, emailDay4, emailDay10, emailTracking, emailDelivered]) assert(re.test(f(base).html), f.name);
     assert(!/mi-pedido/.test(emailDay4({ ...base, id: 'shop_9' }).html));
     assert(/Ver mi pedido/.test(emailDay4(base).html) && /See your order/.test(emailDay4({ ...base, lang: 'en' }).html));
@@ -143,6 +143,53 @@ const call = async (body, headers = {}) => { let out = { code: 0, body: null, he
     }
     assert(fs.readFileSync('scripts/rebuild-sitemap.js', 'utf8').includes('ORDER_VIEW_HANDLES.has(slug)'));
     for (const [l, h] of [['en', 'my-order'], ['es', 'mi-pedido'], ['fr', 'mon-commande'], ['it', 'il-mio-ordine']]) assert(JSON.parse(fs.readFileSync(`cms/pages/${l}/${h}.json`, 'utf8')).content.includes('cardH'), l + ': card button string');
+  });
+  await t('two designs: jersey 13 + shorts-only 12 -> 13 jerseys, 12 shorts (order oofxswi4sj, 21 Oct 2026: page read 25)', () => {
+    const jr = Array.from({ length: 13 }, (_, i) => ({ number: i + 1, name: 'P' + i, size: 'M', qty: 1 }));
+    const sh = Array.from({ length: 12 }, (_, i) => ({ number: i + 1, name: 'P' + i, size: 'M', qty: 1 }));
+    const o = V.publicOrder({ ...base, extras: { shorts: 12 } }, [{ suit: 'mamuto3', players: jr }, { suit: 'mamuto3shorts1', players: sh }]);
+    assert.strictEqual(o.totals.jerseys, 13);
+    assert.strictEqual(o.totals.shorts, 12);
+    assert.deepStrictEqual(o.designs.map(d => d.kind), ['jersey', 'shorts']);
+    // the same order with no suit on the rows (older records) keeps the old behaviour: everything is a jersey
+    const old = V.publicOrder({ ...base, extras: { shorts: 12 } }, [{ players: jr }, { players: sh }]);
+    assert.strictEqual(old.totals.jerseys, 25);
+  });
+  await t('design kinds + roster units', () => {
+    const K = require('../lib/design-kind');
+    assert.deepStrictEqual(['mamuto3', 'mamuto2', 'mamuto3suit1', 'mamuto3shorts1', 'mamuto2shorts1', 'mamuto2socks1', 'polo', '', undefined].map(K.designKind),
+      ['jersey', 'jersey', 'jersey', 'shorts', 'shorts', 'socks', 'jersey', 'jersey', 'jersey']);
+    assert.deepStrictEqual(K.rosterUnits([{ suit: 'mamuto3', players: [{ qty: 3 }, { qty: 2 }] }, { suit: 'mamuto3shorts1', players: [{ qty: 4 }] }, { suit: 'mamuto2socks1', players: [{}] }]),
+      { jerseys: 5, shorts: 4, socks: 1 });
+  });
+  await t('delivery: one derivation — paid+25-30 before shipping, ship date+10-15 after, `first` kept (22 Oct 2026: 23-28 Oct vs 31 Oct-5 Nov)', () => {
+    const D = require('../lib/delivery');
+    const late = { paidAt: '2026-09-28T09:00:00Z', lang: 'es' };
+    const a = D.deliveryEstimate(late);
+    assert.deepStrictEqual([a.basis, D.isoDay(a.from), D.isoDay(a.to), a.changed], ['paid', '2026-10-23', '2026-10-28', false]);
+    const b = D.deliveryEstimate({ ...late, shippedAt: '2026-10-21T08:00:00Z' });
+    assert.deepStrictEqual([b.basis, D.isoDay(b.from), D.isoDay(b.to), b.changed], ['shipped', '2026-10-31', '2026-11-05', true]);
+    assert.deepStrictEqual([D.isoDay(b.first.from), D.isoDay(b.first.to)], ['2026-10-23', '2026-10-28']);
+    // the page reads the same estimate and says what it replaced
+    const w = V.deliveryWindowISO({ ...late, shippedAt: '2026-10-21T08:00:00Z' });
+    assert.deepStrictEqual([w.from, w.to, w.basis, w.first.from, w.first.to], ['2026-10-31', '2026-11-05', 'shipped', '2026-10-23', '2026-10-28']);
+    assert.strictEqual(V.deliveryWindowISO(late).basis, 'paid');
+    assert.strictEqual(V.deliveryWindowISO(late).first, undefined);
+    assert.strictEqual(D.deliveryEstimate({}), null);
+    // fast lane: first quote 18-23
+    const f = D.deliveryEstimate({ paidAt: '2026-09-28T09:00:00Z', fastLane: true });
+    assert.deepStrictEqual([D.isoDay(f.from), D.isoDay(f.to)], ['2026-10-16', '2026-10-21']);
+  });
+  await t('emails: confirmation and shipped email quote consistent windows; shipped email says it replaces the first one', () => {
+    const o = { ...base, paidAt: '2026-09-28T09:00:00Z', lang: 'es', shippedAt: '2026-10-21T08:00:00Z', trackingNumber: 'TN1', carrier: 'DHL', trackingUrl: 'https://dhl.example/t/TN1' };
+    const conf = emailConfirmation3D({ ...o, shippedAt: undefined, trackingNumber: undefined });
+    assert(conf.html.includes('23–28 de octubre'), 'confirmation: 23-28 oct');
+    const ship = emailTracking(o);
+    assert(ship.html.includes('31 de octubre – 5 de noviembre'), 'shipped: 31 oct - 5 nov');
+    assert(ship.html.includes('sustituye') && ship.html.includes('23–28 de octubre'), 'shipped email names the estimate it replaces');
+    const same = emailTracking({ ...o, paidAt: '2026-10-10T09:00:00Z' });   // shipped on day 11: 31 Oct-5 Nov vs 4-9 Nov -> still differs, still says so
+    assert(same.html.includes('sustituye'));
+    const en = emailTracking({ ...o, lang: 'en' }); assert(/replaces the estimate in your confirmation email/.test(en.html));
   });
   await t('deploy: api/ stays at 12 functions; /api/order-view rewrites onto lead.js', () => {
     const fs = require('fs');

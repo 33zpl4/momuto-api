@@ -23,7 +23,7 @@ const T = {
     title: 'My order', meta_title: 'My order | MOMUTO', meta_descript: 'Follow your MOMUTO order: status, delivery window, tracking and your roster.',
     h1: 'MY <span class="acc">ORDER</span>', sub: 'Status, delivery window, tracking and your roster, in one place.',
     hi: n => n ? `Hi ${n}, here is your order.` : 'Here is your order.', ref: 'Order reference', store: 'Store order',
-    steps: ['Paid', 'In production', 'Shipped', 'Delivered'], window: 'Estimated delivery', windowFast: 'Estimated delivery · Fast lane',
+    steps: ['Paid', 'In production', 'Shipped', 'Delivered'], window: 'Estimated delivery', windowFast: 'Estimated delivery · Fast lane', shipNote: f => `Updated from the day it shipped. First estimate: ${f}.`,
     track: 'Track your parcel', tracking: 'Tracking number', design: 'Your design', cardH: 'Share your new kit', cardB: 'Make a post image', front: 'Front', back: 'Back',
     roster: 'Roster', cols: { number: 'No.', name: 'Name', size: 'Jersey', shorts: 'Shorts', sleeve: 'Sleeve', qty: 'Qty' },
     long: 'Long', short: 'Short', none: 'Jersey only', polo: 'Polo collar', same: 'Same size',
@@ -37,7 +37,7 @@ const T = {
     title: 'Mi pedido', meta_title: 'Mi pedido | MOMUTO', meta_descript: 'Sigue tu pedido de MOMUTO: estado, plazo de entrega, seguimiento y tu plantilla.',
     h1: 'MI <span class="acc">PEDIDO</span>', sub: 'Estado, plazo de entrega, seguimiento y tu plantilla, en un solo sitio.',
     hi: n => n ? `Hola ${n}, este es tu pedido.` : 'Este es tu pedido.', ref: 'Referencia del pedido', store: 'Pedido de la tienda',
-    steps: ['Pagado', 'En producción', 'Enviado', 'Entregado'], window: 'Entrega estimada', windowFast: 'Entrega estimada · Fast lane',
+    steps: ['Pagado', 'En producción', 'Enviado', 'Entregado'], window: 'Entrega estimada', windowFast: 'Entrega estimada · Fast lane', shipNote: f => `Actualizada desde el día del envío. Primera estimación: ${f}.`,
     track: 'Seguir el paquete', tracking: 'Número de seguimiento', design: 'Tu diseño', cardH: 'Comparte tu nueva equipación', cardB: 'Crear imagen para publicar', front: 'Delante', back: 'Detrás',
     roster: 'Plantilla', cols: { number: 'Dorsal', name: 'Nombre', size: 'Camiseta', shorts: 'Pantalón', sleeve: 'Manga', qty: 'Cant.' },
     long: 'Larga', short: 'Corta', none: 'Solo camiseta', polo: 'Cuello polo', same: 'Misma talla',
@@ -51,7 +51,7 @@ const T = {
     title: 'Ma commande', meta_title: 'Ma commande | MOMUTO', meta_descript: 'Suivez votre commande MOMUTO : statut, délai de livraison, suivi et votre liste de joueurs.',
     h1: 'MA <span class="acc">COMMANDE</span>', sub: 'Statut, délai de livraison, suivi et votre liste de joueurs, au même endroit.',
     hi: n => n ? `Bonjour ${n}, voici votre commande.` : 'Voici votre commande.', ref: 'Référence de commande', store: 'Commande boutique',
-    steps: ['Payée', 'En production', 'Expédiée', 'Livrée'], window: 'Livraison estimée', windowFast: 'Livraison estimée · Fast lane',
+    steps: ['Payée', 'En production', 'Expédiée', 'Livrée'], window: 'Livraison estimée', windowFast: 'Livraison estimée · Fast lane', shipNote: f => `Mise à jour depuis le jour d'expédition. Première estimation : ${f}.`,
     track: 'Suivre le colis', tracking: 'Numéro de suivi', design: 'Votre design', cardH: 'Partagez votre nouvelle tenue', cardB: 'Créer une image à publier', front: 'Face', back: 'Dos',
     roster: 'Liste des joueurs', cols: { number: 'N°', name: 'Nom', size: 'Maillot', shorts: 'Short', sleeve: 'Manches', qty: 'Qté' },
     long: 'Longues', short: 'Courtes', none: 'Maillot seul', polo: 'Col polo', same: 'Même taille',
@@ -65,7 +65,7 @@ const T = {
     title: 'Il mio ordine', meta_title: 'Il mio ordine | MOMUTO', meta_descript: 'Segui il tuo ordine MOMUTO: stato, data di consegna, tracking e la tua lista giocatori.',
     h1: 'IL MIO <span class="acc">ORDINE</span>', sub: 'Stato, data di consegna, tracking e la tua lista giocatori, in un unico posto.',
     hi: n => n ? `Ciao ${n}, ecco il tuo ordine.` : 'Ecco il tuo ordine.', ref: 'Riferimento ordine', store: 'Ordine negozio',
-    steps: ['Pagato', 'In produzione', 'Spedito', 'Consegnato'], window: 'Consegna stimata', windowFast: 'Consegna stimata · Fast lane',
+    steps: ['Pagato', 'In produzione', 'Spedito', 'Consegnato'], window: 'Consegna stimata', windowFast: 'Consegna stimata · Fast lane', shipNote: f => `Aggiornata dal giorno della spedizione. Prima stima: ${f}.`,
     track: 'Traccia il pacco', tracking: 'Numero di tracking', design: 'Il tuo design', cardH: 'Condividi la tua nuova divisa', cardB: "Crea un'immagine da pubblicare", front: 'Fronte', back: 'Retro',
     roster: 'Lista giocatori', cols: { number: 'N.', name: 'Nome', size: 'Maglia', shorts: 'Pantaloncini', sleeve: 'Maniche', qty: 'Qtà' },
     long: 'Lunghe', short: 'Corte', none: 'Solo maglia', polo: 'Colletto polo', same: 'Stessa taglia',
@@ -119,7 +119,7 @@ const EXTRA_CSS = `
 // Browser script. Text only via textContent; only https image URLs (also enforced by the API).
 const SCRIPT = `(function(){
 var T=JSON.parse(document.getElementById('ov-t').textContent);
-['hi','totals','helpSub'].forEach(function(k){var f=T[k];if(f&&f.__fn)T[k]=(new Function('return '+f.__fn))();});
+['hi','totals','helpSub','shipNote'].forEach(function(k){var f=T[k];if(f&&f.__fn)T[k]=(new Function('return '+f.__fn))();});
 var API=${JSON.stringify(API)},root=document.getElementById('ov');
 var q=new URLSearchParams(location.search),ref=(q.get('ref')||'').trim(),k=(q.get('k')||'').trim();
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
@@ -141,7 +141,8 @@ function render(o){
   var c=el('div','card'),ol=el('ol','tl');
   o.status.steps.forEach(function(s,i){var li=el('li',(s.done?'done':'')+(s.current?' cur':''),T.steps[i]);if(s.date)li.appendChild(el('small',0,day(s.date)));ol.appendChild(li);});
   c.appendChild(ol);
-  var w=o.status.window;if(w&&o.status.current!=='delivered'){var p=el('p','win',(o.fastLane?T.windowFast:T.window)+': ');p.appendChild(el('b',0,day(w.from)+' – '+day(w.to)));c.appendChild(p);}
+  var w=o.status.window;if(w&&o.status.current!=='delivered'){var p=el('p','win',(o.fastLane?T.windowFast:T.window)+': ');p.appendChild(el('b',0,day(w.from)+' – '+day(w.to)));c.appendChild(p);
+    if(w.basis==='shipped'&&w.first)c.appendChild(el('p','muted',T.shipNote(day(w.first.from)+' – '+day(w.first.to))));}
   if(o.tracking){var t=el('p','win',T.tracking+': ');t.appendChild(el('b',0,o.tracking.number));c.appendChild(t);
     if(o.tracking.url){var g=el('a','go',T.track+' →');g.href=o.tracking.url;g.target='_blank';g.rel='noopener';c.appendChild(g);}}
   root.appendChild(c);
