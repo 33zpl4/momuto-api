@@ -136,7 +136,7 @@ async function run() {
       console.log(`\n-- kit ${kitPrice} -> jersey-only ${jerseyPrice}: "${body.title}" (${body.handle})`);
       if (!args.live) { console.log('[dry run] would POST /products with:'); console.log(JSON.stringify(body, null, 2)); continue; }
       if (!token) { console.error(`MISSING ${store.tokenEnv} — skipping ${lang}`); failed = true; continue; }
-      if (!img) { console.error(`${lang}: no jersey image found — refusing to create a product without a photo`); failed = true; continue; }
+      if (!img) { console.log(`${lang}: SKIPPED — no custom-jersey product with a photo on this store (cms/order-line-tiles/products.json has none for it); IT has no fixed-price cart display yet either`); continue; }
       try {
         const existing = await findByHandle(token, body.handle);
         let id;
