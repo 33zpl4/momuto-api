@@ -135,7 +135,8 @@ module.exports = async function handler(req, res) {
       receivedAt: new Date().toISOString(),
       type: 'deposit_intent',
       email,
-      locale: body.locale || null,
+      // the US page posts locale 'en' (store copy is en); the email needs 'us' for $ and the us. link
+      locale: /^https?:\/\/us\./.test(body.source || req.headers['referer'] || '') ? 'us' : (body.locale || null),
       source: body.source || req.headers['referer'] || null,
       name: null, team: null, qty: null, emailSent: false, emailError: null,
     };

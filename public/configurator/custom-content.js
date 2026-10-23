@@ -49,24 +49,24 @@ var CHAT={
 /* ---- price-estimator strings (replaces the native qty stepper, which never
         reaches the roster cart; see estimator() below). es/fr/it fall back to en. ---- */
 var EST={
- en:{title:"Price estimate", team:"Team size", jersey:"jersey", kit:"kit", collar:"polo collar", units:"units",
+ en:{title:"Price estimate", fixed:"Fixed price, same at any quantity", team:"Team size", jersey:"jersey", kit:"kit", collar:"polo collar", units:"units",
      est:"est.", total:"total", popular:"Most chosen",
      note:"Sizes &amp; final quantities on the next step.", ship:"Free shipping over €50.",
      gift:"Includes a free team flag + captain armband", giftFrom:"Free team flag + captain armband from 10 kits"},
  // us.momuto.com: en strings, USD ladder (pricing.js PRICING_US), $59 threshold
- us:{title:"Price estimate", team:"Team size", jersey:"jersey", kit:"kit", collar:"polo collar", units:"units",
+ us:{title:"Price estimate", fixed:"Fixed price, same at any quantity", team:"Team size", jersey:"jersey", kit:"kit", collar:"polo collar", units:"units",
      est:"est.", total:"total", popular:"Most chosen",
      note:"Sizes &amp; final quantities on the next step.", ship:"Free shipping over $59.",
      gift:"Includes a free team flag + captain armband", giftFrom:"Free team flag + captain armband from 10 kits"},
- es:{title:"Precio estimado", team:"Tamaño del equipo", jersey:"camiseta", kit:"kit", collar:"cuello polo", units:"unidades",
+ es:{title:"Precio estimado", fixed:"Precio fijo, igual con cualquier cantidad", team:"Tamaño del equipo", jersey:"camiseta", kit:"kit", collar:"cuello polo", units:"unidades",
      est:"aprox.", total:"total", popular:"El más elegido",
      note:"Tallas y cantidades finales en el siguiente paso.", ship:"Envío gratis desde 50 €.",
      gift:"Incluye bandera del equipo + brazalete de capitán de regalo", giftFrom:"Bandera del equipo + brazalete de capitán de regalo desde 10 kits"},
- fr:{title:"Prix estimé", team:"Taille de l'équipe", jersey:"maillot", kit:"kit", collar:"col polo", units:"unités",
+ fr:{title:"Prix estimé", fixed:"Prix fixe, identique quelle que soit la quantité", team:"Taille de l'équipe", jersey:"maillot", kit:"kit", collar:"col polo", units:"unités",
      est:"estimé", total:"total", popular:"Le plus choisi",
      note:"Tailles et quantités finales à l'étape suivante.", ship:"Livraison offerte dès 50 €.",
      gift:"Drapeau de l'équipe + brassard de capitaine offerts", giftFrom:"Drapeau de l'équipe + brassard de capitaine offerts dès 10 kits"},
- it:{title:"Prezzo stimato", team:"Dimensione squadra", jersey:"maglia", kit:"kit", collar:"colletto polo", units:"unità",
+ it:{title:"Prezzo stimato", fixed:"Prezzo fisso, uguale a qualsiasi quantità", team:"Dimensione squadra", jersey:"maglia", kit:"kit", collar:"colletto polo", units:"unità",
      est:"stima", total:"totale", popular:"Il più scelto",
      note:"Taglie e quantità finali al passaggio successivo.", ship:"Spedizione gratis oltre 50 €.",
      gift:"Bandiera della squadra + fascia da capitano in regalo", giftFrom:"Bandiera della squadra + fascia da capitano in regalo da 10 kit"}
@@ -405,11 +405,32 @@ function detectCollar(mount){
   var el=document.querySelector(".control-product_detail-title, .product-info-subtitle, .product-info-title");
   return COLLAR_RE.test(((el&&el.textContent)||document.title||""));
 }
+// Fixed-price "Promo" kits (Oct 2026): the store title carries a Promo marker and the product's own
+// platform price IS the locked price at every quantity (server bills it as-is, jersey-only players
+// via the hidden helper). The ladder does not apply, so the estimate shows that price flat. The price
+// is read from the native price element (hidden by CSS but still in the DOM) or data-price on the mount;
+// if neither parses, no estimate is shown rather than a ladder price that would be wrong.
+var PROMO_RE=/\bpromo\b|fixed[\s-]*price|precio[\s-]*fijo|prix[\s-]*fixe|prezzo[\s-]*fisso/i;
+function detectPromo(mount){
+  var el=document.querySelector(".control-product_detail-title, .product-info-subtitle, .product-info-title");
+  return PROMO_RE.test(((el&&el.textContent)||document.title||""));
+}
+function parseMoney(txt){
+  var m=String(txt||"").replace(/\s/g,"").match(/(\d{1,4}(?:[.,]\d{1,2})?)/);
+  return m?parseFloat(m[1].replace(",",".")):0;
+}
+function lockedPrice(mount){
+  var d=parseMoney(mount.getAttribute("data-price"));
+  if(d>0) return d;
+  var el=document.querySelector("#plugin-product-price, .control-product_detail-price_box .price, .control-product_detail-price_box");
+  return el?parseMoney(el.textContent):0;
+}
 function estimator(lang, kind, opts){
   var P=window.MOMUTO_PRICING; if(!P) return null;
   var t=EST[lang]||EST.en;
   kind=(kind==="kit")?"kit":"jersey";
-  var cs=(opts&&opts.collar)?(P.COLLAR_SURCHARGE||3):0;
+  var lock=(opts&&opts.lock)||0;
+  var cs=(!lock&&opts&&opts.collar)?(P.COLLAR_SURCHARGE||3):0;
   // opts.store:'us' -> pricing.js USD ladder + "$"; anything else -> EUR (fmt falls
   // back to "€" on an older cached pricing.js without fmt).
   var euro=function(n){return (P.fmt?P.fmt(n,opts):"€"+n.toFixed(2));};
@@ -427,13 +448,14 @@ function estimator(lang, kind, opts){
   var input=wrap.querySelector("input"), out=wrap.querySelector(".mest-out");
   function draw(){
     var q=Math.max(1, parseInt(input.value,10)||1);
-    var unit=P.unitPrice(kind,q,opts)+cs, one=P.unitPrice(kind,1,opts)+cs, total=Math.round(unit*q*100)/100;
+    var unit=lock||P.unitPrice(kind,q,opts)+cs, one=lock||P.unitPrice(kind,1,opts)+cs, total=Math.round(unit*q*100)/100;
     var strike=(unit<one)?'<s>'+euro(one)+'</s> ':'';
-    var pop=(q>=P.POPULAR_MIN && q<20)?'<span class="mest-pop">'+t.popular+'</span>':'';
+    var pop=(!lock&&q>=P.POPULAR_MIN && q<20)?'<span class="mest-pop">'+t.popular+'</span>':'';
     out.innerHTML='<div class="mest-price">'+strike+'<b>'+euro(unit)+'</b> <span class="per">/ '+kindLabel+'</span>'+pop+'</div>'
       +'<div class="mest-sum">'+q+' '+t.units+' · '+t.est+' <b>'+euro(total)+'</b> '+t.total+'</div>'
       // free team flag + captain armband: 10+ KITS only (pricing.js GIFT_MIN_KITS; older cached pricing.js without it: no line)
-      +((kind==="kit"&&P.GIFT_MIN_KITS&&t.gift)?'<div class="mest-gift">'+(q>=P.GIFT_MIN_KITS?t.gift:t.giftFrom)+'</div>':'');
+      +(lock&&t.fixed?'<div class="mest-gift">'+t.fixed+'</div>':'')
+      +((!lock&&kind==="kit"&&P.GIFT_MIN_KITS&&t.gift)?'<div class="mest-gift">'+(q>=P.GIFT_MIN_KITS?t.gift:t.giftFrom)+'</div>':'');
   }
   wrap.querySelectorAll("button[data-d]").forEach(function(b){
     b.onclick=function(){ input.value=Math.max(1,(parseInt(input.value,10)||1)+parseInt(b.getAttribute("data-d"),10)); draw(); };
@@ -470,7 +492,9 @@ function mountEstimator(mount){
     withPricing(function(){
       var lang=(mount.getAttribute("data-lang")||"en").toLowerCase();
       var collar=detectCollar(mount);
-      var est=isUS?estimator("us", detectKind(mount), {store:"us", collar:collar}):estimator(lang, detectKind(mount), {collar:collar});
+      var lock=detectPromo(mount)?lockedPrice(mount):0;
+      if(detectPromo(mount)&&!lock) return;
+      var est=isUS?estimator("us", detectKind(mount), {store:"us", collar:collar, lock:lock}):estimator(lang, detectKind(mount), {collar:collar, lock:lock});
       if(!est) return;
       est.id="mo-est";
       btn.parentNode.insertBefore(est, btn);
