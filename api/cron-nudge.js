@@ -20,7 +20,7 @@
  */
 
 const { kv } = require('@vercel/kv');
-const { emailDepositNudge } = require('../lib/emails');
+const { emailDepositNudge, leadLang } = require('../lib/emails');
 
 const RESEND_KEY  = process.env.RESEND_API_KEY;
 const FROM_EMAIL  = process.env.FROM_EMAIL || 'leads@momuto.com';
@@ -85,7 +85,7 @@ module.exports = async function handler(req, res) {
     if (age < MIN_AGE_H || age > MAX_AGE_DAYS * 24) { results.skipped++; continue; }
 
     try {
-      const { subject, html } = emailDepositNudge({ lang: lead.locale || 'en' });
+      const { subject, html } = emailDepositNudge({ lang: leadLang(lead) });
       await sendNudge(lead.email, subject, html);
       await kv.set(`lead:${lead.id}`, { ...lead, nudgeSent: true, nudgeAt: new Date().toISOString() });
       nudgedEmails.add(norm(lead.email)); // block any duplicate lead for this email this run

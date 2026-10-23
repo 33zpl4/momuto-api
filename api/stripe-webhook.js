@@ -18,7 +18,7 @@
 
 const crypto = require('crypto');
 const { kv } = require('@vercel/kv');
-const { emailDepositPaid } = require('../lib/emails');
+const { emailDepositPaid, leadLang } = require('../lib/emails');
 
 const SECRET     = process.env.STRIPE_WEBHOOK_SECRET;
 const RESEND_KEY = process.env.RESEND_API_KEY;
@@ -126,7 +126,7 @@ module.exports = async function handler(req, res) {
       if (!lead.paid) {
         await kv.set(`lead:${id}`, { ...lead, paid: true, paidAt, stripeAmount: amount, stripeCurrency: currency, stripeSessionId: session.id });
         await notifyTeam(email, amount, currency);
-        await notifyCustomer(email, lead.locale);
+        await notifyCustomer(email, leadLang(lead));
         console.log(`[stripe-webhook] marked paid: ${email} (${id})`);
       }
     } else if (!alreadyPaid) {

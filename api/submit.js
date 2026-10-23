@@ -211,7 +211,7 @@ async function sendEmail(fields, subject, html, replyTo) {
 // ── Customer confirmation (custom-design deposit flow only) ──────────────────
 
 function localeFrom(str) {
-  const m = (str || '').match(/^https?:\/\/(es|fr|it)\./);
+  const m = (str || '').match(/^https?:\/\/(es|fr|it|us)\./);
   return m ? m[1] : 'en';
 }
 
