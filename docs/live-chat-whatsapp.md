@@ -3,7 +3,7 @@
 Owner decision after reading Nikita Bier's "24 h live support removes a confounding variable": put human chat in the product. Channel chosen: **WhatsApp** (not HubSpot), answered by the owner from the WhatsApp Business app, away message set there for out-of-hours. Placement: the 3D designer and the cart page. Not on the five stores' pages (could come later).
 
 ## What exists
-- Button: `3d-configurator/static/wa-chat.js` in **design-momuto** (black pill, green WhatsApp glyph, label per language: "Questions? Chat with us" / "¿Dudas? Chatea con nosotros" / "Une question ? Écrivez-nous" / "Hai domande? Scrivici" since 16 Oct, was "Any trouble?"; icon only on phones). The prefill is "Hi MOMUTO, I have a question about…" (cart: "…about my order."); on the US store it ends with " (US)" so the bot quotes dollars (cart: host `us.`; tool: `fromUrlHost`, then referrer, both unverified). Loaded by `configurator.html` and the four `templates/*/cartItem.html` (`data-lang`). No third-party script, no cookie.
+- Button: `3d-configurator/static/wa-chat.js` in **design-momuto** (black pill, green WhatsApp glyph, label per language: "Questions? Chat with us" / "¿Dudas? Chatea con nosotros" / "Une question ? Écrivez-nous" / "Hai domande? Scrivici" since 16 Oct, was "Any trouble?"; phones since 17 Oct: same labelled pill, bottom-left; in the tool it shares the bottom bar with ADD TO CART, which moves right, and the label ellipsizes before it can reach that button; was icon-only, floating). The prefill is "Hi MOMUTO, I have a question about…" (cart: "…about my order."); on the US store it ends with " (US)" so the bot quotes dollars (cart: host `us.`; tool: `fromUrlHost`, then referrer, both unverified). Loaded by `configurator.html` and the four `templates/*/cartItem.html` (`data-lang`). No third-party script, no cookie.
 - It opens `https://wa.me/34614625408?text=<prefilled message>`; the message is in the page language and ends with `(ref. del diseño: <configId>)` / `(design ref: <configId>)` in the tool.
 - The tool's own "Support" button was removed (`useSupport:false`).
 - Count: the beacon `wa_chat_click` (`lib/event-beacon.js` EVENTS) shows as "WhatsApp chat clicked (help-seeking)" in the weekly scorecard (`docs/scorecard.md`). Outside the funnel on purpose.
@@ -18,7 +18,7 @@ The `configId` is minted when the customer ENTERS the tool, not when they save. 
 Background: design-momuto `docs/product-page-linking.md` ("How configIds actually work").
 
 ## Not verified
-Phone layout of the button, the cart page placement, the `wa_chat_click` count, and whether the ref clone link in step 1 opens the saved design.
+Phone layout of the button on a real device (checked only in headless Chromium at 360/390 px, en/es/fr; French truncates to "Une question ? …" at 360 px), the cart page placement on phones (the cart preview has no theme CSS), the `wa_chat_click` count, and whether the ref clone link in step 1 opens the saved design.
 
 ## The assistant (bot) — built 16 Oct 2026, NOT live until the Meta setup below is done
 Why: 3 "what does it cost" chats in <24 h, all people exploring the tool (a design ref does NOT mean "stuck"). Decision: **Meta Cloud API direct, rule-based, no LLM** — $0 platform fee, answers are the FAQ text, so there is one set of numbers. SendPulse/Wati/etc. would hold a second copy of prices; Twilio moves the number; unofficial QR tools risk a ban of the only customer line.
