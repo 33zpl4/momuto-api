@@ -16,6 +16,7 @@ const VIEWPORTS = [['desktop', { width: 1440, height: 900 }], ['phone', { width:
 const ADD_RE = /add to cart|añadir al carrito|ajouter au panier|aggiungi al carrello/i;
 const CHECKOUT_RE = /check ?out|proceed|place order|continue|completar|finalizar|tramitar|pagar|commander|passer|paiement|procedi|cassa|continua|continuar|continuer/i;
 const NOISE = /google|googletagmanager|doubleclick|facebook|fbevents|clarity\.ms|hotjar|tiktok|pinterest|trustpilot|analytics|sentry|gtag|hubspot/i;
+const NEXT_RE = /^\s*(next|continue|start|got it|skip|siguiente|continuar|empezar|saltar|suivant|continuer|commencer|passer|avanti|continua|inizia|salta)\b/i;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const facts = () => ({
   url: location.href, title: document.title, textLen: (document.body.innerText || '').trim().length,
@@ -43,7 +44,18 @@ const facts = () => ({
       rep.tool = await page.evaluate(facts);
       step('tool opens', r.status() < 400 && rep.tool.canvas.length > 0, `HTTP ${r.status()} canvas ${JSON.stringify(rep.tool.canvas)} | buttons ${JSON.stringify(rep.tool.buttons.slice(0, 12))}`);
       await page.screenshot({ path: path.join(OUT, `${tag}-1-tool.png`) });
-      const add = page.locator('button, a, [role=button], div').filter({ hasText: ADD_RE }).filter({ visible: true }).last();
+      // first-visit intro ("Your club's colours... NEXT"): a new customer clicks through it, so does the probe (max 8 steps)
+      rep.intro = 0;
+      for (let i = 0; i < 8; i++) {
+        const nx = page.locator('button, [role=button], a, div').filter({ hasText: NEXT_RE }).filter({ visible: true }).last();
+        const addVisible = await page.locator('button, [role=button]').filter({ hasText: ADD_RE }).filter({ visible: true }).count();
+        if (!await nx.count() || (addVisible && !(await page.locator('div').filter({ hasText: /club.s colou?rs|tus colores|vos couleurs|i colori/i }).filter({ visible: true }).count()))) break;
+        await nx.click({ timeout: 4000 }).catch(() => {}); rep.intro++; await sleep(1500);
+        if (i === 0) await page.screenshot({ path: path.join(OUT, `${tag}-1b-intro.png`) });
+      }
+      step('intro clicked through', true, `${rep.intro} step(s)`);
+      await page.screenshot({ path: path.join(OUT, `${tag}-1c-after-intro.png`) });
+      const add = page.locator('button, [role=button]').filter({ hasText: ADD_RE }).filter({ visible: true }).last();
       if (!await add.count()) throw new Error('no ADD TO CART control visible in the tool');
       rep.addText = (await add.innerText().catch(() => '')).trim().slice(0, 40);
       await add.scrollIntoViewIfNeeded().catch(() => {});
