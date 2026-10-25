@@ -33,6 +33,7 @@ const facts = () => ({
     const tag = `${lang}-${vp}`, rep = { lang, viewport: vp, steps: [], console: [], pageErrors: [], badRequests: [] };
     const ctx = await browser.newContext({ viewport: size, isMobile: vp === 'phone', locale: lang === 'en' ? 'en-GB' : lang });
     const page = await ctx.newPage();
+    { const _s = page.screenshot.bind(page); page.screenshot = o => _s({ ...o, timeout: 12000 }).catch(() => null); }   // software-rendered 3D can stall a screenshot; never let that fail the probe
     page.on('console', m => { if (m.type() === 'error') rep.console.push(m.text().slice(0, 200)); });
     page.on('pageerror', e => rep.pageErrors.push(String(e.message).slice(0, 200)));
     page.on('requestfailed', r => { if (!NOISE.test(r.url())) rep.badRequests.push(`FAILED ${r.url().slice(0, 140)} ${(r.failure() || {}).errorText || ''}`); });
@@ -48,7 +49,7 @@ const facts = () => ({
       // first-visit intro ("Your club's colours... NEXT"): a new customer clicks through it, so does the probe (max 8 steps)
       rep.intro = 0;
       for (let i = 0; i < 8; i++) {
-        const nx = page.locator('button, [role=button]').filter({ hasText: NEXT_RE }).filter({ visible: true }).last();
+        const nx = page.locator(':text-matches("^\\s*(next|siguiente|suivant|avanti)\\s*$", "i")').filter({ visible: true }).last();
         if (!await nx.count()) break;
         await nx.click({ timeout: 4000 }).catch(() => {}); rep.intro++; await sleep(1500);
         if (i === 0) await page.screenshot({ path: path.join(OUT, `${tag}-1b-intro.png`) });
