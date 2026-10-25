@@ -15,7 +15,7 @@ const STORES = [['www', 'https://www.momuto.com'], ['us', 'https://us.momuto.com
 const VIEWPORTS = [['desktop', { width: 1440, height: 900 }], ['phone', { width: 390, height: 844 }]];
 const ONLY = (process.env.PROBE_STORES || 'all').toLowerCase().split(',').map(s => s.trim());
 const ADD_RE = /add to (cart|bag)|añadir al (carrito|cesta)|agregar al carrito|ajouter au panier|aggiungi al carrello/i;
-const CHECKOUT_RE = /check ?out|proceed|place order|pay now|finalizar|tramitar|pagar|commander|passer la commande|paiement|procedi|cassa|ordina/i;
+const CHECKOUT_RE = /check ?out|proceed|place order|pay now|completar|finalizar|tramitar|pagar|commander|passer la commande|paiement|procedi|cassa|ordina/i;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const NOISE = /google-analytics|googletagmanager|doubleclick|facebook|fbevents|clarity\.ms|hotjar|tiktok|pinterest|trustpilot|analytics|sentry|gtag/i;
 
