@@ -18,6 +18,9 @@ const CHECKOUT_RE = /check ?out|proceed|place order|continue|completar|finalizar
 const NOISE = /google|googletagmanager|doubleclick|facebook|fbevents|clarity\.ms|hotjar|tiktok|pinterest|trustpilot|analytics|sentry|gtag|hubspot/i;
 const NEXT_RE = /^\s*(next|siguiente|suivant|avanti)\b/i;
 const NOT_ON_KIT_RE = /not on this kit|no en este kit|pas sur ce kit|non su questo kit/i;
+// after the add the tool shows "LOGO RECEIVED - GOT IT" and "KIT ADDED - GOALKEEPER TOO?" (YES / NO THANKS - GO TO CART): a customer who just wants the cart says no
+const TO_CART_RE = /go to cart|ir al carrito|ir a la cesta|aller au panier|vai al carrello/i;
+const GOT_IT_RE = /^\s*(got it|entendido|compris|capito|ok)\s*$/i;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const facts = () => ({
   url: location.href, title: document.title, textLen: (document.body.innerText || '').trim().length,
@@ -75,6 +78,14 @@ const facts = () => ({
           await nav1;
         }
       } else { await page.waitForURL(/\/cart|checkouts|sign|login/i, { timeout: 40000 }).catch(() => null); }
+      for (let i = 0; i < 6 && !/\/cart/.test(page.url()); i++) {
+        const toCart = page.locator('button, [role=button], a').filter({ hasText: TO_CART_RE }).filter({ visible: true }).last();
+        const gotIt = page.locator('button, [role=button]').filter({ hasText: GOT_IT_RE }).filter({ visible: true }).last();
+        const nv = page.waitForURL(/\/cart/, { timeout: 15000 }).catch(() => null);
+        if (await toCart.count()) { rep.afterAdd = (rep.afterAdd || []).concat('go to cart'); await toCart.click({ timeout: 5000 }).catch(() => {}); await nv; }
+        else if (await gotIt.count()) { rep.afterAdd = (rep.afterAdd || []).concat('got it'); await gotIt.click({ timeout: 5000 }).catch(() => {}); await sleep(2500); }
+        else { await sleep(3000); }
+      }
       await sleep(5000);
       rep.cart = await page.evaluate(facts);
       step('add to cart -> cart', /\/cart/.test(rep.cart.url) && rep.cart.textLen > 60, `${rep.cart.url.slice(0, 100)} | ${rep.cart.textLen} chars | ${rep.cart.text.slice(0, 160)}`);
