@@ -23,7 +23,7 @@ What the offer costs (US ladder from `docs/us-launch-status.md`; commission = 5 
 > 4. **Disclose the link.** In every video or post that promotes the code say it is an affiliate/partner code (#ad or #partner, and say it out loud in videos). This is required in the US.
 > 5. Say only what is true about the kits: no invented statistics, no comparison claims we have not agreed, no use of club or brand names or logos on our behalf.
 > 6. We can change the offer or end the code with 14 days' notice, and stop it at once for misuse. Orders already placed keep their terms.
-> 7. The code is yours alone: do not post it as a public coupon or share it with other creators.
+> 7. Share your code anywhere you like: videos, comments, your bio, forums. Do not submit it to coupon or deal-aggregator sites, and do not run paid ads on our brand name.
 
 Reply to send him (WhatsApp, first message): thank him, say yes, give the offer in one line, ask where he wants to be paid (just the method, no bank details in chat), and say the code will arrive once the store has it. Do not promise reporting beyond "I send you the list each month".
 
@@ -47,5 +47,6 @@ Reply to send him (WhatsApp, first message): thank him, say yes, give the offer 
 - Whether the order list returns old enough orders for a monthly run (`--days` 60; the paging stops when `page` is ignored).
 
 ## Decisions log
+- 25 Oct 2026 (later): the "code is yours alone / no public coupon" clause was wrong for a creator whose job is to spread the code; replaced by: free to share to his audience, but no coupon/deal-aggregator listings and no paid ads on the brand name. Payout by bank transfer (owner told the creator); bank details are collected by email at the first payout, never in chat.
 - 25 Oct 2026 (later): stacking enabled so the quantity promo applies; only other codes are incompatible. Terms page unchanged (it never promised exclusions).
 - 25 Oct 2026: pilot with one US creator; public wording "10+ jerseys", store minimum $259; 5 % commission after discount; start with two or three creators at most.
