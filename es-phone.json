@@ -1,0 +1,78 @@
+{
+ "store": "es",
+ "viewport": "phone",
+ "steps": [
+  {
+   "n": "home",
+   "ok": true,
+   "note": "HTTP 200"
+  },
+  {
+   "n": "product",
+   "ok": true,
+   "note": "/products/im-07-los-suplentes HTTP 200"
+  },
+  {
+   "n": "add to cart",
+   "ok": true,
+   "note": "clicked"
+  },
+  {
+   "n": "cart page",
+   "ok": true,
+   "note": "HTTP 200, 382 chars of text"
+  },
+  {
+   "n": "checkout page",
+   "ok": true,
+   "note": "https://es.momuto.com/52561-0daa20/checkouts/0daa209d634137ee86d0aed37928b799 | HTTP 200 | 13 inputs | buttons [\"Continuar al envío\"]"
+  }
+ ],
+ "console": [],
+ "pageErrors": [
+  "Identifier 'targetUrl' has already been declared",
+  "Identifier 'targetUrl' has already been declared",
+  "Invalid or unexpected token",
+  "Identifier 'targetUrl' has already been declared",
+  "Identifier 'targetUrl' has already been declared",
+  "Invalid or unexpected token",
+  "Identifier 'uuid' has already been declared",
+  "Identifier 'targetUrl' has already been declared",
+  "Identifier 'targetUrl' has already been declared",
+  "Invalid or unexpected token",
+  "Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.",
+  "Identifier 'targetUrl' has already been declared",
+  "Identifier 'targetUrl' has already been declared",
+  "Invalid or unexpected token"
+ ],
+ "badRequests": [
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927518374&cv=11&fst=1792927518374&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927520231&cv=11&fst=1792927520231&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927528135&cv=11&fst=1792927528135&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/measurement/conversion?random=1792927531278&cv=11&tid=G-JQSQSHXLKS&fst=1792927531278&fmt=8&en=form_submit&gtm=45je6al net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927532053&cv=11&fst=1792927532053&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED"
+ ],
+ "slow": [],
+ "cart": {
+  "url": "https://es.momuto.com/cart",
+  "title": "Cesta de la compra - MOMUTO",
+  "textLen": 382,
+  "text": "ENVÍO GRATIS PEDIDOS +50€ 1 EQUIPACIONES ICONIC SERIES LA MARCA SOPORTE SU CESTA DE LA COMPRA < Seguir comprando Los Suplentes Size: XS € 39.00 Código del cupón Subtotal € 39.00 Envío Gastos de envío gratuitos Total € 39.00 COMPLETAR PEDIDO < Seguir comprando Total € 39.00 COMPLETAR PEDIDO VOLVER AYUDA TIENDA BENEFICIOS Newsletter © 2026 MOMUTO Group Limited. All rights reserved.",
+  "inputs": 4,
+  "payButtons": [],
+  "hScroll": false
+ },
+ "checkoutButton": "COMPLETAR PEDIDO",
+ "landing": {
+  "url": "https://es.momuto.com/52561-0daa20/checkouts/0daa209d634137ee86d0aed37928b799",
+  "title": "Información - MOMUTO - COMPLETAR PEDIDO",
+  "textLen": 4129,
+  "text": "MOMUTO Mostrar el resumen del pedido € 39.00 Carrito > Información > Envío > Pago Contacto Confirma tu e-mail para altertas de pedido Correo electrónico con noticias y ofertas Dirección de entrega Nombre Apellidos Dirección Apartamento, suite, etc. (Opcional) País Seleccione el país Australia Canada United Kingdom United States -------------- País Afghanistan Aland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarctica Antigua And Barbuda Argentina Armenia Aruba Australia Aust",
+  "inputs": 13,
+  "payButtons": [
+   "Continuar al envío"
+  ],
+  "hScroll": false
+ },
+ "landingStatus": 200
+}

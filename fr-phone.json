@@ -1,0 +1,64 @@
+{
+ "store": "fr",
+ "viewport": "phone",
+ "steps": [
+  {
+   "n": "home",
+   "ok": true,
+   "note": "HTTP 200"
+  },
+  {
+   "n": "product",
+   "ok": true,
+   "note": "/products/im-01-the-volley HTTP 200"
+  },
+  {
+   "n": "add to cart",
+   "ok": true,
+   "note": "clicked"
+  },
+  {
+   "n": "cart page",
+   "ok": true,
+   "note": "HTTP 200, 409 chars of text"
+  },
+  {
+   "n": "checkout page",
+   "ok": true,
+   "note": "https://fr.momuto.com/49703-55f137/checkouts/55f13784bcdfb6096132e20ed7b508dd | HTTP 200 | 13 inputs | buttons [\"Continuer l'envoi\"]"
+  }
+ ],
+ "console": [
+  "Elements not found: add-cart-9645275 buynow-9645275",
+  "Elements not found: add-cart-9645270 buynow-9645270"
+ ],
+ "pageErrors": [
+  "Identifier 'uuid' has already been declared"
+ ],
+ "badRequests": [
+  "FAILED https://www.google.com/measurement/conversion?random=1792927569626&cv=11&tid=G-JQSQSHXLKS&fst=1792927569626&fmt=8&en=form_submit&gtm=45je6am net::ERR_ABORTED"
+ ],
+ "slow": [],
+ "cart": {
+  "url": "https://fr.momuto.com/cart",
+  "title": "Panier d'achat - MOMUTO",
+  "textLen": 409,
+  "text": "LIVRAISON GRATUITE À PARTIR DE 50 € 1 MAILLOTS PERSONNALISÉS ICONIC SERIES LA MARQUE AIDE S'inscrire VOTRE PANIER < Poursuivre les achats The Volley Size: XS € 39.00 Code du bon Sous-total € 39.00 Expédition facturé à la caisse Total € 39.00 PASSER LA COMMANDE < Poursuivre les achats Total € 39.00 PASSER LA COMMANDE RETOUR AIDE BOUTIQUE POUR VOUS Newsletter © 2026 MOMUTO Group Limited. All rights reserved.",
+  "inputs": 4,
+  "payButtons": [],
+  "hScroll": false
+ },
+ "checkoutButton": "PASSER LA COMMANDE",
+ "landing": {
+  "url": "https://fr.momuto.com/49703-55f137/checkouts/55f13784bcdfb6096132e20ed7b508dd",
+  "title": "Informations - MOMUTO - Caisse",
+  "textLen": 4100,
+  "text": "MOMUTO Afficher le résumé de la commande € 39.00 Chariot > Informations > Expédition > Paiement Contact E-mail E-mail avec nouveautés et offres Adresse de livraison Prénom Nom Adresse Logement, appartement, etc. (Facultatif) Pays Veuillez sélectionner le pays Australia Canada United Kingdom United States -------------- Pays Afghanistan Aland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarctica Antigua And Barbuda Argentina Armenia Aruba Australia Austria Azerbaijan Bahamas B",
+  "inputs": 13,
+  "payButtons": [
+   "Continuer l'envoi"
+  ],
+  "hScroll": false
+ },
+ "landingStatus": 200
+}

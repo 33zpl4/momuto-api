@@ -1,0 +1,25 @@
+{
+ "store": "design",
+ "viewport": "desktop",
+ "steps": [
+  {
+   "n": "design/",
+   "ok": true,
+   "note": "HTTP 200 4387 chars | FREE SHIPPING OVER +50€ CUSTOM KITS ICONIC SERIES THE BRAND SUPPORT CUSTOM KITS "
+  },
+  {
+   "n": "design/cart",
+   "ok": true,
+   "note": "HTTP 200 449 chars | FREE SHIPPING OVER +50€ HELP CENTER ABOUT US BUILD YOUR TEAM KIT Your design's r"
+  }
+ ],
+ "console": [],
+ "pageErrors": [],
+ "badRequests": [
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927614310&cv=11&fst=1792927614310&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927620655&cv=11&fst=1792927620655&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/measurement/conversion?random=1792927620759&cv=11&tid=G-JQSQSHXLKS&fst=1792927620759&fmt=8&en=add_to_cart&gtm=45je6al net::ERR_ABORTED",
+  "FAILED https://www.google.com/pagead/1p-conversion/11388373094/?random=729096838&cv=11&fst=1792927620659&fmt=8&bg=ffffff&guid=ON&async=1&en=convers net::ERR_ABORTED"
+ ],
+ "slow": []
+}

@@ -1,0 +1,25 @@
+{
+ "store": "design",
+ "viewport": "phone",
+ "steps": [
+  {
+   "n": "design/",
+   "ok": true,
+   "note": "HTTP 200 4123 chars | FREE SHIPPING OVER +50€ CUSTOM KITS ICONIC SERIES THE BRAND SUPPORT CUSTOM FOOTB"
+  },
+  {
+   "n": "design/cart",
+   "ok": true,
+   "note": "HTTP 200 368 chars | FREE SHIPPING OVER +50€ BUILD YOUR TEAM KIT Your design's ready. Now set each pl"
+  }
+ ],
+ "console": [],
+ "pageErrors": [],
+ "badRequests": [
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927626924&cv=11&fst=1792927626924&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927633165&cv=11&fst=1792927633165&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/measurement/conversion?random=1792927633263&cv=11&tid=G-JQSQSHXLKS&fst=1792927633263&fmt=8&en=add_to_cart&gtm=45je6al net::ERR_ABORTED",
+  "FAILED https://www.google.com/pagead/1p-conversion/11388373094/?random=1560053621&cv=11&fst=1792927633170&fmt=8&bg=ffffff&guid=ON&async=1&en=conver net::ERR_ABORTED"
+ ],
+ "slow": []
+}

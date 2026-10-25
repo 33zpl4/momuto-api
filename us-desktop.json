@@ -1,0 +1,72 @@
+{
+ "store": "us",
+ "viewport": "desktop",
+ "steps": [
+  {
+   "n": "home",
+   "ok": true,
+   "note": "HTTP 200"
+  },
+  {
+   "n": "product",
+   "ok": true,
+   "note": "/products/im-01-the-volley HTTP 200"
+  },
+  {
+   "n": "add to cart",
+   "ok": true,
+   "note": "clicked"
+  },
+  {
+   "n": "cart page",
+   "ok": true,
+   "note": "HTTP 200, 609 chars of text"
+  },
+  {
+   "n": "checkout page",
+   "ok": true,
+   "note": "https://us.momuto.com/231549-51e70b/checkouts/51e70b0201c0737ef6c59dee5f00d055 | HTTP 200 | 13 inputs | buttons [\"Payment\",\"Continue to Shipping\"]"
+  }
+ ],
+ "console": [
+  "Elements not found: add-cart-9010898 buynow-9010898",
+  "Elements not found: add-cart-9010897 buynow-9010897"
+ ],
+ "pageErrors": [
+  "Identifier 'uuid' has already been declared"
+ ],
+ "badRequests": [
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927456926&cv=11&fst=1792927456926&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927459348&cv=11&fst=1792927459348&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927465758&cv=11&fst=1792927465758&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927469931&cv=11&fst=1792927469931&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/pagead/1p-conversion/11388373094/?random=484971998&cv=11&fst=1792927469937&fmt=8&bg=ffffff&guid=ON&async=1&en=convers net::ERR_ABORTED"
+ ],
+ "slow": [],
+ "cart": {
+  "url": "https://us.momuto.com/cart",
+  "title": "Shopping Cart - MOMUTO",
+  "textLen": 609,
+  "text": "FREE SHIPPING OVER $59 CUSTOM JERSEYS BASKETBALL ICONIC SERIES SUPPORT 1 Custom Jerseys Basketball Iconic Series Support YOUR CART < Continue Shopping PRODUCT QUANTITY TOTAL The Volley Size: XS $ 45.90 Coupon Code Subtotal $ 45.90 Shipping calculated at checkout Total $ 45.90 CHECKOUT < Continue Shopping BACK HELP Contact Us FAQ Size Guide MOMUTO vs The Rest SHOP Order Status Shipping policy Returns & Exchanges Terms & Conditions Privacy Policy FOR YOU Special Discounts Idea Submission Define yo",
+  "inputs": 4,
+  "payButtons": [
+   "< Continue Shopping",
+   "< Continue Shopping"
+  ],
+  "hScroll": false
+ },
+ "checkoutButton": "CHECKOUT",
+ "landing": {
+  "url": "https://us.momuto.com/231549-51e70b/checkouts/51e70b0201c0737ef6c59dee5f00d055",
+  "title": "Information - MOMUTO - Checkout",
+  "textLen": 4145,
+  "text": "MOMUTO Cart > Information > Shipping > Payment Contact Email Email me with news and offers Shipping Address First name Last name Address Apartment, suite, etc. (Optional) Country Please select the country Australia Canada United Kingdom United States -------------- Country Afghanistan Aland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarctica Antigua And Barbuda Argentina Armenia Aruba Australia Austria Azerbaijan Bahamas Bahrain Bangladesh Barbados Belarus Belgium Belize Be",
+  "inputs": 13,
+  "payButtons": [
+   "Payment",
+   "Continue to Shipping"
+  ],
+  "hScroll": false
+ },
+ "landingStatus": 200
+}

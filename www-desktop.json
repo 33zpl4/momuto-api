@@ -1,0 +1,72 @@
+{
+ "store": "www",
+ "viewport": "desktop",
+ "steps": [
+  {
+   "n": "home",
+   "ok": true,
+   "note": "HTTP 200"
+  },
+  {
+   "n": "product",
+   "ok": true,
+   "note": "/products/im-09-viking-row HTTP 200"
+  },
+  {
+   "n": "add to cart",
+   "ok": true,
+   "note": "clicked"
+  },
+  {
+   "n": "cart page",
+   "ok": true,
+   "note": "HTTP 200, 602 chars of text"
+  },
+  {
+   "n": "checkout page",
+   "ok": true,
+   "note": "https://www.momuto.com/47711-5362f1/checkouts/5362f1c51b90e5f720d11b7471977dc2 | HTTP 200 | 13 inputs | buttons [\"Payment\",\"Continue to Shipping\"]"
+  }
+ ],
+ "console": [
+  "Elements not found: add-cart-9010898 buynow-9010898",
+  "Elements not found: add-cart-9010897 buynow-9010897"
+ ],
+ "pageErrors": [
+  "Identifier 'uuid' has already been declared"
+ ],
+ "badRequests": [
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927419272&cv=11&fst=1792927419272&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927421736&cv=11&fst=1792927421736&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927428088&cv=11&fst=1792927428088&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927432239&cv=11&fst=1792927432239&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/pagead/1p-conversion/11388373094/?random=851986823&cv=11&fst=1792927432245&fmt=8&bg=ffffff&guid=ON&async=1&en=convers net::ERR_ABORTED"
+ ],
+ "slow": [],
+ "cart": {
+  "url": "https://www.momuto.com/cart",
+  "title": "Shopping Cart - MOMUTO",
+  "textLen": 602,
+  "text": "FREE SHIPPING OVER +50€ CUSTOM KITS ICONIC SERIES THE BRAND SUPPORT 1 CUSTOM KITS ICONIC SERIES THE BRAND SUPPORT YOUR CART < Continue Shopping PRODUCT QUANTITY TOTAL Viking Row Size: XS $ 44.85 Coupon Code Subtotal $ 44.85 Shipping calculated at checkout Total $ 44.85 CHECKOUT < Continue Shopping BACK HELP Contact Us FAQ Size Guide MOMUTO vs The Rest SHOP Order Status Shipping policy Returns & Exchanges Terms & Conditions Privacy Policy FOR YOU Special Discounts Idea Submission Define your foot",
+  "inputs": 4,
+  "payButtons": [
+   "< Continue Shopping",
+   "< Continue Shopping"
+  ],
+  "hScroll": false
+ },
+ "checkoutButton": "CHECKOUT",
+ "landing": {
+  "url": "https://www.momuto.com/47711-5362f1/checkouts/5362f1c51b90e5f720d11b7471977dc2",
+  "title": "Information - MOMUTO - Checkout",
+  "textLen": 4145,
+  "text": "MOMUTO Cart > Information > Shipping > Payment Contact Email Email me with news and offers Shipping Address First name Last name Address Apartment, suite, etc. (Optional) Country Please select the country Australia Canada United Kingdom United States -------------- Country Afghanistan Aland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarctica Antigua And Barbuda Argentina Armenia Aruba Australia Austria Azerbaijan Bahamas Bahrain Bangladesh Barbados Belarus Belgium Belize Be",
+  "inputs": 13,
+  "payButtons": [
+   "Payment",
+   "Continue to Shipping"
+  ],
+  "hScroll": false
+ },
+ "landingStatus": 200
+}

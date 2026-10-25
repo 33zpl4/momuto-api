@@ -1,0 +1,76 @@
+{
+ "store": "it",
+ "viewport": "phone",
+ "steps": [
+  {
+   "n": "home",
+   "ok": true,
+   "note": "HTTP 200"
+  },
+  {
+   "n": "product",
+   "ok": true,
+   "note": "/products/im-09-viking-row HTTP 200"
+  },
+  {
+   "n": "add to cart",
+   "ok": true,
+   "note": "clicked"
+  },
+  {
+   "n": "cart page",
+   "ok": true,
+   "note": "HTTP 200, 372 chars of text"
+  },
+  {
+   "n": "checkout page",
+   "ok": true,
+   "note": "https://it.momuto.com/205422-8f871e/checkouts/8f871e4a0b823e811df34df2a2361080 | HTTP 200 | 13 inputs | buttons [\"Pagamento\",\"Continua a spedire\"]"
+  }
+ ],
+ "console": [
+  "Elements not found: add-cart-9010898 buynow-9010898",
+  "Elements not found: add-cart-9010897 buynow-9010897"
+ ],
+ "pageErrors": [
+  "Cannot read properties of undefined (reading 'toString')",
+  "Identifier 'uuid' has already been declared",
+  "Cannot read properties of undefined (reading 'toString')",
+  "Cannot read properties of undefined (reading 'toString')"
+ ],
+ "badRequests": [
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927594974&cv=11&fst=1792927594974&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927597478&cv=11&fst=1792927597478&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927603977&cv=11&fst=1792927603977&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/rmkt/collect/11388373094/?random=1792927608171&cv=11&fst=1792927608171&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be6al1z8 net::ERR_ABORTED",
+  "FAILED https://www.google.com/pagead/1p-conversion/11388373094/?random=1598991081&cv=11&fst=1792927608176&fmt=8&bg=ffffff&guid=ON&async=1&en=conver net::ERR_ABORTED"
+ ],
+ "slow": [],
+ "cart": {
+  "url": "https://it.momuto.com/cart",
+  "title": "Carrello - MOMUTO",
+  "textLen": 372,
+  "text": "SPEDIZIONE GRATUITA OLTRE €50 1 MAGLIE PERSONALIZZATE ICONIC SERIES THE BRAND ASSISTENZA IL TUO CARRELLO < Continua lo shopping Viking Row Size: XS $ 43.69 Codice coupon Subtotale $ 43.69 Spedizione calcolato alla cassa Totale $ 43.69 PROCEDI AL PAGAMENTO < Continua lo shopping BACK Company Info Service Center Newsletter © 2026 MOMUTO Group Limited. All rights reserved.",
+  "inputs": 3,
+  "payButtons": [
+   "< Continua lo shopping",
+   "PROCEDI AL PAGAMENTO",
+   "< Continua lo shopping"
+  ],
+  "hScroll": false
+ },
+ "checkoutButton": "PROCEDI AL PAGAMENTO",
+ "landing": {
+  "url": "https://it.momuto.com/205422-8f871e/checkouts/8f871e4a0b823e811df34df2a2361080",
+  "title": "Informazioni - MOMUTO - Cassa",
+  "textLen": 4104,
+  "text": "MOMUTO Mostra il riepilogo dell ordine $ 43.69 Cart > Informazioni > Spedizione > Pagamento Contatto Email Inviami un e-mail con notizie e offerte Indirizzo di spedizione Nome Cognome Indirizzo Appartamento, suite, etc. (Optional) Paese Selezionare il Paese Australia Canada United Kingdom United States -------------- Paese Afghanistan Aland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarctica Antigua And Barbuda Argentina Armenia Aruba Australia Austria Azerbaijan Bahamas Ba",
+  "inputs": 13,
+  "payButtons": [
+   "Pagamento",
+   "Continua a spedire"
+  ],
+  "hScroll": false
+ },
+ "landingStatus": 200
+}
