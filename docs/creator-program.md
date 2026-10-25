@@ -45,4 +45,5 @@ Reply to send him (WhatsApp, first message): thank him, say yes, give the offer 
 - Whether the order list returns old enough orders for a monthly run (`--days` 60; the paging stops when `page` is ignored).
 
 ## Decisions log
+- 25 Oct 2026: first creator, code **SFC27** (us store), Connor D., 60 days from 25 Oct. Full name and email are kept in the owner's WhatsApp/email, not in the repo. Payout by bank transfer; details by email at the first payout. His "I agree" to the terms is still to be collected in the chat (keep the screenshot).
 - 25 Oct 2026: pilot with one US creator; public wording "10+ jerseys", store minimum $259; 5 % commission after discount; start with two or three creators at most.
