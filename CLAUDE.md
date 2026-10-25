@@ -39,6 +39,7 @@ Read the doc that owns a topic BEFORE editing that surface.
 - `docs/store-cart-ui.md` — the store `/cart` page + "Added to cart" pop-up: what the theme ships, the brand skin in `docs/cart-brand/` (one pasted script-manager entry per store, NOT deployed from the repo), probe `probe-cart-ui`. Read BEFORE touching cart/pop-up styling.
 - `docs/blog-pipeline.md` — blog files, schema, deploy, translation workflow + its failure modes, post dates (the 1969-12-31 gotcha), image hosting. Read BEFORE touching `blogs/**`.
 - `docs/live-chat-whatsapp.md` — the WhatsApp chat button (tool + cart), what a message with a design ref means and how to open that design.
+- `docs/creator-program.md` — the creator-code pilot ($15 off 10+ jerseys, 5 % commission): offer, terms, setup checklist, the commission report script/workflow, what is unverified.
 - `docs/seo-opportunities-2026-09.md` — SEO audit of every plan vs what
   shipped (25 Sep 2026): what was fixed, the ranked backlog of what's next,
   owner-side checks. Start here before picking SEO work.

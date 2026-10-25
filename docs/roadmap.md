@@ -102,3 +102,4 @@ Everything shipped in those sessions is merged and documented where it lives; th
 - **Unsourced claim:** "fastest-growing" in copy needs a source or removal (owner's call).
 - **3D tool open items** (phone checks, contrast ring look, shorts number height, Cascade/Legacy centring): design-momuto `docs/3d-configurator-handbook.md`, "Open items (16 Oct 2026)".
 - **Photos:** more real team photos can go into other posts (recipe in design-momuto handbook, "Blog / marketing photos hosted here").
+- **Creator-code pilot** (`docs/creator-program.md`): create the coupon in the us store admin, run the three test orders, add the creator to `creators/creators.json`, run the report with `probe=true` once.

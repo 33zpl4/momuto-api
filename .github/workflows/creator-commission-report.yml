@@ -1,0 +1,43 @@
+name: Creator commission report
+
+# Read-only: lists the orders that carry each creator's coupon code (creators/creators.json) and the commission due.
+# Result is in the run's Summary tab. probe=true also prints the raw order objects that carry the code — run it ONCE after the
+# first test order to pin down the coupon / shipping / delivery field names (docs/creator-program.md).
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'How many days back to read orders'
+        required: false
+        default: '60'
+      code:
+        description: 'Only this code (blank = every active creator in creators/creators.json; a code here works even before it is in the file)'
+        required: false
+        default: ''
+      probe:
+        description: 'Print the raw order objects that carry the code'
+        required: false
+        default: 'false'
+        type: choice
+        options: ['false', 'true']
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Report
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+        run: |
+          ARGS="--days ${{ github.event.inputs.days }}"
+          if [ -n "${{ github.event.inputs.code }}" ]; then ARGS="$ARGS --code ${{ github.event.inputs.code }}"; fi
+          if [ "${{ github.event.inputs.probe }}" = "true" ]; then ARGS="$ARGS --probe"; fi
+          node scripts/creator-commission-report.js $ARGS
