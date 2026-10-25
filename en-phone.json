@@ -1,0 +1,95 @@
+{
+ "lang": "en",
+ "viewport": "phone",
+ "steps": [
+  {
+   "n": "tool opens",
+   "ok": true,
+   "note": "HTTP 200 canvas [\"390x726\"] | buttons [\"DESIGN\",\"COLOR\",\"PATTERN\",\"LOGO\",\"NAME & NO.\",\"ADD TO CART\",\"Save\"]"
+  },
+  {
+   "n": "intro clicked through",
+   "ok": true,
+   "note": "1 step(s)"
+  },
+  {
+   "n": "add to cart -> cart",
+   "ok": true,
+   "note": "https://design.momuto.com/cart | 975 chars | FREE SHIPPING OVER +50€ BUILD YOUR TEAM KIT Your design's ready. Now set each player's size, name, and number. 8131 MOMUTO Pro Jersey - Crafted with a polyester"
+  },
+  {
+   "n": "cart -> checkout",
+   "ok": false,
+   "note": "https://www.momuto.com/cart | HTTP 200 | FREE SHIPPING OVER +50€ CUSTOM KITS ICONIC SERIES THE BRAND SUPPORT Shopping Cart Your Shopping Cart is Empty Continue Shopping BACK HELP SHOP FOR YOU Newsletter © 2026 MOMUTO Group Limited. All right"
+  }
+ ],
+ "console": [],
+ "pageErrors": [],
+ "badRequests": [],
+ "tool": {
+  "url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en",
+  "title": "MOMUTO 3D Kit Designer — Design Your Custom Football Jersey",
+  "textLen": 127,
+  "text": "Jersey DESIGN COLOR PATTERN LOGO NAME & NO. ADD TO CART Save Your club's colours. Your design. On the pitch in 25 days. NEXT",
+  "buttons": [
+   "DESIGN",
+   "COLOR",
+   "PATTERN",
+   "LOGO",
+   "NAME & NO.",
+   "ADD TO CART",
+   "Save"
+  ],
+  "canvas": [
+   "390x726"
+  ]
+ },
+ "intro": 1,
+ "addText": "ADD TO CART",
+ "prompt": "names-and-numbers prompt shown",
+ "afterAdd": [
+  "go to cart"
+ ],
+ "cart": {
+  "url": "https://design.momuto.com/cart",
+  "title": "Shopping cart",
+  "textLen": 975,
+  "text": "FREE SHIPPING OVER +50€ BUILD YOUR TEAM KIT Your design's ready. Now set each player's size, name, and number. 8131 MOMUTO Pro Jersey - Crafted with a polyester-elastane blend and sublimation-printed logos for ultimate flexibility, performance, and durability. €21.90 / JERSEY Add 10 more — €18.90 each FIND YOUR SIZE SIZE FIND YOUR SIZE - XS S M L XL 2XL 3XL 98/104 · 3–4 yrs 110/116 · 5–6 yrs 128 · 7–8 yrs 140 · 9–10 yrs 152 · 11–12 yrs 164 · 13–14 yrs SLEEVES Short Long +€3.00 NAME NUMBER QUANTITY Add another teammate Fast lane +€59.00 per order Priority production and priority shipping. Saves",
+  "buttons": [
+   "ADD ANOTHER PRODUCT",
+   "CHECKOUT",
+   "Contact Us",
+   "FAQ",
+   "Size Guide",
+   "Printing & Materials",
+   "Shipping Policy",
+   "Returns & Exchanges",
+   "Terms & Conditions",
+   "Privacy Policy",
+   "Special Discounts",
+   "Idea Submission",
+   "Questions? Chat with us"
+  ],
+  "canvas": []
+ },
+ "checkoutText": "",
+ "landing": {
+  "url": "https://www.momuto.com/cart",
+  "title": "Shopping Cart - MOMUTO",
+  "textLen": 213,
+  "text": "FREE SHIPPING OVER +50€ CUSTOM KITS ICONIC SERIES THE BRAND SUPPORT Shopping Cart Your Shopping Cart is Empty Continue Shopping BACK HELP SHOP FOR YOU Newsletter © 2026 MOMUTO Group Limited. All rights reserved.",
+  "buttons": [
+   "FREE SHIPPING OVER +50€",
+   "CUSTOM KITS",
+   "ICONIC SERIES",
+   "THE BRAND",
+   "SUPPORT",
+   "Continue Shopping",
+   "BACK",
+   "HELP",
+   "SHOP",
+   "FOR YOU"
+  ],
+  "canvas": []
+ }
+}
