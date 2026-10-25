@@ -13,10 +13,11 @@ const { chromium } = require('playwright');
 const OUT = path.join(__dirname, '..', 'probe-3d-out'); fs.mkdirSync(OUT, { recursive: true });
 const LANGS = (process.env.PROBE_LANGS || 'en,es,fr,it').split(',').map(s => s.trim());
 const VIEWPORTS = [['desktop', { width: 1440, height: 900 }], ['phone', { width: 390, height: 844 }]];
-const ADD_RE = /add to cart|añadir al carrito|ajouter au panier|aggiungi al carrello/i;
+const ADD_RE = /add to cart|añadir al carrito|añadir a la cesta|ajouter au panier|aggiungi al carrello/i;
 const CHECKOUT_RE = /check ?out|proceed|place order|continue|completar|finalizar|tramitar|pagar|commander|passer|paiement|procedi|cassa|continua|continuar|continuer/i;
 const NOISE = /google|googletagmanager|doubleclick|facebook|fbevents|clarity\.ms|hotjar|tiktok|pinterest|trustpilot|analytics|sentry|gtag|hubspot/i;
-const NEXT_RE = /^\s*(next|continue|start|got it|skip|siguiente|continuar|empezar|saltar|suivant|continuer|commencer|passer|avanti|continua|inizia|salta)\b/i;
+const NEXT_RE = /^\s*(next|siguiente|suivant|avanti)\b/i;
+const NOT_ON_KIT_RE = /not on this kit|no en este kit|pas sur ce kit|non su questo kit/i;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const facts = () => ({
   url: location.href, title: document.title, textLen: (document.body.innerText || '').trim().length,
@@ -47,9 +48,8 @@ const facts = () => ({
       // first-visit intro ("Your club's colours... NEXT"): a new customer clicks through it, so does the probe (max 8 steps)
       rep.intro = 0;
       for (let i = 0; i < 8; i++) {
-        const nx = page.locator('button, [role=button], a, div').filter({ hasText: NEXT_RE }).filter({ visible: true }).last();
-        const addVisible = await page.locator('button, [role=button]').filter({ hasText: ADD_RE }).filter({ visible: true }).count();
-        if (!await nx.count() || (addVisible && !(await page.locator('div').filter({ hasText: /club.s colou?rs|tus colores|vos couleurs|i colori/i }).filter({ visible: true }).count()))) break;
+        const nx = page.locator('button, [role=button]').filter({ hasText: NEXT_RE }).filter({ visible: true }).last();
+        if (!await nx.count()) break;
         await nx.click({ timeout: 4000 }).catch(() => {}); rep.intro++; await sleep(1500);
         if (i === 0) await page.screenshot({ path: path.join(OUT, `${tag}-1b-intro.png`) });
       }
@@ -59,8 +59,22 @@ const facts = () => ({
       if (!await add.count()) throw new Error('no ADD TO CART control visible in the tool');
       rep.addText = (await add.innerText().catch(() => '')).trim().slice(0, 40);
       await add.scrollIntoViewIfNeeded().catch(() => {});
-      const nav = page.waitForURL(/\/cart|checkouts|sign|login/i, { timeout: 60000 }).catch(() => null);
-      await add.click({ timeout: 8000 }); await nav; await sleep(6000);
+      await add.click({ timeout: 8000 }); await sleep(3500);
+      // names & numbers prompt ("Add them" / "Not on this kit"): a customer who has not designed a roster answers "Not on this kit", then the add goes through
+      const skip = page.locator('button, [role=button]').filter({ hasText: NOT_ON_KIT_RE }).filter({ visible: true }).first();
+      if (await skip.count()) {
+        rep.prompt = 'names-and-numbers prompt shown';
+        await page.screenshot({ path: path.join(OUT, `${tag}-2a-prompt.png`) });
+        const nav0 = page.waitForURL(/\/cart|checkouts|sign|login/i, { timeout: 25000 }).catch(() => null);
+        await skip.click({ timeout: 5000 }).catch(() => {}); await nav0; await sleep(3000);
+        if (!/\/cart|checkouts/.test(page.url())) {
+          const nav1 = page.waitForURL(/\/cart|checkouts|sign|login/i, { timeout: 40000 }).catch(() => null);
+          const add2 = page.locator('button, [role=button]').filter({ hasText: ADD_RE }).filter({ visible: true }).last();
+          if (await add2.count()) await add2.click({ timeout: 5000 }).catch(() => {});
+          await nav1;
+        }
+      } else { await page.waitForURL(/\/cart|checkouts|sign|login/i, { timeout: 40000 }).catch(() => null); }
+      await sleep(5000);
       rep.cart = await page.evaluate(facts);
       step('add to cart -> cart', /\/cart/.test(rep.cart.url) && rep.cart.textLen > 60, `${rep.cart.url.slice(0, 100)} | ${rep.cart.textLen} chars | ${rep.cart.text.slice(0, 160)}`);
       await page.screenshot({ path: path.join(OUT, `${tag}-2-cart.png`), fullPage: true });
