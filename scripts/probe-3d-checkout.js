@@ -22,7 +22,7 @@ const NOT_ON_KIT_RE = /not on this kit|no en este kit|pas sur ce kit|non su ques
 const TO_CART_RE = /go to cart|ir al carrito|ir a la cesta|aller au panier|vai al carrello/i;
 const GOT_IT_RE = /^\s*(got it|entendido|compris|capito|ok)\s*$/i;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const facts = () => ({
+const facts = () => (!document.body ? { url: location.href, title: '', textLen: 0, text: '', buttons: [], canvas: [] } : {
   url: location.href, title: document.title, textLen: (document.body.innerText || '').trim().length,
   text: (document.body.innerText || '').trim().replace(/\s+/g, ' ').slice(0, 600),
   buttons: [...document.querySelectorAll('button, a, input[type=submit], [role=button]')].filter(e => e.getBoundingClientRect().width > 0).map(e => (e.innerText || e.value || '').trim().replace(/\s+/g, ' ').slice(0, 40)).filter(Boolean).slice(0, 25),
@@ -87,10 +87,10 @@ const facts = () => ({
         else { await sleep(3000); }
       }
       await sleep(5000);
-      rep.cart = await page.evaluate(facts);
+      await page.waitForLoadState('domcontentloaded').catch(() => {}); rep.cart = await page.evaluate(facts);
       step('add to cart -> cart', /\/cart/.test(rep.cart.url) && rep.cart.textLen > 60, `${rep.cart.url.slice(0, 100)} | ${rep.cart.textLen} chars | ${rep.cart.text.slice(0, 160)}`);
       await page.screenshot({ path: path.join(OUT, `${tag}-2-cart.png`), fullPage: true });
-      const co = page.locator('button, a, input[type=submit], [role=button]').filter({ hasText: CHECKOUT_RE }).filter({ visible: true }).last();
+      const co = page.locator(':text-matches("^\\s*(check ?out|finalizar compra|completar pedido|tramitar pedido|passer la commande|procedi al pagamento|paiement|cassa)\\s*$", "i")').filter({ visible: true }).last();
       if (!await co.count()) throw new Error('no checkout button in the design cart');
       rep.checkoutText = (await co.innerText().catch(() => '')).trim().slice(0, 40);
       const nav2 = page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 30000 }).catch(() => null);
