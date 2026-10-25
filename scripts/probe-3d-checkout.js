@@ -12,6 +12,8 @@ const path = require('path');
 const { chromium } = require('playwright');
 const OUT = path.join(__dirname, '..', 'probe-3d-out'); fs.mkdirSync(OUT, { recursive: true });
 const LANGS = (process.env.PROBE_LANGS || 'en,es,fr,it').split(',').map(s => s.trim());
+const ENTRIES = (process.env.PROBE_ENTRIES || 'store,direct').split(',').map(x => x.trim());   // store = start on the store home and click its 3D link (customer path); direct = open the designer URL cold
+const HOSTS = { en: 'https://www.momuto.com', es: 'https://es.momuto.com', fr: 'https://fr.momuto.com', it: 'https://it.momuto.com' };
 const VIEWPORTS = [['desktop', { width: 1440, height: 900 }], ['phone', { width: 390, height: 844 }]];
 const ADD_RE = /add to cart|añadir al carrito|añadir a la cesta|ajouter au panier|aggiungi al carrello/i;
 const CHECKOUT_RE = /check ?out|proceed|place order|continue|completar|finalizar|tramitar|pagar|commander|passer|paiement|procedi|cassa|continua|continuar|continuer/i;
@@ -32,8 +34,8 @@ const facts = () => (!document.body ? { url: location.href, title: '', textLen: 
 (async () => {
   const browser = await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   const table = [];
-  for (const lang of LANGS) for (const [vp, size] of VIEWPORTS) {
-    const tag = `${lang}-${vp}`, rep = { lang, viewport: vp, steps: [], console: [], pageErrors: [], badRequests: [] };
+  for (const lang of LANGS) for (const [vp, size] of VIEWPORTS) for (const entry of ENTRIES) {
+    const tag = `${lang}-${vp}-${entry}`, rep = { lang, viewport: vp, entry, steps: [], console: [], pageErrors: [], badRequests: [] };
     const ctx = await browser.newContext({ viewport: size, isMobile: vp === 'phone', locale: lang === 'en' ? 'en-GB' : lang });
     const page = await ctx.newPage();
     { const _s = page.screenshot.bind(page); page.screenshot = o => _s({ ...o, timeout: 12000 }).catch(() => null); }   // software-rendered 3D can stall a screenshot; never let that fail the probe
@@ -44,7 +46,17 @@ const facts = () => (!document.body ? { url: location.href, title: '', textLen: 
     const step = (n, ok, note) => rep.steps.push({ n, ok, note });
     try {
       const url = `https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=${lang}&langguage=${lang}`;
-      const r = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      let r;
+      if (entry === 'store') {
+        // customer path: land on the store, then follow the store's own 3D link (carries the store's guest session to the designer)
+        const sh = await page.goto(HOSTS[lang] + '/', { waitUntil: 'domcontentloaded', timeout: 60000 }); await sleep(3000);
+        const link = await page.evaluate(() => { const a = [...document.querySelectorAll('a[href*="design.momuto.com/3d-configurator"]')].find(e => e.getBoundingClientRect().width > 0) || document.querySelector('a[href*="design.momuto.com/3d-configurator"]'); return a ? a.href : null; });
+        rep.storeLink = link;
+        if (!link) throw new Error('no 3D designer link on the ' + lang + ' store home page');
+        r = await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      } else {
+        r = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      }
       await page.waitForSelector('canvas', { timeout: 45000 }).catch(() => {}); await sleep(15000);
       rep.tool = await page.evaluate(facts);
       step('tool opens', r.status() < 400 && rep.tool.canvas.length > 0, `HTTP ${r.status()} canvas ${JSON.stringify(rep.tool.canvas)} | buttons ${JSON.stringify(rep.tool.buttons.slice(0, 12))}`);
@@ -87,7 +99,7 @@ const facts = () => (!document.body ? { url: location.href, title: '', textLen: 
         else { await sleep(3000); }
       }
       await sleep(5000);
-      await page.waitForLoadState('domcontentloaded').catch(() => {}); rep.cart = await page.evaluate(facts);
+      await page.waitForLoadState('domcontentloaded').catch(() => {}); await page.waitForSelector(':text-matches("/\\s*(jersey|kit|camiseta|maillot|maglia)", "i")', { timeout: 20000 }).catch(() => {}); rep.cart = await page.evaluate(facts);
       step('add to cart -> cart', /\/cart/.test(rep.cart.url) && rep.cart.textLen > 60, `${rep.cart.url.slice(0, 100)} | ${rep.cart.textLen} chars | ${rep.cart.text.slice(0, 160)}`);
       await page.screenshot({ path: path.join(OUT, `${tag}-2-cart.png`), fullPage: true });
       const co = page.locator(':text-matches("^\\s*(check ?out|finalizar compra|completar pedido|tramitar pedido|passer la commande|procedi al pagamento|paiement|cassa)\\s*$", "i")').filter({ visible: true }).last();
