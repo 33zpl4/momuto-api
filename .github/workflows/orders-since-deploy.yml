@@ -1,0 +1,27 @@
+name: Orders and hand-offs since the deploy (read-only)
+
+# Read-only questions to /api/admin-orders: (1) which 3D orders were paid since 20 Oct (ref, paidAt, lang, total only; no names or emails), and
+# (2) the weekly checkout hand-off counts (ok vs other) from the checkout beacons. A paid 3D order must have passed the hand-off, so this shows
+# when the hand-off last worked. TEMP push trigger on the scratch branch only.
+
+on:
+  push:
+    branches: ['claude/trace-checkout-handoff']
+    paths: ['.github/workflows/orders-since-deploy.yml']
+  workflow_dispatch:
+
+jobs:
+  q:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query
+        env:
+          SECRET: ${{ secrets.MOMUTO_API_SECRET }}
+        run: |
+          [ -n "$SECRET" ] || { echo "::error::MOMUTO_API_SECRET missing"; exit 1; }
+          API="https://momuto-api.vercel.app/api/admin-orders"
+          echo "== active orders paid since 2026-10-20 (UTC) =="
+          curl -sS -H "x-webhook-secret: $SECRET" "$API?action=list" | jq -r '.active[]? | select((.paidAt // "") >= "2026-10-20") | [.paidAt, .ref, .lang, (.total // "-"), (.currency // "-")] | @tsv'
+          echo
+          echo "== weekly hand-off counts (checkout beacons) =="
+          curl -sS -H "x-webhook-secret: $SECRET" "$API?action=metrics&weeks=3" | jq -c '.weeks | to_entries[] | {week: .key, orders: .value.orders, handoff: .value.checkoutHandoff, byLang: .value.byLang}'
