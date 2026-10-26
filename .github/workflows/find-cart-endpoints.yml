@@ -1,0 +1,20 @@
+name: Find store cart endpoints (read-only)
+
+# Downloads each store's public /cart page and its scripts and lists the /homeapi/ endpoints they call. Nothing is posted. See scripts/find-cart-endpoints.js.
+# TEMP push trigger on the scratch branch only (the workflow is not on main).
+
+on:
+  push:
+    branches: ['claude/trace-checkout-handoff']
+    paths: ['scripts/find-cart-endpoints.js']
+  workflow_dispatch:
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/find-cart-endpoints.js
