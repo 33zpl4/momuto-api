@@ -27,10 +27,18 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
       step = 'cart page'; await page.goto(base + '/cart', { waitUntil: 'networkidle', timeout: 60000 }); await sleep(2500);
       const ctl = await page.evaluate(() => [...document.querySelectorAll('[class*=delete],[class*=remove],[class*=trash],[class*=clear],[class*=del-]')].filter(e => e.getBoundingClientRect().width > 0).map(e => e.tagName + '.' + String(e.className).slice(0, 50)));
       console.log('cart remove/clear controls:', JSON.stringify(ctl.slice(0, 8)));
-      step = 'remove item (X)';
-      const x = page.locator('[class*=remove],[class*=delete],[class*=del-]').filter({ visible: true }).first();
-      if (await x.count()) { await x.click({ timeout: 5000 }).catch(e => console.log('click failed', e.message.slice(0, 80))); await sleep(3500); }
-      else console.log('no visible remove control');
+      step = 'delete-all control';
+      page.on('dialog', d => d.accept().catch(() => {}));
+      const all = page.locator('.cart_list_delete_all').filter({ visible: true }).first();
+      if (await all.count()) {
+        await all.click({ timeout: 5000 }).catch(e => console.log('click failed', e.message.slice(0, 80))); await sleep(1500);
+        step = 'delete-all confirm';
+        const ok = page.locator('button, a, div, span').filter({ hasText: /^\s*(ok|yes|confirm|delete|remove|sí|si|oui|confirmar|supprimer|elimina|eliminar|确定|确认)\s*$/i }).filter({ visible: true }).first();
+        if (await ok.count()) { console.log('confirm control:', (await ok.innerText().catch(() => '')).trim()); await ok.click({ timeout: 4000 }).catch(() => {}); }
+        await sleep(3500);
+      } else console.log('no visible delete-all control');
+      step = 'cart after';
+      console.log('cart text after:', (await page.evaluate(() => document.body.innerText.replace(/\s+/g, ' ').slice(0, 200))));
     } catch (e) { console.log('ERROR', e.message.slice(0, 200)); }
     console.log(log.join('\n') || '(no requests recorded)');
     await ctx.close();
