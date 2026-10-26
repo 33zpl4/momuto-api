@@ -18,6 +18,7 @@ on:
 
 jobs:
   probe:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -34,7 +35,7 @@ jobs:
       - run: node scripts/trace-checkout-handoff.js
         if: github.event.inputs.mode != 'cleanup'
         env:
-          PROBE_LANGS: ${{ github.event.inputs.stores || 'es,en' }}
+          PROBE_LANGS: ${{ github.event.inputs.stores || 'en' }}
       - uses: actions/upload-artifact@v4
         if: always() && github.event.inputs.mode != 'cleanup'
         with:

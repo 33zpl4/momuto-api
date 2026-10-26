@@ -105,12 +105,12 @@ const facts = () => (!document.body ? { url: location.href, title: '', textLen: 
         else { await sleep(3000); }
       }
       await sleep(5000);
-      await page.waitForLoadState('domcontentloaded').catch(() => {}); await page.waitForSelector(':text-matches("/\\s*(jersey|kit|camiseta|maillot|maglia)", "i")', { timeout: 20000 }).catch(() => {}); rep.cart = await page.evaluate(facts);
+      await page.waitForLoadState('domcontentloaded').catch(() => {}); rep.addClickAt = rep.addClickAt || null; await page.waitForSelector(':text-matches("/\\s*(jersey|kit|camiseta|maillot|maglia)", "i")', { timeout: 20000 }).catch(() => {}); rep.cart = await page.evaluate(facts); rep.cartTiming = await page.evaluate(() => { const n = performance.getEntriesByType('navigation')[0]; return n ? { ttfbMs: Math.round(n.responseStart), domContentLoadedMs: Math.round(n.domContentLoadedEventEnd), loadMs: Math.round(n.loadEventEnd) } : null; }).catch(() => null);
       step('add to cart -> cart', /\/cart/.test(rep.cart.url) && rep.cart.textLen > 60, `${rep.cart.url.slice(0, 100)} | ${rep.cart.textLen} chars | ${rep.cart.text.slice(0, 160)}`);
       await page.screenshot({ path: path.join(OUT, `${tag}-2-cart.png`), fullPage: true });
       const co = page.locator(':text-matches("^\\s*(check ?out|finalizar compra|completar pedido|tramitar pedido|passer la commande|procedi al pagamento|paiement|cassa)\\s*$", "i")').filter({ visible: true }).last();
       if (!await co.count()) throw new Error('no checkout button in the design cart');
-      rep.checkoutText = (await co.innerText().catch(() => '')).trim().slice(0, 40); rep.tracing = true;
+      rep.checkoutText = (await co.innerText().catch(() => '')).trim().slice(0, 40); rep.tracing = true; rep.t0 = Date.now();
       const nav2 = page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 30000 }).catch(() => null);
       await co.click({ timeout: 8000 }).catch(e => { rep.clickError = e.message.slice(0, 120); }); const resp = await nav2; await sleep(6000);
       await sleep(8000); rep.landing = await page.evaluate(facts);
