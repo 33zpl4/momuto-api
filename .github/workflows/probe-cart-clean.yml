@@ -1,0 +1,21 @@
+name: Probe cart/clean on all stores (read-only)
+
+# POSTs /homeapi/cart/clean with an empty body to an anonymous empty cart on each store, like the checkSumbit hand-off page does, and prints the answers.
+# TEMP push trigger on the scratch branch only.
+
+on:
+  push:
+    branches: ['claude/trace-checkout-handoff']
+    paths: ['scripts/probe-cart-clean.js']
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: node scripts/probe-cart-clean.js
