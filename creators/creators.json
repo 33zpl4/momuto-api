@@ -1,0 +1,18 @@
+{
+  "_note": "One entry per creator. `code` is what the customer types at checkout (case-insensitive). rate = commission share of the order after discount, excluding shipping. min_order = the store-side coupon minimum (documentation only). Set active:false to stop a creator without deleting the history. Never commit payout details.",
+  "creators": [
+    {
+      "code": "SFC27",
+      "name": "Connor D. (TikTok creator, US)",
+      "stores": [
+        "us"
+      ],
+      "rate": 0.05,
+      "discount_usd": 15,
+      "min_order_usd": 259,
+      "start": "2026-10-25",
+      "end": "2026-12-24",
+      "active": true
+    }
+  ]
+}

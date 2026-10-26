@@ -1,0 +1,39 @@
+name: Patch gallery countries stat
+
+# Sets the "Countries" stat tile number of the kit gallery page on all five stores.
+# Reads the LIVE page and changes only that number (gallery pages are pipeline-owned; never deploy a repo copy).
+# Dry run by default. workflow_dispatch only — no push trigger.
+
+on:
+  workflow_dispatch:
+    inputs:
+      value:
+        description: 'Countries stat, e.g. 15+'
+        required: true
+        default: '15+'
+        type: string
+      dry_run:
+        description: 'Dry run — list only, no writes'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Patch
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          VALUE: ${{ inputs.value }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: node scripts/patch-gallery-countries.js
