@@ -1,28 +1,38 @@
 'use strict';
 /**
- * READ-ONLY: which /homeapi/ cart endpoints do the stores' OWN scripts call today? Opens each store's public /cart page in a real browser (a plain download
- * gets 403), records every same-site script it loads, and prints every "homeapi/..." string with its context. Nothing is posted anywhere.
- * Why: the checkout hand-off page (checkSumbit.html) calls POST /homeapi/cart/clean, which the platform now answers {"code":404,"msg":"接口未定义"}.
+ * READ-ONLY (anonymous throwaway cart): which cart endpoints do the stores' OWN pages call today? Opens a public product, clicks add-to-cart, opens /cart,
+ * clicks the cart's own remove / clear controls, and prints every non-asset request the page made at each step (method + URL + status + body start).
+ * Why: the checkout hand-off page (checkSumbit.html) calls POST /homeapi/cart/clean, which the platform answers {"code":404,"msg":"接口未定义"}.
  */
 const { chromium } = require('playwright');
 const STORES = [['www', 'https://www.momuto.com'], ['us', 'https://us.momuto.com'], ['es', 'https://es.momuto.com'], ['fr', 'https://fr.momuto.com'], ['it', 'https://it.momuto.com']];
 const ONLY = (process.env.PROBE_STORES || 'www').split(',');
+const ADD_RE = /add to (cart|bag)|añadir al (carrito|cesta)|agregar al carrito|ajouter au panier|aggiungi al carrello/i;
+const NOISE = /google|doubleclick|facebook|clarity|hotjar|tiktok|pinterest|hubspot|hs-|twitter|ads-|gtag|trustpilot|sentry|\.(png|jpe?g|webp|svg|gif|woff2?|css|ico)(\?|$)/i;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 (async () => {
   const browser = await chromium.launch();
   for (const [k, base] of STORES) {
     if (!ONLY.includes(k) && !ONLY.includes('all')) continue;
     console.log('\n========== ' + k + ' ' + base);
-    const ctx = await browser.newContext({ locale: 'en-GB' }); const page = await ctx.newPage();
-    const scripts = new Map();
-    page.on('response', async r => { try { const u = r.url(); const ct = r.headers()['content-type'] || ''; if (new URL(u).host.endsWith('momuto.com') && /javascript|html|json/.test(ct)) scripts.set(u, await r.text()); } catch (e) {} });
-    const resp = await page.goto(base + '/cart', { waitUntil: 'networkidle', timeout: 60000 }).catch(e => { console.log('goto error', e.message); return null; });
-    console.log('cart page', resp && resp.status(), 'captured', scripts.size, 'same-site responses');
-    const found = new Map();
-    for (const [u, text] of scripts) for (const m of text.matchAll(/["'`]([^"'`\s]*homeapi\/[^"'`\s]*)["'`]/g)) { const e = m[1]; if (!found.has(e)) found.set(e, { label: u.replace(base, '').slice(0, 70), ctx: text.slice(Math.max(0, m.index - 140), m.index + e.length + 160).replace(/\s+/g, ' ') }); }
-    const all = [...found.keys()].sort();
-    console.log('\nALL homeapi endpoints seen (' + all.length + '):\n' + all.join('\n'));
-    console.log('\nCART-RELATED, with context:');
-    for (const [e, v] of found) if (/cart|checkout|order/i.test(e)) console.log('- ' + e + '   [' + v.label + ']\n    ' + v.ctx.slice(0, 340));
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, locale: 'en-GB' }); const page = await ctx.newPage();
+    let step = 'start'; const log = [];
+    page.on('response', async r => { try { const u = r.url(), q = r.request(); if (NOISE.test(u) || !new URL(u).host.endsWith('momuto.com')) return; if (!['POST', 'PUT', 'DELETE', 'PATCH'].includes(q.method()) && !/homeapi|\/api\/|cart/i.test(u)) return; let b = ''; try { b = (await r.text()).slice(0, 160).replace(/\s+/g, ' '); } catch (e) {} if (/^<!doctype|^<html/i.test(b)) b = '(html)'; log.push(`[${step}] ${q.method()} ${r.status()} ${u.slice(0, 150)}  ${(q.postData() || '').slice(0, 120)}  => ${b}`); } catch (e) {} });
+    try {
+      await page.goto(base + '/', { waitUntil: 'domcontentloaded', timeout: 60000 }); await sleep(2500);
+      const prod = await page.evaluate(() => { const a = [...document.querySelectorAll('a[href*="/products/"]')].map(a => a.getAttribute('href')).filter(h => /\/products\//.test(h) && !/fast.?lane/i.test(h)); return a[0] || null; });
+      step = 'product'; await page.goto(new URL(prod, base).href, { waitUntil: 'domcontentloaded', timeout: 60000 }); await sleep(3000);
+      await page.evaluate(() => { document.querySelectorAll('[class*=variant] [class*=item]:not([class*=disabled]):not([class*=active]), [class*=sku] [class*=item]:not([class*=disabled]):not([class*=active]), [class*=option] li:not([class*=disabled]):not([class*=active])').forEach((e, i) => { if (i < 3) e.click(); }); }); await sleep(600);
+      step = 'add-to-cart'; const btn = page.locator('button, a, div[role=button], [class*=btn], [class*=button]').filter({ hasText: ADD_RE }).first(); await btn.click({ timeout: 8000 }); await sleep(3500);
+      step = 'cart page'; await page.goto(base + '/cart', { waitUntil: 'networkidle', timeout: 60000 }); await sleep(2500);
+      const ctl = await page.evaluate(() => [...document.querySelectorAll('[class*=delete],[class*=remove],[class*=trash],[class*=clear],[class*=del-]')].filter(e => e.getBoundingClientRect().width > 0).map(e => e.tagName + '.' + String(e.className).slice(0, 50)));
+      console.log('cart remove/clear controls:', JSON.stringify(ctl.slice(0, 8)));
+      step = 'remove item (X)';
+      const x = page.locator('[class*=remove],[class*=delete],[class*=del-]').filter({ visible: true }).first();
+      if (await x.count()) { await x.click({ timeout: 5000 }).catch(e => console.log('click failed', e.message.slice(0, 80))); await sleep(3500); }
+      else console.log('no visible remove control');
+    } catch (e) { console.log('ERROR', e.message.slice(0, 200)); }
+    console.log(log.join('\n') || '(no requests recorded)');
     await ctx.close();
   }
   await browser.close();
