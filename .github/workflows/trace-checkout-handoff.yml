@@ -1,0 +1,51 @@
+name: Trace checkout hand-off (read-only)
+
+# Anonymous browser on a GitHub runner: open the 3D designer exactly as the site links it (no customising), ADD TO CART, look at the design cart, press checkout,
+# record where it lands. en/es/fr/it, desktop + phone. Stops at the landing page: no roster typed, nothing paid. See scripts/trace-checkout-handoff.js.
+
+on:
+  push:
+    branches: ['claude/trace-checkout-handoff']   # TEMP: lets the first run start before the workflow is on main; removed before merge
+    paths: ['scripts/trace-checkout-handoff.js']
+  workflow_dispatch:
+    inputs:
+      stores:
+        description: 'languages (en,es,fr,it)'
+        default: 'en,es,fr,it'
+      mode:
+        description: "'probe' or 'cleanup' (deletes the screenshots branch)"
+        default: 'probe'
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Cleanup
+        if: github.event.inputs.mode == 'cleanup'
+        run: git push -q "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" --delete trace-checkout-shots || echo "branch already gone"
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+        if: github.event.inputs.mode != 'cleanup'
+      - run: node scripts/trace-checkout-handoff.js
+        if: github.event.inputs.mode != 'cleanup'
+        env:
+          PROBE_LANGS: ${{ github.event.inputs.stores || 'es,en' }}
+      - uses: actions/upload-artifact@v4
+        if: always() && github.event.inputs.mode != 'cleanup'
+        with:
+          name: checkout-trace
+          path: trace-out/
+          retention-days: 7
+      - name: "Publish screenshots + JSON to the throwaway branch (public pages only)"
+        if: always() && github.event.inputs.mode != 'cleanup'
+        run: |
+          mkdir -p /tmp/shots && cp trace-out/* /tmp/shots/ 2>/dev/null || true
+          cd /tmp/shots && ls * >/dev/null 2>&1 || { echo "no output"; exit 0; }
+          git init -q && git config user.name "probe" && git config user.email "probe@users.noreply.github.com"
+          git add . && git commit -q -m "cart probe ${{ github.sha }}"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:refs/heads/trace-checkout-shots
