@@ -521,7 +521,35 @@ The run reports it alongside the cap:
 
 If a specific mark still reads wrong, the two constants are the knobs: `_FROM`
 moves the aspect where the discount begins, `_MAX` sets how much a square mark
-loses. What this rule cannot see is ink density — a solid square and an outlined
+loses.
+
+#### Vertical sponsors run along the arm — their own placement
+
+A mark narrower than it is tall (pixbet, 412×1200, aspect 0.34) is a wordmark
+that runs *along* the arm, and every horizontal rule gets it wrong at once:
+sized to the horizontal box's height it is a sliver; centred on that box's
+centre it sits ~70% down the sleeve and grows into the cuff; and the optical
+discount, built for compact solid shapes, takes 20% off something that is not
+compact. Supplied as a patch instead, its long side (0.62 of the width = a
+third of the sleeve) is what put it on the cuff.
+
+Under aspect `SPONSOR_VERTICAL_BELOW` (0.6) a sponsor takes its own placement:
+
+| constant | value | meaning |
+|---|---|---|
+| `SPONSOR_VERTICAL_HEIGHT` | 0.24 | its height, as a fraction of the canvas height |
+| `SPONSOR_VERTICAL_CENTRE_Y` | 0.46 | where its middle sits (horizontal boxes centre at ~0.70) |
+| `SPONSOR_VERTICAL_INWARD` | 0.35 | how far from the horizontal box's centre toward the canvas centre — toward the body, on either arm |
+
+No optical discount, no width cap; the on-canvas clamp applies as it does for
+a patch. The values are read off the team's reference (shorter, centred about
+40% down the sleeve, nearer the body) and are starting points: tune from a
+render at ~25 canvas px per 1% of `CENTRE_Y`. `@NN` scales the height. The
+run reports it:
+
+```
+· overlaid: club-sleevesponsorleft.svg → 206×599px: VERTICAL (aspect 0.34): height 24% of sleeve, centre at 46% down, 35% inward
+``` What this rule cannot see is ink density — a solid square and an outlined
 square of the same box get the same discount. That would need reading the mark's
 transparency coverage, which is possible but not built.
 

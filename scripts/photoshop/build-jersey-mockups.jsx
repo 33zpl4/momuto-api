@@ -22,7 +22,7 @@
 
 #target photoshop
 
-var VERSION = '2026-09-22c · fixes a comment ExtendScript read as a directive';
+var VERSION = '2026-10-26a · vertical sleeve sponsors get their own placement';
 
 // ── Where a sponsor sits on each sleeve, as FRACTIONS of that slot's own canvas:
 //    [x, y, w, h], 0..1, origin top-left.
@@ -181,13 +181,41 @@ var SPONSOR_EDGE_INSET = 0.03;
 var SPONSOR_OPTICAL_FROM = 1.3;
 var SPONSOR_OPTICAL_MAX  = 0.20;
 
-// The overlay entry every sleeve slot uses, so the cap, inset and optical rule
-// are set in one place and the four slots cannot drift apart.
+// ── VERTICAL sponsors (Oct 2026). A mark narrower than it is tall — pixbet at
+//    412×1200, aspect 0.34 — is a wordmark that runs ALONG the arm, and every
+//    horizontal rule above gets it wrong: sized to the horizontal box's height
+//    it is a sliver; centred on that box's centre it sits ~70% down the sleeve
+//    and grows into the cuff; and the optical discount, built for compact solid
+//    shapes, takes 20% off something that is not compact at all. The team's
+//    own reference has it shorter, centred around 40% down the sleeve, and
+//    nearer the body. So under SPONSOR_VERTICAL_BELOW a sponsor takes its own
+//    placement, in the slot's canvas like everything else:
+//
+//      HEIGHT    the mark's height as a fraction of the canvas height. Not the
+//                horizontal standard (0.273) and not a patch's long side
+//                (0.62 of the width = 0.335 of the height, which is what put
+//                pixbet on the cuff).
+//      CENTRE_Y  where its middle sits, fraction of canvas height. The
+//                horizontal boxes centre at ~0.70; the reference is well above.
+//      INWARD    how far it moves from the horizontal box's centre toward the
+//                canvas centre, 0..1 — i.e. toward the body, whichever arm.
+//
+//    Reference-derived starting values; tune from a render at ~25 canvas px
+//    per 1% of CENTRE_Y. No optical discount and no width cap apply.
+var SPONSOR_VERTICAL_BELOW    = 0.6;
+var SPONSOR_VERTICAL_HEIGHT   = 0.24;
+var SPONSOR_VERTICAL_CENTRE_Y = 0.46;
+var SPONSOR_VERTICAL_INWARD   = 0.35;
+
+// The overlay entry every sleeve slot uses, so the cap, inset, optical rule and
+// vertical rule are set in one place and the four slots cannot drift apart.
 function sponsorOverlay(kinds, boxPct) {
   return {
     file: kinds, boxPct: boxPct,
     maxWidthPct: SPONSOR_MAX_WIDTH, edgeInsetPct: SPONSOR_EDGE_INSET,
-    opticalFrom: SPONSOR_OPTICAL_FROM, opticalMax: SPONSOR_OPTICAL_MAX
+    opticalFrom: SPONSOR_OPTICAL_FROM, opticalMax: SPONSOR_OPTICAL_MAX,
+    vertical: { below: SPONSOR_VERTICAL_BELOW, heightPct: SPONSOR_VERTICAL_HEIGHT,
+                centreY: SPONSOR_VERTICAL_CENTRE_Y, inward: SPONSOR_VERTICAL_INWARD }
   };
 }
 
@@ -747,6 +775,37 @@ function fitLayerInBox(pl, box, mode, cw, ch, rules) {
   rules = rules || {};
 
   var aspect = m.w / m.h;
+
+  // A VERTICAL mark takes its own placement and none of the horizontal rules.
+  // Size from the canvas height (times the @NN factor the box already carries),
+  // centre at a fixed height, and slide from the horizontal box's centre toward
+  // the canvas centre — which is toward the body on either arm, since every
+  // sponsor box sits against the outer edge. Then the same on-canvas clamp a
+  // patch gets: a clipped wordmark is as bad as a clipped rectangle.
+  if (mode !== 'contain' && rules.vertical && aspect < rules.vertical.below) {
+    var v = rules.vertical, sc = rules.scale || 1;
+    var vScale = (v.heightPct * sc * ch) / m.h;
+    pl.resize(vScale * 100, vScale * 100, AnchorPosition.MIDDLECENTER);
+    var vn = layerBox(pl);
+    var bcx = box[0] + box[2] / 2;
+    var cx = bcx + (cw / 2 - bcx) * v.inward;
+    var cy = v.centreY * ch;
+    var vtx = cx - (vn.x + vn.w / 2), vty = cy - (vn.y + vn.h / 2);
+    var vl = vn.x + vtx, vr = vl + vn.w, vt = vn.y + vty, vb = vt + vn.h, vdx = 0, vdy = 0;
+    if (vl < rules.inset)            vdx = rules.inset - vl;
+    else if (vr > cw - rules.inset)  vdx = (cw - rules.inset) - vr;
+    if (vt < rules.inset)            vdy = rules.inset - vt;
+    else if (vb > ch - rules.inset)  vdy = (ch - rules.inset) - vb;
+    pl.translate(UnitValue(vtx + vdx, 'px'), UnitValue(vty + vdy, 'px'));
+    return {
+      capped: false, shifted: Math.round(Math.sqrt(vdx * vdx + vdy * vdy)),
+      optical: 0, aspect: aspect.toFixed(2),
+      w: Math.round(vn.w), h: Math.round(vn.h),
+      vertical: 'height ' + Math.round(v.heightPct * sc * 100) + '% of sleeve, centre at ' +
+                Math.round(v.centreY * 100) + '% down, ' + Math.round(v.inward * 100) + '% inward'
+    };
+  }
+
   var scale = (mode === 'contain') ? Math.min(box[2] / m.w, box[3] / m.h) : (box[3] / m.h);
 
   var optical = 0;
@@ -788,7 +847,7 @@ function fitLayerInBox(pl, box, mode, cw, ch, rules) {
   return {
     capped: capped, shifted: shifted,
     optical: Math.round(optical * 100), aspect: aspect.toFixed(2),
-    w: Math.round(n.w), h: Math.round(n.h)
+    w: Math.round(n.w), h: Math.round(n.h), vertical: null
   };
 }
 
@@ -978,15 +1037,19 @@ function placeInsideSlot(doc, layer, stack, sample, notes) {
             inset:        (stack[f].edgeInsetPct || 0) * cw,
             opticalFrom:  stack[f].opticalFrom || 0,
             opticalMax:   stack[f].opticalMax || 0,
-            keepOnCanvas: !!stack[f].keepOnCanvas
+            keepOnCanvas: !!stack[f].keepOnCanvas,
+            vertical:     stack[f].vertical || null,
+            scale:        sc
           };
           var fitted = fitLayerInBox(pl, box, stack[f].fit, cw, ch, rules);
           // Say so whenever a rule decided the size — a sponsor that came out
           // smaller than the standard height, or at the standard WIDTH instead,
-          // or a patch sized by its long side, should not pass as a mystery.
-          if (fitted && notes && (isPatch || sc !== 1 || fitted.capped || fitted.optical >= 1)) {
+          // or a patch sized by its long side, or a vertical wordmark placed
+          // by its own rule, should not pass as a mystery.
+          if (fitted && notes && (isPatch || sc !== 1 || fitted.capped || fitted.optical >= 1 || fitted.vertical)) {
             var why = [];
             if (sc !== 1) why.push('@' + Math.round(sc * 100) + ' → ' + Math.round(sc * 100) + '% of standard');
+            if (fitted.vertical) why.push('VERTICAL (aspect ' + fitted.aspect + '): ' + fitted.vertical);
             if (isPatch) why.push('patch, longer side ' + Math.round(Math.max(fitted.w, fitted.h)) + 'px');
             if (fitted.optical >= 1) why.push(fitted.optical + '% smaller (optical, aspect ' + fitted.aspect + ')');
             if (fitted.capped) why.push('width-capped');
@@ -1054,11 +1117,12 @@ function overSpec(entry) {
       opticalMax: entry.opticalMax || 0,
       centrePct: entry.centrePct || null,
       sizePct: entry.sizePct || 0,
-      keepOnCanvas: !!entry.keepOnCanvas
+      keepOnCanvas: !!entry.keepOnCanvas,
+      vertical: entry.vertical || null
     };
   }
   return { kinds: entry, box: null, boxPct: null, fit: 'height', maxWidthPct: null, edgeInsetPct: 0,
-           opticalFrom: 0, opticalMax: 0, centrePct: null, sizePct: 0, keepOnCanvas: false };
+           opticalFrom: 0, opticalMax: 0, centrePct: null, sizePct: 0, keepOnCanvas: false, vertical: null };
 }
 
 // Kind names deliberately carry no internal hyphen ('collarback', not
@@ -1583,7 +1647,7 @@ function main() {
                                  maxWidthPct: spec.maxWidthPct, edgeInsetPct: spec.edgeInsetPct,
                                  opticalFrom: spec.opticalFrom, opticalMax: spec.opticalMax,
                                  centrePct: spec.centrePct, sizePct: spec.sizePct, keepOnCanvas: spec.keepOnCanvas,
-                                 scale: extraMatch.scale });
+                                 vertical: spec.vertical, scale: extraMatch.scale });
                     overlaid.push(decodeURI(extra.name) + ((spec.box || spec.boxPct || spec.sizePct) ? '' : ' (full canvas)'));
                     if (extraMatch.note) overlaid.push('⚠ ' + extraMatch.note);
                   }
