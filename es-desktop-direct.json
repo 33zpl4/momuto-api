@@ -1,0 +1,87 @@
+{
+ "lang": "es",
+ "viewport": "desktop",
+ "entry": "direct",
+ "steps": [
+  {
+   "n": "tool opens",
+   "ok": true,
+   "note": "HTTP 200 canvas [\"816x788\"] | buttons [\"DISEÑO\",\"COLOR\",\"PATRÓN\",\"LOGO\",\"NOMBRE Y NÚM\",\"Calculadora de precios →\",\"Guardar\",\"Compartir\",\"AÑADIR A LA CESTA\"]"
+  },
+  {
+   "n": "intro clicked through",
+   "ok": true,
+   "note": "1 step(s)"
+  },
+  {
+   "n": "add to cart -> cart",
+   "ok": false,
+   "note": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitN | 369 chars | Camiseta DISEÑO COLOR PATRÓN LOGO NOMBRE Y NÚM Desde 21,90 € por camiseta a partir de 10 Calculadora de precios → Guardar | Compartir AÑADIR A LA CESTA ¿Dudas? "
+  },
+  {
+   "n": "ERROR",
+   "ok": false,
+   "note": "no checkout button in the design cart"
+  }
+ ],
+ "console": [],
+ "pageErrors": [],
+ "badRequests": [],
+ "trace": [],
+ "tracing": false,
+ "tool": {
+  "url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=es",
+  "title": "MOMUTO 3D Kit Designer — Design Your Custom Football Jersey",
+  "textLen": 223,
+  "text": "Camiseta DISEÑO COLOR PATRÓN LOGO NOMBRE Y NÚM Desde 21,90 € por camiseta a partir de 10 Calculadora de precios → Guardar | Compartir AÑADIR A LA CESTA Los colores de tu club. Tu diseño. En el campo en 25 días. SIGUIENTE",
+  "buttons": [
+   "DISEÑO",
+   "COLOR",
+   "PATRÓN",
+   "LOGO",
+   "NOMBRE Y NÚM",
+   "Calculadora de precios →",
+   "Guardar",
+   "Compartir",
+   "AÑADIR A LA CESTA"
+  ],
+  "canvas": [
+   "816x788"
+  ]
+ },
+ "intro": 1,
+ "addText": "AÑADIR A LA CESTA",
+ "prompt": "names-and-numbers prompt shown",
+ "afterAdd": [
+  "go to cart",
+  "go to cart",
+  "go to cart",
+  "go to cart",
+  "go to cart",
+  "go to cart"
+ ],
+ "cart": {
+  "url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=es",
+  "title": "MOMUTO 3D Kit Designer — Design Your Custom Football Jersey",
+  "textLen": 369,
+  "text": "Camiseta DISEÑO COLOR PATRÓN LOGO NOMBRE Y NÚM Desde 21,90 € por camiseta a partir de 10 Calculadora de precios → Guardar | Compartir AÑADIR A LA CESTA ¿Dudas? Chatea con nosotros ¿Nombres y números en la espalda? Tu diseño aún no los tiene: añádelos para definir el estilo y luego indica cada jugador (nombre, número y talla) en el carrito. Añadirlos No en este kit ×",
+  "buttons": [
+   "DISEÑO",
+   "COLOR",
+   "PATRÓN",
+   "LOGO",
+   "NOMBRE Y NÚM",
+   "Calculadora de precios →",
+   "Guardar",
+   "Compartir",
+   "AÑADIR A LA CESTA",
+   "¿Dudas? Chatea con nosotros",
+   "Añadirlos",
+   "No en este kit",
+   "×"
+  ],
+  "canvas": [
+   "816x788"
+  ]
+ }
+}

@@ -1,0 +1,371 @@
+{
+ "lang": "en",
+ "viewport": "desktop",
+ "entry": "direct",
+ "steps": [
+  {
+   "n": "tool opens",
+   "ok": true,
+   "note": "HTTP 200 canvas [\"816x788\"] | buttons [\"DESIGN\",\"COLOR\",\"PATTERN\",\"LOGO\",\"NAME & NO.\",\"Price calculator →\",\"Save\",\"Share\",\"ADD TO CART\"]"
+  },
+  {
+   "n": "intro clicked through",
+   "ok": true,
+   "note": "2 step(s)"
+  },
+  {
+   "n": "add to cart -> cart",
+   "ok": true,
+   "note": "https://design.momuto.com/cart | 1050 chars | FREE SHIPPING OVER +50€ HELP CENTER ABOUT US BUILD YOUR TEAM KIT Your design's ready. Now set each player's size, name, and number. 8158 MOMUTO Pro Jersey - Cra"
+  },
+  {
+   "n": "cart -> checkout",
+   "ok": false,
+   "note": "https://www.momuto.com/cart | HTTP 200 | FREE SHIPPING OVER +50€ CUSTOM KITS ICONIC SERIES THE BRAND SUPPORT CUSTOM KITS ICONIC SERIES THE BRAND SUPPORT Shopping Cart Your Shopping Cart is Empty Continue Shopping BACK HELP Contact Us FAQ Siz"
+  }
+ ],
+ "console": [],
+ "pageErrors": [],
+ "badRequests": [],
+ "trace": [
+  {
+   "t": 1793006925375,
+   "m": "POST",
+   "s": 200,
+   "u": "https://momuto-api.vercel.app/api/event",
+   "post": "{\"event\":\"checkout_clicked\",\"sid\":\"7dw4uiegf5mvp1wwij\",\"store\":\"design\"}",
+   "body": ""
+  },
+  {
+   "nav": "https://www.momuto.com/checkSumbit.html?data={%22goods%22:{%22mamuto3%22:10},%22oem%22:[],%22source%22:%223d%22,%22order_no%22:%224wbz2vt3fa%22,%22email%22:null,%22preview%22:{%2211017381%22:1}}"
+  },
+  {
+   "t": 1793006927620,
+   "m": "POST",
+   "s": 200,
+   "u": "https://design.momuto.com/getCartRedirect/936adf1c864c898293",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006927622,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/checkSumbit.html?data={%22goods%22:{%22mamuto3%22:10},%22oem%22:[],%22source%22:%223d%22,%22order_no%22:%224wbz2vt3fa%22,%22email%22:null,%22preview%22:{%2211017381%22:1}}",
+   "post": "",
+   "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Preparing your order…</title>\n</head>\n<script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n<body>\n<style>\n    .loading { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; text-align: center; align-items: center; justify-content: center }\n    .loading > h2 { color: #ccc; margin: 0; font: .8em verdana; text-transform: uppercase; letter-spacing: .1em }"
+  },
+  {
+   "t": 1793006927623,
+   "m": "GET",
+   "s": 200,
+   "u": "https://code.jquery.com/jquery-3.6.0.min.js",
+   "post": "",
+   "body": ""
+  },
+  {
+   "console": "log: Request to /homeapi/cart/clean failed: code=404"
+  },
+  {
+   "console": "log: Request to /homeapi/cart/clean failed: code=404"
+  },
+  {
+   "console": "log: Request to /homeapi/cart/clean failed: code=404"
+  },
+  {
+   "console": "log: Request to /homeapi/cart/clean failed: code=404"
+  },
+  {
+   "console": "log: Request to /homeapi/cart/clean failed: code=404"
+  },
+  {
+   "console": "log: Request to /homeapi/cart/clean failed: code=404"
+  },
+  {
+   "t": 1793006927842,
+   "m": "POST",
+   "s": 200,
+   "u": "https://www.momuto.com/homeapi/cart/clean",
+   "post": "",
+   "body": "{\"code\":404,\"msg\":\"接口未定义\",\"data\":null,\"trace_id\":\"AA8ADC88-BEAA-0292-FEBB-04AD337ADADD\"}"
+  },
+  {
+   "t": 1793006927842,
+   "m": "POST",
+   "s": 200,
+   "u": "https://www.momuto.com/homeapi/cart/clean",
+   "post": "",
+   "body": "{\"code\":404,\"msg\":\"接口未定义\",\"data\":null,\"trace_id\":\"81D64FB9-52B9-5C03-6958-600E49CD81F8\"}"
+  },
+  {
+   "t": 1793006927842,
+   "m": "POST",
+   "s": 200,
+   "u": "https://www.momuto.com/homeapi/cart/clean",
+   "post": "",
+   "body": "{\"code\":404,\"msg\":\"接口未定义\",\"data\":null,\"trace_id\":\"0B0F90B3-898F-9A84-3E13-A829A6EE42FD\"}"
+  },
+  {
+   "t": 1793006927842,
+   "m": "POST",
+   "s": 200,
+   "u": "https://www.momuto.com/homeapi/cart/clean",
+   "post": "",
+   "body": "{\"code\":404,\"msg\":\"接口未定义\",\"data\":null,\"trace_id\":\"58FDF7AF-5B07-D8D9-9F05-1C22631E1E9D\"}"
+  },
+  {
+   "t": 1793006927842,
+   "m": "POST",
+   "s": 200,
+   "u": "https://www.momuto.com/homeapi/cart/clean",
+   "post": "",
+   "body": "{\"code\":404,\"msg\":\"接口未定义\",\"data\":null,\"trace_id\":\"94EB672E-27E8-EDF2-83BE-B1AC7CF7EB70\"}"
+  },
+  {
+   "nav": "https://www.momuto.com/cart"
+  },
+  {
+   "t": 1793006927937,
+   "m": "POST",
+   "s": 200,
+   "u": "https://www.momuto.com/homeapi/cart/clean",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006928001,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/cart",
+   "post": "",
+   "body": "<!DOCTYPE html>\n<html lang=\"en-US\" dir=\"ltr\">\n\n\n  <head>\n    <script>(()=>{const n=()=>{};(()=>{(()=>n())()})()})();</script><meta charset=\"utf-8\">\n<meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">\n<meta content=\"yes\" name=\"mobile-web-app-capable\">\n<meta content=\"IE=edge,chrome=1\" http-equiv=\"X-UA-Compatible\">\n<meta content=\"always\" name=\"referrer\">\n<meta content=\"en-US\" http-equiv=\"content-language\">\n<link rel=\"prefetch\" href=\"/skins/system/order_runtime.js?v=f8c9d1e481b84fcf27c27e439f13fcda102612\">\n\n  \n    \n      <link rel=\"Shortcut Icon\" href=\"https://cdn.staticsoe.com/"
+  },
+  {
+   "t": 1793006928001,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/skins/sport/sport_app.js?v=0361beafe7e578bcae0e8e91a1bb7fc7102612",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006928001,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/skins/default/public.js?v=730db5f312914260a69768a181f6fd5d102612",
+   "post": "",
+   "body": ""
+  },
+  {
+   "console": "log: [Theme] Common module loaded. Most features have been moved to separate modules."
+  },
+  {
+   "console": "log: -1 checkouts"
+  },
+  {
+   "t": 1793006928073,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/skins/system/order_runtime.js?v=f8c9d1e481b84fcf27c27e439f13fcda102612",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006928074,
+   "m": "GET",
+   "s": 200,
+   "u": "https://static.ads-twitter.com/uwt.js",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006928102,
+   "m": "GET",
+   "s": 200,
+   "u": "https://design.momuto.com/uuid?timestamp=1793006928&ranstr=1829154273",
+   "post": "",
+   "body": "{\"code\":200,\"uuid\":\"766adf1d500e77e113\"}"
+  },
+  {
+   "t": 1793006928102,
+   "m": "POST",
+   "s": 200,
+   "u": "https://www.momuto.com/homeapi/collect?store_id=47711",
+   "post": "{\"hit_type_name\":\"cart_list\",\"hit_type_label\":\"\",\"hit_type\":\"page_view\",\"theme_dir\":\"sport\",\"pv_id\":\"2A1AE428-0D7C-E3D1-09AA-E1A04B056863\",\"oemsaas_global_visit_id\":\"A398584E-1192-E741-7DF9-59AC93072C78\",\"landing_page\":\"aHR0cHM6Ly93d3cubW9tdXRvLmNvbS9jaGVja1N1bWJpdC5odG1sP2RhdGE9eyUyMmdvb2RzJTIyOnslMjJtYW11dG8zJTIyOjEwLCUyMm9lbSUyMjpbXSwlMjJzb3VyY2UlMjI6JTIyM2QlMjIsJTIyb3JkZXJfbm8lMjI6JTIyNHdiejJ2",
+   "body": "//1793006927"
+  },
+  {
+   "t": 1793006928104,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/app-assets/faqtool/47711/index.js?var=1768275072",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006928111,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/app-assets/virtualtrack/47711/index.js?var=1768275940",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006928112,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/app-assets/formtool/47711/index.js?var=1768275615",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006928153,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/app-assets/trusttool/47711/index.js?var=1772785273",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006928195,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/app-api/formtool/47711/front/plan?current_router=cart/list",
+   "post": "",
+   "body": "{\"code\":0,\"msg\":\"success\",\"data\":{\"direct_show_plan\":null,\"popup_show_plan\":null,\"setting\":{\"detail_location\":0,\"pop_button\":0,\"tab_name\":\"\",\"icon\":\"app_formtool-icon icon-biaodan5\",\"color\":{\"icon_color\":\"#000000\"},\"page_id\":\"249371\"}},\"trace_id\":\"7979B86E-288D-04C3-2922-6E2A09F47985\"}"
+  },
+  {
+   "t": 1793006928223,
+   "m": "GET",
+   "s": 200,
+   "u": "https://www.momuto.com/app-api/trusttool/47711/config?route=cart/list",
+   "post": "",
+   "body": "{\"code\":0,\"msg\":\"success\",\"data\":null,\"trace_id\":\"7742772D-FD57-77B3-D414-AAC08CD1D467\"}"
+  },
+  {
+   "t": 1793006928430,
+   "m": "GET",
+   "s": 200,
+   "u": "https://js-eu1.hs-scripts.com/142863575.js",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006928434,
+   "m": "GET",
+   "s": 200,
+   "u": "https://js-eu1.hs-banner.com/v2/142863575/banner.js",
+   "post": "",
+   "body": "var _hsp = window['_hsp'] = window['_hsp'] || [];\n_hsp.push(['setBannerSettings', {}]);\n_hsp.push(['setCustomizationSettings', {}]);\n_hsp.push(['addCookieDomain', '.hubspotpagebuilder.eu']);\n_hsp.push(['addCookieDomain', '.hs-sites-eu1.com']);\n_hsp.push(['addCookieDomain', '.hubspot.com']);\n_hsp.push(['addCookieDomain', '.hsforms.com']);\n_hsp.push(['addCookieDomain', '.momuto.com']);\n_hsp.push(['addCookieDomain', '.momuto.es']);\n_hsp.push(['addCookieDomain', '.momuto.fr']);\n_hsp.push(['setApiBaseUrl', 'https://js-eu1.hs-banner.com/v2']);\n/**\n * HubSpot Cookie Banner Code Copyright 2026 HubSpot"
+  },
+  {
+   "t": 1793006928786,
+   "m": "GET",
+   "s": 200,
+   "u": "https://js-eu1.hscollectedforms.net/collectedforms.js",
+   "post": "",
+   "body": ""
+  },
+  {
+   "t": 1793006929096,
+   "m": "GET",
+   "s": 200,
+   "u": "https://forms-eu1.hscollectedforms.net/collected-forms/v1/config/json?portalId=142863575&utk=eb139a89c1c430ee8c85e6d08aa4be7f",
+   "post": "",
+   "body": "{\"portalId\":142863575,\"submissionsApiDomain\":\"forms.hubspot.com\",\"reportScraperTest\":false,\"formCaptureEnabled\":true,\"token\":995903941}"
+  },
+  {
+   "t": 1793006929166,
+   "m": "POST",
+   "s": 200,
+   "u": "https://www.momuto.com/homeapi/collect?store_id=47711",
+   "post": "{\"hit_type_name\":\"timing\",\"hit_type_action\":\"cart_list\",\"hit_type_category\":\"cart_list\",\"hit_type_label\":\"\",\"hit_type_id\":\"\",\"redirect_time\":0,\"dns_lookup_time\":0,\"tcp_time\":0,\"dom_parse_time\":119,\"dom_content_load_time\":25,\"dom_proccessing_time\":975,\"dom_resource_time\":856,\"app_cache_time\":0,\"response_time\":15,\"request_time\":73,\"load_event_time\":4,\"execution_time\":51.733017,\"ttfb_time\":75,\"ttsr_t",
+   "body": "//1793006929"
+  }
+ ],
+ "tracing": true,
+ "tool": {
+  "url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en",
+  "title": "MOMUTO 3D Kit Designer — Design Your Custom Football Jersey",
+  "textLen": 184,
+  "text": "Jersey DESIGN COLOR PATTERN LOGO NAME & NO. From €21.90 per jersey at 10+ Price calculator → Save | Share ADD TO CART Your club's colours. Your design. On the pitch in 25 days. NEXT",
+  "buttons": [
+   "DESIGN",
+   "COLOR",
+   "PATTERN",
+   "LOGO",
+   "NAME & NO.",
+   "Price calculator →",
+   "Save",
+   "Share",
+   "ADD TO CART"
+  ],
+  "canvas": [
+   "816x788"
+  ]
+ },
+ "intro": 2,
+ "addText": "ADD TO CART",
+ "prompt": "names-and-numbers prompt shown",
+ "afterAdd": [
+  "go to cart"
+ ],
+ "cart": {
+  "url": "https://design.momuto.com/cart",
+  "title": "Shopping cart",
+  "textLen": 1050,
+  "text": "FREE SHIPPING OVER +50€ HELP CENTER ABOUT US BUILD YOUR TEAM KIT Your design's ready. Now set each player's size, name, and number. 8158 MOMUTO Pro Jersey - Crafted with a polyester-elastane blend and sublimation-printed logos for ultimate flexibility, performance, and durability. €21.90 / JERSEY Add 10 more — €18.90 each FIND YOUR SIZE SIZE SLEEVES NAME NUMBER QUANTITY - XS S M L XL 2XL 3XL 98/104 · 3–4 yrs 110/116 · 5–6 yrs 128 · 7–8 yrs 140 · 9–10 yrs 152 · 11–12 yrs 164 · 13–14 yrs Short Long +€3.00 Add another teammate Fast lane +€59.00 per order Priority production and priority shipping.",
+  "buttons": [
+   "ABOUT US",
+   "ADD ANOTHER PRODUCT",
+   "CHECKOUT",
+   "Contact Us",
+   "FAQ",
+   "Size Guide",
+   "Printing & Materials",
+   "Shipping Policy",
+   "Returns & Exchanges",
+   "Terms & Conditions",
+   "Privacy Policy",
+   "Special Discounts",
+   "Idea Submission",
+   "Questions? Chat with us"
+  ],
+  "canvas": []
+ },
+ "checkoutText": "",
+ "landing": {
+  "url": "https://www.momuto.com/cart",
+  "title": "Shopping Cart - MOMUTO",
+  "textLen": 477,
+  "text": "FREE SHIPPING OVER +50€ CUSTOM KITS ICONIC SERIES THE BRAND SUPPORT CUSTOM KITS ICONIC SERIES THE BRAND SUPPORT Shopping Cart Your Shopping Cart is Empty Continue Shopping BACK HELP Contact Us FAQ Size Guide MOMUTO vs The Rest SHOP Order Status Shipping policy Returns & Exchanges Terms & Conditions Privacy Policy FOR YOU Special Discounts Idea Submission Define your football identity. Customize, play, be seen. SUBSCRIBE © 2026 MOMUTO Group Limited. All rights reserved.",
+  "buttons": [
+   "FREE SHIPPING OVER +50€",
+   "CUSTOM KITS",
+   "ICONIC SERIES",
+   "THE BRAND",
+   "SUPPORT",
+   "CUSTOM KITS",
+   "ICONIC SERIES",
+   "THE BRAND",
+   "SUPPORT",
+   "Continue Shopping",
+   "BACK",
+   "HELP",
+   "Contact Us",
+   "FAQ",
+   "Size Guide",
+   "MOMUTO vs The Rest",
+   "SHOP",
+   "Order Status",
+   "Shipping policy",
+   "Returns & Exchanges",
+   "Terms & Conditions",
+   "Privacy Policy",
+   "FOR YOU",
+   "Special Discounts",
+   "Idea Submission"
+  ],
+  "canvas": []
+ }
+}
