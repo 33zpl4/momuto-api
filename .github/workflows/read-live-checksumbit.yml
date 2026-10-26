@@ -1,0 +1,21 @@
+name: Read live checkSumbit pages (read-only)
+
+# Downloads each store's live /checkSumbit.html and prints which hand-off code version is really live. TEMP push trigger on the scratch branch only.
+
+on:
+  push:
+    branches: ['claude/trace-checkout-handoff']
+    paths: ['scripts/read-live-checksumbit.js']
+  workflow_dispatch:
+
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: node scripts/read-live-checksumbit.js
