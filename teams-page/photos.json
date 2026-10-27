@@ -1,5 +1,18 @@
 [
  {
+  "team": "Far3 | Football Club",
+  "image": "https://cdn.staticsoe.com/pics/7c0bf37c31817ec78838d5586d8d1d2ba6e8efa6147e497b89c67916a45fc579.webp",
+  "country": "IT",
+  "region": "",
+  "place": {
+   "en": "Bologna",
+   "es": "Bologna",
+   "fr": "Bologna",
+   "it": "Bologna"
+  },
+  "league": "Calcio CSI"
+ },
+ {
   "team": "STAPS de Metz",
   "image": "https://cdn.staticsoe.com/pics/728feeea4a4df6468d54225a54169686ea889acfd5ca56686c73787d9954f456.webp",
   "country": "FR",
