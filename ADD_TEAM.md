@@ -50,6 +50,14 @@ gallery; say so in the report. An existing team's folder is found with
 1. `cd` into the repo, `git fetch origin`, `git checkout <branch>`,
    `git merge --no-edit origin/main` (keeps the branch current; the CMS bot
    pushes to main often). Do not rebase or force-push.
+   **Order matters:** do this merge FIRST. Then create and commit the config as the
+   LAST commit before you push, so the pushed tip IS your config commit. The push
+   deploy (`create-team-page.yml`) only diffs `HEAD~1..HEAD` for `teams/*/config.json`
+   and reads the tip commit's message for `add-to-gallery`; if a merge commit sits on
+   top of your config commit it sees neither and silently deploys nothing (this
+   happened with ROYAL MONCEAU, 27 Oct 2026). If your push is rejected as
+   non-fast-forward, never force: `git fetch origin`, then put your single config
+   commit on top of the remote tip (merge `origin/main` BEFORE committing), and push.
 2. **ADD:** create `teams/<slug>/config.json` (slug rules §2, fields §3).
    **UPDATE:** edit only `image_url` / `back_image_url` in the existing
    config and set `"updated_at": "YYYY-MM-DD"` (today). Leave every other field.
@@ -428,6 +436,7 @@ Verification notes learned the hard way:
 | `401 Token-Error` on one store only (manual workflow) | That workflow's `env:` is missing the store's `OEMSAAS_TOKEN_*` (US was fixed 24 Sep 2026) | Report; the orchestrator adds the secret line to the workflow. |
 | `❌ Error processing <store>: fetch failed` on ONE store, others ✓ (seen on it.momuto.com, 30 Sep 2026, ~10 s timeout) | Transient network timeout to that store's CMS | Other stores are live. Redeploy yourself: dispatch `deploy-team-manual.yml` (§0.3 "Re-deploying") with the same slug and gallery flag. Safe — existing pages log `✓ Updated`, the missing one `✓ Created`. Report it as recovered. |
 | A store's gallery is MISSING many teams the log said were added (US lost 29 on 1 Oct 2026) | Something overwrote the live gallery with an older copy — it was `Deploy CMS Page` pushing a stale `cms/pages/us/custom-kit-gallery.json` snapshot. Galleries are pipeline-owned; the pipeline only ever adds the team it is deploying | Do NOT redeploy teams one by one. Run the repair (below). Never edit or deploy `cms/pages/*/custom-kit-gallery.json`; `deploy-cms-page.js` now refuses gallery handles. |
+| Push run is green but took only seconds, the log says `No team config changed — skipping deploy` (or has no `✓ Created`/`✓ Updated` lines) | A merge commit (or any non-config commit) was the pushed tip, so the push deploy saw no `teams/*/config.json` in `HEAD~1..HEAD` and no `add-to-gallery` in the tip message | Nothing was deployed. Recover by dispatching `deploy-team-manual.yml` (§0.3 "Re-deploying") with the slug and `update_gallery: "true"` if the gallery was requested, then check THAT run's log. Next time merge main before committing the config. |
 | One store's gallery step gets HTML instead of JSON | Transient API-management page from the CMS | Pages are live; only that store's card is missing. Push a redeploy commit with `add-to-gallery`. |
 
 ### Repairing the US gallery (cards missing vs EN)
