@@ -1,5 +1,18 @@
 [
  {
+  "team": "Deportivo JCPE",
+  "image": "https://cdn.staticsoe.com/pics/b6a9bcf4d25ab57dacf36411970e4468fefa3ef0a8862a4089fd486f6d691fba.jpg",
+  "country": "ES",
+  "region": "madrid",
+  "place": {
+   "en": "San Sebastián de los Reyes",
+   "es": "San Sebastián de los Reyes",
+   "fr": "San Sebastián de los Reyes",
+   "it": "San Sebastián de los Reyes"
+  },
+  "league": "3ª"
+ },
+ {
   "team": "CD Grisén",
   "image": "https://cdn.staticsoe.com/pics/c3e2f9f733f431e77df69d7bf5d5d119d8b47405983f264aa047e1f8bf3abdcb.png",
   "country": "ES",
