@@ -42,7 +42,7 @@ same email"; guest checkout does NOT create a login, the buyer registers with th
 
 ## Not verified
 Live send (needs merge + dry-run read + `SHIP_LIVE`), how the list row signals "shipped" (the pre-filter uses `delivery_at` / `fulfillment_status 320`; the dry run log shows
-whether orders are being found), partial shipments (only the first fulfillment is emailed), email-client rendering (previews are Chromium only), courier ids other than USPS.
+whether orders are being found), partial shipments (only the first fulfillment is emailed), email-client rendering (previews are Chromium only), courier ids other than USPS and CTT Express (id 3659, code 100114; the ES store's carrier since 27 Oct 2026, added to `lib/carriers.js` with the owner-given tracking page `https://cttexpress.com/localizador-de-envios/` — a number pre-filled link is not used until it is checked on a real shipment).
 
 ## One delivery estimate everywhere (22 Oct 2026)
 A buyer asked "¿cuál es la buena?": the confirmation email and the My order page said 23–28 Oct (payment + 25–30 d), the shipped email said
