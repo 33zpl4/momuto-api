@@ -19,7 +19,7 @@ carries our local ref, same join as the paid poller).
 3. The manual route (`api/order-tracking.js`, admin) still works and sends the same email; the poller then sees `tracking` already sent and skips.
 
 ## The email
-Dark brand layout. Carrier, tracking number, estimated delivery (ship date + 10–15 d, rule 6), red button to the carrier's page (only when we have a trustworthy
+Dark brand layout. Carrier, tracking number, estimated delivery (payment date + 25–30 d, fast lane 18–23; see "One delivery estimate everywhere"), red button to the carrier's page (only when we have a trustworthy
 https link), then **My order** (token page, no login) and a line pointing to the store account (`/account/orders/<no>`, "sign in or create an account with the
 same email"; guest checkout does NOT create a login, the buyer registers with the order's email and the order appears). Previews: `docs/email-previews/*.html`
 (regenerate: `node scripts/test-shipped-email.js --write-previews`).
@@ -42,14 +42,16 @@ same email"; guest checkout does NOT create a login, the buyer registers with th
 
 ## Not verified
 Live send (needs merge + dry-run read + `SHIP_LIVE`), how the list row signals "shipped" (the pre-filter uses `delivery_at` / `fulfillment_status 320`; the dry run log shows
-whether orders are being found), partial shipments (only the first fulfillment is emailed), email-client rendering (previews are Chromium only), courier ids other than USPS.
+whether orders are being found), partial shipments (only the first fulfillment is emailed), email-client rendering (previews are Chromium only), courier ids other than USPS and CTT Express (id 3659, code 100114; the ES store's carrier since 27 Oct 2026, added to `lib/carriers.js` with the owner-given tracking page `https://cttexpress.com/localizador-de-envios/` — a number pre-filled link is not used until it is checked on a real shipment).
 
-## One delivery estimate everywhere (22 Oct 2026)
+## One delivery estimate everywhere — counted from the PAYMENT date (22 Oct 2026, reversed in part 27 Oct 2026)
 A buyer asked "¿cuál es la buena?": the confirmation email and the My order page said 23–28 Oct (payment + 25–30 d), the shipped email said
-31 Oct – 5 Nov (ship date + 10–15 d). The order had shipped late (paid 28 Sep, shipped 21 Oct), the page never switched after shipping, and
-nothing told the buyer the new date replaced the old one. Fix: `lib/delivery.js` (`deliveryEstimate`) is the only derivation, used by every
-email (`lib/emails.js` `orderWindow`, `emailTracking`) and by the page (`lib/order-view.js` `deliveryWindowISO`): payment + 25–30 d (fast lane
-18–23) until the order has a ship date, ship date + 10–15 d after. The shipped email and the page also show the first quote ("This replaces the
-estimate in your confirmation email (…)" / "Updated from the day it shipped. First estimate: …"). The page copy is generated (`scripts/build-order-view-pages.js`,
-Deploy CMS Page on merge). Open: a fast-lane order keeps 10–15 d after shipping (no owner figure for priority shipping alone).
+31 Oct – 5 Nov (ship date + 10–15 d). Fix of 22 Oct: `lib/delivery.js` (`deliveryEstimate`) became the only derivation, used by every email
+(`lib/emails.js` `orderWindow`, `emailTracking`) and by the page (`lib/order-view.js` `deliveryWindowISO`), and it switched to ship date + 10–15 d after shipping.
+**Owner ruling 27 Oct 2026: that switch is gone.** Shipments are often made on the usual dates and only recorded in the CMS a couple of days later, so a
+window counted from the ship record promised a later arrival than the real one. Now the estimate is ALWAYS payment + 25–30 d (fast lane 18–23), before and after
+shipping, in the confirmation emails, the shipped email and the page. The shipped email no longer says "this replaces…" and the page no longer shows the
+"updated from the day it shipped" line (the page script keeps the dead branch until the next regeneration of the page copy; the API never sends `basis:'shipped'`).
+Store orders with no local record: the poller sends the platform order's `created_at`/`pay_at` as `paid_at`, `admin-orders` `ship` uses it; with no payment date at
+all the shipped email shows no estimate row (never a guess). Known consequence: for an order paid long ago the window can already be in the past when it ships.
 Rule: **never compute a delivery date inline; call `deliveryEstimate`.** Tests: `node scripts/test-order-view.js` (delivery + consistency cases).

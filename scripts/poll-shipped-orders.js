@@ -91,6 +91,8 @@ async function main() {
           email: o.customer_email, name: (o.customer_name || '').trim() ? String(o.customer_name).replace(/\b\w/g, c => c.toUpperCase()).split(' ')[0] : 'Coach',
           lang: l, currency: o.currency_code, tracking_number: String(f.tracking_number).trim(), tracking_url: trackingUrl, carrier,
           shipped_at: new Date(ms(f.created_at)).toISOString(),
+          // the delivery window is counted from the payment date (owner 27 Oct 2026), also for store orders with no local record
+          ...(created ? { paid_at: new Date(created).toISOString() } : {}),
         };
         if (!payload.email) { report.errors.push(`${l}:${no}: shipped but no customer email`); continue; }
         const r = await ship(payload);

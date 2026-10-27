@@ -13,6 +13,12 @@ const d = describeFulfillment(f);
 ok(d.carrier === 'USPS' && d.trackingUrl === 'https://tools.usps.com/go/TrackConfirmAction?tLabels=AB123456789US', 'USPS fulfillment -> name + deep link');
 const u = describeFulfillment({ tracking_number: 'X1', courier_id: 999, tracking_company: 'Colis Prive', note: 'https://www.colisprive.fr/' });
 ok(u.carrier === 'Colis Prive' && u.trackingUrl === 'https://www.colisprive.fr/', 'unknown courier -> platform name + https note');
+const ctt = describeFulfillment({ tracking_number: '01234567890123', courier_id: 3659, courier_code: '100114', note: 'https://www.cttexpress.com/' });
+ok(ctt.carrier === 'CTT Express' && ctt.trackingUrl === 'https://cttexpress.com/localizador-de-envios/', 'CTT Express by courier id 3659 -> name + tracking page');
+const ctt2 = describeFulfillment({ tracking_number: '01234567890123', courier_id: 12345, tracking_company: 'CTT Express' });
+ok(ctt2.carrier === 'CTT Express' && ctt2.trackingUrl === 'https://cttexpress.com/localizador-de-envios/', 'CTT Express by name when the courier id is not the known one');
+const ctty = describeFulfillment({ tracking_number: 'X1', courier_id: 5317, tracking_company: 'CTTYEX', note: 'https://www.cttyvip888.com/' });
+ok(ctty.carrier === 'CTTYEX' && ctty.trackingUrl === 'https://www.cttyvip888.com/', 'CTTYEX (a different carrier) is not mistaken for CTT Express');
 ok(describeFulfillment({ tracking_number: 'X1', courier_id: 999, note: 'http://insecure.example/' }).trackingUrl === null, 'unknown courier + http note -> no link (never a guess)');
 
 const base = { name: 'Alberto', team: 'Los Halcones <FC>', email: 'a@b.com', ref: 'abc123xyz9', id: '3d_abc123xyz9', plantOrderNo: '231549-2026026', currency: 'EUR',
@@ -42,4 +48,13 @@ if (process.argv.includes('--write-previews')) {
   for (const [k, h] of Object.entries(out)) fs.writeFileSync(path.join(dir, k + '.html'), `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><body style="margin:0;padding:24px 8px;background:#e4e4e7">${h}</body>`);
   console.log('previews written to docs/email-previews/');
 }
+// 27 Oct 2026: the delivery window is counted from the PAYMENT date. A store order with no local record gets it from the platform's payment date
+// (poller -> admin-orders ship); with no payment date at all the email shows no estimate row (and must not throw).
+{
+  const withPaid = emailTracking({ name: 'Sam', email: 's@x.com', lang: 'en', plantOrderNo: '231549-77', trackingNumber: 'ZZ99', trackingUrl: 'https://x.example/t', carrier: 'DHL', shippedAt: '2026-10-21T08:00:00Z', paidAt: '2026-09-28T09:00:00Z' });
+  ok(/Estimated delivery/i.test(withPaid.html) && /23/.test(withPaid.html) && /28/.test(withPaid.html), 'store order with a payment date: estimate counted from payment (23-28 Oct), not from the ship date');
+  let noPaid; let threw = false; try { noPaid = emailTracking({ name: 'Sam', email: 's@x.com', lang: 'en', plantOrderNo: '231549-77', trackingNumber: 'ZZ99', carrier: 'DHL', shippedAt: '2026-10-21T08:00:00Z' }); } catch (e) { threw = true; }
+  ok(!threw && !/Estimated delivery/i.test(noPaid.html) && /ZZ99/.test(noPaid.html), 'no payment date: no estimate row, tracking number still shown, no crash');
+}
+
 console.log(`\n${pass} passed, ${fail} failed`); process.exit(fail ? 1 : 0);

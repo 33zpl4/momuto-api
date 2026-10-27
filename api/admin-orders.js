@@ -458,6 +458,8 @@ module.exports = async function handler(req, res) {
     const base = existing || {
       id: null, ref: null, name: String(body.name || '').trim() || 'Coach', team: null, email,
       currency: rawLang === 'us' ? 'USD' : (body.currency || 'EUR'),
+      // store order without a local record: the platform's payment date (the delivery window counts from it)
+      paidAt: body.paid_at && !isNaN(Date.parse(body.paid_at)) ? new Date(body.paid_at).toISOString() : null,
     };
     const mail = {
       ...base, email, lang: ['en', 'es', 'fr', 'it'].includes(rawLang) ? rawLang : 'en',
