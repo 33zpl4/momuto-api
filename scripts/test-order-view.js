@@ -162,34 +162,37 @@ const call = async (body, headers = {}) => { let out = { code: 0, body: null, he
     assert.deepStrictEqual(K.rosterUnits([{ suit: 'mamuto3', players: [{ qty: 3 }, { qty: 2 }] }, { suit: 'mamuto3shorts1', players: [{ qty: 4 }] }, { suit: 'mamuto2socks1', players: [{}] }]),
       { jerseys: 5, shorts: 4, socks: 1 });
   });
-  await t('delivery: one derivation — paid+25-30 before shipping, ship date+10-15 after, `first` kept (22 Oct 2026: 23-28 Oct vs 31 Oct-5 Nov)', () => {
+  await t('delivery: always payment + 25-30 d (fast lane 18-23); shipping, even recorded days late, never moves it (owner 27 Oct 2026)', () => {
     const D = require('../lib/delivery');
     const late = { paidAt: '2026-09-28T09:00:00Z', lang: 'es' };
     const a = D.deliveryEstimate(late);
     assert.deepStrictEqual([a.basis, D.isoDay(a.from), D.isoDay(a.to), a.changed], ['paid', '2026-10-23', '2026-10-28', false]);
+    // shipped on 21 Oct (recorded late): the window is still 23-28 Oct, on every path that can pass a ship date
     const b = D.deliveryEstimate({ ...late, shippedAt: '2026-10-21T08:00:00Z' });
-    assert.deepStrictEqual([b.basis, D.isoDay(b.from), D.isoDay(b.to), b.changed], ['shipped', '2026-10-31', '2026-11-05', true]);
-    assert.deepStrictEqual([D.isoDay(b.first.from), D.isoDay(b.first.to)], ['2026-10-23', '2026-10-28']);
-    // the page reads the same estimate and says what it replaced
+    assert.deepStrictEqual([b.basis, D.isoDay(b.from), D.isoDay(b.to), b.changed], ['paid', '2026-10-23', '2026-10-28', false]);
+    const c = D.deliveryEstimate(late, { shippedAt: '2026-10-26T08:00:00Z' });
+    assert.deepStrictEqual([D.isoDay(c.from), D.isoDay(c.to)], ['2026-10-23', '2026-10-28']);
+    // the page reads the same estimate and never says "updated"
     const w = V.deliveryWindowISO({ ...late, shippedAt: '2026-10-21T08:00:00Z' });
-    assert.deepStrictEqual([w.from, w.to, w.basis, w.first.from, w.first.to], ['2026-10-31', '2026-11-05', 'shipped', '2026-10-23', '2026-10-28']);
+    assert.deepStrictEqual([w.from, w.to, w.basis, w.first], ['2026-10-23', '2026-10-28', 'paid', undefined]);
     assert.strictEqual(V.deliveryWindowISO(late).basis, 'paid');
-    assert.strictEqual(V.deliveryWindowISO(late).first, undefined);
     assert.strictEqual(D.deliveryEstimate({}), null);
-    // fast lane: first quote 18-23
-    const f = D.deliveryEstimate({ paidAt: '2026-09-28T09:00:00Z', fastLane: true });
+    // fast lane: 18-23, before and after shipping
+    const f = D.deliveryEstimate({ paidAt: '2026-09-28T09:00:00Z', fastLane: true, shippedAt: '2026-10-05T08:00:00Z' });
     assert.deepStrictEqual([D.isoDay(f.from), D.isoDay(f.to)], ['2026-10-16', '2026-10-21']);
   });
-  await t('emails: confirmation and shipped email quote consistent windows; shipped email says it replaces the first one', () => {
+  await t('emails: confirmation, shipped email and the page all quote the SAME window, counted from payment', () => {
     const o = { ...base, paidAt: '2026-09-28T09:00:00Z', lang: 'es', shippedAt: '2026-10-21T08:00:00Z', trackingNumber: 'TN1', carrier: 'DHL', trackingUrl: 'https://dhl.example/t/TN1' };
     const conf = emailConfirmation3D({ ...o, shippedAt: undefined, trackingNumber: undefined });
     assert(conf.html.includes('23–28 de octubre'), 'confirmation: 23-28 oct');
     const ship = emailTracking(o);
-    assert(ship.html.includes('31 de octubre – 5 de noviembre'), 'shipped: 31 oct - 5 nov');
-    assert(ship.html.includes('sustituye') && ship.html.includes('23–28 de octubre'), 'shipped email names the estimate it replaces');
-    const same = emailTracking({ ...o, paidAt: '2026-10-10T09:00:00Z' });   // shipped on day 11: 31 Oct-5 Nov vs 4-9 Nov -> still differs, still says so
-    assert(same.html.includes('sustituye'));
-    const en = emailTracking({ ...o, lang: 'en' }); assert(/replaces the estimate in your confirmation email/.test(en.html));
+    assert(ship.html.includes('23–28 de octubre'), 'shipped email: the same 23-28 oct');
+    assert(!ship.html.includes('31 de octubre') && !ship.html.includes('sustituye'), 'shipped email: no ship-date window, no "replaces" note');
+    const en = emailTracking({ ...o, lang: 'en' });
+    assert(!/replaces the estimate/.test(en.html) && /October 23\s*[–-]\s*28|23\s*[–-]\s*28 October|Oct(ober)? 23/.test(en.html), 'EN shipped email: payment-based window, no "replaces"');
+    // shipped with no ship date recorded yet (the poller passes "now"): still payment-based
+    const now = emailTracking({ ...o, shippedAt: undefined });
+    assert(now.html.includes('23–28 de octubre'));
   });
   await t('deploy: api/ stays at 12 functions; /api/order-view rewrites onto lead.js', () => {
     const fs = require('fs');
