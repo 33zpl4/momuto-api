@@ -1,0 +1,32 @@
+name: Probe the customer share link variants (read-only)
+
+# Opens the customer's real share link and variants in fresh browsers and screenshots each. Pushes screenshots to the throwaway branch probe-share-link-shots.
+# TEMP push trigger on the scratch branch only.
+
+on:
+  push:
+    branches: ['claude/trace-checkout-handoff']
+    paths: ['scripts/probe-share-link.js']
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: node scripts/probe-share-link.js
+      - name: Publish screenshots
+        if: always()
+        run: |
+          mkdir -p /tmp/shots && cp probe-share-out/* /tmp/shots/ 2>/dev/null || true
+          cd /tmp/shots && ls * >/dev/null 2>&1 || { echo "no output"; exit 0; }
+          git init -q && git config user.name "probe" && git config user.email "probe@users.noreply.github.com"
+          git add . && git commit -q -m "share probe ${{ github.sha }}"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:refs/heads/probe-share-link-shots
