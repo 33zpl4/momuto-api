@@ -13,6 +13,12 @@ const d = describeFulfillment(f);
 ok(d.carrier === 'USPS' && d.trackingUrl === 'https://tools.usps.com/go/TrackConfirmAction?tLabels=AB123456789US', 'USPS fulfillment -> name + deep link');
 const u = describeFulfillment({ tracking_number: 'X1', courier_id: 999, tracking_company: 'Colis Prive', note: 'https://www.colisprive.fr/' });
 ok(u.carrier === 'Colis Prive' && u.trackingUrl === 'https://www.colisprive.fr/', 'unknown courier -> platform name + https note');
+const ctt = describeFulfillment({ tracking_number: '01234567890123', courier_id: 3659, courier_code: '100114', note: 'https://www.cttexpress.com/' });
+ok(ctt.carrier === 'CTT Express' && ctt.trackingUrl === 'https://cttexpress.com/localizador-de-envios/', 'CTT Express by courier id 3659 -> name + tracking page');
+const ctt2 = describeFulfillment({ tracking_number: '01234567890123', courier_id: 12345, tracking_company: 'CTT Express' });
+ok(ctt2.carrier === 'CTT Express' && ctt2.trackingUrl === 'https://cttexpress.com/localizador-de-envios/', 'CTT Express by name when the courier id is not the known one');
+const ctty = describeFulfillment({ tracking_number: 'X1', courier_id: 5317, tracking_company: 'CTTYEX', note: 'https://www.cttyvip888.com/' });
+ok(ctty.carrier === 'CTTYEX' && ctty.trackingUrl === 'https://www.cttyvip888.com/', 'CTTYEX (a different carrier) is not mistaken for CTT Express');
 ok(describeFulfillment({ tracking_number: 'X1', courier_id: 999, note: 'http://insecure.example/' }).trackingUrl === null, 'unknown courier + http note -> no link (never a guess)');
 
 const base = { name: 'Alberto', team: 'Los Halcones <FC>', email: 'a@b.com', ref: 'abc123xyz9', id: '3d_abc123xyz9', plantOrderNo: '231549-2026026', currency: 'EUR',
