@@ -20,8 +20,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
-      - run: node scripts/probe-share-link.js
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium webkit
+      - run: PROBE_ENGINE=chromium node scripts/probe-share-link.js
+      - run: PROBE_ENGINE=webkit node scripts/probe-share-link.js
       - name: Publish screenshots
         if: always()
         run: |

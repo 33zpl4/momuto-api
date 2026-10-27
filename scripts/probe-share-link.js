@@ -8,7 +8,9 @@
  *   D  no lang, leading "?&"
  */
 const fs = require('fs'); const path = require('path');
-const { chromium } = require('playwright');
+const pw = require('playwright');
+const ENGINE = process.env.PROBE_ENGINE || 'chromium';   // chromium | webkit (iPhone Safari engine)
+const { chromium, webkit, devices } = pw;
 const OUT = path.join(__dirname, '..', 'probe-share-out'); fs.mkdirSync(OUT, { recursive: true });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 setTimeout(() => { console.log('HARD TIMEOUT'); process.exit(2); }, 9 * 60 * 1000);
@@ -20,17 +22,19 @@ const VARIANTS = {
   C: `${BASE}?${Q}&lang=es`,
   D: `${BASE}?&${Q}`,
 };
-const ONLY = (process.env.PROBE_VARIANTS || 'A,B,C,D').split(',');
+const ONLY = (process.env.PROBE_VARIANTS || 'A').split(',');
 (async () => {
-  const browser = await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+  const browser = ENGINE === 'webkit' ? await webkit.launch() : await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   for (const k of ONLY) {
-    const ctx = await browser.newContext({ viewport: { width: 900, height: 900 }, locale: 'es-ES' }); const p = await ctx.newPage();
+    const dev = devices['iPhone 13']; const ctx = await browser.newContext({ ...dev, locale: 'es-ES' });   // the customer's phone: iPhone, iOS Safari-class engine const p = await ctx.newPage();
     const calls = [];
+    p.on('console', m => { if (/error|warn/.test(m.type())) console.log('  console.' + m.type() + ': ' + m.text().slice(0, 200)); });
+    p.on('pageerror', e => console.log('  pageerror: ' + String(e.message).slice(0, 200)));
     p.on('response', async r => { try { const u = r.url(); if (/\.(png|jpe?g|webp|svg|gif|woff2?|css|ico|glb|js|map|ttf)(\?|$)/i.test(u) || /google|facebook|hotjar|clarity/.test(u)) return; let b = ''; try { b = (await r.text()).slice(0, 200).replace(/\s+/g, ' '); } catch (e) {} calls.push(`${r.request().method()} ${r.status()} ${u.replace('https://design.momuto.com', '').slice(0, 140)} ${(r.request().postData() || '').slice(0, 120)} => ${b}`); } catch (e) {} });
     console.log(`\n===== ${k}: ${VARIANTS[k]}`);
     await p.goto(VARIANTS[k], { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(e => console.log('goto', e.message.slice(0, 80)));
-    await sleep(50000);
-    await p.screenshot({ path: path.join(OUT, `link-${k}.png`), timeout: 60000 }).catch(e => console.log('shot', k, e.message.slice(0, 60)));
+    await sleep(60000);
+    await p.screenshot({ path: path.join(OUT, `link-${ENGINE}-${k}.png`), timeout: 60000 }).catch(e => console.log('shot', k, e.message.slice(0, 60)));
     console.log(calls.filter(c => !/^GET 200 \/3d-configurator\/share\.html/.test(c)).slice(0, 14).join('\n'));
     await ctx.close().catch(() => {});
   }
