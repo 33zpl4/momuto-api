@@ -18,7 +18,7 @@
   "hero": {
     "label": "Returns & exchanges",
     "h1": "If Something Is <span class=\"acc\">Wrong</span>, We Fix It",
-    "sub": "Custom products are made to order, so they can't be returned or cancelled once production starts — unless the error is ours. If a piece arrives defective, damaged or different from the mockup you approved, we replace it or refund it, including the return shipping you paid."
+    "sub": "Custom products are made to order, so they can't be returned or cancelled once production starts (usually 2–3 days after we receive your order) — unless the error is ours. If a piece arrives defective, damaged or different from the mockup you approved, we replace it or refund it, including the return shipping you paid."
   },
   "quick": [
     [
@@ -107,15 +107,15 @@
   },
   "cancel": {
     "title": "Cancellations",
-    "lead": "You can cancel for a full refund at any point before production starts.",
+    "lead": "You can cancel for a full refund at any point before production starts — usually 2–3 days after we receive your order.",
     "items": [
       [
-        "Before you approve the mockup",
-        "<b>Full refund</b>, no questions. Reply to your order email or write to <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
+        "Before production starts",
+        "<b>Full refund</b>, no questions. Reply to your order email or write to <a href=\"mailto:info@momuto.com\">info@momuto.com</a> as soon as you can."
       ],
       [
-        "After mockup approval",
-        "Production starts on approval and the fabric is printed to your design within days, so the order <b>can no longer be cancelled</b> or changed."
+        "Once production has started",
+        "Every kit is made from scratch to your own design, names and numbers, so a 100% custom order <b>can no longer be cancelled</b>, changed or returned for a change of mind. Fast-lane orders go into production as soon as your files are ready, so their window is shorter."
       ],
       [
         "Design deposits",

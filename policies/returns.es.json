@@ -18,7 +18,7 @@
   "hero": {
     "label": "Cambios y devoluciones",
     "h1": "Si Algo Está <span class=\"acc\">Mal</span>, Lo Arreglamos",
-    "sub": "Los productos personalizados se fabrican bajo pedido, así que no se pueden devolver ni cancelar una vez iniciada la producción — salvo que el error sea nuestro. Si una prenda llega defectuosa, dañada o distinta de la maqueta que aprobaste, la reemplazamos o la reembolsamos, incluido el envío de devolución que hayas pagado."
+    "sub": "Los productos personalizados se fabrican bajo pedido, así que no se pueden devolver ni cancelar una vez iniciada la producción (normalmente 2–3 días después de recibir tu pedido) — salvo que el error sea nuestro. Si una prenda llega defectuosa, dañada o distinta de la maqueta que aprobaste, la reemplazamos o la reembolsamos, incluido el envío de devolución que hayas pagado."
   },
   "quick": [
     [
@@ -107,15 +107,15 @@
   },
   "cancel": {
     "title": "Cancelaciones",
-    "lead": "Puedes cancelar con reembolso total en cualquier momento antes de que empiece la producción.",
+    "lead": "Puedes cancelar con reembolso total en cualquier momento antes de que empiece la producción, normalmente 2–3 días después de recibir tu pedido.",
     "items": [
       [
-        "Antes de aprobar la maqueta",
-        "<b>Reembolso total</b>, sin preguntas. Responde al correo de tu pedido o escribe a <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
+        "Antes de que empiece la producción",
+        "<b>Reembolso total</b>, sin preguntas. Responde al correo de tu pedido o escribe a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> lo antes posible."
       ],
       [
-        "Después de aprobar la maqueta",
-        "La producción empieza con la aprobación y el tejido se imprime con tu diseño en pocos días, así que el pedido <b>ya no se puede cancelar</b> ni modificar."
+        "Una vez iniciada la producción",
+        "Cada equipación se fabrica desde cero con tu diseño, nombres y números, así que un pedido 100 % personalizado <b>ya no se puede cancelar</b>, modificar ni devolver por cambio de opinión. Los pedidos con vía rápida entran en producción en cuanto los archivos están listos, así que su plazo es más corto."
       ],
       [
         "Depósitos de diseño",
