@@ -18,7 +18,7 @@
   "hero": {
     "label": "Resi e cambi",
     "h1": "Se Qualcosa Non Va, <span class=\"acc\">Lo Sistemiamo</span>",
-    "sub": "I prodotti personalizzati sono fatti su ordinazione: non possono essere restituiti né annullati una volta avviata la produzione — a meno che l'errore sia nostro. Se un capo arriva difettoso, danneggiato o diverso dal mockup che hai approvato, lo sostituiamo o lo rimborsiamo, incluse le spese di reso che hai pagato."
+    "sub": "I prodotti personalizzati sono fatti su ordinazione: non possono essere restituiti né annullati una volta avviata la produzione (di solito 2–3 giorni dopo aver ricevuto il tuo ordine) — a meno che l'errore sia nostro. Se un capo arriva difettoso, danneggiato o diverso dal mockup che hai approvato, lo sostituiamo o lo rimborsiamo, incluse le spese di reso che hai pagato."
   },
   "quick": [
     [
@@ -107,15 +107,15 @@
   },
   "cancel": {
     "title": "Annullamenti",
-    "lead": "Puoi annullare con rimborso completo in qualsiasi momento prima che inizi la produzione.",
+    "lead": "Puoi annullare con rimborso completo in qualsiasi momento prima che inizi la produzione, di solito 2–3 giorni dopo aver ricevuto il tuo ordine.",
     "items": [
       [
-        "Prima di approvare il mockup",
-        "<b>Rimborso completo</b>, senza domande. Rispondi all'email dell'ordine o scrivi a <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
+        "Prima che inizi la produzione",
+        "<b>Rimborso completo</b>, senza domande. Rispondi all'email dell'ordine o scrivi a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> il prima possibile."
       ],
       [
-        "Dopo l'approvazione del mockup",
-        "La produzione parte con l'approvazione e il tessuto viene stampato con il tuo design in pochi giorni, quindi l'ordine <b>non può più essere annullato</b> né modificato."
+        "Una volta avviata la produzione",
+        "Ogni divisa viene realizzata da zero sul tuo design, con i tuoi nomi e numeri: un ordine 100 % personalizzato <b>non può più essere annullato</b>, modificato né restituito per ripensamento. Gli ordini con corsia veloce vanno in produzione appena i file sono pronti, quindi la loro finestra è più breve."
       ],
       [
         "Depositi di design",

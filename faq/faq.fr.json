@@ -132,7 +132,7 @@
         ],
         [
           "Puis-je encore modifier quelque chose après la commande ?",
-          "Oui, jusqu'à la validation de la maquette — couleurs, position de l'écusson, un nom mal orthographié, une taille. Après validation, la tenue part en production et les modifications ne sont plus possibles. Vous pouvez annuler avec remboursement intégral à tout moment avant le début de la production."
+          "Oui, jusqu'au début de la production, en général 2 à 3 jours après réception de votre commande : couleurs, position de l'écusson, un nom mal orthographié, une taille. Ensuite la tenue est en cours de fabrication et les modifications ne sont plus possibles. Vous pouvez annuler avec remboursement intégral à tout moment avant le début de la production."
         ],
         [
           "L'acompte de 15 € est-il remboursé ?",
@@ -270,7 +270,7 @@
         ],
         [
           "Puis-je annuler ?",
-          "Oui, avec remboursement intégral à tout moment <b>avant le début de la production</b> (c'est-à-dire avant la validation de la maquette). Une fois en production ou expédiée, la commande ne peut plus être annulée."
+          "Oui, avec remboursement intégral à tout moment <b>avant le début de la production</b>, en général 2 à 3 jours après réception de votre commande (les commandes en voie rapide partent en production dès que les fichiers sont prêts). Une fois la production lancée, la commande ne peut plus être annulée : chaque tenue est fabriquée selon votre design, vos noms et vos numéros."
         ],
         [
           "Puis-je commander un échantillon d'abord ?",
