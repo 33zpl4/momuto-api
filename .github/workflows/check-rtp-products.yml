@@ -4,6 +4,9 @@ name: Check RTP Products
 # Dispatch-only; writes nothing.
 
 on:
+  push:
+    branches: [claude/clever-mendel-fni5rb]   # TEMP: remove before merge
+    paths: ['.github/workflows/check-rtp-products.yml']
   workflow_dispatch:
     inputs:
       stores:
@@ -22,7 +25,7 @@ jobs:
           node-version: '20'
       - name: List RTP products per store
         env:
-          STORES: ${{ github.event.inputs.stores }}
+          STORES: ${{ github.event.inputs.stores || 'EN,IT' }}
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
