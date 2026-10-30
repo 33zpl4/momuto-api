@@ -1,0 +1,31 @@
+name: Check RTP Products
+
+# Read-only: lists which Ready to Play products exist on each store (scripts/check-rtp-products.js).
+# Dispatch-only; writes nothing.
+
+on:
+  workflow_dispatch:
+    inputs:
+      stores:
+        description: 'Comma-separated stores (EN,IT,ES,FR,US)'
+        required: false
+        default: 'EN,IT'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: List RTP products per store
+        env:
+          STORES: ${{ github.event.inputs.stores }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+        run: node scripts/check-rtp-products.js
