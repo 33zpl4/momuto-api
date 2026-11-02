@@ -1,0 +1,27 @@
+name: Check Promo Products (read-only)
+
+# Which fixed-price "Promo" products also match the quantity-discount campaign words (scripts/check-promo-products.js). Writes nothing.
+
+on:
+  push:
+    branches: [claude/clever-mendel-fni5rb]   # TEMP: remove before merge
+    paths: ['.github/workflows/check-promo-products.yml']
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: List Promo products per store
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+        run: node scripts/check-promo-products.js
