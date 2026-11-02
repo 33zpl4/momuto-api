@@ -18,7 +18,7 @@
   "hero": {
     "label": "Retours et échanges",
     "h1": "Si Quelque Chose Ne Va Pas, <span class=\"acc\">On Répare</span>",
-    "sub": "Les produits personnalisés sont fabriqués à la commande : ils ne peuvent être ni retournés ni annulés une fois la production lancée — sauf si l'erreur vient de nous. Si une pièce arrive défectueuse, abîmée ou différente de la maquette que vous avez validée, nous la remplaçons ou la remboursons, frais de retour compris."
+    "sub": "Les produits personnalisés sont fabriqués à la commande : ils ne peuvent être ni retournés ni annulés une fois la production lancée (en général 2 à 3 jours après réception de votre commande) — sauf si l'erreur vient de nous. Si une pièce arrive défectueuse, abîmée ou différente de la maquette que vous avez validée, nous la remplaçons ou la remboursons, frais de retour compris."
   },
   "quick": [
     [
@@ -107,15 +107,15 @@
   },
   "cancel": {
     "title": "Annulations",
-    "lead": "Vous pouvez annuler avec remboursement intégral à tout moment avant le début de la production.",
+    "lead": "Vous pouvez annuler avec remboursement intégral à tout moment avant le début de la production, en général 2 à 3 jours après réception de votre commande.",
     "items": [
       [
-        "Avant la validation de la maquette",
-        "<b>Remboursement intégral</b>, sans question. Répondez à l'e-mail de commande ou écrivez à <a href=\"mailto:info@momuto.com\">info@momuto.com</a>."
+        "Avant le début de la production",
+        "<b>Remboursement intégral</b>, sans question. Répondez à l'e-mail de commande ou écrivez à <a href=\"mailto:info@momuto.com\">info@momuto.com</a> dès que possible."
       ],
       [
-        "Après la validation de la maquette",
-        "La production démarre à la validation et le tissu est imprimé à votre design en quelques jours : la commande <b>ne peut plus être annulée</b> ni modifiée."
+        "Une fois la production lancée",
+        "Chaque tenue est fabriquée de A à Z selon votre design, vos noms et vos numéros : une commande 100 % sur mesure <b>ne peut plus être annulée</b>, modifiée ni retournée pour un changement d'avis. Les commandes en voie rapide partent en production dès que vos fichiers sont prêts, leur délai est donc plus court."
       ],
       [
         "Acomptes de design",
