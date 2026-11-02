@@ -105,7 +105,7 @@ async function processEntry(token, entry) {
   if (entry.price != null && back.variants.some(v => Number(v.price).toFixed(2) !== Number(entry.price).toFixed(2))) throw new Error(`${label}: read-back price ${back.variants.map(v => v.price).join('/')} — PUT not effective`);
   if (entry.title && back.title !== entry.title) throw new Error(`${label}: read-back title "${back.title}" — PUT not effective`);
   if (!Array.isArray(back.variants) || back.variants.length !== live.variants.length) throw new Error(`${label}: read-back variant count changed (${live.variants.length} → ${back.variants && back.variants.length})`);
-  console.log(`     collections after:  ${collsOf(back)}`);
+  console.log(`     collections after:  ${collsOf(back)}  (the platform re-evaluates collection rules ~1 min after an edit: confirm later with Check Promo Products)`);
   console.log(`  ✅ ${label}: verified — ${back.detail_url || ''}`);
   return 'ok';
 }
