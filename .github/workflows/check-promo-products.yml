@@ -25,3 +25,9 @@ jobs:
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
         run: node scripts/check-promo-products.js
+      - name: Orders with a Promo line, and any discount stacked on them
+        env:
+          STORES: EN,ES
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+        run: node scripts/promo-rebate-exposure.js
