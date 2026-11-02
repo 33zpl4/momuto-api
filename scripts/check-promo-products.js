@@ -6,6 +6,7 @@
  * campaigns match on (personalizad* / personalis* / personnalis* / custom, kit) - those get the rebate stacked on the fixed price.
  * Prints store, id, handle, title, price, status and every collection field the product carries. No customer data.
  *
+ * Exits 1 when any product is at risk (daily workflow Check Promo Products goes red).
  * Env: OEMSAAS_TOKEN_EN / _ES / _FR / _IT / _US, STORES (default all five)
  */
 const HOST = 'https://openapi.oemapps.com';
@@ -36,6 +37,7 @@ async function allProducts(token) {
 const colls = p => Object.keys(p).filter(k => /collect/i.test(k)).map(k => `${k}=${JSON.stringify(p[k]).slice(0, 160)}`).join(' ');
 
 (async () => {
+  let atRisk = 0;
   const stores = (process.env.STORES || 'EN,ES,FR,IT,US').split(',').map(s => s.trim()).filter(Boolean);
   for (const st of stores) {
     const token = process.env['OEMSAAS_TOKEN_' + st];
@@ -45,8 +47,15 @@ const colls = p => Object.keys(p).filter(k => /collect/i.test(k)).map(k => `${k}
     console.log(`\n== ${st}: ${prods.length} products, ${promo.length} with the Promo marker`);
     for (const p of promo) {
       const risk = CAMPAIGN_WORDS.test(String(p.title || ''));
+      if (risk) atRisk++;
       const prices = [...new Set((p.variants || []).map(v => v.price))].join('/');
       console.log(`  ${risk ? 'AT RISK' : 'ok     '} id=${p.id} status=${p.status} price=${prices} title=${JSON.stringify(p.title)}  ${colls(p)}`);
     }
   }
+  if (atRisk) {
+    console.error(`\n${atRisk} Promo product(s) carry a discount-campaign word in the title: the platform rebate stacks on the fixed price.\n` +
+      'Rename them without personalizada/o / custom (keep "Promo" and the kit/jersey word) and check the product left the campaign collection.');
+    process.exit(1);
+  }
+  console.log('\nAll Promo products are clear of the campaign words.');
 })().catch(e => { console.error('FAILED', e.message); process.exit(1); });

@@ -1,11 +1,12 @@
-name: Check Promo Products (read-only)
+name: Check Promo Products
 
-# Which fixed-price "Promo" products also match the quantity-discount campaign words (scripts/check-promo-products.js). Writes nothing.
+# Daily + on demand. A fixed-price "Promo" product must not carry the discount campaigns' words in its title
+# (personalizada/o, custom ...), or the platform rebate stacks on the fixed price (2 Nov 2026: ES Fokabumbum order, -40.81 EUR).
+# Read-only (scripts/check-promo-products.js); goes red while any product is at risk.
 
 on:
-  push:
-    branches: [claude/clever-mendel-fni5rb]   # TEMP: remove before merge
-    paths: ['.github/workflows/check-promo-products.yml']
+  schedule:
+    - cron: '41 5 * * *'
   workflow_dispatch:
 
 jobs:
@@ -17,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: List Promo products per store
+      - name: List Promo products per store, fail if any is in a campaign
         env:
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
@@ -25,9 +26,3 @@ jobs:
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
         run: node scripts/check-promo-products.js
-      - name: Orders with a Promo line, and any discount stacked on them
-        env:
-          STORES: EN,ES
-          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
-          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
-        run: node scripts/promo-rebate-exposure.js
