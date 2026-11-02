@@ -5,7 +5,7 @@
  * optionally its `price` (every variant) and `title`.
  *
  * Source of truth: cms/product-3d-pointers/<store>.json
- *   [{ "id": 16913848, "handle": "maillot-momuto-basket-pro",
+ *   [{ "id": 16913848, "handle": "maillot-momuto-basket-pro", "expectTitle": "(optional guard: live title must equal this)",
  *      "mudel": "configId=avy6d4xt&suitName=basketball",
  *      "price": "45.90", "title": "…", "note": "…" }]
  * Any subset of mudel / price / title per entry; the rest is left untouched.
@@ -77,6 +77,8 @@ async function processEntry(token, entry) {
   if (!live || !live.title) throw new Error(`${label}: refusing to PUT blind — GET returned no product/title`);
   if (!Array.isArray(live.variants) || !live.variants.length) throw new Error(`${label}: refusing to PUT — would drop the variants`);
   if (entry.handle && live.handle !== entry.handle) throw new Error(`${label}: live handle is "${live.handle}" — wrong product, not touching it`);
+  if (entry.expectTitle && live.title !== entry.expectTitle) throw new Error(`${label}: live title is "${live.title}", expected "${entry.expectTitle}" — wrong product or already changed, not touching it`);
+  const collsOf = p => (Array.isArray(p.collections) ? p.collections.map(c => c.title || c.id).join(', ') : '') || '(none)';
   const changes = [], payload = { ...live };
   if (entry.mudel) {
     const { current, next } = wantedInner(live, entry.mudel);
@@ -91,6 +93,7 @@ async function processEntry(token, entry) {
   if (entry.title && entry.title !== live.title) { changes.push(`title "${live.title}" → "${entry.title}"`); payload.title = entry.title; }
   if (!changes.length) { console.log(`  ·  ${label}: up to date`); return 'skip'; }
   console.log(`  ${label}: ${changes.join('; ')}`);
+  console.log(`     collections before: ${collsOf(live)}`);
   if (DRY_RUN) { console.log(`  DRY_RUN — would PUT /products/${entry.id} (full object, only the fields above changed)`); return 'dry'; }
   await withRetry(() => api(token, 'PUT', `/products/${entry.id}`, payload), `PUT ${entry.id}`);
   await sleep(600);
@@ -102,6 +105,7 @@ async function processEntry(token, entry) {
   if (entry.price != null && back.variants.some(v => Number(v.price).toFixed(2) !== Number(entry.price).toFixed(2))) throw new Error(`${label}: read-back price ${back.variants.map(v => v.price).join('/')} — PUT not effective`);
   if (entry.title && back.title !== entry.title) throw new Error(`${label}: read-back title "${back.title}" — PUT not effective`);
   if (!Array.isArray(back.variants) || back.variants.length !== live.variants.length) throw new Error(`${label}: read-back variant count changed (${live.variants.length} → ${back.variants && back.variants.length})`);
+  console.log(`     collections after:  ${collsOf(back)}`);
   console.log(`  ✅ ${label}: verified — ${back.detail_url || ''}`);
   return 'ok';
 }

@@ -6,5 +6,17 @@
     "note": "Basketball Basket Pro clone (25 Sep 2026, owner). Price 38.90 EUR = single MOMUTO Pro Jersey price, same ladder (rule 6; already 38.90). Title localised (was the French 'Maillot MOMUTO Basket Pro'). 3D link = curated collection, as on US; the vendor stock mamuto3basket3 is no longer billable at checkout (design-momuto #200). Handle unchanged (product URLs are by id).",
     "price": "38.90",
     "title": "Camiseta MOMUTO Pro Baloncesto"
+  },
+  {
+    "id": 11082848,
+    "expectTitle": "Fokabumbum — Camiseta Personalizada · Promo",
+    "title": "Fokabumbum — Camiseta · Promo",
+    "note": "2 Nov 2026: a fixed-price Promo product must not carry the discount campaign's words (personalizada/o, custom) or the platform rebate stacks on the fixed price (docs: design-momuto server-patches README section 13)."
+  },
+  {
+    "id": 11071048,
+    "expectTitle": "Automóviles Simón FC — Kit Personalizado · Promo",
+    "title": "Automóviles Simón FC — Kit Completo · Promo",
+    "note": "2 Nov 2026: a fixed-price Promo product must not carry the discount campaign's words (personalizada/o, custom) or the platform rebate stacks on the fixed price (docs: design-momuto server-patches README section 13)."
   }
 ]
