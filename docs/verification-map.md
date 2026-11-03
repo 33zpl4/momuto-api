@@ -36,3 +36,9 @@ Templates in the repo: `scripts/push-recovery-email.js`, `scripts/patch-gallery-
 Proof: a green **Probe page head (read-only)** run (`scripts/probe-page-head.js`) with the URL in its input; the log prints status, final URL,
 title, canonical(s), meta robots, hreflang tags, H1s and whether the host's `/sitemap.xml` lists the URL and with which alternates.
 Use it before claiming anything about what Google sees on a page; a repo fragment is not that proof.
+
+## Store nav menus and the homepage SEO plan — added 3 Nov 2026
+Proof of a nav write: a green **Store Config** `apply-nav` run (DRY_RUN=false) followed by an `inspect-nav` run for the same store whose
+JSON shows the item URLs you wrote (the POST upsert issues a new menu id; the theme binds by `nav_name`, so a new id is expected).
+Proof of a homepage SEO write: a green `apply-seo` run followed by an `apply-seo` **dry run**, whose "Current homepage SEO" line equals the
+"New" line. A page-level title/description change is proved by **Probe page head** on the URL (see above).

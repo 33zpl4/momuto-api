@@ -71,7 +71,7 @@ per write; a green job with a ❌ line is still a failure — read the log.
 overflows the 3000-line tail the API hands back, and the sandbox cannot
 download the log zip.
 
-- **US "Header Menu"** (809770): Custom Jerseys → **Jersey Maker — free 3D
+- **US "Header Menu"** (841794 since the 3 Nov 2026 apply; was 809770 — POST /navs upserts by name and issues a new id): Custom Jerseys → **Jersey Maker — free 3D
   tool** (`/pages/jersey-maker` since 3 Nov 2026, the sport-agnostic hub; was
   `/pages/custom-soccer-jersey-designer` from 4 Sep), Ready to Play, Custom
   design request ($15); Basketball; Iconic Series (Drop 01/02); Support (FAQ,
@@ -82,7 +82,7 @@ download the log zip.
   handles that do not exist on US (`contact-us_ebf80444`,
   `terms-of-service_736dfc8a`, `privacy-policy_0d030312`); now custom URLs
   to US handles incl. `/pages/shipping-policy` and `/pages/return-policy`.
-- **EN "Header Menu"** (63790): CUSTOM KITS → **Jersey Maker — free 3D
+- **EN "Header Menu"** (841796 since the 3 Nov 2026 apply; was 63790): CUSTOM KITS → **Jersey Maker — free 3D
   tool** (`/pages/jersey-maker` since 3 Nov 2026; was the EN maker page), Design Gallery, Ready-to-Play; ICONIC SERIES; THE BRAND; SUPPORT
   (FAQ, Printing & Materials `/pages/printing` id 234946, Size Guide, Contact).
 - **EN "Footer Menu"** (63789): unchanged except Shipping policy →
