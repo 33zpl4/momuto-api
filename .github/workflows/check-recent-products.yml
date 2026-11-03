@@ -26,6 +26,7 @@ jobs:
       - name: Newest and most recently updated products
         env:
           STORES: ${{ github.event.inputs.stores || 'EN,US' }}
+          DETAIL: 'US:18828514,US:18828480,US:18703106'
           OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
           OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
           OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}

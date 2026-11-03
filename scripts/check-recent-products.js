@@ -45,9 +45,24 @@ async function api(token, p) {
       const byId = [...all].sort((a, b) => key(b) - key(a)).slice(0, N);
       console.log(`  newest ${N} by id:`);
       for (const p of byId) console.log(`   id=${p.id} status=${p.status} created=${iso(p.created_at)} updated=${iso(p.updated_at)} price=${[...new Set((p.variants || []).map(v => v.price))].join('/')} title=${JSON.stringify(String(p.title || '').slice(0, 70))}`);
-      const upd = [...all].filter(p => p.updated_at).sort((a, b) => Number(b.updated_at) - Number(a.updated_at)).slice(0, 6);
+      const ts = p => Date.parse(p.updated_at) || 0;
+      const upd = [...all].filter(p => p.updated_at).sort((a, b) => ts(b) - ts(a)).slice(0, 12);
       console.log(`  most recently updated:`);
       for (const p of upd) console.log(`   id=${p.id} updated=${iso(p.updated_at)} title=${JSON.stringify(String(p.title || '').slice(0, 70))}`);
+      // full single-product read (the list omits fields): the 3 newest non-preview products + any DETAIL ids ("US:123,EN:456")
+      const isPrev = p => /your custom design|tu diseño personalizado|votre design/i.test(String(p.title || ''));
+      const want = new Set([...[...all].filter(p => !isPrev(p) && p.updated_at).sort((a, b) => ts(b) - ts(a)).slice(0, 3).map(p => String(p.id)),
+        ...String(process.env.DETAIL || '').split(',').map(x => x.trim()).filter(x => x.startsWith(st + ':')).map(x => x.split(':')[1])]);
+      for (const id of want) {
+        try {
+          const r = await api(token, `/products/${id}`); const d = (r.data && r.data.product) || r.data || {};
+          let inner = String(d.inner_title || ''); try { const j = JSON.parse(inner); inner = `type=${j.type} mudel=${j.mudel} productId=${j.productId}`; } catch { inner = inner.slice(0, 80) || '(empty)'; }
+          console.log(`  DETAIL id=${id}: handle=${d.handle} status=${d.status} title=${JSON.stringify(String(d.title || '').slice(0, 60))}`);
+          console.log(`          inner_title: ${inner}`);
+          console.log(`          images=${(d.images || []).length} variants=${(d.variants || []).map(v => v.price).join('/')} collections=${JSON.stringify((d.collections || []).map(c => c.title))} tags=${JSON.stringify((d.tags || []).slice(0, 4))} body_html=${String(d.body_html || '').length} chars meta_title=${d.meta_title ? 'yes' : 'no'} created=${iso(d.created_at)} updated=${iso(d.updated_at)}`);
+        } catch (e) { console.log(`  DETAIL id=${id}: ${e.message}`); }
+        await sleep(400);
+      }
       const prev = all.filter(p => /your custom design|tu diseño personalizado|votre design/i.test(String(p.title || ''))).sort((a, b) => key(b) - key(a))[0];
       console.log(`  last checkout preview product: ${prev ? `id=${prev.id} created=${iso(prev.created_at)}` : 'none found'}`);
     } catch (e) { console.log(`\n== ${st}: API FAILED: ${e.message}`); }
