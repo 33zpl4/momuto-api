@@ -76,6 +76,16 @@ suppliers. We have (a) only partially (ES and FR hubs exist but are cited 7 and 
 9. **Perplexity vs Claude split**: Claude reads our fact pages (35%); Perplexity reads catalogue/category pages and roundups (4%). Items 1–3 are the
    Perplexity fix; the AI-assistants post is the Claude reinforcement.
 
+### Shipped 3 Nov 2026 (evening): opportunity 1, the price page per market
+`scripts/build-price-pages.js` + `pricing/price-page.<locale>.json` → five pages, built from the FAQ ladder (one source of numbers):
+`www…/pages/custom-football-kit-prices` (id 6603838) · `us…/custom-soccer-jersey-prices` (6603842) · `es…/precios-equipaciones-futbol-personalizadas`
+(6603839) · `fr…/prix-maillot-foot-personnalise` (6603840) · `it…/prezzi-maglie-calcio-personalizzate` (6603841). Ladder in plain HTML, worked
+totals for 11/15/20 players, browser-side calculator, Product offers per tier, FAQPage. Proof: Deploy CMS Page 41640597173 (5 × created),
+Rebuild Sitemap 41640728837 (the 5-way hreflang row is live), Probe page head 41640761526 (200 + self canonical on www/us/fr/it; es answered the
+runner with the Cloudflare challenge, the sitemap lists it), pulls 41640766962 / 41641051294 / 41641117884 / 41641209974 / 41641279331.
+llms.txt in all five feeds carries the page; the maker hubs' "Full price list" links point here. Re-read: the price prompts (EN11, ES05,
+FR03, IT08, US-none) on the next radar run.
+
 ## 6. Content ideas that come straight from the answers (editorial)
 - "What a custom kit costs for 11 / 15 / 20 players" (per market, with the ladder; the price prompts are the biggest hole).
 - "Owayo or Spized or MOMUTO: the honest comparison for an amateur club" (the "alternatives" prompts are where we already win; a page that
