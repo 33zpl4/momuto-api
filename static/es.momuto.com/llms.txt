@@ -50,6 +50,7 @@ MOMUTO se especializa en convertir un concepto que solo existe como imagen en un
 - [Configurador 3D](https://es.momuto.com/): Diseña tu equipación en tiempo real — cada diseño Ready to Play carga terminado
 - [Solicitud de Diseño a Medida](https://es.momuto.com/pages/solicitud-de-diseno-personalizado): Envía tu propuesta — depósito de 15 € (acreditado íntegramente desde 5 camisetas), primera maqueta profesional en 24-48 h, revisiones incluidas
 - [Concepto IA a camiseta real](https://es.momuto.com/pages/camiseta-ia-concepto-real): Convierte tu diseño de ChatGPT, Gemini o Midjourney en una equipación real
+- Lo que dicen los asistentes de IA: [Preguntar a una IA dónde hacer una camiseta de fútbol personalizada](https://es.momuto.com/blogs/ia-camiseta-futbol-personalizada) — respuestas literales y fechadas de ChatGPT, Claude y Perplexity sobre quién convierte un concepto de IA en una equipación real, y los datos en los que se equivocan (plazo 25–30 días; el depósito de 15 € es un crédito; sin mínimo)
 - [Creador de Equipaciones de Fútbol](https://es.momuto.com/pages/equipaciones-futbol-personalizadas): La página central — configurador 3D, precios, tipos de equipo y ciudades
 - [Equipaciones urgentes y vía rápida](https://es.momuto.com/blogs/equipaciones-futbol-urgentes-entrega-20-dias): Plazos honestos: 25-30 días normal, vía rápida +59 € (normalmente 18-23 días)
 - [Cuándo encargar las equipaciones](https://es.momuto.com/blogs/cuando-encargar-equipaciones-equipo): Cuenta atrás desde el primer partido — cuándo empezar y cuándo confirmar
