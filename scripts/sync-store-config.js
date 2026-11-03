@@ -223,12 +223,14 @@ const FR_FOOTER_CHILDREN = [
 // Curated homepage SEO per store (PUT /seoplans). meta_keywords is an array
 // (same CMS rule as pages). Only stores listed here can be applied.
 const HOMEPAGE_SEO = {
+  // Positioning order (owner ruling, 3 Nov 2026): every description LEADS with the concept-to-real service (AI concept or sketch
+  // made real by a designer) and puts the 3D designer second — the engines were describing us as 'plantillas base' because our copy led with the tool.
   // en (www) — 3 Nov 2026, docs/seo-targets-2026-11.md Decision 1: the live title "Custom Football Jersey Maker | MOMUTO"
   // drew 21k US impressions/yr for American-football queries at 0.2% CTR, while the UK got 11 clicks/28 d on it.
   // "Soccer" goes in so the US SERP reads soccer; "Football" stays for the UK. Keywords: the live ones + the maker terms.
   en: {
     meta_title: 'Custom Football & Soccer Jersey Maker — Free 3D Designer | MOMUTO',
-    meta_descript: 'Design custom football (soccer) jerseys and team kits in a free 3D jersey maker. No minimum order, from €21.90 at 10+, 25–30 days door to door.',
+    meta_descript: 'Your AI concept or sketch made into a real football kit by a designer, or design it free in 3D. No minimum, from €21.90 at 10+, 25–30 days door to door.',
     meta_keywords: ['momuto', 'custom football jerseys', 'custom soccer jerseys', 'jersey maker', 'football jersey maker', 'soccer jersey maker', 'sublimation football jerseys', 'football kits'],
   },
   // es / fr / it — 3 Nov 2026. The live ES plan ("Selecciona una plantilla, elige colores y fuentes, añade logos") was what ChatGPT and
@@ -237,22 +239,22 @@ const HOMEPAGE_SEO = {
   // designer service + AI concept, canonical numbers, fabric. Keywords: the live ones kept, buyer phrases added.
   es: {
     meta_title: 'Equipaciones de Fútbol Personalizadas sin Mínimo | MOMUTO',
-    meta_descript: 'Estudio europeo: equipaciones 100 % personalizadas en sublimación, sin mínimo. Diseñador 3D gratis o diseñador para tu idea o concepto IA. 25–30 días.',
+    meta_descript: 'Tu concepto hecho con IA o tu boceto, convertido en equipación real por un diseñador; o diséñala gratis en 3D. Sin mínimo, desde 21,90 € a partir de 10.',
     meta_keywords: ['momuto', 'equipaciones de fútbol personalizadas', 'camisetas de fútbol personalizadas', 'equipaciones futbol sin pedido minimo', 'diseñador 3D camisetas', 'personalizar equipacion futbol', 'equipaciones futbol distintas'],
   },
   fr: {
     meta_title: 'Maillots de Foot Personnalisés sans Minimum | MOMUTO',
-    meta_descript: 'Studio européen : maillots 100 % personnalisés en sublimation, sans minimum. Designer 3D gratuit ou designer pour votre idée ou concept IA. 25–30 jours.',
+    meta_descript: 'Votre concept IA ou votre croquis transformé en vrai maillot par un designer, ou créez-le gratuitement en 3D. Sans minimum, dès 21,90 € à partir de 10.',
     meta_keywords: ['momuto', 'maillot de foot personnalisé', 'maillots de foot personnalisables', 'maillot foot personnalisé sans minimum', 'configurateur 3D maillot', 'maillot sport personnalisé'],
   },
   it: {
     meta_title: 'Maglie da Calcio Personalizzate senza Minimo | MOMUTO',
-    meta_descript: 'Studio europeo: maglie 100 % personalizzate in sublimazione, nessun minimo. Designer 3D gratuito o designer per la tua idea o concept IA. 25–30 giorni.',
+    meta_descript: 'Il tuo concept IA o il tuo schizzo trasformato in una maglia reale da un designer, o progettala gratis in 3D. Nessun minimo, da 21,90 € da 10 pezzi.',
     meta_keywords: ['momuto', 'maglie da calcio personalizzate', 'divise da calcio personalizzate', 'maglie calcio senza ordine minimo', 'designer 3D maglie', 'maglia calcio personalizzata'],
   },
   us: {
     meta_title: 'Custom Soccer Jerseys & Uniforms — Free 3D Designer | MOMUTO',
-    meta_descript: 'Design custom soccer jerseys and team uniforms in a free 3D designer. No minimum order, from $25.90/jersey at 10+, delivered across the US in 25-30 days.',
+    meta_descript: 'Your AI concept or sketch made into real soccer jerseys by a designer, or design them free in 3D. No minimum, from $25.90 at 10+, delivered in 25–30 days.',
     meta_keywords: ['custom soccer jerseys', 'custom soccer uniforms', 'soccer jersey maker', '3d soccer jersey designer', 'custom basketball jerseys', 'MOMUTO'],
   },
 };
