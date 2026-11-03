@@ -20,6 +20,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
       - name: Fetch heads
         env:
           URLS: ${{ github.event.inputs.urls }}
