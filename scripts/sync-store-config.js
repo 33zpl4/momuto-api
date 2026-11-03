@@ -66,13 +66,12 @@ const page = (name, position, url, sourceId) => item(name, position, 5, url, [],
 
 const US_MENU_CHILDREN = [
   item('Custom Jerseys', 0, 0, '', [
-    item('Ready to Play — 3D designer', 0, 6, '/pages/ready-to-play'),
-    // GSC 4 Sep 2026: the maker/creator cluster carries the volume — the
-    // handle is the rebuilt "Soccer Jersey Maker" page (build-maker-pages.js)
-    // 3 Nov 2026 (seo-targets T3 / Decision 2): the nav item points at the sport-agnostic hub; it links both sport makers
-    item('Jersey Maker — free 3D tool', 1, 6, '/pages/jersey-maker'),
+    // Order and items transcribed from the LIVE menu on 3 Nov 2026 (inspect run 41615976695): the owner had moved
+    // Jersey Maker first and removed the "AI concept to real jersey" item since the 4 Sep apply — keep that.
+    // 3 Nov 2026 (seo-targets T3 / Decision 2): the Jersey Maker item points at the sport-agnostic hub, which links both sport makers.
+    item('Jersey Maker — free 3D tool', 0, 6, '/pages/jersey-maker'),
+    item('Ready to Play — 3D designer', 1, 6, '/pages/ready-to-play'),
     item('Custom design request ($15)', 2, 6, '/pages/request-custom-kit-design'),
-    item('AI concept to real jersey', 3, 6, '/pages/ai-concept-to-real-kit'),
   ]),
   item('Basketball', 1, 6, '/pages/custom-basketball-jerseys'),
   // the Iconic Series collections were cloned to the US store (owner, 1 Sep 2026);
