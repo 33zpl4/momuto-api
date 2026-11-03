@@ -343,3 +343,22 @@ GSC report  dimensions=query,page  country=usa  query=basketball                
 GSC report  dimensions=query,page  country=gbr  min=15                           → Decision 1, UK side
 Probe page head  (the ten URLs above)                                            → titles/canonicals after any change
 ```
+
+---
+
+## Shipped 3 Nov 2026 (evening) — what moved from targets to live
+
+Dry runs (all green, from the branch): Deploy CMS Page 41616549543 (4 files: 2 new `jersey-maker` pages, 2 us twins), Store Config apply-seo en
+41616554786, apply-nav en 41616559585, apply-nav us 41616565089, Deploy Design-Your-Own 41616570503. Live runs and read-backs are listed
+below this line as they happen.
+
+- **T3**: `jersey-maker` hub on www + us (`maker/maker.jm-{en,us}.json` → `build-maker-pages.js` → `cms/pages/{en,us}/jersey-maker.json`).
+  Same handle on both stores, so the nightly sitemap pairs them. Linked from both llms.txt files; nav item "Jersey Maker — free 3D tool" on
+  EN and US now points at it (Decision 2).
+- **Decision 1 (b)**: www homepage SEO plan → "Custom Football & Soccer Jersey Maker — Free 3D Designer | MOMUTO" + a numbers description;
+  keywords keep the live ones and add the maker terms (`HOMEPAGE_SEO.en`, apply-seo).
+- **T2**: www design page meta description leads with "Design your own soccer jersey … custom colors, crest, names and numbers".
+- **T1 action 2**: us `design-your-own-soccer-jersey` title/description differ from www (USD, "MOMUTO USA", US delivery).
+- **T4**: us `custom-soccer-jerseys` title "…for US Teams — No Minimum", description without the bare "Free pro design" claim;
+  `check-copy-rules` now catches "free pro design".
+- Not shipped: the www→us banner (owner paste, Decision 3); the us design-your-own **body** is still the www body (meta only).

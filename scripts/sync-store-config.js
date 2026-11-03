@@ -66,12 +66,12 @@ const page = (name, position, url, sourceId) => item(name, position, 5, url, [],
 
 const US_MENU_CHILDREN = [
   item('Custom Jerseys', 0, 0, '', [
-    item('Ready to Play — 3D designer', 0, 6, '/pages/ready-to-play'),
-    // GSC 4 Sep 2026: the maker/creator cluster carries the volume — the
-    // handle is the rebuilt "Soccer Jersey Maker" page (build-maker-pages.js)
-    item('Jersey Maker — free 3D tool', 1, 6, '/pages/custom-soccer-jersey-designer'),
+    // Order and items transcribed from the LIVE menu on 3 Nov 2026 (inspect run 41615976695): the owner had moved
+    // Jersey Maker first and removed the "AI concept to real jersey" item since the 4 Sep apply — keep that.
+    // 3 Nov 2026 (seo-targets T3 / Decision 2): the Jersey Maker item points at the sport-agnostic hub, which links both sport makers.
+    item('Jersey Maker — free 3D tool', 0, 6, '/pages/jersey-maker'),
+    item('Ready to Play — 3D designer', 1, 6, '/pages/ready-to-play'),
     item('Custom design request ($15)', 2, 6, '/pages/request-custom-kit-design'),
-    item('AI concept to real jersey', 3, 6, '/pages/ai-concept-to-real-kit'),
   ]),
   item('Basketball', 1, 6, '/pages/custom-basketball-jerseys'),
   // the Iconic Series collections were cloned to the US store (owner, 1 Sep 2026);
@@ -94,7 +94,8 @@ const US_MENU_CHILDREN = [
 const EN_HEADER_CHILDREN = [
   item('CUSTOM KITS', 0, 0, '', [
     // NEW 4 Sep 2026 — the rebuilt Football Jersey Maker page (build-maker-pages.js)
-    item('Jersey Maker — free 3D tool', 0, 6, 'https://www.momuto.com/pages/custom-soccer-jersey-designer'),
+    // 3 Nov 2026 (seo-targets T3 / Decision 2): now the sport-agnostic hub (soccer + basketball makers)
+    item('Jersey Maker — free 3D tool', 0, 6, 'https://www.momuto.com/pages/jersey-maker'),
     item('Design Gallery', 1, 6, 'https://www.momuto.com/pages/custom-kit-gallery'),
     page('Ready-to-Play', 2, '/pages/ready-to-play', 4429211),
   ]),
@@ -222,6 +223,14 @@ const FR_FOOTER_CHILDREN = [
 // Curated homepage SEO per store (PUT /seoplans). meta_keywords is an array
 // (same CMS rule as pages). Only stores listed here can be applied.
 const HOMEPAGE_SEO = {
+  // en (www) — 3 Nov 2026, docs/seo-targets-2026-11.md Decision 1: the live title "Custom Football Jersey Maker | MOMUTO"
+  // drew 21k US impressions/yr for American-football queries at 0.2% CTR, while the UK got 11 clicks/28 d on it.
+  // "Soccer" goes in so the US SERP reads soccer; "Football" stays for the UK. Keywords: the live ones + the maker terms.
+  en: {
+    meta_title: 'Custom Football & Soccer Jersey Maker — Free 3D Designer | MOMUTO',
+    meta_descript: 'Design custom football (soccer) jerseys and team kits in a free 3D jersey maker. No minimum order, from €21.90 at 10+, 25–30 days door to door.',
+    meta_keywords: ['momuto', 'custom football jerseys', 'custom soccer jerseys', 'jersey maker', 'football jersey maker', 'soccer jersey maker', 'sublimation football jerseys', 'football kits'],
+  },
   us: {
     meta_title: 'Custom Soccer Jerseys & Uniforms — Free 3D Designer | MOMUTO',
     meta_descript: 'Design custom soccer jerseys and team uniforms in a free 3D designer. No minimum order, from $25.90/jersey at 10+, delivered across the US in 25-30 days.',

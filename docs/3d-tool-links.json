@@ -343,6 +343,20 @@
   "count": 1
  },
  {
+  "file": "cms/pages/en/jersey-maker.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=avy6d4xt suit=basketball userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "cms/pages/en/jersey-maker.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
   "file": "cms/pages/en/return-policy.json",
   "group": "built/pulled CMS copy",
   "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
@@ -516,6 +530,20 @@
   "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
   "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
   "count": 1
+ },
+ {
+  "file": "cms/pages/us/jersey-maker.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=avy6d4xt suit=basketball userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "cms/pages/us/jersey-maker.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
  },
  {
   "file": "cms/pages/us/ready-to-play.json",
@@ -736,6 +764,34 @@
  },
  {
   "file": "maker/maker.fr.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "maker/maker.jm-en.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=avy6d4xt suit=basketball userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "maker/maker.jm-en.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "maker/maker.jm-us.json",
+  "group": "generated-page source",
+  "deploy": "auto after build + merge (Deploy CMS Page)",
+  "variant": "configId=avy6d4xt suit=basketball userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "maker/maker.jm-us.json",
   "group": "generated-page source",
   "deploy": "auto after build + merge (Deploy CMS Page)",
   "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
@@ -1072,6 +1128,34 @@
  },
  {
   "file": "pages/maker/fr.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/maker/jm-en.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=avy6d4xt suit=basketball userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/maker/jm-en.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/maker/jm-us.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=avy6d4xt suit=basketball userId=userIdUrl",
+  "count": 3
+ },
+ {
+  "file": "pages/maker/jm-us.html",
   "group": "page fragment",
   "deploy": "auto on merge (its deploy workflow)",
   "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
