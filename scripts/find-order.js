@@ -56,6 +56,9 @@ const hay = o => Object.values(o).some(v => (typeof v === 'string' || typeof v =
       for (const k of ['id', 'order_number', 'order_no', 'name', 'financial_status', 'fulfillment_status', 'status', 'created_at', 'pay_at', 'first_pay_at', 'currency', 'total_price', 'total', 'lang', 'source', 'country', 'shipping_country']) {
         if (hit[k] != null && typeof hit[k] !== 'object') console.log(`   ${k}: ${hit[k]}`);
       }
+      // every numeric money field (subtotal, discounts, shipping, total ...): no personal data
+      const money = Object.entries(hit).filter(([k, v]) => /price|total|discount|promot|coupon|rebate|shipping|tax|fee/i.test(k) && (typeof v === 'number' || /^-?\d+(\.\d+)?$/.test(String(v)))).map(([k, v]) => `${k}=${v}`);
+      console.log(`   money: ${money.join(' ')}`);
       const items = hit.line_items || hit.items || hit.products;
       if (Array.isArray(items)) console.log(`   lines: ${items.length}`);
     }
