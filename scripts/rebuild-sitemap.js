@@ -125,6 +125,7 @@ const STATIC_CLUSTERS = [
 // deliberately NOT clustered — they review different competitor sets, so they
 // are not translations of each other.
 const BLOG_CLUSTERS = [
+  { en: 'ai-assistants-custom-jersey-recommendation', us: 'ai-assistants-custom-jersey-recommendation', es: 'ia-camiseta-futbol-personalizada', fr: 'ia-maillot-foot-personnalise', it: 'consigli-ai-maglie-calcio-personalizzate' },   // AI-assistants post, 3 Nov 2026
   { en: 'custom-football-kits-for-your-team-complete-guide', us: 'custom-soccer-uniforms-for-your-team-complete-guide', es: 'equipaciones-de-futbol-para-tu-equipo-guia-completa', fr: 'maillots-de-foot-pour-club-guide-complet', it: 'maglie-da-calcio-per-la-tua-squadra-guida-completa' },
   { en: 'custom-football-kits-amateur-grassroots-club',      us: 'custom-soccer-uniforms-club-team',            es: 'equipaciones-futbol-club-amateur',        fr: 'maillots-foot-club-amateur',        it: 'maglie-calcio-squadra-dilettantistica' },
   { en: 'custom-futsal-5-a-side-jerseys',                    us: 'custom-futsal-indoor-soccer-jerseys',         es: 'camisetas-futbol-sala-personalizadas',    fr: 'maillots-five-futsal-personnalises', it: 'maglie-calcetto-futsal-personalizzate' },

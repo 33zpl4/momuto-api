@@ -50,6 +50,7 @@ MOMUTO est spécialisé dans la transformation d'un concept qui n'existe qu'en i
 - [Configurateur 3D](https://fr.momuto.com/): Concevez votre tenue en temps réel — chaque design Ready to Play se charge terminé
 - [Demande de Design sur Mesure](https://fr.momuto.com/pages/demande-de-design-professionnel-de-maillots): Soumettez votre brief — acompte de 15 € (intégralement crédité dès 5 maillots), première maquette professionnelle en 24-48 h, retouches incluses
 - [Concept IA vers maillot réel](https://fr.momuto.com/pages/maillot-ia-concept-reel): Transformez votre design ChatGPT, Gemini ou Midjourney en vrai maillot
+- Ce que disent les assistants IA : [Demander à une IA où fabriquer un maillot de foot personnalisé](https://fr.momuto.com/blogs/ia-maillot-foot-personnalise) — réponses datées et citées de ChatGPT, Claude et Perplexity sur qui transforme un concept IA en maillot réel, et les faits sur lesquels ils se trompent (délai 25–30 jours ; l’acompte de 15 € est un crédit ; sans minimum)
 - [Quand commander les maillots](https://fr.momuto.com/blogs/quand-commander-maillots-equipe): Compte à rebours depuis le premier match — quand commencer, quand confirmer
 - [Impression & Matériaux](https://fr.momuto.com/pages/impression-et-materiaux): Détails techniques sur l'impression par sublimation et la composition des tissus
 - [Guide des Tailles](https://www.momuto.com/pages/size-guide): Informations complètes sur les tailles pour les commandes d'équipe
