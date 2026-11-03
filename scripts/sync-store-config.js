@@ -231,6 +231,25 @@ const HOMEPAGE_SEO = {
     meta_descript: 'Design custom football (soccer) jerseys and team kits in a free 3D jersey maker. No minimum order, from €21.90 at 10+, 25–30 days door to door.',
     meta_keywords: ['momuto', 'custom football jerseys', 'custom soccer jerseys', 'jersey maker', 'football jersey maker', 'soccer jersey maker', 'sublimation football jerseys', 'football kits'],
   },
+  // es / fr / it — 3 Nov 2026. The live ES plan ("Selecciona una plantilla, elige colores y fuentes, añade logos") was what ChatGPT and
+  // Gemini paraphrased as "trabajan sobre plantillas base" when Spanish buyers asked for the best sites (owner screenshots); FR was
+  // decorative prose, IT was the single word "MOMUTO". Each now states what we are in the engines' own criteria: studio, no minimum,
+  // designer service + AI concept, canonical numbers, fabric. Keywords: the live ones kept, buyer phrases added.
+  es: {
+    meta_title: 'Equipaciones de Fútbol Personalizadas sin Mínimo — Diseño 3D Gratis | MOMUTO',
+    meta_descript: 'Estudio de diseño europeo: equipaciones de fútbol 100 % personalizadas en sublimación total, sin pedido mínimo. Diseñador 3D gratis, o un diseñador convierte tu idea o concepto de IA en equipación. Desde 21,90 € por camiseta a partir de 10, entrega en 25–30 días.',
+    meta_keywords: ['momuto', 'equipaciones de fútbol personalizadas', 'camisetas de fútbol personalizadas', 'equipaciones futbol sin pedido minimo', 'diseñador 3D camisetas', 'personalizar equipacion futbol', 'equipaciones futbol distintas'],
+  },
+  fr: {
+    meta_title: 'Maillots de Foot Personnalisés sans Minimum — Designer 3D Gratuit | MOMUTO',
+    meta_descript: 'Studio de design européen : maillots de foot 100 % personnalisés en sublimation totale, sans minimum de commande. Designer 3D gratuit, ou un designer transforme votre idée ou concept IA en maillot. Dès 21,90 € par maillot à partir de 10, livraison en 25–30 jours.',
+    meta_keywords: ['momuto', 'maillot de foot personnalisé', 'maillots de foot personnalisables', 'maillot foot personnalisé sans minimum', 'configurateur 3D maillot', 'maillot sport personnalisé'],
+  },
+  it: {
+    meta_title: 'Maglie da Calcio Personalizzate senza Minimo — Designer 3D Gratis | MOMUTO',
+    meta_descript: 'Studio di design europeo: maglie da calcio 100 % personalizzate in sublimazione totale, nessun ordine minimo. Designer 3D gratuito, o un designer trasforma la tua idea o il tuo concept IA in maglia. Da 21,90 € a maglia da 10 pezzi, consegna in 25–30 giorni.',
+    meta_keywords: ['momuto', 'maglie da calcio personalizzate', 'divise da calcio personalizzate', 'maglie calcio senza ordine minimo', 'designer 3D maglie', 'maglia calcio personalizzata'],
+  },
   us: {
     meta_title: 'Custom Soccer Jerseys & Uniforms — Free 3D Designer | MOMUTO',
     meta_descript: 'Design custom soccer jerseys and team uniforms in a free 3D designer. No minimum order, from $25.90/jersey at 10+, delivered across the US in 25-30 days.',
