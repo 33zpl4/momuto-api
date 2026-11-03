@@ -35,6 +35,7 @@ const { rosterUnits, designKind } = require('../lib/design-kind');
 const path = require('path');
 const ExcelJS = require('exceljs');
 const { classifyLine } = require('../lib/order-lines');
+const { orderAmounts, amountText } = require('../lib/order-amounts');
 
 const HOST = 'https://openapi.oemapps.com';
 const MOMUTO_API = 'https://momuto-api.vercel.app/api/admin-orders';
@@ -143,7 +144,8 @@ function shape(o, lang) {
   const lines = parseLines(o);
   const subtotal = parseFloat(field(o, ['current_subtotal_price', 'subtotal_price']) || 0);
   const ship = parseFloat(field(o, ['current_shipping_price', 'shipping_price']) || 0);
-  const total = field(o, ['current_total_price', 'total_price', 'total']) || (subtotal + ship).toFixed(2);
+  // the amount the customer paid (after promotions), not `current_total_price` (before them): lib/order-amounts.js
+  const total = orderAmounts(o).paid || (subtotal + ship).toFixed(2);
   return {
     store: lang,
     order_number: String(field(o, ['order_number', 'order_no', 'orderNumber']) || ''),
@@ -161,6 +163,7 @@ function shape(o, lang) {
     shipping_plan: field(o, ['shipping_plan_name', 'shipping_name', 'shipping_method', 'free_shipping_plan_name']) || '',
     shipping_price: ship,
     total: String(total), currency: field(o, ['currency_code', 'currency']) || '',
+    amountText: amountText(o, field(o, ['currency_code', 'currency']) || ''),
     total_num: parseInt(field(o, ['total_num', 'total_quantity']) || 0, 10) || null,
     domain: field(o, ['domain']) || '',
     is_test: parseInt(field(o, ['is_test']) || 0, 10) === 1,
@@ -285,7 +288,7 @@ async function buildSheet(order, designs, warnings) {
     ['电话', order.phone], ['邮编', order.zip], ['邮箱', order.email], ['留言', order.note || '（无）'],
     ['总数量', jerseyQty != null ? `${jerseyQty} 件` + (order.longSleeves ? `（其中长袖 ${order.longSleeves} 件）` : '') + (order.collars ? `（POLO领 ${order.collars} 件）` : '') : ''],
     ['货运方式', order.shipping_plan ? `${order.shipping_plan}（运费 ${order.shipping_price} ${order.currency}）` : `运费 ${order.shipping_price} ${order.currency}`],
-    ['支付方式', PAY_ZH(order.payment)], ['总金额', `${order.total} ${order.currency}`],
+    ['支付方式', PAY_ZH(order.payment)], ['总金额', order.amountText],
   ];
   for (const [k, v] of rows) {
     label(ws.getCell(r, 1)); ws.getCell(r, 1).value = k;
@@ -351,7 +354,7 @@ async function emailSheet(order, filePath, warnings) {
   const qty = order.jerseys ? `${order.jerseys} 件${order.shorts ? ` · 短裤 ${order.shorts}` : ''}${order.socks ? ` · 袜 ${order.socks}` : ''}` : '';
   const subject = `${order.fastLane ? '⚡ 加急 FAST LANE · ' : ''}生产单 ${order.order_number} · ${order.country || order.store}${qty ? ' · ' + qty : ''}${order.longSleeves ? ' · 含长袖' : ''}${order.collars ? ' · 含POLO领' : ''}${warnings.length ? ' · ⚠ 需核对' : ''}`;
   const html = (order.fastLane ? '<p style="color:#c8352e;font-weight:700">⚡ 加急 FAST LANE — 优先生产 + 优先发货</p>' : '') +
-    `<p>订单 <strong>${order.order_number}</strong>（3D ${order.ref3d || '-'}）· ${order.name} · ${order.country} · ${order.total} ${order.currency}</p>` +
+    `<p>订单 <strong>${order.order_number}</strong>（3D ${order.ref3d || '-'}）· ${order.name} · ${order.country} · ${order.amountText}</p>` +
     `<p>生产单见附件。${warnings.length ? '<br><strong style="color:#c00">⚠ ' + warnings.join('<br>⚠ ') + '</strong>' : ''}</p>` +
     `<p style="color:#888;font-size:12px">MOMUTO 自动生成 · 平台订单 + 3D设计服务器 · 如有疑问回复 info@momuto.com</p>`;
   const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
@@ -365,7 +368,7 @@ async function emailSheet(order, filePath, warnings) {
 async function processOrder(lang, raw, token) {
   const order = shape(raw, lang);
   const warnings = [];
-  console.log(`\n[${lang}] ${order.order_number} · ${order.name} · ${order.country} · ${order.total} ${order.currency} · ref3d ${order.ref3d || '-'}`);
+  console.log(`\n[${lang}] ${order.order_number} · ${order.name} · ${order.country} · ${order.amountText} · ref3d ${order.ref3d || '-'}`);
   if (!order.ref3d && !order.previewIds.length) warnings.push('平台订单中没有3D设计行（非3D订单或预览行缺失）');
 
   let designs = null;

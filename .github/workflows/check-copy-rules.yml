@@ -52,3 +52,5 @@ jobs:
         run: node scripts/build-wa-bot-answers.js --check
       - name: WhatsApp bot tests (hours, keywords, handoff, webhook)
         run: node --test test/wa-bot.test.js test/wa-webhook.test.js test/wa-twilio.test.js test/wa-faq-json.test.js test/gift-rule.test.js
+      - name: Order amounts (the paid total is total_price, after promotions)
+        run: node scripts/test-order-amounts.js
