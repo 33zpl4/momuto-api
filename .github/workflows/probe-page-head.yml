@@ -1,0 +1,33 @@
+name: Probe page head (read-only)
+# Fetches live URLs from the runner and prints title / canonical / robots / hreflang / H1 / sitemap listing. Reads only.
+
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'URLs, comma-separated'
+        required: true
+        default: 'https://www.momuto.com/pages/design-your-own-soccer-jersey,https://us.momuto.com/pages/design-your-own-soccer-jersey'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - name: Fetch heads
+        env:
+          URLS: ${{ github.event.inputs.urls }}
+        run: node scripts/probe-page-head.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: probe-page-head
+          path: probe-page-head/
+          if-no-files-found: ignore

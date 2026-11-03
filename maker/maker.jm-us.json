@@ -1,0 +1,251 @@
+{
+  "locale": "us",
+  "handle": "jersey-maker",
+  "base": "https://us.momuto.com",
+  "lang": "en",
+  "currency": "USD",
+  "meta": {
+    "title": "Jersey Maker — Free 3D Designer, Soccer & Basketball | MOMUTO",
+    "meta_title": "Jersey Maker — Free 3D Designer, Soccer & Basketball | MOMUTO",
+    "meta_descript": "Free online jersey maker: design custom soccer and basketball jerseys in real-time 3D, names and numbers included, no minimum order. From $25.90 at 10+.",
+    "keywords": [
+      "jersey maker",
+      "custom jersey maker",
+      "jersey creator",
+      "jersey designer",
+      "jersey design maker",
+      "online jersey maker",
+      "3d jersey maker",
+      "jersey customizer",
+      "jersey configurator",
+      "basketball jersey maker",
+      "soccer jersey maker",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Online jersey maker",
+    "h1": "Jersey <span class=\"acc\">Maker</span>",
+    "sub": "One free, real-time 3D jersey maker for two sports. Pick soccer or basketball, set every color and panel, drop in your crest and sponsor, add each player's name and number, and order straight from the tool. One jersey or the whole roster — no minimum, no account needed.",
+    "btn": "Open the soccer jersey maker — free",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en",
+    "btn2": "Open the basketball jersey maker — free",
+    "btn2_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=avy6d4xt&suitName=basketball&lang=en"
+  },
+  "quick": [
+    [
+      "Free",
+      "design in 3D, pay only when you order"
+    ],
+    [
+      "2 sports",
+      "soccer and basketball, same tool"
+    ],
+    [
+      "No minimum",
+      "1 jersey or 100+, same price ladder"
+    ],
+    [
+      "25–30 days",
+      "door to door, tracked, duties prepaid"
+    ]
+  ],
+  "features": {
+    "title": "What the jersey maker does",
+    "lead": "Everything a custom jersey creator should do, in the browser, without a designer on your side.",
+    "items": [
+      [
+        "Real-time 3D",
+        "Rotate the jersey as you build it. What you see is the sublimation file we print — no surprises at the mockup stage."
+      ],
+      [
+        "Colors without limits",
+        "Every panel, trim and stripe takes any color. Gradients, patterns and fades cost nothing extra — it's all one print."
+      ],
+      [
+        "Crest &amp; sponsor upload",
+        "Upload your club crest and sponsor logos in the tool. A designer cleans and print-preps every logo before production."
+      ],
+      [
+        "Names &amp; numbers",
+        "Add the full roster with per-player names, numbers and sizes on the cart. Included in the price."
+      ],
+      [
+        "Two sports, one maker",
+        "The same designer builds soccer jerseys, shorts and full kits, and basketball jerseys with the matching shorts. Switch sport, keep your artwork."
+      ],
+      [
+        "Order from the tool",
+        "No quote, no email chain. Set quantities, check the price ladder and check out. A production mockup follows in 24–48 h."
+      ]
+    ]
+  },
+  "synonyms": {
+    "title": "Jersey maker, creator, designer, customizer — one tool",
+    "body": "People search for a jersey creator, a custom jersey maker, a jersey designer, a jersey configurator or a jersey generator. They mean the same thing: a tool that turns an idea into a real, wearable jersey. MOMUTO's version is <b>the 3D designer</b> — free to use, real-time, and wired straight to production, so the design you approve is the design that ships. It covers soccer (<a href=\"/pages/design-your-own-soccer-jersey\">design your own soccer jersey</a>) and basketball (<a href=\"/pages/custom-basketball-jerseys\">custom basketball jerseys</a>). If you would rather not build it yourself, the same team that runs the tool will <a href=\"/pages/request-custom-kit-design\">design it for you</a>: first mockup in 24–48 hours."
+  },
+  "ways": {
+    "title": "Three ways to start",
+    "items": [
+      [
+        "Soccer jersey maker",
+        "Open a soccer template, set every color yourself, upload your artwork and place the sponsor. Shorts and socks in the same tool.",
+        "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en",
+        "Open the soccer maker"
+      ],
+      [
+        "Basketball jersey maker",
+        "Sleeveless jersey and shorts, full sublimation, per-player names and numbers. Same ladder as the soccer jerseys.",
+        "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=avy6d4xt&suitName=basketball&lang=en",
+        "Open the basketball maker"
+      ],
+      [
+        "Send your idea",
+        "A sketch, a brief, a photo of last season's kit or an AI-generated concept. A designer builds it in the tool for you; $15 design deposit, credited in full to orders of 5+ jerseys — free for a team order.",
+        "/pages/request-custom-kit-design",
+        "Request a design"
+      ]
+    ]
+  },
+  "pricing": {
+    "title": "What a custom jersey costs",
+    "lead": "One ladder for soccer and basketball, no setup fees, names and numbers included. Shorts and full kits follow the same steps.",
+    "cols": [
+      "Quantity",
+      "Jersey",
+      "Jersey + shorts"
+    ],
+    "rows": [
+      [
+        "1",
+        "$45.90",
+        "$66.80"
+      ],
+      [
+        "2–4",
+        "$41.90 each",
+        "$60.80"
+      ],
+      [
+        "5–9",
+        "$30.90 each",
+        "$44.80"
+      ],
+      [
+        "10–19",
+        "$25.90 each",
+        "$30.90"
+      ],
+      [
+        "20–49",
+        "$21.90 each",
+        "$26.90"
+      ],
+      [
+        "50–99",
+        "$20.90 each",
+        "$25.90"
+      ],
+      [
+        "100+",
+        "$19.90 each",
+        "$24.90"
+      ]
+    ],
+    "pop": 3,
+    "notes": [
+      "Long sleeves +$3 per jersey, chosen per player (soccer only).",
+      "Free shipping over $59; $4.90 below. Duties prepaid.",
+      "Fast lane +$69 per order skips the production queue — about 7 days saved."
+    ],
+    "more": "/pages/faq#pricing",
+    "more_label": "Full price list and FAQ"
+  },
+  "steps": {
+    "title": "How it works",
+    "items": [
+      [
+        "Design",
+        "Build the jersey in the maker, or send us your idea."
+      ],
+      [
+        "Approve",
+        "A production mockup arrives in 24–48 h. Nothing prints until you approve it."
+      ],
+      [
+        "Produce",
+        "7–12 days of full dye-sublimation, cut and sewn to each player's size."
+      ],
+      [
+        "Deliver",
+        "10–15 days tracked shipping with USPS in the US. 25–30 days door to door."
+      ]
+    ]
+  },
+  "faq": {
+    "title": "Jersey maker FAQ",
+    "items": [
+      [
+        "Is the jersey maker really free?",
+        "Yes. Designing in the 3D tool is free and needs no account. You pay only when you place an order, and the price is the ladder above — no setup, art or screen fees."
+      ],
+      [
+        "Which sports does the jersey maker cover?",
+        "Soccer and basketball today: soccer jerseys, shorts, socks and full kits, and basketball jerseys with matching shorts. Both use the same 3D designer and the same price ladder."
+      ],
+      [
+        "Can I make a single jersey?",
+        "Yes. There is no minimum order. A single jersey is $45.90; the per-jersey price falls to $25.90 at 10 and $19.90 at 100."
+      ],
+      [
+        "Can I upload my own logo and sponsor?",
+        "Yes. Upload PNG, JPG, SVG or PDF artwork in the maker. A designer cleans every crest and sponsor before production and sends you the file for approval."
+      ],
+      [
+        "Does the maker handle names and numbers?",
+        "Yes. Add the roster on the cart with each player's name, number and size. Names and numbers are included in the price; long sleeves are +$3 per player on soccer jerseys."
+      ],
+      [
+        "Can I use an AI-generated jersey design?",
+        "Yes. Send a ChatGPT, Midjourney or Gemini concept through the <a href=\"/pages/ai-concept-to-real-kit\">AI concept page</a> and a designer rebuilds it as a print-ready jersey."
+      ],
+      [
+        "What if I don't like the result?",
+        "You approve a production mockup before anything prints, with unlimited revisions. If a jersey arrives defective or different from the approved mockup, we reprint or refund it — see the <a href=\"/pages/return-policy\">returns policy</a>."
+      ],
+      [
+        "How long does a custom jersey take?",
+        "Mockup in 24–48 hours, 7–12 days production, 10–15 days shipping: plan on 25–30 days door to door. The fast lane (+$69) saves about a week."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Make your jersey",
+    "p": "Open the free jersey maker and have a finished design in ten minutes — or send us your idea and let a designer build it.",
+    "btn": "Open the soccer maker — free",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=en&langguage=en",
+    "btn2": "Open the basketball maker — free",
+    "btn2_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=avy6d4xt&suitName=basketball&lang=en"
+  },
+  "more": {
+    "label": "Keep exploring:",
+    "links": [
+      [
+        "/pages/custom-soccer-jersey-designer",
+        "soccer jersey maker"
+      ],
+      [
+        "/pages/custom-basketball-jerseys",
+        "custom basketball jerseys"
+      ],
+      [
+        "/pages/custom-soccer-jerseys",
+        "custom soccer jerseys"
+      ],
+      [
+        "/pages/ai-concept-to-real-kit",
+        "AI concept to real jersey"
+      ]
+    ]
+  }
+}

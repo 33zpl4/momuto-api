@@ -30,7 +30,7 @@ const RULES = [
     where: ALL_COPY, test: line => REFUND.test(line) && DEPOSIT.test(line),
     allow: ['pages/request-custom-kit-design', 'pages/solicitud-de-diseno-personalizado', 'pages/demande-de-design-professionnel-de-maillots', 'pages/richiesta-design-personalizzato'] },   // the four request/gate pages may carry the refund promise
   { id: 'bare-free-design', why: 'Rule 5: "free design" only as "free design for teams" + the deposit condition (EN/ES/FR/IT)',
-    where: ALL_COPY, regex: /free (custom |professional )?design(?! for teams)|design (is )?always free|dise[ñn]o (siempre )?gratis(?! para (los )?equipos)|dise[ñn]o gratuito(?! para (los )?equipos)|design (toujours )?gratuite?s?\b(?! pour (les )?[ée]quipes)|design (sempre )?gratuit[oa](?! per (i )?(team|squadre)| per le squadre)|progettazione gratuita|design sempre gratis/i },
+    where: ALL_COPY, regex: /free (custom |pro |professional )?design(?! for teams)|design (is )?always free|dise[ñn]o (siempre )?gratis(?! para (los )?equipos)|dise[ñn]o gratuito(?! para (los )?equipos)|design (toujours )?gratuite?s?\b(?! pour (les )?[ée]quipes)|design (sempre )?gratuit[oa](?! per (i )?(team|squadre)| per le squadre)|progettazione gratuita|design sempre gratis/i },
   { id: 'stale-price', why: 'Rule 6: from €21.90 (not €20.90) at 10+',
     where: ALL_COPY, regex: /from (€|\$)?20[.,]90|[àa] partir de 20,90|desde 20,90|da 20,90/i },
   { id: 'customer-email', why: 'Rule 8: one customer email, info@momuto.com',

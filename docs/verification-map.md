@@ -20,6 +20,7 @@ failures and fixes of the 1–12 Oct sessions. Extend it whenever a new surface 
 | Shipping zones / navs / SEO (`sync-store-config.js`) | `inspect-zones`, then `dry_run` | the run's `apply` log + a test checkout | type-1 zones cannot overlap |
 | WhatsApp assistant (`lib/wa-*`, `/api/wa-webhook`) | `node --test test/wa-bot.test.js test/wa-webhook.test.js`; `node scripts/build-wa-bot-answers.js --check` | Vercel log shows `[wa] DRY RUN would send` for a test message BEFORE `WA_LIVE=true`; then a real round trip from a phone | answers only change via the FAQ JSON; `api/` is at the 12-function cap (webhook rides `stripe-webhook.js`); Meta needs a raw-body HMAC |
 | Copy rules (CLAUDE.md "hard rules") | `node scripts/check-copy-rules.js` (also a PR check) | — | baseline in `scripts/copy-rules.baseline.json` only ever shrinks |
+| Fixed-price "Promo" store product (title marker `Promo`, design-momuto server-patches README section 13) | title has NO discount-campaign word (personalizada/o, custom): `node scripts/check-promo-products.js` (runs daily as **Check Promo Products**, red = at risk) | product's collections list is empty about a minute after the title edit (collection rules re-evaluate late: `set-product-3d-pointer` logs a stale "after" right away; dispatch **Check Promo Products** a minute later and read the collections); a test order shows the Promo line without a `Promotion` row | 2 Nov 2026: ES "Fokabumbum — Camiseta Personalizada · Promo" was in the "Camiseta Personalizada" collection, so the 7-unit rebate tier (30.85%) stacked on the fixed 18.90: -40.81 EUR; the EN "Chicos Tóxicos — Custom Full Kit · Promo" order lost 7.57 the same way. The campaigns apply to collections matched on the title; keep the kit/jersey word, drop the campaign word |
 
 ## The write-script pattern (copy it for any new CMS/API writer)
 
@@ -30,3 +31,18 @@ failures and fixes of the 1–12 Oct sessions. Extend it whenever a new surface 
 5. A `workflow_dispatch` input for dry run, so a person or an agent can run the same thing from a branch before merging.
 
 Templates in the repo: `scripts/push-recovery-email.js`, `scripts/patch-gallery-review-count.js`, `scripts/sync-store-config.js`.
+
+## Live page `<head>` (title, canonical, robots, hreflang, sitemap listing) — added 3 Nov 2026
+Proof: a green **Probe page head (read-only)** run (`scripts/probe-page-head.js`) with the URL in its input; the log prints status, final URL,
+title, canonical(s), meta robots, hreflang tags, H1s and whether the host's `/sitemap.xml` lists the URL and with which alternates.
+Use it before claiming anything about what Google sees on a page; a repo fragment is not that proof.
+
+## Store nav menus and the homepage SEO plan — added 3 Nov 2026
+Proof of a nav write: a green **Store Config** `apply-nav` run (DRY_RUN=false) followed by an `inspect-nav` run for the same store whose
+JSON shows the item URLs you wrote (the POST upsert issues a new menu id; the theme binds by `nav_name`, so a new id is expected).
+Proof of a homepage SEO write: a green `apply-seo` run followed by an `apply-seo` **dry run**, whose "Current homepage SEO" line equals the
+"New" line. A page-level title/description change is proved by **Probe page head** on the URL (see above).
+
+## www entry (US banner + H1 demotion) — added 3 Nov 2026
+Source `docs/www-us-banner/`; proof that it is pasted = **Probe page head** on a www page showing a single `h1` and (from a US browser)
+the `#mo-us-banner` bar. The `--check` in Check copy rules proves only that the generated file matches the sources.

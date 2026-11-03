@@ -1,0 +1,29 @@
+name: Find Order (read-only)
+
+# Which store holds an order number? Read-only (scripts/find-order.js); prints no personal data.
+
+on:
+  workflow_dispatch:
+    inputs:
+      needle:
+        description: 'Order number / reference to look for'
+        required: true
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Look the order up on every store
+        env:
+          NEEDLE: ${{ github.event.inputs.needle }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+        run: node scripts/find-order.js

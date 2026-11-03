@@ -1,0 +1,28 @@
+name: Check Promo Products
+
+# Daily + on demand. A fixed-price "Promo" product must not carry the discount campaigns' words in its title
+# (personalizada/o, custom ...), or the platform rebate stacks on the fixed price (2 Nov 2026: ES Fokabumbum order, -40.81 EUR).
+# Read-only (scripts/check-promo-products.js); goes red while any product is at risk.
+
+on:
+  schedule:
+    - cron: '41 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: List Promo products per store, fail if any is in a campaign
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+        run: node scripts/check-promo-products.js

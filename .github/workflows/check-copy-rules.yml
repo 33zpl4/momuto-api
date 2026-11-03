@@ -20,6 +20,8 @@ on:
       - 'docs/cart-brand/**'
       - 'scripts/build-cart-brand-entry.js'
       - 'scripts/build-account-brand-entry.js'
+      - 'docs/www-us-banner/**'
+      - 'scripts/build-www-us-banner-entry.js'
       - 'lib/wa-*'
       - 'public/wa-faq.json'
       - 'public/configurator/pricing.js'
@@ -45,6 +47,8 @@ jobs:
         run: node scripts/audit-3d-links.js --check
       - name: Account skin paste-in file is current and every CSS rule is scoped
         run: node scripts/build-account-brand-entry.js --check
+      - name: www entry (US banner + H1 demotion) generated file is current
+        run: node scripts/build-www-us-banner-entry.js --check
 
       - name: Cart brand entry is current and guarded
         run: node scripts/build-cart-brand-entry.js --check
@@ -52,3 +56,5 @@ jobs:
         run: node scripts/build-wa-bot-answers.js --check
       - name: WhatsApp bot tests (hours, keywords, handoff, webhook)
         run: node --test test/wa-bot.test.js test/wa-webhook.test.js test/wa-twilio.test.js test/wa-faq-json.test.js test/gift-rule.test.js
+      - name: Order amounts (the paid total is total_price, after promotions)
+        run: node scripts/test-order-amounts.js
