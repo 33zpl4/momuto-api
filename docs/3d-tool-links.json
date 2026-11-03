@@ -329,6 +329,13 @@
   "count": 1
  },
  {
+  "file": "cms/pages/en/best-custom-football-kit-suppliers-2026.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
   "file": "cms/pages/en/custom-football-kit-prices.json",
   "group": "built/pulled CMS copy",
   "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
@@ -434,6 +441,13 @@
   "count": 1
  },
  {
+  "file": "cms/pages/fr/meilleurs-sites-maillots-foot-personnalises-2026.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
   "file": "cms/pages/fr/politique-de-livraison.json",
   "group": "built/pulled CMS copy",
   "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
@@ -463,6 +477,13 @@
  },
  {
   "file": "cms/pages/it/faq.json",
+  "group": "built/pulled CMS copy",
+  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "cms/pages/it/migliori-siti-maglie-calcio-personalizzate-2026.json",
   "group": "built/pulled CMS copy",
   "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
   "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
@@ -917,6 +938,13 @@
   "count": 1
  },
  {
+  "file": "scripts/build-roundup-pages.js",
+  "group": "generator script",
+  "deploy": "it emits the links above",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
   "file": "scripts/build-teams-pages.js",
   "group": "generator script",
   "deploy": "it emits the links above",
@@ -1303,6 +1331,27 @@
  },
  {
   "file": "pages/roundup-es",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/roundup/en.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/roundup/fr.html",
+  "group": "page fragment",
+  "deploy": "auto on merge (its deploy workflow)",
+  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
+  "count": 1
+ },
+ {
+  "file": "pages/roundup/it.html",
   "group": "page fragment",
   "deploy": "auto on merge (its deploy workflow)",
   "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",

@@ -104,6 +104,7 @@ const STATIC_CLUSTERS = [
   // Added 25 Sep 2026 (docs/seo-opportunities-2026-09.md §1): the translated
   // pages that had no cross-locale annotation at all. Generated pages first
   // (faq/, policies/, maker/ — handles from those JSON sources).
+  { en: 'best-custom-football-kit-suppliers-2026', es: 'mejores-webs-equipaciones-futbol-personalizadas-2026', fr: 'meilleurs-sites-maillots-foot-personnalises-2026', it: 'migliori-siti-maglie-calcio-personalizzate-2026' },   // market roundups, 3 Nov 2026 (build-roundup-pages.js; ES page predates it)
   { en: 'custom-football-kit-prices',         es: 'precios-equipaciones-futbol-personalizadas', fr: 'prix-maillot-foot-personnalise',            it: 'prezzi-maglie-calcio-personalizzate', us: 'custom-soccer-jersey-prices' },   // price pages, 3 Nov 2026 (build-price-pages.js)
   { en: 'faq',                                 es: 'preguntas-frecuentes',                fr: 'questions-frequentes',                       it: 'faq',                     us: 'faq' },
   { en: 'shipping-policy',                     es: 'envios-metodos-y-plazos',             fr: 'politique-de-livraison',                     it: 'politica-di-spedizione',  us: 'shipping-policy' },
