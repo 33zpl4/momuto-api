@@ -75,6 +75,7 @@ async function patchPage(domain, p) {
     }
   }
   if (!changed) return false;
+  if (process.env.DRY_RUN === 'true') { console.log(`  DRY RUN — would patch ${p.handle}`); return true; }
 
   const res = await fetch(`${domain.host}/pages/${p.id}`, {
     method: 'PUT',
