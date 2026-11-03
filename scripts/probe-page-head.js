@@ -62,6 +62,12 @@ async function sitemapFor(host) {
       row.metaDescription = all(head, /<meta[^>]+name=["']description["'][^>]*>/gi).map((m) => attr(m[0], 'content'));
       row.hreflangTags = all(head, /<link[^>]+hreflang=[^>]*>/gi).map((m) => `${attr(m[0], 'hreflang')}→${attr(m[0], 'href')}`);
       row.h1 = all(html, /<h1[^>]*>([\s\S]*?)<\/h1>/gi).map((m) => m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()).slice(0, 5);
+      // opening tag + the nearest ancestors' tag/class, so a theme-printed heading can be targeted precisely
+      row.h1Context = all(html, /<h1[^>]*>/gi).slice(0, 5).map((m) => {
+        const before = html.slice(Math.max(0, m.index - 600), m.index);
+        const parents = all(before, /<(div|section|main|header|article)\b[^>]*>/gi).slice(-3).map((p) => p[0].slice(0, 120));
+        return { tag: m[0].slice(0, 160), parents };
+      });
       row.htmlBytes = html.length;
       const host = new URL(url).host; const sm = await sitemapFor(host);
       row.sitemap = { status: sm.status, urls: sm.count, listed: Object.prototype.hasOwnProperty.call(sm.entries, url.replace(/\/$/, '')), alternates: sm.entries[url.replace(/\/$/, '')] || [] };
