@@ -13,7 +13,11 @@
  * custom-soccer-jersey-designer was a broken template scaffold on both
  * stores ("Discover MOMUTO", placeholder CSS href) — reused, not created.
  *
- * Usage: node scripts/build-maker-pages.js [us,en]
+ * Usage: node scripts/build-maker-pages.js [us,en,fr,jm-us,jm-en]
+ *   Each entry names maker/maker.<entry>.json; the file's own "locale" picks the cms/pages/<locale>/ target and the
+ *   store rules. jm-us / jm-en are the sport-agnostic "Jersey Maker" hub (handle jersey-maker, 3 Nov 2026,
+ *   docs/seo-targets-2026-11.md T3). A missing pulled page is written as an id-less stub: deploy-cms-page.js
+ *   looks the handle up and POSTs it when absent.
  */
 
 const fs = require('fs');
@@ -21,7 +25,7 @@ const path = require('path');
 const CSS = require('./lib/estate-css.js');
 
 const ROOT = path.resolve(__dirname, '..');
-const LOCALES = (process.argv[2] || 'us,en,fr').split(',').map(s => s.trim()).filter(Boolean);
+const LOCALES = (process.argv[2] || 'us,en,fr,jm-us,jm-en').split(',').map(s => s.trim()).filter(Boolean);
 
 const esc = (s) => String(s).replace(/&(?![a-z#0-9]+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const strip = (h) => String(h).replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&mdash;/g, '—').replace(/&ndash;/g, '–').replace(/\s+/g, ' ').trim();
@@ -185,16 +189,17 @@ function sanity(d, html) {
   if (/\b30 ?(€|\$)|(€|\$) ?30(?![.,]\d)\b/.test(strip(html))) throw new Error(`${d.locale}: stale €30 deposit`);
 }
 
-for (const locale of LOCALES) {
-  const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'maker', `maker.${locale}.json`), 'utf8'));
+for (const entry of LOCALES) {
+  const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'maker', `maker.${entry}.json`), 'utf8'));
+  const locale = d.locale;
   const html = render(d);
   sanity(d, html);
   fs.mkdirSync(path.join(ROOT, 'pages', 'maker'), { recursive: true });
-  fs.writeFileSync(path.join(ROOT, 'pages', 'maker', `${locale}.html`), html);
+  fs.writeFileSync(path.join(ROOT, 'pages', 'maker', `${entry}.html`), html);
   const cmsFile = path.join(ROOT, 'cms', 'pages', locale, `${d.handle}.json`);
-  if (!fs.existsSync(cmsFile)) { console.warn(`⚠️  ${locale}: no pulled page at cms/pages/${locale}/${d.handle}.json — preview only (pull it first)`); continue; }
-  const page = JSON.parse(fs.readFileSync(cmsFile, 'utf8'));
+  if (!fs.existsSync(cmsFile)) console.warn(`ℹ️  ${entry}: no pulled page at cms/pages/${locale}/${d.handle}.json — writing an id-less stub (the deployer creates it)`);
+  const page = fs.existsSync(cmsFile) ? JSON.parse(fs.readFileSync(cmsFile, 'utf8')) : { handle: d.handle };
   Object.assign(page, { content: html, title: d.meta.title, meta_title: d.meta.meta_title, meta_descript: d.meta.meta_descript, meta_keywords: d.meta.keywords, handle: d.handle });
   fs.writeFileSync(cmsFile, JSON.stringify(page, null, 2) + '\n');
-  console.log(`✅ ${locale}: ${html.length} chars → cms/pages/${locale}/${d.handle}.json (${page.id ? 'id ' + page.id : 'NEW — deployer will create it'})`);
+  console.log(`✅ ${entry}: ${html.length} chars → cms/pages/${locale}/${d.handle}.json (${page.id ? 'id ' + page.id : 'NEW — deployer will create it'})`);
 }

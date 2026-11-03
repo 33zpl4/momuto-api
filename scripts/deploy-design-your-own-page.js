@@ -31,7 +31,9 @@ const DOMAIN = {
   // ('create your own soccer jersey online free', pos 3.6, 17% CTR).
   title: 'Soccer Jersey Maker — Create Your Own Soccer Jersey Online Free',
   meta_title: 'Soccer Jersey Maker — Create Your Own Soccer Jersey Online Free',
-  meta_descript: 'Free 3D soccer jersey maker: create your own soccer jersey online, or turn your AI concept (ChatGPT, Gemini) into a real, wearable kit. No minimum order.',
+  // 3 Nov 2026 (seo-targets T2): pos 3–6 on "design your own soccer jersey", "custom soccer jersey design/creator",
+  // "create custom soccer jerseys" with 0–2% CTR — the snippet never said design-your-own or custom. Now it does.
+  meta_descript: 'Design your own soccer jersey in a free 3D maker: custom colors, crest, names and numbers, or turn your AI concept into a real kit. No minimum order.',
   meta_keywords: [
     'design your own soccer jersey',
     'create your own soccer jersey online free',
