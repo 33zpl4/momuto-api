@@ -34,3 +34,13 @@ counted but never read back. Decide with your privacy adviser whether this needs
 
 ## Extending it
 Add the metric to `admin-orders?action=metrics` (or a new collector in `scripts/weekly-scorecard.js`), add a `row(...)` to the report, add a line here.
+
+## On-demand reports: `GSC report` workflow (3 Nov 2026)
+
+The weekly collector stores only host totals and 12 queries. For page-, query- or country-level questions, dispatch **GSC report**
+(`.github/workflows/gsc-report.yml` → `scripts/gsc-report.js`, read only) from any branch with the inputs you need (dimensions, date
+range, country, page/query contains / not-contains filters, sort, min impressions). The table is in the step log and the job summary;
+the `gsc-report` artifact holds JSON + CSV. The default property `sc-domain:momuto.com` covers every subdomain, so "us.momuto.com only"
+is `page=us.momuto.com`, not a different site. Up to 25,000 rows; GSC drops anonymised queries, so query totals sit below page totals.
+Typical calls: `dimensions=page country=usa` (which host takes US clicks); `dimensions=query page=/pages/design-your-own-soccer-jersey`
+(what a page ranks for); `dimensions=query,page query=jersey maker` (which page takes a head term).

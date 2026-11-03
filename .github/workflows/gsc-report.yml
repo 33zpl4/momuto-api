@@ -1,0 +1,89 @@
+name: GSC report
+# On-demand Search Console query (read only). The sandbox cannot reach Google; dispatch this from any branch and read the
+# table in the step log / job summary, or download the gsc-report artifact (JSON + CSV). See docs/scorecard.md.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dimensions:
+        description: 'Comma list: query,page,country,device,date,searchAppearance'
+        required: false
+        default: 'query'
+      start:
+        description: 'Start YYYY-MM-DD (default: 28 complete days ending 3 days ago)'
+        required: false
+        default: ''
+      end:
+        description: 'End YYYY-MM-DD'
+        required: false
+        default: ''
+      country:
+        description: '3-letter ISO country filter (usa, gbr, esp, fra, ita) or empty'
+        required: false
+        default: ''
+      page:
+        description: 'Page URL must contain (e.g. us.momuto.com or /pages/design-your-own-soccer-jersey)'
+        required: false
+        default: ''
+      page_not:
+        description: 'Page URL must NOT contain'
+        required: false
+        default: ''
+      query:
+        description: 'Query must contain (e.g. jersey maker)'
+        required: false
+        default: ''
+      query_not:
+        description: 'Query must NOT contain'
+        required: false
+        default: ''
+      row_limit:
+        description: 'Max rows (default 200, max 25000)'
+        required: false
+        default: '200'
+      sort:
+        description: 'clicks | impressions | position | ctr'
+        required: false
+        default: 'clicks'
+      min_impressions:
+        description: 'Drop rows with fewer impressions'
+        required: false
+        default: '0'
+      site:
+        description: 'GSC property (default sc-domain:momuto.com, which includes every subdomain)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Query Search Console
+        env:
+          GSC_SERVICE_ACCOUNT: ${{ secrets.GSC_SERVICE_ACCOUNT }}
+          GSC_SITE: ${{ github.event.inputs.site || vars.GSC_SITE }}
+          DIMENSIONS: ${{ github.event.inputs.dimensions }}
+          START: ${{ github.event.inputs.start }}
+          END: ${{ github.event.inputs.end }}
+          COUNTRY: ${{ github.event.inputs.country }}
+          PAGE: ${{ github.event.inputs.page }}
+          PAGE_NOT: ${{ github.event.inputs.page_not }}
+          QUERY: ${{ github.event.inputs.query }}
+          QUERY_NOT: ${{ github.event.inputs.query_not }}
+          ROW_LIMIT: ${{ github.event.inputs.row_limit }}
+          SORT: ${{ github.event.inputs.sort }}
+          MIN_IMPRESSIONS: ${{ github.event.inputs.min_impressions }}
+        run: node scripts/gsc-report.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gsc-report
+          path: gsc-report/
+          if-no-files-found: ignore
