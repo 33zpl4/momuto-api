@@ -219,3 +219,127 @@ Every target above was read from a manual export because `metrics/weekly.json` h
 `scripts/weekly-scorecard.js` before the next read: `dimensions: ['page']` filtered to the US country for the handles named in T1–T5,
 and `dimensions: ['query']` for the ~20 head terms listed here, both stored per ISO week. The 15 Dec and 15 Jan reads then become a
 diff of `weekly.json`, and the scorecard can flag a target that slips without anyone pulling a sheet.
+
+---
+
+## Addendum, 3 Nov 2026 (later the same day): what the live API reads changed
+
+The `GSC report` workflow (merged in #358) and the `Probe page head` workflow (#359, #360) ran the same day. Eight Search Console reads
+(runs 41614343769, 41614347964, 41614351760, 41614355955, 41614360335, 41614365127, 41614369208, 41614372984, 41614490573, 41614907906,
+41614912697; all green, logs in the Actions tab) and one live `<head>` probe (run 41614901270) replace the inferences above. Window for
+the reads: **4–31 Oct 2026, country = US**, unless stated.
+
+### Caveat first: page-level rows undercount by ~40%
+
+Daily series for 4–31 Oct: **841 clicks, 15,009 impressions**. The same window grouped by page: 510 clicks, 12,699 impressions. The
+difference is Search Console's privacy filtering of long-tail URLs when a page dimension is present (the query dimension drops anonymised
+queries the same way, and a query×page read filtered on one page returned only 12 rows for the homepage). **Compare page or query rows with
+each other, never with the host totals**, and keep the scorecard's host totals as the number of record.
+
+### T2 is mostly done already: the design page owns the soccer maker terms at position ~3
+
+The 12-month averages in the table above (13.7 for "soccer jersey maker") mixed in the spring, when the page ranked on page 2. Last 28 days,
+query × page, all on `www…/pages/design-your-own-soccer-jersey`:
+
+| Query | Clicks | Impr | CTR | Position |
+|---|---:|---:|---:|---:|
+| soccer jersey maker | 40 | 444 | 9.0% | 2.7 |
+| soccer jersey designer | 25 | 256 | 9.8% | 3.3 |
+| make your own soccer jersey | 20 | 231 | 8.7% | 2.9 |
+| soccer jersey creator | 23 | 181 | 12.7% | 2.9 |
+| custom soccer jersey maker | 12 | 176 | 6.8% | 3.2 |
+| create your own soccer jersey online free | 23 | 128 | 18.0% | 1.1 |
+| 3d soccer jersey designer | 6 | 83 | 7.2% | 2.2 |
+
+The homepage still shows for the same queries as a second listing at 28–42 with 0 clicks (e.g. "soccer jersey maker" 37 impr at 42.4);
+that second listing is what dragged the 12-month query averages down, not a ranking problem. **Revised T2:** hold the design page at ≤ 3.5 on
+the seven queries above and lift the top-3 rows with weak CTR: "design your own soccer jersey" (104 impr, pos 3.7, **1.9%**), "how to make your
+own soccer jersey" (39, 4.4, 0%), "custom soccer jersey design" (37, 3.0, 0%), "create custom soccer jerseys" (35, 6.3, 0%), "custom soccer jersey
+creator" (34, 5.6, 0%). These are snippet problems at a good position: the meta description leads with "Free 3D soccer jersey maker" and says
+nothing about *design your own* or *custom* in the first 90 characters. One description rewrite, measured on 15 Dec. The internal-link work in
+T2 action 1 still applies to the EN nav target (see Decision 2), but it is no longer the lever for the head terms.
+
+### T3 confirmed: the generic "jersey maker" cluster lands on the homepage, page 2–4, 0 clicks
+
+Query × page for queries containing "jersey maker", last 28 days: the homepage takes **custom football jersey maker** (159 impr, 9.2, 0 clicks),
+**jersey maker** (148, 13.3, 1), **jersey makers** (123, 32.7, 0), **custom jersey maker** (95, 33.6, 0), **football jersey maker** (73, 20.1, 3),
+jersey maker online (23, 17.3, 0). A separate read shows **jersey designer** on the homepage too (171 impr, 12.3, 2 clicks). The design page
+gets "jersey maker" at 13.0 on only 10 impressions: Google does not see it as the answer to the sport-less query. The sport-agnostic page
+in T3 is the right build; its first internal links should come from the homepage and from the design page.
+
+### T1 revised: the us twins ARE indexed as separate pages, and differentiation alone has not moved them
+
+The probe (run 41614901270) read the live `<head>` of the paired pages:
+
+| Page | www title | us title | Canonical | Sitemap hreflang |
+|---|---|---|---|---|
+| design-your-own-soccer-jersey | Soccer Jersey Maker — Create Your Own Soccer Jersey Online Free | **identical** (title, description, H1) | each self | en ↔ en-US reciprocal, x-default → www |
+| custom-soccer-jersey-designer | Football Jersey Maker: Free 3D Kit Designer… €21.90 | Soccer Jersey Maker: Free 3D Designer… $25.90 (**different since 4 Sep**) | each self | reciprocal (+ fr-FR) |
+| custom-soccer-jerseys | Custom Soccer Jerseys & Uniforms — No Minimum | identical title + H1; description differs | each self | reciprocal (+ es-ES, fr-FR) |
+| custom-soccer-uniforms (us only) | — | Custom Soccer Uniforms for Teams — Free 3D Designer | self | no alternates (no twin; expected) |
+| custom-basketball-jerseys (us only) | — | Custom Basketball Jerseys — Design in 3D, No Minimum | self | no alternates (no twin; expected) |
+
+(Both homepages answer the runner with the Cloudflare challenge even in Chromium, so their live titles were not read; the sitemaps were.)
+No `noindex`, no cross-host canonical, hreflang reciprocal in both sitemaps (421 www URLs, 444 us URLs). Search Console, last 28 days,
+US country: `us…/custom-soccer-jersey-designer` 235 impressions at **58.8** (0 clicks) while `www…/custom-soccer-jersey-designer` sits at **6.1**
+(184 impr, 3 clicks); the us page is reached by "jersey creator" (51 impr, 69.7), "custom soccer jersey creator" (23, 67.3), "jersey maker" (19, 69.4),
+"soccer uniform generator" (16, 41.7). Previous 28 days it had 52 impressions at 75.0, so it is rising, slowly. All us pages together: 0 clicks on
+459 impressions at 51.5.
+
+What this rules out: a duplicate-canonical fold (both URLs are indexed and shown), a robots/noindex mistake, and a missing hreflang row.
+What it leaves: Google has not *applied* the en ↔ en-US swap yet. The maker twin has been visibly different for eight weeks and still ranks
+on page 6 on its own, so **differentiating the design-your-own twin (T1 action 2) is necessary but will not by itself move anything in
+weeks**. The owner check that settles the remaining question is still a 10-minute one, now narrower:
+1. Search Console → us.momuto.com property → **Pages**: how many of the 444 sitemap URLs are indexed, and what the top "not indexed" reason is
+   (expected: *Crawled – currently not indexed* or *Discovered – currently not indexed* for most pages).
+2. Same property → **Sitemaps**: is `https://us.momuto.com/sitemap.xml` submitted and read without errors? If it was never submitted there,
+   submit it; the domain property reading it is not the same as the us URL-prefix property reading it.
+3. **URL inspection** on `https://us.momuto.com/pages/custom-soccer-jersey-designer`: crawl date and "Google-selected canonical".
+
+Revised T1 metrics (unchanged dates): us.momuto.com clicks per 28 d from **0 (page rows) / 17 (property)** to ≥ 60 by 15 Jan (was 120: the
+property is nine weeks old and the pages have no links); `us…/custom-soccer-jersey-designer` from 58.8 to ≤ 20. The banner (action 3) moves
+from "nice to have" to **the only lever that puts US buyers on the USD store this quarter**, since search will not do it before January.
+
+### T4: a rule-5 drift on the live us page, and a page that ranks at 16 with no clicks
+
+- **Live us meta description for `custom-soccer-jerseys` says "Free pro design in 1–2 days"** (a bare free-design claim with no "for teams"
+  and no deposit line; rule 5). The www twin says "Free design for teams." The us copy was cloned at launch and no repo script deploys that
+  handle for us (`deploy-soccer-hub-page.js` is EN only), so the drift lives in the CMS only; `cms/pages/us/custom-soccer-jerseys.json` holds
+  the same text. Fix: edit `meta_descript` in that file and deploy with Deploy CMS Page (dry run first); add the us page to the copy-rules
+  check's live surfaces.
+- `www…/pages/custom-soccer-jerseys` has 150 impressions at 15.9 and 0 clicks in 28 days (77 at 15.0 the month before). "custom soccer jerseys
+  no minimum" lands on it at 3.6 with 0 clicks on 26 impressions. The buyer vocabulary in the US is small in volume this month ("custom soccer
+  jerseys" 13 impr on this page at 23.2, plus 7 on the best-makers page at 3.0), so the T4 quarterly click target stays at 60 but the measure
+  that matters first is this page's position: **15.9 → ≤ 8** by 15 Jan.
+
+### T5 confirmed, smaller than the 12-month view suggested
+
+Basketball, last 28 days, US: 53 impressions, 0 clicks, every row on `us…/custom-basketball-jerseys` at 56–82 (previous 28 days: 82 impr at 67).
+The "13 clicks" in export B came from earlier weeks and anonymised queries. The page is indexed and is the only basketball URL we have; the
+www twin + links + "basketball jersey maker" wording remain the plan; expectations for 15 Jan: ≤ 30, ≥ 10 clicks per quarter.
+
+### T6 narrowed: the desktop gap is the homepage, not the templates
+
+Device × page, last 28 days: design page desktop 3.6 / mobile 4.0 (no gap); **homepage desktop 19.2 / mobile 14.1** (2,441 vs 2,549 impr;
+3.3% vs 5.8% CTR). The homepage's desktop SERP is the American-football one (see Decision 1); the maker page shows desktop 11.8 vs mobile 3.7 on
+small numbers. Drop the Core Web Vitals check; T6 folds into Decision 1.
+
+### Decision 1, with UK numbers
+
+UK, last 28 days, all queries ≥ 15 impressions: **877 impressions, 11 clicks**, of which 5 are brand and 4 land on the design page or the AI
+post. The www homepage takes "custom design football jersey" (79 impr, 24.0), "custom jersey maker" (71, 23.9), "custom football jersey design"
+(63, 16.9), "jersey maker" (73, 7.1, 1 click) and sixteen more football-worded queries at 8–45, **0 clicks on all of them**. Adding "Soccer" to the
+www homepage title puts at risk roughly nothing in the UK this month and addresses 21k US impressions a year on a 0.2% CTR. Recommendation
+unchanged: (b), and measure both countries on 15 Dec with `GSC report` (`dimensions=query,page country=gbr` and `country=usa page=www.momuto.com/`).
+
+### How to re-read (replaces the manual exports)
+
+```
+GSC report  dimensions=page        country=usa                                   → host split, us share (compare rows with rows)
+GSC report  dimensions=query,page  country=usa  query=jersey maker               → T3 (homepage vs the new page)
+GSC report  dimensions=query,page  country=usa  query=soccer jersey  min=20      → T2 (design page positions and CTR)
+GSC report  dimensions=query,page  country=usa  page=us.momuto.com               → T1 (what the us store ranks for)
+GSC report  dimensions=query,page  country=usa  query=basketball                 → T5
+GSC report  dimensions=query,page  country=gbr  min=15                           → Decision 1, UK side
+Probe page head  (the ten URLs above)                                            → titles/canonicals after any change
+```
