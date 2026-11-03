@@ -4,7 +4,7 @@
  *
  *   ES: https://es.momuto.com/pages/mejores-webs-equipaciones-futbol-personalizadas-2026
  *
- * Multi-competitor comparativa (MOMUTO vs Zentral vs Aimar Sport vs Owayo vs
+ * Multi-competitor comparativa (MOMUTO vs Zentral vs Aimar Sport vs EZ Sports Lab vs Owayo vs
  * Spized) mirroring the FR comparatif. Upserts: creates the page on first run,
  * updates it thereafter.
  *
@@ -26,7 +26,7 @@ const DOMAIN = {
   file: path.join(ROOT, 'pages', 'roundup-es'),
   title: 'Mejores Webs para Crear Equipaciones de Fútbol Personalizadas (2026) | MOMUTO',
   meta_title: 'Mejores Webs para Equipaciones de Fútbol Personalizadas 2026 | MOMUTO',
-  meta_descript: 'Comparativa 2026 de las mejores webs para crear equipaciones de fútbol personalizadas: MOMUTO, Zentral, Aimar Sport, Owayo y Spized. Precios, plazos, pedido mínimo y diseño comparados.',
+  meta_descript: 'Comparativa 2026: MOMUTO, Zentral, Aimar Sport, EZ Sports Lab, Owayo y Spized para equipaciones de fútbol personalizadas. Precios, plazos, mínimo y diseño.',
   meta_keywords: [
     'mejores webs equipaciones futbol personalizadas',
     'crear equipacion de futbol',
