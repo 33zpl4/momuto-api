@@ -46,3 +46,9 @@ Proof of a homepage SEO write: a green `apply-seo` run followed by an `apply-seo
 ## www entry (US banner + H1 demotion) — added 3 Nov 2026
 Source `docs/www-us-banner/`; proof that it is pasted = **Probe page head** on a www page showing a single `h1` and (from a US browser)
 the `#mo-us-banner` bar. The `--check` in Check copy rules proves only that the generated file matches the sources.
+
+## Price pages (5 locales) — added 3 Nov 2026
+Source of numbers: `faq/faq.<locale>.json` pricing block; copy: `pricing/price-page.<locale>.json`; builder `scripts/build-price-pages.js`
+(sanity: fonts, one H1, JSON-LD, meta lengths, lexicon, stale price, no refund wording, 15-player row). Proof of a change: green Deploy CMS Page
+on the merge + Probe page head on the URL; the calculator is checked in Chromium by `scratchpad/test-price-calc.js` (session) — move it into
+`scripts/` on the second change. A price change goes into the FAQ source first, then both builders run.
