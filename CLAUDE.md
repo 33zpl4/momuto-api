@@ -49,6 +49,7 @@ Read the doc that owns a topic BEFORE editing that surface.
   commit, or Google gets no locale signal for it. Same-handle en↔us pairs
   are automatic. One URL may appear in one cluster only (the script now logs
   and skips a duplicate).
+- `docs/seo-status-2026-11.md` — SEO handoff (3 Nov 2026): search numbers by store, what moved and what stalled, caveats of the data, ranked next actions. Read before any SEO work, after `seo-opportunities-2026-09.md`.
 - `docs/store-theme-css.md` — the live store custom-CSS script (CMS name `PC端你也喜欢产品调准css`),
   the Jost audit and measured header/footer numbers; read BEFORE touching nav fonts or header styling.
 - `docs/store-account-area.md` — the platform's customer account (login, orders, order detail, tracking) on the 5 stores: the three order surfaces, what is verified,
