@@ -4,10 +4,25 @@
  * and print what search engines see in <head>: HTTP status + redirects, <title>, canonical, meta robots, meta description,
  * hreflang <link> tags, H1s, and whether the URL is listed (with which alternates) in its host's /sitemap.xml.
  * Env: URLS (comma or newline separated). Writes probe-page-head/report.json.
+ * Uses Playwright Chromium (the stores sit behind a Cloudflare managed challenge that answers plain fetch with 403 "Just a moment").
  */
 'use strict';
 const fs = require('fs');
-const UA = 'Mozilla/5.0 (compatible; momuto-probe/1.0; +https://www.momuto.com)';
+const { chromium } = require('playwright');
+let browser, ctx;
+async function getHtml(url) {
+  if (!browser) { browser = await chromium.launch(); ctx = await browser.newContext({ userAgent: UA, locale: 'en-US' }); }
+  const page = await ctx.newPage();
+  try {
+    const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    let status = resp ? resp.status() : 0;
+    for (let i = 0; i < 6 && /just a moment/i.test(await page.title()); i++) await page.waitForTimeout(3000); // Cloudflare challenge
+    const html = await page.content();
+    if (/just a moment/i.test(await page.title())) status = 'CF-CHALLENGE';
+    return { status, finalUrl: page.url(), html, headers: resp ? resp.headers() : {} };
+  } finally { await page.close(); }
+}
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
 const urls = (process.env.URLS || '').split(/[\n,]/).map((s) => s.trim()).filter(Boolean);
 if (!urls.length) { console.error('URLS is empty'); process.exit(1); }
 
@@ -19,8 +34,8 @@ const sitemapCache = {};
 async function sitemapFor(host) {
   if (sitemapCache[host]) return sitemapCache[host];
   try {
-    const r = await fetch(`https://${host}/sitemap.xml`, { headers: { 'User-Agent': UA } });
-    const xml = r.ok ? await r.text() : '';
+    const r = await getHtml(`https://${host}/sitemap.xml`);
+    const xml = String(r.html || '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
     const entries = {};
     for (const m of all(xml, /<url>([\s\S]*?)<\/url>/g)) {
       const loc = pick(m[1], /<loc>\s*([^<]+?)\s*<\/loc>/);
@@ -37,9 +52,9 @@ async function sitemapFor(host) {
   for (const url of urls) {
     const row = { url };
     try {
-      const r = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'text/html' }, redirect: 'follow' });
-      row.status = r.status; row.finalUrl = r.url; row.xRobotsTag = r.headers.get('x-robots-tag');
-      const html = await r.text();
+      const r = await getHtml(url);
+      row.status = r.status; row.finalUrl = r.finalUrl; row.xRobotsTag = r.headers['x-robots-tag'] || null;
+      const html = r.html;
       const head = (html.match(/<head[\s\S]*?<\/head>/i) || [html.slice(0, 200000)])[0];
       row.title = pick(head, /<title[^>]*>([\s\S]*?)<\/title>/i);
       row.canonical = (all(head, /<link[^>]+rel=["']canonical["'][^>]*>/gi).map((m) => attr(m[0], 'href')));
@@ -57,4 +72,5 @@ async function sitemapFor(host) {
   }
   fs.mkdirSync('probe-page-head', { recursive: true });
   fs.writeFileSync('probe-page-head/report.json', JSON.stringify(report, null, 1));
+  if (browser) await browser.close();
 })().catch((e) => { console.error('FAILED:', e.message); process.exit(1); });
