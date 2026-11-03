@@ -381,3 +381,7 @@ it is one rule in the theme, not per page.
 
 **Re-read for these changes:** 15 Dec — homepage CTR in the US and UK (Decision 1), "jersey maker" cluster by page (T3: the hub should
 appear), the five low-CTR design-page queries (T2), us twins' positions (T1).
+
+**Decision 3 + the second H1 (3 Nov, evening):** built as one www script-manager entry, `docs/www-us-banner/www-us-banner-entry.html`
+(README there): the US banner (link to us.momuto.com for en-US browsers in US time zones, dismiss 30 days) and the demotion of the
+theme-printed `h1.title` to a `div` on every page and post. Owner pastes it once on www; not live from the repo. Theme fork not needed.

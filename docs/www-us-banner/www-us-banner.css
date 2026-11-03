@@ -1,0 +1,12 @@
+/* MOMUTO — www-only script-manager entry: US banner (+ the H1 demotion lives in the JS). Version is read by the JS and the probe. */
+:root { --mo-www-entry: v1; }
+#mo-us-banner { display: none; box-sizing: border-box; width: 100%; background: #0b0b0c; color: #e8e8ec; font-family: 'Outfit', Arial, sans-serif; font-size: 14px; line-height: 1.4; border-bottom: 1px solid #2a2a2e; }
+#mo-us-banner.mo-on { display: block; }
+#mo-us-banner .mo-in { max-width: 1200px; margin: 0 auto; padding: 9px 44px 9px 16px; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; position: relative; }
+#mo-us-banner .mo-txt { margin: 0; }
+#mo-us-banner .mo-txt b { color: #fff; font-weight: 600; }
+#mo-us-banner a.mo-go { display: inline-block; background: #c8352e; color: #fff; text-decoration: none; font-weight: 600; letter-spacing: .04em; padding: 6px 14px; border-radius: 3px; white-space: nowrap; }
+#mo-us-banner a.mo-go:hover { background: #a52a24; color: #fff; }
+#mo-us-banner button.mo-x { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: 0; color: #a1a1aa; font-size: 22px; line-height: 1; cursor: pointer; padding: 4px 8px; }
+#mo-us-banner button.mo-x:hover { color: #fff; }
+@media (max-width: 600px) { #mo-us-banner .mo-in { padding: 8px 40px 8px 12px; gap: 8px; font-size: 13px; } }

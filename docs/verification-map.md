@@ -42,3 +42,7 @@ Proof of a nav write: a green **Store Config** `apply-nav` run (DRY_RUN=false) f
 JSON shows the item URLs you wrote (the POST upsert issues a new menu id; the theme binds by `nav_name`, so a new id is expected).
 Proof of a homepage SEO write: a green `apply-seo` run followed by an `apply-seo` **dry run**, whose "Current homepage SEO" line equals the
 "New" line. A page-level title/description change is proved by **Probe page head** on the URL (see above).
+
+## www entry (US banner + H1 demotion) — added 3 Nov 2026
+Source `docs/www-us-banner/`; proof that it is pasted = **Probe page head** on a www page showing a single `h1` and (from a US browser)
+the `#mo-us-banner` bar. The `--check` in Check copy rules proves only that the generated file matches the sources.
