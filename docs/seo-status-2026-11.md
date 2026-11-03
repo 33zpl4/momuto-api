@@ -1,6 +1,6 @@
 # SEO status — handoff, 3 Nov 2026
 
-Written for a new agent picking this up cold. Read the **Caveats** first. Companion docs: `docs/seo-opportunities-2026-09.md` (ranked backlog),
+Written for a new agent picking this up cold. Read the **Caveats** first. **Targets with baselines: `docs/seo-targets-2026-11.md` (3 Nov, from the US page/query exports).** Companion docs: `docs/seo-opportunities-2026-09.md` (ranked backlog),
 `docs/search-position-2026-08.md` + `docs/search-analysis-2026-07.md` + `docs/search-analysis-2026-09-us.md` (query-level analyses),
 `docs/scorecard.md` (the weekly loop), `docs/it-site-recovery.md` (Italy runbook), `docs/editorial-strategy.md`.
 
