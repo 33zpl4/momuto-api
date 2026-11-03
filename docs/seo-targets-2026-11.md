@@ -362,3 +362,22 @@ below this line as they happen.
 - **T4**: us `custom-soccer-jerseys` title "…for US Teams — No Minimum", description without the bare "Free pro design" claim;
   `check-copy-rules` now catches "free pro design".
 - Not shipped: the www→us banner (owner paste, Decision 3); the us design-your-own **body** is still the www body (meta only).
+
+**Live, 3 Nov 2026 (run ids = the proof):**
+- Deploy CMS Page 41616830283 (push to main): `jersey-maker` created on www and us; us `design-your-own-soccer-jersey` and
+  `custom-soccer-jerseys` updated. Deploy Design-Your-Own 41616830339: www design page updated, IndexNow 200. Deploy Static Files
+  41616830299: llms.txt on all stores.
+- Store Config apply-seo en 41616853958 (homepage plan written), read back by apply-seo dry run 41617018514 ("Current" = new values).
+  apply-nav en 41616859259 / us 41616864263, read back by inspect-nav 41617009543 / 41617014160: both "Jersey Maker — free 3D tool"
+  items point at `/pages/jersey-maker`; the POST upsert gave the menus new ids (en Header Menu 841796, us 841794; the theme binds by name).
+- Rebuild Sitemap 41616961955: 1,335 URLs clustered; both hub URLs listed with en ↔ en-US alternates (probe 41617219868).
+- Probe page head 41616957177 + 41617219868: live titles, descriptions and self-canonicals of the five changed pages match the repo.
+- Pull CMS Content 41617023526 (en) and the us pull: `cms/pages/{en,us}/jersey-maker.json` now carry their ids.
+- IndexNow 41617028876: the three www URLs accepted (the us host has no IndexNow key; Bing finds it through the sitemap).
+
+**Found on the way (theme, not fixed):** the storefront renders the CMS `title` as an `<h1>` above every page fragment, so each
+page carries two H1s in the DOM (the title-hide CSS only hides it visually). Every probed page shows it. Theme-owned; if it matters,
+it is one rule in the theme, not per page.
+
+**Re-read for these changes:** 15 Dec — homepage CTR in the US and UK (Decision 1), "jersey maker" cluster by page (T3: the hub should
+appear), the five low-CTR design-page queries (T2), us twins' positions (T1).
