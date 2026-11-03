@@ -88,7 +88,7 @@
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.6",
-    "reviewCount": "51",
+    "reviewCount": "53",
     "bestRating": 5
   },
   "offers": {
