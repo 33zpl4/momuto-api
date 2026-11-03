@@ -1,0 +1,112 @@
+{
+  "handle": "precios-equipaciones-futbol-personalizadas",
+  "title": "Precios de equipaciones de fútbol personalizadas 2026 | MOMUTO",
+  "meta_title": "Precios equipaciones de fútbol personalizadas 2026 | MOMUTO",
+  "meta_descript": "Precios 2026: 38,90 € una camiseta, 21,90 € a partir de 10, kit completo desde 21,90 €, con totales para 11, 15 y 20 jugadores. Sin pedido mínimo.",
+  "keywords": [
+    "precio equipaciones de fútbol personalizadas",
+    "cuánto cuesta una equipación de fútbol personalizada",
+    "precio camiseta de fútbol personalizada",
+    "equipaciones fútbol 7 precio",
+    "precio por jugador equipación",
+    "MOMUTO"
+  ],
+  "label": "Precios 2026",
+  "h1": "Precios de equipaciones de fútbol <span class=\"acc\">personalizadas</span>",
+  "sub": "Una sola escala para cualquier diseño: el mismo precio si lo creas en el diseñador 3D gratuito, eliges un diseño Ready to Play o nos envías un concepto hecho con IA. Nombres, dorsales y patrocinadores van impresos sin coste extra. Sin pedido mínimo.",
+  "quick": [
+    [
+      "38,90 €",
+      "una camiseta, sin mínimo"
+    ],
+    [
+      "21,90 €",
+      "por camiseta a partir de 10"
+    ],
+    [
+      "26,90 €",
+      "camiseta + pantalón a partir de 10"
+    ],
+    [
+      "25–30 días",
+      "puerta a puerta, con seguimiento"
+    ]
+  ],
+  "ladder_h": "La escala de precios",
+  "ladder_lead": "Por unidad y por línea. Las cantidades se suman por producto: 12 camisetas y 12 pantalones reciben cada uno el tramo 10–19.",
+  "ex_h": "Lo que paga un equipo de verdad",
+  "ex_lead": "Totales calculados al precio de la escala, envío incluido (gratis a partir de 50 €). Los extras son opcionales y están abajo.",
+  "ex_cols": [
+    "Equipo",
+    "Solo camisetas",
+    "Por jugador",
+    "Camiseta + pantalón",
+    "Por jugador"
+  ],
+  "players": "jugadores",
+  "addons_h": "Extras y las dos preguntas de siempre",
+  "calc_h": "Calcula tu pedido",
+  "calc_lead": "La misma escala con tus números. No se envía nada: es una cuenta en tu navegador.",
+  "calc": {
+    "players": "Jugadores",
+    "item": "Qué",
+    "jersey": "Camiseta",
+    "kit": "Camiseta + pantalón",
+    "socks": "Medias (+3,90 € el par)",
+    "ls": "Manga larga (+3,00 € por camiseta)",
+    "fast": "Vía rápida (+59 € por pedido)",
+    "total": "Total del pedido",
+    "per": "por jugador",
+    "ship": "Envío"
+  },
+  "faq_h": "Preguntas sobre precios",
+  "faq": [
+    [
+      "¿Cuánto cuesta una equipación de fútbol personalizada para un equipo de 15?",
+      "En el tramo 10–19 la camiseta cuesta 21,90 € y el kit camiseta + pantalón 26,90 €: 15 camisetas son 328,50 € y 15 kits completos 403,50 €, envío incluido. Nombres y dorsales van incluidos; las medias son 3,90 € el par si las añades."
+    ],
+    [
+      "¿Hay pedido mínimo?",
+      "No. Una camiseta cuesta 38,90 €. El precio por unidad baja a partir de 2, 5, 10, 20, 50 y 100 unidades."
+    ],
+    [
+      "¿Nombres, dorsales y patrocinadores se cobran aparte?",
+      "No. Van sublimados en el tejido junto con el diseño e incluidos en el precio en cualquier cantidad."
+    ],
+    [
+      "¿Cuánto cuesta el diseño?",
+      "Diseñar en el diseñador 3D es gratis y sin cuenta. Un diseño creado por nuestro equipo (un brief, un boceto o un concepto de IA) lleva un depósito de 15 € que se descuenta íntegro en pedidos de 5+ camisetas: diseño gratis para equipos."
+    ],
+    [
+      "¿Y el envío y las aduanas?",
+      "Envío gratis a partir de 50 € y 3,90 € por debajo. Con seguimiento y aranceles pagados: 25–30 días puerta a puerta, o 18–23 con la vía rápida (+59 € por pedido)."
+    ],
+    [
+      "¿Cambia el precio entre el diseñador 3D, Ready to Play y un diseño a medida?",
+      "No. Una sola escala para las tres vías; la selección de temporada Ready to Play lleva −10 % en los diseños con la insignia."
+    ]
+  ],
+  "cta_h": "Diséñala y mira el precio en la herramienta",
+  "cta_p": "Abre el diseñador 3D gratuito, pon la cantidad y verás el precio de la escala antes de pagar nada.",
+  "cta_btn": "Abrir el diseñador 3D — gratis",
+  "cta_btn2": "Solicitar un diseño",
+  "more_label": "Sigue explorando:",
+  "more": [
+    [
+      "/pages/preguntas-frecuentes",
+      "preguntas frecuentes"
+    ],
+    [
+      "/pages/envios-metodos-y-plazos",
+      "envíos"
+    ],
+    [
+      "/pages/equipaciones-futbol-personalizadas",
+      "equipaciones personalizadas"
+    ],
+    [
+      "/pages/solicitud-de-diseno-personalizado",
+      "diseño a medida"
+    ]
+  ]
+}

@@ -88,3 +88,8 @@ suppliers. We have (a) only partially (ES and FR hubs exist but are cited 7 and 
 ## Re-run
 `ai-radar` on branch `claude/new-repo-setup-b5q4vx`, three runs on three days; then repeat sections 2–4 with the one-off script
 (`scratchpad/` in this session; worth moving into `ai-radar` as `report_competitors.py` when it is run a second time).
+
+**Prompt-bias note (owner, 3 Nov 2026):** the quality prompts US05 and ES16 used MOMUTO's own fabric vocabulary ("premium polyester-elastane
+as standard"), so the first-place answers on those two are partly self-inflicted. Both prompts were rewritten in a buyer's words in the
+battery (ai-radar, same day); the ES17 result ("mejor calidad de tejido para un equipo amateur", neutral) stands. Treat the 44% quality figure
+above as inflated until the next run.

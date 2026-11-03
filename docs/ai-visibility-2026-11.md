@@ -130,3 +130,8 @@ fabric facts went on the pages and in llms.txt in October; the AI hub page is no
 with 34 prompts and the old Gemini id — do not dispatch there). One run ≈ 20–25 min; the method is three runs on three days. Then
 `python radar_pipeline.py score --csv`. The analysis above is a one-off script over `results/`; the next read should repeat the half-month
 table and the category table and compare.
+
+**Prompt-bias note (owner, 3 Nov 2026):** the quality prompts US05 and ES16 used MOMUTO's own fabric vocabulary ("premium polyester-elastane
+as standard"), so the first-place answers on those two are partly self-inflicted. Both prompts were rewritten in a buyer's words in the
+battery (ai-radar, same day); the ES17 result ("mejor calidad de tejido para un equipo amateur", neutral) stands. Treat the 44% quality figure
+above as inflated until the next run.
