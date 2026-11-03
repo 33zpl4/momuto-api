@@ -1,0 +1,34 @@
+name: Check Recent Products (read-only)
+
+# Is the platform product API answering, and which products were created / updated last, per store?
+# Read-only (scripts/check-recent-products.js). Dispatch only; the push trigger below is for a branch run.
+
+on:
+  push:
+    branches: [claude/clever-mendel-fni5rb]   # TEMP: remove before merge
+    paths: ['.github/workflows/check-recent-products.yml']
+  workflow_dispatch:
+    inputs:
+      stores:
+        description: 'Comma-separated stores (EN,ES,FR,IT,US)'
+        required: false
+        default: 'EN,US'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Newest and most recently updated products
+        env:
+          STORES: ${{ github.event.inputs.stores || 'EN,US' }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+        run: node scripts/check-recent-products.js
