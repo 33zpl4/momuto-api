@@ -1,10 +1,11 @@
 {
   "team_name": "Frozen Gunners",
   "design_name": "Frozen Brushstroke",
-  "design_description": "Frozen Gunners FC, a football team from Texas, features a striking red jersey with white sleeves and gold accents. The design combines sharp, icy brushstroke patterns, scattered snowflakes, and frozen textures around the shoulders and lower torso, leaving the central chest clean for the Frozen Gunners sponsor and club crest. Gold shoulder stripes and red-and-gold sleeve trims complete the look.",
+  "design_description": "Frozen Gunners FC, an Arsenal-inspired football team from Texas, features a striking red jersey with white sleeves and gold accents. The design combines sharp, icy brushstroke patterns, scattered snowflakes, and frozen textures around the shoulders and lower torso, leaving the central chest clean for the Frozen Gunners sponsor and club crest. Gold shoulder stripes and red-and-gold sleeve trims complete the look.",
   "primary_color": "#C8102E",
   "secondary_color": "#C9A84C",
   "accent_color": "#C9A84C",
   "image_url": "https://cdn.statics-cdn-abc.com/pics/b25b381cda88ac751e4bcc45edf12c0e3e7b1a3fa5a8ded7a467a5be9b6a81d6.png",
-  "back_image_url": "https://cdn.statics-cdn-abc.com/pics/7d51f6bb609a8466f58eec445561dc450578342743126cc8ba160aa67702bee7.png"
+  "back_image_url": "https://cdn.statics-cdn-abc.com/pics/7d51f6bb609a8466f58eec445561dc450578342743126cc8ba160aa67702bee7.png",
+  "updated_at": "2026-11-03"
 }
