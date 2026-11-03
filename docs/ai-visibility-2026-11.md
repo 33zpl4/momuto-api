@@ -104,6 +104,27 @@ the ES comparison page has become the ES citation engine the way the FR comparat
 is the number to watch on the next runs; Claude's rise (16% → 32%) is the other. One run, so neither is a trend yet.
 The full-battery run on the correct branch follows below.
 
+## 3 Nov 2026, full battery on the correct branch (run 41629625098, 48 prompts, 144 answers)
+
+Claude, ChatGPT and Perplexity answered everything; Gemini (`gemini-3.8-flash` discovered) hit 429 three times and was skipped.
+
+| | MOMUTO | Claude | ChatGPT | Perplexity |
+|---|---:|---:|---:|---:|
+| 3 Nov, 48 prompts | **17%** (24/144) | **35%** (17/48) | 10% (5/48) | 4% (2/48) |
+
+Claude's rate has gone 13% (Jul) → 16% (late Sep) → **35%**. Perplexity's has gone the other way (20–24% in Sep → 4%), and it still quotes
+"roughly 20–25 days" from an old page. ChatGPT at 10% is its first comparable point. Brands the same day: Owayo 30%, Spized 21%, Vistaprint 19%,
+**MOMUTO 17%**, Joma 15%, Decathlon 12%, Fútbol Factory 10%, Zentral 3%.
+
+By category: **quality 44% (4/9, first every time)** — new; alternatives 42%; speed 33%; process 33% (first ever mention); no-minimum 20%;
+AI concept 19% (Claude first on US03 and EN07; ChatGPT on US04); best-of 3%; use-case, bespoke and basketball 0. By market: ES 25%, EN 21%,
+US 21%, FR 7%, IT 0%. Cited: `es…/mejores-webs…` 10 (the ES engine), `www…/design-your-own-soccer-jersey` 4, `best-custom-soccer-jersey-makers-2026`
+4 (+2 on us), the suppliers review 3, **`www…/pages/ai-concept-to-real-kit` 3 (first citations ever)**, the vs-comparison 2, FR comparatif 2.
+
+What changed since September: the quality/fabric cluster flipped from a blind spot (5% all-time) to our best category in one run, right after the
+fabric facts went on the pages and in llms.txt in October; the AI hub page is now cited; Perplexity dropped and ChatGPT appeared. The post
+`ai-assistants-custom-jersey-recommendation` (EN + US, live 3 Nov) carries the dated examples from this run.
+
 ## How to re-run
 `ai-radar`: Actions → *Radar IA run* → client `momuto`, **branch `claude/new-repo-setup-b5q4vx`** (the default; `main` is a stale copy
 with 34 prompts and the old Gemini id — do not dispatch there). One run ≈ 20–25 min; the method is three runs on three days. Then
