@@ -86,6 +86,18 @@ runner with the Cloudflare challenge, the sitemap lists it), pulls 41640766962 /
 llms.txt in all five feeds carries the page; the maker hubs' "Full price list" links point here. Re-read: the price prompts (EN11, ES05,
 FR03, IT08, US-none) on the next radar run.
 
+### Shipped 3 Nov 2026 (night): the market roundups (opportunity 2 by potential)
+Why this before the category pages: the ES roundup is our most-cited page in AI answers (15 citations in three runs, named every time,
+across best-of / price / alternatives / speed prompts) and the ES market went 5% → 25% with it; "best site" prompts are the largest category
+(90 of 382 answers) and the one we win least (5). FR and IT only had a "vs" page, the UK none. Built with `scripts/build-roundup-pages.js` +
+`roundup/roundup.{en,fr,it}.json` (ES CSS and FAQ ladder reused, sources listed on every page):
+`www…/pages/best-custom-football-kit-suppliers-2026` · `fr…/meilleurs-sites-maillots-foot-personnalises-2026` ·
+`it…/migliori-siti-maglie-calcio-personalizzate-2026`, hreflang row with the ES roundup. Proof: Deploy CMS Page 41643604756 (3 × created),
+Rebuild Sitemap 41643726235 (4-way row live), Probe 41643731340 (200 + self canonical on all three), pulls 41643737020 / 41643974720 / it.
+Same PR: Trustpilot 51 → 53 on nine fragments + llms.txt (their deploys 41643604845…41643605181 green); the 28 US team pages that still
+said "20-25 DAYS" (quoted by Claude as "guarantees 20–25 days") were patched live by run 41643420952 (the dry-run switch was added after;
+run 41643742842 from main finds nothing left to patch). Re-read: IT01/IT05 (Jersix owns them), EN09/EN10, FR05/FR10 on the next radar run.
+
 ## 6. Content ideas that come straight from the answers (editorial)
 - "What a custom kit costs for 11 / 15 / 20 players" (per market, with the ladder; the price prompts are the biggest hole).
 - "Owayo or Spized or MOMUTO: the honest comparison for an amateur club" (the "alternatives" prompts are where we already win; a page that
