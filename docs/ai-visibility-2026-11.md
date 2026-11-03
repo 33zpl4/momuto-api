@@ -86,7 +86,26 @@ Claude names us first for US buyers. They do not pick us for price, for quality/
    needs no screenshots from the owner: cite the radar (prompt, engine, run date, quote).
 6. **Comparison refresh** (Jan 2027): the most-cited pages carry "2025"/"2026" in handles or titles; keep them current, they are the engine.
 
+## 3 Nov 2026, first run after the October changes (run 41626225013, the OLD 34-prompt battery)
+
+Dispatched by mistake on the stale `main` branch of ai-radar (the live battery and code are on the default branch
+`claude/new-repo-setup-b5q4vx`), so this run has the 34 original EU prompts only: no US, no AI-concept, no basketball prompts, and
+Gemini 404 again (old model id). It is still a valid point for the EU prompts, with three engines answering (102 answers):
+
+| | MOMUTO | Claude | OpenAI | Perplexity |
+|---|---:|---:|---:|---:|
+| 3 Nov, 34 EU prompts | **16%** (16/102) | 32% (11/34) | 9% (3/34) | 6% (2/34) |
+
+By market: **ES 24% (10/42)**, up from 5% all-time; EN 22%; FR 8% (down from 24%); IT 0%. Brands the same day: Owayo 26%, Vistaprint 24%,
+Spized 23%, Decathlon 18%, **MOMUTO 16%**, Joma 15%, Fútbol Factory 11%, Zentral 8%. The ES jump has one source: the engines cited
+`es…/mejores-webs-equipaciones-futbol-personalizadas-2026` **10 times in 102 answers**, more than every other momuto.com URL together;
+the ES comparison page has become the ES citation engine the way the FR comparatif was in August. Also cited for the first time:
+`www…/pages/design-your-own-soccer-jersey` (2) and `best-custom-soccer-jersey-makers-2026` (1). Perplexity's drop (20–24% in Sep → 6%)
+is the number to watch on the next runs; Claude's rise (16% → 32%) is the other. One run, so neither is a trend yet.
+The full-battery run on the correct branch follows below.
+
 ## How to re-run
-`ai-radar`: Actions → *Radar IA run* → client `momuto` (one run ≈ 20 min; the method is three runs on three days). Then
+`ai-radar`: Actions → *Radar IA run* → client `momuto`, **branch `claude/new-repo-setup-b5q4vx`** (the default; `main` is a stale copy
+with 34 prompts and the old Gemini id — do not dispatch there). One run ≈ 20–25 min; the method is three runs on three days. Then
 `python radar_pipeline.py score --csv`. The analysis above is a one-off script over `results/`; the next read should repeat the half-month
 table and the category table and compare.
