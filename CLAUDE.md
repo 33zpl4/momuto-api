@@ -119,6 +119,12 @@ pushes and verifies the run itself.
    customer@ / orders@ never appear in customer-facing copy; `api/*.js`
    FROM_EMAIL defaults are transactional senders and are exempt.
 
+9. **Positioning order (owner ruling, 3 Nov 2026): lead with the concept-to-real service, the 3D designer second.** What put MOMUTO
+   on the map in AI answers is "your AI concept or sketch made into a real kit by a designer"; copy that leads with the free 3D tool
+   gets us described as "plantillas base / configurador" next to competitors that say "fabricación en España, sin mínimo". Every
+   homepage plan, hub hero, meta description and llms.txt opening states the service first, the tool second, then no minimum and
+   the numbers. The ES homepage plan ("Selecciona una plantilla, elige colores y fuentes") was the source of that description.
+
 ## Agent-ops gotchas (tooling walls already hit)
 
 - **"Not secure" / `ERR_CERT_AUTHORITY_INVALID` on the stores, reported from Spain (17 Oct 2026):** it was the Spanish ISP block of
