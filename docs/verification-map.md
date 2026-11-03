@@ -31,3 +31,8 @@ failures and fixes of the 1–12 Oct sessions. Extend it whenever a new surface 
 5. A `workflow_dispatch` input for dry run, so a person or an agent can run the same thing from a branch before merging.
 
 Templates in the repo: `scripts/push-recovery-email.js`, `scripts/patch-gallery-review-count.js`, `scripts/sync-store-config.js`.
+
+## Live page `<head>` (title, canonical, robots, hreflang, sitemap listing) — added 3 Nov 2026
+Proof: a green **Probe page head (read-only)** run (`scripts/probe-page-head.js`) with the URL in its input; the log prints status, final URL,
+title, canonical(s), meta robots, hreflang tags, H1s and whether the host's `/sitemap.xml` lists the URL and with which alternates.
+Use it before claiming anything about what Google sees on a page; a repo fragment is not that proof.
