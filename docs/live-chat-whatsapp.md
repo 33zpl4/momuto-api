@@ -9,7 +9,7 @@ Owner decision after reading Nikita Bier's "24 h live support removes a confound
 - Count: the beacon `wa_chat_click` (`lib/event-beacon.js` EVENTS) shows as "WhatsApp chat clicked (help-seeking)" in the weekly scorecard (`docs/scorecard.md`). Outside the funnel on purpose.
 
 ## A message arrives with a design ref - how to look at that design
-The `configId` is minted when the customer ENTERS the tool, not when they save. It leads to a design only if they saved or ordered; otherwise the tool shows the collection default.
+The `configId` is minted when the customer ENTERS the tool, not when they save. It leads to a design only if they saved or ordered; otherwise the tool shows the collection default. **Since 4 Nov 2026 the ref is unique per visit** even for visitors from the public links (the tool swaps the shared `ypi9qc1z` / `avy6d4xt` for a fresh id at entry, design-momuto `configurator.html`), so a ref now points at THAT visitor's saves. Refs sent before that date may be the shared `ypi9qc1z`, which identifies nobody: ask for the account email and look the order up in manage.momuto.com (that is how the 4 Nov case was solved).
 1. **View a copy** (never changes the customer's config; for es use `es.momuto.com`, check `suitName`, e.g. `mamuto3suit1`):
    `https://design.momuto.com/goodsInfoSave?uuid=check1&sysType=oem&fromUrlHost=https%3A%2F%2Fes.momuto.com&collectionName=configId%3D<REF>%26suitName%3Dmamuto3suit1`
    A default design or an error means nothing was saved under that id (or the suit name is wrong). Not verified from the sandbox (cannot reach the stores).

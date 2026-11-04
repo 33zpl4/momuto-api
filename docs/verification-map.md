@@ -52,3 +52,9 @@ Source of numbers: `faq/faq.<locale>.json` pricing block; copy: `pricing/price-p
 (sanity: fonts, one H1, JSON-LD, meta lengths, lexicon, stale price, no refund wording, 15-player row). Proof of a change: green Deploy CMS Page
 on the merge + Probe page head on the URL; the calculator is checked in Chromium by `scratchpad/test-price-calc.js` (session) — move it into
 `scripts/` on the second change. A price change goes into the FAQ source first, then both builders run.
+
+## 3D designer: one configId per visit — added 4 Nov 2026
+The tool (design-momuto `configurator.html`, inline script) swaps the public template ids for a fresh one at entry.
+Proof that it is live: a green **Probe 3D entry (read-only)** run (`scripts/probe-3d-entry.js`): each public link opens with a
+different 8-char configId, the tool's state (`__momutoOw.configId`) equals it, a share-copy link keeps its id, and the about-page
+link no longer carries the literal user id. NOT proved by the probe: a real save / add-to-cart (owner test on one store).
