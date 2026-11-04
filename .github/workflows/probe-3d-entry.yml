@@ -1,0 +1,20 @@
+name: Probe 3D entry (read-only)
+# Opens public 3D-designer links on design.momuto.com like a visitor (no save, no cart) and checks the per-visit configId.
+on:
+  push:
+    paths:
+      - '.github/workflows/probe-3d-entry.yml'
+      - 'scripts/probe-3d-entry.js'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: node scripts/probe-3d-entry.js
