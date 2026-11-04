@@ -1,0 +1,45 @@
+name: Probe API GET (read-only)
+# GETs OEMSaaS open-API paths on one store and prints status / code / data shape. Sends nothing but GET.
+on:
+  push:
+    paths:
+      - '.github/workflows/probe-api-get.yml'
+      - 'scripts/probe-api-get.js'
+  workflow_dispatch:
+    inputs:
+      store:
+        description: 'Store'
+        required: false
+        default: 'fr'
+        type: choice
+        options: [fr, es, it, en, us]
+      paths:
+        description: 'Comma-separated API paths, e.g. /payments,/settings'
+        required: true
+      dump:
+        description: 'Print the data of successful responses (truncated)'
+        required: false
+        default: 'false'
+        type: choice
+        options: ['false', 'true']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: GET probe
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          STORE: ${{ github.event.inputs.store || 'fr' }}
+          DUMP: ${{ github.event.inputs.dump || 'true' }}
+          PATHS: ${{ github.event.inputs.paths || '/payments,/paymentmethods,/payment_methods,/payment-methods,/payment,/pays,/gateways,/paygateways,/paymentgateways,/payment/list,/payments/list,/shop,/shops,/store,/stores,/settings,/setting,/shopsettings,/storesettings,/checkout,/checkoutsettings,/currencies,/navs' }}
+        run: node scripts/probe-api-get.js
