@@ -40,6 +40,6 @@ jobs:
           OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
           OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
           STORE: ${{ github.event.inputs.store || 'fr' }}
-          DUMP: ${{ github.event.inputs.dump || 'true' }}
+          DUMP: ${{ github.event.inputs.dump || 'false' }}
           PATHS: ${{ github.event.inputs.paths || '/payments,/paymentmethods,/payment_methods,/payment-methods,/payment,/pays,/gateways,/paygateways,/paymentgateways,/payment/list,/payments/list,/shop,/shops,/store,/stores,/settings,/setting,/shopsettings,/storesettings,/checkout,/checkoutsettings,/currencies,/navs' }}
         run: node scripts/probe-api-get.js
