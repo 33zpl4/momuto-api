@@ -151,12 +151,7 @@
 <div class="sg">
   <h1 class="sg-h1">Guide des Tailles</h1>
 
-  <div class="sg-fit-notice">
-    <strong>Nos maillots sont coupés dans un style athlétique ajusté.</strong>
-    Si vous êtes entre deux tailles ou si vous préférez une coupe plus ample sur le terrain,
-    <strong>nous vous recommandons de prendre la taille supérieure.</strong>
-    Toutes les mesures ci-dessous sont des mesures corporelles — pas des mesures du vêtement.
-  </div>
+  <div class="sg-fit-notice"><strong>Coupe athlétique légèrement ajustée (slim fit).</strong> Choisissez votre taille selon le tour de poitrine et le poids ; <strong>s’ils indiquent deux tailles différentes, ou si vous êtes entre deux, prenez la plus grande.</strong> Toutes les mesures sont celles du corps — pas du vêtement.</div>
 
   <div class="sg-toggle" role="tablist">
     <button class="sg-toggle-btn active" data-panel="adult" role="tab">Adultes</button>
@@ -173,18 +168,19 @@
           <tr>
             <th>Taille</th>
             <th>Poitrine (cm)</th>
-            <th class="hide-sm">Poids (kg)</th>
+            <th>Poids (kg)</th>
             <th>Hauteur (cm)</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>XS</td><td>86–91</td><td class="hide-sm">50–60</td><td>160–165</td></tr>
-          <tr><td>S</td><td>91–96</td><td class="hide-sm">60–70</td><td>165–170</td></tr>
-          <tr><td>M</td><td>96–101</td><td class="hide-sm">70–80</td><td>170–175</td></tr>
-          <tr><td>L</td><td>101–106</td><td class="hide-sm">80–90</td><td>175–180</td></tr>
-          <tr><td>XL</td><td>106–111</td><td class="hide-sm">90–100</td><td>180–185</td></tr>
-          <tr><td>2XL</td><td>111–116</td><td class="hide-sm">100–110</td><td>185–190</td></tr>
-          <tr><td>3XL</td><td>116–121</td><td class="hide-sm">110–120</td><td>190–195</td></tr>
+          <tr><td>XS</td><td>82–86</td><td>50–57</td><td>160–165</td></tr>
+          <tr><td>S</td><td>86–91</td><td>57–65</td><td>165–170</td></tr>
+          <tr><td>M</td><td>91–97</td><td>65–75</td><td>170–175</td></tr>
+          <tr><td>L</td><td>97–103</td><td>75–85</td><td>175–180</td></tr>
+          <tr><td>XL</td><td>103–109</td><td>85–95</td><td>180–185</td></tr>
+          <tr><td>2XL</td><td>109–115</td><td>95–105</td><td>185–190</td></tr>
+          <tr><td>3XL</td><td>115–121</td><td>105–115</td><td>190–195</td></tr>
+          <tr><td>4XL</td><td>121–127</td><td>115–125</td><td>195–200</td></tr>
         </tbody>
       </table>
     </div>
@@ -194,20 +190,22 @@
       <table class="sg-table">
         <thead>
           <tr>
+            <th>
+          <tr>
             <th>Taille</th>
+            <th>Hanches (cm)</th>
             <th>Tour de taille (cm)</th>
-            <th class="hide-sm">Hanches (cm)</th>
-            <th>Hauteur (cm)</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>XS</td><td>73–90</td><td class="hide-sm">85–90</td><td>160–180</td></tr>
-          <tr><td>S</td><td>79–96</td><td class="hide-sm">91–96</td><td>165–185</td></tr>
-          <tr><td>M</td><td>85–102</td><td class="hide-sm">97–102</td><td>170–190</td></tr>
-          <tr><td>L</td><td>91–108</td><td class="hide-sm">103–108</td><td>175–195</td></tr>
-          <tr><td>XL</td><td>97–114</td><td class="hide-sm">109–114</td><td>180–200</td></tr>
-          <tr><td>2XL</td><td>103–120</td><td class="hide-sm">115–120</td><td>185–205</td></tr>
-          <tr><td>3XL</td><td>109–126</td><td class="hide-sm">121–126</td><td>185–205</td></tr>
+          <tr><td>XS</td><td>85–90</td><td>73–90</td></tr>
+          <tr><td>S</td><td>91–96</td><td>79–96</td></tr>
+          <tr><td>M</td><td>97–102</td><td>85–102</td></tr>
+          <tr><td>L</td><td>103–108</td><td>91–108</td></tr>
+          <tr><td>XL</td><td>109–114</td><td>97–114</td></tr>
+          <tr><td>2XL</td><td>115–120</td><td>103–120</td></tr>
+          <tr><td>3XL</td><td>121–126</td><td>109–126</td></tr>
+          <tr><td>4XL</td><td>127–132</td><td>115–132</td></tr>
         </tbody>
       </table>
     </div>
@@ -232,10 +230,11 @@
         <tbody>
           <tr><td>98/104</td><td>54–58</td><td class="hide-sm">15–18</td><td>96–104</td><td class="sg-age">3–4 ans</td></tr>
           <tr><td>110/116</td><td>58–64</td><td class="hide-sm">18–22</td><td>105–117</td><td class="sg-age">5–6 ans</td></tr>
-          <tr><td>128</td><td>64–70</td><td class="hide-sm">22–28</td><td>123–128</td><td class="sg-age">7–8 ans</td></tr>
-          <tr><td>140</td><td>70–76</td><td class="hide-sm">28–36</td><td>135–140</td><td class="sg-age">9–10 ans</td></tr>
-          <tr><td>152</td><td>76–82</td><td class="hide-sm">34–42</td><td>147–152</td><td class="sg-age">11–12 ans</td></tr>
-          <tr><td>164</td><td>82–88</td><td class="hide-sm">40–52</td><td>159–164</td><td class="sg-age">13–14 ans</td></tr>
+          <tr><td>128</td><td>64–70</td><td class="hide-sm">22–28</td><td>118–128</td><td class="sg-age">7–8 ans</td></tr>
+          <tr><td>140</td><td>70–76</td><td class="hide-sm">28–36</td><td>129–140</td><td class="sg-age">9–10 ans</td></tr>
+          <tr><td>152</td><td>76–82</td><td class="hide-sm">34–42</td><td>141–152</td><td class="sg-age">11–12 ans</td></tr>
+          <tr><td>164</td><td>82–88</td><td class="hide-sm">40–52</td><td>153–164</td><td class="sg-age">13–14 ans</td></tr>
+        
         </tbody>
       </table>
     </div>
@@ -255,10 +254,11 @@
         <tbody>
           <tr><td>98/104</td><td>52–55</td><td class="hide-sm">58–61</td><td>96–104</td><td class="sg-age">3–4 ans</td></tr>
           <tr><td>110/116</td><td>54–58</td><td class="hide-sm">62–66</td><td>105–117</td><td class="sg-age">5–6 ans</td></tr>
-          <tr><td>128</td><td>59–62</td><td class="hide-sm">68–71</td><td>123–128</td><td class="sg-age">7–8 ans</td></tr>
-          <tr><td>140</td><td>63–67</td><td class="hide-sm">74–79</td><td>135–140</td><td class="sg-age">9–10 ans</td></tr>
-          <tr><td>152</td><td>66–72</td><td class="hide-sm">79–84</td><td>147–152</td><td class="sg-age">11–12 ans</td></tr>
-          <tr><td>164</td><td>71–75</td><td class="hide-sm">86–90</td><td>159–164</td><td class="sg-age">13–14 ans</td></tr>
+          <tr><td>128</td><td>59–62</td><td class="hide-sm">68–71</td><td>118–128</td><td class="sg-age">7–8 ans</td></tr>
+          <tr><td>140</td><td>63–67</td><td class="hide-sm">74–79</td><td>129–140</td><td class="sg-age">9–10 ans</td></tr>
+          <tr><td>152</td><td>66–72</td><td class="hide-sm">79–84</td><td>141–152</td><td class="sg-age">11–12 ans</td></tr>
+          <tr><td>164</td><td>71–75</td><td class="hide-sm">86–90</td><td>153–164</td><td class="sg-age">13–14 ans</td></tr>
+        
         </tbody>
       </table>
     </div>
@@ -266,7 +266,7 @@
   </div>
 
   <div class="sg-note">
-    <p><strong>Vous n'êtes pas sûr de votre taille ?</strong> Mesurez votre poitrine à son point le plus large et votre hauteur sans chaussures, puis comparez avec le tableau. En cas de doute, prenez la taille supérieure — les maillots personnalisés ne peuvent pas être échangés une fois imprimés.</p>
+    <p><strong>Vous hésitez sur la taille ?</strong> Mesurez votre tour de poitrine au point le plus large et comparez poitrine et poids au tableau. Les shorts se choisissent au tour de hanches. Plus de 127 cm de poitrine ou 132 cm de hanches ? Écrivez-nous avant de commander. Les maillots personnalisés ne peuvent pas être échangés une fois imprimés.</p>
     <p>Des questions ? <a href="/pages/contactez-nous">Contactez notre équipe</a> — nous sommes ravis de vous aider avant votre commande.</p>
   </div>
 </div>
