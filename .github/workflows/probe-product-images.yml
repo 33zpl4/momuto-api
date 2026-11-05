@@ -1,0 +1,48 @@
+name: Probe Product Images
+
+# GET-only. Downloads a platform product's stored images and uploads them as an
+# artifact (debugging grey/placeholder tiles on 3D preview order lines).
+on:
+  push:
+    paths:
+      - 'scripts/probe-product-images.js'
+      - '.github/workflows/probe-product-images.yml'
+  workflow_dispatch:
+    inputs:
+      store:
+        description: 'Store'
+        required: false
+        default: 'us'
+        type: choice
+        options: [us, en, fr, es, it]
+      product_ids:
+        description: 'Comma-separated platform product ids'
+        required: true
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Download product images
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          STORE: ${{ inputs.store || 'us' }}
+          # push-triggered default: order 231549-2186535 preview line (+ a healthy jersey for contrast)
+          PRODUCT_IDS: ${{ inputs.product_ids || '18851731,16913785' }}
+          OUT: product-images
+        run: node scripts/probe-product-images.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: product-images
+          path: product-images
+          retention-days: 3
