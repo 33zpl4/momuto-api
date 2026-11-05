@@ -34,6 +34,9 @@ function pngSize(b) { return b.slice(1, 4).toString() === 'PNG' ? `${b.readUInt3
     for (const [i, im] of imgs.entries()) {
       const meta = Object.entries(im).filter(([k, v]) => k !== 'src' && v != null && typeof v !== 'object').map(([k, v]) => `${k}=${v}`).join(' ');
       try {
+        // same check the design server runs (curl NOBODY = HEAD) so we can tell whether it sees a dead file
+        const h = await fetch(im.src, { method: 'HEAD' }).catch(e => ({ status: 'ERR ' + e.message, headers: new Map() }));
+        console.log(`   [${i + 1}] HEAD http=${h.status} server=${h.headers.get && h.headers.get('server')} cache=${h.headers.get && (h.headers.get('cf-cache-status') || h.headers.get('x-cache'))} age=${h.headers.get && h.headers.get('age')}`);
         const res = await fetch(im.src);
         const buf = Buffer.from(await res.arrayBuffer());
         const ct = res.headers.get('content-type') || '';
