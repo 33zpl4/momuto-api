@@ -1,0 +1,34 @@
+name: Probe page text (read-only)
+
+# Opens public pages in Chromium on the runner and prints the visible text lines matching a
+# keyword regex (fabric, price ...). For competitor fact-checks the sandbox cannot reach.
+on:
+  push:
+    paths:
+      - 'scripts/probe-page-text.js'
+      - '.github/workflows/probe-page-text.yml'
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'URLs, comma-separated'
+        required: true
+      keywords:
+        description: 'Regex of lines to print (case-insensitive); empty = fabric/price default'
+        required: false
+        default: ''
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - name: Probe
+        env:
+          URLS: ${{ github.event.inputs.urls || 'https://ezsportslab.com/products/camiseta-futbol-cd-zamora-copia,https://ezsportslab.com/products/camiseta-legend,https://ezsportslab.com/en/products/camiseta-flash-2,https://ezsportslab.com/products/camiseta-futbol-londres-fc,https://ezsportslab.com/collections/all,https://ezsportslab.com,https://www.spized.com/es/crear/ropa-deportiva/camisetas,https://www.spized.com/en/custom/sports-clothing/jerseys?p=1,https://www.spized.com/en/club-jerseys,https://www.spized.com/en/have-sports-shirts-printed,https://www.owayo.com/design-custom-soccer-jerseys.htm,https://www.owayo.com/soccer/pricelist_all-us.htm' }}
+          KEYWORDS: ${{ github.event.inputs.keywords }}
+        run: node scripts/probe-page-text.js
