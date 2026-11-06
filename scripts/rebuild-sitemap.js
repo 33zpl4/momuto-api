@@ -110,7 +110,7 @@ const STATIC_CLUSTERS = [
   { en: 'shipping-policy',                     es: 'envios-metodos-y-plazos',             fr: 'politique-de-livraison',                     it: 'politica-di-spedizione',  us: 'shipping-policy' },
   { en: 'return-policy',                       es: 'cambios-devoluciones',                fr: 'retours-echanges',                           it: 'politica-resi',           us: 'return-policy' },
   { en: 'contact',                             es: 'contacto',                            fr: 'contactez-nous',                             it: 'contattaci',              us: 'contact' },
-  { en: 'custom-soccer-jersey-designer',                                                  fr: 'creer-son-maillot-de-foot',                                                 us: 'custom-soccer-jersey-designer' },
+  { en: 'custom-soccer-jersey-designer',                                                  fr: 'creer-son-maillot-de-foot',                                                 us: 'custom-soccer-jersey-designer', es: 'crea-tu-camiseta-de-futbol' },
   { en: 'ai-concept-to-real-kit',              es: 'camiseta-ia-concepto-real',           fr: 'maillot-ia-concept-reel',                    it: 'maglia-ia-concetto-reale', us: 'ai-concept-to-real-kit' },
   { en: 'bachelor-party-football-shirts',      es: 'camisetas-despedida-de-soltero',      fr: 'maillot-evg-personnalise',                                                  us: 'bachelor-party-football-shirts' },
   // Custom-kit hubs (www soccer hub ↔ ES equipaciones hub ↔ FR personnalisé hub).

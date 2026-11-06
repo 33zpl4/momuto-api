@@ -1,0 +1,244 @@
+{
+  "locale": "es",
+  "handle": "crea-tu-camiseta-de-futbol",
+  "base": "https://es.momuto.com",
+  "lang": "es",
+  "currency": "EUR",
+  "meta": {
+    "title": "Crea tu camiseta de fútbol en 3D — gratis, sin mínimo | MOMUTO",
+    "meta_title": "Crea tu Camiseta de Fútbol en 3D: Gratis, Sin Mínimo | MOMUTO",
+    "meta_descript": "Crea tu camiseta de fútbol en 3D gratis: colores, escudo, patrocinador, nombres y dorsales en tiempo real; pide 1 o 100 camisetas. Desde 21,90 € a partir de 10.",
+    "keywords": [
+      "crear camiseta de futbol",
+      "crea tu camiseta de futbol",
+      "diseña tu camiseta de futbol",
+      "creador de camisetas de futbol",
+      "diseñar camisetas de futbol",
+      "configurador camisetas 3d",
+      "crear equipacion de futbol",
+      "diseñador de camisetas",
+      "MOMUTO"
+    ]
+  },
+  "hero": {
+    "label": "Creador de camisetas de fútbol",
+    "h1": "Crea tu Camiseta de Fútbol <span class=\"acc\">en 3D</span>",
+    "sub": "Un creador de camisetas de fútbol gratis y en tiempo real: elige un modelo, ajusta tus colores, sube tu escudo y tu patrocinador, añade el nombre y el dorsal de cada jugador y pide directamente desde la herramienta. Una camiseta o todo el club — sin mínimo, sin cuenta.",
+    "btn": "Abrir el creador 3D — gratis",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=es&langguage=es",
+    "btn2": "Ver los diseños Ready to Play",
+    "btn2_url": "/pages/coleccion-ready-to-play"
+  },
+  "quick": [
+    [
+      "Gratis",
+      "crea en 3D, paga solo al pedir"
+    ],
+    [
+      "30+",
+      "modelos, cada uno se abre ya terminado"
+    ],
+    [
+      "Sin mínimo",
+      "1 camiseta o 100+, la misma herramienta"
+    ],
+    [
+      "25–30 días",
+      "puerta a puerta, con seguimiento, aduanas prepagadas"
+    ]
+  ],
+  "features": {
+    "title": "Qué hace el creador",
+    "lead": "Todo lo que un programa para crear camisetas de fútbol debería hacer, en el navegador, sin diseñador de tu parte.",
+    "items": [
+      [
+        "3D en tiempo real",
+        "Gira la camiseta mientras la creas. Lo que ves es el archivo de sublimación que imprimimos — sin sorpresas en la maqueta."
+      ],
+      [
+        "Colores sin límite",
+        "Cada panel, ribete y banda admite cualquier color. Degradados, motivos y fundidos no cuestan más — es una sola impresión."
+      ],
+      [
+        "Escudo &amp; patrocinador",
+        "Sube el escudo del club y los logos de los patrocinadores en la herramienta. Un diseñador limpia y prepara cada logo para imprimir antes de producir."
+      ],
+      [
+        "Nombres &amp; dorsales",
+        "Añade toda la plantilla al carrito con el nombre, el dorsal y la talla de cada jugador. Incluido en el precio."
+      ],
+      [
+        "Modelos ya terminados",
+        "Cada modelo se abre como un diseño acabado en una combinación de colores pensada — parte de algo bueno, no de una forma vacía."
+      ],
+      [
+        "Pedido desde la herramienta",
+        "Sin presupuestos ni cadenas de correos. Ajusta las cantidades, revisa la tabla de precios y confirma. Una maqueta de producción llega en 24–48 h."
+      ]
+    ]
+  },
+  "synonyms": {
+    "title": "Creador, configurador, diseñador de camisetas — una sola herramienta",
+    "body": "Los equipos buscan un creador de camisetas de fútbol, un configurador 3D, un programa para diseñar camisetas gratis o simplemente «crear mi camiseta». Es lo mismo: una herramienta que convierte una idea en una camiseta de fútbol real. En MOMUTO es <b>el diseñador 3D</b> — gratis, en tiempo real y conectado directamente con producción, así que el diseño que apruebas es el que se fabrica. Si prefieres no construirlo tú, el mismo equipo que hace la herramienta puede <a href=\"/pages/solicitud-de-diseno-personalizado\">crearlo por ti</a>: primera maqueta en 24–48 horas."
+  },
+  "ways": {
+    "title": "Tres formas de empezar",
+    "items": [
+      [
+        "Ready to Play",
+        "Elige un diseño terminado del estudio MOMUTO y ábrelo en el creador. Cambia colores y escudo, o pídelo tal cual.",
+        "/pages/coleccion-ready-to-play",
+        "Ver los diseños"
+      ],
+      [
+        "Desde cero en 3D",
+        "Abre un modelo, ajusta cada color tú mismo, sube tu escudo y coloca el patrocinador. Control total, siempre gratis.",
+        "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=es&langguage=es",
+        "Abrir el diseñador 3D"
+      ],
+      [
+        "Envíanos tu idea",
+        "Un boceto, un brief, una foto de la camiseta de la temporada pasada o un concepto generado con IA. Un diseñador lo construye en la herramienta por ti; depósito de 15 €, que se descuenta íntegro en pedidos de 5 camisetas o más — gratis para un pedido de equipo.",
+        "/pages/solicitud-de-diseno-personalizado",
+        "Pedir un diseño"
+      ]
+    ]
+  },
+  "pricing": {
+    "title": "Cuánto cuesta una camiseta de fútbol personalizada",
+    "lead": "Una sola tabla, sin costes de preparación, nombres y dorsales incluidos. Pantalones y equipaciones completas siguen los mismos tramos.",
+    "cols": [
+      "Cantidad",
+      "Camiseta",
+      "Camiseta + pantalón"
+    ],
+    "rows": [
+      [
+        "1",
+        "38,90 €",
+        "56,80 €"
+      ],
+      [
+        "2–4",
+        "34,90 € / u.",
+        "50,80 €"
+      ],
+      [
+        "5–9",
+        "26,90 € / u.",
+        "38,80 €"
+      ],
+      [
+        "10–19",
+        "21,90 € / u.",
+        "26,90 €"
+      ],
+      [
+        "20–49",
+        "18,90 € / u.",
+        "24,90 €"
+      ],
+      [
+        "50–99",
+        "17,90 € / u.",
+        "23,40 €"
+      ],
+      [
+        "100+",
+        "16,90 € / u.",
+        "21,90 €"
+      ]
+    ],
+    "pop": 3,
+    "notes": [
+      "Manga larga +3 € por camiseta, a elegir por jugador.",
+      "Envío gratis desde 50 €; 3,90 € por debajo. Aduanas prepagadas.",
+      "Vía rápida +59 € por pedido para saltarte la cola de producción — unos 7 días menos."
+    ],
+    "more": "/pages/precios-equipaciones-futbol-personalizadas",
+    "more_label": "Tabla completa y preguntas"
+  },
+  "steps": {
+    "title": "Cómo funciona",
+    "items": [
+      [
+        "Crea",
+        "Construye la camiseta en el creador, o envíanos tu idea."
+      ],
+      [
+        "Aprueba",
+        "Una maqueta de producción llega en 24–48 h. No se imprime nada hasta que la apruebas."
+      ],
+      [
+        "Producción",
+        "7–12 días de sublimación total, cortada y cosida a la talla de cada jugador."
+      ],
+      [
+        "Entrega",
+        "10–15 días de envío con seguimiento. 25–30 días puerta a puerta."
+      ]
+    ]
+  },
+  "faq": {
+    "title": "Preguntas sobre el creador de camisetas",
+    "items": [
+      [
+        "¿El creador de camisetas de fútbol es gratis de verdad?",
+        "Sí. Crear en la herramienta 3D es gratis y no pide cuenta. Solo pagas al hacer el pedido, al precio de la tabla de arriba — sin costes de preparación, de diseño ni de pantalla."
+      ],
+      [
+        "¿Puedo crear una sola camiseta?",
+        "Sí. No hay pedido mínimo. Una camiseta suelta cuesta 38,90 €; el precio por unidad baja a 21,90 € a partir de 10 y a 16,90 € a partir de 100."
+      ],
+      [
+        "¿Puedo subir mi propio escudo y mi patrocinador?",
+        "Sí. Sube un archivo PNG, JPG, SVG o PDF en el creador. Un diseñador limpia cada escudo y patrocinador antes de producir y te envía el archivo para aprobar."
+      ],
+      [
+        "¿El creador gestiona nombres y dorsales?",
+        "Sí. Añade la plantilla al carrito con el nombre, el dorsal y la talla de cada jugador. Nombres y dorsales van incluidos en el precio; la manga larga cuesta +3 € por jugador."
+      ],
+      [
+        "¿Y si el resultado no me gusta?",
+        "Apruebas una maqueta de producción antes de imprimir nada, con revisiones ilimitadas. Si una camiseta llega defectuosa o distinta de la maqueta aprobada, la reimprimimos o la reembolsamos — ver la <a href=\"/pages/cambios-devoluciones\">política de cambios</a>."
+      ],
+      [
+        "¿Puedo usar un diseño generado con IA?",
+        "Sí. Envía un concepto de ChatGPT, Midjourney o Gemini a través de la <a href=\"/pages/camiseta-ia-concepto-real\">página de concepto IA</a> y un diseñador lo reconstruye como una camiseta de fútbol lista para imprimir."
+      ],
+      [
+        "¿Cuánto tarda una camiseta personalizada?",
+        "Maqueta en 24–48 horas, 7–12 días de producción, 10–15 días de envío: cuenta 25–30 días puerta a puerta. La vía rápida (+59 €) ahorra aproximadamente una semana."
+      ]
+    ]
+  },
+  "cta": {
+    "h2": "Crea tu camiseta",
+    "p": "Abre el creador de camisetas de fútbol gratis y ten un diseño terminado en diez minutos — o envíanos tu idea y deja que un diseñador lo construya.",
+    "btn": "Abrir el diseñador 3D — gratis",
+    "btn_url": "https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=es&langguage=es",
+    "btn2": "Preguntar por WhatsApp",
+    "btn2_url": "https://wa.me/34614625408"
+  },
+  "more": {
+    "label": "Seguir:",
+    "links": [
+      [
+        "/pages/equipaciones-futbol-personalizadas",
+        "equipaciones de fútbol personalizadas"
+      ],
+      [
+        "/pages/coleccion-ready-to-play",
+        "diseños Ready to Play"
+      ],
+      [
+        "/pages/materiales-impresion",
+        "materiales e impresión"
+      ],
+      [
+        "/pages/mejores-webs-equipaciones-futbol-personalizadas-2026",
+        "comparativa de proveedores"
+      ]
+    ]
+  }
+}
