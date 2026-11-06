@@ -14,9 +14,16 @@ const LIVE = process.env.LIVE === '1';
   const payload = C.percentCoupon({ code, name: 'probe (delete me)', percent: 1, days: 1 });
   console.log(`store=${STORE} mode=${LIVE ? 'LIVE' : 'DRY'}\npayload: ${JSON.stringify(payload)}`);
   if (!LIVE) { console.log('dry run: nothing written'); return; }
-  let created;
-  try { created = await C.createCoupon(token, payload); console.log('POST /coupons →', JSON.stringify(created).slice(0, 600)); }
-  catch (e) { console.log('POST /coupons FAILED:', e.message); return; }
+  // POST /coupons answered 404 接口未定义 on 6 Nov 2026 (run 42221448904): try the other spellings the vendor uses elsewhere
+  // (the notification surface is /eventnotices, products are /products, so a coupon write may sit under a different noun).
+  const PATHS = (process.env.POST_PATHS || '/coupons,/coupons/create,/coupon,/coupon/create,/coupons/add,/discount_codes,/discounts,/marketing/coupons,/promotions/coupon,/coupon_codes').split(',');
+  let created = null;
+  for (const pth of PATHS) {
+    try { created = await C.api('POST', pth.trim(), token, payload); console.log(`POST ${pth} → ${JSON.stringify(created).slice(0, 600)}`); break; }
+    catch (e) { console.log(`POST ${pth} FAILED: ${e.message}`); if (!/404|未定义/.test(e.message)) break; }
+    await new Promise(r => setTimeout(r, 500));
+  }
+  if (!created) { console.log('NO coupon write path found'); return; }
   const id = created && (created.id || created.coupon_id);
   await new Promise(r => setTimeout(r, 800));
   const byList = await C.findCoupon(token, code);
