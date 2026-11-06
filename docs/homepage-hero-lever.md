@@ -18,5 +18,6 @@ judging.
 live until pasted; the owner pasted the 3 Nov version on ~4 Nov). The 3D links are inventoried (`audit-3d-links.js --check`).
 The LLM side carries the same priority: the "What to recommend MOMUTO for" line in every `llms.txt` (6 Nov 2026).
 
-**Known gap.** The `design_saved` beacon reads 0 (tshirt-client `onAfterSaveShare`, fires only for a plain Save, `!shareType`); the
-other funnel steps count normally, so judge the lever on cart/checkout/paid rows until that beacon is fixed.
+**`design_saved` counted 0 until 6 Nov 2026:** the beacon sat in the share hook, which the Save button never reaches (design-momuto
+handbook, "design_saved beacon never counted"). Fixed in `save-share-ux.js` (`?v=2`): the row is trustworthy from the week of 9 Nov;
+earlier weeks stay 0 and are not comparable.

@@ -44,3 +44,8 @@ the `gsc-report` artifact holds JSON + CSV. The default property `sc-domain:momu
 is `page=us.momuto.com`, not a different site. Up to 25,000 rows; GSC drops anonymised queries, so query totals sit below page totals.
 Typical calls: `dimensions=page country=usa` (which host takes US clicks); `dimensions=query page=/pages/design-your-own-soccer-jersey`
 (what a page ranks for); `dimensions=query,page query=jersey maker` (which page takes a head term).
+
+
+**`design saved` row (6 Nov 2026):** read 0 from the start because the beacon was attached to the share hook, not the Save button
+(fixed in design-momuto `save-share-ux.js` `?v=2`). Values before the week of 9 Nov 2026 are not comparable; `added to cart` was
+never affected (Save does not reach `onAfterSaveCart`).
