@@ -1,0 +1,44 @@
+name: Abandoned checkout email (hourly)
+
+# Our abandoned-checkout mail (Resend, lib/lifecycle-mail.js) from the platform's UNPAID orders
+# (scripts/poll-abandoned-checkouts.js, docs/lifecycle-emails.md). Replaces the platform's carts/recovery_1.
+#   • Scheduled hourly: LIVE only when the repo variable ABANDONED_LIVE is "1"; otherwise a dry run that logs decisions.
+#   • Dispatch: dry run unless `live` is ticked.
+on:
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+    inputs:
+      live:
+        description: 'Send for real (unticked = dry run, decisions only)'
+        type: boolean
+        default: false
+      lang:
+        description: 'Store (all|en|es|fr|it|us)'
+        default: 'all'
+      min_age_min:
+        description: 'Minimum checkout age in minutes'
+        default: '60'
+      max_age_h:
+        description: 'Maximum checkout age in hours'
+        default: '72'
+permissions:
+  contents: read
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Poll unpaid checkouts
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          MOMUTO_API_SECRET: ${{ secrets.MOMUTO_API_SECRET }}
+          LIVE: ${{ (github.event_name == 'schedule' && vars.ABANDONED_LIVE == '1') || (github.event_name == 'workflow_dispatch' && inputs.live) && '1' || '0' }}
+        run: node scripts/poll-abandoned-checkouts.js --lang "${{ inputs.lang || 'all' }}" --min "${{ inputs.min_age_min || '60' }}" --max "${{ inputs.max_age_h || '72' }}"
