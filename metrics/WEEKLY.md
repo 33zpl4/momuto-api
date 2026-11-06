@@ -1,6 +1,6 @@
 # Weekly scorecard — 2026-W44
 
-_Generated 2026-11-05T14:43Z. Season: **NORMAL — Season underway: fewer first orders, more re-orders and late joiners. Lower than August is normal.**_
+_Generated 2026-11-06T17:15Z. Season: **NORMAL — Season underway: fewer first orders, more re-orders and late joiners. Lower than August is normal.**_
 
 ### Funnel (distinct sessions)
 | metric | this week | vs last week | vs 4-wk avg | same week last year |
@@ -34,8 +34,8 @@ Cart → paid: **11%** of sessions that reached the cart (orders and sessions ar
 ### Leads (custom design gate)
 | metric | this week | vs last week | vs 4-wk avg | same week last year |
 |---|---:|---:|---:|---:|
-| lead | 6 | -50% | -33% | — |
 | deposit intent | 10 | -33% | -20% | — |
+| lead | 6 | -50% | -33% | — |
 | deposit paid | 9 | -25% | -10% | — |
 
 ### Search Console
@@ -58,7 +58,7 @@ Cart → paid: **11%** of sessions that reached the cart (orders and sessions ar
 | design: clicks | 0 | -100% | -100% | — |
 | design: impressions | 107 | +43% | +54% | — |
 
-**Top queries** (week to 2026-11-02): momuto (248 clk, pos 1.1) · soccer jersey maker (14 clk, pos 5.1) · soccer jersey designer (13 clk, pos 6) · football shirt maker (11 clk, pos 5.9) · crear camisetas de futbol (9 clk, pos 4.9) · create your own soccer jersey online free (9 clk, pos 5.5) · design jersey online free (9 clk, pos 5) · momuto design (9 clk, pos 1) · jersey design maker (7 clk, pos 7.5) · custom soccer jersey maker (6 clk, pos 5)
+**Top queries** (week to 2026-11-03): momuto (240 clk, pos 1.1) · football shirt maker (13 clk, pos 5.3) · soccer jersey maker (12 clk, pos 5.2) · soccer jersey designer (11 clk, pos 6.4) · momuto design (9 clk, pos 1) · crear camisetas de futbol (8 clk, pos 6.6) · custom football jersey (8 clk, pos 6.7) · design jersey online free (8 clk, pos 5.2) · jersey design maker (7 clk, pos 7.7) · jersey designer (7 clk, pos 9.1)
 
 ### Health
 - copy-rules baseline: **11** known violations (should only shrink)
