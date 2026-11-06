@@ -6,10 +6,13 @@ const { chromium } = require('playwright');
 const urls = (process.env.URLS || '').split(/[\n,]/).map(s => s.trim()).filter(Boolean);
 const kw = new RegExp(process.env.KEYWORDS || 'elast|poli[eé]ster|polyester|tejido|fabric|tissu|material|gsm|g/m|power 170|cio-tex|precio|price|prix|€|\\$', 'i');
 const MAX = parseInt(process.env.MAX || '60', 10);
+const FOLLOW = process.env.FOLLOW ? new RegExp(process.env.FOLLOW, 'i') : null;   // also open links whose href matches (max 12)
+const queue = [...urls]; const seen = new Set();
 (async () => {
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ locale: 'es-ES', userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36' });
-  for (const u of urls) {
+  while (queue.length) {
+    const u = queue.shift(); if (seen.has(u)) continue; seen.add(u);
     const page = await ctx.newPage();
     try {
       const r = await page.goto(u, { waitUntil: 'domcontentloaded', timeout: 45000 });
@@ -26,6 +29,12 @@ const MAX = parseInt(process.env.MAX || '60', 10);
         if (kw.test(lines[i])) { console.log('  > ' + lines[i].slice(0, 300) + (lines[i + 1] && !kw.test(lines[i + 1]) ? '  ‖ ' + lines[i + 1].slice(0, 160) : '')); n++; }
       }
       if (!n) console.log('  (no matching lines)');
+      if (FOLLOW && urls.includes(u)) {
+        const hrefs = await page.evaluate(() => Array.from(document.querySelectorAll('a[href]')).map(a => a.href));
+        const pick = [...new Set(hrefs.filter(h => FOLLOW.test(h)))].slice(0, 12);
+        console.log('    following: ' + pick.join(' '));
+        queue.push(...pick);
+      }
     } catch (e) { console.log(`\n=== ${u}\n    ERROR ${e.message.slice(0, 200)}`); }
     await page.close();
   }
