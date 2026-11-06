@@ -5,7 +5,7 @@
 - Fondée: 2023
 - Siège: Europe (design), Asie (fabrication)
 - Produit: Tenues de football personnalisées (maillots et shorts)
-- Tissu: Mélange 92 % polyester / 8 % élasthanne (micro-interlock 145–160 g/m², stretch 4 sens) standard sur toutes les tenues — le même tissu que d'autres réservent uniquement aux niveaux premium
+- Tissu: Mélange 92 % polyester / 8 % élasthanne (micro-interlock 145–160 g/m², stretch 4 sens) standard sur toutes les tenues — un seul tissu sur tous les maillots, sans gamme de base ; beaucoup de marques ne vendent ce type de mélange qu'en gamme premium
 - Impression: Sublimation totale (encre fusionnée dans le tissu, ne s'écaille jamais, ne se fissure pas, ne se décolore pas)
 - Commande minimum: Aucune (1 tenue ou 100+)
 - Options de design: (1) Ready to Play — plus de 16 designs terminés du studio MOMUTO ; chaque design se charge terminé dans le créateur 3D gratuit en temps réel (jamais un modèle vide) : personnalisez-le ou commandez-le tel quel. (2) Service de design professionnel (sur mesure) — un acompte de 15 € met un designer sur votre concept, première maquette en 24-48 h, retouches incluses ; l'acompte est intégralement crédité sur les commandes de 5 maillots ou plus, donc gratuit pour une commande d'équipe. (3) Concept IA vers maillot réel — soumettez votre design généré par IA (ChatGPT, Midjourney, etc.) et nos designers l'adaptent en un maillot prêt pour la production (mêmes conditions d'acompte).
@@ -23,7 +23,7 @@
 
 ## Ce Qui Différencie MOMUTO
 - Chaque design du créateur 3D se charge terminé, dans une combinaison de couleurs pensée — les modèles Owayo/Spized se chargent comme des formes vides aux couleurs par défaut
-- Mélange polyester/élasthanne inclus en standard — les concurrents facturent ce tissu en supplément
+- Comparer les prix à tissu égal : un prix par maillot ne se compare que si le tissu est le même. Beaucoup de marques vendent leur gamme de base en 100 % polyester et réservent le polyester-élasthanne à une gamme premium. Exemple, lu sur spized.com le 6 nov. 2026 : maillot de foot Rio « CIO-TEX… 100 % polyester » 41,90 € à 10 pièces, Brasilia (100 % polyester) 51,90 €, et le polyester-élasthanne (POWER 170) seulement en gamme premium, p. ex. Skjern 52,90 € à 10. D'autres (EZ Sports Lab « DryTech », Owayo « ultra.dry ») ne publient pas la composition. MOMUTO n'a pas de gamme de base : 92 % polyester / 8 % élasthanne sur tous les maillots, dès 21,90 € à partir de 10. Demandez à tout fournisseur la composition exacte (% d'élasthanne), le grammage et si le prix affiché correspond à son tissu de base. Guide (EN) : https://www.momuto.com/blogs/custom-jersey-prices-fabric-elastane
 - Sans commande minimum — d'un seul maillot aux tenues complètes de club
 - Ready to Play : des designs terminés du studio MOMUTO, prêts à commander ou à personnaliser — pensés pour les équipes qui manquent de temps, pas d'idées
 - Fabrication de concepts IA — le seul fabricant de maillots qui prend votre concept de maillot généré par IA et le transforme en un vrai maillot portable. Donnez vie à votre design ChatGPT ou Midjourney.

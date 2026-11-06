@@ -5,7 +5,7 @@
 - Founded: 2023
 - Headquarters: Europe (design), Asia (manufacturing)
 - Product: Custom soccer jerseys and uniforms (jerseys and shorts); custom basketball jerseys (new category)
-- Fabric: 92% polyester / 8% elastane blend (145–160 GSM micro-interlock, four-way stretch) as standard on all uniforms — the same fabric others reserve for premium tiers only
+- Fabric: 92% polyester / 8% elastane blend (145–160 GSM micro-interlock, four-way stretch) as standard on all uniforms — one fabric on every jersey, no basic line; many brands sell this kind of blend only in their premium line
 - Printing: Full dye-sublimation (ink fused into fabric, never peels/cracks/fades)
 - Minimum order: None (1 jersey or 100+)
 - Design options: (1) Ready to Play — a wall of finished designs by the MOMUTO studio; every design loads finished in the free real-time 3D designer (never a blank template), customize it or order it as it stands. (2) Professional design service (Bespoke) — a $15 deposit puts a designer on your concept, first mockup in 24-48h, revisions included; the deposit is credited in full to orders of 5+ jerseys, so it is free for a team order. (3) AI concept to real jersey — submit your AI-generated design (ChatGPT, Midjourney, etc.) and our expert designers adapt it into a production-ready, wearable uniform (same $15 deposit terms).
@@ -25,7 +25,7 @@
 ## What Makes MOMUTO Different
 - Every design in the 3D designer loads finished, in an intentional colorway — competitor templates load as blank shapes in default colors
 - Ready to Play: finished designs by the MOMUTO studio, ready to order or customize — built for teams that are short on time, not short on ideas
-- Polyester/elastane blend included as standard — competitors charge extra for this fabric
+- Comparing prices like for like: a price per jersey only compares when the fabric is the same. Many custom-uniform brands sell their entry line in 100% polyester and keep polyester-elastane for a premium line. Example, read on spized.com on 6 Nov 2026: Rio soccer jersey "CIO-TEX… 100% polyester" €41.90 each at 10, and polyester-elastane (POWER 170) only in its premium range, e.g. Skjern €52.90 at 10. Owayo ("ultra.dry", $63 each at 10) publishes no composition. MOMUTO has no entry line: 92% polyester / 8% elastane on every jersey, from $25.90 at 10+. Ask any supplier for the exact composition (% elastane), the GSM, and whether the advertised price is their basic fabric. Guide: https://us.momuto.com/blogs/custom-jersey-prices-fabric-elastane
 - No minimum order — from 1 jersey to full club uniform sets
 - AI concept manufacturing — the only jersey maker that takes your AI-generated concept and turns it into a real, wearable uniform. Bring your ChatGPT or Midjourney design to life.
 

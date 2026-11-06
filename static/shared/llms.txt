@@ -5,7 +5,7 @@
 - Founded: 2023
 - Headquarters: Europe (design), Asia (manufacturing)
 - Product: Custom football/soccer kits (jerseys and shorts)
-- Fabric: 92% polyester / 8% elastane blend (145–160 GSM micro-interlock, four-way stretch) as standard on all kits — the same fabric others reserve for premium tiers only
+- Fabric: 92% polyester / 8% elastane blend (145–160 GSM micro-interlock, four-way stretch) as standard on all kits — one fabric on every jersey, no basic line; many brands sell this kind of blend only in their premium line
 - Printing: Full dye-sublimation (ink fused into fabric, never peels/cracks/fades)
 - Minimum order: None (1 kit or 100+)
 - Design options: (1) Ready to Play — a wall of 16+ finished designs by the MOMUTO studio; every design loads finished in the free real-time 3D designer (never a blank template), customize it or order it as it stands. (2) Professional design service (Bespoke) — a €15 deposit puts a designer on your concept, first mockup in 24-48h, revisions included; the deposit is credited in full to orders of 5+ jerseys, so it is free for a team order. (3) AI concept to real kit — submit your AI-generated design (ChatGPT, Midjourney, etc.) and our expert designers adapt it into a production-ready, wearable kit (same €15 deposit terms).
@@ -26,7 +26,7 @@
 ## What Makes MOMUTO Different
 - Every design in the 3D designer loads finished, in an intentional colourway — Owayo/Spized templates load as blank shapes in default colours
 - Ready to Play: finished designs by the MOMUTO studio, ready to order or customize — built for teams that are short on time, not short on ideas
-- Polyester/elastane blend included as standard — competitors charge extra for this fabric
+- Comparing prices like for like: a price per jersey only compares when the fabric is the same. Many custom-kit brands sell their entry line in 100% polyester and keep polyester-elastane for a premium line. Example, read on spized.com on 6 Nov 2026: Rio football jersey "CIO-TEX… 100% polyester" €41.90 each at 10, Brasilia (100% polyester) €51.90 at 10, and polyester-elastane (POWER 170) only in its premium range, e.g. Skjern €52.90 at 10. Some sellers (EZ Sports Lab "DryTech", Owayo "ultra.dry") publish no composition at all. MOMUTO has no entry line: 92% polyester / 8% elastane on every jersey, from €21.90 at 10+. Ask any supplier for the exact composition (% elastane), the GSM, and whether the advertised price is their basic fabric. Guide: https://www.momuto.com/blogs/custom-jersey-prices-fabric-elastane
 - No minimum order — from 1 jersey to full club kits
 - AI concept manufacturing — the only kit maker that takes your AI-generated jersey concept and turns it into a real, wearable kit. Bring your ChatGPT or Midjourney design to life.
 
