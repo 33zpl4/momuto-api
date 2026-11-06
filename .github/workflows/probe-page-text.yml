@@ -29,6 +29,7 @@ jobs:
       - run: npm i --no-save playwright && npx playwright install --with-deps chromium
       - name: Probe
         env:
-          URLS: ${{ github.event.inputs.urls || 'https://ezsportslab.com/products/camiseta-futbol-cd-zamora-copia,https://ezsportslab.com/products/camiseta-legend,https://ezsportslab.com/en/products/camiseta-flash-2,https://ezsportslab.com/products/camiseta-futbol-londres-fc,https://ezsportslab.com/collections/all,https://ezsportslab.com,https://www.spized.com/es/crear/ropa-deportiva/camisetas,https://www.spized.com/en/custom/sports-clothing/jerseys?p=1,https://www.spized.com/en/club-jerseys,https://www.spized.com/en/have-sports-shirts-printed,https://www.owayo.com/design-custom-soccer-jerseys.htm,https://www.owayo.com/soccer/pricelist_all-us.htm' }}
-          KEYWORDS: ${{ github.event.inputs.keywords }}
+          URLS: ${{ github.event.inputs.urls || 'https://www.spized.com/en/custom/sports-clothing/jerseys?p=1,https://www.spized.com/es,https://www.spized.com/en/design-your-own-jersey,https://www.spized.com/en/team-trip-t-shirt' }}
+          KEYWORDS: ${{ github.event.inputs.keywords || 'power|cio-tex|elast|polyester|poli|pro line|premium|regular fit|slim fit|rio|brasilia|unit price|precio unitario|line|range' }}
+          MAX: '200'
         run: node scripts/probe-page-text.js
