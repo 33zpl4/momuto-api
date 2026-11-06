@@ -5,9 +5,13 @@
  *
  * Source = the platform orders of every store (so direct store buys count too): financial_status 230, pay_at between
  * DAY_FROM and DAY_TO days ago, with an email, not test, not cancelled, no refund. One offer per email per run and per
- * 180 days (KV, lib/lifecycle-mail.js). The coupon is created on the order's store with scripts/platform-coupon.js
- * (code KIT10-<ref or id>) — its existence is also the idempotency guard on this side: an order whose code already
- * exists is skipped before any email. Dry run by default (no coupon, no email). LIVE=1 to run.
+ * 180 days (KV, lib/lifecycle-mail.js).
+ * Coupon: the platform has NO coupon write API (POST /coupons and 9 other spellings → 404, runs 42221448904 /
+ * 42221734410), so the code is ONE SHARED CODE PER STORE created by the owner in the admin (10 %, whole store, one use
+ * per customer) and given to this script as REORDER_CODES='{"es":"KIT10","fr":"KIT10",...}' or REORDER_CODE=KIT10 for
+ * all stores. Before any email the code is read back from GET /coupons and must be active (status 2) and not expired;
+ * otherwise the store is skipped with an error. The "valid 14 days" in the mail is therefore not enforced per customer.
+ * Dry run by default. LIVE=1 to send.
  *
  *   node scripts/poll-reorder-offers.js [--lang es] [--from 90] [--to 104]
  */
@@ -15,7 +19,9 @@ const C = require('./platform-coupon');
 const API  = (process.env.MOMUTO_API_BASE || 'https://momuto-api.vercel.app') + '/api/lifecycle';
 const SECRET = process.env.MOMUTO_API_SECRET;
 const LIVE = process.env.LIVE === '1';
-const PERCENT = 10, DAYS_VALID = 14;
+const DAYS_VALID = 14;
+const CODES = (() => { try { return JSON.parse(process.env.REORDER_CODES || '{}'); } catch { return {}; } })();
+const codeFor = lang => CODES[lang] || process.env.REORDER_CODE || '';
 const STORES = {
   en: { host: 'www.momuto.com', tokenEnv: 'OEMSAAS_TOKEN_EN', lang: 'en', cta: 'https://www.momuto.com/pages/jersey-maker', price: 'https://www.momuto.com/pages/custom-football-kit-prices' },
   es: { host: 'es.momuto.com',  tokenEnv: 'OEMSAAS_TOKEN_ES', lang: 'es', cta: 'https://es.momuto.com/pages/equipaciones-futbol-personalizadas', price: 'https://es.momuto.com/pages/precios-equipaciones-futbol-personalizadas' },
@@ -57,12 +63,21 @@ async function post(body) {
   const now = Date.now(), fromMs = now - args.to * 86400000, toMs = now - args.from * 86400000;
   console.log(`mode=${LIVE ? 'LIVE' : 'DRY RUN'} paid between ${args.to} and ${args.from} days ago · stores=${langs.join(',')}`);
   if (LIVE && !SECRET) throw new Error('LIVE needs MOMUTO_API_SECRET');
-  const report = { candidates: 0, coupons: 0, sent: 0, dedup: 0, skipped: 0, errors: [] };
+  const report = { candidates: 0, sent: 0, dedup: 0, skipped: 0, errors: [] };
   const seenEmail = new Set();
   for (const lang of langs) {
     const S = STORES[lang]; const token = process.env[S.tokenEnv];
     if (!token) { report.errors.push(`${lang}: missing ${S.tokenEnv}`); continue; }
     console.log(`\n=== ${lang.toUpperCase()}`);
+    const code = codeFor(lang);
+    if (!code) { console.log(`  no REORDER_CODES entry for ${lang} — nothing can be offered here`); if (LIVE) report.errors.push(`${lang}: no coupon code configured`); }
+    let live = null;
+    if (code) {
+      try { live = await C.findCoupon(token, code); } catch (e) { report.errors.push(`${lang}: coupon read ${e.message}`); continue; }
+      const ok = live && +live.status === 2 && (+live.ends_at === -1 || +live.ends_at * 1000 > now);
+      console.log(`  coupon ${code}: ${live ? `found, status ${live.status}, ends ${+live.ends_at === -1 ? 'never' : new Date(live.ends_at * 1000).toISOString().slice(0, 10)}, used ${live.times_used}` : 'NOT FOUND in the store'}${ok ? '' : ' → not usable'}`);
+      if (!ok && LIVE) { report.errors.push(`${lang}: coupon ${code} not active on the store`); continue; }
+    }
     let paid; try { paid = await listPaid(token, fromMs, toMs); } catch (e) { report.errors.push(`${lang}: ${e.message}`); continue; }
     for (const o of paid) {
       const email = emailOf(o); const id = o.id;
@@ -70,20 +85,14 @@ async function post(body) {
       if (why) { report.skipped++; console.log(`  skip ${id} (${why})`); continue; }
       seenEmail.add(email); report.candidates++;
       const ref = (items(o).map(preview).find(Boolean) || {}).order_no;
-      const code = `KIT10-${String(ref || id).toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10)}`;
       const image = (items(o).find(preview) || {}).src || null;
       const ctx = { kind: 'reorder', key: `${lang}:${id}`, email, lang: S.lang, name: nameOf(o), team: teamOf(o) || '', code, expires: fmtDate(now + DAYS_VALID * 86400000, S.lang), image, ctaUrl: S.cta, priceUrl: S.price, dry: !LIVE };
-      console.log(`  ${LIVE ? 'OFFER' : 'would offer'} ${id} → ${mask(email)} · paid ${Math.round((now - (+field(o, ['first_pay_at', 'pay_at']) || 0) * 1000) / 86400000)} d ago · code ${code} · team "${ctx.team}"`);
-      if (!LIVE) continue;
+      console.log(`  ${LIVE ? 'OFFER' : 'would offer'} ${id} → ${mask(email)} · paid ${Math.round((now - (+field(o, ['first_pay_at', 'pay_at']) || 0) * 1000) / 86400000)} d ago · code ${code || '(none)'} · team "${ctx.team}"`);
+      if (!LIVE || !code) continue;
       try {
-        if (await C.findCoupon(token, code)) { console.log('    coupon exists → already offered, skip'); report.dedup++; continue; }
-        const dry = await post({ ...ctx, dry: true });   // render check + suppression-free preflight before the coupon exists
-        if (!dry.json.ok) { report.errors.push(`${lang}:${id}: preflight ${JSON.stringify(dry.json)}`); continue; }
-        await C.createCoupon(token, C.percentCoupon({ code, name: `Reorder 10% · ${ref || id}`, percent: PERCENT, days: DAYS_VALID }));
-        report.coupons++; await sleep(600);
         const r = await post(ctx);
         if (r.json.sent) report.sent++; else if (r.json.dedup || r.json.suppressed) report.dedup++;
-        console.log(`    coupon created · mail → ${r.status} ${JSON.stringify(r.json).slice(0, 160)}`);
+        console.log(`    mail → ${r.status} ${JSON.stringify(r.json).slice(0, 160)}`);
       } catch (e) { report.errors.push(`${lang}:${id}: ${e.message}`); }
       await sleep(500);
     }
