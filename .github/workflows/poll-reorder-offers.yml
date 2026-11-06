@@ -1,0 +1,44 @@
+name: Reorder offer email (day 90)
+
+# ~90 days after a paid order: one 10 % single-use coupon (14 days) + one email (scripts/poll-reorder-offers.js,
+# lib/lifecycle-mail.js, docs/lifecycle-emails.md). Creates coupons on the store platform when LIVE.
+#   • Scheduled daily: LIVE only when the repo variable REORDER_LIVE is "1"; otherwise a dry run.
+#   • Dispatch: dry run unless `live` is ticked.
+on:
+  schedule:
+    - cron: '17 9 * * *'
+  workflow_dispatch:
+    inputs:
+      live:
+        description: 'Create coupons and send for real (unticked = dry run)'
+        type: boolean
+        default: false
+      lang:
+        description: 'Store (all|en|es|fr|it|us)'
+        default: 'all'
+      day_from:
+        description: 'Paid at least N days ago'
+        default: '90'
+      day_to:
+        description: 'Paid at most N days ago'
+        default: '104'
+permissions:
+  contents: read
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Poll paid orders around day 90
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          MOMUTO_API_SECRET: ${{ secrets.MOMUTO_API_SECRET }}
+          LIVE: ${{ (github.event_name == 'schedule' && vars.REORDER_LIVE == '1') || (github.event_name == 'workflow_dispatch' && inputs.live) && '1' || '0' }}
+        run: node scripts/poll-reorder-offers.js --lang "${{ inputs.lang || 'all' }}" --from "${{ inputs.day_from || '90' }}" --to "${{ inputs.day_to || '104' }}"

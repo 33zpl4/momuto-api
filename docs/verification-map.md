@@ -58,3 +58,12 @@ The tool (design-momuto `configurator.html`, inline script) swaps the public tem
 Proof that it is live: a green **Probe 3D entry (read-only)** run (`scripts/probe-3d-entry.js`): each public link opens with a
 different 8-char configId, the tool's state (`__momutoOw.configId`) equals it, a share-copy link keeps its id, and the about-page
 link no longer carries the literal user id. NOT proved by the probe: a real save / add-to-cart (owner test on one store).
+
+
+## Lifecycle emails (6 Nov 2026) — docs/lifecycle-emails.md
+
+| surface | proof |
+| --- | --- |
+| Abandoned-checkout mail | `poll-abandoned-checkouts.yml` dry-run log lists the right unpaid orders (masked emails, renders found); first live run: `→ 200 {"ok":true,"sent":true}` per order and the mail in the Resend dashboard |
+| Day-90 reorder offer | `poll-reorder-offers.yml` dry-run log; `probe-coupon-write.yml` live = `VERIFIED create + delete`; first live run: `coupon created · mail → 200 … sent` and the code visible in the store admin |
+| Templates | `node --test test/lifecycle-emails.test.js` in the PR check |
