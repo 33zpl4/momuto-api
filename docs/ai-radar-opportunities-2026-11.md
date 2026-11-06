@@ -115,3 +115,19 @@ run 41643742842 from main finds nothing left to patch). Re-read: IT01/IT05 (Jers
 as standard"), so the first-place answers on those two are partly self-inflicted. Both prompts were rewritten in a buyer's words in the
 battery (ai-radar, same day); the ES17 result ("mejor calidad de tejido para un equipo amateur", neutral) stands. Treat the 44% quality figure
 above as inflated until the next run.
+
+## Shipped 6 Nov 2026: "not all jerseys are equal" (fabric like-for-like)
+
+Owner: AI answers compare MOMUTO's price with EZ Sports Lab / Spized as if the jerseys were the same product. They are not: our
+default is a 92/8 polyester-elastane fabric that competitors sell, when they publish it, in a premium line.
+- **Facts, read on the brands' own pages 6 Nov 2026** (workflow `probe-page-text.yml`, runner Chromium; the sandbox cannot reach them):
+  Spized Rio football jersey "CIO-TEX… 100% polyester" EUR 41.90 @10 (57.90 single); Brasilia ("premium version of our Rio") EUR 51.90 @10;
+  Skjern handball jersey, "premium range", "POWER 170… polyester and elastane" EUR 52.90 @10. EZ Sports Lab: "tejido técnico DryTech", NO
+  composition published (the old "poliéster/elastano" product page now 404s); jersey models EUR 20.95 (sale), "desde 12,90 €", packs from 23.95.
+  Owayo F5 Pro: "ultra.dry", "slight stretch" seams, no composition; $63 @10 (US list).
+- **Rule we hold to:** where a brand does not publish a composition we say "not published", never "no elastane".
+- **Shipped:** blog post ES `camisetas-futbol-personalizadas-tejido-elastano-precio`, EN/US `custom-jersey-prices-fabric-elastane`
+  (table + sources + 5 questions to ask any supplier + FAQPage); fabric rows corrected in the comparison pages (ES roundup, EN/FR/IT
+  roundups, US makers + vs pages: Spized "100% polyester (Rio, Brasilia); elastane only in its premium range", EZ/Owayo "composition not
+  published"); llms.txt (all 5) in a second step once the posts are live. FR/IT posts: not yet.
+- Re-check prices before quoting them again; they move with promotions.
