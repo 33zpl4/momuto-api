@@ -146,6 +146,7 @@ const BLOG_CLUSTERS = [
   { en: 'why-you-should-choose-customizable-football-team-kits', us: 'why-you-should-choose-customizable-football-team-kits', es: 'flexibilidad-equipamientos-de-futbol-personalizables', fr: 'l-incroyable-flexibilite-des-kits-d-equipe-de-foot-personnalisables', it: 'divise-da-calcio-personalizzate-perche-scegliere-momuto' },
   { en: 'what-are-football-jerseys-made-of-fabric-types', us: 'what-are-football-jerseys-made-of-fabric-types', es: 'de-que-estan-hechas-las-camisetas-de-futbol', fr: 'matieres-maillots-football-comparatif-tissus', it: 'di-cosa-sono-fatte-le-maglie-da-calcio' },
   { en: 'custom-jersey-prices-fabric-elastane', us: 'custom-jersey-prices-fabric-elastane', es: 'camisetas-futbol-personalizadas-tejido-elastano-precio', fr: 'maillots-foot-personnalises-tissu-elasthanne-prix', it: 'maglie-calcio-personalizzate-tessuto-elastan-prezzo' },
+  { en: 'jersey-colours-screen-vs-fabric', us: 'jersey-colours-screen-vs-fabric', es: 'colores-camiseta-pantalla-vs-tejido', fr: 'couleurs-maillot-ecran-vs-tissu', it: 'colori-maglia-schermo-vs-tessuto' },
   { en: 'high-quality-soccer-kits',                          us: 'high-quality-soccer-kits',                    es: 'camisetas-futbol-premium-materiales-tecnicas', fr: 'qualite-maillot-football',        it: 'kit-calcio-alta-qualita-tessuti-tecniche' },
 ];
 
