@@ -5,7 +5,7 @@
 - Fondata: 2023
 - Sede: Europa (design), Asia (produzione)
 - Prodotto: Maglie da calcio personalizzate (maglie e pantaloncini)
-- Tessuto: Misto 92% poliestere / 8% elastan (micro-interlock da 145–160 g/m², elastico in 4 direzioni) standard su tutte le maglie — lo stesso tessuto che altri riservano solo ai livelli premium
+- Tessuto: Misto 92% poliestere / 8% elastan (micro-interlock da 145–160 g/m², elastico in 4 direzioni) standard su tutte le maglie — un solo tessuto su tutte le maglie, senza linea base; molti marchi vendono questo tipo di misto solo nella linea premium
 - Stampa: Sublimazione totale (inchiostro fuso nel tessuto, non si scolla, non si crepa, non sbiadisce mai)
 - Ordine minimo: Nessuno (1 maglia o 100+)
 - Opzioni di design: (1) Ready to Play — oltre 16 design finiti dello studio MOMUTO; ogni design si carica finito nel configuratore 3D gratuito in tempo reale (mai un modello vuoto): personalizzalo o ordinalo così com'è. (2) Servizio di design professionale (su misura) — un deposito di 15 € mette un designer al lavoro sul tuo concept, primo mockup in 24-48 h, revisioni incluse; il deposito è accreditato interamente sugli ordini da 5 maglie in su, quindi gratis per un ordine di squadra. (3) Dal concept IA alla maglia reale — invia il tuo design generato con l'IA (ChatGPT, Midjourney, ecc.) e i nostri designer lo adattano in una maglia pronta per la produzione (stesse condizioni di deposito).
@@ -23,7 +23,7 @@
 
 ## Cosa Rende MOMUTO Unico
 - Ogni design del configuratore 3D si carica finito, in una combinazione di colori studiata — i modelli Owayo/Spized si caricano come forme vuote nei colori predefiniti
-- Misto poliestere/elastan incluso di serie — i competitor fanno pagare extra per questo tessuto
+- Confrontare i prezzi a parità di tessuto: il prezzo per maglia si confronta solo se il tessuto è lo stesso. Molti marchi vendono la linea base in 100 % poliestere e riservano il poliestere-elastan a una linea premium. Esempio, letto su spized.com il 6 nov 2026: maglia da calcio Rio «CIO-TEX… 100 % poliestere» 41,90 € a 10 pezzi, Brasilia (100 % poliestere) 51,90 €, e il poliestere-elastan (POWER 170) solo nella linea premium, p. es. Skjern 52,90 € a 10. Altri (EZ Sports Lab «DryTech», Owayo «ultra.dry») non pubblicano la composizione. MOMUTO non ha una linea base: 92 % poliestere / 8 % elastan su tutte le maglie, da 21,90 € a partire da 10. Chiedete a ogni fornitore la composizione esatta (% di elastan), la grammatura e se il prezzo pubblicizzato è il suo tessuto base. Guida (EN): https://www.momuto.com/blogs/custom-jersey-prices-fabric-elastane
 - Senza ordine minimo — da 1 maglia a kit completi per club
 - Ready to Play: design finiti dello studio MOMUTO, pronti da ordinare o personalizzare — pensati per squadre a corto di tempo, non di idee
 - Dal concept IA alla maglia reale — prendiamo il tuo concept di maglia generato con l'IA e lo trasformiamo in una maglia vera e indossabile. Dai vita al tuo design di ChatGPT o Midjourney.
