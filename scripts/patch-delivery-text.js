@@ -28,6 +28,14 @@ const DOMAINS = {
     handleSuffix: 'design-maillot',
     replacements: [['20-25 J', '25-30 J']]
   },
+  us: {
+    // added 3 Nov 2026: 28 US team pages still carried "20-25 DAYS" (the radar's Claude answers quoted it)
+    token: process.env.OEMSAAS_TOKEN_US,
+    host: 'https://openapi.oemapps.com',
+    label: 'us.momuto.com',
+    handleSuffix: 'custom-kit-design',
+    replacements: [['20-25 DAYS', '25-30 DAYS'], ['20-25 days', '25-30 days']]
+  },
   it: {
     token: process.env.OEMSAAS_TOKEN_IT,
     host: 'https://openapi.oemapps.com',
@@ -67,6 +75,7 @@ async function patchPage(domain, p) {
     }
   }
   if (!changed) return false;
+  if (process.env.DRY_RUN === 'true') { console.log(`  DRY RUN — would patch ${p.handle}`); return true; }
 
   const res = await fetch(`${domain.host}/pages/${p.id}`, {
     method: 'PUT',

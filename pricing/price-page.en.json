@@ -1,0 +1,112 @@
+{
+  "handle": "custom-football-kit-prices",
+  "title": "Custom Football Kit Prices 2026 — Jersey, Shorts, Full Kit | MOMUTO",
+  "meta_title": "Custom Football Kit Prices 2026: Per Jersey, Per Player | MOMUTO",
+  "meta_descript": "Custom football kit prices 2026: €38.90 for one jersey, €21.90 each at 10+, full kit from €21.90, worked totals for 11, 15 and 20 players. No minimum order.",
+  "keywords": [
+    "custom football kit prices",
+    "custom football jersey price",
+    "how much does a custom football kit cost",
+    "custom football kits for 15 players price",
+    "team kit price per player",
+    "MOMUTO"
+  ],
+  "label": "Prices 2026",
+  "h1": "Custom Football Kit <span class=\"acc\">Prices</span>",
+  "sub": "One ladder for every design: the same price whether you build it in the free 3D designer, pick a Ready to Play design, or send us an AI concept. Names, numbers and sponsor logos are printed in at no extra cost. No minimum order.",
+  "quick": [
+    [
+      "€38.90",
+      "one jersey, no minimum"
+    ],
+    [
+      "€21.90",
+      "per jersey at 10+"
+    ],
+    [
+      "€26.90",
+      "jersey + shorts at 10+"
+    ],
+    [
+      "25–30 days",
+      "door to door, tracked"
+    ]
+  ],
+  "ladder_h": "The price ladder",
+  "ladder_lead": "Per unit, per line. Quantities pool per product, so 12 jerseys and 12 shorts each get the 10–19 tier.",
+  "ex_h": "What a team actually pays",
+  "ex_lead": "Worked totals at the ladder price, shipping included (free over €50). Add-ons are optional and listed below.",
+  "ex_cols": [
+    "Team",
+    "Jerseys only",
+    "Per player",
+    "Jersey + shorts",
+    "Per player"
+  ],
+  "players": "players",
+  "addons_h": "Add-ons and the two extras people ask about",
+  "calc_h": "Price your own order",
+  "calc_lead": "The same ladder, for your numbers. Nothing is sent; this is arithmetic in your browser.",
+  "calc": {
+    "players": "Players",
+    "item": "What",
+    "jersey": "Jersey",
+    "kit": "Jersey + shorts",
+    "socks": "Socks (+€3.90 per pair)",
+    "ls": "Long sleeves (+€3.00 per jersey)",
+    "fast": "Fast lane (+€59 per order)",
+    "total": "Order total",
+    "per": "per player",
+    "ship": "Shipping"
+  },
+  "faq_h": "Price questions",
+  "faq": [
+    [
+      "How much does a custom football kit cost for a team of 15?",
+      "At the 10–19 tier a jersey is €21.90 and a jersey + shorts kit is €26.90, so 15 jerseys cost €328.50 and 15 full kits €403.50, shipping included. Names and numbers are included; socks are €3.90 a pair if you add them."
+    ],
+    [
+      "Is there a minimum order?",
+      "No. One jersey is €38.90. The per-unit price falls at 2, 5, 10, 20, 50 and 100 units."
+    ],
+    [
+      "Are names, numbers and sponsor logos extra?",
+      "No. They are sublimated into the fabric with the design and included in the price at every quantity."
+    ],
+    [
+      "What does design cost?",
+      "Designing in the 3D designer is free, with no account. A designer-built design (a brief, a sketch or an AI concept) takes a €15 deposit that is credited in full to orders of 5+ jerseys — free design for teams."
+    ],
+    [
+      "What about shipping and duties?",
+      "Shipping is free over €50 and €3.90 below. Delivery is tracked and duties are prepaid: 25–30 days door to door, or 18–23 with the fast lane (+€59 per order)."
+    ],
+    [
+      "Do prices differ between the 3D designer, Ready to Play and a bespoke design?",
+      "No. One ladder for all three routes; the Ready to Play seasonal selection carries −10% on the designs wearing the badge."
+    ]
+  ],
+  "cta_h": "Design it, then see the price in the tool",
+  "cta_p": "Open the free 3D designer, set the quantity and the ladder price shows before you pay anything.",
+  "cta_btn": "Open the 3D designer — free",
+  "cta_btn2": "Request a design",
+  "more_label": "Keep exploring:",
+  "more": [
+    [
+      "/pages/jersey-maker",
+      "jersey maker"
+    ],
+    [
+      "/pages/faq",
+      "FAQ"
+    ],
+    [
+      "/pages/shipping-policy",
+      "shipping"
+    ],
+    [
+      "/pages/custom-soccer-jerseys",
+      "custom football kits"
+    ]
+  ]
+}

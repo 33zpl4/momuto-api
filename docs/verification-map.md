@@ -46,3 +46,24 @@ Proof of a homepage SEO write: a green `apply-seo` run followed by an `apply-seo
 ## www entry (US banner + H1 demotion) — added 3 Nov 2026
 Source `docs/www-us-banner/`; proof that it is pasted = **Probe page head** on a www page showing a single `h1` and (from a US browser)
 the `#mo-us-banner` bar. The `--check` in Check copy rules proves only that the generated file matches the sources.
+
+## Price pages (5 locales) — added 3 Nov 2026
+Source of numbers: `faq/faq.<locale>.json` pricing block; copy: `pricing/price-page.<locale>.json`; builder `scripts/build-price-pages.js`
+(sanity: fonts, one H1, JSON-LD, meta lengths, lexicon, stale price, no refund wording, 15-player row). Proof of a change: green Deploy CMS Page
+on the merge + Probe page head on the URL; the calculator is checked in Chromium by `scratchpad/test-price-calc.js` (session) — move it into
+`scripts/` on the second change. A price change goes into the FAQ source first, then both builders run.
+
+## 3D designer: one configId per visit — added 4 Nov 2026
+The tool (design-momuto `configurator.html`, inline script) swaps the public template ids for a fresh one at entry.
+Proof that it is live: a green **Probe 3D entry (read-only)** run (`scripts/probe-3d-entry.js`): each public link opens with a
+different 8-char configId, the tool's state (`__momutoOw.configId`) equals it, a share-copy link keeps its id, and the about-page
+link no longer carries the literal user id. NOT proved by the probe: a real save / add-to-cart (owner test on one store).
+
+
+## Lifecycle emails (6 Nov 2026) — docs/lifecycle-emails.md
+
+| surface | proof |
+| --- | --- |
+| Abandoned-checkout mail | `poll-abandoned-checkouts.yml` dry-run log lists the right unpaid orders (masked emails, renders found); first live run: `→ 200 {"ok":true,"sent":true}` per order and the mail in the Resend dashboard |
+| Day-90 reorder offer | `poll-reorder-offers.yml` dry-run log; `probe-coupon-write.yml` live = `VERIFIED create + delete`; first live run: `coupon created · mail → 200 … sent` and the code visible in the store admin |
+| Templates | `node --test test/lifecycle-emails.test.js` in the PR check |

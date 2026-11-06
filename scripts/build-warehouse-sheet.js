@@ -333,7 +333,7 @@ async function buildSheet(order, designs, warnings) {
     }
     d.players.forEach((p, i) => {
       const vals = [i + 1, SLEEVE_ZH[p.sleeve] || p.sleeve, p.size, p.number, p.name, p.qty, p.shorts || '', p.collar ? 'POLO领' : ''];
-      vals.forEach((v, j) => { const c = ws.getCell(r, j + 1); c.value = v; c.font = { name: 'Arial', size: 11, bold: j === 3 || j === 4 }; c.border = { top: { style: 'thin' }, bottom: { style: 'thin' }, left: { style: 'thin' }, right: { style: 'thin' } }; c.alignment = { horizontal: 'center' }; if (j === 3) c.numFmt = '@'; });
+      vals.forEach((v, j) => { const c = ws.getCell(r, j + 1); c.value = v; c.font = { name: 'Arial', size: 11, bold: j === 3 || j === 4 }; c.border = { top: { style: 'thin' }, bottom: { style: 'thin' }, left: { style: 'thin' }, right: { style: 'thin' } }; c.alignment = { horizontal: 'center' }; if (j === 3) c.numFmt = '@'; if (j === 2 && !String(v || '').trim()) { c.value = '缺尺码'; c.font = { name: '宋体', size: 11, bold: true, color: { argb: 'FFC00000' } }; c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFE0E0' } }; } });
       r += 1;
     });
     if (d.players.length) {
@@ -392,6 +392,11 @@ async function processOrder(lang, raw, token) {
     designs.forEach((d, i) => { const p = previewRenders[i]; if (p) { d.front = d.front || p.front; d.back = d.back || p.back; } });
   }
   const rosterQty = rosterUnits(designs).jerseys;   // jersey designs only: a shorts design's rows are shorts (21 Oct 2026)
+  // Order 2yc9cfywz1 (5 Nov 2026): a shorts row with no size and no number reached the factory (the cart
+  // let ADD PLAYER rows through with the size left on "-"; fixed in the cart the same day). Flag any left.
+  designs.forEach((d, di) => d.players.forEach((p, pi) => {
+    if (!String(p.size || '').trim()) warnings.push(`设计 ${di + 1}${d.suit ? ' (' + d.suit + ')' : ''} 第 ${pi + 1} 行没有尺码${p.number || p.name ? `（号码 ${p.number || '-'} 名字 ${p.name || '-'}）` : '（也没有号码/名字）'}，请与客户核对后再生产`);
+  }));
   if (rosterQty && order.jerseys && rosterQty !== order.jerseys) warnings.push(`名单数量 ${rosterQty} 与平台数量 ${order.jerseys} 不一致，请核对`);
   const rosterLong = designs.reduce((n, d) => n + d.players.filter(p => p.sleeve === 'long').reduce((m, p) => m + p.qty, 0), 0);
   if (rosterQty && rosterLong !== order.longSleeves) warnings.push(`长袖数量：名单 ${rosterLong} 件，平台加购 ${order.longSleeves} 件，请核对`);

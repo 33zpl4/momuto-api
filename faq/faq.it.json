@@ -131,6 +131,10 @@
           "Aggiungi il design al carrello e inserisci la rosa: una riga per giocatore con taglia, nome e numero. Taglie miste — dal bambino all'adulto — nello stesso design sono la normalità. Se la lista non è ancora definitiva, ordina quello che hai; un secondo ordine più avanti avrà la propria fascia di prezzo."
         ],
         [
+          "Posso riordinare qualche maglia più avanti al prezzo della mia squadra?",
+          "Sì, con una recensione. <b>Lascia una recensione dopo la consegna e il prezzo per maglia del tuo ordine di squadra resta bloccato per i riordini fino alla fine della stagione, senza minimo</b>: due maglie per nuovi giocatori costano quanto è costata ogni maglia nell'ordine di squadra, non il prezzo singolo. Rispondi all'email di consegna o scrivi a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> con il link alla tua recensione e lo attiviamo sul tuo account."
+        ],
+        [
           "Posso ancora cambiare qualcosa dopo l'ordine?",
           "Sì, fino all'inizio della produzione, di solito 2–3 giorni dopo aver ricevuto il tuo ordine: colori, posizione dello stemma, un nome scritto male, una taglia. Dopo la divisa è in lavorazione e non si può più modificare. Puoi annullare con rimborso completo in qualsiasi momento prima che inizi la produzione."
         ],
@@ -184,11 +188,11 @@
       "items": [
         [
           "Come vestono le divise?",
-          "<b>Vestibilità atletica aderente</b>. Se un giocatore è tra due taglie, o preferisce una sensazione più comoda, scegli la taglia superiore. Tutti i numeri nella <a href=\"/pages/guida-alle-taglie\">guida alle taglie</a> sono misure del corpo (torace, altezza, peso), non del capo."
+          "<b>Vestibilità atletica leggermente slim</b>. Scegli in base a torace e peso; se indicano taglie diverse, o un giocatore è tra due, prendi la più grande. I pantaloncini si scelgono in base ai fianchi. Tutti i numeri nella <a href=\"/pages/guida-alle-taglie\">guida alle taglie</a> sono misure del corpo (torace, altezza, peso), non del capo."
         ],
         [
           "Quali taglie esistono?",
-          "Adulti <b>XS–3XL</b>; bambini e ragazzi da <b>98/104 (3–4 anni) a 164 (13–14 anni)</b>; da 15–16 anni consigliamo la taglia S adulto. I pantaloncini seguono la stessa gamma. Taglie miste in un unico ordine sono la norma per una squadra."
+          "Adulti <b>XS–4XL</b>; bambini e ragazzi da <b>98/104 (3–4 anni) a 164 (13–14 anni)</b>; da 15–16 anni consigliamo la taglia S adulto. I pantaloncini seguono la stessa gamma. Taglie miste in un unico ordine sono la norma per una squadra."
         ],
         [
           "Posso mischiare bambini e adulti in un ordine?",
@@ -261,8 +265,8 @@
           "Le divise sono fatte per te, quindi i resi riguardano <b>difetti di fabbricazione, danni durante il trasporto o una divisa diversa dal mockup approvato</b>. Scrivi a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> entro 7 giorni dalla consegna con le foto; emettiamo un RMA e sostituiamo o rimborsiamo — incluse le spese di reso che hai pagato — entro 14 giorni dall'approvazione."
         ],
         [
-          "I colori saranno uguali a quelli che vedo sullo schermo?",
-          "Molto vicini, ma non identici. Lo schermo emette luce, il tessuto la riflette: una leggera differenza di tono è normale su ogni maglia personalizzata e non è considerata un difetto. Facciamo test colore prima della produzione per ridurla al minimo. Per un colore critico, dacci il codice Pantone o hex e allineiamo la stampa al riferimento, non allo schermo."
+          "I colori corrisponderanno a quello che vedo sullo schermo?",
+          "Molto, ma non perfettamente. Lo schermo emette luce e il tessuto la riflette; le stampanti lavorano con riferimenti di inchiostro tipo Pantone, non con codici hex; e l'inchiostro viene assorbito da un poliestere bianco. Una leggera differenza di tono è normale su ogni maglia personalizzata e non è considerata un difetto. Cosa facciamo: i design usano colori che sappiamo tradursi bene, un designer segnala un concept non realistico prima di ricrearlo e <b>ogni ordine viene stampato in 3-4 tonalità prima della produzione</b> e teniamo la più vicina. Per un colore critico, dacci il codice Pantone e allineiamo la stampa al riferimento, non allo schermo. <a href=\"/blogs/colori-maglia-schermo-vs-tessuto\">Perché schermo e tessuto differiscono →</a>"
         ],
         [
           "Cosa protegge il mio acquisto?",

@@ -1,0 +1,40 @@
+name: Probe page text (read-only)
+
+# Opens public pages in Chromium on the runner and prints the visible text lines matching a
+# keyword regex (fabric, price ...). For competitor fact-checks the sandbox cannot reach.
+on:
+  push:
+    paths:
+      - 'scripts/probe-page-text.js'
+      - '.github/workflows/probe-page-text.yml'
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'URLs, comma-separated'
+        required: true
+      follow:
+        description: 'Regex: also open links from these pages whose href matches'
+        required: false
+        default: ''
+      keywords:
+        description: 'Regex of lines to print (case-insensitive); empty = fabric/price default'
+        required: false
+        default: ''
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - name: Probe
+        env:
+          URLS: ${{ github.event.inputs.urls || 'https://www.spized.com/en/custom/sports-clothing/jerseys?p=1' }}
+          KEYWORDS: ${{ github.event.inputs.keywords || 'power|cio-tex|elast|polyester|poli|pro line|premium|regular fit|slim fit|rio|brasilia|unit price|precio unitario|line|range' }}
+          MAX: '200'
+          FOLLOW: ${{ github.event.inputs.follow || 'rio|brasilia|skjern|pro-line|power' }}
+        run: node scripts/probe-page-text.js

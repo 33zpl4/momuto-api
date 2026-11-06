@@ -1,0 +1,112 @@
+{
+  "handle": "prezzi-maglie-calcio-personalizzate",
+  "title": "Prezzi maglie da calcio personalizzate 2026 | MOMUTO",
+  "meta_title": "Prezzi maglie da calcio personalizzate 2026 | MOMUTO",
+  "meta_descript": "Prezzi 2026: 38,90 € una maglia, 21,90 € da 10 pezzi, kit completo da 21,90 €, con i totali per 11, 15 e 20 giocatori. Nessun ordine minimo.",
+  "keywords": [
+    "prezzi maglie da calcio personalizzate",
+    "quanto costa una maglia da calcio personalizzata",
+    "prezzo divisa da calcio personalizzata",
+    "divise calcio 15 giocatori prezzo",
+    "prezzo per giocatore maglia",
+    "MOMUTO"
+  ],
+  "label": "Prezzi 2026",
+  "h1": "Prezzi delle maglie da calcio <span class=\"acc\">personalizzate</span>",
+  "sub": "Una sola scala per ogni design: lo stesso prezzo se la crei nel designer 3D gratuito, scegli un design Ready to Play o ci mandi un concept generato dall’IA. Nomi, numeri e sponsor sono stampati senza costi extra. Nessun ordine minimo.",
+  "quick": [
+    [
+      "38,90 €",
+      "una maglia, senza minimo"
+    ],
+    [
+      "21,90 €",
+      "per maglia da 10 pezzi"
+    ],
+    [
+      "26,90 €",
+      "maglia + pantaloncini da 10"
+    ],
+    [
+      "25–30 giorni",
+      "porta a porta, tracciato"
+    ]
+  ],
+  "ladder_h": "La scala dei prezzi",
+  "ladder_lead": "Per pezzo e per riga. Le quantità si sommano per prodotto: 12 maglie e 12 pantaloncini ricevono ciascuno la fascia 10–19.",
+  "ex_h": "Quanto paga davvero una squadra",
+  "ex_lead": "Totali calcolati al prezzo della scala, spedizione inclusa (gratuita da 50 €). Gli extra sono opzionali e sono elencati sotto.",
+  "ex_cols": [
+    "Squadra",
+    "Solo maglie",
+    "Per giocatore",
+    "Maglia + pantaloncini",
+    "Per giocatore"
+  ],
+  "players": "giocatori",
+  "addons_h": "Extra e le due domande che tornano sempre",
+  "calc_h": "Calcola il tuo ordine",
+  "calc_lead": "La stessa scala con i tuoi numeri. Non viene inviato nulla: è un calcolo nel tuo browser.",
+  "calc": {
+    "players": "Giocatori",
+    "item": "Cosa",
+    "jersey": "Maglia",
+    "kit": "Maglia + pantaloncini",
+    "socks": "Calzettoni (+3,90 € al paio)",
+    "ls": "Maniche lunghe (+3,00 € per maglia)",
+    "fast": "Corsia veloce (+59 € per ordine)",
+    "total": "Totale ordine",
+    "per": "per giocatore",
+    "ship": "Spedizione"
+  },
+  "faq_h": "Domande sui prezzi",
+  "faq": [
+    [
+      "Quanto costa una divisa da calcio personalizzata per una squadra di 15?",
+      "Nella fascia 10–19 la maglia costa 21,90 € e il kit maglia + pantaloncini 26,90 €: 15 maglie costano 328,50 € e 15 kit completi 403,50 €, spedizione inclusa. Nomi e numeri inclusi; i calzettoni costano 3,90 € al paio se li aggiungi."
+    ],
+    [
+      "C’è un ordine minimo?",
+      "No. Una maglia costa 38,90 €. Il prezzo unitario scende a 2, 5, 10, 20, 50 e 100 pezzi."
+    ],
+    [
+      "Nomi, numeri e sponsor si pagano a parte?",
+      "No. Sono sublimati nel tessuto insieme al design e inclusi nel prezzo a qualsiasi quantità."
+    ],
+    [
+      "Quanto costa il design?",
+      "Progettare nel designer 3D è gratuito, senza account. Un design realizzato dal nostro team (brief, schizzo o concept IA) richiede un acconto di 15 €, accreditato per intero sugli ordini da 5 maglie in su: design gratuito per le squadre."
+    ],
+    [
+      "E spedizione e dogana?",
+      "Spedizione gratuita da 50 €, 3,90 € sotto. Tracciata, dazi pagati: 25–30 giorni porta a porta, o 18–23 con la corsia veloce (+59 € per ordine)."
+    ],
+    [
+      "Il prezzo cambia tra designer 3D, Ready to Play e design su misura?",
+      "No. Una sola scala per le tre strade; la selezione stagionale Ready to Play ha −10 % sui design con il badge."
+    ]
+  ],
+  "cta_h": "Progettala e guarda il prezzo nello strumento",
+  "cta_p": "Apri il designer 3D gratuito, imposta la quantità e il prezzo della scala compare prima di pagare qualsiasi cosa.",
+  "cta_btn": "Apri il designer 3D — gratis",
+  "cta_btn2": "Richiedi un design",
+  "more_label": "Continua:",
+  "more": [
+    [
+      "/pages/faq",
+      "FAQ"
+    ],
+    [
+      "/pages/politica-di-spedizione",
+      "spedizione"
+    ],
+    [
+      "/pages/collezione-ready-to-play",
+      "Ready to Play"
+    ],
+    [
+      "/pages/richiesta-design-personalizzato",
+      "design su misura"
+    ]
+  ]
+}

@@ -104,6 +104,8 @@ const STATIC_CLUSTERS = [
   // Added 25 Sep 2026 (docs/seo-opportunities-2026-09.md §1): the translated
   // pages that had no cross-locale annotation at all. Generated pages first
   // (faq/, policies/, maker/ — handles from those JSON sources).
+  { en: 'best-custom-football-kit-suppliers-2026', es: 'mejores-webs-equipaciones-futbol-personalizadas-2026', fr: 'meilleurs-sites-maillots-foot-personnalises-2026', it: 'migliori-siti-maglie-calcio-personalizzate-2026' },   // market roundups, 3 Nov 2026 (build-roundup-pages.js; ES page predates it)
+  { en: 'custom-football-kit-prices',         es: 'precios-equipaciones-futbol-personalizadas', fr: 'prix-maillot-foot-personnalise',            it: 'prezzi-maglie-calcio-personalizzate', us: 'custom-soccer-jersey-prices' },   // price pages, 3 Nov 2026 (build-price-pages.js)
   { en: 'faq',                                 es: 'preguntas-frecuentes',                fr: 'questions-frequentes',                       it: 'faq',                     us: 'faq' },
   { en: 'shipping-policy',                     es: 'envios-metodos-y-plazos',             fr: 'politique-de-livraison',                     it: 'politica-di-spedizione',  us: 'shipping-policy' },
   { en: 'return-policy',                       es: 'cambios-devoluciones',                fr: 'retours-echanges',                           it: 'politica-resi',           us: 'return-policy' },
@@ -123,6 +125,7 @@ const STATIC_CLUSTERS = [
 // deliberately NOT clustered — they review different competitor sets, so they
 // are not translations of each other.
 const BLOG_CLUSTERS = [
+  { en: 'ai-assistants-custom-jersey-recommendation', us: 'ai-assistants-custom-jersey-recommendation', es: 'ia-camiseta-futbol-personalizada', fr: 'ia-maillot-foot-personnalise', it: 'consigli-ai-maglie-calcio-personalizzate' },   // AI-assistants post, 3 Nov 2026
   { en: 'custom-football-kits-for-your-team-complete-guide', us: 'custom-soccer-uniforms-for-your-team-complete-guide', es: 'equipaciones-de-futbol-para-tu-equipo-guia-completa', fr: 'maillots-de-foot-pour-club-guide-complet', it: 'maglie-da-calcio-per-la-tua-squadra-guida-completa' },
   { en: 'custom-football-kits-amateur-grassroots-club',      us: 'custom-soccer-uniforms-club-team',            es: 'equipaciones-futbol-club-amateur',        fr: 'maillots-foot-club-amateur',        it: 'maglie-calcio-squadra-dilettantistica' },
   { en: 'custom-futsal-5-a-side-jerseys',                    us: 'custom-futsal-indoor-soccer-jerseys',         es: 'camisetas-futbol-sala-personalizadas',    fr: 'maillots-five-futsal-personnalises', it: 'maglie-calcetto-futsal-personalizzate' },
@@ -142,6 +145,8 @@ const BLOG_CLUSTERS = [
   { en: 'why-personalize-your-football-kit-and-how-to-do-it', us: 'why-personalize-your-football-kit-and-how-to-do-it', es: 'por-que-personalizar-tu-camiseta-de-futbol-y-como-hacerlo', fr: 'pourquoi-customiser-votre-maillot-de-foot-et-comment-le-faire', it: 'perche-personalizzare-il-kit-da-calcio-e-come-farlo' },
   { en: 'why-you-should-choose-customizable-football-team-kits', us: 'why-you-should-choose-customizable-football-team-kits', es: 'flexibilidad-equipamientos-de-futbol-personalizables', fr: 'l-incroyable-flexibilite-des-kits-d-equipe-de-foot-personnalisables', it: 'divise-da-calcio-personalizzate-perche-scegliere-momuto' },
   { en: 'what-are-football-jerseys-made-of-fabric-types', us: 'what-are-football-jerseys-made-of-fabric-types', es: 'de-que-estan-hechas-las-camisetas-de-futbol', fr: 'matieres-maillots-football-comparatif-tissus', it: 'di-cosa-sono-fatte-le-maglie-da-calcio' },
+  { en: 'custom-jersey-prices-fabric-elastane', us: 'custom-jersey-prices-fabric-elastane', es: 'camisetas-futbol-personalizadas-tejido-elastano-precio', fr: 'maillots-foot-personnalises-tissu-elasthanne-prix', it: 'maglie-calcio-personalizzate-tessuto-elastan-prezzo' },
+  { en: 'jersey-colours-screen-vs-fabric', us: 'jersey-colours-screen-vs-fabric', es: 'colores-camiseta-pantalla-vs-tejido', fr: 'couleurs-maillot-ecran-vs-tissu', it: 'colori-maglia-schermo-vs-tessuto' },
   { en: 'high-quality-soccer-kits',                          us: 'high-quality-soccer-kits',                    es: 'camisetas-futbol-premium-materiales-tecnicas', fr: 'qualite-maillot-football',        it: 'kit-calcio-alta-qualita-tessuti-tecniche' },
 ];
 

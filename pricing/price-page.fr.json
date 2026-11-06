@@ -1,0 +1,112 @@
+{
+  "handle": "prix-maillot-foot-personnalise",
+  "title": "Prix des maillots de foot personnalisés 2026 | MOMUTO",
+  "meta_title": "Prix maillot de foot personnalisé 2026 : par joueur | MOMUTO",
+  "meta_descript": "Prix 2026 : 38,90 € le maillot à l’unité, 21,90 € dès 10, kit complet dès 21,90 €, avec les totaux pour 11, 15 et 20 joueurs. Sans minimum de commande.",
+  "keywords": [
+    "prix maillot de foot personnalisé",
+    "combien coûte un maillot de foot personnalisé",
+    "prix équipement de football personnalisé",
+    "maillots personnalisés 15 joueurs prix",
+    "prix par joueur maillot",
+    "MOMUTO"
+  ],
+  "label": "Tarifs 2026",
+  "h1": "Prix des maillots de foot <span class=\"acc\">personnalisés</span>",
+  "sub": "Une seule grille pour tous les designs : le même prix que vous créiez le maillot dans le designer 3D gratuit, choisissiez un design Ready to Play ou nous envoyiez un concept généré par IA. Noms, numéros et sponsors sont imprimés sans supplément. Sans minimum de commande.",
+  "quick": [
+    [
+      "38,90 €",
+      "un maillot, sans minimum"
+    ],
+    [
+      "21,90 €",
+      "par maillot dès 10"
+    ],
+    [
+      "26,90 €",
+      "maillot + short dès 10"
+    ],
+    [
+      "25–30 jours",
+      "porte à porte, suivi"
+    ]
+  ],
+  "ladder_h": "La grille tarifaire",
+  "ladder_lead": "Par unité et par ligne. Les quantités se cumulent par produit : 12 maillots et 12 shorts bénéficient chacun du palier 10–19.",
+  "ex_h": "Ce qu’une équipe paie réellement",
+  "ex_lead": "Totaux calculés au prix de la grille, livraison comprise (gratuite dès 50 €). Les options sont facultatives et listées plus bas.",
+  "ex_cols": [
+    "Équipe",
+    "Maillots seuls",
+    "Par joueur",
+    "Maillot + short",
+    "Par joueur"
+  ],
+  "players": "joueurs",
+  "addons_h": "Options et les deux questions qui reviennent",
+  "calc_h": "Calculez votre commande",
+  "calc_lead": "La même grille avec vos chiffres. Rien n’est envoyé : c’est un calcul dans votre navigateur.",
+  "calc": {
+    "players": "Joueurs",
+    "item": "Quoi",
+    "jersey": "Maillot",
+    "kit": "Maillot + short",
+    "socks": "Chaussettes (+3,90 € la paire)",
+    "ls": "Manches longues (+3,00 € par maillot)",
+    "fast": "Voie rapide (+59 € par commande)",
+    "total": "Total de la commande",
+    "per": "par joueur",
+    "ship": "Livraison"
+  },
+  "faq_h": "Questions sur les prix",
+  "faq": [
+    [
+      "Combien coûte un équipement de foot personnalisé pour une équipe de 15 ?",
+      "Au palier 10–19, le maillot est à 21,90 € et le kit maillot + short à 26,90 € : 15 maillots coûtent 328,50 € et 15 kits complets 403,50 €, livraison comprise. Noms et numéros inclus ; les chaussettes sont à 3,90 € la paire si vous les ajoutez."
+    ],
+    [
+      "Y a-t-il un minimum de commande ?",
+      "Non. Un maillot coûte 38,90 €. Le prix unitaire baisse à 2, 5, 10, 20, 50 et 100 unités."
+    ],
+    [
+      "Les noms, numéros et sponsors sont-ils en supplément ?",
+      "Non. Ils sont sublimés dans le tissu avec le design et compris dans le prix à toute quantité."
+    ],
+    [
+      "Combien coûte le design ?",
+      "Créer dans le designer 3D est gratuit, sans compte. Un design réalisé par notre équipe (brief, croquis ou concept IA) demande un acompte de 15 €, crédité intégralement sur les commandes de 5 maillots et plus : design gratuit pour les équipes."
+    ],
+    [
+      "Et la livraison, les droits de douane ?",
+      "Livraison gratuite dès 50 €, 3,90 € en dessous. Suivie, droits payés : 25–30 jours porte à porte, ou 18–23 avec la voie rapide (+59 € par commande)."
+    ],
+    [
+      "Le prix change-t-il entre le designer 3D, Ready to Play et un design sur mesure ?",
+      "Non. Une seule grille pour les trois voies ; la sélection de saison Ready to Play porte −10 % sur les designs qui ont le badge."
+    ]
+  ],
+  "cta_h": "Créez-le, puis voyez le prix dans l’outil",
+  "cta_p": "Ouvrez le designer 3D gratuit, indiquez la quantité et le prix de la grille s’affiche avant tout paiement.",
+  "cta_btn": "Ouvrir le designer 3D — gratuit",
+  "cta_btn2": "Demander un design",
+  "more_label": "Continuer :",
+  "more": [
+    [
+      "/pages/questions-frequentes",
+      "FAQ"
+    ],
+    [
+      "/pages/politique-de-livraison",
+      "livraison"
+    ],
+    [
+      "/pages/maillot-foot-personnalise",
+      "maillots personnalisés"
+    ],
+    [
+      "/pages/demande-de-design-professionnel-de-maillots",
+      "design sur mesure"
+    ]
+  ]
+}

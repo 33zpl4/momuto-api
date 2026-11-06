@@ -131,6 +131,10 @@
           "Ajoutez le design au panier et saisissez l'effectif : une ligne par joueur avec taille, nom et numéro. Mélanger les tailles — de l'enfant à l'adulte — dans le même design, c'est la norme. Si la liste n'est pas encore définitive, commandez ce que vous avez ; une seconde commande plus tard aura sa propre tranche de prix."
         ],
         [
+          "Puis-je recommander quelques maillots plus tard au prix de mon équipe ?",
+          "Oui, avec un avis. <b>Laissez un avis après la livraison et le prix par maillot de votre commande d'équipe est verrouillé pour les réassorts jusqu'à la fin de la saison, sans minimum</b> : deux maillots pour de nouveaux joueurs coûtent ce que chaque maillot a coûté dans la commande d'équipe, pas le prix à l'unité. Répondez à l'e-mail de livraison ou écrivez à <a href=\"mailto:info@momuto.com\">info@momuto.com</a> avec le lien de votre avis, et nous l'activons sur votre compte."
+        ],
+        [
           "Puis-je encore modifier quelque chose après la commande ?",
           "Oui, jusqu'au début de la production, en général 2 à 3 jours après réception de votre commande : couleurs, position de l'écusson, un nom mal orthographié, une taille. Ensuite la tenue est en cours de fabrication et les modifications ne sont plus possibles. Vous pouvez annuler avec remboursement intégral à tout moment avant le début de la production."
         ],
@@ -184,11 +188,11 @@
       "items": [
         [
           "Comment taillent les tenues ?",
-          "Une <b>coupe athlétique ajustée</b>. Si un joueur est entre deux tailles, ou préfère plus d'aisance, prenez la taille au-dessus. Toutes les mesures du <a href=\"/pages/guide-des-tailles\">guide des tailles</a> sont des mesures du corps (tour de poitrine, taille, poids), pas du vêtement."
+          "Une <b>coupe athlétique légèrement ajustée (slim fit)</b>. Choisissez selon la poitrine et le poids ; s'ils indiquent deux tailles différentes, ou si un joueur est entre deux, prenez la plus grande. Les shorts se choisissent au tour de hanches. Toutes les mesures du <a href=\"/pages/guide-des-tailles\">guide des tailles</a> sont des mesures du corps (tour de poitrine, taille, poids), pas du vêtement."
         ],
         [
           "Quelles tailles existent ?",
-          "Adultes <b>XS–3XL</b> ; enfants et juniors de <b>98/104 (3–4 ans) à 164 (13–14 ans)</b> ; à partir de 15–16 ans nous recommandons la taille S adulte. Les shorts suivent la même gamme. Mélanger les tailles dans une commande est la norme pour une équipe."
+          "Adultes <b>XS–4XL</b> ; enfants et juniors de <b>98/104 (3–4 ans) à 164 (13–14 ans)</b> ; à partir de 15–16 ans nous recommandons la taille S adulte. Les shorts suivent la même gamme. Mélanger les tailles dans une commande est la norme pour une équipe."
         ],
         [
           "Puis-je mélanger enfants et adultes dans une commande ?",
@@ -261,8 +265,8 @@
           "Les tenues sont fabriquées pour vous, les retours concernent donc les <b>défauts de fabrication, les dommages pendant le transport ou une tenue différente de la maquette validée</b>. Contactez <a href=\"mailto:info@momuto.com\">info@momuto.com</a> dans les 7 jours suivant la livraison avec des photos ; nous émettons un RMA et remplaçons ou remboursons — y compris les frais de retour que vous auriez payés — sous 14 jours après approbation."
         ],
         [
-          "Les couleurs seront-elles identiques à celles de mon écran ?",
-          "Très proches, mais pas identiques. Un écran émet de la lumière, un tissu la reflète : une légère différence de teinte est normale sur tout maillot personnalisé et n'est pas considérée comme un défaut. Nous faisons des tests couleur avant production pour la limiter. Pour une couleur critique, donnez-nous le code Pantone ou hex et nous calons l'impression sur la référence, pas sur l'écran."
+          "Les couleurs correspondront-elles à ce que je vois à l'écran ?",
+          "De près, pas parfaitement. L'écran émet de la lumière et le tissu la réfléchit ; les imprimantes travaillent à partir de références d'encre type Pantone, pas de codes hex ; et l'encre est absorbée par un polyester blanc. Un léger écart de ton est normal sur tout maillot personnalisé et n'est pas considéré comme un défaut. Ce que nous faisons : les designs utilisent des couleurs dont nous savons qu'elles se traduisent bien, un designer signale un concept irréaliste avant de le recréer, et <b>chaque commande est imprimée en 3-4 nuances avant production</b> et nous gardons la plus proche. Pour une couleur critique, donnez-nous le code Pantone et nous calons l'impression sur la référence, pas sur l'écran. <a href=\"/blogs/couleurs-maillot-ecran-vs-tissu\">Pourquoi écran et tissu diffèrent →</a>"
         ],
         [
           "Qu'est-ce qui protège mon achat ?",

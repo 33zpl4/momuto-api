@@ -61,6 +61,12 @@ const hay = o => Object.values(o).some(v => (typeof v === 'string' || typeof v =
       console.log(`   money: ${money.join(' ')}`);
       const items = hit.line_items || hit.items || hit.products;
       if (Array.isArray(items)) console.log(`   lines: ${items.length}`);
+      // per line: product/variant ids, titles, image, custom properties (no personal data)
+      if (Array.isArray(items)) items.forEach((it, i) => {
+        const flat = Object.entries(it).filter(([k, v]) => v != null && typeof v !== 'object').map(([k, v]) => `${k}=${String(v).slice(0, 160)}`);
+        console.log(`   line ${i + 1}: ${flat.join(' | ')}`);
+        for (const [k, v] of Object.entries(it)) if (v && typeof v === 'object') console.log(`     ${k}: ${JSON.stringify(v).slice(0, 600)}`);
+      });
     }
   }
 })().catch(e => { console.error(e.message); process.exit(1); });

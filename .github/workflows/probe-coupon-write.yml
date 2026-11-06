@@ -1,0 +1,35 @@
+name: Probe coupon write (throwaway coupon)
+
+# Verifies POST/GET/DELETE /coupons on one store with a 1 % test coupon that is deleted again
+# (scripts/probe-coupon-write.js). Dispatch-only; dry run unless `live` is ticked.
+on:
+  workflow_dispatch:
+    inputs:
+      store:
+        description: 'Store'
+        default: 'es'
+        type: choice
+        options: [es, en, fr, it, us]
+      live:
+        description: 'Create + delete the test coupon for real'
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          STORE: ${{ inputs.store }}
+          LIVE: ${{ inputs.live && '1' || '0' }}
+        run: node scripts/probe-coupon-write.js

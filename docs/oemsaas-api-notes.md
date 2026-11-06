@@ -323,6 +323,17 @@ The findings above came from four habits worth reusing on any similar task:
   the read-modify-write above, packaged: repoints a product's `inner_title.mudel`
   (3D button) with handle/variants guards and a read-back check
 
+## Payments (read) — `GET /payments` returns LIVE SECRETS (4 Nov 2026)
+
+`GET /payments` works with the store token and returns the store's payment methods grouped as `paypal`, `credit_card`,
+`jhpays` (FR, 4 Nov: one `credit_card` entry, "Carte bancaire", `interface_type: stripe`, status 1; paypal and jhpays empty;
+**no offline / bank-transfer group exists in the response**). Each entry's `interface_type_param` carries the provider keys
+**in clear, including the live Stripe secret key**. A probe that dumped the response printed it into a public Actions log
+on 4 Nov 2026 (run 41850334894; logs deleted within minutes; owner asked to roll the key). Rules: never print or commit a
+`/payments` response; `scripts/probe-api-get.js` now redacts and suppresses; and **never `PUT /payments`** from the repo —
+PUT replaces the whole object (see above), so a partial body could wipe the live gateway. Payment methods are configured
+in the admin by the owner.
+
 ## Navigation + logistics endpoints (from the vendor's Apizza docs, 1 Sep 2026)
 
 Previously assumed admin-only; both are on the same OpenAPI host/token.

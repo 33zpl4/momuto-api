@@ -16,6 +16,7 @@ const { kv } = require('@vercel/kv');
 const checkoutBeacon = require('../lib/checkout-beacon');
 const orderView = require('../lib/order-view-handler');
 const eventBeacon = require('../lib/event-beacon');
+const lifecycleMail = require('../lib/lifecycle-mail');
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
 const TEAM_EMAIL = process.env.TEAM_EMAIL || 'info@momuto.com';
@@ -97,6 +98,9 @@ module.exports = async function handler(req, res) {
   }
 
   // /api/event (anonymous funnel counters, weekly scorecard): same rewrite trick.
+  if ((req.query && req.query.type === 'lifecycle') || /\/api\/lifecycle/.test(req.url || '')) {
+    return lifecycleMail(req, res);
+  }
   if ((req.query && req.query.type === 'event') || /\/api\/event/.test(req.url || '')) {
     return eventBeacon(req, res);
   }
