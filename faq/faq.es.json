@@ -131,6 +131,10 @@
           "Añade el diseño al carrito e introduce la lista del equipo: una línea por jugador con talla, nombre y dorsal. Mezclar tallas — de infantil a adulto — en el mismo diseño es lo normal. Si la lista aún no está cerrada, pide lo que tengas; un segundo pedido más adelante tiene su propio tramo de precio."
         ],
         [
+          "¿Puedo pedir más camisetas más adelante al precio de mi equipo?",
+          "Sí, con una reseña. <b>Deja una reseña después de la entrega y el precio por camiseta de tu pedido de equipo queda bloqueado para repeticiones durante el resto de la temporada, sin mínimo</b>: dos camisetas para jugadores nuevos cuestan lo que costó cada camiseta en el pedido del equipo, no el precio de unidad. Responde al correo de entrega o escribe a <a href=\"mailto:info@momuto.com\">info@momuto.com</a> con el enlace a tu reseña y lo activamos en tu cuenta."
+        ],
+        [
           "¿Puedo cambiar algo después de pedir?",
           "Sí, hasta que empiece la producción, normalmente 2–3 días después de recibir tu pedido: colores, posición del escudo, un nombre mal escrito, una talla. Después la equipación ya se está fabricando y no se puede cambiar. Puedes cancelar con reembolso total en cualquier momento antes de que empiece la producción."
         ],
@@ -262,7 +266,7 @@
         ],
         [
           "¿Los colores coincidirán con lo que veo en pantalla?",
-          "Mucho, pero no al 100 %. Las pantallas emiten luz y el tejido la refleja, así que una ligera diferencia de tono es normal en toda camiseta personalizada y no se considera defecto. Hacemos pruebas de color antes de producir para que sea mínima. Para un color crítico, danos el código Pantone o hex y ajustamos la impresión a la referencia, no a la pantalla."
+          "Mucho, pero no al 100 %. La pantalla emite luz y la tela la refleja; las impresoras trabajan con referencias de tinta tipo Pantone, no con códigos hex; y la tinta la absorbe un poliéster blanco. Una ligera diferencia de tono es normal en toda camiseta personalizada y no se considera defecto. Qué hacemos: los diseños usan colores que sabemos que se traducen bien, un diseñador avisa si un concepto no es realista antes de recrearlo y <b>cada pedido se imprime en 3-4 tonos antes de producir</b> y nos quedamos con el más cercano. Para un color crítico, danos el código Pantone y ajustamos la impresión a la referencia, no a la pantalla. <a href=\"/blogs/colores-camiseta-pantalla-vs-tejido\">Por qué difieren pantalla y tejido →</a>"
         ],
         [
           "¿Qué protege mi compra?",

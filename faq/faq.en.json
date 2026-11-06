@@ -128,7 +128,11 @@
         ],
         [
           "How do I order for a whole team?",
-          "Add the design to your cart and enter the roster: one line per player with size, name and number. Mixed sizes — youth to adult — in the same design are normal. If the roster isn't final yet, order what you have; a second order later gets its own tier pricing."
+          "Add the design to your cart and enter the roster: one line per player with size, name and number. Mixed sizes — youth to adult — in the same design are normal. If the roster isn't final yet, order what you have; a second order later gets its own tier pricing — unless you lock your tier with a review (see below)."
+        ],
+        [
+          "Can I re-order a few jerseys later at my team price?",
+          "Yes, with a review. <b>Leave a review after delivery and your team's price tier is locked for re-orders for the rest of the season, with no minimum</b>: two jerseys for new players cost what each jersey cost in your team order, not the single price. Reply to your delivery email, or write to <a href=\"mailto:info@momuto.com\">info@momuto.com</a> with the link to your review, and we set it up on your account."
         ],
         [
           "Can I still change something after ordering?",
@@ -262,7 +266,7 @@
         ],
         [
           "Will the colours match what I see on screen?",
-          "Closely, but not perfectly. Screens emit light and fabric reflects it, so a slight tone difference is normal on every custom jersey and isn't covered as a defect. We run colour tests before production to keep it minimal. For a critical colour, give us the Pantone or hex code and we match the print to the reference, not the screen."
+          "Closely, but not perfectly. Screens emit light and fabric reflects it; printers work from Pantone-style ink references, not hex codes; and the ink is absorbed by white polyester. A slight tone difference is normal on every custom jersey and isn't covered as a defect. What we do about it: designs use colours we know translate well, a designer flags an unrealistic concept before recreating it, and <b>every order is printed in 3–4 shades before production</b> and we keep the closest. For a critical colour, give us the Pantone code and we match the print to the reference, not the screen. <a href=\"/blogs/jersey-colours-screen-vs-fabric\">Why screen and fabric colours differ →</a>"
         ],
         [
           "What protects my purchase?",
