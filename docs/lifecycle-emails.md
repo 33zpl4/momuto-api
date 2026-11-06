@@ -5,6 +5,14 @@ Written 6 Nov 2026. Owner rulings that day: (1) abandoned-cart mail goes through
 valid 14 days — something we did not do. Read this BEFORE touching either flow, `lib/lifecycle-mail.js`, or the platform's
 `carts/recovery_*` notifications.
 
+## Status: ON HOLD (owner, 6 Nov 2026)
+
+Both flows stay in dry-run mode. The owner has asked the platform whether coupon creation can be enabled through the API; if it
+cannot, the reorder offer goes the shared-admin-code way described below (`REORDER_CODES`). Until the answer: do not ask the owner
+for the admin codes, the live variables (`ABANDONED_LIVE` / `REORDER_LIVE`) or the forwarded platform recovery email. When the
+platform answers, either (a) add `POST /coupons` (or whatever path they give) to `scripts/platform-coupon.js` and restore per-order
+codes in `poll-reorder-offers.js` (the code is in git history, PR #387), or (b) proceed with shared codes.
+
 ## How it fits
 
 | piece | where | runs |
