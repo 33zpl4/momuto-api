@@ -82,7 +82,7 @@ async function post(body) {
       const images = its.filter(it => isPreview(it)).map(it => field(it, ['src', 'image'])).filter(Boolean);
       const count = its.filter(it => !isPreview(it)).reduce((n, it) => n + (+field(it, ['quantity', 'qty']) || 0), 0);
       const ctx = { kind: 'abandoned', key: `${lang}:${id}`, email, lang: S.lang, name: nameOf(o), images, itemCount: count,
-        total: money(field(o, ['total_price', 'current_total_price']), S.cur, S.lang), cartUrl: `https://${S.host}/cart`, ref: previews[0] ? previews[0].order_no : null, dry: !LIVE };
+        total: money(field(o, ['total_price', 'current_total_price']), S.cur, S.lang), cartUrl: `https://${S.host}/cart`, createdAt: new Date(created).toISOString(), ref: previews[0] ? previews[0].order_no : null, dry: !LIVE };
       console.log(`  ${LIVE ? 'SEND' : 'would send'} ${id} → ${mask(email)} · ${count} item(s) ${ctx.total} · ${images.length} render(s) · ref ${ctx.ref || '-'} · ${Math.round(age / 3600000)} h old`);
       if (!SECRET) continue;
       try {

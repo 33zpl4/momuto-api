@@ -26,6 +26,10 @@ test('reorder: every language carries the code, the expiry, the fabric, 10% and 
     assert(!/38,90|21,90|\$45|\$25/.test(html), 'no ladder prices in the reorder mail');
   }
 });
+test('reorder: no team → generic subject', () => {
+  const { subject } = emailReorder({ lang: 'es', name: 'Lina', code: 'X', expires: 'x' });
+  assert.strictEqual(subject, '10 % en tu próxima equipación');
+});
 test('reorder: html-escapes team and code', () => {
   const { html } = emailReorder({ lang: 'en', team: '<b>x</b>', code: 'A<B', expires: 'x' });
   assert(!html.includes('<b>x</b>')); assert(html.includes('A&lt;B'));
