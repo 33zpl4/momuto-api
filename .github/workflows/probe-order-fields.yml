@@ -6,6 +6,7 @@ on:
   push:
     paths:
       - 'scripts/probe-order-fields.js'
+      - 'scripts/probe-order-write-routes.js'
       - '.github/workflows/probe-order-fields.yml'
   workflow_dispatch:
     inputs:
@@ -38,3 +39,9 @@ jobs:
           ORDER_ID: ${{ inputs.order_id || '33635073' }}
           PATHS: ${{ inputs.paths || '/orders/33635073/payments,/orders/33635073/payment,/orders/33635073/transactions,/orders/33635073/pay,/orders/33635073/paid,/orders/33635073/fulfillments,/orders/33635073/refunds,/orders/33635073/events,/orders/33635073/notes,/orders/33635073/tags' }}
         run: node scripts/probe-order-fields.js
+      - name: Which order write routes exist (nonexistent order id, nothing written)
+        env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          STORE: es
+        run: node scripts/probe-order-write-routes.js
