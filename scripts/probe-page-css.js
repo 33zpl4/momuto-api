@@ -36,5 +36,9 @@ const PATTERN = process.env.PATTERN || 'momuto-hero|btn-primary|btn-link';
     console.log(`\n--- sheet ${s.sheet}${s.of ? '/' + s.of : ''}: ${s.where}${s.bytes ? ' (' + s.bytes + ' chars)' : ''}${s.error ? ' ' + s.error : ''}`);
     (s.rules || []).forEach(r => console.log('  ' + r));
   }
+  if (process.env.DUMP) {
+    const full = await page.evaluate((pat) => Array.from(document.querySelectorAll('style')).filter(n => new RegExp(pat).test(n.textContent)).map(n => n.textContent), process.env.DUMP_MATCH || 'momuto-hero-container');
+    full.forEach((t, i) => console.log(`\n=== BEGIN full inline style ${i + 1}/${full.length} (${t.length} chars)\n${t}\n=== END`));
+  }
   await browser.close();
 })().catch(e => { console.error(e.message); process.exit(1); });

@@ -32,4 +32,5 @@ jobs:
       - name: Where the hero CSS comes from (www)
         env:
           URL: https://www.momuto.com/
+          DUMP: '1'
         run: node scripts/probe-page-css.js
