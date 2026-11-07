@@ -53,3 +53,6 @@ one variable `--mo-font`.
 
 ## Account pages skin (19 Oct 2026)
 The platform's login / register / account / orders / order-detail pages have their own brand skin and a tracking panel, kept in `docs/account-brand/` (CSS + JS, scoped with `:has()` to the account containers) and pasted as its OWN new script-manager entry (`MOMUTO account skin v1`, one per store; generated file `account-brand-entry.html`), NOT into this nav script. It is NOT deployed from the repo. Details, tests and open items: `docs/store-account-area.md`, `docs/account-brand/README.md`.
+
+## Homepage hero CSS
+The hero's CSS is a separate platform `<head>` block ("MOMUTO HERO v3"); snapshot, how to re-read it, and the CTA fix: `docs/homepage-hero-css.md`.
