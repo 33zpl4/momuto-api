@@ -12,6 +12,26 @@ Written 16 Oct 2026 from the fabric post (`what-are-football-jerseys-made-of-fab
 - US posts use the US lexicon (soccer, color, fiber), $ prices ($25.90 at 10+, $45.90 single) and US handles for internal links (`custom-soccer-uniforms-for-your-team-complete-guide`).
 - Editorial (blog) is the only surface that may name clubs and brands (Real Madrid rule applies elsewhere). Fabric facts: **92% polyester / 8% elastane, 145-160 GSM micro-interlock, four-way stretch** (owner, 15 Oct 2026; FAQ, materials pages, llms.txt carry it). Do not invent other percentages.
 
+## Integrity check (6 Nov 2026) — runs in the PR check
+
+`node scripts/check-blog-integrity.js` (`--write` fixes what is mechanical). Two bugs it caught in the existing posts, now fixed:
+1. **FAQPage JSON-LD that does not match the visible FAQ.** Five localized posts carried the English markup after translation; five
+   posts had FAQ markup with no visible FAQ at all (a visible `<details>` FAQ was added from the markup, unsourced competitor claims
+   dropped). Rule: every FAQPage JSON-LD question must appear, in the post's language, in the visible page; the visible FAQ is the source.
+2. **ES/FR/IT posts linking to English handles** (404 on those stores): mapped through `BLOG_CLUSTERS` in `scripts/rebuild-sitemap.js`
+   to the locale's handle, or to the English post on www when no translation exists. US is not link-checked (the US store has live
+   posts that are not in the repo).
+New post checklist: file in every locale, a hreflang row in `BLOG_CLUSTERS`, visible FAQ + matching JSON-LD, `published_at`, dry run.
+
+## Post families added 6 Nov 2026 (all 5 locales; handles differ per locale)
+- **Not all custom jerseys are equal** (fabric like-for-like, sourced competitor table, five supplier questions):
+  `custom-jersey-prices-fabric-elastane` (en/us), `camisetas-futbol-personalizadas-tejido-elastano-precio`, `maillots-foot-personnalises-tissu-elasthanne-prix`, `maglie-calcio-personalizzate-tessuto-elastan-prezzo`.
+- **Why the colour on your screen is never exactly the colour on the jersey** (with the founder quote):
+  `jersey-colours-screen-vs-fabric` (en/us), `colores-camiseta-pantalla-vs-tejido`, `couleurs-maillot-ecran-vs-tissu`, `colori-maglia-schermo-vs-tessuto`.
+- **AI guide** `ai-to-reality-kit-maker-guide` (en/us): title/meta now lead with "AI jersey generator" + a prompts section.
+Competitor claims in a post must be read from the brand's own page and dated (`probe-page-text.yml`); "not published" is the wording when a
+brand does not state a composition, never "no elastane".
+
 ## Deploy
 - **Deploy Blog Post** runs automatically on merge to main for changed `blogs/**/*.json` (it does NOT run on branch pushes: safe to push branches). Dispatch (`post_handle` + `locale`, `dry_run`) works from a branch.
 - Always `DRY_RUN=true node scripts/deploy-blog-post.js` first (`CHANGED_FILES="blogs/x.json ..."`), run `node scripts/check-copy-rules.js`, check tag balance and that the JSON-LD parses.

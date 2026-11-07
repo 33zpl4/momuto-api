@@ -35,6 +35,9 @@ Read the doc that owns a topic BEFORE editing that surface.
   `node scripts/build-size-guide-pages.js` (writes `cms/pages/<locale>/<handle>.json`, deploy via Deploy CMS Page);
   US is edited directly in `cms/pages/us/size-guide.json`. Sizes must match the cart dropdowns in
   `design-momuto/templates/*/cartItem.html` (no 176 — factory maps it to adult S).
+- `docs/size-guide.md` — the size rule (never smaller than adidas for the same chest), the table incl. 4XL, shorts by hips, kids' heights, the six places the numbers live, what is unverified (factory 4XL).
+- `docs/content-round-2026-11.md` — the 6 Nov content round: GSC findings, every URL shipped (also the Search Console submit list), the colour/fabric/review-lock facts, competitor complaints, what is waiting on the owner.
+- `docs/open-items.md` — owner-side and pending items in one place (read at session start).
 - `docs/shipped-email.md` — our branded "order shipped" email (Resend) driven by the platform order API (`poll-shipped-orders`, admin-orders `ship`), arming steps, what is not verified. Read BEFORE touching shipped/tracking emails.
 - `docs/lifecycle-emails.md` — the abandoned-checkout mail (ours, Resend; from the platform's UNPAID orders) and the day-90 reorder
   offer (10 % coupon, 14 days): pollers, `lib/lifecycle-mail.js` dedup, live switches `ABANDONED_LIVE` / `REORDER_LIVE`. Read BEFORE
@@ -116,6 +119,9 @@ pushes and verifies the run itself.
    production + priority shipping, saves ~7 days (window 18–23 d instead of
    25–30; never promises a specific carrier). A surface with different numbers is a bug.
    Fabric: **92% polyester / 8% elastane**, 145–160 GSM micro-interlock, four-way stretch (owner, 15 Oct 2026).
+   **Review price lock (owner, 6 Nov 2026):** a review after delivery locks the team's per-jersey price for re-orders for the rest of
+   the season, no minimum (FAQ entry + delivered/reorder emails + llms.txt; the exact end rule — season vs 12 months — is the owner's to define).
+   **Sizes:** adults XS–4XL, one slim-fit rule, `docs/size-guide.md`.
 7. `static/shared/llms.txt` is the machine-readable fact feed for LLMs —
    update it in the same commit as any fact change.
 8. **One customer email: info@momuto.com** (owner ruling 5 Sep 2026).

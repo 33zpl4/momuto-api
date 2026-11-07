@@ -99,3 +99,28 @@ rapide / Corsia veloce; €59 / $69) is detected by title in `parseLines`
 the email subject carry `⚡ 加急 FAST LANE — 优先生产 + 优先发货` so the
 factory prioritises the batch. The same flag reaches the customer emails as an
 18–23 day window (design-server webhook `fast_lane` / poller title match).
+
+
+## Rows with no size (order 2yc9cfywz1, 5 Nov 2026)
+
+A shorts row reached the factory with **no size and no number**, qty 1: in the 3D flow jersey and shorts are separate cart lines, "Add
+player" creates a row whose size select sits on the disabled "-", and nothing checked size (the pre-checkout gap modal skipped
+non-jersey lines). Fixed at the source in the cart (design-momuto `server-patches/README.md` §19: checkout refused while any row has no
+size). Belt here: `build-warehouse-sheet.js` prints a red **缺尺码** in the size cell and adds a ⚠ line per sizeless row (the email subject
+gets 需核对). Not exercised on a real sizeless order yet.
+
+## Orders paid outside the platform (Stripe payment link) — procedure, 6 Nov 2026
+
+Order 2026110633635073 (ES, design 78nmn3osnc, €349.70) was paid by a Stripe payment link. The platform had created the order at
+checkout (financial_status 200, pay_at 0) and **marking it paid in the store admin did not change what the API exposes** (still 200,
+`pay_at` 0 on two reads). Everything automated keys on 230, so: no confirmation email (poller), no factory sheet (daily run), and the
+design server's pay status stays unpaid. What was done by hand, in this order:
+1. `find-order.yml` (needle = platform order number) → store, lines, totals, the preview lines' render URLs (`probe-product-images.yml`
+   prints each stored image with HEAD/GET status).
+2. `admin-order-email.yml` action `find` (needle = the 3D ref) → "No stored order matches" = never reached the pipeline.
+3. `admin-order-email.yml` action `ingest-and-send` with `order_no` (3D ref), `plant_order_no`, `email`, `name`, `lang`, `qty` (jerseys),
+   `total`, `paid_at` (ISO day), `image` / `image_back` (render URLs), `extras` (e.g. `{"shorts":13}`) → record `3d_<ref>` + the
+   confirmation email + the day-4 / day-10 / tracking lifecycle. Result read: `ingested: true, sent: true`.
+4. **Factory sheet: still manual** (`check-platform-orders.yml`, mode `sheet`, order number) — it was offered and **not confirmed run**
+   for this order; see `docs/open-items.md`.
+The abandoned-checkout mail skips such customers (`lib/lifecycle-mail.js` `paidSince` looks for a paid order from the same email in KV).
