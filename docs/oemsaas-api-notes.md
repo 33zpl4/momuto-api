@@ -403,3 +403,10 @@ order-line tile images", dry-run by default, rollback file of the previous image
   `GET /promotions` works (quantity-discount ladders, `rule_param.rule` ge/value). `GET /customers` returns orders_count, total_spent, first_pay_at.
 - **Reading competitor pages:** `probe-page-text.yml` (runner Chromium, keyword regex, optional link-following) — the sandbox cannot reach them.
   Trustpilot pages load but ignore the star filter.
+
+- **Orders are READ-ONLY through the API (7 Nov 2026).** 27 write candidates (`PUT/PATCH /orders/{id}`, `/financial_status`, `/status`, `/pay`, `/paid`,
+  `/payment(s)`, `/transactions`, `/offlinepay`, `/offline_pay`, `/confirm_pay(ment)`, `/mark_paid`, `/fulfillments`, `/note`, `/remark`, `/cancel`) all answer
+  `404 接口未定义` against a nonexistent order id (`probe-order-fields.yml`, run 42359255082); the GET sub-routes for payments, transactions, refunds, events,
+  notes and tags are undefined too. An order carries `financial_status`, `pay_at`, `payment_id` (0), `transaction` (empty object). Marking an order paid in the
+  admin moved `updated_at` but not `financial_status` / `pay_at` (order 2026110633635073, read 7 Nov). `scripts/probe-order-fields.js` prints the key names and
+  a whitelist of non-personal fields only: Actions logs on this repo are public and the order object holds the customer's name, address, phone and email.

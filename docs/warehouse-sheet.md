@@ -123,4 +123,7 @@ design server's pay status stays unpaid. What was done by hand, in this order:
    confirmation email + the day-4 / day-10 / tracking lifecycle. Result read: `ingested: true, sent: true`.
 4. **Factory sheet: manual** (`check-platform-orders.yml`, mode `sheet`, order number), or tell production directly. For this order the owner
    informed the production team by hand (7 Nov 2026) and no sheet was run.
+**The platform side cannot be set from here** (the order API is read-only, `docs/oemsaas-api-notes.md`); the design-server side can: the paid poller's
+`POST design.momuto.com/pay/callback {order_no, payStatus:'success', type:'oem', plant_order_no}` flips the order to 已支付 in manage.momuto.com (idempotent,
+design-momuto `server-patches/README.md` §12). Not run for this order yet (owner's go needed).
 The abandoned-checkout mail skips such customers (`lib/lifecycle-mail.js` `paidSince` looks for a paid order from the same email in KV).
