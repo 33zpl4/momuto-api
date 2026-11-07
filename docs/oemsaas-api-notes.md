@@ -384,3 +384,22 @@ order-line tile images", dry-run by default, rollback file of the previous image
 - Tested against a mock of the API (`node scripts/test-set-order-line-tiles.js`, 12 scenarios incl. throttled GET,
   no variants, ignored images, rollback). The real platform behaviour above is the part a mock cannot prove.
 
+
+
+## Findings and tools added 4–6 Nov 2026
+
+- **Order lines for debugging:** `find-order.yml` (needle = platform order number or 3D ref) now prints every line's ids, SKU, cover `src` and
+  properties (no personal data). The SPU on a line is NOT the product id (`product_id` is). `probe-product-images.yml` takes product ids and
+  prints each stored image with HEAD and GET status, size and dimensions, and uploads the files as an artifact.
+- **Dead cover images:** the platform can ACK `POST /products` with images it never stored (US order 231549-2186535: cover 404 on the CDN,
+  back fine). The line copies the cover URL at checkout, so it cannot be repaired afterwards. Fix is server-side (design-momuto handbook,
+  "Third occurrence"), not here.
+- **Unpaid orders are created at checkout** (financial_status 200, pay_at 0, customer email, preview lines with renders, `recart_mail_sended`,
+  `checkout_token`). That is the abandoned-checkout signal (`docs/lifecycle-emails.md`). No `/carts`, `/checkouts`, `/abandoned_*` endpoints exist.
+- **Marking an order paid in the admin did not change the API's `financial_status` / `pay_at`** (order 2026110633635073, two reads).
+- **Coupons:** `GET /coupons` works (rows: id, coupon_name, coupon_code, product_range 0 = whole store, starts_at, ends_at (-1 = never),
+  usage_limit (-1 = none), param.discount {type 1 percent | 2 fixed, value}, times_used, status 2 active | 3 ended). **No write:** POST
+  /coupons and nine other spellings → `404 接口未定义` (runs 42221448904, 42221734410). The owner asked the platform whether it can be enabled.
+  `GET /promotions` works (quantity-discount ladders, `rule_param.rule` ge/value). `GET /customers` returns orders_count, total_spent, first_pay_at.
+- **Reading competitor pages:** `probe-page-text.yml` (runner Chromium, keyword regex, optional link-following) — the sandbox cannot reach them.
+  Trustpilot pages load but ignore the star filter.

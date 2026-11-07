@@ -120,6 +120,9 @@ forming and will move.
   10+; seasonal selection −10%; deposit €15 credited from 5 jerseys; no
   minimum order. An article that states a different number is a bug.
   Fabric (owner, 15 Oct 2026): 92% polyester / 8% elastane, 145–160 GSM micro-interlock, four-way stretch.
+  Review price lock (owner, 6 Nov 2026): a review after delivery locks the team's per-jersey price for re-orders for the rest of the season, no minimum.
+  Colour (owner, 6 Nov 2026): screen colour cannot be matched 1:1 on fabric (Pantone references not hex, ink absorbed by white polyester); every order is
+  printed in 3–4 shades before production and the closest kept; designers flag unrealistic (often AI-made) colours before recreating. Never promise 1:1.
 
 ## GEO mechanics (how LLM citation actually happens)
 

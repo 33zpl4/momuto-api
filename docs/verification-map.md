@@ -67,3 +67,13 @@ link no longer carries the literal user id. NOT proved by the probe: a real save
 | Abandoned-checkout mail | `poll-abandoned-checkouts.yml` dry-run log lists the right unpaid orders (masked emails, renders found); first live run: `→ 200 {"ok":true,"sent":true}` per order and the mail in the Resend dashboard |
 | Day-90 reorder offer | `poll-reorder-offers.yml` dry-run log; `probe-coupon-write.yml` live = `VERIFIED create + delete`; first live run: `coupon created · mail → 200 … sent` and the code visible in the store admin |
 | Templates | `node --test test/lifecycle-emails.test.js` in the PR check |
+
+## Size guide, gallery meta, blog checks, ES maker page (6 Nov 2026)
+
+| surface | proof |
+| --- | --- |
+| Size guide (5 stores) + FAQ sizes | CMS deploy run green; tables read back from `cms/pages/*`; cart popup/selects: design-momuto harness `drive-cart-4xl.js` 4/4 per locale. Not verified: live pages, factory 4XL (`docs/size-guide.md`) |
+| Gallery SEO meta | `patch-gallery-meta.yml` live run prints `VERIFIED` and the content length unchanged per store (run 42276767078) |
+| Blog FAQ/links | `node scripts/check-blog-integrity.js` = 0 problems (PR check) |
+| ES maker page | Deploy CMS Page "created id ?" then Pull (`pull-blog-post.yml`, cms_type page) to capture the id into `cms/pages/es/` |
+| Competitor claims in copy | read with `probe-page-text.yml`, dated in the post; "not published" when a brand states no composition |
