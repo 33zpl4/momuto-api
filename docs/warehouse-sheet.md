@@ -121,6 +121,6 @@ design server's pay status stays unpaid. What was done by hand, in this order:
 3. `admin-order-email.yml` action `ingest-and-send` with `order_no` (3D ref), `plant_order_no`, `email`, `name`, `lang`, `qty` (jerseys),
    `total`, `paid_at` (ISO day), `image` / `image_back` (render URLs), `extras` (e.g. `{"shorts":13}`) → record `3d_<ref>` + the
    confirmation email + the day-4 / day-10 / tracking lifecycle. Result read: `ingested: true, sent: true`.
-4. **Factory sheet: still manual** (`check-platform-orders.yml`, mode `sheet`, order number) — it was offered and **not confirmed run**
-   for this order; see `docs/open-items.md`.
+4. **Factory sheet: manual** (`check-platform-orders.yml`, mode `sheet`, order number), or tell production directly. For this order the owner
+   informed the production team by hand (7 Nov 2026) and no sheet was run.
 The abandoned-checkout mail skips such customers (`lib/lifecycle-mail.js` `paidSince` looks for a paid order from the same email in KV).

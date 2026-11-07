@@ -11,9 +11,11 @@ One place to read at session start. "Not re-confirmed" = told in an earlier sess
 | Forward one platform abandoned-cart email | on hold with the above | holds the resume-checkout link; until then the button goes to `/cart` |
 | Factory: confirm 4XL; send flat chest widths per size | open | `docs/size-guide.md` — tell them before the first 4XL order |
 | Review price lock: define the end rule | open | written as "rest of the season"; owner may mean 12 months from delivery |
-| Order 2026110633635073 (ES, Stripe link, €349.70) — **factory sheet** | **not run** | confirmation email sent (ingested as `3d_78nmn3osnc`); platform still shows it unpaid so the daily sheet skips it; run `check-platform-orders.yml` mode `sheet` for it — `docs/warehouse-sheet.md` |
 | Hoodies / training wear | strategy only | ask the factory for a hoodie and a training tee: unit cost at 10 and 20, minimum, lead time; then pre-sell to past teams with one line in the reorder/delivered mails before building anything |
 | Fast lane more visible | offered, undecided | named in the abandoned mail; cart and price pages are the next places |
+
+## Closed
+- **Order 2026110633635073 (ES, Stripe link, €349.70):** confirmation email sent 6 Nov (ingested as `3d_78nmn3osnc`); the owner informed the production team by hand on 7 Nov, so no factory sheet was run. The platform still shows the order unpaid — expect it to stay out of the daily sheet and the poller (`docs/warehouse-sheet.md`).
 
 ## From earlier sessions — not re-confirmed
 - Roll the live FR Stripe secret key (printed once into a public Actions log on 4 Nov, run deleted within minutes) and paste the new one in the FR admin.
