@@ -83,3 +83,9 @@ link no longer carries the literal user id. NOT proved by the probe: a real save
 | surface | proof |
 | --- | --- |
 | Hero CTAs (wrap, contrast, hover) | `probe-hero-buttons.yml` (runs on push of `pages/homepage/hero.*.html`): `REPO problems: 0` across 5 stores x 5 widths on the live theme CSS (run 42352737676); it also shows the LIVE state per store. Not a visual check: no screenshot of the final render; the owner confirms after pasting |
+
+## Orders paid outside the platform (7 Nov 2026)
+
+| surface | proof |
+| --- | --- |
+| Design-server paid flag | `mark-design-paid.yml` live run prints both guards and `→ HTTP 200 {"code":200,"data":"success"}`; the 已支付 state is NOT read back by any endpoint: the owner checks manage.momuto.com. No second email: re-read the record with `admin-order-email.yml` `find` (`emailsSent` still only `confirmation`) |

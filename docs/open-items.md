@@ -17,7 +17,7 @@ One place to read at session start. "Not re-confirmed" = told in an earlier sess
 ## Closed
 - **Order 2026110633635073 (ES, Stripe link, €349.70):** confirmation email sent 6 Nov (ingested as `3d_78nmn3osnc`); the owner informed the production team by hand on 7 Nov, so no factory sheet was run. The platform still shows the order unpaid — expect it to stay out of the daily sheet and the poller (`docs/warehouse-sheet.md`).
 
-- **Same order, still unpaid in two places.** Platform: unpaid (`financial_status` 200; the API cannot change it; ask the platform together with the coupon question whether the admin's manual mark should set it). manage.momuto.com: can be set paid with the poller's `/pay/callback` for design `78nmn3osnc` — waiting for the owner's go.
+- **Order 2026110633635073, design side:** marked paid on the design server on 7 Nov 2026 with `mark-design-paid.yml` (run 42359724176, callback answered `{"code":200,"data":"success"}`, no email sent: the record still shows only `confirmation`). The owner is to confirm 已支付 in manage.momuto.com. **The platform side stays unpaid** (read-only API): ask the platform why the admin's manual mark does not set `financial_status`.
 
 ## From earlier sessions — not re-confirmed
 - Roll the live FR Stripe secret key (printed once into a public Actions log on 4 Nov, run deleted within minutes) and paste the new one in the FR admin.
