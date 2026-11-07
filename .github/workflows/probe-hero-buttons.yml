@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - 'scripts/probe-hero-buttons.js'
+      - 'scripts/probe-page-css.js'
       - '.github/workflows/probe-hero-buttons.yml'
       - 'pages/homepage/hero.*.html'
   workflow_dispatch:
@@ -28,3 +29,7 @@ jobs:
       - env:
           PAIRS: ${{ inputs.pairs || 'https://www.momuto.com/|pages/homepage/hero.en.html;https://us.momuto.com/|pages/homepage/hero.us.html;https://es.momuto.com/|pages/homepage/hero.es.html;https://fr.momuto.com/|pages/homepage/hero.fr.html;https://it.momuto.com/|pages/homepage/hero.it.html' }}
         run: node scripts/probe-hero-buttons.js
+      - name: Where the hero CSS comes from (www)
+        env:
+          URL: https://www.momuto.com/
+        run: node scripts/probe-page-css.js
