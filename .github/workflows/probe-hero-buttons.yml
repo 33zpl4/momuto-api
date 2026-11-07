@@ -3,6 +3,11 @@ name: Probe hero buttons (live theme CSS, read-only)
 # Loads a live store homepage, measures the hero CTAs as pasted ("LIVE"), swaps in the markup of pages/homepage/hero.<locale>.html from the
 # checked-out ref ("REPO") and measures again at 4 widths: wrapping labels, text/border contrast. Nothing is written anywhere.
 on:
+  push:
+    paths:
+      - 'scripts/probe-hero-buttons.js'
+      - '.github/workflows/probe-hero-buttons.yml'
+      - 'pages/homepage/hero.en.html'
   workflow_dispatch:
     inputs:
       url:
@@ -23,6 +28,6 @@ jobs:
           node-version: '20'
       - run: npm i --no-save playwright && npx playwright install --with-deps chromium
       - env:
-          URL: ${{ inputs.url }}
-          HERO_FILE: ${{ inputs.hero_file }}
+          URL: ${{ inputs.url || 'https://www.momuto.com/' }}
+          HERO_FILE: ${{ inputs.hero_file || 'pages/homepage/hero.en.html' }}
         run: node scripts/probe-hero-buttons.js
