@@ -3,6 +3,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<style id="momuto-hero-cta-fix">
+/* Hero CTAs (7 Nov 2026): the hero is near-black and its CTA column is only ~450px wide on desktop. Labels never break mid-phrase;
+   the row wraps instead of squeezing; the secondary button is a white outline with a real hover. Measured on the live theme CSS:
+   scripts/probe-hero-buttons.js (docs/homepage-hero-lever.md). */
+.momuto-hero-ctas{flex-wrap:wrap;row-gap:14px}
+.momuto-hero-ctas a.btn-primary,.momuto-hero-ctas a.btn-link{white-space:nowrap}
+.momuto-hero-ctas a.btn-primary.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.78);transition:background .2s,color .2s,border-color .2s}
+.momuto-hero-ctas a.btn-primary.btn-outline:hover,.momuto-hero-ctas a.btn-primary.btn-outline:focus-visible{background:#fff;color:#0a0a0a;border-color:#fff}
+@media (max-width:480px){.momuto-hero-ctas a.btn-primary{white-space:normal;text-align:center}}
+</style>
+
 <div class="momuto-hero-container">
 
     <div class="momuto-hero-grid">
@@ -26,7 +37,7 @@
                     Envoyez-nous votre idée
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
                 </a>
-                <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr" class="btn-primary" style="background:transparent;color:#0a0a0a;border:2px solid #0a0a0a">
+                <a href="https://design.momuto.com/3d-configurator/configurator.html?userId=userIdUrl&configId=ypi9qc1z&suitName=mamuto3suit1&lang=fr&langguage=fr" class="btn-primary btn-outline">
                     Créez-la vous-même en 3D — gratuit
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
                 </a>
