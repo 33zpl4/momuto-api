@@ -1,0 +1,36 @@
+name: Probe hero buttons (live theme CSS, read-only)
+
+# Loads live store homepages, measures the hero CTAs as pasted ("LIVE"), injects the cta-fix style + markup of pages/homepage/hero.<locale>.html
+# from the checked-out ref ("REPO") and measures again at 5 widths: wrapping labels, text/border/hover contrast (background sampled from the
+# rendered pixels). Nothing is written anywhere. scripts/probe-hero-buttons.js, docs/homepage-hero-lever.md.
+on:
+  push:
+    paths:
+      - 'scripts/probe-hero-buttons.js'
+      - 'scripts/probe-page-css.js'
+      - '.github/workflows/probe-hero-buttons.yml'
+      - 'pages/homepage/hero.*.html'
+  workflow_dispatch:
+    inputs:
+      pairs:
+        description: 'url|file pairs separated by ;  (default: all five stores)'
+        default: ''
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i --no-save playwright pngjs && npx playwright install --with-deps chromium
+      - env:
+          PAIRS: ${{ inputs.pairs || 'https://www.momuto.com/|pages/homepage/hero.en.html;https://us.momuto.com/|pages/homepage/hero.us.html;https://es.momuto.com/|pages/homepage/hero.es.html;https://fr.momuto.com/|pages/homepage/hero.fr.html;https://it.momuto.com/|pages/homepage/hero.it.html' }}
+        run: node scripts/probe-hero-buttons.js
+      - name: Where the hero CSS comes from (www)
+        env:
+          URL: https://www.momuto.com/
+          DUMP: '1'
+        run: node scripts/probe-page-css.js

@@ -77,3 +77,9 @@ link no longer carries the literal user id. NOT proved by the probe: a real save
 | Blog FAQ/links | `node scripts/check-blog-integrity.js` = 0 problems (PR check) |
 | ES maker page | Deploy CMS Page "created id ?" then Pull (`pull-blog-post.yml`, cms_type page) to capture the id into `cms/pages/es/` |
 | Competitor claims in copy | read with `probe-page-text.yml`, dated in the post; "not published" when a brand states no composition |
+
+## Homepage hero buttons (7 Nov 2026)
+
+| surface | proof |
+| --- | --- |
+| Hero CTAs (wrap, contrast, hover) | `probe-hero-buttons.yml` (runs on push of `pages/homepage/hero.*.html`): `REPO problems: 0` across 5 stores x 5 widths on the live theme CSS (run 42352737676); it also shows the LIVE state per store. Not a visual check: no screenshot of the final render; the owner confirms after pasting |

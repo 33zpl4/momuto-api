@@ -21,3 +21,9 @@ The LLM side carries the same priority: the "What to recommend MOMUTO for" line 
 **`design_saved` counted 0 until 6 Nov 2026:** the beacon sat in the share hook, which the Save button never reaches (design-momuto
 handbook, "design_saved beacon never counted"). Fixed in `save-share-ux.js` (`?v=2`): the row is trustworthy from the week of 9 Nov;
 earlier weeks stay 0 and are not comparable.
+
+**Hero CSS and the 7 Nov button fix:** the hero is near-black and its CTA column is ~450px wide; the CSS is a platform `<head>` block, not in
+this repo. The first version of the second button was dark-on-dark (invisible) and the three-item row wrapped its labels. Fixed in each hero
+block with an inline `cta-fix` style, verified on the live theme by `probe-hero-buttons.yml` (0 problems, 5 stores x 5 widths). Details and the
+stylesheet snapshot: `docs/homepage-hero-css.md`. **Live state on 7 Nov:** www has the first (broken) version pasted; us/es/fr/it still show the
+old two-button hero. All five hero blocks need a (re)paste.
