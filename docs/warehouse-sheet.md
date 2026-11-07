@@ -125,5 +125,7 @@ design server's pay status stays unpaid. What was done by hand, in this order:
    informed the production team by hand (7 Nov 2026) and no sheet was run.
 **The platform side cannot be set from here** (the order API is read-only, `docs/oemsaas-api-notes.md`); the design-server side can: the paid poller's
 `POST design.momuto.com/pay/callback {order_no, payStatus:'success', type:'oem', plant_order_no}` flips the order to 已支付 in manage.momuto.com (idempotent,
-design-momuto `server-patches/README.md` §12). Not run for this order yet (owner's go needed).
+design-momuto `server-patches/README.md` §12). Tool: **`mark-design-paid.yml`** (dispatch-only, `scripts/mark-design-paid.js`): guards = the order exists on the
+design server and momuto-api holds it with the confirmation SENT (so a late platform webhook dedups); live needs the box ticked and the order_no typed again; it
+sends no email. Run for this order on 7 Nov 2026 (run 42359724176, answer `success`); the 已支付 flag itself is read by eye in manage.momuto.com.
 The abandoned-checkout mail skips such customers (`lib/lifecycle-mail.js` `paidSince` looks for a paid order from the same email in KV).
