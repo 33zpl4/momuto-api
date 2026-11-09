@@ -25,7 +25,7 @@ const path = require('path');
 const CSS = require('./lib/estate-css.js');
 
 const ROOT = path.resolve(__dirname, '..');
-const LOCALES = (process.argv[2] || 'us,en,fr,jm-us,jm-en').split(',').map(s => s.trim()).filter(Boolean);
+const LOCALES = (process.argv[2] || 'us,en,fr,es,jm-us,jm-en').split(',').map(s => s.trim()).filter(Boolean);
 
 const esc = (s) => String(s).replace(/&(?![a-z#0-9]+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const strip = (h) => String(h).replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&mdash;/g, '—').replace(/&ndash;/g, '–').replace(/\s+/g, ' ').trim();
@@ -182,7 +182,7 @@ function sanity(d, html) {
   if (d.locale === 'us' && /€|&euro;|\bEUR\b|\bfootball\b|colour|\bshirt/i.test(prose)) throw new Error('us: contains €/EUR/football/shirt/British spelling');
   if (!html.includes('design.momuto.com/3d-configurator/configurator.html')) throw new Error(`${d.locale}: missing 3D designer deep link`);
   const h1 = strip(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1]).toLowerCase();
-  const must = { fr: /maillot de foot/ }[d.locale] || /jersey maker/;
+  const must = { fr: /maillot de foot/, es: /camiseta de f/ }[d.locale] || /jersey maker/;
   if (!must.test(h1)) throw new Error(`${d.locale}: h1 must carry ${must}`);
   if (!must.test(d.meta.meta_title.toLowerCase())) throw new Error(`${d.locale}: meta_title must carry ${must}`);
   if (/path-to-your|Discover MOMUTO|Shop Now/.test(html)) throw new Error(`${d.locale}: template scaffold leaked`);

@@ -1,0 +1,37 @@
+name: Mark a design-server order paid (off-platform payments)
+
+# One order paid outside the platform (Stripe payment link): sets orders.pay_status = 2 on the design server through the same /pay/callback the
+# paid poller uses. Sends NO email. Dry run by default; live needs the box ticked AND the order_no typed again. scripts/mark-design-paid.js
+on:
+  workflow_dispatch:
+    inputs:
+      order_no:
+        description: 'Design-server order_no (the 3D ref, e.g. 78nmn3osnc)'
+        required: true
+      plant_order_no:
+        description: 'Platform order number (optional, stamped only when the design order has none)'
+        default: ''
+      live:
+        description: 'Write for real (unticked = dry run)'
+        type: boolean
+        default: false
+      confirm:
+        description: 'Live only: type the order_no again'
+        default: ''
+permissions:
+  contents: read
+jobs:
+  mark:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - env:
+          MOMUTO_API_SECRET: ${{ secrets.MOMUTO_API_SECRET }}
+          ORDER_NO: ${{ inputs.order_no }}
+          PLANT_ORDER_NO: ${{ inputs.plant_order_no }}
+          LIVE: ${{ inputs.live && '1' || '0' }}
+          CONFIRM: ${{ inputs.confirm }}
+        run: node scripts/mark-design-paid.js
