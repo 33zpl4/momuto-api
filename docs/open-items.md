@@ -5,6 +5,7 @@ One place to read at session start. "Not re-confirmed" = told in an earlier sess
 ## Waiting on the owner
 | item | state | detail |
 |---|---|---|
+| Follow up US deposits paid 6–10 Nov with no brief | **pending** | US brief form was dead 6 Nov 19:01 → 10 Nov 07:47 UTC (`docs/incident-2026-11-10-us-request-form.md`); check Stripe (US $15 link) for deposits in that window without a brief and send each the "form fixed — or just reply with the details" note. Fix verified: probe run 42777830732, 10/10 |
 | Paste the five hero blocks (design request leads) | **pending paste** | `pages/homepage/hero.<locale>.html`, merged 6 Nov; the rule for swapping back: `docs/homepage-hero-lever.md` |
 | Submit the new/updated URLs in Search Console | pending | tiered list: `docs/content-round-2026-11.md` (~10 per day) |
 | Coupon creation via the platform API | **waiting on the platform's answer** | if yes: per-order `KIT10-…` codes with a real 14-day expiry; if not: one shared code per store (`REORDER_CODES`). Lifecycle flows stay in dry run until then: `docs/lifecycle-emails.md` ("ON HOLD") |
