@@ -31,6 +31,7 @@ on:
       - 'scripts/audit-3d-links.js'
       - 'docs/3d-tool-links.*'
       - 'scripts/check-copy-rules.js'
+      - 'scripts/check-page-sources.js'
       - 'scripts/check-blog-integrity.js'
       - 'scripts/rebuild-sitemap.js'
   workflow_dispatch:
@@ -40,11 +41,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
       - name: Check copy rules
         run: node scripts/check-copy-rules.js
+      - name: One source per page (no edits to cms/pages copies of pages/ sources, no template copies)
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.sha }}
+        run: node scripts/check-page-sources.js
       - name: Check the 3D launch-link inventory is current
         run: node scripts/audit-3d-links.js --check
       - name: Account skin paste-in file is current and every CSS rule is scoped
