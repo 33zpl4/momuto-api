@@ -62,7 +62,13 @@ async function walk(browser, store, vpName) {
     await page.locator('#primaryColorCircle').scrollIntoViewIfNeeded(); r.circleTop = await page.evaluate(() => { const c = document.getElementById('primaryColorCircle'); const b = c.getBoundingClientRect(); const t = document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2); return t ? (t.id || String(t.className) || t.tagName).slice(0, 60) : 'none'; }); await page.click('#primaryColorCircle', { timeout: 8000 }); await page.waitForTimeout(300);
     const modal = await page.isVisible('#colorModal');
     if (!modal) r.problems.push('colour picker did not open');
-    else { await page.locator('#colorSwatches .color-swatch').nth(2).click(); await page.waitForTimeout(200); r.primaryColor = await page.inputValue('#primaryColorValue'); if (r.primaryColor.toLowerCase() !== '#0000ff') r.problems.push('colour not applied: ' + r.primaryColor); }
+    else {
+      const sw = page.locator('#colorSwatches .color-swatch').nth(2);
+      const want = await sw.evaluate(e => { const m = getComputedStyle(e).backgroundColor.match(/\d+/g).slice(0, 3); return '#' + m.map(n => (+n).toString(16).padStart(2, '0')).join(''); });
+      await sw.click(); await page.waitForTimeout(200);
+      r.primaryColor = await page.inputValue('#primaryColorValue');
+      if (r.primaryColor.toLowerCase() !== want.toLowerCase()) r.problems.push(`colour not applied: picked ${want}, form holds ${r.primaryColor}`);
+    }
     await page.locator('#stylePreference').fill('8').catch(() => {});
     await shot('2-style');
     await page.click('#step2 .next-step'); await page.waitForTimeout(800);
