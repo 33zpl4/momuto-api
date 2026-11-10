@@ -59,6 +59,7 @@ async function walk(browser, store, vpName) {
     // the badge is required by validateCurrentStep — check CONTINUE refuses without it, then upload
     await page.click('#step2 .next-step'); await page.waitForTimeout(400);
     r.badgeRequired = await page.evaluate(() => document.getElementById('step2').classList.contains('active'));
+    if (!r.badgeRequired && await page.evaluate(() => document.getElementById('step3').classList.contains('active'))) { await page.click('#step3 .prev-step'); await page.waitForTimeout(500); }
     await page.setInputFiles('#clubCrest', crest);
     await page.click('#primaryColorCircle'); await page.waitForTimeout(300);
     const modal = await page.isVisible('#colorModal');
