@@ -110,6 +110,16 @@ async function deployOne(locale, handle) {
   if (!fs.existsSync(file)) { console.warn(`⚠️  ${handle}: no file ${file} — skipping`); return; }
 
   const page = JSON.parse(fs.readFileSync(file, 'utf8'));
+  // A page whose content still carries <!-- inject:… --> markers is a TEMPLATE owned by another deployer
+  // (deploy-us-pages.js / deploy-request-design-page.js paste shared/design-request.{css,js} into it).
+  // Shipping it raw kills the form: on 6 Nov 2026 this deployer pushed the US request page without its step
+  // script and "Next step" did nothing for 4 days (paid deposits could not send their brief). Refuse, loudly.
+  const markers = String(page.content || '').match(/<!-- inject:[^>]+-->/g);
+  if (markers) {
+    console.error(`⛔ ${locale} ${handle}: content still has ${markers.join(' ')} — this page is deployed by its own workflow (deploy-us-pages / deploy-request-design-page), which injects the shared script. NOT deploying the raw copy.`);
+    process.exitCode = 1;
+    return;
+  }
   if (!page.id) {
     // New page (generator stub without an id): look it up by handle, else POST it.
     // Never PUT blind; never create twice.
