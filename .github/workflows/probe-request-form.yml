@@ -1,0 +1,32 @@
+name: Probe request form (all stores)
+
+# Walks the paid brief form (?paid=true) on all five stores like a customer and intercepts the submit — writes nothing.
+# Docs: docs/verification-map.md (request form). Push-triggered on its own files so it can run from a claude/ branch.
+on:
+  push:
+    paths:
+      - 'scripts/probe-request-form.js'
+      - '.github/workflows/probe-request-form.yml'
+  workflow_dispatch:
+    inputs:
+      stores: { description: 'Comma list (en,us,es,fr,it)', default: 'en,us,es,fr,it' }
+  workflow_run:
+    workflows: ['Deploy US Pages (us.momuto.com)', 'Deploy CMS Page', 'Deploy Request Design Pages']
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - name: Walk the form
+        env:
+          STORES: ${{ inputs.stores || 'en,us,es,fr,it' }}
+        run: node scripts/probe-request-form.js
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: request-form-probe, path: probe-out/, retention-days: 7 }
