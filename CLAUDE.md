@@ -140,6 +140,10 @@ pushes and verifies the run itself.
   Cloudflare IPs during LaLiga match windows, not a site fault (outside check clean, no mixed content, Cloudflare Full strict).
   Read `docs/incident-2026-10-17-not-secure-spain.md` BEFORE hunting; check `whynopadlock.com` first.
 
+- **US brief form dead 6–10 Nov 2026 (paid customers could not submit):** a page edit went into the `cms/pages/us/…json` COPY of a
+  `pages/us/` source; Deploy CMS Page shipped the raw template without its step script. Read `docs/incident-2026-11-10-us-request-form.md`.
+  Rule: **edit `pages/<handle>` / `pages/us/<handle>`, never its `cms/pages` copy** (PR check `check-page-sources.js` enforces it); the
+  request pages are done only on a green *Probe request form (all stores)* run.
 - **Workflow-tool subagents can hit a permission-handler bug** that strips
   EVERY tool parameter (`updatedInput ... required parameter missing`),
   including structured output — 12/12 agents failed after a full run

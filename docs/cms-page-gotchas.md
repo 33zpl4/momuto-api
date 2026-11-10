@@ -87,6 +87,13 @@ ul.my-list > li::marker { content: none; }
 ```
 (Live example: `ul.hiw-steps` in `shared/design-request.css`.)
 
+## 5. A page with `<!-- inject:… -->` markers is a template, not a page
+
+The request pages (`request-custom-kit-design` and its ES/FR/IT/US twins) are assembled by their own deployers, which paste
+`shared/design-request.{css,js}` into the markers. Their `cms/pages/*/<handle>.json` copies (from a pull) still hold the markers.
+Editing that copy and merging ran **Deploy CMS Page**, which shipped it raw: no step script, "Next step" dead on us.momuto.com
+from 6 Nov to 10 Nov 2026. Edit `pages/<handle>` / `pages/us/<handle>`; `deploy-cms-page.js` refuses marker content since.
+
 ## The habit that prevents all of these
 
 You cannot render the theme locally, so assume the wrapper is hostile:
