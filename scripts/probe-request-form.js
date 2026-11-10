@@ -56,14 +56,8 @@ async function walk(browser, store, vpName) {
     await page.waitForTimeout(800);
     if (!(await page.evaluate(() => document.getElementById('step2').classList.contains('active') && document.getElementById('step2').offsetParent !== null))) { r.problems.push('NEXT STEP did not open step 2 (Style)'); await shot('2-stuck'); return r; }
     r.steps.push('step2');
-    // the badge is required by validateCurrentStep — check CONTINUE refuses without it, then upload
-    await page.click('#step2 .next-step'); await page.waitForTimeout(400);
-    r.badgeRequired = await page.evaluate(() => document.getElementById('step2').classList.contains('active'));
-    r.afterNoBadge = await page.evaluate(() => ['step1','step2','step3'].map(id => { const e = document.getElementById(id); return id + ':' + (e.classList.contains('active') ? 'A' : '-') + (e.offsetParent ? 'V' : 'h'); }).join(' ')
-      + ' crestInValidator=' + (typeof validateCurrentStep === 'function' && /clubCrest/.test(validateCurrentStep.toString()))
-      + ' circleVisible=' + !!(document.getElementById('primaryColorCircle') || {}).offsetParent
-      + ' modalAt=' + (() => { const c = document.getElementById('primaryColorCircle'); if (!c) return 'none'; const b = c.getBoundingClientRect(); const top = document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2); return top ? (top.id || top.className || top.tagName).toString().slice(0, 40) : 'offscreen'; })());
-    if (!r.badgeRequired && await page.evaluate(() => document.getElementById('step3').classList.contains('active'))) { await page.click('#step3 .prev-step'); await page.waitForTimeout(500); }
+    // real customer order: badge first (the validator requires it), then colours, style, CONTINUE
+    r.badgeRequired = await page.evaluate(() => typeof validateCurrentStep === 'function' && /clubCrest/.test(validateCurrentStep.toString()));
     await page.setInputFiles('#clubCrest', crest);
     await page.locator('#primaryColorCircle').scrollIntoViewIfNeeded(); r.circleTop = await page.evaluate(() => { const c = document.getElementById('primaryColorCircle'); const b = c.getBoundingClientRect(); const t = document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2); return t ? (t.id || String(t.className) || t.tagName).slice(0, 60) : 'none'; }); await page.click('#primaryColorCircle', { timeout: 8000 }); await page.waitForTimeout(300);
     const modal = await page.isVisible('#colorModal');
@@ -93,7 +87,7 @@ async function walk(browser, store, vpName) {
   for (const s of stores) for (const v of Object.keys(VPS)) {
     const r = await walk(browser, s, v); all.push(r);
     console.log(`${r.problems.length ? '❌' : '✅'} ${s.padEnd(2)} ${v.padEnd(7)} steps=${r.steps.join('>') || '-'} badgeRequired=${r.badgeRequired} colour=${r.primaryColor || '-'} submitFields=${r.submit ? r.submit.fields.length : 0}`);
-    r.problems.forEach(p => console.log('     · ' + p)); if (r.afterNoBadge) console.log('     state: ' + r.afterNoBadge + ' circleTop=' + r.circleTop);
+    r.problems.forEach(p => console.log('     · ' + p)); 
     if (r.jsErrors.length) console.log('     js errors: ' + r.jsErrors.join(' | '));
   }
   await browser.close();
