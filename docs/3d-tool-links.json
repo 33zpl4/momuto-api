@@ -623,13 +623,6 @@
   "count": 12
  },
  {
-  "file": "cms/pages/us/request-custom-kit-design.json",
-  "group": "built/pulled CMS copy",
-  "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
-  "variant": "configId=ypi9qc1z suit=mamuto3suit1 userId=userIdUrl",
-  "count": 3
- },
- {
   "file": "cms/pages/us/return-policy.json",
   "group": "built/pulled CMS copy",
   "deploy": "edit the SOURCE (pages/*, faq/, policies/, maker/, blogs/) and rebuild; or edit live (scripts/patch-live-copy.js)",
