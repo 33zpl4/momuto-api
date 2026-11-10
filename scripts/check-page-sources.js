@@ -33,7 +33,7 @@ for (const loc of fs.readdirSync(path.join(ROOT, 'cms', 'pages'))) {
 // 2. a PR must not edit a cms/pages copy that shadows a pages/ source
 const base = process.env.BASE_REF;
 if (base) {
-  const changed = execSync(`git diff --name-only ${base}...HEAD`, { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean);
+  const changed = execSync(`git diff --name-only --diff-filter=d ${base}...HEAD`, { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean);
   for (const f of changed) {
     const m = f.match(/^cms\/pages\/([a-z]{2})\/([^/]+)\.json$/);
     if (!m) continue;
