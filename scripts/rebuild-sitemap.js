@@ -379,6 +379,11 @@ async function pushSitemap(domain, xml) {
 // customer order pages: noindex utility pages, never in the sitemap (docs/order-view.md)
 const ORDER_VIEW_HANDLES = new Set(require('../lib/order-view').PAGE_HANDLES);
 
+// Conversion-only pages (thank-you / design-confirmed / paid-true gate): a customer lands here after paying or submitting a brief.
+// They have no search value, are near-empty, and one of them (ready-to-play-thank-you) is the canonical Google picked for the page that
+// carries ~45 % of our US clicks (URL Inspection, 11 Nov 2026; docs/us-indexing-2026-11.md). Never list them.
+const CONVERSION_ONLY = /(thank-you|-confirmed|-confirme|-confirmado|-confermato|paid-true)$/;
+
 async function rebuildDomain(domain, fetched, alternatesMap) {
   const { pages, posts, products, collections } = fetched;
   console.log(`\n[${domain.label}] pages: ${pages.length}, posts: ${posts.length}, products: ${products.length}, collections: ${collections.length}`);
@@ -394,6 +399,7 @@ async function rebuildDomain(domain, fetched, alternatesMap) {
     const slug = getSlug(p);
     if (!slug) continue;
     if (ORDER_VIEW_HANDLES.has(slug)) continue;   // noindex customer order page (docs/order-view.md)
+    if (CONVERSION_ONLY.test(slug)) { console.log(`  skip conversion-only page /pages/${slug}`); continue; }
     const priority = HIGH_PRIORITY_HANDLES.has(slug) ? '0.8' : '0.7';
     entries.push({ loc: `${domain.baseUrl}/pages/${slug}`, lastmod: getLastmod(p, today), changefreq: 'monthly', priority });
   }
