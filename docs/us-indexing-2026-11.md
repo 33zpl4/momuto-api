@@ -33,6 +33,38 @@ dry run 43060640285 skipped `ready-to-play-thank-you` (www, us), `customized-des
 (not in `cms/pages`); it should carry `<meta name="robots" content="noindex">`. Re-inspect `design-your-own-soccer-jersey` with the probe after the next nightly rebuild:
 the verdict should return to "Submitted and indexed" with its own canonical. If it does not, the page content, not the thank-you page, is the next suspect.
 
+## The canonical defect became a traffic collapse (found 11 Nov, same day)
+
+Daily GSC for `www/pages/design-your-own-soccer-jersey`: **~35–55 clicks and ~600 impressions a day until 1 Nov, then 214 impressions on 2 Nov, 33 on 3 Nov, ~10 a day since: 0 clicks from 6 Nov.**
+That is the site's best non-brand page (876 clicks 10 Oct – 8 Nov). From 2 Nov `www/pages/ready-to-play-thank-you` started receiving impressions for the same
+queries ("create soccer jersey", "custom soccer jersey creator", "soccer jersey maker") at positions 20–70, and gets no clicks. Google folded the real page into the thank-you page.
+Site-wide Search Console is −13 % clicks week on week (www −16 %), which is this page plus its US share.
+
+The **Canonical watch** (new, daily, `scripts/canonical-watch.js`) inspected 24 key URLs on 11 Nov. Findings:
+
+| URL | Google says |
+|---|---|
+| `www/pages/design-your-own-soccer-jersey` | duplicate; Google chose `ready-to-play-thank-you` (crawled 6 Nov) |
+| `www/pages/ai-concept-to-real-kit` — **the concept-to-real hub** | same: duplicate, Google chose `ready-to-play-thank-you` (crawled 6 Nov) |
+| `es/pages/equipaciones-futbol-personalizadas` — the ES category hub | "Crawled - currently not indexed", last crawl 23 Aug |
+| `it/pages/prezzi-maglie-calcio-personalizzate` — the IT price page | "Discovered - currently not indexed", never crawled |
+| the other 20 | indexed, own canonical |
+
+**Ruled out** (probes `probe-main-content`, `probe-html-weight`): the three pages' main text is 0 % similar; the raw HTML is ~650 KB against Googlebot's 2 MB limit;
+no redirect or canonical script in the head (the inline `targetUrl` blocks are legacy brief-form scripts). The page is served 200 with its own canonical.
+**Not known:** what made Google treat them as duplicates (it judges rendered content we cannot see; my guess is a crawl on 1–6 Nov that rendered without the page body). So the fix removes the wrong candidate and asks Google to re-decide.
+
+### Fix applied
+1. Conversion-only pages are out of the sitemap (nightly rebuild also run live on 11 Nov).
+2. **`noindex` on the live thank-you / paid-gate pages that had none** (`scripts/noindex-pages.js`, workflow *Noindex conversion-only pages*, dry run first, read-back):
+   `ready-to-play-thank-you` (www, us), `custom-kit-design-studio-paid-true` (www, us), `design-personalizzato-confermato` (it). The other confirmation pages already answered noindex.
+3. Daily **Canonical watch** so this cannot go unseen again: a red run names the URL and the canonical Google picked.
+
+### Owner action (cannot be done through the API)
+In Search Console → URL Inspection, for **each** of `https://www.momuto.com/pages/design-your-own-soccer-jersey` and `https://www.momuto.com/pages/ai-concept-to-real-kit`:
+**Request indexing** (after the noindex is live). Expect days, not hours. Also request indexing for the ES hub and the IT price page (never indexed).
+The Canonical watch goes green when Google has re-decided; the daily clicks of the page (GSC report, `dimensions=date`) should climb back towards 35–55.
+
 ## Options for the `us` store (owner decision — nothing here is changed yet)
 
 1. **Keep `us` as the checkout destination, stop expecting it to rank.** www already wins the US searches; the lever is moving www visitors to USD prices
