@@ -1,0 +1,30 @@
+name: Probe US indexing (www vs us)
+
+# Read only. For each www page and its us twin: Google's own index verdict + chosen canonical (Search Console URL Inspection API)
+# and what the live HTML declares (canonical, hreflang tags, robots meta, body similarity). See docs/us-indexing-2026-11.md.
+on:
+  push:
+    paths:
+      - 'scripts/probe-us-index.js'
+      - '.github/workflows/probe-us-index.yml'
+  workflow_dispatch:
+    inputs:
+      pairs:
+        description: 'Comma list of paths (default: the top US-traffic pages)'
+        default: ''
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i --no-save playwright && npx playwright install chromium
+      - name: Probe
+        env:
+          GSC_SERVICE_ACCOUNT: ${{ secrets.GSC_SERVICE_ACCOUNT }}
+          GSC_SITE: ${{ vars.GSC_SITE }}
+          PAIRS: ${{ inputs.pairs }}
+        run: node scripts/probe-us-index.js

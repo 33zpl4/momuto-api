@@ -63,7 +63,7 @@ Orders +32% then +55% while clicks grew +6% then +15%. 3D designer sessions: ~3,
    homepage still takes them.
 2. **FR decline.** The July analysis argued losing the FR "concept" cluster was fine (fan-art audience, not buyers). That argument has run its course.
    Unknown from this data: whether the FR comparison page (`comparatif-fournisseur-maillot-foot-2026`, best non-home page in July, pos ~6–7) is holding.
-3. **US store not indexed as the US destination.** The Sept plan said wait 4–8 weeks for hreflang to steer Google and "re-read ~16 Oct". That re-read never
+3. **US store not indexed as the US destination. (Answered 11 Nov: it IS indexed; it does not rank, because the pairs are 76–95 % duplicates. `docs/us-indexing-2026-11.md`.)** The Sept plan said wait 4–8 weeks for hreflang to steer Google and "re-read ~16 Oct". That re-read never
    happened; seven weeks in, us.momuto.com pages sit around position 30. hreflang is built nightly (`scripts/rebuild-sitemap.js`, runs green daily).
    Owner ruling: **no geo-redirect www→us** (hreflang steers, a banner at most).
 4. **ES internal-link items from the 14 Aug addendum were never done:** more links to the Zentral/roundup page, ES nav link to the Ready to Play wall
