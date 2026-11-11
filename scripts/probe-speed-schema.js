@@ -9,9 +9,22 @@ const { chromium } = require('playwright');
 const URLS = (process.env.URLS || 'https://www.momuto.com/,https://www.momuto.com/pages/design-your-own-soccer-jersey,https://www.momuto.com/pages/custom-soccer-jerseys,https://us.momuto.com/,https://es.momuto.com/,https://design.momuto.com/3d-configurator/configurator.html').split(',').map(s => s.trim()).filter(Boolean);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+async function lighthouseLab(url, strategy) {
+  // PSI's unauthenticated quota is often exhausted from shared runner IPs; run Lighthouse locally (lab data only, no real-user data).
+  const lighthouse = (await import('lighthouse')).default;
+  const chromeLauncher = await import('chrome-launcher');
+  const chrome = await chromeLauncher.launch({ chromePath: chromium.executablePath(), chromeFlags: ['--headless=new', '--no-sandbox', '--disable-gpu'] });
+  try {
+    const cfg = strategy === 'desktop' ? { extends: 'lighthouse:default', settings: { formFactor: 'desktop', screenEmulation: { mobile: false, width: 1350, height: 940, deviceScaleFactor: 1, disabled: false }, throttling: { rttMs: 40, throughputKbps: 10240, cpuSlowdownMultiplier: 1 }, onlyCategories: ['performance'] } } : { extends: 'lighthouse:default', settings: { onlyCategories: ['performance'] } };
+    const r = await lighthouse(url, { port: chrome.port, output: 'json', logLevel: 'error' }, cfg);
+    const lr = r.lhr, a = lr.audits;
+    return { lab: true, perf: Math.round((lr.categories.performance.score || 0) * 100), lcp: a['largest-contentful-paint'].displayValue, cls: a['cumulative-layout-shift'].displayValue, tbt: a['total-blocking-time'].displayValue, si: a['speed-index'].displayValue, fcp: a['first-contentful-paint'].displayValue, bytes: Math.round((a['total-byte-weight'].numericValue || 0) / 1024) + ' KB', lcpEl: ((a['largest-contentful-paint-element'].details || {}).items || [{}])[0].items ? (((a['largest-contentful-paint-element'].details.items[0].items || [])[0] || {}).node || {}).snippet : '', runtimeError: lr.runtimeError ? lr.runtimeError.code : '' };
+  } finally { await chrome.kill(); }
+}
+
 async function psi(url, strategy) {
   const api = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=${strategy}&category=performance${process.env.PSI_KEY ? '&key=' + process.env.PSI_KEY : ''}`;
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 1; i++) {
     const r = await fetch(api); const j = await r.json();
     if (r.ok) {
       const a = j.lighthouseResult.audits, f = (j.loadingExperience || {}).metrics || {}, o = (j.originLoadingExperience || {}).metrics || {};
@@ -38,7 +51,9 @@ function summariseLd(blocks) {
   console.log(`Speed + schema probe ${new Date().toISOString().slice(0, 16)}Z\n`);
   console.log('== PageSpeed Insights (lab score; "page"/"origin" = real users from CrUX when Google has data; p75 values, G/N/P = good/needs-improvement/poor)');
   for (const u of URLS) for (const s of ['mobile', 'desktop']) {
-    const r = await psi(u, s);
+    let r = await psi(u, s);
+    if (r.error) { try { r = await lighthouseLab(u, s); } catch (e) { r = { error: 'PSI unavailable and Lighthouse failed: ' + e.message.slice(0, 100) }; } }
+    if (r.lab) { console.log(`  ${s.padEnd(7)} ${u}\n          perf=${r.perf}  LAB (local Lighthouse): FCP ${r.fcp} | LCP ${r.lcp} | CLS ${r.cls} | TBT ${r.tbt} | SI ${r.si} | page weight ${r.bytes}${r.runtimeError ? ' | ERROR ' + r.runtimeError : ''}\n          LCP element: ${(r.lcpEl || '-').slice(0, 140)}`); await sleep(500); continue; }
     console.log(r.error ? `  ${s.padEnd(7)} ${u}\n          ERROR ${r.error}` : `  ${s.padEnd(7)} ${u}\n          perf=${r.perf}  lab: LCP ${r.lcp} | CLS ${r.cls} | TBT ${r.tbt} | SI ${r.si}\n          real users page: LCP ${r.pageLCP}ms CLS ${r.pageCLS} INP ${r.pageINP}ms | origin: LCP ${r.originLCP}ms CLS ${r.originCLS} INP ${r.originINP}ms | origin verdict ${r.fieldVerdict}`);
     await sleep(1500);
   }
