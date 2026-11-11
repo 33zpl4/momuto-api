@@ -17,5 +17,6 @@ jobs:
         with: { node-version: '20' }
       - run: npm i --no-save playwright && npx playwright install chromium
       - env:
-          URLS: ${{ inputs.urls || 'https://www.momuto.com/pages/design-your-own-soccer-jersey,https://www.momuto.com/pages/ready-to-play-thank-you,https://www.momuto.com/pages/customized-design-confirmed,https://www.momuto.com/pages/custom-soccer-jerseys' }}
+          URLS: ${{ inputs.urls || 'https://www.momuto.com/pages/ready-to-play-thank-you,https://us.momuto.com/pages/ready-to-play-thank-you,https://www.momuto.com/pages/custom-kit-design-studio-paid-true,https://us.momuto.com/pages/custom-kit-design-studio-paid-true,https://us.momuto.com/pages/customized-design-confirmed,https://fr.momuto.com/pages/design-personnalise-confirme,https://it.momuto.com/pages/design-personalizzato-confermato' }}
+          SHOW: '120'
         run: node scripts/probe-main-content.js
