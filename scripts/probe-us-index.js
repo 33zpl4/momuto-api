@@ -17,7 +17,7 @@ async function token(sa) {
     body: `grant_type=${encodeURIComponent('urn:ietf:params:oauth:grant-type:jwt-bearer')}&assertion=${h}.${c}.${b64u(crypto.sign('RSA-SHA256', Buffer.from(`${h}.${c}`), sa.private_key))}` });
   const j = await r.json(); if (!j.access_token) throw new Error('token ' + JSON.stringify(j).slice(0, 160)); return j.access_token;
 }
-const PATHS = (process.env.PAIRS || '/,/pages/design-your-own-soccer-jersey,/pages/custom-soccer-jersey-designer,/pages/jersey-maker,/pages/ready-to-play,/pages/custom-kit-gallery,/pages/request-custom-kit-design,/pages/best-custom-soccer-jersey-makers-2026,/pages/about-us').split(',').map(s => s.trim()).filter(Boolean);
+const PATHS = (process.env.PAIRS || '/,/pages/design-your-own-soccer-jersey,/pages/custom-soccer-jersey-designer,/pages/jersey-maker,/pages/ready-to-play,/pages/custom-kit-gallery,/pages/request-custom-kit-design,/pages/best-custom-soccer-jersey-makers-2026,/pages/about-us,/pages/ready-to-play-thank-you').split(',').map(s => s.trim()).filter(Boolean);
 const HOSTS = { www: 'https://www.momuto.com', us: 'https://us.momuto.com' };
 
 async function inspect(tk, site, url) {
@@ -83,6 +83,7 @@ async function live(url) {
       console.log(`  [${k}] http=${L.status || L.error}${L.finalUrl && L.finalUrl !== url ? ' → ' + L.finalUrl : ''}  bytes=${L.bytes || '-'}`);
       console.log(`       title: ${L.title || '-'} | h1: ${L.h1 || '-'}`);
       console.log(`       canonical(declared): ${L.canonical || '(none)'}  robots-meta: ${L.robotsMeta || '-'}  hreflang-tags: ${L.hreflangs ? L.hreflangs.length : 0}${L.hreflangs && L.hreflangs.length ? ' ' + L.hreflangs.slice(0, 6).join(' ') : ''}`);
+      if (k === 'www' && L.text) console.log(`       text: ${L.text.slice(0, 260)}`);
       if (G) console.log(G.error ? `       GOOGLE: ${G.error}` : `       GOOGLE: ${G.verdict} / ${G.state} / indexing=${G.indexing} fetch=${G.fetched} lastCrawl=${G.lastCrawl}\n       google-canonical: ${G.googleCanonical || '-'}   user-canonical: ${G.userCanonical || '-'}${G.googleCanonical && G.userCanonical && G.googleCanonical !== G.userCanonical ? '   ⚠ GOOGLE CHOSE A DIFFERENT CANONICAL' : ''}`);
     }
     if (res.www.L.text && res.us.L.text) console.log(`  → body similarity www↔us (5-word shingles, Jaccard): ${(jaccard(shingles(res.www.L.text), shingles(res.us.L.text)) * 100).toFixed(0)}%`);
