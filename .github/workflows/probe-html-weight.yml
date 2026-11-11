@@ -17,5 +17,7 @@ jobs:
         with: { node-version: '20' }
       - run: npm i --no-save playwright && npx playwright install chromium
       - env:
-          URLS: ${{ inputs.urls }}
+          URLS: ${{ inputs.urls || 'https://www.momuto.com/pages/design-your-own-soccer-jersey' }}
+          DUMP: 'targetUrl|location\\.(href|replace|assign)'
+          DUMP_CHARS: '3200'
         run: node scripts/probe-html-weight.js
