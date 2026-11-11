@@ -5,6 +5,7 @@ One place to read at session start. "Not re-confirmed" = told in an earlier sess
 ## Waiting on the owner
 | item | state | detail |
 |---|---|---|
+| Send the wave-1 outreach (3 emails) and paste the GSC → Links "Top linking sites" export | **pending** | messages ready in `docs/outreach-roundups-2026-11.md`; tracker + wave 2 candidates in `docs/outreach-log.md`. No tool counts referring domains: the GSC UI export is the first number |
 | Follow up US deposits paid 6–10 Nov with no brief | **pending** | US brief form was dead 6 Nov 19:01 → 10 Nov 07:47 UTC (`docs/incident-2026-11-10-us-request-form.md`); check Stripe (US $15 link) for deposits in that window without a brief and send each the "form fixed — or just reply with the details" note. Fix verified: probe run 42777830732, 10/10 |
 | Paste the five hero blocks (design request leads) | **pending paste** | `pages/homepage/hero.<locale>.html`, merged 6 Nov; the rule for swapping back: `docs/homepage-hero-lever.md` |
 | Submit the new/updated URLs in Search Console | pending | tiered list: `docs/content-round-2026-11.md` (~10 per day) |
