@@ -1,0 +1,21 @@
+name: Probe HTML weight (Googlebot 2 MB limit)
+# Read only. Raw HTML size, where #MainContent starts, and the biggest inline blocks.
+on:
+  push:
+    paths: ['scripts/probe-html-weight.js', '.github/workflows/probe-html-weight.yml']
+  workflow_dispatch:
+    inputs:
+      urls: { description: 'Comma list of URLs (default: key pages)', default: '' }
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i --no-save playwright && npx playwright install chromium
+      - env:
+          URLS: ${{ inputs.urls }}
+        run: node scripts/probe-html-weight.js
