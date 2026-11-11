@@ -1,0 +1,21 @@
+name: Probe main content (duplicate diagnosis)
+# Read only. Prints the main-content text a crawler sees per URL and the similarity between URLs.
+on:
+  push:
+    paths: ['scripts/probe-main-content.js', '.github/workflows/probe-main-content.yml']
+  workflow_dispatch:
+    inputs:
+      urls: { description: 'Comma list of URLs', required: true }
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i --no-save playwright && npx playwright install chromium
+      - env:
+          URLS: ${{ inputs.urls || 'https://www.momuto.com/pages/design-your-own-soccer-jersey,https://www.momuto.com/pages/ready-to-play-thank-you,https://www.momuto.com/pages/customized-design-confirmed,https://www.momuto.com/pages/custom-soccer-jerseys' }}
+        run: node scripts/probe-main-content.js
