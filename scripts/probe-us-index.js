@@ -56,6 +56,24 @@ async function live(url) {
   }
   console.log('');
 
+  // sitemaps: what Google actually reads (hreflang lives only here)
+  for (const [k, base] of Object.entries(HOSTS)) {
+    try {
+      const rb = await (await fetch(base + '/robots.txt')).text().catch(() => '');
+      console.log(`[${k}] robots Sitemap lines: ${(rb.match(/^sitemap:.*$/gim) || []).join(' | ') || '(none)'}`);
+      const page = await CTX.newPage();
+      const resp = await page.goto(base + '/sitemap.xml', { waitUntil: 'domcontentloaded', timeout: 45000 });
+      const xml = await resp.text(); await page.close();
+      const urls = (xml.match(/<url>/g) || []).length, alts = (xml.match(/<xhtml:link/g) || []).length;
+      console.log(`[${k}] /sitemap.xml http=${resp.status()} bytes=${xml.length} <url>=${urls} xhtml:link=${alts} sitemapindex=${/<sitemapindex/.test(xml)}`);
+      for (const p of PATHS.slice(0, 4)) {
+        const i = xml.indexOf('<loc>' + base + (p === '/' ? '/' : p) + '</loc>');
+        console.log(`   ${p}: ${i < 0 ? 'NOT IN SITEMAP' : xml.slice(i, i + 700).replace(/\s+/g, ' ').replace(/<\/url>.*/, '').slice(0, 520)}`);
+      }
+    } catch (e) { console.log(`[${k}] sitemap read failed: ${e.message.slice(0, 100)}`); }
+  }
+  console.log('');
+
   for (const p of PATHS) {
     console.log(`=== ${p}`);
     const res = {};
