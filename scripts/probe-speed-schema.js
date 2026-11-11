@@ -18,7 +18,11 @@ async function lighthouseLab(url, strategy) {
     const cfg = strategy === 'desktop' ? { extends: 'lighthouse:default', settings: { formFactor: 'desktop', screenEmulation: { mobile: false, width: 1350, height: 940, deviceScaleFactor: 1, disabled: false }, throttling: { rttMs: 40, throughputKbps: 10240, cpuSlowdownMultiplier: 1 }, onlyCategories: ['performance'] } } : { extends: 'lighthouse:default', settings: { onlyCategories: ['performance'] } };
     const r = await lighthouse(url, { port: chrome.port, output: 'json', logLevel: 'error' }, cfg);
     const lr = r.lhr, a = lr.audits;
-    return { lab: true, perf: Math.round((lr.categories.performance.score || 0) * 100), lcp: a['largest-contentful-paint'].displayValue, cls: a['cumulative-layout-shift'].displayValue, tbt: a['total-blocking-time'].displayValue, si: a['speed-index'].displayValue, fcp: a['first-contentful-paint'].displayValue, bytes: Math.round((a['total-byte-weight'].numericValue || 0) / 1024) + ' KB', lcpEl: ((a['largest-contentful-paint-element'].details || {}).items || [{}])[0].items ? (((a['largest-contentful-paint-element'].details.items[0].items || [])[0] || {}).node || {}).snippet : '', runtimeError: lr.runtimeError ? lr.runtimeError.code : '' };
+    return { lab: true, perf: Math.round((lr.categories.performance.score || 0) * 100), lcp: a['largest-contentful-paint'].displayValue, cls: a['cumulative-layout-shift'].displayValue, tbt: a['total-blocking-time'].displayValue, si: a['speed-index'].displayValue, fcp: a['first-contentful-paint'].displayValue, bytes: Math.round((a['total-byte-weight'].numericValue || 0) / 1024) + ' KB', lcpEl: ((a['largest-contentful-paint-element'].details || {}).items || [{}])[0].items ? (((a['largest-contentful-paint-element'].details.items[0].items || [])[0] || {}).node || {}).snippet : '', runtimeError: lr.runtimeError ? lr.runtimeError.code : '',
+      shifts: (((a['layout-shifts'] || {}).details || {}).items || []).slice(0, 4).map(i => `${(+i.score).toFixed(3)} ${((i.node || {}).snippet || '').slice(0, 90)}`),
+      blocking: (((a['render-blocking-resources'] || {}).details || {}).items || []).slice(0, 6).map(i => `${Math.round(i.wastedMs)}ms ${String(i.url).replace(/^https?:\/\//, '').slice(0, 95)}`),
+      thirdParty: (((a['third-party-summary'] || {}).details || {}).items || []).slice(0, 5).map(i => `${((i.entity && i.entity.text) || i.entity)}: ${Math.round(i.blockingTime || 0)}ms blocking, ${Math.round((i.transferSize || 0) / 1024)} KB`),
+      mainThread: (((a['mainthread-work-breakdown'] || {}).details || {}).items || []).slice(0, 4).map(i => `${i.groupLabel} ${Math.round(i.duration)}ms`) };
   } finally { await chrome.kill(); }
 }
 
@@ -53,7 +57,7 @@ function summariseLd(blocks) {
   for (const u of URLS) for (const s of ['mobile', 'desktop']) {
     let r = await psi(u, s);
     if (r.error) { try { r = await lighthouseLab(u, s); } catch (e) { r = { error: 'PSI unavailable and Lighthouse failed: ' + e.message.slice(0, 100) }; } }
-    if (r.lab) { console.log(`  ${s.padEnd(7)} ${u}\n          perf=${r.perf}  LAB (local Lighthouse): FCP ${r.fcp} | LCP ${r.lcp} | CLS ${r.cls} | TBT ${r.tbt} | SI ${r.si} | page weight ${r.bytes}${r.runtimeError ? ' | ERROR ' + r.runtimeError : ''}\n          LCP element: ${(r.lcpEl || '-').slice(0, 140)}`); await sleep(500); continue; }
+    if (r.lab) { console.log(`  ${s.padEnd(7)} ${u}\n          perf=${r.perf}  LAB (local Lighthouse): FCP ${r.fcp} | LCP ${r.lcp} | CLS ${r.cls} | TBT ${r.tbt} | SI ${r.si} | page weight ${r.bytes}${r.runtimeError ? ' | ERROR ' + r.runtimeError : ''}\n          LCP element: ${(r.lcpEl || '-').slice(0, 140)}\n          layout shifts: ${(r.shifts || []).join(' || ') || '-'}\n          render-blocking: ${(r.blocking || []).join(' | ') || '-'}\n          third parties: ${(r.thirdParty || []).join(' | ') || '-'}\n          main thread: ${(r.mainThread || []).join(' | ') || '-'}`); await sleep(500); continue; }
     console.log(r.error ? `  ${s.padEnd(7)} ${u}\n          ERROR ${r.error}` : `  ${s.padEnd(7)} ${u}\n          perf=${r.perf}  lab: LCP ${r.lcp} | CLS ${r.cls} | TBT ${r.tbt} | SI ${r.si}\n          real users page: LCP ${r.pageLCP}ms CLS ${r.pageCLS} INP ${r.pageINP}ms | origin: LCP ${r.originLCP}ms CLS ${r.originCLS} INP ${r.originINP}ms | origin verdict ${r.fieldVerdict}`);
     await sleep(1500);
   }
