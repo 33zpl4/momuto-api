@@ -1,0 +1,25 @@
+name: Canonical watch (Google's verdict on key URLs)
+
+# Daily, read only. Red run = a key URL is not indexed or Google chose another canonical. See docs/us-indexing-2026-11.md.
+on:
+  schedule:
+    - cron: '35 5 * * *'
+  push:
+    paths: ['scripts/canonical-watch.js', '.github/workflows/canonical-watch.yml']
+  workflow_dispatch:
+    inputs:
+      extra: { description: 'More URLs, comma list', default: '' }
+permissions:
+  contents: read
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - env:
+          GSC_SERVICE_ACCOUNT: ${{ secrets.GSC_SERVICE_ACCOUNT }}
+          GSC_SITE: ${{ vars.GSC_SITE }}
+          EXTRA: ${{ inputs.extra }}
+        run: node scripts/canonical-watch.js
