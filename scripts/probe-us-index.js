@@ -5,9 +5,10 @@
  * (index state, the canonical Google CHOSE vs the one we declare, last crawl) and (b) what the live HTML says:
  * canonical, hreflang link tags, robots meta, title, h1, and how similar the two bodies are (duplicate pressure).
  * Also reads the live robots.txt and sitemap hreflang rows for the pair. Writes nothing.
- * Env: GSC_SERVICE_ACCOUNT (secret), GSC_SITE (default sc-domain:momuto.com), PAIRS="/pages/x,/pages/y" (default list below)
+ * Env: GSC_SERVICE_ACCOUNT (secret), GSC_SITE (default sc-domain:momuto.com), PAIRS="/pages/x,/pages/y" (default list below); the live HTML is read with Playwright (plain fetch gets Cloudflare's 403)
  */
 const crypto = require('crypto');
+const { chromium } = require('playwright');
 const b64u = b => Buffer.from(b).toString('base64').replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
 async function token(sa) {
   const now = Math.floor(Date.now() / 1000), h = b64u(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
@@ -28,13 +29,18 @@ async function inspect(tk, site, url) {
 const strip = h => h.replace(/<(script|style|noscript)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
 function shingles(t) { const w = t.split(' '), s = new Set(); for (let i = 0; i + 5 <= w.length; i++) s.add(w.slice(i, i + 5).join(' ')); return s; }
 const jaccard = (a, b) => { if (!a.size || !b.size) return 0; let n = 0; for (const x of a) if (b.has(x)) n++; return n / (a.size + b.size - n); };
+let CTX = null;
 async function live(url) {
+  // Cloudflare answers plain fetch() from runners with a 403 challenge, so read the page with a real browser.
   try {
-    const r = await fetch(url, { redirect: 'follow', headers: { 'User-Agent': 'Mozilla/5.0 (compatible; momuto-probe)', 'Accept-Language': 'en-US,en;q=0.9' } });
-    const h = await r.text();
+    const page = await CTX.newPage();
+    const r = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await page.waitForTimeout(1500);
+    const h = await page.content(), status = r ? r.status() : 0, finalUrl = page.url();
+    await page.close();
     const tag = re => (h.match(re) || [])[1] || '';
     const hreflangs = [...h.matchAll(/<link[^>]+rel=["']alternate["'][^>]*>/gi)].map(m => m[0]).filter(t => /hreflang/i.test(t)).map(t => `${(t.match(/hreflang=["']([^"']+)/i) || [])[1]}→${(t.match(/href=["']([^"']+)/i) || [])[1]}`);
-    return { status: r.status, finalUrl: r.url, canonical: tag(/<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)/i) || tag(/<link[^>]+href=["']([^"']+)["'][^>]*rel=["']canonical/i), robotsMeta: tag(/<meta[^>]+name=["']robots["'][^>]*content=["']([^"']+)/i), title: tag(/<title[^>]*>([^<]*)/i).trim().slice(0, 90), h1: strip(tag(/<h1[^>]*>([\s\S]*?)<\/h1>/i)).slice(0, 80), hreflangs, text: strip(h), bytes: h.length };
+    return { status, finalUrl, canonical: tag(/<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)/i) || tag(/<link[^>]+href=["']([^"']+)["'][^>]*rel=["']canonical/i), robotsMeta: tag(/<meta[^>]+name=["']robots["'][^>]*content=["']([^"']+)/i), title: tag(/<title[^>]*>([^<]*)/i).trim().slice(0, 90), h1: strip(tag(/<h1[^>]*>([\s\S]*?)<\/h1>/i)).slice(0, 80), hreflangs, text: strip(h), bytes: h.length };
   } catch (e) { return { error: e.message.slice(0, 100) }; }
 }
 
@@ -42,6 +48,7 @@ async function live(url) {
   const sa = process.env.GSC_SERVICE_ACCOUNT ? JSON.parse(process.env.GSC_SERVICE_ACCOUNT) : null;
   const site = process.env.GSC_SITE || 'sc-domain:momuto.com';
   const tk = sa ? await token(sa) : null;
+  const browser = await chromium.launch(); CTX = await browser.newContext({ locale: 'en-US', viewport: { width: 1366, height: 900 } });
   console.log(`US indexing probe — ${new Date().toISOString().slice(0, 16)}Z  site=${site}  inspection=${tk ? 'on' : 'OFF (no secret)'}\n`);
 
   for (const h of Object.values(HOSTS)) {
@@ -63,4 +70,5 @@ async function live(url) {
     if (res.www.L.text && res.us.L.text) console.log(`  → body similarity www↔us (5-word shingles, Jaccard): ${(jaccard(shingles(res.www.L.text), shingles(res.us.L.text)) * 100).toFixed(0)}%`);
     console.log('');
   }
+  await browser.close();
 })().catch(e => { console.error('FAILED:', e.message); process.exit(1); });
