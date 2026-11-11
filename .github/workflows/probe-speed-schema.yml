@@ -1,0 +1,28 @@
+name: Probe speed + schema (PageSpeed Insights, JSON-LD)
+
+# Read only. Core Web Vitals (lab + real-user CrUX) for the key pages and the structured data on live product pages.
+# Runs on push of its own files (so it can run from a claude/ branch) and by dispatch. Results: the step log. docs/speed-schema-2026-11.md
+on:
+  push:
+    paths:
+      - 'scripts/probe-speed-schema.js'
+      - '.github/workflows/probe-speed-schema.yml'
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'Comma list of URLs for PageSpeed (default: key pages)'
+        default: ''
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i --no-save playwright && npx playwright install chromium
+      - name: Probe
+        env:
+          URLS: ${{ inputs.urls }}
+        run: node scripts/probe-speed-schema.js
