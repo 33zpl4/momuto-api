@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: '20' }
-      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: npm i --no-save playwright && npx playwright install chromium
       - name: Probe
         env:
           GSC_SERVICE_ACCOUNT: ${{ secrets.GSC_SERVICE_ACCOUNT }}
