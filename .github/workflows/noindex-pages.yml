@@ -1,0 +1,35 @@
+name: Noindex conversion-only pages (live read-modify-write)
+
+# Adds a robots noindex to the LIVE thank-you / paid-gate pages so Google cannot pick them as the canonical of a real page
+# (docs/us-indexing-2026-11.md). Dry run by default; a push of the script runs a DRY RUN only. Live: dispatch with dry_run=false.
+on:
+  push:
+    paths: ['scripts/noindex-pages.js', '.github/workflows/noindex-pages.yml']
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (read + print, write nothing)'
+        type: choice
+        options: ['true', 'false']
+        default: 'true'
+      targets:
+        description: 'Override: comma list store:handle (default list in the script)'
+        default: ''
+permissions:
+  contents: read
+jobs:
+  noindex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - env:
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+          DRY_RUN: ${{ inputs.dry_run || 'true' }}
+          TARGETS: ${{ inputs.targets }}
+        run: node scripts/noindex-pages.js
