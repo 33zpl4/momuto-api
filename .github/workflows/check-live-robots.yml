@@ -3,7 +3,7 @@ name: Check live robots.txt (five stores)
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ['Deploy Static Files']
+    workflows: ['Deploy Static Files (robots.txt / llms.txt / sitemap.xml / blog.css)']
     types: [completed]
   push:
     paths: ['scripts/check-live-robots.js', '.github/workflows/check-live-robots.yml']
