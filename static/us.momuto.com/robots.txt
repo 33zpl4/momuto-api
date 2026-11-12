@@ -9,6 +9,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -25,6 +39,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -40,6 +68,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -56,6 +98,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -71,6 +127,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -86,6 +156,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -101,6 +185,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -116,6 +214,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -131,6 +243,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -146,6 +272,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -161,6 +301,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5
@@ -176,6 +330,20 @@ Disallow: /coupons/
 Disallow: /account/
 # internal search results
 Disallow: /search
+# tracking / variant parameters the theme appends to internal links: same page, thousands of crawl targets (GSC, 12 Nov 2026: ~6,000 "alternative page" URLs)
+Disallow: /*?*spm=
+Disallow: /*?*data_from=
+Disallow: /*?*sku_code=
+Disallow: /*?*sku=
+# per-order 3D preview products and their review pages: needed for the buyer's cart/email picture, never for search or for the public
+Disallow: /products/your-custom-design
+Disallow: /comments/your-custom-design
+Disallow: /products/tu-dise
+Disallow: /comments/tu-dise
+Disallow: /products/votre-design-personnalis
+Disallow: /comments/votre-design-personnalis
+Disallow: /products/il-tuo-design-personalizzato
+Disallow: /comments/il-tuo-design-personalizzato
 # CJK URLs - nothing on these stores should be in Chinese
 Disallow: /*%E4
 Disallow: /*%E5

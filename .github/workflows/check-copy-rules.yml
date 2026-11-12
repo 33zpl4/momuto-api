@@ -32,6 +32,8 @@ on:
       - 'docs/3d-tool-links.*'
       - 'scripts/check-copy-rules.js'
       - 'scripts/check-page-sources.js'
+      - 'static/*/robots.txt'
+      - 'scripts/test-robots.js'
       - 'scripts/check-blog-integrity.js'
       - 'scripts/rebuild-sitemap.js'
   workflow_dispatch:
@@ -52,6 +54,8 @@ jobs:
         env:
           BASE_REF: ${{ github.event.pull_request.base.sha }}
         run: node scripts/check-page-sources.js
+      - name: robots.txt keeps real pages crawlable and blocks previews/parameters
+        run: node scripts/test-robots.js
       - name: Check the 3D launch-link inventory is current
         run: node scripts/audit-3d-links.js --check
       - name: Account skin paste-in file is current and every CSS rule is scoped

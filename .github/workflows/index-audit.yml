@@ -1,0 +1,29 @@
+name: Index audit (Google's verdict on every sitemap page)
+# Read only. URL Inspection API over the /pages/ and /blogs/ URLs of each store (quota 2,000/day). Run on demand; on a branch it runs on push.
+on:
+  push:
+    paths: ['scripts/index-audit.js', '.github/workflows/index-audit.yml']
+  workflow_dispatch:
+    inputs:
+      stores: { description: 'Comma list (www,es,fr,it,us)', default: 'www,es,fr,it,us' }
+      limit: { description: 'Max URLs per store', default: '700' }
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i --no-save playwright && npx playwright install chromium
+      - env:
+          GSC_SERVICE_ACCOUNT: ${{ secrets.GSC_SERVICE_ACCOUNT }}
+          GSC_SITE: ${{ vars.GSC_SITE }}
+          STORES: ${{ inputs.stores || 'fr,it,us' }}
+          LIMIT: ${{ inputs.limit || '700' }}
+        run: node scripts/index-audit.js
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: index-audit, path: index-audit/, retention-days: 7 }
