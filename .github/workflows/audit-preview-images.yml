@@ -1,0 +1,39 @@
+name: Audit Preview Images (read-only)
+
+# Do the checkout preview lines have a live cover image on the platform CDN? Per order, by shipping country, time of day and day
+# (scripts/audit-preview-images.js). Read-only; prints order numbers and country codes only.
+
+on:
+  push:
+    branches: [claude/preview-image-audit]   # TEMP: remove before merge
+    paths: ['.github/workflows/audit-preview-images.yml']
+  workflow_dispatch:
+    inputs:
+      store:
+        description: 'Store (EN, ES, FR, IT, US)'
+        required: false
+        default: 'EN'
+      days:
+        description: 'How many days back'
+        required: false
+        default: '14'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Audit the preview images
+        env:
+          STORE: ${{ github.event.inputs.store || 'EN' }}
+          DAYS: ${{ github.event.inputs.days || '14' }}
+          OEMSAAS_TOKEN_EN: ${{ secrets.OEMSAAS_TOKEN_EN }}
+          OEMSAAS_TOKEN_ES: ${{ secrets.OEMSAAS_TOKEN_ES }}
+          OEMSAAS_TOKEN_FR: ${{ secrets.OEMSAAS_TOKEN_FR }}
+          OEMSAAS_TOKEN_IT: ${{ secrets.OEMSAAS_TOKEN_IT }}
+          OEMSAAS_TOKEN_US: ${{ secrets.OEMSAAS_TOKEN_US }}
+        run: node scripts/audit-preview-images.js
