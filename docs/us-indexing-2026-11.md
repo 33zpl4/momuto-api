@@ -33,6 +33,38 @@ dry run 43060640285 skipped `ready-to-play-thank-you` (www, us), `customized-des
 (not in `cms/pages`); it should carry `<meta name="robots" content="noindex">`. Re-inspect `design-your-own-soccer-jersey` with the probe after the next nightly rebuild:
 the verdict should return to "Submitted and indexed" with its own canonical. If it does not, the page content, not the thank-you page, is the next suspect.
 
+## The canonical defect became a traffic collapse (found 11 Nov, same day)
+
+Daily GSC for `www/pages/design-your-own-soccer-jersey`: **~35–55 clicks and ~600 impressions a day until 1 Nov, then 214 impressions on 2 Nov, 33 on 3 Nov, ~10 a day since: 0 clicks from 6 Nov.**
+That is the site's best non-brand page (876 clicks 10 Oct – 8 Nov). From 2 Nov `www/pages/ready-to-play-thank-you` started receiving impressions for the same
+queries ("create soccer jersey", "custom soccer jersey creator", "soccer jersey maker") at positions 20–70, and gets no clicks. Google folded the real page into the thank-you page.
+Site-wide Search Console is −13 % clicks week on week (www −16 %), which is this page plus its US share.
+
+The **Canonical watch** (new, daily, `scripts/canonical-watch.js`) inspected 24 key URLs on 11 Nov. Findings:
+
+| URL | Google says |
+|---|---|
+| `www/pages/design-your-own-soccer-jersey` | duplicate; Google chose `ready-to-play-thank-you` (crawled 6 Nov) |
+| `www/pages/ai-concept-to-real-kit` — **the concept-to-real hub** | same: duplicate, Google chose `ready-to-play-thank-you` (crawled 6 Nov) |
+| `es/pages/equipaciones-futbol-personalizadas` — the ES category hub | "Crawled - currently not indexed", last crawl 23 Aug |
+| `it/pages/prezzi-maglie-calcio-personalizzate` — the IT price page | "Discovered - currently not indexed", never crawled |
+| the other 20 | indexed, own canonical |
+
+**Ruled out** (probes `probe-main-content`, `probe-html-weight`): the three pages' main text is 0 % similar; the raw HTML is ~650 KB against Googlebot's 2 MB limit;
+no redirect or canonical script in the head (the inline `targetUrl` blocks are legacy brief-form scripts). The page is served 200 with its own canonical.
+**Not known:** what made Google treat them as duplicates (it judges rendered content we cannot see; my guess is a crawl on 1–6 Nov that rendered without the page body). So the fix removes the wrong candidate and asks Google to re-decide.
+
+### Fix applied
+1. Conversion-only pages are out of the sitemap (nightly rebuild also run live on 11 Nov).
+2. **`noindex` on the live thank-you / paid-gate pages that had none** (`scripts/noindex-pages.js`, workflow *Noindex conversion-only pages*, dry run first, read-back):
+   `ready-to-play-thank-you` (www, us), `custom-kit-design-studio-paid-true` (www, us), `design-personalizzato-confermato` (it). The other confirmation pages already answered noindex.
+3. Daily **Canonical watch** so this cannot go unseen again: a red run names the URL and the canonical Google picked.
+
+### Owner action (cannot be done through the API)
+In Search Console → URL Inspection, for **each** of `https://www.momuto.com/pages/design-your-own-soccer-jersey` and `https://www.momuto.com/pages/ai-concept-to-real-kit`:
+**Request indexing** (after the noindex is live). Expect days, not hours. Also request indexing for the ES hub and the IT price page (never indexed).
+The Canonical watch goes green when Google has re-decided; the daily clicks of the page (GSC report, `dimensions=date`) should climb back towards 35–55.
+
 ## Options for the `us` store (owner decision — nothing here is changed yet)
 
 1. **Keep `us` as the checkout destination, stop expecting it to rank.** www already wins the US searches; the lever is moving www visitors to USD prices
@@ -50,3 +82,22 @@ Owner ruling stands: **no geo-redirect www → us.**
 gh workflow run "GSC report" -f dimensions=page -f country=usa -f row_limit=120 -f min_impressions=5
 gh workflow run "Probe US indexing (www vs us)"      # after the file is on main; on a branch it runs on push
 ```
+
+## 12 Nov: the whole-site picture and the crawl-waste fix
+
+Search Console "Page indexing" (exports of 12 Nov): 3,351 indexed, 8,030 not indexed. Indexed pages grew from 990 (14 Aug) to 3,435 (23 Oct) and have not grown since;
+not-indexed jumped 5,848 → 7,928 between 23 and 28 Oct (≈ +2,080) while "Duplicate, Google chose different canonical" went ~100 → ~520. The platform changed behaviour about 24 Oct
+(`design-momuto/server-patches/README.md` §2b: `POST /homeapi/cart/clean` answers 接口未定义 on all five stores; the write routes of the orders API are undefined too).
+That is a timing match with the index jump, not a proven cause.
+
+What the exports contain: of the 553 "different canonical" pages, 478 are www, 275 are `/comments/` review pages and 228 are products (221 = per-order 3D preview products);
+~36 are team pages (`*-custom-kit-design`) plus the two hubs. In a 1,000-row sample of the 5,986 "alternative page" URLs: 735 products (740 per-order previews),
+578 with `?data_from=&spm=`, 176 with `?sku_code=&sku=`. "Crawled – currently not indexed" (784): 294 `/pages/` (team design pages in 5 languages, a city page, Ready to Play), 225 products, 113 review pages, 58 blog posts.
+
+**Per-order preview products stay** (owner, 12 Nov): checkout creates one per design so the platform cart, order and emails show the buyer's real render
+(`createPreviewProducts` in `server-patches/GoodInfoAction.php`). What changes is that crawlers no longer spend time on them.
+Done: `Disallow` for the tracking parameters (`spm`, `data_from`, `sku_code`, `sku`) and for the preview product and review-page handles
+(`/products|comments/your-custom-design…`, `tu-dise…`, `votre-design-personnalis…`, `il-tuo-design-personalizzato…`) in all 12 user-agent groups of the five `static/<host>/robots.txt`.
+`scripts/test-robots.js` (PR check) asserts, with Google-style matching, that 688 real URLs from the exports and the sitemaps stay crawlable and the preview/parameter URLs are blocked.
+`check-live-robots` reads the deployed files back.
+Not done (decision for later): removing previews after delivery. Unpublishing a preview might blank the picture on an old order page or in an old email; test on ONE delivered order before any cleanup job.

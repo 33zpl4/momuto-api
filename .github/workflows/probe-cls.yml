@@ -1,0 +1,21 @@
+name: Probe layout shifts (CLS)
+# Read only. What moves on the key pages and when (docs/speed-schema-2026-11.md). Push-triggered on its own files.
+on:
+  push:
+    paths: ['scripts/probe-cls.js', '.github/workflows/probe-cls.yml']
+  workflow_dispatch:
+    inputs:
+      urls: { description: 'Comma list', default: '' }
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i --no-save playwright && npx playwright install chromium
+      - env:
+          URLS: ${{ inputs.urls }}
+        run: node scripts/probe-cls.js

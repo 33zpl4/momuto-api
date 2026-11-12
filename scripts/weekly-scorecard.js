@@ -52,10 +52,10 @@ async function collectApi() {
 
 // ---------------------------------------------------------------- Search Console
 function b64u(b) { return Buffer.from(b).toString('base64').replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_'); }
-async function gscToken(sa) {
+async function gscToken(sa, scope = 'https://www.googleapis.com/auth/webmasters.readonly') {
   const now = Math.floor(Date.now() / 1000);
   const head = b64u(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
-  const claim = b64u(JSON.stringify({ iss: sa.client_email, scope: 'https://www.googleapis.com/auth/webmasters.readonly', aud: 'https://oauth2.googleapis.com/token', exp: now + 3300, iat: now }));
+  const claim = b64u(JSON.stringify({ iss: sa.client_email, scope, aud: 'https://oauth2.googleapis.com/token', exp: now + 3300, iat: now }));
   const sig = crypto.createSign('RSA-SHA256').update(`${head}.${claim}`).sign(sa.private_key);
   const r = await fetch('https://oauth2.googleapis.com/token', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `grant_type=${encodeURIComponent('urn:ietf:params:oauth:grant-type:jwt-bearer')}&assertion=${head}.${claim}.${b64u(sig)}` });
@@ -97,6 +97,42 @@ async function collectGsc() {
   const wkEnd = new Date(Date.now() - 3 * 86400000), wkStart = new Date(wkEnd.getTime() - 6 * 86400000);
   const q = await gscQuery(token, site, { startDate: iso(wkStart), endDate: iso(wkEnd), dimensions: ['query'], rowLimit: 12, type: 'web' });
   hist._topQueries = { asOf: iso(wkEnd), rows: q.map(r => ({ query: r.keys[0], clicks: r.clicks, impressions: r.impressions, position: +r.position.toFixed(1) })) };
+}
+
+// ---------------------------------------------------------------- US searchers: which host gets the clicks (docs/us-indexing-2026-11.md)
+// hreflang does not steer US searchers to us.momuto.com (pairs are 76-95% duplicates), so www takes them. This keeps the number honest, weekly.
+async function collectUsByHost() {
+  if (!process.env.GSC_SERVICE_ACCOUNT) return;
+  const sa = JSON.parse(process.env.GSC_SERVICE_ACCOUNT), site = process.env.GSC_SITE || 'sc-domain:momuto.com';
+  const token = await gscToken(sa);
+  const last = isoWeek(new Date(Date.now() - 7 * 86400000));
+  for (let n = 0; n < 8; n++) {
+    const wk = weekMinus(last, n), e = weekEnd(wk), st = iso(new Date(new Date(e + 'T00:00:00Z').getTime() - 6 * 86400000));
+    if (e > iso(new Date(Date.now() - 3 * 86400000))) continue;
+    const rows = await gscQuery(token, site, { startDate: st, endDate: e, dimensions: ['page'], rowLimit: 5000, type: 'web', dimensionFilterGroups: [{ filters: [{ dimension: 'country', operator: 'equals', expression: 'USA' }] }] });
+    const agg = { www: { clicks: 0, impressions: 0 }, us: { clicks: 0, impressions: 0 }, other: { clicks: 0, impressions: 0 } };
+    rows.forEach(r => { const h = /^https?:\/\/us\.momuto\.com/.test(r.keys[0]) ? 'us' : /^https?:\/\/www\.momuto\.com/.test(r.keys[0]) ? 'www' : 'other'; agg[h].clicks += r.clicks; agg[h].impressions += r.impressions; });
+    const h = hist[wk] = hist[wk] || {}; h.gsc = h.gsc || {}; h.gsc.usSearchers = agg;
+  }
+}
+
+// ---------------------------------------------------------------- GA4 (optional: needs GA4_PROPERTY_ID and the service account added as Viewer on that property)
+async function collectGa4() {
+  const prop = process.env.GA4_PROPERTY_ID;
+  if (!prop) { notes.push('GA4: GA4_PROPERTY_ID not set — skipped (docs/scorecard.md "Connect GA4")'); return; }
+  if (!process.env.GSC_SERVICE_ACCOUNT) { notes.push('GA4: no service account — skipped'); return; }
+  const token = await gscToken(JSON.parse(process.env.GSC_SERVICE_ACCOUNT), 'https://www.googleapis.com/auth/analytics.readonly');
+  const run = async body => {
+    const r = await fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${encodeURIComponent(prop)}:runReport`, { method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const j = await r.json(); if (!r.ok) throw new Error(`GA4 ${r.status}: ${JSON.stringify(j.error || j).slice(0, 220)}`);
+    return j.rows || [];
+  };
+  const wkOf = v => `${v.slice(0, 4)}-W${v.slice(4)}`;
+  const dateRanges = [{ startDate: '112daysAgo', endDate: '8daysAgo' }];   // 16 weeks; the current partial week is never stored
+  const base = await run({ dateRanges, dimensions: [{ name: 'isoYearIsoWeek' }], metrics: [{ name: 'sessions' }, { name: 'totalUsers' }, { name: 'engagementRate' }, { name: 'keyEvents' }], limit: 100 });
+  base.forEach(r => { const wk = wkOf(r.dimensionValues[0].value), m = r.metricValues.map(x => +x.value); const h = hist[wk] = hist[wk] || {}; h.ga4 = Object.assign(h.ga4 || {}, { sessions: m[0], users: m[1], engagementRate: +m[2].toFixed(4), keyEvents: m[3] }); });
+  const ch = await run({ dateRanges, dimensions: [{ name: 'isoYearIsoWeek' }, { name: 'sessionDefaultChannelGroup' }], metrics: [{ name: 'sessions' }], limit: 1000 });
+  ch.forEach(r => { const wk = wkOf(r.dimensionValues[0].value), g = r.dimensionValues[1].value, n = +r.metricValues[0].value; const h = hist[wk] = hist[wk] || {}; h.ga4 = h.ga4 || {}; h.ga4.byChannel = h.ga4.byChannel || {}; h.ga4.byChannel[g] = n; if (g === 'Organic Search') h.ga4.organicSessions = n; });
 }
 
 // ---------------------------------------------------------------- repo health
@@ -183,6 +219,9 @@ function report() {
     if (k === 'all') gscRows.push(row('all: avg position', wk, 'gsc.all.position', { lowerIsBetter: true }), row('all: CTR', wk, 'gsc.all.ctr'));
   }
   md += sec('Search Console', gscRows);
+  md += sec('US searchers (country = USA): which host gets the clicks', [row('→ www clicks', wk, 'gsc.usSearchers.www.clicks'), row('→ us clicks', wk, 'gsc.usSearchers.us.clicks'),
+    row('→ www impressions', wk, 'gsc.usSearchers.www.impressions'), row('→ us impressions', wk, 'gsc.usSearchers.us.impressions')]);
+  md += sec('Google Analytics (GA4)', ['sessions', 'users', 'organicSessions', 'keyEvents', 'engagementRate'].map(k => row(k, wk, `ga4.${k}`)));
   if (hist._topQueries) md += `\n**Top queries** (week to ${hist._topQueries.asOf}): ` + hist._topQueries.rows.slice(0, 10).map(r => `${r.query} (${r.clicks} clk, pos ${r.position})`).join(' · ') + '\n';
   const rp = hist[wk] && hist[wk].repo;
   if (rp) md += `\n### Health\n- copy-rules baseline: **${rp.copyRuleBaseline}** known violations (should only shrink)\n- failed workflow runs, last 7 days: ${rp.failedRuns7d && Object.keys(rp.failedRuns7d).length ? Object.entries(rp.failedRuns7d).map(([n, c]) => `${n} ×${c}`).join(', ') : 'none'}\n`;
@@ -192,7 +231,7 @@ function report() {
 }
 
 (async () => {
-  for (const [name, fn] of [['api', collectApi], ['gsc', collectGsc]]) { try { await fn(); } catch (e) { notes.push(`${name}: ${e.message}`); } }
+  for (const [name, fn] of [['api', collectApi], ['gsc', collectGsc], ['us-by-host', collectUsByHost], ['ga4', collectGa4]]) { try { await fn(); } catch (e) { notes.push(`${name}: ${e.message}`); } }
   await collectRepo();
   fs.mkdirSync(path.dirname(HIST), { recursive: true });
   fs.writeFileSync(HIST, JSON.stringify(Object.fromEntries(Object.entries(hist).sort(([a], [b]) => a.localeCompare(b))), null, 1) + '\n');

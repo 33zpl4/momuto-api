@@ -26,9 +26,11 @@ jobs:
           MOMUTO_API_SECRET: ${{ secrets.MOMUTO_API_SECRET }}
           GSC_SERVICE_ACCOUNT: ${{ secrets.GSC_SERVICE_ACCOUNT }}
           GSC_SITE: ${{ vars.GSC_SITE }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/weekly-scorecard.js
-      - name: Commit the history
+      - name: Commit the history (main only — a branch run is a dry run, read the summary)
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
