@@ -82,3 +82,22 @@ Owner ruling stands: **no geo-redirect www → us.**
 gh workflow run "GSC report" -f dimensions=page -f country=usa -f row_limit=120 -f min_impressions=5
 gh workflow run "Probe US indexing (www vs us)"      # after the file is on main; on a branch it runs on push
 ```
+
+## 12 Nov: the whole-site picture and the crawl-waste fix
+
+Search Console "Page indexing" (exports of 12 Nov): 3,351 indexed, 8,030 not indexed. Indexed pages grew from 990 (14 Aug) to 3,435 (23 Oct) and have not grown since;
+not-indexed jumped 5,848 → 7,928 between 23 and 28 Oct (≈ +2,080) while "Duplicate, Google chose different canonical" went ~100 → ~520. The platform changed behaviour about 24 Oct
+(`design-momuto/server-patches/README.md` §2b: `POST /homeapi/cart/clean` answers 接口未定义 on all five stores; the write routes of the orders API are undefined too).
+That is a timing match with the index jump, not a proven cause.
+
+What the exports contain: of the 553 "different canonical" pages, 478 are www, 275 are `/comments/` review pages and 228 are products (221 = per-order 3D preview products);
+~36 are team pages (`*-custom-kit-design`) plus the two hubs. In a 1,000-row sample of the 5,986 "alternative page" URLs: 735 products (740 per-order previews),
+578 with `?data_from=&spm=`, 176 with `?sku_code=&sku=`. "Crawled – currently not indexed" (784): 294 `/pages/` (team design pages in 5 languages, a city page, Ready to Play), 225 products, 113 review pages, 58 blog posts.
+
+**Per-order preview products stay** (owner, 12 Nov): checkout creates one per design so the platform cart, order and emails show the buyer's real render
+(`createPreviewProducts` in `server-patches/GoodInfoAction.php`). What changes is that crawlers no longer spend time on them.
+Done: `Disallow` for the tracking parameters (`spm`, `data_from`, `sku_code`, `sku`) and for the preview product and review-page handles
+(`/products|comments/your-custom-design…`, `tu-dise…`, `votre-design-personnalis…`, `il-tuo-design-personalizzato…`) in all 12 user-agent groups of the five `static/<host>/robots.txt`.
+`scripts/test-robots.js` (PR check) asserts, with Google-style matching, that 688 real URLs from the exports and the sitemaps stay crawlable and the preview/parameter URLs are blocked.
+`check-live-robots` reads the deployed files back.
+Not done (decision for later): removing previews after delivery. Unpublishing a preview might blank the picture on an old order page or in an old email; test on ONE delivered order before any cleanup job.
