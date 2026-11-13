@@ -32,6 +32,8 @@ on:
       - 'docs/3d-tool-links.*'
       - 'scripts/check-copy-rules.js'
       - 'scripts/check-page-sources.js'
+      - 'lib/claims.json'
+      - 'scripts/check-claims.js'
       - 'static/*/robots.txt'
       - 'scripts/test-robots.js'
       - 'scripts/check-blog-integrity.js'
@@ -54,6 +56,8 @@ jobs:
         env:
           BASE_REF: ${{ github.event.pull_request.base.sha }}
         run: node scripts/check-page-sources.js
+      - name: Public claims (teams, Trustpilot reviews) match lib/claims.json
+        run: node scripts/check-claims.js
       - name: robots.txt keeps real pages crawlable and blocks previews/parameters
         run: node scripts/test-robots.js
       - name: Check the 3D launch-link inventory is current

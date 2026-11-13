@@ -77,7 +77,7 @@ Never invent a pair — unmapped prices fail loudly by design.
   If anything, a dismissible "Shopping from the US?" banner on www —
   link, never redirect. Revisit only when us. is fully checkout-wired,
   indexed, and outranking www for US queries.
-- Claims estate-wide: **250+ teams, 15+ countries, 500+ designs**.
+- Claims estate-wide: **300+ teams, 15+ countries, 500+ designs** (13 Nov 2026; `lib/claims.json`).
   momuto.com frames Europe-wide (not France/Spain — those have stores);
   the US site highlights the US.
 - US free-shipping threshold in copy: **$59** everywhere.

@@ -1,0 +1,8 @@
+{
+  "_note": "The estate-wide public claims, one place. Owner figures: update here, run scripts/check-claims.js, then sweep the surfaces it names. Never write a different number on a surface.",
+  "teams": "300+",
+  "teamsMin": 300,
+  "countries": "15+",
+  "trustpilot": { "rating": "4.6", "reviews": 57, "asOf": "2026-11-13", "note": "Trustpilot shows the star graphic as 'TrustScore 4.5 out of 5' (rounded to half stars) and the number 4.6; we quote the number." },
+  "source": "owner, 13 Nov 2026 (teams); Trustpilot page, 13 Nov 2026 (reviews)"
+}

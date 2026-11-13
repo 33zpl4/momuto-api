@@ -112,7 +112,7 @@ function sanity(d, html) {
   if (/20[–-]25 (days|jours|giorni)|20[.,]90 ?€|€20[.,]90/i.test(prose)) throw new Error(`${d.locale}: stale number`);
   if (/refund|rembours|rimbors/i.test(prose)) throw new Error(`${d.locale}: refund wording (rule 5)`);
   if (!/25[–-]30/.test(prose) || !/21[.,]90/.test(prose) || !/26[.,]90/.test(prose)) throw new Error(`${d.locale}: canonical numbers missing`);
-  if (!/53/.test(prose)) throw new Error(`${d.locale}: Trustpilot count missing`);
+  if (!/57/.test(prose)) throw new Error(`${d.locale}: Trustpilot count missing`);
   for (const r of d.rows) if (r.length !== d.cols.length + 1) throw new Error(`${d.locale}: row "${r[0]}" has ${r.length - 1} cells for ${d.cols.length} suppliers`);
   if (/\bReal Madrid|Barcelona|Juventus|Manchester/i.test(prose)) throw new Error(`${d.locale}: club name on a product surface (rule 4)`);
 }

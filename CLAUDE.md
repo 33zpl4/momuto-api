@@ -123,6 +123,8 @@ pushes and verifies the run itself.
    **Review price lock (owner, 6 Nov 2026):** a review after delivery locks the team's per-jersey price for re-orders for the rest of
    the season, no minimum (FAQ entry + delivered/reorder emails + llms.txt; the exact end rule — season vs 12 months — is the owner's to define).
    **Sizes:** adults XS–4XL, one slim-fit rule, `docs/size-guide.md`.
+   **Public claims** (teams, Trustpilot reviews) live in `lib/claims.json` (owner, 13 Nov 2026: **300+ teams**, Trustpilot **4.6/5 from 57 reviews**; Trustpilot's "4.5 out of 5"
+   is the star graphic rounded to half stars). `scripts/check-claims.js` (PR check) fails on any older number. They changed three times in five weeks.
 7. `static/shared/llms.txt` is the machine-readable fact feed for LLMs —
    update it in the same commit as any fact change.
 8. **One customer email: info@momuto.com** (owner ruling 5 Sep 2026).
