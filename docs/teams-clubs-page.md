@@ -22,7 +22,7 @@ ImageObject JSON-LD, a bridge to the kit gallery, a send-us-a-photo block and th
 | IT | `squadre-club-momuto` |
 
 Never hand-edit the built `content` (it is regenerated); edit `photos.json` / `copy.json` / the builder.
-Numbers on the page: 250+ teams, 15+ countries, 4.6/5 from 51 Trustpilot reviews (owner, 12 Oct 2026), no minimum
+Numbers on the page: 300+ teams, 15+ countries, 4.6/5 from 57 Trustpilot reviews (owner, 13 Nov 2026; the single source is `lib/claims.json`, checked by `scripts/check-claims.js`), no minimum
 order, delivery 25–30 days (CLAUDE.md rule 6).
 
 ## Adding a team

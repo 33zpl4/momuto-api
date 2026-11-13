@@ -30,7 +30,7 @@
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.6",
-    "reviewCount": "53",
+    "reviewCount": "57",
     "bestRating": "5",
     "worstRating": "1"
   },
@@ -304,7 +304,7 @@
 <section class="social-proof-strip">
 <div class="proof-container">
 <div class="proof-stats">
-<div class="proof-stat"><span class="stat-number">250+</span>
+<div class="proof-stat"><span class="stat-number">300+</span>
 <div class="stat-label">Equipos Satisfechos</div>
 </div>
 <div class="proof-stat"><span class="stat-number">15+</span>

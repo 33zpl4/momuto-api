@@ -55,7 +55,7 @@ var I18N={
    ["Checked by our designers","Upload the logo you have — even a screenshot. Our design team <b>cleans and prepares your crest &amp; sponsors for print</b>, checks placement, and sends a <b>final proof within 24h</b> to approve before we produce.",true]
   ],
   trust:{
-   lab:"Worn on real pitches", h2:"Trusted by 250+ teams", sub:"Across Europe and North America.",
+   lab:"Worn on real pitches", h2:"Trusted by 300+ teams", sub:"Across Europe and North America.",
    reviews:[
     ["Great experience for our team's custom jerseys. The design was exactly as we requested and the whole process was smooth — their team was super responsive and always happy to help. Very happy with the result, highly recommend!","Karim","France"],
     ["10/10 — fast, cheap and good quality!","Olaya","Spain"],
@@ -97,7 +97,7 @@ var I18N={
    ["Revisado por nuestros diseñadores","Sube el logo que tengas, aunque sea una captura de pantalla. Nuestro equipo <b>limpia y prepara tu escudo y patrocinadores para impresión</b>, revisa la colocación y te envía una <b>prueba final en 24 h</b> para aprobar antes de producir.",true]
   ],
   trust:{
-   lab:"Vistas en el campo", h2:"Más de 250 equipos confían en nosotros", sub:"En toda Europa y Norteamérica.",
+   lab:"Vistas en el campo", h2:"Más de 300 equipos confían en nosotros", sub:"En toda Europa y Norteamérica.",
    reviews:[
     ["Gran experiencia con las camisetas personalizadas de nuestro equipo. El diseño era exactamente lo que pedimos y todo el proceso fue muy fluido: su equipo respondía rapidísimo y siempre dispuesto a ayudar. ¡Muy contentos con el resultado, totalmente recomendable!","Karim","Francia"],
     ["10/10: ¡rápido, barato y de buena calidad!","Olaya","España"],
@@ -139,7 +139,7 @@ var I18N={
    ["Vérifié par nos designers","Importez le logo que vous avez, même une capture d'écran. Notre équipe <b>nettoie et prépare votre écusson et vos sponsors pour l'impression</b>, vérifie le placement et vous envoie une <b>maquette finale sous 24h</b> à valider avant production.",true]
   ],
   trust:{
-   lab:"Portés sur le terrain", h2:"Plus de 250 équipes nous font confiance", sub:"Partout en Europe et en Amérique du Nord.",
+   lab:"Portés sur le terrain", h2:"Plus de 300 équipes nous font confiance", sub:"Partout en Europe et en Amérique du Nord.",
    reviews:[
     ["Très bonne expérience pour les maillots personnalisés de notre équipe. Le design était exactement comme demandé et tout le processus a été fluide : leur équipe répondait très vite et toujours prête à aider. Très contents du résultat, je recommande vivement !","Karim","France"],
     ["10/10 — rapide, pas cher et de bonne qualité !","Olaya","Espagne"],
@@ -181,7 +181,7 @@ var I18N={
    ["Acquisto protetto","Paghi oggi, ma <b>non stampiamo</b> finché non approvi un mockup finale, inviato <b>entro 24h</b>. Cambia ciò che vuoi, gratis.",true]
   ],
   trust:{
-   lab:"Indossate in campo", h2:"Più di 250 squadre si fidano di noi", sub:"In tutta Europa e Nord America.",
+   lab:"Indossate in campo", h2:"Più di 300 squadre si fidano di noi", sub:"In tutta Europa e Nord America.",
    reviews:[
     ["Ottima esperienza per le maglie personalizzate della nostra squadra. Il design era esattamente come richiesto e tutto il processo è stato fluido: il loro team rispondeva velocissimo e sempre disponibile. Molto soddisfatti del risultato, super consigliato!","Karim","Francia"],
     ["10/10 — veloce, economico e di buona qualità!","Olaya","Spagna"],
