@@ -129,3 +129,12 @@ design-momuto `server-patches/README.md` §12). Tool: **`mark-design-paid.yml`**
 design server and momuto-api holds it with the confirmation SENT (so a late platform webhook dedups); live needs the box ticked and the order_no typed again; it
 sends no email. Run for this order on 7 Nov 2026 (run 42359724176, answer `success`); the 已支付 flag itself is read by eye in manage.momuto.com.
 The abandoned-checkout mail skips such customers (`lib/lifecycle-mail.js` `paidSince` looks for a paid order from the same email in KV).
+
+## Polo collar in the manage.momuto.com roster (13 Nov 2026)
+
+A polo-collar jersey reads `M · POLO COLLAR POLO领` in the size column of the manage.momuto.com order roster (English + Chinese, set by
+`design-momuto` `GoodInfoAction::COLLAR_SIZE_TAG`), whether the collar came from a polo-titled product or from the buyer's tick in the cart.
+The Chinese is for production only. Customer paths strip it: the design server's webhook sends `M · POLO` (`WebhookAction::customerSize`),
+`lib/customer-size.js` applies the same rule at ingest (`api/order-3d-paid.js`) and in the confirmation email's roster, the customer order
+page keeps only the part before the first ` · `, and the design server's own order-detail page removes the tag. Readers key on a part that
+starts with `POLO` (`lib/order-view.js`, `scripts/build-warehouse-sheet.js`). Tests: `test/customer-size.test.js`.

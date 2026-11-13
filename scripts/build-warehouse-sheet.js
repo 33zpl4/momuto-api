@@ -198,7 +198,7 @@ function normaliseRoster(players) {
     // jersey-only kit player (design server: noShorts flag / '· JERSEY ONLY' size suffix)
     if (p.noShorts === true || parts.some(s => /^JERSEY ONLY$/i.test(s))) shorts = '无短裤';
     // polo-collar design (design server: collar flag / '· POLO' size suffix, 15 Sep 2026)
-    const collar = p.collar === true || parts.some(s => /^POLO$/i.test(s));
+    const collar = p.collar === true || parts.some(s => /^POLO\b/i.test(s));
     return { number: String(p.number ?? ''), name: String(p.name ?? ''), size, sleeve, shorts, collar, qty: parseInt(p.qty, 10) || 1 };
   });
 }

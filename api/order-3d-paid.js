@@ -39,6 +39,7 @@
 const { kv } = require('@vercel/kv');
 const { emailConfirmation3D } = require('../lib/emails');
 const { rosterUnits } = require('../lib/design-kind');
+const { customerRoster } = require('../lib/customer-size');
 
 const RESEND_KEY  = process.env.RESEND_API_KEY;
 const FROM_EMAIL  = process.env.FROM_EMAIL_ORDERS || process.env.FROM_EMAIL || 'orders@momuto.com';
@@ -92,8 +93,10 @@ module.exports = async function handler(req, res) {
   }
 
   const body = await readJSON(req);
-  const { order_no, plant_order_no, email, name, lang, total, currency, designs,
+  const { order_no, plant_order_no, email, name, lang, total, currency, designs: rawDesigns,
           pay_at, first_pay_at, is_test, fast_lane, uuid } = body;
+  // sizes are stored and emailed in their customer form: the design server's production wording ("POLO COLLAR POLO领") is reduced to "POLO"
+  const designs = Array.isArray(rawDesigns) ? rawDesigns.map(d => (d && typeof d === 'object' ? { ...d, players: customerRoster(d.players) } : d)) : rawDesigns;
 
   if (!order_no || !email) {
     return res.status(400).json({ error: 'order_no and email are required' });
