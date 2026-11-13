@@ -1,0 +1,17 @@
+name: Probe live claims (teams, Trustpilot reviews)
+# Read only: the live pages must carry the figures in lib/claims.json. Runs after the page deploys and on demand.
+on:
+  workflow_dispatch:
+  push:
+    paths: ['scripts/probe-claims-live.js', '.github/workflows/probe-claims-live.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i --no-save playwright && npx playwright install chromium
+      - run: node scripts/probe-claims-live.js

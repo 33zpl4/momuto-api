@@ -38,7 +38,8 @@ if (base) {
     const m = f.match(/^cms\/pages\/([a-z]{2})\/([^/]+)\.json$/);
     if (!m) continue;
     const src = sourceFor(m[1], m[2]);
-    if (fs.existsSync(src)) problems.push(`${f} is a copy — this page's source is ${path.relative(ROOT, src)} (deployed by its own workflow). Edit the source and revert ${f}.`);
+    // a DIRECTORY with the handle's name (pages/faq/ holds locale fragments for the generated FAQ) is not a page source
+    if (fs.existsSync(src) && fs.statSync(src).isFile()) problems.push(`${f} is a copy — this page's source is ${path.relative(ROOT, src)} (deployed by its own workflow). Edit the source and revert ${f}.`);
   }
 }
 
