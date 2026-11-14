@@ -101,3 +101,22 @@ Done: `Disallow` for the tracking parameters (`spm`, `data_from`, `sku_code`, `s
 `scripts/test-robots.js` (PR check) asserts, with Google-style matching, that 688 real URLs from the exports and the sitemaps stay crawlable and the preview/parameter URLs are blocked.
 `check-live-robots` reads the deployed files back.
 Not done (decision for later): removing previews after delivery. Unpublishing a preview might blank the picture on an old order page or in an old email; test on ONE delivered order before any cleanup job.
+
+## 14 Nov: index audit of all five stores, and the dead links in the sitemaps
+
+URL Inspection over every `/pages` and `/blogs` URL in the sitemaps (`scripts/index-audit.js`):
+
+| Store | Checked | Indexed | Notable |
+|---|---:|---:|---|
+| www | 311 | 233 (75 %) | 43 folded into `ready-to-play-thank-you` (noindex applied 11 Nov, validation requested 12 Nov) |
+| fr | 301 | 270 (90 %) | healthy |
+| us | 323 | 272 (84 %) | 28 crawled-not-indexed (team pages), 8 x 404 |
+| it | 313 | 120 (38 %) | 148 crawled-not-indexed, 23 x 404 |
+| es | 339 | 127 (37 %) of the 260 read | 105 crawled-not-indexed; first run lost its token (79 unread), rerun 14 Nov |
+
+**Dead links: the sitemap listed unpublished blog posts.** `rebuild-sitemap.js` wrote every post the CMS list returns, including `status: 0`
+(drafts / unpublished), and the store answers 404 for those. Live check before the fix (`scripts/check-sitemap-links.js`, run 43585028788):
+1,654 URLs requested, **47 dead: IT 39, US 8**, all `/blogs/`, exactly the posts the builder's dry run now skips (run 43584238722). The IT 39 are
+the French/English/duplicate posts unpublished by `docs/it-site-recovery.md` step 1; the US 8 are the UK-worded twins replaced by US-worded posts.
+Fix: posts with an explicit status other than 1 are skipped and are no longer offered as hreflang alternates. `check-sitemap-links` runs after every
+nightly rebuild (paced: 2 at a time, 350 ms apart, backoff on 429 — a first unpaced run was rate-limited by the stores).

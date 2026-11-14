@@ -1,0 +1,39 @@
+name: Check sitemap links (five stores)
+# Read only. Requests every page/blog/collection URL listed in each live sitemap and fails if any is dead (404/410).
+# Also runs after the nightly Rebuild Sitemap.
+on:
+  workflow_dispatch:
+    inputs:
+      stores:
+        description: 'Comma list of stores (default www,es,fr,it,us)'
+        required: false
+        default: 'www,es,fr,it,us'
+      kinds:
+        description: 'URL kinds (default pages,blogs,collections; add products for the thousands)'
+        required: false
+        default: 'pages,blogs,collections'
+  push:
+    paths: ['scripts/check-sitemap-links.js', '.github/workflows/check-sitemap-links.yml']
+  workflow_run:
+    workflows: ['Rebuild Sitemap']
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i --no-save playwright && npx playwright install chromium
+      - run: node scripts/check-sitemap-links.js
+        env:
+          STORES: ${{ github.event.inputs.stores }}
+          KINDS: ${{ github.event.inputs.kinds }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sitemap-links
+          path: sitemap-links/
+          if-no-files-found: ignore
