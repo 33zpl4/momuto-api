@@ -32,7 +32,8 @@ function wanted(u, kinds) {
   return kinds.some(k => p.startsWith('/' + k + '/'));
 }
 
-const stripSlash = u => u.replace(/\/+$/, '');
+// compare decoded and NFC-normalised: the listed URL and the final URL can spell the same accented path differently (%C3%A9 vs é)
+const stripSlash = u => { let x = String(u).replace(/\/+$/, ''); try { x = decodeURI(x); } catch (e) {} return x.normalize('NFC'); };
 
 function classify(listed, status, finalUrl) {
   if (status === 200) return stripSlash(finalUrl) === stripSlash(listed) ? 'ok' : 'redirected';
