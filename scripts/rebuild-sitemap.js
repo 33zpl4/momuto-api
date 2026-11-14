@@ -445,11 +445,18 @@ async function rebuildDomain(domain, fetched, alternatesMap) {
 
   // Blog index + posts → /blogs/[handle]
   entries.push({ loc: `${domain.baseUrl}/blogs`, lastmod: today, changefreq: 'weekly', priority: '0.7' });
+  // A post with status 0 is a draft / unpublished post: the store answers 404 for it. They were listed until 14 Nov 2026
+  // (index audit: 23 dead blog URLs in the IT sitemap, 8 in the US one). Only an explicit non-1 status is skipped, so a list
+  // response without the field behaves as before.
+  const drafts = [];
   for (const a of posts) {
     const slug = getSlug(a);
     if (!slug) continue;
+    if (a.status !== undefined && a.status !== null && String(a.status) !== '1') { drafts.push(slug); continue; }
     entries.push({ loc: `${domain.baseUrl}/blogs/${slug}`, lastmod: getLastmod(a, today), changefreq: 'monthly', priority: '0.6' });
   }
+
+  console.log(`  posts: ${posts.length} listed, ${posts.length - drafts.length} in sitemap; skipped ${drafts.length} not published (status != 1)${drafts.length ? ': ' + drafts.join(', ') : ''}; status field present on ${posts.filter(a => a.status !== undefined).length}`);
 
   // Attach hreflang alternates to any entry that belongs to a cross-locale cluster.
   let clustered = 0;
@@ -503,7 +510,8 @@ async function main() {
     ]);
     fetched[locale] = { pages, posts, products, collections };
     handleSets[locale] = new Set(pages.map(getSlug).filter(Boolean));
-    postSets[locale] = new Set(posts.map(getSlug).filter(Boolean));
+    // drafts (status != 1) answer 404: they must not be offered as hreflang alternates either
+    postSets[locale] = new Set(posts.filter(a => a.status === undefined || a.status === null || String(a.status) === '1').map(getSlug).filter(Boolean));
   }
 
   const alternatesMap = buildAlternatesMap(handleSets, postSets);
