@@ -5,7 +5,7 @@
 // Read only (GET requests only). Uses Playwright's request context because plain fetch gets Cloudflare's challenge from runners.
 //
 // Env: STORES (comma list, default www,es,fr,it,us), KINDS (default pages,blogs,collections; add "products" to include /products/),
-//      CONCURRENCY (default 6), LIMIT (max URLs per store, default 800).
+//      CONCURRENCY (default 2), PAUSE_MS before each request (default 350), LIMIT (max URLs per store, default 800).
 // Classes: ok (200), redirected (200 but final URL differs, trailing slash ignored), dead (404/410), other (anything else).
 // Writes sitemap-links/<store>.json. Exit 1 if any dead URL exists, else 0.
 const fs = require('fs');
@@ -47,16 +47,21 @@ async function getOnce(ctx, url) {
   return { status: r.status(), finalUrl: r.url() };
 }
 
+// The stores rate-limit bursts (HTTP 429 after ~100 quick requests, first run 14 Nov 2026). Every request waits PAUSE_MS first,
+// and a 429 / 5xx / network error backs off 6 s, 20 s, 45 s before it is reported.
+const PAUSE_MS = Math.max(0, parseInt(process.env.PAUSE_MS, 10) || 350);
 async function check(ctx, url) {
   let res;
-  for (let attempt = 0; attempt < 2; attempt++) {
+  const waits = [6000, 20000, 45000];
+  for (let attempt = 0; attempt <= waits.length; attempt++) {
+    await sleep(PAUSE_MS);
     try {
       res = await getOnce(ctx, url);
       if (res.status < 500 && res.status !== 429) break;
     } catch (e) {
       res = { status: 0, finalUrl: url, error: e.message };
     }
-    if (attempt === 0) await sleep(1500);
+    if (attempt < waits.length) await sleep(waits[attempt]);
   }
   return { url, status: res.status, finalUrl: res.finalUrl, error: res.error, cls: classify(url, res.status, res.finalUrl) };
 }
@@ -86,7 +91,7 @@ function summarize(store, results) {
 async function main() {
   const stores = (process.env.STORES || 'www,es,fr,it,us').split(',').map(s => s.trim()).filter(Boolean);
   const kinds = (process.env.KINDS || 'pages,blogs,collections').split(',').map(s => s.trim()).filter(Boolean);
-  const conc = Math.max(1, parseInt(process.env.CONCURRENCY, 10) || 6);
+  const conc = Math.max(1, parseInt(process.env.CONCURRENCY, 10) || 2);
   const limit = Math.max(1, parseInt(process.env.LIMIT, 10) || 800);
   const { chromium } = require('playwright');
   const b = await chromium.launch();
@@ -97,7 +102,8 @@ async function main() {
     const base = `https://${store}.momuto.com`;
     let locs;
     try {
-      const r = await bctx.request.get(`${base}/sitemap.xml`, { timeout: 45000 });
+      let r = null;
+      for (const w of [0, 8000, 25000, 60000]) { await sleep(w); r = await bctx.request.get(`${base}/sitemap.xml`, { timeout: 45000 }); if (r.status() !== 429 && r.status() < 500) break; }
       if (r.status() !== 200) throw new Error('sitemap http ' + r.status());
       locs = parseLocs(await r.text());
     } catch (e) {
